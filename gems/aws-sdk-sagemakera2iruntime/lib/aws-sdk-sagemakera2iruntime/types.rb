@@ -12,7 +12,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,12 +22,14 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class DeleteHumanLoopRequest < Struct.new(
       :human_loop_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteHumanLoopResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +38,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class DescribeHumanLoopRequest < Struct.new(
       :human_loop_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +81,8 @@ module Aws::SageMakerA2IRuntime
       :human_loop_arn,
       :flow_definition_arn,
       :human_loop_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +93,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [Array<String>]
     class HumanLoopDataAttributes < Struct.new(
       :content_classifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +104,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class HumanLoopInput < Struct.new(
       :input_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +115,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class HumanLoopOutput < Struct.new(
       :output_s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +144,8 @@ module Aws::SageMakerA2IRuntime
       :creation_time,
       :failure_reason,
       :flow_definition_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +155,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +188,8 @@ module Aws::SageMakerA2IRuntime
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +202,8 @@ module Aws::SageMakerA2IRuntime
     class ListHumanLoopsResponse < Struct.new(
       :human_loop_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +213,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -215,7 +228,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +252,8 @@ module Aws::SageMakerA2IRuntime
       :flow_definition_arn,
       :human_loop_input,
       :data_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -247,7 +262,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class StartHumanLoopResponse < Struct.new(
       :human_loop_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,12 +272,14 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class StopHumanLoopRequest < Struct.new(
       :human_loop_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopHumanLoopResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +290,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +301,8 @@ module Aws::SageMakerA2IRuntime
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

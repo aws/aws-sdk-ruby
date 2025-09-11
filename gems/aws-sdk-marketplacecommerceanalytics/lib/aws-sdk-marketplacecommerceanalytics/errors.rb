@@ -34,7 +34,7 @@ module Aws::MarketplaceCommerceAnalytics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceCommerceAnalytics::Types::MarketplaceCommerceAnalyticsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # This message describes details of the error.

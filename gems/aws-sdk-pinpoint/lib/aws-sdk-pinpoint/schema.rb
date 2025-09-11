@@ -4803,7 +4803,6 @@ module Aws::Pinpoint
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/apps/{ApplicationId}/verify-otp", "code" => 200}}
       end)
-
     end
 
     class << self

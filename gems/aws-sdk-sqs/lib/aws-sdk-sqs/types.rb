@@ -38,7 +38,8 @@ module Aws::SQS
       :label,
       :aws_account_ids,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +48,8 @@ module Aws::SQS
     #   @return [String]
     class BatchEntryIdsNotDistinct < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +58,8 @@ module Aws::SQS
     #   @return [String]
     class BatchRequestTooLong < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +82,8 @@ module Aws::SQS
       :sender_fault,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -93,7 +97,8 @@ module Aws::SQS
     #   @return [String]
     class CancelMessageMoveTaskRequest < Struct.new(
       :task_handle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +107,8 @@ module Aws::SQS
     #   @return [Integer]
     class CancelMessageMoveTaskResult < Struct.new(
       :approximate_number_of_messages_moved,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -123,7 +129,8 @@ module Aws::SQS
     class ChangeMessageVisibilityBatchRequest < Struct.new(
       :queue_url,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +155,8 @@ module Aws::SQS
       :id,
       :receipt_handle,
       :visibility_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +181,8 @@ module Aws::SQS
     class ChangeMessageVisibilityBatchResult < Struct.new(
       :successful,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +194,8 @@ module Aws::SQS
     #   @return [String]
     class ChangeMessageVisibilityBatchResultEntry < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +218,8 @@ module Aws::SQS
       :queue_url,
       :receipt_handle,
       :visibility_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +515,8 @@ module Aws::SQS
       :queue_name,
       :attributes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +526,8 @@ module Aws::SQS
     #   @return [String]
     class CreateQueueResult < Struct.new(
       :queue_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +542,8 @@ module Aws::SQS
     class DeleteMessageBatchRequest < Struct.new(
       :queue_url,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +562,8 @@ module Aws::SQS
     class DeleteMessageBatchRequestEntry < Struct.new(
       :id,
       :receipt_handle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +587,8 @@ module Aws::SQS
     class DeleteMessageBatchResult < Struct.new(
       :successful,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +600,8 @@ module Aws::SQS
     #   @return [String]
     class DeleteMessageBatchResultEntry < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +616,8 @@ module Aws::SQS
     class DeleteMessageRequest < Struct.new(
       :queue_url,
       :receipt_handle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +628,8 @@ module Aws::SQS
     #   @return [String]
     class DeleteQueueRequest < Struct.new(
       :queue_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -619,7 +638,8 @@ module Aws::SQS
     #   @return [String]
     class EmptyBatchRequest < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -860,7 +880,8 @@ module Aws::SQS
     class GetQueueAttributesRequest < Struct.new(
       :queue_url,
       :attribute_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +891,8 @@ module Aws::SQS
     #   @return [Hash<String, String>]
     class GetQueueAttributesResult < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +911,8 @@ module Aws::SQS
     class GetQueueUrlRequest < Struct.new(
       :queue_name,
       :queue_owner_aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +923,8 @@ module Aws::SQS
     #   @return [String]
     class GetQueueUrlResult < Struct.new(
       :queue_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +933,8 @@ module Aws::SQS
     #   @return [String]
     class InvalidAddress < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +943,8 @@ module Aws::SQS
     #   @return [String]
     class InvalidAttributeName < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +953,8 @@ module Aws::SQS
     #   @return [String]
     class InvalidAttributeValue < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +964,8 @@ module Aws::SQS
     #   @return [String]
     class InvalidBatchEntryId < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -945,7 +973,8 @@ module Aws::SQS
     # @deprecated
     #   exception has been included in ReceiptHandleIsInvalid
     class InvalidIdFormat < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -954,7 +983,8 @@ module Aws::SQS
     #   @return [String]
     class InvalidMessageContents < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -963,7 +993,8 @@ module Aws::SQS
     #   @return [String]
     class InvalidSecurity < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -972,7 +1003,8 @@ module Aws::SQS
     #   @return [String]
     class KmsAccessDenied < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +1013,8 @@ module Aws::SQS
     #   @return [String]
     class KmsDisabled < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1033,8 @@ module Aws::SQS
     #   @return [String]
     class KmsInvalidKeyUsage < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1010,7 +1044,8 @@ module Aws::SQS
     #   @return [String]
     class KmsInvalidState < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1055,8 @@ module Aws::SQS
     #   @return [String]
     class KmsNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1066,8 @@ module Aws::SQS
     #   @return [String]
     class KmsOptInRequired < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1076,8 @@ module Aws::SQS
     #   @return [String]
     class KmsThrottled < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1098,8 @@ module Aws::SQS
       :queue_url,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1077,7 +1116,8 @@ module Aws::SQS
     class ListDeadLetterSourceQueuesResult < Struct.new(
       :queue_urls,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1091,7 +1131,8 @@ module Aws::SQS
     class ListMessageMoveTasksRequest < Struct.new(
       :source_arn,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1141,8 @@ module Aws::SQS
     #   @return [Array<Types::ListMessageMoveTasksResultEntry>]
     class ListMessageMoveTasksResult < Struct.new(
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1195,8 @@ module Aws::SQS
       :approximate_number_of_messages_to_move,
       :failure_reason,
       :started_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1168,7 +1211,8 @@ module Aws::SQS
     #   @return [String]
     class ListQueueTagsRequest < Struct.new(
       :queue_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1177,7 +1221,8 @@ module Aws::SQS
     #   @return [Hash<String, String>]
     class ListQueueTagsResult < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1244,8 @@ module Aws::SQS
       :queue_name_prefix,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1216,7 +1262,8 @@ module Aws::SQS
     class ListQueuesResult < Struct.new(
       :queue_urls,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1300,7 +1347,8 @@ module Aws::SQS
       :attributes,
       :md5_of_message_attributes,
       :message_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1341,13 +1389,15 @@ module Aws::SQS
       :string_list_values,
       :binary_list_values,
       :data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The specified message isn't in flight.</p>
     class MessageNotInflight < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1386,7 +1436,8 @@ module Aws::SQS
       :string_list_values,
       :binary_list_values,
       :data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1449,8 @@ module Aws::SQS
     #   @return [String]
     class OverLimit < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1409,7 +1461,8 @@ module Aws::SQS
     #   @return [String]
     class PurgeQueueInProgress < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1421,7 +1474,8 @@ module Aws::SQS
     #   @return [String]
     class PurgeQueueRequest < Struct.new(
       :queue_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1431,7 +1485,8 @@ module Aws::SQS
     #   @return [String]
     class QueueDeletedRecently < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1441,7 +1496,8 @@ module Aws::SQS
     #   @return [String]
     class QueueDoesNotExist < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1451,7 +1507,8 @@ module Aws::SQS
     #   @return [String]
     class QueueNameExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1517,8 @@ module Aws::SQS
     #   @return [String]
     class ReceiptHandleIsInvalid < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1777,7 +1835,8 @@ module Aws::SQS
       :visibility_timeout,
       :wait_time_seconds,
       :receive_request_attempt_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1787,7 +1846,8 @@ module Aws::SQS
     #   @return [Array<Types::Message>]
     class ReceiveMessageResult < Struct.new(
       :messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,7 +1865,8 @@ module Aws::SQS
     class RemovePermissionRequest < Struct.new(
       :queue_url,
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1825,7 +1886,8 @@ module Aws::SQS
     #   @return [String]
     class RequestThrottled < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1896,8 @@ module Aws::SQS
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1851,7 +1914,8 @@ module Aws::SQS
     class SendMessageBatchRequest < Struct.new(
       :queue_url,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2012,7 +2076,8 @@ module Aws::SQS
       :message_system_attributes,
       :message_deduplication_id,
       :message_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2037,7 +2102,8 @@ module Aws::SQS
     class SendMessageBatchResult < Struct.new(
       :successful,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,7 +2139,8 @@ module Aws::SQS
       :md5_of_message_attributes,
       :md5_of_message_system_attributes,
       :sequence_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2239,7 +2306,8 @@ module Aws::SQS
       :message_system_attributes,
       :message_deduplication_id,
       :message_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2271,7 +2339,8 @@ module Aws::SQS
       :md5_of_message_system_attributes,
       :message_id,
       :sequence_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2514,7 +2583,8 @@ module Aws::SQS
     class SetQueueAttributesRequest < Struct.new(
       :queue_url,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2541,7 +2611,8 @@ module Aws::SQS
       :source_arn,
       :destination_arn,
       :max_number_of_messages_per_second,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2552,7 +2623,8 @@ module Aws::SQS
     #   @return [String]
     class StartMessageMoveTaskResult < Struct.new(
       :task_handle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2565,7 +2637,8 @@ module Aws::SQS
     class TagQueueRequest < Struct.new(
       :queue_url,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2575,7 +2648,8 @@ module Aws::SQS
     #   @return [String]
     class TooManyEntriesInBatchRequest < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2584,7 +2658,8 @@ module Aws::SQS
     #   @return [String]
     class UnsupportedOperation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2597,7 +2672,8 @@ module Aws::SQS
     class UntagQueueRequest < Struct.new(
       :queue_url,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

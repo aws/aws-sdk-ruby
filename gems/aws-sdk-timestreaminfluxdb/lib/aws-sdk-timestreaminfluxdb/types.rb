@@ -11,7 +11,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28,7 +29,8 @@ module Aws::TimestreamInfluxDB
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +124,8 @@ module Aws::TimestreamInfluxDB
       :failover_mode,
       :log_delivery_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +138,8 @@ module Aws::TimestreamInfluxDB
     class CreateDbClusterOutput < Struct.new(
       :db_cluster_id,
       :db_cluster_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +230,8 @@ module Aws::TimestreamInfluxDB
       :tags,
       :port,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,7 +320,8 @@ module Aws::TimestreamInfluxDB
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
       :instance_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -336,7 +342,8 @@ module Aws::TimestreamInfluxDB
       :description,
       :parameters,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +368,8 @@ module Aws::TimestreamInfluxDB
       :arn,
       :description,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +423,8 @@ module Aws::TimestreamInfluxDB
       :network_type,
       :db_storage_type,
       :allocated_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +478,8 @@ module Aws::TimestreamInfluxDB
       :allocated_storage,
       :deployment_type,
       :instance_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +530,8 @@ module Aws::TimestreamInfluxDB
       :db_storage_type,
       :allocated_storage,
       :deployment_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +553,8 @@ module Aws::TimestreamInfluxDB
       :name,
       :arn,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +563,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class DeleteDbClusterInput < Struct.new(
       :db_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +573,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class DeleteDbClusterOutput < Struct.new(
       :db_cluster_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +583,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class DeleteDbInstanceInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -658,7 +673,8 @@ module Aws::TimestreamInfluxDB
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
       :instance_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -672,7 +688,8 @@ module Aws::TimestreamInfluxDB
     class Duration < Struct.new(
       :duration_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -681,7 +698,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class GetDbClusterInput < Struct.new(
       :db_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +780,8 @@ module Aws::TimestreamInfluxDB
       :vpc_subnet_ids,
       :vpc_security_group_ids,
       :failover_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +790,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class GetDbInstanceInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -860,7 +880,8 @@ module Aws::TimestreamInfluxDB
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
       :instance_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +890,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class GetDbParameterGroupInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +916,8 @@ module Aws::TimestreamInfluxDB
       :arn,
       :description,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1069,7 +1092,8 @@ module Aws::TimestreamInfluxDB
       :storage_wal_max_concurrent_writes,
       :storage_wal_max_write_delay,
       :ui_disabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1078,7 +1102,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1091,7 +1116,8 @@ module Aws::TimestreamInfluxDB
     class ListDbClustersInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1131,8 @@ module Aws::TimestreamInfluxDB
     class ListDbClustersOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1122,7 +1149,8 @@ module Aws::TimestreamInfluxDB
       :db_cluster_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1164,8 @@ module Aws::TimestreamInfluxDB
     class ListDbInstancesForClusterOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1178,8 @@ module Aws::TimestreamInfluxDB
     class ListDbInstancesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1193,8 @@ module Aws::TimestreamInfluxDB
     class ListDbInstancesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1176,7 +1207,8 @@ module Aws::TimestreamInfluxDB
     class ListDbParameterGroupsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1222,8 @@ module Aws::TimestreamInfluxDB
     class ListDbParameterGroupsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1232,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1208,7 +1242,8 @@ module Aws::TimestreamInfluxDB
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1253,8 @@ module Aws::TimestreamInfluxDB
     #   @return [Types::S3Configuration]
     class LogDeliveryConfiguration < Struct.new(
       :s3_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1229,7 +1265,8 @@ module Aws::TimestreamInfluxDB
     class Parameters < Struct.new(
       :influx_d_bv2,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class InfluxDBv2 < Parameters; end
@@ -1249,7 +1286,8 @@ module Aws::TimestreamInfluxDB
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1301,8 @@ module Aws::TimestreamInfluxDB
     class S3Configuration < Struct.new(
       :bucket_name,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1272,7 +1311,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1285,7 +1325,8 @@ module Aws::TimestreamInfluxDB
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1298,7 +1339,8 @@ module Aws::TimestreamInfluxDB
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,7 +1353,8 @@ module Aws::TimestreamInfluxDB
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,7 +1383,8 @@ module Aws::TimestreamInfluxDB
       :port,
       :db_instance_type,
       :failover_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1349,7 +1393,8 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     class UpdateDbClusterOutput < Struct.new(
       :db_cluster_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1435,8 @@ module Aws::TimestreamInfluxDB
       :deployment_type,
       :db_storage_type,
       :allocated_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1480,7 +1526,8 @@ module Aws::TimestreamInfluxDB
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
       :instance_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,7 +1540,8 @@ module Aws::TimestreamInfluxDB
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

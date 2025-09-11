@@ -2593,7 +2593,6 @@ module Aws::WAFV2
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         operation.traits = {}
       end)
-
     end
 
     class << self

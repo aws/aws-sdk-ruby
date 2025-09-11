@@ -56,7 +56,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ApplicationNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -78,7 +78,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ComputeNotCompatibleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -87,7 +87,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::IncompatibleApplicationsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -109,7 +109,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -122,7 +122,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::InvalidParameterCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -136,7 +136,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::InvalidParameterValuesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -150,7 +150,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::InvalidResourceStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -163,7 +163,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::OperatingSystemNotCompatibleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -172,7 +172,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::OperationInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -185,7 +185,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::OperationNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -204,7 +204,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -217,7 +217,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ResourceAssociatedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -230,7 +230,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ResourceCreationFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -243,7 +243,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -261,7 +261,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -275,7 +275,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The resource could not be found.</p>
@@ -294,7 +294,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ResourceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -316,7 +316,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::UnsupportedNetworkConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -331,7 +331,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::UnsupportedWorkspaceConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -345,7 +345,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -359,7 +359,7 @@ module Aws::WorkSpaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpaces::Types::WorkspacesDefaultRoleNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

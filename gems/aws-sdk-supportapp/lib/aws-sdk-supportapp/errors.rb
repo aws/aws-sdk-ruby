@@ -39,7 +39,7 @@ module Aws::SupportApp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SupportApp::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::SupportApp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SupportApp::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::SupportApp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SupportApp::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::SupportApp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SupportApp::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::SupportApp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SupportApp::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::SupportApp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SupportApp::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

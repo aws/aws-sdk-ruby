@@ -11,7 +11,8 @@ module Aws::ConnectCases
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +42,8 @@ module Aws::ConnectCases
       :performed_time,
       :fields,
       :performed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +61,8 @@ module Aws::ConnectCases
       :event_field_id,
       :old_value,
       :new_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +89,8 @@ module Aws::ConnectCases
       :empty_value,
       :user_arn_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringValue < AuditEventFieldValueUnion; end
@@ -107,7 +111,8 @@ module Aws::ConnectCases
     class AuditEventPerformedBy < Struct.new(
       :user,
       :iam_principal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +126,8 @@ module Aws::ConnectCases
     class BasicLayout < Struct.new(
       :top_panel,
       :more_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +140,8 @@ module Aws::ConnectCases
     class BatchGetCaseRuleRequest < Struct.new(
       :domain_id,
       :case_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +154,8 @@ module Aws::ConnectCases
     class BatchGetCaseRuleResponse < Struct.new(
       :case_rules,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +168,8 @@ module Aws::ConnectCases
     class BatchGetFieldInput < Struct.new(
       :domain_id,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +182,8 @@ module Aws::ConnectCases
     class BatchGetFieldOutput < Struct.new(
       :fields,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,7 +200,8 @@ module Aws::ConnectCases
       :domain_id,
       :field_id,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +210,8 @@ module Aws::ConnectCases
     #   @return [Array<Types::FieldOptionError>]
     class BatchPutFieldOptionsOutput < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +226,8 @@ module Aws::ConnectCases
       :equal_to,
       :not_equal_to,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EqualTo < BooleanCondition; end
@@ -236,7 +249,8 @@ module Aws::ConnectCases
       :operand_one,
       :operand_two,
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -246,7 +260,8 @@ module Aws::ConnectCases
     #   @return [Array<Types::FieldIdentifier>]
     class CaseEventIncludedData < Struct.new(
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -269,7 +284,8 @@ module Aws::ConnectCases
       :and_all,
       :or_all,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Field < CaseFilter; end
@@ -286,7 +302,8 @@ module Aws::ConnectCases
     class CaseRuleDetails < Struct.new(
       :required,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Required < CaseRuleDetails; end
@@ -307,7 +324,8 @@ module Aws::ConnectCases
       :id,
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +335,8 @@ module Aws::ConnectCases
     #   @return [String]
     class CaseRuleIdentifier < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,7 +362,8 @@ module Aws::ConnectCases
       :case_rule_arn,
       :rule_type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -357,7 +377,8 @@ module Aws::ConnectCases
     class CaseSummary < Struct.new(
       :case_id,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,13 +392,15 @@ module Aws::ConnectCases
     class CommentContent < Struct.new(
       :body,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for related items of type <code>Comment</code>.</p>
     class CommentFilter < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +409,8 @@ module Aws::ConnectCases
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +420,8 @@ module Aws::ConnectCases
     #   @return [String]
     class Contact < Struct.new(
       :contact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +439,8 @@ module Aws::ConnectCases
       :contact_arn,
       :channel,
       :connected_to_system_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -428,7 +454,8 @@ module Aws::ConnectCases
     class ContactFilter < Struct.new(
       :channel,
       :contact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +480,8 @@ module Aws::ConnectCases
       :fields,
       :client_token,
       :performed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +494,8 @@ module Aws::ConnectCases
     class CreateCaseOutput < Struct.new(
       :case_id,
       :case_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +516,8 @@ module Aws::ConnectCases
       :name,
       :description,
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +530,8 @@ module Aws::ConnectCases
     class CreateCaseRuleResponse < Struct.new(
       :case_rule_id,
       :case_rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +540,8 @@ module Aws::ConnectCases
     #   @return [String]
     class CreateDomainInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +558,8 @@ module Aws::ConnectCases
       :domain_id,
       :domain_arn,
       :domain_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +580,8 @@ module Aws::ConnectCases
       :name,
       :type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +594,8 @@ module Aws::ConnectCases
     class CreateFieldOutput < Struct.new(
       :field_id,
       :field_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -577,7 +612,8 @@ module Aws::ConnectCases
       :domain_id,
       :name,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +626,8 @@ module Aws::ConnectCases
     class CreateLayoutOutput < Struct.new(
       :layout_id,
       :layout_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +652,8 @@ module Aws::ConnectCases
       :type,
       :content,
       :performed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -628,7 +666,8 @@ module Aws::ConnectCases
     class CreateRelatedItemOutput < Struct.new(
       :related_item_id,
       :related_item_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +700,8 @@ module Aws::ConnectCases
       :required_fields,
       :status,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +714,8 @@ module Aws::ConnectCases
     class CreateTemplateOutput < Struct.new(
       :template_id,
       :template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,12 +728,14 @@ module Aws::ConnectCases
     class DeleteCaseRequest < Struct.new(
       :domain_id,
       :case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCaseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,12 +748,14 @@ module Aws::ConnectCases
     class DeleteCaseRuleRequest < Struct.new(
       :domain_id,
       :case_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCaseRuleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,12 +764,14 @@ module Aws::ConnectCases
     #   @return [String]
     class DeleteDomainInput < Struct.new(
       :domain_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDomainOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,12 +784,14 @@ module Aws::ConnectCases
     class DeleteFieldRequest < Struct.new(
       :domain_id,
       :field_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFieldResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,12 +804,14 @@ module Aws::ConnectCases
     class DeleteLayoutRequest < Struct.new(
       :domain_id,
       :layout_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLayoutResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,12 +828,14 @@ module Aws::ConnectCases
       :domain_id,
       :case_id,
       :related_item_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRelatedItemResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -795,12 +848,14 @@ module Aws::ConnectCases
     class DeleteTemplateRequest < Struct.new(
       :domain_id,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -818,19 +873,22 @@ module Aws::ConnectCases
       :domain_id,
       :domain_arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An empty value. You cannot set <code>EmptyFieldValue</code> on a field that is required on a case template.</p> <p>This structure will never have any data members. It signifies an empty value on a case field.</p>
     class EmptyFieldValue < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an empty operand value. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">Add case field conditions to a case template</a>.</p>
     class EmptyOperandValue < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +902,8 @@ module Aws::ConnectCases
     class EventBridgeConfiguration < Struct.new(
       :enabled,
       :included_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,7 +917,8 @@ module Aws::ConnectCases
     class EventIncludedData < Struct.new(
       :case_data,
       :related_item_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -876,7 +936,8 @@ module Aws::ConnectCases
       :id,
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +968,8 @@ module Aws::ConnectCases
       :less_than,
       :less_than_or_equal_to,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EqualTo < FieldFilter; end
@@ -929,7 +991,8 @@ module Aws::ConnectCases
     class FieldGroup < Struct.new(
       :name,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +1002,8 @@ module Aws::ConnectCases
     #   @return [String]
     class FieldIdentifier < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -949,7 +1013,8 @@ module Aws::ConnectCases
     #   @return [String]
     class FieldItem < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1032,8 @@ module Aws::ConnectCases
       :name,
       :value,
       :active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1051,8 @@ module Aws::ConnectCases
       :message,
       :error_code,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1078,8 @@ module Aws::ConnectCases
       :name,
       :type,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1025,7 +1093,8 @@ module Aws::ConnectCases
     class FieldValue < Struct.new(
       :id,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1121,8 @@ module Aws::ConnectCases
       :empty_value,
       :user_arn_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringValue < FieldValueUnion; end
@@ -1069,7 +1139,8 @@ module Aws::ConnectCases
     #   @return [String]
     class FileContent < Struct.new(
       :file_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,7 +1150,8 @@ module Aws::ConnectCases
     #   @return [String]
     class FileFilter < Struct.new(
       :file_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1172,8 @@ module Aws::ConnectCases
       :domain_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1113,7 +1186,8 @@ module Aws::ConnectCases
     class GetCaseAuditEventsResponse < Struct.new(
       :next_token,
       :audit_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1122,7 +1196,8 @@ module Aws::ConnectCases
     #   @return [String]
     class GetCaseEventConfigurationInput < Struct.new(
       :domain_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1131,7 +1206,8 @@ module Aws::ConnectCases
     #   @return [Types::EventBridgeConfiguration]
     class GetCaseEventConfigurationOutput < Struct.new(
       :event_bridge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1228,8 @@ module Aws::ConnectCases
       :domain_id,
       :fields,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1250,8 @@ module Aws::ConnectCases
       :template_id,
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1293,8 @@ module Aws::ConnectCases
       :created_time,
       :last_modified_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1229,7 +1308,8 @@ module Aws::ConnectCases
     #   @return [String]
     class GetDomainInput < Struct.new(
       :domain_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1258,7 +1338,8 @@ module Aws::ConnectCases
       :created_time,
       :domain_status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1385,8 @@ module Aws::ConnectCases
       :deleted,
       :created_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1322,7 +1404,8 @@ module Aws::ConnectCases
     class GetLayoutInput < Struct.new(
       :domain_id,
       :layout_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1442,8 @@ module Aws::ConnectCases
       :deleted,
       :created_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1377,7 +1461,8 @@ module Aws::ConnectCases
     class GetTemplateInput < Struct.new(
       :domain_id,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1430,7 +1515,8 @@ module Aws::ConnectCases
       :created_time,
       :last_modified_time,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1448,7 +1534,8 @@ module Aws::ConnectCases
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1458,7 +1545,8 @@ module Aws::ConnectCases
     #   @return [String]
     class LayoutConfiguration < Struct.new(
       :default_layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1469,7 +1557,8 @@ module Aws::ConnectCases
     class LayoutContent < Struct.new(
       :basic,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Basic < LayoutContent; end
@@ -1482,7 +1571,8 @@ module Aws::ConnectCases
     #   @return [Array<Types::Section>]
     class LayoutSections < Struct.new(
       :sections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1500,7 +1590,8 @@ module Aws::ConnectCases
       :layout_id,
       :layout_arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,7 +1608,8 @@ module Aws::ConnectCases
       :domain_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1622,8 @@ module Aws::ConnectCases
     class ListCaseRulesResponse < Struct.new(
       :case_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1551,7 +1644,8 @@ module Aws::ConnectCases
       :contact_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,7 +1658,8 @@ module Aws::ConnectCases
     class ListCasesForContactOutput < Struct.new(
       :cases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1672,8 @@ module Aws::ConnectCases
     class ListDomainsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1590,7 +1686,8 @@ module Aws::ConnectCases
     class ListDomainsOutput < Struct.new(
       :domains,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,7 +1712,8 @@ module Aws::ConnectCases
       :max_results,
       :next_token,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1628,7 +1726,8 @@ module Aws::ConnectCases
     class ListFieldOptionsOutput < Struct.new(
       :options,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1645,7 +1744,8 @@ module Aws::ConnectCases
       :domain_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1658,7 +1758,8 @@ module Aws::ConnectCases
     class ListFieldsOutput < Struct.new(
       :fields,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1776,8 @@ module Aws::ConnectCases
       :domain_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1688,7 +1790,8 @@ module Aws::ConnectCases
     class ListLayoutsOutput < Struct.new(
       :layouts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1697,7 +1800,8 @@ module Aws::ConnectCases
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1706,7 +1810,8 @@ module Aws::ConnectCases
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1727,7 +1832,8 @@ module Aws::ConnectCases
       :max_results,
       :next_token,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1740,7 +1846,8 @@ module Aws::ConnectCases
     class ListTemplatesOutput < Struct.new(
       :templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1751,7 +1858,8 @@ module Aws::ConnectCases
     class OperandOne < Struct.new(
       :field_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class FieldId < OperandOne; end
@@ -1777,7 +1885,8 @@ module Aws::ConnectCases
       :double_value,
       :empty_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringValue < OperandTwo; end
@@ -1796,12 +1905,14 @@ module Aws::ConnectCases
     class PutCaseEventConfigurationInput < Struct.new(
       :domain_id,
       :event_bridge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutCaseEventConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1824,7 +1935,8 @@ module Aws::ConnectCases
       :file,
       :sla,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Contact < RelatedItemContent; end
@@ -1840,7 +1952,8 @@ module Aws::ConnectCases
     #   @return [Boolean]
     class RelatedItemEventIncludedData < Struct.new(
       :include_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1976,8 @@ module Aws::ConnectCases
       :file,
       :sla,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Contact < RelatedItemInputContent; end
@@ -1892,7 +2006,8 @@ module Aws::ConnectCases
       :file,
       :sla,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Contact < RelatedItemTypeFilter; end
@@ -1912,7 +2027,8 @@ module Aws::ConnectCases
     class RequiredCaseRule < Struct.new(
       :default_value,
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1922,7 +2038,8 @@ module Aws::ConnectCases
     #   @return [String]
     class RequiredField < Struct.new(
       :field_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1939,7 +2056,8 @@ module Aws::ConnectCases
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1972,7 +2090,8 @@ module Aws::ConnectCases
       :filter,
       :sorts,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1985,7 +2104,8 @@ module Aws::ConnectCases
     class SearchCasesOutput < Struct.new(
       :next_token,
       :cases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2007,7 +2127,8 @@ module Aws::ConnectCases
       :template_id,
       :fields,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2032,7 +2153,8 @@ module Aws::ConnectCases
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2045,7 +2167,8 @@ module Aws::ConnectCases
     class SearchRelatedItemsOutput < Struct.new(
       :next_token,
       :related_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2075,7 +2198,8 @@ module Aws::ConnectCases
       :content,
       :tags,
       :performed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2086,7 +2210,8 @@ module Aws::ConnectCases
     class Section < Struct.new(
       :field_group,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class FieldGroup < Section; end
@@ -2098,7 +2223,8 @@ module Aws::ConnectCases
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2132,7 +2258,8 @@ module Aws::ConnectCases
       :target_field_values,
       :target_time,
       :completion_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2142,7 +2269,8 @@ module Aws::ConnectCases
     #   @return [Types::SlaConfiguration]
     class SlaContent < Struct.new(
       :sla_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2156,7 +2284,8 @@ module Aws::ConnectCases
     class SlaFilter < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2182,7 +2311,8 @@ module Aws::ConnectCases
       :field_id,
       :target_field_values,
       :target_sla_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2193,7 +2323,8 @@ module Aws::ConnectCases
     class SlaInputContent < Struct.new(
       :sla_input_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SlaInputConfiguration < SlaInputContent; end
@@ -2210,7 +2341,8 @@ module Aws::ConnectCases
     class Sort < Struct.new(
       :field_id,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2223,7 +2355,8 @@ module Aws::ConnectCases
     class TagResourceInput < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2237,7 +2370,8 @@ module Aws::ConnectCases
     class TemplateRule < Struct.new(
       :case_rule_id,
       :field_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2259,7 +2393,8 @@ module Aws::ConnectCases
       :template_arn,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2268,7 +2403,8 @@ module Aws::ConnectCases
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2281,7 +2417,8 @@ module Aws::ConnectCases
     class UntagResourceInput < Struct.new(
       :arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,12 +2439,14 @@ module Aws::ConnectCases
       :case_id,
       :fields,
       :performed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateCaseOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2332,12 +2471,14 @@ module Aws::ConnectCases
       :name,
       :description,
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateCaseRuleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2358,12 +2499,14 @@ module Aws::ConnectCases
       :field_id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateFieldOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2384,12 +2527,14 @@ module Aws::ConnectCases
       :layout_id,
       :name,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateLayoutOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2426,12 +2571,14 @@ module Aws::ConnectCases
       :required_fields,
       :status,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTemplateOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2446,7 +2593,8 @@ module Aws::ConnectCases
       :user_arn,
       :custom_entity,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class UserArn < UserUnion; end
@@ -2459,7 +2607,8 @@ module Aws::ConnectCases
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

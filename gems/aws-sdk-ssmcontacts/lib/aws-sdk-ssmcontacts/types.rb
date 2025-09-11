@@ -38,12 +38,14 @@ module Aws::SSMContacts
       :note,
       :accept_code,
       :accept_code_validation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AcceptPageResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,7 +54,8 @@ module Aws::SSMContacts
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,12 +68,14 @@ module Aws::SSMContacts
     class ActivateContactChannelRequest < Struct.new(
       :contact_channel_id,
       :activation_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ActivateContactChannelResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +91,8 @@ module Aws::SSMContacts
     class ChannelTargetInfo < Struct.new(
       :contact_channel_id,
       :retry_interval_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +113,8 @@ module Aws::SSMContacts
       :resource_id,
       :resource_type,
       :dependent_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +151,8 @@ module Aws::SSMContacts
       :alias,
       :display_name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +194,8 @@ module Aws::SSMContacts
       :type,
       :delivery_address,
       :activation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +217,8 @@ module Aws::SSMContacts
     #   @return [String]
     class ContactChannelAddress < Struct.new(
       :simple_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +233,8 @@ module Aws::SSMContacts
     class ContactTargetInfo < Struct.new(
       :contact_id,
       :is_essential,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -237,7 +248,8 @@ module Aws::SSMContacts
     class CoverageTime < Struct.new(
       :start,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +311,8 @@ module Aws::SSMContacts
       :delivery_address,
       :defer_activation,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +321,8 @@ module Aws::SSMContacts
     #   @return [String]
     class CreateContactChannelResult < Struct.new(
       :contact_channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +369,8 @@ module Aws::SSMContacts
       :plan,
       :tags,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +379,8 @@ module Aws::SSMContacts
     #   @return [String]
     class CreateContactResult < Struct.new(
       :contact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +409,8 @@ module Aws::SSMContacts
       :start_time,
       :end_time,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +419,8 @@ module Aws::SSMContacts
     #   @return [String]
     class CreateRotationOverrideResult < Struct.new(
       :rotation_override_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +472,8 @@ module Aws::SSMContacts
       :recurrence,
       :tags,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -463,7 +482,8 @@ module Aws::SSMContacts
     #   @return [String]
     class CreateRotationResult < Struct.new(
       :rotation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +492,8 @@ module Aws::SSMContacts
     #   @return [String]
     class DataEncryptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -481,12 +502,14 @@ module Aws::SSMContacts
     #   @return [String]
     class DeactivateContactChannelRequest < Struct.new(
       :contact_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeactivateContactChannelResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,12 +518,14 @@ module Aws::SSMContacts
     #   @return [String]
     class DeleteContactChannelRequest < Struct.new(
       :contact_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContactChannelResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,12 +534,14 @@ module Aws::SSMContacts
     #   @return [String]
     class DeleteContactRequest < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContactResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,12 +554,14 @@ module Aws::SSMContacts
     class DeleteRotationOverrideRequest < Struct.new(
       :rotation_id,
       :rotation_override_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRotationOverrideResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -541,12 +570,14 @@ module Aws::SSMContacts
     #   @return [String]
     class DeleteRotationRequest < Struct.new(
       :rotation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRotationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +594,8 @@ module Aws::SSMContacts
     class DependentEntity < Struct.new(
       :relation_type,
       :dependent_resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +604,8 @@ module Aws::SSMContacts
     #   @return [String]
     class DescribeEngagementRequest < Struct.new(
       :engagement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -621,7 +654,8 @@ module Aws::SSMContacts
       :incident_id,
       :start_time,
       :stop_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -630,7 +664,8 @@ module Aws::SSMContacts
     #   @return [String]
     class DescribePageRequest < Struct.new(
       :page_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +722,8 @@ module Aws::SSMContacts
       :sent_time,
       :read_time,
       :delivery_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +754,8 @@ module Aws::SSMContacts
       :incident_id,
       :start_time,
       :stop_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +764,8 @@ module Aws::SSMContacts
     #   @return [String]
     class GetContactChannelRequest < Struct.new(
       :contact_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +795,8 @@ module Aws::SSMContacts
       :type,
       :delivery_address,
       :activation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +805,8 @@ module Aws::SSMContacts
     #   @return [String]
     class GetContactPolicyRequest < Struct.new(
       :contact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -779,7 +819,8 @@ module Aws::SSMContacts
     class GetContactPolicyResult < Struct.new(
       :contact_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,7 +829,8 @@ module Aws::SSMContacts
     #   @return [String]
     class GetContactRequest < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +857,8 @@ module Aws::SSMContacts
       :display_name,
       :type,
       :plan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +873,8 @@ module Aws::SSMContacts
     class GetRotationOverrideRequest < Struct.new(
       :rotation_id,
       :rotation_override_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -860,7 +904,8 @@ module Aws::SSMContacts
       :start_time,
       :end_time,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +915,8 @@ module Aws::SSMContacts
     #   @return [String]
     class GetRotationRequest < Struct.new(
       :rotation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +948,8 @@ module Aws::SSMContacts
       :start_time,
       :time_zone_id,
       :recurrence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -916,7 +963,8 @@ module Aws::SSMContacts
     class HandOffTime < Struct.new(
       :hour_of_day,
       :minute_of_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -935,7 +983,8 @@ module Aws::SSMContacts
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -957,7 +1006,8 @@ module Aws::SSMContacts
       :contact_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1020,8 @@ module Aws::SSMContacts
     class ListContactChannelsResult < Struct.new(
       :next_token,
       :contact_channels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1042,8 @@ module Aws::SSMContacts
       :max_results,
       :alias_prefix,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1056,8 @@ module Aws::SSMContacts
     class ListContactsResult < Struct.new(
       :next_token,
       :contacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1025,7 +1078,8 @@ module Aws::SSMContacts
       :max_results,
       :incident_id,
       :time_range_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1093,8 @@ module Aws::SSMContacts
     class ListEngagementsResult < Struct.new(
       :next_token,
       :engagements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1056,7 +1111,8 @@ module Aws::SSMContacts
       :page_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1069,7 +1125,8 @@ module Aws::SSMContacts
     class ListPageReceiptsResult < Struct.new(
       :next_token,
       :receipts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1139,8 @@ module Aws::SSMContacts
     class ListPageResolutionsRequest < Struct.new(
       :next_token,
       :page_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1154,8 @@ module Aws::SSMContacts
     class ListPageResolutionsResult < Struct.new(
       :next_token,
       :page_resolutions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1173,8 @@ module Aws::SSMContacts
       :contact_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1187,8 @@ module Aws::SSMContacts
     class ListPagesByContactResult < Struct.new(
       :next_token,
       :pages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1206,8 @@ module Aws::SSMContacts
       :engagement_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,7 +1220,8 @@ module Aws::SSMContacts
     class ListPagesByEngagementResult < Struct.new(
       :next_token,
       :pages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1205,7 +1268,8 @@ module Aws::SSMContacts
       :overrides,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1219,7 +1283,8 @@ module Aws::SSMContacts
     class ListPreviewRotationShiftsResult < Struct.new(
       :rotation_shifts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,7 +1310,8 @@ module Aws::SSMContacts
       :end_time,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1259,7 +1325,8 @@ module Aws::SSMContacts
     class ListRotationOverridesResult < Struct.new(
       :rotation_overrides,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1286,7 +1353,8 @@ module Aws::SSMContacts
       :end_time,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1300,7 +1368,8 @@ module Aws::SSMContacts
     class ListRotationShiftsResult < Struct.new(
       :rotation_shifts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1389,8 @@ module Aws::SSMContacts
       :rotation_name_prefix,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1404,8 @@ module Aws::SSMContacts
     class ListRotationsResult < Struct.new(
       :next_token,
       :rotations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1415,8 @@ module Aws::SSMContacts
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1425,8 @@ module Aws::SSMContacts
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResult < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1440,8 @@ module Aws::SSMContacts
     class MonthlySetting < Struct.new(
       :day_of_month,
       :hand_off_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1405,7 +1479,8 @@ module Aws::SSMContacts
       :sent_time,
       :delivery_time,
       :read_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1498,8 @@ module Aws::SSMContacts
     class Plan < Struct.new(
       :stages,
       :rotation_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1441,7 +1517,8 @@ module Aws::SSMContacts
       :new_members,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1454,12 +1531,14 @@ module Aws::SSMContacts
     class PutContactPolicyRequest < Struct.new(
       :contact_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutContactPolicyResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1483,7 +1562,8 @@ module Aws::SSMContacts
       :receipt_type,
       :receipt_info,
       :receipt_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,7 +1597,8 @@ module Aws::SSMContacts
       :number_of_on_calls,
       :shift_coverages,
       :recurrence_multiplier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1541,7 +1622,8 @@ module Aws::SSMContacts
       :contact_arn,
       :type,
       :stage_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1563,7 +1645,8 @@ module Aws::SSMContacts
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1596,7 +1679,8 @@ module Aws::SSMContacts
       :start_time,
       :time_zone_id,
       :recurrence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1623,7 +1707,8 @@ module Aws::SSMContacts
       :start_time,
       :end_time,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1735,8 @@ module Aws::SSMContacts
       :end_time,
       :type,
       :shift_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1659,12 +1745,14 @@ module Aws::SSMContacts
     #   @return [String]
     class SendActivationCodeRequest < Struct.new(
       :contact_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SendActivationCodeResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1689,7 +1777,8 @@ module Aws::SSMContacts
       :resource_type,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1701,7 +1790,8 @@ module Aws::SSMContacts
     #   @return [Array<String>]
     class ShiftDetails < Struct.new(
       :overridden_contact_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1808,8 @@ module Aws::SSMContacts
     class Stage < Struct.new(
       :duration_in_minutes,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1760,7 +1851,8 @@ module Aws::SSMContacts
       :public_content,
       :incident_id,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1769,7 +1861,8 @@ module Aws::SSMContacts
     #   @return [String]
     class StartEngagementResult < Struct.new(
       :engagement_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1782,12 +1875,14 @@ module Aws::SSMContacts
     class StopEngagementRequest < Struct.new(
       :engagement_id,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopEngagementResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1801,7 +1896,8 @@ module Aws::SSMContacts
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,12 +1910,14 @@ module Aws::SSMContacts
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1833,7 +1931,8 @@ module Aws::SSMContacts
     class Target < Struct.new(
       :channel_target_info,
       :contact_target_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,7 +1953,8 @@ module Aws::SSMContacts
       :quota_code,
       :service_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1873,7 +1973,8 @@ module Aws::SSMContacts
     class TimeRange < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1886,12 +1987,14 @@ module Aws::SSMContacts
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1908,12 +2011,14 @@ module Aws::SSMContacts
       :contact_channel_id,
       :name,
       :delivery_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactChannelResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1931,12 +2036,14 @@ module Aws::SSMContacts
       :contact_id,
       :display_name,
       :plan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1976,12 +2083,14 @@ module Aws::SSMContacts
       :start_time,
       :time_zone_id,
       :recurrence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateRotationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1999,7 +2108,8 @@ module Aws::SSMContacts
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2013,7 +2123,8 @@ module Aws::SSMContacts
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2027,7 +2138,8 @@ module Aws::SSMContacts
     class WeeklySetting < Struct.new(
       :day_of_week,
       :hand_off_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

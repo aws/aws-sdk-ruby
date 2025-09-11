@@ -17,7 +17,8 @@ module Aws::NetworkManager
     class AWSLocation < Struct.new(
       :zone,
       :subnet_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26,7 +27,8 @@ module Aws::NetworkManager
     #   @return [String]
     class AcceptAttachmentRequest < Struct.new(
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +37,8 @@ module Aws::NetworkManager
     #   @return [Types::Attachment]
     class AcceptAttachmentResponse < Struct.new(
       :attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +47,8 @@ module Aws::NetworkManager
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +62,8 @@ module Aws::NetworkManager
     class AccountStatus < Struct.new(
       :account_id,
       :slr_deployment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +84,8 @@ module Aws::NetworkManager
       :connect_peer_id,
       :device_id,
       :link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +94,8 @@ module Aws::NetworkManager
     #   @return [Types::ConnectPeerAssociation]
     class AssociateConnectPeerResponse < Struct.new(
       :connect_peer_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -109,7 +116,8 @@ module Aws::NetworkManager
       :global_network_id,
       :device_id,
       :link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -118,7 +126,8 @@ module Aws::NetworkManager
     #   @return [Types::CustomerGatewayAssociation]
     class AssociateCustomerGatewayResponse < Struct.new(
       :customer_gateway_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +144,8 @@ module Aws::NetworkManager
       :global_network_id,
       :device_id,
       :link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +154,8 @@ module Aws::NetworkManager
     #   @return [Types::LinkAssociation]
     class AssociateLinkResponse < Struct.new(
       :link_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,7 +176,8 @@ module Aws::NetworkManager
       :transit_gateway_connect_peer_arn,
       :device_id,
       :link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +186,8 @@ module Aws::NetworkManager
     #   @return [Types::TransitGatewayConnectPeerAssociation]
     class AssociateTransitGatewayConnectPeerResponse < Struct.new(
       :transit_gateway_connect_peer_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +265,8 @@ module Aws::NetworkManager
       :created_at,
       :updated_at,
       :last_modification_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +288,8 @@ module Aws::NetworkManager
       :message,
       :resource_arn,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +303,8 @@ module Aws::NetworkManager
     class Bandwidth < Struct.new(
       :upload_speed,
       :download_speed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +314,8 @@ module Aws::NetworkManager
     #   @return [Integer]
     class BgpOptions < Struct.new(
       :peer_asn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +333,8 @@ module Aws::NetworkManager
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +352,8 @@ module Aws::NetworkManager
       :attachment,
       :transport_attachment_id,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +363,8 @@ module Aws::NetworkManager
     #   @return [String]
     class ConnectAttachmentOptions < Struct.new(
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -390,7 +410,8 @@ module Aws::NetworkManager
       :tags,
       :subnet_arn,
       :last_modification_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +437,8 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +460,8 @@ module Aws::NetworkManager
       :peer_asn,
       :core_network_address,
       :peer_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +487,8 @@ module Aws::NetworkManager
       :inside_cidr_blocks,
       :protocol,
       :bgp_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -486,7 +510,8 @@ module Aws::NetworkManager
       :message,
       :resource_arn,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +549,8 @@ module Aws::NetworkManager
       :created_at,
       :tags,
       :subnet_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +600,8 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -592,7 +619,8 @@ module Aws::NetworkManager
       :type,
       :status,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -638,7 +666,8 @@ module Aws::NetworkManager
       :network_function_groups,
       :edges,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +697,8 @@ module Aws::NetworkManager
       :previous_values,
       :new_values,
       :identifier_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,7 +728,8 @@ module Aws::NetworkManager
       :event_time,
       :status,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -724,7 +755,8 @@ module Aws::NetworkManager
       :network_function_group_name,
       :attachment_id,
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -778,7 +810,8 @@ module Aws::NetworkManager
       :vpn_ecmp_support,
       :dns_support,
       :security_group_referencing_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -803,7 +836,8 @@ module Aws::NetworkManager
       :edge_location,
       :asn,
       :inside_cidr_blocks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -821,7 +855,8 @@ module Aws::NetworkManager
       :name,
       :edge_locations,
       :segments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -839,7 +874,8 @@ module Aws::NetworkManager
       :core_network_id,
       :network_function_group_name,
       :edge_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,7 +913,8 @@ module Aws::NetworkManager
       :change_set_state,
       :policy_errors,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,7 +932,8 @@ module Aws::NetworkManager
       :error_code,
       :message,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +946,8 @@ module Aws::NetworkManager
     class CoreNetworkPolicyException < Struct.new(
       :message,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,7 +977,8 @@ module Aws::NetworkManager
       :description,
       :created_at,
       :change_set_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +996,8 @@ module Aws::NetworkManager
       :name,
       :edge_locations,
       :shared_segments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,7 +1015,8 @@ module Aws::NetworkManager
       :core_network_id,
       :segment_name,
       :edge_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1008,7 +1050,8 @@ module Aws::NetworkManager
       :state,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1080,8 @@ module Aws::NetworkManager
       :options,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1046,7 +1090,8 @@ module Aws::NetworkManager
     #   @return [Types::ConnectAttachment]
     class CreateConnectAttachmentResponse < Struct.new(
       :connect_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1083,7 +1128,8 @@ module Aws::NetworkManager
       :tags,
       :client_token,
       :subnet_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1092,7 +1138,8 @@ module Aws::NetworkManager
     #   @return [Types::ConnectPeer]
     class CreateConnectPeerResponse < Struct.new(
       :connect_peer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1126,7 +1173,8 @@ module Aws::NetworkManager
       :connected_link_id,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1135,7 +1183,8 @@ module Aws::NetworkManager
     #   @return [Types::Connection]
     class CreateConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1160,7 +1209,8 @@ module Aws::NetworkManager
       :tags,
       :policy_document,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1169,7 +1219,8 @@ module Aws::NetworkManager
     #   @return [Types::CoreNetwork]
     class CreateCoreNetworkResponse < Struct.new(
       :core_network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1269,8 @@ module Aws::NetworkManager
       :location,
       :site_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1227,7 +1279,8 @@ module Aws::NetworkManager
     #   @return [Types::Device]
     class CreateDeviceResponse < Struct.new(
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1252,7 +1305,8 @@ module Aws::NetworkManager
       :edge_locations,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1315,8 @@ module Aws::NetworkManager
     #   @return [Types::DirectConnectGatewayAttachment]
     class CreateDirectConnectGatewayAttachmentResponse < Struct.new(
       :direct_connect_gateway_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1275,7 +1330,8 @@ module Aws::NetworkManager
     class CreateGlobalNetworkRequest < Struct.new(
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,7 +1340,8 @@ module Aws::NetworkManager
     #   @return [Types::GlobalNetwork]
     class CreateGlobalNetworkResponse < Struct.new(
       :global_network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1377,8 @@ module Aws::NetworkManager
       :provider,
       :site_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1387,8 @@ module Aws::NetworkManager
     #   @return [Types::Link]
     class CreateLinkResponse < Struct.new(
       :link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1365,7 +1424,8 @@ module Aws::NetworkManager
       :description,
       :location,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1434,8 @@ module Aws::NetworkManager
     #   @return [Types::Site]
     class CreateSiteResponse < Struct.new(
       :site,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1395,7 +1456,8 @@ module Aws::NetworkManager
       :vpn_connection_arn,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1404,7 +1466,8 @@ module Aws::NetworkManager
     #   @return [Types::SiteToSiteVpnAttachment]
     class CreateSiteToSiteVpnAttachmentResponse < Struct.new(
       :site_to_site_vpn_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1425,7 +1488,8 @@ module Aws::NetworkManager
       :transit_gateway_arn,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1434,7 +1498,8 @@ module Aws::NetworkManager
     #   @return [Types::TransitGatewayPeering]
     class CreateTransitGatewayPeeringResponse < Struct.new(
       :transit_gateway_peering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1455,7 +1520,8 @@ module Aws::NetworkManager
       :transit_gateway_route_table_arn,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1464,7 +1530,8 @@ module Aws::NetworkManager
     #   @return [Types::TransitGatewayRouteTableAttachment]
     class CreateTransitGatewayRouteTableAttachmentResponse < Struct.new(
       :transit_gateway_route_table_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,7 +1560,8 @@ module Aws::NetworkManager
       :options,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1502,7 +1570,8 @@ module Aws::NetworkManager
     #   @return [Types::VpcAttachment]
     class CreateVpcAttachmentResponse < Struct.new(
       :vpc_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1528,7 +1597,8 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1607,8 @@ module Aws::NetworkManager
     #   @return [String]
     class DeleteAttachmentRequest < Struct.new(
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1546,7 +1617,8 @@ module Aws::NetworkManager
     #   @return [Types::Attachment]
     class DeleteAttachmentResponse < Struct.new(
       :attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1627,8 @@ module Aws::NetworkManager
     #   @return [String]
     class DeleteConnectPeerRequest < Struct.new(
       :connect_peer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,7 +1637,8 @@ module Aws::NetworkManager
     #   @return [Types::ConnectPeer]
     class DeleteConnectPeerResponse < Struct.new(
       :connect_peer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1651,8 @@ module Aws::NetworkManager
     class DeleteConnectionRequest < Struct.new(
       :global_network_id,
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1661,8 @@ module Aws::NetworkManager
     #   @return [Types::Connection]
     class DeleteConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1675,8 @@ module Aws::NetworkManager
     class DeleteCoreNetworkPolicyVersionRequest < Struct.new(
       :core_network_id,
       :policy_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1608,7 +1685,8 @@ module Aws::NetworkManager
     #   @return [Types::CoreNetworkPolicy]
     class DeleteCoreNetworkPolicyVersionResponse < Struct.new(
       :core_network_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1617,7 +1695,8 @@ module Aws::NetworkManager
     #   @return [String]
     class DeleteCoreNetworkRequest < Struct.new(
       :core_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1705,8 @@ module Aws::NetworkManager
     #   @return [Types::CoreNetwork]
     class DeleteCoreNetworkResponse < Struct.new(
       :core_network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1719,8 @@ module Aws::NetworkManager
     class DeleteDeviceRequest < Struct.new(
       :global_network_id,
       :device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1729,8 @@ module Aws::NetworkManager
     #   @return [Types::Device]
     class DeleteDeviceResponse < Struct.new(
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,7 +1739,8 @@ module Aws::NetworkManager
     #   @return [String]
     class DeleteGlobalNetworkRequest < Struct.new(
       :global_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1749,8 @@ module Aws::NetworkManager
     #   @return [Types::GlobalNetwork]
     class DeleteGlobalNetworkResponse < Struct.new(
       :global_network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1679,7 +1763,8 @@ module Aws::NetworkManager
     class DeleteLinkRequest < Struct.new(
       :global_network_id,
       :link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1688,7 +1773,8 @@ module Aws::NetworkManager
     #   @return [Types::Link]
     class DeleteLinkResponse < Struct.new(
       :link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1697,7 +1783,8 @@ module Aws::NetworkManager
     #   @return [String]
     class DeletePeeringRequest < Struct.new(
       :peering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1706,7 +1793,8 @@ module Aws::NetworkManager
     #   @return [Types::Peering]
     class DeletePeeringResponse < Struct.new(
       :peering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1715,12 +1803,14 @@ module Aws::NetworkManager
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1733,7 +1823,8 @@ module Aws::NetworkManager
     class DeleteSiteRequest < Struct.new(
       :global_network_id,
       :site_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1742,7 +1833,8 @@ module Aws::NetworkManager
     #   @return [Types::Site]
     class DeleteSiteResponse < Struct.new(
       :site,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1755,7 +1847,8 @@ module Aws::NetworkManager
     class DeregisterTransitGatewayRequest < Struct.new(
       :global_network_id,
       :transit_gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1857,8 @@ module Aws::NetworkManager
     #   @return [Types::TransitGatewayRegistration]
     class DeregisterTransitGatewayResponse < Struct.new(
       :transit_gateway_registration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1781,7 +1875,8 @@ module Aws::NetworkManager
       :global_network_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1794,7 +1889,8 @@ module Aws::NetworkManager
     class DescribeGlobalNetworksResponse < Struct.new(
       :global_networks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1856,7 +1952,8 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1967,8 @@ module Aws::NetworkManager
     class DirectConnectGatewayAttachment < Struct.new(
       :attachment,
       :direct_connect_gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1883,7 +1981,8 @@ module Aws::NetworkManager
     class DisassociateConnectPeerRequest < Struct.new(
       :global_network_id,
       :connect_peer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1892,7 +1991,8 @@ module Aws::NetworkManager
     #   @return [Types::ConnectPeerAssociation]
     class DisassociateConnectPeerResponse < Struct.new(
       :connect_peer_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1905,7 +2005,8 @@ module Aws::NetworkManager
     class DisassociateCustomerGatewayRequest < Struct.new(
       :global_network_id,
       :customer_gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1914,7 +2015,8 @@ module Aws::NetworkManager
     #   @return [Types::CustomerGatewayAssociation]
     class DisassociateCustomerGatewayResponse < Struct.new(
       :customer_gateway_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1931,7 +2033,8 @@ module Aws::NetworkManager
       :global_network_id,
       :device_id,
       :link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1940,7 +2043,8 @@ module Aws::NetworkManager
     #   @return [Types::LinkAssociation]
     class DisassociateLinkResponse < Struct.new(
       :link_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2057,8 @@ module Aws::NetworkManager
     class DisassociateTransitGatewayConnectPeerRequest < Struct.new(
       :global_network_id,
       :transit_gateway_connect_peer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1962,7 +2067,8 @@ module Aws::NetworkManager
     #   @return [Types::TransitGatewayConnectPeerAssociation]
     class DisassociateTransitGatewayConnectPeerResponse < Struct.new(
       :transit_gateway_connect_peer_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1976,7 +2082,8 @@ module Aws::NetworkManager
     class EdgeOverride < Struct.new(
       :edge_sets,
       :use_edge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,12 +2096,14 @@ module Aws::NetworkManager
     class ExecuteCoreNetworkChangeSetRequest < Struct.new(
       :core_network_id,
       :policy_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ExecuteCoreNetworkChangeSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2003,7 +2112,8 @@ module Aws::NetworkManager
     #   @return [String]
     class GetConnectAttachmentRequest < Struct.new(
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2012,7 +2122,8 @@ module Aws::NetworkManager
     #   @return [Types::ConnectAttachment]
     class GetConnectAttachmentResponse < Struct.new(
       :connect_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2033,7 +2144,8 @@ module Aws::NetworkManager
       :connect_peer_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2046,7 +2158,8 @@ module Aws::NetworkManager
     class GetConnectPeerAssociationsResponse < Struct.new(
       :connect_peer_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2055,7 +2168,8 @@ module Aws::NetworkManager
     #   @return [String]
     class GetConnectPeerRequest < Struct.new(
       :connect_peer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2064,7 +2178,8 @@ module Aws::NetworkManager
     #   @return [Types::ConnectPeer]
     class GetConnectPeerResponse < Struct.new(
       :connect_peer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2089,7 +2204,8 @@ module Aws::NetworkManager
       :device_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2102,7 +2218,8 @@ module Aws::NetworkManager
     class GetConnectionsResponse < Struct.new(
       :connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2123,7 +2240,8 @@ module Aws::NetworkManager
       :policy_version_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2136,7 +2254,8 @@ module Aws::NetworkManager
     class GetCoreNetworkChangeEventsResponse < Struct.new(
       :core_network_change_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2157,7 +2276,8 @@ module Aws::NetworkManager
       :policy_version_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2170,7 +2290,8 @@ module Aws::NetworkManager
     class GetCoreNetworkChangeSetResponse < Struct.new(
       :core_network_changes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2187,7 +2308,8 @@ module Aws::NetworkManager
       :core_network_id,
       :policy_version_id,
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2196,7 +2318,8 @@ module Aws::NetworkManager
     #   @return [Types::CoreNetworkPolicy]
     class GetCoreNetworkPolicyResponse < Struct.new(
       :core_network_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2205,7 +2328,8 @@ module Aws::NetworkManager
     #   @return [String]
     class GetCoreNetworkRequest < Struct.new(
       :core_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2214,7 +2338,8 @@ module Aws::NetworkManager
     #   @return [Types::CoreNetwork]
     class GetCoreNetworkResponse < Struct.new(
       :core_network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2235,7 +2360,8 @@ module Aws::NetworkManager
       :customer_gateway_arns,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2248,7 +2374,8 @@ module Aws::NetworkManager
     class GetCustomerGatewayAssociationsResponse < Struct.new(
       :customer_gateway_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2273,7 +2400,8 @@ module Aws::NetworkManager
       :site_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2286,7 +2414,8 @@ module Aws::NetworkManager
     class GetDevicesResponse < Struct.new(
       :devices,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2295,7 +2424,8 @@ module Aws::NetworkManager
     #   @return [String]
     class GetDirectConnectGatewayAttachmentRequest < Struct.new(
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2304,7 +2434,8 @@ module Aws::NetworkManager
     #   @return [Types::DirectConnectGatewayAttachment]
     class GetDirectConnectGatewayAttachmentResponse < Struct.new(
       :direct_connect_gateway_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2329,7 +2460,8 @@ module Aws::NetworkManager
       :link_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2342,7 +2474,8 @@ module Aws::NetworkManager
     class GetLinkAssociationsResponse < Struct.new(
       :link_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2508,8 @@ module Aws::NetworkManager
       :provider,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2388,7 +2522,8 @@ module Aws::NetworkManager
     class GetLinksResponse < Struct.new(
       :links,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2503,7 +2638,8 @@ module Aws::NetworkManager
       :resource_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2516,7 +2652,8 @@ module Aws::NetworkManager
     class GetNetworkResourceCountsResponse < Struct.new(
       :network_resource_counts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2651,7 +2788,8 @@ module Aws::NetworkManager
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2664,7 +2802,8 @@ module Aws::NetworkManager
     class GetNetworkResourceRelationshipsResponse < Struct.new(
       :relationships,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2799,7 +2938,8 @@ module Aws::NetworkManager
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2812,7 +2952,8 @@ module Aws::NetworkManager
     class GetNetworkResourcesResponse < Struct.new(
       :network_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2857,7 +2998,8 @@ module Aws::NetworkManager
       :states,
       :types,
       :destination_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2882,7 +3024,8 @@ module Aws::NetworkManager
       :route_table_type,
       :route_table_timestamp,
       :network_routes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2940,7 +3083,8 @@ module Aws::NetworkManager
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2953,7 +3097,8 @@ module Aws::NetworkManager
     class GetNetworkTelemetryResponse < Struct.new(
       :network_telemetry,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2962,7 +3107,8 @@ module Aws::NetworkManager
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2971,7 +3117,8 @@ module Aws::NetworkManager
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2984,7 +3131,8 @@ module Aws::NetworkManager
     class GetRouteAnalysisRequest < Struct.new(
       :global_network_id,
       :route_analysis_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2993,7 +3141,8 @@ module Aws::NetworkManager
     #   @return [Types::RouteAnalysis]
     class GetRouteAnalysisResponse < Struct.new(
       :route_analysis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3002,7 +3151,8 @@ module Aws::NetworkManager
     #   @return [String]
     class GetSiteToSiteVpnAttachmentRequest < Struct.new(
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3011,7 +3161,8 @@ module Aws::NetworkManager
     #   @return [Types::SiteToSiteVpnAttachment]
     class GetSiteToSiteVpnAttachmentResponse < Struct.new(
       :site_to_site_vpn_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3032,7 +3183,8 @@ module Aws::NetworkManager
       :site_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3045,7 +3197,8 @@ module Aws::NetworkManager
     class GetSitesResponse < Struct.new(
       :sites,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3066,7 +3219,8 @@ module Aws::NetworkManager
       :transit_gateway_connect_peer_arns,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3079,7 +3233,8 @@ module Aws::NetworkManager
     class GetTransitGatewayConnectPeerAssociationsResponse < Struct.new(
       :transit_gateway_connect_peer_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3088,7 +3243,8 @@ module Aws::NetworkManager
     #   @return [String]
     class GetTransitGatewayPeeringRequest < Struct.new(
       :peering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3097,7 +3253,8 @@ module Aws::NetworkManager
     #   @return [Types::TransitGatewayPeering]
     class GetTransitGatewayPeeringResponse < Struct.new(
       :transit_gateway_peering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3119,7 +3276,8 @@ module Aws::NetworkManager
       :transit_gateway_arns,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3132,7 +3290,8 @@ module Aws::NetworkManager
     class GetTransitGatewayRegistrationsResponse < Struct.new(
       :transit_gateway_registrations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3141,7 +3300,8 @@ module Aws::NetworkManager
     #   @return [String]
     class GetTransitGatewayRouteTableAttachmentRequest < Struct.new(
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3150,7 +3310,8 @@ module Aws::NetworkManager
     #   @return [Types::TransitGatewayRouteTableAttachment]
     class GetTransitGatewayRouteTableAttachmentResponse < Struct.new(
       :transit_gateway_route_table_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3159,7 +3320,8 @@ module Aws::NetworkManager
     #   @return [String]
     class GetVpcAttachmentRequest < Struct.new(
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3168,7 +3330,8 @@ module Aws::NetworkManager
     #   @return [Types::VpcAttachment]
     class GetVpcAttachmentResponse < Struct.new(
       :vpc_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3198,7 +3361,8 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3211,7 +3375,8 @@ module Aws::NetworkManager
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3261,7 +3426,8 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3283,7 +3449,8 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       :link_association_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3312,7 +3479,8 @@ module Aws::NetworkManager
       :state,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3325,7 +3493,8 @@ module Aws::NetworkManager
     class ListAttachmentsResponse < Struct.new(
       :attachments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3346,7 +3515,8 @@ module Aws::NetworkManager
       :connect_attachment_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3359,7 +3529,8 @@ module Aws::NetworkManager
     class ListConnectPeersResponse < Struct.new(
       :connect_peers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3376,7 +3547,8 @@ module Aws::NetworkManager
       :core_network_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3389,7 +3561,8 @@ module Aws::NetworkManager
     class ListCoreNetworkPolicyVersionsResponse < Struct.new(
       :core_network_policy_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3402,7 +3575,8 @@ module Aws::NetworkManager
     class ListCoreNetworksRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3415,7 +3589,8 @@ module Aws::NetworkManager
     class ListCoreNetworksResponse < Struct.new(
       :core_networks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3428,7 +3603,8 @@ module Aws::NetworkManager
     class ListOrganizationServiceAccessStatusRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3441,7 +3617,8 @@ module Aws::NetworkManager
     class ListOrganizationServiceAccessStatusResponse < Struct.new(
       :organization_status,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3470,7 +3647,8 @@ module Aws::NetworkManager
       :state,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3483,7 +3661,8 @@ module Aws::NetworkManager
     class ListPeeringsResponse < Struct.new(
       :peerings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3492,7 +3671,8 @@ module Aws::NetworkManager
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3501,7 +3681,8 @@ module Aws::NetworkManager
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3520,7 +3701,8 @@ module Aws::NetworkManager
       :address,
       :latitude,
       :longitude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3530,7 +3712,8 @@ module Aws::NetworkManager
     #   @return [String]
     class NetworkFunctionGroup < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3674,7 +3857,8 @@ module Aws::NetworkManager
       :definition_timestamp,
       :tags,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3688,7 +3872,8 @@ module Aws::NetworkManager
     class NetworkResourceCount < Struct.new(
       :resource_type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3718,7 +3903,8 @@ module Aws::NetworkManager
       :definition,
       :name_tag,
       :is_middlebox,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3749,7 +3935,8 @@ module Aws::NetworkManager
       :prefix_list_id,
       :state,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3783,7 +3970,8 @@ module Aws::NetworkManager
       :edge_location,
       :resource_type,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3825,7 +4013,8 @@ module Aws::NetworkManager
       :resource_arn,
       :address,
       :health,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3847,7 +4036,8 @@ module Aws::NetworkManager
       :organization_aws_service_access_status,
       :slr_deployment_status,
       :account_status_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3865,7 +4055,8 @@ module Aws::NetworkManager
       :sequence,
       :resource,
       :destination_cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3915,7 +4106,8 @@ module Aws::NetworkManager
       :tags,
       :created_at,
       :last_modification_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3942,7 +4134,8 @@ module Aws::NetworkManager
       :resource_arn,
       :request_id,
       :missing_permissions_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3952,7 +4145,8 @@ module Aws::NetworkManager
     #   @return [String]
     class PermissionsErrorContext < Struct.new(
       :missing_permission,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3970,7 +4164,8 @@ module Aws::NetworkManager
       :tags,
       :attachment_policy_rule_number,
       :network_function_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3988,7 +4183,8 @@ module Aws::NetworkManager
       :tags,
       :attachment_policy_rule_number,
       :segment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4013,7 +4209,8 @@ module Aws::NetworkManager
       :description,
       :latest_version_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4022,7 +4219,8 @@ module Aws::NetworkManager
     #   @return [Types::CoreNetworkPolicy]
     class PutCoreNetworkPolicyResponse < Struct.new(
       :core_network_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4035,12 +4233,14 @@ module Aws::NetworkManager
     class PutResourcePolicyRequest < Struct.new(
       :policy_document,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutResourcePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4053,7 +4253,8 @@ module Aws::NetworkManager
     class RegisterTransitGatewayRequest < Struct.new(
       :global_network_id,
       :transit_gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4062,7 +4263,8 @@ module Aws::NetworkManager
     #   @return [Types::TransitGatewayRegistration]
     class RegisterTransitGatewayResponse < Struct.new(
       :transit_gateway_registration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4071,7 +4273,8 @@ module Aws::NetworkManager
     #   @return [String]
     class RejectAttachmentRequest < Struct.new(
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4080,7 +4283,8 @@ module Aws::NetworkManager
     #   @return [Types::Attachment]
     class RejectAttachmentResponse < Struct.new(
       :attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4094,7 +4298,8 @@ module Aws::NetworkManager
     class Relationship < Struct.new(
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4115,7 +4320,8 @@ module Aws::NetworkManager
       :resource_id,
       :resource_type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4128,7 +4334,8 @@ module Aws::NetworkManager
     class RestoreCoreNetworkPolicyVersionRequest < Struct.new(
       :core_network_id,
       :policy_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4137,7 +4344,8 @@ module Aws::NetworkManager
     #   @return [Types::CoreNetworkPolicy]
     class RestoreCoreNetworkPolicyVersionResponse < Struct.new(
       :core_network_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4188,7 +4396,8 @@ module Aws::NetworkManager
       :use_middleboxes,
       :forward_path,
       :return_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4251,7 +4460,8 @@ module Aws::NetworkManager
       :result_code,
       :reason_code,
       :reason_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4269,7 +4479,8 @@ module Aws::NetworkManager
       :transit_gateway_attachment_arn,
       :transit_gateway_arn,
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4283,7 +4494,8 @@ module Aws::NetworkManager
     class RouteAnalysisEndpointOptionsSpecification < Struct.new(
       :transit_gateway_attachment_arn,
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4297,7 +4509,8 @@ module Aws::NetworkManager
     class RouteAnalysisPath < Struct.new(
       :completion_status,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4315,7 +4528,8 @@ module Aws::NetworkManager
       :transit_gateway_route_table_arn,
       :core_network_segment_edge,
       :core_network_network_function_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4343,7 +4557,8 @@ module Aws::NetworkManager
       :mode,
       :when_sent_to,
       :via,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4357,7 +4572,8 @@ module Aws::NetworkManager
     class ServiceInsertionSegments < Struct.new(
       :send_via,
       :send_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4383,7 +4599,8 @@ module Aws::NetworkManager
       :resource_type,
       :limit_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4421,7 +4638,8 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4435,7 +4653,8 @@ module Aws::NetworkManager
     class SiteToSiteVpnAttachment < Struct.new(
       :attachment,
       :vpn_connection_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4444,7 +4663,8 @@ module Aws::NetworkManager
     #   @return [String]
     class StartOrganizationServiceAccessUpdateRequest < Struct.new(
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4453,7 +4673,8 @@ module Aws::NetworkManager
     #   @return [Types::OrganizationStatus]
     class StartOrganizationServiceAccessUpdateResponse < Struct.new(
       :organization_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4479,7 +4700,8 @@ module Aws::NetworkManager
       :destination,
       :include_return_path,
       :use_middleboxes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4488,7 +4710,8 @@ module Aws::NetworkManager
     #   @return [Types::RouteAnalysis]
     class StartRouteAnalysisResponse < Struct.new(
       :route_analysis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4504,7 +4727,8 @@ module Aws::NetworkManager
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4517,12 +4741,14 @@ module Aws::NetworkManager
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4535,7 +4761,8 @@ module Aws::NetworkManager
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4561,7 +4788,8 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4579,7 +4807,8 @@ module Aws::NetworkManager
       :peering,
       :transit_gateway_arn,
       :transit_gateway_peering_attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4597,7 +4826,8 @@ module Aws::NetworkManager
       :global_network_id,
       :transit_gateway_arn,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4611,7 +4841,8 @@ module Aws::NetworkManager
     class TransitGatewayRegistrationStateReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4629,7 +4860,8 @@ module Aws::NetworkManager
       :attachment,
       :peering_id,
       :transit_gateway_route_table_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4642,12 +4874,14 @@ module Aws::NetworkManager
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4673,7 +4907,8 @@ module Aws::NetworkManager
       :link_id,
       :connected_link_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4682,7 +4917,8 @@ module Aws::NetworkManager
     #   @return [Types::Connection]
     class UpdateConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4695,7 +4931,8 @@ module Aws::NetworkManager
     class UpdateCoreNetworkRequest < Struct.new(
       :core_network_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4704,7 +4941,8 @@ module Aws::NetworkManager
     #   @return [Types::CoreNetwork]
     class UpdateCoreNetworkResponse < Struct.new(
       :core_network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4753,7 +4991,8 @@ module Aws::NetworkManager
       :serial_number,
       :location,
       :site_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4762,7 +5001,8 @@ module Aws::NetworkManager
     #   @return [Types::Device]
     class UpdateDeviceResponse < Struct.new(
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4775,7 +5015,8 @@ module Aws::NetworkManager
     class UpdateDirectConnectGatewayAttachmentRequest < Struct.new(
       :attachment_id,
       :edge_locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4784,7 +5025,8 @@ module Aws::NetworkManager
     #   @return [Types::DirectConnectGatewayAttachment]
     class UpdateDirectConnectGatewayAttachmentResponse < Struct.new(
       :direct_connect_gateway_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4798,7 +5040,8 @@ module Aws::NetworkManager
     class UpdateGlobalNetworkRequest < Struct.new(
       :global_network_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4807,7 +5050,8 @@ module Aws::NetworkManager
     #   @return [Types::GlobalNetwork]
     class UpdateGlobalNetworkResponse < Struct.new(
       :global_network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4839,7 +5083,8 @@ module Aws::NetworkManager
       :type,
       :bandwidth,
       :provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4848,7 +5093,8 @@ module Aws::NetworkManager
     #   @return [Types::Link]
     class UpdateLinkResponse < Struct.new(
       :link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4865,7 +5111,8 @@ module Aws::NetworkManager
       :global_network_id,
       :resource_arn,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4878,7 +5125,8 @@ module Aws::NetworkManager
     class UpdateNetworkResourceMetadataResponse < Struct.new(
       :resource_arn,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4914,7 +5162,8 @@ module Aws::NetworkManager
       :site_id,
       :description,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4923,7 +5172,8 @@ module Aws::NetworkManager
     #   @return [Types::Site]
     class UpdateSiteResponse < Struct.new(
       :site,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4944,7 +5194,8 @@ module Aws::NetworkManager
       :add_subnet_arns,
       :remove_subnet_arns,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4953,7 +5204,8 @@ module Aws::NetworkManager
     #   @return [Types::VpcAttachment]
     class UpdateVpcAttachmentResponse < Struct.new(
       :vpc_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4970,7 +5222,8 @@ module Aws::NetworkManager
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4984,7 +5237,8 @@ module Aws::NetworkManager
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4999,7 +5253,8 @@ module Aws::NetworkManager
     class Via < Struct.new(
       :network_function_groups,
       :with_edge_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5017,7 +5272,8 @@ module Aws::NetworkManager
       :attachment,
       :subnet_arns,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5039,7 +5295,8 @@ module Aws::NetworkManager
       :appliance_mode_support,
       :dns_support,
       :security_group_referencing_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5058,7 +5315,8 @@ module Aws::NetworkManager
     #   @return [Array<String>]
     class WhenSentTo < Struct.new(
       :when_sent_to_segments_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -1622,7 +1622,6 @@ module Aws::IoTTwinMaker
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/workspaces/{workspaceId}", "code" => 200}}
       end)
-
     end
 
     class << self

@@ -39,7 +39,7 @@ module Aws::ApplicationSignals
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationSignals::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::ApplicationSignals
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationSignals::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::ApplicationSignals
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationSignals::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The resource type is not valid.</p>
@@ -88,7 +88,7 @@ module Aws::ApplicationSignals
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationSignals::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::ApplicationSignals
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationSignals::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::ApplicationSignals
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationSignals::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

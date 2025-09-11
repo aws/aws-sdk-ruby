@@ -41,7 +41,7 @@ module Aws::AppIntegrations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppIntegrations::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::AppIntegrations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppIntegrations::Types::DuplicateResourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::AppIntegrations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppIntegrations::Types::InternalServiceError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::AppIntegrations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppIntegrations::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::AppIntegrations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppIntegrations::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::AppIntegrations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppIntegrations::Types::ResourceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::AppIntegrations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppIntegrations::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -132,7 +132,7 @@ module Aws::AppIntegrations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppIntegrations::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -35,7 +35,7 @@ module Aws::Greengrass
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Greengrass::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Details about the error.
@@ -54,7 +54,7 @@ module Aws::Greengrass
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Greengrass::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Details about the error.

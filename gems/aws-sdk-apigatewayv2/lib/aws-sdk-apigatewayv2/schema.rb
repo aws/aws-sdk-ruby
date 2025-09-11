@@ -2226,7 +2226,6 @@ module Aws::ApiGatewayV2
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/v2/vpclinks/{VpcLinkId}", "code" => 200}}
       end)
-
     end
 
     class << self

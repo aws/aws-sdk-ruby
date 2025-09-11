@@ -411,7 +411,6 @@ module Aws::OAM
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "oam:ResourceTypes"], "smithy.api#http" => {"method" => "POST", "uri" => "/UpdateLink"}}
       end)
-
     end
 
     class << self

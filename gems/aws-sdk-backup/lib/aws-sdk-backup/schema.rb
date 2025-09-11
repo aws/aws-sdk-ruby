@@ -2925,7 +2925,6 @@ module Aws::Backup
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

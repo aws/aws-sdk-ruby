@@ -11,7 +11,8 @@ module Aws::ElastiCache
     #   @return [String]
     class APICallRateForCustomerExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::ElastiCache
     class AddTagsToResourceMessage < Struct.new(
       :resource_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +46,8 @@ module Aws::ElastiCache
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceOutput < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +69,8 @@ module Aws::ElastiCache
     class AllowedNodeTypeModificationsMessage < Struct.new(
       :scale_up_modifications,
       :scale_down_modifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +84,8 @@ module Aws::ElastiCache
     class Authentication < Struct.new(
       :type,
       :password_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -96,7 +101,8 @@ module Aws::ElastiCache
     class AuthenticationMode < Struct.new(
       :type,
       :passwords,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +112,8 @@ module Aws::ElastiCache
     #   @return [String]
     class AuthorizationAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +123,8 @@ module Aws::ElastiCache
     #   @return [String]
     class AuthorizationNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,7 +145,8 @@ module Aws::ElastiCache
       :cache_security_group_name,
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +172,8 @@ module Aws::ElastiCache
     #   @return [Types::CacheSecurityGroup]
     class AuthorizeCacheSecurityGroupIngressResult < Struct.new(
       :cache_security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +183,8 @@ module Aws::ElastiCache
     #   @return [String]
     class AvailabilityZone < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,7 +201,8 @@ module Aws::ElastiCache
       :replication_group_ids,
       :cache_cluster_ids,
       :service_update_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -203,7 +215,8 @@ module Aws::ElastiCache
     class BatchApplyUpdateActionOutput < Struct.new(
       :processed_update_actions,
       :unprocessed_update_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +233,8 @@ module Aws::ElastiCache
       :replication_group_ids,
       :cache_cluster_ids,
       :service_update_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +247,8 @@ module Aws::ElastiCache
     class BatchStopUpdateActionOutput < Struct.new(
       :processed_update_actions,
       :unprocessed_update_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +677,8 @@ module Aws::ElastiCache
       :network_type,
       :ip_discovery,
       :transit_encryption_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +687,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheClusterAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +703,8 @@ module Aws::ElastiCache
     class CacheClusterMessage < Struct.new(
       :marker,
       :cache_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +713,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheClusterNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +745,8 @@ module Aws::ElastiCache
       :cache_parameter_group_family,
       :cache_engine_description,
       :cache_engine_version_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -742,7 +762,8 @@ module Aws::ElastiCache
     class CacheEngineVersionMessage < Struct.new(
       :marker,
       :cache_engine_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1001,8 @@ module Aws::ElastiCache
       :source_cache_node_id,
       :customer_availability_zone,
       :customer_outpost_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1029,7 +1051,8 @@ module Aws::ElastiCache
       :minimum_engine_version,
       :cache_node_type_specific_values,
       :change_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1043,7 +1066,8 @@ module Aws::ElastiCache
     class CacheNodeTypeSpecificValue < Struct.new(
       :cache_node_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1106,8 @@ module Aws::ElastiCache
       :node_update_initiated_by,
       :node_update_initiated_date,
       :node_update_status_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1139,8 @@ module Aws::ElastiCache
       :description,
       :is_global,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1123,7 +1149,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheParameterGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1160,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheParameterGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1143,7 +1171,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheParameterGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1191,8 @@ module Aws::ElastiCache
       :cache_parameter_group_name,
       :parameter_apply_status,
       :cache_node_ids_to_reboot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1177,7 +1207,8 @@ module Aws::ElastiCache
     class CacheParameterGroupsMessage < Struct.new(
       :marker,
       :cache_parameter_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1221,7 +1252,8 @@ module Aws::ElastiCache
       :description,
       :ec2_security_groups,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1230,7 +1262,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheSecurityGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1246,7 +1279,8 @@ module Aws::ElastiCache
     class CacheSecurityGroupMembership < Struct.new(
       :cache_security_group_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1295,8 @@ module Aws::ElastiCache
     class CacheSecurityGroupMessage < Struct.new(
       :marker,
       :cache_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1306,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheSecurityGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1317,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheSecurityGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1325,7 +1362,8 @@ module Aws::ElastiCache
       :subnets,
       :arn,
       :supported_network_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1335,7 +1373,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheSubnetGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1383,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheSubnetGroupInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1399,8 @@ module Aws::ElastiCache
     class CacheSubnetGroupMessage < Struct.new(
       :marker,
       :cache_subnet_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1369,7 +1410,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheSubnetGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1379,7 +1421,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheSubnetGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1432,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CacheSubnetQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1405,7 +1449,8 @@ module Aws::ElastiCache
     class CacheUsageLimits < Struct.new(
       :data_storage,
       :ecpu_per_second,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1415,7 +1460,8 @@ module Aws::ElastiCache
     #   @return [String]
     class CloudWatchLogsDestinationDetails < Struct.new(
       :log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1425,7 +1471,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ClusterQuotaForCustomerExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1487,8 @@ module Aws::ElastiCache
     class CompleteMigrationMessage < Struct.new(
       :replication_group_id,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1497,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroup]
     class CompleteMigrationResponse < Struct.new(
       :replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1500,7 +1549,8 @@ module Aws::ElastiCache
       :new_replica_count,
       :preferred_availability_zones,
       :preferred_outpost_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1521,7 +1571,8 @@ module Aws::ElastiCache
       :target_serverless_cache_snapshot_name,
       :kms_key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1581,8 @@ module Aws::ElastiCache
     #   @return [Types::ServerlessCacheSnapshot]
     class CopyServerlessCacheSnapshotResponse < Struct.new(
       :serverless_cache_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1565,7 +1617,8 @@ module Aws::ElastiCache
       :target_bucket,
       :kms_key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1628,8 @@ module Aws::ElastiCache
     #   @return [Types::Snapshot]
     class CopySnapshotResult < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2032,7 +2086,8 @@ module Aws::ElastiCache
       :transit_encryption_enabled,
       :network_type,
       :ip_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2041,7 +2096,8 @@ module Aws::ElastiCache
     #   @return [Types::CacheCluster]
     class CreateCacheClusterResult < Struct.new(
       :cache_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2068,7 +2124,8 @@ module Aws::ElastiCache
       :cache_parameter_group_family,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2077,7 +2134,8 @@ module Aws::ElastiCache
     #   @return [Types::CacheParameterGroup]
     class CreateCacheParameterGroupResult < Struct.new(
       :cache_parameter_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2101,7 +2159,8 @@ module Aws::ElastiCache
       :cache_security_group_name,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2127,7 +2186,8 @@ module Aws::ElastiCache
     #   @return [Types::CacheSecurityGroup]
     class CreateCacheSecurityGroupResult < Struct.new(
       :cache_security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2153,7 +2213,8 @@ module Aws::ElastiCache
       :cache_subnet_group_description,
       :subnet_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2174,7 +2235,8 @@ module Aws::ElastiCache
     #   @return [Types::CacheSubnetGroup]
     class CreateCacheSubnetGroupResult < Struct.new(
       :cache_subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2199,7 +2261,8 @@ module Aws::ElastiCache
       :global_replication_group_id_suffix,
       :global_replication_group_description,
       :primary_replication_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2217,7 +2280,8 @@ module Aws::ElastiCache
     #   @return [Types::GlobalReplicationGroup]
     class CreateGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2803,7 +2867,8 @@ module Aws::ElastiCache
       :transit_encryption_mode,
       :cluster_mode,
       :serverless_cache_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2812,7 +2877,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroup]
     class CreateReplicationGroupResult < Struct.new(
       :replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2877,7 +2943,8 @@ module Aws::ElastiCache
       :subnet_ids,
       :snapshot_retention_limit,
       :daily_snapshot_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2886,7 +2953,8 @@ module Aws::ElastiCache
     #   @return [Types::ServerlessCache]
     class CreateServerlessCacheResponse < Struct.new(
       :serverless_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2908,7 +2976,8 @@ module Aws::ElastiCache
       :serverless_cache_name,
       :kms_key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2917,7 +2986,8 @@ module Aws::ElastiCache
     #   @return [Types::ServerlessCacheSnapshot]
     class CreateServerlessCacheSnapshotResponse < Struct.new(
       :serverless_cache_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2946,7 +3016,8 @@ module Aws::ElastiCache
       :snapshot_name,
       :kms_key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2956,7 +3027,8 @@ module Aws::ElastiCache
     #   @return [Types::Snapshot]
     class CreateSnapshotResult < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2978,7 +3050,8 @@ module Aws::ElastiCache
       :engine,
       :user_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3020,7 +3093,8 @@ module Aws::ElastiCache
       :replication_groups,
       :serverless_caches,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3058,7 +3132,8 @@ module Aws::ElastiCache
       :no_password_required,
       :tags,
       :authentication_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3099,7 +3174,8 @@ module Aws::ElastiCache
       :user_group_ids,
       :authentication,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3113,7 +3189,8 @@ module Aws::ElastiCache
     class CustomerNodeEndpoint < Struct.new(
       :address,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3131,7 +3208,8 @@ module Aws::ElastiCache
       :maximum,
       :minimum,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3166,7 +3244,8 @@ module Aws::ElastiCache
       :global_node_groups_to_remove,
       :global_node_groups_to_retain,
       :apply_immediately,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3184,7 +3263,8 @@ module Aws::ElastiCache
     #   @return [Types::GlobalReplicationGroup]
     class DecreaseNodeGroupsInGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3235,7 +3315,8 @@ module Aws::ElastiCache
       :replica_configuration,
       :replicas_to_remove,
       :apply_immediately,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3244,7 +3325,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroup]
     class DecreaseReplicaCountResult < Struct.new(
       :replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3253,7 +3335,8 @@ module Aws::ElastiCache
     #   @return [String]
     class DefaultUserAssociatedToUserGroupFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3262,7 +3345,8 @@ module Aws::ElastiCache
     #   @return [String]
     class DefaultUserRequired < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3279,7 +3363,8 @@ module Aws::ElastiCache
     class DeleteCacheClusterMessage < Struct.new(
       :cache_cluster_id,
       :final_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3288,7 +3373,8 @@ module Aws::ElastiCache
     #   @return [Types::CacheCluster]
     class DeleteCacheClusterResult < Struct.new(
       :cache_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3302,7 +3388,8 @@ module Aws::ElastiCache
     #   @return [String]
     class DeleteCacheParameterGroupMessage < Struct.new(
       :cache_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3315,7 +3402,8 @@ module Aws::ElastiCache
     #   @return [String]
     class DeleteCacheSecurityGroupMessage < Struct.new(
       :cache_security_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3326,7 +3414,8 @@ module Aws::ElastiCache
     #   @return [String]
     class DeleteCacheSubnetGroupMessage < Struct.new(
       :cache_subnet_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3339,7 +3428,8 @@ module Aws::ElastiCache
     class DeleteGlobalReplicationGroupMessage < Struct.new(
       :global_replication_group_id,
       :retain_primary_replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3357,7 +3447,8 @@ module Aws::ElastiCache
     #   @return [Types::GlobalReplicationGroup]
     class DeleteGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3380,7 +3471,8 @@ module Aws::ElastiCache
       :replication_group_id,
       :retain_primary_cluster,
       :final_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3389,7 +3481,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroup]
     class DeleteReplicationGroupResult < Struct.new(
       :replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3403,7 +3496,8 @@ module Aws::ElastiCache
     class DeleteServerlessCacheRequest < Struct.new(
       :serverless_cache_name,
       :final_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3412,7 +3506,8 @@ module Aws::ElastiCache
     #   @return [Types::ServerlessCache]
     class DeleteServerlessCacheResponse < Struct.new(
       :serverless_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3421,7 +3516,8 @@ module Aws::ElastiCache
     #   @return [String]
     class DeleteServerlessCacheSnapshotRequest < Struct.new(
       :serverless_cache_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3430,7 +3526,8 @@ module Aws::ElastiCache
     #   @return [Types::ServerlessCacheSnapshot]
     class DeleteServerlessCacheSnapshotResponse < Struct.new(
       :serverless_cache_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3440,7 +3537,8 @@ module Aws::ElastiCache
     #   @return [String]
     class DeleteSnapshotMessage < Struct.new(
       :snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3450,7 +3548,8 @@ module Aws::ElastiCache
     #   @return [Types::Snapshot]
     class DeleteSnapshotResult < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3459,7 +3558,8 @@ module Aws::ElastiCache
     #   @return [String]
     class DeleteUserGroupMessage < Struct.new(
       :user_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3501,7 +3601,8 @@ module Aws::ElastiCache
       :replication_groups,
       :serverless_caches,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3510,7 +3611,8 @@ module Aws::ElastiCache
     #   @return [String]
     class DeleteUserMessage < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3551,7 +3653,8 @@ module Aws::ElastiCache
       :user_group_ids,
       :authentication,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3587,7 +3690,8 @@ module Aws::ElastiCache
       :marker,
       :show_cache_node_info,
       :show_cache_clusters_not_in_replication_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3645,7 +3749,8 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       :default_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3669,7 +3774,8 @@ module Aws::ElastiCache
       :cache_parameter_group_name,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3700,7 +3806,8 @@ module Aws::ElastiCache
       :source,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3719,7 +3826,8 @@ module Aws::ElastiCache
       :marker,
       :parameters,
       :cache_node_type_specific_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3743,7 +3851,8 @@ module Aws::ElastiCache
       :cache_security_group_name,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3767,7 +3876,8 @@ module Aws::ElastiCache
       :cache_subnet_group_name,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3797,7 +3907,8 @@ module Aws::ElastiCache
       :cache_parameter_group_family,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3807,7 +3918,8 @@ module Aws::ElastiCache
     #   @return [Types::EngineDefaults]
     class DescribeEngineDefaultParametersResult < Struct.new(
       :engine_defaults,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3855,7 +3967,8 @@ module Aws::ElastiCache
       :duration,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3880,7 +3993,8 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       :show_member_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3895,7 +4009,8 @@ module Aws::ElastiCache
     class DescribeGlobalReplicationGroupsResult < Struct.new(
       :marker,
       :global_replication_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3922,7 +4037,8 @@ module Aws::ElastiCache
       :replication_group_id,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4171,7 +4287,8 @@ module Aws::ElastiCache
       :offering_type,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4418,7 +4535,8 @@ module Aws::ElastiCache
       :offering_type,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4449,7 +4567,8 @@ module Aws::ElastiCache
       :snapshot_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4464,7 +4583,8 @@ module Aws::ElastiCache
     class DescribeServerlessCacheSnapshotsResponse < Struct.new(
       :next_token,
       :serverless_cache_snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4486,7 +4606,8 @@ module Aws::ElastiCache
       :serverless_cache_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4501,7 +4622,8 @@ module Aws::ElastiCache
     class DescribeServerlessCachesResponse < Struct.new(
       :next_token,
       :serverless_caches,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4524,7 +4646,8 @@ module Aws::ElastiCache
       :service_update_status,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4541,7 +4664,8 @@ module Aws::ElastiCache
     class DescribeSnapshotsListMessage < Struct.new(
       :marker,
       :snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4588,7 +4712,8 @@ module Aws::ElastiCache
       :marker,
       :max_records,
       :show_node_group_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4636,7 +4761,8 @@ module Aws::ElastiCache
       :show_node_level_update_status,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4657,7 +4783,8 @@ module Aws::ElastiCache
       :user_group_id,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4672,7 +4799,8 @@ module Aws::ElastiCache
     class DescribeUserGroupsResult < Struct.new(
       :user_groups,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4701,7 +4829,8 @@ module Aws::ElastiCache
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4716,7 +4845,8 @@ module Aws::ElastiCache
     class DescribeUsersResult < Struct.new(
       :users,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4731,7 +4861,8 @@ module Aws::ElastiCache
     class DestinationDetails < Struct.new(
       :cloud_watch_logs_details,
       :kinesis_firehose_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4749,7 +4880,8 @@ module Aws::ElastiCache
       :global_replication_group_id,
       :replication_group_id,
       :replication_group_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4767,7 +4899,8 @@ module Aws::ElastiCache
     #   @return [Types::GlobalReplicationGroup]
     class DisassociateGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4776,7 +4909,8 @@ module Aws::ElastiCache
     #   @return [String]
     class DuplicateUserNameFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4794,7 +4928,8 @@ module Aws::ElastiCache
       :status,
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4808,7 +4943,8 @@ module Aws::ElastiCache
     class ECPUPerSecond < Struct.new(
       :maximum,
       :minimum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4823,7 +4959,8 @@ module Aws::ElastiCache
     class Endpoint < Struct.new(
       :address,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4853,7 +4990,8 @@ module Aws::ElastiCache
       :marker,
       :parameters,
       :cache_node_type_specific_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4879,7 +5017,8 @@ module Aws::ElastiCache
       :source_type,
       :message,
       :date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4894,7 +5033,8 @@ module Aws::ElastiCache
     class EventsMessage < Struct.new(
       :marker,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4908,7 +5048,8 @@ module Aws::ElastiCache
     class ExportServerlessCacheSnapshotRequest < Struct.new(
       :serverless_cache_snapshot_name,
       :s3_bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4917,7 +5058,8 @@ module Aws::ElastiCache
     #   @return [Types::ServerlessCacheSnapshot]
     class ExportServerlessCacheSnapshotResponse < Struct.new(
       :serverless_cache_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4934,7 +5076,8 @@ module Aws::ElastiCache
       :global_replication_group_id,
       :primary_region,
       :primary_replication_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4952,7 +5095,8 @@ module Aws::ElastiCache
     #   @return [Types::GlobalReplicationGroup]
     class FailoverGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4966,7 +5110,8 @@ module Aws::ElastiCache
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4980,7 +5125,8 @@ module Aws::ElastiCache
     class GlobalNodeGroup < Struct.new(
       :global_node_group_id,
       :slots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5062,7 +5208,8 @@ module Aws::ElastiCache
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5071,7 +5218,8 @@ module Aws::ElastiCache
     #   @return [String]
     class GlobalReplicationGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5087,7 +5235,8 @@ module Aws::ElastiCache
     class GlobalReplicationGroupInfo < Struct.new(
       :global_replication_group_id,
       :global_replication_group_member_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5114,7 +5263,8 @@ module Aws::ElastiCache
       :role,
       :automatic_failover,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5123,7 +5273,8 @@ module Aws::ElastiCache
     #   @return [String]
     class GlobalReplicationGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5146,7 +5297,8 @@ module Aws::ElastiCache
       :node_group_count,
       :regional_configurations,
       :apply_immediately,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5164,7 +5316,8 @@ module Aws::ElastiCache
     #   @return [Types::GlobalReplicationGroup]
     class IncreaseNodeGroupsInGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5191,7 +5344,8 @@ module Aws::ElastiCache
       :new_replica_count,
       :replica_configuration,
       :apply_immediately,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5200,7 +5354,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroup]
     class IncreaseReplicaCountResult < Struct.new(
       :replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5210,7 +5365,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InsufficientCacheClusterCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5220,7 +5376,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidARNFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5229,7 +5386,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidCacheClusterStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5239,7 +5397,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidCacheParameterGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5248,7 +5407,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidCacheSecurityGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5257,7 +5417,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidCredentialsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5266,7 +5427,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidGlobalReplicationGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5275,7 +5437,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidKMSKeyFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5285,7 +5448,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5295,7 +5459,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5304,7 +5469,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidReplicationGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5313,7 +5479,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidServerlessCacheSnapshotStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5322,7 +5489,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidServerlessCacheStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5332,7 +5500,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidSnapshotStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5341,7 +5510,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidSubnet < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5350,7 +5520,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidUserGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5359,7 +5530,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidUserStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5368,7 +5540,8 @@ module Aws::ElastiCache
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5378,7 +5551,8 @@ module Aws::ElastiCache
     #   @return [String]
     class KinesisFirehoseDestinationDetails < Struct.new(
       :delivery_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5406,7 +5580,8 @@ module Aws::ElastiCache
     class ListAllowedNodeTypeModificationsMessage < Struct.new(
       :cache_cluster_id,
       :replication_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5421,7 +5596,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ListTagsForResourceMessage < Struct.new(
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5433,7 +5609,8 @@ module Aws::ElastiCache
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5469,7 +5646,8 @@ module Aws::ElastiCache
       :log_format,
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5498,7 +5676,8 @@ module Aws::ElastiCache
       :destination_details,
       :log_format,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5868,7 +6047,8 @@ module Aws::ElastiCache
       :log_delivery_configurations,
       :ip_discovery,
       :scale_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5877,7 +6057,8 @@ module Aws::ElastiCache
     #   @return [Types::CacheCluster]
     class ModifyCacheClusterResult < Struct.new(
       :cache_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5893,7 +6074,8 @@ module Aws::ElastiCache
     class ModifyCacheParameterGroupMessage < Struct.new(
       :cache_parameter_group_name,
       :parameter_name_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5915,7 +6097,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ModifyCacheParameterGroupOutput < Struct.new(
       :cache_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5937,7 +6120,8 @@ module Aws::ElastiCache
       :cache_subnet_group_name,
       :cache_subnet_group_description,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5958,7 +6142,8 @@ module Aws::ElastiCache
     #   @return [Types::CacheSubnetGroup]
     class ModifyCacheSubnetGroupResult < Struct.new(
       :cache_subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6001,7 +6186,8 @@ module Aws::ElastiCache
       :cache_parameter_group_name,
       :global_replication_group_description,
       :automatic_failover_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6019,7 +6205,8 @@ module Aws::ElastiCache
     #   @return [Types::GlobalReplicationGroup]
     class ModifyGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6289,7 +6476,8 @@ module Aws::ElastiCache
       :transit_encryption_enabled,
       :transit_encryption_mode,
       :cluster_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6298,7 +6486,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroup]
     class ModifyReplicationGroupResult < Struct.new(
       :replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6349,7 +6538,8 @@ module Aws::ElastiCache
       :resharding_configuration,
       :node_groups_to_remove,
       :node_groups_to_retain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6358,7 +6548,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroup]
     class ModifyReplicationGroupShardConfigurationResult < Struct.new(
       :replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6413,7 +6604,8 @@ module Aws::ElastiCache
       :daily_snapshot_time,
       :engine,
       :major_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6422,7 +6614,8 @@ module Aws::ElastiCache
     #   @return [Types::ServerlessCache]
     class ModifyServerlessCacheResponse < Struct.new(
       :serverless_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6443,7 +6636,8 @@ module Aws::ElastiCache
       :user_ids_to_add,
       :user_ids_to_remove,
       :engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6485,7 +6679,8 @@ module Aws::ElastiCache
       :replication_groups,
       :serverless_caches,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6518,7 +6713,8 @@ module Aws::ElastiCache
       :no_password_required,
       :authentication_mode,
       :engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6559,7 +6755,8 @@ module Aws::ElastiCache
       :user_group_ids,
       :authentication,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6568,7 +6765,8 @@ module Aws::ElastiCache
     #   @return [String]
     class NoOperationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6604,7 +6802,8 @@ module Aws::ElastiCache
       :reader_endpoint,
       :slots,
       :node_group_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6647,7 +6846,8 @@ module Aws::ElastiCache
       :replica_availability_zones,
       :primary_outpost_arn,
       :replica_outpost_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6681,7 +6881,8 @@ module Aws::ElastiCache
       :preferred_availability_zone,
       :preferred_outpost_arn,
       :current_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6724,7 +6925,8 @@ module Aws::ElastiCache
       :node_update_initiated_by,
       :node_update_initiated_date,
       :node_update_status_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6735,7 +6937,8 @@ module Aws::ElastiCache
     #   @return [String]
     class NodeGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6749,7 +6952,8 @@ module Aws::ElastiCache
     class NodeGroupUpdateStatus < Struct.new(
       :node_group_id,
       :node_group_member_update_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6759,7 +6963,8 @@ module Aws::ElastiCache
     #   @return [String]
     class NodeGroupsPerReplicationGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6769,7 +6974,8 @@ module Aws::ElastiCache
     #   @return [String]
     class NodeQuotaForClusterExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6779,7 +6985,8 @@ module Aws::ElastiCache
     #   @return [String]
     class NodeQuotaForCustomerExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6814,7 +7021,8 @@ module Aws::ElastiCache
       :cache_size,
       :cache_node_create_time,
       :snapshot_create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6830,7 +7038,8 @@ module Aws::ElastiCache
     class NotificationConfiguration < Struct.new(
       :topic_arn,
       :topic_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6878,7 +7087,8 @@ module Aws::ElastiCache
       :is_modifiable,
       :minimum_engine_version,
       :change_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6892,7 +7102,8 @@ module Aws::ElastiCache
     class ParameterNameValue < Struct.new(
       :parameter_name,
       :parameter_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6916,7 +7127,8 @@ module Aws::ElastiCache
       :destination_type,
       :destination_details,
       :log_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6963,7 +7175,8 @@ module Aws::ElastiCache
       :transit_encryption_enabled,
       :transit_encryption_mode,
       :scale_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6985,7 +7198,8 @@ module Aws::ElastiCache
       :cache_cluster_id,
       :service_update_name,
       :update_action_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7019,7 +7233,8 @@ module Aws::ElastiCache
       :reserved_cache_node_id,
       :cache_node_count,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7029,7 +7244,8 @@ module Aws::ElastiCache
     #   @return [Types::ReservedCacheNode]
     class PurchaseReservedCacheNodesOfferingResult < Struct.new(
       :reserved_cache_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7042,7 +7258,8 @@ module Aws::ElastiCache
     class RebalanceSlotsInGlobalReplicationGroupMessage < Struct.new(
       :global_replication_group_id,
       :apply_immediately,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7060,7 +7277,8 @@ module Aws::ElastiCache
     #   @return [Types::GlobalReplicationGroup]
     class RebalanceSlotsInGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7075,7 +7293,8 @@ module Aws::ElastiCache
     class RebootCacheClusterMessage < Struct.new(
       :cache_cluster_id,
       :cache_node_ids_to_reboot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7084,7 +7303,8 @@ module Aws::ElastiCache
     #   @return [Types::CacheCluster]
     class RebootCacheClusterResult < Struct.new(
       :cache_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7099,7 +7319,8 @@ module Aws::ElastiCache
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7118,7 +7339,8 @@ module Aws::ElastiCache
       :replication_group_id,
       :replication_group_region,
       :resharding_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7137,7 +7359,8 @@ module Aws::ElastiCache
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7149,7 +7372,8 @@ module Aws::ElastiCache
     #   @return [Array<Types::Tag>]
     class RemoveTagsFromResourceOutput < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7345,7 +7569,8 @@ module Aws::ElastiCache
       :transit_encryption_mode,
       :cluster_mode,
       :engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7354,7 +7579,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ReplicationGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7363,7 +7589,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ReplicationGroupAlreadyUnderMigrationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7378,7 +7605,8 @@ module Aws::ElastiCache
     class ReplicationGroupMessage < Struct.new(
       :marker,
       :replication_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7387,7 +7615,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ReplicationGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7396,7 +7625,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ReplicationGroupNotUnderMigrationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7446,7 +7676,8 @@ module Aws::ElastiCache
       :transit_encryption_enabled,
       :transit_encryption_mode,
       :cluster_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7702,7 +7933,8 @@ module Aws::ElastiCache
       :state,
       :recurring_charges,
       :reservation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7711,7 +7943,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ReservedCacheNodeAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7726,7 +7959,8 @@ module Aws::ElastiCache
     class ReservedCacheNodeMessage < Struct.new(
       :marker,
       :reserved_cache_nodes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7735,7 +7969,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ReservedCacheNodeNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7745,7 +7980,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ReservedCacheNodeQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7977,7 +8213,8 @@ module Aws::ElastiCache
       :product_description,
       :offering_type,
       :recurring_charges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7993,7 +8230,8 @@ module Aws::ElastiCache
     class ReservedCacheNodesOfferingMessage < Struct.new(
       :marker,
       :reserved_cache_nodes_offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8002,7 +8240,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ReservedCacheNodesOfferingNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8028,7 +8267,8 @@ module Aws::ElastiCache
       :cache_parameter_group_name,
       :reset_all_parameters,
       :parameter_name_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8050,7 +8290,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ResetCacheParameterGroupOutput < Struct.new(
       :cache_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8066,7 +8307,8 @@ module Aws::ElastiCache
     class ReshardingConfiguration < Struct.new(
       :node_group_id,
       :preferred_availability_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8076,7 +8318,8 @@ module Aws::ElastiCache
     #   @return [Types::SlotMigration]
     class ReshardingStatus < Struct.new(
       :slot_migration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8097,7 +8340,8 @@ module Aws::ElastiCache
       :cache_security_group_name,
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8123,7 +8367,8 @@ module Aws::ElastiCache
     #   @return [Types::CacheSecurityGroup]
     class RevokeCacheSecurityGroupIngressResult < Struct.new(
       :cache_security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8137,7 +8382,8 @@ module Aws::ElastiCache
     class ScaleConfig < Struct.new(
       :scale_percentage,
       :scale_interval_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8153,7 +8399,8 @@ module Aws::ElastiCache
     class SecurityGroupMembership < Struct.new(
       :security_group_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8232,7 +8479,8 @@ module Aws::ElastiCache
       :subnet_ids,
       :snapshot_retention_limit,
       :daily_snapshot_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8241,7 +8489,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ServerlessCacheAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8259,7 +8508,8 @@ module Aws::ElastiCache
       :serverless_cache_name,
       :engine,
       :major_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8268,7 +8518,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ServerlessCacheNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8277,7 +8528,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ServerlessCacheQuotaForCustomerExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8320,7 +8572,8 @@ module Aws::ElastiCache
       :expiry_time,
       :bytes_used_for_cache,
       :serverless_cache_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8329,7 +8582,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ServerlessCacheSnapshotAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8338,7 +8592,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ServerlessCacheSnapshotNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8347,7 +8602,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ServerlessCacheSnapshotQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8356,7 +8612,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ServiceLinkedRoleNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8413,7 +8670,8 @@ module Aws::ElastiCache
       :engine_version,
       :auto_update_after_recommended_apply_by_date,
       :estimated_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8422,7 +8680,8 @@ module Aws::ElastiCache
     #   @return [String]
     class ServiceUpdateNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8437,7 +8696,8 @@ module Aws::ElastiCache
     class ServiceUpdatesMessage < Struct.new(
       :marker,
       :service_updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8447,7 +8707,8 @@ module Aws::ElastiCache
     #   @return [Float]
     class SlotMigration < Struct.new(
       :progress_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8827,7 +9088,8 @@ module Aws::ElastiCache
       :kms_key_id,
       :arn,
       :data_tiering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8836,7 +9098,8 @@ module Aws::ElastiCache
     #   @return [String]
     class SnapshotAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8856,7 +9119,8 @@ module Aws::ElastiCache
     #   @return [String]
     class SnapshotFeatureNotSupportedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8865,7 +9129,8 @@ module Aws::ElastiCache
     #   @return [String]
     class SnapshotNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8875,7 +9140,8 @@ module Aws::ElastiCache
     #   @return [String]
     class SnapshotQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8889,7 +9155,8 @@ module Aws::ElastiCache
     class StartMigrationMessage < Struct.new(
       :replication_group_id,
       :customer_node_endpoint_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8898,7 +9165,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroup]
     class StartMigrationResponse < Struct.new(
       :replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8923,7 +9191,8 @@ module Aws::ElastiCache
       :subnet_availability_zone,
       :subnet_outpost,
       :supported_network_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8932,7 +9201,8 @@ module Aws::ElastiCache
     #   @return [String]
     class SubnetInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8944,7 +9214,8 @@ module Aws::ElastiCache
     #   @return [String]
     class SubnetNotAllowedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8954,7 +9225,8 @@ module Aws::ElastiCache
     #   @return [String]
     class SubnetOutpost < Struct.new(
       :subnet_outpost_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8972,7 +9244,8 @@ module Aws::ElastiCache
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8981,7 +9254,8 @@ module Aws::ElastiCache
     #   @return [String]
     class TagNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8992,7 +9266,8 @@ module Aws::ElastiCache
     #   @return [String]
     class TagQuotaPerResourceExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9008,7 +9283,8 @@ module Aws::ElastiCache
     class TestFailoverMessage < Struct.new(
       :replication_group_id,
       :node_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9017,7 +9293,8 @@ module Aws::ElastiCache
     #   @return [String]
     class TestFailoverNotAvailableFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9026,7 +9303,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroup]
     class TestFailoverResult < Struct.new(
       :replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9040,7 +9318,8 @@ module Aws::ElastiCache
     class TestMigrationMessage < Struct.new(
       :replication_group_id,
       :customer_node_endpoint_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9049,7 +9328,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroup]
     class TestMigrationResponse < Struct.new(
       :replication_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9064,7 +9344,8 @@ module Aws::ElastiCache
     class TimeRangeFilter < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9091,7 +9372,8 @@ module Aws::ElastiCache
       :service_update_name,
       :error_type,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9169,7 +9451,8 @@ module Aws::ElastiCache
       :cache_node_update_status,
       :estimated_update_time,
       :engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9184,7 +9467,8 @@ module Aws::ElastiCache
     class UpdateActionsMessage < Struct.new(
       :marker,
       :update_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9225,7 +9509,8 @@ module Aws::ElastiCache
       :user_group_ids,
       :authentication,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9234,7 +9519,8 @@ module Aws::ElastiCache
     #   @return [String]
     class UserAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9276,7 +9562,8 @@ module Aws::ElastiCache
       :replication_groups,
       :serverless_caches,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9285,7 +9572,8 @@ module Aws::ElastiCache
     #   @return [String]
     class UserGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9294,7 +9582,8 @@ module Aws::ElastiCache
     #   @return [String]
     class UserGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9308,7 +9597,8 @@ module Aws::ElastiCache
     class UserGroupPendingChanges < Struct.new(
       :user_ids_to_remove,
       :user_ids_to_add,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9317,7 +9607,8 @@ module Aws::ElastiCache
     #   @return [String]
     class UserGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9331,7 +9622,8 @@ module Aws::ElastiCache
     class UserGroupsUpdateStatus < Struct.new(
       :user_group_ids_to_add,
       :user_group_ids_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9340,7 +9632,8 @@ module Aws::ElastiCache
     #   @return [String]
     class UserNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9349,7 +9642,8 @@ module Aws::ElastiCache
     #   @return [String]
     class UserQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

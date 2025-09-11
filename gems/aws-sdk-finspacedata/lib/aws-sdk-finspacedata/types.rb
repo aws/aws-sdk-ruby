@@ -11,7 +11,8 @@ module Aws::Finspacedata
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28,7 +29,8 @@ module Aws::Finspacedata
       :permission_group_id,
       :user_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +39,8 @@ module Aws::Finspacedata
     #   @return [Integer]
     class AssociateUserToPermissionGroupResponse < Struct.new(
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -65,7 +68,8 @@ module Aws::Finspacedata
       :secret_access_key,
       :session_token,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -123,7 +127,8 @@ module Aws::Finspacedata
     class ChangesetErrorInfo < Struct.new(
       :error_message,
       :error_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +225,8 @@ module Aws::Finspacedata
       :active_from_timestamp,
       :updates_changeset_id,
       :updated_by_changeset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -273,7 +279,8 @@ module Aws::Finspacedata
       :data_type,
       :column_name,
       :column_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +292,8 @@ module Aws::Finspacedata
     class ConflictException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +392,8 @@ module Aws::Finspacedata
       :change_type,
       :source_params,
       :format_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +407,8 @@ module Aws::Finspacedata
     class CreateChangesetResponse < Struct.new(
       :dataset_id,
       :changeset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +442,8 @@ module Aws::Finspacedata
       :partition_columns,
       :as_of_timestamp,
       :destination_type_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +457,8 @@ module Aws::Finspacedata
     class CreateDataViewResponse < Struct.new(
       :dataset_id,
       :data_view_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +506,8 @@ module Aws::Finspacedata
       :permission_group_params,
       :alias,
       :schema_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +517,8 @@ module Aws::Finspacedata
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -558,7 +572,8 @@ module Aws::Finspacedata
       :description,
       :application_permissions,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -567,7 +582,8 @@ module Aws::Finspacedata
     #   @return [String]
     class CreatePermissionGroupResponse < Struct.new(
       :permission_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +636,8 @@ module Aws::Finspacedata
       :api_access,
       :api_access_principal_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +646,8 @@ module Aws::Finspacedata
     #   @return [String]
     class CreateUserResponse < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -648,7 +666,8 @@ module Aws::Finspacedata
       :access_key_id,
       :secret_access_key,
       :session_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -696,7 +715,8 @@ module Aws::Finspacedata
       :destination_type,
       :s3_destination_export_file_format,
       :s3_destination_export_file_format_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +769,8 @@ module Aws::Finspacedata
     class DataViewErrorInfo < Struct.new(
       :error_message,
       :error_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +858,8 @@ module Aws::Finspacedata
       :auto_update,
       :create_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -901,7 +923,8 @@ module Aws::Finspacedata
       :last_modified_time,
       :schema_definition,
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -925,7 +948,8 @@ module Aws::Finspacedata
       :name,
       :phone_number,
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +963,8 @@ module Aws::Finspacedata
     class DeleteDatasetRequest < Struct.new(
       :client_token,
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -949,7 +974,8 @@ module Aws::Finspacedata
     #   @return [String]
     class DeleteDatasetResponse < Struct.new(
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +988,8 @@ module Aws::Finspacedata
     class DeletePermissionGroupRequest < Struct.new(
       :permission_group_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -971,7 +998,8 @@ module Aws::Finspacedata
     #   @return [String]
     class DeletePermissionGroupResponse < Struct.new(
       :permission_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1012,8 @@ module Aws::Finspacedata
     class DisableUserRequest < Struct.new(
       :user_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,7 +1022,8 @@ module Aws::Finspacedata
     #   @return [String]
     class DisableUserResponse < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1010,7 +1040,8 @@ module Aws::Finspacedata
       :permission_group_id,
       :user_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1019,7 +1050,8 @@ module Aws::Finspacedata
     #   @return [Integer]
     class DisassociateUserFromPermissionGroupResponse < Struct.new(
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1037,7 +1069,8 @@ module Aws::Finspacedata
     class EnableUserRequest < Struct.new(
       :user_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1046,7 +1079,8 @@ module Aws::Finspacedata
     #   @return [String]
     class EnableUserResponse < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1094,8 @@ module Aws::Finspacedata
     class GetChangesetRequest < Struct.new(
       :dataset_id,
       :changeset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1132,7 +1167,8 @@ module Aws::Finspacedata
       :active_from_timestamp,
       :updates_changeset_id,
       :updated_by_changeset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1153,7 +1189,8 @@ module Aws::Finspacedata
     class GetDataViewRequest < Struct.new(
       :data_view_id,
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1241,7 +1278,8 @@ module Aws::Finspacedata
       :data_view_arn,
       :destination_type_params,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1259,7 +1297,8 @@ module Aws::Finspacedata
     #   @return [String]
     class GetDatasetRequest < Struct.new(
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1333,7 +1372,8 @@ module Aws::Finspacedata
       :schema_definition,
       :alias,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1352,7 +1392,8 @@ module Aws::Finspacedata
     class GetExternalDataViewAccessDetailsRequest < Struct.new(
       :data_view_id,
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1365,7 +1406,8 @@ module Aws::Finspacedata
     class GetExternalDataViewAccessDetailsResponse < Struct.new(
       :credentials,
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1416,8 @@ module Aws::Finspacedata
     #   @return [String]
     class GetPermissionGroupRequest < Struct.new(
       :permission_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1383,7 +1426,8 @@ module Aws::Finspacedata
     #   @return [Types::PermissionGroup]
     class GetPermissionGroupResponse < Struct.new(
       :permission_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1397,7 +1441,8 @@ module Aws::Finspacedata
     class GetProgrammaticAccessCredentialsRequest < Struct.new(
       :duration_in_minutes,
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,7 +1456,8 @@ module Aws::Finspacedata
     class GetProgrammaticAccessCredentialsResponse < Struct.new(
       :credentials,
       :duration_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1466,8 @@ module Aws::Finspacedata
     #   @return [String]
     class GetUserRequest < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1560,8 @@ module Aws::Finspacedata
       :last_disabled_time,
       :last_modified_time,
       :last_login_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1543,7 +1591,8 @@ module Aws::Finspacedata
     #   @return [String]
     class GetWorkingLocationRequest < Struct.new(
       :location_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1560,7 +1609,8 @@ module Aws::Finspacedata
       :s3_uri,
       :s3_path,
       :s3_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1570,7 +1620,8 @@ module Aws::Finspacedata
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1579,7 +1630,8 @@ module Aws::Finspacedata
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1597,7 +1649,8 @@ module Aws::Finspacedata
       :dataset_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1664,8 @@ module Aws::Finspacedata
     class ListChangesetsResponse < Struct.new(
       :changesets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1629,7 +1683,8 @@ module Aws::Finspacedata
       :dataset_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1697,8 @@ module Aws::Finspacedata
     class ListDataViewsResponse < Struct.new(
       :next_token,
       :data_views,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1712,8 @@ module Aws::Finspacedata
     class ListDatasetsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1727,8 @@ module Aws::Finspacedata
     class ListDatasetsResponse < Struct.new(
       :datasets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1687,7 +1745,8 @@ module Aws::Finspacedata
       :user_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1700,7 +1759,8 @@ module Aws::Finspacedata
     class ListPermissionGroupsByUserResponse < Struct.new(
       :permission_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1713,7 +1773,8 @@ module Aws::Finspacedata
     class ListPermissionGroupsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1726,7 +1787,8 @@ module Aws::Finspacedata
     class ListPermissionGroupsResponse < Struct.new(
       :permission_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1743,7 +1805,8 @@ module Aws::Finspacedata
       :permission_group_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1756,7 +1819,8 @@ module Aws::Finspacedata
     class ListUsersByPermissionGroupResponse < Struct.new(
       :users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1769,7 +1833,8 @@ module Aws::Finspacedata
     class ListUsersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1782,7 +1847,8 @@ module Aws::Finspacedata
     class ListUsersResponse < Struct.new(
       :users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1865,7 +1931,8 @@ module Aws::Finspacedata
       :create_time,
       :last_modified_time,
       :membership_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1903,7 +1970,8 @@ module Aws::Finspacedata
       :permission_group_id,
       :name,
       :membership_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1931,7 +1999,8 @@ module Aws::Finspacedata
     class PermissionGroupParams < Struct.new(
       :permission_group_id,
       :dataset_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1944,7 +2013,8 @@ module Aws::Finspacedata
     class ResetUserPasswordRequest < Struct.new(
       :user_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2027,8 @@ module Aws::Finspacedata
     class ResetUserPasswordResponse < Struct.new(
       :user_id,
       :temporary_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1969,7 +2040,8 @@ module Aws::Finspacedata
     class ResourceNotFoundException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2015,7 +2087,8 @@ module Aws::Finspacedata
     #   @return [String]
     class ResourcePermission < Struct.new(
       :permission,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2029,7 +2102,8 @@ module Aws::Finspacedata
     class S3Location < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2043,7 +2117,8 @@ module Aws::Finspacedata
     class SchemaDefinition < Struct.new(
       :columns,
       :primary_key_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2053,13 +2128,15 @@ module Aws::Finspacedata
     #   @return [Types::SchemaDefinition]
     class SchemaUnion < Struct.new(
       :tabular_schema_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
     class ThrottlingException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2141,7 +2218,8 @@ module Aws::Finspacedata
       :changeset_id,
       :source_params,
       :format_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2233,8 @@ module Aws::Finspacedata
     class UpdateChangesetResponse < Struct.new(
       :changeset_id,
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2199,7 +2278,8 @@ module Aws::Finspacedata
       :dataset_description,
       :alias,
       :schema_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2209,7 +2289,8 @@ module Aws::Finspacedata
     #   @return [String]
     class UpdateDatasetResponse < Struct.new(
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2267,7 +2348,8 @@ module Aws::Finspacedata
       :description,
       :application_permissions,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2276,7 +2358,8 @@ module Aws::Finspacedata
     #   @return [String]
     class UpdatePermissionGroupResponse < Struct.new(
       :permission_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2329,7 +2412,8 @@ module Aws::Finspacedata
       :api_access,
       :api_access_principal_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2338,7 +2422,8 @@ module Aws::Finspacedata
     #   @return [String]
     class UpdateUserResponse < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2433,7 +2518,8 @@ module Aws::Finspacedata
       :last_disabled_time,
       :last_modified_time,
       :last_login_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2532,7 +2618,8 @@ module Aws::Finspacedata
       :api_access,
       :api_access_principal_arn,
       :membership_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2544,7 +2631,8 @@ module Aws::Finspacedata
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

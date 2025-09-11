@@ -2509,7 +2509,6 @@ module Aws::DirectoryService
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         operation.traits = {}
       end)
-
     end
 
     class << self

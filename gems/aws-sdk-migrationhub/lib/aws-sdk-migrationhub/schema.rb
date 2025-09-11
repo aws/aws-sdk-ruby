@@ -654,7 +654,6 @@ module Aws::MigrationHub
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         operation.traits = {}
       end)
-
     end
 
     class << self

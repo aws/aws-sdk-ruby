@@ -46,7 +46,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::BadGatewayException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -61,7 +61,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -103,7 +103,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::DependencyFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def retry_after_seconds
@@ -146,7 +146,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::LoopDetectedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::NotAcceptableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -173,7 +173,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -186,7 +186,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::RequestTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -200,7 +200,7 @@ module Aws::LexRuntimeService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexRuntimeService::Types::UnsupportedMediaTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

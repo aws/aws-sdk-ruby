@@ -39,7 +39,7 @@ module Aws::HealthLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::HealthLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::HealthLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::HealthLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::HealthLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::HealthLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

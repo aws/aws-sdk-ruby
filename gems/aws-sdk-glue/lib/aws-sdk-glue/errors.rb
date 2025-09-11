@@ -78,7 +78,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -92,7 +92,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -106,7 +106,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ColumnStatisticsTaskNotRunningException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -120,7 +120,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ColumnStatisticsTaskRunningException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -134,7 +134,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ColumnStatisticsTaskStoppingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -148,7 +148,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -162,7 +162,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ConcurrentRunsExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -176,7 +176,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ConditionCheckFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -190,7 +190,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -204,7 +204,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::CrawlerNotRunningException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -218,7 +218,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::CrawlerRunningException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -232,7 +232,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::CrawlerStoppingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -246,7 +246,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::EntityNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -265,7 +265,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::FederatedResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message describing the problem.</p>
@@ -284,7 +284,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::FederationSourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error code of the problem.</p>
@@ -303,7 +303,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::FederationSourceRetryableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -317,7 +317,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::GlueEncryptionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message describing the problem.</p>
@@ -331,7 +331,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::IdempotentParameterMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -345,7 +345,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::IllegalBlueprintStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -359,7 +359,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::IllegalSessionStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -373,7 +373,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::IllegalWorkflowStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -387,7 +387,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::IntegrationConflictOperationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -401,7 +401,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::IntegrationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -415,7 +415,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::IntegrationQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -429,7 +429,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -443,7 +443,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -457,7 +457,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -476,7 +476,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::InvalidIntegrationStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -490,7 +490,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -504,7 +504,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::KMSKeyNotAccessibleFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -518,7 +518,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::MLTransformNotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -532,7 +532,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::NoScheduleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -546,7 +546,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::OperationNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -560,7 +560,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::OperationTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -574,7 +574,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::PermissionTypeMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>There is a mismatch between the SupportedPermissionType used in the query request
@@ -589,7 +589,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -603,7 +603,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ResourceNotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -617,7 +617,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ResourceNumberLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -631,7 +631,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::SchedulerNotRunningException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -645,7 +645,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::SchedulerRunningException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -659,7 +659,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::SchedulerTransitioningException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -673,7 +673,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::TargetResourceNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -687,7 +687,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -701,7 +701,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -715,7 +715,7 @@ module Aws::Glue
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::VersionMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>

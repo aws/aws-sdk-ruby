@@ -4,7 +4,7 @@
 
 Gem::Specification.new do |spec|
   spec.name        = 'aws-sdk-neptunedata'
-  spec.version     = File.read(File.expand_path('../VERSION', __FILE__))
+  spec.version     = File.read(File.expand_path('VERSION', __dir__))
   spec.summary     = 'Generated gem using Smithy'
   spec.authors     = ['Smithy Ruby']
   spec.files       = Dir['VERSION', 'CHANGELOG.md', 'lib/**/*.rb', base: __dir__]
@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sigv4', '~> 1')
   spec.add_dependency('aws-sdk-core', '4.0.0.pre0')
   spec.add_dependency('smithy-json', '1.0.0.pre1')
-  spec.add_dependency('smithy-client', '~> 1')
+  spec.add_dependency('smithy-client', '1.0.0.pre1')
 
   spec.required_ruby_version = '>= 3.3'
 end

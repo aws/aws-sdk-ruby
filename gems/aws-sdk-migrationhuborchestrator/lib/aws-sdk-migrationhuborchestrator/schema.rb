@@ -994,7 +994,6 @@ module Aws::MigrationHubOrchestrator
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/workflowstepgroup/{id}", "code" => 202}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

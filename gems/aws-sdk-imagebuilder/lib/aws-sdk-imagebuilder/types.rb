@@ -20,7 +20,8 @@ module Aws::Imagebuilder
     class AccountAggregation < Struct.new(
       :account_id,
       :severity_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +57,8 @@ module Aws::Imagebuilder
     class AdditionalInstanceConfiguration < Struct.new(
       :systems_manager_agent,
       :user_data_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +88,8 @@ module Aws::Imagebuilder
       :description,
       :state,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -118,7 +121,8 @@ module Aws::Imagebuilder
       :ami_tags,
       :kms_key_id,
       :launch_permission,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +131,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class CallRateLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +148,8 @@ module Aws::Imagebuilder
     class CancelImageCreationRequest < Struct.new(
       :image_build_version_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +166,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +182,8 @@ module Aws::Imagebuilder
     class CancelLifecycleExecutionRequest < Struct.new(
       :lifecycle_execution_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +192,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class CancelLifecycleExecutionResponse < Struct.new(
       :lifecycle_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -195,7 +204,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ClientException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +294,8 @@ module Aws::Imagebuilder
       :publisher,
       :obfuscate,
       :product_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -304,7 +315,8 @@ module Aws::Imagebuilder
     class ComponentConfiguration < Struct.new(
       :component_arn,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +330,8 @@ module Aws::Imagebuilder
     class ComponentParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +355,8 @@ module Aws::Imagebuilder
       :type,
       :default_value,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -356,7 +370,8 @@ module Aws::Imagebuilder
     class ComponentState < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +438,8 @@ module Aws::Imagebuilder
       :tags,
       :publisher,
       :obfuscate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -514,7 +530,8 @@ module Aws::Imagebuilder
       :date_created,
       :status,
       :product_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +546,8 @@ module Aws::Imagebuilder
     class Container < Struct.new(
       :region,
       :image_uris,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +566,8 @@ module Aws::Imagebuilder
       :description,
       :container_tags,
       :target_repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +683,8 @@ module Aws::Imagebuilder
       :tags,
       :working_directory,
       :target_repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +722,8 @@ module Aws::Imagebuilder
       :parent_image,
       :date_created,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +798,8 @@ module Aws::Imagebuilder
       :kms_key_id,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +816,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :component_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,7 +905,8 @@ module Aws::Imagebuilder
       :target_repository,
       :kms_key_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +924,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :container_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +952,8 @@ module Aws::Imagebuilder
       :distributions,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -945,7 +971,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :distribution_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1019,7 +1046,8 @@ module Aws::Imagebuilder
       :image_scanning_configuration,
       :workflows,
       :execution_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1065,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_pipeline_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1144,8 @@ module Aws::Imagebuilder
       :working_directory,
       :additional_instance_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1163,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,7 +1222,8 @@ module Aws::Imagebuilder
       :image_scanning_configuration,
       :workflows,
       :execution_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1208,7 +1240,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1292,7 +1325,8 @@ module Aws::Imagebuilder
       :tags,
       :placement,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1310,7 +1344,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :infrastructure_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1354,7 +1389,8 @@ module Aws::Imagebuilder
       :resource_selection,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1403,8 @@ module Aws::Imagebuilder
     class CreateLifecyclePolicyResponse < Struct.new(
       :client_token,
       :lifecycle_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1436,7 +1473,8 @@ module Aws::Imagebuilder
       :tags,
       :client_token,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1487,8 @@ module Aws::Imagebuilder
     class CreateWorkflowResponse < Struct.new(
       :client_token,
       :workflow_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1515,8 @@ module Aws::Imagebuilder
       :scoring_vector,
       :version,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1490,7 +1530,8 @@ module Aws::Imagebuilder
     class CvssScoreAdjustment < Struct.new(
       :metric,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1522,7 +1563,8 @@ module Aws::Imagebuilder
       :score,
       :scoring_vector,
       :adjustments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1573,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteComponentRequest < Struct.new(
       :component_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1544,7 +1587,8 @@ module Aws::Imagebuilder
     class DeleteComponentResponse < Struct.new(
       :request_id,
       :component_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1597,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteContainerRecipeRequest < Struct.new(
       :container_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1611,8 @@ module Aws::Imagebuilder
     class DeleteContainerRecipeResponse < Struct.new(
       :request_id,
       :container_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1621,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteDistributionConfigurationRequest < Struct.new(
       :distribution_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1636,8 @@ module Aws::Imagebuilder
     class DeleteDistributionConfigurationResponse < Struct.new(
       :request_id,
       :distribution_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1598,7 +1646,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteImagePipelineRequest < Struct.new(
       :image_pipeline_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1660,8 @@ module Aws::Imagebuilder
     class DeleteImagePipelineResponse < Struct.new(
       :request_id,
       :image_pipeline_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1620,7 +1670,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteImageRecipeRequest < Struct.new(
       :image_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1633,7 +1684,8 @@ module Aws::Imagebuilder
     class DeleteImageRecipeResponse < Struct.new(
       :request_id,
       :image_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1694,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteImageRequest < Struct.new(
       :image_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1655,7 +1708,8 @@ module Aws::Imagebuilder
     class DeleteImageResponse < Struct.new(
       :request_id,
       :image_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1664,7 +1718,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteInfrastructureConfigurationRequest < Struct.new(
       :infrastructure_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1733,8 @@ module Aws::Imagebuilder
     class DeleteInfrastructureConfigurationResponse < Struct.new(
       :request_id,
       :infrastructure_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1687,7 +1743,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteLifecyclePolicyRequest < Struct.new(
       :lifecycle_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1696,7 +1753,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteLifecyclePolicyResponse < Struct.new(
       :lifecycle_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1763,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteWorkflowRequest < Struct.new(
       :workflow_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1714,7 +1773,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class DeleteWorkflowResponse < Struct.new(
       :workflow_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1757,7 +1817,8 @@ module Aws::Imagebuilder
       :s3_export_configuration,
       :fast_launch_configurations,
       :ssm_parameter_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1857,8 @@ module Aws::Imagebuilder
       :date_created,
       :date_updated,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1830,7 +1892,8 @@ module Aws::Imagebuilder
       :date_updated,
       :tags,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1933,8 @@ module Aws::Imagebuilder
       :volume_size,
       :volume_type,
       :throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1890,7 +1954,8 @@ module Aws::Imagebuilder
     class EcrConfiguration < Struct.new(
       :repository_name,
       :container_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1921,7 +1986,8 @@ module Aws::Imagebuilder
       :max_parallel_launches,
       :launch_template,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1950,7 +2016,8 @@ module Aws::Imagebuilder
       :launch_template_id,
       :launch_template_name,
       :launch_template_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1962,7 +2029,8 @@ module Aws::Imagebuilder
     #   @return [Integer]
     class FastLaunchSnapshotConfiguration < Struct.new(
       :target_resource_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1978,7 +2046,8 @@ module Aws::Imagebuilder
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2056,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1997,7 +2067,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetComponentPolicyRequest < Struct.new(
       :component_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2010,7 +2081,8 @@ module Aws::Imagebuilder
     class GetComponentPolicyResponse < Struct.new(
       :request_id,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2020,7 +2092,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetComponentRequest < Struct.new(
       :component_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2033,7 +2106,8 @@ module Aws::Imagebuilder
     class GetComponentResponse < Struct.new(
       :request_id,
       :component,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2043,7 +2117,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetContainerRecipePolicyRequest < Struct.new(
       :container_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2056,7 +2131,8 @@ module Aws::Imagebuilder
     class GetContainerRecipePolicyResponse < Struct.new(
       :request_id,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2065,7 +2141,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetContainerRecipeRequest < Struct.new(
       :container_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2078,7 +2155,8 @@ module Aws::Imagebuilder
     class GetContainerRecipeResponse < Struct.new(
       :request_id,
       :container_recipe,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2088,7 +2166,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetDistributionConfigurationRequest < Struct.new(
       :distribution_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2101,7 +2180,8 @@ module Aws::Imagebuilder
     class GetDistributionConfigurationResponse < Struct.new(
       :request_id,
       :distribution_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2110,7 +2190,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetImagePipelineRequest < Struct.new(
       :image_pipeline_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2123,7 +2204,8 @@ module Aws::Imagebuilder
     class GetImagePipelineResponse < Struct.new(
       :request_id,
       :image_pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2132,7 +2214,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetImagePolicyRequest < Struct.new(
       :image_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2145,7 +2228,8 @@ module Aws::Imagebuilder
     class GetImagePolicyResponse < Struct.new(
       :request_id,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2239,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetImageRecipePolicyRequest < Struct.new(
       :image_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2168,7 +2253,8 @@ module Aws::Imagebuilder
     class GetImageRecipePolicyResponse < Struct.new(
       :request_id,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2177,7 +2263,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetImageRecipeRequest < Struct.new(
       :image_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2190,7 +2277,8 @@ module Aws::Imagebuilder
     class GetImageRecipeResponse < Struct.new(
       :request_id,
       :image_recipe,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2199,7 +2287,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetImageRequest < Struct.new(
       :image_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2212,7 +2301,8 @@ module Aws::Imagebuilder
     class GetImageResponse < Struct.new(
       :request_id,
       :image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2223,7 +2313,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetInfrastructureConfigurationRequest < Struct.new(
       :infrastructure_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2237,7 +2328,8 @@ module Aws::Imagebuilder
     class GetInfrastructureConfigurationResponse < Struct.new(
       :request_id,
       :infrastructure_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2338,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetLifecycleExecutionRequest < Struct.new(
       :lifecycle_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2255,7 +2348,8 @@ module Aws::Imagebuilder
     #   @return [Types::LifecycleExecution]
     class GetLifecycleExecutionResponse < Struct.new(
       :lifecycle_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2264,7 +2358,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetLifecyclePolicyRequest < Struct.new(
       :lifecycle_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2273,7 +2368,8 @@ module Aws::Imagebuilder
     #   @return [Types::LifecyclePolicy]
     class GetLifecyclePolicyResponse < Struct.new(
       :lifecycle_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2290,7 +2386,8 @@ module Aws::Imagebuilder
       :resource_type,
       :resource_arn,
       :resource_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2307,7 +2404,8 @@ module Aws::Imagebuilder
       :resource_arn,
       :url,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2317,7 +2415,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetWorkflowExecutionRequest < Struct.new(
       :workflow_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2387,7 +2486,8 @@ module Aws::Imagebuilder
       :start_time,
       :end_time,
       :parallel_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2404,7 +2504,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetWorkflowRequest < Struct.new(
       :workflow_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2413,7 +2514,8 @@ module Aws::Imagebuilder
     #   @return [Types::Workflow]
     class GetWorkflowResponse < Struct.new(
       :workflow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2423,7 +2525,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class GetWorkflowStepExecutionRequest < Struct.new(
       :step_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2502,7 +2605,8 @@ module Aws::Imagebuilder
       :end_time,
       :on_failure,
       :timeout_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2512,7 +2616,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2685,7 +2790,8 @@ module Aws::Imagebuilder
       :lifecycle_execution_id,
       :execution_role,
       :workflows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2700,7 +2806,8 @@ module Aws::Imagebuilder
     class ImageAggregation < Struct.new(
       :image_build_version_arn,
       :severity_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2717,7 +2824,8 @@ module Aws::Imagebuilder
     class ImagePackage < Struct.new(
       :package_name,
       :package_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2810,7 +2918,8 @@ module Aws::Imagebuilder
       :image_scanning_configuration,
       :execution_role,
       :workflows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2826,7 +2935,8 @@ module Aws::Imagebuilder
     class ImagePipelineAggregation < Struct.new(
       :image_pipeline_arn,
       :severity_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2909,7 +3019,8 @@ module Aws::Imagebuilder
       :tags,
       :working_directory,
       :additional_instance_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2943,7 +3054,8 @@ module Aws::Imagebuilder
       :parent_image,
       :date_created,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3122,8 @@ module Aws::Imagebuilder
       :inspector_score_details,
       :package_vulnerability_details,
       :fix_available,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3034,7 +3147,8 @@ module Aws::Imagebuilder
       :image_aggregation,
       :image_pipeline_aggregation,
       :vulnerability_id_aggregation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3049,7 +3163,8 @@ module Aws::Imagebuilder
     class ImageScanFindingsFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3064,7 +3179,8 @@ module Aws::Imagebuilder
     class ImageScanState < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3079,7 +3195,8 @@ module Aws::Imagebuilder
     class ImageScanningConfiguration < Struct.new(
       :image_scanning_enabled,
       :ecr_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3093,7 +3210,8 @@ module Aws::Imagebuilder
     class ImageState < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3183,7 +3301,8 @@ module Aws::Imagebuilder
       :image_source,
       :deprecation_time,
       :lifecycle_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3203,7 +3322,8 @@ module Aws::Imagebuilder
     class ImageTestsConfiguration < Struct.new(
       :image_tests_enabled,
       :timeout_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3308,7 +3428,8 @@ module Aws::Imagebuilder
       :date_created,
       :build_type,
       :image_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3380,7 +3501,8 @@ module Aws::Imagebuilder
       :kms_key_id,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3397,7 +3519,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :component_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3449,7 +3572,8 @@ module Aws::Imagebuilder
       :uri,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3462,7 +3586,8 @@ module Aws::Imagebuilder
     class ImportDiskImageResponse < Struct.new(
       :client_token,
       :image_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3516,7 +3641,8 @@ module Aws::Imagebuilder
       :vm_import_task_id,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3534,7 +3660,8 @@ module Aws::Imagebuilder
       :request_id,
       :image_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3616,7 +3743,8 @@ module Aws::Imagebuilder
       :instance_metadata_options,
       :tags,
       :placement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3663,7 +3791,8 @@ module Aws::Imagebuilder
       :instance_types,
       :instance_profile_name,
       :placement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3675,7 +3804,8 @@ module Aws::Imagebuilder
     #   @return [Types::CvssScoreDetails]
     class InspectorScoreDetails < Struct.new(
       :adjusted_cvss,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3697,7 +3827,8 @@ module Aws::Imagebuilder
       :ebs,
       :virtual_name,
       :no_device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3716,7 +3847,8 @@ module Aws::Imagebuilder
     class InstanceConfiguration < Struct.new(
       :image,
       :block_device_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3756,7 +3888,8 @@ module Aws::Imagebuilder
     class InstanceMetadataOptions < Struct.new(
       :http_tokens,
       :http_put_response_hop_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3765,7 +3898,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3775,7 +3909,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3785,7 +3920,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3794,7 +3930,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3803,7 +3940,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3812,7 +3950,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class InvalidVersionNumberException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3844,7 +3983,8 @@ module Aws::Imagebuilder
       :user_groups,
       :organization_arns,
       :organizational_unit_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3863,7 +4003,8 @@ module Aws::Imagebuilder
       :launch_template_id,
       :account_id,
       :set_default_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3900,7 +4041,8 @@ module Aws::Imagebuilder
       :state,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3957,7 +4099,8 @@ module Aws::Imagebuilder
       :image_uris,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3971,7 +4114,8 @@ module Aws::Imagebuilder
     class LifecycleExecutionResourceAction < Struct.new(
       :name,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3987,7 +4131,8 @@ module Aws::Imagebuilder
     class LifecycleExecutionResourceState < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3998,7 +4143,8 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     class LifecycleExecutionResourcesImpactedSummary < Struct.new(
       :has_impacted_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4018,7 +4164,8 @@ module Aws::Imagebuilder
     class LifecycleExecutionSnapshotResource < Struct.new(
       :snapshot_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4032,7 +4179,8 @@ module Aws::Imagebuilder
     class LifecycleExecutionState < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4089,7 +4237,8 @@ module Aws::Imagebuilder
       :date_updated,
       :date_last_run,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4107,7 +4256,8 @@ module Aws::Imagebuilder
       :action,
       :filter,
       :exclusion_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4121,7 +4271,8 @@ module Aws::Imagebuilder
     class LifecyclePolicyDetailAction < Struct.new(
       :type,
       :include_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4139,7 +4290,8 @@ module Aws::Imagebuilder
       :amis,
       :snapshots,
       :containers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4162,7 +4314,8 @@ module Aws::Imagebuilder
     class LifecyclePolicyDetailExclusionRules < Struct.new(
       :tag_map,
       :amis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4189,7 +4342,8 @@ module Aws::Imagebuilder
       :shared_accounts,
       :last_launched,
       :tag_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4210,7 +4364,8 @@ module Aws::Imagebuilder
     class LifecyclePolicyDetailExclusionRulesAmisLastLaunched < Struct.new(
       :value,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4242,7 +4397,8 @@ module Aws::Imagebuilder
       :value,
       :unit,
       :retain_at_least,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4258,7 +4414,8 @@ module Aws::Imagebuilder
     class LifecyclePolicyResourceSelection < Struct.new(
       :recipes,
       :tag_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4272,7 +4429,8 @@ module Aws::Imagebuilder
     class LifecyclePolicyResourceSelectionRecipe < Struct.new(
       :name,
       :semantic_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4320,7 +4478,8 @@ module Aws::Imagebuilder
       :date_updated,
       :date_last_run,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4339,7 +4498,8 @@ module Aws::Imagebuilder
       :component_version_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4358,7 +4518,8 @@ module Aws::Imagebuilder
       :request_id,
       :component_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4419,7 +4580,8 @@ module Aws::Imagebuilder
       :by_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4442,7 +4604,8 @@ module Aws::Imagebuilder
       :request_id,
       :component_version_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4488,7 +4651,8 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4507,7 +4671,8 @@ module Aws::Imagebuilder
       :request_id,
       :container_recipe_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4525,7 +4690,8 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4544,7 +4710,8 @@ module Aws::Imagebuilder
       :request_id,
       :distribution_configuration_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4594,7 +4761,8 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4613,7 +4781,8 @@ module Aws::Imagebuilder
       :request_id,
       :image_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4631,7 +4800,8 @@ module Aws::Imagebuilder
       :image_build_version_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4650,7 +4820,8 @@ module Aws::Imagebuilder
       :request_id,
       :image_package_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4685,7 +4856,8 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4704,7 +4876,8 @@ module Aws::Imagebuilder
       :request_id,
       :image_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4754,7 +4927,8 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4773,7 +4947,8 @@ module Aws::Imagebuilder
       :request_id,
       :image_pipeline_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4815,7 +4990,8 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4834,7 +5010,8 @@ module Aws::Imagebuilder
       :request_id,
       :image_recipe_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4850,7 +5027,8 @@ module Aws::Imagebuilder
     class ListImageScanFindingAggregationsRequest < Struct.new(
       :filter,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4894,7 +5072,8 @@ module Aws::Imagebuilder
       :aggregation_type,
       :responses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4936,7 +5115,8 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4956,7 +5136,8 @@ module Aws::Imagebuilder
       :request_id,
       :findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5016,7 +5197,8 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       :include_deprecated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5044,7 +5226,8 @@ module Aws::Imagebuilder
       :request_id,
       :image_version_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5062,7 +5245,8 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5081,7 +5265,8 @@ module Aws::Imagebuilder
       :request_id,
       :infrastructure_configuration_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5106,7 +5291,8 @@ module Aws::Imagebuilder
       :parent_resource_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5129,7 +5315,8 @@ module Aws::Imagebuilder
       :lifecycle_execution_state,
       :resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5147,7 +5334,8 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5162,7 +5350,8 @@ module Aws::Imagebuilder
     class ListLifecycleExecutionsResponse < Struct.new(
       :lifecycle_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5181,7 +5370,8 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5197,7 +5387,8 @@ module Aws::Imagebuilder
     class ListLifecyclePoliciesResponse < Struct.new(
       :lifecycle_policy_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5206,7 +5397,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5215,7 +5407,8 @@ module Aws::Imagebuilder
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5229,7 +5422,8 @@ module Aws::Imagebuilder
     class ListWaitingWorkflowStepsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5245,7 +5439,8 @@ module Aws::Imagebuilder
     class ListWaitingWorkflowStepsResponse < Struct.new(
       :steps,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5263,7 +5458,8 @@ module Aws::Imagebuilder
       :workflow_version_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5279,7 +5475,8 @@ module Aws::Imagebuilder
     class ListWorkflowBuildVersionsResponse < Struct.new(
       :workflow_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5298,7 +5495,8 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       :image_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5327,7 +5525,8 @@ module Aws::Imagebuilder
       :image_build_version_arn,
       :message,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5346,7 +5545,8 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       :workflow_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5385,7 +5585,8 @@ module Aws::Imagebuilder
       :image_build_version_arn,
       :message,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5411,7 +5612,8 @@ module Aws::Imagebuilder
       :by_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5426,7 +5628,8 @@ module Aws::Imagebuilder
     class ListWorkflowsResponse < Struct.new(
       :workflow_version_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5436,7 +5639,8 @@ module Aws::Imagebuilder
     #   @return [Types::S3Logs]
     class Logging < Struct.new(
       :s3_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5451,7 +5655,8 @@ module Aws::Imagebuilder
     class OutputResources < Struct.new(
       :amis,
       :containers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5501,7 +5706,8 @@ module Aws::Imagebuilder
       :vendor_created_at,
       :vendor_updated_at,
       :reference_urls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5537,7 +5743,8 @@ module Aws::Imagebuilder
       :tenancy,
       :host_id,
       :host_resource_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5554,7 +5761,8 @@ module Aws::Imagebuilder
     class ProductCodeListItem < Struct.new(
       :product_code_id,
       :product_code_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5568,7 +5776,8 @@ module Aws::Imagebuilder
     class PutComponentPolicyRequest < Struct.new(
       :component_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5582,7 +5791,8 @@ module Aws::Imagebuilder
     class PutComponentPolicyResponse < Struct.new(
       :request_id,
       :component_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5596,7 +5806,8 @@ module Aws::Imagebuilder
     class PutContainerRecipePolicyRequest < Struct.new(
       :container_recipe_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5610,7 +5821,8 @@ module Aws::Imagebuilder
     class PutContainerRecipePolicyResponse < Struct.new(
       :request_id,
       :container_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5624,7 +5836,8 @@ module Aws::Imagebuilder
     class PutImagePolicyRequest < Struct.new(
       :image_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5637,7 +5850,8 @@ module Aws::Imagebuilder
     class PutImagePolicyResponse < Struct.new(
       :request_id,
       :image_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5651,7 +5865,8 @@ module Aws::Imagebuilder
     class PutImageRecipePolicyRequest < Struct.new(
       :image_recipe_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5665,7 +5880,8 @@ module Aws::Imagebuilder
     class PutImageRecipePolicyResponse < Struct.new(
       :request_id,
       :image_recipe_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5676,7 +5892,8 @@ module Aws::Imagebuilder
     #   @return [Types::RemediationRecommendation]
     class Remediation < Struct.new(
       :recommendation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5691,7 +5908,8 @@ module Aws::Imagebuilder
     class RemediationRecommendation < Struct.new(
       :text,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5700,7 +5918,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5710,7 +5929,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ResourceDependencyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5720,7 +5940,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5729,7 +5950,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5739,7 +5961,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ResourceState < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5749,7 +5972,8 @@ module Aws::Imagebuilder
     #   @return [Types::LifecyclePolicyDetailExclusionRulesAmis]
     class ResourceStateUpdateExclusionRules < Struct.new(
       :amis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5767,7 +5991,8 @@ module Aws::Imagebuilder
       :amis,
       :snapshots,
       :containers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5816,7 +6041,8 @@ module Aws::Imagebuilder
       :disk_image_format,
       :s3_bucket,
       :s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5830,7 +6056,8 @@ module Aws::Imagebuilder
     class S3Logs < Struct.new(
       :s3_bucket_name,
       :s3_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5872,7 +6099,8 @@ module Aws::Imagebuilder
       :schedule_expression,
       :timezone,
       :pipeline_execution_start_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5900,7 +6128,8 @@ module Aws::Imagebuilder
       :action,
       :reason,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5918,7 +6147,8 @@ module Aws::Imagebuilder
       :step_execution_id,
       :image_build_version_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5928,7 +6158,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5939,7 +6170,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5948,7 +6180,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5971,7 +6204,8 @@ module Aws::Imagebuilder
       :critical,
       :high,
       :medium,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5995,7 +6229,8 @@ module Aws::Imagebuilder
       :ami_account_id,
       :parameter_name,
       :data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6011,7 +6246,8 @@ module Aws::Imagebuilder
     class StartImagePipelineExecutionRequest < Struct.new(
       :image_pipeline_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6028,7 +6264,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_build_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6065,7 +6302,8 @@ module Aws::Imagebuilder
       :exclusion_rules,
       :update_at,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6079,7 +6317,8 @@ module Aws::Imagebuilder
     class StartResourceStateUpdateResponse < Struct.new(
       :lifecycle_execution_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6092,7 +6331,8 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     class SystemsManagerAgent < Struct.new(
       :uninstall_after_build,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6105,12 +6345,14 @@ module Aws::Imagebuilder
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6126,7 +6368,8 @@ module Aws::Imagebuilder
     class TargetContainerRepository < Struct.new(
       :service,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6139,12 +6382,14 @@ module Aws::Imagebuilder
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6168,7 +6413,8 @@ module Aws::Imagebuilder
       :description,
       :distributions,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6186,7 +6432,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :distribution_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6255,7 +6502,8 @@ module Aws::Imagebuilder
       :image_scanning_configuration,
       :workflows,
       :execution_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6273,7 +6521,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_pipeline_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6369,7 +6618,8 @@ module Aws::Imagebuilder
       :instance_metadata_options,
       :placement,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6387,7 +6637,8 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :infrastructure_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6427,7 +6678,8 @@ module Aws::Imagebuilder
       :policy_details,
       :resource_selection,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6436,7 +6688,8 @@ module Aws::Imagebuilder
     #   @return [String]
     class UpdateLifecyclePolicyResponse < Struct.new(
       :lifecycle_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6451,7 +6704,8 @@ module Aws::Imagebuilder
     class VulnerabilityIdAggregation < Struct.new(
       :vulnerability_id,
       :severity_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6497,7 +6751,8 @@ module Aws::Imagebuilder
       :file_path,
       :fixed_in_version,
       :remediation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6561,7 +6816,8 @@ module Aws::Imagebuilder
       :date_created,
       :tags,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6590,7 +6846,8 @@ module Aws::Imagebuilder
       :parameters,
       :parallel_group,
       :on_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6646,7 +6903,8 @@ module Aws::Imagebuilder
       :start_time,
       :end_time,
       :parallel_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6668,7 +6926,8 @@ module Aws::Imagebuilder
     class WorkflowParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6692,7 +6951,8 @@ module Aws::Imagebuilder
       :type,
       :default_value,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6706,7 +6966,8 @@ module Aws::Imagebuilder
     class WorkflowState < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6743,7 +7004,8 @@ module Aws::Imagebuilder
       :name,
       :action,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6793,7 +7055,8 @@ module Aws::Imagebuilder
       :outputs,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6840,7 +7103,8 @@ module Aws::Imagebuilder
       :state,
       :date_created,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6875,7 +7139,8 @@ module Aws::Imagebuilder
       :type,
       :owner,
       :date_created,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

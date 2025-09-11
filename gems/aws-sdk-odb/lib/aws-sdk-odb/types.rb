@@ -11,12 +11,14 @@ module Aws::Odb
     #   @return [String]
     class AcceptMarketplaceRegistrationInput < Struct.new(
       :marketplace_registration_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AcceptMarketplaceRegistrationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +27,8 @@ module Aws::Odb
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -83,7 +86,8 @@ module Aws::Odb
       :cloud_autonomous_vm_cluster_id,
       :ocid,
       :oci_resource_anchor_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +289,8 @@ module Aws::Odb
       :time_ords_certificate_expires,
       :time_zone,
       :total_container_databases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +304,8 @@ module Aws::Odb
     class CloudAutonomousVmClusterResourceDetails < Struct.new(
       :cloud_autonomous_vm_cluster_id,
       :unallocated_adb_storage_in_t_bs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +507,8 @@ module Aws::Odb
       :time_ords_certificate_expires,
       :time_zone,
       :total_container_databases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -659,7 +666,8 @@ module Aws::Odb
       :database_server_type,
       :storage_server_type,
       :compute_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +825,8 @@ module Aws::Odb
       :database_server_type,
       :storage_server_type,
       :compute_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +860,8 @@ module Aws::Odb
       :local_storage_in_g_bs,
       :memory_in_g_bs,
       :ocpus,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1017,7 +1027,8 @@ module Aws::Odb
       :odb_network_id,
       :percent_progress,
       :compute_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,7 +1194,8 @@ module Aws::Odb
       :odb_network_id,
       :percent_progress,
       :compute_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1200,7 +1212,8 @@ module Aws::Odb
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1286,8 @@ module Aws::Odb
       :tags,
       :time_zone,
       :total_container_databases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1294,7 +1308,8 @@ module Aws::Odb
       :status,
       :status_reason,
       :cloud_autonomous_vm_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1347,7 +1362,8 @@ module Aws::Odb
       :client_token,
       :database_server_type,
       :storage_server_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1384,8 @@ module Aws::Odb
       :status,
       :status_reason,
       :cloud_exadata_infrastructure_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1457,7 +1474,8 @@ module Aws::Odb
       :time_zone,
       :client_token,
       :scan_listener_port_tcp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1496,8 @@ module Aws::Odb
       :status,
       :status_reason,
       :cloud_vm_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1550,8 @@ module Aws::Odb
       :zero_etl_access,
       :s3_policy_document,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1552,7 +1572,8 @@ module Aws::Odb
       :status,
       :status_reason,
       :odb_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1598,8 @@ module Aws::Odb
       :display_name,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1598,7 +1620,8 @@ module Aws::Odb
       :status,
       :status_reason,
       :odb_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1608,7 +1631,8 @@ module Aws::Odb
     #   @return [String]
     class CustomerContact < Struct.new(
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1650,8 @@ module Aws::Odb
       :is_diagnostics_events_enabled,
       :is_health_monitoring_enabled,
       :is_incident_logs_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,7 +1661,8 @@ module Aws::Odb
     #   @return [String]
     class DayOfWeek < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1654,7 +1680,8 @@ module Aws::Odb
       :db_name,
       :flash_cache_limit,
       :share,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1772,7 +1799,8 @@ module Aws::Odb
       :vnic_id,
       :private_ip_address,
       :floating_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1882,7 +1910,8 @@ module Aws::Odb
       :total_cpu_core_count,
       :vnic2_id,
       :vnic_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1968,7 +1997,8 @@ module Aws::Odb
       :compute_model,
       :autonomous_vm_cluster_ids,
       :autonomous_virtual_machine_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1990,7 +2020,8 @@ module Aws::Odb
       :patching_status,
       :time_patching_ended,
       :time_patching_started,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2076,7 +2107,8 @@ module Aws::Odb
       :compute_model,
       :autonomous_vm_cluster_ids,
       :autonomous_virtual_machine_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2210,8 @@ module Aws::Odb
       :name,
       :compute_model,
       :are_server_types_supported,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2187,12 +2220,14 @@ module Aws::Odb
     #   @return [String]
     class DeleteCloudAutonomousVmClusterInput < Struct.new(
       :cloud_autonomous_vm_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCloudAutonomousVmClusterOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2201,12 +2236,14 @@ module Aws::Odb
     #   @return [String]
     class DeleteCloudExadataInfrastructureInput < Struct.new(
       :cloud_exadata_infrastructure_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCloudExadataInfrastructureOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2215,12 +2252,14 @@ module Aws::Odb
     #   @return [String]
     class DeleteCloudVmClusterInput < Struct.new(
       :cloud_vm_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCloudVmClusterOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2233,12 +2272,14 @@ module Aws::Odb
     class DeleteOdbNetworkInput < Struct.new(
       :odb_network_id,
       :delete_associated_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteOdbNetworkOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2247,12 +2288,14 @@ module Aws::Odb
     #   @return [String]
     class DeleteOdbPeeringConnectionInput < Struct.new(
       :odb_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteOdbPeeringConnectionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2274,7 +2317,8 @@ module Aws::Odb
       :lifecycle_details,
       :lifecycle_state,
       :objective,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2283,7 +2327,8 @@ module Aws::Odb
     #   @return [String]
     class GetCloudAutonomousVmClusterInput < Struct.new(
       :cloud_autonomous_vm_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2292,7 +2337,8 @@ module Aws::Odb
     #   @return [Types::CloudAutonomousVmCluster]
     class GetCloudAutonomousVmClusterOutput < Struct.new(
       :cloud_autonomous_vm_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2301,7 +2347,8 @@ module Aws::Odb
     #   @return [String]
     class GetCloudExadataInfrastructureInput < Struct.new(
       :cloud_exadata_infrastructure_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2310,7 +2357,8 @@ module Aws::Odb
     #   @return [Types::CloudExadataInfrastructure]
     class GetCloudExadataInfrastructureOutput < Struct.new(
       :cloud_exadata_infrastructure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2323,7 +2371,8 @@ module Aws::Odb
     class GetCloudExadataInfrastructureUnallocatedResourcesInput < Struct.new(
       :cloud_exadata_infrastructure_id,
       :db_servers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2332,7 +2381,8 @@ module Aws::Odb
     #   @return [Types::CloudExadataInfrastructureUnallocatedResources]
     class GetCloudExadataInfrastructureUnallocatedResourcesOutput < Struct.new(
       :cloud_exadata_infrastructure_unallocated_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2341,7 +2391,8 @@ module Aws::Odb
     #   @return [String]
     class GetCloudVmClusterInput < Struct.new(
       :cloud_vm_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,7 +2401,8 @@ module Aws::Odb
     #   @return [Types::CloudVmCluster]
     class GetCloudVmClusterOutput < Struct.new(
       :cloud_vm_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2363,7 +2415,8 @@ module Aws::Odb
     class GetDbNodeInput < Struct.new(
       :cloud_vm_cluster_id,
       :db_node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2372,7 +2425,8 @@ module Aws::Odb
     #   @return [Types::DbNode]
     class GetDbNodeOutput < Struct.new(
       :db_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2385,7 +2439,8 @@ module Aws::Odb
     class GetDbServerInput < Struct.new(
       :cloud_exadata_infrastructure_id,
       :db_server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2394,12 +2449,14 @@ module Aws::Odb
     #   @return [Types::DbServer]
     class GetDbServerOutput < Struct.new(
       :db_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetOciOnboardingStatusInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2416,7 +2473,8 @@ module Aws::Odb
       :status,
       :existing_tenancy_activation_link,
       :new_tenancy_activation_link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2425,7 +2483,8 @@ module Aws::Odb
     #   @return [String]
     class GetOdbNetworkInput < Struct.new(
       :odb_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2434,7 +2493,8 @@ module Aws::Odb
     #   @return [Types::OdbNetwork]
     class GetOdbNetworkOutput < Struct.new(
       :odb_network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2443,7 +2503,8 @@ module Aws::Odb
     #   @return [String]
     class GetOdbPeeringConnectionInput < Struct.new(
       :odb_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2452,7 +2513,8 @@ module Aws::Odb
     #   @return [Types::OdbPeeringConnection]
     class GetOdbPeeringConnectionOutput < Struct.new(
       :odb_peering_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2462,17 +2524,20 @@ module Aws::Odb
     #   @return [String]
     class GiVersionSummary < Struct.new(
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2485,7 +2550,8 @@ module Aws::Odb
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2502,7 +2568,8 @@ module Aws::Odb
       :max_results,
       :next_token,
       :cloud_autonomous_vm_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2515,7 +2582,8 @@ module Aws::Odb
     class ListAutonomousVirtualMachinesOutput < Struct.new(
       :next_token,
       :autonomous_virtual_machines,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2532,7 +2600,8 @@ module Aws::Odb
       :max_results,
       :next_token,
       :cloud_exadata_infrastructure_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2545,7 +2614,8 @@ module Aws::Odb
     class ListCloudAutonomousVmClustersOutput < Struct.new(
       :next_token,
       :cloud_autonomous_vm_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2558,7 +2628,8 @@ module Aws::Odb
     class ListCloudExadataInfrastructuresInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2571,7 +2642,8 @@ module Aws::Odb
     class ListCloudExadataInfrastructuresOutput < Struct.new(
       :next_token,
       :cloud_exadata_infrastructures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2588,7 +2660,8 @@ module Aws::Odb
       :max_results,
       :next_token,
       :cloud_exadata_infrastructure_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2601,7 +2674,8 @@ module Aws::Odb
     class ListCloudVmClustersOutput < Struct.new(
       :next_token,
       :cloud_vm_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2618,7 +2692,8 @@ module Aws::Odb
       :max_results,
       :next_token,
       :cloud_vm_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2631,7 +2706,8 @@ module Aws::Odb
     class ListDbNodesOutput < Struct.new(
       :next_token,
       :db_nodes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2648,7 +2724,8 @@ module Aws::Odb
       :cloud_exadata_infrastructure_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2661,7 +2738,8 @@ module Aws::Odb
     class ListDbServersOutput < Struct.new(
       :next_token,
       :db_servers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2682,7 +2760,8 @@ module Aws::Odb
       :next_token,
       :availability_zone,
       :availability_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2695,7 +2774,8 @@ module Aws::Odb
     class ListDbSystemShapesOutput < Struct.new(
       :next_token,
       :db_system_shapes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2712,7 +2792,8 @@ module Aws::Odb
       :max_results,
       :next_token,
       :shape,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2725,7 +2806,8 @@ module Aws::Odb
     class ListGiVersionsOutput < Struct.new(
       :next_token,
       :gi_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2738,7 +2820,8 @@ module Aws::Odb
     class ListOdbNetworksInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2751,7 +2834,8 @@ module Aws::Odb
     class ListOdbNetworksOutput < Struct.new(
       :next_token,
       :odb_networks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2768,7 +2852,8 @@ module Aws::Odb
       :max_results,
       :next_token,
       :odb_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2781,7 +2866,8 @@ module Aws::Odb
     class ListOdbPeeringConnectionsOutput < Struct.new(
       :next_token,
       :odb_peering_connections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2802,7 +2888,8 @@ module Aws::Odb
       :next_token,
       :gi_version,
       :shape,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2815,7 +2902,8 @@ module Aws::Odb
     class ListSystemVersionsOutput < Struct.new(
       :next_token,
       :system_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2824,7 +2912,8 @@ module Aws::Odb
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2833,7 +2922,8 @@ module Aws::Odb
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2879,7 +2969,8 @@ module Aws::Odb
       :preference,
       :skip_ru,
       :weeks_of_month,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2893,7 +2984,8 @@ module Aws::Odb
     class ManagedS3BackupAccess < Struct.new(
       :status,
       :ipv4_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2927,7 +3019,8 @@ module Aws::Odb
       :managed_s3_backup_access,
       :zero_etl_access,
       :s3_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2937,7 +3030,8 @@ module Aws::Odb
     #   @return [String]
     class Month < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2951,7 +3045,8 @@ module Aws::Odb
     class OciDnsForwardingConfig < Struct.new(
       :domain_name,
       :oci_dns_listener_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3041,7 +3136,8 @@ module Aws::Odb
       :created_at,
       :percent_progress,
       :managed_services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3131,7 +3227,8 @@ module Aws::Odb
       :created_at,
       :percent_progress,
       :managed_services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3177,7 +3274,8 @@ module Aws::Odb
       :odb_peering_connection_type,
       :created_at,
       :percent_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3223,7 +3321,8 @@ module Aws::Odb
       :odb_peering_connection_type,
       :created_at,
       :percent_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3236,7 +3335,8 @@ module Aws::Odb
     class RebootDbNodeInput < Struct.new(
       :cloud_vm_cluster_id,
       :db_node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3253,7 +3353,8 @@ module Aws::Odb
       :db_node_id,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3270,7 +3371,8 @@ module Aws::Odb
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3292,7 +3394,8 @@ module Aws::Odb
       :ipv4_addresses,
       :domain_name,
       :s3_policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3306,7 +3409,8 @@ module Aws::Odb
     class ServiceNetworkEndpoint < Struct.new(
       :vpc_endpoint_id,
       :vpc_endpoint_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3327,7 +3431,8 @@ module Aws::Odb
       :resource_id,
       :resource_type,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3340,7 +3445,8 @@ module Aws::Odb
     class StartDbNodeInput < Struct.new(
       :cloud_vm_cluster_id,
       :db_node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3357,7 +3463,8 @@ module Aws::Odb
       :db_node_id,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3370,7 +3477,8 @@ module Aws::Odb
     class StopDbNodeInput < Struct.new(
       :cloud_vm_cluster_id,
       :db_node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3387,7 +3495,8 @@ module Aws::Odb
       :db_node_id,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3405,7 +3514,8 @@ module Aws::Odb
       :gi_version,
       :shape,
       :system_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3418,12 +3528,14 @@ module Aws::Odb
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3436,7 +3548,8 @@ module Aws::Odb
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3449,12 +3562,14 @@ module Aws::Odb
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3467,7 +3582,8 @@ module Aws::Odb
     class UpdateCloudExadataInfrastructureInput < Struct.new(
       :cloud_exadata_infrastructure_id,
       :maintenance_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3488,7 +3604,8 @@ module Aws::Odb
       :status,
       :status_reason,
       :cloud_exadata_infrastructure_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3521,7 +3638,8 @@ module Aws::Odb
       :s3_access,
       :zero_etl_access,
       :s3_policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3542,7 +3660,8 @@ module Aws::Odb
       :status,
       :status_reason,
       :odb_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3559,7 +3678,8 @@ module Aws::Odb
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3573,7 +3693,8 @@ module Aws::Odb
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3587,7 +3708,8 @@ module Aws::Odb
     class ZeroEtlAccess < Struct.new(
       :status,
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

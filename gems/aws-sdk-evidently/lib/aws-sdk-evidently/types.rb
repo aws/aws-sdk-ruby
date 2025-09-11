@@ -11,7 +11,8 @@ module Aws::Evidently
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::Evidently
     class BatchEvaluateFeatureInput < Struct.new(
       :project,
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +36,8 @@ module Aws::Evidently
     #   @return [Array<Types::EvaluationResult>]
     class BatchEvaluateFeatureOutput < Struct.new(
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +49,8 @@ module Aws::Evidently
     #   @return [String]
     class CloudWatchLogsDestination < Struct.new(
       :log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +62,8 @@ module Aws::Evidently
     #   @return [String]
     class CloudWatchLogsDestinationConfig < Struct.new(
       :log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +80,8 @@ module Aws::Evidently
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +142,8 @@ module Aws::Evidently
       :online_ab_config,
       :segment,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +153,8 @@ module Aws::Evidently
     #   @return [Types::Experiment]
     class CreateExperimentOutput < Struct.new(
       :experiment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +209,8 @@ module Aws::Evidently
       :default_variation,
       :tags,
       :entity_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,7 +219,8 @@ module Aws::Evidently
     #   @return [Types::Feature]
     class CreateFeatureOutput < Struct.new(
       :feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +268,8 @@ module Aws::Evidently
       :groups,
       :randomization_salt,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +278,8 @@ module Aws::Evidently
     #   @return [Types::Launch]
     class CreateLaunchOutput < Struct.new(
       :launch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +323,8 @@ module Aws::Evidently
       :data_delivery,
       :app_config_resource,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +333,8 @@ module Aws::Evidently
     #   @return [Types::Project]
     class CreateProjectOutput < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -349,7 +363,8 @@ module Aws::Evidently
       :pattern,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +373,8 @@ module Aws::Evidently
     #   @return [Types::Segment]
     class CreateSegmentOutput < Struct.new(
       :segment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,12 +387,14 @@ module Aws::Evidently
     class DeleteExperimentInput < Struct.new(
       :project,
       :experiment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteExperimentOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,12 +407,14 @@ module Aws::Evidently
     class DeleteFeatureInput < Struct.new(
       :project,
       :feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFeatureOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,12 +427,14 @@ module Aws::Evidently
     class DeleteLaunchInput < Struct.new(
       :project,
       :launch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLaunchOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -421,12 +443,14 @@ module Aws::Evidently
     #   @return [String]
     class DeleteProjectInput < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,12 +459,14 @@ module Aws::Evidently
     #   @return [String]
     class DeleteSegmentInput < Struct.new(
       :segment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSegmentOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +494,8 @@ module Aws::Evidently
       :feature,
       :entity_id,
       :evaluation_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +521,8 @@ module Aws::Evidently
       :value,
       :reason,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +543,8 @@ module Aws::Evidently
       :feature,
       :entity_id,
       :evaluation_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +583,8 @@ module Aws::Evidently
       :entity_id,
       :reason,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -570,7 +600,8 @@ module Aws::Evidently
     class EvaluationRule < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -593,7 +624,8 @@ module Aws::Evidently
       :timestamp,
       :type,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -681,7 +713,8 @@ module Aws::Evidently
       :type,
       :online_ab_definition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -700,7 +733,8 @@ module Aws::Evidently
     class ExperimentExecution < Struct.new(
       :started_time,
       :ended_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -722,7 +756,8 @@ module Aws::Evidently
       :treatment_name,
       :report_name,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +780,8 @@ module Aws::Evidently
       :treatment_name,
       :result_stat,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +791,8 @@ module Aws::Evidently
     #   @return [Time]
     class ExperimentSchedule < Struct.new(
       :analysis_complete_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +868,8 @@ module Aws::Evidently
       :evaluation_rules,
       :tags,
       :entity_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +919,8 @@ module Aws::Evidently
       :evaluation_rules,
       :default_variation,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +933,8 @@ module Aws::Evidently
     class GetExperimentInput < Struct.new(
       :project,
       :experiment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +943,8 @@ module Aws::Evidently
     #   @return [Types::Experiment]
     class GetExperimentOutput < Struct.new(
       :experiment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -979,7 +1020,8 @@ module Aws::Evidently
       :result_stats,
       :report_names,
       :period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1044,8 @@ module Aws::Evidently
       :reports,
       :timestamps,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1015,7 +1058,8 @@ module Aws::Evidently
     class GetFeatureInput < Struct.new(
       :project,
       :feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1024,7 +1068,8 @@ module Aws::Evidently
     #   @return [Types::Feature]
     class GetFeatureOutput < Struct.new(
       :feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1082,8 @@ module Aws::Evidently
     class GetLaunchInput < Struct.new(
       :project,
       :launch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1046,7 +1092,8 @@ module Aws::Evidently
     #   @return [Types::Launch]
     class GetLaunchOutput < Struct.new(
       :launch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1055,7 +1102,8 @@ module Aws::Evidently
     #   @return [String]
     class GetProjectInput < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1112,8 @@ module Aws::Evidently
     #   @return [Types::Project]
     class GetProjectOutput < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1122,8 @@ module Aws::Evidently
     #   @return [String]
     class GetSegmentInput < Struct.new(
       :segment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1132,8 @@ module Aws::Evidently
     #   @return [Types::Segment]
     class GetSegmentOutput < Struct.new(
       :segment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1091,7 +1142,8 @@ module Aws::Evidently
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1161,7 +1213,8 @@ module Aws::Evidently
       :type,
       :scheduled_splits_definition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,7 +1228,8 @@ module Aws::Evidently
     class LaunchExecution < Struct.new(
       :started_time,
       :ended_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1194,7 +1248,8 @@ module Aws::Evidently
       :name,
       :description,
       :feature_variations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1217,7 +1272,8 @@ module Aws::Evidently
       :description,
       :feature,
       :variation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1295,8 @@ module Aws::Evidently
       :max_results,
       :next_token,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1254,7 +1311,8 @@ module Aws::Evidently
     class ListExperimentsOutput < Struct.new(
       :experiments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1272,7 +1330,8 @@ module Aws::Evidently
       :project,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1287,7 +1346,8 @@ module Aws::Evidently
     class ListFeaturesOutput < Struct.new(
       :features,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1369,8 @@ module Aws::Evidently
       :max_results,
       :next_token,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,7 +1385,8 @@ module Aws::Evidently
     class ListLaunchesOutput < Struct.new(
       :launches,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1338,7 +1400,8 @@ module Aws::Evidently
     class ListProjectsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1352,7 +1415,8 @@ module Aws::Evidently
     class ListProjectsOutput < Struct.new(
       :projects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1438,8 @@ module Aws::Evidently
       :max_results,
       :next_token,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1454,8 @@ module Aws::Evidently
     class ListSegmentReferencesOutput < Struct.new(
       :referenced_by,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1403,7 +1469,8 @@ module Aws::Evidently
     class ListSegmentsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1417,7 +1484,8 @@ module Aws::Evidently
     class ListSegmentsOutput < Struct.new(
       :segments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,7 +1494,8 @@ module Aws::Evidently
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1504,8 @@ module Aws::Evidently
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1535,8 @@ module Aws::Evidently
       :value_key,
       :event_pattern,
       :unit_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1566,8 @@ module Aws::Evidently
       :value_key,
       :event_pattern,
       :unit_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1515,7 +1587,8 @@ module Aws::Evidently
     class MetricGoal < Struct.new(
       :metric_definition,
       :desired_change,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,7 +1608,8 @@ module Aws::Evidently
     class MetricGoalConfig < Struct.new(
       :metric_definition,
       :desired_change,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1545,7 +1619,8 @@ module Aws::Evidently
     #   @return [Types::MetricDefinition]
     class MetricMonitor < Struct.new(
       :metric_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1630,8 @@ module Aws::Evidently
     #   @return [Types::MetricDefinitionConfig]
     class MetricMonitorConfig < Struct.new(
       :metric_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1574,7 +1650,8 @@ module Aws::Evidently
     class OnlineAbConfig < Struct.new(
       :control_treatment_name,
       :treatment_weights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1593,7 +1670,8 @@ module Aws::Evidently
     class OnlineAbDefinition < Struct.new(
       :control_treatment_name,
       :treatment_weights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,7 +1738,8 @@ module Aws::Evidently
       :data_delivery,
       :app_config_resource,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1759,8 @@ module Aws::Evidently
       :application_id,
       :environment_id,
       :configuration_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1701,7 +1781,8 @@ module Aws::Evidently
     class ProjectAppConfigResourceConfig < Struct.new(
       :application_id,
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1799,8 @@ module Aws::Evidently
     class ProjectDataDelivery < Struct.new(
       :s3_destination,
       :cloud_watch_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1735,7 +1817,8 @@ module Aws::Evidently
     class ProjectDataDeliveryConfig < Struct.new(
       :s3_destination,
       :cloud_watch_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1789,7 +1872,8 @@ module Aws::Evidently
       :experiment_count,
       :active_experiment_count,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1803,7 +1887,8 @@ module Aws::Evidently
     class PutProjectEventsInput < Struct.new(
       :project,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1817,7 +1902,8 @@ module Aws::Evidently
     class PutProjectEventsOutput < Struct.new(
       :failed_event_count,
       :event_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1837,7 +1923,8 @@ module Aws::Evidently
       :event_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1872,7 +1959,8 @@ module Aws::Evidently
       :start_time,
       :end_time,
       :last_updated_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1889,7 +1977,8 @@ module Aws::Evidently
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1904,7 +1993,8 @@ module Aws::Evidently
     class S3Destination < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1919,7 +2009,8 @@ module Aws::Evidently
     class S3DestinationConfig < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1951,7 +2042,8 @@ module Aws::Evidently
       :start_time,
       :group_weights,
       :segment_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2075,8 @@ module Aws::Evidently
       :start_time,
       :group_weights,
       :segment_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1996,7 +2089,8 @@ module Aws::Evidently
     #   @return [Array<Types::ScheduledSplitConfig>]
     class ScheduledSplitsLaunchConfig < Struct.new(
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2009,7 +2103,8 @@ module Aws::Evidently
     #   @return [Array<Types::ScheduledSplit>]
     class ScheduledSplitsLaunchDefinition < Struct.new(
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2057,7 +2152,8 @@ module Aws::Evidently
       :experiment_count,
       :launch_count,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2080,7 +2176,8 @@ module Aws::Evidently
       :segment,
       :evaluation_order,
       :weights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2105,7 +2202,8 @@ module Aws::Evidently
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2114,7 +2212,8 @@ module Aws::Evidently
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2132,7 +2231,8 @@ module Aws::Evidently
       :project,
       :experiment,
       :analysis_complete_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2141,7 +2241,8 @@ module Aws::Evidently
     #   @return [Time]
     class StartExperimentOutput < Struct.new(
       :started_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2154,7 +2255,8 @@ module Aws::Evidently
     class StartLaunchInput < Struct.new(
       :project,
       :launch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2163,7 +2265,8 @@ module Aws::Evidently
     #   @return [Types::Launch]
     class StartLaunchOutput < Struct.new(
       :launch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2185,7 +2288,8 @@ module Aws::Evidently
       :experiment,
       :desired_state,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2298,8 @@ module Aws::Evidently
     #   @return [Time]
     class StopExperimentOutput < Struct.new(
       :ended_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2216,7 +2321,8 @@ module Aws::Evidently
       :launch,
       :desired_state,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2225,7 +2331,8 @@ module Aws::Evidently
     #   @return [Time]
     class StopLaunchOutput < Struct.new(
       :ended_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2238,12 +2345,14 @@ module Aws::Evidently
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2256,7 +2365,8 @@ module Aws::Evidently
     class TestSegmentPatternInput < Struct.new(
       :pattern,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2265,7 +2375,8 @@ module Aws::Evidently
     #   @return [Boolean]
     class TestSegmentPatternOutput < Struct.new(
       :match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2282,7 +2393,8 @@ module Aws::Evidently
       :message,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,7 +2414,8 @@ module Aws::Evidently
       :name,
       :description,
       :feature_variations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2325,7 +2438,8 @@ module Aws::Evidently
       :description,
       :feature,
       :variation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2338,12 +2452,14 @@ module Aws::Evidently
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2401,7 +2517,8 @@ module Aws::Evidently
       :segment,
       :remove_segment,
       :online_ab_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2411,7 +2528,8 @@ module Aws::Evidently
     #   @return [Types::Experiment]
     class UpdateExperimentOutput < Struct.new(
       :experiment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,7 +2581,8 @@ module Aws::Evidently
       :remove_variations,
       :default_variation,
       :entity_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2472,7 +2591,8 @@ module Aws::Evidently
     #   @return [Types::Feature]
     class UpdateFeatureOutput < Struct.new(
       :feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2631,8 @@ module Aws::Evidently
       :metric_monitors,
       :randomization_salt,
       :scheduled_splits_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2520,7 +2641,8 @@ module Aws::Evidently
     #   @return [Types::Launch]
     class UpdateLaunchOutput < Struct.new(
       :launch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2538,7 +2660,8 @@ module Aws::Evidently
       :project,
       :s3_destination,
       :cloud_watch_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2547,7 +2670,8 @@ module Aws::Evidently
     #   @return [Types::Project]
     class UpdateProjectDataDeliveryOutput < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2570,7 +2694,8 @@ module Aws::Evidently
       :project,
       :app_config_resource,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2579,7 +2704,8 @@ module Aws::Evidently
     #   @return [Types::Project]
     class UpdateProjectOutput < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2596,7 +2722,8 @@ module Aws::Evidently
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2610,7 +2737,8 @@ module Aws::Evidently
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2639,7 +2767,8 @@ module Aws::Evidently
       :long_value,
       :double_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class BoolValue < VariableValue; end
@@ -2659,7 +2788,8 @@ module Aws::Evidently
     class Variation < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2673,7 +2803,8 @@ module Aws::Evidently
     class VariationConfig < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

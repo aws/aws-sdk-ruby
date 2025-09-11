@@ -12,7 +12,8 @@ module Aws::Location
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::Location
     #   @return [String]
     class ApiKeyFilter < Struct.new(
       :key_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +220,8 @@ module Aws::Location
       :allow_actions,
       :allow_resources,
       :allow_referers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,12 +242,14 @@ module Aws::Location
     class AssociateTrackerConsumerInput < Struct.new(
       :tracker_name,
       :consumer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateTrackerConsumerOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +263,8 @@ module Aws::Location
     class BatchDeleteDevicePositionHistoryError < Struct.new(
       :device_id,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +284,8 @@ module Aws::Location
     class BatchDeleteDevicePositionHistoryInput < Struct.new(
       :tracker_name,
       :device_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +294,8 @@ module Aws::Location
     #   @return [Array<Types::BatchDeleteDevicePositionHistoryError>]
     class BatchDeleteDevicePositionHistoryOutput < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +310,8 @@ module Aws::Location
     class BatchDeleteGeofenceError < Struct.new(
       :geofence_id,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,7 +324,8 @@ module Aws::Location
     class BatchDeleteGeofenceInput < Struct.new(
       :collection_name,
       :geofence_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +334,8 @@ module Aws::Location
     #   @return [Array<Types::BatchDeleteGeofenceError>]
     class BatchDeleteGeofenceOutput < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +356,8 @@ module Aws::Location
       :device_id,
       :sample_time,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +372,8 @@ module Aws::Location
     class BatchEvaluateGeofencesInput < Struct.new(
       :collection_name,
       :device_position_updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -370,7 +383,8 @@ module Aws::Location
     #   @return [Array<Types::BatchEvaluateGeofencesError>]
     class BatchEvaluateGeofencesOutput < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +398,8 @@ module Aws::Location
     class BatchGetDevicePositionError < Struct.new(
       :device_id,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -404,7 +419,8 @@ module Aws::Location
     class BatchGetDevicePositionInput < Struct.new(
       :tracker_name,
       :device_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +435,8 @@ module Aws::Location
     class BatchGetDevicePositionOutput < Struct.new(
       :errors,
       :device_positions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -433,7 +450,8 @@ module Aws::Location
     class BatchItemError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +466,8 @@ module Aws::Location
     class BatchPutGeofenceError < Struct.new(
       :geofence_id,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +480,8 @@ module Aws::Location
     class BatchPutGeofenceInput < Struct.new(
       :collection_name,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +495,8 @@ module Aws::Location
     class BatchPutGeofenceOutput < Struct.new(
       :successes,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +527,8 @@ module Aws::Location
       :geofence_id,
       :geometry,
       :geofence_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +551,8 @@ module Aws::Location
       :geofence_id,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -549,7 +572,8 @@ module Aws::Location
       :device_id,
       :sample_time,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,7 +586,8 @@ module Aws::Location
     class BatchUpdateDevicePositionInput < Struct.new(
       :tracker_name,
       :updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +596,8 @@ module Aws::Location
     #   @return [Array<Types::BatchUpdateDevicePositionError>]
     class BatchUpdateDevicePositionOutput < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +620,8 @@ module Aws::Location
     class CalculateRouteCarModeOptions < Struct.new(
       :avoid_ferries,
       :avoid_tolls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +792,8 @@ module Aws::Location
       :arrival_time,
       :optimize_for,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -897,7 +925,8 @@ module Aws::Location
       :car_mode_options,
       :truck_mode_options,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +958,8 @@ module Aws::Location
       :snapped_departure_positions,
       :snapped_destination_positions,
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,7 +1004,8 @@ module Aws::Location
       :route_count,
       :error_count,
       :distance_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1049,8 @@ module Aws::Location
     class CalculateRouteOutput < Struct.new(
       :legs,
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1126,8 @@ module Aws::Location
       :distance,
       :duration_seconds,
       :distance_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1161,8 @@ module Aws::Location
       :avoid_tolls,
       :dimensions,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1172,8 @@ module Aws::Location
     #   @return [Array<Types::LteCellDetails>]
     class CellSignals < Struct.new(
       :lte_cell_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1190,8 @@ module Aws::Location
     class Circle < Struct.new(
       :center,
       :radius,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1200,8 @@ module Aws::Location
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1276,8 @@ module Aws::Location
       :description,
       :tags,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1266,7 +1304,8 @@ module Aws::Location
       :collection_name,
       :collection_arn,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1336,7 +1375,8 @@ module Aws::Location
       :expire_time,
       :no_expiry,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1407,8 @@ module Aws::Location
       :key_arn,
       :key_name,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1476,8 @@ module Aws::Location
       :pricing_plan,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1461,7 +1503,8 @@ module Aws::Location
       :map_name,
       :map_arn,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1561,7 +1604,8 @@ module Aws::Location
       :description,
       :data_source_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1631,8 @@ module Aws::Location
       :index_name,
       :index_arn,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1687,7 +1732,8 @@ module Aws::Location
       :pricing_plan,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1724,7 +1770,8 @@ module Aws::Location
       :calculator_name,
       :calculator_arn,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1855,7 +1902,8 @@ module Aws::Location
       :position_filtering,
       :event_bridge_enabled,
       :kms_key_enable_geospatial_queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1881,7 +1929,8 @@ module Aws::Location
       :tracker_name,
       :tracker_arn,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1922,7 +1971,8 @@ module Aws::Location
     #   @return [String]
     class DataSourceConfiguration < Struct.new(
       :intended_use,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1931,12 +1981,14 @@ module Aws::Location
     #   @return [String]
     class DeleteGeofenceCollectionInput < Struct.new(
       :collection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGeofenceCollectionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1954,12 +2006,14 @@ module Aws::Location
     class DeleteKeyInput < Struct.new(
       :key_name,
       :force_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKeyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1968,12 +2022,14 @@ module Aws::Location
     #   @return [String]
     class DeleteMapInput < Struct.new(
       :map_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMapOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1982,12 +2038,14 @@ module Aws::Location
     #   @return [String]
     class DeletePlaceIndexInput < Struct.new(
       :index_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePlaceIndexOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1996,12 +2054,14 @@ module Aws::Location
     #   @return [String]
     class DeleteRouteCalculatorInput < Struct.new(
       :calculator_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRouteCalculatorOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2010,12 +2070,14 @@ module Aws::Location
     #   @return [String]
     class DeleteTrackerInput < Struct.new(
       :tracker_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTrackerOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2024,7 +2086,8 @@ module Aws::Location
     #   @return [String]
     class DescribeGeofenceCollectionInput < Struct.new(
       :collection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2088,7 +2151,8 @@ module Aws::Location
       :create_time,
       :update_time,
       :geofence_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2097,7 +2161,8 @@ module Aws::Location
     #   @return [String]
     class DescribeKeyInput < Struct.new(
       :key_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2150,7 +2215,8 @@ module Aws::Location
       :update_time,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2159,7 +2225,8 @@ module Aws::Location
     #   @return [String]
     class DescribeMapInput < Struct.new(
       :map_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2213,7 +2280,8 @@ module Aws::Location
       :tags,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2222,7 +2290,8 @@ module Aws::Location
     #   @return [String]
     class DescribePlaceIndexInput < Struct.new(
       :index_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2294,7 +2363,8 @@ module Aws::Location
       :data_source,
       :data_source_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2303,7 +2373,8 @@ module Aws::Location
     #   @return [String]
     class DescribeRouteCalculatorInput < Struct.new(
       :calculator_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2384,7 +2455,8 @@ module Aws::Location
       :update_time,
       :data_source,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2393,7 +2465,8 @@ module Aws::Location
     #   @return [String]
     class DescribeTrackerInput < Struct.new(
       :tracker_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2472,7 +2545,8 @@ module Aws::Location
       :position_filtering,
       :event_bridge_enabled,
       :kms_key_enable_geospatial_queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2504,7 +2578,8 @@ module Aws::Location
       :position,
       :accuracy,
       :position_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2537,7 +2612,8 @@ module Aws::Location
       :position,
       :accuracy,
       :position_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2572,7 +2648,8 @@ module Aws::Location
       :ipv4_address,
       :wi_fi_access_points,
       :cell_signals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2593,12 +2670,14 @@ module Aws::Location
     class DisassociateTrackerConsumerInput < Struct.new(
       :tracker_name,
       :consumer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateTrackerConsumerOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2612,7 +2691,8 @@ module Aws::Location
     class ForecastGeofenceEventsDeviceState < Struct.new(
       :position,
       :speed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2667,7 +2747,8 @@ module Aws::Location
       :speed_unit,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2689,7 +2770,8 @@ module Aws::Location
       :next_token,
       :distance_unit,
       :speed_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2736,7 +2818,8 @@ module Aws::Location
       :event_type,
       :forecasted_breach_time,
       :geofence_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2861,7 +2944,8 @@ module Aws::Location
       :circle,
       :geobuf,
       :multi_polygon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2913,7 +2997,8 @@ module Aws::Location
       :start_time_inclusive,
       :end_time_exclusive,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2927,7 +3012,8 @@ module Aws::Location
     class GetDevicePositionHistoryOutput < Struct.new(
       :device_positions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2940,7 +3026,8 @@ module Aws::Location
     class GetDevicePositionInput < Struct.new(
       :tracker_name,
       :device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2971,7 +3058,8 @@ module Aws::Location
       :position,
       :accuracy,
       :position_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2984,7 +3072,8 @@ module Aws::Location
     class GetGeofenceInput < Struct.new(
       :collection_name,
       :geofence_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3046,7 +3135,8 @@ module Aws::Location
       :create_time,
       :update_time,
       :geofence_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3155,7 +3245,8 @@ module Aws::Location
       :font_stack,
       :font_unicode_range,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3173,7 +3264,8 @@ module Aws::Location
       :blob,
       :content_type,
       :cache_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3214,7 +3306,8 @@ module Aws::Location
       :map_name,
       :file_name,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3233,7 +3326,8 @@ module Aws::Location
       :blob,
       :content_type,
       :cache_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3247,7 +3341,8 @@ module Aws::Location
     class GetMapStyleDescriptorInput < Struct.new(
       :map_name,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3266,7 +3361,8 @@ module Aws::Location
       :blob,
       :content_type,
       :cache_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3292,7 +3388,8 @@ module Aws::Location
       :x,
       :y,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3310,7 +3407,8 @@ module Aws::Location
       :blob,
       :content_type,
       :cache_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3345,7 +3443,8 @@ module Aws::Location
       :place_id,
       :language,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3354,7 +3453,8 @@ module Aws::Location
     #   @return [Types::Place]
     class GetPlaceOutput < Struct.new(
       :place,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3376,7 +3476,8 @@ module Aws::Location
       :accuracy,
       :deviation_distance,
       :proxy_detected,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3385,7 +3486,8 @@ module Aws::Location
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3461,7 +3563,8 @@ module Aws::Location
       :duration_seconds,
       :geometry,
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3481,7 +3584,8 @@ module Aws::Location
     #   @return [Array<Array<Float>>]
     class LegGeometry < Struct.new(
       :line_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3507,7 +3611,8 @@ module Aws::Location
       :max_results,
       :next_token,
       :filter_geometry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3521,7 +3626,8 @@ module Aws::Location
     class ListDevicePositionsOutput < Struct.new(
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3548,7 +3654,8 @@ module Aws::Location
       :position,
       :accuracy,
       :position_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3566,7 +3673,8 @@ module Aws::Location
     class ListGeofenceCollectionsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3580,7 +3688,8 @@ module Aws::Location
     class ListGeofenceCollectionsOutput < Struct.new(
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3624,7 +3733,8 @@ module Aws::Location
       :pricing_plan_data_source,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3691,7 +3801,8 @@ module Aws::Location
       :create_time,
       :update_time,
       :geofence_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3713,7 +3824,8 @@ module Aws::Location
       :collection_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3727,7 +3839,8 @@ module Aws::Location
     class ListGeofencesOutput < Struct.new(
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3750,7 +3863,8 @@ module Aws::Location
       :max_results,
       :next_token,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3765,7 +3879,8 @@ module Aws::Location
     class ListKeysOutput < Struct.new(
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3799,7 +3914,8 @@ module Aws::Location
       :restrictions,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3817,7 +3933,8 @@ module Aws::Location
     class ListMapsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3830,7 +3947,8 @@ module Aws::Location
     class ListMapsOutput < Struct.new(
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3865,7 +3983,8 @@ module Aws::Location
       :pricing_plan,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3883,7 +4002,8 @@ module Aws::Location
     class ListPlaceIndexesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3897,7 +4017,8 @@ module Aws::Location
     class ListPlaceIndexesOutput < Struct.new(
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3950,7 +4071,8 @@ module Aws::Location
       :pricing_plan,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3968,7 +4090,8 @@ module Aws::Location
     class ListRouteCalculatorsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3982,7 +4105,8 @@ module Aws::Location
     class ListRouteCalculatorsOutput < Struct.new(
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4048,7 +4172,8 @@ module Aws::Location
       :pricing_plan,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4064,7 +4189,8 @@ module Aws::Location
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4080,7 +4206,8 @@ module Aws::Location
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4102,7 +4229,8 @@ module Aws::Location
       :tracker_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4116,7 +4244,8 @@ module Aws::Location
     class ListTrackerConsumersOutput < Struct.new(
       :consumer_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4134,7 +4263,8 @@ module Aws::Location
     class ListTrackersInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4149,7 +4279,8 @@ module Aws::Location
     class ListTrackersOutput < Struct.new(
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4187,7 +4318,8 @@ module Aws::Location
       :pricing_plan_data_source,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4233,7 +4365,8 @@ module Aws::Location
       :rsrp,
       :rsrq,
       :tac,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4252,7 +4385,8 @@ module Aws::Location
     class LteLocalId < Struct.new(
       :earfcn,
       :pci,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4284,7 +4418,8 @@ module Aws::Location
       :pci,
       :rsrp,
       :rsrq,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4461,7 +4596,8 @@ module Aws::Location
       :style,
       :political_view,
       :custom_layers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4487,7 +4623,8 @@ module Aws::Location
     class MapConfigurationUpdate < Struct.new(
       :political_view,
       :custom_layers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4597,7 +4734,8 @@ module Aws::Location
       :categories,
       :supplemental_categories,
       :sub_municipality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4618,7 +4756,8 @@ module Aws::Location
     #   @return [Array<Float>]
     class PlaceGeometry < Struct.new(
       :point,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4629,7 +4768,8 @@ module Aws::Location
     #   @return [Float]
     class PositionalAccuracy < Struct.new(
       :horizontal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4663,7 +4803,8 @@ module Aws::Location
       :geofence_id,
       :geometry,
       :geofence_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4684,7 +4825,8 @@ module Aws::Location
       :geofence_id,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4693,7 +4835,8 @@ module Aws::Location
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4713,7 +4856,8 @@ module Aws::Location
       :distance,
       :duration_seconds,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4773,7 +4917,8 @@ module Aws::Location
     class RouteMatrixEntryError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4802,7 +4947,8 @@ module Aws::Location
       :place,
       :distance,
       :place_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4838,7 +4984,8 @@ module Aws::Location
       :place_id,
       :categories,
       :supplemental_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4875,7 +5022,8 @@ module Aws::Location
       :distance,
       :relevance,
       :place_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4921,7 +5069,8 @@ module Aws::Location
       :max_results,
       :language,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4937,7 +5086,8 @@ module Aws::Location
     class SearchPlaceIndexForPositionOutput < Struct.new(
       :summary,
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4977,7 +5127,8 @@ module Aws::Location
       :max_results,
       :data_source,
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5072,7 +5223,8 @@ module Aws::Location
       :language,
       :filter_categories,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5088,7 +5240,8 @@ module Aws::Location
     class SearchPlaceIndexForSuggestionsOutput < Struct.new(
       :summary,
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5149,7 +5302,8 @@ module Aws::Location
       :data_source,
       :language,
       :filter_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5244,7 +5398,8 @@ module Aws::Location
       :language,
       :filter_categories,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5264,7 +5419,8 @@ module Aws::Location
     class SearchPlaceIndexForTextOutput < Struct.new(
       :summary,
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5332,7 +5488,8 @@ module Aws::Location
       :data_source,
       :language,
       :filter_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5343,7 +5500,8 @@ module Aws::Location
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5379,7 +5537,8 @@ module Aws::Location
       :distance,
       :duration_seconds,
       :geometry_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5424,12 +5583,14 @@ module Aws::Location
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5438,7 +5599,8 @@ module Aws::Location
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5455,7 +5617,8 @@ module Aws::Location
     class TimeZone < Struct.new(
       :name,
       :offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5465,7 +5628,8 @@ module Aws::Location
     #   @return [Array<Array<Array<Float>>>]
     class TrackingFilterGeometry < Struct.new(
       :polygon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5521,7 +5685,8 @@ module Aws::Location
       :height,
       :width,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5544,7 +5709,8 @@ module Aws::Location
     class TruckWeight < Struct.new(
       :total,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5565,12 +5731,14 @@ module Aws::Location
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5598,7 +5766,8 @@ module Aws::Location
       :pricing_plan,
       :pricing_plan_data_source,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5625,7 +5794,8 @@ module Aws::Location
       :collection_name,
       :collection_arn,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5663,7 +5833,8 @@ module Aws::Location
       :no_expiry,
       :force_update,
       :restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5689,7 +5860,8 @@ module Aws::Location
       :key_arn,
       :key_name,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5715,7 +5887,8 @@ module Aws::Location
       :pricing_plan,
       :description,
       :configuration_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5740,7 +5913,8 @@ module Aws::Location
       :map_name,
       :map_arn,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5765,7 +5939,8 @@ module Aws::Location
       :pricing_plan,
       :description,
       :data_source_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5791,7 +5966,8 @@ module Aws::Location
       :index_name,
       :index_arn,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5812,7 +5988,8 @@ module Aws::Location
       :calculator_name,
       :pricing_plan,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5838,7 +6015,8 @@ module Aws::Location
       :calculator_name,
       :calculator_arn,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5915,7 +6093,8 @@ module Aws::Location
       :position_filtering,
       :event_bridge_enabled,
       :kms_key_enable_geospatial_queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5940,7 +6119,8 @@ module Aws::Location
       :tracker_name,
       :tracker_arn,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5957,7 +6137,8 @@ module Aws::Location
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5972,7 +6153,8 @@ module Aws::Location
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5991,7 +6173,8 @@ module Aws::Location
       :tracker_name,
       :device_state,
       :distance_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6018,7 +6201,8 @@ module Aws::Location
       :sample_time,
       :received_time,
       :distance_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6032,7 +6216,8 @@ module Aws::Location
     class WiFiAccessPoint < Struct.new(
       :mac_address,
       :rss,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

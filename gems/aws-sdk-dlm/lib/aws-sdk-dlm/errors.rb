@@ -37,7 +37,7 @@ module Aws::DLM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DLM::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::DLM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DLM::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::DLM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DLM::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::DLM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DLM::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

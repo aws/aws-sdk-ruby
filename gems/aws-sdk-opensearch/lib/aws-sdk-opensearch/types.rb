@@ -16,7 +16,8 @@ module Aws::OpenSearch
     class AIMLOptionsInput < Struct.new(
       :natural_language_query_generation_options,
       :s3_vectors_engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +31,8 @@ module Aws::OpenSearch
     class AIMLOptionsOutput < Struct.new(
       :natural_language_query_generation_options,
       :s3_vectors_engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +46,8 @@ module Aws::OpenSearch
     class AIMLOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +65,8 @@ module Aws::OpenSearch
       :owner_id,
       :domain_name,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +76,8 @@ module Aws::OpenSearch
     #   @return [String]
     class AcceptInboundConnectionRequest < Struct.new(
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +87,8 @@ module Aws::OpenSearch
     #   @return [Types::InboundConnection]
     class AcceptInboundConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,7 +98,8 @@ module Aws::OpenSearch
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +115,8 @@ module Aws::OpenSearch
     class AccessPoliciesStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +139,8 @@ module Aws::OpenSearch
       :name,
       :data_source_type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +150,8 @@ module Aws::OpenSearch
     #   @return [String]
     class AddDataSourceResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +186,8 @@ module Aws::OpenSearch
       :description,
       :open_search_arns,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +198,8 @@ module Aws::OpenSearch
     #   @return [String]
     class AddDirectQueryDataSourceResponse < Struct.new(
       :data_source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -203,7 +215,8 @@ module Aws::OpenSearch
     class AddTagsRequest < Struct.new(
       :arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +243,8 @@ module Aws::OpenSearch
     class AdditionalLimit < Struct.new(
       :limit_name,
       :limit_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +290,8 @@ module Aws::OpenSearch
     class AdvancedOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,7 +328,8 @@ module Aws::OpenSearch
       :iam_federation_options,
       :anonymous_auth_disable_date,
       :anonymous_auth_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +366,8 @@ module Aws::OpenSearch
       :jwt_options,
       :iam_federation_options,
       :anonymous_auth_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +381,8 @@ module Aws::OpenSearch
     class AdvancedSecurityOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +397,8 @@ module Aws::OpenSearch
     class AppConfig < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +434,8 @@ module Aws::OpenSearch
       :status,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +458,8 @@ module Aws::OpenSearch
       :domain_name,
       :prerequisite_package_id_list,
       :association_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +469,8 @@ module Aws::OpenSearch
     #   @return [Types::DomainPackageDetails]
     class AssociatePackageResponse < Struct.new(
       :domain_package_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +484,8 @@ module Aws::OpenSearch
     class AssociatePackagesRequest < Struct.new(
       :package_list,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +494,8 @@ module Aws::OpenSearch
     #   @return [Array<Types::DomainPackageDetails>]
     class AssociatePackagesResponse < Struct.new(
       :domain_package_details_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +512,8 @@ module Aws::OpenSearch
       :domain_name,
       :account,
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +523,8 @@ module Aws::OpenSearch
     #   @return [Types::AuthorizedPrincipal]
     class AuthorizeVpcEndpointAccessResponse < Struct.new(
       :authorized_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -513,7 +539,8 @@ module Aws::OpenSearch
     class AuthorizedPrincipal < Struct.new(
       :principal_type,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +555,8 @@ module Aws::OpenSearch
     class AutoTune < Struct.new(
       :auto_tune_type,
       :auto_tune_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +567,8 @@ module Aws::OpenSearch
     #   @return [Types::ScheduledAutoTuneDetails]
     class AutoTuneDetails < Struct.new(
       :scheduled_auto_tune_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -566,7 +595,8 @@ module Aws::OpenSearch
       :start_at,
       :duration,
       :cron_expression_for_recurrence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,7 +625,8 @@ module Aws::OpenSearch
       :rollback_on_disable,
       :maintenance_schedules,
       :use_off_peak_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +646,8 @@ module Aws::OpenSearch
       :desired_state,
       :maintenance_schedules,
       :use_off_peak_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +666,8 @@ module Aws::OpenSearch
       :state,
       :error_message,
       :use_off_peak_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -648,7 +681,8 @@ module Aws::OpenSearch
     class AutoTuneOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -679,7 +713,8 @@ module Aws::OpenSearch
       :state,
       :error_message,
       :pending_deletion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -728,7 +763,8 @@ module Aws::OpenSearch
       :available_data_node_count,
       :total_shards,
       :total_un_assigned_shards,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +774,8 @@ module Aws::OpenSearch
     #   @return [String]
     class BaseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +789,8 @@ module Aws::OpenSearch
     class CancelDomainConfigChangeRequest < Struct.new(
       :domain_name,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +807,8 @@ module Aws::OpenSearch
       :cancelled_change_ids,
       :cancelled_change_properties,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +819,8 @@ module Aws::OpenSearch
     #   @return [String]
     class CancelServiceSoftwareUpdateRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +831,8 @@ module Aws::OpenSearch
     #   @return [Types::ServiceSoftwareOptions]
     class CancelServiceSoftwareUpdateResponse < Struct.new(
       :service_software_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,7 +850,8 @@ module Aws::OpenSearch
       :property_name,
       :cancelled_value,
       :active_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -839,7 +881,8 @@ module Aws::OpenSearch
       :initiated_by,
       :start_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +904,8 @@ module Aws::OpenSearch
       :status,
       :description,
       :last_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +951,8 @@ module Aws::OpenSearch
       :last_updated_time,
       :config_change_status,
       :initiated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -928,7 +973,8 @@ module Aws::OpenSearch
     #   @return [String]
     class CloudWatchDirectQueryDataSource < Struct.new(
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1037,8 @@ module Aws::OpenSearch
       :cold_storage_options,
       :multi_az_with_standby_enabled,
       :node_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1052,8 @@ module Aws::OpenSearch
     class ClusterConfigStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1032,7 +1080,8 @@ module Aws::OpenSearch
       :user_pool_id,
       :identity_pool_id,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1046,7 +1095,8 @@ module Aws::OpenSearch
     class CognitoOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1058,7 +1108,8 @@ module Aws::OpenSearch
     #   @return [Boolean]
     class ColdStorageOptions < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1124,8 @@ module Aws::OpenSearch
     class CompatibleVersionsMap < Struct.new(
       :source_version,
       :target_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1083,7 +1135,8 @@ module Aws::OpenSearch
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1153,8 @@ module Aws::OpenSearch
     class ConnectionProperties < Struct.new(
       :endpoint,
       :cross_cluster_search,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1129,7 +1183,8 @@ module Aws::OpenSearch
       :iam_identity_center_options,
       :app_configs,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1168,7 +1223,8 @@ module Aws::OpenSearch
       :app_configs,
       :tag_list,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1305,7 +1361,8 @@ module Aws::OpenSearch
       :off_peak_window_options,
       :software_update_options,
       :aiml_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1316,7 +1373,8 @@ module Aws::OpenSearch
     #   @return [Types::DomainStatus]
     class CreateDomainResponse < Struct.new(
       :domain_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1342,7 +1400,8 @@ module Aws::OpenSearch
       :connection_alias,
       :connection_mode,
       :connection_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1378,7 +1437,8 @@ module Aws::OpenSearch
       :connection_id,
       :connection_mode,
       :connection_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1417,7 +1477,8 @@ module Aws::OpenSearch
       :engine_version,
       :package_vending_options,
       :package_encryption_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1427,7 +1488,8 @@ module Aws::OpenSearch
     #   @return [Types::PackageDetails]
     class CreatePackageResponse < Struct.new(
       :package_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1444,7 +1506,8 @@ module Aws::OpenSearch
       :domain_arn,
       :vpc_options,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1453,7 +1516,8 @@ module Aws::OpenSearch
     #   @return [Types::VpcEndpoint]
     class CreateVpcEndpointResponse < Struct.new(
       :vpc_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1529,8 @@ module Aws::OpenSearch
     #   @return [String]
     class CrossClusterSearchConnectionProperties < Struct.new(
       :skip_unavailable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1481,7 +1546,8 @@ module Aws::OpenSearch
     class DataSource < Struct.new(
       :data_source_arn,
       :data_source_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1569,8 @@ module Aws::OpenSearch
       :name,
       :description,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1514,7 +1581,8 @@ module Aws::OpenSearch
     class DataSourceType < Struct.new(
       :s3_glue_data_catalog,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3GlueDataCatalog < DataSourceType; end
@@ -1526,12 +1594,14 @@ module Aws::OpenSearch
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1546,7 +1616,8 @@ module Aws::OpenSearch
     class DeleteDataSourceRequest < Struct.new(
       :domain_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1556,7 +1627,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DeleteDataSourceResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1640,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DeleteDirectQueryDataSourceRequest < Struct.new(
       :data_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1578,7 +1651,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1663,8 @@ module Aws::OpenSearch
     #   @return [Types::DomainStatus]
     class DeleteDomainResponse < Struct.new(
       :domain_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1674,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DeleteInboundConnectionRequest < Struct.new(
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1610,7 +1686,8 @@ module Aws::OpenSearch
     #   @return [Types::InboundConnection]
     class DeleteInboundConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1620,7 +1697,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DeleteOutboundConnectionRequest < Struct.new(
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1630,7 +1708,8 @@ module Aws::OpenSearch
     #   @return [Types::OutboundConnection]
     class DeleteOutboundConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1641,7 +1720,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DeletePackageRequest < Struct.new(
       :package_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1731,8 @@ module Aws::OpenSearch
     #   @return [Types::PackageDetails]
     class DeletePackageResponse < Struct.new(
       :package_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,7 +1741,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DeleteVpcEndpointRequest < Struct.new(
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1752,8 @@ module Aws::OpenSearch
     #   @return [Types::VpcEndpointSummary]
     class DeleteVpcEndpointResponse < Struct.new(
       :vpc_endpoint_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1763,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DependencyFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1701,7 +1785,8 @@ module Aws::OpenSearch
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1717,7 +1802,8 @@ module Aws::OpenSearch
     class DescribeDomainAutoTunesResponse < Struct.new(
       :auto_tunes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1733,7 +1819,8 @@ module Aws::OpenSearch
     class DescribeDomainChangeProgressRequest < Struct.new(
       :domain_name,
       :change_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1744,7 +1831,8 @@ module Aws::OpenSearch
     #   @return [Types::ChangeProgressStatusDetails]
     class DescribeDomainChangeProgressResponse < Struct.new(
       :change_progress_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1754,7 +1842,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DescribeDomainConfigRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1853,8 @@ module Aws::OpenSearch
     #   @return [Types::DomainConfig]
     class DescribeDomainConfigResponse < Struct.new(
       :domain_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1774,7 +1864,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DescribeDomainHealthRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1871,7 +1962,8 @@ module Aws::OpenSearch
       :total_shards,
       :total_un_assigned_shards,
       :environment_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1882,7 +1974,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DescribeDomainNodesRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1893,7 +1986,8 @@ module Aws::OpenSearch
     #   @return [Array<Types::DomainNodesStatus>]
     class DescribeDomainNodesResponse < Struct.new(
       :domain_nodes_status_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +1997,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DescribeDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1913,7 +2008,8 @@ module Aws::OpenSearch
     #   @return [Types::DomainStatus]
     class DescribeDomainResponse < Struct.new(
       :domain_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1924,7 +2020,8 @@ module Aws::OpenSearch
     #   @return [Array<String>]
     class DescribeDomainsRequest < Struct.new(
       :domain_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1934,7 +2031,8 @@ module Aws::OpenSearch
     #   @return [Array<Types::DomainStatus>]
     class DescribeDomainsResponse < Struct.new(
       :domain_status_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1952,7 +2050,8 @@ module Aws::OpenSearch
       :domain_name,
       :dry_run_id,
       :load_dry_run_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1969,7 +2068,8 @@ module Aws::OpenSearch
       :dry_run_progress_status,
       :dry_run_config,
       :dry_run_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1991,7 +2091,8 @@ module Aws::OpenSearch
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2007,7 +2108,8 @@ module Aws::OpenSearch
     class DescribeInboundConnectionsResponse < Struct.new(
       :connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2026,7 +2128,8 @@ module Aws::OpenSearch
       :domain_name,
       :instance_type,
       :engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2038,7 +2141,8 @@ module Aws::OpenSearch
     #   @return [Hash<String, Types::Limits>]
     class DescribeInstanceTypeLimitsResponse < Struct.new(
       :limits_by_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2060,7 +2164,8 @@ module Aws::OpenSearch
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2076,7 +2181,8 @@ module Aws::OpenSearch
     class DescribeOutboundConnectionsResponse < Struct.new(
       :connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2090,7 +2196,8 @@ module Aws::OpenSearch
     class DescribePackagesFilter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2111,7 +2218,8 @@ module Aws::OpenSearch
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2127,7 +2235,8 @@ module Aws::OpenSearch
     class DescribePackagesResponse < Struct.new(
       :package_details_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2151,7 +2260,8 @@ module Aws::OpenSearch
       :reserved_instance_offering_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2167,7 +2277,8 @@ module Aws::OpenSearch
     class DescribeReservedInstanceOfferingsResponse < Struct.new(
       :next_token,
       :reserved_instance_offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2191,7 +2302,8 @@ module Aws::OpenSearch
       :reserved_instance_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2208,7 +2320,8 @@ module Aws::OpenSearch
     class DescribeReservedInstancesResponse < Struct.new(
       :next_token,
       :reserved_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2217,7 +2330,8 @@ module Aws::OpenSearch
     #   @return [Array<String>]
     class DescribeVpcEndpointsRequest < Struct.new(
       :vpc_endpoint_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2230,7 +2344,8 @@ module Aws::OpenSearch
     class DescribeVpcEndpointsResponse < Struct.new(
       :vpc_endpoints,
       :vpc_endpoint_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2273,7 +2388,8 @@ module Aws::OpenSearch
       :open_search_arns,
       :data_source_arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2295,7 +2411,8 @@ module Aws::OpenSearch
       :cloud_watch_log,
       :security_lake,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CloudWatchLog < DirectQueryDataSourceType; end
@@ -2309,7 +2426,8 @@ module Aws::OpenSearch
     #   @return [String]
     class DisabledOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2324,7 +2442,8 @@ module Aws::OpenSearch
     class DissociatePackageRequest < Struct.new(
       :package_id,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2334,7 +2453,8 @@ module Aws::OpenSearch
     #   @return [Types::DomainPackageDetails]
     class DissociatePackageResponse < Struct.new(
       :domain_package_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2348,7 +2468,8 @@ module Aws::OpenSearch
     class DissociatePackagesRequest < Struct.new(
       :package_list,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2357,7 +2478,8 @@ module Aws::OpenSearch
     #   @return [Array<Types::DomainPackageDetails>]
     class DissociatePackagesResponse < Struct.new(
       :domain_package_details_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2452,7 +2574,8 @@ module Aws::OpenSearch
       :software_update_options,
       :modifying_properties,
       :aiml_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2497,7 +2620,8 @@ module Aws::OpenSearch
       :custom_endpoint_enabled,
       :custom_endpoint,
       :custom_endpoint_certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2635,8 @@ module Aws::OpenSearch
     class DomainEndpointOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2526,7 +2651,8 @@ module Aws::OpenSearch
     class DomainInfo < Struct.new(
       :domain_name,
       :engine_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2536,7 +2662,8 @@ module Aws::OpenSearch
     #   @return [Types::AWSDomainInformation]
     class DomainInformationContainer < Struct.new(
       :aws_domain_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2574,7 +2701,8 @@ module Aws::OpenSearch
       :status_message,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2613,7 +2741,8 @@ module Aws::OpenSearch
       :storage_type,
       :storage_volume_type,
       :storage_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2794,8 @@ module Aws::OpenSearch
       :reference_path,
       :error_details,
       :association_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2838,7 +2968,8 @@ module Aws::OpenSearch
       :domain_processing_status,
       :modifying_properties,
       :aiml_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +2995,8 @@ module Aws::OpenSearch
       :creation_date,
       :update_date,
       :validation_failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2900,7 +3032,8 @@ module Aws::OpenSearch
     class DryRunResults < Struct.new(
       :deployment_type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2915,7 +3048,8 @@ module Aws::OpenSearch
     class Duration < Struct.new(
       :value,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2945,7 +3079,8 @@ module Aws::OpenSearch
       :volume_size,
       :iops,
       :throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2959,7 +3094,8 @@ module Aws::OpenSearch
     class EBSOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2976,7 +3112,8 @@ module Aws::OpenSearch
     class EncryptionAtRestOptions < Struct.new(
       :enabled,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2990,7 +3127,8 @@ module Aws::OpenSearch
     class EncryptionAtRestOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3000,7 +3138,8 @@ module Aws::OpenSearch
     #   @return [Array<Types::AvailabilityZoneInfo>]
     class EnvironmentInfo < Struct.new(
       :availability_zone_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3014,7 +3153,8 @@ module Aws::OpenSearch
     class ErrorDetails < Struct.new(
       :error_type,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3030,7 +3170,8 @@ module Aws::OpenSearch
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3039,7 +3180,8 @@ module Aws::OpenSearch
     #   @return [String]
     class GetApplicationRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3086,7 +3228,8 @@ module Aws::OpenSearch
       :app_configs,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3097,7 +3240,8 @@ module Aws::OpenSearch
     #   @return [String]
     class GetCompatibleVersionsRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3108,7 +3252,8 @@ module Aws::OpenSearch
     #   @return [Array<Types::CompatibleVersionsMap>]
     class GetCompatibleVersionsResponse < Struct.new(
       :compatible_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3123,7 +3268,8 @@ module Aws::OpenSearch
     class GetDataSourceRequest < Struct.new(
       :domain_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3145,7 +3291,8 @@ module Aws::OpenSearch
       :name,
       :description,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3157,7 +3304,8 @@ module Aws::OpenSearch
     #   @return [String]
     class GetDirectQueryDataSourceRequest < Struct.new(
       :data_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3195,7 +3343,8 @@ module Aws::OpenSearch
       :description,
       :open_search_arns,
       :data_source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3210,7 +3359,8 @@ module Aws::OpenSearch
     class GetDomainMaintenanceStatusRequest < Struct.new(
       :domain_name,
       :maintenance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3240,7 +3390,8 @@ module Aws::OpenSearch
       :action,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3262,7 +3413,8 @@ module Aws::OpenSearch
       :package_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3282,7 +3434,8 @@ module Aws::OpenSearch
       :package_id,
       :package_version_history_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3303,7 +3456,8 @@ module Aws::OpenSearch
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3320,7 +3474,8 @@ module Aws::OpenSearch
     class GetUpgradeHistoryResponse < Struct.new(
       :upgrade_histories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3330,7 +3485,8 @@ module Aws::OpenSearch
     #   @return [String]
     class GetUpgradeStatusRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3348,7 +3504,8 @@ module Aws::OpenSearch
       :upgrade_step,
       :step_status,
       :upgrade_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3368,7 +3525,8 @@ module Aws::OpenSearch
       :enabled,
       :subject_key,
       :roles_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3386,7 +3544,8 @@ module Aws::OpenSearch
       :enabled,
       :subject_key,
       :roles_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3400,7 +3559,8 @@ module Aws::OpenSearch
     class IPAddressTypeStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3426,7 +3586,8 @@ module Aws::OpenSearch
       :iam_identity_center_instance_arn,
       :iam_role_for_identity_center_application_arn,
       :iam_identity_center_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3446,7 +3607,8 @@ module Aws::OpenSearch
       :enabled,
       :iam_identity_center_instance_arn,
       :iam_role_for_identity_center_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3478,7 +3640,8 @@ module Aws::OpenSearch
       :roles_key,
       :identity_center_application_arn,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3500,7 +3663,8 @@ module Aws::OpenSearch
       :identity_center_instance_arn,
       :subject_key,
       :roles_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3514,7 +3678,8 @@ module Aws::OpenSearch
     class IdentityCenterOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3542,7 +3707,8 @@ module Aws::OpenSearch
       :connection_id,
       :connection_status,
       :connection_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3597,7 +3763,8 @@ module Aws::OpenSearch
     class InboundConnectionStatus < Struct.new(
       :status_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3612,7 +3779,8 @@ module Aws::OpenSearch
     class InstanceCountLimits < Struct.new(
       :minimum_instance_count,
       :maximum_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3628,7 +3796,8 @@ module Aws::OpenSearch
     #   @return [Types::InstanceCountLimits]
     class InstanceLimits < Struct.new(
       :instance_count_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3669,7 +3838,8 @@ module Aws::OpenSearch
       :warm_enabled,
       :instance_role,
       :availability_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3679,7 +3849,8 @@ module Aws::OpenSearch
     #   @return [String]
     class InternalException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3689,7 +3860,8 @@ module Aws::OpenSearch
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3699,7 +3871,8 @@ module Aws::OpenSearch
     #   @return [String]
     class InvalidTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3721,7 +3894,8 @@ module Aws::OpenSearch
       :subject_key,
       :roles_key,
       :public_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3743,7 +3917,8 @@ module Aws::OpenSearch
       :subject_key,
       :roles_key,
       :public_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3757,7 +3932,8 @@ module Aws::OpenSearch
     class KeyStoreAccessOption < Struct.new(
       :key_access_role_arn,
       :key_store_access_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3767,7 +3943,8 @@ module Aws::OpenSearch
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3786,7 +3963,8 @@ module Aws::OpenSearch
       :storage_types,
       :instance_limits,
       :additional_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3806,7 +3984,8 @@ module Aws::OpenSearch
       :next_token,
       :statuses,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3821,7 +4000,8 @@ module Aws::OpenSearch
     class ListApplicationsResponse < Struct.new(
       :application_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3832,7 +4012,8 @@ module Aws::OpenSearch
     #   @return [String]
     class ListDataSourcesRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3842,7 +4023,8 @@ module Aws::OpenSearch
     #   @return [Array<Types::DataSourceDetails>]
     class ListDataSourcesResponse < Struct.new(
       :data_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3853,7 +4035,8 @@ module Aws::OpenSearch
     #   @return [String]
     class ListDirectQueryDataSourcesRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3871,7 +4054,8 @@ module Aws::OpenSearch
     class ListDirectQueryDataSourcesResponse < Struct.new(
       :next_token,
       :direct_query_data_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3901,7 +4085,8 @@ module Aws::OpenSearch
       :status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3917,7 +4102,8 @@ module Aws::OpenSearch
     class ListDomainMaintenancesResponse < Struct.new(
       :domain_maintenances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3927,7 +4113,8 @@ module Aws::OpenSearch
     #   @return [String]
     class ListDomainNamesRequest < Struct.new(
       :engine_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3939,7 +4126,8 @@ module Aws::OpenSearch
     #   @return [Array<Types::DomainInfo>]
     class ListDomainNamesResponse < Struct.new(
       :domain_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3960,7 +4148,8 @@ module Aws::OpenSearch
       :package_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3976,7 +4165,8 @@ module Aws::OpenSearch
     class ListDomainsForPackageResponse < Struct.new(
       :domain_package_details_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4009,7 +4199,8 @@ module Aws::OpenSearch
       :next_token,
       :retrieve_a_zs,
       :instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4025,7 +4216,8 @@ module Aws::OpenSearch
     class ListInstanceTypeDetailsResponse < Struct.new(
       :instance_type_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4046,7 +4238,8 @@ module Aws::OpenSearch
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4062,7 +4255,8 @@ module Aws::OpenSearch
     class ListPackagesForDomainResponse < Struct.new(
       :domain_package_details_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4082,7 +4276,8 @@ module Aws::OpenSearch
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4097,7 +4292,8 @@ module Aws::OpenSearch
     class ListScheduledActionsResponse < Struct.new(
       :scheduled_actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4108,7 +4304,8 @@ module Aws::OpenSearch
     #   @return [String]
     class ListTagsRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4119,7 +4316,8 @@ module Aws::OpenSearch
     #   @return [Array<Types::Tag>]
     class ListTagsResponse < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4136,7 +4334,8 @@ module Aws::OpenSearch
     class ListVersionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4154,7 +4353,8 @@ module Aws::OpenSearch
     class ListVersionsResponse < Struct.new(
       :versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4169,7 +4369,8 @@ module Aws::OpenSearch
     class ListVpcEndpointAccessRequest < Struct.new(
       :domain_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4185,7 +4386,8 @@ module Aws::OpenSearch
     class ListVpcEndpointAccessResponse < Struct.new(
       :authorized_principal_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4200,7 +4402,8 @@ module Aws::OpenSearch
     class ListVpcEndpointsForDomainRequest < Struct.new(
       :domain_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4215,7 +4418,8 @@ module Aws::OpenSearch
     class ListVpcEndpointsForDomainResponse < Struct.new(
       :vpc_endpoint_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4226,7 +4430,8 @@ module Aws::OpenSearch
     #   @return [String]
     class ListVpcEndpointsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4241,7 +4446,8 @@ module Aws::OpenSearch
     class ListVpcEndpointsResponse < Struct.new(
       :vpc_endpoint_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4260,7 +4466,8 @@ module Aws::OpenSearch
     class LogPublishingOption < Struct.new(
       :cloud_watch_logs_log_group_arn,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4274,7 +4481,8 @@ module Aws::OpenSearch
     class LogPublishingOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4295,7 +4503,8 @@ module Aws::OpenSearch
       :master_user_arn,
       :master_user_name,
       :master_user_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4327,7 +4536,8 @@ module Aws::OpenSearch
       :active_value,
       :pending_value,
       :value_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4337,7 +4547,8 @@ module Aws::OpenSearch
     #   @return [String]
     class NaturalLanguageQueryGenerationOptionsInput < Struct.new(
       :desired_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4351,7 +4562,8 @@ module Aws::OpenSearch
     class NaturalLanguageQueryGenerationOptionsOutput < Struct.new(
       :desired_state,
       :current_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4369,7 +4581,8 @@ module Aws::OpenSearch
       :enabled,
       :type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4383,7 +4596,8 @@ module Aws::OpenSearch
     class NodeOption < Struct.new(
       :node_type,
       :node_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4393,7 +4607,8 @@ module Aws::OpenSearch
     #   @return [Boolean]
     class NodeToNodeEncryptionOptions < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4407,7 +4622,8 @@ module Aws::OpenSearch
     class NodeToNodeEncryptionOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4425,7 +4641,8 @@ module Aws::OpenSearch
     #   @return [Types::WindowStartTime]
     class OffPeakWindow < Struct.new(
       :window_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4443,7 +4660,8 @@ module Aws::OpenSearch
     class OffPeakWindowOptions < Struct.new(
       :enabled,
       :off_peak_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4458,7 +4676,8 @@ module Aws::OpenSearch
     class OffPeakWindowOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4484,7 +4703,8 @@ module Aws::OpenSearch
       :update_version,
       :state,
       :pending_deletion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4523,7 +4743,8 @@ module Aws::OpenSearch
       :connection_status,
       :connection_mode,
       :connection_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4586,7 +4807,8 @@ module Aws::OpenSearch
     class OutboundConnectionStatus < Struct.new(
       :status_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4596,7 +4818,8 @@ module Aws::OpenSearch
     #   @return [Types::KeyStoreAccessOption]
     class PackageAssociationConfiguration < Struct.new(
       :key_store_access_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4618,7 +4841,8 @@ module Aws::OpenSearch
       :license_filepath,
       :configuration_requirement,
       :requires_restart_for_configuration_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4689,7 +4913,8 @@ module Aws::OpenSearch
       :package_owner,
       :package_vending_options,
       :package_encryption_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4707,7 +4932,8 @@ module Aws::OpenSearch
       :package_id,
       :prerequisite_package_id_list,
       :association_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4721,7 +4947,8 @@ module Aws::OpenSearch
     class PackageEncryptionOptions < Struct.new(
       :kms_key_identifier,
       :encryption_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4735,7 +4962,8 @@ module Aws::OpenSearch
     class PackageSource < Struct.new(
       :s3_bucket_name,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4745,7 +4973,8 @@ module Aws::OpenSearch
     #   @return [Boolean]
     class PackageVendingOptions < Struct.new(
       :vending_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4771,7 +5000,8 @@ module Aws::OpenSearch
       :created_at,
       :plugin_properties,
       :package_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4797,7 +5027,8 @@ module Aws::OpenSearch
       :version,
       :class_name,
       :uncompressed_size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4816,7 +5047,8 @@ module Aws::OpenSearch
       :reserved_instance_offering_id,
       :reservation_name,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4830,7 +5062,8 @@ module Aws::OpenSearch
     class PurchaseReservedInstanceOfferingResponse < Struct.new(
       :reserved_instance_id,
       :reservation_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4845,7 +5078,8 @@ module Aws::OpenSearch
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4855,7 +5089,8 @@ module Aws::OpenSearch
     #   @return [String]
     class RejectInboundConnectionRequest < Struct.new(
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4865,7 +5100,8 @@ module Aws::OpenSearch
     #   @return [Types::InboundConnection]
     class RejectInboundConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4880,7 +5116,8 @@ module Aws::OpenSearch
     class RemoveTagsRequest < Struct.new(
       :arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4944,7 +5181,8 @@ module Aws::OpenSearch
       :state,
       :payment_option,
       :recurring_charges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4990,7 +5228,8 @@ module Aws::OpenSearch
       :currency_code,
       :payment_option,
       :recurring_charges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5005,7 +5244,8 @@ module Aws::OpenSearch
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5015,7 +5255,8 @@ module Aws::OpenSearch
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5032,12 +5273,14 @@ module Aws::OpenSearch
       :domain_name,
       :account,
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RevokeVpcEndpointAccessResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5047,7 +5290,8 @@ module Aws::OpenSearch
     #   @return [String]
     class S3GlueDataCatalog < Struct.new(
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5057,7 +5301,8 @@ module Aws::OpenSearch
     #   @return [Boolean]
     class S3VectorsEngine < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5071,7 +5316,8 @@ module Aws::OpenSearch
     class SAMLIdp < Struct.new(
       :metadata_content,
       :entity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5108,7 +5354,8 @@ module Aws::OpenSearch
       :subject_key,
       :roles_key,
       :session_timeout_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5134,7 +5381,8 @@ module Aws::OpenSearch
       :subject_key,
       :roles_key,
       :session_timeout_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5179,7 +5427,8 @@ module Aws::OpenSearch
       :status,
       :mandatory,
       :cancellable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5203,7 +5452,8 @@ module Aws::OpenSearch
       :action_type,
       :action,
       :severity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5219,7 +5469,8 @@ module Aws::OpenSearch
     #   @return [String]
     class SecurityLakeDirectQueryDataSource < Struct.new(
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5263,7 +5514,8 @@ module Aws::OpenSearch
       :description,
       :automated_update_date,
       :optional_deployment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5277,7 +5529,8 @@ module Aws::OpenSearch
     class SlotNotAvailableException < Struct.new(
       :slot_suggestions,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5289,7 +5542,8 @@ module Aws::OpenSearch
     #   @return [Integer]
     class SnapshotOptions < Struct.new(
       :automated_snapshot_start_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5304,7 +5558,8 @@ module Aws::OpenSearch
     class SnapshotOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5314,7 +5569,8 @@ module Aws::OpenSearch
     #   @return [Boolean]
     class SoftwareUpdateOptions < Struct.new(
       :auto_software_update_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5328,7 +5584,8 @@ module Aws::OpenSearch
     class SoftwareUpdateOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5347,7 +5604,8 @@ module Aws::OpenSearch
       :domain_name,
       :action,
       :node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5357,7 +5615,8 @@ module Aws::OpenSearch
     #   @return [String]
     class StartDomainMaintenanceResponse < Struct.new(
       :maintenance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5397,7 +5656,8 @@ module Aws::OpenSearch
       :domain_name,
       :schedule_at,
       :desired_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5408,7 +5668,8 @@ module Aws::OpenSearch
     #   @return [Types::ServiceSoftwareOptions]
     class StartServiceSoftwareUpdateResponse < Struct.new(
       :service_software_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5427,7 +5688,8 @@ module Aws::OpenSearch
       :storage_type_name,
       :storage_sub_type_name,
       :storage_type_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5474,7 +5736,8 @@ module Aws::OpenSearch
     class StorageTypeLimit < Struct.new(
       :limit_name,
       :limit_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5491,7 +5754,8 @@ module Aws::OpenSearch
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5508,7 +5772,8 @@ module Aws::OpenSearch
       :id,
       :data_sources,
       :app_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5547,7 +5812,8 @@ module Aws::OpenSearch
       :app_configs,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5574,7 +5840,8 @@ module Aws::OpenSearch
       :data_source_type,
       :description,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5584,7 +5851,8 @@ module Aws::OpenSearch
     #   @return [String]
     class UpdateDataSourceResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5617,7 +5885,8 @@ module Aws::OpenSearch
       :data_source_type,
       :description,
       :open_search_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5628,7 +5897,8 @@ module Aws::OpenSearch
     #   @return [String]
     class UpdateDirectQueryDataSourceResponse < Struct.new(
       :data_source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5765,7 +6035,8 @@ module Aws::OpenSearch
       :off_peak_window_options,
       :software_update_options,
       :aiml_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5784,7 +6055,8 @@ module Aws::OpenSearch
       :domain_config,
       :dry_run_results,
       :dry_run_progress_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5815,7 +6087,8 @@ module Aws::OpenSearch
       :commit_message,
       :package_configuration,
       :package_encryption_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5825,7 +6098,8 @@ module Aws::OpenSearch
     #   @return [Types::PackageDetails]
     class UpdatePackageResponse < Struct.new(
       :package_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5842,7 +6116,8 @@ module Aws::OpenSearch
       :package_id,
       :operation,
       :package_user_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5859,7 +6134,8 @@ module Aws::OpenSearch
       :package_id,
       :operation,
       :package_user_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5904,7 +6180,8 @@ module Aws::OpenSearch
       :action_type,
       :schedule_at,
       :desired_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5913,7 +6190,8 @@ module Aws::OpenSearch
     #   @return [Types::ScheduledAction]
     class UpdateScheduledActionResponse < Struct.new(
       :scheduled_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5926,7 +6204,8 @@ module Aws::OpenSearch
     class UpdateVpcEndpointRequest < Struct.new(
       :vpc_endpoint_id,
       :vpc_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5935,7 +6214,8 @@ module Aws::OpenSearch
     #   @return [Types::VpcEndpoint]
     class UpdateVpcEndpointResponse < Struct.new(
       :vpc_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5962,7 +6242,8 @@ module Aws::OpenSearch
       :target_version,
       :perform_check_only,
       :advanced_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5992,7 +6273,8 @@ module Aws::OpenSearch
       :perform_check_only,
       :advanced_options,
       :change_progress_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6030,7 +6312,8 @@ module Aws::OpenSearch
       :start_timestamp,
       :upgrade_status,
       :steps_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6077,7 +6360,8 @@ module Aws::OpenSearch
       :upgrade_step_status,
       :issues,
       :progress_percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6102,7 +6386,8 @@ module Aws::OpenSearch
       :subnet_ids,
       :availability_zones,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6116,7 +6401,8 @@ module Aws::OpenSearch
     class VPCDerivedInfoStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6135,7 +6421,8 @@ module Aws::OpenSearch
     class VPCOptions < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6145,7 +6432,8 @@ module Aws::OpenSearch
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6160,7 +6448,8 @@ module Aws::OpenSearch
     class ValidationFailure < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6175,7 +6464,8 @@ module Aws::OpenSearch
     class VersionStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6207,7 +6497,8 @@ module Aws::OpenSearch
       :vpc_options,
       :status,
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6226,7 +6517,8 @@ module Aws::OpenSearch
       :vpc_endpoint_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6248,7 +6540,8 @@ module Aws::OpenSearch
       :vpc_endpoint_owner,
       :domain_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6264,7 +6557,8 @@ module Aws::OpenSearch
     class WindowStartTime < Struct.new(
       :hours,
       :minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6282,7 +6576,8 @@ module Aws::OpenSearch
     #   @return [Integer]
     class ZoneAwarenessConfig < Struct.new(
       :availability_zone_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

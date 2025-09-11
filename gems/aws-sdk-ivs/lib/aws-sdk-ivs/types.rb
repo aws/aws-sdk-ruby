@@ -12,7 +12,8 @@ module Aws::Ivs
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::Ivs
       :sample_rate,
       :channels,
       :track,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -63,7 +65,8 @@ module Aws::Ivs
       :arn,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +75,8 @@ module Aws::Ivs
     #   @return [Array<String>]
     class BatchGetChannelInput < Struct.new(
       :arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +89,8 @@ module Aws::Ivs
     class BatchGetChannelOutput < Struct.new(
       :channels,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +99,8 @@ module Aws::Ivs
     #   @return [Array<String>]
     class BatchGetStreamKeyInput < Struct.new(
       :arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +113,8 @@ module Aws::Ivs
     class BatchGetStreamKeyOutput < Struct.new(
       :stream_keys,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +137,8 @@ module Aws::Ivs
       :viewer_id,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,7 +147,8 @@ module Aws::Ivs
     #   @return [Array<Types::BatchStartViewerSessionRevocationViewerSession>]
     class BatchStartViewerSessionRevocationInput < Struct.new(
       :viewer_sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +158,8 @@ module Aws::Ivs
     #   @return [Array<Types::BatchStartViewerSessionRevocationError>]
     class BatchStartViewerSessionRevocationOutput < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,7 +179,8 @@ module Aws::Ivs
       :channel_arn,
       :viewer_id,
       :viewer_session_versions_less_than_or_equal_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -256,7 +267,8 @@ module Aws::Ivs
       :playback_restriction_policy_arn,
       :multitrack_input_configuration,
       :container_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -272,7 +284,8 @@ module Aws::Ivs
     #   @return [String]
     class ChannelNotBroadcasting < Struct.new(
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +346,8 @@ module Aws::Ivs
       :type,
       :preset,
       :playback_restriction_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -349,7 +363,8 @@ module Aws::Ivs
     #   @return [String]
     class ConflictException < Struct.new(
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +425,8 @@ module Aws::Ivs
       :playback_restriction_policy_arn,
       :multitrack_input_configuration,
       :container_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +439,8 @@ module Aws::Ivs
     class CreateChannelOutput < Struct.new(
       :channel,
       :stream_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +471,8 @@ module Aws::Ivs
       :enable_strict_origin_enforcement,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -463,7 +481,8 @@ module Aws::Ivs
     #   @return [Types::PlaybackRestrictionPolicy]
     class CreatePlaybackRestrictionPolicyResponse < Struct.new(
       :playback_restriction_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +515,8 @@ module Aws::Ivs
       :thumbnail_configuration,
       :recording_reconnect_window_seconds,
       :rendition_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +525,8 @@ module Aws::Ivs
     #   @return [Types::RecordingConfiguration]
     class CreateRecordingConfigurationOutput < Struct.new(
       :recording_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +540,8 @@ module Aws::Ivs
     class CreateStreamKeyInput < Struct.new(
       :channel_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +550,8 @@ module Aws::Ivs
     #   @return [Types::StreamKey]
     class CreateStreamKeyOutput < Struct.new(
       :stream_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +560,8 @@ module Aws::Ivs
     #   @return [String]
     class DeleteChannelInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,12 +570,14 @@ module Aws::Ivs
     #   @return [String]
     class DeletePlaybackKeyPairInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePlaybackKeyPairOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +586,8 @@ module Aws::Ivs
     #   @return [String]
     class DeletePlaybackRestrictionPolicyRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +596,8 @@ module Aws::Ivs
     #   @return [String]
     class DeleteRecordingConfigurationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +606,8 @@ module Aws::Ivs
     #   @return [String]
     class DeleteStreamKeyInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +619,8 @@ module Aws::Ivs
     #   @return [Types::S3DestinationConfiguration]
     class DestinationConfiguration < Struct.new(
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +629,8 @@ module Aws::Ivs
     #   @return [String]
     class GetChannelInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -608,7 +639,8 @@ module Aws::Ivs
     #   @return [Types::Channel]
     class GetChannelOutput < Struct.new(
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,7 +649,8 @@ module Aws::Ivs
     #   @return [String]
     class GetPlaybackKeyPairInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +659,8 @@ module Aws::Ivs
     #   @return [Types::PlaybackKeyPair]
     class GetPlaybackKeyPairOutput < Struct.new(
       :key_pair,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +669,8 @@ module Aws::Ivs
     #   @return [String]
     class GetPlaybackRestrictionPolicyRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +679,8 @@ module Aws::Ivs
     #   @return [Types::PlaybackRestrictionPolicy]
     class GetPlaybackRestrictionPolicyResponse < Struct.new(
       :playback_restriction_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -653,7 +689,8 @@ module Aws::Ivs
     #   @return [String]
     class GetRecordingConfigurationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +699,8 @@ module Aws::Ivs
     #   @return [Types::RecordingConfiguration]
     class GetRecordingConfigurationOutput < Struct.new(
       :recording_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +709,8 @@ module Aws::Ivs
     #   @return [String]
     class GetStreamInput < Struct.new(
       :channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +719,8 @@ module Aws::Ivs
     #   @return [String]
     class GetStreamKeyInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -689,7 +729,8 @@ module Aws::Ivs
     #   @return [Types::StreamKey]
     class GetStreamKeyOutput < Struct.new(
       :stream_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,7 +739,8 @@ module Aws::Ivs
     #   @return [Types::Stream]
     class GetStreamOutput < Struct.new(
       :stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +755,8 @@ module Aws::Ivs
     class GetStreamSessionInput < Struct.new(
       :channel_arn,
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -722,7 +765,8 @@ module Aws::Ivs
     #   @return [Types::StreamSession]
     class GetStreamSessionOutput < Struct.new(
       :stream_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +784,8 @@ module Aws::Ivs
       :public_key_material,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +794,8 @@ module Aws::Ivs
     #   @return [Types::PlaybackKeyPair]
     class ImportPlaybackKeyPairOutput < Struct.new(
       :key_pair,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +812,8 @@ module Aws::Ivs
     class IngestConfiguration < Struct.new(
       :video,
       :audio,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +829,8 @@ module Aws::Ivs
     class IngestConfigurations < Struct.new(
       :video_configurations,
       :audio_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +840,8 @@ module Aws::Ivs
     #   @return [String]
     class InternalServerException < Struct.new(
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -818,7 +867,8 @@ module Aws::Ivs
       :filter_by_playback_restriction_policy_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +882,8 @@ module Aws::Ivs
     class ListChannelsOutput < Struct.new(
       :channels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +898,8 @@ module Aws::Ivs
     class ListPlaybackKeyPairsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +913,8 @@ module Aws::Ivs
     class ListPlaybackKeyPairsOutput < Struct.new(
       :key_pairs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +928,8 @@ module Aws::Ivs
     class ListPlaybackRestrictionPoliciesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +943,8 @@ module Aws::Ivs
     class ListPlaybackRestrictionPoliciesResponse < Struct.new(
       :playback_restriction_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +959,8 @@ module Aws::Ivs
     class ListRecordingConfigurationsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +974,8 @@ module Aws::Ivs
     class ListRecordingConfigurationsOutput < Struct.new(
       :recording_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -936,7 +993,8 @@ module Aws::Ivs
       :channel_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,7 +1008,8 @@ module Aws::Ivs
     class ListStreamKeysOutput < Struct.new(
       :stream_keys,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1027,8 @@ module Aws::Ivs
       :channel_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -982,7 +1042,8 @@ module Aws::Ivs
     class ListStreamSessionsOutput < Struct.new(
       :stream_sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1061,8 @@ module Aws::Ivs
       :filter_by,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1076,8 @@ module Aws::Ivs
     class ListStreamsOutput < Struct.new(
       :streams,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1023,7 +1086,8 @@ module Aws::Ivs
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1033,7 +1097,8 @@ module Aws::Ivs
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1116,8 @@ module Aws::Ivs
       :enabled,
       :policy,
       :maximum_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1066,7 +1132,8 @@ module Aws::Ivs
     #   @return [String]
     class PendingVerification < Struct.new(
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1157,8 @@ module Aws::Ivs
       :name,
       :fingerprint,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1178,8 @@ module Aws::Ivs
       :arn,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1148,7 +1217,8 @@ module Aws::Ivs
       :enable_strict_origin_enforcement,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,7 +1255,8 @@ module Aws::Ivs
       :enable_strict_origin_enforcement,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1270,8 @@ module Aws::Ivs
     class PutMetadataInput < Struct.new(
       :channel_arn,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1314,8 @@ module Aws::Ivs
       :thumbnail_configuration,
       :recording_reconnect_window_seconds,
       :rendition_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1276,7 +1349,8 @@ module Aws::Ivs
       :destination_configuration,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1297,7 +1371,8 @@ module Aws::Ivs
     class RenditionConfiguration < Struct.new(
       :rendition_selection,
       :renditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1307,7 +1382,8 @@ module Aws::Ivs
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1317,7 +1393,8 @@ module Aws::Ivs
     #   @return [String]
     class S3DestinationConfiguration < Struct.new(
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1327,7 +1404,8 @@ module Aws::Ivs
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1343,7 +1421,8 @@ module Aws::Ivs
     class Srt < Struct.new(
       :endpoint,
       :passphrase,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,12 +1441,14 @@ module Aws::Ivs
       :channel_arn,
       :viewer_id,
       :viewer_session_versions_less_than_or_equal_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartViewerSessionRevocationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1376,12 +1457,14 @@ module Aws::Ivs
     #   @return [String]
     class StopStreamInput < Struct.new(
       :channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopStreamOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1421,7 +1504,8 @@ module Aws::Ivs
       :state,
       :health,
       :viewer_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1486,7 +1570,8 @@ module Aws::Ivs
       :type,
       :event_time,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1496,7 +1581,8 @@ module Aws::Ivs
     #   @return [String]
     class StreamFilters < Struct.new(
       :health,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1520,7 +1606,8 @@ module Aws::Ivs
       :value,
       :channel_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1540,7 +1627,8 @@ module Aws::Ivs
       :arn,
       :channel_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1675,8 @@ module Aws::Ivs
       :ingest_configurations,
       :recording_configuration,
       :truncated_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1700,8 @@ module Aws::Ivs
       :start_time,
       :end_time,
       :has_error_event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1652,7 +1742,8 @@ module Aws::Ivs
       :health,
       :viewer_count,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1667,7 +1758,8 @@ module Aws::Ivs
     #   @return [String]
     class StreamUnavailable < Struct.new(
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1683,12 +1775,14 @@ module Aws::Ivs
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1698,7 +1792,8 @@ module Aws::Ivs
     #   @return [String]
     class ThrottlingException < Struct.new(
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1738,7 +1833,8 @@ module Aws::Ivs
       :target_interval_seconds,
       :resolution,
       :storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1753,12 +1849,14 @@ module Aws::Ivs
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1817,7 +1915,8 @@ module Aws::Ivs
       :playback_restriction_policy_arn,
       :multitrack_input_configuration,
       :container_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1826,7 +1925,8 @@ module Aws::Ivs
     #   @return [Types::Channel]
     class UpdateChannelOutput < Struct.new(
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1856,7 +1956,8 @@ module Aws::Ivs
       :allowed_origins,
       :enable_strict_origin_enforcement,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1865,7 +1966,8 @@ module Aws::Ivs
     #   @return [Types::PlaybackRestrictionPolicy]
     class UpdatePlaybackRestrictionPolicyResponse < Struct.new(
       :playback_restriction_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1875,7 +1977,8 @@ module Aws::Ivs
     #   @return [String]
     class ValidationException < Struct.new(
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1930,7 +2033,8 @@ module Aws::Ivs
       :level,
       :track,
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

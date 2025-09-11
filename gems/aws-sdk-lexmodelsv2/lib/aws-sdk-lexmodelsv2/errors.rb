@@ -42,7 +42,7 @@ module Aws::LexModelsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelsV2::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::LexModelsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelsV2::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::LexModelsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelsV2::Types::PreconditionFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::LexModelsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelsV2::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::LexModelsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelsV2::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::LexModelsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelsV2::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The number of seconds after which the user can invoke the API again.</p>
@@ -131,7 +131,7 @@ module Aws::LexModelsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelsV2::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -101,7 +101,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -115,7 +115,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::ConformancePackTemplateValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -129,7 +129,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::IdempotentParameterMismatch] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -143,7 +143,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InsufficientDeliveryPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -182,7 +182,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InsufficientPermissionsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -196,7 +196,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidConfigurationRecorderNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -210,7 +210,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidDeliveryChannelNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -224,7 +224,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidExpressionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -238,7 +238,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidLimitException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -254,7 +254,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -269,7 +269,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -306,7 +306,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidRecordingGroupException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -320,7 +320,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidResultTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -334,7 +334,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidRoleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -348,7 +348,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidS3KeyPrefixException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -362,7 +362,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidS3KmsKeyArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -376,7 +376,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidSNSTopicARNException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -391,7 +391,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::InvalidTimeRangeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -405,7 +405,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::LastDeliveryChannelDeleteFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -426,7 +426,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -442,7 +442,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::MaxActiveResourcesExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -458,7 +458,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::MaxNumberOfConfigRulesExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -473,7 +473,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::MaxNumberOfConfigurationRecordersExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -489,7 +489,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::MaxNumberOfConformancePacksExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -504,7 +504,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::MaxNumberOfDeliveryChannelsExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -520,7 +520,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::MaxNumberOfOrganizationConfigRulesExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -536,7 +536,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::MaxNumberOfOrganizationConformancePacksExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -550,7 +550,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::MaxNumberOfRetentionConfigurationsExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -565,7 +565,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoAvailableConfigurationRecorderException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -580,7 +580,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoAvailableDeliveryChannelException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -594,7 +594,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoAvailableOrganizationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -608,7 +608,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoRunningConfigurationRecorderException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -622,7 +622,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchBucketException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -636,7 +636,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchConfigRuleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -650,7 +650,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchConfigRuleInConformancePackException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -664,7 +664,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchConfigurationAggregatorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -679,7 +679,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchConfigurationRecorderException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -693,7 +693,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchConformancePackException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -708,7 +708,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchDeliveryChannelException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -722,7 +722,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchOrganizationConfigRuleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -737,7 +737,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchOrganizationConformancePackException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -751,7 +751,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchRemediationConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -765,7 +765,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchRemediationExceptionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -779,7 +779,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::NoSuchRetentionConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -811,7 +811,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::OrganizationAccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -825,7 +825,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::OrganizationAllFeaturesNotEnabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -839,7 +839,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::OrganizationConformancePackTemplateValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -853,7 +853,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::OversizedConfigurationItemException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -867,7 +867,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::RemediationInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -881,7 +881,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::ResourceConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -917,7 +917,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -932,7 +932,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::ResourceNotDiscoveredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -946,7 +946,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -963,7 +963,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -985,7 +985,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::UnmodifiableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>
@@ -1032,7 +1032,7 @@ module Aws::ConfigService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConfigService::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error executing the command</p>

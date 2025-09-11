@@ -12,12 +12,14 @@ module Aws::Polly
     #   @return [String]
     class DeleteLexiconInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLexiconOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,7 +52,8 @@ module Aws::Polly
       :language_code,
       :include_additional_language_codes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +68,8 @@ module Aws::Polly
     class DescribeVoicesOutput < Struct.new(
       :voices,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +80,8 @@ module Aws::Polly
     #   @return [String]
     class EngineNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +90,8 @@ module Aws::Polly
     #   @return [String]
     class GetLexiconInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,7 +107,8 @@ module Aws::Polly
     class GetLexiconOutput < Struct.new(
       :lexicon,
       :lexicon_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +117,8 @@ module Aws::Polly
     #   @return [String]
     class GetSpeechSynthesisTaskInput < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +129,8 @@ module Aws::Polly
     #   @return [Types::SynthesisTask]
     class GetSpeechSynthesisTaskOutput < Struct.new(
       :synthesis_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +140,8 @@ module Aws::Polly
     #   @return [String]
     class InvalidLexiconException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +151,8 @@ module Aws::Polly
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +162,8 @@ module Aws::Polly
     #   @return [String]
     class InvalidS3BucketException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +173,8 @@ module Aws::Polly
     #   @return [String]
     class InvalidS3KeyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +183,8 @@ module Aws::Polly
     #   @return [String]
     class InvalidSampleRateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +194,8 @@ module Aws::Polly
     #   @return [String]
     class InvalidSnsTopicArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,7 +205,8 @@ module Aws::Polly
     #   @return [String]
     class InvalidSsmlException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +216,8 @@ module Aws::Polly
     #   @return [String]
     class InvalidTaskIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,7 +227,8 @@ module Aws::Polly
     #   @return [String]
     class LanguageNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +245,8 @@ module Aws::Polly
     class Lexicon < Struct.new(
       :content,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +280,8 @@ module Aws::Polly
       :lexicon_arn,
       :lexemes_count,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -281,7 +301,8 @@ module Aws::Polly
     class LexiconDescription < Struct.new(
       :name,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +315,8 @@ module Aws::Polly
     #   @return [String]
     class LexiconNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +326,8 @@ module Aws::Polly
     #   @return [String]
     class LexiconSizeExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,7 +338,8 @@ module Aws::Polly
     #   @return [String]
     class ListLexiconsInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +354,8 @@ module Aws::Polly
     class ListLexiconsOutput < Struct.new(
       :lexicons,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +375,8 @@ module Aws::Polly
       :max_results,
       :next_token,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,7 +393,8 @@ module Aws::Polly
     class ListSpeechSynthesisTasksOutput < Struct.new(
       :next_token,
       :synthesis_tasks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +405,8 @@ module Aws::Polly
     #   @return [String]
     class MarksNotSupportedForFormatException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -388,7 +416,8 @@ module Aws::Polly
     #   @return [String]
     class MaxLexemeLengthExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +427,8 @@ module Aws::Polly
     #   @return [String]
     class MaxLexiconsNumberExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,12 +443,14 @@ module Aws::Polly
     class PutLexiconInput < Struct.new(
       :name,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutLexiconOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +459,8 @@ module Aws::Polly
     #   @return [String]
     class ServiceFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +470,8 @@ module Aws::Polly
     #   @return [String]
     class SsmlMarksNotSupportedForTextTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -513,7 +547,8 @@ module Aws::Polly
       :text,
       :text_type,
       :voice_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,7 +558,8 @@ module Aws::Polly
     #   @return [Types::SynthesisTask]
     class StartSpeechSynthesisTaskOutput < Struct.new(
       :synthesis_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -613,7 +649,8 @@ module Aws::Polly
       :text_type,
       :voice_id,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -628,7 +665,8 @@ module Aws::Polly
     #   @return [String]
     class SynthesisTaskNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -699,7 +737,8 @@ module Aws::Polly
       :text,
       :text_type,
       :voice_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +780,8 @@ module Aws::Polly
       :audio_stream,
       :content_type,
       :request_characters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -762,7 +802,8 @@ module Aws::Polly
     #   @return [String]
     class TextLengthExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +813,8 @@ module Aws::Polly
     #   @return [String]
     class UnsupportedPlsAlphabetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +824,8 @@ module Aws::Polly
     #   @return [String]
     class UnsupportedPlsLanguageException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +868,8 @@ module Aws::Polly
       :name,
       :additional_language_codes,
       :supported_engines,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

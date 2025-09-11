@@ -22,7 +22,8 @@ module Aws::TranscribeStreaming
       :transcript,
       :items,
       :entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51,7 +52,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class AudioEvent < Struct.new(
       :audio_chunk,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -70,7 +72,8 @@ module Aws::TranscribeStreaming
       :audio_event,
       :configuration_event,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AudioEvent < AudioStream; end
@@ -86,7 +89,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +126,8 @@ module Aws::TranscribeStreaming
       :type,
       :content,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +168,8 @@ module Aws::TranscribeStreaming
       :confidence,
       :vocabulary_filter_match,
       :stable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -183,7 +189,8 @@ module Aws::TranscribeStreaming
     class CallAnalyticsLanguageWithScore < Struct.new(
       :language_code,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -232,7 +239,8 @@ module Aws::TranscribeStreaming
       :conflict_exception,
       :service_unavailable_exception,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class UtteranceEvent < CallAnalyticsTranscriptResultStream; end
@@ -256,7 +264,8 @@ module Aws::TranscribeStreaming
     class CategoryEvent < Struct.new(
       :matched_categories,
       :matched_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +283,8 @@ module Aws::TranscribeStreaming
     class ChannelDefinition < Struct.new(
       :channel_id,
       :participant_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -296,7 +306,8 @@ module Aws::TranscribeStreaming
     class CharacterOffsets < Struct.new(
       :begin,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +357,8 @@ module Aws::TranscribeStreaming
       :transcript_output_location,
       :status,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +404,8 @@ module Aws::TranscribeStreaming
     class ClinicalNoteGenerationSettings < Struct.new(
       :output_bucket_name,
       :note_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +424,8 @@ module Aws::TranscribeStreaming
     class ConfigurationEvent < Struct.new(
       :channel_definitions,
       :post_call_analytics_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +434,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +471,8 @@ module Aws::TranscribeStreaming
       :type,
       :content,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -471,7 +487,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class GetMedicalScribeStreamRequest < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -480,7 +497,8 @@ module Aws::TranscribeStreaming
     #   @return [Types::MedicalScribeStreamDetails]
     class GetMedicalScribeStreamResponse < Struct.new(
       :medical_scribe_stream_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +508,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class InternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +519,8 @@ module Aws::TranscribeStreaming
     #   @return [Types::CharacterOffsets]
     class IssueDetected < Struct.new(
       :character_offsets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +566,8 @@ module Aws::TranscribeStreaming
       :speaker,
       :confidence,
       :stable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -570,7 +591,8 @@ module Aws::TranscribeStreaming
     class LanguageWithScore < Struct.new(
       :language_code,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -585,7 +607,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +629,8 @@ module Aws::TranscribeStreaming
       :transcript,
       :items,
       :entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -637,7 +661,8 @@ module Aws::TranscribeStreaming
       :category,
       :content,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -679,7 +704,8 @@ module Aws::TranscribeStreaming
       :content,
       :confidence,
       :speaker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -724,7 +750,8 @@ module Aws::TranscribeStreaming
       :is_partial,
       :alternatives,
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -760,7 +787,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class MedicalScribeAudioEvent < Struct.new(
       :audio_chunk,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +815,8 @@ module Aws::TranscribeStreaming
     class MedicalScribeChannelDefinition < Struct.new(
       :channel_id,
       :participant_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -859,7 +888,8 @@ module Aws::TranscribeStreaming
       :encryption_settings,
       :post_stream_analytics_settings,
       :medical_scribe_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +900,8 @@ module Aws::TranscribeStreaming
     #   @return [Types::MedicalScribePatientContext]
     class MedicalScribeContext < Struct.new(
       :patient_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -919,7 +950,8 @@ module Aws::TranscribeStreaming
     class MedicalScribeEncryptionSettings < Struct.new(
       :kms_encryption_context,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -963,7 +995,8 @@ module Aws::TranscribeStreaming
       :session_control_event,
       :configuration_event,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AudioEvent < MedicalScribeInputStream; end
@@ -978,7 +1011,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class MedicalScribePatientContext < Struct.new(
       :pronouns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -989,7 +1023,8 @@ module Aws::TranscribeStreaming
     #   @return [Types::ClinicalNoteGenerationResult]
     class MedicalScribePostStreamAnalyticsResult < Struct.new(
       :clinical_note_generation_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1035,8 @@ module Aws::TranscribeStreaming
     #   @return [Types::ClinicalNoteGenerationSettings]
     class MedicalScribePostStreamAnalyticsSettings < Struct.new(
       :clinical_note_generation_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1075,8 @@ module Aws::TranscribeStreaming
       :conflict_exception,
       :service_unavailable_exception,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TranscriptEvent < MedicalScribeResultStream; end
@@ -1070,7 +1107,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class MedicalScribeSessionControlEvent < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1171,7 +1209,8 @@ module Aws::TranscribeStreaming
       :post_stream_analytics_settings,
       :post_stream_analytics_result,
       :medical_scribe_context_provided,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,7 +1224,8 @@ module Aws::TranscribeStreaming
     #   @return [Types::MedicalScribeTranscriptSegment]
     class MedicalScribeTranscriptEvent < Struct.new(
       :transcript_segment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1224,7 +1264,8 @@ module Aws::TranscribeStreaming
       :confidence,
       :content,
       :vocabulary_filter_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1271,7 +1312,8 @@ module Aws::TranscribeStreaming
       :items,
       :is_partial,
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1296,7 +1338,8 @@ module Aws::TranscribeStreaming
     #   @return [Array<Types::MedicalResult>]
     class MedicalTranscript < Struct.new(
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1355,8 @@ module Aws::TranscribeStreaming
     #   @return [Types::MedicalTranscript]
     class MedicalTranscriptEvent < Struct.new(
       :transcript,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1397,8 @@ module Aws::TranscribeStreaming
       :conflict_exception,
       :service_unavailable_exception,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TranscriptEvent < MedicalTranscriptResultStream; end
@@ -1371,7 +1416,8 @@ module Aws::TranscribeStreaming
     #   @return [Array<Types::TimestampRange>]
     class PointsOfInterest < Struct.new(
       :timestamp_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1464,7 +1510,8 @@ module Aws::TranscribeStreaming
       :data_access_role_arn,
       :content_redaction_output,
       :output_encryption_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1473,7 +1520,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1521,7 +1569,8 @@ module Aws::TranscribeStreaming
       :channel_id,
       :language_code,
       :language_identification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1537,7 +1586,8 @@ module Aws::TranscribeStreaming
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1733,7 +1783,8 @@ module Aws::TranscribeStreaming
       :content_identification_type,
       :content_redaction_type,
       :pii_entity_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1820,7 +1871,8 @@ module Aws::TranscribeStreaming
       :content_identification_type,
       :content_redaction_type,
       :pii_entity_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1876,7 +1928,8 @@ module Aws::TranscribeStreaming
       :media_sample_rate_hertz,
       :media_encoding,
       :input_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +1970,8 @@ module Aws::TranscribeStreaming
       :media_sample_rate_hertz,
       :media_encoding,
       :result_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2012,7 +2066,8 @@ module Aws::TranscribeStreaming
       :enable_channel_identification,
       :number_of_channels,
       :content_identification_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2070,7 +2125,8 @@ module Aws::TranscribeStreaming
       :enable_channel_identification,
       :number_of_channels,
       :content_identification_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2325,7 +2381,8 @@ module Aws::TranscribeStreaming
       :identify_multiple_languages,
       :vocabulary_names,
       :vocabulary_filter_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2429,7 +2486,8 @@ module Aws::TranscribeStreaming
       :identify_multiple_languages,
       :vocabulary_names,
       :vocabulary_filter_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2454,7 +2512,8 @@ module Aws::TranscribeStreaming
     class TimestampRange < Struct.new(
       :begin_offset_millis,
       :end_offset_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2472,7 +2531,8 @@ module Aws::TranscribeStreaming
     #   @return [Array<Types::Result>]
     class Transcript < Struct.new(
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2488,7 +2548,8 @@ module Aws::TranscribeStreaming
     #   @return [Types::Transcript]
     class TranscriptEvent < Struct.new(
       :transcript,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2526,7 +2587,8 @@ module Aws::TranscribeStreaming
       :conflict_exception,
       :service_unavailable_exception,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TranscriptEvent < TranscriptResultStream; end
@@ -2596,7 +2658,8 @@ module Aws::TranscribeStreaming
       :issues_detected,
       :language_code,
       :language_identification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

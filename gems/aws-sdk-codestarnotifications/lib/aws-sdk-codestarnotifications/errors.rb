@@ -42,7 +42,7 @@ module Aws::Codestarnotifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codestarnotifications::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::Codestarnotifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codestarnotifications::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::Codestarnotifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codestarnotifications::Types::ConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::Codestarnotifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codestarnotifications::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::Codestarnotifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codestarnotifications::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -111,7 +111,7 @@ module Aws::Codestarnotifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codestarnotifications::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -124,7 +124,7 @@ module Aws::Codestarnotifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codestarnotifications::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::Codestarnotifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codestarnotifications::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

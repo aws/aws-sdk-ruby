@@ -45,7 +45,6 @@ module Aws::AutoScaling
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

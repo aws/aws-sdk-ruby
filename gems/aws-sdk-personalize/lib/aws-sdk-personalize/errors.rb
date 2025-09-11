@@ -41,7 +41,7 @@ module Aws::Personalize
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Personalize::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::Personalize
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Personalize::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::Personalize
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Personalize::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::Personalize
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Personalize::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::Personalize
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Personalize::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::Personalize
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Personalize::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::Personalize
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Personalize::Types::TooManyTagKeysException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -132,7 +132,7 @@ module Aws::Personalize
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Personalize::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

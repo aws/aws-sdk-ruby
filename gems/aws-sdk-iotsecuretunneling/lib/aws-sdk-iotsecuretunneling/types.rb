@@ -16,12 +16,14 @@ module Aws::IoTSecureTunneling
     class CloseTunnelRequest < Struct.new(
       :tunnel_id,
       :delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CloseTunnelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +38,8 @@ module Aws::IoTSecureTunneling
     class ConnectionState < Struct.new(
       :status,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +48,8 @@ module Aws::IoTSecureTunneling
     #   @return [String]
     class DescribeTunnelRequest < Struct.new(
       :tunnel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +58,8 @@ module Aws::IoTSecureTunneling
     #   @return [Types::Tunnel]
     class DescribeTunnelResponse < Struct.new(
       :tunnel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +76,8 @@ module Aws::IoTSecureTunneling
     class DestinationConfig < Struct.new(
       :thing_name,
       :services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +86,8 @@ module Aws::IoTSecureTunneling
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +96,8 @@ module Aws::IoTSecureTunneling
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +106,8 @@ module Aws::IoTSecureTunneling
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +125,8 @@ module Aws::IoTSecureTunneling
       :thing_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +140,8 @@ module Aws::IoTSecureTunneling
     class ListTunnelsResponse < Struct.new(
       :tunnel_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +162,8 @@ module Aws::IoTSecureTunneling
       :tags,
       :destination_config,
       :timeout_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +186,8 @@ module Aws::IoTSecureTunneling
       :tunnel_arn,
       :source_access_token,
       :destination_access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +196,8 @@ module Aws::IoTSecureTunneling
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +215,8 @@ module Aws::IoTSecureTunneling
       :tunnel_id,
       :client_mode,
       :destination_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +235,8 @@ module Aws::IoTSecureTunneling
       :tunnel_arn,
       :source_access_token,
       :destination_access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +251,8 @@ module Aws::IoTSecureTunneling
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,12 +265,14 @@ module Aws::IoTSecureTunneling
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +284,8 @@ module Aws::IoTSecureTunneling
     #   @return [Integer]
     class TimeoutConfig < Struct.new(
       :max_lifetime_timeout_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +337,8 @@ module Aws::IoTSecureTunneling
       :tags,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +368,8 @@ module Aws::IoTSecureTunneling
       :description,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,12 +382,14 @@ module Aws::IoTSecureTunneling
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

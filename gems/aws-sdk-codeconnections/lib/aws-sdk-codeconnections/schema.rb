@@ -802,7 +802,6 @@ module Aws::CodeConnections
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateOutOfSyncException)
         operation.traits = {}
       end)
-
     end
 
     class << self

@@ -1151,7 +1151,6 @@ module Aws::GroundStation
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/missionprofile/{missionProfileId}"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

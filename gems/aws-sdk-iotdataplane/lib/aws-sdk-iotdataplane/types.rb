@@ -12,7 +12,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::IoTDataPlane
       :client_id,
       :clean_session,
       :prevent_will_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +45,8 @@ module Aws::IoTDataPlane
     class DeleteThingShadowRequest < Struct.new(
       :thing_name,
       :shadow_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53,7 +56,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class DeleteThingShadowResponse < Struct.new(
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +66,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +77,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class GetRetainedMessageRequest < Struct.new(
       :topic,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +110,8 @@ module Aws::IoTDataPlane
       :qos,
       :last_modified_time,
       :user_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -124,7 +131,8 @@ module Aws::IoTDataPlane
     class GetThingShadowRequest < Struct.new(
       :thing_name,
       :shadow_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +142,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class GetThingShadowResponse < Struct.new(
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +153,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class InternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +164,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -171,7 +182,8 @@ module Aws::IoTDataPlane
       :thing_name,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -188,7 +200,8 @@ module Aws::IoTDataPlane
       :results,
       :next_token,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -208,7 +221,8 @@ module Aws::IoTDataPlane
     class ListRetainedMessagesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -222,7 +236,8 @@ module Aws::IoTDataPlane
     class ListRetainedMessagesResponse < Struct.new(
       :retained_topics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +247,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class MethodNotAllowedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -300,7 +316,8 @@ module Aws::IoTDataPlane
       :response_topic,
       :correlation_data,
       :message_expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +327,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class RequestEntityTooLargeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +338,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +361,8 @@ module Aws::IoTDataPlane
       :payload_size,
       :qos,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -359,7 +379,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -369,7 +390,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +401,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +412,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class UnsupportedDocumentEncodingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,7 +431,8 @@ module Aws::IoTDataPlane
       :thing_name,
       :shadow_name,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +442,8 @@ module Aws::IoTDataPlane
     #   @return [String]
     class UpdateThingShadowResponse < Struct.new(
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -14,7 +14,8 @@ module Aws::AppConfigData
     class BadRequestDetails < Struct.new(
       :invalid_parameters,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class InvalidParameters < BadRequestDetails; end
@@ -34,7 +35,8 @@ module Aws::AppConfigData
       :message,
       :reason,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53,7 +55,8 @@ module Aws::AppConfigData
     #   @return [String]
     class GetLatestConfigurationInput < Struct.new(
       :configuration_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +93,8 @@ module Aws::AppConfigData
       :content_type,
       :configuration,
       :version_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -104,7 +108,8 @@ module Aws::AppConfigData
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +119,8 @@ module Aws::AppConfigData
     #   @return [String]
     class InvalidParameterDetail < Struct.new(
       :problem,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +138,8 @@ module Aws::AppConfigData
       :message,
       :resource_type,
       :referenced_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +162,8 @@ module Aws::AppConfigData
       :environment_identifier,
       :configuration_profile_identifier,
       :required_minimum_poll_interval_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +185,8 @@ module Aws::AppConfigData
     #   @return [String]
     class StartConfigurationSessionOutput < Struct.new(
       :initial_configuration_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +195,8 @@ module Aws::AppConfigData
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

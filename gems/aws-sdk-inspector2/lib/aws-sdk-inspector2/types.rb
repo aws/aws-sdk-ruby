@@ -13,7 +13,8 @@ module Aws::Inspector2
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31,7 +32,8 @@ module Aws::Inspector2
       :account_id,
       :status,
       :resource_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +56,8 @@ module Aws::Inspector2
       :resource_type,
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +79,8 @@ module Aws::Inspector2
       :severity_counts,
       :exploit_available_count,
       :fix_available_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -95,7 +99,8 @@ module Aws::Inspector2
       :account_id,
       :state,
       :resource_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +165,8 @@ module Aws::Inspector2
       :lambda_function_aggregation,
       :code_repository_aggregation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AccountAggregation < AggregationRequest; end
@@ -239,7 +245,8 @@ module Aws::Inspector2
       :lambda_function_aggregation,
       :code_repository_aggregation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AccountAggregation < AggregationResponse; end
@@ -271,7 +278,8 @@ module Aws::Inspector2
       :amis,
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +301,8 @@ module Aws::Inspector2
       :account_id,
       :severity_counts,
       :affected_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +317,8 @@ module Aws::Inspector2
     class AssociateConfigurationRequest < Struct.new(
       :scan_configuration_arn,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +327,8 @@ module Aws::Inspector2
     #   @return [String]
     class AssociateMemberInput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +337,8 @@ module Aws::Inspector2
     #   @return [String]
     class AssociateMemberOutput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +362,8 @@ module Aws::Inspector2
       :last_seen,
       :targets,
       :ttps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -382,7 +395,8 @@ module Aws::Inspector2
       :lambda,
       :lambda_code,
       :code_repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -428,7 +442,8 @@ module Aws::Inspector2
       :subnet_id,
       :launched_at,
       :platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +486,8 @@ module Aws::Inspector2
       :sort_by,
       :last_in_use_at,
       :in_use_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +530,8 @@ module Aws::Inspector2
       :severity_counts,
       :last_in_use_at,
       :in_use_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +578,8 @@ module Aws::Inspector2
       :platform,
       :last_in_use_at,
       :in_use_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +593,8 @@ module Aws::Inspector2
     class AwsEcsMetadataDetails < Struct.new(
       :details_group,
       :task_definition_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +609,8 @@ module Aws::Inspector2
     class AwsEksMetadataDetails < Struct.new(
       :namespace,
       :workload_info_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +624,8 @@ module Aws::Inspector2
     class AwsEksWorkloadInfo < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +677,8 @@ module Aws::Inspector2
       :package_type,
       :architectures,
       :last_modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +687,8 @@ module Aws::Inspector2
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +697,8 @@ module Aws::Inspector2
     #   @return [Array<Types::AssociateConfigurationRequest>]
     class BatchAssociateCodeSecurityScanConfigurationRequest < Struct.new(
       :associate_configuration_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -689,7 +713,8 @@ module Aws::Inspector2
     class BatchAssociateCodeSecurityScanConfigurationResponse < Struct.new(
       :failed_associations,
       :successful_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -699,7 +724,8 @@ module Aws::Inspector2
     #   @return [Array<Types::DisassociateConfigurationRequest>]
     class BatchDisassociateCodeSecurityScanConfigurationRequest < Struct.new(
       :disassociate_configuration_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +740,8 @@ module Aws::Inspector2
     class BatchDisassociateCodeSecurityScanConfigurationResponse < Struct.new(
       :failed_associations,
       :successful_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +750,8 @@ module Aws::Inspector2
     #   @return [Array<String>]
     class BatchGetAccountStatusInput < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,7 +765,8 @@ module Aws::Inspector2
     class BatchGetAccountStatusOutput < Struct.new(
       :accounts,
       :failed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,7 +776,8 @@ module Aws::Inspector2
     #   @return [Array<String>]
     class BatchGetCodeSnippetRequest < Struct.new(
       :finding_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -761,7 +791,8 @@ module Aws::Inspector2
     class BatchGetCodeSnippetResponse < Struct.new(
       :code_snippet_results,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +801,8 @@ module Aws::Inspector2
     #   @return [Array<String>]
     class BatchGetFindingDetailsRequest < Struct.new(
       :finding_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +815,8 @@ module Aws::Inspector2
     class BatchGetFindingDetailsResponse < Struct.new(
       :finding_details,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +825,8 @@ module Aws::Inspector2
     #   @return [Array<String>]
     class BatchGetFreeTrialInfoInput < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +841,8 @@ module Aws::Inspector2
     class BatchGetFreeTrialInfoOutput < Struct.new(
       :accounts,
       :failed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +852,8 @@ module Aws::Inspector2
     #   @return [Array<String>]
     class BatchGetMemberEc2DeepInspectionStatusRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +868,8 @@ module Aws::Inspector2
     class BatchGetMemberEc2DeepInspectionStatusResponse < Struct.new(
       :account_ids,
       :failed_account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +879,8 @@ module Aws::Inspector2
     #   @return [Array<Types::MemberAccountEc2DeepInspectionStatus>]
     class BatchUpdateMemberEc2DeepInspectionStatusRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +895,8 @@ module Aws::Inspector2
     class BatchUpdateMemberEc2DeepInspectionStatusResponse < Struct.new(
       :account_ids,
       :failed_account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +905,8 @@ module Aws::Inspector2
     #   @return [String]
     class CancelFindingsReportInput < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +915,8 @@ module Aws::Inspector2
     #   @return [String]
     class CancelFindingsReportOutput < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +925,8 @@ module Aws::Inspector2
     #   @return [String]
     class CancelSbomExportRequest < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +935,8 @@ module Aws::Inspector2
     #   @return [String]
     class CancelSbomExportResponse < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +974,8 @@ module Aws::Inspector2
       :account_id,
       :status_counts,
       :platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -945,7 +989,8 @@ module Aws::Inspector2
     class CisDateFilter < Struct.new(
       :earliest_scan_start_time,
       :latest_scan_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +1004,8 @@ module Aws::Inspector2
     class CisFindingStatusFilter < Struct.new(
       :comparison,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -973,7 +1019,8 @@ module Aws::Inspector2
     class CisNumberFilter < Struct.new(
       :upper_inclusive,
       :lower_inclusive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -987,7 +1034,8 @@ module Aws::Inspector2
     class CisResultStatusFilter < Struct.new(
       :comparison,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1082,8 @@ module Aws::Inspector2
       :targets,
       :scheduled_by,
       :security_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1117,8 @@ module Aws::Inspector2
       :schedule,
       :targets,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1122,7 +1172,8 @@ module Aws::Inspector2
       :remediation,
       :level,
       :finding_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1200,8 @@ module Aws::Inspector2
       :title_filters,
       :security_level_filters,
       :finding_arn_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1231,8 @@ module Aws::Inspector2
       :platform_filters,
       :failed_resources_filters,
       :security_level_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1221,7 +1274,8 @@ module Aws::Inspector2
       :target_status_filters,
       :target_status_reason_filters,
       :failed_checks_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1289,8 @@ module Aws::Inspector2
     class CisScanStatusFilter < Struct.new(
       :comparison,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1250,7 +1305,8 @@ module Aws::Inspector2
     class CisSecurityLevelFilter < Struct.new(
       :comparison,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1268,7 +1324,8 @@ module Aws::Inspector2
       :rule_id,
       :status,
       :cis_rule_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1282,7 +1339,8 @@ module Aws::Inspector2
     class CisStringFilter < Struct.new(
       :comparison,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1378,8 @@ module Aws::Inspector2
       :platform,
       :target_status,
       :target_status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1393,8 @@ module Aws::Inspector2
     class CisTargetStatusFilter < Struct.new(
       :comparison,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1408,8 @@ module Aws::Inspector2
     class CisTargetStatusReasonFilter < Struct.new(
       :comparison,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1423,8 @@ module Aws::Inspector2
     class CisTargets < Struct.new(
       :account_ids,
       :target_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1381,7 +1443,8 @@ module Aws::Inspector2
       :date_added,
       :date_due,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1405,7 +1468,8 @@ module Aws::Inspector2
       :running_unit_count,
       :stopped_unit_count,
       :cluster_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1415,7 +1479,8 @@ module Aws::Inspector2
     #   @return [String]
     class ClusterForImageFilterCriteria < Struct.new(
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,7 +1494,8 @@ module Aws::Inspector2
     class ClusterInformation < Struct.new(
       :cluster_arn,
       :cluster_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1444,7 +1510,8 @@ module Aws::Inspector2
       :aws_ecs_metadata_details,
       :aws_eks_metadata_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AwsEcsMetadataDetails < ClusterMetadata; end
@@ -1471,7 +1538,8 @@ module Aws::Inspector2
       :file_path,
       :start_line,
       :end_line,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1491,7 +1559,8 @@ module Aws::Inspector2
     class CodeLine < Struct.new(
       :content,
       :line_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1518,7 +1587,8 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       :resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1623,8 @@ module Aws::Inspector2
       :fix_available_active_findings_count,
       :account_id,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1572,7 +1643,8 @@ module Aws::Inspector2
       :project_name,
       :integration_arn,
       :provider_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1608,7 +1680,8 @@ module Aws::Inspector2
       :last_scanned_commit_id,
       :scan_configuration,
       :on_demand_scan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1699,8 @@ module Aws::Inspector2
       :last_scanned_commit_id,
       :last_scan_at,
       :scan_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1664,7 +1738,8 @@ module Aws::Inspector2
       :created_on,
       :last_update_on,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1750,8 @@ module Aws::Inspector2
     class CodeSecurityResource < Struct.new(
       :project_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ProjectId < CodeSecurityResource; end
@@ -1697,7 +1773,8 @@ module Aws::Inspector2
       :periodic_scan_configuration,
       :continuous_integration_scan_configuration,
       :rule_set_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1707,7 +1784,8 @@ module Aws::Inspector2
     #   @return [Types::CodeSecurityResource]
     class CodeSecurityScanConfigurationAssociationSummary < Struct.new(
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1751,7 +1829,8 @@ module Aws::Inspector2
       :rule_set_categories,
       :scope_settings,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1770,7 +1849,8 @@ module Aws::Inspector2
       :finding_arn,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1797,7 +1877,8 @@ module Aws::Inspector2
       :end_line,
       :code_snippet,
       :suggested_fixes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1844,7 +1925,8 @@ module Aws::Inspector2
       :detector_id,
       :detector_name,
       :cwes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1862,7 +1944,8 @@ module Aws::Inspector2
       :vendor,
       :product,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1880,7 +1963,8 @@ module Aws::Inspector2
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1892,7 +1976,8 @@ module Aws::Inspector2
     #   @return [Array<String>]
     class ContinuousIntegrationScanConfiguration < Struct.new(
       :supported_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,7 +1991,8 @@ module Aws::Inspector2
     class Counts < Struct.new(
       :count,
       :group_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1925,7 +2011,8 @@ module Aws::Inspector2
     class CoverageDateFilter < Struct.new(
       :start_inclusive,
       :end_inclusive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2028,7 +2115,8 @@ module Aws::Inspector2
       :code_repository_provider_type,
       :code_repository_provider_type_visibility,
       :last_scanned_commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2046,7 +2134,8 @@ module Aws::Inspector2
       :comparison,
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2060,7 +2149,8 @@ module Aws::Inspector2
     class CoverageNumberFilter < Struct.new(
       :upper_inclusive,
       :lower_inclusive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2164,8 @@ module Aws::Inspector2
     class CoverageStringFilter < Struct.new(
       :comparison,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2112,7 +2203,8 @@ module Aws::Inspector2
       :resource_metadata,
       :last_scanned_at,
       :scan_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2138,7 +2230,8 @@ module Aws::Inspector2
       :schedule,
       :targets,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2147,7 +2240,8 @@ module Aws::Inspector2
     #   @return [String]
     class CreateCisScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2161,7 +2255,8 @@ module Aws::Inspector2
     class CreateCisTargets < Struct.new(
       :account_ids,
       :target_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2182,7 +2277,8 @@ module Aws::Inspector2
       :type,
       :details,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2199,7 +2295,8 @@ module Aws::Inspector2
       :integration_arn,
       :status,
       :authorization_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2229,7 +2326,8 @@ module Aws::Inspector2
       :configuration,
       :scope_settings,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2238,7 +2336,8 @@ module Aws::Inspector2
     #   @return [String]
     class CreateCodeSecurityScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2269,7 +2368,8 @@ module Aws::Inspector2
       :name,
       :tags,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2378,8 @@ module Aws::Inspector2
     #   @return [String]
     class CreateFilterOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2295,7 +2396,8 @@ module Aws::Inspector2
       :filter_criteria,
       :report_format,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2304,7 +2406,8 @@ module Aws::Inspector2
     #   @return [String]
     class CreateFindingsReportOutput < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2320,7 +2423,8 @@ module Aws::Inspector2
     class CreateGitLabSelfManagedIntegrationDetail < Struct.new(
       :instance_url,
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2332,7 +2436,8 @@ module Aws::Inspector2
     class CreateIntegrationDetail < Struct.new(
       :gitlab_self_managed,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class GitlabSelfManaged < CreateIntegrationDetail; end
@@ -2352,7 +2457,8 @@ module Aws::Inspector2
       :resource_filter_criteria,
       :report_format,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2361,7 +2467,8 @@ module Aws::Inspector2
     #   @return [String]
     class CreateSbomExportResponse < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2376,7 +2483,8 @@ module Aws::Inspector2
     class Cvss2 < Struct.new(
       :base_score,
       :scoring_vector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2396,7 +2504,8 @@ module Aws::Inspector2
     class Cvss3 < Struct.new(
       :base_score,
       :scoring_vector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2415,7 +2524,8 @@ module Aws::Inspector2
     class Cvss4 < Struct.new(
       :base_score,
       :scoring_vector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2442,7 +2552,8 @@ module Aws::Inspector2
       :scoring_vector,
       :version,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2456,7 +2567,8 @@ module Aws::Inspector2
     class CvssScoreAdjustment < Struct.new(
       :metric,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2486,7 +2598,8 @@ module Aws::Inspector2
       :score,
       :scoring_vector,
       :adjustments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2496,7 +2609,8 @@ module Aws::Inspector2
     #   @return [Types::Time]
     class DailySchedule < Struct.new(
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2510,7 +2624,8 @@ module Aws::Inspector2
     class DateFilter < Struct.new(
       :start_inclusive,
       :end_inclusive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2524,7 +2639,8 @@ module Aws::Inspector2
     class DelegatedAdmin < Struct.new(
       :account_id,
       :relationship_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2538,7 +2654,8 @@ module Aws::Inspector2
     class DelegatedAdminAccount < Struct.new(
       :account_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2547,7 +2664,8 @@ module Aws::Inspector2
     #   @return [String]
     class DeleteCisScanConfigurationRequest < Struct.new(
       :scan_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2556,7 +2674,8 @@ module Aws::Inspector2
     #   @return [String]
     class DeleteCisScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2565,7 +2684,8 @@ module Aws::Inspector2
     #   @return [String]
     class DeleteCodeSecurityIntegrationRequest < Struct.new(
       :integration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2574,7 +2694,8 @@ module Aws::Inspector2
     #   @return [String]
     class DeleteCodeSecurityIntegrationResponse < Struct.new(
       :integration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2583,7 +2704,8 @@ module Aws::Inspector2
     #   @return [String]
     class DeleteCodeSecurityScanConfigurationRequest < Struct.new(
       :scan_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2592,7 +2714,8 @@ module Aws::Inspector2
     #   @return [String]
     class DeleteCodeSecurityScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2601,7 +2724,8 @@ module Aws::Inspector2
     #   @return [String]
     class DeleteFilterInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2610,12 +2734,14 @@ module Aws::Inspector2
     #   @return [String]
     class DeleteFilterOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeOrganizationConfigurationInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2629,7 +2755,8 @@ module Aws::Inspector2
     class DescribeOrganizationConfigurationOutput < Struct.new(
       :auto_enable,
       :max_account_limit_reached,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2647,7 +2774,8 @@ module Aws::Inspector2
       :bucket_name,
       :key_prefix,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2656,7 +2784,8 @@ module Aws::Inspector2
     #   @return [String]
     class DisableDelegatedAdminAccountInput < Struct.new(
       :delegated_admin_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2794,8 @@ module Aws::Inspector2
     #   @return [String]
     class DisableDelegatedAdminAccountOutput < Struct.new(
       :delegated_admin_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2678,7 +2808,8 @@ module Aws::Inspector2
     class DisableInput < Struct.new(
       :account_ids,
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2693,7 +2824,8 @@ module Aws::Inspector2
     class DisableOutput < Struct.new(
       :accounts,
       :failed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2709,7 +2841,8 @@ module Aws::Inspector2
     class DisassociateConfigurationRequest < Struct.new(
       :scan_configuration_arn,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2718,7 +2851,8 @@ module Aws::Inspector2
     #   @return [String]
     class DisassociateMemberInput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2727,7 +2861,8 @@ module Aws::Inspector2
     #   @return [String]
     class DisassociateMemberOutput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2737,7 +2872,8 @@ module Aws::Inspector2
     #   @return [String]
     class Ec2Configuration < Struct.new(
       :scan_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2747,7 +2883,8 @@ module Aws::Inspector2
     #   @return [Types::Ec2ScanModeState]
     class Ec2ConfigurationState < Struct.new(
       :scan_mode_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2779,7 +2916,8 @@ module Aws::Inspector2
       :instance_tags,
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2813,7 +2951,8 @@ module Aws::Inspector2
       :account_id,
       :severity_counts,
       :network_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2831,7 +2970,8 @@ module Aws::Inspector2
       :tags,
       :ami_id,
       :platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2845,7 +2985,8 @@ module Aws::Inspector2
     class Ec2ScanModeState < Struct.new(
       :scan_mode,
       :scan_mode_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2863,7 +3004,8 @@ module Aws::Inspector2
       :rescan_duration,
       :pull_date_rescan_duration,
       :pull_date_rescan_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2873,7 +3015,8 @@ module Aws::Inspector2
     #   @return [Types::EcrRescanDurationState]
     class EcrConfigurationState < Struct.new(
       :rescan_duration_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2896,7 +3039,8 @@ module Aws::Inspector2
       :image_pulled_at,
       :last_in_use_at,
       :in_use_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2910,7 +3054,8 @@ module Aws::Inspector2
     class EcrRepositoryMetadata < Struct.new(
       :name,
       :scan_frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2941,7 +3086,8 @@ module Aws::Inspector2
       :updated_at,
       :pull_date_rescan_duration,
       :pull_date_rescan_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2954,7 +3100,8 @@ module Aws::Inspector2
     class EnableDelegatedAdminAccountInput < Struct.new(
       :delegated_admin_account_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2963,7 +3110,8 @@ module Aws::Inspector2
     #   @return [String]
     class EnableDelegatedAdminAccountOutput < Struct.new(
       :delegated_admin_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2980,7 +3128,8 @@ module Aws::Inspector2
       :account_ids,
       :resource_types,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2995,7 +3144,8 @@ module Aws::Inspector2
     class EnableOutput < Struct.new(
       :accounts,
       :failed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3005,7 +3155,8 @@ module Aws::Inspector2
     #   @return [Float]
     class Epss < Struct.new(
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3020,7 +3171,8 @@ module Aws::Inspector2
     #   @return [Float]
     class EpssDetails < Struct.new(
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3043,7 +3195,8 @@ module Aws::Inspector2
       :evidence_rule,
       :evidence_detail,
       :severity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3057,7 +3210,8 @@ module Aws::Inspector2
     class ExploitObserved < Struct.new(
       :last_seen,
       :first_seen,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3068,7 +3222,8 @@ module Aws::Inspector2
     #   @return [Time]
     class ExploitabilityDetails < Struct.new(
       :last_known_exploit_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3094,7 +3249,8 @@ module Aws::Inspector2
       :resource_status,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3118,7 +3274,8 @@ module Aws::Inspector2
       :resource,
       :status_code,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3140,7 +3297,8 @@ module Aws::Inspector2
       :account_id,
       :ec2_scan_status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3186,7 +3344,8 @@ module Aws::Inspector2
       :description,
       :reason,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3394,7 +3553,8 @@ module Aws::Inspector2
       :epss_score,
       :code_repository_project_name,
       :code_repository_provider_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3496,7 +3656,8 @@ module Aws::Inspector2
       :exploitability_details,
       :code_vulnerability_details,
       :epss,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3544,7 +3705,8 @@ module Aws::Inspector2
       :reference_urls,
       :cwes,
       :epss_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3563,7 +3725,8 @@ module Aws::Inspector2
       :finding_arn,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3585,7 +3748,8 @@ module Aws::Inspector2
       :resource_type,
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3607,7 +3771,8 @@ module Aws::Inspector2
       :severity_counts,
       :exploit_available_count,
       :fix_available_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3621,7 +3786,8 @@ module Aws::Inspector2
     class FreeTrialAccountInfo < Struct.new(
       :account_id,
       :free_trial_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3643,7 +3809,8 @@ module Aws::Inspector2
       :start,
       :end,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3662,7 +3829,8 @@ module Aws::Inspector2
       :account_id,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3680,7 +3848,8 @@ module Aws::Inspector2
       :scan_arn,
       :target_accounts,
       :report_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3693,7 +3862,8 @@ module Aws::Inspector2
     class GetCisScanReportResponse < Struct.new(
       :url,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3732,7 +3902,8 @@ module Aws::Inspector2
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3746,7 +3917,8 @@ module Aws::Inspector2
     class GetCisScanResultDetailsResponse < Struct.new(
       :scan_result_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3764,7 +3936,8 @@ module Aws::Inspector2
       :filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3778,7 +3951,8 @@ module Aws::Inspector2
     class GetClustersForImageResponse < Struct.new(
       :cluster,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3791,7 +3965,8 @@ module Aws::Inspector2
     class GetCodeSecurityIntegrationRequest < Struct.new(
       :integration_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3834,7 +4009,8 @@ module Aws::Inspector2
       :last_update_on,
       :tags,
       :authorization_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3843,7 +4019,8 @@ module Aws::Inspector2
     #   @return [String]
     class GetCodeSecurityScanConfigurationRequest < Struct.new(
       :scan_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3882,7 +4059,8 @@ module Aws::Inspector2
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3895,7 +4073,8 @@ module Aws::Inspector2
     class GetCodeSecurityScanRequest < Struct.new(
       :resource,
       :scan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3933,12 +4112,14 @@ module Aws::Inspector2
       :created_at,
       :updated_at,
       :last_commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetConfigurationInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3953,12 +4134,14 @@ module Aws::Inspector2
     class GetConfigurationOutput < Struct.new(
       :ecr_configuration,
       :ec2_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetDelegatedAdminAccountInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3967,12 +4150,14 @@ module Aws::Inspector2
     #   @return [Types::DelegatedAdmin]
     class GetDelegatedAdminAccountOutput < Struct.new(
       :delegated_admin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetEc2DeepInspectionConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3994,7 +4179,8 @@ module Aws::Inspector2
       :org_package_paths,
       :status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4007,7 +4193,8 @@ module Aws::Inspector2
     class GetEncryptionKeyRequest < Struct.new(
       :scan_type,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4016,7 +4203,8 @@ module Aws::Inspector2
     #   @return [String]
     class GetEncryptionKeyResponse < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4025,7 +4213,8 @@ module Aws::Inspector2
     #   @return [String]
     class GetFindingsReportStatusInput < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4054,7 +4243,8 @@ module Aws::Inspector2
       :error_message,
       :destination,
       :filter_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4063,7 +4253,8 @@ module Aws::Inspector2
     #   @return [String]
     class GetMemberInput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4072,7 +4263,8 @@ module Aws::Inspector2
     #   @return [Types::Member]
     class GetMemberOutput < Struct.new(
       :member,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4081,7 +4273,8 @@ module Aws::Inspector2
     #   @return [String]
     class GetSbomExportRequest < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4115,7 +4308,8 @@ module Aws::Inspector2
       :error_message,
       :s3_destination,
       :filter_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4141,7 +4335,8 @@ module Aws::Inspector2
       :layer_hashes,
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4168,7 +4363,8 @@ module Aws::Inspector2
       :layer_hash,
       :account_id,
       :severity_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4178,7 +4374,8 @@ module Aws::Inspector2
     #   @return [Types::CvssScoreDetails]
     class InspectorScoreDetails < Struct.new(
       :adjusted_cvss,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4191,7 +4388,8 @@ module Aws::Inspector2
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4224,7 +4422,8 @@ module Aws::Inspector2
       :function_tags,
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4261,7 +4460,8 @@ module Aws::Inspector2
       :account_id,
       :severity_counts,
       :last_modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4284,7 +4484,8 @@ module Aws::Inspector2
       :layers,
       :function_name,
       :runtime,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4311,7 +4512,8 @@ module Aws::Inspector2
       :layer_arns,
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4338,7 +4540,8 @@ module Aws::Inspector2
       :layer_arn,
       :account_id,
       :severity_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4358,7 +4561,8 @@ module Aws::Inspector2
       :subnet_ids,
       :security_group_ids,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4381,7 +4585,8 @@ module Aws::Inspector2
       :service,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4397,7 +4602,8 @@ module Aws::Inspector2
     class ListAccountPermissionsOutput < Struct.new(
       :permissions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4415,7 +4621,8 @@ module Aws::Inspector2
       :scan_name_filters,
       :target_resource_tag_filters,
       :scan_configuration_arn_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4442,7 +4649,8 @@ module Aws::Inspector2
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4456,7 +4664,8 @@ module Aws::Inspector2
     class ListCisScanConfigurationsResponse < Struct.new(
       :scan_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4487,7 +4696,8 @@ module Aws::Inspector2
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4501,7 +4711,8 @@ module Aws::Inspector2
     class ListCisScanResultsAggregatedByChecksResponse < Struct.new(
       :check_aggregations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4532,7 +4743,8 @@ module Aws::Inspector2
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4546,7 +4758,8 @@ module Aws::Inspector2
     class ListCisScanResultsAggregatedByTargetResourceResponse < Struct.new(
       :target_resource_aggregations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4592,7 +4805,8 @@ module Aws::Inspector2
       :scheduled_by_filters,
       :failed_checks_filters,
       :target_account_id_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4622,7 +4836,8 @@ module Aws::Inspector2
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4636,7 +4851,8 @@ module Aws::Inspector2
     class ListCisScansResponse < Struct.new(
       :scans,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4652,7 +4868,8 @@ module Aws::Inspector2
     class ListCodeSecurityIntegrationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4668,7 +4885,8 @@ module Aws::Inspector2
     class ListCodeSecurityIntegrationsResponse < Struct.new(
       :integrations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4691,7 +4909,8 @@ module Aws::Inspector2
       :scan_configuration_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4707,7 +4926,8 @@ module Aws::Inspector2
     class ListCodeSecurityScanConfigurationAssociationsResponse < Struct.new(
       :associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4723,7 +4943,8 @@ module Aws::Inspector2
     class ListCodeSecurityScanConfigurationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4739,7 +4960,8 @@ module Aws::Inspector2
     class ListCodeSecurityScanConfigurationsResponse < Struct.new(
       :configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4763,7 +4985,8 @@ module Aws::Inspector2
       :max_results,
       :next_token,
       :filter_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4779,7 +5002,8 @@ module Aws::Inspector2
     class ListCoverageOutput < Struct.new(
       :next_token,
       :covered_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4800,7 +5024,8 @@ module Aws::Inspector2
       :filter_criteria,
       :group_by,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4820,7 +5045,8 @@ module Aws::Inspector2
       :counts_by_group,
       :total_counts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4839,7 +5065,8 @@ module Aws::Inspector2
     class ListDelegatedAdminAccountsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4855,7 +5082,8 @@ module Aws::Inspector2
     class ListDelegatedAdminAccountsOutput < Struct.new(
       :delegated_admin_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4882,7 +5110,8 @@ module Aws::Inspector2
       :action,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4898,7 +5127,8 @@ module Aws::Inspector2
     class ListFiltersOutput < Struct.new(
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4930,7 +5160,8 @@ module Aws::Inspector2
       :max_results,
       :account_ids,
       :aggregation_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4950,7 +5181,8 @@ module Aws::Inspector2
       :aggregation_type,
       :responses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4977,7 +5209,8 @@ module Aws::Inspector2
       :next_token,
       :filter_criteria,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4993,7 +5226,8 @@ module Aws::Inspector2
     class ListFindingsOutput < Struct.new(
       :next_token,
       :findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5017,7 +5251,8 @@ module Aws::Inspector2
       :only_associated,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5031,7 +5266,8 @@ module Aws::Inspector2
     class ListMembersOutput < Struct.new(
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5040,7 +5276,8 @@ module Aws::Inspector2
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5049,7 +5286,8 @@ module Aws::Inspector2
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5072,7 +5310,8 @@ module Aws::Inspector2
       :max_results,
       :next_token,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5086,7 +5325,8 @@ module Aws::Inspector2
     class ListUsageTotalsOutput < Struct.new(
       :next_token,
       :totals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5104,7 +5344,8 @@ module Aws::Inspector2
       :comparison,
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5127,7 +5368,8 @@ module Aws::Inspector2
       :relationship_status,
       :delegated_admin_account_id,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5143,7 +5385,8 @@ module Aws::Inspector2
     class MemberAccountEc2DeepInspectionStatus < Struct.new(
       :account_id,
       :activate_deep_inspection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5163,7 +5406,8 @@ module Aws::Inspector2
       :account_id,
       :status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5177,7 +5421,8 @@ module Aws::Inspector2
     class MonthlySchedule < Struct.new(
       :start_time,
       :day,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5187,7 +5432,8 @@ module Aws::Inspector2
     #   @return [Array<Types::Step>]
     class NetworkPath < Struct.new(
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5206,7 +5452,8 @@ module Aws::Inspector2
       :open_port_range,
       :protocol,
       :network_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5220,13 +5467,15 @@ module Aws::Inspector2
     class NumberFilter < Struct.new(
       :upper_inclusive,
       :lower_inclusive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A one time schedule.</p>
     class OneTimeSchedule < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5244,7 +5493,8 @@ module Aws::Inspector2
       :package_names,
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5262,7 +5512,8 @@ module Aws::Inspector2
       :package_name,
       :account_id,
       :severity_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5300,7 +5551,8 @@ module Aws::Inspector2
       :source_layer_hash,
       :source_lambda_layer_arn,
       :file_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5347,7 +5599,8 @@ module Aws::Inspector2
       :vendor_created_at,
       :vendor_updated_at,
       :reference_urls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5364,7 +5617,8 @@ module Aws::Inspector2
     class PeriodicScanConfiguration < Struct.new(
       :frequency,
       :frequency_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5379,7 +5633,8 @@ module Aws::Inspector2
     class Permission < Struct.new(
       :service,
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5393,7 +5648,8 @@ module Aws::Inspector2
     class PortRange < Struct.new(
       :begin,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5407,7 +5663,8 @@ module Aws::Inspector2
     class PortRangeFilter < Struct.new(
       :begin_inclusive,
       :end_inclusive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5422,7 +5679,8 @@ module Aws::Inspector2
     class ProjectCodeSecurityScanConfiguration < Struct.new(
       :periodic_scan_configurations,
       :continuous_integration_scan_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5438,7 +5696,8 @@ module Aws::Inspector2
     class ProjectContinuousIntegrationScanConfiguration < Struct.new(
       :supported_event,
       :rule_set_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5453,7 +5712,8 @@ module Aws::Inspector2
     class ProjectPeriodicScanConfiguration < Struct.new(
       :frequency_expression,
       :rule_set_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5467,7 +5727,8 @@ module Aws::Inspector2
     class Recommendation < Struct.new(
       :text,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5478,7 +5739,8 @@ module Aws::Inspector2
     #   @return [Types::Recommendation]
     class Remediation < Struct.new(
       :recommendation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5496,7 +5758,8 @@ module Aws::Inspector2
       :repositories,
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5519,7 +5782,8 @@ module Aws::Inspector2
       :account_id,
       :severity_counts,
       :affected_images,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5532,12 +5796,14 @@ module Aws::Inspector2
     class ResetEncryptionKeyRequest < Struct.new(
       :scan_type,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ResetEncryptionKeyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5567,7 +5833,8 @@ module Aws::Inspector2
       :region,
       :tags,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5591,7 +5858,8 @@ module Aws::Inspector2
       :aws_ecr_container_image,
       :aws_lambda_function,
       :code_repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5629,7 +5897,8 @@ module Aws::Inspector2
       :ecr_image_tags,
       :ec2_instance_tags,
       :lambda_function_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5647,7 +5916,8 @@ module Aws::Inspector2
       :comparison,
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5657,7 +5927,8 @@ module Aws::Inspector2
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5684,7 +5955,8 @@ module Aws::Inspector2
       :ec2,
       :lambda_function,
       :code_repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5710,7 +5982,8 @@ module Aws::Inspector2
       :lambda,
       :lambda_code,
       :code_repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5737,7 +6010,8 @@ module Aws::Inspector2
       :lambda,
       :lambda_code,
       :code_repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5751,7 +6025,8 @@ module Aws::Inspector2
     class ResourceStringFilter < Struct.new(
       :comparison,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5864,7 +6139,8 @@ module Aws::Inspector2
     class ScanStatus < Struct.new(
       :status_code,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5887,7 +6163,8 @@ module Aws::Inspector2
       :weekly,
       :monthly,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OneTime < Schedule; end
@@ -5905,7 +6182,8 @@ module Aws::Inspector2
     #   @return [String]
     class ScopeSettings < Struct.new(
       :project_selection_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5915,7 +6193,8 @@ module Aws::Inspector2
     #   @return [Array<String>]
     class SearchVulnerabilitiesFilterCriteria < Struct.new(
       :vulnerability_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5931,7 +6210,8 @@ module Aws::Inspector2
     class SearchVulnerabilitiesRequest < Struct.new(
       :filter_criteria,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5945,7 +6225,8 @@ module Aws::Inspector2
     class SearchVulnerabilitiesResponse < Struct.new(
       :vulnerabilities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5958,12 +6239,14 @@ module Aws::Inspector2
     class SendCisSessionHealthRequest < Struct.new(
       :scan_job_id,
       :session_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SendCisSessionHealthResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5980,12 +6263,14 @@ module Aws::Inspector2
       :scan_job_id,
       :session_token,
       :messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SendCisSessionTelemetryResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5999,7 +6284,8 @@ module Aws::Inspector2
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6021,7 +6307,8 @@ module Aws::Inspector2
       :medium,
       :high,
       :critical,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6035,7 +6322,8 @@ module Aws::Inspector2
     class SortCriteria < Struct.new(
       :field,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6045,7 +6333,8 @@ module Aws::Inspector2
     #   @return [String]
     class StartCisSessionMessage < Struct.new(
       :session_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6058,12 +6347,14 @@ module Aws::Inspector2
     class StartCisSessionRequest < Struct.new(
       :scan_job_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartCisSessionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6077,7 +6368,8 @@ module Aws::Inspector2
     class StartCodeSecurityScanRequest < Struct.new(
       :client_token,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6090,7 +6382,8 @@ module Aws::Inspector2
     class StartCodeSecurityScanResponse < Struct.new(
       :scan_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6108,7 +6401,8 @@ module Aws::Inspector2
       :status,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6126,7 +6420,8 @@ module Aws::Inspector2
       :failed,
       :skipped,
       :passed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6145,7 +6440,8 @@ module Aws::Inspector2
       :component_id,
       :component_type,
       :component_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6183,7 +6479,8 @@ module Aws::Inspector2
       :not_applicable_checks,
       :informational_checks,
       :error_checks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6225,7 +6522,8 @@ module Aws::Inspector2
       :compute_platform,
       :benchmark_version,
       :benchmark_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6242,12 +6540,14 @@ module Aws::Inspector2
       :scan_job_id,
       :session_token,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopCisSessionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6261,7 +6561,8 @@ module Aws::Inspector2
     class StringFilter < Struct.new(
       :comparison,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6277,7 +6578,8 @@ module Aws::Inspector2
     class SuccessfulAssociationResult < Struct.new(
       :scan_configuration_arn,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6291,7 +6593,8 @@ module Aws::Inspector2
     class SuggestedFix < Struct.new(
       :description,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6309,7 +6612,8 @@ module Aws::Inspector2
       :comparison,
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6322,12 +6626,14 @@ module Aws::Inspector2
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6340,7 +6646,8 @@ module Aws::Inspector2
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6354,7 +6661,8 @@ module Aws::Inspector2
     class Time < Struct.new(
       :time_of_day,
       :timezone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6384,7 +6692,8 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       :finding_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6407,7 +6716,8 @@ module Aws::Inspector2
       :vulnerability_id,
       :account_id,
       :severity_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6420,12 +6730,14 @@ module Aws::Inspector2
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6451,7 +6763,8 @@ module Aws::Inspector2
       :security_level,
       :schedule,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6460,7 +6773,8 @@ module Aws::Inspector2
     #   @return [String]
     class UpdateCisScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6474,7 +6788,8 @@ module Aws::Inspector2
     class UpdateCisTargets < Struct.new(
       :account_ids,
       :target_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6487,7 +6802,8 @@ module Aws::Inspector2
     class UpdateCodeSecurityIntegrationRequest < Struct.new(
       :integration_arn,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6500,7 +6816,8 @@ module Aws::Inspector2
     class UpdateCodeSecurityIntegrationResponse < Struct.new(
       :integration_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6513,7 +6830,8 @@ module Aws::Inspector2
     class UpdateCodeSecurityScanConfigurationRequest < Struct.new(
       :scan_configuration_arn,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6522,7 +6840,8 @@ module Aws::Inspector2
     #   @return [String]
     class UpdateCodeSecurityScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6535,12 +6854,14 @@ module Aws::Inspector2
     class UpdateConfigurationInput < Struct.new(
       :ecr_configuration,
       :ec2_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6556,7 +6877,8 @@ module Aws::Inspector2
     class UpdateEc2DeepInspectionConfigurationRequest < Struct.new(
       :activate_deep_inspection,
       :package_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6578,7 +6900,8 @@ module Aws::Inspector2
       :org_package_paths,
       :status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6595,12 +6918,14 @@ module Aws::Inspector2
       :kms_key_id,
       :scan_type,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateEncryptionKeyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6629,7 +6954,8 @@ module Aws::Inspector2
       :name,
       :filter_arn,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6638,7 +6964,8 @@ module Aws::Inspector2
     #   @return [String]
     class UpdateFilterOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6652,7 +6979,8 @@ module Aws::Inspector2
     class UpdateGitHubIntegrationDetail < Struct.new(
       :code,
       :installation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6664,7 +6992,8 @@ module Aws::Inspector2
     #   @return [String]
     class UpdateGitLabSelfManagedIntegrationDetail < Struct.new(
       :auth_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6680,7 +7009,8 @@ module Aws::Inspector2
       :gitlab_self_managed,
       :github,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class GitlabSelfManaged < UpdateIntegrationDetails; end
@@ -6693,12 +7023,14 @@ module Aws::Inspector2
     #   @return [Array<String>]
     class UpdateOrgEc2DeepInspectionConfigurationRequest < Struct.new(
       :org_package_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateOrgEc2DeepInspectionConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6708,7 +7040,8 @@ module Aws::Inspector2
     #   @return [Types::AutoEnable]
     class UpdateOrganizationConfigurationInput < Struct.new(
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6718,7 +7051,8 @@ module Aws::Inspector2
     #   @return [Types::AutoEnable]
     class UpdateOrganizationConfigurationOutput < Struct.new(
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6740,7 +7074,8 @@ module Aws::Inspector2
       :total,
       :estimated_monthly_cost,
       :currency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6760,7 +7095,8 @@ module Aws::Inspector2
     class UsageTotal < Struct.new(
       :account_id,
       :usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6778,7 +7114,8 @@ module Aws::Inspector2
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6792,7 +7129,8 @@ module Aws::Inspector2
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6876,7 +7214,8 @@ module Aws::Inspector2
       :exploit_observed,
       :detection_platforms,
       :epss,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6927,7 +7266,8 @@ module Aws::Inspector2
       :fixed_in_version,
       :remediation,
       :source_lambda_layer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6946,7 +7286,8 @@ module Aws::Inspector2
     class WeeklySchedule < Struct.new(
       :start_time,
       :days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

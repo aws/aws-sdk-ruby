@@ -1009,7 +1009,6 @@ module Aws::ApplicationDiscoveryService
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalErrorException)
         operation.traits = {}
       end)
-
     end
 
     class << self

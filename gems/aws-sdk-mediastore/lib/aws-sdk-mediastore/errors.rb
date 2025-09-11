@@ -40,7 +40,7 @@ module Aws::MediaStore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaStore::Types::ContainerInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::MediaStore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaStore::Types::ContainerNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::MediaStore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaStore::Types::CorsPolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::MediaStore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaStore::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::MediaStore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaStore::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::MediaStore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaStore::Types::PolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

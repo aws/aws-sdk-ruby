@@ -45,7 +45,6 @@ module Aws::Identitystore
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

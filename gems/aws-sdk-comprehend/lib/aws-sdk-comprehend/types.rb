@@ -61,7 +61,8 @@ module Aws::Comprehend
       :annotation_data_s3_uri,
       :source_documents_s3_uri,
       :document_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +79,8 @@ module Aws::Comprehend
     class BatchDetectDominantLanguageItemResult < Struct.new(
       :index,
       :languages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +90,8 @@ module Aws::Comprehend
     #   @return [Array<String>]
     class BatchDetectDominantLanguageRequest < Struct.new(
       :text_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +111,8 @@ module Aws::Comprehend
     class BatchDetectDominantLanguageResponse < Struct.new(
       :result_list,
       :error_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +129,8 @@ module Aws::Comprehend
     class BatchDetectEntitiesItemResult < Struct.new(
       :index,
       :entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +145,8 @@ module Aws::Comprehend
     class BatchDetectEntitiesRequest < Struct.new(
       :text_list,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +166,8 @@ module Aws::Comprehend
     class BatchDetectEntitiesResponse < Struct.new(
       :result_list,
       :error_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +184,8 @@ module Aws::Comprehend
     class BatchDetectKeyPhrasesItemResult < Struct.new(
       :index,
       :key_phrases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +200,8 @@ module Aws::Comprehend
     class BatchDetectKeyPhrasesRequest < Struct.new(
       :text_list,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +221,8 @@ module Aws::Comprehend
     class BatchDetectKeyPhrasesResponse < Struct.new(
       :result_list,
       :error_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +243,8 @@ module Aws::Comprehend
       :index,
       :sentiment,
       :sentiment_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +259,8 @@ module Aws::Comprehend
     class BatchDetectSentimentRequest < Struct.new(
       :text_list,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +280,8 @@ module Aws::Comprehend
     class BatchDetectSentimentResponse < Struct.new(
       :result_list,
       :error_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +296,8 @@ module Aws::Comprehend
     class BatchDetectSyntaxItemResult < Struct.new(
       :index,
       :syntax_tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +313,8 @@ module Aws::Comprehend
     class BatchDetectSyntaxRequest < Struct.new(
       :text_list,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -319,7 +334,8 @@ module Aws::Comprehend
     class BatchDetectSyntaxResponse < Struct.new(
       :result_list,
       :error_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +349,8 @@ module Aws::Comprehend
     class BatchDetectTargetedSentimentItemResult < Struct.new(
       :index,
       :entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +364,8 @@ module Aws::Comprehend
     class BatchDetectTargetedSentimentRequest < Struct.new(
       :text_list,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +381,8 @@ module Aws::Comprehend
     class BatchDetectTargetedSentimentResponse < Struct.new(
       :result_list,
       :error_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -383,7 +402,8 @@ module Aws::Comprehend
       :index,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +413,8 @@ module Aws::Comprehend
     #   @return [String]
     class BatchSizeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +456,8 @@ module Aws::Comprehend
       :page,
       :geometry,
       :relationships,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +479,8 @@ module Aws::Comprehend
       :begin_offset,
       :end_offset,
       :child_blocks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +507,8 @@ module Aws::Comprehend
       :left,
       :top,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -502,7 +526,8 @@ module Aws::Comprehend
       :child_block_id,
       :begin_offset,
       :end_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +586,8 @@ module Aws::Comprehend
       :micro_recall,
       :micro_f1_score,
       :hamming_loss,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -587,7 +613,8 @@ module Aws::Comprehend
       :number_of_trained_documents,
       :number_of_test_documents,
       :evaluation_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +651,8 @@ module Aws::Comprehend
       :endpoint_arn,
       :bytes,
       :document_reader_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +697,8 @@ module Aws::Comprehend
       :document_type,
       :errors,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -679,7 +708,8 @@ module Aws::Comprehend
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +722,8 @@ module Aws::Comprehend
     class ContainsPiiEntitiesRequest < Struct.new(
       :text,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +733,8 @@ module Aws::Comprehend
     #   @return [Array<Types::EntityLabel>]
     class ContainsPiiEntitiesResponse < Struct.new(
       :labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +770,8 @@ module Aws::Comprehend
       :input_data_config,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,7 +780,8 @@ module Aws::Comprehend
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
       :dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,7 +892,8 @@ module Aws::Comprehend
       :mode,
       :model_kms_key_id,
       :model_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -867,7 +902,8 @@ module Aws::Comprehend
     #   @return [String]
     class CreateDocumentClassifierResponse < Struct.new(
       :document_classifier_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +947,8 @@ module Aws::Comprehend
       :tags,
       :data_access_role_arn,
       :flywheel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +962,8 @@ module Aws::Comprehend
     class CreateEndpointResponse < Struct.new(
       :endpoint_arn,
       :model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1029,7 +1067,8 @@ module Aws::Comprehend
       :vpc_config,
       :model_kms_key_id,
       :model_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1077,8 @@ module Aws::Comprehend
     #   @return [String]
     class CreateEntityRecognizerResponse < Struct.new(
       :entity_recognizer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1124,8 @@ module Aws::Comprehend
       :data_security_config,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1097,7 +1138,8 @@ module Aws::Comprehend
     class CreateFlywheelResponse < Struct.new(
       :flywheel_arn,
       :active_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1175,8 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :data_lake_kms_key_id,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1172,7 +1215,8 @@ module Aws::Comprehend
       :annotation_data_s3_uri,
       :source_documents_s3_uri,
       :document_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1200,7 +1244,8 @@ module Aws::Comprehend
     class DatasetDocumentClassifierInputDataConfig < Struct.new(
       :s3_uri,
       :label_delimiter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1257,8 @@ module Aws::Comprehend
     #   @return [String]
     class DatasetEntityRecognizerAnnotations < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1231,7 +1277,8 @@ module Aws::Comprehend
     class DatasetEntityRecognizerDocuments < Struct.new(
       :s3_uri,
       :input_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1290,8 @@ module Aws::Comprehend
     #   @return [String]
     class DatasetEntityRecognizerEntityList < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1311,8 @@ module Aws::Comprehend
       :annotations,
       :documents,
       :entity_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1285,7 +1334,8 @@ module Aws::Comprehend
       :dataset_type,
       :creation_time_after,
       :creation_time_before,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1315,7 +1365,8 @@ module Aws::Comprehend
       :data_format,
       :document_classifier_input_data_config,
       :entity_recognizer_input_data_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1413,8 @@ module Aws::Comprehend
       :number_of_documents,
       :creation_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,12 +1423,14 @@ module Aws::Comprehend
     #   @return [String]
     class DeleteDocumentClassifierRequest < Struct.new(
       :document_classifier_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDocumentClassifierResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1385,12 +1439,14 @@ module Aws::Comprehend
     #   @return [String]
     class DeleteEndpointRequest < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEndpointResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,12 +1455,14 @@ module Aws::Comprehend
     #   @return [String]
     class DeleteEntityRecognizerRequest < Struct.new(
       :entity_recognizer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEntityRecognizerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,12 +1471,14 @@ module Aws::Comprehend
     #   @return [String]
     class DeleteFlywheelRequest < Struct.new(
       :flywheel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFlywheelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1431,12 +1491,14 @@ module Aws::Comprehend
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1507,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
       :dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1454,7 +1517,8 @@ module Aws::Comprehend
     #   @return [Types::DatasetProperties]
     class DescribeDatasetResponse < Struct.new(
       :dataset_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1464,7 +1528,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeDocumentClassificationJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1539,8 @@ module Aws::Comprehend
     #   @return [Types::DocumentClassificationJobProperties]
     class DescribeDocumentClassificationJobResponse < Struct.new(
       :document_classification_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1484,7 +1550,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeDocumentClassifierRequest < Struct.new(
       :document_classifier_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,7 +1560,8 @@ module Aws::Comprehend
     #   @return [Types::DocumentClassifierProperties]
     class DescribeDocumentClassifierResponse < Struct.new(
       :document_classifier_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1571,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeDominantLanguageDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1582,8 @@ module Aws::Comprehend
     #   @return [Types::DominantLanguageDetectionJobProperties]
     class DescribeDominantLanguageDetectionJobResponse < Struct.new(
       :dominant_language_detection_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1522,7 +1592,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeEndpointRequest < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1602,8 @@ module Aws::Comprehend
     #   @return [Types::EndpointProperties]
     class DescribeEndpointResponse < Struct.new(
       :endpoint_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1541,7 +1613,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeEntitiesDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,7 +1623,8 @@ module Aws::Comprehend
     #   @return [Types::EntitiesDetectionJobProperties]
     class DescribeEntitiesDetectionJobResponse < Struct.new(
       :entities_detection_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1559,7 +1633,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeEntityRecognizerRequest < Struct.new(
       :entity_recognizer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1643,8 @@ module Aws::Comprehend
     #   @return [Types::EntityRecognizerProperties]
     class DescribeEntityRecognizerResponse < Struct.new(
       :entity_recognizer_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1653,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeEventsDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1663,8 @@ module Aws::Comprehend
     #   @return [Types::EventsDetectionJobProperties]
     class DescribeEventsDetectionJobResponse < Struct.new(
       :events_detection_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1677,8 @@ module Aws::Comprehend
     class DescribeFlywheelIterationRequest < Struct.new(
       :flywheel_arn,
       :flywheel_iteration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1608,7 +1687,8 @@ module Aws::Comprehend
     #   @return [Types::FlywheelIterationProperties]
     class DescribeFlywheelIterationResponse < Struct.new(
       :flywheel_iteration_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1617,7 +1697,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeFlywheelRequest < Struct.new(
       :flywheel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1707,8 @@ module Aws::Comprehend
     #   @return [Types::FlywheelProperties]
     class DescribeFlywheelResponse < Struct.new(
       :flywheel_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1637,7 +1719,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeKeyPhrasesDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1647,7 +1730,8 @@ module Aws::Comprehend
     #   @return [Types::KeyPhrasesDetectionJobProperties]
     class DescribeKeyPhrasesDetectionJobResponse < Struct.new(
       :key_phrases_detection_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,7 +1741,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribePiiEntitiesDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1751,8 @@ module Aws::Comprehend
     #   @return [Types::PiiEntitiesDetectionJobProperties]
     class DescribePiiEntitiesDetectionJobResponse < Struct.new(
       :pii_entities_detection_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1761,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1697,7 +1784,8 @@ module Aws::Comprehend
       :creation_time,
       :last_modified_time,
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1707,7 +1795,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeSentimentDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1805,8 @@ module Aws::Comprehend
     #   @return [Types::SentimentDetectionJobProperties]
     class DescribeSentimentDetectionJobResponse < Struct.new(
       :sentiment_detection_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1727,7 +1817,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeTargetedSentimentDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1736,7 +1827,8 @@ module Aws::Comprehend
     #   @return [Types::TargetedSentimentDetectionJobProperties]
     class DescribeTargetedSentimentDetectionJobResponse < Struct.new(
       :targeted_sentiment_detection_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1837,8 @@ module Aws::Comprehend
     #   @return [String]
     class DescribeTopicsDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1754,7 +1847,8 @@ module Aws::Comprehend
     #   @return [Types::TopicsDetectionJobProperties]
     class DescribeTopicsDetectionJobResponse < Struct.new(
       :topics_detection_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1763,7 +1857,8 @@ module Aws::Comprehend
     #   @return [String]
     class DetectDominantLanguageRequest < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1779,7 +1874,8 @@ module Aws::Comprehend
     #   @return [Array<Types::DominantLanguage>]
     class DetectDominantLanguageResponse < Struct.new(
       :languages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1830,7 +1926,8 @@ module Aws::Comprehend
       :endpoint_arn,
       :bytes,
       :document_reader_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1967,8 @@ module Aws::Comprehend
       :document_type,
       :blocks,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1885,7 +1983,8 @@ module Aws::Comprehend
     class DetectKeyPhrasesRequest < Struct.new(
       :text,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1898,7 +1997,8 @@ module Aws::Comprehend
     #   @return [Array<Types::KeyPhrase>]
     class DetectKeyPhrasesResponse < Struct.new(
       :key_phrases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1912,7 +2012,8 @@ module Aws::Comprehend
     class DetectPiiEntitiesRequest < Struct.new(
       :text,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1923,7 +2024,8 @@ module Aws::Comprehend
     #   @return [Array<Types::PiiEntity>]
     class DetectPiiEntitiesResponse < Struct.new(
       :entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1937,7 +2039,8 @@ module Aws::Comprehend
     class DetectSentimentRequest < Struct.new(
       :text,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2056,8 @@ module Aws::Comprehend
     class DetectSentimentResponse < Struct.new(
       :sentiment,
       :sentiment_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1968,7 +2072,8 @@ module Aws::Comprehend
     class DetectSyntaxRequest < Struct.new(
       :text,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1982,7 +2087,8 @@ module Aws::Comprehend
     #   @return [Array<Types::SyntaxToken>]
     class DetectSyntaxResponse < Struct.new(
       :syntax_tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,7 +2101,8 @@ module Aws::Comprehend
     class DetectTargetedSentimentRequest < Struct.new(
       :text,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2005,7 +2112,8 @@ module Aws::Comprehend
     #   @return [Array<Types::TargetedSentimentEntity>]
     class DetectTargetedSentimentResponse < Struct.new(
       :entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2019,7 +2127,8 @@ module Aws::Comprehend
     class DetectToxicContentRequest < Struct.new(
       :text_segments,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2032,7 +2141,8 @@ module Aws::Comprehend
     #   @return [Array<Types::ToxicLabels>]
     class DetectToxicContentResponse < Struct.new(
       :result_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2051,7 +2161,8 @@ module Aws::Comprehend
       :name,
       :score,
       :page,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2065,7 +2176,8 @@ module Aws::Comprehend
     class DocumentClassificationConfig < Struct.new(
       :mode,
       :labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2093,7 +2205,8 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2183,7 +2296,8 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :flywheel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2198,7 +2312,8 @@ module Aws::Comprehend
     class DocumentClassifierDocuments < Struct.new(
       :s3_uri,
       :test_s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2226,7 +2341,8 @@ module Aws::Comprehend
       :document_classifier_name,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2327,7 +2443,8 @@ module Aws::Comprehend
       :document_type,
       :documents,
       :document_reader_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2492,8 @@ module Aws::Comprehend
       :s3_uri,
       :kms_key_id,
       :flywheel_stats_s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2500,7 +2618,8 @@ module Aws::Comprehend
       :version_name,
       :source_model_arn,
       :flywheel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2526,7 +2645,8 @@ module Aws::Comprehend
       :latest_version_created_at,
       :latest_version_name,
       :latest_version_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2545,7 +2665,8 @@ module Aws::Comprehend
       :name,
       :score,
       :page,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2559,7 +2680,8 @@ module Aws::Comprehend
     class DocumentMetadata < Struct.new(
       :pages,
       :extracted_characters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2635,7 +2757,8 @@ module Aws::Comprehend
       :document_read_action,
       :document_read_mode,
       :feature_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2649,7 +2772,8 @@ module Aws::Comprehend
     class DocumentTypeListItem < Struct.new(
       :page,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2667,7 +2791,8 @@ module Aws::Comprehend
     class DominantLanguage < Struct.new(
       :language_code,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2696,7 +2821,8 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2779,7 +2905,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2804,7 +2931,8 @@ module Aws::Comprehend
       :status,
       :creation_time_before,
       :creation_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2867,7 +2995,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :desired_data_access_role_arn,
       :flywheel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2895,7 +3024,8 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2989,7 +3119,8 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :flywheel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3028,7 +3159,8 @@ module Aws::Comprehend
       :begin_offset,
       :end_offset,
       :block_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3044,7 +3176,8 @@ module Aws::Comprehend
     class EntityLabel < Struct.new(
       :name,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3054,7 +3187,8 @@ module Aws::Comprehend
     #   @return [Array<Types::EntityTypesListItem>]
     class EntityRecognitionConfig < Struct.new(
       :entity_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3070,7 +3204,8 @@ module Aws::Comprehend
     class EntityRecognizerAnnotations < Struct.new(
       :s3_uri,
       :test_s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3096,7 +3231,8 @@ module Aws::Comprehend
       :s3_uri,
       :test_s3_uri,
       :input_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3107,7 +3243,8 @@ module Aws::Comprehend
     #   @return [String]
     class EntityRecognizerEntityList < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3133,7 +3270,8 @@ module Aws::Comprehend
       :precision,
       :recall,
       :f1_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3161,7 +3299,8 @@ module Aws::Comprehend
       :recognizer_name,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3227,7 +3366,8 @@ module Aws::Comprehend
       :annotations,
       :entity_list,
       :augmented_manifests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3252,7 +3392,8 @@ module Aws::Comprehend
       :number_of_test_documents,
       :evaluation_metrics,
       :entity_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3273,7 +3414,8 @@ module Aws::Comprehend
       :type,
       :evaluation_metrics,
       :number_of_train_mentions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3283,7 +3425,8 @@ module Aws::Comprehend
     #   @return [String]
     class EntityRecognizerOutputDataConfig < Struct.new(
       :flywheel_stats_s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3391,7 +3534,8 @@ module Aws::Comprehend
       :source_model_arn,
       :flywheel_arn,
       :output_data_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3417,7 +3561,8 @@ module Aws::Comprehend
       :latest_version_created_at,
       :latest_version_name,
       :latest_version_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3442,7 +3587,8 @@ module Aws::Comprehend
       :precision,
       :recall,
       :f1_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3457,7 +3603,8 @@ module Aws::Comprehend
     #   @return [String]
     class EntityTypesListItem < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3497,7 +3644,8 @@ module Aws::Comprehend
       :page,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3524,7 +3672,8 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3590,7 +3739,8 @@ module Aws::Comprehend
       :language_code,
       :data_access_role_arn,
       :target_event_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3604,7 +3754,8 @@ module Aws::Comprehend
     class ExtractedCharactersListItem < Struct.new(
       :page,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3622,7 +3773,8 @@ module Aws::Comprehend
       :status,
       :creation_time_after,
       :creation_time_before,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3636,7 +3788,8 @@ module Aws::Comprehend
     class FlywheelIterationFilter < Struct.new(
       :creation_time_after,
       :creation_time_before,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3686,7 +3839,8 @@ module Aws::Comprehend
       :trained_model_arn,
       :trained_model_metrics,
       :evaluation_manifest_s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3708,7 +3862,8 @@ module Aws::Comprehend
       :average_precision,
       :average_recall,
       :average_accuracy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3763,7 +3918,8 @@ module Aws::Comprehend
       :creation_time,
       :last_modified_time,
       :latest_flywheel_iteration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3805,7 +3961,8 @@ module Aws::Comprehend
       :creation_time,
       :last_modified_time,
       :latest_flywheel_iteration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3821,7 +3978,8 @@ module Aws::Comprehend
     class Geometry < Struct.new(
       :bounding_box,
       :polygon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3871,7 +4029,8 @@ module Aws::Comprehend
       :model_kms_key_id,
       :data_access_role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3880,7 +4039,8 @@ module Aws::Comprehend
     #   @return [String]
     class ImportModelResponse < Struct.new(
       :model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3919,7 +4079,8 @@ module Aws::Comprehend
       :s3_uri,
       :input_format,
       :document_reader_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3928,7 +4089,8 @@ module Aws::Comprehend
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3938,7 +4100,8 @@ module Aws::Comprehend
     #   @return [String]
     class InvalidFilterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3971,7 +4134,8 @@ module Aws::Comprehend
     #   @return [String]
     class InvalidRequestDetail < Struct.new(
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3987,7 +4151,8 @@ module Aws::Comprehend
       :message,
       :reason,
       :detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3996,7 +4161,8 @@ module Aws::Comprehend
     #   @return [String]
     class JobNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4021,7 +4187,8 @@ module Aws::Comprehend
       :text,
       :begin_offset,
       :end_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4049,7 +4216,8 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4135,7 +4303,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4145,7 +4314,8 @@ module Aws::Comprehend
     #   @return [String]
     class KmsKeyValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4166,7 +4336,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4179,7 +4350,8 @@ module Aws::Comprehend
     class ListDatasetsResponse < Struct.new(
       :dataset_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4197,7 +4369,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4210,7 +4383,8 @@ module Aws::Comprehend
     class ListDocumentClassificationJobsResponse < Struct.new(
       :document_classification_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4223,7 +4397,8 @@ module Aws::Comprehend
     class ListDocumentClassifierSummariesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4236,7 +4411,8 @@ module Aws::Comprehend
     class ListDocumentClassifierSummariesResponse < Struct.new(
       :document_classifier_summaries_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4254,7 +4430,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4267,7 +4444,8 @@ module Aws::Comprehend
     class ListDocumentClassifiersResponse < Struct.new(
       :document_classifier_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4285,7 +4463,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4298,7 +4477,8 @@ module Aws::Comprehend
     class ListDominantLanguageDetectionJobsResponse < Struct.new(
       :dominant_language_detection_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4317,7 +4497,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4331,7 +4512,8 @@ module Aws::Comprehend
     class ListEndpointsResponse < Struct.new(
       :endpoint_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4349,7 +4531,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4362,7 +4545,8 @@ module Aws::Comprehend
     class ListEntitiesDetectionJobsResponse < Struct.new(
       :entities_detection_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4375,7 +4559,8 @@ module Aws::Comprehend
     class ListEntityRecognizerSummariesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4388,7 +4573,8 @@ module Aws::Comprehend
     class ListEntityRecognizerSummariesResponse < Struct.new(
       :entity_recognizer_summaries_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4407,7 +4593,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4420,7 +4607,8 @@ module Aws::Comprehend
     class ListEntityRecognizersResponse < Struct.new(
       :entity_recognizer_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4438,7 +4626,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4451,7 +4640,8 @@ module Aws::Comprehend
     class ListEventsDetectionJobsResponse < Struct.new(
       :events_detection_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4472,7 +4662,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4485,7 +4676,8 @@ module Aws::Comprehend
     class ListFlywheelIterationHistoryResponse < Struct.new(
       :flywheel_iteration_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4504,7 +4696,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4518,7 +4711,8 @@ module Aws::Comprehend
     class ListFlywheelsResponse < Struct.new(
       :flywheel_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4536,7 +4730,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4549,7 +4744,8 @@ module Aws::Comprehend
     class ListKeyPhrasesDetectionJobsResponse < Struct.new(
       :key_phrases_detection_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4567,7 +4763,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4580,7 +4777,8 @@ module Aws::Comprehend
     class ListPiiEntitiesDetectionJobsResponse < Struct.new(
       :pii_entities_detection_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4598,7 +4796,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4611,7 +4810,8 @@ module Aws::Comprehend
     class ListSentimentDetectionJobsResponse < Struct.new(
       :sentiment_detection_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4621,7 +4821,8 @@ module Aws::Comprehend
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4638,7 +4839,8 @@ module Aws::Comprehend
     class ListTagsForResourceResponse < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4656,7 +4858,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4669,7 +4872,8 @@ module Aws::Comprehend
     class ListTargetedSentimentDetectionJobsResponse < Struct.new(
       :targeted_sentiment_detection_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4687,7 +4891,8 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4700,7 +4905,8 @@ module Aws::Comprehend
     class ListTopicsDetectionJobsResponse < Struct.new(
       :topics_detection_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4716,7 +4922,8 @@ module Aws::Comprehend
     class MentionSentiment < Struct.new(
       :sentiment,
       :sentiment_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4765,7 +4972,8 @@ module Aws::Comprehend
     class OutputDataConfig < Struct.new(
       :s3_uri,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4784,7 +4992,8 @@ module Aws::Comprehend
     class PartOfSpeechTag < Struct.new(
       :tag,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4811,7 +5020,8 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4885,7 +5095,8 @@ module Aws::Comprehend
       :language_code,
       :data_access_role_arn,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4910,7 +5121,8 @@ module Aws::Comprehend
       :type,
       :begin_offset,
       :end_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4930,7 +5142,8 @@ module Aws::Comprehend
     class PiiOutputDataConfig < Struct.new(
       :s3_uri,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4945,7 +5158,8 @@ module Aws::Comprehend
     class Point < Struct.new(
       :x,
       :y,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4975,7 +5189,8 @@ module Aws::Comprehend
       :resource_arn,
       :resource_policy,
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4985,7 +5200,8 @@ module Aws::Comprehend
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5005,7 +5221,8 @@ module Aws::Comprehend
       :pii_entity_types,
       :mask_mode,
       :mask_character,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5019,7 +5236,8 @@ module Aws::Comprehend
     class RelationshipsListItem < Struct.new(
       :ids,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5029,7 +5247,8 @@ module Aws::Comprehend
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5039,7 +5258,8 @@ module Aws::Comprehend
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5048,7 +5268,8 @@ module Aws::Comprehend
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5058,7 +5279,8 @@ module Aws::Comprehend
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5086,7 +5308,8 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5172,7 +5395,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5199,7 +5423,8 @@ module Aws::Comprehend
       :negative,
       :neutral,
       :mixed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5265,7 +5490,8 @@ module Aws::Comprehend
       :vpc_config,
       :tags,
       :flywheel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5318,7 +5544,8 @@ module Aws::Comprehend
       :job_arn,
       :job_status,
       :document_classifier_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5374,7 +5601,8 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5415,7 +5643,8 @@ module Aws::Comprehend
       :job_id,
       :job_arn,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5488,7 +5717,8 @@ module Aws::Comprehend
       :vpc_config,
       :tags,
       :flywheel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5540,7 +5770,8 @@ module Aws::Comprehend
       :job_arn,
       :job_status,
       :entity_recognizer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5581,7 +5812,8 @@ module Aws::Comprehend
       :client_request_token,
       :target_event_types,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5608,7 +5840,8 @@ module Aws::Comprehend
       :job_id,
       :job_arn,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5622,7 +5855,8 @@ module Aws::Comprehend
     class StartFlywheelIterationRequest < Struct.new(
       :flywheel_arn,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5635,7 +5869,8 @@ module Aws::Comprehend
     class StartFlywheelIterationResponse < Struct.new(
       :flywheel_arn,
       :flywheel_iteration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5697,7 +5932,8 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5738,7 +5974,8 @@ module Aws::Comprehend
       :job_id,
       :job_arn,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5788,7 +6025,8 @@ module Aws::Comprehend
       :language_code,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5814,7 +6052,8 @@ module Aws::Comprehend
       :job_id,
       :job_arn,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5875,7 +6114,8 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5916,7 +6156,8 @@ module Aws::Comprehend
       :job_id,
       :job_arn,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5977,7 +6218,8 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6019,7 +6261,8 @@ module Aws::Comprehend
       :job_id,
       :job_arn,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6081,7 +6324,8 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6124,7 +6368,8 @@ module Aws::Comprehend
       :job_id,
       :job_arn,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6133,7 +6378,8 @@ module Aws::Comprehend
     #   @return [String]
     class StopDominantLanguageDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6148,7 +6394,8 @@ module Aws::Comprehend
     class StopDominantLanguageDetectionJobResponse < Struct.new(
       :job_id,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6157,7 +6404,8 @@ module Aws::Comprehend
     #   @return [String]
     class StopEntitiesDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6172,7 +6420,8 @@ module Aws::Comprehend
     class StopEntitiesDetectionJobResponse < Struct.new(
       :job_id,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6181,7 +6430,8 @@ module Aws::Comprehend
     #   @return [String]
     class StopEventsDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6194,7 +6444,8 @@ module Aws::Comprehend
     class StopEventsDetectionJobResponse < Struct.new(
       :job_id,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6203,7 +6454,8 @@ module Aws::Comprehend
     #   @return [String]
     class StopKeyPhrasesDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6218,7 +6470,8 @@ module Aws::Comprehend
     class StopKeyPhrasesDetectionJobResponse < Struct.new(
       :job_id,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6227,7 +6480,8 @@ module Aws::Comprehend
     #   @return [String]
     class StopPiiEntitiesDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6240,7 +6494,8 @@ module Aws::Comprehend
     class StopPiiEntitiesDetectionJobResponse < Struct.new(
       :job_id,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6249,7 +6504,8 @@ module Aws::Comprehend
     #   @return [String]
     class StopSentimentDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6264,7 +6520,8 @@ module Aws::Comprehend
     class StopSentimentDetectionJobResponse < Struct.new(
       :job_id,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6273,7 +6530,8 @@ module Aws::Comprehend
     #   @return [String]
     class StopTargetedSentimentDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6288,7 +6546,8 @@ module Aws::Comprehend
     class StopTargetedSentimentDetectionJobResponse < Struct.new(
       :job_id,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6298,12 +6557,14 @@ module Aws::Comprehend
     #   @return [String]
     class StopTrainingDocumentClassifierRequest < Struct.new(
       :document_classifier_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopTrainingDocumentClassifierResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6313,12 +6574,14 @@ module Aws::Comprehend
     #   @return [String]
     class StopTrainingEntityRecognizerRequest < Struct.new(
       :entity_recognizer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopTrainingEntityRecognizerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6350,7 +6613,8 @@ module Aws::Comprehend
       :begin_offset,
       :end_offset,
       :part_of_speech,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6372,7 +6636,8 @@ module Aws::Comprehend
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6387,12 +6652,14 @@ module Aws::Comprehend
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6420,7 +6687,8 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6506,7 +6774,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6523,7 +6792,8 @@ module Aws::Comprehend
     class TargetedSentimentEntity < Struct.new(
       :descriptive_mention_index,
       :mentions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6559,7 +6829,8 @@ module Aws::Comprehend
       :mention_sentiment,
       :begin_offset,
       :end_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6577,7 +6848,8 @@ module Aws::Comprehend
       :language_code,
       :document_classification_config,
       :entity_recognition_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6587,7 +6859,8 @@ module Aws::Comprehend
     #   @return [String]
     class TextSegment < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6596,7 +6869,8 @@ module Aws::Comprehend
     #   @return [String]
     class TextSizeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6605,7 +6879,8 @@ module Aws::Comprehend
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6615,7 +6890,8 @@ module Aws::Comprehend
     #   @return [String]
     class TooManyTagKeysException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6626,7 +6902,8 @@ module Aws::Comprehend
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6654,7 +6931,8 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6741,7 +7019,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6757,7 +7036,8 @@ module Aws::Comprehend
     class ToxicContent < Struct.new(
       :name,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6771,7 +7051,8 @@ module Aws::Comprehend
     class ToxicLabels < Struct.new(
       :labels,
       :toxicity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6782,7 +7063,8 @@ module Aws::Comprehend
     #   @return [String]
     class UnsupportedLanguageException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6799,12 +7081,14 @@ module Aws::Comprehend
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6836,7 +7120,8 @@ module Aws::Comprehend
       :model_kms_key_id,
       :volume_kms_key_id,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6863,7 +7148,8 @@ module Aws::Comprehend
       :desired_inference_units,
       :desired_data_access_role_arn,
       :flywheel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6872,7 +7158,8 @@ module Aws::Comprehend
     #   @return [String]
     class UpdateEndpointResponse < Struct.new(
       :desired_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6894,7 +7181,8 @@ module Aws::Comprehend
       :active_model_arn,
       :data_access_role_arn,
       :data_security_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6903,7 +7191,8 @@ module Aws::Comprehend
     #   @return [Types::FlywheelProperties]
     class UpdateFlywheelResponse < Struct.new(
       :flywheel_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6927,7 +7216,8 @@ module Aws::Comprehend
     class VpcConfig < Struct.new(
       :security_group_ids,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6953,7 +7243,8 @@ module Aws::Comprehend
       :page,
       :warn_code,
       :warn_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

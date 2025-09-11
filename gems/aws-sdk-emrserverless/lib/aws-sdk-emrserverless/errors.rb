@@ -38,7 +38,7 @@ module Aws::EMRServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EMRServerless::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -51,7 +51,7 @@ module Aws::EMRServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EMRServerless::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -64,7 +64,7 @@ module Aws::EMRServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EMRServerless::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::EMRServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EMRServerless::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::EMRServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EMRServerless::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

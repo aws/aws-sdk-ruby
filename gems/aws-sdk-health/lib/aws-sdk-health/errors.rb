@@ -38,7 +38,7 @@ module Aws::Health
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Health::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -51,7 +51,7 @@ module Aws::Health
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Health::Types::InvalidPaginationToken] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -64,7 +64,7 @@ module Aws::Health
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Health::Types::UnsupportedLocale] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

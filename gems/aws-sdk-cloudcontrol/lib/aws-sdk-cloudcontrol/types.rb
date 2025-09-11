@@ -11,7 +11,8 @@ module Aws::CloudControl
     #   @return [String]
     class AlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::CloudControl
     #   @return [String]
     class CancelResourceRequestOperationInput < Struct.new(
       :request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +34,8 @@ module Aws::CloudControl
     #   @return [Types::ProgressEvent]
     class CancelResourceRequestOperationOutput < Struct.new(
       :progress_event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +46,8 @@ module Aws::CloudControl
     #   @return [String]
     class ClientTokenConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,7 +56,8 @@ module Aws::CloudControl
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +66,8 @@ module Aws::CloudControl
     #   @return [String]
     class ConcurrentOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +133,8 @@ module Aws::CloudControl
       :role_arn,
       :client_token,
       :desired_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,7 +146,8 @@ module Aws::CloudControl
     #   @return [Types::ProgressEvent]
     class CreateResourceOperationOutput < Struct.new(
       :progress_event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +207,8 @@ module Aws::CloudControl
       :role_arn,
       :client_token,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +220,8 @@ module Aws::CloudControl
     #   @return [Types::ProgressEvent]
     class DeleteResourceOperationOutput < Struct.new(
       :progress_event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +231,8 @@ module Aws::CloudControl
     #   @return [String]
     class GeneralServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +278,8 @@ module Aws::CloudControl
       :type_version_id,
       :role_arn,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +292,8 @@ module Aws::CloudControl
     class GetResourceOperationOutput < Struct.new(
       :type_name,
       :resource_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -291,7 +304,8 @@ module Aws::CloudControl
     #   @return [String]
     class GetResourceRequestStatusOperationInput < Struct.new(
       :request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +318,8 @@ module Aws::CloudControl
     class GetResourceRequestStatusOperationOutput < Struct.new(
       :progress_event,
       :hooks_progress_event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +329,8 @@ module Aws::CloudControl
     #   @return [String]
     class HandlerFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +340,8 @@ module Aws::CloudControl
     #   @return [String]
     class HandlerInternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -397,7 +414,8 @@ module Aws::CloudControl
       :hook_event_time,
       :hook_status_message,
       :failure_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,7 +425,8 @@ module Aws::CloudControl
     #   @return [String]
     class InvalidCredentialsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +436,8 @@ module Aws::CloudControl
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -443,7 +463,8 @@ module Aws::CloudControl
       :max_results,
       :next_token,
       :resource_request_status_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +481,8 @@ module Aws::CloudControl
     class ListResourceRequestsOutput < Struct.new(
       :resource_request_status_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +530,8 @@ module Aws::CloudControl
       :next_token,
       :max_results,
       :resource_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -530,7 +553,8 @@ module Aws::CloudControl
       :type_name,
       :resource_descriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +564,8 @@ module Aws::CloudControl
     #   @return [String]
     class NetworkFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +575,8 @@ module Aws::CloudControl
     #   @return [String]
     class NotStabilizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +586,8 @@ module Aws::CloudControl
     #   @return [String]
     class NotUpdatableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +598,8 @@ module Aws::CloudControl
     #   @return [String]
     class PrivateTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +688,8 @@ module Aws::CloudControl
       :status_message,
       :error_code,
       :retry_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +698,8 @@ module Aws::CloudControl
     #   @return [String]
     class RequestTokenNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +710,8 @@ module Aws::CloudControl
     #   @return [String]
     class ResourceConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -696,7 +727,8 @@ module Aws::CloudControl
     class ResourceDescription < Struct.new(
       :identifier,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,7 +737,8 @@ module Aws::CloudControl
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +779,8 @@ module Aws::CloudControl
     class ResourceRequestStatusFilter < Struct.new(
       :operations,
       :operation_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +790,8 @@ module Aws::CloudControl
     #   @return [String]
     class ServiceInternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +801,8 @@ module Aws::CloudControl
     #   @return [String]
     class ServiceLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +811,8 @@ module Aws::CloudControl
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +821,8 @@ module Aws::CloudControl
     #   @return [String]
     class TypeNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +831,8 @@ module Aws::CloudControl
     #   @return [String]
     class UnsupportedActionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +898,8 @@ module Aws::CloudControl
       :client_token,
       :identifier,
       :patch_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +910,8 @@ module Aws::CloudControl
     #   @return [Types::ProgressEvent]
     class UpdateResourceOperationOutput < Struct.new(
       :progress_event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

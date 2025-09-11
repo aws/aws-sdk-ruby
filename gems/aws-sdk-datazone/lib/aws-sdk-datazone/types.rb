@@ -20,7 +20,8 @@ module Aws::DataZone
       :prediction_target,
       :prediction_choice,
       :edited_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +50,8 @@ module Aws::DataZone
       :accept_rule,
       :accept_choices,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +68,8 @@ module Aws::DataZone
       :domain_id,
       :asset_id,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +83,8 @@ module Aws::DataZone
     class AcceptRule < Struct.new(
       :rule,
       :threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,7 +105,8 @@ module Aws::DataZone
       :identifier,
       :decision_comment,
       :asset_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +167,8 @@ module Aws::DataZone
       :decision_comment,
       :existing_subscription_id,
       :metadata_forms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +182,8 @@ module Aws::DataZone
     class AcceptedAssetScope < Struct.new(
       :asset_id,
       :filter_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +192,8 @@ module Aws::DataZone
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -203,7 +211,8 @@ module Aws::DataZone
       :aws_account_id,
       :supported_regions,
       :aws_account_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -237,7 +246,8 @@ module Aws::DataZone
       :domain_unit_id,
       :created_by,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +262,8 @@ module Aws::DataZone
       :accounts,
       :custom_account_pool_handler,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Accounts < AccountSource; end
@@ -267,7 +278,8 @@ module Aws::DataZone
     class ActionParameters < Struct.new(
       :aws_console_link,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AwsConsoleLink < ActionParameters; end
@@ -295,12 +307,14 @@ module Aws::DataZone
       :entity_identifier,
       :owner,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddEntityOwnerOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +347,8 @@ module Aws::DataZone
       :principal,
       :detail,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +357,8 @@ module Aws::DataZone
     #   @return [String]
     class AddPolicyGrantOutput < Struct.new(
       :grant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -352,7 +368,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class AddToProjectMemberPoolPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +383,8 @@ module Aws::DataZone
     class AggregationListItem < Struct.new(
       :attribute,
       :display_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +402,8 @@ module Aws::DataZone
       :attribute,
       :display_value,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,19 +421,22 @@ module Aws::DataZone
       :value,
       :count,
       :display_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The grant filter for all domain units.</p>
     class AllDomainUnitsGrantFilter < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The all users grant filter.</p>
     class AllUsersGrantFilter < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -429,7 +451,8 @@ module Aws::DataZone
       :column_configuration,
       :row_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ColumnConfiguration < AssetFilterConfiguration; end
@@ -479,7 +502,8 @@ module Aws::DataZone
       :effective_row_filter,
       :created_at,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +521,8 @@ module Aws::DataZone
       :entity_id,
       :entity_revision,
       :entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +588,8 @@ module Aws::DataZone
       :owning_project_id,
       :additional_attributes,
       :governed_glossary_terms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +611,8 @@ module Aws::DataZone
       :read_only_forms_output,
       :latest_time_series_data_point_forms_output,
       :match_rationale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +654,8 @@ module Aws::DataZone
       :glossary_terms,
       :governed_glossary_terms,
       :owning_project_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +669,8 @@ module Aws::DataZone
     class AssetListingDetails < Struct.new(
       :listing_id,
       :listing_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +732,8 @@ module Aws::DataZone
       :governed_glossary_terms,
       :owning_project_id,
       :additional_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +751,8 @@ module Aws::DataZone
       :forms,
       :match_rationale,
       :latest_time_series_data_point_forms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,7 +778,8 @@ module Aws::DataZone
       :revision,
       :created_by,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +801,8 @@ module Aws::DataZone
       :filter_ids,
       :status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +816,8 @@ module Aws::DataZone
     class AssetTargetNameMap < Struct.new(
       :asset_id,
       :target_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +871,8 @@ module Aws::DataZone
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +886,8 @@ module Aws::DataZone
     class AssetTypesForRule < Struct.new(
       :selection_mode,
       :specific_asset_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,12 +904,14 @@ module Aws::DataZone
       :domain_identifier,
       :environment_identifier,
       :environment_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateEnvironmentRoleOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,12 +932,14 @@ module Aws::DataZone
       :entity_identifier,
       :entity_type,
       :governed_glossary_terms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateGovernedTermsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +949,8 @@ module Aws::DataZone
     #   @return [String]
     class AthenaPropertiesInput < Struct.new(
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -919,7 +960,8 @@ module Aws::DataZone
     #   @return [String]
     class AthenaPropertiesOutput < Struct.new(
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +971,8 @@ module Aws::DataZone
     #   @return [String]
     class AthenaPropertiesPatch < Struct.new(
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +990,8 @@ module Aws::DataZone
       :authentication_type,
       :secret_arn,
       :o_auth2_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +1021,8 @@ module Aws::DataZone
       :kms_key_arn,
       :basic_authentication_credentials,
       :custom_authentication_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1036,8 @@ module Aws::DataZone
     class AuthenticationConfigurationPatch < Struct.new(
       :secret_arn,
       :basic_authentication_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1051,8 @@ module Aws::DataZone
     class AuthorizationCodeProperties < Struct.new(
       :authorization_code,
       :redirect_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1067,8 @@ module Aws::DataZone
       :aws_account_id,
       :aws_account_id_path,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AwsAccountId < AwsAccount; end
@@ -1034,7 +1082,8 @@ module Aws::DataZone
     #   @return [String]
     class AwsConsoleLinkParameters < Struct.new(
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1056,7 +1105,8 @@ module Aws::DataZone
       :aws_account_id,
       :aws_region,
       :iam_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1071,7 +1121,8 @@ module Aws::DataZone
     class BasicAuthenticationCredentials < Struct.new(
       :user_name,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1132,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class BusinessNameGenerationConfiguration < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,12 +1146,14 @@ module Aws::DataZone
     class CancelMetadataGenerationRunInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelMetadataGenerationRunOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1166,8 @@ module Aws::DataZone
     class CancelSubscriptionInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1161,7 +1216,8 @@ module Aws::DataZone
       :subscribed_listing,
       :subscription_request_id,
       :retain_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1171,7 +1227,8 @@ module Aws::DataZone
     #   @return [String]
     class CloudFormationProperties < Struct.new(
       :template_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1181,7 +1238,8 @@ module Aws::DataZone
     #   @return [Array<String>]
     class ColumnFilterConfiguration < Struct.new(
       :included_column_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1195,7 +1253,8 @@ module Aws::DataZone
     class ConfigurableActionParameter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1213,7 +1272,8 @@ module Aws::DataZone
       :type,
       :auth,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1222,7 +1282,8 @@ module Aws::DataZone
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,7 +1306,8 @@ module Aws::DataZone
       :secret_access_key,
       :session_token,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,7 +1346,8 @@ module Aws::DataZone
       :spark_glue_properties,
       :s3_properties,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AthenaProperties < ConnectionPropertiesInput; end
@@ -1333,7 +1396,8 @@ module Aws::DataZone
       :spark_glue_properties,
       :s3_properties,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AthenaProperties < ConnectionPropertiesOutput; end
@@ -1374,7 +1438,8 @@ module Aws::DataZone
       :spark_emr_properties,
       :s3_properties,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AthenaProperties < ConnectionPropertiesPatch; end
@@ -1424,7 +1489,8 @@ module Aws::DataZone
       :project_id,
       :props,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1515,8 @@ module Aws::DataZone
       :description,
       :resolution_strategy,
       :account_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1498,7 +1565,8 @@ module Aws::DataZone
       :last_updated_at,
       :updated_by,
       :domain_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1527,7 +1595,8 @@ module Aws::DataZone
       :description,
       :configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1645,8 @@ module Aws::DataZone
       :error_message,
       :effective_column_names,
       :effective_row_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1695,8 @@ module Aws::DataZone
       :owning_project_identifier,
       :prediction_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1781,8 @@ module Aws::DataZone
       :read_only_forms_output,
       :latest_time_series_data_point_forms_output,
       :prediction_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1751,7 +1823,8 @@ module Aws::DataZone
       :forms_input,
       :prediction_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1836,7 +1909,8 @@ module Aws::DataZone
       :read_only_forms_output,
       :latest_time_series_data_point_forms_output,
       :prediction_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1861,7 +1935,8 @@ module Aws::DataZone
       :description,
       :forms_input,
       :owning_project_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1914,7 +1989,8 @@ module Aws::DataZone
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1924,7 +2000,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class CreateAssetTypePolicyGrantDetail < Struct.new(
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2034,8 @@ module Aws::DataZone
       :environment_identifier,
       :name,
       :props,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2080,8 @@ module Aws::DataZone
       :project_id,
       :props,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2039,7 +2118,8 @@ module Aws::DataZone
       :forms_input,
       :items,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2180,8 @@ module Aws::DataZone
       :created_by,
       :first_revision_created_at,
       :first_revision_created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2142,7 +2223,8 @@ module Aws::DataZone
       :items,
       :forms_input,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2203,7 +2285,8 @@ module Aws::DataZone
       :created_by,
       :first_revision_created_at,
       :first_revision_created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2269,7 +2352,8 @@ module Aws::DataZone
       :publish_on_import,
       :asset_forms_input,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2358,7 +2442,8 @@ module Aws::DataZone
       :error_message,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2399,7 +2484,8 @@ module Aws::DataZone
       :domain_version,
       :service_role,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2456,7 +2542,8 @@ module Aws::DataZone
       :tags,
       :domain_version,
       :service_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2481,7 +2568,8 @@ module Aws::DataZone
       :parent_domain_unit_identifier,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2522,7 +2610,8 @@ module Aws::DataZone
       :ancestor_domain_unit_ids,
       :created_at,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2532,7 +2621,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class CreateDomainUnitPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2557,7 +2647,8 @@ module Aws::DataZone
       :name,
       :parameters,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2586,7 +2677,8 @@ module Aws::DataZone
       :name,
       :parameters,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2639,7 +2731,8 @@ module Aws::DataZone
       :environment_blueprint_identifier,
       :deployment_order,
       :environment_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2732,7 +2825,8 @@ module Aws::DataZone
       :deployment_properties,
       :environment_blueprint_id,
       :environment_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2774,7 +2868,8 @@ module Aws::DataZone
       :user_parameters,
       :aws_account_id,
       :aws_account_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2827,7 +2922,8 @@ module Aws::DataZone
       :environment_blueprint_id,
       :project_id,
       :user_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2837,7 +2933,8 @@ module Aws::DataZone
     #   @return [String]
     class CreateEnvironmentProfilePolicyGrantDetail < Struct.new(
       :domain_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2866,7 +2963,8 @@ module Aws::DataZone
       :owning_project_identifier,
       :status,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2899,7 +2997,8 @@ module Aws::DataZone
       :owning_project_id,
       :origin_domain_id,
       :origin_project_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2909,7 +3008,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class CreateFormTypePolicyGrantDetail < Struct.new(
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2942,7 +3042,8 @@ module Aws::DataZone
       :status,
       :usage_restrictions,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2975,7 +3076,8 @@ module Aws::DataZone
       :description,
       :status,
       :usage_restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2985,7 +3087,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class CreateGlossaryPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3022,7 +3125,8 @@ module Aws::DataZone
       :long_description,
       :term_relations,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3063,7 +3167,8 @@ module Aws::DataZone
       :long_description,
       :term_relations,
       :usage_restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3080,7 +3185,8 @@ module Aws::DataZone
       :domain_identifier,
       :group_identifier,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3101,7 +3207,8 @@ module Aws::DataZone
       :id,
       :status,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3130,7 +3237,8 @@ module Aws::DataZone
       :entity_revision,
       :action,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3147,7 +3255,8 @@ module Aws::DataZone
       :listing_id,
       :listing_revision,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3161,7 +3270,8 @@ module Aws::DataZone
     class CreateProjectFromProjectProfilePolicyGrantDetail < Struct.new(
       :include_child_domain_units,
       :project_profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3194,7 +3304,8 @@ module Aws::DataZone
       :domain_unit_id,
       :project_profile_id,
       :user_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3215,12 +3326,14 @@ module Aws::DataZone
       :project_identifier,
       :member,
       :designation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateProjectMembershipOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3281,7 +3394,8 @@ module Aws::DataZone
       :project_profile_id,
       :user_parameters,
       :environment_deployment_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3291,7 +3405,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class CreateProjectPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3320,7 +3435,8 @@ module Aws::DataZone
       :status,
       :environment_configurations,
       :domain_unit_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3365,7 +3481,8 @@ module Aws::DataZone
       :created_at,
       :last_updated_at,
       :domain_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3402,7 +3519,8 @@ module Aws::DataZone
       :detail,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3451,7 +3569,8 @@ module Aws::DataZone
       :description,
       :created_at,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3480,7 +3599,8 @@ module Aws::DataZone
       :granted_entity,
       :asset_target_names,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3531,7 +3651,8 @@ module Aws::DataZone
       :status,
       :assets,
       :subscription_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3560,7 +3681,8 @@ module Aws::DataZone
       :request_reason,
       :client_token,
       :metadata_forms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3621,7 +3743,8 @@ module Aws::DataZone
       :decision_comment,
       :existing_subscription_id,
       :metadata_forms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3666,7 +3789,8 @@ module Aws::DataZone
       :applicable_asset_types,
       :provider,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3731,7 +3855,8 @@ module Aws::DataZone
       :applicable_asset_types,
       :subscription_target_config,
       :provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3752,7 +3877,8 @@ module Aws::DataZone
       :user_identifier,
       :user_type,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3777,7 +3903,8 @@ module Aws::DataZone
       :type,
       :status,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3791,7 +3918,8 @@ module Aws::DataZone
     class CustomAccountPoolHandler < Struct.new(
       :lambda_function_arn,
       :lambda_execution_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3821,7 +3949,8 @@ module Aws::DataZone
       :default_value,
       :is_editable,
       :is_optional,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3843,7 +3972,8 @@ module Aws::DataZone
       :identifier,
       :revision,
       :glossary_terms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3853,7 +3983,8 @@ module Aws::DataZone
     #   @return [Array<Types::MatchRationaleItem>]
     class DataProductItemAdditionalAttributes < Struct.new(
       :match_rationale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3887,7 +4018,8 @@ module Aws::DataZone
       :glossary_terms,
       :owning_project_id,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3945,7 +4077,8 @@ module Aws::DataZone
       :owning_project_id,
       :additional_attributes,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3959,7 +4092,8 @@ module Aws::DataZone
     class DataProductListingItemAdditionalAttributes < Struct.new(
       :forms,
       :match_rationale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4009,7 +4143,8 @@ module Aws::DataZone
       :first_revision_created_at,
       :first_revision_created_by,
       :additional_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4035,7 +4170,8 @@ module Aws::DataZone
       :revision,
       :created_at,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4054,7 +4190,8 @@ module Aws::DataZone
       :redshift_run_configuration,
       :sage_maker_run_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class GlueRunConfiguration < DataSourceConfigurationInput; end
@@ -4078,7 +4215,8 @@ module Aws::DataZone
       :redshift_run_configuration,
       :sage_maker_run_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class GlueRunConfiguration < DataSourceConfigurationOutput; end
@@ -4097,7 +4235,8 @@ module Aws::DataZone
     class DataSourceErrorMessage < Struct.new(
       :error_type,
       :error_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4147,7 +4286,8 @@ module Aws::DataZone
       :lineage_summary,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4157,7 +4297,8 @@ module Aws::DataZone
     #   @return [String]
     class DataSourceRunLineageSummary < Struct.new(
       :import_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4211,7 +4352,8 @@ module Aws::DataZone
       :started_at,
       :stopped_at,
       :lineage_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4281,7 +4423,8 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4294,12 +4437,14 @@ module Aws::DataZone
     class DeleteAccountPoolInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountPoolOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4316,7 +4461,8 @@ module Aws::DataZone
       :domain_identifier,
       :asset_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4329,12 +4475,14 @@ module Aws::DataZone
     class DeleteAssetInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAssetOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4347,12 +4495,14 @@ module Aws::DataZone
     class DeleteAssetTypeInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAssetTypeOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4365,7 +4515,8 @@ module Aws::DataZone
     class DeleteConnectionInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4374,7 +4525,8 @@ module Aws::DataZone
     #   @return [String]
     class DeleteConnectionOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4387,12 +4539,14 @@ module Aws::DataZone
     class DeleteDataProductInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataProductOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4416,7 +4570,8 @@ module Aws::DataZone
       :identifier,
       :client_token,
       :retain_permissions_on_revoke_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4509,7 +4664,8 @@ module Aws::DataZone
       :updated_at,
       :self_grant_status,
       :retain_permissions_on_revoke_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4526,7 +4682,8 @@ module Aws::DataZone
       :identifier,
       :client_token,
       :skip_deletion_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4535,7 +4692,8 @@ module Aws::DataZone
     #   @return [String]
     class DeleteDomainOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4548,12 +4706,14 @@ module Aws::DataZone
     class DeleteDomainUnitInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDomainUnitOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4570,7 +4730,8 @@ module Aws::DataZone
       :domain_identifier,
       :environment_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4583,12 +4744,14 @@ module Aws::DataZone
     class DeleteEnvironmentBlueprintConfigurationInput < Struct.new(
       :domain_identifier,
       :environment_blueprint_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentBlueprintConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4601,7 +4764,8 @@ module Aws::DataZone
     class DeleteEnvironmentInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4614,7 +4778,8 @@ module Aws::DataZone
     class DeleteEnvironmentProfileInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4627,12 +4792,14 @@ module Aws::DataZone
     class DeleteFormTypeInput < Struct.new(
       :domain_identifier,
       :form_type_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFormTypeOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4645,12 +4812,14 @@ module Aws::DataZone
     class DeleteGlossaryInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGlossaryOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4663,12 +4832,14 @@ module Aws::DataZone
     class DeleteGlossaryTermInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGlossaryTermOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4681,12 +4852,14 @@ module Aws::DataZone
     class DeleteListingInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteListingOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4703,7 +4876,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :skip_deletion_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4720,17 +4894,20 @@ module Aws::DataZone
       :domain_identifier,
       :project_identifier,
       :member,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectMembershipOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4743,12 +4920,14 @@ module Aws::DataZone
     class DeleteProjectProfileInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectProfileOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4761,12 +4940,14 @@ module Aws::DataZone
     class DeleteRuleInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4779,7 +4960,8 @@ module Aws::DataZone
     class DeleteSubscriptionGrantInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4830,7 +5012,8 @@ module Aws::DataZone
       :status,
       :assets,
       :subscription_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4843,7 +5026,8 @@ module Aws::DataZone
     class DeleteSubscriptionRequestInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4860,7 +5044,8 @@ module Aws::DataZone
       :domain_identifier,
       :environment_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4885,12 +5070,14 @@ module Aws::DataZone
       :entity_type,
       :form_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTimeSeriesDataPointsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4920,7 +5107,8 @@ module Aws::DataZone
       :failure_reason,
       :messages,
       :is_deployment_complete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4934,7 +5122,8 @@ module Aws::DataZone
     class DeploymentProperties < Struct.new(
       :start_timeout_minutes,
       :end_timeout_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4948,7 +5137,8 @@ module Aws::DataZone
     class DetailedGlossaryTerm < Struct.new(
       :name,
       :short_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4965,12 +5155,14 @@ module Aws::DataZone
       :domain_identifier,
       :environment_identifier,
       :environment_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateEnvironmentRoleOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4991,12 +5183,14 @@ module Aws::DataZone
       :entity_identifier,
       :entity_type,
       :governed_glossary_terms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateGovernedTermsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5042,7 +5236,8 @@ module Aws::DataZone
       :created_at,
       :last_updated_at,
       :domain_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5056,7 +5251,8 @@ module Aws::DataZone
     class DomainUnitFilterForProject < Struct.new(
       :domain_unit,
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5072,7 +5268,8 @@ module Aws::DataZone
     class DomainUnitGrantFilter < Struct.new(
       :all_domain_units_grant_filter,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AllDomainUnitsGrantFilter < DomainUnitGrantFilter; end
@@ -5085,7 +5282,8 @@ module Aws::DataZone
     #   @return [String]
     class DomainUnitGroupProperties < Struct.new(
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5100,7 +5298,8 @@ module Aws::DataZone
       :user,
       :group,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class User < DomainUnitOwnerProperties; end
@@ -5122,7 +5321,8 @@ module Aws::DataZone
       :domain_unit_designation,
       :domain_unit_identifier,
       :domain_unit_grant_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5136,7 +5336,8 @@ module Aws::DataZone
     class DomainUnitSummary < Struct.new(
       :name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5150,7 +5351,8 @@ module Aws::DataZone
     class DomainUnitTarget < Struct.new(
       :domain_unit_id,
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5160,7 +5362,8 @@ module Aws::DataZone
     #   @return [String]
     class DomainUnitUserProperties < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5190,7 +5393,8 @@ module Aws::DataZone
       :name,
       :parameters,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5236,7 +5440,8 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       :provisioning_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5270,7 +5475,8 @@ module Aws::DataZone
       :provisioning_properties,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5316,7 +5522,8 @@ module Aws::DataZone
       :account_pools,
       :aws_region,
       :deployment_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5334,7 +5541,8 @@ module Aws::DataZone
       :name,
       :value,
       :is_editable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5352,7 +5560,8 @@ module Aws::DataZone
       :ssm_path,
       :parameter_overrides,
       :resolved_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5374,7 +5583,8 @@ module Aws::DataZone
       :environment_resolved_account,
       :environment_configuration_name,
       :environment_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5388,7 +5598,8 @@ module Aws::DataZone
     class EnvironmentDeploymentDetails < Struct.new(
       :overall_deployment_status,
       :environment_failure_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5402,7 +5613,8 @@ module Aws::DataZone
     class EnvironmentError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5416,7 +5628,8 @@ module Aws::DataZone
     class EnvironmentParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5466,7 +5679,8 @@ module Aws::DataZone
       :description,
       :environment_blueprint_id,
       :project_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5484,7 +5698,8 @@ module Aws::DataZone
       :aws_account_id,
       :region_name,
       :source_account_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5546,7 +5761,8 @@ module Aws::DataZone
       :provider,
       :status,
       :environment_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5565,7 +5781,8 @@ module Aws::DataZone
     class EqualToExpression < Struct.new(
       :column_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5576,7 +5793,8 @@ module Aws::DataZone
     class EventSummary < Struct.new(
       :open_lineage_run_event_summary,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OpenLineageRunEventSummary < EventSummary; end
@@ -5589,7 +5807,8 @@ module Aws::DataZone
     #   @return [String]
     class FailureCause < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5603,7 +5822,8 @@ module Aws::DataZone
     class Filter < Struct.new(
       :attribute,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5622,7 +5842,8 @@ module Aws::DataZone
       :and,
       :or,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Filter < FilterClause; end
@@ -5641,7 +5862,8 @@ module Aws::DataZone
     class FilterExpression < Struct.new(
       :type,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5659,7 +5881,8 @@ module Aws::DataZone
       :type_identifier,
       :type_revision,
       :required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5677,7 +5900,8 @@ module Aws::DataZone
       :type_name,
       :type_revision,
       :required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5700,7 +5924,8 @@ module Aws::DataZone
       :type_identifier,
       :type_revision,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5722,7 +5947,8 @@ module Aws::DataZone
       :type_name,
       :type_revision,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5776,7 +6002,8 @@ module Aws::DataZone
       :created_by,
       :description,
       :imports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5789,7 +6016,8 @@ module Aws::DataZone
     class GetAccountPoolInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5838,7 +6066,8 @@ module Aws::DataZone
       :last_updated_at,
       :updated_by,
       :domain_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5855,7 +6084,8 @@ module Aws::DataZone
       :domain_identifier,
       :asset_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5904,7 +6134,8 @@ module Aws::DataZone
       :error_message,
       :effective_column_names,
       :effective_row_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5921,7 +6152,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6002,7 +6234,8 @@ module Aws::DataZone
       :forms_output,
       :read_only_forms_output,
       :latest_time_series_data_point_forms_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6019,7 +6252,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6072,7 +6306,8 @@ module Aws::DataZone
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6089,7 +6324,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :with_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6142,7 +6378,8 @@ module Aws::DataZone
       :project_id,
       :props,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6159,7 +6396,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6220,7 +6458,8 @@ module Aws::DataZone
       :created_by,
       :first_revision_created_at,
       :first_revision_created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6238,7 +6477,8 @@ module Aws::DataZone
     class GetDataSourceInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6335,7 +6575,8 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       :self_grant_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6348,7 +6589,8 @@ module Aws::DataZone
     class GetDataSourceRunInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6409,7 +6651,8 @@ module Aws::DataZone
       :updated_at,
       :started_at,
       :stopped_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6418,7 +6661,8 @@ module Aws::DataZone
     #   @return [String]
     class GetDomainInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6483,7 +6727,8 @@ module Aws::DataZone
       :tags,
       :domain_version,
       :service_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6496,7 +6741,8 @@ module Aws::DataZone
     class GetDomainUnitInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6541,7 +6787,8 @@ module Aws::DataZone
       :last_updated_at,
       :created_by,
       :last_updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6558,7 +6805,8 @@ module Aws::DataZone
       :domain_identifier,
       :environment_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6587,7 +6835,8 @@ module Aws::DataZone
       :name,
       :parameters,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6600,7 +6849,8 @@ module Aws::DataZone
     class GetEnvironmentBlueprintConfigurationInput < Struct.new(
       :domain_identifier,
       :environment_blueprint_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6645,7 +6895,8 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       :provisioning_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6658,7 +6909,8 @@ module Aws::DataZone
     class GetEnvironmentBlueprintInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6703,7 +6955,8 @@ module Aws::DataZone
       :glossary_terms,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6716,7 +6969,8 @@ module Aws::DataZone
     class GetEnvironmentCredentialsInput < Struct.new(
       :domain_identifier,
       :environment_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6738,7 +6992,8 @@ module Aws::DataZone
       :secret_access_key,
       :session_token,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6751,7 +7006,8 @@ module Aws::DataZone
     class GetEnvironmentInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6844,7 +7100,8 @@ module Aws::DataZone
       :deployment_properties,
       :environment_blueprint_id,
       :environment_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6862,7 +7119,8 @@ module Aws::DataZone
     class GetEnvironmentProfileInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6915,7 +7173,8 @@ module Aws::DataZone
       :environment_blueprint_id,
       :project_id,
       :user_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6932,7 +7191,8 @@ module Aws::DataZone
       :domain_identifier,
       :form_type_identifier,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6985,7 +7245,8 @@ module Aws::DataZone
       :created_by,
       :description,
       :imports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6998,7 +7259,8 @@ module Aws::DataZone
     class GetGlossaryInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7047,7 +7309,8 @@ module Aws::DataZone
       :updated_at,
       :updated_by,
       :usage_restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7060,7 +7323,8 @@ module Aws::DataZone
     class GetGlossaryTermInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7117,7 +7381,8 @@ module Aws::DataZone
       :updated_at,
       :updated_by,
       :usage_restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7130,7 +7395,8 @@ module Aws::DataZone
     class GetGroupProfileInput < Struct.new(
       :domain_identifier,
       :group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7151,7 +7417,8 @@ module Aws::DataZone
       :id,
       :status,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7160,7 +7427,8 @@ module Aws::DataZone
     #   @return [String]
     class GetIamPortalLoginUrlInput < Struct.new(
       :domain_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7173,7 +7441,8 @@ module Aws::DataZone
     class GetIamPortalLoginUrlOutput < Struct.new(
       :auth_code_url,
       :user_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7186,7 +7455,8 @@ module Aws::DataZone
     class GetJobRunInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7239,7 +7509,8 @@ module Aws::DataZone
       :created_at,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7252,7 +7523,8 @@ module Aws::DataZone
     class GetLineageEventInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7285,7 +7557,8 @@ module Aws::DataZone
       :processing_status,
       :event_time,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7302,7 +7575,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :event_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7367,7 +7641,8 @@ module Aws::DataZone
       :forms_output,
       :upstream_nodes,
       :downstream_nodes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7384,7 +7659,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :listing_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7433,7 +7709,8 @@ module Aws::DataZone
       :name,
       :description,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7446,7 +7723,8 @@ module Aws::DataZone
     class GetMetadataGenerationRunInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7483,7 +7761,8 @@ module Aws::DataZone
       :created_at,
       :created_by,
       :owning_project_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7496,7 +7775,8 @@ module Aws::DataZone
     class GetProjectInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7557,7 +7837,8 @@ module Aws::DataZone
       :project_profile_id,
       :user_parameters,
       :environment_deployment_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7570,7 +7851,8 @@ module Aws::DataZone
     class GetProjectProfileInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7615,7 +7897,8 @@ module Aws::DataZone
       :created_at,
       :last_updated_at,
       :domain_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7632,7 +7915,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7693,7 +7977,8 @@ module Aws::DataZone
       :updated_at,
       :created_by,
       :last_updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7706,7 +7991,8 @@ module Aws::DataZone
     class GetSubscriptionGrantInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7757,7 +8043,8 @@ module Aws::DataZone
       :status,
       :assets,
       :subscription_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7770,7 +8057,8 @@ module Aws::DataZone
     class GetSubscriptionInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7819,7 +8107,8 @@ module Aws::DataZone
       :subscribed_listing,
       :subscription_request_id,
       :retain_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7832,7 +8121,8 @@ module Aws::DataZone
     class GetSubscriptionRequestDetailsInput < Struct.new(
       :domain_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7893,7 +8183,8 @@ module Aws::DataZone
       :decision_comment,
       :existing_subscription_id,
       :metadata_forms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7910,7 +8201,8 @@ module Aws::DataZone
       :domain_identifier,
       :environment_identifier,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7975,7 +8267,8 @@ module Aws::DataZone
       :applicable_asset_types,
       :subscription_target_config,
       :provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8000,7 +8293,8 @@ module Aws::DataZone
       :entity_type,
       :identifier,
       :form_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8025,7 +8319,8 @@ module Aws::DataZone
       :entity_type,
       :form_name,
       :form,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8042,7 +8337,8 @@ module Aws::DataZone
       :domain_identifier,
       :user_identifier,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8067,7 +8363,8 @@ module Aws::DataZone
       :type,
       :status,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8121,7 +8418,8 @@ module Aws::DataZone
       :updated_at,
       :updated_by,
       :additional_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8131,7 +8429,8 @@ module Aws::DataZone
     #   @return [Array<Types::MatchRationaleItem>]
     class GlossaryItemAdditionalAttributes < Struct.new(
       :match_rationale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8193,7 +8492,8 @@ module Aws::DataZone
       :updated_at,
       :updated_by,
       :additional_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8203,7 +8503,8 @@ module Aws::DataZone
     #   @return [Array<Types::MatchRationaleItem>]
     class GlossaryTermItemAdditionalAttributes < Struct.new(
       :match_rationale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8281,7 +8582,8 @@ module Aws::DataZone
       :authentication_configuration,
       :connection_schema_version,
       :compatible_compute_environments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8335,7 +8637,8 @@ module Aws::DataZone
       :athena_properties,
       :python_properties,
       :authentication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8353,7 +8656,8 @@ module Aws::DataZone
       :description,
       :connection_properties,
       :authentication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8376,7 +8680,8 @@ module Aws::DataZone
       :access_token,
       :refresh_token,
       :jwt_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8386,7 +8691,8 @@ module Aws::DataZone
     #   @return [Types::GlueConnectionInput]
     class GluePropertiesInput < Struct.new(
       :glue_connection_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8400,7 +8706,8 @@ module Aws::DataZone
     class GluePropertiesOutput < Struct.new(
       :status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8410,7 +8717,8 @@ module Aws::DataZone
     #   @return [Types::GlueConnectionPatch]
     class GluePropertiesPatch < Struct.new(
       :glue_connection_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8432,7 +8740,8 @@ module Aws::DataZone
       :relational_filter_configurations,
       :auto_import_data_quality_result,
       :catalog_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8462,7 +8771,8 @@ module Aws::DataZone
       :relational_filter_configurations,
       :auto_import_data_quality_result,
       :catalog_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8472,7 +8782,8 @@ module Aws::DataZone
     #   @return [Array<Types::SelfGrantStatusDetail>]
     class GlueSelfGrantStatusOutput < Struct.new(
       :self_grant_status_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8483,7 +8794,8 @@ module Aws::DataZone
     class GrantedEntity < Struct.new(
       :listing,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Listing < GrantedEntity; end
@@ -8497,7 +8809,8 @@ module Aws::DataZone
     class GrantedEntityInput < Struct.new(
       :listing,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Listing < GrantedEntityInput; end
@@ -8514,7 +8827,8 @@ module Aws::DataZone
     class GreaterThanExpression < Struct.new(
       :column_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8528,7 +8842,8 @@ module Aws::DataZone
     class GreaterThanOrEqualToExpression < Struct.new(
       :column_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8538,7 +8853,8 @@ module Aws::DataZone
     #   @return [String]
     class GroupDetails < Struct.new(
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8549,7 +8865,8 @@ module Aws::DataZone
     class GroupPolicyGrantPrincipal < Struct.new(
       :group_identifier,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class GroupIdentifier < GroupPolicyGrantPrincipal; end
@@ -8574,7 +8891,8 @@ module Aws::DataZone
       :id,
       :status,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8584,7 +8902,8 @@ module Aws::DataZone
     #   @return [String]
     class HyperPodPropertiesInput < Struct.new(
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8602,7 +8921,8 @@ module Aws::DataZone
       :cluster_name,
       :cluster_arn,
       :orchestrator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8612,7 +8932,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class IamPropertiesInput < Struct.new(
       :glue_lineage_sync_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8626,7 +8947,8 @@ module Aws::DataZone
     class IamPropertiesOutput < Struct.new(
       :environment_id,
       :glue_lineage_sync_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8636,7 +8958,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class IamPropertiesPatch < Struct.new(
       :glue_lineage_sync_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8646,7 +8969,8 @@ module Aws::DataZone
     #   @return [String]
     class IamUserProfileDetails < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8660,7 +8984,8 @@ module Aws::DataZone
     class Import < Struct.new(
       :name,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8674,7 +8999,8 @@ module Aws::DataZone
     class InExpression < Struct.new(
       :column_name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8683,7 +9009,8 @@ module Aws::DataZone
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8693,7 +9020,8 @@ module Aws::DataZone
     #   @return [String]
     class IsNotNullExpression < Struct.new(
       :column_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8703,7 +9031,8 @@ module Aws::DataZone
     #   @return [String]
     class IsNullExpression < Struct.new(
       :column_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8714,7 +9043,8 @@ module Aws::DataZone
     class JobRunDetails < Struct.new(
       :lineage_run_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class LineageRunDetails < JobRunDetails; end
@@ -8727,7 +9057,8 @@ module Aws::DataZone
     #   @return [String]
     class JobRunError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8777,7 +9108,8 @@ module Aws::DataZone
       :created_at,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8791,7 +9123,8 @@ module Aws::DataZone
     class LakeFormationConfiguration < Struct.new(
       :location_registration_role,
       :location_registration_exclude_s3_locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8805,7 +9138,8 @@ module Aws::DataZone
     class LessThanExpression < Struct.new(
       :column_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8819,7 +9153,8 @@ module Aws::DataZone
     class LessThanOrEqualToExpression < Struct.new(
       :column_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8833,7 +9168,8 @@ module Aws::DataZone
     class LikeExpression < Struct.new(
       :column_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8867,7 +9203,8 @@ module Aws::DataZone
       :event_summary,
       :created_by,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8885,7 +9222,8 @@ module Aws::DataZone
       :event_id,
       :event_status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8899,7 +9237,8 @@ module Aws::DataZone
     class LineageNodeReference < Struct.new(
       :id,
       :event_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8953,7 +9292,8 @@ module Aws::DataZone
       :type_revision,
       :source_identifier,
       :event_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8995,7 +9335,8 @@ module Aws::DataZone
       :updated_by,
       :revision,
       :forms_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9005,7 +9346,8 @@ module Aws::DataZone
     #   @return [Types::LineageSqlQueryRunDetails]
     class LineageRunDetails < Struct.new(
       :sql_query_run_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9031,7 +9373,8 @@ module Aws::DataZone
       :total_queries_processed,
       :num_queries_failed,
       :error_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9041,7 +9384,8 @@ module Aws::DataZone
     #   @return [String]
     class LineageSyncSchedule < Struct.new(
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9070,7 +9414,8 @@ module Aws::DataZone
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9083,7 +9428,8 @@ module Aws::DataZone
     class ListAccountPoolsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9104,7 +9450,8 @@ module Aws::DataZone
       :identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9117,7 +9464,8 @@ module Aws::DataZone
     class ListAccountsInAccountPoolOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9142,7 +9490,8 @@ module Aws::DataZone
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9155,7 +9504,8 @@ module Aws::DataZone
     class ListAssetFiltersOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9176,7 +9526,8 @@ module Aws::DataZone
       :identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9189,7 +9540,8 @@ module Aws::DataZone
     class ListAssetRevisionsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9230,7 +9582,8 @@ module Aws::DataZone
       :environment_identifier,
       :project_identifier,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9243,7 +9596,8 @@ module Aws::DataZone
     class ListConnectionsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9264,7 +9618,8 @@ module Aws::DataZone
       :identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9277,7 +9632,8 @@ module Aws::DataZone
     class ListDataProductRevisionsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9302,7 +9658,8 @@ module Aws::DataZone
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9315,7 +9672,8 @@ module Aws::DataZone
     class ListDataSourceRunActivitiesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9340,7 +9698,8 @@ module Aws::DataZone
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9353,7 +9712,8 @@ module Aws::DataZone
     class ListDataSourceRunsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9394,7 +9754,8 @@ module Aws::DataZone
       :name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9407,7 +9768,8 @@ module Aws::DataZone
     class ListDataSourcesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9428,7 +9790,8 @@ module Aws::DataZone
       :parent_domain_unit_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9441,7 +9804,8 @@ module Aws::DataZone
     class ListDomainUnitsForParentOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9458,7 +9822,8 @@ module Aws::DataZone
       :status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9471,7 +9836,8 @@ module Aws::DataZone
     class ListDomainsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9496,7 +9862,8 @@ module Aws::DataZone
       :entity_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9509,7 +9876,8 @@ module Aws::DataZone
     class ListEntityOwnersOutput < Struct.new(
       :owners,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9530,7 +9898,8 @@ module Aws::DataZone
       :environment_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9543,7 +9912,8 @@ module Aws::DataZone
     class ListEnvironmentActionsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9560,7 +9930,8 @@ module Aws::DataZone
       :domain_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9573,7 +9944,8 @@ module Aws::DataZone
     class ListEnvironmentBlueprintConfigurationsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9598,7 +9970,8 @@ module Aws::DataZone
       :next_token,
       :name,
       :managed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9611,7 +9984,8 @@ module Aws::DataZone
     class ListEnvironmentBlueprintsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9648,7 +10022,8 @@ module Aws::DataZone
       :name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9661,7 +10036,8 @@ module Aws::DataZone
     class ListEnvironmentProfilesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9710,7 +10086,8 @@ module Aws::DataZone
       :name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9723,7 +10100,8 @@ module Aws::DataZone
     class ListEnvironmentsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9752,7 +10130,8 @@ module Aws::DataZone
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9765,7 +10144,8 @@ module Aws::DataZone
     class ListJobRunsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9798,7 +10178,8 @@ module Aws::DataZone
       :processing_status,
       :sort_order,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9811,7 +10192,8 @@ module Aws::DataZone
     class ListLineageEventsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9848,7 +10230,8 @@ module Aws::DataZone
       :event_timestamp_gte,
       :event_timestamp_lte,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9861,7 +10244,8 @@ module Aws::DataZone
     class ListLineageNodeHistoryOutput < Struct.new(
       :nodes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9886,7 +10270,8 @@ module Aws::DataZone
       :type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9899,7 +10284,8 @@ module Aws::DataZone
     class ListMetadataGenerationRunsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9936,7 +10322,8 @@ module Aws::DataZone
       :task_status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9949,7 +10336,8 @@ module Aws::DataZone
     class ListNotificationsOutput < Struct.new(
       :notifications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9978,7 +10366,8 @@ module Aws::DataZone
       :policy_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9991,7 +10380,8 @@ module Aws::DataZone
     class ListPolicyGrantsOutput < Struct.new(
       :grant_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10020,7 +10410,8 @@ module Aws::DataZone
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10033,7 +10424,8 @@ module Aws::DataZone
     class ListProjectMembershipsOutput < Struct.new(
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10062,7 +10454,8 @@ module Aws::DataZone
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10075,7 +10468,8 @@ module Aws::DataZone
     class ListProjectProfilesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10104,7 +10498,8 @@ module Aws::DataZone
       :name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10117,7 +10512,8 @@ module Aws::DataZone
     class ListProjectsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10166,7 +10562,8 @@ module Aws::DataZone
       :include_cascaded,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10179,7 +10576,8 @@ module Aws::DataZone
     class ListRulesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10224,7 +10622,8 @@ module Aws::DataZone
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10237,7 +10636,8 @@ module Aws::DataZone
     class ListSubscriptionGrantsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10278,7 +10678,8 @@ module Aws::DataZone
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10291,7 +10692,8 @@ module Aws::DataZone
     class ListSubscriptionRequestsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10320,7 +10722,8 @@ module Aws::DataZone
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10333,7 +10736,8 @@ module Aws::DataZone
     class ListSubscriptionTargetsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10378,7 +10782,8 @@ module Aws::DataZone
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10391,7 +10796,8 @@ module Aws::DataZone
     class ListSubscriptionsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10400,7 +10806,8 @@ module Aws::DataZone
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10409,7 +10816,8 @@ module Aws::DataZone
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10446,7 +10854,8 @@ module Aws::DataZone
       :ended_at,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10459,7 +10868,8 @@ module Aws::DataZone
     class ListTimeSeriesDataPointsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10474,7 +10884,8 @@ module Aws::DataZone
       :asset_listing,
       :data_product_listing,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AssetListing < ListingItem; end
@@ -10492,7 +10903,8 @@ module Aws::DataZone
     class ListingRevision < Struct.new(
       :id,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10506,7 +10918,8 @@ module Aws::DataZone
     class ListingRevisionInput < Struct.new(
       :identifier,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10524,7 +10937,8 @@ module Aws::DataZone
       :listing_id,
       :listing_revision,
       :glossary_terms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10542,7 +10956,8 @@ module Aws::DataZone
       :listing_id,
       :listing_revision,
       :glossary_terms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10556,7 +10971,8 @@ module Aws::DataZone
     class MatchOffset < Struct.new(
       :start_offset,
       :end_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10567,7 +10983,8 @@ module Aws::DataZone
     class MatchRationaleItem < Struct.new(
       :text_matches,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TextMatches < MatchRationaleItem; end
@@ -10585,7 +11002,8 @@ module Aws::DataZone
       :user_identifier,
       :group_identifier,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class UserIdentifier < Member; end
@@ -10604,7 +11022,8 @@ module Aws::DataZone
       :user,
       :group,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class User < MemberDetails; end
@@ -10618,7 +11037,8 @@ module Aws::DataZone
     #   @return [Array<Types::MetadataFormReference>]
     class MetadataFormEnforcementDetail < Struct.new(
       :required_metadata_forms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10632,7 +11052,8 @@ module Aws::DataZone
     class MetadataFormReference < Struct.new(
       :type_identifier,
       :type_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10650,7 +11071,8 @@ module Aws::DataZone
       :form_name,
       :type_name,
       :type_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10688,7 +11110,8 @@ module Aws::DataZone
       :created_at,
       :created_by,
       :owning_project_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10706,7 +11129,8 @@ module Aws::DataZone
       :type,
       :identifier,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10718,7 +11142,8 @@ module Aws::DataZone
     class Model < Struct.new(
       :smithy,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Smithy < Model; end
@@ -10735,7 +11160,8 @@ module Aws::DataZone
     class NameIdentifier < Struct.new(
       :name,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10749,7 +11175,8 @@ module Aws::DataZone
     class NotEqualToExpression < Struct.new(
       :column_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10763,7 +11190,8 @@ module Aws::DataZone
     class NotInExpression < Struct.new(
       :column_name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10777,7 +11205,8 @@ module Aws::DataZone
     class NotLikeExpression < Struct.new(
       :column_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10827,7 +11256,8 @@ module Aws::DataZone
       :creation_timestamp,
       :last_updated_timestamp,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10845,7 +11275,8 @@ module Aws::DataZone
       :type,
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10859,7 +11290,8 @@ module Aws::DataZone
     class OAuth2ClientApplication < Struct.new(
       :user_managed_client_application_client_id,
       :a_ws_managed_client_application_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10889,7 +11321,8 @@ module Aws::DataZone
       :token_url_parameters_map,
       :authorization_code_properties,
       :o_auth2_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10915,7 +11348,8 @@ module Aws::DataZone
       :job,
       :inputs,
       :outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10925,7 +11359,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class OverrideDomainUnitOwnersPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10935,7 +11370,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class OverrideProjectOwnersPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10945,7 +11381,8 @@ module Aws::DataZone
     #   @return [String]
     class OwnerGroupProperties < Struct.new(
       :group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10955,7 +11392,8 @@ module Aws::DataZone
     #   @return [String]
     class OwnerGroupPropertiesOutput < Struct.new(
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10970,7 +11408,8 @@ module Aws::DataZone
       :user,
       :group,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class User < OwnerProperties; end
@@ -10989,7 +11428,8 @@ module Aws::DataZone
       :user,
       :group,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class User < OwnerPropertiesOutput; end
@@ -11003,7 +11443,8 @@ module Aws::DataZone
     #   @return [String]
     class OwnerUserProperties < Struct.new(
       :user_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11013,7 +11454,8 @@ module Aws::DataZone
     #   @return [String]
     class OwnerUserPropertiesOutput < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11035,7 +11477,8 @@ module Aws::DataZone
       :subnet_id_list,
       :security_group_id_list,
       :availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11069,7 +11512,8 @@ module Aws::DataZone
       :port,
       :protocol,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11132,7 +11576,8 @@ module Aws::DataZone
       :create_project_from_project_profile,
       :use_asset_type,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CreateDomainUnit < PolicyGrantDetail; end
@@ -11174,7 +11619,8 @@ module Aws::DataZone
       :created_at,
       :created_by,
       :grant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11197,7 +11643,8 @@ module Aws::DataZone
       :project,
       :domain_unit,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class User < PolicyGrantPrincipal; end
@@ -11220,7 +11667,8 @@ module Aws::DataZone
       :domain_identifier,
       :event,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11233,7 +11681,8 @@ module Aws::DataZone
     class PostLineageEventOutput < Struct.new(
       :id,
       :domain_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11258,7 +11707,8 @@ module Aws::DataZone
       :entity_type,
       :forms,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11279,7 +11729,8 @@ module Aws::DataZone
       :entity_id,
       :entity_type,
       :forms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11289,7 +11740,8 @@ module Aws::DataZone
     #   @return [Types::BusinessNameGenerationConfiguration]
     class PredictionConfiguration < Struct.new(
       :business_name_generation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11303,7 +11755,8 @@ module Aws::DataZone
     class ProjectDeletionError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11314,7 +11767,8 @@ module Aws::DataZone
     class ProjectGrantFilter < Struct.new(
       :domain_unit_filter,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DomainUnitFilter < ProjectGrantFilter; end
@@ -11331,7 +11785,8 @@ module Aws::DataZone
     class ProjectMember < Struct.new(
       :member_details,
       :designation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11349,7 +11804,8 @@ module Aws::DataZone
       :project_designation,
       :project_identifier,
       :project_grant_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11391,7 +11847,8 @@ module Aws::DataZone
       :created_at,
       :last_updated_at,
       :domain_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11437,7 +11894,8 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       :domain_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11451,7 +11909,8 @@ module Aws::DataZone
     class ProjectsForRule < Struct.new(
       :selection_mode,
       :specific_projects,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11462,7 +11921,8 @@ module Aws::DataZone
     class ProvisioningConfiguration < Struct.new(
       :lake_formation_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class LakeFormationConfiguration < ProvisioningConfiguration; end
@@ -11476,7 +11936,8 @@ module Aws::DataZone
     class ProvisioningProperties < Struct.new(
       :cloud_formation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CloudFormation < ProvisioningProperties; end
@@ -11516,7 +11977,8 @@ module Aws::DataZone
       :enabled_regions,
       :regional_parameters,
       :provisioning_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11561,7 +12023,8 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       :provisioning_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11571,7 +12034,8 @@ module Aws::DataZone
     #   @return [Boolean]
     class RecommendationConfiguration < Struct.new(
       :enable_business_name_generation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11581,7 +12045,8 @@ module Aws::DataZone
     #   @return [String]
     class RedshiftClusterStorage < Struct.new(
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11591,7 +12056,8 @@ module Aws::DataZone
     #   @return [String]
     class RedshiftCredentialConfiguration < Struct.new(
       :secret_manager_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11607,7 +12073,8 @@ module Aws::DataZone
       :secret_arn,
       :username_password,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SecretArn < RedshiftCredentials; end
@@ -11625,7 +12092,8 @@ module Aws::DataZone
     class RedshiftLineageSyncConfigurationInput < Struct.new(
       :enabled,
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11643,7 +12111,8 @@ module Aws::DataZone
       :lineage_job_id,
       :enabled,
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11673,7 +12142,8 @@ module Aws::DataZone
       :port,
       :credentials,
       :lineage_sync,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11715,7 +12185,8 @@ module Aws::DataZone
       :lineage_sync,
       :status,
       :database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11745,7 +12216,8 @@ module Aws::DataZone
       :port,
       :credentials,
       :lineage_sync,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11767,7 +12239,8 @@ module Aws::DataZone
       :relational_filter_configurations,
       :redshift_credential_configuration,
       :redshift_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11797,7 +12270,8 @@ module Aws::DataZone
       :relational_filter_configurations,
       :redshift_credential_configuration,
       :redshift_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11807,7 +12281,8 @@ module Aws::DataZone
     #   @return [Array<Types::SelfGrantStatusDetail>]
     class RedshiftSelfGrantStatusOutput < Struct.new(
       :self_grant_status_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11817,7 +12292,8 @@ module Aws::DataZone
     #   @return [String]
     class RedshiftServerlessStorage < Struct.new(
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11832,7 +12308,8 @@ module Aws::DataZone
       :redshift_cluster_source,
       :redshift_serverless_source,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RedshiftClusterSource < RedshiftStorage; end
@@ -11851,7 +12328,8 @@ module Aws::DataZone
       :cluster_name,
       :workgroup_name,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ClusterName < RedshiftStorageProperties; end
@@ -11870,7 +12348,8 @@ module Aws::DataZone
       :region_name,
       :region_name_path,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RegionName < Region; end
@@ -11888,7 +12367,8 @@ module Aws::DataZone
     class RejectChoice < Struct.new(
       :prediction_target,
       :prediction_choices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11917,7 +12397,8 @@ module Aws::DataZone
       :reject_rule,
       :reject_choices,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11934,7 +12415,8 @@ module Aws::DataZone
       :domain_id,
       :asset_id,
       :asset_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11948,7 +12430,8 @@ module Aws::DataZone
     class RejectRule < Struct.new(
       :rule,
       :threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11965,7 +12448,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :decision_comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12026,7 +12510,8 @@ module Aws::DataZone
       :decision_comment,
       :existing_subscription_id,
       :metadata_forms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12044,7 +12529,8 @@ module Aws::DataZone
       :database_name,
       :schema_name,
       :filter_expressions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12069,12 +12555,14 @@ module Aws::DataZone
       :entity_identifier,
       :owner,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveEntityOwnerOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12107,12 +12595,14 @@ module Aws::DataZone
       :principal,
       :grant_identifier,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemovePolicyGrantOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12134,7 +12624,8 @@ module Aws::DataZone
       :name,
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12143,7 +12634,8 @@ module Aws::DataZone
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12160,7 +12652,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :retain_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12209,7 +12702,8 @@ module Aws::DataZone
       :subscribed_listing,
       :subscription_request_id,
       :retain_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12228,7 +12722,8 @@ module Aws::DataZone
       :and,
       :or,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Expression < RowFilter; end
@@ -12247,7 +12742,8 @@ module Aws::DataZone
     class RowFilterConfiguration < Struct.new(
       :row_filter,
       :sensitive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12307,7 +12803,8 @@ module Aws::DataZone
       :like,
       :not_like,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EqualTo < RowFilterExpression; end
@@ -12332,7 +12829,8 @@ module Aws::DataZone
     class RuleDetail < Struct.new(
       :metadata_form_enforcement_detail,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class MetadataFormEnforcementDetail < RuleDetail; end
@@ -12353,7 +12851,8 @@ module Aws::DataZone
       :asset_type,
       :data_product,
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12399,7 +12898,8 @@ module Aws::DataZone
       :scope,
       :updated_at,
       :last_updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12410,7 +12910,8 @@ module Aws::DataZone
     class RuleTarget < Struct.new(
       :domain_unit_target,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DomainUnitTarget < RuleTarget; end
@@ -12439,7 +12940,8 @@ module Aws::DataZone
       :unchanged,
       :skipped,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12453,7 +12955,8 @@ module Aws::DataZone
     class S3PropertiesInput < Struct.new(
       :s3_uri,
       :s3_access_grant_location_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12475,7 +12978,8 @@ module Aws::DataZone
       :s3_access_grant_location_id,
       :status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12489,7 +12993,8 @@ module Aws::DataZone
     class S3PropertiesPatch < Struct.new(
       :s3_uri,
       :s3_access_grant_location_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12499,7 +13004,8 @@ module Aws::DataZone
     #   @return [Hash<String, Array<String>>]
     class SageMakerRunConfigurationInput < Struct.new(
       :tracking_assets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12517,7 +13023,8 @@ module Aws::DataZone
       :account_id,
       :region,
       :tracking_assets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12532,7 +13039,8 @@ module Aws::DataZone
     class ScheduleConfiguration < Struct.new(
       :timezone,
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12557,7 +13065,8 @@ module Aws::DataZone
       :search_text,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12570,7 +13079,8 @@ module Aws::DataZone
     class SearchGroupProfilesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12580,7 +13090,8 @@ module Aws::DataZone
     #   @return [String]
     class SearchInItem < Struct.new(
       :attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12625,7 +13136,8 @@ module Aws::DataZone
       :filters,
       :sort,
       :additional_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12648,7 +13160,8 @@ module Aws::DataZone
       :asset_item,
       :data_product_item,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class GlossaryItem < SearchInventoryResultItem; end
@@ -12695,7 +13208,8 @@ module Aws::DataZone
       :aggregations,
       :sort,
       :additional_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12716,7 +13230,8 @@ module Aws::DataZone
       :next_token,
       :total_match_count,
       :aggregates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12733,7 +13248,8 @@ module Aws::DataZone
       :items,
       :next_token,
       :total_match_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12748,7 +13264,8 @@ module Aws::DataZone
       :asset_listing,
       :data_product_listing,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AssetListing < SearchResultItem; end
@@ -12766,7 +13283,8 @@ module Aws::DataZone
     class SearchSort < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12807,7 +13325,8 @@ module Aws::DataZone
       :filters,
       :sort,
       :managed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12824,7 +13343,8 @@ module Aws::DataZone
       :items,
       :next_token,
       :total_match_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12843,7 +13363,8 @@ module Aws::DataZone
       :form_type_item,
       :lineage_node_type_item,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AssetTypeItem < SearchTypesResultItem; end
@@ -12873,7 +13394,8 @@ module Aws::DataZone
       :search_text,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12886,7 +13408,8 @@ module Aws::DataZone
     class SearchUserProfilesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12908,7 +13431,8 @@ module Aws::DataZone
       :schema_name,
       :status,
       :failure_cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12923,7 +13447,8 @@ module Aws::DataZone
       :glue_self_grant_status,
       :redshift_self_grant_status,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class GlueSelfGrantStatus < SelfGrantStatusOutput; end
@@ -12936,7 +13461,8 @@ module Aws::DataZone
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12954,7 +13480,8 @@ module Aws::DataZone
       :type,
       :user_assignment,
       :idc_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12988,7 +13515,8 @@ module Aws::DataZone
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13038,7 +13566,8 @@ module Aws::DataZone
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13072,7 +13601,8 @@ module Aws::DataZone
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13082,7 +13612,8 @@ module Aws::DataZone
     #   @return [String]
     class SparkGlueArgs < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13120,7 +13651,8 @@ module Aws::DataZone
       :number_of_workers,
       :python_virtual_env,
       :worker_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13158,7 +13690,8 @@ module Aws::DataZone
       :number_of_workers,
       :python_virtual_env,
       :worker_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13176,7 +13709,8 @@ module Aws::DataZone
       :username,
       :first_name,
       :last_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13193,7 +13727,8 @@ module Aws::DataZone
       :domain_identifier,
       :data_source_identifier,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13250,7 +13785,8 @@ module Aws::DataZone
       :updated_at,
       :started_at,
       :stopped_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13275,7 +13811,8 @@ module Aws::DataZone
       :target,
       :client_token,
       :owning_project_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13308,7 +13845,8 @@ module Aws::DataZone
       :created_at,
       :created_by,
       :owning_project_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13346,7 +13884,8 @@ module Aws::DataZone
       :granted_timestamp,
       :failure_timestamp,
       :asset_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13376,7 +13915,8 @@ module Aws::DataZone
       :forms,
       :glossary_terms,
       :asset_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13410,7 +13950,8 @@ module Aws::DataZone
       :item,
       :owner_project_id,
       :owner_project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13420,7 +13961,8 @@ module Aws::DataZone
     #   @return [String]
     class SubscribedListingInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13435,7 +13977,8 @@ module Aws::DataZone
       :asset_listing,
       :product_listing,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AssetListing < SubscribedListingItem; end
@@ -13450,7 +13993,8 @@ module Aws::DataZone
     class SubscribedPrincipal < Struct.new(
       :project,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Project < SubscribedPrincipal; end
@@ -13464,7 +14008,8 @@ module Aws::DataZone
     class SubscribedPrincipalInput < Struct.new(
       :project,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Project < SubscribedPrincipalInput; end
@@ -13497,7 +14042,8 @@ module Aws::DataZone
       :name,
       :description,
       :asset_listings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13511,7 +14057,8 @@ module Aws::DataZone
     class SubscribedProject < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13521,7 +14068,8 @@ module Aws::DataZone
     #   @return [String]
     class SubscribedProjectInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13573,7 +14121,8 @@ module Aws::DataZone
       :status,
       :assets,
       :subscription_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13635,7 +14184,8 @@ module Aws::DataZone
       :decision_comment,
       :existing_subscription_id,
       :metadata_forms_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13685,7 +14235,8 @@ module Aws::DataZone
       :subscribed_listing,
       :subscription_request_id,
       :retain_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13699,7 +14250,8 @@ module Aws::DataZone
     class SubscriptionTargetForm < Struct.new(
       :form_name,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13765,7 +14317,8 @@ module Aws::DataZone
       :applicable_asset_types,
       :subscription_target_config,
       :provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13778,12 +14331,14 @@ module Aws::DataZone
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13797,7 +14352,8 @@ module Aws::DataZone
     class TermRelations < Struct.new(
       :is_a,
       :classifies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13815,7 +14371,8 @@ module Aws::DataZone
       :attribute,
       :text,
       :match_offsets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13824,7 +14381,8 @@ module Aws::DataZone
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13850,7 +14408,8 @@ module Aws::DataZone
       :type_revision,
       :timestamp,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13880,7 +14439,8 @@ module Aws::DataZone
       :timestamp,
       :content,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13910,7 +14470,8 @@ module Aws::DataZone
       :timestamp,
       :content_summary,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13928,7 +14489,8 @@ module Aws::DataZone
       :subject,
       :resource,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13937,13 +14499,15 @@ module Aws::DataZone
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the policy of creating an environment.</p>
     class Unit < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13956,12 +14520,14 @@ module Aws::DataZone
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13990,7 +14556,8 @@ module Aws::DataZone
       :description,
       :resolution_strategy,
       :account_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14039,7 +14606,8 @@ module Aws::DataZone
       :last_updated_at,
       :updated_by,
       :domain_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14068,7 +14636,8 @@ module Aws::DataZone
       :name,
       :description,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14117,7 +14686,8 @@ module Aws::DataZone
       :error_message,
       :effective_column_names,
       :effective_row_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14142,7 +14712,8 @@ module Aws::DataZone
       :description,
       :aws_location,
       :props,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14187,7 +14758,8 @@ module Aws::DataZone
       :project_id,
       :props,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14236,7 +14808,8 @@ module Aws::DataZone
       :configuration,
       :recommendation,
       :retain_permissions_on_revoke_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14333,7 +14906,8 @@ module Aws::DataZone
       :updated_at,
       :self_grant_status,
       :retain_permissions_on_revoke_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14366,7 +14940,8 @@ module Aws::DataZone
       :service_role,
       :name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14403,7 +14978,8 @@ module Aws::DataZone
       :service_role,
       :name,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14424,7 +15000,8 @@ module Aws::DataZone
       :identifier,
       :description,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14469,7 +15046,8 @@ module Aws::DataZone
       :last_updated_at,
       :created_by,
       :last_updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14498,7 +15076,8 @@ module Aws::DataZone
       :parameters,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14527,7 +15106,8 @@ module Aws::DataZone
       :name,
       :parameters,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14560,7 +15140,8 @@ module Aws::DataZone
       :glossary_terms,
       :blueprint_version,
       :user_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14653,7 +15234,8 @@ module Aws::DataZone
       :deployment_properties,
       :environment_blueprint_id,
       :environment_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14691,7 +15273,8 @@ module Aws::DataZone
       :user_parameters,
       :aws_account_id,
       :aws_account_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14744,7 +15327,8 @@ module Aws::DataZone
       :environment_blueprint_id,
       :project_id,
       :user_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14773,7 +15357,8 @@ module Aws::DataZone
       :description,
       :status,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14806,7 +15391,8 @@ module Aws::DataZone
       :description,
       :status,
       :usage_restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14843,7 +15429,8 @@ module Aws::DataZone
       :long_description,
       :term_relations,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14884,7 +15471,8 @@ module Aws::DataZone
       :long_description,
       :term_relations,
       :usage_restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14901,7 +15489,8 @@ module Aws::DataZone
       :domain_identifier,
       :group_identifier,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14922,7 +15511,8 @@ module Aws::DataZone
       :id,
       :status,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14963,7 +15553,8 @@ module Aws::DataZone
       :environment_deployment_details,
       :user_parameters,
       :project_profile_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15024,7 +15615,8 @@ module Aws::DataZone
       :project_profile_id,
       :user_parameters,
       :environment_deployment_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15057,7 +15649,8 @@ module Aws::DataZone
       :status,
       :environment_configurations,
       :domain_unit_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15102,7 +15695,8 @@ module Aws::DataZone
       :created_at,
       :last_updated_at,
       :domain_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15135,7 +15729,8 @@ module Aws::DataZone
       :scope,
       :detail,
       :include_child_domain_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15192,7 +15787,8 @@ module Aws::DataZone
       :updated_at,
       :created_by,
       :last_updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15221,7 +15817,8 @@ module Aws::DataZone
       :status,
       :failure_cause,
       :target_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15272,7 +15869,8 @@ module Aws::DataZone
       :status,
       :assets,
       :subscription_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15289,7 +15887,8 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       :request_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15350,7 +15949,8 @@ module Aws::DataZone
       :decision_comment,
       :existing_subscription_id,
       :metadata_forms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15391,7 +15991,8 @@ module Aws::DataZone
       :subscription_target_config,
       :manage_access_role,
       :provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15456,7 +16057,8 @@ module Aws::DataZone
       :applicable_asset_types,
       :subscription_target_config,
       :provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15477,7 +16079,8 @@ module Aws::DataZone
       :user_identifier,
       :type,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15502,7 +16105,8 @@ module Aws::DataZone
       :type,
       :status,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15512,7 +16116,8 @@ module Aws::DataZone
     #   @return [String]
     class UseAssetTypePolicyGrantDetail < Struct.new(
       :domain_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15522,7 +16127,8 @@ module Aws::DataZone
     #   @return [String]
     class UserDetails < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15537,7 +16143,8 @@ module Aws::DataZone
       :user_identifier,
       :all_users_grant_filter,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class UserIdentifier < UserPolicyGrantPrincipal; end
@@ -15556,7 +16163,8 @@ module Aws::DataZone
       :iam,
       :sso,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Iam < UserProfileDetails; end
@@ -15586,7 +16194,8 @@ module Aws::DataZone
       :type,
       :status,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15601,7 +16210,8 @@ module Aws::DataZone
     class UsernamePassword < Struct.new(
       :password,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15610,7 +16220,8 @@ module Aws::DataZone
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

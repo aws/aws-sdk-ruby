@@ -18,7 +18,8 @@ module Aws::CodeDeploy
     class AddTagsToOnPremisesInstancesInput < Struct.new(
       :tags,
       :instance_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class Alarm < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +63,8 @@ module Aws::CodeDeploy
       :enabled,
       :ignore_poll_alarm_failure,
       :alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -77,7 +80,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class AlarmsLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,7 +105,8 @@ module Aws::CodeDeploy
     class AppSpecContent < Struct.new(
       :content,
       :sha256,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +117,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ApplicationAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +128,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ApplicationDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -153,7 +160,8 @@ module Aws::CodeDeploy
       :linked_to_git_hub,
       :git_hub_account_name,
       :compute_platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -168,7 +176,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ApplicationLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +187,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ApplicationNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +199,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ArnNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +216,8 @@ module Aws::CodeDeploy
     class AutoRollbackConfiguration < Struct.new(
       :enabled,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -232,7 +244,8 @@ module Aws::CodeDeploy
       :name,
       :hook,
       :termination_hook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +262,8 @@ module Aws::CodeDeploy
     class BatchGetApplicationRevisionsInput < Struct.new(
       :application_name,
       :revisions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +281,8 @@ module Aws::CodeDeploy
       :application_name,
       :error_message,
       :revisions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +293,8 @@ module Aws::CodeDeploy
     #   @return [Array<String>]
     class BatchGetApplicationsInput < Struct.new(
       :application_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +304,8 @@ module Aws::CodeDeploy
     #   @return [Array<Types::ApplicationInfo>]
     class BatchGetApplicationsOutput < Struct.new(
       :applications_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +320,8 @@ module Aws::CodeDeploy
     class BatchGetDeploymentGroupsInput < Struct.new(
       :application_name,
       :deployment_group_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +335,8 @@ module Aws::CodeDeploy
     class BatchGetDeploymentGroupsOutput < Struct.new(
       :deployment_groups_info,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +351,8 @@ module Aws::CodeDeploy
     class BatchGetDeploymentInstancesInput < Struct.new(
       :deployment_id,
       :instance_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +366,8 @@ module Aws::CodeDeploy
     class BatchGetDeploymentInstancesOutput < Struct.new(
       :instances_summary,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +405,8 @@ module Aws::CodeDeploy
     class BatchGetDeploymentTargetsInput < Struct.new(
       :deployment_id,
       :target_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +439,8 @@ module Aws::CodeDeploy
     #   @return [Array<Types::DeploymentTarget>]
     class BatchGetDeploymentTargetsOutput < Struct.new(
       :deployment_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -428,7 +451,8 @@ module Aws::CodeDeploy
     #   @return [Array<String>]
     class BatchGetDeploymentsInput < Struct.new(
       :deployment_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +462,8 @@ module Aws::CodeDeploy
     #   @return [Array<Types::DeploymentInfo>]
     class BatchGetDeploymentsOutput < Struct.new(
       :deployments_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +474,8 @@ module Aws::CodeDeploy
     #   @return [Array<String>]
     class BatchGetOnPremisesInstancesInput < Struct.new(
       :instance_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +485,8 @@ module Aws::CodeDeploy
     #   @return [Array<Types::InstanceInfo>]
     class BatchGetOnPremisesInstancesOutput < Struct.new(
       :instance_infos,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +496,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class BatchLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +518,8 @@ module Aws::CodeDeploy
       :terminate_blue_instances_on_deployment_success,
       :deployment_ready_option,
       :green_fleet_provisioning_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +554,8 @@ module Aws::CodeDeploy
     class BlueInstanceTerminationOption < Struct.new(
       :action,
       :termination_wait_time_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -540,7 +570,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class BucketNameFilterRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -580,7 +611,8 @@ module Aws::CodeDeploy
       :status,
       :resource_type,
       :target_version_weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -602,7 +634,8 @@ module Aws::CodeDeploy
     class ContinueDeploymentInput < Struct.new(
       :deployment_id,
       :deployment_wait_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +657,8 @@ module Aws::CodeDeploy
       :application_name,
       :compute_platform,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +668,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class CreateApplicationOutput < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -681,7 +716,8 @@ module Aws::CodeDeploy
       :traffic_routing_config,
       :compute_platform,
       :zonal_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +727,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class CreateDeploymentConfigOutput < Struct.new(
       :deployment_config_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +851,8 @@ module Aws::CodeDeploy
       :on_premises_tag_set,
       :tags,
       :termination_hook_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -824,7 +862,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class CreateDeploymentGroupOutput < Struct.new(
       :deployment_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -932,7 +971,8 @@ module Aws::CodeDeploy
       :update_outdated_instances_only,
       :file_exists_behavior,
       :override_alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +982,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class CreateDeploymentOutput < Struct.new(
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +993,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeleteApplicationInput < Struct.new(
       :application_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1004,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeleteDeploymentConfigInput < Struct.new(
       :deployment_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -976,7 +1019,8 @@ module Aws::CodeDeploy
     class DeleteDeploymentGroupInput < Struct.new(
       :application_name,
       :deployment_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1034,8 @@ module Aws::CodeDeploy
     #   @return [Array<Types::AutoScalingGroup>]
     class DeleteDeploymentGroupOutput < Struct.new(
       :hooks_not_cleaned_up,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1045,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeleteGitHubAccountTokenInput < Struct.new(
       :token_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1010,7 +1056,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeleteGitHubAccountTokenOutput < Struct.new(
       :token_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,12 +1067,14 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeleteResourcesByExternalIdInput < Struct.new(
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcesByExternalIdOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,7 +1084,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentAlreadyCompletedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1045,7 +1095,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentConfigAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1055,7 +1106,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentConfigDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1117,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentConfigInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1102,7 +1155,8 @@ module Aws::CodeDeploy
       :compute_platform,
       :traffic_routing_config,
       :zonal_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1166,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentConfigLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1122,7 +1177,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentConfigNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1132,7 +1188,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1143,7 +1200,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentGroupAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1212,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentGroupDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1336,8 @@ module Aws::CodeDeploy
       :compute_platform,
       :ecs_services,
       :termination_hook_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1292,7 +1352,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentGroupLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1363,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentGroupNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1374,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentIdRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1576,8 @@ module Aws::CodeDeploy
       :external_id,
       :related_deployments,
       :override_alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1530,7 +1594,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentIsNotInReadyStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1540,7 +1605,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,7 +1616,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentNotStartedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1582,7 +1649,8 @@ module Aws::CodeDeploy
       :failed,
       :skipped,
       :ready,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1623,7 +1691,8 @@ module Aws::CodeDeploy
     class DeploymentReadyOption < Struct.new(
       :action_on_timeout,
       :wait_time_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1643,7 +1712,8 @@ module Aws::CodeDeploy
     class DeploymentStyle < Struct.new(
       :deployment_type,
       :deployment_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1674,7 +1744,8 @@ module Aws::CodeDeploy
       :lambda_target,
       :ecs_target,
       :cloud_formation_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1684,7 +1755,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentTargetDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1766,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentTargetIdRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1707,7 +1780,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeploymentTargetListSizeExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1717,7 +1791,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DeregisterOnPremisesInstanceInput < Struct.new(
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1727,7 +1802,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class DescriptionTooLongException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1774,7 +1850,8 @@ module Aws::CodeDeploy
       :script_name,
       :message,
       :log_tail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1806,7 +1883,8 @@ module Aws::CodeDeploy
       :key,
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1818,7 +1896,8 @@ module Aws::CodeDeploy
     #   @return [Array<Array<Types::EC2TagFilter>>]
     class EC2TagSet < Struct.new(
       :ec2_tag_set_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1913,8 @@ module Aws::CodeDeploy
     class ECSService < Struct.new(
       :service_name,
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1925,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ECSServiceMappingLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1882,7 +1963,8 @@ module Aws::CodeDeploy
       :lifecycle_events,
       :status,
       :task_sets_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1952,7 +2034,8 @@ module Aws::CodeDeploy
       :traffic_weight,
       :target_group,
       :task_set_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1976,7 +2059,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ELBInfo < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2043,7 +2127,8 @@ module Aws::CodeDeploy
     class ErrorInformation < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2069,7 +2154,8 @@ module Aws::CodeDeploy
       :first_used_time,
       :last_used_time,
       :register_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2079,7 +2165,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class GetApplicationInput < Struct.new(
       :application_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2089,7 +2176,8 @@ module Aws::CodeDeploy
     #   @return [Types::ApplicationInfo]
     class GetApplicationOutput < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2103,7 +2191,8 @@ module Aws::CodeDeploy
     class GetApplicationRevisionInput < Struct.new(
       :application_name,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2210,8 @@ module Aws::CodeDeploy
       :application_name,
       :revision,
       :revision_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2131,7 +2221,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class GetDeploymentConfigInput < Struct.new(
       :deployment_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2141,7 +2232,8 @@ module Aws::CodeDeploy
     #   @return [Types::DeploymentConfigInfo]
     class GetDeploymentConfigOutput < Struct.new(
       :deployment_config_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2247,8 @@ module Aws::CodeDeploy
     class GetDeploymentGroupInput < Struct.new(
       :application_name,
       :deployment_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2165,7 +2258,8 @@ module Aws::CodeDeploy
     #   @return [Types::DeploymentGroupInfo]
     class GetDeploymentGroupOutput < Struct.new(
       :deployment_group_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2176,7 +2270,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class GetDeploymentInput < Struct.new(
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2190,7 +2285,8 @@ module Aws::CodeDeploy
     class GetDeploymentInstanceInput < Struct.new(
       :deployment_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2200,7 +2296,8 @@ module Aws::CodeDeploy
     #   @return [Types::InstanceSummary]
     class GetDeploymentInstanceOutput < Struct.new(
       :instance_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2210,7 +2307,8 @@ module Aws::CodeDeploy
     #   @return [Types::DeploymentInfo]
     class GetDeploymentOutput < Struct.new(
       :deployment_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2223,7 +2321,8 @@ module Aws::CodeDeploy
     class GetDeploymentTargetInput < Struct.new(
       :deployment_id,
       :target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2236,7 +2335,8 @@ module Aws::CodeDeploy
     #   @return [Types::DeploymentTarget]
     class GetDeploymentTargetOutput < Struct.new(
       :deployment_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2346,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class GetOnPremisesInstanceInput < Struct.new(
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2256,7 +2357,8 @@ module Aws::CodeDeploy
     #   @return [Types::InstanceInfo]
     class GetOnPremisesInstanceOutput < Struct.new(
       :instance_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2266,7 +2368,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class GitHubAccountTokenDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2276,7 +2379,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class GitHubAccountTokenNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2293,7 +2397,8 @@ module Aws::CodeDeploy
     class GitHubLocation < Struct.new(
       :repository,
       :commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2316,7 +2421,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class GreenFleetProvisioningOption < Struct.new(
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2326,7 +2432,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class IamArnRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2337,7 +2444,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class IamSessionArnAlreadyRegisteredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2347,7 +2455,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class IamUserArnAlreadyRegisteredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2357,7 +2466,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class IamUserArnRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2369,7 +2479,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InstanceDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2381,7 +2492,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InstanceIdRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2417,7 +2529,8 @@ module Aws::CodeDeploy
       :register_time,
       :deregister_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2541,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InstanceLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2438,7 +2552,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InstanceNameAlreadyRegisteredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2448,7 +2563,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InstanceNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2458,7 +2574,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InstanceNotRegisteredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2528,7 +2645,8 @@ module Aws::CodeDeploy
       :last_updated_at,
       :lifecycle_events,
       :instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2565,7 +2683,8 @@ module Aws::CodeDeploy
       :last_updated_at,
       :lifecycle_events,
       :instance_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2592,7 +2711,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidAlarmConfigException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2602,7 +2722,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidApplicationNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2612,7 +2733,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2624,7 +2746,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidAutoRollbackConfigException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2635,7 +2758,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidAutoScalingGroupException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2646,7 +2770,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidBlueGreenDeploymentConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2656,7 +2781,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidBucketNameFilterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2666,7 +2792,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidComputePlatformException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2676,7 +2803,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidDeployedStateFilterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2686,7 +2814,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidDeploymentConfigNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2696,7 +2825,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidDeploymentGroupNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2706,7 +2836,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidDeploymentIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2717,7 +2848,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidDeploymentInstanceTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2727,7 +2859,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidDeploymentStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2739,7 +2872,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidDeploymentStyleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2749,7 +2883,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidDeploymentTargetIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2759,7 +2894,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidDeploymentWaitTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2770,7 +2906,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidEC2TagCombinationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2780,7 +2917,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidEC2TagException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2790,7 +2928,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidECSServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2800,7 +2939,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidExternalIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2812,7 +2952,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidFileExistsBehaviorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2822,7 +2963,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidGitHubAccountTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2832,7 +2974,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidGitHubAccountTokenNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2842,7 +2985,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidIamSessionArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2852,7 +2996,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidIamUserArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +3009,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidIgnoreApplicationStopFailuresValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2874,7 +3020,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2884,7 +3031,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidInstanceNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2894,7 +3042,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidInstanceStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2906,7 +3055,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidInstanceTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2916,7 +3066,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidKeyPrefixFilterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2928,7 +3079,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidLifecycleEventHookExecutionIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2939,7 +3091,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidLifecycleEventHookExecutionStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2949,7 +3102,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidLoadBalancerInfoException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2959,7 +3113,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidMinimumHealthyHostValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2969,7 +3124,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2980,7 +3136,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidOnPremisesTagCombinationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2990,7 +3147,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3000,7 +3158,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidRegistrationStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3169,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidRevisionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3022,7 +3182,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidRoleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3033,7 +3194,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidSortByException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3043,7 +3205,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidSortOrderException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3053,7 +3216,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidTagException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3063,7 +3227,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidTagFilterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3073,7 +3238,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidTagsToAddException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3083,7 +3249,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidTargetFilterNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3093,7 +3260,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidTargetGroupPairException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3118,7 +3286,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidTargetInstancesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3128,7 +3297,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidTimeRangeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3139,7 +3309,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidTrafficRoutingConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3149,7 +3320,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidTriggerConfigException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3161,7 +3333,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidUpdateOutdatedInstancesOnlyValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3171,7 +3344,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class InvalidZonalDeploymentConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3201,7 +3375,8 @@ module Aws::CodeDeploy
       :current_version,
       :target_version,
       :target_version_weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3245,7 +3420,8 @@ module Aws::CodeDeploy
       :last_updated_at,
       :lifecycle_events,
       :lambda_function_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3270,7 +3446,8 @@ module Aws::CodeDeploy
       :status,
       :end_time,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3318,7 +3495,8 @@ module Aws::CodeDeploy
       :start_time,
       :end_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3329,7 +3507,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class LifecycleEventAlreadyCompletedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3339,7 +3518,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class LifecycleHookLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3424,7 +3604,8 @@ module Aws::CodeDeploy
       :s3_key_prefix,
       :deployed,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3440,7 +3621,8 @@ module Aws::CodeDeploy
     class ListApplicationRevisionsOutput < Struct.new(
       :revisions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3451,7 +3633,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ListApplicationsInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3467,7 +3650,8 @@ module Aws::CodeDeploy
     class ListApplicationsOutput < Struct.new(
       :applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3478,7 +3662,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ListDeploymentConfigsInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3495,7 +3680,8 @@ module Aws::CodeDeploy
     class ListDeploymentConfigsOutput < Struct.new(
       :deployment_configs_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3510,7 +3696,8 @@ module Aws::CodeDeploy
     class ListDeploymentGroupsInput < Struct.new(
       :application_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3530,7 +3717,8 @@ module Aws::CodeDeploy
       :application_name,
       :deployment_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3584,7 +3772,8 @@ module Aws::CodeDeploy
       :next_token,
       :instance_status_filter,
       :instance_type_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3600,7 +3789,8 @@ module Aws::CodeDeploy
     class ListDeploymentInstancesOutput < Struct.new(
       :instances_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3632,7 +3822,8 @@ module Aws::CodeDeploy
       :deployment_id,
       :next_token,
       :target_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3647,7 +3838,8 @@ module Aws::CodeDeploy
     class ListDeploymentTargetsOutput < Struct.new(
       :target_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3719,7 +3911,8 @@ module Aws::CodeDeploy
       :include_only_statuses,
       :create_time_range,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3735,7 +3928,8 @@ module Aws::CodeDeploy
     class ListDeploymentsOutput < Struct.new(
       :deployments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3746,7 +3940,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ListGitHubAccountTokenNamesInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3762,7 +3957,8 @@ module Aws::CodeDeploy
     class ListGitHubAccountTokenNamesOutput < Struct.new(
       :token_name_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3794,7 +3990,8 @@ module Aws::CodeDeploy
       :registration_status,
       :tag_filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3810,7 +4007,8 @@ module Aws::CodeDeploy
     class ListOnPremisesInstancesOutput < Struct.new(
       :instance_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3826,7 +4024,8 @@ module Aws::CodeDeploy
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3842,7 +4041,8 @@ module Aws::CodeDeploy
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3884,7 +4084,8 @@ module Aws::CodeDeploy
       :elb_info_list,
       :target_group_info_list,
       :target_group_pair_info_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3930,7 +4131,8 @@ module Aws::CodeDeploy
     class MinimumHealthyHosts < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3952,7 +4154,8 @@ module Aws::CodeDeploy
     class MinimumHealthyHostsPerZone < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3968,7 +4171,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class MultipleIamArnsProvidedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3980,7 +4184,8 @@ module Aws::CodeDeploy
     #   @return [Array<Array<Types::TagFilter>>]
     class OnPremisesTagSet < Struct.new(
       :on_premises_tag_set_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3990,7 +4195,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class OperationNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4012,7 +4218,8 @@ module Aws::CodeDeploy
       :deployment_id,
       :lifecycle_event_hook_execution_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4022,7 +4229,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class PutLifecycleEventHookExecutionStatusOutput < Struct.new(
       :lifecycle_event_hook_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4042,7 +4250,8 @@ module Aws::CodeDeploy
     class RawString < Struct.new(
       :content,
       :sha256,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4061,7 +4270,8 @@ module Aws::CodeDeploy
       :application_name,
       :description,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4080,7 +4290,8 @@ module Aws::CodeDeploy
       :instance_name,
       :iam_session_arn,
       :iam_user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4095,7 +4306,8 @@ module Aws::CodeDeploy
     class RelatedDeployments < Struct.new(
       :auto_update_outdated_instances_root_deployment_id,
       :auto_update_outdated_instances_deployment_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4110,7 +4322,8 @@ module Aws::CodeDeploy
     class RemoveTagsFromOnPremisesInstancesInput < Struct.new(
       :tags,
       :instance_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4120,7 +4333,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ResourceArnRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4130,7 +4344,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ResourceValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4140,7 +4355,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class RevisionDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4155,7 +4371,8 @@ module Aws::CodeDeploy
     class RevisionInfo < Struct.new(
       :revision_location,
       :generic_revision_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4202,7 +4419,8 @@ module Aws::CodeDeploy
       :git_hub_location,
       :string,
       :app_spec_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4212,7 +4430,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class RevisionRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4222,7 +4441,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class RoleRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4242,7 +4462,8 @@ module Aws::CodeDeploy
       :rollback_deployment_id,
       :rollback_triggering_deployment_id,
       :rollback_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4298,7 +4519,8 @@ module Aws::CodeDeploy
       :bundle_type,
       :version,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4308,7 +4530,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class SkipWaitTimeForInstanceTerminationInput < Struct.new(
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4323,7 +4546,8 @@ module Aws::CodeDeploy
     class StopDeploymentInput < Struct.new(
       :deployment_id,
       :auto_rollback_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4345,7 +4569,8 @@ module Aws::CodeDeploy
     class StopDeploymentOutput < Struct.new(
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4359,7 +4584,8 @@ module Aws::CodeDeploy
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4388,7 +4614,8 @@ module Aws::CodeDeploy
       :key,
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4398,7 +4625,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class TagLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4408,7 +4636,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class TagRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4422,12 +4651,14 @@ module Aws::CodeDeploy
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4438,7 +4669,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class TagSetListLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4454,7 +4686,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class TargetGroupInfo < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4475,7 +4708,8 @@ module Aws::CodeDeploy
       :target_groups,
       :prod_traffic_route,
       :test_traffic_route,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4500,7 +4734,8 @@ module Aws::CodeDeploy
       :tag_filters,
       :auto_scaling_groups,
       :ec2_tag_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4510,7 +4745,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4529,7 +4765,8 @@ module Aws::CodeDeploy
     class TimeBasedCanary < Struct.new(
       :canary_percentage,
       :canary_interval,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4554,7 +4791,8 @@ module Aws::CodeDeploy
     class TimeBasedLinear < Struct.new(
       :linear_percentage,
       :linear_interval,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4580,7 +4818,8 @@ module Aws::CodeDeploy
     class TimeRange < Struct.new(
       :start,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4593,7 +4832,8 @@ module Aws::CodeDeploy
     #   @return [Array<String>]
     class TrafficRoute < Struct.new(
       :listener_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4621,7 +4861,8 @@ module Aws::CodeDeploy
       :type,
       :time_based_canary,
       :time_based_linear,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4640,7 +4881,8 @@ module Aws::CodeDeploy
       :trigger_name,
       :trigger_target_arn,
       :trigger_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4650,7 +4892,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class TriggerTargetsLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4660,7 +4903,8 @@ module Aws::CodeDeploy
     #   @return [String]
     class UnsupportedActionForDeploymentTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4676,12 +4920,14 @@ module Aws::CodeDeploy
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4695,7 +4941,8 @@ module Aws::CodeDeploy
     class UpdateApplicationInput < Struct.new(
       :application_name,
       :new_application_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4819,7 +5066,8 @@ module Aws::CodeDeploy
       :ecs_services,
       :on_premises_tag_set,
       :termination_hook_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4831,7 +5079,8 @@ module Aws::CodeDeploy
     #   @return [Array<Types::AutoScalingGroup>]
     class UpdateDeploymentGroupOutput < Struct.new(
       :hooks_not_cleaned_up,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4878,7 +5127,8 @@ module Aws::CodeDeploy
       :first_zone_monitor_duration_in_seconds,
       :monitor_duration_in_seconds,
       :minimum_healthy_hosts_per_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

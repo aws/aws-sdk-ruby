@@ -13,7 +13,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,12 +39,14 @@ module Aws::MediaPackageV2
       :origin_endpoint_name,
       :harvest_job_name,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelHarvestJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +60,8 @@ module Aws::MediaPackageV2
     class CdnAuthConfiguration < Struct.new(
       :cdn_identifier_secret_arns,
       :secrets_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -83,7 +87,8 @@ module Aws::MediaPackageV2
       :created_at,
       :modified_at,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +133,8 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :input_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +147,8 @@ module Aws::MediaPackageV2
     class ConflictException < Struct.new(
       :message,
       :conflict_exception_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +175,8 @@ module Aws::MediaPackageV2
       :client_token,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +213,8 @@ module Aws::MediaPackageV2
       :e_tag,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -259,7 +268,8 @@ module Aws::MediaPackageV2
       :input_switch_configuration,
       :output_header_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +333,8 @@ module Aws::MediaPackageV2
       :tags,
       :input_switch_configuration,
       :output_header_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -406,7 +417,8 @@ module Aws::MediaPackageV2
       :dvb_settings,
       :compactness,
       :subtitle_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +464,8 @@ module Aws::MediaPackageV2
       :client_token,
       :harvest_job_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +531,8 @@ module Aws::MediaPackageV2
       :error_message,
       :e_tag,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +574,8 @@ module Aws::MediaPackageV2
       :program_date_time_interval_seconds,
       :filter_configuration,
       :url_encode_child_manifest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -602,7 +617,8 @@ module Aws::MediaPackageV2
       :program_date_time_interval_seconds,
       :filter_configuration,
       :url_encode_child_manifest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +640,8 @@ module Aws::MediaPackageV2
       :manifest_window_seconds,
       :filter_configuration,
       :manifest_layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +708,8 @@ module Aws::MediaPackageV2
       :mss_manifests,
       :force_endpoint_error_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -764,7 +782,8 @@ module Aws::MediaPackageV2
       :force_endpoint_error_configuration,
       :e_tag,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +805,8 @@ module Aws::MediaPackageV2
       :service_location,
       :dvb_priority,
       :dvb_weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +825,8 @@ module Aws::MediaPackageV2
       :url,
       :mime_type,
       :font_family,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +840,8 @@ module Aws::MediaPackageV2
     class DashDvbMetricsReporting < Struct.new(
       :reporting_url,
       :probability,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -833,7 +855,8 @@ module Aws::MediaPackageV2
     class DashDvbSettings < Struct.new(
       :font_download,
       :error_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +882,8 @@ module Aws::MediaPackageV2
       :copyright,
       :language_code,
       :more_information_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +893,8 @@ module Aws::MediaPackageV2
     #   @return [Types::DashTtmlConfiguration]
     class DashSubtitleConfiguration < Struct.new(
       :ttml_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +906,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class DashTtmlConfiguration < Struct.new(
       :ttml_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,7 +921,8 @@ module Aws::MediaPackageV2
     class DashUtcTiming < Struct.new(
       :timing_mode,
       :timing_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,12 +931,14 @@ module Aws::MediaPackageV2
     #   @return [String]
     class DeleteChannelGroupRequest < Struct.new(
       :channel_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,12 +951,14 @@ module Aws::MediaPackageV2
     class DeleteChannelPolicyRequest < Struct.new(
       :channel_group_name,
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,12 +971,14 @@ module Aws::MediaPackageV2
     class DeleteChannelRequest < Struct.new(
       :channel_group_name,
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,12 +995,14 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteOriginEndpointPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,12 +1019,14 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteOriginEndpointResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1036,8 @@ module Aws::MediaPackageV2
     #   @return [Types::S3DestinationConfig]
     class Destination < Struct.new(
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1085,8 @@ module Aws::MediaPackageV2
       :key_rotation_interval_seconds,
       :cmaf_exclude_segment_drm_metadata,
       :speke_key_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1137,7 +1176,8 @@ module Aws::MediaPackageV2
     class EncryptionContractConfiguration < Struct.new(
       :preset_speke20_audio,
       :preset_speke20_video,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1195,8 @@ module Aws::MediaPackageV2
       :ts_encryption_method,
       :cmaf_encryption_method,
       :ism_encryption_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1181,7 +1222,8 @@ module Aws::MediaPackageV2
       :end,
       :time_delay_seconds,
       :clip_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1209,7 +1251,8 @@ module Aws::MediaPackageV2
     #   @return [Array<String>]
     class ForceEndpointErrorConfiguration < Struct.new(
       :endpoint_error_conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1261,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class GetChannelGroupRequest < Struct.new(
       :channel_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1299,8 @@ module Aws::MediaPackageV2
       :description,
       :e_tag,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1268,7 +1313,8 @@ module Aws::MediaPackageV2
     class GetChannelPolicyRequest < Struct.new(
       :channel_group_name,
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1285,7 +1331,8 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1298,7 +1345,8 @@ module Aws::MediaPackageV2
     class GetChannelRequest < Struct.new(
       :channel_group_name,
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1366,7 +1414,8 @@ module Aws::MediaPackageV2
       :tags,
       :input_switch_configuration,
       :output_header_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1501,8 @@ module Aws::MediaPackageV2
       :dvb_settings,
       :compactness,
       :subtitle_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1524,8 @@ module Aws::MediaPackageV2
       :channel_name,
       :origin_endpoint_name,
       :harvest_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1540,7 +1591,8 @@ module Aws::MediaPackageV2
       :error_message,
       :e_tag,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1638,8 @@ module Aws::MediaPackageV2
       :filter_configuration,
       :start_tag,
       :url_encode_child_manifest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1632,7 +1685,8 @@ module Aws::MediaPackageV2
       :filter_configuration,
       :start_tag,
       :url_encode_child_manifest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1658,7 +1712,8 @@ module Aws::MediaPackageV2
       :filter_configuration,
       :manifest_window_seconds,
       :manifest_layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1730,8 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1702,7 +1758,8 @@ module Aws::MediaPackageV2
       :origin_endpoint_name,
       :policy,
       :cdn_auth_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1719,7 +1776,8 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1854,8 @@ module Aws::MediaPackageV2
       :force_endpoint_error_configuration,
       :e_tag,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1858,7 +1917,8 @@ module Aws::MediaPackageV2
       :status,
       :error_message,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1868,7 +1928,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class HarvestedDashManifest < Struct.new(
       :manifest_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1878,7 +1939,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class HarvestedHlsManifest < Struct.new(
       :manifest_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1950,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class HarvestedLowLatencyHlsManifest < Struct.new(
       :manifest_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,7 +1969,8 @@ module Aws::MediaPackageV2
       :hls_manifests,
       :dash_manifests,
       :low_latency_hls_manifests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1920,7 +1984,8 @@ module Aws::MediaPackageV2
     class HarvesterScheduleConfiguration < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1934,7 +1999,8 @@ module Aws::MediaPackageV2
     class IngestEndpoint < Struct.new(
       :id,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1948,7 +2014,8 @@ module Aws::MediaPackageV2
     class InputSwitchConfiguration < Struct.new(
       :mqcs_input_switching,
       :preferred_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2024,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1970,7 +2038,8 @@ module Aws::MediaPackageV2
     class ListChannelGroupsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2052,8 @@ module Aws::MediaPackageV2
     class ListChannelGroupsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2000,7 +2070,8 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2013,7 +2084,8 @@ module Aws::MediaPackageV2
     class ListChannelsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2027,7 +2099,8 @@ module Aws::MediaPackageV2
     class ListDashManifestConfiguration < Struct.new(
       :manifest_name,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2057,7 +2130,8 @@ module Aws::MediaPackageV2
       :status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2071,7 +2145,8 @@ module Aws::MediaPackageV2
     class ListHarvestJobsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2089,7 +2164,8 @@ module Aws::MediaPackageV2
       :manifest_name,
       :child_manifest_name,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2107,7 +2183,8 @@ module Aws::MediaPackageV2
       :manifest_name,
       :child_manifest_name,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2198,8 @@ module Aws::MediaPackageV2
     class ListMssManifestConfiguration < Struct.new(
       :manifest_name,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2142,7 +2220,8 @@ module Aws::MediaPackageV2
       :channel_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2234,8 @@ module Aws::MediaPackageV2
     class ListOriginEndpointsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2164,7 +2244,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2173,7 +2254,8 @@ module Aws::MediaPackageV2
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2231,7 +2313,8 @@ module Aws::MediaPackageV2
       :dash_manifests,
       :mss_manifests,
       :force_endpoint_error_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2241,7 +2324,8 @@ module Aws::MediaPackageV2
     #   @return [Boolean]
     class OutputHeaderConfiguration < Struct.new(
       :publish_mqcs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2258,12 +2342,14 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutChannelPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2290,12 +2376,14 @@ module Aws::MediaPackageV2
       :origin_endpoint_name,
       :policy,
       :cdn_auth_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutOriginEndpointPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2308,7 +2396,8 @@ module Aws::MediaPackageV2
     class ResetChannelStateRequest < Struct.new(
       :channel_group_name,
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2329,7 +2418,8 @@ module Aws::MediaPackageV2
       :channel_name,
       :arn,
       :reset_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2346,7 +2436,8 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2371,7 +2462,8 @@ module Aws::MediaPackageV2
       :origin_endpoint_name,
       :arn,
       :reset_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2384,7 +2476,8 @@ module Aws::MediaPackageV2
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_type_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2398,7 +2491,8 @@ module Aws::MediaPackageV2
     class S3DestinationConfig < Struct.new(
       :bucket_name,
       :destination_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2408,7 +2502,8 @@ module Aws::MediaPackageV2
     #   @return [Array<String>]
     class Scte < Struct.new(
       :scte_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2429,7 +2524,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class ScteDash < Struct.new(
       :ad_marker_dash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2445,7 +2541,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class ScteHls < Struct.new(
       :ad_marker_hls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2479,7 +2576,8 @@ module Aws::MediaPackageV2
       :ts_include_dvb_subtitles,
       :scte,
       :encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2488,7 +2586,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2520,7 +2619,8 @@ module Aws::MediaPackageV2
       :drm_systems,
       :role_arn,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2534,7 +2634,8 @@ module Aws::MediaPackageV2
     class StartTag < Struct.new(
       :time_offset,
       :precise,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2547,7 +2648,8 @@ module Aws::MediaPackageV2
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2556,7 +2658,8 @@ module Aws::MediaPackageV2
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2569,7 +2672,8 @@ module Aws::MediaPackageV2
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2586,7 +2690,8 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :e_tag,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2623,7 +2728,8 @@ module Aws::MediaPackageV2
       :description,
       :e_tag,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2652,7 +2758,8 @@ module Aws::MediaPackageV2
       :description,
       :input_switch_configuration,
       :output_header_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2716,7 +2823,8 @@ module Aws::MediaPackageV2
       :tags,
       :input_switch_configuration,
       :output_header_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2773,7 +2881,8 @@ module Aws::MediaPackageV2
       :mss_manifests,
       :force_endpoint_error_configuration,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2846,7 +2955,8 @@ module Aws::MediaPackageV2
       :e_tag,
       :tags,
       :dash_manifests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2859,7 +2969,8 @@ module Aws::MediaPackageV2
     class ValidationException < Struct.new(
       :message,
       :validation_exception_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

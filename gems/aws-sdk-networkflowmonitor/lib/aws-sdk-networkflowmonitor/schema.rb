@@ -788,7 +788,6 @@ module Aws::NetworkFlowMonitor
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update a scope"}, "smithy.api#http" => {"uri" => "/scopes/{scopeId}", "method" => "PATCH"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

@@ -20,7 +20,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +58,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +68,8 @@ module Aws::Neptunedata
     #   @return [String]
     class CancelGremlinQueryInput < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +78,8 @@ module Aws::Neptunedata
     #   @return [String]
     class CancelGremlinQueryOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -83,7 +88,8 @@ module Aws::Neptunedata
     #   @return [String]
     class CancelLoaderJobInput < Struct.new(
       :load_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,7 +98,8 @@ module Aws::Neptunedata
     #   @return [String]
     class CancelLoaderJobOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -109,7 +116,8 @@ module Aws::Neptunedata
       :id,
       :neptune_iam_role_arn,
       :clean,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -118,7 +126,8 @@ module Aws::Neptunedata
     #   @return [String]
     class CancelMLDataProcessingJobOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +144,8 @@ module Aws::Neptunedata
       :id,
       :neptune_iam_role_arn,
       :clean,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +154,8 @@ module Aws::Neptunedata
     #   @return [String]
     class CancelMLModelTrainingJobOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +172,8 @@ module Aws::Neptunedata
       :id,
       :neptune_iam_role_arn,
       :clean,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +182,8 @@ module Aws::Neptunedata
     #   @return [String]
     class CancelMLModelTransformJobOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +196,8 @@ module Aws::Neptunedata
     class CancelOpenCypherQueryInput < Struct.new(
       :query_id,
       :silent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +210,8 @@ module Aws::Neptunedata
     class CancelOpenCypherQueryOutput < Struct.new(
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +229,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +248,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +267,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +286,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +328,8 @@ module Aws::Neptunedata
       :instance_type,
       :instance_count,
       :volume_encryption_kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +346,8 @@ module Aws::Neptunedata
       :id,
       :arn,
       :creation_time_in_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +365,8 @@ module Aws::Neptunedata
       :source_s3_directory_path,
       :training_entry_point_script,
       :transform_entry_point_script,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +380,8 @@ module Aws::Neptunedata
     class CustomModelTransformParameters < Struct.new(
       :source_s3_directory_path,
       :transform_entry_point_script,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +398,8 @@ module Aws::Neptunedata
       :id,
       :neptune_iam_role_arn,
       :clean,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +408,8 @@ module Aws::Neptunedata
     #   @return [String]
     class DeleteMLEndpointOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +426,8 @@ module Aws::Neptunedata
       :status_code,
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +444,8 @@ module Aws::Neptunedata
       :status_code,
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +459,8 @@ module Aws::Neptunedata
     class DeleteStatisticsValueMap < Struct.new(
       :active,
       :statistics_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +474,8 @@ module Aws::Neptunedata
     class EdgeStructure < Struct.new(
       :count,
       :edge_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +488,8 @@ module Aws::Neptunedata
     class ExecuteFastResetInput < Struct.new(
       :action,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +502,8 @@ module Aws::Neptunedata
     class ExecuteFastResetOutput < Struct.new(
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -481,7 +512,8 @@ module Aws::Neptunedata
     #   @return [String]
     class ExecuteGremlinExplainQueryInput < Struct.new(
       :gremlin_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +522,8 @@ module Aws::Neptunedata
     #   @return [String]
     class ExecuteGremlinExplainQueryOutput < Struct.new(
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +548,8 @@ module Aws::Neptunedata
       :chop,
       :serializer,
       :index_ops,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +558,8 @@ module Aws::Neptunedata
     #   @return [String]
     class ExecuteGremlinProfileQueryOutput < Struct.new(
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +572,8 @@ module Aws::Neptunedata
     class ExecuteGremlinQueryInput < Struct.new(
       :gremlin_query,
       :serializer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -558,7 +594,8 @@ module Aws::Neptunedata
       :status,
       :result,
       :meta,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +612,8 @@ module Aws::Neptunedata
       :open_cypher_query,
       :parameters,
       :explain_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +622,8 @@ module Aws::Neptunedata
     #   @return [String]
     class ExecuteOpenCypherExplainQueryOutput < Struct.new(
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +636,8 @@ module Aws::Neptunedata
     class ExecuteOpenCypherQueryInput < Struct.new(
       :open_cypher_query,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +646,8 @@ module Aws::Neptunedata
     #   @return [JSON]
     class ExecuteOpenCypherQueryOutput < Struct.new(
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +665,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +684,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +695,8 @@ module Aws::Neptunedata
     #   @return [String]
     class FastResetToken < Struct.new(
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +753,8 @@ module Aws::Neptunedata
       :rolling_back_trx_earliest_start_time,
       :features,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +763,8 @@ module Aws::Neptunedata
     #   @return [String]
     class GetGremlinQueryStatusInput < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +781,8 @@ module Aws::Neptunedata
       :query_id,
       :query_string,
       :query_eval_stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +807,8 @@ module Aws::Neptunedata
       :errors,
       :page,
       :errors_per_page,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +821,8 @@ module Aws::Neptunedata
     class GetLoaderJobStatusOutput < Struct.new(
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +835,8 @@ module Aws::Neptunedata
     class GetMLDataProcessingJobInput < Struct.new(
       :id,
       :neptune_iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +853,8 @@ module Aws::Neptunedata
       :status,
       :id,
       :processing_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +867,8 @@ module Aws::Neptunedata
     class GetMLEndpointInput < Struct.new(
       :id,
       :neptune_iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +889,8 @@ module Aws::Neptunedata
       :id,
       :endpoint,
       :endpoint_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,7 +903,8 @@ module Aws::Neptunedata
     class GetMLModelTrainingJobInput < Struct.new(
       :id,
       :neptune_iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,7 +933,8 @@ module Aws::Neptunedata
       :hpo_job,
       :model_transform_job,
       :ml_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +947,8 @@ module Aws::Neptunedata
     class GetMLModelTransformJobInput < Struct.new(
       :id,
       :neptune_iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +973,8 @@ module Aws::Neptunedata
       :base_processing_job,
       :remote_model_transform_job,
       :models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -926,7 +983,8 @@ module Aws::Neptunedata
     #   @return [String]
     class GetOpenCypherQueryStatusInput < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -943,7 +1001,8 @@ module Aws::Neptunedata
       :query_id,
       :query_string,
       :query_eval_stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +1015,8 @@ module Aws::Neptunedata
     class GetPropertygraphStatisticsOutput < Struct.new(
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +1041,8 @@ module Aws::Neptunedata
       :commit_num,
       :op_num,
       :encoding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1006,7 +1067,8 @@ module Aws::Neptunedata
       :format,
       :records,
       :total_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1015,7 +1077,8 @@ module Aws::Neptunedata
     #   @return [String]
     class GetPropertygraphSummaryInput < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1028,7 +1091,8 @@ module Aws::Neptunedata
     class GetPropertygraphSummaryOutput < Struct.new(
       :status_code,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1101,8 @@ module Aws::Neptunedata
     #   @return [String]
     class GetRDFGraphSummaryInput < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1115,8 @@ module Aws::Neptunedata
     class GetRDFGraphSummaryOutput < Struct.new(
       :status_code,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1063,7 +1129,8 @@ module Aws::Neptunedata
     class GetSparqlStatisticsOutput < Struct.new(
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1088,7 +1155,8 @@ module Aws::Neptunedata
       :commit_num,
       :op_num,
       :encoding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1113,7 +1181,8 @@ module Aws::Neptunedata
       :format,
       :records,
       :total_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1131,7 +1200,8 @@ module Aws::Neptunedata
       :query_id,
       :query_string,
       :query_eval_stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1219,8 @@ module Aws::Neptunedata
       :message,
       :code,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1167,7 +1238,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,7 +1257,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,7 +1276,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1221,7 +1295,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1314,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1248,7 +1324,8 @@ module Aws::Neptunedata
     #   @return [Boolean]
     class ListGremlinQueriesInput < Struct.new(
       :include_waiting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1342,8 @@ module Aws::Neptunedata
       :accepted_query_count,
       :running_query_count,
       :queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1278,7 +1356,8 @@ module Aws::Neptunedata
     class ListLoaderJobsInput < Struct.new(
       :limit,
       :include_queued_loads,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1370,8 @@ module Aws::Neptunedata
     class ListLoaderJobsOutput < Struct.new(
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1384,8 @@ module Aws::Neptunedata
     class ListMLDataProcessingJobsInput < Struct.new(
       :max_items,
       :neptune_iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1313,7 +1394,8 @@ module Aws::Neptunedata
     #   @return [Array<String>]
     class ListMLDataProcessingJobsOutput < Struct.new(
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1326,7 +1408,8 @@ module Aws::Neptunedata
     class ListMLEndpointsInput < Struct.new(
       :max_items,
       :neptune_iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1335,7 +1418,8 @@ module Aws::Neptunedata
     #   @return [Array<String>]
     class ListMLEndpointsOutput < Struct.new(
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1432,8 @@ module Aws::Neptunedata
     class ListMLModelTrainingJobsInput < Struct.new(
       :max_items,
       :neptune_iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1357,7 +1442,8 @@ module Aws::Neptunedata
     #   @return [Array<String>]
     class ListMLModelTrainingJobsOutput < Struct.new(
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1370,7 +1456,8 @@ module Aws::Neptunedata
     class ListMLModelTransformJobsInput < Struct.new(
       :max_items,
       :neptune_iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1379,7 +1466,8 @@ module Aws::Neptunedata
     #   @return [Array<String>]
     class ListMLModelTransformJobsOutput < Struct.new(
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1388,7 +1476,8 @@ module Aws::Neptunedata
     #   @return [Boolean]
     class ListOpenCypherQueriesInput < Struct.new(
       :include_waiting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1405,7 +1494,8 @@ module Aws::Neptunedata
       :accepted_query_count,
       :running_query_count,
       :queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1513,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1433,7 +1524,8 @@ module Aws::Neptunedata
     #   @return [Array<String>]
     class LoaderIdResult < Struct.new(
       :load_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1451,7 +1543,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1469,7 +1562,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1572,8 @@ module Aws::Neptunedata
     #   @return [String]
     class ManagePropertygraphStatisticsInput < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1491,7 +1586,8 @@ module Aws::Neptunedata
     class ManagePropertygraphStatisticsOutput < Struct.new(
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1500,7 +1596,8 @@ module Aws::Neptunedata
     #   @return [String]
     class ManageSparqlStatisticsInput < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1610,8 @@ module Aws::Neptunedata
     class ManageSparqlStatisticsOutput < Struct.new(
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1629,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,7 +1648,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1567,7 +1667,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1581,7 +1682,8 @@ module Aws::Neptunedata
     class MlConfigDefinition < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1713,8 @@ module Aws::Neptunedata
       :output_location,
       :failure_reason,
       :cloudwatch_log_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1629,7 +1732,8 @@ module Aws::Neptunedata
       :count,
       :node_properties,
       :distinct_outgoing_edge_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1647,7 +1751,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1665,7 +1770,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1695,7 +1801,8 @@ module Aws::Neptunedata
       :value,
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1721,7 +1828,8 @@ module Aws::Neptunedata
       :data,
       :op,
       :is_last_op,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1783,7 +1891,8 @@ module Aws::Neptunedata
       :total_edge_property_values,
       :node_structures,
       :edge_structures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1801,7 +1910,8 @@ module Aws::Neptunedata
       :version,
       :last_statistics_computation_time,
       :graph_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1823,7 +1933,8 @@ module Aws::Neptunedata
       :elapsed,
       :cancelled,
       :subqueries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1833,7 +1944,8 @@ module Aws::Neptunedata
     #   @return [String]
     class QueryLanguageVersion < Struct.new(
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1851,7 +1963,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1982,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1887,7 +2001,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1921,7 +2036,8 @@ module Aws::Neptunedata
       :classes,
       :predicates,
       :subject_structures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1939,7 +2055,8 @@ module Aws::Neptunedata
       :version,
       :last_statistics_computation_time,
       :graph_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2074,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1967,7 +2085,8 @@ module Aws::Neptunedata
     #   @return [String]
     class RefreshStatisticsIdMap < Struct.new(
       :statistics_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1985,7 +2104,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2003,7 +2123,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2013,7 +2134,8 @@ module Aws::Neptunedata
     #   @return [String]
     class SparqlData < Struct.new(
       :stmt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2039,7 +2161,8 @@ module Aws::Neptunedata
       :data,
       :op,
       :is_last_op,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2092,7 +2215,8 @@ module Aws::Neptunedata
       :queue_request,
       :dependencies,
       :user_provided_edge_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2105,7 +2229,8 @@ module Aws::Neptunedata
     class StartLoaderJobOutput < Struct.new(
       :status,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2170,7 +2295,8 @@ module Aws::Neptunedata
       :security_group_ids,
       :volume_encryption_kms_key,
       :s3_output_encryption_kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2187,7 +2313,8 @@ module Aws::Neptunedata
       :id,
       :arn,
       :creation_time_in_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2264,7 +2391,8 @@ module Aws::Neptunedata
       :s3_output_encryption_kms_key,
       :enable_managed_spot_training,
       :custom_model_training_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2281,7 +2409,8 @@ module Aws::Neptunedata
       :id,
       :arn,
       :creation_time_in_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2342,7 +2471,8 @@ module Aws::Neptunedata
       :security_group_ids,
       :volume_encryption_kms_key,
       :s3_output_encryption_kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2359,7 +2489,8 @@ module Aws::Neptunedata
       :id,
       :arn,
       :creation_time_in_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2389,7 +2520,8 @@ module Aws::Neptunedata
       :date,
       :note,
       :signature_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2407,7 +2539,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2425,7 +2558,8 @@ module Aws::Neptunedata
       :signature_count,
       :instance_count,
       :predicate_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2443,7 +2577,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2457,7 +2592,8 @@ module Aws::Neptunedata
     class SubjectStructure < Struct.new(
       :count,
       :predicates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2475,7 +2611,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2493,7 +2630,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2649,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2529,7 +2668,8 @@ module Aws::Neptunedata
       :detailed_message,
       :request_id,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

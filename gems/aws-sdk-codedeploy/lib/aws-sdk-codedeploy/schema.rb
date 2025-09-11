@@ -2060,7 +2060,6 @@ module Aws::CodeDeploy
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TriggerTargetsLimitExceededException)
         operation.traits = {}
       end)
-
     end
 
     class << self

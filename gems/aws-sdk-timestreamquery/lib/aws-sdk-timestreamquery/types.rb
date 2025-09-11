@@ -11,7 +11,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::TimestreamQuery
     class AccountSettingsNotificationConfiguration < Struct.new(
       :sns_configuration,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +37,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class CancelQueryRequest < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +48,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class CancelQueryResponse < Struct.new(
       :cancellation_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -63,7 +67,8 @@ module Aws::TimestreamQuery
     class ColumnInfo < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +77,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +154,8 @@ module Aws::TimestreamQuery
       :tags,
       :kms_key_id,
       :error_report_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +164,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class CreateScheduledQueryResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +192,8 @@ module Aws::TimestreamQuery
       :array_value,
       :row_value,
       :null_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,12 +202,14 @@ module Aws::TimestreamQuery
     #   @return [String]
     class DeleteScheduledQueryRequest < Struct.new(
       :scheduled_query_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountSettingsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,12 +232,14 @@ module Aws::TimestreamQuery
       :max_query_tcu,
       :query_pricing_model,
       :query_compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeEndpointsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +249,8 @@ module Aws::TimestreamQuery
     #   @return [Array<Types::Endpoint>]
     class DescribeEndpointsResponse < Struct.new(
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +259,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class DescribeScheduledQueryRequest < Struct.new(
       :scheduled_query_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +269,8 @@ module Aws::TimestreamQuery
     #   @return [Types::ScheduledQueryDescription]
     class DescribeScheduledQueryResponse < Struct.new(
       :scheduled_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -269,7 +285,8 @@ module Aws::TimestreamQuery
     class DimensionMapping < Struct.new(
       :name,
       :dimension_value_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +301,8 @@ module Aws::TimestreamQuery
     class Endpoint < Struct.new(
       :address,
       :cache_period_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -299,7 +317,8 @@ module Aws::TimestreamQuery
     #   @return [Types::S3Configuration]
     class ErrorReportConfiguration < Struct.new(
       :s3_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +329,8 @@ module Aws::TimestreamQuery
     #   @return [Types::S3ReportLocation]
     class ErrorReportLocation < Struct.new(
       :s3_report_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +353,8 @@ module Aws::TimestreamQuery
       :invocation_time,
       :client_token,
       :query_insights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +386,8 @@ module Aws::TimestreamQuery
       :cumulative_bytes_scanned,
       :records_ingested,
       :query_result_rows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -384,7 +406,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +416,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class InvalidEndpointException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +435,8 @@ module Aws::TimestreamQuery
       :target_query_tcu,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +452,8 @@ module Aws::TimestreamQuery
     class ListScheduledQueriesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -441,7 +467,8 @@ module Aws::TimestreamQuery
     class ListScheduledQueriesResponse < Struct.new(
       :scheduled_queries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +486,8 @@ module Aws::TimestreamQuery
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +501,8 @@ module Aws::TimestreamQuery
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +534,8 @@ module Aws::TimestreamQuery
       :target_measure_name,
       :measure_value_type,
       :multi_measure_attribute_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +554,8 @@ module Aws::TimestreamQuery
       :source_column,
       :target_multi_measure_attribute_name,
       :measure_value_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +574,8 @@ module Aws::TimestreamQuery
     class MultiMeasureMappings < Struct.new(
       :target_multi_measure_name,
       :multi_measure_attribute_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +586,8 @@ module Aws::TimestreamQuery
     #   @return [Types::SnsConfiguration]
     class NotificationConfiguration < Struct.new(
       :sns_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +604,8 @@ module Aws::TimestreamQuery
     class ParameterMapping < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +622,8 @@ module Aws::TimestreamQuery
     class PrepareQueryRequest < Struct.new(
       :query_string,
       :validate_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,7 +640,8 @@ module Aws::TimestreamQuery
       :query_string,
       :columns,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -619,7 +655,8 @@ module Aws::TimestreamQuery
     class ProvisionedCapacityRequest < Struct.new(
       :target_query_tcu,
       :notification_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -637,7 +674,8 @@ module Aws::TimestreamQuery
       :active_query_tcu,
       :notification_configuration,
       :last_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,7 +689,8 @@ module Aws::TimestreamQuery
     class QueryComputeRequest < Struct.new(
       :compute_mode,
       :provisioned_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +704,8 @@ module Aws::TimestreamQuery
     class QueryComputeResponse < Struct.new(
       :compute_mode,
       :provisioned_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -675,7 +715,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class QueryExecutionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +759,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class QueryInsights < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +809,8 @@ module Aws::TimestreamQuery
       :unload_partition_count,
       :unload_written_rows,
       :unload_written_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -886,7 +929,8 @@ module Aws::TimestreamQuery
       :next_token,
       :max_rows,
       :query_insights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +961,8 @@ module Aws::TimestreamQuery
       :column_info,
       :query_status,
       :query_insights_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,7 +995,8 @@ module Aws::TimestreamQuery
     #   @return [Types::QuerySpatialCoverageMax]
     class QuerySpatialCoverage < Struct.new(
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1014,8 @@ module Aws::TimestreamQuery
       :value,
       :table_arn,
       :partition_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -996,7 +1043,8 @@ module Aws::TimestreamQuery
       :progress_percentage,
       :cumulative_bytes_scanned,
       :cumulative_bytes_metered,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1023,7 +1071,8 @@ module Aws::TimestreamQuery
     #   @return [Types::QueryTemporalRangeMax]
     class QueryTemporalRange < Struct.new(
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1086,8 @@ module Aws::TimestreamQuery
     class QueryTemporalRangeMax < Struct.new(
       :value,
       :table_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1055,7 +1105,8 @@ module Aws::TimestreamQuery
     class ResourceNotFoundException < Struct.new(
       :message,
       :scheduled_query_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1116,8 @@ module Aws::TimestreamQuery
     #   @return [Array<Types::Datum>]
     class Row < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1137,8 @@ module Aws::TimestreamQuery
       :bucket_name,
       :object_key_prefix,
       :encryption_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1099,7 +1152,8 @@ module Aws::TimestreamQuery
     class S3ReportLocation < Struct.new(
       :bucket_name,
       :object_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1164,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class ScheduleConfiguration < Struct.new(
       :schedule_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1207,8 @@ module Aws::TimestreamQuery
       :error_report_configuration,
       :target_destination,
       :last_run_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1274,8 @@ module Aws::TimestreamQuery
       :error_report_configuration,
       :last_run_summary,
       :recently_failed_runs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1238,7 +1295,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class ScheduledQueryInsights < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1275,7 +1333,8 @@ module Aws::TimestreamQuery
       :query_table_count,
       :output_rows,
       :output_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1319,7 +1378,8 @@ module Aws::TimestreamQuery
       :query_insights_response,
       :error_report_location,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1408,8 @@ module Aws::TimestreamQuery
       :database_name,
       :table_name,
       :aliased,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1357,7 +1418,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1429,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class SnsConfiguration < Struct.new(
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1384,7 +1447,8 @@ module Aws::TimestreamQuery
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,12 +1462,14 @@ module Aws::TimestreamQuery
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,7 +1479,8 @@ module Aws::TimestreamQuery
     #   @return [Types::TimestreamConfiguration]
     class TargetConfiguration < Struct.new(
       :timestream_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1424,7 +1491,8 @@ module Aws::TimestreamQuery
     #   @return [Types::TimestreamDestination]
     class TargetDestination < Struct.new(
       :timestream_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1433,7 +1501,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1519,8 @@ module Aws::TimestreamQuery
     class TimeSeriesDataPoint < Struct.new(
       :time,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1489,7 +1559,8 @@ module Aws::TimestreamQuery
       :multi_measure_mappings,
       :mixed_measure_mappings,
       :measure_name_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1574,8 @@ module Aws::TimestreamQuery
     class TimestreamDestination < Struct.new(
       :database_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1602,8 @@ module Aws::TimestreamQuery
       :array_column_info,
       :time_series_measure_value_column_info,
       :row_column_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1545,12 +1618,14 @@ module Aws::TimestreamQuery
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1574,7 +1649,8 @@ module Aws::TimestreamQuery
       :max_query_tcu,
       :query_pricing_model,
       :query_compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1591,7 +1667,8 @@ module Aws::TimestreamQuery
       :max_query_tcu,
       :query_pricing_model,
       :query_compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1604,7 +1681,8 @@ module Aws::TimestreamQuery
     class UpdateScheduledQueryRequest < Struct.new(
       :scheduled_query_arn,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1613,7 +1691,8 @@ module Aws::TimestreamQuery
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

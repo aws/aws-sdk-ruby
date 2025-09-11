@@ -25,7 +25,8 @@ module Aws::EFS
       :error_code,
       :message,
       :access_point_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +75,8 @@ module Aws::EFS
       :root_directory,
       :owner_id,
       :life_cycle_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +96,8 @@ module Aws::EFS
     class AccessPointLimitExceeded < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +117,8 @@ module Aws::EFS
     class AccessPointNotFound < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +139,8 @@ module Aws::EFS
     class AvailabilityZonesMismatch < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +181,8 @@ module Aws::EFS
     #   @return [String]
     class BackupPolicy < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +202,8 @@ module Aws::EFS
     class BadRequest < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -215,7 +222,8 @@ module Aws::EFS
     class ConflictException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +272,8 @@ module Aws::EFS
       :root_directory,
       :owner_id,
       :life_cycle_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +310,8 @@ module Aws::EFS
       :file_system_id,
       :posix_user,
       :root_directory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -406,7 +416,8 @@ module Aws::EFS
       :availability_zone_id,
       :tags,
       :file_system_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -524,7 +535,8 @@ module Aws::EFS
       :availability_zone_name,
       :backup,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -580,7 +592,8 @@ module Aws::EFS
       :availability_zone_id,
       :availability_zone_name,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +646,8 @@ module Aws::EFS
       :ipv6_address,
       :ip_address_type,
       :security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +684,8 @@ module Aws::EFS
       :creation_time,
       :destinations,
       :source_file_system_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +699,8 @@ module Aws::EFS
     class CreateReplicationConfigurationRequest < Struct.new(
       :source_file_system_id,
       :destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +716,8 @@ module Aws::EFS
     class CreateTagsRequest < Struct.new(
       :file_system_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +746,8 @@ module Aws::EFS
       :owner_uid,
       :owner_gid,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +756,8 @@ module Aws::EFS
     #   @return [String]
     class DeleteAccessPointRequest < Struct.new(
       :access_point_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +767,8 @@ module Aws::EFS
     #   @return [String]
     class DeleteFileSystemPolicyRequest < Struct.new(
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +778,8 @@ module Aws::EFS
     #   @return [String]
     class DeleteFileSystemRequest < Struct.new(
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +789,8 @@ module Aws::EFS
     #   @return [String]
     class DeleteMountTargetRequest < Struct.new(
       :mount_target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -795,7 +817,8 @@ module Aws::EFS
     class DeleteReplicationConfigurationRequest < Struct.new(
       :source_file_system_id,
       :deletion_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,7 +832,8 @@ module Aws::EFS
     class DeleteTagsRequest < Struct.new(
       :file_system_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +853,8 @@ module Aws::EFS
     class DependencyTimeout < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +881,8 @@ module Aws::EFS
       :next_token,
       :access_point_id,
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +896,8 @@ module Aws::EFS
     class DescribeAccessPointsResponse < Struct.new(
       :access_points,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +913,8 @@ module Aws::EFS
     class DescribeAccountPreferencesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +928,8 @@ module Aws::EFS
     class DescribeAccountPreferencesResponse < Struct.new(
       :resource_id_preference,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +939,8 @@ module Aws::EFS
     #   @return [Types::BackupPolicy]
     class DescribeBackupPolicyOutput < Struct.new(
       :backup_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,7 +950,8 @@ module Aws::EFS
     #   @return [String]
     class DescribeBackupPolicyRequest < Struct.new(
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -935,7 +966,8 @@ module Aws::EFS
     class DescribeFileSystemPolicyOutput < Struct.new(
       :file_system_id,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -945,7 +977,8 @@ module Aws::EFS
     #   @return [String]
     class DescribeFileSystemPolicyRequest < Struct.new(
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -973,7 +1006,8 @@ module Aws::EFS
       :marker,
       :creation_token,
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1025,8 @@ module Aws::EFS
       :marker,
       :file_systems,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1001,7 +1036,8 @@ module Aws::EFS
     #   @return [Array<Types::LifecyclePolicy>]
     class DescribeLifecycleConfigurationOutput < Struct.new(
       :lifecycle_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1047,8 @@ module Aws::EFS
     #   @return [String]
     class DescribeLifecycleConfigurationRequest < Struct.new(
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1021,7 +1058,8 @@ module Aws::EFS
     #   @return [String]
     class DescribeMountTargetSecurityGroupsRequest < Struct.new(
       :mount_target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1068,8 @@ module Aws::EFS
     #   @return [Array<String>]
     class DescribeMountTargetSecurityGroupsResponse < Struct.new(
       :security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1063,7 +1102,8 @@ module Aws::EFS
       :file_system_id,
       :mount_target_id,
       :access_point_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1125,8 @@ module Aws::EFS
       :marker,
       :mount_targets,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1149,8 @@ module Aws::EFS
       :file_system_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1122,7 +1164,8 @@ module Aws::EFS
     class DescribeReplicationConfigurationsResponse < Struct.new(
       :replications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1144,7 +1187,8 @@ module Aws::EFS
       :max_items,
       :marker,
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1166,7 +1210,8 @@ module Aws::EFS
       :marker,
       :tags,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1257,8 @@ module Aws::EFS
       :owner_id,
       :status_message,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1348,8 @@ module Aws::EFS
       :kms_key_id,
       :file_system_id,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1325,7 +1372,8 @@ module Aws::EFS
       :error_code,
       :message,
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1430,7 +1478,8 @@ module Aws::EFS
       :availability_zone_id,
       :tags,
       :file_system_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1454,7 +1503,8 @@ module Aws::EFS
     class FileSystemInUse < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1524,8 @@ module Aws::EFS
     class FileSystemLimitExceeded < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1494,7 +1545,8 @@ module Aws::EFS
     class FileSystemNotFound < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1578,8 @@ module Aws::EFS
     #   @return [String]
     class FileSystemProtectionDescription < Struct.new(
       :replication_overwrite_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1562,7 +1615,8 @@ module Aws::EFS
       :value_in_ia,
       :value_in_standard,
       :value_in_archive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1586,7 +1640,8 @@ module Aws::EFS
     class IncorrectFileSystemLifeCycleState < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,7 +1661,8 @@ module Aws::EFS
     class IncorrectMountTargetState < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1629,7 +1685,8 @@ module Aws::EFS
     class InsufficientThroughputCapacity < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1705,8 @@ module Aws::EFS
     class InternalServerError < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1669,7 +1727,8 @@ module Aws::EFS
     class InvalidPolicyException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1689,7 +1748,8 @@ module Aws::EFS
     class IpAddressInUse < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1785,8 @@ module Aws::EFS
       :transition_to_ia,
       :transition_to_primary_storage_class,
       :transition_to_archive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1743,7 +1804,8 @@ module Aws::EFS
       :resource_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1757,7 +1819,8 @@ module Aws::EFS
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1771,7 +1834,8 @@ module Aws::EFS
     class ModifyMountTargetSecurityGroupsRequest < Struct.new(
       :mount_target_id,
       :security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1791,7 +1855,8 @@ module Aws::EFS
     class MountTargetConflict < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1847,7 +1912,8 @@ module Aws::EFS
       :availability_zone_id,
       :availability_zone_name,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1933,8 @@ module Aws::EFS
     class MountTargetNotFound < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1891,7 +1958,8 @@ module Aws::EFS
     class NetworkInterfaceLimitExceeded < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1911,7 +1979,8 @@ module Aws::EFS
     class NoFreeAddressesInSubnet < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1930,7 +1999,8 @@ module Aws::EFS
     class PolicyNotFound < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +2019,8 @@ module Aws::EFS
       :uid,
       :gid,
       :secondary_gids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1964,7 +2035,8 @@ module Aws::EFS
     #   @return [String]
     class PutAccountPreferencesRequest < Struct.new(
       :resource_id_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1973,7 +2045,8 @@ module Aws::EFS
     #   @return [Types::ResourceIdPreference]
     class PutAccountPreferencesResponse < Struct.new(
       :resource_id_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2056,8 @@ module Aws::EFS
     #   @return [Types::BackupPolicy]
     class PutBackupPolicyOutput < Struct.new(
       :backup_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1996,7 +2070,8 @@ module Aws::EFS
     class PutBackupPolicyRequest < Struct.new(
       :file_system_id,
       :backup_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2011,7 +2086,8 @@ module Aws::EFS
     class PutFileSystemPolicyOutput < Struct.new(
       :file_system_id,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2036,7 +2112,8 @@ module Aws::EFS
       :file_system_id,
       :policy,
       :bypass_policy_lockout_safety_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2046,7 +2123,8 @@ module Aws::EFS
     #   @return [Array<Types::LifecyclePolicy>]
     class PutLifecycleConfigurationOutput < Struct.new(
       :lifecycle_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2101,7 +2179,8 @@ module Aws::EFS
     class PutLifecycleConfigurationRequest < Struct.new(
       :file_system_id,
       :lifecycle_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2120,7 +2199,8 @@ module Aws::EFS
     class ReplicationAlreadyExists < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2157,7 +2237,8 @@ module Aws::EFS
       :creation_time,
       :destinations,
       :source_file_system_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2176,7 +2257,8 @@ module Aws::EFS
     class ReplicationNotFound < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2191,7 +2273,8 @@ module Aws::EFS
     class ResourceIdPreference < Struct.new(
       :resource_id_type,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2220,7 +2303,8 @@ module Aws::EFS
     class RootDirectory < Struct.new(
       :path,
       :creation_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2244,7 +2328,8 @@ module Aws::EFS
     class SecurityGroupLimitExceeded < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2264,7 +2349,8 @@ module Aws::EFS
     class SecurityGroupNotFound < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2284,7 +2370,8 @@ module Aws::EFS
     class SubnetNotFound < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2299,7 +2386,8 @@ module Aws::EFS
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2313,7 +2401,8 @@ module Aws::EFS
     class TagResourceRequest < Struct.new(
       :resource_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2334,7 +2423,8 @@ module Aws::EFS
     class ThrottlingException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2354,7 +2444,8 @@ module Aws::EFS
     class ThroughputLimitExceeded < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2374,7 +2465,8 @@ module Aws::EFS
     class TooManyRequests < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2393,7 +2485,8 @@ module Aws::EFS
     class UnsupportedAvailabilityZone < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2407,7 +2500,8 @@ module Aws::EFS
     class UntagResourceRequest < Struct.new(
       :resource_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2512,7 +2606,8 @@ module Aws::EFS
       :availability_zone_id,
       :tags,
       :file_system_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2549,7 +2644,8 @@ module Aws::EFS
     #   @return [String]
     class UpdateFileSystemProtectionOutput < Struct.new(
       :replication_overwrite_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2584,7 +2680,8 @@ module Aws::EFS
     class UpdateFileSystemProtectionRequest < Struct.new(
       :file_system_id,
       :replication_overwrite_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2610,7 +2707,8 @@ module Aws::EFS
       :file_system_id,
       :throughput_mode,
       :provisioned_throughput_in_mibps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2629,7 +2727,8 @@ module Aws::EFS
     class ValidationException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

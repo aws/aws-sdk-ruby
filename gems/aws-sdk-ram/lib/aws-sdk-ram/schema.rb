@@ -1165,7 +1165,6 @@ module Aws::RAM
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnknownResourceException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/updateresourceshare", "code" => 200}}
       end)
-
     end
 
     class << self

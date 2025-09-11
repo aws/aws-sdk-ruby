@@ -20,7 +20,8 @@ module Aws::Health
       :account_id,
       :count,
       :statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -80,7 +81,8 @@ module Aws::Health
       :status_code,
       :tags,
       :entity_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -91,7 +93,8 @@ module Aws::Health
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +114,8 @@ module Aws::Health
     class DateTimeRange < Struct.new(
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -138,7 +142,8 @@ module Aws::Health
       :event_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +181,8 @@ module Aws::Health
       :affected_accounts,
       :event_scope_code,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +213,8 @@ module Aws::Health
       :next_token,
       :max_results,
       :organization_entity_account_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +237,8 @@ module Aws::Health
       :entities,
       :failed_set,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +262,8 @@ module Aws::Health
       :locale,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +279,8 @@ module Aws::Health
     class DescribeAffectedEntitiesResponse < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +294,8 @@ module Aws::Health
     class DescribeEntityAggregatesForOrganizationRequest < Struct.new(
       :event_arns,
       :aws_account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +304,8 @@ module Aws::Health
     #   @return [Array<Types::OrganizationEntityAggregate>]
     class DescribeEntityAggregatesForOrganizationResponse < Struct.new(
       :organization_entity_aggregates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +315,8 @@ module Aws::Health
     #   @return [Array<String>]
     class DescribeEntityAggregatesRequest < Struct.new(
       :event_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -312,7 +325,8 @@ module Aws::Health
     #   @return [Array<Types::EntityAggregate>]
     class DescribeEntityAggregatesResponse < Struct.new(
       :entity_aggregates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -336,7 +350,8 @@ module Aws::Health
       :aggregate_field,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -352,7 +367,8 @@ module Aws::Health
     class DescribeEventAggregatesResponse < Struct.new(
       :event_aggregates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +382,8 @@ module Aws::Health
     class DescribeEventDetailsForOrganizationRequest < Struct.new(
       :organization_event_detail_filters,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +396,8 @@ module Aws::Health
     class DescribeEventDetailsForOrganizationResponse < Struct.new(
       :successful_set,
       :failed_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +411,8 @@ module Aws::Health
     class DescribeEventDetailsRequest < Struct.new(
       :event_arns,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -406,7 +425,8 @@ module Aws::Health
     class DescribeEventDetailsResponse < Struct.new(
       :successful_set,
       :failed_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +454,8 @@ module Aws::Health
       :locale,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +477,8 @@ module Aws::Health
     class DescribeEventTypesResponse < Struct.new(
       :event_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -480,7 +502,8 @@ module Aws::Health
       :next_token,
       :max_results,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +519,8 @@ module Aws::Health
     class DescribeEventsForOrganizationResponse < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +544,8 @@ module Aws::Health
       :next_token,
       :max_results,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -536,7 +561,8 @@ module Aws::Health
     class DescribeEventsResponse < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +573,8 @@ module Aws::Health
     #   @return [String]
     class DescribeHealthServiceStatusForOrganizationResponse < Struct.new(
       :health_service_access_status_for_organization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +599,8 @@ module Aws::Health
       :event_arn,
       :aws_account_id,
       :status_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +625,8 @@ module Aws::Health
       :event_arn,
       :count,
       :statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -637,7 +666,8 @@ module Aws::Health
       :last_updated_times,
       :tags,
       :status_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +765,8 @@ module Aws::Health
       :last_updated_time,
       :status_code,
       :event_scope_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +787,8 @@ module Aws::Health
     class EventAccountFilter < Struct.new(
       :event_arn,
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +802,8 @@ module Aws::Health
     class EventAggregate < Struct.new(
       :aggregate_value,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -786,7 +819,8 @@ module Aws::Health
     #   @return [String]
     class EventDescription < Struct.new(
       :latest_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +839,8 @@ module Aws::Health
       :event,
       :event_description,
       :event_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +865,8 @@ module Aws::Health
       :event_arn,
       :error_name,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -897,7 +933,8 @@ module Aws::Health
       :event_type_categories,
       :tags,
       :event_status_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +964,8 @@ module Aws::Health
       :service,
       :code,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,7 +986,8 @@ module Aws::Health
       :event_type_codes,
       :services,
       :event_type_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -957,7 +996,8 @@ module Aws::Health
     #   @return [String]
     class InvalidPaginationToken < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1031,8 @@ module Aws::Health
       :event_arn,
       :error_name,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1057,8 @@ module Aws::Health
       :count,
       :statuses,
       :accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1097,7 +1139,8 @@ module Aws::Health
       :end_time,
       :last_updated_time,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1183,8 @@ module Aws::Health
       :event,
       :event_description,
       :event_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1184,7 +1228,8 @@ module Aws::Health
       :event_arn,
       :error_name,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1300,8 @@ module Aws::Health
       :entity_values,
       :event_type_categories,
       :event_status_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1310,8 @@ module Aws::Health
     #   @return [String]
     class UnsupportedLocale < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

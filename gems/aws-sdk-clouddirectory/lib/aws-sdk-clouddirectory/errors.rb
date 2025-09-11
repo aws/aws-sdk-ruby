@@ -68,7 +68,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::BatchWriteException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def index
@@ -102,7 +102,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::CannotListParentOfRootException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::DirectoryAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::DirectoryDeletedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -143,7 +143,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::DirectoryNotDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::DirectoryNotEnabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -169,7 +169,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::FacetAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -183,7 +183,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::FacetInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -196,7 +196,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::FacetNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -210,7 +210,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::FacetValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -223,7 +223,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::IncompatibleSchemaException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -236,7 +236,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::IndexedAttributeMissingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -249,7 +249,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -262,7 +262,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::InvalidArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -276,7 +276,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::InvalidAttachmentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -290,7 +290,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::InvalidFacetUpdateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -303,7 +303,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -316,7 +316,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::InvalidRuleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -329,7 +329,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::InvalidSchemaDocException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -342,7 +342,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::InvalidTaggingRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -355,7 +355,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -369,7 +369,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::LinkNameAlreadyInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -382,7 +382,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::NotIndexException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -396,7 +396,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::NotNodeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -409,7 +409,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::NotPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -422,7 +422,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::ObjectAlreadyDetachedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -436,7 +436,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::ObjectNotDetachedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -449,7 +449,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -462,7 +462,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::RetryableConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -476,7 +476,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::SchemaAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -489,7 +489,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::SchemaAlreadyPublishedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -503,7 +503,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::StillContainsLinksException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -516,7 +516,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::UnsupportedIndexTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -530,7 +530,7 @@ module Aws::CloudDirectory
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudDirectory::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -39,7 +39,7 @@ module Aws::MigrationHubOrchestrator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubOrchestrator::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::MigrationHubOrchestrator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubOrchestrator::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -74,7 +74,7 @@ module Aws::MigrationHubOrchestrator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubOrchestrator::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::MigrationHubOrchestrator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubOrchestrator::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::MigrationHubOrchestrator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubOrchestrator::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::MigrationHubOrchestrator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubOrchestrator::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

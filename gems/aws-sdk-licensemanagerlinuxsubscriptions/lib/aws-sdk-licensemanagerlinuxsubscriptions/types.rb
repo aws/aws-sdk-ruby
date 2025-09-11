@@ -11,12 +11,14 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [String]
     class DeregisterSubscriptionProviderRequest < Struct.new(
       :subscription_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterSubscriptionProviderResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +37,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +47,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [String]
     class GetRegisteredSubscriptionProviderRequest < Struct.new(
       :subscription_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,12 +81,14 @@ module Aws::LicenseManagerLinuxSubscriptions
       :subscription_provider_status,
       :subscription_provider_status_message,
       :last_successful_data_retrieval_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetServiceSettingsInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -109,7 +115,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :status,
       :status_message,
       :home_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +189,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :subscription_provider_update_time,
       :dual_subscription,
       :registered_with_subscription_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +199,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +214,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     class LinuxSubscriptionsDiscoverySettings < Struct.new(
       :source_regions,
       :organization_integration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +306,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -312,7 +323,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     class ListLinuxSubscriptionInstancesOutput < Struct.new(
       :instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +373,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -377,7 +390,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     class ListLinuxSubscriptionsOutput < Struct.new(
       :subscriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +410,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :subscription_provider_sources,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +428,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     class ListRegisteredSubscriptionProvidersResponse < Struct.new(
       :registered_subscription_providers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +438,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +448,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -451,7 +469,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :subscription_provider_source,
       :secret_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +488,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :subscription_provider_source,
       :subscription_provider_arn,
       :subscription_provider_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -507,7 +527,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :subscription_provider_status,
       :subscription_provider_status_message,
       :last_successful_data_retrieval_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +537,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -536,7 +558,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :name,
       :type,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,12 +574,14 @@ module Aws::LicenseManagerLinuxSubscriptions
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -565,7 +590,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,12 +605,14 @@ module Aws::LicenseManagerLinuxSubscriptions
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +631,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :linux_subscriptions_discovery,
       :linux_subscriptions_discovery_settings,
       :allow_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -630,7 +659,8 @@ module Aws::LicenseManagerLinuxSubscriptions
       :status,
       :status_message,
       :home_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -639,7 +669,8 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

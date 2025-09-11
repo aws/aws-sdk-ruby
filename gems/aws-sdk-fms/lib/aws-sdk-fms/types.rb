@@ -20,7 +20,8 @@ module Aws::FMS
       :accounts,
       :all_accounts_enabled,
       :exclude_specified_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -40,7 +41,8 @@ module Aws::FMS
     class ActionTarget < Struct.new(
       :resource_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +78,8 @@ module Aws::FMS
       :admin_account,
       :default_admin,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -104,7 +107,8 @@ module Aws::FMS
       :organizational_unit_scope,
       :region_scope,
       :policy_type_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +126,8 @@ module Aws::FMS
       :app_name,
       :protocol,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +163,8 @@ module Aws::FMS
       :last_update_time,
       :apps_list,
       :previous_apps_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +186,8 @@ module Aws::FMS
       :list_id,
       :list_name,
       :apps_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,7 +200,8 @@ module Aws::FMS
     #   @return [String]
     class AssociateAdminAccountRequest < Struct.new(
       :admin_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +210,8 @@ module Aws::FMS
     #   @return [String]
     class AssociateThirdPartyFirewallRequest < Struct.new(
       :third_party_firewall,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +242,8 @@ module Aws::FMS
     #   @return [String]
     class AssociateThirdPartyFirewallResponse < Struct.new(
       :third_party_firewall_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -247,7 +257,8 @@ module Aws::FMS
     class AwsEc2InstanceViolation < Struct.new(
       :violation_target,
       :aws_ec2_network_interface_violations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +272,8 @@ module Aws::FMS
     class AwsEc2NetworkInterfaceViolation < Struct.new(
       :violation_target,
       :violating_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +295,8 @@ module Aws::FMS
       :violation_target_description,
       :partial_matches,
       :possible_security_group_remediation_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +309,8 @@ module Aws::FMS
     class BatchAssociateResourceRequest < Struct.new(
       :resource_set_identifier,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +323,8 @@ module Aws::FMS
     class BatchAssociateResourceResponse < Struct.new(
       :resource_set_identifier,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -322,7 +337,8 @@ module Aws::FMS
     class BatchDisassociateResourceRequest < Struct.new(
       :resource_set_identifier,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +351,8 @@ module Aws::FMS
     class BatchDisassociateResourceResponse < Struct.new(
       :resource_set_identifier,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +377,8 @@ module Aws::FMS
       :violation_reason,
       :resource_type,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +396,8 @@ module Aws::FMS
       :description,
       :vpc,
       :fms_can_remediate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -405,7 +424,8 @@ module Aws::FMS
       :network_acl_id,
       :network_acl_entries_to_be_created,
       :fms_can_remediate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -420,7 +440,8 @@ module Aws::FMS
     #   @return [String]
     class DeleteAppsListRequest < Struct.new(
       :list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +463,8 @@ module Aws::FMS
       :network_acl_id,
       :network_acl_entries_to_be_deleted,
       :fms_can_remediate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -452,7 +474,8 @@ module Aws::FMS
     end
 
     class DeleteNotificationChannelRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +521,8 @@ module Aws::FMS
     class DeletePolicyRequest < Struct.new(
       :policy_id,
       :delete_all_policy_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +532,8 @@ module Aws::FMS
     #   @return [String]
     class DeleteProtocolsListRequest < Struct.new(
       :list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,12 +542,14 @@ module Aws::FMS
     #   @return [String]
     class DeleteResourceSetRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateAdminAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -531,7 +558,8 @@ module Aws::FMS
     #   @return [String]
     class DisassociateThirdPartyFirewallRequest < Struct.new(
       :third_party_firewall,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +568,8 @@ module Aws::FMS
     #   @return [String]
     class DisassociateThirdPartyFirewallResponse < Struct.new(
       :third_party_firewall_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,7 +591,8 @@ module Aws::FMS
       :account_id,
       :type,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -577,7 +607,8 @@ module Aws::FMS
     class DnsDuplicateRuleGroupViolation < Struct.new(
       :violation_target,
       :violation_target_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,7 +626,8 @@ module Aws::FMS
       :violation_target,
       :violation_target_description,
       :number_of_rule_groups_already_associated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -629,7 +661,8 @@ module Aws::FMS
       :conflicting_priority,
       :conflicting_policy_id,
       :unavailable_priorities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -656,7 +689,8 @@ module Aws::FMS
       :route_table_id,
       :subnet_id,
       :gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +708,8 @@ module Aws::FMS
       :description,
       :vpc_id,
       :route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +743,8 @@ module Aws::FMS
       :vpc_endpoint_id,
       :gateway_id,
       :route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -722,7 +758,8 @@ module Aws::FMS
     class EC2CreateRouteTableAction < Struct.new(
       :description,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +785,8 @@ module Aws::FMS
       :destination_prefix_list_id,
       :destination_ipv6_cidr_block,
       :route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -778,7 +816,8 @@ module Aws::FMS
       :destination_ipv6_cidr_block,
       :gateway_id,
       :route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -796,7 +835,8 @@ module Aws::FMS
       :description,
       :association_id,
       :route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +862,8 @@ module Aws::FMS
       :entry_detail,
       :entry_rule_number,
       :entry_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -858,7 +899,8 @@ module Aws::FMS
       :entry_at_expected_evaluation_order,
       :entries_with_conflicts,
       :entry_violation_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,7 +924,8 @@ module Aws::FMS
       :compliance_status,
       :violator_count,
       :evaluation_limit_exceeded,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -918,7 +961,8 @@ module Aws::FMS
       :contributing_subnets,
       :allowed_targets,
       :route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -936,7 +980,8 @@ module Aws::FMS
     class FMSPolicyUpdateFirewallCreationConfigAction < Struct.new(
       :description,
       :firewall_creation_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,7 +995,8 @@ module Aws::FMS
     class FailedItem < Struct.new(
       :uri,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -976,7 +1022,8 @@ module Aws::FMS
       :subnet_availability_zone,
       :subnet_availability_zone_id,
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,12 +1045,14 @@ module Aws::FMS
       :vpc_id,
       :subnet_availability_zone,
       :subnet_availability_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAdminAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1017,7 +1066,8 @@ module Aws::FMS
     class GetAdminAccountResponse < Struct.new(
       :admin_account,
       :role_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1026,7 +1076,8 @@ module Aws::FMS
     #   @return [String]
     class GetAdminScopeRequest < Struct.new(
       :admin_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1108,8 @@ module Aws::FMS
     class GetAdminScopeResponse < Struct.new(
       :admin_scope,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1070,7 +1122,8 @@ module Aws::FMS
     class GetAppsListRequest < Struct.new(
       :list_id,
       :default_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1083,7 +1136,8 @@ module Aws::FMS
     class GetAppsListResponse < Struct.new(
       :apps_list,
       :apps_list_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1097,7 +1151,8 @@ module Aws::FMS
     class GetComplianceDetailRequest < Struct.new(
       :policy_id,
       :member_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1107,12 +1162,14 @@ module Aws::FMS
     #   @return [Types::PolicyComplianceDetail]
     class GetComplianceDetailResponse < Struct.new(
       :policy_compliance_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetNotificationChannelRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1125,7 +1182,8 @@ module Aws::FMS
     class GetNotificationChannelResponse < Struct.new(
       :sns_topic_arn,
       :sns_role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1134,7 +1192,8 @@ module Aws::FMS
     #   @return [String]
     class GetPolicyRequest < Struct.new(
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1206,8 @@ module Aws::FMS
     class GetPolicyResponse < Struct.new(
       :policy,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1186,7 +1246,8 @@ module Aws::FMS
       :end_time,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1233,7 +1294,8 @@ module Aws::FMS
       :service_type,
       :data,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1246,7 +1308,8 @@ module Aws::FMS
     class GetProtocolsListRequest < Struct.new(
       :list_id,
       :default_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1259,7 +1322,8 @@ module Aws::FMS
     class GetProtocolsListResponse < Struct.new(
       :protocols_list,
       :protocols_list_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1268,7 +1332,8 @@ module Aws::FMS
     #   @return [String]
     class GetResourceSetRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1346,8 @@ module Aws::FMS
     class GetResourceSetResponse < Struct.new(
       :resource_set,
       :resource_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1356,8 @@ module Aws::FMS
     #   @return [String]
     class GetThirdPartyFirewallAssociationStatusRequest < Struct.new(
       :third_party_firewall,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1406,8 @@ module Aws::FMS
     class GetThirdPartyFirewallAssociationStatusResponse < Struct.new(
       :third_party_firewall_status,
       :marketplace_onboarding_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1391,7 +1459,8 @@ module Aws::FMS
       :member_account,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1400,7 +1469,8 @@ module Aws::FMS
     #   @return [Types::ViolationDetail]
     class GetViolationDetailsResponse < Struct.new(
       :violation_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1410,7 +1480,8 @@ module Aws::FMS
     #   @return [String]
     class InternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1419,7 +1490,8 @@ module Aws::FMS
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1517,8 @@ module Aws::FMS
       :subnet_availability_zone,
       :current_associated_network_acl,
       :entry_violations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1458,7 +1531,8 @@ module Aws::FMS
     #   @return [String]
     class InvalidOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1467,7 +1541,8 @@ module Aws::FMS
     #   @return [String]
     class InvalidTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1479,7 +1554,8 @@ module Aws::FMS
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1496,7 +1572,8 @@ module Aws::FMS
     class ListAdminAccountsForOrganizationRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1511,7 +1588,8 @@ module Aws::FMS
     class ListAdminAccountsForOrganizationResponse < Struct.new(
       :admin_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1528,7 +1606,8 @@ module Aws::FMS
     class ListAdminsManagingAccountRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1622,8 @@ module Aws::FMS
     class ListAdminsManagingAccountResponse < Struct.new(
       :admin_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1565,7 +1645,8 @@ module Aws::FMS
       :default_lists,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1579,7 +1660,8 @@ module Aws::FMS
     class ListAppsListsResponse < Struct.new(
       :apps_lists,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,7 +1688,8 @@ module Aws::FMS
       :policy_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1624,7 +1707,8 @@ module Aws::FMS
     class ListComplianceStatusResponse < Struct.new(
       :policy_compliance_status_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1649,7 +1733,8 @@ module Aws::FMS
       :resource_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1664,7 +1749,8 @@ module Aws::FMS
     class ListDiscoveredResourcesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1771,8 @@ module Aws::FMS
     class ListMemberAccountsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1702,7 +1789,8 @@ module Aws::FMS
     class ListMemberAccountsResponse < Struct.new(
       :member_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1724,7 +1812,8 @@ module Aws::FMS
     class ListPoliciesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1741,7 +1830,8 @@ module Aws::FMS
     class ListPoliciesResponse < Struct.new(
       :policy_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1763,7 +1853,8 @@ module Aws::FMS
       :default_lists,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1777,7 +1868,8 @@ module Aws::FMS
     class ListProtocolsListsResponse < Struct.new(
       :protocols_lists,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1798,7 +1890,8 @@ module Aws::FMS
       :identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1813,7 +1906,8 @@ module Aws::FMS
     class ListResourceSetResourcesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1830,7 +1924,8 @@ module Aws::FMS
     class ListResourceSetsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1940,8 @@ module Aws::FMS
     class ListResourceSetsResponse < Struct.new(
       :resource_sets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,7 +1950,8 @@ module Aws::FMS
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1960,8 @@ module Aws::FMS
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1889,7 +1987,8 @@ module Aws::FMS
       :third_party_firewall,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +2002,8 @@ module Aws::FMS
     class ListThirdPartyFirewallFirewallPoliciesResponse < Struct.new(
       :third_party_firewall_firewall_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +2017,8 @@ module Aws::FMS
     #   @return [Types::NetworkAclEntrySet]
     class NetworkAclCommonPolicy < Struct.new(
       :network_acl_entry_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1958,7 +2059,8 @@ module Aws::FMS
       :ipv6_cidr_block,
       :rule_action,
       :egress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2000,7 +2102,8 @@ module Aws::FMS
       :force_remediate_for_first_entries,
       :last_entries,
       :force_remediate_for_last_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2014,7 +2117,8 @@ module Aws::FMS
     class NetworkAclIcmpTypeCode < Struct.new(
       :code,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2028,7 +2132,8 @@ module Aws::FMS
     class NetworkAclPortRange < Struct.new(
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2050,7 +2155,8 @@ module Aws::FMS
       :route_table_id,
       :vpc_id,
       :violating_routes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2116,7 +2222,8 @@ module Aws::FMS
       :expected_internet_gateway_routes,
       :actual_internet_gateway_routes,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2192,7 +2299,8 @@ module Aws::FMS
       :expected_internet_gateway_routes,
       :actual_internet_gateway_routes,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2224,7 +2332,8 @@ module Aws::FMS
       :availability_zone,
       :current_route_table,
       :expected_route_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2351,8 @@ module Aws::FMS
       :violation_target,
       :expected_routes,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2265,7 +2375,8 @@ module Aws::FMS
       :vpc,
       :availability_zone,
       :target_violation_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2288,7 +2399,8 @@ module Aws::FMS
       :vpc,
       :availability_zone,
       :target_violation_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,7 +2414,8 @@ module Aws::FMS
     #   @return [String]
     class NetworkFirewallPolicy < Struct.new(
       :firewall_deployment_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2356,7 +2469,8 @@ module Aws::FMS
       :stateful_rule_groups,
       :stateful_default_actions,
       :stateful_engine_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2489,8 @@ module Aws::FMS
       :violation_target,
       :current_policy_description,
       :expected_policy_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2385,7 +2500,8 @@ module Aws::FMS
     #   @return [String]
     class NetworkFirewallStatefulRuleGroupOverride < Struct.new(
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2411,7 +2527,8 @@ module Aws::FMS
       :route_table_id,
       :firewall_endpoint,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2433,7 +2550,8 @@ module Aws::FMS
       :violating_routes,
       :route_table_id,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2452,7 +2570,8 @@ module Aws::FMS
       :organizational_units,
       :all_organizational_units_enabled,
       :exclude_specified_organizational_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2472,7 +2591,8 @@ module Aws::FMS
     class PartialMatch < Struct.new(
       :reference,
       :target_violation_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2633,7 +2753,8 @@ module Aws::FMS
       :policy_description,
       :policy_status,
       :resource_tag_logical_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2680,7 +2801,8 @@ module Aws::FMS
       :evaluation_limit_exceeded,
       :expired_at,
       :issue_info_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2723,7 +2845,8 @@ module Aws::FMS
       :evaluation_results,
       :last_updated,
       :issue_info_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2741,7 +2864,8 @@ module Aws::FMS
       :network_firewall_policy,
       :third_party_firewall_policy,
       :network_acl_common_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2796,7 +2920,8 @@ module Aws::FMS
       :remediation_enabled,
       :delete_unused_fm_managed_resources,
       :policy_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2816,7 +2941,8 @@ module Aws::FMS
     class PolicyTypeScope < Struct.new(
       :policy_types,
       :all_policy_types_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2839,7 +2965,8 @@ module Aws::FMS
       :description,
       :ordered_remediation_actions,
       :is_default_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2858,7 +2985,8 @@ module Aws::FMS
     class PossibleRemediationActions < Struct.new(
       :description,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2894,7 +3022,8 @@ module Aws::FMS
       :last_update_time,
       :protocols_list,
       :previous_protocols_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2916,7 +3045,8 @@ module Aws::FMS
       :list_id,
       :list_name,
       :protocols_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2930,7 +3060,8 @@ module Aws::FMS
     class PutAdminAccountRequest < Struct.new(
       :admin_account,
       :admin_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2943,7 +3074,8 @@ module Aws::FMS
     class PutAppsListRequest < Struct.new(
       :apps_list,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2956,7 +3088,8 @@ module Aws::FMS
     class PutAppsListResponse < Struct.new(
       :apps_list,
       :apps_list_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2971,7 +3104,8 @@ module Aws::FMS
     class PutNotificationChannelRequest < Struct.new(
       :sns_topic_arn,
       :sns_role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2984,7 +3118,8 @@ module Aws::FMS
     class PutPolicyRequest < Struct.new(
       :policy,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2997,7 +3132,8 @@ module Aws::FMS
     class PutPolicyResponse < Struct.new(
       :policy,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3146,8 @@ module Aws::FMS
     class PutProtocolsListRequest < Struct.new(
       :protocols_list,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3023,7 +3160,8 @@ module Aws::FMS
     class PutProtocolsListResponse < Struct.new(
       :protocols_list,
       :protocols_list_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3040,7 +3178,8 @@ module Aws::FMS
     class PutResourceSetRequest < Struct.new(
       :resource_set,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3053,7 +3192,8 @@ module Aws::FMS
     class PutResourceSetResponse < Struct.new(
       :resource_set,
       :resource_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3067,7 +3207,8 @@ module Aws::FMS
     class RegionScope < Struct.new(
       :regions,
       :all_regions_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3130,7 +3271,8 @@ module Aws::FMS
       :replace_network_acl_association_action,
       :create_network_acl_entries_action,
       :delete_network_acl_entries_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3144,7 +3286,8 @@ module Aws::FMS
     class RemediationActionWithOrder < Struct.new(
       :remediation_action,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3171,7 +3314,8 @@ module Aws::FMS
       :association_id,
       :network_acl_id,
       :fms_can_remediate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3190,7 +3334,8 @@ module Aws::FMS
     class Resource < Struct.new(
       :uri,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3199,7 +3344,8 @@ module Aws::FMS
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3248,7 +3394,8 @@ module Aws::FMS
       :resource_type_list,
       :last_update_time,
       :resource_set_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3284,7 +3431,8 @@ module Aws::FMS
       :description,
       :last_update_time,
       :resource_set_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3307,7 +3455,8 @@ module Aws::FMS
     class ResourceTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3425,7 +3574,8 @@ module Aws::FMS
       :possible_remediation_actions,
       :web_acl_has_incompatible_configuration_violation,
       :web_acl_has_out_of_scope_resources_violation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3447,7 +3597,8 @@ module Aws::FMS
       :target_type,
       :destination,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3501,7 +3652,8 @@ module Aws::FMS
       :internet_gateway_id,
       :current_internet_gateway_route_table,
       :internet_gateway_routes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3523,7 +3675,8 @@ module Aws::FMS
       :description,
       :remediation_result,
       :is_default_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3558,7 +3711,8 @@ module Aws::FMS
       :protocol,
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3840,7 +3994,8 @@ module Aws::FMS
       :type,
       :managed_service_data,
       :policy_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3883,7 +4038,8 @@ module Aws::FMS
     class StatefulEngineOptions < Struct.new(
       :rule_order,
       :stream_exception_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3915,7 +4071,8 @@ module Aws::FMS
       :resource_id,
       :priority,
       :override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3933,7 +4090,8 @@ module Aws::FMS
       :rule_group_name,
       :resource_id,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3947,7 +4105,8 @@ module Aws::FMS
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3960,12 +4119,14 @@ module Aws::FMS
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3979,7 +4140,8 @@ module Aws::FMS
     class ThirdPartyFirewallFirewallPolicy < Struct.new(
       :firewall_policy_id,
       :firewall_policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4005,7 +4167,8 @@ module Aws::FMS
       :availability_zone,
       :current_route_table,
       :expected_route_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4027,7 +4190,8 @@ module Aws::FMS
       :vpc,
       :availability_zone,
       :target_violation_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4049,7 +4213,8 @@ module Aws::FMS
       :vpc,
       :availability_zone,
       :target_violation_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4059,7 +4224,8 @@ module Aws::FMS
     #   @return [String]
     class ThirdPartyFirewallPolicy < Struct.new(
       :firewall_deployment_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4072,12 +4238,14 @@ module Aws::FMS
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4111,7 +4279,8 @@ module Aws::FMS
       :resource_violations,
       :resource_tags,
       :resource_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4125,7 +4294,8 @@ module Aws::FMS
     class WebACLHasIncompatibleConfigurationViolation < Struct.new(
       :web_acl_arn,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4139,7 +4309,8 @@ module Aws::FMS
     class WebACLHasOutOfScopeResourcesViolation < Struct.new(
       :web_acl_arn,
       :out_of_scope_resource_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

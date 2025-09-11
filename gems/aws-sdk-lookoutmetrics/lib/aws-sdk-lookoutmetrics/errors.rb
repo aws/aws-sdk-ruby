@@ -40,7 +40,7 @@ module Aws::LookoutMetrics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutMetrics::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::LookoutMetrics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutMetrics::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::LookoutMetrics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutMetrics::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -89,7 +89,7 @@ module Aws::LookoutMetrics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutMetrics::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::LookoutMetrics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutMetrics::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -145,7 +145,7 @@ module Aws::LookoutMetrics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutMetrics::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::LookoutMetrics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutMetrics::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

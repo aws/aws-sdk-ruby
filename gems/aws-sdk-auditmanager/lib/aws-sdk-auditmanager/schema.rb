@@ -1918,7 +1918,6 @@ module Aws::AuditManager
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/assessmentReports/integrity", "code" => 200}}
       end)
-
     end
 
     class << self

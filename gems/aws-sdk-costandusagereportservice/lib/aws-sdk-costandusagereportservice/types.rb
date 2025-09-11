@@ -12,7 +12,8 @@ module Aws::CostandUsageReportService
     #   @return [String]
     class DeleteReportDefinitionRequest < Struct.new(
       :report_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::CostandUsageReportService
     #   @return [String]
     class DeleteReportDefinitionResponse < Struct.new(
       :response_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +38,8 @@ module Aws::CostandUsageReportService
     class DescribeReportDefinitionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,7 +53,8 @@ module Aws::CostandUsageReportService
     class DescribeReportDefinitionsResponse < Struct.new(
       :report_definitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +64,8 @@ module Aws::CostandUsageReportService
     #   @return [String]
     class DuplicateReportNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -70,7 +75,8 @@ module Aws::CostandUsageReportService
     #   @return [String]
     class InternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +85,8 @@ module Aws::CostandUsageReportService
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :report_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +95,8 @@ module Aws::CostandUsageReportService
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,12 +113,14 @@ module Aws::CostandUsageReportService
     class ModifyReportDefinitionRequest < Struct.new(
       :report_name,
       :report_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ModifyReportDefinitionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,13 +135,15 @@ module Aws::CostandUsageReportService
     class PutReportDefinitionRequest < Struct.new(
       :report_definition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>
     class PutReportDefinitionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +210,8 @@ module Aws::CostandUsageReportService
       :report_versioning,
       :billing_view_arn,
       :report_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +221,8 @@ module Aws::CostandUsageReportService
     #   @return [String]
     class ReportLimitReachedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +238,8 @@ module Aws::CostandUsageReportService
     class ReportStatus < Struct.new(
       :last_delivery,
       :last_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +249,8 @@ module Aws::CostandUsageReportService
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +267,8 @@ module Aws::CostandUsageReportService
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,12 +281,14 @@ module Aws::CostandUsageReportService
     class TagResourceRequest < Struct.new(
       :report_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,12 +302,14 @@ module Aws::CostandUsageReportService
     class UntagResourceRequest < Struct.new(
       :report_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +319,8 @@ module Aws::CostandUsageReportService
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

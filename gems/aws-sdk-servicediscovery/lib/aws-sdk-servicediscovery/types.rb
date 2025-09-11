@@ -28,7 +28,8 @@ module Aws::ServiceDiscovery
       :creator_request_id,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class CreateHttpNamespaceResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +77,8 @@ module Aws::ServiceDiscovery
       :vpc,
       :tags,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +88,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class CreatePrivateDnsNamespaceResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +124,8 @@ module Aws::ServiceDiscovery
       :description,
       :tags,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +135,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class CreatePublicDnsNamespaceResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -222,7 +228,8 @@ module Aws::ServiceDiscovery
       :health_check_custom_config,
       :tags,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +238,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::Service]
     class CreateServiceResponse < Struct.new(
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +249,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class CustomHealthNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +259,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class DeleteNamespaceRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -260,7 +270,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class DeleteNamespaceResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,12 +287,14 @@ module Aws::ServiceDiscovery
     class DeleteServiceAttributesRequest < Struct.new(
       :service_id,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,12 +306,14 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class DeleteServiceRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +329,8 @@ module Aws::ServiceDiscovery
     class DeregisterInstanceRequest < Struct.new(
       :service_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +340,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class DeregisterInstanceResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +409,8 @@ module Aws::ServiceDiscovery
       :optional_parameters,
       :health_status,
       :owner_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +426,8 @@ module Aws::ServiceDiscovery
     class DiscoverInstancesResponse < Struct.new(
       :instances,
       :instances_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -430,7 +449,8 @@ module Aws::ServiceDiscovery
       :namespace_name,
       :service_name,
       :owner_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -441,7 +461,8 @@ module Aws::ServiceDiscovery
     #   @return [Integer]
     class DiscoverInstancesRevisionResponse < Struct.new(
       :instances_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +530,8 @@ module Aws::ServiceDiscovery
       :namespace_id,
       :routing_policy,
       :dns_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +543,8 @@ module Aws::ServiceDiscovery
     #   @return [Array<Types::DnsRecord>]
     class DnsConfigChange < Struct.new(
       :dns_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -536,7 +559,8 @@ module Aws::ServiceDiscovery
     class DnsProperties < Struct.new(
       :hosted_zone_id,
       :soa,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +718,8 @@ module Aws::ServiceDiscovery
     class DnsRecord < Struct.new(
       :type,
       :ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -707,7 +732,8 @@ module Aws::ServiceDiscovery
     class DuplicateRequest < Struct.new(
       :message,
       :duplicate_operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +749,8 @@ module Aws::ServiceDiscovery
     class GetInstanceRequest < Struct.new(
       :service_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +765,8 @@ module Aws::ServiceDiscovery
     class GetInstanceResponse < Struct.new(
       :resource_owner,
       :instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +802,8 @@ module Aws::ServiceDiscovery
       :instances,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -790,7 +819,8 @@ module Aws::ServiceDiscovery
     class GetInstancesHealthStatusResponse < Struct.new(
       :status,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +833,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class GetNamespaceRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -812,7 +843,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::Namespace]
     class GetNamespaceResponse < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -826,7 +858,8 @@ module Aws::ServiceDiscovery
     class GetOperationRequest < Struct.new(
       :operation_id,
       :owner_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +868,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::Operation]
     class GetOperationResponse < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +881,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class GetServiceAttributesRequest < Struct.new(
       :service_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +892,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::ServiceAttributes]
     class GetServiceAttributesResponse < Struct.new(
       :service_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +905,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class GetServiceRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -878,7 +915,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::Service]
     class GetServiceResponse < Struct.new(
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1037,8 @@ module Aws::ServiceDiscovery
       :type,
       :resource_path,
       :failure_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1074,7 +1113,8 @@ module Aws::ServiceDiscovery
     #   @return [Integer]
     class HealthCheckCustomConfig < Struct.new(
       :failure_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1106,7 +1146,8 @@ module Aws::ServiceDiscovery
       :service_name,
       :health_status,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1118,7 +1159,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class HttpNamespaceChange < Struct.new(
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1170,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class HttpProperties < Struct.new(
       :http_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1322,8 @@ module Aws::ServiceDiscovery
       :creator_request_id,
       :attributes,
       :created_by_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1289,7 +1333,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class InstanceNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1407,8 @@ module Aws::ServiceDiscovery
       :id,
       :attributes,
       :created_by_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1419,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class InvalidInput < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1445,8 @@ module Aws::ServiceDiscovery
       :service_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1468,8 @@ module Aws::ServiceDiscovery
       :resource_owner,
       :instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1499,8 @@ module Aws::ServiceDiscovery
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1472,7 +1522,8 @@ module Aws::ServiceDiscovery
     class ListNamespacesResponse < Struct.new(
       :namespaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1554,8 @@ module Aws::ServiceDiscovery
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1524,7 +1576,8 @@ module Aws::ServiceDiscovery
     class ListOperationsResponse < Struct.new(
       :operations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1608,8 @@ module Aws::ServiceDiscovery
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1631,8 @@ module Aws::ServiceDiscovery
     class ListServicesResponse < Struct.new(
       :services,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1641,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1595,7 +1651,8 @@ module Aws::ServiceDiscovery
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1723,8 @@ module Aws::ServiceDiscovery
       :properties,
       :create_date,
       :creator_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1683,7 +1741,8 @@ module Aws::ServiceDiscovery
       :message,
       :creator_request_id,
       :namespace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1823,8 @@ module Aws::ServiceDiscovery
       :name,
       :values,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1773,7 +1833,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class NamespaceNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1788,7 +1849,8 @@ module Aws::ServiceDiscovery
     class NamespaceProperties < Struct.new(
       :dns_properties,
       :http_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1896,8 @@ module Aws::ServiceDiscovery
       :service_count,
       :properties,
       :create_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2016,8 @@ module Aws::ServiceDiscovery
       :create_date,
       :update_date,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2049,7 +2113,8 @@ module Aws::ServiceDiscovery
       :name,
       :values,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2058,7 +2123,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class OperationNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2093,7 +2159,8 @@ module Aws::ServiceDiscovery
     class OperationSummary < Struct.new(
       :id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2110,7 +2177,8 @@ module Aws::ServiceDiscovery
     class PrivateDnsNamespaceChange < Struct.new(
       :description,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2122,7 +2190,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::PrivateDnsPropertiesMutable]
     class PrivateDnsNamespaceProperties < Struct.new(
       :dns_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2134,7 +2203,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::PrivateDnsPropertiesMutableChange]
     class PrivateDnsNamespacePropertiesChange < Struct.new(
       :dns_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2147,7 +2217,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::SOA]
     class PrivateDnsPropertiesMutable < Struct.new(
       :soa,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2160,7 +2231,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::SOAChange]
     class PrivateDnsPropertiesMutableChange < Struct.new(
       :soa,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2177,7 +2249,8 @@ module Aws::ServiceDiscovery
     class PublicDnsNamespaceChange < Struct.new(
       :description,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2189,7 +2262,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::PublicDnsPropertiesMutable]
     class PublicDnsNamespaceProperties < Struct.new(
       :dns_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2201,7 +2275,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::PublicDnsPropertiesMutableChange]
     class PublicDnsNamespacePropertiesChange < Struct.new(
       :dns_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2213,7 +2288,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::SOA]
     class PublicDnsPropertiesMutable < Struct.new(
       :soa,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2226,7 +2302,8 @@ module Aws::ServiceDiscovery
     #   @return [Types::SOAChange]
     class PublicDnsPropertiesMutableChange < Struct.new(
       :soa,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2395,7 +2472,8 @@ module Aws::ServiceDiscovery
       :instance_id,
       :creator_request_id,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2405,7 +2483,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class RegisterInstanceResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2416,7 +2495,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class RequestLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2426,7 +2506,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class ResourceInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2436,7 +2517,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class ResourceLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2445,7 +2527,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2457,7 +2540,8 @@ module Aws::ServiceDiscovery
     #   @return [Integer]
     class SOA < Struct.new(
       :ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2469,7 +2553,8 @@ module Aws::ServiceDiscovery
     #   @return [Integer]
     class SOAChange < Struct.new(
       :ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2572,7 +2657,8 @@ module Aws::ServiceDiscovery
       :create_date,
       :creator_request_id,
       :created_by_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2593,7 +2679,8 @@ module Aws::ServiceDiscovery
       :creator_request_id,
       :service_id,
       :service_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2625,7 +2712,8 @@ module Aws::ServiceDiscovery
       :service_arn,
       :resource_owner,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2635,7 +2723,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class ServiceAttributesLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2657,7 +2746,8 @@ module Aws::ServiceDiscovery
       :description,
       :dns_config,
       :health_check_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2713,7 +2803,8 @@ module Aws::ServiceDiscovery
       :name,
       :values,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2722,7 +2813,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class ServiceNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2822,7 +2914,8 @@ module Aws::ServiceDiscovery
       :health_check_custom_config,
       :create_date,
       :created_by_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2837,7 +2930,8 @@ module Aws::ServiceDiscovery
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2851,12 +2945,14 @@ module Aws::ServiceDiscovery
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2870,7 +2966,8 @@ module Aws::ServiceDiscovery
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2883,12 +2980,14 @@ module Aws::ServiceDiscovery
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2908,7 +3007,8 @@ module Aws::ServiceDiscovery
       :id,
       :updater_request_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2918,7 +3018,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class UpdateHttpNamespaceResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2938,7 +3039,8 @@ module Aws::ServiceDiscovery
       :service_id,
       :instance_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2958,7 +3060,8 @@ module Aws::ServiceDiscovery
       :id,
       :updater_request_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2968,7 +3071,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class UpdatePrivateDnsNamespaceResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2988,7 +3092,8 @@ module Aws::ServiceDiscovery
       :id,
       :updater_request_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2998,7 +3103,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class UpdatePublicDnsNamespaceResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3012,12 +3118,14 @@ module Aws::ServiceDiscovery
     class UpdateServiceAttributesRequest < Struct.new(
       :service_id,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateServiceAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3035,7 +3143,8 @@ module Aws::ServiceDiscovery
     class UpdateServiceRequest < Struct.new(
       :id,
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3045,7 +3154,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     class UpdateServiceResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

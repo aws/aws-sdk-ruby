@@ -1364,7 +1364,6 @@ module Aws::ConnectCases
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/domains/{domainId}/templates/{templateId}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

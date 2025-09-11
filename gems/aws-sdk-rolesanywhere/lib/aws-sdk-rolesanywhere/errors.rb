@@ -37,7 +37,7 @@ module Aws::RolesAnywhere
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RolesAnywhere::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -50,7 +50,7 @@ module Aws::RolesAnywhere
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RolesAnywhere::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -63,7 +63,7 @@ module Aws::RolesAnywhere
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RolesAnywhere::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::RolesAnywhere
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RolesAnywhere::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

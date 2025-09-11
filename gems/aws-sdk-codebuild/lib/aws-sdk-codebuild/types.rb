@@ -11,7 +11,8 @@ module Aws::CodeBuild
     #   @return [String]
     class AccountLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::CodeBuild
     #   @return [String]
     class AccountSuspendedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +48,8 @@ module Aws::CodeBuild
       :auto_retry_number,
       :next_auto_retry,
       :previous_auto_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +58,8 @@ module Aws::CodeBuild
     #   @return [Array<String>]
     class BatchDeleteBuildsInput < Struct.new(
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +72,8 @@ module Aws::CodeBuild
     class BatchDeleteBuildsOutput < Struct.new(
       :builds_deleted,
       :builds_not_deleted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +82,8 @@ module Aws::CodeBuild
     #   @return [Array<String>]
     class BatchGetBuildBatchesInput < Struct.new(
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -91,7 +97,8 @@ module Aws::CodeBuild
     class BatchGetBuildBatchesOutput < Struct.new(
       :build_batches,
       :build_batches_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -100,7 +107,8 @@ module Aws::CodeBuild
     #   @return [Array<String>]
     class BatchGetBuildsInput < Struct.new(
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +121,8 @@ module Aws::CodeBuild
     class BatchGetBuildsOutput < Struct.new(
       :builds,
       :builds_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +135,8 @@ module Aws::CodeBuild
     class BatchGetCommandExecutionsInput < Struct.new(
       :sandbox_id,
       :command_execution_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,7 +149,8 @@ module Aws::CodeBuild
     class BatchGetCommandExecutionsOutput < Struct.new(
       :command_executions,
       :command_executions_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +159,8 @@ module Aws::CodeBuild
     #   @return [Array<String>]
     class BatchGetFleetsInput < Struct.new(
       :names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +173,8 @@ module Aws::CodeBuild
     class BatchGetFleetsOutput < Struct.new(
       :fleets,
       :fleets_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +185,8 @@ module Aws::CodeBuild
     #   @return [Array<String>]
     class BatchGetProjectsInput < Struct.new(
       :names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +199,8 @@ module Aws::CodeBuild
     class BatchGetProjectsOutput < Struct.new(
       :projects,
       :projects_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +211,8 @@ module Aws::CodeBuild
     #   @return [Array<String>]
     class BatchGetReportGroupsInput < Struct.new(
       :report_group_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +229,8 @@ module Aws::CodeBuild
     class BatchGetReportGroupsOutput < Struct.new(
       :report_groups,
       :report_groups_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +241,8 @@ module Aws::CodeBuild
     #   @return [Array<String>]
     class BatchGetReportsInput < Struct.new(
       :report_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +259,8 @@ module Aws::CodeBuild
     class BatchGetReportsOutput < Struct.new(
       :reports,
       :reports_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +269,8 @@ module Aws::CodeBuild
     #   @return [Array<String>]
     class BatchGetSandboxesInput < Struct.new(
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +283,8 @@ module Aws::CodeBuild
     class BatchGetSandboxesOutput < Struct.new(
       :sandboxes,
       :sandboxes_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -286,7 +307,8 @@ module Aws::CodeBuild
       :maximum_builds_allowed,
       :compute_types_allowed,
       :fleets_allowed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +547,8 @@ module Aws::CodeBuild
       :debug_session,
       :build_batch_arn,
       :auto_retry_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -620,7 +643,8 @@ module Aws::CodeBuild
       :encryption_disabled,
       :artifact_identifier,
       :bucket_owner_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +844,8 @@ module Aws::CodeBuild
       :build_groups,
       :debug_session_enabled,
       :report_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -836,7 +861,8 @@ module Aws::CodeBuild
     #   @return [String]
     class BuildBatchFilter < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +951,8 @@ module Aws::CodeBuild
       :end_time,
       :duration_in_seconds,
       :contexts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +983,8 @@ module Aws::CodeBuild
       :ignore_failure,
       :current_build_summary,
       :prior_build_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -975,7 +1003,8 @@ module Aws::CodeBuild
     class BuildNotDeleted < Struct.new(
       :id,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1109,8 @@ module Aws::CodeBuild
       :end_time,
       :duration_in_seconds,
       :contexts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1151,8 @@ module Aws::CodeBuild
     class BuildStatusConfig < Struct.new(
       :context,
       :target_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,7 +1206,8 @@ module Aws::CodeBuild
       :build_status,
       :primary_artifact,
       :secondary_artifacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1205,7 +1237,8 @@ module Aws::CodeBuild
       :status,
       :group_name,
       :stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1288,8 @@ module Aws::CodeBuild
       :branches_covered,
       :branches_missed,
       :expired,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1289,7 +1323,8 @@ module Aws::CodeBuild
       :branch_coverage_percentage,
       :branches_covered,
       :branches_missed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1347,7 +1382,8 @@ module Aws::CodeBuild
       :standard_err_content,
       :logs,
       :sandbox_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1409,8 @@ module Aws::CodeBuild
       :disk,
       :machine_type,
       :instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1609,7 +1646,8 @@ module Aws::CodeBuild
       :image_id,
       :fleet_service_role,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1618,7 +1656,8 @@ module Aws::CodeBuild
     #   @return [Types::Fleet]
     class CreateFleetOutput < Struct.new(
       :fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1774,7 +1813,8 @@ module Aws::CodeBuild
       :build_batch_config,
       :concurrent_build_limit,
       :auto_retry_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1783,7 +1823,8 @@ module Aws::CodeBuild
     #   @return [Types::Project]
     class CreateProjectOutput < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1855,8 @@ module Aws::CodeBuild
       :type,
       :export_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1825,7 +1867,8 @@ module Aws::CodeBuild
     #   @return [Types::ReportGroup]
     class CreateReportGroupOutput < Struct.new(
       :report_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1884,7 +1927,8 @@ module Aws::CodeBuild
       :manual_creation,
       :scope_configuration,
       :pull_request_build_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1894,7 +1938,8 @@ module Aws::CodeBuild
     #   @return [Types::Webhook]
     class CreateWebhookOutput < Struct.new(
       :webhook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1911,7 +1956,8 @@ module Aws::CodeBuild
     class DebugSession < Struct.new(
       :session_enabled,
       :session_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1920,7 +1966,8 @@ module Aws::CodeBuild
     #   @return [String]
     class DeleteBuildBatchInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1938,7 +1985,8 @@ module Aws::CodeBuild
       :status_code,
       :builds_deleted,
       :builds_not_deleted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,12 +1995,14 @@ module Aws::CodeBuild
     #   @return [String]
     class DeleteFleetInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFleetOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1961,12 +2011,14 @@ module Aws::CodeBuild
     #   @return [String]
     class DeleteProjectInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,12 +2035,14 @@ module Aws::CodeBuild
     class DeleteReportGroupInput < Struct.new(
       :arn,
       :delete_reports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteReportGroupOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1999,12 +2053,14 @@ module Aws::CodeBuild
     #   @return [String]
     class DeleteReportInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteReportOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2013,12 +2069,14 @@ module Aws::CodeBuild
     #   @return [String]
     class DeleteResourcePolicyInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2027,7 +2085,8 @@ module Aws::CodeBuild
     #   @return [String]
     class DeleteSourceCredentialsInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2036,7 +2095,8 @@ module Aws::CodeBuild
     #   @return [String]
     class DeleteSourceCredentialsOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2045,12 +2105,14 @@ module Aws::CodeBuild
     #   @return [String]
     class DeleteWebhookInput < Struct.new(
       :project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWebhookOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2097,7 +2159,8 @@ module Aws::CodeBuild
       :sort_by,
       :min_line_coverage_percentage,
       :max_line_coverage_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2111,7 +2174,8 @@ module Aws::CodeBuild
     class DescribeCodeCoveragesOutput < Struct.new(
       :next_token,
       :code_coverages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2145,7 +2209,8 @@ module Aws::CodeBuild
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2166,7 +2231,8 @@ module Aws::CodeBuild
     class DescribeTestCasesOutput < Struct.new(
       :next_token,
       :test_cases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2215,7 +2281,8 @@ module Aws::CodeBuild
       :compute_type,
       :security_group_ids,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2229,7 +2296,8 @@ module Aws::CodeBuild
     class DockerServerStatus < Struct.new(
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2247,7 +2315,8 @@ module Aws::CodeBuild
       :name,
       :description,
       :versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2332,8 @@ module Aws::CodeBuild
     class EnvironmentLanguage < Struct.new(
       :language,
       :images,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2348,8 @@ module Aws::CodeBuild
     class EnvironmentPlatform < Struct.new(
       :platform,
       :languages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2328,7 +2399,8 @@ module Aws::CodeBuild
       :name,
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2352,7 +2424,8 @@ module Aws::CodeBuild
     class ExportedEnvironmentVariable < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2609,7 +2682,8 @@ module Aws::CodeBuild
       :image_id,
       :fleet_service_role,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2627,7 +2701,8 @@ module Aws::CodeBuild
       :type,
       :effect,
       :entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2689,7 +2764,8 @@ module Aws::CodeBuild
       :status_code,
       :context,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2767,7 +2843,8 @@ module Aws::CodeBuild
       :report_group_arn,
       :num_of_reports,
       :trend_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2780,7 +2857,8 @@ module Aws::CodeBuild
     class GetReportGroupTrendOutput < Struct.new(
       :stats,
       :raw_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2789,7 +2867,8 @@ module Aws::CodeBuild
     #   @return [String]
     class GetResourcePolicyInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2798,7 +2877,8 @@ module Aws::CodeBuild
     #   @return [String]
     class GetResourcePolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2809,7 +2889,8 @@ module Aws::CodeBuild
     #   @return [Boolean]
     class GitSubmodulesConfig < Struct.new(
       :fetch_submodules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2841,7 +2922,8 @@ module Aws::CodeBuild
       :server_type,
       :auth_type,
       :should_overwrite,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2850,7 +2932,8 @@ module Aws::CodeBuild
     #   @return [String]
     class ImportSourceCredentialsOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2859,7 +2942,8 @@ module Aws::CodeBuild
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2868,12 +2952,14 @@ module Aws::CodeBuild
     #   @return [String]
     class InvalidateProjectCacheInput < Struct.new(
       :project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class InvalidateProjectCacheOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2912,7 +2998,8 @@ module Aws::CodeBuild
       :max_results,
       :sort_order,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2927,7 +3014,8 @@ module Aws::CodeBuild
     class ListBuildBatchesForProjectOutput < Struct.new(
       :ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2960,7 +3048,8 @@ module Aws::CodeBuild
       :max_results,
       :sort_order,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2974,7 +3063,8 @@ module Aws::CodeBuild
     class ListBuildBatchesOutput < Struct.new(
       :ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3100,8 @@ module Aws::CodeBuild
       :project_name,
       :sort_order,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3027,7 +3118,8 @@ module Aws::CodeBuild
     class ListBuildsForProjectOutput < Struct.new(
       :ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3057,7 +3149,8 @@ module Aws::CodeBuild
     class ListBuildsInput < Struct.new(
       :sort_order,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3073,7 +3166,8 @@ module Aws::CodeBuild
     class ListBuildsOutput < Struct.new(
       :ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3094,7 +3188,8 @@ module Aws::CodeBuild
       :max_results,
       :sort_order,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3107,12 +3202,14 @@ module Aws::CodeBuild
     class ListCommandExecutionsForSandboxOutput < Struct.new(
       :command_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ListCuratedEnvironmentImagesInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3122,7 +3219,8 @@ module Aws::CodeBuild
     #   @return [Array<Types::EnvironmentPlatform>]
     class ListCuratedEnvironmentImagesOutput < Struct.new(
       :platforms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3179,7 +3277,8 @@ module Aws::CodeBuild
       :max_results,
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3195,7 +3294,8 @@ module Aws::CodeBuild
     class ListFleetsOutput < Struct.new(
       :next_token,
       :fleets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3247,7 +3347,8 @@ module Aws::CodeBuild
       :sort_by,
       :sort_order,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3264,7 +3365,8 @@ module Aws::CodeBuild
     class ListProjectsOutput < Struct.new(
       :next_token,
       :projects,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3314,7 +3416,8 @@ module Aws::CodeBuild
       :sort_by,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3335,7 +3438,8 @@ module Aws::CodeBuild
     class ListReportGroupsOutput < Struct.new(
       :next_token,
       :report_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3375,7 +3479,8 @@ module Aws::CodeBuild
       :sort_order,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3396,7 +3501,8 @@ module Aws::CodeBuild
     class ListReportsForReportGroupOutput < Struct.new(
       :next_token,
       :reports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3442,7 +3548,8 @@ module Aws::CodeBuild
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3463,7 +3570,8 @@ module Aws::CodeBuild
     class ListReportsOutput < Struct.new(
       :next_token,
       :reports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3484,7 +3592,8 @@ module Aws::CodeBuild
       :max_results,
       :sort_order,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3497,7 +3606,8 @@ module Aws::CodeBuild
     class ListSandboxesForProjectOutput < Struct.new(
       :ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3514,7 +3624,8 @@ module Aws::CodeBuild
       :max_results,
       :sort_order,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3527,7 +3638,8 @@ module Aws::CodeBuild
     class ListSandboxesOutput < Struct.new(
       :ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3577,7 +3689,8 @@ module Aws::CodeBuild
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3596,7 +3709,8 @@ module Aws::CodeBuild
     class ListSharedProjectsOutput < Struct.new(
       :next_token,
       :projects,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3646,7 +3760,8 @@ module Aws::CodeBuild
       :sort_by,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3665,12 +3780,14 @@ module Aws::CodeBuild
     class ListSharedReportGroupsOutput < Struct.new(
       :next_token,
       :report_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ListSourceCredentialsInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3681,7 +3798,8 @@ module Aws::CodeBuild
     #   @return [Array<Types::SourceCredentialsInfo>]
     class ListSourceCredentialsOutput < Struct.new(
       :source_credentials_infos,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3697,7 +3815,8 @@ module Aws::CodeBuild
     class LogsConfig < Struct.new(
       :cloud_watch_logs,
       :s3_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3738,7 +3857,8 @@ module Aws::CodeBuild
       :s3_logs_arn,
       :cloud_watch_logs,
       :s3_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3752,7 +3872,8 @@ module Aws::CodeBuild
     class NetworkInterface < Struct.new(
       :subnet_id,
       :network_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3761,7 +3882,8 @@ module Aws::CodeBuild
     #   @return [String]
     class OAuthProviderException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3777,7 +3899,8 @@ module Aws::CodeBuild
     class PhaseContext < Struct.new(
       :status_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3970,7 +4093,8 @@ module Aws::CodeBuild
       :public_project_alias,
       :resource_access_role,
       :auto_retry_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4213,7 +4337,8 @@ module Aws::CodeBuild
       :encryption_disabled,
       :artifact_identifier,
       :bucket_owner_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4229,7 +4354,8 @@ module Aws::CodeBuild
     class ProjectBadge < Struct.new(
       :badge_enabled,
       :badge_request_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4274,7 +4400,8 @@ module Aws::CodeBuild
       :restrictions,
       :timeout_in_mins,
       :batch_report_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4380,7 +4507,8 @@ module Aws::CodeBuild
       :location,
       :modes,
       :cache_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4586,7 +4714,8 @@ module Aws::CodeBuild
       :registry_credential,
       :image_pull_credentials_type,
       :docker_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4633,7 +4762,8 @@ module Aws::CodeBuild
       :mount_point,
       :identifier,
       :mount_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4645,7 +4775,8 @@ module Aws::CodeBuild
     #   @return [String]
     class ProjectFleet < Struct.new(
       :fleet_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4826,7 +4957,8 @@ module Aws::CodeBuild
       :build_status_config,
       :insecure_ssl,
       :source_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4870,7 +5002,8 @@ module Aws::CodeBuild
     class ProjectSourceVersion < Struct.new(
       :source_identifier,
       :source_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4884,7 +5017,8 @@ module Aws::CodeBuild
     class ProxyConfiguration < Struct.new(
       :default_behavior,
       :ordered_proxy_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4912,7 +5046,8 @@ module Aws::CodeBuild
     class PullRequestBuildPolicy < Struct.new(
       :requires_comment_approval,
       :approver_roles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4928,7 +5063,8 @@ module Aws::CodeBuild
     class PutResourcePolicyInput < Struct.new(
       :policy,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4938,7 +5074,8 @@ module Aws::CodeBuild
     #   @return [String]
     class PutResourcePolicyOutput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4970,7 +5107,8 @@ module Aws::CodeBuild
     class RegistryCredential < Struct.new(
       :credential,
       :credential_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5042,7 +5180,8 @@ module Aws::CodeBuild
       :truncated,
       :test_summary,
       :code_coverage_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5067,7 +5206,8 @@ module Aws::CodeBuild
     class ReportExportConfig < Struct.new(
       :export_config_type,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5078,7 +5218,8 @@ module Aws::CodeBuild
     #   @return [String]
     class ReportFilter < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5145,7 +5286,8 @@ module Aws::CodeBuild
       :last_modified,
       :tags,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5164,7 +5306,8 @@ module Aws::CodeBuild
       :average,
       :max,
       :min,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5178,7 +5321,8 @@ module Aws::CodeBuild
     class ReportWithRawData < Struct.new(
       :report_arn,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5197,7 +5341,8 @@ module Aws::CodeBuild
       :type,
       :location,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5207,7 +5352,8 @@ module Aws::CodeBuild
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5216,7 +5362,8 @@ module Aws::CodeBuild
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5237,7 +5384,8 @@ module Aws::CodeBuild
       :id,
       :idempotency_token,
       :retry_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5246,7 +5394,8 @@ module Aws::CodeBuild
     #   @return [Types::BuildBatch]
     class RetryBuildBatchOutput < Struct.new(
       :build_batch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5263,7 +5412,8 @@ module Aws::CodeBuild
     class RetryBuildInput < Struct.new(
       :id,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5272,7 +5422,8 @@ module Aws::CodeBuild
     #   @return [Types::Build]
     class RetryBuildOutput < Struct.new(
       :build,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5350,7 +5501,8 @@ module Aws::CodeBuild
       :location,
       :encryption_disabled,
       :bucket_owner_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5393,7 +5545,8 @@ module Aws::CodeBuild
       :packaging,
       :encryption_key,
       :encryption_disabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5411,7 +5564,8 @@ module Aws::CodeBuild
       :session_id,
       :token_value,
       :stream_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5504,7 +5658,8 @@ module Aws::CodeBuild
       :encryption_key,
       :service_role,
       :current_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5546,7 +5701,8 @@ module Aws::CodeBuild
       :resolved_source_version,
       :logs,
       :network_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5603,7 +5759,8 @@ module Aws::CodeBuild
       :end_time,
       :duration_in_seconds,
       :contexts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5621,7 +5778,8 @@ module Aws::CodeBuild
       :scaling_type,
       :target_tracking_scaling_configs,
       :max_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5643,7 +5801,8 @@ module Aws::CodeBuild
       :target_tracking_scaling_configs,
       :max_capacity,
       :desired_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5661,7 +5820,8 @@ module Aws::CodeBuild
       :name,
       :domain,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5676,7 +5836,8 @@ module Aws::CodeBuild
     class SourceAuth < Struct.new(
       :type,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5701,7 +5862,8 @@ module Aws::CodeBuild
       :server_type,
       :auth_type,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5927,7 +6089,8 @@ module Aws::CodeBuild
       :image_pull_credentials_type_override,
       :build_batch_config_override,
       :debug_session_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5936,7 +6099,8 @@ module Aws::CodeBuild
     #   @return [Types::BuildBatch]
     class StartBuildBatchOutput < Struct.new(
       :build_batch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6186,7 +6350,8 @@ module Aws::CodeBuild
       :debug_session_enabled,
       :fleet_override,
       :auto_retry_limit_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6195,7 +6360,8 @@ module Aws::CodeBuild
     #   @return [Types::Build]
     class StartBuildOutput < Struct.new(
       :build,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6212,7 +6378,8 @@ module Aws::CodeBuild
       :sandbox_id,
       :command,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6221,7 +6388,8 @@ module Aws::CodeBuild
     #   @return [Types::CommandExecution]
     class StartCommandExecutionOutput < Struct.new(
       :command_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6230,7 +6398,8 @@ module Aws::CodeBuild
     #   @return [String]
     class StartSandboxConnectionInput < Struct.new(
       :sandbox_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6239,7 +6408,8 @@ module Aws::CodeBuild
     #   @return [Types::SSMSession]
     class StartSandboxConnectionOutput < Struct.new(
       :ssm_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6252,7 +6422,8 @@ module Aws::CodeBuild
     class StartSandboxInput < Struct.new(
       :project_name,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6261,7 +6432,8 @@ module Aws::CodeBuild
     #   @return [Types::Sandbox]
     class StartSandboxOutput < Struct.new(
       :sandbox,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6270,7 +6442,8 @@ module Aws::CodeBuild
     #   @return [String]
     class StopBuildBatchInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6279,7 +6452,8 @@ module Aws::CodeBuild
     #   @return [Types::BuildBatch]
     class StopBuildBatchOutput < Struct.new(
       :build_batch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6288,7 +6462,8 @@ module Aws::CodeBuild
     #   @return [String]
     class StopBuildInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6297,7 +6472,8 @@ module Aws::CodeBuild
     #   @return [Types::Build]
     class StopBuildOutput < Struct.new(
       :build,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6306,7 +6482,8 @@ module Aws::CodeBuild
     #   @return [String]
     class StopSandboxInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6315,7 +6492,8 @@ module Aws::CodeBuild
     #   @return [Types::Sandbox]
     class StopSandboxOutput < Struct.new(
       :sandbox,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6330,7 +6508,8 @@ module Aws::CodeBuild
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6344,7 +6523,8 @@ module Aws::CodeBuild
     class TargetTrackingScalingConfiguration < Struct.new(
       :metric_type,
       :target_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6392,7 +6572,8 @@ module Aws::CodeBuild
       :message,
       :expired,
       :test_suite_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6437,7 +6618,8 @@ module Aws::CodeBuild
     class TestCaseFilter < Struct.new(
       :status,
       :keyword,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6458,7 +6640,8 @@ module Aws::CodeBuild
       :total,
       :status_counts,
       :duration_in_nano_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6695,7 +6878,8 @@ module Aws::CodeBuild
       :image_id,
       :fleet_service_role,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6704,7 +6888,8 @@ module Aws::CodeBuild
     #   @return [Types::Fleet]
     class UpdateFleetOutput < Struct.new(
       :fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6860,7 +7045,8 @@ module Aws::CodeBuild
       :build_batch_config,
       :concurrent_build_limit,
       :auto_retry_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6869,7 +7055,8 @@ module Aws::CodeBuild
     #   @return [Types::Project]
     class UpdateProjectOutput < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6897,7 +7084,8 @@ module Aws::CodeBuild
       :project_arn,
       :project_visibility,
       :resource_access_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6924,7 +7112,8 @@ module Aws::CodeBuild
       :project_arn,
       :public_project_alias,
       :project_visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6961,7 +7150,8 @@ module Aws::CodeBuild
       :arn,
       :export_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6972,7 +7162,8 @@ module Aws::CodeBuild
     #   @return [Types::ReportGroup]
     class UpdateReportGroupOutput < Struct.new(
       :report_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7018,7 +7209,8 @@ module Aws::CodeBuild
       :filter_groups,
       :build_type,
       :pull_request_build_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7028,7 +7220,8 @@ module Aws::CodeBuild
     #   @return [Types::Webhook]
     class UpdateWebhookOutput < Struct.new(
       :webhook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7046,7 +7239,8 @@ module Aws::CodeBuild
       :vpc_id,
       :subnets,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7148,7 +7342,8 @@ module Aws::CodeBuild
       :status,
       :status_message,
       :pull_request_build_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7331,7 +7526,8 @@ module Aws::CodeBuild
       :type,
       :pattern,
       :exclude_matched_pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

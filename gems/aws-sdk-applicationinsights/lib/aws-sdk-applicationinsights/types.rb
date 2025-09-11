@@ -11,7 +11,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28,7 +29,8 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :component_name,
       :workload_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +43,8 @@ module Aws::ApplicationInsights
     class AddWorkloadResponse < Struct.new(
       :workload_id,
       :workload_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +81,8 @@ module Aws::ApplicationInsights
       :tier,
       :monitor,
       :detected_workload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +147,8 @@ module Aws::ApplicationInsights
       :auto_config_enabled,
       :discovery_type,
       :attach_missing_permission,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +157,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +198,8 @@ module Aws::ApplicationInsights
       :event_time,
       :event_detail,
       :event_resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +256,8 @@ module Aws::ApplicationInsights
       :auto_create,
       :grouping_type,
       :attach_missing_permission,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +266,8 @@ module Aws::ApplicationInsights
     #   @return [Types::ApplicationInfo]
     class CreateApplicationResponse < Struct.new(
       :application_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -275,12 +284,14 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :component_name,
       :resource_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateComponentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,7 +326,8 @@ module Aws::ApplicationInsights
       :pattern_name,
       :pattern,
       :rank,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -328,7 +340,8 @@ module Aws::ApplicationInsights
     class CreateLogPatternResponse < Struct.new(
       :log_pattern,
       :resource_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,12 +350,14 @@ module Aws::ApplicationInsights
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
       :resource_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,12 +370,14 @@ module Aws::ApplicationInsights
     class DeleteComponentRequest < Struct.new(
       :resource_group_name,
       :component_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteComponentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -377,12 +394,14 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :pattern_set_name,
       :pattern_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLogPatternResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +414,8 @@ module Aws::ApplicationInsights
     class DescribeApplicationRequest < Struct.new(
       :resource_group_name,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -404,7 +424,8 @@ module Aws::ApplicationInsights
     #   @return [Types::ApplicationInfo]
     class DescribeApplicationResponse < Struct.new(
       :application_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -430,7 +451,8 @@ module Aws::ApplicationInsights
       :tier,
       :workload_name,
       :recommendation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +462,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     class DescribeComponentConfigurationRecommendationResponse < Struct.new(
       :component_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +480,8 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :component_name,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +502,8 @@ module Aws::ApplicationInsights
       :monitor,
       :tier,
       :component_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +520,8 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :component_name,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +535,8 @@ module Aws::ApplicationInsights
     class DescribeComponentResponse < Struct.new(
       :application_component,
       :resource_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -530,7 +557,8 @@ module Aws::ApplicationInsights
       :pattern_set_name,
       :pattern_name,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +575,8 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :account_id,
       :log_pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +589,8 @@ module Aws::ApplicationInsights
     class DescribeObservationRequest < Struct.new(
       :observation_id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +599,8 @@ module Aws::ApplicationInsights
     #   @return [Types::Observation]
     class DescribeObservationResponse < Struct.new(
       :observation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -582,7 +613,8 @@ module Aws::ApplicationInsights
     class DescribeProblemObservationsRequest < Struct.new(
       :problem_id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -591,7 +623,8 @@ module Aws::ApplicationInsights
     #   @return [Types::RelatedObservations]
     class DescribeProblemObservationsResponse < Struct.new(
       :related_observations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +637,8 @@ module Aws::ApplicationInsights
     class DescribeProblemRequest < Struct.new(
       :problem_id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -619,7 +653,8 @@ module Aws::ApplicationInsights
     class DescribeProblemResponse < Struct.new(
       :problem,
       :sns_notification_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +675,8 @@ module Aws::ApplicationInsights
       :component_name,
       :workload_id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -657,7 +693,8 @@ module Aws::ApplicationInsights
       :workload_id,
       :workload_remarks,
       :workload_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +703,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +722,8 @@ module Aws::ApplicationInsights
       :max_results,
       :next_token,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,7 +737,8 @@ module Aws::ApplicationInsights
     class ListApplicationsResponse < Struct.new(
       :application_info_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +760,8 @@ module Aws::ApplicationInsights
       :max_results,
       :next_token,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -733,7 +774,8 @@ module Aws::ApplicationInsights
     class ListComponentsResponse < Struct.new(
       :application_component_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +819,8 @@ module Aws::ApplicationInsights
       :max_results,
       :next_token,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +837,8 @@ module Aws::ApplicationInsights
     class ListConfigurationHistoryResponse < Struct.new(
       :event_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +860,8 @@ module Aws::ApplicationInsights
       :max_results,
       :next_token,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,7 +883,8 @@ module Aws::ApplicationInsights
       :account_id,
       :log_pattern_sets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +910,8 @@ module Aws::ApplicationInsights
       :max_results,
       :next_token,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +933,8 @@ module Aws::ApplicationInsights
       :account_id,
       :log_patterns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +975,8 @@ module Aws::ApplicationInsights
       :next_token,
       :component_name,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -949,7 +998,8 @@ module Aws::ApplicationInsights
       :next_token,
       :resource_group_name,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +1009,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1021,8 @@ module Aws::ApplicationInsights
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -996,7 +1048,8 @@ module Aws::ApplicationInsights
       :max_results,
       :next_token,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1009,7 +1062,8 @@ module Aws::ApplicationInsights
     class ListWorkloadsResponse < Struct.new(
       :workload_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1101,8 @@ module Aws::ApplicationInsights
       :pattern_name,
       :pattern,
       :rank,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1249,7 +1304,8 @@ module Aws::ApplicationInsights
       :x_ray_request_average_latency,
       :x_ray_node_name,
       :x_ray_node_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1325,7 +1381,8 @@ module Aws::ApplicationInsights
       :last_recurrence_time,
       :visibility,
       :resolution_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1335,7 +1392,8 @@ module Aws::ApplicationInsights
     #   @return [Array<Types::Observation>]
     class RelatedObservations < Struct.new(
       :observation_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1352,12 +1410,14 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :component_name,
       :workload_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveWorkloadResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1366,7 +1426,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1375,7 +1436,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1416,7 +1478,8 @@ module Aws::ApplicationInsights
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,12 +1495,14 @@ module Aws::ApplicationInsights
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1446,7 +1511,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     class TagsAlreadyExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1526,8 @@ module Aws::ApplicationInsights
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,12 +1545,14 @@ module Aws::ApplicationInsights
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1595,8 @@ module Aws::ApplicationInsights
       :remove_sns_topic,
       :auto_config_enabled,
       :attach_missing_permission,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,7 +1605,8 @@ module Aws::ApplicationInsights
     #   @return [Types::ApplicationInfo]
     class UpdateApplicationResponse < Struct.new(
       :application_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1569,12 +1640,14 @@ module Aws::ApplicationInsights
       :tier,
       :component_configuration,
       :auto_config_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateComponentConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1595,12 +1668,14 @@ module Aws::ApplicationInsights
       :component_name,
       :new_component_name,
       :resource_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateComponentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1710,8 @@ module Aws::ApplicationInsights
       :pattern_name,
       :pattern,
       :rank,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1724,8 @@ module Aws::ApplicationInsights
     class UpdateLogPatternResponse < Struct.new(
       :resource_group_name,
       :log_pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1668,12 +1745,14 @@ module Aws::ApplicationInsights
       :problem_id,
       :update_status,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateProblemResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1773,8 @@ module Aws::ApplicationInsights
       :component_name,
       :workload_id,
       :workload_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1707,7 +1787,8 @@ module Aws::ApplicationInsights
     class UpdateWorkloadResponse < Struct.new(
       :workload_id,
       :workload_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1797,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1746,7 +1828,8 @@ module Aws::ApplicationInsights
       :tier,
       :workload_remarks,
       :missing_workload_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1847,8 @@ module Aws::ApplicationInsights
       :workload_name,
       :tier,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

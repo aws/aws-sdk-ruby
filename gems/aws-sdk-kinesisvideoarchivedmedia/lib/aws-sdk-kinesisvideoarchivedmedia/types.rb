@@ -11,7 +11,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class ClientLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31,7 +32,8 @@ module Aws::KinesisVideoArchivedMedia
     class ClipFragmentSelector < Struct.new(
       :fragment_selector_type,
       :timestamp_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +59,8 @@ module Aws::KinesisVideoArchivedMedia
     class ClipTimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +97,8 @@ module Aws::KinesisVideoArchivedMedia
     class DASHFragmentSelector < Struct.new(
       :fragment_selector_type,
       :timestamp_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +138,8 @@ module Aws::KinesisVideoArchivedMedia
     class DASHTimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +167,8 @@ module Aws::KinesisVideoArchivedMedia
       :producer_timestamp,
       :server_timestamp,
       :fragment_length_in_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -201,7 +207,8 @@ module Aws::KinesisVideoArchivedMedia
     class FragmentSelector < Struct.new(
       :fragment_selector_type,
       :timestamp_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +227,8 @@ module Aws::KinesisVideoArchivedMedia
       :stream_name,
       :stream_arn,
       :clip_fragment_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +244,8 @@ module Aws::KinesisVideoArchivedMedia
     class GetClipOutput < Struct.new(
       :content_type,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -388,7 +397,8 @@ module Aws::KinesisVideoArchivedMedia
       :dash_fragment_selector,
       :expires,
       :max_manifest_fragment_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +408,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class GetDASHStreamingSessionURLOutput < Struct.new(
       :dash_streaming_session_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +596,8 @@ module Aws::KinesisVideoArchivedMedia
       :display_fragment_timestamp,
       :expires,
       :max_media_playlist_fragment_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,7 +607,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class GetHLSStreamingSessionURLOutput < Struct.new(
       :hls_streaming_session_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -658,7 +671,8 @@ module Aws::KinesisVideoArchivedMedia
       :height_pixels,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -672,7 +686,8 @@ module Aws::KinesisVideoArchivedMedia
     class GetImagesOutput < Struct.new(
       :images,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +705,8 @@ module Aws::KinesisVideoArchivedMedia
       :stream_name,
       :stream_arn,
       :fragments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +751,8 @@ module Aws::KinesisVideoArchivedMedia
     class GetMediaForFragmentListOutput < Struct.new(
       :content_type,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -777,7 +794,8 @@ module Aws::KinesisVideoArchivedMedia
     class HLSFragmentSelector < Struct.new(
       :fragment_selector_type,
       :timestamp_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +832,8 @@ module Aws::KinesisVideoArchivedMedia
     class HLSTimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +863,8 @@ module Aws::KinesisVideoArchivedMedia
       :time_stamp,
       :error,
       :image_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -854,7 +874,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class InvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +885,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class InvalidCodecPrivateDataException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,7 +896,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class InvalidMediaFrameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +929,8 @@ module Aws::KinesisVideoArchivedMedia
       :max_results,
       :next_token,
       :fragment_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +946,8 @@ module Aws::KinesisVideoArchivedMedia
     class ListFragmentsOutput < Struct.new(
       :fragments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +956,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class MissingCodecPrivateDataException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +968,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class NoDataRetentionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +979,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class NotAuthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +998,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1014,8 @@ module Aws::KinesisVideoArchivedMedia
     class TimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -997,7 +1027,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     class UnsupportedStreamMediaTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

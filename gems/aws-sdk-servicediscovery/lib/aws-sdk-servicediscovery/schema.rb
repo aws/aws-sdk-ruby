@@ -940,7 +940,6 @@ module Aws::ServiceDiscovery
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
         operation.traits = {}
       end)
-
     end
 
     class << self

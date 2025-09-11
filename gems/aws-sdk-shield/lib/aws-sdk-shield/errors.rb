@@ -46,7 +46,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -59,7 +59,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::AccessDeniedForDependencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -72,7 +72,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::InternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::InvalidOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::InvalidPaginationTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -111,7 +111,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -134,7 +134,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::InvalidResourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -147,7 +147,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::LimitsExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -170,7 +170,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::LockedSubscriptionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -183,7 +183,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::NoAssociatedRoleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -197,7 +197,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::OptimisticLockException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -210,7 +210,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -228,7 +228,7 @@ module Aws::Shield
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Shield::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

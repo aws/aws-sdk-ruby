@@ -149,7 +149,6 @@ module Aws::QLDBSession
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateExceededException)
         operation.traits = {}
       end)
-
     end
 
     class << self

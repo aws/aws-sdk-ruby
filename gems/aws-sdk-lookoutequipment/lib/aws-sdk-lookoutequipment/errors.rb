@@ -41,7 +41,7 @@ module Aws::LookoutEquipment
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutEquipment::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::LookoutEquipment
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutEquipment::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::LookoutEquipment
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutEquipment::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::LookoutEquipment
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutEquipment::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::LookoutEquipment
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutEquipment::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::LookoutEquipment
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutEquipment::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::LookoutEquipment
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LookoutEquipment::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

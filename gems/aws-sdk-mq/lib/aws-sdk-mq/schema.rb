@@ -812,7 +812,6 @@ module Aws::Mq
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/brokers/{BrokerId}/users/{Username}", "code" => 200}}
       end)
-
     end
 
     class << self

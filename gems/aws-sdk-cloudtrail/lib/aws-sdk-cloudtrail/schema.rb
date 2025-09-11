@@ -2362,7 +2362,6 @@ module Aws::CloudTrail
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

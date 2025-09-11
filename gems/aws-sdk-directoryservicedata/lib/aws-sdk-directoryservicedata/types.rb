@@ -20,7 +20,8 @@ module Aws::DirectoryServiceData
     class AccessDeniedException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,12 +61,14 @@ module Aws::DirectoryServiceData
       :member_name,
       :member_realm,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddGroupMemberResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +107,8 @@ module Aws::DirectoryServiceData
       :bool,
       :ss,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S < AttributeValue; end
@@ -125,7 +129,8 @@ module Aws::DirectoryServiceData
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +169,8 @@ module Aws::DirectoryServiceData
       :group_scope,
       :other_attributes,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +187,8 @@ module Aws::DirectoryServiceData
       :directory_id,
       :sam_account_name,
       :sid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +235,8 @@ module Aws::DirectoryServiceData
       :surname,
       :other_attributes,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +253,8 @@ module Aws::DirectoryServiceData
       :directory_id,
       :sid,
       :sam_account_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,12 +280,14 @@ module Aws::DirectoryServiceData
       :directory_id,
       :sam_account_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,12 +313,14 @@ module Aws::DirectoryServiceData
       :directory_id,
       :sam_account_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +348,8 @@ module Aws::DirectoryServiceData
       :realm,
       :sam_account_name,
       :other_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -373,7 +387,8 @@ module Aws::DirectoryServiceData
       :group_type,
       :group_scope,
       :other_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -400,7 +415,8 @@ module Aws::DirectoryServiceData
       :sam_account_name,
       :other_attributes,
       :realm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +471,8 @@ module Aws::DirectoryServiceData
       :surname,
       :enabled,
       :other_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +486,8 @@ module Aws::DirectoryServiceData
     class DirectoryUnavailableException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,12 +513,14 @@ module Aws::DirectoryServiceData
       :directory_id,
       :sam_account_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableUserResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +552,8 @@ module Aws::DirectoryServiceData
       :group_type,
       :group_scope,
       :other_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +575,8 @@ module Aws::DirectoryServiceData
       :sam_account_name,
       :group_type,
       :group_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +585,8 @@ module Aws::DirectoryServiceData
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +626,8 @@ module Aws::DirectoryServiceData
       :sam_account_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +653,8 @@ module Aws::DirectoryServiceData
       :member_realm,
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +696,8 @@ module Aws::DirectoryServiceData
       :sam_account_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +723,8 @@ module Aws::DirectoryServiceData
       :member_realm,
       :groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -724,7 +751,8 @@ module Aws::DirectoryServiceData
       :realm,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +774,8 @@ module Aws::DirectoryServiceData
       :realm,
       :groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +802,8 @@ module Aws::DirectoryServiceData
       :realm,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -795,7 +825,8 @@ module Aws::DirectoryServiceData
       :realm,
       :users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +844,8 @@ module Aws::DirectoryServiceData
       :sid,
       :sam_account_name,
       :member_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -852,12 +884,14 @@ module Aws::DirectoryServiceData
       :member_name,
       :member_realm,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveGroupMemberResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +900,8 @@ module Aws::DirectoryServiceData
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +943,8 @@ module Aws::DirectoryServiceData
       :realm,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +966,8 @@ module Aws::DirectoryServiceData
       :realm,
       :groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -972,7 +1009,8 @@ module Aws::DirectoryServiceData
       :search_attributes,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -994,7 +1032,8 @@ module Aws::DirectoryServiceData
       :realm,
       :users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1007,7 +1046,8 @@ module Aws::DirectoryServiceData
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,12 +1092,14 @@ module Aws::DirectoryServiceData
       :other_attributes,
       :update_type,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateGroupResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,12 +1152,14 @@ module Aws::DirectoryServiceData
       :other_attributes,
       :update_type,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateUserResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1161,7 +1205,8 @@ module Aws::DirectoryServiceData
       :surname,
       :enabled,
       :other_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1232,8 @@ module Aws::DirectoryServiceData
       :given_name,
       :surname,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1247,8 @@ module Aws::DirectoryServiceData
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

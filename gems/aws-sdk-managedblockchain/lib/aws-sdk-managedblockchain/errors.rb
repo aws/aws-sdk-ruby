@@ -43,7 +43,7 @@ module Aws::ManagedBlockchain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ManagedBlockchain::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::ManagedBlockchain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ManagedBlockchain::Types::IllegalActionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::ManagedBlockchain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ManagedBlockchain::Types::InternalServiceErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -78,7 +78,7 @@ module Aws::ManagedBlockchain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ManagedBlockchain::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::ManagedBlockchain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ManagedBlockchain::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::ManagedBlockchain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ManagedBlockchain::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::ManagedBlockchain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ManagedBlockchain::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -136,7 +136,7 @@ module Aws::ManagedBlockchain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ManagedBlockchain::Types::ResourceNotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::ManagedBlockchain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ManagedBlockchain::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -161,7 +161,7 @@ module Aws::ManagedBlockchain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ManagedBlockchain::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -16,7 +16,8 @@ module Aws::IoTEvents
     #   @return [Boolean]
     class AcknowledgeFlow < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +90,8 @@ module Aws::IoTEvents
       :dynamo_db,
       :dynamo_d_bv2,
       :iot_site_wise,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +265,8 @@ module Aws::IoTEvents
       :dynamo_db,
       :dynamo_d_bv2,
       :iot_site_wise,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +281,8 @@ module Aws::IoTEvents
     class AlarmCapabilities < Struct.new(
       :initialization_configuration,
       :acknowledge_flow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +293,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::AlarmAction>]
     class AlarmEventActions < Struct.new(
       :alarm_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +312,8 @@ module Aws::IoTEvents
       :creation_time,
       :alarm_model_description,
       :alarm_model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +374,8 @@ module Aws::IoTEvents
       :last_update_time,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +386,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::NotificationAction>]
     class AlarmNotification < Struct.new(
       :notification_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +397,8 @@ module Aws::IoTEvents
     #   @return [Types::SimpleRule]
     class AlarmRule < Struct.new(
       :simple_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +482,8 @@ module Aws::IoTEvents
       :level,
       :message,
       :locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -485,7 +495,8 @@ module Aws::IoTEvents
     #   @return [String]
     class AnalysisResultLocation < Struct.new(
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -531,7 +542,8 @@ module Aws::IoTEvents
     class AssetPropertyTimestamp < Struct.new(
       :time_in_seconds,
       :offset_in_nanos,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +583,8 @@ module Aws::IoTEvents
       :value,
       :timestamp,
       :quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +645,8 @@ module Aws::IoTEvents
       :integer_value,
       :double_value,
       :boolean_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,7 +665,8 @@ module Aws::IoTEvents
     #   @return [String]
     class Attribute < Struct.new(
       :json_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +676,8 @@ module Aws::IoTEvents
     #   @return [String]
     class ClearTimerAction < Struct.new(
       :timer_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +728,8 @@ module Aws::IoTEvents
       :alarm_notification,
       :alarm_event_actions,
       :alarm_capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +775,8 @@ module Aws::IoTEvents
       :alarm_model_version,
       :last_update_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -796,7 +814,8 @@ module Aws::IoTEvents
       :role_arn,
       :tags,
       :evaluation_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +824,8 @@ module Aws::IoTEvents
     #   @return [Types::DetectorModelConfiguration]
     class CreateDetectorModelResponse < Struct.new(
       :detector_model_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -826,7 +846,8 @@ module Aws::IoTEvents
       :input_description,
       :input_definition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +856,8 @@ module Aws::IoTEvents
     #   @return [Types::InputConfiguration]
     class CreateInputResponse < Struct.new(
       :input_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,12 +866,14 @@ module Aws::IoTEvents
     #   @return [String]
     class DeleteAlarmModelRequest < Struct.new(
       :alarm_model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAlarmModelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,12 +882,14 @@ module Aws::IoTEvents
     #   @return [String]
     class DeleteDetectorModelRequest < Struct.new(
       :detector_model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDetectorModelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,12 +898,14 @@ module Aws::IoTEvents
     #   @return [String]
     class DeleteInputRequest < Struct.new(
       :input_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteInputResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +918,8 @@ module Aws::IoTEvents
     class DescribeAlarmModelRequest < Struct.new(
       :alarm_model_name,
       :alarm_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1009,8 @@ module Aws::IoTEvents
       :alarm_notification,
       :alarm_event_actions,
       :alarm_capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -989,7 +1019,8 @@ module Aws::IoTEvents
     #   @return [String]
     class DescribeDetectorModelAnalysisRequest < Struct.new(
       :analysis_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1045,8 @@ module Aws::IoTEvents
     #   @return [String]
     class DescribeDetectorModelAnalysisResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1027,7 +1059,8 @@ module Aws::IoTEvents
     class DescribeDetectorModelRequest < Struct.new(
       :detector_model_name,
       :detector_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1036,7 +1069,8 @@ module Aws::IoTEvents
     #   @return [Types::DetectorModel]
     class DescribeDetectorModelResponse < Struct.new(
       :detector_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1045,7 +1079,8 @@ module Aws::IoTEvents
     #   @return [String]
     class DescribeInputRequest < Struct.new(
       :input_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1054,12 +1089,14 @@ module Aws::IoTEvents
     #   @return [Types::Input]
     class DescribeInputResponse < Struct.new(
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeLoggingOptionsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1105,8 @@ module Aws::IoTEvents
     #   @return [Types::LoggingOptions]
     class DescribeLoggingOptionsResponse < Struct.new(
       :logging_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1122,8 @@ module Aws::IoTEvents
     class DetectorDebugOption < Struct.new(
       :detector_model_name,
       :key_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1098,7 +1137,8 @@ module Aws::IoTEvents
     class DetectorModel < Struct.new(
       :detector_model_definition,
       :detector_model_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1151,7 +1191,8 @@ module Aws::IoTEvents
       :status,
       :key,
       :evaluation_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1206,8 @@ module Aws::IoTEvents
     class DetectorModelDefinition < Struct.new(
       :states,
       :initial_state_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,7 +1225,8 @@ module Aws::IoTEvents
       :detector_model_name,
       :detector_model_description,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1222,7 +1265,8 @@ module Aws::IoTEvents
       :last_update_time,
       :status,
       :evaluation_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,7 +1415,8 @@ module Aws::IoTEvents
       :payload_field,
       :table_name,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1480,8 @@ module Aws::IoTEvents
     class DynamoDBv2Action < Struct.new(
       :table_name,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1506,8 @@ module Aws::IoTEvents
       :from,
       :content,
       :recipients,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1521,8 @@ module Aws::IoTEvents
     class EmailContent < Struct.new(
       :subject,
       :additional_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1487,7 +1535,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::RecipientDetail>]
     class EmailRecipients < Struct.new(
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1508,7 +1557,8 @@ module Aws::IoTEvents
       :event_name,
       :condition,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1580,8 @@ module Aws::IoTEvents
       :delivery_stream_name,
       :separator,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1547,7 +1598,8 @@ module Aws::IoTEvents
       :analysis_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1561,7 +1613,8 @@ module Aws::IoTEvents
     class GetDetectorModelAnalysisResultsResponse < Struct.new(
       :analysis_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1574,7 +1627,8 @@ module Aws::IoTEvents
     #   @return [Boolean]
     class InitializationConfiguration < Struct.new(
       :disabled_on_initialization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1588,7 +1642,8 @@ module Aws::IoTEvents
     class Input < Struct.new(
       :input_configuration,
       :input_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1618,7 +1673,8 @@ module Aws::IoTEvents
       :creation_time,
       :last_update_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1632,7 +1688,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::Attribute>]
     class InputDefinition < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1652,7 +1709,8 @@ module Aws::IoTEvents
     class InputIdentifier < Struct.new(
       :iot_events_input_identifier,
       :iot_site_wise_input_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1682,7 +1740,8 @@ module Aws::IoTEvents
       :creation_time,
       :last_update_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1692,7 +1751,8 @@ module Aws::IoTEvents
     #   @return [String]
     class InternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1702,7 +1762,8 @@ module Aws::IoTEvents
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1717,7 +1778,8 @@ module Aws::IoTEvents
     class IotEventsAction < Struct.new(
       :input_name,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1731,7 +1793,8 @@ module Aws::IoTEvents
     #   @return [String]
     class IotEventsInputIdentifier < Struct.new(
       :input_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1794,7 +1857,8 @@ module Aws::IoTEvents
       :property_id,
       :property_alias,
       :property_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1878,8 @@ module Aws::IoTEvents
     class IotSiteWiseAssetModelPropertyIdentifier < Struct.new(
       :asset_model_id,
       :property_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1828,7 +1893,8 @@ module Aws::IoTEvents
     #   @return [Types::IotSiteWiseAssetModelPropertyIdentifier]
     class IotSiteWiseInputIdentifier < Struct.new(
       :iot_site_wise_asset_model_property_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1911,8 @@ module Aws::IoTEvents
     class IotTopicPublishAction < Struct.new(
       :mqtt_topic,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1860,7 +1927,8 @@ module Aws::IoTEvents
     class LambdaAction < Struct.new(
       :function_arn,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1938,8 @@ module Aws::IoTEvents
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1887,7 +1956,8 @@ module Aws::IoTEvents
       :alarm_model_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1901,7 +1971,8 @@ module Aws::IoTEvents
     class ListAlarmModelVersionsResponse < Struct.new(
       :alarm_model_version_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1914,7 +1985,8 @@ module Aws::IoTEvents
     class ListAlarmModelsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1928,7 +2000,8 @@ module Aws::IoTEvents
     class ListAlarmModelsResponse < Struct.new(
       :alarm_model_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1945,7 +2018,8 @@ module Aws::IoTEvents
       :detector_model_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1959,7 +2033,8 @@ module Aws::IoTEvents
     class ListDetectorModelVersionsResponse < Struct.new(
       :detector_model_version_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1972,7 +2047,8 @@ module Aws::IoTEvents
     class ListDetectorModelsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2062,8 @@ module Aws::IoTEvents
     class ListDetectorModelsResponse < Struct.new(
       :detector_model_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2009,7 +2086,8 @@ module Aws::IoTEvents
       :input_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2027,7 +2105,8 @@ module Aws::IoTEvents
     class ListInputRoutingsResponse < Struct.new(
       :routed_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2040,7 +2119,8 @@ module Aws::IoTEvents
     class ListInputsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2054,7 +2134,8 @@ module Aws::IoTEvents
     class ListInputsResponse < Struct.new(
       :input_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2063,7 +2144,8 @@ module Aws::IoTEvents
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2072,7 +2154,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2095,7 +2178,8 @@ module Aws::IoTEvents
       :level,
       :enabled,
       :detector_debug_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2120,7 +2204,8 @@ module Aws::IoTEvents
       :action,
       :sms_configurations,
       :email_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2132,7 +2217,8 @@ module Aws::IoTEvents
     #   @return [Types::LambdaAction]
     class NotificationTargetActions < Struct.new(
       :lambda_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2144,7 +2230,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::Event>]
     class OnEnterLifecycle < Struct.new(
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2156,7 +2243,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::Event>]
     class OnExitLifecycle < Struct.new(
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2171,7 +2259,8 @@ module Aws::IoTEvents
     class OnInputLifecycle < Struct.new(
       :events,
       :transition_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2283,8 @@ module Aws::IoTEvents
     class Payload < Struct.new(
       :content_expression,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2203,7 +2293,8 @@ module Aws::IoTEvents
     #   @return [Types::LoggingOptions]
     class PutLoggingOptionsRequest < Struct.new(
       :logging_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2213,7 +2304,8 @@ module Aws::IoTEvents
     #   @return [Types::SSOIdentity]
     class RecipientDetail < Struct.new(
       :sso_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2225,7 +2317,8 @@ module Aws::IoTEvents
     #   @return [String]
     class ResetTimerAction < Struct.new(
       :timer_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2243,7 +2336,8 @@ module Aws::IoTEvents
       :message,
       :resource_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2253,7 +2347,8 @@ module Aws::IoTEvents
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2358,8 @@ module Aws::IoTEvents
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2283,7 +2379,8 @@ module Aws::IoTEvents
     class RoutedResource < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2304,7 +2401,8 @@ module Aws::IoTEvents
       :sender_id,
       :additional_message,
       :recipients,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2319,7 +2417,8 @@ module Aws::IoTEvents
     class SNSTopicPublishAction < Struct.new(
       :target_arn,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2335,7 +2434,8 @@ module Aws::IoTEvents
     class SSOIdentity < Struct.new(
       :identity_store_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2345,7 +2445,8 @@ module Aws::IoTEvents
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2370,7 +2471,8 @@ module Aws::IoTEvents
       :timer_name,
       :seconds,
       :duration_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2384,7 +2486,8 @@ module Aws::IoTEvents
     class SetVariableAction < Struct.new(
       :variable_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2404,7 +2507,8 @@ module Aws::IoTEvents
       :input_property,
       :comparison_operator,
       :threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2425,7 +2529,8 @@ module Aws::IoTEvents
       :queue_url,
       :use_base64,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2434,7 +2539,8 @@ module Aws::IoTEvents
     #   @return [Types::DetectorModelDefinition]
     class StartDetectorModelAnalysisRequest < Struct.new(
       :detector_model_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2443,7 +2549,8 @@ module Aws::IoTEvents
     #   @return [String]
     class StartDetectorModelAnalysisResponse < Struct.new(
       :analysis_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2468,7 +2575,8 @@ module Aws::IoTEvents
       :on_input,
       :on_enter,
       :on_exit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2482,7 +2590,8 @@ module Aws::IoTEvents
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2495,12 +2604,14 @@ module Aws::IoTEvents
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2510,7 +2621,8 @@ module Aws::IoTEvents
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2534,7 +2646,8 @@ module Aws::IoTEvents
       :condition,
       :actions,
       :next_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2544,7 +2657,8 @@ module Aws::IoTEvents
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2557,12 +2671,14 @@ module Aws::IoTEvents
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2599,7 +2715,8 @@ module Aws::IoTEvents
       :alarm_notification,
       :alarm_event_actions,
       :alarm_capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2645,7 +2762,8 @@ module Aws::IoTEvents
       :alarm_model_version,
       :last_update_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2671,7 +2789,8 @@ module Aws::IoTEvents
       :detector_model_description,
       :role_arn,
       :evaluation_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2680,7 +2799,8 @@ module Aws::IoTEvents
     #   @return [Types::DetectorModelConfiguration]
     class UpdateDetectorModelResponse < Struct.new(
       :detector_model_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2697,7 +2817,8 @@ module Aws::IoTEvents
       :input_name,
       :input_description,
       :input_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2706,7 +2827,8 @@ module Aws::IoTEvents
     #   @return [Types::InputConfiguration]
     class UpdateInputResponse < Struct.new(
       :input_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

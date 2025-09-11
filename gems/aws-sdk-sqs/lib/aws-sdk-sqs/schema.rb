@@ -749,7 +749,6 @@ module Aws::SQS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
         operation.traits = {}
       end)
-
     end
 
     class << self

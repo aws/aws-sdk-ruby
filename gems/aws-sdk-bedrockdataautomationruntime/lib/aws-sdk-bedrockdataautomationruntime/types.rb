@@ -11,7 +11,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [Types::VideoAssetProcessingConfiguration]
     class AssetProcessingConfiguration < Struct.new(
       :video,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +41,8 @@ module Aws::BedrockDataAutomationRuntime
       :blueprint_arn,
       :version,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53,7 +56,8 @@ module Aws::BedrockDataAutomationRuntime
     class DataAutomationConfiguration < Struct.new(
       :data_automation_project_arn,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +71,8 @@ module Aws::BedrockDataAutomationRuntime
     class EncryptionConfiguration < Struct.new(
       :kms_key_id,
       :kms_encryption_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +82,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [Boolean]
     class EventBridgeConfiguration < Struct.new(
       :event_bridge_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -87,7 +93,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [String]
     class GetDataAutomationStatusRequest < Struct.new(
       :invocation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -109,7 +116,8 @@ module Aws::BedrockDataAutomationRuntime
       :error_type,
       :error_message,
       :output_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +131,8 @@ module Aws::BedrockDataAutomationRuntime
     class InputConfiguration < Struct.new(
       :s3_uri,
       :asset_processing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +141,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +184,8 @@ module Aws::BedrockDataAutomationRuntime
       :blueprints,
       :data_automation_profile_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +195,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [String]
     class InvokeDataAutomationAsyncResponse < Struct.new(
       :invocation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,7 +205,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +215,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +226,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [Types::EventBridgeConfiguration]
     class NotificationConfiguration < Struct.new(
       :event_bridge_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -222,7 +237,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [String]
     class OutputConfiguration < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +247,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +257,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +272,8 @@ module Aws::BedrockDataAutomationRuntime
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,12 +286,14 @@ module Aws::BedrockDataAutomationRuntime
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -281,7 +302,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -295,7 +317,8 @@ module Aws::BedrockDataAutomationRuntime
     class TimestampSegment < Struct.new(
       :start_time_millis,
       :end_time_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,12 +331,14 @@ module Aws::BedrockDataAutomationRuntime
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -322,7 +347,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +358,8 @@ module Aws::BedrockDataAutomationRuntime
     #   @return [Types::VideoSegmentConfiguration]
     class VideoAssetProcessingConfiguration < Struct.new(
       :segment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,7 +370,8 @@ module Aws::BedrockDataAutomationRuntime
     class VideoSegmentConfiguration < Struct.new(
       :timestamp_segment,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TimestampSegment < VideoSegmentConfiguration; end

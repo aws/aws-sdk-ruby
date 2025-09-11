@@ -48,7 +48,6 @@ module Aws::Route53RecoveryControlConfig
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

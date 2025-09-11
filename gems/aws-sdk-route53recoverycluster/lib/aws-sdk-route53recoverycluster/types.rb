@@ -11,7 +11,8 @@ module Aws::Route53RecoveryCluster
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::Route53RecoveryCluster
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::Route53RecoveryCluster
     #   @return [String]
     class EndpointTemporarilyUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +50,8 @@ module Aws::Route53RecoveryCluster
     #   @return [String]
     class GetRoutingControlStateRequest < Struct.new(
       :routing_control_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +68,8 @@ module Aws::Route53RecoveryCluster
       :routing_control_arn,
       :routing_control_state,
       :routing_control_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +82,8 @@ module Aws::Route53RecoveryCluster
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -99,7 +105,8 @@ module Aws::Route53RecoveryCluster
       :control_panel_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +119,8 @@ module Aws::Route53RecoveryCluster
     class ListRoutingControlsResponse < Struct.new(
       :routing_controls,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,7 +137,8 @@ module Aws::Route53RecoveryCluster
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +172,8 @@ module Aws::Route53RecoveryCluster
       :routing_control_name,
       :routing_control_state,
       :owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -188,7 +198,8 @@ module Aws::Route53RecoveryCluster
       :resource_type,
       :limit_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +212,8 @@ module Aws::Route53RecoveryCluster
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -220,7 +232,8 @@ module Aws::Route53RecoveryCluster
     class UpdateRoutingControlStateEntry < Struct.new(
       :routing_control_arn,
       :routing_control_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,12 +254,14 @@ module Aws::Route53RecoveryCluster
       :routing_control_arn,
       :routing_control_state,
       :safety_rules_to_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateRoutingControlStateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,12 +278,14 @@ module Aws::Route53RecoveryCluster
     class UpdateRoutingControlStatesRequest < Struct.new(
       :update_routing_control_state_entries,
       :safety_rules_to_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateRoutingControlStatesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +302,8 @@ module Aws::Route53RecoveryCluster
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +317,8 @@ module Aws::Route53RecoveryCluster
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

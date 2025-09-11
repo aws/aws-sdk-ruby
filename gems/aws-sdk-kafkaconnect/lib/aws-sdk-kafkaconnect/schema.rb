@@ -794,7 +794,6 @@ module Aws::KafkaConnect
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/connectors/{connectorArn}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

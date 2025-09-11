@@ -41,7 +41,7 @@ module Aws::CloudHSMV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudHSMV2::Types::CloudHsmAccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::CloudHSMV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudHSMV2::Types::CloudHsmInternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::CloudHSMV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudHSMV2::Types::CloudHsmInvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::CloudHSMV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudHSMV2::Types::CloudHsmResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::CloudHSMV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudHSMV2::Types::CloudHsmResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::CloudHSMV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudHSMV2::Types::CloudHsmServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::CloudHSMV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudHSMV2::Types::CloudHsmTagException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

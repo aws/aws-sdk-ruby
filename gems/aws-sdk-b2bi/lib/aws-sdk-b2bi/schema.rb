@@ -1467,7 +1467,6 @@ module Aws::B2bi
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#requiredActions" => ["b2bi:TagResource", "b2bi:UntagResource"], "smithy.api#http" => {"code" => 200, "uri" => "/transformers/{transformerId}", "method" => "PATCH"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

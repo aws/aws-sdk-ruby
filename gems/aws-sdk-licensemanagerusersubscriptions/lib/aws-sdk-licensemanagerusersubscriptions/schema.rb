@@ -552,7 +552,6 @@ module Aws::LicenseManagerUserSubscriptions
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/identity-provider/UpdateIdentityProviderSettings"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

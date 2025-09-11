@@ -212,7 +212,6 @@ module Aws::Pricing
         operation.traits = {}
         operation[:paginator] = Paginators::ListPriceLists.new
       end)
-
     end
 
     class << self

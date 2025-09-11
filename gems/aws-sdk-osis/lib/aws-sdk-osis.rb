@@ -7,7 +7,6 @@ require 'aws-sdk-core'
 require 'smithy-json'
 require 'smithy-client'
 
-
 Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('OSIS', Module.new) unless Aws.const_defined?('OSIS')
 

@@ -11,7 +11,8 @@ module Aws::ControlCatalog
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::ControlCatalog
     class AssociatedDomainSummary < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +41,8 @@ module Aws::ControlCatalog
     class AssociatedObjectiveSummary < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +52,8 @@ module Aws::ControlCatalog
     #   @return [Array<Types::ObjectiveResourceFilter>]
     class CommonControlFilter < Struct.new(
       :objectives,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +63,8 @@ module Aws::ControlCatalog
     #   @return [String]
     class CommonControlMappingDetails < Struct.new(
       :common_control_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +98,8 @@ module Aws::ControlCatalog
       :objective,
       :create_time,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +109,8 @@ module Aws::ControlCatalog
     #   @return [Types::ImplementationFilter]
     class ControlFilter < Struct.new(
       :implementations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +128,8 @@ module Aws::ControlCatalog
       :control_arn,
       :mapping_type,
       :mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,7 +147,8 @@ module Aws::ControlCatalog
       :control_arns,
       :common_control_arns,
       :mapping_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +158,8 @@ module Aws::ControlCatalog
     #   @return [String]
     class ControlParameter < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +201,8 @@ module Aws::ControlCatalog
       :implementation,
       :create_time,
       :governed_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +212,8 @@ module Aws::ControlCatalog
     #   @return [String]
     class DomainResourceFilter < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +239,8 @@ module Aws::ControlCatalog
       :description,
       :create_time,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +254,8 @@ module Aws::ControlCatalog
     class FrameworkMappingDetails < Struct.new(
       :name,
       :item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +264,8 @@ module Aws::ControlCatalog
     #   @return [String]
     class GetControlRequest < Struct.new(
       :control_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +314,8 @@ module Aws::ControlCatalog
       :parameters,
       :create_time,
       :governed_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,7 +329,8 @@ module Aws::ControlCatalog
     class ImplementationDetails < Struct.new(
       :type,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +344,8 @@ module Aws::ControlCatalog
     class ImplementationFilter < Struct.new(
       :types,
       :identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +359,8 @@ module Aws::ControlCatalog
     class ImplementationSummary < Struct.new(
       :type,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +369,8 @@ module Aws::ControlCatalog
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,7 +387,8 @@ module Aws::ControlCatalog
       :max_results,
       :next_token,
       :common_control_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -380,7 +401,8 @@ module Aws::ControlCatalog
     class ListCommonControlsResponse < Struct.new(
       :common_controls,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -397,7 +419,8 @@ module Aws::ControlCatalog
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +433,8 @@ module Aws::ControlCatalog
     class ListControlMappingsResponse < Struct.new(
       :control_mappings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +451,8 @@ module Aws::ControlCatalog
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +465,8 @@ module Aws::ControlCatalog
     class ListControlsResponse < Struct.new(
       :controls,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +479,8 @@ module Aws::ControlCatalog
     class ListDomainsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +493,8 @@ module Aws::ControlCatalog
     class ListDomainsResponse < Struct.new(
       :domains,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +511,8 @@ module Aws::ControlCatalog
       :max_results,
       :next_token,
       :objective_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +525,8 @@ module Aws::ControlCatalog
     class ListObjectivesResponse < Struct.new(
       :objectives,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -511,7 +541,8 @@ module Aws::ControlCatalog
       :framework,
       :common_control,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Framework < Mapping; end
@@ -525,7 +556,8 @@ module Aws::ControlCatalog
     #   @return [Array<Types::DomainResourceFilter>]
     class ObjectiveFilter < Struct.new(
       :domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +567,8 @@ module Aws::ControlCatalog
     #   @return [String]
     class ObjectiveResourceFilter < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -565,7 +598,8 @@ module Aws::ControlCatalog
       :domain,
       :create_time,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,7 +613,8 @@ module Aws::ControlCatalog
     class RegionConfiguration < Struct.new(
       :scope,
       :deployable_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +623,8 @@ module Aws::ControlCatalog
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +633,8 @@ module Aws::ControlCatalog
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +643,8 @@ module Aws::ControlCatalog
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -40,7 +40,7 @@ module Aws::AuditManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AuditManager::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::AuditManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AuditManager::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::AuditManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AuditManager::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::AuditManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AuditManager::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::AuditManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AuditManager::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::AuditManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AuditManager::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

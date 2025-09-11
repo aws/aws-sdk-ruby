@@ -40,7 +40,7 @@ module Aws::APIGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::APIGateway::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::APIGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::APIGateway::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::APIGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::APIGateway::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def retry_after_seconds
@@ -83,7 +83,7 @@ module Aws::APIGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::APIGateway::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::APIGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::APIGateway::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def retry_after_seconds
@@ -113,7 +113,7 @@ module Aws::APIGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::APIGateway::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def retry_after_seconds
@@ -130,7 +130,7 @@ module Aws::APIGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::APIGateway::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -769,7 +769,6 @@ module Aws::ResourceGroups
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/update-group-query", "code" => 200}}
       end)
-
     end
 
     class << self

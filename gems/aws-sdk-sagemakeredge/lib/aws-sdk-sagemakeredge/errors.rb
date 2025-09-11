@@ -35,7 +35,7 @@ module Aws::SagemakerEdge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SagemakerEdge::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

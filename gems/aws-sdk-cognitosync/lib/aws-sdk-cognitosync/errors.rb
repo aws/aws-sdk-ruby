@@ -46,7 +46,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::AlreadyStreamedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # The message associated with the AlreadyStreamedException exception.
@@ -60,7 +60,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message returned by a ConcurrentModicationException.</p>
@@ -74,7 +74,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::DuplicateRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # The message associated with the DuplicateRequestException exception.
@@ -89,7 +89,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::InternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Message returned by
@@ -104,7 +104,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::InvalidConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Message returned by
@@ -119,7 +119,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::InvalidLambdaFunctionOutputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message returned when an InvalidLambdaFunctionOutputException occurs</p>
@@ -134,7 +134,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Message returned by
@@ -149,7 +149,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::LambdaThrottledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message returned when an LambdaThrottledException is thrown</p>
@@ -164,7 +164,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Message returned by
@@ -180,7 +180,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::NotAuthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # The message returned by a
@@ -196,7 +196,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::ResourceConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # The message returned by a
@@ -212,7 +212,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Message returned by a
@@ -228,7 +228,7 @@ module Aws::CognitoSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoSync::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Message returned by a

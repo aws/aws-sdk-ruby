@@ -1198,7 +1198,6 @@ module Aws::CodeCatalyst
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/session", "code" => 200}, "smithy.api#readonly" => {}}
       end)
-
     end
 
     class << self

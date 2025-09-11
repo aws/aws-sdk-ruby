@@ -40,7 +40,7 @@ module Aws::Notifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Notifications::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::Notifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Notifications::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::Notifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Notifications::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -88,7 +88,7 @@ module Aws::Notifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Notifications::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::Notifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Notifications::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::Notifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Notifications::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -175,7 +175,7 @@ module Aws::Notifications
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Notifications::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -11,7 +11,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +42,8 @@ module Aws::TimestreamWrite
       :record_ingestion_failures,
       :file_failures,
       :bytes_metered,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -86,7 +88,8 @@ module Aws::TimestreamWrite
       :creation_time,
       :last_updated_time,
       :resumable_until,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +150,8 @@ module Aws::TimestreamWrite
       :creation_time,
       :last_updated_time,
       :resumable_until,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -162,7 +166,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +201,8 @@ module Aws::TimestreamWrite
       :target_database_name,
       :target_table_name,
       :record_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +211,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class CreateBatchLoadTaskResponse < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +230,8 @@ module Aws::TimestreamWrite
       :database_name,
       :kms_key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +240,8 @@ module Aws::TimestreamWrite
     #   @return [Types::Database]
     class CreateDatabaseResponse < Struct.new(
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +271,8 @@ module Aws::TimestreamWrite
       :tags,
       :magnetic_store_write_properties,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +281,8 @@ module Aws::TimestreamWrite
     #   @return [Types::Table]
     class CreateTableResponse < Struct.new(
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +310,8 @@ module Aws::TimestreamWrite
       :quote_char,
       :null_value,
       :trim_white_space,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -331,7 +343,8 @@ module Aws::TimestreamWrite
       :multi_measure_mappings,
       :mixed_measure_mappings,
       :measure_name_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +358,8 @@ module Aws::TimestreamWrite
     class DataModelConfiguration < Struct.new(
       :data_model,
       :data_model_s3_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +373,8 @@ module Aws::TimestreamWrite
     class DataModelS3Configuration < Struct.new(
       :bucket_name,
       :object_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +393,8 @@ module Aws::TimestreamWrite
       :data_source_s3_configuration,
       :csv_configuration,
       :data_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +410,8 @@ module Aws::TimestreamWrite
     class DataSourceS3Configuration < Struct.new(
       :bucket_name,
       :object_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +444,8 @@ module Aws::TimestreamWrite
       :kms_key_id,
       :creation_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -441,7 +459,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class DeleteDatabaseRequest < Struct.new(
       :database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +473,8 @@ module Aws::TimestreamWrite
     class DeleteTableRequest < Struct.new(
       :database_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -463,7 +483,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class DescribeBatchLoadTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +493,8 @@ module Aws::TimestreamWrite
     #   @return [Types::BatchLoadTaskDescription]
     class DescribeBatchLoadTaskResponse < Struct.new(
       :batch_load_task_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -481,7 +503,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class DescribeDatabaseRequest < Struct.new(
       :database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,12 +513,14 @@ module Aws::TimestreamWrite
     #   @return [Types::Database]
     class DescribeDatabaseResponse < Struct.new(
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeEndpointsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +530,8 @@ module Aws::TimestreamWrite
     #   @return [Array<Types::Endpoint>]
     class DescribeEndpointsResponse < Struct.new(
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +544,8 @@ module Aws::TimestreamWrite
     class DescribeTableRequest < Struct.new(
       :database_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +554,8 @@ module Aws::TimestreamWrite
     #   @return [Types::Table]
     class DescribeTableResponse < Struct.new(
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +579,8 @@ module Aws::TimestreamWrite
       :name,
       :value,
       :dimension_value_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -566,7 +595,8 @@ module Aws::TimestreamWrite
     class DimensionMapping < Struct.new(
       :source_column,
       :destination_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +611,8 @@ module Aws::TimestreamWrite
     class Endpoint < Struct.new(
       :address,
       :cache_period_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -597,7 +628,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +638,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class InvalidEndpointException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +660,8 @@ module Aws::TimestreamWrite
       :next_token,
       :max_results,
       :task_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +675,8 @@ module Aws::TimestreamWrite
     class ListBatchLoadTasksResponse < Struct.new(
       :next_token,
       :batch_load_tasks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -658,7 +693,8 @@ module Aws::TimestreamWrite
     class ListDatabasesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +707,8 @@ module Aws::TimestreamWrite
     class ListDatabasesResponse < Struct.new(
       :databases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +729,8 @@ module Aws::TimestreamWrite
       :database_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +744,8 @@ module Aws::TimestreamWrite
     class ListTablesResponse < Struct.new(
       :tables,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -716,7 +755,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -725,7 +765,8 @@ module Aws::TimestreamWrite
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,7 +778,8 @@ module Aws::TimestreamWrite
     #   @return [Types::S3Configuration]
     class MagneticStoreRejectedDataLocation < Struct.new(
       :s3_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +794,8 @@ module Aws::TimestreamWrite
     class MagneticStoreWriteProperties < Struct.new(
       :enable_magnetic_store_writes,
       :magnetic_store_rejected_data_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +820,8 @@ module Aws::TimestreamWrite
       :name,
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +847,8 @@ module Aws::TimestreamWrite
       :target_measure_name,
       :measure_value_type,
       :multi_measure_attribute_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -821,7 +866,8 @@ module Aws::TimestreamWrite
       :source_column,
       :target_multi_measure_attribute_name,
       :measure_value_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +881,8 @@ module Aws::TimestreamWrite
     class MultiMeasureMappings < Struct.new(
       :target_multi_measure_name,
       :multi_measure_attribute_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +906,8 @@ module Aws::TimestreamWrite
       :type,
       :name,
       :enforcement_in_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +976,8 @@ module Aws::TimestreamWrite
       :time_unit,
       :version,
       :measure_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -951,7 +1000,8 @@ module Aws::TimestreamWrite
       :total,
       :memory_store,
       :magnetic_store,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1020,7 +1070,8 @@ module Aws::TimestreamWrite
       :record_index,
       :reason,
       :existing_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1069,7 +1120,8 @@ module Aws::TimestreamWrite
     class RejectedRecordsException < Struct.new(
       :message,
       :rejected_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1133,8 @@ module Aws::TimestreamWrite
     #   @return [Types::ReportS3Configuration]
     class ReportConfiguration < Struct.new(
       :report_s3_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1156,8 @@ module Aws::TimestreamWrite
       :object_key_prefix,
       :encryption_option,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1113,7 +1167,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1122,12 +1177,14 @@ module Aws::TimestreamWrite
     #   @return [String]
     class ResumeBatchLoadTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ResumeBatchLoadTaskResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1142,7 +1199,8 @@ module Aws::TimestreamWrite
     class RetentionProperties < Struct.new(
       :memory_store_retention_period_in_hours,
       :magnetic_store_retention_period_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1166,7 +1224,8 @@ module Aws::TimestreamWrite
       :object_key_prefix,
       :encryption_option,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1238,8 @@ module Aws::TimestreamWrite
     #   @return [Array<Types::PartitionKey>]
     class Schema < Struct.new(
       :composite_partition_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1188,7 +1248,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1303,8 @@ module Aws::TimestreamWrite
       :last_updated_time,
       :magnetic_store_write_properties,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1258,7 +1320,8 @@ module Aws::TimestreamWrite
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1272,12 +1335,14 @@ module Aws::TimestreamWrite
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1287,7 +1352,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,12 +1368,14 @@ module Aws::TimestreamWrite
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1412,8 @@ module Aws::TimestreamWrite
     class UpdateDatabaseRequest < Struct.new(
       :database_name,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1355,7 +1424,8 @@ module Aws::TimestreamWrite
     #   @return [Types::Database]
     class UpdateDatabaseResponse < Struct.new(
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1380,7 +1450,8 @@ module Aws::TimestreamWrite
       :retention_properties,
       :magnetic_store_write_properties,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1460,8 @@ module Aws::TimestreamWrite
     #   @return [Types::Table]
     class UpdateTableResponse < Struct.new(
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1470,8 @@ module Aws::TimestreamWrite
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1425,7 +1498,8 @@ module Aws::TimestreamWrite
       :table_name,
       :common_attributes,
       :records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1434,7 +1508,8 @@ module Aws::TimestreamWrite
     #   @return [Types::RecordsIngested]
     class WriteRecordsResponse < Struct.new(
       :records_ingested,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

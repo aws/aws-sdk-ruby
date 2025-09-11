@@ -11,7 +11,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +38,8 @@ module Aws::BCMDashboards
       :granularity,
       :group_by,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +57,8 @@ module Aws::BCMDashboards
       :key,
       :values,
       :match_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +79,8 @@ module Aws::BCMDashboards
       :description,
       :widgets,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +89,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class CreateDashboardResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +120,8 @@ module Aws::BCMDashboards
       :type,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,7 +135,8 @@ module Aws::BCMDashboards
     class DateTimeRange < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +150,8 @@ module Aws::BCMDashboards
     class DateTimeValue < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +160,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class DeleteDashboardRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +170,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class DeleteDashboardResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,7 +189,8 @@ module Aws::BCMDashboards
       :key,
       :values,
       :match_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,7 +205,8 @@ module Aws::BCMDashboards
       :graph,
       :table,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Graph < DisplayConfig; end
@@ -228,7 +240,8 @@ module Aws::BCMDashboards
       :dimensions,
       :tags,
       :cost_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -237,7 +250,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class GetDashboardRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +284,8 @@ module Aws::BCMDashboards
       :widgets,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +294,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +308,8 @@ module Aws::BCMDashboards
     class GetResourcePolicyResponse < Struct.new(
       :resource_arn,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +319,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class GraphDisplayConfig < Struct.new(
       :visual_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +334,8 @@ module Aws::BCMDashboards
     class GroupDefinition < Struct.new(
       :key,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -330,7 +349,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,7 +363,8 @@ module Aws::BCMDashboards
     class ListDashboardsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -356,7 +377,8 @@ module Aws::BCMDashboards
     class ListDashboardsResponse < Struct.new(
       :dashboards,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +387,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +397,8 @@ module Aws::BCMDashboards
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +425,8 @@ module Aws::BCMDashboards
       :reservation_coverage,
       :reservation_utilization,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CostAndUsage < QueryParameters; end
@@ -434,7 +459,8 @@ module Aws::BCMDashboards
       :granularity,
       :filter,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +482,8 @@ module Aws::BCMDashboards
       :group_by,
       :granularity,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -465,7 +492,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +507,8 @@ module Aws::BCMDashboards
     class ResourceTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +534,8 @@ module Aws::BCMDashboards
       :granularity,
       :group_by,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,7 +553,8 @@ module Aws::BCMDashboards
       :time_range,
       :granularity,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,13 +563,15 @@ module Aws::BCMDashboards
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration structure for customizing the tabular display of widget data.</p>
     class TableDisplayConfigStruct < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,12 +584,14 @@ module Aws::BCMDashboards
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +609,8 @@ module Aws::BCMDashboards
       :key,
       :values,
       :match_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +619,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,12 +633,14 @@ module Aws::BCMDashboards
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :resource_tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +661,8 @@ module Aws::BCMDashboards
       :name,
       :description,
       :widgets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,7 +671,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class UpdateDashboardResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +681,8 @@ module Aws::BCMDashboards
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +712,8 @@ module Aws::BCMDashboards
       :height,
       :horizontal_offset,
       :configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -691,7 +734,8 @@ module Aws::BCMDashboards
     class WidgetConfig < Struct.new(
       :query_parameters,
       :display_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

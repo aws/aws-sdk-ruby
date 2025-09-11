@@ -50,7 +50,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -63,7 +63,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::ConditionalCheckFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -89,7 +89,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -102,7 +102,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -141,7 +141,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -154,7 +154,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::ResourceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -180,7 +180,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::RetryLatestCommitFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -193,7 +193,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::SyncBlockerDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -206,7 +206,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::SyncConfigurationStillExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -219,7 +219,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -232,7 +232,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -245,7 +245,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::UnsupportedProviderTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -258,7 +258,7 @@ module Aws::CodeConnections
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeConnections::Types::UpdateOutOfSyncException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

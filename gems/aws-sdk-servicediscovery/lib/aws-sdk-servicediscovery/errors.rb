@@ -49,7 +49,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::CustomHealthNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::DuplicateRequest] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::InstanceNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::InvalidInput] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::NamespaceAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -132,7 +132,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::NamespaceNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -145,7 +145,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::OperationNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -160,7 +160,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::RequestLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -174,7 +174,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::ResourceInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -188,7 +188,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::ResourceLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -201,7 +201,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -214,7 +214,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::ServiceAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -243,7 +243,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::ServiceAttributesLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -256,7 +256,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::ServiceNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -270,7 +270,7 @@ module Aws::ServiceDiscovery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

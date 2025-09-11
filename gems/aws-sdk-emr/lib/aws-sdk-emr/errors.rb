@@ -37,7 +37,7 @@ module Aws::EMR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EMR::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -47,7 +47,7 @@ module Aws::EMR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EMR::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message associated with the exception.</p>
@@ -61,7 +61,7 @@ module Aws::EMR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EMR::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error code associated with the exception.</p>

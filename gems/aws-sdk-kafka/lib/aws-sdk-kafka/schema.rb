@@ -1804,7 +1804,6 @@ module Aws::Kafka
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/clusters/{ClusterArn}/storage", "code" => 200}}
       end)
-
     end
 
     class << self

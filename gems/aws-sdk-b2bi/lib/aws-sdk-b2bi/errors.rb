@@ -40,7 +40,7 @@ module Aws::B2bi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::B2bi::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::B2bi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::B2bi::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::B2bi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::B2bi::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -88,7 +88,7 @@ module Aws::B2bi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::B2bi::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::B2bi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::B2bi::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -134,7 +134,7 @@ module Aws::B2bi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::B2bi::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::B2bi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::B2bi::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

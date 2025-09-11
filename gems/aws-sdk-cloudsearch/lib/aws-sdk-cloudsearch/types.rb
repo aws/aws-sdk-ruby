@@ -16,7 +16,8 @@ module Aws::CloudSearch
     class AccessPoliciesStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42,7 +43,8 @@ module Aws::CloudSearch
       :stemming_dictionary,
       :japanese_tokenization_dictionary,
       :algorithmic_stemming,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +63,8 @@ module Aws::CloudSearch
       :analysis_scheme_name,
       :analysis_scheme_language,
       :analysis_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +78,8 @@ module Aws::CloudSearch
     class AnalysisSchemeStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +93,8 @@ module Aws::CloudSearch
     class AvailabilityOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -108,7 +113,8 @@ module Aws::CloudSearch
     class BaseException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -118,7 +124,8 @@ module Aws::CloudSearch
     #   @return [String]
     class BuildSuggestersRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +135,8 @@ module Aws::CloudSearch
     #   @return [Array<String>]
     class BuildSuggestersResponse < Struct.new(
       :field_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -138,7 +146,8 @@ module Aws::CloudSearch
     #   @return [String]
     class CreateDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +157,8 @@ module Aws::CloudSearch
     #   @return [Types::DomainStatus]
     class CreateDomainResponse < Struct.new(
       :domain_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +184,8 @@ module Aws::CloudSearch
       :facet_enabled,
       :search_enabled,
       :return_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +228,8 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       :sort_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +243,8 @@ module Aws::CloudSearch
     class DefineAnalysisSchemeRequest < Struct.new(
       :domain_name,
       :analysis_scheme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +254,8 @@ module Aws::CloudSearch
     #   @return [Types::AnalysisSchemeStatus]
     class DefineAnalysisSchemeResponse < Struct.new(
       :analysis_scheme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -255,7 +269,8 @@ module Aws::CloudSearch
     class DefineExpressionRequest < Struct.new(
       :domain_name,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +280,8 @@ module Aws::CloudSearch
     #   @return [Types::ExpressionStatus]
     class DefineExpressionResponse < Struct.new(
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +295,8 @@ module Aws::CloudSearch
     class DefineIndexFieldRequest < Struct.new(
       :domain_name,
       :index_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +306,8 @@ module Aws::CloudSearch
     #   @return [Types::IndexFieldStatus]
     class DefineIndexFieldResponse < Struct.new(
       :index_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +321,8 @@ module Aws::CloudSearch
     class DefineSuggesterRequest < Struct.new(
       :domain_name,
       :suggester,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,7 +332,8 @@ module Aws::CloudSearch
     #   @return [Types::SuggesterStatus]
     class DefineSuggesterResponse < Struct.new(
       :suggester,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +347,8 @@ module Aws::CloudSearch
     class DeleteAnalysisSchemeRequest < Struct.new(
       :domain_name,
       :analysis_scheme_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,7 +358,8 @@ module Aws::CloudSearch
     #   @return [Types::AnalysisSchemeStatus]
     class DeleteAnalysisSchemeResponse < Struct.new(
       :analysis_scheme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +369,8 @@ module Aws::CloudSearch
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -357,7 +380,8 @@ module Aws::CloudSearch
     #   @return [Types::DomainStatus]
     class DeleteDomainResponse < Struct.new(
       :domain_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +395,8 @@ module Aws::CloudSearch
     class DeleteExpressionRequest < Struct.new(
       :domain_name,
       :expression_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +406,8 @@ module Aws::CloudSearch
     #   @return [Types::ExpressionStatus]
     class DeleteExpressionResponse < Struct.new(
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +421,8 @@ module Aws::CloudSearch
     class DeleteIndexFieldRequest < Struct.new(
       :domain_name,
       :index_field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +432,8 @@ module Aws::CloudSearch
     #   @return [Types::IndexFieldStatus]
     class DeleteIndexFieldResponse < Struct.new(
       :index_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +447,8 @@ module Aws::CloudSearch
     class DeleteSuggesterRequest < Struct.new(
       :domain_name,
       :suggester_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -429,7 +458,8 @@ module Aws::CloudSearch
     #   @return [Types::SuggesterStatus]
     class DeleteSuggesterResponse < Struct.new(
       :suggester,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +477,8 @@ module Aws::CloudSearch
       :domain_name,
       :analysis_scheme_names,
       :deployed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +488,8 @@ module Aws::CloudSearch
     #   @return [Array<Types::AnalysisSchemeStatus>]
     class DescribeAnalysisSchemesResponse < Struct.new(
       :analysis_schemes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +503,8 @@ module Aws::CloudSearch
     class DescribeAvailabilityOptionsRequest < Struct.new(
       :domain_name,
       :deployed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -481,7 +514,8 @@ module Aws::CloudSearch
     #   @return [Types::AvailabilityOptionsStatus]
     class DescribeAvailabilityOptionsResponse < Struct.new(
       :availability_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +529,8 @@ module Aws::CloudSearch
     class DescribeDomainEndpointOptionsRequest < Struct.new(
       :domain_name,
       :deployed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +540,8 @@ module Aws::CloudSearch
     #   @return [Types::DomainEndpointOptionsStatus]
     class DescribeDomainEndpointOptionsResponse < Struct.new(
       :domain_endpoint_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +551,8 @@ module Aws::CloudSearch
     #   @return [Array<String>]
     class DescribeDomainsRequest < Struct.new(
       :domain_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +562,8 @@ module Aws::CloudSearch
     #   @return [Array<Types::DomainStatus>]
     class DescribeDomainsResponse < Struct.new(
       :domain_status_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +582,8 @@ module Aws::CloudSearch
       :domain_name,
       :expression_names,
       :deployed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +593,8 @@ module Aws::CloudSearch
     #   @return [Array<Types::ExpressionStatus>]
     class DescribeExpressionsResponse < Struct.new(
       :expressions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +612,8 @@ module Aws::CloudSearch
       :domain_name,
       :field_names,
       :deployed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -582,7 +623,8 @@ module Aws::CloudSearch
     #   @return [Array<Types::IndexFieldStatus>]
     class DescribeIndexFieldsResponse < Struct.new(
       :index_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -592,7 +634,8 @@ module Aws::CloudSearch
     #   @return [String]
     class DescribeScalingParametersRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -602,7 +645,8 @@ module Aws::CloudSearch
     #   @return [Types::ScalingParametersStatus]
     class DescribeScalingParametersResponse < Struct.new(
       :scaling_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +660,8 @@ module Aws::CloudSearch
     class DescribeServiceAccessPoliciesRequest < Struct.new(
       :domain_name,
       :deployed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +671,8 @@ module Aws::CloudSearch
     #   @return [Types::AccessPoliciesStatus]
     class DescribeServiceAccessPoliciesResponse < Struct.new(
       :access_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +690,8 @@ module Aws::CloudSearch
       :domain_name,
       :suggester_names,
       :deployed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +701,8 @@ module Aws::CloudSearch
     #   @return [Array<Types::SuggesterStatus>]
     class DescribeSuggestersResponse < Struct.new(
       :suggesters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +716,8 @@ module Aws::CloudSearch
     class DisabledOperationException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +741,8 @@ module Aws::CloudSearch
       :source_field,
       :fuzzy_matching,
       :sort_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +756,8 @@ module Aws::CloudSearch
     class DomainEndpointOptions < Struct.new(
       :enforce_https,
       :tls_security_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +771,8 @@ module Aws::CloudSearch
     class DomainEndpointOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +829,8 @@ module Aws::CloudSearch
       :search_partition_count,
       :search_instance_count,
       :limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +856,8 @@ module Aws::CloudSearch
       :facet_enabled,
       :search_enabled,
       :return_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -833,7 +887,8 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       :sort_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +903,8 @@ module Aws::CloudSearch
     class Expression < Struct.new(
       :expression_name,
       :expression_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +918,8 @@ module Aws::CloudSearch
     class ExpressionStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,7 +929,8 @@ module Aws::CloudSearch
     #   @return [String]
     class IndexDocumentsRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,7 +940,8 @@ module Aws::CloudSearch
     #   @return [Array<String>]
     class IndexDocumentsResponse < Struct.new(
       :field_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +1012,8 @@ module Aws::CloudSearch
       :literal_array_options,
       :text_array_options,
       :date_array_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1027,8 @@ module Aws::CloudSearch
     class IndexFieldStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,7 +1054,8 @@ module Aws::CloudSearch
       :facet_enabled,
       :search_enabled,
       :return_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1023,7 +1085,8 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       :sort_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1101,8 @@ module Aws::CloudSearch
     class InternalException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1116,8 @@ module Aws::CloudSearch
     class InvalidTypeException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1095,7 +1160,8 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       :sort_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1109,7 +1175,8 @@ module Aws::CloudSearch
     class LimitExceededException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,7 +1187,8 @@ module Aws::CloudSearch
     class Limits < Struct.new(
       :maximum_replication_count,
       :maximum_partition_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1130,7 +1198,8 @@ module Aws::CloudSearch
     #   @return [Hash<String, String>]
     class ListDomainNamesResponse < Struct.new(
       :domain_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1156,7 +1225,8 @@ module Aws::CloudSearch
       :facet_enabled,
       :search_enabled,
       :return_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1269,8 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       :sort_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1230,7 +1301,8 @@ module Aws::CloudSearch
       :update_version,
       :state,
       :pending_deletion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1249,7 +1321,8 @@ module Aws::CloudSearch
     class ResourceAlreadyExistsException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1336,8 @@ module Aws::CloudSearch
     class ResourceNotFoundException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1282,7 +1356,8 @@ module Aws::CloudSearch
       :desired_instance_type,
       :desired_replication_count,
       :desired_partition_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1302,7 +1377,8 @@ module Aws::CloudSearch
     class ScalingParametersStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1388,8 @@ module Aws::CloudSearch
     #   @return [String]
     class ServiceEndpoint < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1327,7 +1404,8 @@ module Aws::CloudSearch
     class Suggester < Struct.new(
       :suggester_name,
       :document_suggester_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1341,7 +1419,8 @@ module Aws::CloudSearch
     class SuggesterStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1446,8 @@ module Aws::CloudSearch
       :return_enabled,
       :highlight_enabled,
       :analysis_scheme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1410,7 +1490,8 @@ module Aws::CloudSearch
       :sort_enabled,
       :highlight_enabled,
       :analysis_scheme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1424,7 +1505,8 @@ module Aws::CloudSearch
     class UpdateAvailabilityOptionsRequest < Struct.new(
       :domain_name,
       :multi_az,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1434,7 +1516,8 @@ module Aws::CloudSearch
     #   @return [Types::AvailabilityOptionsStatus]
     class UpdateAvailabilityOptionsResponse < Struct.new(
       :availability_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1448,7 +1531,8 @@ module Aws::CloudSearch
     class UpdateDomainEndpointOptionsRequest < Struct.new(
       :domain_name,
       :domain_endpoint_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1458,7 +1542,8 @@ module Aws::CloudSearch
     #   @return [Types::DomainEndpointOptionsStatus]
     class UpdateDomainEndpointOptionsResponse < Struct.new(
       :domain_endpoint_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1472,7 +1557,8 @@ module Aws::CloudSearch
     class UpdateScalingParametersRequest < Struct.new(
       :domain_name,
       :scaling_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1482,7 +1568,8 @@ module Aws::CloudSearch
     #   @return [Types::ScalingParametersStatus]
     class UpdateScalingParametersResponse < Struct.new(
       :scaling_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1496,7 +1583,8 @@ module Aws::CloudSearch
     class UpdateServiceAccessPoliciesRequest < Struct.new(
       :domain_name,
       :access_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1506,7 +1594,8 @@ module Aws::CloudSearch
     #   @return [Types::AccessPoliciesStatus]
     class UpdateServiceAccessPoliciesResponse < Struct.new(
       :access_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1520,7 +1609,8 @@ module Aws::CloudSearch
     class ValidationException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

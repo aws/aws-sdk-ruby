@@ -17,7 +17,8 @@ module Aws::BedrockAgent
       :s3,
       :payload,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < APISchema; end
@@ -30,7 +31,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +47,8 @@ module Aws::BedrockAgent
       :lambda,
       :custom_control,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Lambda < ActionGroupExecutor; end
@@ -75,7 +78,8 @@ module Aws::BedrockAgent
       :action_group_state,
       :description,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +177,8 @@ module Aws::BedrockAgent
       :guardrail_configuration,
       :memory_configuration,
       :agent_collaboration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +240,8 @@ module Aws::BedrockAgent
       :api_schema,
       :function_schema,
       :action_group_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +299,8 @@ module Aws::BedrockAgent
       :agent_alias_status,
       :failure_reasons,
       :alias_invocation_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +318,8 @@ module Aws::BedrockAgent
       :routing_configuration,
       :end_date,
       :start_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +333,8 @@ module Aws::BedrockAgent
     class AgentAliasRoutingConfigurationListItem < Struct.new(
       :agent_version,
       :provisioned_throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +372,8 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       :alias_invocation_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -409,7 +419,8 @@ module Aws::BedrockAgent
       :last_updated_at,
       :relay_conversation_history,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -451,7 +462,8 @@ module Aws::BedrockAgent
       :collaborator_name,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +473,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class AgentDescriptor < Struct.new(
       :alias_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +484,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class AgentFlowNodeConfiguration < Struct.new(
       :agent_alias_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -510,7 +524,8 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       :knowledge_base_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +547,8 @@ module Aws::BedrockAgent
       :description,
       :knowledge_base_state,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -566,7 +582,8 @@ module Aws::BedrockAgent
       :updated_at,
       :latest_agent_version,
       :guardrail_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -648,7 +665,8 @@ module Aws::BedrockAgent
       :guardrail_configuration,
       :memory_configuration,
       :agent_collaboration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,13 +700,15 @@ module Aws::BedrockAgent
       :updated_at,
       :description,
       :guardrail_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Use a tool to complete an Amazon Bedrock model response</a>.</p>
     class AnyToolChoice < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +741,8 @@ module Aws::BedrockAgent
       :collaboration_instruction,
       :relay_conversation_history,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +751,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentCollaborator]
     class AssociateAgentCollaboratorResponse < Struct.new(
       :agent_collaborator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +777,8 @@ module Aws::BedrockAgent
       :knowledge_base_id,
       :description,
       :knowledge_base_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -764,13 +787,15 @@ module Aws::BedrockAgent
     #   @return [Types::AgentKnowledgeBase]
     class AssociateAgentKnowledgeBaseResponse < Struct.new(
       :agent_knowledge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Defines tools. The model automatically decides whether to call a tool or to generate text instead. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Use a tool to complete an Amazon Bedrock model response</a>.</p>
     class AutoToolChoice < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +805,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class BedrockDataAutomationConfiguration < Struct.new(
       :parsing_modality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +820,8 @@ module Aws::BedrockAgent
     class BedrockEmbeddingModelConfiguration < Struct.new(
       :dimensions,
       :embedding_data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -812,7 +839,8 @@ module Aws::BedrockAgent
       :model_arn,
       :parsing_prompt,
       :parsing_modality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -826,7 +854,8 @@ module Aws::BedrockAgent
     class BedrockFoundationModelContextEnrichmentConfiguration < Struct.new(
       :enrichment_strategy_configuration,
       :model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +869,8 @@ module Aws::BedrockAgent
     class ByteContentDoc < Struct.new(
       :mime_type,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,7 +880,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class CachePointBlock < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +904,8 @@ module Aws::BedrockAgent
       :system,
       :input_variables,
       :tool_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,13 +927,15 @@ module Aws::BedrockAgent
       :fixed_size_chunking_configuration,
       :hierarchical_chunking_configuration,
       :semantic_chunking_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a collector node in your flow. This node takes an iteration of inputs and consolidates them into an array in the output. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
     class CollectorFlowNodeConfiguration < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +945,8 @@ module Aws::BedrockAgent
     #   @return [Array<Types::FlowCondition>]
     class ConditionFlowNodeConfiguration < Struct.new(
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,7 +955,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +966,8 @@ module Aws::BedrockAgent
     #   @return [Types::CrawlFilterConfiguration]
     class ConfluenceCrawlerConfiguration < Struct.new(
       :filter_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -944,7 +981,8 @@ module Aws::BedrockAgent
     class ConfluenceDataSourceConfiguration < Struct.new(
       :source_configuration,
       :crawler_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -966,7 +1004,8 @@ module Aws::BedrockAgent
       :host_type,
       :auth_type,
       :credentials_secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -982,7 +1021,8 @@ module Aws::BedrockAgent
       :text,
       :cache_point,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Text < ContentBlock; end
@@ -1000,7 +1040,8 @@ module Aws::BedrockAgent
     class ContextEnrichmentConfiguration < Struct.new(
       :type,
       :bedrock_foundation_model_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1055,8 @@ module Aws::BedrockAgent
     class CrawlFilterConfiguration < Struct.new(
       :type,
       :pattern_object_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1063,7 +1105,8 @@ module Aws::BedrockAgent
       :api_schema,
       :action_group_state,
       :function_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1115,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentActionGroup]
     class CreateAgentActionGroupResponse < Struct.new(
       :agent_action_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1101,7 +1145,8 @@ module Aws::BedrockAgent
       :description,
       :routing_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1155,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentAlias]
     class CreateAgentAliasResponse < Struct.new(
       :agent_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,7 +1221,8 @@ module Aws::BedrockAgent
       :guardrail_configuration,
       :memory_configuration,
       :agent_collaboration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1184,7 +1231,8 @@ module Aws::BedrockAgent
     #   @return [Types::Agent]
     class CreateAgentResponse < Struct.new(
       :agent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1221,7 +1269,8 @@ module Aws::BedrockAgent
       :data_deletion_policy,
       :server_side_encryption_configuration,
       :vector_ingestion_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1230,7 +1279,8 @@ module Aws::BedrockAgent
     #   @return [Types::DataSource]
     class CreateDataSourceResponse < Struct.new(
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1313,8 @@ module Aws::BedrockAgent
       :flow_identifier,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1355,8 @@ module Aws::BedrockAgent
       :arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1337,7 +1389,8 @@ module Aws::BedrockAgent
       :definition,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1386,7 +1439,8 @@ module Aws::BedrockAgent
       :updated_at,
       :version,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1403,7 +1457,8 @@ module Aws::BedrockAgent
       :flow_identifier,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1448,7 +1503,8 @@ module Aws::BedrockAgent
       :created_at,
       :version,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1481,7 +1537,8 @@ module Aws::BedrockAgent
       :knowledge_base_configuration,
       :storage_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1490,7 +1547,8 @@ module Aws::BedrockAgent
     #   @return [Types::KnowledgeBase]
     class CreateKnowledgeBaseResponse < Struct.new(
       :knowledge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,7 +1581,8 @@ module Aws::BedrockAgent
       :variants,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1627,8 @@ module Aws::BedrockAgent
       :version,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1649,8 @@ module Aws::BedrockAgent
       :description,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1634,7 +1695,8 @@ module Aws::BedrockAgent
       :version,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1710,8 @@ module Aws::BedrockAgent
     class CuratedQuery < Struct.new(
       :natural_language,
       :sql,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1733,8 @@ module Aws::BedrockAgent
       :source_type,
       :s3_location,
       :inline_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1744,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class CustomDocumentIdentifier < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1690,7 +1755,8 @@ module Aws::BedrockAgent
     #   @return [Types::OrchestrationExecutor]
     class CustomOrchestration < Struct.new(
       :executor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1704,7 +1770,8 @@ module Aws::BedrockAgent
     class CustomS3Location < Struct.new(
       :uri,
       :bucket_owner_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1785,8 @@ module Aws::BedrockAgent
     class CustomTransformationConfiguration < Struct.new(
       :intermediate_storage,
       :transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1728,7 +1796,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class CyclicConnectionFlowValidationDetails < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1782,7 +1851,8 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       :failure_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1812,7 +1882,8 @@ module Aws::BedrockAgent
       :confluence_configuration,
       :salesforce_configuration,
       :share_point_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1842,7 +1913,8 @@ module Aws::BedrockAgent
       :status,
       :description,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,12 +1935,14 @@ module Aws::BedrockAgent
       :agent_version,
       :action_group_id,
       :skip_resource_in_use_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAgentActionGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1881,7 +1955,8 @@ module Aws::BedrockAgent
     class DeleteAgentAliasRequest < Struct.new(
       :agent_id,
       :agent_alias_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1898,7 +1973,8 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_alias_id,
       :agent_alias_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1911,7 +1987,8 @@ module Aws::BedrockAgent
     class DeleteAgentRequest < Struct.new(
       :agent_id,
       :skip_resource_in_use_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1924,7 +2001,8 @@ module Aws::BedrockAgent
     class DeleteAgentResponse < Struct.new(
       :agent_id,
       :agent_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1941,7 +2019,8 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_version,
       :skip_resource_in_use_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1958,7 +2037,8 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_version,
       :agent_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1971,7 +2051,8 @@ module Aws::BedrockAgent
     class DeleteDataSourceRequest < Struct.new(
       :knowledge_base_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1988,7 +2069,8 @@ module Aws::BedrockAgent
       :knowledge_base_id,
       :data_source_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2001,7 +2083,8 @@ module Aws::BedrockAgent
     class DeleteFlowAliasRequest < Struct.new(
       :flow_identifier,
       :alias_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2014,7 +2097,8 @@ module Aws::BedrockAgent
     class DeleteFlowAliasResponse < Struct.new(
       :flow_id,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2027,7 +2111,8 @@ module Aws::BedrockAgent
     class DeleteFlowRequest < Struct.new(
       :flow_identifier,
       :skip_resource_in_use_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2036,7 +2121,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class DeleteFlowResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2053,7 +2139,8 @@ module Aws::BedrockAgent
       :flow_identifier,
       :flow_version,
       :skip_resource_in_use_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2066,7 +2153,8 @@ module Aws::BedrockAgent
     class DeleteFlowVersionResponse < Struct.new(
       :id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2087,7 +2175,8 @@ module Aws::BedrockAgent
       :data_source_id,
       :client_token,
       :document_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2096,7 +2185,8 @@ module Aws::BedrockAgent
     #   @return [Array<Types::KnowledgeBaseDocumentDetail>]
     class DeleteKnowledgeBaseDocumentsResponse < Struct.new(
       :document_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2105,7 +2195,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class DeleteKnowledgeBaseRequest < Struct.new(
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2118,7 +2209,8 @@ module Aws::BedrockAgent
     class DeleteKnowledgeBaseResponse < Struct.new(
       :knowledge_base_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2131,7 +2223,8 @@ module Aws::BedrockAgent
     class DeletePromptRequest < Struct.new(
       :prompt_identifier,
       :prompt_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2144,7 +2237,8 @@ module Aws::BedrockAgent
     class DeletePromptResponse < Struct.new(
       :id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2161,12 +2255,14 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_version,
       :collaborator_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateAgentCollaboratorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2183,12 +2279,14 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_version,
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateAgentKnowledgeBaseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2206,7 +2304,8 @@ module Aws::BedrockAgent
       :data_source_type,
       :custom,
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2224,7 +2323,8 @@ module Aws::BedrockAgent
       :data_source_type,
       :s3,
       :custom,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2342,8 @@ module Aws::BedrockAgent
       :type,
       :inline_attributes,
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2256,7 +2357,8 @@ module Aws::BedrockAgent
     class DuplicateConditionExpressionFlowValidationDetails < Struct.new(
       :node,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2270,7 +2372,8 @@ module Aws::BedrockAgent
     class DuplicateConnectionsFlowValidationDetails < Struct.new(
       :source,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2280,7 +2383,8 @@ module Aws::BedrockAgent
     #   @return [Types::BedrockEmbeddingModelConfiguration]
     class EmbeddingModelConfiguration < Struct.new(
       :bedrock_embedding_model_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2290,7 +2394,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class EnrichmentStrategyConfiguration < Struct.new(
       :method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2300,7 +2405,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class FieldForReranking < Struct.new(
       :field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2314,7 +2420,8 @@ module Aws::BedrockAgent
     class FixedSizeChunkingConfiguration < Struct.new(
       :max_tokens,
       :overlap_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2328,7 +2435,8 @@ module Aws::BedrockAgent
     class FlowAliasConcurrencyConfiguration < Struct.new(
       :type,
       :max_concurrency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2338,7 +2446,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class FlowAliasRoutingConfigurationListItem < Struct.new(
       :flow_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2380,7 +2489,8 @@ module Aws::BedrockAgent
       :arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2394,7 +2504,8 @@ module Aws::BedrockAgent
     class FlowCondition < Struct.new(
       :name,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2404,7 +2515,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class FlowConditionalConnectionConfiguration < Struct.new(
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2430,7 +2542,8 @@ module Aws::BedrockAgent
       :source,
       :target,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2445,7 +2558,8 @@ module Aws::BedrockAgent
       :data,
       :conditional,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Data < FlowConnectionConfiguration; end
@@ -2463,7 +2577,8 @@ module Aws::BedrockAgent
     class FlowDataConnectionConfiguration < Struct.new(
       :source_output,
       :target_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2478,7 +2593,8 @@ module Aws::BedrockAgent
     class FlowDefinition < Struct.new(
       :nodes,
       :connections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2504,7 +2620,8 @@ module Aws::BedrockAgent
       :configuration,
       :inputs,
       :outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2575,7 +2692,8 @@ module Aws::BedrockAgent
       :loop_input,
       :loop_controller,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Input < FlowNodeConfiguration; end
@@ -2615,7 +2733,8 @@ module Aws::BedrockAgent
       :type,
       :expression,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2629,7 +2748,8 @@ module Aws::BedrockAgent
     class FlowNodeOutput < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2667,7 +2787,8 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2689,7 +2810,8 @@ module Aws::BedrockAgent
       :severity,
       :details,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2828,7 +2950,8 @@ module Aws::BedrockAgent
       :loop_incompatible_node_type,
       :invalid_loop_boundary,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CyclicConnection < FlowValidationDetails; end
@@ -2889,7 +3012,8 @@ module Aws::BedrockAgent
       :status,
       :created_at,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2911,7 +3035,8 @@ module Aws::BedrockAgent
       :description,
       :parameters,
       :require_confirmation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2922,7 +3047,8 @@ module Aws::BedrockAgent
     class FunctionSchema < Struct.new(
       :functions,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Functions < FunctionSchema; end
@@ -2942,7 +3068,8 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_version,
       :action_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2951,7 +3078,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentActionGroup]
     class GetAgentActionGroupResponse < Struct.new(
       :agent_action_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2964,7 +3092,8 @@ module Aws::BedrockAgent
     class GetAgentAliasRequest < Struct.new(
       :agent_id,
       :agent_alias_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2973,7 +3102,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentAlias]
     class GetAgentAliasResponse < Struct.new(
       :agent_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2990,7 +3120,8 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_version,
       :collaborator_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2999,7 +3130,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentCollaborator]
     class GetAgentCollaboratorResponse < Struct.new(
       :agent_collaborator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3016,7 +3148,8 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_version,
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3025,7 +3158,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentKnowledgeBase]
     class GetAgentKnowledgeBaseResponse < Struct.new(
       :agent_knowledge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3034,7 +3168,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class GetAgentRequest < Struct.new(
       :agent_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3043,7 +3178,8 @@ module Aws::BedrockAgent
     #   @return [Types::Agent]
     class GetAgentResponse < Struct.new(
       :agent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3056,7 +3192,8 @@ module Aws::BedrockAgent
     class GetAgentVersionRequest < Struct.new(
       :agent_id,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3065,7 +3202,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentVersion]
     class GetAgentVersionResponse < Struct.new(
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3078,7 +3216,8 @@ module Aws::BedrockAgent
     class GetDataSourceRequest < Struct.new(
       :knowledge_base_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3087,7 +3226,8 @@ module Aws::BedrockAgent
     #   @return [Types::DataSource]
     class GetDataSourceResponse < Struct.new(
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3100,7 +3240,8 @@ module Aws::BedrockAgent
     class GetFlowAliasRequest < Struct.new(
       :flow_identifier,
       :alias_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3141,7 +3282,8 @@ module Aws::BedrockAgent
       :arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3150,7 +3292,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class GetFlowRequest < Struct.new(
       :flow_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3203,7 +3346,8 @@ module Aws::BedrockAgent
       :version,
       :definition,
       :validations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3216,7 +3360,8 @@ module Aws::BedrockAgent
     class GetFlowVersionRequest < Struct.new(
       :flow_identifier,
       :flow_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3261,7 +3406,8 @@ module Aws::BedrockAgent
       :created_at,
       :version,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3278,7 +3424,8 @@ module Aws::BedrockAgent
       :knowledge_base_id,
       :data_source_id,
       :ingestion_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3287,7 +3434,8 @@ module Aws::BedrockAgent
     #   @return [Types::IngestionJob]
     class GetIngestionJobResponse < Struct.new(
       :ingestion_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3304,7 +3452,8 @@ module Aws::BedrockAgent
       :knowledge_base_id,
       :data_source_id,
       :document_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3313,7 +3462,8 @@ module Aws::BedrockAgent
     #   @return [Array<Types::KnowledgeBaseDocumentDetail>]
     class GetKnowledgeBaseDocumentsResponse < Struct.new(
       :document_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3322,7 +3472,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class GetKnowledgeBaseRequest < Struct.new(
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3331,7 +3482,8 @@ module Aws::BedrockAgent
     #   @return [Types::KnowledgeBase]
     class GetKnowledgeBaseResponse < Struct.new(
       :knowledge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3344,7 +3496,8 @@ module Aws::BedrockAgent
     class GetPromptRequest < Struct.new(
       :prompt_identifier,
       :prompt_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3389,7 +3542,8 @@ module Aws::BedrockAgent
       :version,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3403,7 +3557,8 @@ module Aws::BedrockAgent
     class GuardrailConfiguration < Struct.new(
       :guardrail_identifier,
       :guardrail_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3417,7 +3572,8 @@ module Aws::BedrockAgent
     class HierarchicalChunkingConfiguration < Struct.new(
       :level_configurations,
       :overlap_tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3427,7 +3583,8 @@ module Aws::BedrockAgent
     #   @return [Integer]
     class HierarchicalChunkingLevelConfiguration < Struct.new(
       :max_tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3437,7 +3594,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class IncompatibleConnectionDataTypeFlowValidationDetails < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3463,7 +3621,8 @@ module Aws::BedrockAgent
       :top_k,
       :maximum_length,
       :stop_sequences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3484,7 +3643,8 @@ module Aws::BedrockAgent
       :data_source_id,
       :client_token,
       :documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3493,7 +3653,8 @@ module Aws::BedrockAgent
     #   @return [Array<Types::KnowledgeBaseDocumentDetail>]
     class IngestKnowledgeBaseDocumentsResponse < Struct.new(
       :document_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3535,7 +3696,8 @@ module Aws::BedrockAgent
       :failure_reasons,
       :started_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3553,7 +3715,8 @@ module Aws::BedrockAgent
       :attribute,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3567,7 +3730,8 @@ module Aws::BedrockAgent
     class IngestionJobSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3601,7 +3765,8 @@ module Aws::BedrockAgent
       :number_of_metadata_documents_modified,
       :number_of_documents_deleted,
       :number_of_documents_failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3650,7 +3815,8 @@ module Aws::BedrockAgent
       :started_at,
       :updated_at,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3664,7 +3830,8 @@ module Aws::BedrockAgent
     class InlineCodeFlowNodeConfiguration < Struct.new(
       :code,
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3688,13 +3855,15 @@ module Aws::BedrockAgent
       :type,
       :byte_content,
       :text_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for the input flow node for a flow. This node takes the input from flow invocation and passes it to the next node in the data type that you specify.</p>
     class InputFlowNodeConfiguration < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3704,7 +3873,8 @@ module Aws::BedrockAgent
     #   @return [Types::S3Location]
     class IntermediateStorage < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3713,7 +3883,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3731,13 +3902,15 @@ module Aws::BedrockAgent
       :connection,
       :source,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for an iterator node in a flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output.</p> <p>The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node.</p>
     class IteratorFlowNodeConfiguration < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3747,7 +3920,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class KendraKnowledgeBaseConfiguration < Struct.new(
       :kendra_index_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3797,7 +3971,8 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       :failure_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3819,7 +3994,8 @@ module Aws::BedrockAgent
       :vector_knowledge_base_configuration,
       :kendra_knowledge_base_configuration,
       :sql_knowledge_base_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3833,7 +4009,8 @@ module Aws::BedrockAgent
     class KnowledgeBaseDocument < Struct.new(
       :metadata,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3863,7 +4040,8 @@ module Aws::BedrockAgent
       :identifier,
       :status_reason,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3901,7 +4079,8 @@ module Aws::BedrockAgent
       :inference_configuration,
       :reranking_configuration,
       :orchestration_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3928,7 +4107,8 @@ module Aws::BedrockAgent
       :inference_config,
       :additional_model_request_fields,
       :performance_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3938,7 +4118,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class KnowledgeBasePromptTemplate < Struct.new(
       :text_prompt_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3964,7 +4145,8 @@ module Aws::BedrockAgent
       :description,
       :status,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3974,7 +4156,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class LambdaFunctionFlowNodeConfiguration < Struct.new(
       :lambda_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3993,7 +4176,8 @@ module Aws::BedrockAgent
     class LexFlowNodeConfiguration < Struct.new(
       :bot_alias_arn,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4020,7 +4204,8 @@ module Aws::BedrockAgent
       :agent_version,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4033,7 +4218,8 @@ module Aws::BedrockAgent
     class ListAgentActionGroupsResponse < Struct.new(
       :action_group_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4050,7 +4236,8 @@ module Aws::BedrockAgent
       :agent_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4063,7 +4250,8 @@ module Aws::BedrockAgent
     class ListAgentAliasesResponse < Struct.new(
       :agent_alias_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4084,7 +4272,8 @@ module Aws::BedrockAgent
       :agent_version,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4097,7 +4286,8 @@ module Aws::BedrockAgent
     class ListAgentCollaboratorsResponse < Struct.new(
       :agent_collaborator_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4118,7 +4308,8 @@ module Aws::BedrockAgent
       :agent_version,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4131,7 +4322,8 @@ module Aws::BedrockAgent
     class ListAgentKnowledgeBasesResponse < Struct.new(
       :agent_knowledge_base_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4148,7 +4340,8 @@ module Aws::BedrockAgent
       :agent_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4161,7 +4354,8 @@ module Aws::BedrockAgent
     class ListAgentVersionsResponse < Struct.new(
       :agent_version_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4174,7 +4368,8 @@ module Aws::BedrockAgent
     class ListAgentsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4187,7 +4382,8 @@ module Aws::BedrockAgent
     class ListAgentsResponse < Struct.new(
       :agent_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4204,7 +4400,8 @@ module Aws::BedrockAgent
       :knowledge_base_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4217,7 +4414,8 @@ module Aws::BedrockAgent
     class ListDataSourcesResponse < Struct.new(
       :data_source_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4234,7 +4432,8 @@ module Aws::BedrockAgent
       :flow_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4247,7 +4446,8 @@ module Aws::BedrockAgent
     class ListFlowAliasesResponse < Struct.new(
       :flow_alias_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4264,7 +4464,8 @@ module Aws::BedrockAgent
       :flow_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4277,7 +4478,8 @@ module Aws::BedrockAgent
     class ListFlowVersionsResponse < Struct.new(
       :flow_version_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4290,7 +4492,8 @@ module Aws::BedrockAgent
     class ListFlowsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4303,7 +4506,8 @@ module Aws::BedrockAgent
     class ListFlowsResponse < Struct.new(
       :flow_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4332,7 +4536,8 @@ module Aws::BedrockAgent
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4345,7 +4550,8 @@ module Aws::BedrockAgent
     class ListIngestionJobsResponse < Struct.new(
       :ingestion_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4366,7 +4572,8 @@ module Aws::BedrockAgent
       :data_source_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4379,7 +4586,8 @@ module Aws::BedrockAgent
     class ListKnowledgeBaseDocumentsResponse < Struct.new(
       :document_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4392,7 +4600,8 @@ module Aws::BedrockAgent
     class ListKnowledgeBasesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4405,7 +4614,8 @@ module Aws::BedrockAgent
     class ListKnowledgeBasesResponse < Struct.new(
       :knowledge_base_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4422,7 +4632,8 @@ module Aws::BedrockAgent
       :prompt_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4435,7 +4646,8 @@ module Aws::BedrockAgent
     class ListPromptsResponse < Struct.new(
       :prompt_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4444,7 +4656,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4453,7 +4666,8 @@ module Aws::BedrockAgent
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4467,7 +4681,8 @@ module Aws::BedrockAgent
     class LoopControllerFlowNodeConfiguration < Struct.new(
       :continue_condition,
       :max_iterations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4482,7 +4697,8 @@ module Aws::BedrockAgent
     #   @return [Types::FlowDefinition]
     class LoopFlowNodeConfiguration < Struct.new(
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4500,13 +4716,15 @@ module Aws::BedrockAgent
       :node,
       :incompatible_node_type,
       :incompatible_node_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for the input node of a DoWhile loop in the flow.</p>
     class LoopInputFlowNodeConfiguration < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4524,7 +4742,8 @@ module Aws::BedrockAgent
       :node,
       :condition,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4542,7 +4761,8 @@ module Aws::BedrockAgent
       :node,
       :input,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4560,7 +4780,8 @@ module Aws::BedrockAgent
       :enabled_memory_types,
       :storage_days,
       :session_summary_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4579,7 +4800,8 @@ module Aws::BedrockAgent
     class Message < Struct.new(
       :role,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4593,7 +4815,8 @@ module Aws::BedrockAgent
     class MetadataAttribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4619,7 +4842,8 @@ module Aws::BedrockAgent
       :boolean_value,
       :string_value,
       :string_list_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4633,7 +4857,8 @@ module Aws::BedrockAgent
     class MetadataConfigurationForReranking < Struct.new(
       :selection_mode,
       :selective_mode_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4651,7 +4876,8 @@ module Aws::BedrockAgent
       :node,
       :input,
       :expected_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4669,7 +4895,8 @@ module Aws::BedrockAgent
       :node,
       :output,
       :expected_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4679,7 +4906,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class MissingConnectionConfigurationFlowValidationDetails < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4689,13 +4917,15 @@ module Aws::BedrockAgent
     #   @return [String]
     class MissingDefaultConditionFlowValidationDetails < Struct.new(
       :node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Details about missing ending nodes (such as FlowOutputNode) in the flow.</p>
     class MissingEndingNodesFlowValidationDetails < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4705,7 +4935,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class MissingLoopControllerNodeFlowValidationDetails < Struct.new(
       :loop_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4715,7 +4946,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class MissingLoopInputNodeFlowValidationDetails < Struct.new(
       :loop_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4725,7 +4957,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class MissingNodeConfigurationFlowValidationDetails < Struct.new(
       :node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4739,7 +4972,8 @@ module Aws::BedrockAgent
     class MissingNodeInputFlowValidationDetails < Struct.new(
       :node,
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4753,13 +4987,15 @@ module Aws::BedrockAgent
     class MissingNodeOutputFlowValidationDetails < Struct.new(
       :node,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Details about missing starting nodes (such as FlowInputNode) in the flow.</p>
     class MissingStartingNodesFlowValidationDetails < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4797,7 +5033,8 @@ module Aws::BedrockAgent
       :field_mapping,
       :endpoint_service_name,
       :text_index_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4815,7 +5052,8 @@ module Aws::BedrockAgent
       :vector_field,
       :text_field,
       :metadata_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4825,7 +5063,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class MultipleLoopControllerNodesFlowValidationDetails < Struct.new(
       :loop_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4835,7 +5074,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class MultipleLoopInputNodesFlowValidationDetails < Struct.new(
       :loop_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4849,7 +5089,8 @@ module Aws::BedrockAgent
     class MultipleNodeInputConnectionsFlowValidationDetails < Struct.new(
       :node,
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4863,7 +5104,8 @@ module Aws::BedrockAgent
     class NeptuneAnalyticsConfiguration < Struct.new(
       :graph_arn,
       :field_mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4877,7 +5119,8 @@ module Aws::BedrockAgent
     class NeptuneAnalyticsFieldMapping < Struct.new(
       :text_field,
       :metadata_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4899,7 +5142,8 @@ module Aws::BedrockAgent
       :domain_arn,
       :vector_index_name,
       :field_mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4917,7 +5161,8 @@ module Aws::BedrockAgent
       :vector_field,
       :text_field,
       :metadata_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4935,7 +5180,8 @@ module Aws::BedrockAgent
       :collection_arn,
       :vector_index_name,
       :field_mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4953,7 +5199,8 @@ module Aws::BedrockAgent
       :vector_field,
       :text_field,
       :metadata_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4964,7 +5211,8 @@ module Aws::BedrockAgent
     class OrchestrationExecutor < Struct.new(
       :lambda,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Lambda < OrchestrationExecutor; end
@@ -4973,7 +5221,8 @@ module Aws::BedrockAgent
 
     # <p>Contains configurations for an output flow node in the flow. You specify the data type expected for the input into the node in the <code>type</code> field and how to return the final output in the <code>expression</code> field.</p>
     class OutputFlowNodeConfiguration < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4991,7 +5240,8 @@ module Aws::BedrockAgent
       :description,
       :type,
       :required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5009,7 +5259,8 @@ module Aws::BedrockAgent
       :parsing_strategy,
       :bedrock_foundation_model_configuration,
       :bedrock_data_automation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5019,7 +5270,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class ParsingPrompt < Struct.new(
       :parsing_prompt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5037,7 +5289,8 @@ module Aws::BedrockAgent
       :object_type,
       :inclusion_filters,
       :exclusion_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5047,7 +5300,8 @@ module Aws::BedrockAgent
     #   @return [Array<Types::PatternObjectFilter>]
     class PatternObjectFilterConfiguration < Struct.new(
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5057,7 +5311,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class PerformanceConfiguration < Struct.new(
       :latency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5084,7 +5339,8 @@ module Aws::BedrockAgent
       :credentials_secret_arn,
       :namespace,
       :field_mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5098,7 +5354,8 @@ module Aws::BedrockAgent
     class PineconeFieldMapping < Struct.new(
       :text_field,
       :metadata_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5107,7 +5364,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class PrepareAgentRequest < Struct.new(
       :agent_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5128,7 +5386,8 @@ module Aws::BedrockAgent
       :agent_status,
       :agent_version,
       :prepared_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5137,7 +5396,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class PrepareFlowRequest < Struct.new(
       :flow_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5150,7 +5410,8 @@ module Aws::BedrockAgent
     class PrepareFlowResponse < Struct.new(
       :id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5161,7 +5422,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class PromptAgentResource < Struct.new(
       :agent_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5199,7 +5461,8 @@ module Aws::BedrockAgent
       :parser_mode,
       :foundation_model,
       :additional_model_request_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5213,7 +5476,8 @@ module Aws::BedrockAgent
     class PromptFlowNodeConfiguration < Struct.new(
       :source_configuration,
       :guardrail_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5239,7 +5503,8 @@ module Aws::BedrockAgent
       :model_id,
       :inference_configuration,
       :additional_model_request_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5255,7 +5520,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class PromptFlowNodeResourceConfiguration < Struct.new(
       :prompt_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5275,7 +5541,8 @@ module Aws::BedrockAgent
       :resource,
       :inline,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Resource < PromptFlowNodeSourceConfiguration; end
@@ -5291,7 +5558,8 @@ module Aws::BedrockAgent
     class PromptGenAiResource < Struct.new(
       :agent,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Agent < PromptGenAiResource; end
@@ -5305,7 +5573,8 @@ module Aws::BedrockAgent
     class PromptInferenceConfiguration < Struct.new(
       :text,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Text < PromptInferenceConfiguration; end
@@ -5318,7 +5587,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class PromptInputVariable < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5333,7 +5603,8 @@ module Aws::BedrockAgent
     class PromptMetadataEntry < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5355,7 +5626,8 @@ module Aws::BedrockAgent
       :top_p,
       :max_tokens,
       :stop_sequences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5370,7 +5642,8 @@ module Aws::BedrockAgent
     class PromptOverrideConfiguration < Struct.new(
       :prompt_configurations,
       :override_lambda,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5404,7 +5677,8 @@ module Aws::BedrockAgent
       :version,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5419,7 +5693,8 @@ module Aws::BedrockAgent
       :text,
       :chat,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Text < PromptTemplateConfiguration; end
@@ -5462,7 +5737,8 @@ module Aws::BedrockAgent
       :metadata,
       :additional_model_request_fields,
       :gen_ai_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5480,7 +5756,8 @@ module Aws::BedrockAgent
       :name,
       :description,
       :inclusion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5494,7 +5771,8 @@ module Aws::BedrockAgent
     class QueryGenerationConfiguration < Struct.new(
       :execution_timeout_seconds,
       :generation_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5509,7 +5787,8 @@ module Aws::BedrockAgent
     class QueryGenerationContext < Struct.new(
       :tables,
       :curated_queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5531,7 +5810,8 @@ module Aws::BedrockAgent
       :description,
       :inclusion,
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5557,7 +5837,8 @@ module Aws::BedrockAgent
       :database_name,
       :table_name,
       :field_mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5583,7 +5864,8 @@ module Aws::BedrockAgent
       :text_field,
       :metadata_field,
       :custom_metadata_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5605,7 +5887,8 @@ module Aws::BedrockAgent
       :vector_index_name,
       :credentials_secret_arn,
       :field_mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5623,7 +5906,8 @@ module Aws::BedrockAgent
       :vector_field,
       :text_field,
       :metadata_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5641,7 +5925,8 @@ module Aws::BedrockAgent
       :storage_configurations,
       :query_engine_configuration,
       :query_generation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5659,7 +5944,8 @@ module Aws::BedrockAgent
       :type,
       :database_user,
       :username_password_secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5673,7 +5959,8 @@ module Aws::BedrockAgent
     class RedshiftProvisionedConfiguration < Struct.new(
       :cluster_identifier,
       :auth_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5683,7 +5970,8 @@ module Aws::BedrockAgent
     #   @return [Array<String>]
     class RedshiftQueryEngineAwsDataCatalogStorageConfiguration < Struct.new(
       :table_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5701,7 +5989,8 @@ module Aws::BedrockAgent
       :type,
       :serverless_configuration,
       :provisioned_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5711,7 +6000,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class RedshiftQueryEngineRedshiftStorageConfiguration < Struct.new(
       :database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5729,7 +6019,8 @@ module Aws::BedrockAgent
       :type,
       :aws_data_catalog_configuration,
       :redshift_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5743,7 +6034,8 @@ module Aws::BedrockAgent
     class RedshiftServerlessAuthConfiguration < Struct.new(
       :type,
       :username_password_secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5757,7 +6049,8 @@ module Aws::BedrockAgent
     class RedshiftServerlessConfiguration < Struct.new(
       :workgroup_arn,
       :auth_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5772,7 +6065,8 @@ module Aws::BedrockAgent
       :fields_to_include,
       :fields_to_exclude,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class FieldsToInclude < RerankingMetadataSelectiveModeConfiguration; end
@@ -5785,7 +6079,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5795,7 +6090,8 @@ module Aws::BedrockAgent
     #   @return [Types::RetrievalFlowNodeServiceConfiguration]
     class RetrievalFlowNodeConfiguration < Struct.new(
       :service_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5805,7 +6101,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class RetrievalFlowNodeS3Configuration < Struct.new(
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5821,7 +6118,8 @@ module Aws::BedrockAgent
     class RetrievalFlowNodeServiceConfiguration < Struct.new(
       :s3,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < RetrievalFlowNodeServiceConfiguration; end
@@ -5834,7 +6132,8 @@ module Aws::BedrockAgent
     #   @return [Types::S3Location]
     class S3Content < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5852,7 +6151,8 @@ module Aws::BedrockAgent
       :bucket_arn,
       :inclusion_prefixes,
       :bucket_owner_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5866,7 +6166,8 @@ module Aws::BedrockAgent
     class S3Identifier < Struct.new(
       :s3_bucket_name,
       :s3_object_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5876,7 +6177,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class S3Location < Struct.new(
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5894,7 +6196,8 @@ module Aws::BedrockAgent
       :vector_bucket_arn,
       :index_arn,
       :index_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5904,7 +6207,8 @@ module Aws::BedrockAgent
     #   @return [Types::CrawlFilterConfiguration]
     class SalesforceCrawlerConfiguration < Struct.new(
       :filter_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5918,7 +6222,8 @@ module Aws::BedrockAgent
     class SalesforceDataSourceConfiguration < Struct.new(
       :source_configuration,
       :crawler_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5936,7 +6241,8 @@ module Aws::BedrockAgent
       :host_url,
       :auth_type,
       :credentials_secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5946,7 +6252,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class SeedUrl < Struct.new(
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5964,7 +6271,8 @@ module Aws::BedrockAgent
       :max_tokens,
       :buffer_size,
       :breakpoint_percentile_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5974,7 +6282,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5983,7 +6292,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5993,7 +6303,8 @@ module Aws::BedrockAgent
     #   @return [Integer]
     class SessionSummaryConfiguration < Struct.new(
       :max_recent_sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6008,7 +6319,8 @@ module Aws::BedrockAgent
     #   @return [Types::CrawlFilterConfiguration]
     class SharePointCrawlerConfiguration < Struct.new(
       :filter_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6022,7 +6334,8 @@ module Aws::BedrockAgent
     class SharePointDataSourceConfiguration < Struct.new(
       :source_configuration,
       :crawler_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6052,7 +6365,8 @@ module Aws::BedrockAgent
       :host_type,
       :auth_type,
       :credentials_secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6062,7 +6376,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class SpecificToolChoice < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6076,7 +6391,8 @@ module Aws::BedrockAgent
     class SqlKnowledgeBaseConfiguration < Struct.new(
       :type,
       :redshift_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6097,7 +6413,8 @@ module Aws::BedrockAgent
       :data_source_id,
       :client_token,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6106,7 +6423,8 @@ module Aws::BedrockAgent
     #   @return [Types::IngestionJob]
     class StartIngestionJobResponse < Struct.new(
       :ingestion_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6123,7 +6441,8 @@ module Aws::BedrockAgent
       :knowledge_base_id,
       :data_source_id,
       :ingestion_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6132,7 +6451,8 @@ module Aws::BedrockAgent
     #   @return [Types::IngestionJob]
     class StopIngestionJobResponse < Struct.new(
       :ingestion_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6174,7 +6494,8 @@ module Aws::BedrockAgent
       :mongo_db_atlas_configuration,
       :neptune_analytics_configuration,
       :s3_vectors_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6184,7 +6505,8 @@ module Aws::BedrockAgent
     #   @return [Types::StorageFlowNodeServiceConfiguration]
     class StorageFlowNodeConfiguration < Struct.new(
       :service_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6194,7 +6516,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class StorageFlowNodeS3Configuration < Struct.new(
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6210,7 +6533,8 @@ module Aws::BedrockAgent
     class StorageFlowNodeServiceConfiguration < Struct.new(
       :s3,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < StorageFlowNodeServiceConfiguration; end
@@ -6223,7 +6547,8 @@ module Aws::BedrockAgent
     #   @return [Array<Types::SupplementalDataStorageLocation>]
     class SupplementalDataStorageConfiguration < Struct.new(
       :storage_locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6237,7 +6562,8 @@ module Aws::BedrockAgent
     class SupplementalDataStorageLocation < Struct.new(
       :type,
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6253,7 +6579,8 @@ module Aws::BedrockAgent
       :text,
       :cache_point,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Text < SystemContentBlock; end
@@ -6270,12 +6597,14 @@ module Aws::BedrockAgent
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6285,7 +6614,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class TextContentDoc < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6304,7 +6634,8 @@ module Aws::BedrockAgent
       :text,
       :cache_point,
       :input_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6313,7 +6644,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6328,7 +6660,8 @@ module Aws::BedrockAgent
       :tool_spec,
       :cache_point,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ToolSpec < Tool; end
@@ -6352,7 +6685,8 @@ module Aws::BedrockAgent
       :any,
       :tool,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Auto < ToolChoice; end
@@ -6371,7 +6705,8 @@ module Aws::BedrockAgent
     class ToolConfiguration < Struct.new(
       :tools,
       :tool_choice,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6382,7 +6717,8 @@ module Aws::BedrockAgent
     class ToolInputSchema < Struct.new(
       :json,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Json < ToolInputSchema; end
@@ -6403,7 +6739,8 @@ module Aws::BedrockAgent
       :name,
       :description,
       :input_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6417,7 +6754,8 @@ module Aws::BedrockAgent
     class Transformation < Struct.new(
       :transformation_function,
       :step_to_apply,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6427,7 +6765,8 @@ module Aws::BedrockAgent
     #   @return [Types::TransformationLambdaConfiguration]
     class TransformationFunction < Struct.new(
       :transformation_lambda_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6437,7 +6776,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class TransformationLambdaConfiguration < Struct.new(
       :lambda_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6451,7 +6791,8 @@ module Aws::BedrockAgent
     class UnfulfilledNodeInputFlowValidationDetails < Struct.new(
       :node,
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6461,7 +6802,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class UnknownConnectionConditionFlowValidationDetails < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6471,7 +6813,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class UnknownConnectionSourceFlowValidationDetails < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6481,7 +6824,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class UnknownConnectionSourceOutputFlowValidationDetails < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6491,7 +6835,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class UnknownConnectionTargetFlowValidationDetails < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6501,7 +6846,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class UnknownConnectionTargetInputFlowValidationDetails < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6515,7 +6861,8 @@ module Aws::BedrockAgent
     class UnknownNodeInputFlowValidationDetails < Struct.new(
       :node,
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6529,7 +6876,8 @@ module Aws::BedrockAgent
     class UnknownNodeOutputFlowValidationDetails < Struct.new(
       :node,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6539,7 +6887,8 @@ module Aws::BedrockAgent
     #   @return [String]
     class UnreachableNodeFlowValidationDetails < Struct.new(
       :node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6549,13 +6898,15 @@ module Aws::BedrockAgent
     #   @return [String]
     class UnsatisfiedConnectionConditionsFlowValidationDetails < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unspecified validation that doesn't fit other categories.</p>
     class UnspecifiedFlowValidationDetails < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6568,12 +6919,14 @@ module Aws::BedrockAgent
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6622,7 +6975,8 @@ module Aws::BedrockAgent
       :action_group_state,
       :api_schema,
       :function_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6631,7 +6985,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentActionGroup]
     class UpdateAgentActionGroupResponse < Struct.new(
       :agent_action_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6660,7 +7015,8 @@ module Aws::BedrockAgent
       :description,
       :routing_configuration,
       :alias_invocation_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6669,7 +7025,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentAlias]
     class UpdateAgentAliasResponse < Struct.new(
       :agent_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6702,7 +7059,8 @@ module Aws::BedrockAgent
       :collaborator_name,
       :collaboration_instruction,
       :relay_conversation_history,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6711,7 +7069,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentCollaborator]
     class UpdateAgentCollaboratorResponse < Struct.new(
       :agent_collaborator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6736,7 +7095,8 @@ module Aws::BedrockAgent
       :knowledge_base_id,
       :description,
       :knowledge_base_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6745,7 +7105,8 @@ module Aws::BedrockAgent
     #   @return [Types::AgentKnowledgeBase]
     class UpdateAgentKnowledgeBaseResponse < Struct.new(
       :agent_knowledge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6806,7 +7167,8 @@ module Aws::BedrockAgent
       :guardrail_configuration,
       :memory_configuration,
       :agent_collaboration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6815,7 +7177,8 @@ module Aws::BedrockAgent
     #   @return [Types::Agent]
     class UpdateAgentResponse < Struct.new(
       :agent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6852,7 +7215,8 @@ module Aws::BedrockAgent
       :data_deletion_policy,
       :server_side_encryption_configuration,
       :vector_ingestion_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6861,7 +7225,8 @@ module Aws::BedrockAgent
     #   @return [Types::DataSource]
     class UpdateDataSourceResponse < Struct.new(
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6890,7 +7255,8 @@ module Aws::BedrockAgent
       :concurrency_configuration,
       :flow_identifier,
       :alias_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6931,7 +7297,8 @@ module Aws::BedrockAgent
       :arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6960,7 +7327,8 @@ module Aws::BedrockAgent
       :customer_encryption_key_arn,
       :definition,
       :flow_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7009,7 +7377,8 @@ module Aws::BedrockAgent
       :updated_at,
       :version,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7038,7 +7407,8 @@ module Aws::BedrockAgent
       :role_arn,
       :knowledge_base_configuration,
       :storage_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7047,7 +7417,8 @@ module Aws::BedrockAgent
     #   @return [Types::KnowledgeBase]
     class UpdateKnowledgeBaseResponse < Struct.new(
       :knowledge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7076,7 +7447,8 @@ module Aws::BedrockAgent
       :default_variant,
       :variants,
       :prompt_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7121,7 +7493,8 @@ module Aws::BedrockAgent
       :version,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7131,7 +7504,8 @@ module Aws::BedrockAgent
     #   @return [Array<Types::SeedUrl>]
     class UrlConfiguration < Struct.new(
       :seed_urls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7140,7 +7514,8 @@ module Aws::BedrockAgent
     #   @return [Types::FlowDefinition]
     class ValidateFlowDefinitionRequest < Struct.new(
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7149,7 +7524,8 @@ module Aws::BedrockAgent
     #   @return [Array<Types::FlowValidation>]
     class ValidateFlowDefinitionResponse < Struct.new(
       :validations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7162,7 +7538,8 @@ module Aws::BedrockAgent
     class ValidationException < Struct.new(
       :message,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7176,7 +7553,8 @@ module Aws::BedrockAgent
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7198,7 +7576,8 @@ module Aws::BedrockAgent
       :custom_transformation_configuration,
       :parsing_configuration,
       :context_enrichment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7216,7 +7595,8 @@ module Aws::BedrockAgent
       :embedding_model_arn,
       :embedding_model_configuration,
       :supplemental_data_storage_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7234,7 +7614,8 @@ module Aws::BedrockAgent
       :model_configuration,
       :number_of_reranked_results,
       :metadata_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7248,7 +7629,8 @@ module Aws::BedrockAgent
     class VectorSearchBedrockRerankingModelConfiguration < Struct.new(
       :model_arn,
       :additional_model_request_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7262,7 +7644,8 @@ module Aws::BedrockAgent
     class VectorSearchRerankingConfiguration < Struct.new(
       :type,
       :bedrock_reranking_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7292,7 +7675,8 @@ module Aws::BedrockAgent
       :scope,
       :user_agent,
       :user_agent_header,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7306,7 +7690,8 @@ module Aws::BedrockAgent
     class WebCrawlerLimits < Struct.new(
       :rate_limit,
       :max_pages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7320,7 +7705,8 @@ module Aws::BedrockAgent
     class WebDataSourceConfiguration < Struct.new(
       :source_configuration,
       :crawler_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7330,7 +7716,8 @@ module Aws::BedrockAgent
     #   @return [Types::UrlConfiguration]
     class WebSourceConfiguration < Struct.new(
       :url_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

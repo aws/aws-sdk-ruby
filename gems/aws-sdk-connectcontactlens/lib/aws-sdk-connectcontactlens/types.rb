@@ -11,7 +11,8 @@ module Aws::ConnectContactLens
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26,7 +27,8 @@ module Aws::ConnectContactLens
     class Categories < Struct.new(
       :matched_categories,
       :matched_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +38,8 @@ module Aws::ConnectContactLens
     #   @return [Array<Types::PointOfInterest>]
     class CategoryDetails < Struct.new(
       :points_of_interest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51,7 +54,8 @@ module Aws::ConnectContactLens
     class CharacterOffsets < Struct.new(
       :begin_offset_char,
       :end_offset_char,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +64,8 @@ module Aws::ConnectContactLens
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -69,7 +74,8 @@ module Aws::ConnectContactLens
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +86,8 @@ module Aws::ConnectContactLens
     #   @return [Types::CharacterOffsets]
     class IssueDetected < Struct.new(
       :character_offsets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +109,8 @@ module Aws::ConnectContactLens
       :contact_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +136,8 @@ module Aws::ConnectContactLens
     class ListRealtimeContactAnalysisSegmentsResponse < Struct.new(
       :segments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +151,8 @@ module Aws::ConnectContactLens
     class PointOfInterest < Struct.new(
       :begin_offset_millis,
       :end_offset_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +201,8 @@ module Aws::ConnectContactLens
       :content,
       :status,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +220,8 @@ module Aws::ConnectContactLens
       :transcript,
       :categories,
       :post_contact_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +230,8 @@ module Aws::ConnectContactLens
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +240,8 @@ module Aws::ConnectContactLens
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +279,8 @@ module Aws::ConnectContactLens
       :end_offset_millis,
       :sentiment,
       :issues_detected,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -12,7 +12,8 @@ module Aws::CognitoSync
     #   @return [String]
     class AlreadyStreamedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::CognitoSync
     #   @return [String]
     class BulkPublishRequest < Struct.new(
       :identity_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +38,8 @@ module Aws::CognitoSync
     #   @return [String]
     class BulkPublishResponse < Struct.new(
       :identity_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +59,8 @@ module Aws::CognitoSync
       :stream_name,
       :role_arn,
       :streaming_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +70,8 @@ module Aws::CognitoSync
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +116,8 @@ module Aws::CognitoSync
       :last_modified_by,
       :data_storage,
       :num_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +142,8 @@ module Aws::CognitoSync
       :identity_pool_id,
       :identity_id,
       :dataset_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +158,8 @@ module Aws::CognitoSync
     #   @return [Types::Dataset]
     class DeleteDatasetResponse < Struct.new(
       :dataset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +184,8 @@ module Aws::CognitoSync
       :identity_pool_id,
       :identity_id,
       :dataset_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +200,8 @@ module Aws::CognitoSync
     #   @return [Types::Dataset]
     class DescribeDatasetResponse < Struct.new(
       :dataset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -204,7 +214,8 @@ module Aws::CognitoSync
     #   @return [String]
     class DescribeIdentityPoolUsageRequest < Struct.new(
       :identity_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +227,8 @@ module Aws::CognitoSync
     #   @return [Types::IdentityPoolUsage]
     class DescribeIdentityPoolUsageResponse < Struct.new(
       :identity_pool_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +247,8 @@ module Aws::CognitoSync
     class DescribeIdentityUsageRequest < Struct.new(
       :identity_pool_id,
       :identity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -247,7 +260,8 @@ module Aws::CognitoSync
     #   @return [Types::IdentityUsage]
     class DescribeIdentityUsageResponse < Struct.new(
       :identity_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -257,7 +271,8 @@ module Aws::CognitoSync
     #   @return [String]
     class DuplicateRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -269,7 +284,8 @@ module Aws::CognitoSync
     #   @return [String]
     class GetBulkPublishDetailsRequest < Struct.new(
       :identity_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +317,8 @@ module Aws::CognitoSync
       :bulk_publish_complete_time,
       :bulk_publish_status,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +328,8 @@ module Aws::CognitoSync
     #   @return [String]
     class GetCognitoEventsRequest < Struct.new(
       :identity_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +339,8 @@ module Aws::CognitoSync
     #   @return [Hash<String, String>]
     class GetCognitoEventsResponse < Struct.new(
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +351,8 @@ module Aws::CognitoSync
     #   @return [String]
     class GetIdentityPoolConfigurationRequest < Struct.new(
       :identity_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +371,8 @@ module Aws::CognitoSync
       :identity_pool_id,
       :push_sync,
       :cognito_streams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +400,8 @@ module Aws::CognitoSync
       :sync_sessions_count,
       :data_storage,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +434,8 @@ module Aws::CognitoSync
       :last_modified_date,
       :dataset_count,
       :data_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -429,7 +452,8 @@ module Aws::CognitoSync
     #   @return [String]
     class InternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +463,8 @@ module Aws::CognitoSync
     #   @return [String]
     class InvalidConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +474,8 @@ module Aws::CognitoSync
     #   @return [String]
     class InvalidLambdaFunctionOutputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +487,8 @@ module Aws::CognitoSync
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +498,8 @@ module Aws::CognitoSync
     #   @return [String]
     class LambdaThrottledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +511,8 @@ module Aws::CognitoSync
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -512,7 +541,8 @@ module Aws::CognitoSync
       :identity_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +562,8 @@ module Aws::CognitoSync
       :datasets,
       :count,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -554,7 +585,8 @@ module Aws::CognitoSync
     class ListIdentityPoolUsageRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +613,8 @@ module Aws::CognitoSync
       :max_results,
       :count,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -630,7 +663,8 @@ module Aws::CognitoSync
       :next_token,
       :max_results,
       :sync_session_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +714,8 @@ module Aws::CognitoSync
       :dataset_exists,
       :dataset_deleted_after_requested_sync_count,
       :sync_session_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -699,7 +734,8 @@ module Aws::CognitoSync
     #   @return [String]
     class NotAuthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +749,8 @@ module Aws::CognitoSync
     class PushSync < Struct.new(
       :application_arns,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +783,8 @@ module Aws::CognitoSync
       :last_modified_date,
       :last_modified_by,
       :device_last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +813,8 @@ module Aws::CognitoSync
       :value,
       :sync_count,
       :device_last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +837,8 @@ module Aws::CognitoSync
       :identity_id,
       :platform,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +848,8 @@ module Aws::CognitoSync
     #   @return [String]
     class RegisterDeviceResponse < Struct.new(
       :device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +861,8 @@ module Aws::CognitoSync
     #   @return [String]
     class ResourceConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +874,8 @@ module Aws::CognitoSync
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -846,7 +889,8 @@ module Aws::CognitoSync
     class SetCognitoEventsRequest < Struct.new(
       :identity_pool_id,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -865,7 +909,8 @@ module Aws::CognitoSync
       :identity_pool_id,
       :push_sync,
       :cognito_streams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +929,8 @@ module Aws::CognitoSync
       :identity_pool_id,
       :push_sync,
       :cognito_streams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,13 +953,15 @@ module Aws::CognitoSync
       :identity_id,
       :dataset_name,
       :device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Response to a SubscribeToDataset request.</p>
     class SubscribeToDatasetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +973,8 @@ module Aws::CognitoSync
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,13 +997,15 @@ module Aws::CognitoSync
       :identity_id,
       :dataset_name,
       :device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Response to an UnsubscribeFromDataset request.</p>
     class UnsubscribeFromDatasetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1050,8 @@ module Aws::CognitoSync
       :record_patches,
       :sync_session_token,
       :client_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1063,8 @@ module Aws::CognitoSync
     #   @return [Array<Types::Record>]
     class UpdateRecordsResponse < Struct.new(
       :records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

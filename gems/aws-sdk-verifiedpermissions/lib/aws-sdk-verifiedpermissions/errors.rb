@@ -42,7 +42,7 @@ module Aws::VerifiedPermissions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VerifiedPermissions::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::VerifiedPermissions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VerifiedPermissions::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::VerifiedPermissions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VerifiedPermissions::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::VerifiedPermissions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VerifiedPermissions::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -103,7 +103,7 @@ module Aws::VerifiedPermissions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VerifiedPermissions::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::VerifiedPermissions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VerifiedPermissions::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::VerifiedPermissions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VerifiedPermissions::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::VerifiedPermissions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VerifiedPermissions::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -207,7 +207,7 @@ module Aws::VerifiedPermissions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VerifiedPermissions::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

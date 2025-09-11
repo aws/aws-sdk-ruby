@@ -331,7 +331,6 @@ module Aws::AIOps
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/investigationGroups/{identifier}"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

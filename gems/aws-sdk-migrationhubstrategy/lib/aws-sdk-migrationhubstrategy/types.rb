@@ -12,7 +12,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27,7 +28,8 @@ module Aws::MigrationHubStrategy
       :runtime_analysis_status,
       :src_code_or_db_analysis_status,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RuntimeAnalysisStatus < AnalysisStatusUnion; end
@@ -53,7 +55,8 @@ module Aws::MigrationHubStrategy
       :ip_address,
       :source,
       :vm_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +75,8 @@ module Aws::MigrationHubStrategy
       :run_time_analyzer_name,
       :source_code_analyzer_name,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class BinaryAnalyzerName < AnalyzerNameUnion; end
@@ -99,7 +103,8 @@ module Aws::MigrationHubStrategy
       :anti_pattern_report_s3_object,
       :antipattern_report_status,
       :antipattern_report_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +118,8 @@ module Aws::MigrationHubStrategy
     class AntipatternSeveritySummary < Struct.new(
       :severity,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +129,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class AppUnitError < Struct.new(
       :app_unit_error_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +231,8 @@ module Aws::MigrationHubStrategy
       :runtime_status_message,
       :app_unit_error,
       :result_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +247,8 @@ module Aws::MigrationHubStrategy
     class ApplicationComponentStatusSummary < Struct.new(
       :src_code_or_db_analysis_status,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +267,8 @@ module Aws::MigrationHubStrategy
       :recommendation,
       :status,
       :is_preferred,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +282,8 @@ module Aws::MigrationHubStrategy
     class ApplicationComponentSummary < Struct.new(
       :app_type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +293,8 @@ module Aws::MigrationHubStrategy
     #   @return [Types::ManagementPreference]
     class ApplicationPreferences < Struct.new(
       :management_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +344,8 @@ module Aws::MigrationHubStrategy
       :last_analyzed_timestamp,
       :list_application_component_status_summary,
       :list_server_status_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +363,8 @@ module Aws::MigrationHubStrategy
       :condition,
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +378,8 @@ module Aws::MigrationHubStrategy
     class AssociatedApplication < Struct.new(
       :name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +389,8 @@ module Aws::MigrationHubStrategy
     #   @return [Array<String>]
     class AwsManagedResources < Struct.new(
       :target_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -397,7 +413,8 @@ module Aws::MigrationHubStrategy
       :reduce_operational_overhead_with_managed_services,
       :modernize_infrastructure_with_cloud_native_technologies,
       :license_cost_reduction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -436,7 +453,8 @@ module Aws::MigrationHubStrategy
       :registered_time_stamp,
       :last_activity_time_stamp,
       :configuration_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +480,8 @@ module Aws::MigrationHubStrategy
       :version_control_info_list,
       :pipeline_info_list,
       :remote_source_code_analysis_server_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +491,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -510,7 +530,8 @@ module Aws::MigrationHubStrategy
       :start_time,
       :completion_time,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +542,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class DatabaseConfigDetail < Struct.new(
       :secret_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +564,8 @@ module Aws::MigrationHubStrategy
       :homogeneous,
       :no_preference,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Heterogeneous < DatabaseMigrationPreference; end
@@ -562,7 +585,8 @@ module Aws::MigrationHubStrategy
     class DatabasePreferences < Struct.new(
       :database_management_preference,
       :database_migration_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +595,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class DependencyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -580,7 +605,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class GetApplicationComponentDetailsInput < Struct.new(
       :application_component_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -602,7 +628,8 @@ module Aws::MigrationHubStrategy
       :associated_applications,
       :more_application_resource,
       :associated_server_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +638,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class GetApplicationComponentStrategiesInput < Struct.new(
       :application_component_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +648,8 @@ module Aws::MigrationHubStrategy
     #   @return [Array<Types::ApplicationComponentStrategy>]
     class GetApplicationComponentStrategiesOutput < Struct.new(
       :application_component_strategies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +658,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class GetAssessmentInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +676,8 @@ module Aws::MigrationHubStrategy
       :id,
       :data_collection_details,
       :assessment_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -655,7 +686,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class GetImportFileTaskInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,12 +737,14 @@ module Aws::MigrationHubStrategy
       :number_of_records_success,
       :number_of_records_failed,
       :import_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetLatestAssessmentIdInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,12 +753,14 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class GetLatestAssessmentIdOutput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetPortfolioPreferencesInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,12 +781,14 @@ module Aws::MigrationHubStrategy
       :application_preferences,
       :database_preferences,
       :application_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetPortfolioSummaryInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +798,8 @@ module Aws::MigrationHubStrategy
     #   @return [Types::AssessmentSummary]
     class GetPortfolioSummaryOutput < Struct.new(
       :assessment_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +808,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class GetRecommendationReportDetailsInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +822,8 @@ module Aws::MigrationHubStrategy
     class GetRecommendationReportDetailsOutput < Struct.new(
       :id,
       :recommendation_report_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +842,8 @@ module Aws::MigrationHubStrategy
       :server_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +861,8 @@ module Aws::MigrationHubStrategy
       :next_token,
       :server_detail,
       :associated_applications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +871,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class GetServerStrategiesInput < Struct.new(
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +881,8 @@ module Aws::MigrationHubStrategy
     #   @return [Array<Types::ServerStrategy>]
     class GetServerStrategiesOutput < Struct.new(
       :server_strategies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +896,8 @@ module Aws::MigrationHubStrategy
     class Group < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +907,8 @@ module Aws::MigrationHubStrategy
     #   @return [Array<String>]
     class Heterogeneous < Struct.new(
       :target_database_engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -871,7 +918,8 @@ module Aws::MigrationHubStrategy
     #   @return [Array<String>]
     class Homogeneous < Struct.new(
       :target_database_engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +937,8 @@ module Aws::MigrationHubStrategy
       :ip_address_configuration_time_stamp,
       :auth_type,
       :os_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +989,8 @@ module Aws::MigrationHubStrategy
       :number_of_records_success,
       :number_of_records_failed,
       :import_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -949,7 +999,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1018,8 @@ module Aws::MigrationHubStrategy
       :sort,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +1033,8 @@ module Aws::MigrationHubStrategy
     class ListAnalyzableServersResponse < Struct.new(
       :analyzable_servers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1069,8 @@ module Aws::MigrationHubStrategy
       :group_id_filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1084,8 @@ module Aws::MigrationHubStrategy
     class ListApplicationComponentsOutput < Struct.new(
       :application_component_infos,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1045,7 +1100,8 @@ module Aws::MigrationHubStrategy
     class ListCollectorsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1058,7 +1114,8 @@ module Aws::MigrationHubStrategy
     class ListCollectorsOutput < Struct.new(
       :collectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1130,8 @@ module Aws::MigrationHubStrategy
     class ListImportFileTaskInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1144,8 @@ module Aws::MigrationHubStrategy
     class ListImportFileTaskOutput < Struct.new(
       :task_infos,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1180,8 @@ module Aws::MigrationHubStrategy
       :group_id_filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1134,7 +1194,8 @@ module Aws::MigrationHubStrategy
     class ListServersOutput < Struct.new(
       :server_infos,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1214,8 @@ module Aws::MigrationHubStrategy
       :self_manage_resources,
       :no_preference,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AwsManagedResources < ManagementPreference; end
@@ -1181,7 +1243,8 @@ module Aws::MigrationHubStrategy
       :ip_address,
       :mac_address,
       :net_mask,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1192,7 +1255,8 @@ module Aws::MigrationHubStrategy
     #   @return [Array<String>]
     class NoDatabaseMigrationPreference < Struct.new(
       :target_database_engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1202,7 +1266,8 @@ module Aws::MigrationHubStrategy
     #   @return [Array<String>]
     class NoManagementPreference < Struct.new(
       :target_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1216,7 +1281,8 @@ module Aws::MigrationHubStrategy
     class OSInfo < Struct.new(
       :type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1230,7 +1296,8 @@ module Aws::MigrationHubStrategy
     class PipelineInfo < Struct.new(
       :pipeline_type,
       :pipeline_configuration_time_stamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1240,7 +1307,8 @@ module Aws::MigrationHubStrategy
     #   @return [Types::BusinessGoals]
     class PrioritizeBusinessGoals < Struct.new(
       :business_goals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,12 +1329,14 @@ module Aws::MigrationHubStrategy
       :application_preferences,
       :database_preferences,
       :application_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutPortfolioPreferencesOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1296,7 +1366,8 @@ module Aws::MigrationHubStrategy
       :completion_time,
       :s3_bucket,
       :s3_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1385,8 @@ module Aws::MigrationHubStrategy
       :transformation_tool,
       :target_destination,
       :strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,7 +1396,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class RemoteSourceCodeAnalysisServerInfo < Struct.new(
       :remote_source_code_analysis_server_configuration_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1333,7 +1406,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1355,7 +1429,8 @@ module Aws::MigrationHubStrategy
       :analysis_status,
       :status_message,
       :antipattern_report_result_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1369,7 +1444,8 @@ module Aws::MigrationHubStrategy
     class S3Object < Struct.new(
       :s3_bucket,
       :s3key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1379,7 +1455,8 @@ module Aws::MigrationHubStrategy
     #   @return [Array<String>]
     class SelfManageResources < Struct.new(
       :target_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1442,7 +1519,8 @@ module Aws::MigrationHubStrategy
       :server_type,
       :last_analyzed_timestamp,
       :server_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1530,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class ServerError < Struct.new(
       :server_error_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1467,7 +1546,8 @@ module Aws::MigrationHubStrategy
     class ServerStatusSummary < Struct.new(
       :run_time_assessment_status,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1490,7 +1570,8 @@ module Aws::MigrationHubStrategy
       :status,
       :number_of_application_components,
       :is_preferred,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,7 +1585,8 @@ module Aws::MigrationHubStrategy
     class ServerSummary < Struct.new(
       :server_os_type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1595,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class ServiceLinkedRoleLockClientException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,7 +1606,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1546,7 +1630,8 @@ module Aws::MigrationHubStrategy
       :source_version,
       :location,
       :project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1569,7 +1654,8 @@ module Aws::MigrationHubStrategy
       :branch,
       :version_control_type,
       :project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1592,7 +1678,8 @@ module Aws::MigrationHubStrategy
       :s3bucket_for_report_data,
       :assessment_targets,
       :assessment_data_source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1688,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class StartAssessmentOutput < Struct.new(
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1634,7 +1722,8 @@ module Aws::MigrationHubStrategy
       :data_source_type,
       :group_id,
       :s3bucket_for_report_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1643,7 +1732,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class StartImportFileTaskOutput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,7 +1747,8 @@ module Aws::MigrationHubStrategy
     class StartRecommendationReportGenerationInput < Struct.new(
       :output_format,
       :group_id_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1757,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class StartRecommendationReportGenerationOutput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,12 +1767,14 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class StopAssessmentInput < Struct.new(
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopAssessmentOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1799,8 @@ module Aws::MigrationHubStrategy
       :tool_name,
       :target_destination,
       :is_preferred,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1719,7 +1814,8 @@ module Aws::MigrationHubStrategy
     class StrategySummary < Struct.new(
       :strategy,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1741,7 +1837,8 @@ module Aws::MigrationHubStrategy
       :file_system_type,
       :network_info_list,
       :cpu_architecture,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1750,7 +1847,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1769,7 +1867,8 @@ module Aws::MigrationHubStrategy
       :name,
       :description,
       :tranformation_tool_installation_link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,12 +1904,14 @@ module Aws::MigrationHubStrategy
       :secrets_manager_key,
       :configure_only,
       :app_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationComponentConfigOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1823,12 +1924,14 @@ module Aws::MigrationHubStrategy
     class UpdateServerConfigInput < Struct.new(
       :server_id,
       :strategy_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateServerConfigOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1837,7 +1940,8 @@ module Aws::MigrationHubStrategy
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1851,7 +1955,8 @@ module Aws::MigrationHubStrategy
     class VcenterBasedRemoteInfo < Struct.new(
       :vcenter_configuration_time_stamp,
       :os_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1865,7 +1970,8 @@ module Aws::MigrationHubStrategy
     class VersionControlInfo < Struct.new(
       :version_control_type,
       :version_control_configuration_time_stamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

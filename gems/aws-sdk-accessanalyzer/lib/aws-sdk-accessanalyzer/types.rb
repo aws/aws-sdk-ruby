@@ -16,7 +16,8 @@ module Aws::AccessAnalyzer
     class Access < Struct.new(
       :actions,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -31,7 +32,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +63,8 @@ module Aws::AccessAnalyzer
       :created_at,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +134,8 @@ module Aws::AccessAnalyzer
       :error,
       :sources,
       :resource_control_policy_restriction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +145,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class AccessPreviewStatusReason < Struct.new(
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -167,7 +172,8 @@ module Aws::AccessAnalyzer
       :created_at,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +188,8 @@ module Aws::AccessAnalyzer
       :id,
       :uri,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Id < AclGrantee; end
@@ -196,7 +203,8 @@ module Aws::AccessAnalyzer
     #   @return [Array<Types::AnalysisRuleCriteria>]
     class AnalysisRule < Struct.new(
       :exclusions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,7 +218,8 @@ module Aws::AccessAnalyzer
     class AnalysisRuleCriteria < Struct.new(
       :account_ids,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -260,7 +269,8 @@ module Aws::AccessAnalyzer
       :status,
       :resource_owner_account,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +288,8 @@ module Aws::AccessAnalyzer
       :resource_arn,
       :resource_owner_account,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +304,8 @@ module Aws::AccessAnalyzer
       :unused_access,
       :internal_access,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class UnusedAccess < AnalyzerConfiguration; end
@@ -343,7 +355,8 @@ module Aws::AccessAnalyzer
       :status,
       :status_reason,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +374,8 @@ module Aws::AccessAnalyzer
       :analyzer_arn,
       :rule_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -383,7 +397,8 @@ module Aws::AccessAnalyzer
       :filter,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,12 +407,14 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class CancelPolicyGenerationInput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelPolicyGenerationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +431,8 @@ module Aws::AccessAnalyzer
       :policy_document,
       :access,
       :policy_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +449,8 @@ module Aws::AccessAnalyzer
       :result,
       :message,
       :reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +467,8 @@ module Aws::AccessAnalyzer
       :new_policy_document,
       :existing_policy_document,
       :policy_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -465,7 +485,8 @@ module Aws::AccessAnalyzer
       :result,
       :message,
       :reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +499,8 @@ module Aws::AccessAnalyzer
     class CheckNoPublicAccessRequest < Struct.new(
       :policy_document,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +517,8 @@ module Aws::AccessAnalyzer
       :result,
       :message,
       :reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +540,8 @@ module Aws::AccessAnalyzer
       :access_role,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +559,8 @@ module Aws::AccessAnalyzer
       :trail_properties,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +623,8 @@ module Aws::AccessAnalyzer
       :dynamodb_stream,
       :dynamodb_table,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EbsSnapshot < Configuration; end
@@ -631,7 +657,8 @@ module Aws::AccessAnalyzer
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -648,7 +675,8 @@ module Aws::AccessAnalyzer
       :analyzer_arn,
       :configurations,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -657,7 +685,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class CreateAccessPreviewOutput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +716,8 @@ module Aws::AccessAnalyzer
       :tags,
       :client_token,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +727,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class CreateAnalyzerOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +750,8 @@ module Aws::AccessAnalyzer
       :rule_name,
       :filter,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +773,8 @@ module Aws::AccessAnalyzer
       :neq,
       :contains,
       :exists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +788,8 @@ module Aws::AccessAnalyzer
     class DeleteAnalyzerInput < Struct.new(
       :analyzer_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +807,8 @@ module Aws::AccessAnalyzer
       :analyzer_name,
       :rule_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +818,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class DynamodbStreamConfiguration < Struct.new(
       :stream_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +829,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class DynamodbTableConfiguration < Struct.new(
       :table_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,7 +848,8 @@ module Aws::AccessAnalyzer
       :user_ids,
       :groups,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -821,7 +859,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class EcrRepositoryConfiguration < Struct.new(
       :repository_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +870,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class EfsFileSystemConfiguration < Struct.new(
       :file_system_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +901,8 @@ module Aws::AccessAnalyzer
       :principal,
       :sources,
       :resource_control_policy_restriction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +924,8 @@ module Aws::AccessAnalyzer
       :total_active_findings,
       :total_archived_findings,
       :total_resolved_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -949,7 +991,8 @@ module Aws::AccessAnalyzer
       :error,
       :sources,
       :resource_control_policy_restriction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1010,8 @@ module Aws::AccessAnalyzer
       :account,
       :number_of_active_findings,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,7 +1042,8 @@ module Aws::AccessAnalyzer
       :unused_iam_role_details,
       :unused_iam_user_password_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class InternalAccessDetails < FindingDetails; end
@@ -1020,7 +1065,8 @@ module Aws::AccessAnalyzer
     class FindingSource < Struct.new(
       :type,
       :detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1080,8 @@ module Aws::AccessAnalyzer
     class FindingSourceDetail < Struct.new(
       :access_point_arn,
       :access_point_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1147,8 @@ module Aws::AccessAnalyzer
       :error,
       :sources,
       :resource_control_policy_restriction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1194,8 @@ module Aws::AccessAnalyzer
       :status,
       :updated_at,
       :finding_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1214,8 @@ module Aws::AccessAnalyzer
       :internal_access_findings_statistics,
       :unused_access_findings_statistics,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ExternalAccessFindingsStatistics < FindingsStatistics; end
@@ -1183,7 +1233,8 @@ module Aws::AccessAnalyzer
     class GenerateFindingRecommendationRequest < Struct.new(
       :analyzer_arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1193,7 +1244,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class GeneratedPolicy < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,7 +1263,8 @@ module Aws::AccessAnalyzer
       :is_complete,
       :principal_arn,
       :cloud_trail_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1225,7 +1278,8 @@ module Aws::AccessAnalyzer
     class GeneratedPolicyResult < Struct.new(
       :properties,
       :generated_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1238,7 +1292,8 @@ module Aws::AccessAnalyzer
     class GetAccessPreviewInput < Struct.new(
       :access_preview_id,
       :analyzer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1247,7 +1302,8 @@ module Aws::AccessAnalyzer
     #   @return [Types::AccessPreview]
     class GetAccessPreviewOutput < Struct.new(
       :access_preview,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1317,8 @@ module Aws::AccessAnalyzer
     class GetAnalyzedResourceInput < Struct.new(
       :analyzer_arn,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1328,8 @@ module Aws::AccessAnalyzer
     #   @return [Types::AnalyzedResource]
     class GetAnalyzedResourceOutput < Struct.new(
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1339,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class GetAnalyzerInput < Struct.new(
       :analyzer_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1350,8 @@ module Aws::AccessAnalyzer
     #   @return [Types::AnalyzerSummary]
     class GetAnalyzerOutput < Struct.new(
       :analyzer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1305,7 +1365,8 @@ module Aws::AccessAnalyzer
     class GetArchiveRuleInput < Struct.new(
       :analyzer_name,
       :rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1315,7 +1376,8 @@ module Aws::AccessAnalyzer
     #   @return [Types::ArchiveRuleSummary]
     class GetArchiveRuleOutput < Struct.new(
       :archive_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1391,8 @@ module Aws::AccessAnalyzer
     class GetFindingInput < Struct.new(
       :analyzer_arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1402,8 @@ module Aws::AccessAnalyzer
     #   @return [Types::Finding]
     class GetFindingOutput < Struct.new(
       :finding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,7 +1424,8 @@ module Aws::AccessAnalyzer
       :id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1397,7 +1462,8 @@ module Aws::AccessAnalyzer
       :recommended_steps,
       :recommendation_type,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1418,7 +1484,8 @@ module Aws::AccessAnalyzer
       :id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1471,7 +1538,8 @@ module Aws::AccessAnalyzer
       :updated_at,
       :finding_details,
       :finding_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1480,7 +1548,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class GetFindingsStatisticsRequest < Struct.new(
       :analyzer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,7 +1562,8 @@ module Aws::AccessAnalyzer
     class GetFindingsStatisticsResponse < Struct.new(
       :findings_statistics,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1580,8 @@ module Aws::AccessAnalyzer
       :job_id,
       :include_resource_placeholders,
       :include_service_level_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,7 +1594,8 @@ module Aws::AccessAnalyzer
     class GetGeneratedPolicyOutput < Struct.new(
       :job_details,
       :generated_policy_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1533,7 +1605,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class IamRoleConfiguration < Struct.new(
       :trust_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1547,7 +1620,8 @@ module Aws::AccessAnalyzer
     class InlineArchiveRule < Struct.new(
       :rule_name,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1557,7 +1631,8 @@ module Aws::AccessAnalyzer
     #   @return [Array<Types::InternalAccessAnalysisRuleCriteria>]
     class InternalAccessAnalysisRule < Struct.new(
       :inclusions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1650,8 @@ module Aws::AccessAnalyzer
       :account_ids,
       :resource_types,
       :resource_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1585,7 +1661,8 @@ module Aws::AccessAnalyzer
     #   @return [Types::InternalAccessAnalysisRule]
     class InternalAccessConfiguration < Struct.new(
       :analysis_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1627,7 +1704,8 @@ module Aws::AccessAnalyzer
       :sources,
       :resource_control_policy_restriction,
       :service_control_policy_restriction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1649,7 +1727,8 @@ module Aws::AccessAnalyzer
       :total_active_findings,
       :total_archived_findings,
       :total_resolved_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1667,7 +1746,8 @@ module Aws::AccessAnalyzer
       :total_active_findings,
       :total_resolved_findings,
       :total_archived_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,13 +1760,15 @@ module Aws::AccessAnalyzer
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>This configuration sets the network origin for the Amazon S3 access point or multi-region access point to <code>Internet</code>.</p>
     class InternetConfiguration < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1695,7 +1777,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1721,7 +1804,8 @@ module Aws::AccessAnalyzer
       :started_on,
       :completed_on,
       :job_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1735,7 +1819,8 @@ module Aws::AccessAnalyzer
     class JobError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1761,7 +1846,8 @@ module Aws::AccessAnalyzer
       :retiring_principal,
       :constraints,
       :issuing_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1775,7 +1861,8 @@ module Aws::AccessAnalyzer
     class KmsGrantConstraints < Struct.new(
       :encryption_context_equals,
       :encryption_context_subset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1789,7 +1876,8 @@ module Aws::AccessAnalyzer
     class KmsKeyConfiguration < Struct.new(
       :key_policies,
       :grants,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1902,8 @@ module Aws::AccessAnalyzer
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1827,7 +1916,8 @@ module Aws::AccessAnalyzer
     class ListAccessPreviewFindingsOutput < Struct.new(
       :findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1844,7 +1934,8 @@ module Aws::AccessAnalyzer
       :analyzer_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1857,7 +1948,8 @@ module Aws::AccessAnalyzer
     class ListAccessPreviewsOutput < Struct.new(
       :access_previews,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1879,7 +1971,8 @@ module Aws::AccessAnalyzer
       :resource_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1893,7 +1986,8 @@ module Aws::AccessAnalyzer
     class ListAnalyzedResourcesOutput < Struct.new(
       :analyzed_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1911,7 +2005,8 @@ module Aws::AccessAnalyzer
       :next_token,
       :max_results,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1925,7 +2020,8 @@ module Aws::AccessAnalyzer
     class ListAnalyzersOutput < Struct.new(
       :analyzers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1943,7 +2039,8 @@ module Aws::AccessAnalyzer
       :analyzer_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2054,8 @@ module Aws::AccessAnalyzer
     class ListArchiveRulesOutput < Struct.new(
       :archive_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2081,8 @@ module Aws::AccessAnalyzer
       :sort,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1997,7 +2096,8 @@ module Aws::AccessAnalyzer
     class ListFindingsOutput < Struct.new(
       :findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2122,8 @@ module Aws::AccessAnalyzer
       :max_results,
       :next_token,
       :sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2035,7 +2136,8 @@ module Aws::AccessAnalyzer
     class ListFindingsV2Response < Struct.new(
       :findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2052,7 +2154,8 @@ module Aws::AccessAnalyzer
       :principal_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2065,7 +2168,8 @@ module Aws::AccessAnalyzer
     class ListPolicyGenerationsOutput < Struct.new(
       :policy_generations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2075,7 +2179,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2085,7 +2190,8 @@ module Aws::AccessAnalyzer
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2205,8 @@ module Aws::AccessAnalyzer
     class Location < Struct.new(
       :path,
       :span,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2114,7 +2221,8 @@ module Aws::AccessAnalyzer
       :vpc_configuration,
       :internet_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class VpcConfiguration < NetworkOriginConfiguration; end
@@ -2141,7 +2249,8 @@ module Aws::AccessAnalyzer
       :substring,
       :value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Index < PathElement; end
@@ -2173,7 +2282,8 @@ module Aws::AccessAnalyzer
       :status,
       :started_on,
       :completed_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2183,7 +2293,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class PolicyGenerationDetails < Struct.new(
       :principal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2201,7 +2312,8 @@ module Aws::AccessAnalyzer
       :line,
       :column,
       :offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2212,7 +2324,8 @@ module Aws::AccessAnalyzer
     class RdsDbClusterSnapshotAttributeValue < Struct.new(
       :account_ids,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AccountIds < RdsDbClusterSnapshotAttributeValue; end
@@ -2229,7 +2342,8 @@ module Aws::AccessAnalyzer
     class RdsDbClusterSnapshotConfiguration < Struct.new(
       :attributes,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2240,7 +2354,8 @@ module Aws::AccessAnalyzer
     class RdsDbSnapshotAttributeValue < Struct.new(
       :account_ids,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AccountIds < RdsDbSnapshotAttributeValue; end
@@ -2257,7 +2372,8 @@ module Aws::AccessAnalyzer
     class RdsDbSnapshotConfiguration < Struct.new(
       :attributes,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2275,7 +2391,8 @@ module Aws::AccessAnalyzer
       :description,
       :statement_index,
       :statement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2289,7 +2406,8 @@ module Aws::AccessAnalyzer
     class RecommendationError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2300,7 +2418,8 @@ module Aws::AccessAnalyzer
     class RecommendedStep < Struct.new(
       :unused_permissions_recommended_step,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class UnusedPermissionsRecommendedStep < RecommendedStep; end
@@ -2320,7 +2439,8 @@ module Aws::AccessAnalyzer
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2334,7 +2454,8 @@ module Aws::AccessAnalyzer
     class ResourceTypeDetails < Struct.new(
       :total_active_public,
       :total_active_cross_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2352,7 +2473,8 @@ module Aws::AccessAnalyzer
       :access_point_policy,
       :public_access_block,
       :network_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2366,7 +2488,8 @@ module Aws::AccessAnalyzer
     class S3BucketAclGrantConfiguration < Struct.new(
       :permission,
       :grantee,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2388,7 +2511,8 @@ module Aws::AccessAnalyzer
       :bucket_acl_grants,
       :bucket_public_access_block,
       :access_points,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2402,7 +2526,8 @@ module Aws::AccessAnalyzer
     class S3ExpressDirectoryAccessPointConfiguration < Struct.new(
       :access_point_policy,
       :network_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2416,7 +2541,8 @@ module Aws::AccessAnalyzer
     class S3ExpressDirectoryBucketConfiguration < Struct.new(
       :bucket_policy,
       :access_points,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2430,7 +2556,8 @@ module Aws::AccessAnalyzer
     class S3PublicAccessBlockConfiguration < Struct.new(
       :ignore_public_acls,
       :restrict_public_buckets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2444,7 +2571,8 @@ module Aws::AccessAnalyzer
     class SecretsManagerSecretConfiguration < Struct.new(
       :kms_key_id,
       :secret_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2461,7 +2589,8 @@ module Aws::AccessAnalyzer
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2471,7 +2600,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class SnsTopicConfiguration < Struct.new(
       :topic_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2485,7 +2615,8 @@ module Aws::AccessAnalyzer
     class SortCriteria < Struct.new(
       :attribute_name,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2499,7 +2630,8 @@ module Aws::AccessAnalyzer
     class Span < Struct.new(
       :start,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2509,7 +2641,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class SqsQueueConfiguration < Struct.new(
       :queue_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2526,7 +2659,8 @@ module Aws::AccessAnalyzer
       :policy_generation_details,
       :cloud_trail_details,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2535,7 +2669,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class StartPolicyGenerationOutput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2553,7 +2688,8 @@ module Aws::AccessAnalyzer
       :analyzer_arn,
       :resource_arn,
       :resource_owner_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2563,7 +2699,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class StatusReason < Struct.new(
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2577,7 +2714,8 @@ module Aws::AccessAnalyzer
     class Substring < Struct.new(
       :start,
       :length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2591,13 +2729,15 @@ module Aws::AccessAnalyzer
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response to the request.</p>
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2610,7 +2750,8 @@ module Aws::AccessAnalyzer
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2628,7 +2769,8 @@ module Aws::AccessAnalyzer
       :cloud_trail_arn,
       :regions,
       :all_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2646,7 +2788,8 @@ module Aws::AccessAnalyzer
       :cloud_trail_arn,
       :regions,
       :all_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2655,7 +2798,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class UnprocessableEntityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2669,13 +2813,15 @@ module Aws::AccessAnalyzer
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response to the request.</p>
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2689,7 +2835,8 @@ module Aws::AccessAnalyzer
     class UnusedAccessConfiguration < Struct.new(
       :unused_access_age,
       :analysis_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2715,7 +2862,8 @@ module Aws::AccessAnalyzer
       :total_active_findings,
       :total_archived_findings,
       :total_resolved_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2729,7 +2877,8 @@ module Aws::AccessAnalyzer
     class UnusedAccessTypeStatistics < Struct.new(
       :unused_access_type,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2743,7 +2892,8 @@ module Aws::AccessAnalyzer
     class UnusedAction < Struct.new(
       :action,
       :last_accessed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2753,7 +2903,8 @@ module Aws::AccessAnalyzer
     #   @return [Time]
     class UnusedIamRoleDetails < Struct.new(
       :last_accessed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2767,7 +2918,8 @@ module Aws::AccessAnalyzer
     class UnusedIamUserAccessKeyDetails < Struct.new(
       :access_key_id,
       :last_accessed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2777,7 +2929,8 @@ module Aws::AccessAnalyzer
     #   @return [Time]
     class UnusedIamUserPasswordDetails < Struct.new(
       :last_accessed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2795,7 +2948,8 @@ module Aws::AccessAnalyzer
       :actions,
       :service_namespace,
       :last_accessed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2817,7 +2971,8 @@ module Aws::AccessAnalyzer
       :recommended_action,
       :recommended_policy,
       :existing_policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2830,7 +2985,8 @@ module Aws::AccessAnalyzer
     class UpdateAnalyzerRequest < Struct.new(
       :analyzer_name,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2839,7 +2995,8 @@ module Aws::AccessAnalyzer
     #   @return [Types::AnalyzerConfiguration]
     class UpdateAnalyzerResponse < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2861,7 +3018,8 @@ module Aws::AccessAnalyzer
       :rule_name,
       :filter,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2887,7 +3045,8 @@ module Aws::AccessAnalyzer
       :ids,
       :resource_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2913,7 +3072,8 @@ module Aws::AccessAnalyzer
       :issue_code,
       :learn_more_link,
       :locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2942,7 +3102,8 @@ module Aws::AccessAnalyzer
       :policy_document,
       :policy_type,
       :validate_policy_resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2955,7 +3116,8 @@ module Aws::AccessAnalyzer
     class ValidatePolicyOutput < Struct.new(
       :findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2972,7 +3134,8 @@ module Aws::AccessAnalyzer
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2986,7 +3149,8 @@ module Aws::AccessAnalyzer
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2996,7 +3160,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     class VpcConfiguration < Struct.new(
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

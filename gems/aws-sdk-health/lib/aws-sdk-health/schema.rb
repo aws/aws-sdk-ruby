@@ -522,7 +522,6 @@ module Aws::Health
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

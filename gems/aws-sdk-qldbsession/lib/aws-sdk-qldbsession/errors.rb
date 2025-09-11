@@ -40,7 +40,7 @@ module Aws::QLDBSession
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QLDBSession::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::QLDBSession
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QLDBSession::Types::CapacityExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::QLDBSession
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QLDBSession::Types::InvalidSessionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::QLDBSession
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QLDBSession::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::QLDBSession
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QLDBSession::Types::OccConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::QLDBSession
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QLDBSession::Types::RateExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

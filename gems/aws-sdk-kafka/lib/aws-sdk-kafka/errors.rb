@@ -41,7 +41,7 @@ module Aws::Kafka
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kafka::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The parameter that caused the error.</p>
@@ -60,7 +60,7 @@ module Aws::Kafka
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kafka::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The parameter that caused the error.</p>
@@ -79,7 +79,7 @@ module Aws::Kafka
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kafka::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The parameter that caused the error.</p>
@@ -98,7 +98,7 @@ module Aws::Kafka
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kafka::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The parameter that caused the error.</p>
@@ -117,7 +117,7 @@ module Aws::Kafka
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kafka::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The parameter that caused the error.</p>
@@ -136,7 +136,7 @@ module Aws::Kafka
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kafka::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The parameter that caused the error.</p>
@@ -155,7 +155,7 @@ module Aws::Kafka
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kafka::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The parameter that caused the error.</p>
@@ -174,7 +174,7 @@ module Aws::Kafka
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kafka::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The parameter that caused the error.</p>

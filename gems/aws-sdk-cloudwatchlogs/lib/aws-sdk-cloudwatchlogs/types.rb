@@ -11,7 +11,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +47,8 @@ module Aws::CloudWatchLogs
       :scope,
       :selection_criteria,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +67,8 @@ module Aws::CloudWatchLogs
       :key,
       :value,
       :overwrite_if_exists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -82,7 +85,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::AddKeyEntry>]
     class AddKeys < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +188,8 @@ module Aws::CloudWatchLogs
       :suppressed_date,
       :suppressed_until,
       :is_pattern_level_suppression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -243,7 +248,8 @@ module Aws::CloudWatchLogs
       :creation_time_stamp,
       :last_modified_time_stamp,
       :anomaly_visibility_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -294,7 +300,8 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :kms_key_id,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +331,8 @@ module Aws::CloudWatchLogs
       :delimiter,
       :columns,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +341,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class CancelExportTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -390,7 +399,8 @@ module Aws::CloudWatchLogs
       :allowed_action_for_allow_vended_logs_delivery_for_resource,
       :allowed_field_delimiters,
       :allowed_suffix_path_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +424,8 @@ module Aws::CloudWatchLogs
       :record_fields,
       :field_delimiter,
       :s3_delivery_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +434,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +450,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::CopyValueEntry>]
     class CopyValue < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +470,8 @@ module Aws::CloudWatchLogs
       :source,
       :target,
       :overwrite_if_exists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -496,7 +510,8 @@ module Aws::CloudWatchLogs
       :field_delimiter,
       :s3_delivery_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +520,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::Delivery]
     class CreateDeliveryResponse < Struct.new(
       :delivery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +564,8 @@ module Aws::CloudWatchLogs
       :to,
       :destination,
       :destination_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +574,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class CreateExportTaskResponse < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -609,7 +627,8 @@ module Aws::CloudWatchLogs
       :kms_key_id,
       :anomaly_visibility_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +637,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class CreateLogAnomalyDetectorResponse < Struct.new(
       :anomaly_detector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -672,7 +692,8 @@ module Aws::CloudWatchLogs
       :kms_key_id,
       :tags,
       :log_group_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +706,8 @@ module Aws::CloudWatchLogs
     class CreateLogStreamRequest < Struct.new(
       :log_group_name,
       :log_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +725,8 @@ module Aws::CloudWatchLogs
     class DataAlreadyAcceptedException < Struct.new(
       :expected_sequence_token,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -743,7 +766,8 @@ module Aws::CloudWatchLogs
       :source_timezone,
       :target_timezone,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +780,8 @@ module Aws::CloudWatchLogs
     class DeleteAccountPolicyRequest < Struct.new(
       :policy_name,
       :policy_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +791,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteDataProtectionPolicyRequest < Struct.new(
       :log_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +801,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteDeliveryDestinationPolicyRequest < Struct.new(
       :delivery_destination_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +812,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteDeliveryDestinationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +822,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteDeliveryRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +832,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteDeliverySourceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -812,7 +842,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteDestinationRequest < Struct.new(
       :destination_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,12 +853,14 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteIndexPolicyRequest < Struct.new(
       :log_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIndexPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,12 +875,14 @@ module Aws::CloudWatchLogs
     class DeleteIntegrationRequest < Struct.new(
       :integration_name,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIntegrationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,7 +893,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<String>]
     class DeleteKeys < Struct.new(
       :with_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +904,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteLogAnomalyDetectorRequest < Struct.new(
       :anomaly_detector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,7 +914,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteLogGroupRequest < Struct.new(
       :log_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +928,8 @@ module Aws::CloudWatchLogs
     class DeleteLogStreamRequest < Struct.new(
       :log_group_name,
       :log_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +942,8 @@ module Aws::CloudWatchLogs
     class DeleteMetricFilterRequest < Struct.new(
       :log_group_name,
       :filter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -913,7 +953,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteQueryDefinitionRequest < Struct.new(
       :query_definition_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +964,8 @@ module Aws::CloudWatchLogs
     #   @return [Boolean]
     class DeleteQueryDefinitionResponse < Struct.new(
       :success,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -945,7 +987,8 @@ module Aws::CloudWatchLogs
       :policy_name,
       :resource_arn,
       :expected_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -954,7 +997,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteRetentionPolicyRequest < Struct.new(
       :log_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1011,8 @@ module Aws::CloudWatchLogs
     class DeleteSubscriptionFilterRequest < Struct.new(
       :log_group_name,
       :filter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -978,7 +1023,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeleteTransformerRequest < Struct.new(
       :log_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1027,7 +1073,8 @@ module Aws::CloudWatchLogs
       :field_delimiter,
       :s3_delivery_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1131,8 @@ module Aws::CloudWatchLogs
       :output_format,
       :delivery_destination_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1095,7 +1143,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class DeliveryDestinationConfiguration < Struct.new(
       :destination_resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1157,7 +1206,8 @@ module Aws::CloudWatchLogs
       :service,
       :log_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,7 +1235,8 @@ module Aws::CloudWatchLogs
       :policy_name,
       :account_identifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1200,7 +1251,8 @@ module Aws::CloudWatchLogs
     class DescribeAccountPoliciesResponse < Struct.new(
       :account_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1287,8 @@ module Aws::CloudWatchLogs
       :delivery_destination_types,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1250,7 +1303,8 @@ module Aws::CloudWatchLogs
     class DescribeConfigurationTemplatesResponse < Struct.new(
       :configuration_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1318,8 @@ module Aws::CloudWatchLogs
     class DescribeDeliveriesRequest < Struct.new(
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1334,8 @@ module Aws::CloudWatchLogs
     class DescribeDeliveriesResponse < Struct.new(
       :deliveries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1294,7 +1350,8 @@ module Aws::CloudWatchLogs
     class DescribeDeliveryDestinationsRequest < Struct.new(
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1366,8 @@ module Aws::CloudWatchLogs
     class DescribeDeliveryDestinationsResponse < Struct.new(
       :delivery_destinations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,7 +1382,8 @@ module Aws::CloudWatchLogs
     class DescribeDeliverySourcesRequest < Struct.new(
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1398,8 @@ module Aws::CloudWatchLogs
     class DescribeDeliverySourcesResponse < Struct.new(
       :delivery_sources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1419,8 @@ module Aws::CloudWatchLogs
       :destination_name_prefix,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1434,8 @@ module Aws::CloudWatchLogs
     class DescribeDestinationsResponse < Struct.new(
       :destinations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1460,8 @@ module Aws::CloudWatchLogs
       :status_code,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1412,7 +1475,8 @@ module Aws::CloudWatchLogs
     class DescribeExportTasksResponse < Struct.new(
       :export_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1427,7 +1491,8 @@ module Aws::CloudWatchLogs
     class DescribeFieldIndexesRequest < Struct.new(
       :log_group_identifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1441,7 +1506,8 @@ module Aws::CloudWatchLogs
     class DescribeFieldIndexesResponse < Struct.new(
       :field_indexes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1456,7 +1522,8 @@ module Aws::CloudWatchLogs
     class DescribeIndexPoliciesRequest < Struct.new(
       :log_group_identifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1537,8 @@ module Aws::CloudWatchLogs
     class DescribeIndexPoliciesResponse < Struct.new(
       :index_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1560,7 +1628,8 @@ module Aws::CloudWatchLogs
       :include_linked_accounts,
       :log_group_class,
       :log_group_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1644,8 @@ module Aws::CloudWatchLogs
     class DescribeLogGroupsResponse < Struct.new(
       :log_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1632,7 +1702,8 @@ module Aws::CloudWatchLogs
       :descending,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1646,7 +1717,8 @@ module Aws::CloudWatchLogs
     class DescribeLogStreamsResponse < Struct.new(
       :log_streams,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1682,7 +1754,8 @@ module Aws::CloudWatchLogs
       :limit,
       :metric_name,
       :metric_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1696,7 +1769,8 @@ module Aws::CloudWatchLogs
     class DescribeMetricFiltersResponse < Struct.new(
       :metric_filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1799,8 @@ module Aws::CloudWatchLogs
       :max_results,
       :next_token,
       :query_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1739,7 +1814,8 @@ module Aws::CloudWatchLogs
     class DescribeQueriesResponse < Struct.new(
       :queries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1840,8 @@ module Aws::CloudWatchLogs
       :query_definition_name_prefix,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,7 +1855,8 @@ module Aws::CloudWatchLogs
     class DescribeQueryDefinitionsResponse < Struct.new(
       :query_definitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1801,7 +1879,8 @@ module Aws::CloudWatchLogs
       :limit,
       :resource_arn,
       :policy_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1815,7 +1894,8 @@ module Aws::CloudWatchLogs
     class DescribeResourcePoliciesResponse < Struct.new(
       :resource_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,7 +1919,8 @@ module Aws::CloudWatchLogs
       :filter_name_prefix,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1853,7 +1934,8 @@ module Aws::CloudWatchLogs
     class DescribeSubscriptionFiltersResponse < Struct.new(
       :subscription_filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1886,7 +1968,8 @@ module Aws::CloudWatchLogs
       :access_policy,
       :arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +2010,8 @@ module Aws::CloudWatchLogs
     class DisassociateKmsKeyRequest < Struct.new(
       :log_group_name,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2037,8 @@ module Aws::CloudWatchLogs
     class Entity < Struct.new(
       :key_attributes,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1998,7 +2083,8 @@ module Aws::CloudWatchLogs
       :destination_prefix,
       :status,
       :execution_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2014,7 +2100,8 @@ module Aws::CloudWatchLogs
     class ExportTaskExecutionInfo < Struct.new(
       :creation_time,
       :completion_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2028,7 +2115,8 @@ module Aws::CloudWatchLogs
     class ExportTaskStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2147,8 @@ module Aws::CloudWatchLogs
       :last_scan_time,
       :first_event_time,
       :last_event_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2069,7 +2158,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class FieldsData < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2154,7 +2244,8 @@ module Aws::CloudWatchLogs
       :limit,
       :interleaved,
       :unmask,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2269,8 @@ module Aws::CloudWatchLogs
       :events,
       :searched_log_streams,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2206,7 +2298,8 @@ module Aws::CloudWatchLogs
       :message,
       :ingestion_time,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2216,7 +2309,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class GetDataProtectionPolicyRequest < Struct.new(
       :log_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2233,7 +2327,8 @@ module Aws::CloudWatchLogs
       :log_group_identifier,
       :policy_document,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2337,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class GetDeliveryDestinationPolicyRequest < Struct.new(
       :delivery_destination_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2251,7 +2347,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::Policy]
     class GetDeliveryDestinationPolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2260,7 +2357,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class GetDeliveryDestinationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2269,7 +2367,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::DeliveryDestination]
     class GetDeliveryDestinationResponse < Struct.new(
       :delivery_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2377,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class GetDeliveryRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2287,7 +2387,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::Delivery]
     class GetDeliveryResponse < Struct.new(
       :delivery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2296,7 +2397,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class GetDeliverySourceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2305,7 +2407,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::DeliverySource]
     class GetDeliverySourceResponse < Struct.new(
       :delivery_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2316,7 +2419,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class GetIntegrationRequest < Struct.new(
       :integration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2340,7 +2444,8 @@ module Aws::CloudWatchLogs
       :integration_type,
       :integration_status,
       :integration_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,7 +2455,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class GetLogAnomalyDetectorRequest < Struct.new(
       :anomaly_detector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2400,7 +2506,8 @@ module Aws::CloudWatchLogs
       :creation_time_stamp,
       :last_modified_time_stamp,
       :anomaly_visibility_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2470,7 +2577,8 @@ module Aws::CloudWatchLogs
       :limit,
       :start_from_head,
       :unmask,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2491,7 +2599,8 @@ module Aws::CloudWatchLogs
       :events,
       :next_forward_token,
       :next_backward_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2521,7 +2630,8 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :time,
       :log_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2532,7 +2642,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::LogGroupField>]
     class GetLogGroupFieldsResponse < Struct.new(
       :log_group_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2546,7 +2657,8 @@ module Aws::CloudWatchLogs
     class GetLogObjectRequest < Struct.new(
       :unmask,
       :log_object_pointer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2556,7 +2668,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::GetLogObjectResponseStream]
     class GetLogObjectResponse < Struct.new(
       :field_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2571,7 +2684,8 @@ module Aws::CloudWatchLogs
       :fields,
       :internal_streaming_exception,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Fields < GetLogObjectResponseStream; end
@@ -2594,7 +2708,8 @@ module Aws::CloudWatchLogs
     class GetLogRecordRequest < Struct.new(
       :log_record_pointer,
       :unmask,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2603,7 +2718,8 @@ module Aws::CloudWatchLogs
     #   @return [Hash<String, String>]
     class GetLogRecordResponse < Struct.new(
       :log_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2612,7 +2728,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class GetQueryResultsRequest < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2651,7 +2768,8 @@ module Aws::CloudWatchLogs
       :statistics,
       :status,
       :encryption_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2662,7 +2780,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class GetTransformerRequest < Struct.new(
       :log_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2685,7 +2804,8 @@ module Aws::CloudWatchLogs
       :creation_time,
       :last_modified_time,
       :transformer_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2703,7 +2823,8 @@ module Aws::CloudWatchLogs
     class Grok < Struct.new(
       :source,
       :match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2731,7 +2852,8 @@ module Aws::CloudWatchLogs
       :policy_document,
       :policy_name,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2747,7 +2869,8 @@ module Aws::CloudWatchLogs
     class InputLogEvent < Struct.new(
       :timestamp,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2761,7 +2884,8 @@ module Aws::CloudWatchLogs
     class IntegrationDetails < Struct.new(
       :open_search_integration_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OpenSearchIntegrationDetails < IntegrationDetails; end
@@ -2784,7 +2908,8 @@ module Aws::CloudWatchLogs
       :integration_name,
       :integration_type,
       :integration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2793,7 +2918,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class InternalStreamingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2802,7 +2928,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class InvalidOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2811,7 +2938,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2831,7 +2959,8 @@ module Aws::CloudWatchLogs
     class InvalidSequenceTokenException < Struct.new(
       :expected_sequence_token,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2840,7 +2969,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2865,7 +2995,8 @@ module Aws::CloudWatchLogs
       :suppression_state,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2880,7 +3011,8 @@ module Aws::CloudWatchLogs
     class ListAnomaliesResponse < Struct.new(
       :anomalies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2899,7 +3031,8 @@ module Aws::CloudWatchLogs
       :integration_name_prefix,
       :integration_type,
       :integration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2909,7 +3042,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::IntegrationSummary>]
     class ListIntegrationsResponse < Struct.new(
       :integration_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2929,7 +3063,8 @@ module Aws::CloudWatchLogs
       :filter_log_group_arn,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2944,7 +3079,8 @@ module Aws::CloudWatchLogs
     class ListLogAnomalyDetectorsResponse < Struct.new(
       :anomaly_detectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2962,7 +3098,8 @@ module Aws::CloudWatchLogs
       :query_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2976,7 +3113,8 @@ module Aws::CloudWatchLogs
     class ListLogGroupsForQueryResponse < Struct.new(
       :log_group_identifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3035,7 +3173,8 @@ module Aws::CloudWatchLogs
       :account_identifiers,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3050,7 +3189,8 @@ module Aws::CloudWatchLogs
     class ListLogGroupsResponse < Struct.new(
       :log_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3069,7 +3209,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3078,7 +3219,8 @@ module Aws::CloudWatchLogs
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3089,7 +3231,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ListTagsLogGroupRequest < Struct.new(
       :log_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3100,7 +3243,8 @@ module Aws::CloudWatchLogs
     #   @return [Hash<String, String>]
     class ListTagsLogGroupResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3140,7 +3284,8 @@ module Aws::CloudWatchLogs
       :target,
       :flatten,
       :flattened_element,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3172,7 +3317,8 @@ module Aws::CloudWatchLogs
       :message,
       :timestamp,
       :ingestion_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3189,7 +3335,8 @@ module Aws::CloudWatchLogs
     #   @return [Boolean]
     class LiveTailSessionMetadata < Struct.new(
       :sampled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3235,7 +3382,8 @@ module Aws::CloudWatchLogs
       :log_stream_names,
       :log_stream_name_prefixes,
       :log_event_filter_pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3253,7 +3401,8 @@ module Aws::CloudWatchLogs
     class LiveTailSessionUpdate < Struct.new(
       :session_metadata,
       :session_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3268,7 +3417,8 @@ module Aws::CloudWatchLogs
     class LogEvent < Struct.new(
       :timestamp,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3363,7 +3513,8 @@ module Aws::CloudWatchLogs
       :inherited_properties,
       :log_group_class,
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3378,7 +3529,8 @@ module Aws::CloudWatchLogs
     class LogGroupField < Struct.new(
       :name,
       :percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3403,7 +3555,8 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :log_group_arn,
       :log_group_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3463,7 +3616,8 @@ module Aws::CloudWatchLogs
       :upload_sequence_token,
       :arn,
       :stored_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3474,7 +3628,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<String>]
     class LowerCaseString < Struct.new(
       :with_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3490,7 +3645,8 @@ module Aws::CloudWatchLogs
     class MalformedQueryException < Struct.new(
       :query_compile_error,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3527,7 +3683,8 @@ module Aws::CloudWatchLogs
       :creation_time,
       :log_group_name,
       :apply_on_transformed_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3550,7 +3707,8 @@ module Aws::CloudWatchLogs
       :event_number,
       :event_message,
       :extracted_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3604,7 +3762,8 @@ module Aws::CloudWatchLogs
       :default_value,
       :dimensions,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3623,7 +3782,8 @@ module Aws::CloudWatchLogs
       :source,
       :target,
       :overwrite_if_exists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3640,7 +3800,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::MoveKeyEntry>]
     class MoveKeys < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3665,7 +3826,8 @@ module Aws::CloudWatchLogs
       :application_arn,
       :application_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3687,7 +3849,8 @@ module Aws::CloudWatchLogs
       :collection_endpoint,
       :collection_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3707,7 +3870,8 @@ module Aws::CloudWatchLogs
     class OpenSearchDataAccessPolicy < Struct.new(
       :policy_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3727,7 +3891,8 @@ module Aws::CloudWatchLogs
     class OpenSearchDataSource < Struct.new(
       :data_source_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3744,7 +3909,8 @@ module Aws::CloudWatchLogs
     class OpenSearchEncryptionPolicy < Struct.new(
       :policy_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3811,7 +3977,8 @@ module Aws::CloudWatchLogs
       :network_policy,
       :access_policy,
       :lifecycle_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3831,7 +3998,8 @@ module Aws::CloudWatchLogs
     class OpenSearchLifecyclePolicy < Struct.new(
       :policy_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3848,7 +4016,8 @@ module Aws::CloudWatchLogs
     class OpenSearchNetworkPolicy < Struct.new(
       :policy_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3889,7 +4058,8 @@ module Aws::CloudWatchLogs
       :dashboard_viewer_principals,
       :application_arn,
       :retention_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3904,7 +4074,8 @@ module Aws::CloudWatchLogs
     class OpenSearchResourceStatus < Struct.new(
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3923,7 +4094,8 @@ module Aws::CloudWatchLogs
     class OpenSearchWorkspace < Struct.new(
       :workspace_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3932,7 +4104,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class OperationAbortedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3952,7 +4125,8 @@ module Aws::CloudWatchLogs
       :timestamp,
       :message,
       :ingestion_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3969,7 +4143,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ParseCloudfront < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3991,7 +4166,8 @@ module Aws::CloudWatchLogs
     class ParseJSON < Struct.new(
       :source,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4033,7 +4209,8 @@ module Aws::CloudWatchLogs
       :key_prefix,
       :non_match_value,
       :overwrite_if_exists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4056,7 +4233,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ParsePostgres < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4072,7 +4250,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ParseRoute53 < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4094,7 +4273,8 @@ module Aws::CloudWatchLogs
       :source,
       :event_source,
       :ocsf_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4113,7 +4293,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ParseVPC < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4131,7 +4312,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ParseWAF < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4171,7 +4353,8 @@ module Aws::CloudWatchLogs
       :token_string,
       :enumerations,
       :inferred_token_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4186,7 +4369,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class Policy < Struct.new(
       :delivery_destination_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4289,7 +4473,8 @@ module Aws::CloudWatchLogs
       :trim_string,
       :type_converter,
       :upper_case_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4441,7 +4626,8 @@ module Aws::CloudWatchLogs
       :policy_type,
       :scope,
       :selection_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4450,7 +4636,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::AccountPolicy]
     class PutAccountPolicyResponse < Struct.new(
       :account_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4498,7 +4685,8 @@ module Aws::CloudWatchLogs
     class PutDataProtectionPolicyRequest < Struct.new(
       :log_group_identifier,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4515,7 +4703,8 @@ module Aws::CloudWatchLogs
       :log_group_identifier,
       :policy_document,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4528,7 +4717,8 @@ module Aws::CloudWatchLogs
     class PutDeliveryDestinationPolicyRequest < Struct.new(
       :delivery_destination_name,
       :delivery_destination_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4537,7 +4727,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::Policy]
     class PutDeliveryDestinationPolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4589,7 +4780,8 @@ module Aws::CloudWatchLogs
       :delivery_destination_configuration,
       :delivery_destination_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4599,7 +4791,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::DeliveryDestination]
     class PutDeliveryDestinationResponse < Struct.new(
       :delivery_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4673,7 +4866,8 @@ module Aws::CloudWatchLogs
       :resource_arn,
       :log_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4683,7 +4877,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::DeliverySource]
     class PutDeliverySourceResponse < Struct.new(
       :delivery_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4710,7 +4905,8 @@ module Aws::CloudWatchLogs
       :destination_name,
       :access_policy,
       :force_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4734,7 +4930,8 @@ module Aws::CloudWatchLogs
       :target_arn,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4743,7 +4940,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::Destination]
     class PutDestinationResponse < Struct.new(
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4767,7 +4965,8 @@ module Aws::CloudWatchLogs
     class PutIndexPolicyRequest < Struct.new(
       :log_group_identifier,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4776,7 +4975,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::IndexPolicy]
     class PutIndexPolicyResponse < Struct.new(
       :index_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4795,7 +4995,8 @@ module Aws::CloudWatchLogs
       :integration_name,
       :resource_config,
       :integration_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4810,7 +5011,8 @@ module Aws::CloudWatchLogs
     class PutIntegrationResponse < Struct.new(
       :integration_name,
       :integration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4842,7 +5044,8 @@ module Aws::CloudWatchLogs
       :log_events,
       :sequence_token,
       :entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4871,7 +5074,8 @@ module Aws::CloudWatchLogs
       :next_sequence_token,
       :rejected_log_events_info,
       :rejected_entity_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4900,7 +5104,8 @@ module Aws::CloudWatchLogs
       :filter_pattern,
       :metric_transformations,
       :apply_on_transformed_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4945,7 +5150,8 @@ module Aws::CloudWatchLogs
       :log_group_names,
       :query_string,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4954,7 +5160,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class PutQueryDefinitionResponse < Struct.new(
       :query_definition_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4993,7 +5200,8 @@ module Aws::CloudWatchLogs
       :policy_document,
       :resource_arn,
       :expected_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5006,7 +5214,8 @@ module Aws::CloudWatchLogs
     class PutResourcePolicyResponse < Struct.new(
       :resource_policy,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5022,7 +5231,8 @@ module Aws::CloudWatchLogs
     class PutRetentionPolicyRequest < Struct.new(
       :log_group_name,
       :retention_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5088,7 +5298,8 @@ module Aws::CloudWatchLogs
       :role_arn,
       :distribution,
       :apply_on_transformed_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5103,7 +5314,8 @@ module Aws::CloudWatchLogs
     class PutTransformerRequest < Struct.new(
       :log_group_identifier,
       :transformer_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5117,7 +5329,8 @@ module Aws::CloudWatchLogs
     class QueryCompileError < Struct.new(
       :location,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5131,7 +5344,8 @@ module Aws::CloudWatchLogs
     class QueryCompileErrorLocation < Struct.new(
       :start_char_offset,
       :end_char_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5166,7 +5380,8 @@ module Aws::CloudWatchLogs
       :query_string,
       :last_modified,
       :log_group_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5201,7 +5416,8 @@ module Aws::CloudWatchLogs
       :status,
       :create_time,
       :log_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5243,7 +5459,8 @@ module Aws::CloudWatchLogs
       :bytes_scanned,
       :estimated_bytes_skipped,
       :log_groups_scanned,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5269,7 +5486,8 @@ module Aws::CloudWatchLogs
     class RecordField < Struct.new(
       :name,
       :mandatory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5281,7 +5499,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class RejectedEntityInfo < Struct.new(
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5299,7 +5518,8 @@ module Aws::CloudWatchLogs
       :too_new_log_event_start_index,
       :too_old_log_event_end_index,
       :expired_log_event_end_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5319,7 +5539,8 @@ module Aws::CloudWatchLogs
       :key,
       :rename_to,
       :overwrite_if_exists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5336,7 +5557,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::RenameKeyEntry>]
     class RenameKeys < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5345,7 +5567,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5356,7 +5579,8 @@ module Aws::CloudWatchLogs
     class ResourceConfig < Struct.new(
       :open_search_resource_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OpenSearchResourceConfig < ResourceConfig; end
@@ -5368,7 +5592,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5400,7 +5625,8 @@ module Aws::CloudWatchLogs
       :policy_scope,
       :resource_arn,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5417,7 +5643,8 @@ module Aws::CloudWatchLogs
     class ResultField < Struct.new(
       :field,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5436,7 +5663,8 @@ module Aws::CloudWatchLogs
     class S3DeliveryConfiguration < Struct.new(
       :suffix_path,
       :enable_hive_compatible_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5450,7 +5678,8 @@ module Aws::CloudWatchLogs
     class SearchedLogStream < Struct.new(
       :log_stream_name,
       :searched_completely,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5459,7 +5688,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5468,7 +5698,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5477,7 +5708,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class SessionStreamingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5487,7 +5719,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class SessionTimeoutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5500,7 +5733,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::SplitStringEntry>]
     class SplitString < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5514,7 +5748,8 @@ module Aws::CloudWatchLogs
     class SplitStringEntry < Struct.new(
       :source,
       :delimiter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5562,7 +5797,8 @@ module Aws::CloudWatchLogs
       :log_stream_names,
       :log_stream_name_prefixes,
       :log_event_filter_pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5572,7 +5808,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::StartLiveTailResponseStream]
     class StartLiveTailResponse < Struct.new(
       :response_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5598,7 +5835,8 @@ module Aws::CloudWatchLogs
       :session_timeout_exception,
       :session_streaming_exception,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SessionStart < StartLiveTailResponseStream; end
@@ -5675,7 +5913,8 @@ module Aws::CloudWatchLogs
       :end_time,
       :query_string,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5684,7 +5923,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class StartQueryResponse < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5694,7 +5934,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class StopQueryRequest < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5703,7 +5944,8 @@ module Aws::CloudWatchLogs
     #   @return [Boolean]
     class StopQueryResponse < Struct.new(
       :success,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5753,7 +5995,8 @@ module Aws::CloudWatchLogs
       :distribution,
       :apply_on_transformed_logs,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5771,7 +6014,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::SubstituteStringEntry>]
     class SubstituteString < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5792,7 +6036,8 @@ module Aws::CloudWatchLogs
       :source,
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5808,7 +6053,8 @@ module Aws::CloudWatchLogs
     class SuppressionPeriod < Struct.new(
       :value,
       :suppression_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5828,7 +6074,8 @@ module Aws::CloudWatchLogs
     class TagLogGroupRequest < Struct.new(
       :log_group_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5851,7 +6098,8 @@ module Aws::CloudWatchLogs
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5866,7 +6114,8 @@ module Aws::CloudWatchLogs
     class TestMetricFilterRequest < Struct.new(
       :filter_pattern,
       :log_event_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5875,7 +6124,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::MetricFilterMatchRecord>]
     class TestMetricFilterResponse < Struct.new(
       :matches,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5890,7 +6140,8 @@ module Aws::CloudWatchLogs
     class TestTransformerRequest < Struct.new(
       :transformer_config,
       :log_event_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5900,7 +6151,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::TransformedLogRecord>]
     class TestTransformerResponse < Struct.new(
       :transformed_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5909,7 +6161,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5922,7 +6175,8 @@ module Aws::CloudWatchLogs
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5941,7 +6195,8 @@ module Aws::CloudWatchLogs
       :event_number,
       :event_message,
       :transformed_event_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5957,7 +6212,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<String>]
     class TrimString < Struct.new(
       :with_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5972,7 +6228,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::TypeConverterEntry>]
     class TypeConverter < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5987,7 +6244,8 @@ module Aws::CloudWatchLogs
     class TypeConverterEntry < Struct.new(
       :key,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5997,7 +6255,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class UnrecognizedClientException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6012,7 +6271,8 @@ module Aws::CloudWatchLogs
     class UntagLogGroupRequest < Struct.new(
       :log_group_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6035,7 +6295,8 @@ module Aws::CloudWatchLogs
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6076,7 +6337,8 @@ module Aws::CloudWatchLogs
       :suppression_type,
       :suppression_period,
       :baseline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6100,12 +6362,14 @@ module Aws::CloudWatchLogs
       :record_fields,
       :field_delimiter,
       :s3_delivery_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDeliveryConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6138,7 +6402,8 @@ module Aws::CloudWatchLogs
       :filter_pattern,
       :anomaly_visibility_time,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6149,7 +6414,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<String>]
     class UpperCaseString < Struct.new(
       :with_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6158,7 +6424,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

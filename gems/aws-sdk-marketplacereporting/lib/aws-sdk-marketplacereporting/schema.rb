@@ -49,7 +49,6 @@ module Aws::MarketplaceReporting
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/getBuyerDashboard"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GetBuyerDashboardUnauthorized", "params" => {"dashboardIdentifier" => "arn:aws:aws-marketplace::021234567890:AWSMarketplace/ReportingData/Agreement_V1/Dashboard/AgreementSummary_V1", "embeddingDomains" => ["https://localhost:8080"]}, "expect" => {"failure" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
       end)
-
     end
 
     class << self

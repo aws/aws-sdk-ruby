@@ -528,7 +528,6 @@ module Aws::OpsWorksCM
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {}
       end)
-
     end
 
     class << self

@@ -2947,7 +2947,6 @@ module Aws::Macie2
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/templates/sensitivity-inspections/{id}", "code" => 200}}
       end)
-
     end
 
     class << self

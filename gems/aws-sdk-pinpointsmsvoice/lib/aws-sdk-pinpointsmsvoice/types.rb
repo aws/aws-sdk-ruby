@@ -11,7 +11,8 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class AlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +32,8 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class CallInstructionsMessageType < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +47,8 @@ module Aws::PinpointSMSVoice
     class CloudWatchLogsDestination < Struct.new(
       :iam_role_arn,
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,13 +66,15 @@ module Aws::PinpointSMSVoice
       :configuration_set_name,
       :event_destination,
       :event_destination_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # An empty object that indicates that the event destination was created successfully.
     class CreateConfigurationSetEventDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,13 +84,15 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class CreateConfigurationSetRequest < Struct.new(
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # An empty object that indicates that the configuration set was successfully created.
     class CreateConfigurationSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,13 +105,15 @@ module Aws::PinpointSMSVoice
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # An empty object that indicates that the event destination was deleted successfully.
     class DeleteConfigurationSetEventDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,13 +122,15 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # An empty object that indicates that the configuration set was deleted successfully.
     class DeleteConfigurationSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +160,8 @@ module Aws::PinpointSMSVoice
       :matching_event_types,
       :name,
       :sns_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +187,8 @@ module Aws::PinpointSMSVoice
       :kinesis_firehose_destination,
       :matching_event_types,
       :sns_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +197,8 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,7 +208,8 @@ module Aws::PinpointSMSVoice
     #   @return [Array<Types::EventDestination>]
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
       :event_destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +218,8 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +233,8 @@ module Aws::PinpointSMSVoice
     class KinesisFirehoseDestination < Struct.new(
       :delivery_stream_arn,
       :iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +243,8 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +257,8 @@ module Aws::PinpointSMSVoice
     class ListConfigurationSetsRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +272,8 @@ module Aws::PinpointSMSVoice
     class ListConfigurationSetsResponse < Struct.new(
       :configuration_sets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +282,8 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +301,8 @@ module Aws::PinpointSMSVoice
       :language_code,
       :text,
       :voice_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +320,8 @@ module Aws::PinpointSMSVoice
       :language_code,
       :text,
       :voice_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +347,8 @@ module Aws::PinpointSMSVoice
       :content,
       :destination_phone_number,
       :origination_phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +358,8 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class SendVoiceMessageResponse < Struct.new(
       :message_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,7 +369,8 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class SnsDestination < Struct.new(
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -352,7 +379,8 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -370,13 +398,15 @@ module Aws::PinpointSMSVoice
       :configuration_set_name,
       :event_destination,
       :event_destination_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # An empty object that indicates that the event destination was updated successfully.
     class UpdateConfigurationSetEventDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +424,8 @@ module Aws::PinpointSMSVoice
       :call_instructions_message,
       :plain_text_message,
       :ssml_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

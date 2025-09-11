@@ -12,7 +12,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,13 +31,15 @@ module Aws::WorkspacesInstances
       :workspace_instance_id,
       :volume_id,
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms volume attachment.</p>
     class AssociateVolumeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +61,8 @@ module Aws::WorkspacesInstances
       :ebs,
       :no_device,
       :virtual_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +76,8 @@ module Aws::WorkspacesInstances
     class CapacityReservationSpecification < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +91,8 @@ module Aws::WorkspacesInstances
     class CapacityReservationTarget < Struct.new(
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +110,8 @@ module Aws::WorkspacesInstances
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +129,8 @@ module Aws::WorkspacesInstances
       :tcp_established_timeout,
       :udp_stream_timeout,
       :udp_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +148,8 @@ module Aws::WorkspacesInstances
       :amd_sev_snp,
       :core_count,
       :threads_per_core,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +195,8 @@ module Aws::WorkspacesInstances
       :tag_specifications,
       :throughput,
       :volume_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +206,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class CreateVolumeResponse < Struct.new(
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +225,8 @@ module Aws::WorkspacesInstances
       :client_token,
       :tags,
       :managed_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +236,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class CreateWorkspaceInstanceResponse < Struct.new(
       :workspace_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +247,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class CreditSpecificationRequest < Struct.new(
       :cpu_credits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -244,13 +258,15 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class DeleteVolumeRequest < Struct.new(
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms volume deletion.</p>
     class DeleteVolumeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -260,13 +276,15 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class DeleteWorkspaceInstanceRequest < Struct.new(
       :workspace_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms the successful deletion of the specified WorkSpace Instance.</p>
     class DeleteWorkspaceInstanceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,13 +306,15 @@ module Aws::WorkspacesInstances
       :volume_id,
       :device,
       :disassociate_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms volume detachment.</p>
     class DisassociateVolumeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -312,7 +332,8 @@ module Aws::WorkspacesInstances
       :ec2_error_code,
       :ec2_exception_type,
       :ec2_error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -322,7 +343,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class EC2ManagedInstance < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -352,7 +374,8 @@ module Aws::WorkspacesInstances
       :iops,
       :throughput,
       :volume_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +389,8 @@ module Aws::WorkspacesInstances
     class EnaSrdSpecificationRequest < Struct.new(
       :ena_srd_enabled,
       :ena_srd_udp_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +400,8 @@ module Aws::WorkspacesInstances
     #   @return [Boolean]
     class EnaSrdUdpSpecificationRequest < Struct.new(
       :ena_srd_udp_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +411,8 @@ module Aws::WorkspacesInstances
     #   @return [Boolean]
     class EnclaveOptionsRequest < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +422,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class GetWorkspaceInstanceRequest < Struct.new(
       :workspace_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +449,8 @@ module Aws::WorkspacesInstances
       :provision_state,
       :workspace_instance_id,
       :ec2_managed_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +460,8 @@ module Aws::WorkspacesInstances
     #   @return [Boolean]
     class HibernationOptionsRequest < Struct.new(
       :configured,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +475,8 @@ module Aws::WorkspacesInstances
     class IamInstanceProfileSpecification < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +490,8 @@ module Aws::WorkspacesInstances
     class InstanceIpv6Address < Struct.new(
       :ipv6_address,
       :is_primary_ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,7 +501,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class InstanceMaintenanceOptionsRequest < Struct.new(
       :auto_recovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +516,8 @@ module Aws::WorkspacesInstances
     class InstanceMarketOptionsRequest < Struct.new(
       :market_type,
       :spot_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -510,7 +543,8 @@ module Aws::WorkspacesInstances
       :http_put_response_hop_limit,
       :http_tokens,
       :instance_metadata_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,7 +634,8 @@ module Aws::WorkspacesInstances
       :secondary_private_ip_address_count,
       :groups,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +645,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class InstanceNetworkPerformanceOptionsRequest < Struct.new(
       :bandwidth_weighting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +656,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class InstanceTypeInfo < Struct.new(
       :instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +671,8 @@ module Aws::WorkspacesInstances
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +682,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class Ipv4PrefixSpecificationRequest < Struct.new(
       :ipv4_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +693,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class Ipv6PrefixSpecificationRequest < Struct.new(
       :ipv6_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +704,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class LicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +719,8 @@ module Aws::WorkspacesInstances
     class ListInstanceTypesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +734,8 @@ module Aws::WorkspacesInstances
     class ListInstanceTypesResponse < Struct.new(
       :instance_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +749,8 @@ module Aws::WorkspacesInstances
     class ListRegionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +764,8 @@ module Aws::WorkspacesInstances
     class ListRegionsResponse < Struct.new(
       :regions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +775,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :workspace_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +786,8 @@ module Aws::WorkspacesInstances
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +805,8 @@ module Aws::WorkspacesInstances
       :provision_states,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +820,8 @@ module Aws::WorkspacesInstances
     class ListWorkspaceInstancesResponse < Struct.new(
       :workspace_instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +955,8 @@ module Aws::WorkspacesInstances
       :subnet_id,
       :tag_specifications,
       :user_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -944,7 +994,8 @@ module Aws::WorkspacesInstances
       :host_resource_group_arn,
       :partition_number,
       :tenancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1013,8 @@ module Aws::WorkspacesInstances
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -976,7 +1028,8 @@ module Aws::WorkspacesInstances
     class PrivateIpAddressSpecification < Struct.new(
       :primary,
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1039,8 @@ module Aws::WorkspacesInstances
     #   @return [String]
     class Region < Struct.new(
       :region_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1058,8 @@ module Aws::WorkspacesInstances
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1069,8 @@ module Aws::WorkspacesInstances
     #   @return [Boolean]
     class RunInstancesMonitoringEnabled < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1096,8 @@ module Aws::WorkspacesInstances
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1066,7 +1123,8 @@ module Aws::WorkspacesInstances
       :max_price,
       :spot_instance_type,
       :valid_until_utc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1138,8 @@ module Aws::WorkspacesInstances
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,13 +1153,15 @@ module Aws::WorkspacesInstances
     class TagResourceRequest < Struct.new(
       :workspace_instance_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms successful tag addition.</p>
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1175,8 @@ module Aws::WorkspacesInstances
     class TagSpecification < Struct.new(
       :resource_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1198,8 @@ module Aws::WorkspacesInstances
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1150,13 +1213,15 @@ module Aws::WorkspacesInstances
     class UntagResourceRequest < Struct.new(
       :workspace_instance_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms successful tag removal.</p>
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1174,7 +1239,8 @@ module Aws::WorkspacesInstances
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1192,7 +1258,8 @@ module Aws::WorkspacesInstances
       :name,
       :reason,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,7 +1277,8 @@ module Aws::WorkspacesInstances
       :provision_state,
       :workspace_instance_id,
       :ec2_managed_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1224,7 +1292,8 @@ module Aws::WorkspacesInstances
     class WorkspaceInstanceError < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

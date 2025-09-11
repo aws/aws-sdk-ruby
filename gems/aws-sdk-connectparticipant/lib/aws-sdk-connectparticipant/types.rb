@@ -11,7 +11,8 @@ module Aws::ConnectParticipant
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +35,8 @@ module Aws::ConnectParticipant
       :attachment_id,
       :attachment_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +50,8 @@ module Aws::ConnectParticipant
     class Attendee < Struct.new(
       :attendee_id,
       :join_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +61,8 @@ module Aws::ConnectParticipant
     #   @return [String]
     class AudioFeatures < Struct.new(
       :echo_reduction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,12 +76,14 @@ module Aws::ConnectParticipant
     class CancelParticipantAuthenticationRequest < Struct.new(
       :session_id,
       :connection_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelParticipantAuthenticationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,12 +103,14 @@ module Aws::ConnectParticipant
       :attachment_ids,
       :client_token,
       :connection_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CompleteAttachmentUploadResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +120,8 @@ module Aws::ConnectParticipant
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +137,8 @@ module Aws::ConnectParticipant
     class ConnectionCredentials < Struct.new(
       :connection_token,
       :expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +161,8 @@ module Aws::ConnectParticipant
       :type,
       :participant_token,
       :connect_participant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +181,8 @@ module Aws::ConnectParticipant
       :websocket,
       :connection_credentials,
       :web_rtc_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +196,8 @@ module Aws::ConnectParticipant
     class DescribeViewRequest < Struct.new(
       :view_token,
       :connection_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,7 +207,8 @@ module Aws::ConnectParticipant
     #   @return [Types::View]
     class DescribeViewResponse < Struct.new(
       :view,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,12 +224,14 @@ module Aws::ConnectParticipant
     class DisconnectParticipantRequest < Struct.new(
       :client_token,
       :connection_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisconnectParticipantResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +249,8 @@ module Aws::ConnectParticipant
       :attachment_id,
       :connection_token,
       :url_expiry_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +268,8 @@ module Aws::ConnectParticipant
       :url,
       :url_expiry,
       :attachment_size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -274,7 +292,8 @@ module Aws::ConnectParticipant
       :session_id,
       :redirect_uri,
       :connection_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +303,8 @@ module Aws::ConnectParticipant
     #   @return [String]
     class GetAuthenticationUrlResponse < Struct.new(
       :authentication_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -319,7 +339,8 @@ module Aws::ConnectParticipant
       :sort_order,
       :start_position,
       :connection_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,7 +358,8 @@ module Aws::ConnectParticipant
       :initial_contact_id,
       :transcript,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +368,8 @@ module Aws::ConnectParticipant
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,7 +430,8 @@ module Aws::ConnectParticipant
       :message_metadata,
       :related_contact_id,
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +441,8 @@ module Aws::ConnectParticipant
     #   @return [Types::AudioFeatures]
     class MeetingFeaturesConfiguration < Struct.new(
       :audio,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +456,8 @@ module Aws::ConnectParticipant
     class MessageMetadata < Struct.new(
       :message_id,
       :receipts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +475,8 @@ module Aws::ConnectParticipant
       :delivered_timestamp,
       :read_timestamp,
       :recipient_participant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +493,8 @@ module Aws::ConnectParticipant
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -507,7 +535,8 @@ module Aws::ConnectParticipant
       :content,
       :client_token,
       :connection_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +551,8 @@ module Aws::ConnectParticipant
     class SendEventResponse < Struct.new(
       :id,
       :absolute_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +599,8 @@ module Aws::ConnectParticipant
       :content,
       :client_token,
       :connection_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +615,8 @@ module Aws::ConnectParticipant
     class SendMessageResponse < Struct.new(
       :id,
       :absolute_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -593,7 +625,8 @@ module Aws::ConnectParticipant
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -621,7 +654,8 @@ module Aws::ConnectParticipant
       :attachment_name,
       :client_token,
       :connection_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +668,8 @@ module Aws::ConnectParticipant
     class StartAttachmentUploadResponse < Struct.new(
       :attachment_id,
       :upload_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -655,7 +690,8 @@ module Aws::ConnectParticipant
       :id,
       :absolute_time,
       :most_recent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -669,7 +705,8 @@ module Aws::ConnectParticipant
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +725,8 @@ module Aws::ConnectParticipant
       :url,
       :url_expiry,
       :headers_to_include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +735,8 @@ module Aws::ConnectParticipant
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -725,7 +764,8 @@ module Aws::ConnectParticipant
       :name,
       :version,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +785,8 @@ module Aws::ConnectParticipant
       :input_schema,
       :template,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +801,8 @@ module Aws::ConnectParticipant
     class WebRTCConnection < Struct.new(
       :attendee,
       :meeting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +825,8 @@ module Aws::ConnectParticipant
       :audio_fallback_url,
       :signaling_url,
       :event_ingestion_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +844,8 @@ module Aws::ConnectParticipant
       :media_placement,
       :meeting_features,
       :meeting_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +861,8 @@ module Aws::ConnectParticipant
     class Websocket < Struct.new(
       :url,
       :connection_expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

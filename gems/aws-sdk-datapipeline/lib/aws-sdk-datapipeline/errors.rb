@@ -38,7 +38,7 @@ module Aws::DataPipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataPipeline::Types::InternalServiceError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error message.</p>
@@ -52,7 +52,7 @@ module Aws::DataPipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataPipeline::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error message.</p>
@@ -66,7 +66,7 @@ module Aws::DataPipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataPipeline::Types::PipelineDeletedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error message.</p>
@@ -80,7 +80,7 @@ module Aws::DataPipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataPipeline::Types::PipelineNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error message.</p>
@@ -94,7 +94,7 @@ module Aws::DataPipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataPipeline::Types::TaskNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error message.</p>

@@ -2369,7 +2369,6 @@ module Aws::CloudDirectory
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/amazonclouddirectory/2017-01-11/schema/upgradepublished", "code" => 200}}
       end)
-
     end
 
     class << self

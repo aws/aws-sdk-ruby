@@ -40,7 +40,7 @@ module Aws::DataExchange
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataExchange::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Access to the resource is denied.</p>
@@ -55,7 +55,7 @@ module Aws::DataExchange
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataExchange::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The request couldn't be completed because it conflicted with the current state of the
@@ -80,7 +80,7 @@ module Aws::DataExchange
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataExchange::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message identifying the service exception that occurred.</p>
@@ -94,7 +94,7 @@ module Aws::DataExchange
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataExchange::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The resource couldn't be found.</p>
@@ -118,7 +118,7 @@ module Aws::DataExchange
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataExchange::Types::ServiceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The name of the limit that was reached.</p>
@@ -142,7 +142,7 @@ module Aws::DataExchange
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataExchange::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The limit on the number of requests per second was exceeded.</p>
@@ -156,7 +156,7 @@ module Aws::DataExchange
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataExchange::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that informs you about what was invalid about the request.</p>

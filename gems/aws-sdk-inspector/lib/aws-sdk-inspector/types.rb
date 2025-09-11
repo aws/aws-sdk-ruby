@@ -20,7 +20,8 @@ module Aws::Inspector
       :message,
       :error_code,
       :can_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33,7 +34,8 @@ module Aws::Inspector
     class AddAttributesToFindingsRequest < Struct.new(
       :finding_arns,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +45,8 @@ module Aws::Inspector
     #   @return [Hash<String, Types::FailedItemDetails>]
     class AddAttributesToFindingsResponse < Struct.new(
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +63,8 @@ module Aws::Inspector
     class AgentAlreadyRunningAssessment < Struct.new(
       :agent_id,
       :assessment_run_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +79,8 @@ module Aws::Inspector
     class AgentFilter < Struct.new(
       :agent_healths,
       :agent_health_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -117,7 +122,8 @@ module Aws::Inspector
       :operating_system,
       :kernel_version,
       :ipv4_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +146,8 @@ module Aws::Inspector
       :agents,
       :agents_truncated,
       :can_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +220,8 @@ module Aws::Inspector
       :state_changes,
       :notifications,
       :finding_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +258,8 @@ module Aws::Inspector
       :agent_health_details,
       :auto_scaling_group,
       :telemetry_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +308,8 @@ module Aws::Inspector
       :start_time_range,
       :completion_time_range,
       :state_change_time_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +333,8 @@ module Aws::Inspector
       :assessment_run_arns,
       :assessment_run_arns_truncated,
       :can_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +366,8 @@ module Aws::Inspector
       :error,
       :sns_topic_arn,
       :sns_publish_status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -370,7 +382,8 @@ module Aws::Inspector
     class AssessmentRunStateChange < Struct.new(
       :state_changed_at,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +411,8 @@ module Aws::Inspector
       :resource_group_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +425,8 @@ module Aws::Inspector
     #   @return [String]
     class AssessmentTargetFilter < Struct.new(
       :assessment_target_name_pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +476,8 @@ module Aws::Inspector
       :last_assessment_run_arn,
       :assessment_run_count,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -486,7 +502,8 @@ module Aws::Inspector
       :name_pattern,
       :duration_range,
       :rules_package_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +545,8 @@ module Aws::Inspector
       :ipv4_addresses,
       :tags,
       :network_interfaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -548,7 +566,8 @@ module Aws::Inspector
     class Attribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +583,8 @@ module Aws::Inspector
     class CreateAssessmentTargetRequest < Struct.new(
       :assessment_target_name,
       :resource_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +593,8 @@ module Aws::Inspector
     #   @return [String]
     class CreateAssessmentTargetResponse < Struct.new(
       :assessment_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +627,8 @@ module Aws::Inspector
       :duration_in_seconds,
       :rules_package_arns,
       :user_attributes_for_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +637,8 @@ module Aws::Inspector
     #   @return [String]
     class CreateAssessmentTemplateResponse < Struct.new(
       :assessment_template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -625,7 +648,8 @@ module Aws::Inspector
     #   @return [String]
     class CreateExclusionsPreviewRequest < Struct.new(
       :assessment_template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +660,8 @@ module Aws::Inspector
     #   @return [String]
     class CreateExclusionsPreviewResponse < Struct.new(
       :preview_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +672,8 @@ module Aws::Inspector
     #   @return [Array<Types::ResourceGroupTag>]
     class CreateResourceGroupRequest < Struct.new(
       :resource_group_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +682,8 @@ module Aws::Inspector
     #   @return [String]
     class CreateResourceGroupResponse < Struct.new(
       :resource_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +692,8 @@ module Aws::Inspector
     #   @return [String]
     class DeleteAssessmentRunRequest < Struct.new(
       :assessment_run_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +702,8 @@ module Aws::Inspector
     #   @return [String]
     class DeleteAssessmentTargetRequest < Struct.new(
       :assessment_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +712,8 @@ module Aws::Inspector
     #   @return [String]
     class DeleteAssessmentTemplateRequest < Struct.new(
       :assessment_template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +722,8 @@ module Aws::Inspector
     #   @return [Array<String>]
     class DescribeAssessmentRunsRequest < Struct.new(
       :assessment_run_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +737,8 @@ module Aws::Inspector
     class DescribeAssessmentRunsResponse < Struct.new(
       :assessment_runs,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -715,7 +747,8 @@ module Aws::Inspector
     #   @return [Array<String>]
     class DescribeAssessmentTargetsRequest < Struct.new(
       :assessment_target_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +762,8 @@ module Aws::Inspector
     class DescribeAssessmentTargetsResponse < Struct.new(
       :assessment_targets,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,7 +771,8 @@ module Aws::Inspector
     #   @return [Array<String>]
     class DescribeAssessmentTemplatesRequest < Struct.new(
       :assessment_template_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -751,7 +786,8 @@ module Aws::Inspector
     class DescribeAssessmentTemplatesResponse < Struct.new(
       :assessment_templates,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +806,8 @@ module Aws::Inspector
       :role_arn,
       :valid,
       :registered_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +821,8 @@ module Aws::Inspector
     class DescribeExclusionsRequest < Struct.new(
       :exclusion_arns,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +836,8 @@ module Aws::Inspector
     class DescribeExclusionsResponse < Struct.new(
       :exclusions,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -812,7 +851,8 @@ module Aws::Inspector
     class DescribeFindingsRequest < Struct.new(
       :finding_arns,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -826,7 +866,8 @@ module Aws::Inspector
     class DescribeFindingsResponse < Struct.new(
       :findings,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +876,8 @@ module Aws::Inspector
     #   @return [Array<String>]
     class DescribeResourceGroupsRequest < Struct.new(
       :resource_group_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -849,7 +891,8 @@ module Aws::Inspector
     class DescribeResourceGroupsResponse < Struct.new(
       :resource_groups,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +905,8 @@ module Aws::Inspector
     class DescribeRulesPackagesRequest < Struct.new(
       :rules_package_arns,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -876,7 +920,8 @@ module Aws::Inspector
     class DescribeRulesPackagesResponse < Struct.new(
       :rules_packages,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +937,8 @@ module Aws::Inspector
     class DurationRange < Struct.new(
       :min_seconds,
       :max_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +953,8 @@ module Aws::Inspector
     class EventSubscription < Struct.new(
       :event,
       :subscribed_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +984,8 @@ module Aws::Inspector
       :recommendation,
       :scopes,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +1012,8 @@ module Aws::Inspector
       :recommendation,
       :scopes,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -979,7 +1028,8 @@ module Aws::Inspector
     class FailedItemDetails < Struct.new(
       :failure_code,
       :retryable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,7 +1109,8 @@ module Aws::Inspector
       :user_attributes,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1115,7 +1166,8 @@ module Aws::Inspector
       :attributes,
       :user_attributes,
       :creation_time_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1188,8 @@ module Aws::Inspector
       :assessment_run_arn,
       :report_file_format,
       :report_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1150,7 +1203,8 @@ module Aws::Inspector
     class GetAssessmentReportResponse < Struct.new(
       :status,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1181,7 +1235,8 @@ module Aws::Inspector
       :next_token,
       :max_results,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1256,8 @@ module Aws::Inspector
       :preview_status,
       :exclusion_previews,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,7 +1267,8 @@ module Aws::Inspector
     #   @return [String]
     class GetTelemetryMetadataRequest < Struct.new(
       :assessment_run_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1277,8 @@ module Aws::Inspector
     #   @return [Array<Types::TelemetryMetadata>]
     class GetTelemetryMetadataResponse < Struct.new(
       :telemetry_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1238,7 +1296,8 @@ module Aws::Inspector
       :schema_version,
       :assessment_run_arn,
       :rules_package_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1257,7 +1316,8 @@ module Aws::Inspector
     class InternalException < Struct.new(
       :message,
       :can_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1276,7 +1336,8 @@ module Aws::Inspector
       :message,
       :error_code,
       :can_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1295,7 +1356,8 @@ module Aws::Inspector
       :message,
       :error_code,
       :can_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1376,8 @@ module Aws::Inspector
       :message,
       :error_code,
       :can_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1407,8 @@ module Aws::Inspector
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1423,8 @@ module Aws::Inspector
     class ListAssessmentRunAgentsResponse < Struct.new(
       :assessment_run_agents,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1455,8 @@ module Aws::Inspector
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1406,7 +1472,8 @@ module Aws::Inspector
     class ListAssessmentRunsResponse < Struct.new(
       :assessment_run_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1499,8 @@ module Aws::Inspector
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1448,7 +1516,8 @@ module Aws::Inspector
     class ListAssessmentTargetsResponse < Struct.new(
       :assessment_target_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1479,7 +1548,8 @@ module Aws::Inspector
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1565,8 @@ module Aws::Inspector
     class ListAssessmentTemplatesResponse < Struct.new(
       :assessment_template_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1518,7 +1589,8 @@ module Aws::Inspector
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1533,7 +1605,8 @@ module Aws::Inspector
     class ListEventSubscriptionsResponse < Struct.new(
       :subscriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1628,8 @@ module Aws::Inspector
       :assessment_run_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1571,7 +1645,8 @@ module Aws::Inspector
     class ListExclusionsResponse < Struct.new(
       :exclusion_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1602,7 +1677,8 @@ module Aws::Inspector
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1617,7 +1693,8 @@ module Aws::Inspector
     class ListFindingsResponse < Struct.new(
       :finding_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1712,8 @@ module Aws::Inspector
     class ListRulesPackagesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1728,8 @@ module Aws::Inspector
     class ListRulesPackagesResponse < Struct.new(
       :rules_package_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1659,7 +1738,8 @@ module Aws::Inspector
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1668,7 +1748,8 @@ module Aws::Inspector
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1799,8 @@ module Aws::Inspector
       :public_ip,
       :ipv6_addresses,
       :security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1737,7 +1819,8 @@ module Aws::Inspector
       :message,
       :error_code,
       :can_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1759,7 +1842,8 @@ module Aws::Inspector
       :preview_agents_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1774,7 +1858,8 @@ module Aws::Inspector
     class PreviewAgentsResponse < Struct.new(
       :agent_previews,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1784,7 +1869,8 @@ module Aws::Inspector
     #   @return [String]
     class PreviewGenerationInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1800,7 +1886,8 @@ module Aws::Inspector
     class PrivateIp < Struct.new(
       :private_dns_name,
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1897,8 @@ module Aws::Inspector
     #   @return [String]
     class RegisterCrossAccountAccessRoleRequest < Struct.new(
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1824,7 +1912,8 @@ module Aws::Inspector
     class RemoveAttributesFromFindingsRequest < Struct.new(
       :finding_arns,
       :attribute_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1923,8 @@ module Aws::Inspector
     #   @return [Hash<String, Types::FailedItemDetails>]
     class RemoveAttributesFromFindingsResponse < Struct.new(
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1856,7 +1946,8 @@ module Aws::Inspector
       :arn,
       :tags,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1871,7 +1962,8 @@ module Aws::Inspector
     class ResourceGroupTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1898,7 +1990,8 @@ module Aws::Inspector
       :version,
       :provider,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1913,7 +2006,8 @@ module Aws::Inspector
     class Scope < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1929,7 +2023,8 @@ module Aws::Inspector
     class SecurityGroup < Struct.new(
       :group_name,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1943,7 +2038,8 @@ module Aws::Inspector
     class ServiceTemporarilyUnavailableException < Struct.new(
       :message,
       :can_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2053,8 @@ module Aws::Inspector
     class SetTagsForResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1972,7 +2069,8 @@ module Aws::Inspector
     class StartAssessmentRunRequest < Struct.new(
       :assessment_template_arn,
       :assessment_run_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1981,7 +2079,8 @@ module Aws::Inspector
     #   @return [String]
     class StartAssessmentRunResponse < Struct.new(
       :assessment_run_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1997,7 +2096,8 @@ module Aws::Inspector
     class StopAssessmentRunRequest < Struct.new(
       :assessment_run_arn,
       :stop_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2015,7 +2115,8 @@ module Aws::Inspector
       :resource_arn,
       :event,
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2035,7 +2136,8 @@ module Aws::Inspector
       :resource_arn,
       :topic_arn,
       :event_subscriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2049,7 +2151,8 @@ module Aws::Inspector
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2069,7 +2172,8 @@ module Aws::Inspector
       :message_type,
       :count,
       :data_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2084,7 +2188,8 @@ module Aws::Inspector
     class TimestampRange < Struct.new(
       :begin_date,
       :end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2102,7 +2207,8 @@ module Aws::Inspector
       :resource_arn,
       :event,
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2118,7 +2224,8 @@ module Aws::Inspector
     class UnsupportedFeatureException < Struct.new(
       :message,
       :can_retry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2136,7 +2243,8 @@ module Aws::Inspector
       :assessment_target_arn,
       :assessment_target_name,
       :resource_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

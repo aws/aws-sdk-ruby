@@ -1716,7 +1716,6 @@ module Aws::Chime
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/accounts/{AccountId}/users/{UserId}/settings", "code" => 204}}
       end)
-
     end
 
     class << self

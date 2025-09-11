@@ -4363,7 +4363,6 @@ module Aws::GameLift
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         operation.traits = {}
       end)
-
     end
 
     class << self

@@ -16,7 +16,8 @@ module Aws::CloudSearchDomain
     class Bucket < Struct.new(
       :value,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -31,7 +32,8 @@ module Aws::CloudSearchDomain
     #   @return [Array<Types::Bucket>]
     class BucketInfo < Struct.new(
       :buckets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +47,8 @@ module Aws::CloudSearchDomain
     class DocumentServiceException < Struct.new(
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +58,8 @@ module Aws::CloudSearchDomain
     #   @return [String]
     class DocumentServiceWarning < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -96,7 +100,8 @@ module Aws::CloudSearchDomain
       :sum_of_squares,
       :mean,
       :stddev,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -127,7 +132,8 @@ module Aws::CloudSearchDomain
       :fields,
       :exprs,
       :highlights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +155,8 @@ module Aws::CloudSearchDomain
       :start,
       :cursor,
       :hit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -165,7 +172,8 @@ module Aws::CloudSearchDomain
     #   @return [String]
     class SearchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +446,8 @@ module Aws::CloudSearchDomain
       :sort,
       :start,
       :stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +469,8 @@ module Aws::CloudSearchDomain
       :hits,
       :facets,
       :stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +484,8 @@ module Aws::CloudSearchDomain
     class SearchStatus < Struct.new(
       :timems,
       :rid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -497,7 +508,8 @@ module Aws::CloudSearchDomain
       :query,
       :found,
       :suggestions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -520,7 +532,8 @@ module Aws::CloudSearchDomain
       :query,
       :suggester,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +547,8 @@ module Aws::CloudSearchDomain
     class SuggestResponse < Struct.new(
       :status,
       :suggest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +562,8 @@ module Aws::CloudSearchDomain
     class SuggestStatus < Struct.new(
       :timems,
       :rid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -571,7 +586,8 @@ module Aws::CloudSearchDomain
       :suggestion,
       :score,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -594,7 +610,8 @@ module Aws::CloudSearchDomain
     class UploadDocumentsRequest < Struct.new(
       :documents,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +633,8 @@ module Aws::CloudSearchDomain
       :adds,
       :deletes,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

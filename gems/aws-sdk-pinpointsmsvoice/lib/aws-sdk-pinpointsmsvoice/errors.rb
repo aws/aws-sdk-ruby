@@ -39,7 +39,7 @@ module Aws::PinpointSMSVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoice::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::PinpointSMSVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoice::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::PinpointSMSVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoice::Types::InternalServiceErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::PinpointSMSVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoice::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::PinpointSMSVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoice::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::PinpointSMSVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoice::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

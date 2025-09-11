@@ -3586,7 +3586,6 @@ module Aws::CodeCommit
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
         operation.traits = {}
       end)
-
     end
 
     class << self

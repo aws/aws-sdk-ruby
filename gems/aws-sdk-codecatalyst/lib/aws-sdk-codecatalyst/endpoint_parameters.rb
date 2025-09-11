@@ -25,7 +25,6 @@ module Aws::CodeCatalyst
     :endpoint,
     keyword_init: true
   ) do
-
     def initialize(options = {})
       self.use_fips = options.fetch(:use_fips, false)
       self.region = options.fetch(:region, nil)

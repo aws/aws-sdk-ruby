@@ -11,7 +11,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::VerifiedPermissions
     class ActionIdentifier < Struct.new(
       :action_type,
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +74,8 @@ module Aws::VerifiedPermissions
       :datetime,
       :duration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Boolean < AttributeValue; end
@@ -106,7 +109,8 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :policy_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +119,8 @@ module Aws::VerifiedPermissions
     #   @return [Array<Types::BatchGetPolicyInputItem>]
     class BatchGetPolicyInput < Struct.new(
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,7 +134,8 @@ module Aws::VerifiedPermissions
     class BatchGetPolicyInputItem < Struct.new(
       :policy_store_id,
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +148,8 @@ module Aws::VerifiedPermissions
     class BatchGetPolicyOutput < Struct.new(
       :results,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +179,8 @@ module Aws::VerifiedPermissions
       :definition,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +197,8 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :entities,
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +220,8 @@ module Aws::VerifiedPermissions
       :action,
       :resource,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +230,8 @@ module Aws::VerifiedPermissions
     #   @return [Array<Types::BatchIsAuthorizedOutputItem>]
     class BatchIsAuthorizedOutput < Struct.new(
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,7 +253,8 @@ module Aws::VerifiedPermissions
       :decision,
       :determining_policies,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +279,8 @@ module Aws::VerifiedPermissions
       :access_token,
       :entities,
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +298,8 @@ module Aws::VerifiedPermissions
       :action,
       :resource,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +312,8 @@ module Aws::VerifiedPermissions
     class BatchIsAuthorizedWithTokenOutput < Struct.new(
       :principal,
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +335,8 @@ module Aws::VerifiedPermissions
       :decision,
       :determining_policies,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +346,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class CognitoGroupConfiguration < Struct.new(
       :group_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +357,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class CognitoGroupConfigurationDetail < Struct.new(
       :group_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +368,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class CognitoGroupConfigurationItem < Struct.new(
       :group_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +387,8 @@ module Aws::VerifiedPermissions
       :user_pool_arn,
       :client_ids,
       :group_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -390,7 +410,8 @@ module Aws::VerifiedPermissions
       :client_ids,
       :issuer,
       :group_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +433,8 @@ module Aws::VerifiedPermissions
       :client_ids,
       :issuer,
       :group_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +449,8 @@ module Aws::VerifiedPermissions
       :cognito_user_pool_configuration,
       :open_id_connect_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CognitoUserPoolConfiguration < Configuration; end
@@ -446,7 +469,8 @@ module Aws::VerifiedPermissions
       :cognito_user_pool_configuration,
       :open_id_connect_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CognitoUserPoolConfiguration < ConfigurationDetail; end
@@ -465,7 +489,8 @@ module Aws::VerifiedPermissions
       :cognito_user_pool_configuration,
       :open_id_connect_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CognitoUserPoolConfiguration < ConfigurationItem; end
@@ -482,7 +507,8 @@ module Aws::VerifiedPermissions
     class ConflictException < Struct.new(
       :message,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +523,8 @@ module Aws::VerifiedPermissions
       :context_map,
       :cedar_json,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ContextMap < ContextDefinition; end
@@ -522,7 +549,8 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :configuration,
       :principal_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +571,8 @@ module Aws::VerifiedPermissions
       :identity_source_id,
       :last_updated_date,
       :policy_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +589,8 @@ module Aws::VerifiedPermissions
       :client_token,
       :policy_store_id,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +631,8 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :effect,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +657,8 @@ module Aws::VerifiedPermissions
       :description,
       :deletion_protection,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +679,8 @@ module Aws::VerifiedPermissions
       :arn,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +701,8 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :description,
       :statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -689,7 +723,8 @@ module Aws::VerifiedPermissions
       :policy_template_id,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,12 +737,14 @@ module Aws::VerifiedPermissions
     class DeleteIdentitySourceInput < Struct.new(
       :policy_store_id,
       :identity_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIdentitySourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,12 +757,14 @@ module Aws::VerifiedPermissions
     class DeletePolicyInput < Struct.new(
       :policy_store_id,
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -734,12 +773,14 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class DeletePolicyStoreInput < Struct.new(
       :policy_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePolicyStoreOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,12 +793,14 @@ module Aws::VerifiedPermissions
     class DeletePolicyTemplateInput < Struct.new(
       :policy_store_id,
       :policy_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePolicyTemplateOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +810,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class DeterminingPolicyItem < Struct.new(
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +826,8 @@ module Aws::VerifiedPermissions
       :entity_list,
       :cedar_json,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EntityList < EntitiesDefinition; end
@@ -800,7 +845,8 @@ module Aws::VerifiedPermissions
     class EntityIdentifier < Struct.new(
       :entity_type,
       :entity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -818,7 +864,8 @@ module Aws::VerifiedPermissions
       :identifier,
       :attributes,
       :parents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -833,7 +880,8 @@ module Aws::VerifiedPermissions
       :unspecified,
       :identifier,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Unspecified < EntityReference; end
@@ -848,7 +896,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class EvaluationErrorItem < Struct.new(
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +910,8 @@ module Aws::VerifiedPermissions
     class GetIdentitySourceInput < Struct.new(
       :policy_store_id,
       :identity_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -896,7 +946,8 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :principal_entity_type,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +960,8 @@ module Aws::VerifiedPermissions
     class GetPolicyInput < Struct.new(
       :policy_store_id,
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -954,7 +1006,8 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :effect,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1020,8 @@ module Aws::VerifiedPermissions
     class GetPolicyStoreInput < Struct.new(
       :policy_store_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1008,7 +1062,8 @@ module Aws::VerifiedPermissions
       :deletion_protection,
       :cedar_version,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1021,7 +1076,8 @@ module Aws::VerifiedPermissions
     class GetPolicyTemplateInput < Struct.new(
       :policy_store_id,
       :policy_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1106,8 @@ module Aws::VerifiedPermissions
       :statement,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,7 +1116,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class GetSchemaInput < Struct.new(
       :policy_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1142,8 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :namespaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1116,7 +1175,8 @@ module Aws::VerifiedPermissions
       :user_pool_arn,
       :discovery_url,
       :open_id_issuer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1126,7 +1186,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class IdentitySourceFilter < Struct.new(
       :principal_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1223,8 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :principal_entity_type,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1194,7 +1256,8 @@ module Aws::VerifiedPermissions
       :user_pool_arn,
       :discovery_url,
       :open_id_issuer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,7 +1266,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1276,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class InvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1241,7 +1306,8 @@ module Aws::VerifiedPermissions
       :resource,
       :context,
       :entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1258,7 +1324,8 @@ module Aws::VerifiedPermissions
       :decision,
       :determining_policies,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1358,8 @@ module Aws::VerifiedPermissions
       :resource,
       :context,
       :entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1380,8 @@ module Aws::VerifiedPermissions
       :determining_policies,
       :errors,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1333,7 +1402,8 @@ module Aws::VerifiedPermissions
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1346,7 +1416,8 @@ module Aws::VerifiedPermissions
     class ListIdentitySourcesOutput < Struct.new(
       :next_token,
       :identity_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1438,8 @@ module Aws::VerifiedPermissions
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1380,7 +1452,8 @@ module Aws::VerifiedPermissions
     class ListPoliciesOutput < Struct.new(
       :next_token,
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1393,7 +1466,8 @@ module Aws::VerifiedPermissions
     class ListPolicyStoresInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1406,7 +1480,8 @@ module Aws::VerifiedPermissions
     class ListPolicyStoresOutput < Struct.new(
       :next_token,
       :policy_stores,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1498,8 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1436,7 +1512,8 @@ module Aws::VerifiedPermissions
     class ListPolicyTemplatesOutput < Struct.new(
       :next_token,
       :policy_templates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1522,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1454,7 +1532,8 @@ module Aws::VerifiedPermissions
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1468,7 +1547,8 @@ module Aws::VerifiedPermissions
     class OpenIdConnectAccessTokenConfiguration < Struct.new(
       :principal_id_claim,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1487,7 +1567,8 @@ module Aws::VerifiedPermissions
     class OpenIdConnectAccessTokenConfigurationDetail < Struct.new(
       :principal_id_claim,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1506,7 +1587,8 @@ module Aws::VerifiedPermissions
     class OpenIdConnectAccessTokenConfigurationItem < Struct.new(
       :principal_id_claim,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1533,7 +1615,8 @@ module Aws::VerifiedPermissions
       :entity_id_prefix,
       :group_configuration,
       :token_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1638,8 @@ module Aws::VerifiedPermissions
       :entity_id_prefix,
       :group_configuration,
       :token_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1661,8 @@ module Aws::VerifiedPermissions
       :entity_id_prefix,
       :group_configuration,
       :token_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1591,7 +1676,8 @@ module Aws::VerifiedPermissions
     class OpenIdConnectGroupConfiguration < Struct.new(
       :group_claim,
       :group_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1605,7 +1691,8 @@ module Aws::VerifiedPermissions
     class OpenIdConnectGroupConfigurationDetail < Struct.new(
       :group_claim,
       :group_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1619,7 +1706,8 @@ module Aws::VerifiedPermissions
     class OpenIdConnectGroupConfigurationItem < Struct.new(
       :group_claim,
       :group_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1633,7 +1721,8 @@ module Aws::VerifiedPermissions
     class OpenIdConnectIdentityTokenConfiguration < Struct.new(
       :principal_id_claim,
       :client_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1652,7 +1741,8 @@ module Aws::VerifiedPermissions
     class OpenIdConnectIdentityTokenConfigurationDetail < Struct.new(
       :principal_id_claim,
       :client_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1671,7 +1761,8 @@ module Aws::VerifiedPermissions
     class OpenIdConnectIdentityTokenConfigurationItem < Struct.new(
       :principal_id_claim,
       :client_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1691,7 +1782,8 @@ module Aws::VerifiedPermissions
       :access_token_only,
       :identity_token_only,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AccessTokenOnly < OpenIdConnectTokenSelection; end
@@ -1710,7 +1802,8 @@ module Aws::VerifiedPermissions
       :access_token_only,
       :identity_token_only,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AccessTokenOnly < OpenIdConnectTokenSelectionDetail; end
@@ -1729,7 +1822,8 @@ module Aws::VerifiedPermissions
       :access_token_only,
       :identity_token_only,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AccessTokenOnly < OpenIdConnectTokenSelectionItem; end
@@ -1748,7 +1842,8 @@ module Aws::VerifiedPermissions
       :static,
       :template_linked,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Static < PolicyDefinition; end
@@ -1767,7 +1862,8 @@ module Aws::VerifiedPermissions
       :static,
       :template_linked,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Static < PolicyDefinitionDetail; end
@@ -1786,7 +1882,8 @@ module Aws::VerifiedPermissions
       :static,
       :template_linked,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Static < PolicyDefinitionItem; end
@@ -1812,7 +1909,8 @@ module Aws::VerifiedPermissions
       :resource,
       :policy_type,
       :policy_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1858,7 +1956,8 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :effect,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1884,7 +1983,8 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1910,7 +2010,8 @@ module Aws::VerifiedPermissions
       :description,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1923,7 +2024,8 @@ module Aws::VerifiedPermissions
     class PutSchemaInput < Struct.new(
       :policy_store_id,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1944,7 +2046,8 @@ module Aws::VerifiedPermissions
       :namespaces,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1958,7 +2061,8 @@ module Aws::VerifiedPermissions
     class ResourceConflict < Struct.new(
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1975,7 +2079,8 @@ module Aws::VerifiedPermissions
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2091,8 @@ module Aws::VerifiedPermissions
     class SchemaDefinition < Struct.new(
       :cedar_json,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CedarJson < SchemaDefinition; end
@@ -2014,7 +2120,8 @@ module Aws::VerifiedPermissions
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2028,7 +2135,8 @@ module Aws::VerifiedPermissions
     class StaticPolicyDefinition < Struct.new(
       :description,
       :statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2042,7 +2150,8 @@ module Aws::VerifiedPermissions
     class StaticPolicyDefinitionDetail < Struct.new(
       :description,
       :statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2052,7 +2161,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class StaticPolicyDefinitionItem < Struct.new(
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2065,12 +2175,14 @@ module Aws::VerifiedPermissions
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2088,7 +2200,8 @@ module Aws::VerifiedPermissions
       :policy_template_id,
       :principal,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2106,7 +2219,8 @@ module Aws::VerifiedPermissions
       :policy_template_id,
       :principal,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2124,7 +2238,8 @@ module Aws::VerifiedPermissions
       :policy_template_id,
       :principal,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2141,7 +2256,8 @@ module Aws::VerifiedPermissions
       :message,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2154,7 +2270,8 @@ module Aws::VerifiedPermissions
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2167,12 +2284,14 @@ module Aws::VerifiedPermissions
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2182,7 +2301,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class UpdateCognitoGroupConfiguration < Struct.new(
       :group_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2200,7 +2320,8 @@ module Aws::VerifiedPermissions
       :user_pool_arn,
       :client_ids,
       :group_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2215,7 +2336,8 @@ module Aws::VerifiedPermissions
       :cognito_user_pool_configuration,
       :open_id_connect_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CognitoUserPoolConfiguration < UpdateConfiguration; end
@@ -2240,7 +2362,8 @@ module Aws::VerifiedPermissions
       :identity_source_id,
       :update_configuration,
       :principal_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2261,7 +2384,8 @@ module Aws::VerifiedPermissions
       :identity_source_id,
       :last_updated_date,
       :policy_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2275,7 +2399,8 @@ module Aws::VerifiedPermissions
     class UpdateOpenIdConnectAccessTokenConfiguration < Struct.new(
       :principal_id_claim,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2302,7 +2427,8 @@ module Aws::VerifiedPermissions
       :entity_id_prefix,
       :group_configuration,
       :token_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2316,7 +2442,8 @@ module Aws::VerifiedPermissions
     class UpdateOpenIdConnectGroupConfiguration < Struct.new(
       :group_claim,
       :group_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2330,7 +2457,8 @@ module Aws::VerifiedPermissions
     class UpdateOpenIdConnectIdentityTokenConfiguration < Struct.new(
       :principal_id_claim,
       :client_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2350,7 +2478,8 @@ module Aws::VerifiedPermissions
       :access_token_only,
       :identity_token_only,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AccessTokenOnly < UpdateOpenIdConnectTokenSelection; end
@@ -2365,7 +2494,8 @@ module Aws::VerifiedPermissions
     class UpdatePolicyDefinition < Struct.new(
       :static,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Static < UpdatePolicyDefinition; end
@@ -2385,7 +2515,8 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :policy_id,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2426,7 +2557,8 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :effect,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2447,7 +2579,8 @@ module Aws::VerifiedPermissions
       :validation_settings,
       :deletion_protection,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2468,7 +2601,8 @@ module Aws::VerifiedPermissions
       :arn,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2489,7 +2623,8 @@ module Aws::VerifiedPermissions
       :policy_template_id,
       :description,
       :statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2510,7 +2645,8 @@ module Aws::VerifiedPermissions
       :policy_template_id,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2524,7 +2660,8 @@ module Aws::VerifiedPermissions
     class UpdateStaticPolicyDefinition < Struct.new(
       :description,
       :statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2537,7 +2674,8 @@ module Aws::VerifiedPermissions
     class ValidationException < Struct.new(
       :message,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2551,7 +2689,8 @@ module Aws::VerifiedPermissions
     class ValidationExceptionField < Struct.new(
       :path,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2561,7 +2700,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     class ValidationSettings < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

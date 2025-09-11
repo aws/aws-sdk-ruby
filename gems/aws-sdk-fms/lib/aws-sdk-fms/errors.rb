@@ -40,7 +40,7 @@ module Aws::FMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FMS::Types::InternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::FMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FMS::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::FMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FMS::Types::InvalidOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::FMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FMS::Types::InvalidTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::FMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FMS::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::FMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FMS::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

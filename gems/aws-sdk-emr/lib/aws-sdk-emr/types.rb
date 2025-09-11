@@ -15,7 +15,8 @@ module Aws::EMR
     class AddInstanceFleetInput < Struct.new(
       :cluster_id,
       :instance_fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::EMR
       :cluster_id,
       :instance_fleet_id,
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +48,8 @@ module Aws::EMR
     class AddInstanceGroupsInput < Struct.new(
       :instance_groups,
       :job_flow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +67,8 @@ module Aws::EMR
       :job_flow_id,
       :instance_group_ids,
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +92,8 @@ module Aws::EMR
       :job_flow_id,
       :steps,
       :execution_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +103,8 @@ module Aws::EMR
     #   @return [Array<String>]
     class AddJobFlowStepsOutput < Struct.new(
       :step_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,13 +122,15 @@ module Aws::EMR
     class AddTagsInput < Struct.new(
       :resource_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>This output indicates the result of adding tags to a resource.</p>
     class AddTagsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +160,8 @@ module Aws::EMR
       :version,
       :args,
       :additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -171,7 +180,8 @@ module Aws::EMR
     class AutoScalingPolicy < Struct.new(
       :constraints,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,7 +204,8 @@ module Aws::EMR
       :status,
       :constraints,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +223,8 @@ module Aws::EMR
     class AutoScalingPolicyStateChangeReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +239,8 @@ module Aws::EMR
     class AutoScalingPolicyStatus < Struct.new(
       :state,
       :state_change_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,7 +255,8 @@ module Aws::EMR
     #   @return [Integer]
     class AutoTerminationPolicy < Struct.new(
       :idle_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -281,7 +295,8 @@ module Aws::EMR
       :classification,
       :configurations,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +314,8 @@ module Aws::EMR
     class BlockPublicAccessConfigurationMetadata < Struct.new(
       :creation_date_time,
       :created_by_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,7 +329,8 @@ module Aws::EMR
     class BootstrapActionConfig < Struct.new(
       :name,
       :script_bootstrap_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +340,8 @@ module Aws::EMR
     #   @return [Types::BootstrapActionConfig]
     class BootstrapActionDetail < Struct.new(
       :bootstrap_action_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +359,8 @@ module Aws::EMR
       :step_id,
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +380,8 @@ module Aws::EMR
       :cluster_id,
       :step_ids,
       :step_cancellation_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +392,8 @@ module Aws::EMR
     #   @return [Array<Types::CancelStepsInfo>]
     class CancelStepsOutput < Struct.new(
       :cancel_steps_info_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +447,8 @@ module Aws::EMR
       :threshold,
       :unit,
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -628,7 +650,8 @@ module Aws::EMR
       :ebs_root_volume_iops,
       :ebs_root_volume_throughput,
       :extended_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +665,8 @@ module Aws::EMR
     class ClusterStateChangeReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -667,7 +691,8 @@ module Aws::EMR
       :state_change_reason,
       :timeline,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +726,8 @@ module Aws::EMR
       :normalized_instance_hours,
       :cluster_arn,
       :outpost_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +745,8 @@ module Aws::EMR
       :creation_date_time,
       :ready_date_time,
       :end_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,7 +764,8 @@ module Aws::EMR
       :name,
       :script_path,
       :args,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +805,8 @@ module Aws::EMR
       :maximum_capacity_units,
       :maximum_on_demand_capacity_units,
       :maximum_core_capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +831,8 @@ module Aws::EMR
       :classification,
       :configurations,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -827,7 +857,8 @@ module Aws::EMR
       :tags,
       :x_referer,
       :profiler_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +872,8 @@ module Aws::EMR
     class CreatePersistentAppUIOutput < Struct.new(
       :persistent_app_ui_id,
       :runtime_role_enabled_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +889,8 @@ module Aws::EMR
     class CreateSecurityConfigurationInput < Struct.new(
       :name,
       :security_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +903,8 @@ module Aws::EMR
     class CreateSecurityConfigurationOutput < Struct.new(
       :name,
       :creation_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1004,8 @@ module Aws::EMR
       :idc_user_assignment,
       :idc_instance_arn,
       :encryption_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1018,8 @@ module Aws::EMR
     class CreateStudioOutput < Struct.new(
       :studio_id,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1054,8 @@ module Aws::EMR
       :identity_name,
       :identity_type,
       :session_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1067,8 @@ module Aws::EMR
     class Credentials < Struct.new(
       :username_password,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class UsernamePassword < Credentials; end
@@ -1042,12 +1080,14 @@ module Aws::EMR
     #   @return [String]
     class DeleteSecurityConfigurationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSecurityConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1056,7 +1096,8 @@ module Aws::EMR
     #   @return [String]
     class DeleteStudioInput < Struct.new(
       :studio_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1123,8 @@ module Aws::EMR
       :identity_id,
       :identity_name,
       :identity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1092,7 +1134,8 @@ module Aws::EMR
     #   @return [String]
     class DescribeClusterInput < Struct.new(
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1102,7 +1145,8 @@ module Aws::EMR
     #   @return [Types::Cluster]
     class DescribeClusterOutput < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1168,8 @@ module Aws::EMR
       :created_before,
       :job_flow_ids,
       :job_flow_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1134,7 +1179,8 @@ module Aws::EMR
     #   @return [Array<Types::JobFlowDetail>]
     class DescribeJobFlowsOutput < Struct.new(
       :job_flows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1143,7 +1189,8 @@ module Aws::EMR
     #   @return [String]
     class DescribeNotebookExecutionInput < Struct.new(
       :notebook_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1199,8 @@ module Aws::EMR
     #   @return [Types::NotebookExecution]
     class DescribeNotebookExecutionOutput < Struct.new(
       :notebook_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1161,7 +1209,8 @@ module Aws::EMR
     #   @return [String]
     class DescribePersistentAppUIInput < Struct.new(
       :persistent_app_ui_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1170,7 +1219,8 @@ module Aws::EMR
     #   @return [Types::PersistentAppUI]
     class DescribePersistentAppUIOutput < Struct.new(
       :persistent_app_ui,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1237,8 @@ module Aws::EMR
       :release_label,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1214,7 +1265,8 @@ module Aws::EMR
       :applications,
       :next_token,
       :available_os_releases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1223,7 +1275,8 @@ module Aws::EMR
     #   @return [String]
     class DescribeSecurityConfigurationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1240,7 +1293,8 @@ module Aws::EMR
       :name,
       :security_configuration,
       :creation_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1254,7 +1308,8 @@ module Aws::EMR
     class DescribeStepInput < Struct.new(
       :cluster_id,
       :step_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1319,8 @@ module Aws::EMR
     #   @return [Types::Step]
     class DescribeStepOutput < Struct.new(
       :step,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1329,8 @@ module Aws::EMR
     #   @return [String]
     class DescribeStudioInput < Struct.new(
       :studio_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1282,7 +1339,8 @@ module Aws::EMR
     #   @return [Types::Studio]
     class DescribeStudioOutput < Struct.new(
       :studio,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1292,7 +1350,8 @@ module Aws::EMR
     #   @return [String]
     class EMRContainersConfig < Struct.new(
       :job_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1308,7 +1367,8 @@ module Aws::EMR
     class EbsBlockDevice < Struct.new(
       :volume_specification,
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1326,7 +1386,8 @@ module Aws::EMR
     class EbsBlockDeviceConfig < Struct.new(
       :volume_specification,
       :volumes_per_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1342,7 +1403,8 @@ module Aws::EMR
     class EbsConfiguration < Struct.new(
       :ebs_block_device_configs,
       :ebs_optimized,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1356,7 +1418,8 @@ module Aws::EMR
     class EbsVolume < Struct.new(
       :device,
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1495,8 @@ module Aws::EMR
       :service_access_security_group,
       :additional_master_security_groups,
       :additional_slave_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1516,8 @@ module Aws::EMR
       :error_code,
       :error_data,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1480,7 +1545,8 @@ module Aws::EMR
       :type,
       :master_instance_security_group_id,
       :execution_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1569,8 @@ module Aws::EMR
       :reason,
       :message,
       :log_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1580,8 @@ module Aws::EMR
     #   @return [String]
     class GetAutoTerminationPolicyInput < Struct.new(
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,12 +1591,14 @@ module Aws::EMR
     #   @return [Types::AutoTerminationPolicy]
     class GetAutoTerminationPolicyOutput < Struct.new(
       :auto_termination_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetBlockPublicAccessConfigurationInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1560,7 +1630,8 @@ module Aws::EMR
     class GetBlockPublicAccessConfigurationOutput < Struct.new(
       :block_public_access_configuration,
       :block_public_access_configuration_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1647,8 @@ module Aws::EMR
     class GetClusterSessionCredentialsInput < Struct.new(
       :cluster_id,
       :execution_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1591,7 +1663,8 @@ module Aws::EMR
     class GetClusterSessionCredentialsOutput < Struct.new(
       :credentials,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1674,8 @@ module Aws::EMR
     #   @return [String]
     class GetManagedScalingPolicyInput < Struct.new(
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1685,8 @@ module Aws::EMR
     #   @return [Types::ManagedScalingPolicy]
     class GetManagedScalingPolicyOutput < Struct.new(
       :managed_scaling_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1637,7 +1712,8 @@ module Aws::EMR
       :application_id,
       :dry_run,
       :execution_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1726,8 @@ module Aws::EMR
     class GetOnClusterAppUIPresignedURLOutput < Struct.new(
       :presigned_url_ready,
       :presigned_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1752,8 @@ module Aws::EMR
       :application_id,
       :auth_proxy_call,
       :execution_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1688,7 +1766,8 @@ module Aws::EMR
     class GetPersistentAppUIPresignedURLOutput < Struct.new(
       :presigned_url_ready,
       :presigned_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1714,7 +1793,8 @@ module Aws::EMR
       :identity_id,
       :identity_name,
       :identity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1724,7 +1804,8 @@ module Aws::EMR
     #   @return [Types::SessionMappingDetail]
     class GetStudioSessionMappingOutput < Struct.new(
       :session_mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1751,7 +1832,8 @@ module Aws::EMR
       :jar,
       :main_class,
       :args,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,7 +1860,8 @@ module Aws::EMR
       :properties,
       :main_class,
       :args,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1917,8 @@ module Aws::EMR
       :market,
       :instance_type,
       :ebs_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1935,7 +2019,8 @@ module Aws::EMR
       :launch_specifications,
       :resize_specifications,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2011,7 +2096,8 @@ module Aws::EMR
       :launch_specifications,
       :resize_specifications,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2048,7 +2134,8 @@ module Aws::EMR
       :resize_specifications,
       :instance_type_configs,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2161,8 @@ module Aws::EMR
     class InstanceFleetProvisioningSpecifications < Struct.new(
       :spot_specification,
       :on_demand_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2090,7 +2178,8 @@ module Aws::EMR
     class InstanceFleetResizingSpecifications < Struct.new(
       :spot_resize_specification,
       :on_demand_resize_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2108,7 +2197,8 @@ module Aws::EMR
     class InstanceFleetStateChangeReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2167,7 +2257,8 @@ module Aws::EMR
       :state,
       :state_change_reason,
       :timeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2190,7 +2281,8 @@ module Aws::EMR
       :creation_date_time,
       :ready_date_time,
       :end_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2284,7 +2376,8 @@ module Aws::EMR
       :shrink_policy,
       :auto_scaling_policy,
       :custom_ami_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2341,7 +2434,8 @@ module Aws::EMR
       :ebs_configuration,
       :auto_scaling_policy,
       :custom_ami_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2410,7 +2504,8 @@ module Aws::EMR
       :ready_date_time,
       :end_date_time,
       :custom_ami_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2441,7 +2536,8 @@ module Aws::EMR
       :shrink_policy,
       :reconfiguration_type,
       :configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2455,7 +2551,8 @@ module Aws::EMR
     class InstanceGroupStateChangeReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2473,7 +2570,8 @@ module Aws::EMR
       :state,
       :state_change_reason,
       :timeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2491,7 +2589,8 @@ module Aws::EMR
       :creation_date_time,
       :ready_date_time,
       :end_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2610,8 @@ module Aws::EMR
       :instances_to_terminate,
       :instances_to_protect,
       :instance_termination_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2525,7 +2625,8 @@ module Aws::EMR
     class InstanceStateChangeReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2543,7 +2644,8 @@ module Aws::EMR
       :state,
       :state_change_reason,
       :timeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2561,7 +2663,8 @@ module Aws::EMR
       :creation_date_time,
       :ready_date_time,
       :end_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2622,7 +2725,8 @@ module Aws::EMR
       :configurations,
       :custom_ami_id,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2678,14 +2782,16 @@ module Aws::EMR
       :ebs_optimized,
       :custom_ami_id,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that an error occurred while processing the request and that the request was
     #          not completed.</p>
     class InternalServerError < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2696,7 +2802,8 @@ module Aws::EMR
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2710,7 +2817,8 @@ module Aws::EMR
     class InvalidRequestException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2801,7 +2909,8 @@ module Aws::EMR
       :service_role,
       :auto_scaling_role,
       :scale_down_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2831,7 +2940,8 @@ module Aws::EMR
       :ready_date_time,
       :end_date_time,
       :last_state_change_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2945,7 +3055,8 @@ module Aws::EMR
       :service_access_security_group,
       :additional_master_security_groups,
       :additional_slave_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3020,7 +3131,8 @@ module Aws::EMR
       :termination_protected,
       :unhealthy_node_replacement,
       :hadoop_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3053,7 +3165,8 @@ module Aws::EMR
       :cross_realm_trust_principal_password,
       :ad_domain_join_user,
       :ad_domain_join_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3067,7 +3180,8 @@ module Aws::EMR
     class KeyValue < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3081,7 +3195,8 @@ module Aws::EMR
     class ListBootstrapActionsInput < Struct.new(
       :cluster_id,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3095,7 +3210,8 @@ module Aws::EMR
     class ListBootstrapActionsOutput < Struct.new(
       :bootstrap_actions,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3119,7 +3235,8 @@ module Aws::EMR
       :created_before,
       :cluster_states,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3134,7 +3251,8 @@ module Aws::EMR
     class ListClustersOutput < Struct.new(
       :clusters,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3147,7 +3265,8 @@ module Aws::EMR
     class ListInstanceFleetsInput < Struct.new(
       :cluster_id,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3160,7 +3279,8 @@ module Aws::EMR
     class ListInstanceFleetsOutput < Struct.new(
       :instance_fleets,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3174,7 +3294,8 @@ module Aws::EMR
     class ListInstanceGroupsInput < Struct.new(
       :cluster_id,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3188,7 +3309,8 @@ module Aws::EMR
     class ListInstanceGroupsOutput < Struct.new(
       :instance_groups,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3223,7 +3345,8 @@ module Aws::EMR
       :instance_fleet_type,
       :instance_states,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3237,7 +3360,8 @@ module Aws::EMR
     class ListInstancesOutput < Struct.new(
       :instances,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3321,7 +3445,8 @@ module Aws::EMR
       :to,
       :marker,
       :execution_engine_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3335,7 +3460,8 @@ module Aws::EMR
     class ListNotebookExecutionsOutput < Struct.new(
       :notebook_executions,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3360,7 +3486,8 @@ module Aws::EMR
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3374,7 +3501,8 @@ module Aws::EMR
     class ListReleaseLabelsOutput < Struct.new(
       :release_labels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3383,7 +3511,8 @@ module Aws::EMR
     #   @return [String]
     class ListSecurityConfigurationsInput < Struct.new(
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3398,7 +3527,8 @@ module Aws::EMR
     class ListSecurityConfigurationsOutput < Struct.new(
       :security_configurations,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3425,7 +3555,8 @@ module Aws::EMR
       :step_states,
       :step_ids,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3443,7 +3574,8 @@ module Aws::EMR
     class ListStepsOutput < Struct.new(
       :steps,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3461,7 +3593,8 @@ module Aws::EMR
       :studio_id,
       :identity_type,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3476,7 +3609,8 @@ module Aws::EMR
     class ListStudioSessionMappingsOutput < Struct.new(
       :session_mappings,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3485,7 +3619,8 @@ module Aws::EMR
     #   @return [String]
     class ListStudiosInput < Struct.new(
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3498,7 +3633,8 @@ module Aws::EMR
     class ListStudiosOutput < Struct.new(
       :studios,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3517,7 +3653,8 @@ module Aws::EMR
     class ListSupportedInstanceTypesInput < Struct.new(
       :release_label,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3531,7 +3668,8 @@ module Aws::EMR
     class ListSupportedInstanceTypesOutput < Struct.new(
       :supported_instance_types,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3556,7 +3694,8 @@ module Aws::EMR
       :compute_limits,
       :utilization_performance_index,
       :scaling_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3574,7 +3713,8 @@ module Aws::EMR
     class MetricDimension < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3594,7 +3734,8 @@ module Aws::EMR
       :cluster_id,
       :step_concurrency_level,
       :extended_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3607,7 +3748,8 @@ module Aws::EMR
     class ModifyClusterOutput < Struct.new(
       :step_concurrency_level,
       :extended_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3620,7 +3762,8 @@ module Aws::EMR
     class ModifyInstanceFleetInput < Struct.new(
       :cluster_id,
       :instance_fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3634,7 +3777,8 @@ module Aws::EMR
     class ModifyInstanceGroupsInput < Struct.new(
       :cluster_id,
       :instance_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3767,7 +3911,8 @@ module Aws::EMR
       :output_notebook_s3_location,
       :output_notebook_format,
       :environment_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3857,7 +4002,8 @@ module Aws::EMR
       :end_time,
       :notebook_s3_location,
       :execution_engine_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3872,7 +4018,8 @@ module Aws::EMR
     class NotebookS3LocationForOutput < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3887,7 +4034,8 @@ module Aws::EMR
     class NotebookS3LocationFromInput < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3901,7 +4049,8 @@ module Aws::EMR
     #   @return [String]
     class OSRelease < Struct.new(
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3943,7 +4092,8 @@ module Aws::EMR
       :usage_strategy,
       :capacity_reservation_preference,
       :capacity_reservation_resource_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3968,7 +4118,8 @@ module Aws::EMR
     class OnDemandProvisioningSpecification < Struct.new(
       :allocation_strategy,
       :capacity_reservation_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3993,7 +4144,8 @@ module Aws::EMR
       :timeout_duration_minutes,
       :allocation_strategy,
       :capacity_reservation_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4008,7 +4160,8 @@ module Aws::EMR
     class OutputNotebookS3LocationForOutput < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4023,7 +4176,8 @@ module Aws::EMR
     class OutputNotebookS3LocationFromInput < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4063,7 +4217,8 @@ module Aws::EMR
       :last_modified_time,
       :last_state_change_reason,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4085,7 +4240,8 @@ module Aws::EMR
     class PlacementGroupConfig < Struct.new(
       :instance_role,
       :placement_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4108,7 +4264,8 @@ module Aws::EMR
     class PlacementType < Struct.new(
       :availability_zone,
       :availability_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4124,7 +4281,8 @@ module Aws::EMR
     class PortRange < Struct.new(
       :min_range,
       :max_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4143,7 +4301,8 @@ module Aws::EMR
       :cluster_id,
       :instance_group_id,
       :auto_scaling_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4165,7 +4324,8 @@ module Aws::EMR
       :instance_group_id,
       :auto_scaling_policy,
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4179,12 +4339,14 @@ module Aws::EMR
     class PutAutoTerminationPolicyInput < Struct.new(
       :cluster_id,
       :auto_termination_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutAutoTerminationPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4208,12 +4370,14 @@ module Aws::EMR
     #   @return [Types::BlockPublicAccessConfiguration]
     class PutBlockPublicAccessConfigurationInput < Struct.new(
       :block_public_access_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutBlockPublicAccessConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4227,12 +4391,14 @@ module Aws::EMR
     class PutManagedScalingPolicyInput < Struct.new(
       :cluster_id,
       :managed_scaling_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutManagedScalingPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4246,7 +4412,8 @@ module Aws::EMR
     class ReleaseLabelFilter < Struct.new(
       :prefix,
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4260,12 +4427,14 @@ module Aws::EMR
     class RemoveAutoScalingPolicyInput < Struct.new(
       :cluster_id,
       :instance_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveAutoScalingPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4275,12 +4444,14 @@ module Aws::EMR
     #   @return [String]
     class RemoveAutoTerminationPolicyInput < Struct.new(
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveAutoTerminationPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4290,12 +4461,14 @@ module Aws::EMR
     #   @return [String]
     class RemoveManagedScalingPolicyInput < Struct.new(
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveManagedScalingPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4311,13 +4484,15 @@ module Aws::EMR
     class RemoveTagsInput < Struct.new(
       :resource_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>This output indicates the result of removing tags from the resource.</p>
     class RemoveTagsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4569,7 +4744,8 @@ module Aws::EMR
       :ebs_root_volume_iops,
       :ebs_root_volume_throughput,
       :extended_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4583,7 +4759,8 @@ module Aws::EMR
     class RunJobFlowOutput < Struct.new(
       :job_flow_id,
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4600,7 +4777,8 @@ module Aws::EMR
     class ScalingAction < Struct.new(
       :market,
       :simple_scaling_policy_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4620,7 +4798,8 @@ module Aws::EMR
     class ScalingConstraints < Struct.new(
       :min_capacity,
       :max_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4647,7 +4826,8 @@ module Aws::EMR
       :description,
       :action,
       :trigger,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4658,7 +4838,8 @@ module Aws::EMR
     #   @return [Types::CloudWatchAlarmDefinition]
     class ScalingTrigger < Struct.new(
       :cloud_watch_alarm_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4672,7 +4853,8 @@ module Aws::EMR
     class ScriptBootstrapActionConfig < Struct.new(
       :path,
       :args,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4686,7 +4868,8 @@ module Aws::EMR
     class SecurityConfigurationSummary < Struct.new(
       :name,
       :creation_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4724,7 +4907,8 @@ module Aws::EMR
       :session_policy_arn,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4759,7 +4943,8 @@ module Aws::EMR
       :identity_type,
       :session_policy_arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4774,7 +4959,8 @@ module Aws::EMR
     class SetKeepJobFlowAliveWhenNoStepsInput < Struct.new(
       :job_flow_ids,
       :keep_job_flow_alive_when_no_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4790,7 +4976,8 @@ module Aws::EMR
     class SetTerminationProtectionInput < Struct.new(
       :job_flow_ids,
       :termination_protected,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4805,7 +4992,8 @@ module Aws::EMR
     class SetUnhealthyNodeReplacementInput < Struct.new(
       :job_flow_ids,
       :unhealthy_node_replacement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4824,7 +5012,8 @@ module Aws::EMR
     class SetVisibleToAllUsersInput < Struct.new(
       :job_flow_ids,
       :visible_to_all_users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4841,7 +5030,8 @@ module Aws::EMR
     class ShrinkPolicy < Struct.new(
       :decommission_timeout,
       :instance_resize_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4879,7 +5069,8 @@ module Aws::EMR
       :adjustment_type,
       :scaling_adjustment,
       :cool_down,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4893,7 +5084,8 @@ module Aws::EMR
     class SimplifiedApplication < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4952,7 +5144,8 @@ module Aws::EMR
       :timeout_action,
       :block_duration_minutes,
       :allocation_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4974,7 +5167,8 @@ module Aws::EMR
     class SpotResizingSpecification < Struct.new(
       :timeout_duration_minutes,
       :allocation_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5040,7 +5234,8 @@ module Aws::EMR
       :output_notebook_s3_location,
       :output_notebook_format,
       :environment_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5049,7 +5244,8 @@ module Aws::EMR
     #   @return [String]
     class StartNotebookExecutionOutput < Struct.new(
       :notebook_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5098,7 +5294,8 @@ module Aws::EMR
       :action_on_failure,
       :status,
       :execution_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5148,7 +5345,8 @@ module Aws::EMR
       :name,
       :action_on_failure,
       :hadoop_jar_step,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5162,7 +5360,8 @@ module Aws::EMR
     class StepDetail < Struct.new(
       :step_config,
       :execution_status_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5188,7 +5387,8 @@ module Aws::EMR
       :start_date_time,
       :end_date_time,
       :last_state_change_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5203,7 +5403,8 @@ module Aws::EMR
     class StepStateChangeReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5226,7 +5427,8 @@ module Aws::EMR
       :state_change_reason,
       :failure_details,
       :timeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5254,7 +5456,8 @@ module Aws::EMR
       :config,
       :action_on_failure,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5272,7 +5475,8 @@ module Aws::EMR
       :creation_date_time,
       :start_date_time,
       :end_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5281,7 +5485,8 @@ module Aws::EMR
     #   @return [String]
     class StopNotebookExecutionInput < Struct.new(
       :notebook_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5385,7 +5590,8 @@ module Aws::EMR
       :trusted_identity_propagation_enabled,
       :idc_user_assignment,
       :encryption_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5420,7 +5626,8 @@ module Aws::EMR
       :url,
       :auth_mode,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5481,7 +5688,8 @@ module Aws::EMR
       :number_of_disks,
       :ebs_storage_only,
       :architecture,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5496,7 +5704,8 @@ module Aws::EMR
     class SupportedProductConfig < Struct.new(
       :name,
       :args,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5514,7 +5723,8 @@ module Aws::EMR
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5524,7 +5734,8 @@ module Aws::EMR
     #   @return [Array<String>]
     class TerminateJobFlowsInput < Struct.new(
       :job_flow_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5556,7 +5767,8 @@ module Aws::EMR
       :subnet_ids,
       :default_s3_location,
       :encryption_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5587,7 +5799,8 @@ module Aws::EMR
       :identity_name,
       :identity_type,
       :session_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5604,7 +5817,8 @@ module Aws::EMR
     class UsernamePassword < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5631,7 +5845,8 @@ module Aws::EMR
       :iops,
       :size_in_gb,
       :throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

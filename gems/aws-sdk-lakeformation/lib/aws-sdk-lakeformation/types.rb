@@ -12,7 +12,8 @@ module Aws::LakeFormation
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::LakeFormation
       :catalog_id,
       :resource,
       :lf_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::LakeFormation
     #   @return [Array<Types::LFTagError>]
     class AddLFTagsToResourceResponse < Struct.new(
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +64,8 @@ module Aws::LakeFormation
       :e_tag,
       :size,
       :partition_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -72,7 +76,8 @@ module Aws::LakeFormation
 
     # <p>A structure that you pass to indicate you want all rows in a filter. </p>
     class AllRowsWildcard < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +87,8 @@ module Aws::LakeFormation
     #   @return [String]
     class AlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +109,8 @@ module Aws::LakeFormation
       :role_arn,
       :principal_arn,
       :duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +131,8 @@ module Aws::LakeFormation
       :secret_access_key,
       :session_token,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +142,8 @@ module Aws::LakeFormation
     #   @return [String]
     class AuditContext < Struct.new(
       :additional_audit_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +156,8 @@ module Aws::LakeFormation
     class BatchGrantPermissionsRequest < Struct.new(
       :catalog_id,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +166,8 @@ module Aws::LakeFormation
     #   @return [Array<Types::BatchPermissionsFailureEntry>]
     class BatchGrantPermissionsResponse < Struct.new(
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +181,8 @@ module Aws::LakeFormation
     class BatchPermissionsFailureEntry < Struct.new(
       :request_entry,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +212,8 @@ module Aws::LakeFormation
       :permissions,
       :condition,
       :permissions_with_grant_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +226,8 @@ module Aws::LakeFormation
     class BatchRevokePermissionsRequest < Struct.new(
       :catalog_id,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -222,7 +236,8 @@ module Aws::LakeFormation
     #   @return [Array<Types::BatchPermissionsFailureEntry>]
     class BatchRevokePermissionsResponse < Struct.new(
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,12 +246,14 @@ module Aws::LakeFormation
     #   @return [String]
     class CancelTransactionRequest < Struct.new(
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelTransactionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -246,7 +263,8 @@ module Aws::LakeFormation
     #   @return [String]
     class CatalogResource < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -260,7 +278,8 @@ module Aws::LakeFormation
     class ColumnLFTag < Struct.new(
       :name,
       :lf_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +289,8 @@ module Aws::LakeFormation
     #   @return [Array<String>]
     class ColumnWildcard < Struct.new(
       :excluded_column_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +299,8 @@ module Aws::LakeFormation
     #   @return [String]
     class CommitTransactionRequest < Struct.new(
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +309,8 @@ module Aws::LakeFormation
     #   @return [String]
     class CommitTransactionResponse < Struct.new(
       :transaction_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +320,8 @@ module Aws::LakeFormation
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +331,8 @@ module Aws::LakeFormation
     #   @return [String]
     class Condition < Struct.new(
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,12 +341,14 @@ module Aws::LakeFormation
     #   @return [Types::DataCellsFilter]
     class CreateDataCellsFilterRequest < Struct.new(
       :table_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateDataCellsFilterResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,12 +369,14 @@ module Aws::LakeFormation
       :description,
       :catalog_id,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateLFTagExpressionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,12 +393,14 @@ module Aws::LakeFormation
       :catalog_id,
       :tag_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateLFTagResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -400,7 +430,8 @@ module Aws::LakeFormation
       :instance_arn,
       :external_filtering,
       :share_recipients,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -409,7 +440,8 @@ module Aws::LakeFormation
     #   @return [String]
     class CreateLakeFormationIdentityCenterConfigurationResponse < Struct.new(
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,12 +459,14 @@ module Aws::LakeFormation
       :principal,
       :resource,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateLakeFormationOptInResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +506,8 @@ module Aws::LakeFormation
       :column_names,
       :column_wildcard,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +529,8 @@ module Aws::LakeFormation
       :database_name,
       :table_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +541,8 @@ module Aws::LakeFormation
     #   @return [String]
     class DataLakePrincipal < Struct.new(
       :data_lake_principal_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +598,8 @@ module Aws::LakeFormation
       :allow_full_table_external_data_access,
       :external_data_filtering_allow_list,
       :authorized_session_tag_value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +613,8 @@ module Aws::LakeFormation
     class DataLocationResource < Struct.new(
       :catalog_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -589,7 +628,8 @@ module Aws::LakeFormation
     class DatabaseResource < Struct.new(
       :catalog_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,12 +650,14 @@ module Aws::LakeFormation
       :database_name,
       :table_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataCellsFilterResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -628,12 +670,14 @@ module Aws::LakeFormation
     class DeleteLFTagExpressionRequest < Struct.new(
       :name,
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLFTagExpressionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,12 +690,14 @@ module Aws::LakeFormation
     class DeleteLFTagRequest < Struct.new(
       :catalog_id,
       :tag_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLFTagResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,12 +708,14 @@ module Aws::LakeFormation
     #   @return [String]
     class DeleteLakeFormationIdentityCenterConfigurationRequest < Struct.new(
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLakeFormationIdentityCenterConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,12 +733,14 @@ module Aws::LakeFormation
       :principal,
       :resource,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLakeFormationOptInResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +758,8 @@ module Aws::LakeFormation
       :uri,
       :e_tag,
       :partition_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -733,12 +784,14 @@ module Aws::LakeFormation
       :table_name,
       :transaction_id,
       :objects,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteObjectsOnCancelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,12 +800,14 @@ module Aws::LakeFormation
     #   @return [String]
     class DeregisterResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -761,7 +816,8 @@ module Aws::LakeFormation
     #   @return [String]
     class DescribeLakeFormationIdentityCenterConfigurationRequest < Struct.new(
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +849,8 @@ module Aws::LakeFormation
       :external_filtering,
       :share_recipients,
       :resource_share,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +859,8 @@ module Aws::LakeFormation
     #   @return [String]
     class DescribeResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,7 +869,8 @@ module Aws::LakeFormation
     #   @return [Types::ResourceInfo]
     class DescribeResourceResponse < Struct.new(
       :resource_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +879,8 @@ module Aws::LakeFormation
     #   @return [String]
     class DescribeTransactionRequest < Struct.new(
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +889,8 @@ module Aws::LakeFormation
     #   @return [Types::TransactionDescription]
     class DescribeTransactionResponse < Struct.new(
       :transaction_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +901,8 @@ module Aws::LakeFormation
     #   @return [Array<String>]
     class DetailsMap < Struct.new(
       :resource_share,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,7 +912,8 @@ module Aws::LakeFormation
     #   @return [String]
     class EntityNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +927,8 @@ module Aws::LakeFormation
     class ErrorDetail < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,7 +946,8 @@ module Aws::LakeFormation
       :average_execution_time_millis,
       :data_scanned_bytes,
       :work_units_executed_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -899,7 +964,8 @@ module Aws::LakeFormation
     #   @return [String]
     class ExpiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,12 +974,14 @@ module Aws::LakeFormation
     #   @return [String]
     class ExtendTransactionRequest < Struct.new(
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ExtendTransactionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +997,8 @@ module Aws::LakeFormation
     class ExternalFilteringConfiguration < Struct.new(
       :status,
       :authorized_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +1016,8 @@ module Aws::LakeFormation
       :field,
       :comparison_operator,
       :string_value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1038,8 @@ module Aws::LakeFormation
       :database_name,
       :table_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,12 +1048,14 @@ module Aws::LakeFormation
     #   @return [Types::DataCellsFilter]
     class GetDataCellsFilterResponse < Struct.new(
       :data_cells_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetDataLakePrincipalRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1064,8 @@ module Aws::LakeFormation
     #   @return [String]
     class GetDataLakePrincipalResponse < Struct.new(
       :identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1074,8 @@ module Aws::LakeFormation
     #   @return [String]
     class GetDataLakeSettingsRequest < Struct.new(
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1009,7 +1084,8 @@ module Aws::LakeFormation
     #   @return [Types::DataLakeSettings]
     class GetDataLakeSettingsResponse < Struct.new(
       :data_lake_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1106,8 @@ module Aws::LakeFormation
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1043,7 +1120,8 @@ module Aws::LakeFormation
     class GetEffectivePermissionsForPathResponse < Struct.new(
       :permissions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1056,7 +1134,8 @@ module Aws::LakeFormation
     class GetLFTagExpressionRequest < Struct.new(
       :name,
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1077,7 +1156,8 @@ module Aws::LakeFormation
       :description,
       :catalog_id,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1170,8 @@ module Aws::LakeFormation
     class GetLFTagRequest < Struct.new(
       :catalog_id,
       :tag_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1107,7 +1188,8 @@ module Aws::LakeFormation
       :catalog_id,
       :tag_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1116,7 +1198,8 @@ module Aws::LakeFormation
     #   @return [String]
     class GetQueryStateRequest < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1144,7 +1227,8 @@ module Aws::LakeFormation
     class GetQueryStateResponse < Struct.new(
       :error,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1237,8 @@ module Aws::LakeFormation
     #   @return [String]
     class GetQueryStatisticsRequest < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1170,7 +1255,8 @@ module Aws::LakeFormation
       :execution_statistics,
       :planning_statistics,
       :query_submission_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1273,8 @@ module Aws::LakeFormation
       :catalog_id,
       :resource,
       :show_assigned_lf_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,7 +1291,8 @@ module Aws::LakeFormation
       :lf_tag_on_database,
       :lf_tags_on_table,
       :lf_tags_on_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1252,7 +1340,8 @@ module Aws::LakeFormation
       :partition_predicate,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1354,8 @@ module Aws::LakeFormation
     class GetTableObjectsResponse < Struct.new(
       :objects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1294,7 +1384,8 @@ module Aws::LakeFormation
       :duration_seconds,
       :audit_context,
       :supported_permission_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1315,7 +1406,8 @@ module Aws::LakeFormation
       :secret_access_key,
       :session_token,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1440,8 @@ module Aws::LakeFormation
       :supported_permission_types,
       :s3_path,
       :query_session_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1466,8 @@ module Aws::LakeFormation
       :session_token,
       :expiration,
       :vended_s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1484,8 @@ module Aws::LakeFormation
       :query_id,
       :work_unit_id,
       :work_unit_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1400,7 +1495,8 @@ module Aws::LakeFormation
     #   @return [String]
     class GetWorkUnitResultsResponse < Struct.new(
       :result_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1422,7 +1518,8 @@ module Aws::LakeFormation
       :next_token,
       :page_size,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1537,8 @@ module Aws::LakeFormation
       :next_token,
       :query_id,
       :work_unit_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1548,8 @@ module Aws::LakeFormation
     #   @return [String]
     class GlueEncryptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1480,12 +1579,14 @@ module Aws::LakeFormation
       :permissions,
       :condition,
       :permissions_with_grant_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GrantPermissionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1596,8 @@ module Aws::LakeFormation
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1607,8 @@ module Aws::LakeFormation
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1521,7 +1624,8 @@ module Aws::LakeFormation
     class LFTag < Struct.new(
       :tag_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,7 +1639,8 @@ module Aws::LakeFormation
     class LFTagError < Struct.new(
       :lf_tag,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1557,7 +1662,8 @@ module Aws::LakeFormation
       :description,
       :catalog_id,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1571,7 +1677,8 @@ module Aws::LakeFormation
     class LFTagExpressionResource < Struct.new(
       :catalog_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1696,8 @@ module Aws::LakeFormation
       :catalog_id,
       :tag_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1607,7 +1715,8 @@ module Aws::LakeFormation
       :catalog_id,
       :tag_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1631,7 +1740,8 @@ module Aws::LakeFormation
       :resource_type,
       :expression,
       :expression_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1663,7 +1773,8 @@ module Aws::LakeFormation
       :condition,
       :last_modified,
       :last_updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1791,8 @@ module Aws::LakeFormation
       :table,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1693,7 +1805,8 @@ module Aws::LakeFormation
     class ListDataCellsFilterResponse < Struct.new(
       :data_cells_filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1823,8 @@ module Aws::LakeFormation
       :catalog_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1837,8 @@ module Aws::LakeFormation
     class ListLFTagExpressionsResponse < Struct.new(
       :lf_tag_expressions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1744,7 +1859,8 @@ module Aws::LakeFormation
       :resource_share_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1757,7 +1873,8 @@ module Aws::LakeFormation
     class ListLFTagsResponse < Struct.new(
       :lf_tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1779,7 +1896,8 @@ module Aws::LakeFormation
       :resource,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1910,8 @@ module Aws::LakeFormation
     class ListLakeFormationOptInsResponse < Struct.new(
       :lake_formation_opt_ins_info_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1826,7 +1945,8 @@ module Aws::LakeFormation
       :next_token,
       :max_results,
       :include_related,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,7 +1959,8 @@ module Aws::LakeFormation
     class ListPermissionsResponse < Struct.new(
       :principal_resource_permissions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1856,7 +1977,8 @@ module Aws::LakeFormation
       :filter_condition_list,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1991,8 @@ module Aws::LakeFormation
     class ListResourcesResponse < Struct.new(
       :resource_info_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1898,7 +2021,8 @@ module Aws::LakeFormation
       :storage_optimizer_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1911,7 +2035,8 @@ module Aws::LakeFormation
     class ListTableStorageOptimizersResponse < Struct.new(
       :storage_optimizer_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1932,7 +2057,8 @@ module Aws::LakeFormation
       :status_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1945,7 +2071,8 @@ module Aws::LakeFormation
     class ListTransactionsResponse < Struct.new(
       :transactions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2082,8 @@ module Aws::LakeFormation
     #   @return [String]
     class OperationTimeoutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1969,7 +2097,8 @@ module Aws::LakeFormation
     class PartitionObjects < Struct.new(
       :partition_values,
       :objects,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1979,7 +2108,8 @@ module Aws::LakeFormation
     #   @return [Array<String>]
     class PartitionValueList < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2119,8 @@ module Aws::LakeFormation
     #   @return [String]
     class PermissionTypeMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2011,7 +2142,8 @@ module Aws::LakeFormation
       :planning_time_millis,
       :queue_time_millis,
       :work_units_generated_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2033,7 +2165,8 @@ module Aws::LakeFormation
     class PrincipalPermissions < Struct.new(
       :principal,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2071,7 +2204,8 @@ module Aws::LakeFormation
       :additional_details,
       :last_updated,
       :last_updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2084,12 +2218,14 @@ module Aws::LakeFormation
     class PutDataLakeSettingsRequest < Struct.new(
       :catalog_id,
       :data_lake_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutDataLakeSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2115,7 +2251,8 @@ module Aws::LakeFormation
       :query_as_of_time,
       :query_parameters,
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2141,7 +2278,8 @@ module Aws::LakeFormation
       :cluster_id,
       :query_authorization_id,
       :additional_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2173,12 +2311,14 @@ module Aws::LakeFormation
       :with_federation,
       :hybrid_access_enabled,
       :with_privileged_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RegisterResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2195,7 +2335,8 @@ module Aws::LakeFormation
       :catalog_id,
       :resource,
       :lf_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2204,7 +2345,8 @@ module Aws::LakeFormation
     #   @return [Array<Types::LFTagError>]
     class RemoveLFTagsFromResourceResponse < Struct.new(
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2388,8 @@ module Aws::LakeFormation
       :lf_tag,
       :lf_tag_policy,
       :lf_tag_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2421,8 @@ module Aws::LakeFormation
       :with_federation,
       :hybrid_access_enabled,
       :with_privileged_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2288,7 +2432,8 @@ module Aws::LakeFormation
     #   @return [String]
     class ResourceNotReadyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2298,7 +2443,8 @@ module Aws::LakeFormation
     #   @return [String]
     class ResourceNumberLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2328,12 +2474,14 @@ module Aws::LakeFormation
       :permissions,
       :condition,
       :permissions_with_grant_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RevokePermissionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2347,7 +2495,8 @@ module Aws::LakeFormation
     class RowFilter < Struct.new(
       :filter_expression,
       :all_rows_wildcard,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2368,7 +2517,8 @@ module Aws::LakeFormation
       :max_results,
       :catalog_id,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2381,7 +2531,8 @@ module Aws::LakeFormation
     class SearchDatabasesByLFTagsResponse < Struct.new(
       :next_token,
       :database_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2402,7 +2553,8 @@ module Aws::LakeFormation
       :max_results,
       :catalog_id,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2567,8 @@ module Aws::LakeFormation
     class SearchTablesByLFTagsResponse < Struct.new(
       :next_token,
       :table_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2581,8 @@ module Aws::LakeFormation
     class StartQueryPlanningRequest < Struct.new(
       :query_planning_context,
       :query_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2438,7 +2592,8 @@ module Aws::LakeFormation
     #   @return [String]
     class StartQueryPlanningResponse < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2447,7 +2602,8 @@ module Aws::LakeFormation
     #   @return [String]
     class StartTransactionRequest < Struct.new(
       :transaction_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2456,7 +2612,8 @@ module Aws::LakeFormation
     #   @return [String]
     class StartTransactionResponse < Struct.new(
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2466,7 +2623,8 @@ module Aws::LakeFormation
     #   @return [String]
     class StatisticsNotReadyYetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2494,7 +2652,8 @@ module Aws::LakeFormation
       :error_message,
       :warnings,
       :last_run_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2512,7 +2671,8 @@ module Aws::LakeFormation
       :uri,
       :e_tag,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2540,13 +2700,15 @@ module Aws::LakeFormation
       :database_name,
       :name,
       :table_wildcard,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A wildcard object representing every table under a database.</p>
     class TableWildcard < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2573,7 +2735,8 @@ module Aws::LakeFormation
       :name,
       :column_names,
       :column_wildcard,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2587,7 +2750,8 @@ module Aws::LakeFormation
     class TaggedDatabase < Struct.new(
       :database,
       :lf_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2609,7 +2773,8 @@ module Aws::LakeFormation
       :lf_tag_on_database,
       :lf_tags_on_table,
       :lf_tags_on_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2619,7 +2784,8 @@ module Aws::LakeFormation
     #   @return [String]
     class ThrottledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2629,7 +2795,8 @@ module Aws::LakeFormation
     #   @return [String]
     class TransactionCanceledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2639,7 +2806,8 @@ module Aws::LakeFormation
     #   @return [String]
     class TransactionCommitInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2649,7 +2817,8 @@ module Aws::LakeFormation
     #   @return [String]
     class TransactionCommittedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2671,7 +2840,8 @@ module Aws::LakeFormation
       :transaction_status,
       :transaction_start_time,
       :transaction_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2680,12 +2850,14 @@ module Aws::LakeFormation
     #   @return [Types::DataCellsFilter]
     class UpdateDataCellsFilterRequest < Struct.new(
       :table_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDataCellsFilterResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2706,12 +2878,14 @@ module Aws::LakeFormation
       :description,
       :catalog_id,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateLFTagExpressionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2732,12 +2906,14 @@ module Aws::LakeFormation
       :tag_key,
       :tag_values_to_delete,
       :tag_values_to_add,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateLFTagResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2768,12 +2944,14 @@ module Aws::LakeFormation
       :share_recipients,
       :application_status,
       :external_filtering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateLakeFormationIdentityCenterConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2796,12 +2974,14 @@ module Aws::LakeFormation
       :resource_arn,
       :with_federation,
       :hybrid_access_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2826,12 +3006,14 @@ module Aws::LakeFormation
       :table_name,
       :transaction_id,
       :write_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTableObjectsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2852,7 +3034,8 @@ module Aws::LakeFormation
       :database_name,
       :table_name,
       :storage_optimizer_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2861,7 +3044,8 @@ module Aws::LakeFormation
     #   @return [String]
     class UpdateTableStorageOptimizerResponse < Struct.new(
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2876,7 +3060,8 @@ module Aws::LakeFormation
     class VirtualObject < Struct.new(
       :uri,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2894,7 +3079,8 @@ module Aws::LakeFormation
       :work_unit_id_max,
       :work_unit_id_min,
       :work_unit_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2910,7 +3096,8 @@ module Aws::LakeFormation
     #   @return [String]
     class WorkUnitsNotReadyYetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2924,7 +3111,8 @@ module Aws::LakeFormation
     class WriteOperation < Struct.new(
       :add_object,
       :delete_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

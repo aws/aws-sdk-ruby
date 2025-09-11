@@ -4,7 +4,7 @@ module Aws
   module Core
     # Resolves the default credentials chain.
     class DefaultCredentials
-      include CredentialsProvider
+      include IdentityProvider
 
       def initialize(config)
         @config = config
@@ -104,7 +104,47 @@ module Aws
       end
 
       def profile_sso_credentials
-        nil
+        profile = @config.profile
+        profile_config = Aws::Core.shared_config.profiles[profile]
+        return unless valid_sso_inputs?(profile_config)
+
+        sso_session = Aws::Core::SharedConfig.sso_session(profile, profile_config['sso_session'])
+        validate_sso_conflicts(profile, profile_config, sso_session)
+
+        creds = Aws::SSO::SSOCredentials.new(
+          sso_session: profile_config['sso_session'],
+          sso_account_id: profile_config['sso_account_id'],
+          sso_role_name: profile_config['sso_role_name'],
+          sso_region: sso_session['sso_region']
+        )
+        creds.features = %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
+        creds
+      end
+
+      def valid_sso_inputs?(profile_config)
+        # SSO and SSOOIDC gems must be required
+        return false unless defined?(Aws::SSO::SSOCredentials) && defined?(Aws::SSOOIDC::SSOOIDCToken)
+
+        return false unless profile_config && profile_config['sso_session'] &&
+                            profile_config['sso_account_id'] && profile_config['sso_role_name']
+
+        true
+      end
+
+      def validate_sso_conflicts(profile, profile_config, sso_session)
+        if profile_config['sso_region'] && profile_config['sso_region'] != sso_session['sso_region']
+          raise ArgumentError,
+                "The SSO region in the profile #{profile} (#{profile_config['sso_region']}) does not match the " \
+                "SSO region in the SSO session #{profile_config['sso_session']} (#{sso_session['sso_region']}). " \
+                "Please remove the SSO region from the profile #{profile}."
+        end
+
+        return unless profile_config['sso_start_url'] && profile_config['sso_start_url'] != sso_session['sso_start_url']
+
+        raise ArgumentError,
+              "The SSO start URL in the profile #{profile} (#{profile_config['sso_start_url']}) does not match the " \
+              "SSO start URL in the SSO session #{profile_config['sso_session']} (#{sso_session['sso_start_url']}). " \
+              "Please remove the SSO start URL from the profile #{profile}."
       end
 
       def profile_process_credentials

@@ -58,7 +58,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::ConflictingOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::CustomMetadataLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::DeactivatingLastSystemUserException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::DocumentLockedForCommentsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::DraftUploadOutOfSyncException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -143,7 +143,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::EntityAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::EntityNotExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -176,7 +176,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::FailedDependencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -189,7 +189,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::IllegalUserStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -202,7 +202,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::InvalidArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -215,7 +215,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::InvalidCommentOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -228,7 +228,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::InvalidOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -241,7 +241,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::InvalidPasswordException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -254,7 +254,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -267,7 +267,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::ProhibitedStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -280,7 +280,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::RequestedEntityTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -293,7 +293,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::ResourceAlreadyCheckedOutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -306,7 +306,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -319,7 +319,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::StorageLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -332,7 +332,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::StorageLimitWillExceedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -346,7 +346,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::TooManyLabelsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -360,7 +360,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::TooManySubscriptionsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -373,7 +373,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::UnauthorizedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -390,7 +390,7 @@ module Aws::WorkDocs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkDocs::Types::UnauthorizedResourceAccessException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

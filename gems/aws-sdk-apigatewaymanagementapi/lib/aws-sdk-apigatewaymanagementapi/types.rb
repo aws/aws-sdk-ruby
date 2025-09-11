@@ -10,13 +10,15 @@ module Aws::ApiGatewayManagementApi
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The caller is not authorized to invoke this operation.</p>
     class ForbiddenException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +26,8 @@ module Aws::ApiGatewayManagementApi
     #   @return [String]
     class GetConnectionRequest < Struct.new(
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,13 +43,15 @@ module Aws::ApiGatewayManagementApi
       :connected_at,
       :identity,
       :last_active_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The connection with the provided id no longer exists.</p>
     class GoneException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,13 +64,15 @@ module Aws::ApiGatewayManagementApi
     class Identity < Struct.new(
       :source_ip,
       :user_agent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The client is sending more than the allowed number of requests per unit of time or the WebSocket client side buffer is full.</p>
     class LimitExceededException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +81,8 @@ module Aws::ApiGatewayManagementApi
     #   @return [String]
     class PayloadTooLargeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -87,7 +95,8 @@ module Aws::ApiGatewayManagementApi
     class PostToConnectionRequest < Struct.new(
       :data,
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

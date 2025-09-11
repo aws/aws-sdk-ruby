@@ -1855,7 +1855,6 @@ module Aws::Forecast
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

@@ -61,7 +61,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::BatchEntryIdsNotDistinct] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -74,7 +74,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::BatchRequestTooLong] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::EmptyBatchRequest] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::InvalidAddress] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::InvalidAttributeName] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::InvalidAttributeValue] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::InvalidBatchEntryId] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::InvalidIdFormat] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -162,7 +162,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::InvalidMessageContents] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -175,7 +175,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::InvalidSecurity] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -188,7 +188,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::KmsAccessDenied] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -201,7 +201,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::KmsDisabled] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -224,7 +224,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::KmsInvalidKeyUsage] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -238,7 +238,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::KmsInvalidState] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -252,7 +252,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::KmsNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -266,7 +266,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::KmsOptInRequired] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -279,7 +279,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::KmsThrottled] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -292,7 +292,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::MessageNotInflight] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -304,7 +304,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::OverLimit] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -319,7 +319,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::PurgeQueueInProgress] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -333,7 +333,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::QueueDeletedRecently] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -347,7 +347,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::QueueDoesNotExist] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -361,7 +361,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::QueueNameExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -374,7 +374,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::ReceiptHandleIsInvalid] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -398,7 +398,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::RequestThrottled] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -411,7 +411,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -425,7 +425,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::TooManyEntriesInBatchRequest] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -438,7 +438,7 @@ module Aws::SQS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SQS::Types::UnsupportedOperation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

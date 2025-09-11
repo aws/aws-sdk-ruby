@@ -175,7 +175,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::AccessToClusterDeniedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -189,7 +189,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::AccessToSnapshotDeniedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -202,7 +202,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::AuthenticationProfileAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -215,7 +215,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::AuthenticationProfileNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -229,7 +229,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::AuthenticationProfileQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -243,7 +243,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::AuthorizationAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -257,7 +257,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::AuthorizationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -270,7 +270,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::AuthorizationQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -284,7 +284,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::BatchDeleteRequestSizeExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -298,7 +298,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::BatchModifyClusterSnapshotsLimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -311,7 +311,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::BucketNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -324,7 +324,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -338,7 +338,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -351,7 +351,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterOnLatestRevisionFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -364,7 +364,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterParameterGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -377,7 +377,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -394,7 +394,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterParameterGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -411,7 +411,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -424,7 +424,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterSecurityGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -438,7 +438,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterSecurityGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -455,7 +455,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterSecurityGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -469,7 +469,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterSnapshotAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -482,7 +482,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterSnapshotNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -496,7 +496,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterSnapshotQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -510,7 +510,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterSubnetGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -524,7 +524,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterSubnetGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -541,7 +541,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterSubnetGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -558,7 +558,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ClusterSubnetQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -571,7 +571,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ConflictPolicyUpdateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -585,7 +585,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::CopyToRegionDisabledFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -598,7 +598,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::CustomCnameAssociationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -611,7 +611,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::CustomDomainAssociationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -624,7 +624,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::DependentServiceAccessDeniedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -638,7 +638,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::DependentServiceRequestThrottlingFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -652,7 +652,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::DependentServiceUnavailableFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -665,7 +665,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::EndpointAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -678,7 +678,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::EndpointAuthorizationAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -691,7 +691,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::EndpointAuthorizationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -704,7 +704,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::EndpointAuthorizationsPerClusterLimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -717,7 +717,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::EndpointNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -730,7 +730,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::EndpointsPerAuthorizationLimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -743,7 +743,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::EndpointsPerClusterLimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -760,7 +760,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::EventSubscriptionQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -774,7 +774,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::HsmClientCertificateAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -788,7 +788,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::HsmClientCertificateNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -804,7 +804,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::HsmClientCertificateQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -818,7 +818,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::HsmConfigurationAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -831,7 +831,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::HsmConfigurationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -847,7 +847,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::HsmConfigurationQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -861,7 +861,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InProgressTableRestoreQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -874,7 +874,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::IncompatibleOrderableOptions] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -888,7 +888,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InsufficientClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -902,7 +902,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InsufficientS3BucketPolicyFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -915,7 +915,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::IntegrationAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -930,7 +930,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::IntegrationConflictOperationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -943,7 +943,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::IntegrationConflictStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -956,7 +956,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::IntegrationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -969,7 +969,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::IntegrationQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -982,7 +982,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::IntegrationSourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -995,7 +995,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::IntegrationTargetNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1009,7 +1009,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidAuthenticationProfileRequestFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1022,7 +1022,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidAuthorizationStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1037,7 +1037,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidClusterParameterGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1050,7 +1050,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidClusterSecurityGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1063,7 +1063,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidClusterSnapshotScheduleStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1077,7 +1077,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidClusterSnapshotStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1090,7 +1090,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1103,7 +1103,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidClusterSubnetGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1116,7 +1116,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidClusterSubnetStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1129,7 +1129,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidClusterTrackFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1142,7 +1142,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidDataShareFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1155,7 +1155,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidElasticIpFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1168,7 +1168,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidEndpointStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1182,7 +1182,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidHsmClientCertificateStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1196,7 +1196,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidHsmConfigurationStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1209,7 +1209,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidNamespaceFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1222,7 +1222,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidPolicyFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1235,7 +1235,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidReservedNodeStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1248,7 +1248,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidRestoreFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1262,7 +1262,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidRetentionPeriodFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1278,7 +1278,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidS3BucketNameFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1292,7 +1292,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidS3KeyPrefixFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1305,7 +1305,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidScheduleFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1318,7 +1318,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidScheduledActionFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1332,7 +1332,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidSnapshotCopyGrantStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1346,7 +1346,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidSubnet] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1360,7 +1360,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidSubscriptionStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1375,7 +1375,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidTableRestoreArgumentFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1388,7 +1388,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidTagFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1401,7 +1401,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidUsageLimitFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1414,7 +1414,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::InvalidVPCNetworkStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1428,7 +1428,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::Ipv6CidrBlockNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1441,7 +1441,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::LimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1454,7 +1454,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::NumberOfNodesPerClusterLimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1471,7 +1471,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::NumberOfNodesQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1484,7 +1484,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::PartnerNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1497,7 +1497,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::RedshiftIdcApplicationAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1510,7 +1510,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::RedshiftIdcApplicationNotExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1523,7 +1523,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::RedshiftIdcApplicationQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1536,7 +1536,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ReservedNodeAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1549,7 +1549,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ReservedNodeAlreadyMigratedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1562,7 +1562,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ReservedNodeExchangeNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1575,7 +1575,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ReservedNodeNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1588,7 +1588,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ReservedNodeOfferingNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1604,7 +1604,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ReservedNodeQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1617,7 +1617,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ResizeNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1630,7 +1630,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ResourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1644,7 +1644,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SNSInvalidTopicFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1657,7 +1657,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SNSNoAuthorizationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1671,7 +1671,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SNSTopicArnNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1684,7 +1684,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ScheduleDefinitionTypeUnsupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1697,7 +1697,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ScheduledActionAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1710,7 +1710,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ScheduledActionNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1723,7 +1723,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ScheduledActionQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1736,7 +1736,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::ScheduledActionTypeUnsupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1749,7 +1749,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SnapshotCopyAlreadyDisabledFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1762,7 +1762,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SnapshotCopyAlreadyEnabledFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1776,7 +1776,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SnapshotCopyDisabledFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1790,7 +1790,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SnapshotCopyGrantAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1804,7 +1804,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SnapshotCopyGrantNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1818,7 +1818,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SnapshotCopyGrantQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1831,7 +1831,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SnapshotScheduleAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1844,7 +1844,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SnapshotScheduleNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1857,7 +1857,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SnapshotScheduleQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1870,7 +1870,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SnapshotScheduleUpdateInProgressFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1883,7 +1883,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1896,7 +1896,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SubnetAlreadyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1910,7 +1910,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SubscriptionAlreadyExistFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1925,7 +1925,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SubscriptionCategoryNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1938,7 +1938,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SubscriptionEventIdNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1952,7 +1952,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SubscriptionNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1967,7 +1967,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::SubscriptionSeverityNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1981,7 +1981,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::TableLimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1994,7 +1994,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::TableRestoreNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2007,7 +2007,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::TagLimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2020,7 +2020,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::UnauthorizedOperation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2033,7 +2033,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::UnauthorizedPartnerIntegrationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2046,7 +2046,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::UnknownSnapshotCopyRegionFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2059,7 +2059,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::UnsupportedOperationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2072,7 +2072,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::UnsupportedOptionFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2085,7 +2085,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::UsageLimitAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2098,7 +2098,7 @@ module Aws::Redshift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::UsageLimitNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

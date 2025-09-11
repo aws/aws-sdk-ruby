@@ -18,7 +18,8 @@ module Aws::Redshift
     class AcceptReservedNodeExchangeInputMessage < Struct.new(
       :reserved_node_id,
       :target_reserved_node_offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27,7 +28,8 @@ module Aws::Redshift
     #   @return [Types::ReservedNode]
     class AcceptReservedNodeExchangeOutputMessage < Struct.new(
       :exchanged_reserved_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +38,8 @@ module Aws::Redshift
     #   @return [String]
     class AccessToClusterDeniedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +49,8 @@ module Aws::Redshift
     #   @return [String]
     class AccessToSnapshotDeniedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +64,8 @@ module Aws::Redshift
     class AccountAttribute < Struct.new(
       :attribute_name,
       :attribute_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +81,8 @@ module Aws::Redshift
     class AccountWithRestoreAccess < Struct.new(
       :account_id,
       :account_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +103,8 @@ module Aws::Redshift
       :cluster_identifier,
       :database_name,
       :partner_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +117,8 @@ module Aws::Redshift
     class AddPartnerOutput < Struct.new(
       :database_name,
       :partner_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +132,8 @@ module Aws::Redshift
     class AquaConfiguration < Struct.new(
       :aqua_status,
       :aqua_configuration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +159,8 @@ module Aws::Redshift
       :consumer_arn,
       :consumer_region,
       :allow_writes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +190,8 @@ module Aws::Redshift
       :data_share_associations,
       :managed_by,
       :data_share_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +209,8 @@ module Aws::Redshift
       :custom_domain_certificate_arn,
       :custom_domain_certificate_expiry_date,
       :certificate_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +220,8 @@ module Aws::Redshift
     #   @return [String]
     class AttributeValueTarget < Struct.new(
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +236,8 @@ module Aws::Redshift
     class AuthenticationProfile < Struct.new(
       :authentication_profile_name,
       :authentication_profile_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +246,8 @@ module Aws::Redshift
     #   @return [String]
     class AuthenticationProfileAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +256,8 @@ module Aws::Redshift
     #   @return [String]
     class AuthenticationProfileNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +267,8 @@ module Aws::Redshift
     #   @return [String]
     class AuthenticationProfileQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +278,8 @@ module Aws::Redshift
     #   @return [String]
     class AuthorizationAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +289,8 @@ module Aws::Redshift
     #   @return [String]
     class AuthorizationNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +299,8 @@ module Aws::Redshift
     #   @return [String]
     class AuthorizationQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +326,8 @@ module Aws::Redshift
       :cidrip,
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,7 +336,8 @@ module Aws::Redshift
     #   @return [Types::ClusterSecurityGroup]
     class AuthorizeClusterSecurityGroupIngressResult < Struct.new(
       :cluster_security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +355,8 @@ module Aws::Redshift
       :data_share_arn,
       :consumer_identifier,
       :allow_writes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +386,8 @@ module Aws::Redshift
       :data_share_associations,
       :managed_by,
       :data_share_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -380,7 +404,8 @@ module Aws::Redshift
       :cluster_identifier,
       :account,
       :vpc_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +447,8 @@ module Aws::Redshift
       :allowed_all_vp_cs,
       :allowed_vp_cs,
       :endpoint_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +484,8 @@ module Aws::Redshift
       :snapshot_arn,
       :snapshot_cluster_identifier,
       :account_with_restore_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +494,8 @@ module Aws::Redshift
     #   @return [Types::Snapshot]
     class AuthorizeSnapshotAccessResult < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +510,8 @@ module Aws::Redshift
     class AuthorizedTokenIssuer < Struct.new(
       :trusted_token_issuer_arn,
       :authorized_audiences_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +525,8 @@ module Aws::Redshift
     class AvailabilityZone < Struct.new(
       :name,
       :supported_platforms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +535,8 @@ module Aws::Redshift
     #   @return [Array<Types::DeleteClusterSnapshotMessage>]
     class BatchDeleteClusterSnapshotsRequest < Struct.new(
       :identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +549,8 @@ module Aws::Redshift
     class BatchDeleteClusterSnapshotsResult < Struct.new(
       :resources,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +560,8 @@ module Aws::Redshift
     #   @return [String]
     class BatchDeleteRequestSizeExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +571,8 @@ module Aws::Redshift
     #   @return [String]
     class BatchModifyClusterSnapshotsLimitExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +595,8 @@ module Aws::Redshift
       :snapshot_identifier_list,
       :manual_snapshot_retention_period,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +609,8 @@ module Aws::Redshift
     class BatchModifyClusterSnapshotsOutputMessage < Struct.new(
       :resources,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +619,8 @@ module Aws::Redshift
     #   @return [String]
     class BucketNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -593,7 +630,8 @@ module Aws::Redshift
     #   @return [String]
     class CancelResizeMessage < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +726,8 @@ module Aws::Redshift
       :message,
       :target_encryption_type,
       :data_transfer_progress_percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +742,8 @@ module Aws::Redshift
     class CertificateAssociation < Struct.new(
       :custom_domain_name,
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1161,8 @@ module Aws::Redshift
       :ip_address_type,
       :multi_az,
       :multi_az_secondary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1130,7 +1171,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1144,7 +1186,8 @@ module Aws::Redshift
     class ClusterAssociatedToSchedule < Struct.new(
       :cluster_identifier,
       :schedule_association_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1167,7 +1210,8 @@ module Aws::Redshift
       :current_database_revision,
       :database_revision_release_date,
       :revision_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,7 +1227,8 @@ module Aws::Redshift
     class ClusterDbRevisionsMessage < Struct.new(
       :marker,
       :cluster_db_revisions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1217,7 +1262,8 @@ module Aws::Redshift
     class ClusterIamRole < Struct.new(
       :iam_role_arn,
       :apply_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1281,8 @@ module Aws::Redshift
       :node_role,
       :private_ip_address,
       :public_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,7 +1292,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1254,7 +1302,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterOnLatestRevisionFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1326,8 @@ module Aws::Redshift
       :parameter_group_family,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1286,7 +1336,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterParameterGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1295,7 +1346,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterParameterGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1308,7 +1360,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterParameterGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1330,7 +1383,8 @@ module Aws::Redshift
       :parameter_group_name,
       :parameter_apply_status,
       :cluster_parameter_status_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1350,7 +1404,8 @@ module Aws::Redshift
     class ClusterParameterGroupsMessage < Struct.new(
       :marker,
       :parameter_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1409,7 +1464,8 @@ module Aws::Redshift
       :parameter_name,
       :parameter_apply_status,
       :parameter_apply_error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1422,7 +1478,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1451,7 +1508,8 @@ module Aws::Redshift
       :ec2_security_groups,
       :ip_ranges,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1518,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterSecurityGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1533,8 @@ module Aws::Redshift
     class ClusterSecurityGroupMembership < Struct.new(
       :cluster_security_group_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1492,7 +1552,8 @@ module Aws::Redshift
     class ClusterSecurityGroupMessage < Struct.new(
       :marker,
       :cluster_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1502,7 +1563,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterSecurityGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1515,7 +1577,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterSecurityGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1525,7 +1588,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterSnapshotAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1617,8 @@ module Aws::Redshift
       :retention_period,
       :manual_snapshot_retention_period,
       :snapshot_copy_grant_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1562,7 +1627,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterSnapshotNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1572,7 +1638,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterSnapshotQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1607,7 +1674,8 @@ module Aws::Redshift
       :subnets,
       :tags,
       :supported_cluster_ip_address_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1617,7 +1685,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterSubnetGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,7 +1705,8 @@ module Aws::Redshift
     class ClusterSubnetGroupMessage < Struct.new(
       :marker,
       :cluster_subnet_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1646,7 +1716,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterSubnetGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1659,7 +1730,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterSubnetGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1672,7 +1744,8 @@ module Aws::Redshift
     #   @return [String]
     class ClusterSubnetQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1691,7 +1764,8 @@ module Aws::Redshift
       :cluster_version,
       :cluster_parameter_group_family,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1784,8 @@ module Aws::Redshift
     class ClusterVersionsMessage < Struct.new(
       :marker,
       :cluster_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1804,8 @@ module Aws::Redshift
     class ClustersMessage < Struct.new(
       :marker,
       :clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1738,7 +1814,8 @@ module Aws::Redshift
     #   @return [String]
     class ConflictPolicyUpdateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1873,8 @@ module Aws::Redshift
       :source_snapshot_cluster_identifier,
       :target_snapshot_identifier,
       :manual_snapshot_retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,7 +1883,8 @@ module Aws::Redshift
     #   @return [Types::Snapshot]
     class CopyClusterSnapshotResult < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1815,7 +1894,8 @@ module Aws::Redshift
     #   @return [String]
     class CopyToRegionDisabledFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1829,7 +1909,8 @@ module Aws::Redshift
     class CreateAuthenticationProfileMessage < Struct.new(
       :authentication_profile_name,
       :authentication_profile_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1842,7 +1923,8 @@ module Aws::Redshift
     class CreateAuthenticationProfileResult < Struct.new(
       :authentication_profile_name,
       :authentication_profile_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2222,7 +2304,8 @@ module Aws::Redshift
       :ip_address_type,
       :multi_az,
       :redshift_idc_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2268,7 +2351,8 @@ module Aws::Redshift
       :parameter_group_family,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2277,7 +2361,8 @@ module Aws::Redshift
     #   @return [Types::ClusterParameterGroup]
     class CreateClusterParameterGroupResult < Struct.new(
       :cluster_parameter_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2286,7 +2371,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class CreateClusterResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2319,7 +2405,8 @@ module Aws::Redshift
       :cluster_security_group_name,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2328,7 +2415,8 @@ module Aws::Redshift
     #   @return [Types::ClusterSecurityGroup]
     class CreateClusterSecurityGroupResult < Struct.new(
       :cluster_security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2371,7 +2459,8 @@ module Aws::Redshift
       :cluster_identifier,
       :manual_snapshot_retention_period,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2380,7 +2469,8 @@ module Aws::Redshift
     #   @return [Types::Snapshot]
     class CreateClusterSnapshotResult < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2418,7 +2508,8 @@ module Aws::Redshift
       :description,
       :subnet_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2427,7 +2518,8 @@ module Aws::Redshift
     #   @return [Types::ClusterSubnetGroup]
     class CreateClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2444,7 +2536,8 @@ module Aws::Redshift
       :custom_domain_name,
       :custom_domain_certificate_arn,
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2465,7 +2558,8 @@ module Aws::Redshift
       :custom_domain_certificate_arn,
       :cluster_identifier,
       :custom_domain_cert_expiry_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2494,7 +2588,8 @@ module Aws::Redshift
       :endpoint_name,
       :subnet_group_name,
       :vpc_security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2540,7 +2635,8 @@ module Aws::Redshift
       :address,
       :vpc_security_groups,
       :vpc_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2610,7 +2706,8 @@ module Aws::Redshift
       :severity,
       :enabled,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2619,7 +2716,8 @@ module Aws::Redshift
     #   @return [Types::EventSubscription]
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2634,7 +2732,8 @@ module Aws::Redshift
     class CreateHsmClientCertificateMessage < Struct.new(
       :hsm_client_certificate_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2645,7 +2744,8 @@ module Aws::Redshift
     #   @return [Types::HsmClientCertificate]
     class CreateHsmClientCertificateResult < Struct.new(
       :hsm_client_certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2681,7 +2781,8 @@ module Aws::Redshift
       :hsm_partition_password,
       :hsm_server_public_certificate,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2692,7 +2793,8 @@ module Aws::Redshift
     #   @return [Types::HsmConfiguration]
     class CreateHsmConfigurationResult < Struct.new(
       :hsm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2731,7 +2833,8 @@ module Aws::Redshift
       :tag_list,
       :additional_encryption_context,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2784,7 +2887,8 @@ module Aws::Redshift
       :kms_key_id,
       :additional_encryption_context,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2819,7 +2923,8 @@ module Aws::Redshift
       :iam_role_arn,
       :authorized_token_issuer_list,
       :service_integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2828,7 +2933,8 @@ module Aws::Redshift
     #   @return [Types::RedshiftIdcApplication]
     class CreateRedshiftIdcApplicationResult < Struct.new(
       :redshift_idc_application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2874,7 +2980,8 @@ module Aws::Redshift
       :start_time,
       :end_time,
       :enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2931,7 +3038,8 @@ module Aws::Redshift
       :next_invocations,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2969,7 +3077,8 @@ module Aws::Redshift
       :snapshot_copy_grant_name,
       :kms_key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2985,7 +3094,8 @@ module Aws::Redshift
     #   @return [Types::SnapshotCopyGrant]
     class CreateSnapshotCopyGrantResult < Struct.new(
       :snapshot_copy_grant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3016,7 +3126,8 @@ module Aws::Redshift
       :tags,
       :dry_run,
       :next_invocations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3051,7 +3162,8 @@ module Aws::Redshift
       :next_invocations,
       :associated_cluster_count,
       :associated_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3071,7 +3183,8 @@ module Aws::Redshift
     class CreateTagsMessage < Struct.new(
       :resource_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3112,7 +3225,8 @@ module Aws::Redshift
       :period,
       :breach_action,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3164,7 +3278,8 @@ module Aws::Redshift
       :period,
       :breach_action,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3173,7 +3288,8 @@ module Aws::Redshift
     #   @return [String]
     class CustomCnameAssociationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3182,7 +3298,8 @@ module Aws::Redshift
     #   @return [String]
     class CustomDomainAssociationNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3195,7 +3312,8 @@ module Aws::Redshift
     class CustomDomainAssociationsMessage < Struct.new(
       :marker,
       :associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3208,7 +3326,8 @@ module Aws::Redshift
     class CustomerStorageMessage < Struct.new(
       :total_backup_size_in_mega_bytes,
       :total_provisioned_storage_in_mega_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3238,7 +3357,8 @@ module Aws::Redshift
       :data_share_associations,
       :managed_by,
       :data_share_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3274,7 +3394,8 @@ module Aws::Redshift
       :status_change_date,
       :producer_allowed_writes,
       :consumer_accepted_writes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3306,7 +3427,8 @@ module Aws::Redshift
       :data_transferred_in_mega_bytes,
       :estimated_time_to_completion_in_seconds,
       :elapsed_time_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3320,7 +3442,8 @@ module Aws::Redshift
     class DeauthorizeDataShareMessage < Struct.new(
       :data_share_arn,
       :consumer_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3350,7 +3473,8 @@ module Aws::Redshift
       :data_share_associations,
       :managed_by,
       :data_share_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3373,7 +3497,8 @@ module Aws::Redshift
       :parameter_group_family,
       :marker,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3391,7 +3516,8 @@ module Aws::Redshift
       :defer_maintenance_identifier,
       :defer_maintenance_start_time,
       :defer_maintenance_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3400,7 +3526,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteAuthenticationProfileMessage < Struct.new(
       :authentication_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3409,7 +3536,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteAuthenticationProfileResult < Struct.new(
       :authentication_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3473,7 +3601,8 @@ module Aws::Redshift
       :skip_final_cluster_snapshot,
       :final_cluster_snapshot_identifier,
       :final_cluster_snapshot_retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3492,7 +3621,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteClusterParameterGroupMessage < Struct.new(
       :parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3501,7 +3631,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class DeleteClusterResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3511,7 +3642,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteClusterSecurityGroupMessage < Struct.new(
       :cluster_security_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3531,7 +3663,8 @@ module Aws::Redshift
     class DeleteClusterSnapshotInput < Struct.new(
       :snapshot_identifier,
       :snapshot_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3551,7 +3684,8 @@ module Aws::Redshift
     class DeleteClusterSnapshotMessage < Struct.new(
       :snapshot_identifier,
       :snapshot_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3560,7 +3694,8 @@ module Aws::Redshift
     #   @return [Types::Snapshot]
     class DeleteClusterSnapshotResult < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3570,7 +3705,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteClusterSubnetGroupMessage < Struct.new(
       :cluster_subnet_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3583,7 +3719,8 @@ module Aws::Redshift
     class DeleteCustomDomainAssociationMessage < Struct.new(
       :cluster_identifier,
       :custom_domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3592,7 +3729,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteEndpointAccessMessage < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3638,7 +3776,8 @@ module Aws::Redshift
       :address,
       :vpc_security_groups,
       :vpc_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3648,7 +3787,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3658,7 +3798,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteHsmClientCertificateMessage < Struct.new(
       :hsm_client_certificate_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3668,7 +3809,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteHsmConfigurationMessage < Struct.new(
       :hsm_configuration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3677,7 +3819,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteIntegrationMessage < Struct.new(
       :integration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3730,7 +3873,8 @@ module Aws::Redshift
       :kms_key_id,
       :additional_encryption_context,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3751,7 +3895,8 @@ module Aws::Redshift
       :cluster_identifier,
       :database_name,
       :partner_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3764,7 +3909,8 @@ module Aws::Redshift
     class DeletePartnerOutput < Struct.new(
       :database_name,
       :partner_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3773,7 +3919,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteRedshiftIdcApplicationMessage < Struct.new(
       :redshift_idc_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3782,7 +3929,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteResourcePolicyMessage < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3791,7 +3939,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteScheduledActionMessage < Struct.new(
       :scheduled_action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3801,7 +3950,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteSnapshotCopyGrantMessage < Struct.new(
       :snapshot_copy_grant_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3810,7 +3960,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteSnapshotScheduleMessage < Struct.new(
       :schedule_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3825,7 +3976,8 @@ module Aws::Redshift
     class DeleteTagsMessage < Struct.new(
       :resource_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3834,7 +3986,8 @@ module Aws::Redshift
     #   @return [String]
     class DeleteUsageLimitMessage < Struct.new(
       :usage_limit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3843,7 +3996,8 @@ module Aws::Redshift
     #   @return [String]
     class DependentServiceAccessDeniedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3853,7 +4007,8 @@ module Aws::Redshift
     #   @return [String]
     class DependentServiceRequestThrottlingFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3863,7 +4018,8 @@ module Aws::Redshift
     #   @return [String]
     class DependentServiceUnavailableFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3878,7 +4034,8 @@ module Aws::Redshift
     class DeregisterNamespaceInputMessage < Struct.new(
       :namespace_identifier,
       :consumer_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3888,7 +4045,8 @@ module Aws::Redshift
     #   @return [String]
     class DeregisterNamespaceOutputMessage < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3897,7 +4055,8 @@ module Aws::Redshift
     #   @return [Array<String>]
     class DescribeAccountAttributesMessage < Struct.new(
       :attribute_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3906,7 +4065,8 @@ module Aws::Redshift
     #   @return [Array<Types::AccountAttribute>]
     class DescribeAccountAttributesOutput < Struct.new(
       :account_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3915,7 +4075,8 @@ module Aws::Redshift
     #   @return [String]
     class DescribeAuthenticationProfilesMessage < Struct.new(
       :authentication_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3924,7 +4085,8 @@ module Aws::Redshift
     #   @return [Array<Types::AuthenticationProfile>]
     class DescribeAuthenticationProfilesResult < Struct.new(
       :authentication_profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3956,7 +4118,8 @@ module Aws::Redshift
       :cluster_identifier,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4005,7 +4168,8 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4043,7 +4207,8 @@ module Aws::Redshift
       :source,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4063,7 +4228,8 @@ module Aws::Redshift
     class DescribeClusterParametersOutput < Struct.new(
       :parameters,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4114,7 +4280,8 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4234,7 +4401,8 @@ module Aws::Redshift
       :tag_values,
       :cluster_exists,
       :sorting_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4281,7 +4449,8 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4303,7 +4472,8 @@ module Aws::Redshift
       :maintenance_track_name,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4351,7 +4521,8 @@ module Aws::Redshift
       :cluster_parameter_group_family,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4400,7 +4571,8 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4421,7 +4593,8 @@ module Aws::Redshift
       :custom_domain_certificate_arn,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4451,7 +4624,8 @@ module Aws::Redshift
       :status,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4469,7 +4643,8 @@ module Aws::Redshift
     class DescribeDataSharesForConsumerResult < Struct.new(
       :data_shares,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4499,7 +4674,8 @@ module Aws::Redshift
       :status,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4517,7 +4693,8 @@ module Aws::Redshift
     class DescribeDataSharesForProducerResult < Struct.new(
       :data_shares,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4537,7 +4714,8 @@ module Aws::Redshift
       :data_share_arn,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4550,7 +4728,8 @@ module Aws::Redshift
     class DescribeDataSharesResult < Struct.new(
       :data_shares,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4579,7 +4758,8 @@ module Aws::Redshift
       :parameter_group_family,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4588,7 +4768,8 @@ module Aws::Redshift
     #   @return [Types::DefaultClusterParameters]
     class DescribeDefaultClusterParametersResult < Struct.new(
       :default_cluster_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4622,7 +4803,8 @@ module Aws::Redshift
       :vpc_id,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4638,7 +4820,8 @@ module Aws::Redshift
     class DescribeEndpointAccessOutput < Struct.new(
       :endpoint_access_list,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4671,7 +4854,8 @@ module Aws::Redshift
       :grantee,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4687,7 +4871,8 @@ module Aws::Redshift
     class DescribeEndpointAuthorizationOutput < Struct.new(
       :endpoint_authorization_list,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4699,7 +4884,8 @@ module Aws::Redshift
     #   @return [String]
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4747,7 +4933,8 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4851,7 +5038,8 @@ module Aws::Redshift
       :duration,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4900,7 +5088,8 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4949,7 +5138,8 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4981,7 +5171,8 @@ module Aws::Redshift
       :target_arn,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4995,7 +5186,8 @@ module Aws::Redshift
     class DescribeIntegrationsFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5024,7 +5216,8 @@ module Aws::Redshift
       :max_records,
       :marker,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5036,7 +5229,8 @@ module Aws::Redshift
     #   @return [String]
     class DescribeLoggingStatusMessage < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5076,7 +5270,8 @@ module Aws::Redshift
       :last_failure_message,
       :log_destination_type,
       :log_exports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5130,7 +5325,8 @@ module Aws::Redshift
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5167,7 +5363,8 @@ module Aws::Redshift
       :node_type,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5188,7 +5385,8 @@ module Aws::Redshift
       :cluster_identifier,
       :database_name,
       :partner_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5197,7 +5395,8 @@ module Aws::Redshift
     #   @return [Array<Types::PartnerIntegrationInfo>]
     class DescribePartnersOutputMessage < Struct.new(
       :partner_integration_info_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5221,7 +5420,8 @@ module Aws::Redshift
       :redshift_idc_application_arn,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5239,7 +5439,8 @@ module Aws::Redshift
     class DescribeRedshiftIdcApplicationsResult < Struct.new(
       :redshift_idc_applications,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5267,7 +5468,8 @@ module Aws::Redshift
       :reserved_node_exchange_request_id,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5281,7 +5483,8 @@ module Aws::Redshift
     class DescribeReservedNodeExchangeStatusOutputMessage < Struct.new(
       :reserved_node_exchange_status_details,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5310,7 +5513,8 @@ module Aws::Redshift
       :reserved_node_offering_id,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5339,7 +5543,8 @@ module Aws::Redshift
       :reserved_node_id,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5352,7 +5557,8 @@ module Aws::Redshift
     #   @return [String]
     class DescribeResizeMessage < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5447,7 +5653,8 @@ module Aws::Redshift
       :message,
       :target_encryption_type,
       :data_transfer_progress_percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5498,7 +5705,8 @@ module Aws::Redshift
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5544,7 +5752,8 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5582,7 +5791,8 @@ module Aws::Redshift
       :tag_values,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5599,7 +5809,8 @@ module Aws::Redshift
     class DescribeSnapshotSchedulesOutputMessage < Struct.new(
       :snapshot_schedules,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5629,7 +5840,8 @@ module Aws::Redshift
       :table_restore_request_id,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5718,7 +5930,8 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5772,7 +5985,8 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5790,7 +6004,8 @@ module Aws::Redshift
     class DescribeUsageLimitsOutput < Struct.new(
       :usage_limits,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5802,7 +6017,8 @@ module Aws::Redshift
     #   @return [String]
     class DisableLoggingMessage < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5842,7 +6058,8 @@ module Aws::Redshift
       :last_failure_message,
       :log_destination_type,
       :log_exports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5855,7 +6072,8 @@ module Aws::Redshift
     #   @return [String]
     class DisableSnapshotCopyMessage < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5864,7 +6082,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class DisableSnapshotCopyResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5887,7 +6106,8 @@ module Aws::Redshift
       :disassociate_entire_account,
       :consumer_arn,
       :consumer_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5917,7 +6137,8 @@ module Aws::Redshift
       :data_share_associations,
       :managed_by,
       :data_share_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5940,7 +6161,8 @@ module Aws::Redshift
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5954,7 +6176,8 @@ module Aws::Redshift
     class ElasticIpStatus < Struct.new(
       :elastic_ip,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5994,7 +6217,8 @@ module Aws::Redshift
       :s3_key_prefix,
       :log_destination_type,
       :log_exports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6034,7 +6258,8 @@ module Aws::Redshift
       :last_failure_message,
       :log_destination_type,
       :log_exports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6072,7 +6297,8 @@ module Aws::Redshift
       :retention_period,
       :snapshot_copy_grant_name,
       :manual_snapshot_retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6081,7 +6307,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class EnableSnapshotCopyResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6099,7 +6326,8 @@ module Aws::Redshift
       :address,
       :port,
       :vpc_endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6145,7 +6373,8 @@ module Aws::Redshift
       :address,
       :vpc_security_groups,
       :vpc_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6154,7 +6383,8 @@ module Aws::Redshift
     #   @return [String]
     class EndpointAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6196,7 +6426,8 @@ module Aws::Redshift
       :allowed_all_vp_cs,
       :allowed_vp_cs,
       :endpoint_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6205,7 +6436,8 @@ module Aws::Redshift
     #   @return [String]
     class EndpointAuthorizationAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6214,7 +6446,8 @@ module Aws::Redshift
     #   @return [String]
     class EndpointAuthorizationNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6223,7 +6456,8 @@ module Aws::Redshift
     #   @return [String]
     class EndpointAuthorizationsPerClusterLimitExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6232,7 +6466,8 @@ module Aws::Redshift
     #   @return [String]
     class EndpointNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6241,7 +6476,8 @@ module Aws::Redshift
     #   @return [String]
     class EndpointsPerAuthorizationLimitExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6250,7 +6486,8 @@ module Aws::Redshift
     #   @return [String]
     class EndpointsPerClusterLimitExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6286,7 +6523,8 @@ module Aws::Redshift
       :severity,
       :date,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6301,7 +6539,8 @@ module Aws::Redshift
     class EventCategoriesMap < Struct.new(
       :source_type,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6311,7 +6550,8 @@ module Aws::Redshift
     #   @return [Array<Types::EventCategoriesMap>]
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6334,7 +6574,8 @@ module Aws::Redshift
       :event_categories,
       :event_description,
       :severity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6407,7 +6648,8 @@ module Aws::Redshift
       :severity,
       :enabled,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6420,7 +6662,8 @@ module Aws::Redshift
     #   @return [String]
     class EventSubscriptionQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6438,7 +6681,8 @@ module Aws::Redshift
     class EventSubscriptionsMessage < Struct.new(
       :marker,
       :event_subscriptions_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6456,7 +6700,8 @@ module Aws::Redshift
     class EventsMessage < Struct.new(
       :marker,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6465,7 +6710,8 @@ module Aws::Redshift
     #   @return [String]
     class FailoverPrimaryComputeInputMessage < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6474,7 +6720,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class FailoverPrimaryComputeResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6587,7 +6834,8 @@ module Aws::Redshift
       :auto_create,
       :db_groups,
       :custom_domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6612,7 +6860,8 @@ module Aws::Redshift
       :db_user,
       :db_password,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6637,7 +6886,8 @@ module Aws::Redshift
       :cluster_identifier,
       :duration_seconds,
       :custom_domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6658,7 +6908,8 @@ module Aws::Redshift
       :db_password,
       :expiration,
       :next_refresh_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6690,7 +6941,8 @@ module Aws::Redshift
       :snapshot_identifier,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6706,7 +6958,8 @@ module Aws::Redshift
     class GetReservedNodeExchangeConfigurationOptionsOutputMessage < Struct.new(
       :marker,
       :reserved_node_configuration_option_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6727,7 +6980,8 @@ module Aws::Redshift
       :reserved_node_id,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6745,7 +6999,8 @@ module Aws::Redshift
     class GetReservedNodeExchangeOfferingsOutputMessage < Struct.new(
       :marker,
       :reserved_node_offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6754,7 +7009,8 @@ module Aws::Redshift
     #   @return [String]
     class GetResourcePolicyMessage < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6763,7 +7019,8 @@ module Aws::Redshift
     #   @return [Types::ResourcePolicy]
     class GetResourcePolicyResult < Struct.new(
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6784,7 +7041,8 @@ module Aws::Redshift
       :hsm_client_certificate_identifier,
       :hsm_client_certificate_public_key,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6794,7 +7052,8 @@ module Aws::Redshift
     #   @return [String]
     class HsmClientCertificateAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6813,7 +7072,8 @@ module Aws::Redshift
     class HsmClientCertificateMessage < Struct.new(
       :marker,
       :hsm_client_certificates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6823,7 +7083,8 @@ module Aws::Redshift
     #   @return [String]
     class HsmClientCertificateNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6835,7 +7096,8 @@ module Aws::Redshift
     #   @return [String]
     class HsmClientCertificateQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6864,7 +7126,8 @@ module Aws::Redshift
       :hsm_ip_address,
       :hsm_partition_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6874,7 +7137,8 @@ module Aws::Redshift
     #   @return [String]
     class HsmConfigurationAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6892,7 +7156,8 @@ module Aws::Redshift
     class HsmConfigurationMessage < Struct.new(
       :marker,
       :hsm_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6901,7 +7166,8 @@ module Aws::Redshift
     #   @return [String]
     class HsmConfigurationNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6913,7 +7179,8 @@ module Aws::Redshift
     #   @return [String]
     class HsmConfigurationQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6935,7 +7202,8 @@ module Aws::Redshift
       :hsm_client_certificate_identifier,
       :hsm_configuration_identifier,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6953,7 +7221,8 @@ module Aws::Redshift
       :status,
       :cidrip,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6963,7 +7232,8 @@ module Aws::Redshift
     #   @return [String]
     class InProgressTableRestoreQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6993,7 +7263,8 @@ module Aws::Redshift
       :status,
       :errors,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7010,7 +7281,8 @@ module Aws::Redshift
     class InboundIntegrationsMessage < Struct.new(
       :marker,
       :inbound_integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7019,7 +7291,8 @@ module Aws::Redshift
     #   @return [String]
     class IncompatibleOrderableOptions < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7029,7 +7302,8 @@ module Aws::Redshift
     #   @return [String]
     class InsufficientClusterCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7039,7 +7313,8 @@ module Aws::Redshift
     #   @return [String]
     class InsufficientS3BucketPolicyFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7092,7 +7367,8 @@ module Aws::Redshift
       :kms_key_id,
       :additional_encryption_context,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7101,7 +7377,8 @@ module Aws::Redshift
     #   @return [String]
     class IntegrationAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7112,7 +7389,8 @@ module Aws::Redshift
     #   @return [String]
     class IntegrationConflictOperationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7121,7 +7399,8 @@ module Aws::Redshift
     #   @return [String]
     class IntegrationConflictStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7135,7 +7414,8 @@ module Aws::Redshift
     class IntegrationError < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7144,7 +7424,8 @@ module Aws::Redshift
     #   @return [String]
     class IntegrationNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7153,7 +7434,8 @@ module Aws::Redshift
     #   @return [String]
     class IntegrationQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7162,7 +7444,8 @@ module Aws::Redshift
     #   @return [String]
     class IntegrationSourceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7171,7 +7454,8 @@ module Aws::Redshift
     #   @return [String]
     class IntegrationTargetNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7186,7 +7470,8 @@ module Aws::Redshift
     class IntegrationsMessage < Struct.new(
       :marker,
       :integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7196,7 +7481,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidAuthenticationProfileRequestFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7205,7 +7491,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidAuthorizationStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7216,7 +7503,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidClusterParameterGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7225,7 +7513,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidClusterSecurityGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7234,7 +7523,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidClusterSnapshotScheduleStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7244,7 +7534,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidClusterSnapshotStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7253,7 +7544,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidClusterStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7262,7 +7554,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidClusterSubnetGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7271,7 +7564,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidClusterSubnetStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7280,7 +7574,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidClusterTrackFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7289,7 +7584,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidDataShareFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7298,7 +7594,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidElasticIpFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7307,7 +7604,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidEndpointStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7317,7 +7615,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidHsmClientCertificateStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7327,7 +7626,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidHsmConfigurationStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7336,7 +7636,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidNamespaceFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7345,7 +7646,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidPolicyFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7354,7 +7656,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidReservedNodeStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7363,7 +7666,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidRestoreFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7373,7 +7677,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidRetentionPeriodFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7385,7 +7690,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidS3BucketNameFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7395,7 +7701,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidS3KeyPrefixFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7404,7 +7711,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidScheduleFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7413,7 +7721,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidScheduledActionFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7423,7 +7732,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidSnapshotCopyGrantStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7433,7 +7743,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidSubnet < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7443,7 +7754,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidSubscriptionStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7454,7 +7766,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidTableRestoreArgumentFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7463,7 +7776,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidTagFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7472,7 +7786,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidUsageLimitFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7481,7 +7796,8 @@ module Aws::Redshift
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7491,7 +7807,8 @@ module Aws::Redshift
     #   @return [String]
     class Ipv6CidrBlockNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7501,7 +7818,8 @@ module Aws::Redshift
     #   @return [String]
     class LakeFormationQuery < Struct.new(
       :authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7512,7 +7830,8 @@ module Aws::Redshift
     class LakeFormationScopeUnion < Struct.new(
       :lake_formation_query,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class LakeFormationQuery < LakeFormationScopeUnion; end
@@ -7524,7 +7843,8 @@ module Aws::Redshift
     #   @return [String]
     class LimitExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7554,7 +7874,8 @@ module Aws::Redshift
       :namespace_arn,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7572,7 +7893,8 @@ module Aws::Redshift
     class ListRecommendationsResult < Struct.new(
       :recommendations,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7596,7 +7918,8 @@ module Aws::Redshift
       :maintenance_track_name,
       :database_version,
       :update_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7609,7 +7932,8 @@ module Aws::Redshift
     class ModifyAquaInputMessage < Struct.new(
       :cluster_identifier,
       :aqua_configuration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7618,7 +7942,8 @@ module Aws::Redshift
     #   @return [Types::AquaConfiguration]
     class ModifyAquaOutputMessage < Struct.new(
       :aqua_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7632,7 +7957,8 @@ module Aws::Redshift
     class ModifyAuthenticationProfileMessage < Struct.new(
       :authentication_profile_name,
       :authentication_profile_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7645,7 +7971,8 @@ module Aws::Redshift
     class ModifyAuthenticationProfileResult < Struct.new(
       :authentication_profile_name,
       :authentication_profile_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7661,7 +7988,8 @@ module Aws::Redshift
     class ModifyClusterDbRevisionMessage < Struct.new(
       :cluster_identifier,
       :revision_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7670,7 +7998,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class ModifyClusterDbRevisionResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7694,7 +8023,8 @@ module Aws::Redshift
       :add_iam_roles,
       :remove_iam_roles,
       :default_iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7703,7 +8033,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class ModifyClusterIamRolesResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7734,7 +8065,8 @@ module Aws::Redshift
       :defer_maintenance_start_time,
       :defer_maintenance_end_time,
       :defer_maintenance_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7743,7 +8075,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class ModifyClusterMaintenanceResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8030,7 +8363,8 @@ module Aws::Redshift
       :master_password_secret_kms_key_id,
       :ip_address_type,
       :multi_az,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8049,7 +8383,8 @@ module Aws::Redshift
     class ModifyClusterParameterGroupMessage < Struct.new(
       :parameter_group_name,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8065,7 +8400,8 @@ module Aws::Redshift
     class ModifyClusterParameterGroupOutput < Struct.new(
       :parameter_group_name,
       :parameter_group_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8074,7 +8410,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class ModifyClusterResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8096,7 +8433,8 @@ module Aws::Redshift
       :snapshot_identifier,
       :manual_snapshot_retention_period,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8105,7 +8443,8 @@ module Aws::Redshift
     #   @return [Types::Snapshot]
     class ModifyClusterSnapshotResult < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8125,7 +8464,8 @@ module Aws::Redshift
       :cluster_identifier,
       :schedule_identifier,
       :disassociate_schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8144,7 +8484,8 @@ module Aws::Redshift
       :cluster_subnet_group_name,
       :description,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8153,7 +8494,8 @@ module Aws::Redshift
     #   @return [Types::ClusterSubnetGroup]
     class ModifyClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8170,7 +8512,8 @@ module Aws::Redshift
       :custom_domain_name,
       :custom_domain_certificate_arn,
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8191,7 +8534,8 @@ module Aws::Redshift
       :custom_domain_certificate_arn,
       :cluster_identifier,
       :custom_domain_cert_expiry_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8204,7 +8548,8 @@ module Aws::Redshift
     class ModifyEndpointAccessMessage < Struct.new(
       :endpoint_name,
       :vpc_security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8250,7 +8595,8 @@ module Aws::Redshift
       :address,
       :vpc_security_groups,
       :vpc_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8300,7 +8646,8 @@ module Aws::Redshift
       :event_categories,
       :severity,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8309,7 +8656,8 @@ module Aws::Redshift
     #   @return [Types::EventSubscription]
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8326,7 +8674,8 @@ module Aws::Redshift
       :integration_arn,
       :description,
       :integration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8379,7 +8728,8 @@ module Aws::Redshift
       :kms_key_id,
       :additional_encryption_context,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8410,7 +8760,8 @@ module Aws::Redshift
       :idc_display_name,
       :authorized_token_issuer_list,
       :service_integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8419,7 +8770,8 @@ module Aws::Redshift
     #   @return [Types::RedshiftIdcApplication]
     class ModifyRedshiftIdcApplicationResult < Struct.new(
       :redshift_idc_application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8461,7 +8813,8 @@ module Aws::Redshift
       :start_time,
       :end_time,
       :enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8518,7 +8871,8 @@ module Aws::Redshift
       :next_invocations,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8553,7 +8907,8 @@ module Aws::Redshift
       :cluster_identifier,
       :retention_period,
       :manual,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8562,7 +8917,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class ModifySnapshotCopyRetentionPeriodResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8576,7 +8932,8 @@ module Aws::Redshift
     class ModifySnapshotScheduleMessage < Struct.new(
       :schedule_identifier,
       :schedule_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8611,7 +8968,8 @@ module Aws::Redshift
       :next_invocations,
       :associated_cluster_count,
       :associated_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8630,7 +8988,8 @@ module Aws::Redshift
       :usage_limit_id,
       :amount,
       :breach_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8682,7 +9041,8 @@ module Aws::Redshift
       :period,
       :breach_action,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8698,7 +9058,8 @@ module Aws::Redshift
       :serverless_identifier,
       :provisioned_identifier,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ServerlessIdentifier < NamespaceIdentifierUnion; end
@@ -8728,7 +9089,8 @@ module Aws::Redshift
       :private_ip_address,
       :availability_zone,
       :ipv6_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8750,7 +9112,8 @@ module Aws::Redshift
       :number_of_nodes,
       :estimated_disk_utilization_percent,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8775,7 +9138,8 @@ module Aws::Redshift
       :name,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8792,7 +9156,8 @@ module Aws::Redshift
     class NodeConfigurationOptionsMessage < Struct.new(
       :node_configuration_option_list,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8801,7 +9166,8 @@ module Aws::Redshift
     #   @return [String]
     class NumberOfNodesPerClusterLimitExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8814,7 +9180,8 @@ module Aws::Redshift
     #   @return [String]
     class NumberOfNodesQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8836,7 +9203,8 @@ module Aws::Redshift
       :cluster_type,
       :node_type,
       :availability_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8856,7 +9224,8 @@ module Aws::Redshift
     class OrderableClusterOptionsMessage < Struct.new(
       :orderable_cluster_options,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8905,7 +9274,8 @@ module Aws::Redshift
       :apply_type,
       :is_modifiable,
       :minimum_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8935,7 +9305,8 @@ module Aws::Redshift
       :status_message,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8944,7 +9315,8 @@ module Aws::Redshift
     #   @return [String]
     class PartnerNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8954,7 +9326,8 @@ module Aws::Redshift
     #   @return [String]
     class PauseClusterInput < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8964,7 +9337,8 @@ module Aws::Redshift
     #   @return [String]
     class PauseClusterMessage < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8973,7 +9347,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class PauseClusterResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9033,7 +9408,8 @@ module Aws::Redshift
       :enhanced_vpc_routing,
       :maintenance_track_name,
       :encryption_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9043,7 +9419,8 @@ module Aws::Redshift
     #   @return [String]
     class ProvisionedIdentifier < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9059,7 +9436,8 @@ module Aws::Redshift
     class PurchaseReservedNodeOfferingMessage < Struct.new(
       :reserved_node_offering_id,
       :node_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9069,7 +9447,8 @@ module Aws::Redshift
     #   @return [Types::ReservedNode]
     class PurchaseReservedNodeOfferingResult < Struct.new(
       :reserved_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9082,7 +9461,8 @@ module Aws::Redshift
     class PutResourcePolicyMessage < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9091,7 +9471,8 @@ module Aws::Redshift
     #   @return [Types::ResourcePolicy]
     class PutResourcePolicyResult < Struct.new(
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9101,7 +9482,8 @@ module Aws::Redshift
     #   @return [String]
     class ReadWriteAccess < Struct.new(
       :authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9111,7 +9493,8 @@ module Aws::Redshift
     #   @return [String]
     class RebootClusterMessage < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9120,7 +9503,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class RebootClusterResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9174,7 +9558,8 @@ module Aws::Redshift
       :recommendation_text,
       :recommended_actions,
       :reference_links,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9196,7 +9581,8 @@ module Aws::Redshift
       :database,
       :command,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9211,7 +9597,8 @@ module Aws::Redshift
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9257,7 +9644,8 @@ module Aws::Redshift
       :idc_onboard_status,
       :authorized_token_issuer_list,
       :service_integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9266,7 +9654,8 @@ module Aws::Redshift
     #   @return [String]
     class RedshiftIdcApplicationAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9275,7 +9664,8 @@ module Aws::Redshift
     #   @return [String]
     class RedshiftIdcApplicationNotExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9284,7 +9674,8 @@ module Aws::Redshift
     #   @return [String]
     class RedshiftIdcApplicationQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9298,7 +9689,8 @@ module Aws::Redshift
     class ReferenceLink < Struct.new(
       :text,
       :link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9313,7 +9705,8 @@ module Aws::Redshift
     class RegisterNamespaceInputMessage < Struct.new(
       :namespace_identifier,
       :consumer_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9323,7 +9716,8 @@ module Aws::Redshift
     #   @return [String]
     class RegisterNamespaceOutputMessage < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9332,7 +9726,8 @@ module Aws::Redshift
     #   @return [String]
     class RejectDataShareMessage < Struct.new(
       :data_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9362,7 +9757,8 @@ module Aws::Redshift
       :data_share_associations,
       :managed_by,
       :data_share_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9444,7 +9840,8 @@ module Aws::Redshift
       :offering_type,
       :recurring_charges,
       :reserved_node_offering_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9453,7 +9850,8 @@ module Aws::Redshift
     #   @return [String]
     class ReservedNodeAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9462,7 +9860,8 @@ module Aws::Redshift
     #   @return [String]
     class ReservedNodeAlreadyMigratedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9482,7 +9881,8 @@ module Aws::Redshift
       :source_reserved_node,
       :target_reserved_node_count,
       :target_reserved_node_offering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9491,7 +9891,8 @@ module Aws::Redshift
     #   @return [String]
     class ReservedNodeExchangeNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9535,7 +9936,8 @@ module Aws::Redshift
       :target_reserved_node_offering_id,
       :target_reserved_node_type,
       :target_reserved_node_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9544,7 +9946,8 @@ module Aws::Redshift
     #   @return [String]
     class ReservedNodeNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9591,7 +9994,8 @@ module Aws::Redshift
       :offering_type,
       :recurring_charges,
       :reserved_node_offering_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9600,7 +10004,8 @@ module Aws::Redshift
     #   @return [String]
     class ReservedNodeOfferingNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9618,7 +10023,8 @@ module Aws::Redshift
     class ReservedNodeOfferingsMessage < Struct.new(
       :marker,
       :reserved_node_offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9630,7 +10036,8 @@ module Aws::Redshift
     #   @return [String]
     class ReservedNodeQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9648,7 +10055,8 @@ module Aws::Redshift
     class ReservedNodesMessage < Struct.new(
       :marker,
       :reserved_nodes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9672,7 +10080,8 @@ module Aws::Redshift
       :parameter_group_name,
       :reset_all_parameters,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9688,7 +10097,8 @@ module Aws::Redshift
     class ResetClusterParameterGroupOutput < Struct.new(
       :parameter_group_name,
       :parameter_group_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9724,7 +10134,8 @@ module Aws::Redshift
       :classic,
       :reserved_node_id,
       :target_reserved_node_offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9760,7 +10171,8 @@ module Aws::Redshift
       :classic,
       :reserved_node_id,
       :target_reserved_node_offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9769,7 +10181,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class ResizeClusterResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9783,7 +10196,8 @@ module Aws::Redshift
     class ResizeInfo < Struct.new(
       :resize_type,
       :allow_cancel_resize,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9792,7 +10206,8 @@ module Aws::Redshift
     #   @return [String]
     class ResizeNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9801,7 +10216,8 @@ module Aws::Redshift
     #   @return [String]
     class ResourceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9815,7 +10231,8 @@ module Aws::Redshift
     class ResourcePolicy < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10075,7 +10492,8 @@ module Aws::Redshift
       :master_password_secret_kms_key_id,
       :ip_address_type,
       :multi_az,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10084,7 +10502,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class RestoreFromClusterSnapshotResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10124,7 +10543,8 @@ module Aws::Redshift
       :progress_in_mega_bytes,
       :elapsed_time_in_seconds,
       :estimated_time_to_completion_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10172,7 +10592,8 @@ module Aws::Redshift
       :target_schema_name,
       :new_table_name,
       :enable_case_sensitive_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10182,7 +10603,8 @@ module Aws::Redshift
     #   @return [Types::TableRestoreStatus]
     class RestoreTableFromClusterSnapshotResult < Struct.new(
       :table_restore_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10192,7 +10614,8 @@ module Aws::Redshift
     #   @return [String]
     class ResumeClusterInput < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10202,7 +10625,8 @@ module Aws::Redshift
     #   @return [String]
     class ResumeClusterMessage < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10211,7 +10635,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class ResumeClusterResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10231,7 +10656,8 @@ module Aws::Redshift
       :database_revision,
       :description,
       :database_revision_release_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10264,7 +10690,8 @@ module Aws::Redshift
       :cidrip,
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10273,7 +10700,8 @@ module Aws::Redshift
     #   @return [Types::ClusterSecurityGroup]
     class RevokeClusterSecurityGroupIngressResult < Struct.new(
       :cluster_security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10295,7 +10723,8 @@ module Aws::Redshift
       :account,
       :vpc_ids,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10337,7 +10766,8 @@ module Aws::Redshift
       :allowed_all_vp_cs,
       :allowed_vp_cs,
       :endpoint_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10362,7 +10792,8 @@ module Aws::Redshift
       :snapshot_arn,
       :snapshot_cluster_identifier,
       :account_with_restore_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10371,7 +10802,8 @@ module Aws::Redshift
     #   @return [Types::Snapshot]
     class RevokeSnapshotAccessResult < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10384,7 +10816,8 @@ module Aws::Redshift
     #   @return [String]
     class RotateEncryptionKeyMessage < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10393,7 +10826,8 @@ module Aws::Redshift
     #   @return [Types::Cluster]
     class RotateEncryptionKeyResult < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10404,7 +10838,8 @@ module Aws::Redshift
     class S3AccessGrantsScopeUnion < Struct.new(
       :read_write_access,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ReadWriteAccess < S3AccessGrantsScopeUnion; end
@@ -10417,7 +10852,8 @@ module Aws::Redshift
     #   @return [String]
     class SNSInvalidTopicFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10426,7 +10862,8 @@ module Aws::Redshift
     #   @return [String]
     class SNSNoAuthorizationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10436,7 +10873,8 @@ module Aws::Redshift
     #   @return [String]
     class SNSTopicArnNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10445,7 +10883,8 @@ module Aws::Redshift
     #   @return [String]
     class ScheduleDefinitionTypeUnsupportedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10502,7 +10941,8 @@ module Aws::Redshift
       :next_invocations,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10511,7 +10951,8 @@ module Aws::Redshift
     #   @return [String]
     class ScheduledActionAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10525,7 +10966,8 @@ module Aws::Redshift
     class ScheduledActionFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10534,7 +10976,8 @@ module Aws::Redshift
     #   @return [String]
     class ScheduledActionNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10543,7 +10986,8 @@ module Aws::Redshift
     #   @return [String]
     class ScheduledActionQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10561,7 +11005,8 @@ module Aws::Redshift
       :resize_cluster,
       :pause_cluster,
       :resume_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10570,7 +11015,8 @@ module Aws::Redshift
     #   @return [String]
     class ScheduledActionTypeUnsupportedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10588,7 +11034,8 @@ module Aws::Redshift
     class ScheduledActionsMessage < Struct.new(
       :marker,
       :scheduled_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10602,7 +11049,8 @@ module Aws::Redshift
     class SecondaryClusterInfo < Struct.new(
       :availability_zone,
       :cluster_nodes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10617,7 +11065,8 @@ module Aws::Redshift
     class ServerlessIdentifier < Struct.new(
       :namespace_identifier,
       :workgroup_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10632,7 +11081,8 @@ module Aws::Redshift
       :lake_formation,
       :s3_access_grants,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class LakeFormation < ServiceIntegrationsUnion; end
@@ -10828,7 +11278,8 @@ module Aws::Redshift
       :master_password_secret_arn,
       :master_password_secret_kms_key_id,
       :snapshot_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10837,7 +11288,8 @@ module Aws::Redshift
     #   @return [String]
     class SnapshotCopyAlreadyDisabledFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10846,7 +11298,8 @@ module Aws::Redshift
     #   @return [String]
     class SnapshotCopyAlreadyEnabledFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10856,7 +11309,8 @@ module Aws::Redshift
     #   @return [String]
     class SnapshotCopyDisabledFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10882,7 +11336,8 @@ module Aws::Redshift
       :snapshot_copy_grant_name,
       :kms_key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10892,7 +11347,8 @@ module Aws::Redshift
     #   @return [String]
     class SnapshotCopyGrantAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10912,7 +11368,8 @@ module Aws::Redshift
     class SnapshotCopyGrantMessage < Struct.new(
       :marker,
       :snapshot_copy_grants,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10922,7 +11379,8 @@ module Aws::Redshift
     #   @return [String]
     class SnapshotCopyGrantNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10932,7 +11390,8 @@ module Aws::Redshift
     #   @return [String]
     class SnapshotCopyGrantQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10954,7 +11413,8 @@ module Aws::Redshift
       :snapshot_cluster_identifier,
       :failure_code,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10973,7 +11433,8 @@ module Aws::Redshift
     class SnapshotMessage < Struct.new(
       :marker,
       :snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11008,7 +11469,8 @@ module Aws::Redshift
       :next_invocations,
       :associated_cluster_count,
       :associated_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11017,7 +11479,8 @@ module Aws::Redshift
     #   @return [String]
     class SnapshotScheduleAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11026,7 +11489,8 @@ module Aws::Redshift
     #   @return [String]
     class SnapshotScheduleNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11035,7 +11499,8 @@ module Aws::Redshift
     #   @return [String]
     class SnapshotScheduleQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11044,7 +11509,8 @@ module Aws::Redshift
     #   @return [String]
     class SnapshotScheduleUpdateInProgressFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11058,7 +11524,8 @@ module Aws::Redshift
     class SnapshotSortingEntity < Struct.new(
       :attribute,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11067,7 +11534,8 @@ module Aws::Redshift
     #   @return [String]
     class SourceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11085,7 +11553,8 @@ module Aws::Redshift
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11094,7 +11563,8 @@ module Aws::Redshift
     #   @return [String]
     class SubnetAlreadyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11104,7 +11574,8 @@ module Aws::Redshift
     #   @return [String]
     class SubscriptionAlreadyExistFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11115,7 +11586,8 @@ module Aws::Redshift
     #   @return [String]
     class SubscriptionCategoryNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11124,7 +11596,8 @@ module Aws::Redshift
     #   @return [String]
     class SubscriptionEventIdNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11134,7 +11607,8 @@ module Aws::Redshift
     #   @return [String]
     class SubscriptionNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11145,7 +11619,8 @@ module Aws::Redshift
     #   @return [String]
     class SubscriptionSeverityNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11155,7 +11630,8 @@ module Aws::Redshift
     #   @return [String]
     class SupportedOperation < Struct.new(
       :operation_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11165,7 +11641,8 @@ module Aws::Redshift
     #   @return [String]
     class SupportedPlatform < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11175,7 +11652,8 @@ module Aws::Redshift
     #   @return [String]
     class TableLimitExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11184,7 +11662,8 @@ module Aws::Redshift
     #   @return [String]
     class TableRestoreNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11254,7 +11733,8 @@ module Aws::Redshift
       :target_database_name,
       :target_schema_name,
       :new_table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11268,7 +11748,8 @@ module Aws::Redshift
     class TableRestoreStatusMessage < Struct.new(
       :table_restore_status_details,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11282,7 +11763,8 @@ module Aws::Redshift
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11291,7 +11773,8 @@ module Aws::Redshift
     #   @return [String]
     class TagLimitExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11342,7 +11825,8 @@ module Aws::Redshift
       :tag,
       :resource_name,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11360,7 +11844,8 @@ module Aws::Redshift
     class TaggedResourceListMessage < Struct.new(
       :tagged_resources,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11376,7 +11861,8 @@ module Aws::Redshift
     class TrackListMessage < Struct.new(
       :maintenance_tracks,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11385,7 +11871,8 @@ module Aws::Redshift
     #   @return [String]
     class UnauthorizedOperation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11394,7 +11881,8 @@ module Aws::Redshift
     #   @return [String]
     class UnauthorizedPartnerIntegrationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11403,7 +11891,8 @@ module Aws::Redshift
     #   @return [String]
     class UnknownSnapshotCopyRegionFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11412,7 +11901,8 @@ module Aws::Redshift
     #   @return [String]
     class UnsupportedOperationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11421,7 +11911,8 @@ module Aws::Redshift
     #   @return [String]
     class UnsupportedOptionFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11450,7 +11941,8 @@ module Aws::Redshift
       :partner_name,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11463,7 +11955,8 @@ module Aws::Redshift
     class UpdatePartnerStatusOutput < Struct.new(
       :database_name,
       :partner_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11481,7 +11974,8 @@ module Aws::Redshift
       :maintenance_track_name,
       :database_version,
       :supported_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11533,7 +12027,8 @@ module Aws::Redshift
       :period,
       :breach_action,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11542,7 +12037,8 @@ module Aws::Redshift
     #   @return [String]
     class UsageLimitAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11551,7 +12047,8 @@ module Aws::Redshift
     #   @return [String]
     class UsageLimitNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11569,7 +12066,8 @@ module Aws::Redshift
       :vpc_endpoint_id,
       :vpc_id,
       :network_interfaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11583,7 +12081,8 @@ module Aws::Redshift
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

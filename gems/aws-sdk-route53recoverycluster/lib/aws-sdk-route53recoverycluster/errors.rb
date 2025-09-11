@@ -41,7 +41,7 @@ module Aws::Route53RecoveryCluster
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53RecoveryCluster::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::Route53RecoveryCluster
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53RecoveryCluster::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Description of the ConflictException error
@@ -78,7 +78,7 @@ module Aws::Route53RecoveryCluster
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53RecoveryCluster::Types::EndpointTemporarilyUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::Route53RecoveryCluster
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53RecoveryCluster::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::Route53RecoveryCluster
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53RecoveryCluster::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -131,7 +131,7 @@ module Aws::Route53RecoveryCluster
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53RecoveryCluster::Types::ServiceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -164,7 +164,7 @@ module Aws::Route53RecoveryCluster
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53RecoveryCluster::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -181,7 +181,7 @@ module Aws::Route53RecoveryCluster
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53RecoveryCluster::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

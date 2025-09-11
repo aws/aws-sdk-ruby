@@ -16,7 +16,8 @@ module Aws::QLDB
     class CancelJournalKinesisStreamRequest < Struct.new(
       :ledger_name,
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::QLDB
     #   @return [String]
     class CancelJournalKinesisStreamResponse < Struct.new(
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +138,8 @@ module Aws::QLDB
       :permissions_mode,
       :deletion_protection,
       :kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +177,8 @@ module Aws::QLDB
       :permissions_mode,
       :deletion_protection,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +187,8 @@ module Aws::QLDB
     #   @return [String]
     class DeleteLedgerRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -197,7 +202,8 @@ module Aws::QLDB
     class DescribeJournalKinesisStreamRequest < Struct.new(
       :ledger_name,
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +213,8 @@ module Aws::QLDB
     #   @return [Types::JournalKinesisStreamDescription]
     class DescribeJournalKinesisStreamResponse < Struct.new(
       :stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +228,8 @@ module Aws::QLDB
     class DescribeJournalS3ExportRequest < Struct.new(
       :name,
       :export_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +239,8 @@ module Aws::QLDB
     #   @return [Types::JournalS3ExportDescription]
     class DescribeJournalS3ExportResponse < Struct.new(
       :export_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +249,8 @@ module Aws::QLDB
     #   @return [String]
     class DescribeLedgerRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +289,8 @@ module Aws::QLDB
       :permissions_mode,
       :deletion_protection,
       :encryption_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +352,8 @@ module Aws::QLDB
       :s3_export_configuration,
       :role_arn,
       :output_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +365,8 @@ module Aws::QLDB
     #   @return [String]
     class ExportJournalToS3Response < Struct.new(
       :export_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +388,8 @@ module Aws::QLDB
       :name,
       :block_address,
       :digest_tip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -390,7 +404,8 @@ module Aws::QLDB
     class GetBlockResponse < Struct.new(
       :block,
       :proof,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -399,7 +414,8 @@ module Aws::QLDB
     #   @return [String]
     class GetDigestRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +431,8 @@ module Aws::QLDB
     class GetDigestResponse < Struct.new(
       :digest,
       :digest_tip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -441,7 +458,8 @@ module Aws::QLDB
       :block_address,
       :document_id,
       :digest_tip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +474,8 @@ module Aws::QLDB
     class GetRevisionResponse < Struct.new(
       :proof,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +488,8 @@ module Aws::QLDB
     class InvalidParameterException < Struct.new(
       :message,
       :parameter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +548,8 @@ module Aws::QLDB
       :kinesis_configuration,
       :error_cause,
       :stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +606,8 @@ module Aws::QLDB
       :s3_export_configuration,
       :role_arn,
       :output_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -609,7 +631,8 @@ module Aws::QLDB
     class KinesisConfiguration < Struct.new(
       :stream_arn,
       :aggregation_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -663,7 +686,8 @@ module Aws::QLDB
       :kms_key_arn,
       :encryption_status,
       :inaccessible_kms_key_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +706,8 @@ module Aws::QLDB
       :name,
       :state,
       :creation_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +720,8 @@ module Aws::QLDB
     class LimitExceededException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +743,8 @@ module Aws::QLDB
       :ledger_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +768,8 @@ module Aws::QLDB
     class ListJournalKinesisStreamsForLedgerResponse < Struct.new(
       :streams,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -763,7 +791,8 @@ module Aws::QLDB
       :name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +816,8 @@ module Aws::QLDB
     class ListJournalS3ExportsForLedgerResponse < Struct.new(
       :journal_s3_exports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +834,8 @@ module Aws::QLDB
     class ListJournalS3ExportsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +860,8 @@ module Aws::QLDB
     class ListJournalS3ExportsResponse < Struct.new(
       :journal_s3_exports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +877,8 @@ module Aws::QLDB
     class ListLedgersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +902,8 @@ module Aws::QLDB
     class ListLedgersResponse < Struct.new(
       :ledgers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +915,8 @@ module Aws::QLDB
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +925,8 @@ module Aws::QLDB
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +943,8 @@ module Aws::QLDB
       :message,
       :resource_type,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +961,8 @@ module Aws::QLDB
       :message,
       :resource_type,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -941,7 +979,8 @@ module Aws::QLDB
       :message,
       :resource_type,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -958,7 +997,8 @@ module Aws::QLDB
       :message,
       :resource_type,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -982,7 +1022,8 @@ module Aws::QLDB
     class S3EncryptionConfiguration < Struct.new(
       :object_encryption_type,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1027,7 +1068,8 @@ module Aws::QLDB
       :bucket,
       :prefix,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1123,8 @@ module Aws::QLDB
       :exclusive_end_time,
       :kinesis_configuration,
       :stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1091,7 +1134,8 @@ module Aws::QLDB
     #   @return [String]
     class StreamJournalToKinesisResponse < Struct.new(
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1109,12 +1153,14 @@ module Aws::QLDB
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1130,12 +1176,14 @@ module Aws::QLDB
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1177,7 +1225,8 @@ module Aws::QLDB
     class UpdateLedgerPermissionsModeRequest < Struct.new(
       :name,
       :permissions_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1194,7 +1243,8 @@ module Aws::QLDB
       :name,
       :arn,
       :permissions_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1314,8 @@ module Aws::QLDB
       :name,
       :deletion_protection,
       :kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1299,7 +1350,8 @@ module Aws::QLDB
       :creation_date_time,
       :deletion_protection,
       :encryption_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1310,7 +1362,8 @@ module Aws::QLDB
     #   @return [String]
     class ValueHolder < Struct.new(
       :ion_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

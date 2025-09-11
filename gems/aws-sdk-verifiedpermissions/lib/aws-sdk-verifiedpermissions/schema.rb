@@ -1228,7 +1228,6 @@ module Aws::VerifiedPermissions
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update the specified policy template"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

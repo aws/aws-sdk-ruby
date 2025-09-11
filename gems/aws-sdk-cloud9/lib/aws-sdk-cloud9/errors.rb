@@ -41,7 +41,7 @@ module Aws::Cloud9
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Cloud9::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::Cloud9
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Cloud9::Types::ConcurrentAccessException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::Cloud9
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Cloud9::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::Cloud9
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Cloud9::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::Cloud9
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Cloud9::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::Cloud9
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Cloud9::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::Cloud9
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Cloud9::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -188,7 +188,7 @@ module Aws::Cloud9
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Cloud9::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

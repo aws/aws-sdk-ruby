@@ -19,12 +19,14 @@ module Aws::Macie2
       :administrator_account_id,
       :invitation_id,
       :master_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AcceptInvitationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::Macie2
     class AccessControlList < Struct.new(
       :allows_public_read_access,
       :allows_public_write_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +51,8 @@ module Aws::Macie2
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +66,8 @@ module Aws::Macie2
     class AccountDetail < Struct.new(
       :account_id,
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +77,8 @@ module Aws::Macie2
     #   @return [Types::BlockPublicAccess]
     class AccountLevelPermissions < Struct.new(
       :block_public_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +92,8 @@ module Aws::Macie2
     class AdminAccount < Struct.new(
       :account_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -100,7 +107,8 @@ module Aws::Macie2
     class AllowListCriteria < Struct.new(
       :regex,
       :s3_words_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +122,8 @@ module Aws::Macie2
     class AllowListStatus < Struct.new(
       :code,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +153,8 @@ module Aws::Macie2
       :id,
       :name,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -166,7 +176,8 @@ module Aws::Macie2
       :api_service_name,
       :first_seen,
       :last_seen,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +203,8 @@ module Aws::Macie2
       :arn,
       :principal_id,
       :session_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +218,8 @@ module Aws::Macie2
     class AutomatedDiscoveryAccount < Struct.new(
       :account_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +233,8 @@ module Aws::Macie2
     class AutomatedDiscoveryAccountUpdate < Struct.new(
       :account_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +248,8 @@ module Aws::Macie2
     class AutomatedDiscoveryAccountUpdateError < Struct.new(
       :account_id,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +263,8 @@ module Aws::Macie2
     class AwsAccount < Struct.new(
       :account_id,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +274,8 @@ module Aws::Macie2
     #   @return [String]
     class AwsService < Struct.new(
       :invoked_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +305,8 @@ module Aws::Macie2
       :description,
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +315,8 @@ module Aws::Macie2
     #   @return [Array<String>]
     class BatchGetCustomDataIdentifiersRequest < Struct.new(
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +329,8 @@ module Aws::Macie2
     class BatchGetCustomDataIdentifiersResponse < Struct.new(
       :custom_data_identifiers,
       :not_found_identifier_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -319,7 +339,8 @@ module Aws::Macie2
     #   @return [Array<Types::AutomatedDiscoveryAccountUpdate>]
     class BatchUpdateAutomatedDiscoveryAccountsRequest < Struct.new(
       :accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -328,7 +349,8 @@ module Aws::Macie2
     #   @return [Array<Types::AutomatedDiscoveryAccountUpdateError>]
     class BatchUpdateAutomatedDiscoveryAccountsResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +372,8 @@ module Aws::Macie2
       :block_public_policy,
       :ignore_public_acls,
       :restrict_public_buckets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +395,8 @@ module Aws::Macie2
       :publicly_readable,
       :publicly_writable,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +418,8 @@ module Aws::Macie2
       :s3_managed,
       :unencrypted,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +441,8 @@ module Aws::Macie2
       :internal,
       :not_shared,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +460,8 @@ module Aws::Macie2
       :allows_unencrypted_object_uploads,
       :denies_unencrypted_object_uploads,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +495,8 @@ module Aws::Macie2
       :lte,
       :neq,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -486,7 +514,8 @@ module Aws::Macie2
       :access_control_list,
       :block_public_access,
       :bucket_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,7 +629,8 @@ module Aws::Macie2
       :unclassifiable_object_count,
       :unclassifiable_object_size_in_bytes,
       :versioning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +644,8 @@ module Aws::Macie2
     class BucketPermissionConfiguration < Struct.new(
       :account_level_permissions,
       :bucket_level_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -628,7 +659,8 @@ module Aws::Macie2
     class BucketPolicy < Struct.new(
       :allows_public_read_access,
       :allows_public_write_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +674,8 @@ module Aws::Macie2
     class BucketPublicAccess < Struct.new(
       :effective_permission,
       :permission_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +689,8 @@ module Aws::Macie2
     class BucketServerSideEncryption < Struct.new(
       :kms_master_key_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +704,8 @@ module Aws::Macie2
     class BucketSortCriteria < Struct.new(
       :attribute_name,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +727,8 @@ module Aws::Macie2
       :not_classified,
       :not_sensitive,
       :sensitive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +750,8 @@ module Aws::Macie2
       :column,
       :column_name,
       :row,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +777,8 @@ module Aws::Macie2
       :job_id,
       :origin_type,
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -750,7 +788,8 @@ module Aws::Macie2
     #   @return [Types::S3Destination]
     class ClassificationExportConfiguration < Struct.new(
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +819,8 @@ module Aws::Macie2
       :sensitive_data,
       :size_classified,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +834,8 @@ module Aws::Macie2
     class ClassificationResultStatus < Struct.new(
       :code,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +849,8 @@ module Aws::Macie2
     class ClassificationScopeSummary < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -818,7 +860,8 @@ module Aws::Macie2
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +886,8 @@ module Aws::Macie2
       :description,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +900,8 @@ module Aws::Macie2
     class CreateAllowListResponse < Struct.new(
       :arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -913,7 +958,8 @@ module Aws::Macie2
       :sampling_percentage,
       :schedule_frequency,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -926,7 +972,8 @@ module Aws::Macie2
     class CreateClassificationJobResponse < Struct.new(
       :job_arn,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1014,8 @@ module Aws::Macie2
       :regex,
       :severity_levels,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -976,7 +1024,8 @@ module Aws::Macie2
     #   @return [String]
     class CreateCustomDataIdentifierResponse < Struct.new(
       :custom_data_identifier_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1009,7 +1058,8 @@ module Aws::Macie2
       :name,
       :position,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1022,7 +1072,8 @@ module Aws::Macie2
     class CreateFindingsFilterResponse < Struct.new(
       :arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1090,8 @@ module Aws::Macie2
       :account_ids,
       :disable_email_notification,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1100,8 @@ module Aws::Macie2
     #   @return [Array<Types::UnprocessedAccount>]
     class CreateInvitationsResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1114,8 @@ module Aws::Macie2
     class CreateMemberRequest < Struct.new(
       :account,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1070,7 +1124,8 @@ module Aws::Macie2
     #   @return [String]
     class CreateMemberResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,12 +1134,14 @@ module Aws::Macie2
     #   @return [Array<String>]
     class CreateSampleFindingsRequest < Struct.new(
       :finding_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateSampleFindingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1151,8 @@ module Aws::Macie2
     #   @return [Array<Types::CriteriaForJob>]
     class CriteriaBlockForJob < Struct.new(
       :and,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1166,8 @@ module Aws::Macie2
     class CriteriaForJob < Struct.new(
       :simple_criterion,
       :tag_criterion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1142,7 +1201,8 @@ module Aws::Macie2
       :lt,
       :lte,
       :neq,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1168,7 +1228,8 @@ module Aws::Macie2
       :description,
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1182,7 +1243,8 @@ module Aws::Macie2
     class CustomDataIdentifiers < Struct.new(
       :detections,
       :total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,13 +1266,15 @@ module Aws::Macie2
       :count,
       :name,
       :occurrences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that a classification job runs once a day, every day. This is an empty object.</p>
     class DailySchedule < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1219,7 +1283,8 @@ module Aws::Macie2
     #   @return [Array<String>]
     class DeclineInvitationsRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1293,8 @@ module Aws::Macie2
     #   @return [Array<Types::UnprocessedAccount>]
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1246,7 +1312,8 @@ module Aws::Macie2
       :count,
       :occurrences,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1259,12 +1326,14 @@ module Aws::Macie2
     class DeleteAllowListRequest < Struct.new(
       :id,
       :ignore_job_checks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAllowListResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,12 +1342,14 @@ module Aws::Macie2
     #   @return [String]
     class DeleteCustomDataIdentifierRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomDataIdentifierResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1287,12 +1358,14 @@ module Aws::Macie2
     #   @return [String]
     class DeleteFindingsFilterRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFindingsFilterResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1374,8 @@ module Aws::Macie2
     #   @return [Array<String>]
     class DeleteInvitationsRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1310,7 +1384,8 @@ module Aws::Macie2
     #   @return [Array<Types::UnprocessedAccount>]
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,12 +1394,14 @@ module Aws::Macie2
     #   @return [String]
     class DeleteMemberRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMemberResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1345,7 +1422,8 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1358,7 +1436,8 @@ module Aws::Macie2
     class DescribeBucketsResponse < Struct.new(
       :buckets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1446,8 @@ module Aws::Macie2
     #   @return [String]
     class DescribeClassificationJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1456,12 +1536,14 @@ module Aws::Macie2
       :statistics,
       :tags,
       :user_paused_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeOrganizationConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1556,8 @@ module Aws::Macie2
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
       :max_account_limit_reached,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1484,7 +1567,8 @@ module Aws::Macie2
     #   @return [String]
     class DetectedDataDetails < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1514,17 +1598,20 @@ module Aws::Macie2
       :name,
       :suppressed,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableMacieRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableMacieResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1533,32 +1620,38 @@ module Aws::Macie2
     #   @return [String]
     class DisableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableOrganizationAdminAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1567,12 +1660,14 @@ module Aws::Macie2
     #   @return [String]
     class DisassociateMemberRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1582,7 +1677,8 @@ module Aws::Macie2
     #   @return [String]
     class DomainDetails < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,12 +1695,14 @@ module Aws::Macie2
       :client_token,
       :finding_publishing_frequency,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableMacieResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1617,12 +1715,14 @@ module Aws::Macie2
     class EnableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableOrganizationAdminAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1748,8 @@ module Aws::Macie2
       :arn,
       :principal_id,
       :session_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1726,7 +1827,8 @@ module Aws::Macie2
       :title,
       :type,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1740,7 +1842,8 @@ module Aws::Macie2
     class FindingAction < Struct.new(
       :action_type,
       :api_call_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1758,7 +1861,8 @@ module Aws::Macie2
       :domain_details,
       :ip_address_details,
       :user_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1768,7 +1872,8 @@ module Aws::Macie2
     #   @return [Hash<String, Types::CriterionAdditionalProperties>]
     class FindingCriteria < Struct.new(
       :criterion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1782,7 +1887,8 @@ module Aws::Macie2
     class FindingStatisticsSortCriteria < Struct.new(
       :attribute_name,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1808,12 +1914,14 @@ module Aws::Macie2
       :id,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAdministratorAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1822,7 +1930,8 @@ module Aws::Macie2
     #   @return [Types::Invitation]
     class GetAdministratorAccountResponse < Struct.new(
       :administrator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1831,7 +1940,8 @@ module Aws::Macie2
     #   @return [String]
     class GetAllowListRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1872,12 +1982,14 @@ module Aws::Macie2
       :status,
       :tags,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAutomatedDiscoveryConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1910,7 +2022,8 @@ module Aws::Macie2
       :last_updated_at,
       :sensitivity_inspection_template_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1919,7 +2032,8 @@ module Aws::Macie2
     #   @return [String]
     class GetBucketStatisticsRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1980,12 +2094,14 @@ module Aws::Macie2
       :size_in_bytes_compressed,
       :unclassifiable_object_count,
       :unclassifiable_object_size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetClassificationExportConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1994,7 +2110,8 @@ module Aws::Macie2
     #   @return [Types::ClassificationExportConfiguration]
     class GetClassificationExportConfigurationResponse < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2003,7 +2120,8 @@ module Aws::Macie2
     #   @return [String]
     class GetClassificationScopeRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2020,7 +2138,8 @@ module Aws::Macie2
       :id,
       :name,
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2029,7 +2148,8 @@ module Aws::Macie2
     #   @return [String]
     class GetCustomDataIdentifierRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2082,7 +2202,8 @@ module Aws::Macie2
       :regex,
       :severity_levels,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2103,7 +2224,8 @@ module Aws::Macie2
       :group_by,
       :size,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2112,7 +2234,8 @@ module Aws::Macie2
     #   @return [Array<Types::GroupCount>]
     class GetFindingStatisticsResponse < Struct.new(
       :counts_by_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2244,8 @@ module Aws::Macie2
     #   @return [String]
     class GetFindingsFilterRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2158,12 +2282,14 @@ module Aws::Macie2
       :name,
       :position,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetFindingsPublicationConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2172,7 +2298,8 @@ module Aws::Macie2
     #   @return [Types::SecurityHubConfiguration]
     class GetFindingsPublicationConfigurationResponse < Struct.new(
       :security_hub_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2185,7 +2312,8 @@ module Aws::Macie2
     class GetFindingsRequest < Struct.new(
       :finding_ids,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,12 +2322,14 @@ module Aws::Macie2
     #   @return [Array<Types::Finding>]
     class GetFindingsResponse < Struct.new(
       :findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetInvitationsCountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2208,12 +2338,14 @@ module Aws::Macie2
     #   @return [Integer]
     class GetInvitationsCountResponse < Struct.new(
       :invitations_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetMacieSessionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2238,12 +2370,14 @@ module Aws::Macie2
       :service_role,
       :status,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetMasterAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2252,7 +2386,8 @@ module Aws::Macie2
     #   @return [Types::Invitation]
     class GetMasterAccountResponse < Struct.new(
       :master,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2261,7 +2396,8 @@ module Aws::Macie2
     #   @return [String]
     class GetMemberRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,7 +2438,8 @@ module Aws::Macie2
       :relationship_status,
       :tags,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2311,7 +2448,8 @@ module Aws::Macie2
     #   @return [String]
     class GetResourceProfileRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2332,12 +2470,14 @@ module Aws::Macie2
       :sensitivity_score,
       :sensitivity_score_overridden,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetRevealConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,7 +2490,8 @@ module Aws::Macie2
     class GetRevealConfigurationResponse < Struct.new(
       :configuration,
       :retrieval_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2359,7 +2500,8 @@ module Aws::Macie2
     #   @return [String]
     class GetSensitiveDataOccurrencesAvailabilityRequest < Struct.new(
       :finding_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2372,7 +2514,8 @@ module Aws::Macie2
     class GetSensitiveDataOccurrencesAvailabilityResponse < Struct.new(
       :code,
       :reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2381,7 +2524,8 @@ module Aws::Macie2
     #   @return [String]
     class GetSensitiveDataOccurrencesRequest < Struct.new(
       :finding_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2398,7 +2542,8 @@ module Aws::Macie2
       :error,
       :sensitive_data_occurrences,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2407,7 +2552,8 @@ module Aws::Macie2
     #   @return [String]
     class GetSensitivityInspectionTemplateRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2432,7 +2578,8 @@ module Aws::Macie2
       :includes,
       :name,
       :sensitivity_inspection_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2457,7 +2604,8 @@ module Aws::Macie2
       :next_token,
       :sort_by,
       :time_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2474,7 +2622,8 @@ module Aws::Macie2
       :next_token,
       :records,
       :time_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2483,7 +2632,8 @@ module Aws::Macie2
     #   @return [String]
     class GetUsageTotalsRequest < Struct.new(
       :time_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2496,7 +2646,8 @@ module Aws::Macie2
     class GetUsageTotalsResponse < Struct.new(
       :time_range,
       :usage_totals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2510,7 +2661,8 @@ module Aws::Macie2
     class GroupCount < Struct.new(
       :count,
       :group_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2532,7 +2684,8 @@ module Aws::Macie2
       :arn,
       :principal_id,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2542,7 +2695,8 @@ module Aws::Macie2
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2564,7 +2718,8 @@ module Aws::Macie2
       :invitation_id,
       :invited_at,
       :relationship_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2590,7 +2745,8 @@ module Aws::Macie2
       :ip_country,
       :ip_geo_location,
       :ip_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2600,7 +2756,8 @@ module Aws::Macie2
     #   @return [String]
     class IpCity < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2614,7 +2771,8 @@ module Aws::Macie2
     class IpCountry < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2628,7 +2786,8 @@ module Aws::Macie2
     class IpGeoLocation < Struct.new(
       :lat,
       :lon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2650,7 +2809,8 @@ module Aws::Macie2
       :asn_org,
       :isp,
       :org,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2672,7 +2832,8 @@ module Aws::Macie2
       :is_monitored_by_job,
       :last_job_id,
       :last_job_run_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2690,7 +2851,8 @@ module Aws::Macie2
       :daily_schedule,
       :monthly_schedule,
       :weekly_schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2704,7 +2866,8 @@ module Aws::Macie2
     class JobScopeTerm < Struct.new(
       :simple_scope_term,
       :tag_scope_term,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2714,7 +2877,8 @@ module Aws::Macie2
     #   @return [Array<Types::JobScopeTerm>]
     class JobScopingBlock < Struct.new(
       :and,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2756,7 +2920,8 @@ module Aws::Macie2
       :last_run_error_status,
       :name,
       :user_paused_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2770,7 +2935,8 @@ module Aws::Macie2
     class KeyValuePair < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2780,7 +2946,8 @@ module Aws::Macie2
     #   @return [String]
     class LastRunErrorStatus < Struct.new(
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2793,7 +2960,8 @@ module Aws::Macie2
     class ListAllowListsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2806,7 +2974,8 @@ module Aws::Macie2
     class ListAllowListsResponse < Struct.new(
       :allow_lists,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2823,7 +2992,8 @@ module Aws::Macie2
       :account_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2836,7 +3006,8 @@ module Aws::Macie2
     class ListAutomatedDiscoveryAccountsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2857,7 +3028,8 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2870,7 +3042,8 @@ module Aws::Macie2
     class ListClassificationJobsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2883,7 +3056,8 @@ module Aws::Macie2
     class ListClassificationScopesRequest < Struct.new(
       :name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2896,7 +3070,8 @@ module Aws::Macie2
     class ListClassificationScopesResponse < Struct.new(
       :classification_scopes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2909,7 +3084,8 @@ module Aws::Macie2
     class ListCustomDataIdentifiersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2922,7 +3098,8 @@ module Aws::Macie2
     class ListCustomDataIdentifiersResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2935,7 +3112,8 @@ module Aws::Macie2
     class ListFindingsFiltersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2948,7 +3126,8 @@ module Aws::Macie2
     class ListFindingsFiltersResponse < Struct.new(
       :findings_filter_list_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2969,7 +3148,8 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2982,7 +3162,8 @@ module Aws::Macie2
     class ListFindingsResponse < Struct.new(
       :finding_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2995,7 +3176,8 @@ module Aws::Macie2
     class ListInvitationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3008,7 +3190,8 @@ module Aws::Macie2
     class ListInvitationsResponse < Struct.new(
       :invitations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3022,7 +3205,8 @@ module Aws::Macie2
     class ListJobsFilterCriteria < Struct.new(
       :excludes,
       :includes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3040,7 +3224,8 @@ module Aws::Macie2
       :comparator,
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3054,7 +3239,8 @@ module Aws::Macie2
     class ListJobsSortCriteria < Struct.new(
       :attribute_name,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3063,7 +3249,8 @@ module Aws::Macie2
     #   @return [String]
     class ListManagedDataIdentifiersRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3076,7 +3263,8 @@ module Aws::Macie2
     class ListManagedDataIdentifiersResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3093,7 +3281,8 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :only_associated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3106,7 +3295,8 @@ module Aws::Macie2
     class ListMembersResponse < Struct.new(
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3119,7 +3309,8 @@ module Aws::Macie2
     class ListOrganizationAdminAccountsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3132,7 +3323,8 @@ module Aws::Macie2
     class ListOrganizationAdminAccountsResponse < Struct.new(
       :admin_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3145,7 +3337,8 @@ module Aws::Macie2
     class ListResourceProfileArtifactsRequest < Struct.new(
       :next_token,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3158,7 +3351,8 @@ module Aws::Macie2
     class ListResourceProfileArtifactsResponse < Struct.new(
       :artifacts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3175,7 +3369,8 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3188,7 +3383,8 @@ module Aws::Macie2
     class ListResourceProfileDetectionsResponse < Struct.new(
       :detections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3201,7 +3397,8 @@ module Aws::Macie2
     class ListSensitivityInspectionTemplatesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3214,7 +3411,8 @@ module Aws::Macie2
     class ListSensitivityInspectionTemplatesResponse < Struct.new(
       :next_token,
       :sensitivity_inspection_templates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3223,7 +3421,8 @@ module Aws::Macie2
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3232,7 +3431,8 @@ module Aws::Macie2
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3246,7 +3446,8 @@ module Aws::Macie2
     class ManagedDataIdentifierSummary < Struct.new(
       :category,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3316,7 +3517,8 @@ module Aws::Macie2
       :size_in_bytes_compressed,
       :unclassifiable_object_count,
       :unclassifiable_object_size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3326,7 +3528,8 @@ module Aws::Macie2
     #   @return [Types::MatchingBucket]
     class MatchingResource < Struct.new(
       :matching_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3368,7 +3571,8 @@ module Aws::Macie2
       :relationship_status,
       :tags,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3378,7 +3582,8 @@ module Aws::Macie2
     #   @return [Integer]
     class MonthlySchedule < Struct.new(
       :day_of_month,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3404,7 +3609,8 @@ module Aws::Macie2
       :s3_managed,
       :unencrypted,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3422,7 +3628,8 @@ module Aws::Macie2
       :file_type,
       :storage_class,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3448,7 +3655,8 @@ module Aws::Macie2
       :offset_ranges,
       :pages,
       :records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3466,7 +3674,8 @@ module Aws::Macie2
       :line_range,
       :offset_range,
       :page_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3480,7 +3689,8 @@ module Aws::Macie2
     class PolicyDetails < Struct.new(
       :action,
       :actor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3489,7 +3699,8 @@ module Aws::Macie2
     #   @return [Types::ClassificationExportConfiguration]
     class PutClassificationExportConfigurationRequest < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3498,7 +3709,8 @@ module Aws::Macie2
     #   @return [Types::ClassificationExportConfiguration]
     class PutClassificationExportConfigurationResponse < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3511,12 +3723,14 @@ module Aws::Macie2
     class PutFindingsPublicationConfigurationRequest < Struct.new(
       :client_token,
       :security_hub_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutFindingsPublicationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3534,7 +3748,8 @@ module Aws::Macie2
       :end,
       :start,
       :start_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3548,7 +3763,8 @@ module Aws::Macie2
     class Record < Struct.new(
       :json_path,
       :record_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3566,7 +3782,8 @@ module Aws::Macie2
       :replicated,
       :replicated_externally,
       :replication_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3576,7 +3793,8 @@ module Aws::Macie2
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3594,7 +3812,8 @@ module Aws::Macie2
       :arn,
       :classification_result_status,
       :sensitive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3636,7 +3855,8 @@ module Aws::Macie2
       :total_items_skipped_invalid_encryption,
       :total_items_skipped_invalid_kms,
       :total_items_skipped_permission_denied,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3650,7 +3870,8 @@ module Aws::Macie2
     class ResourcesAffected < Struct.new(
       :s3_bucket,
       :s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3668,7 +3889,8 @@ module Aws::Macie2
       :external_id,
       :retrieval_mode,
       :role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3682,7 +3904,8 @@ module Aws::Macie2
     class RevealConfiguration < Struct.new(
       :kms_key_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3720,7 +3943,8 @@ module Aws::Macie2
       :owner,
       :public_access,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3734,7 +3958,8 @@ module Aws::Macie2
     class S3BucketCriteriaForJob < Struct.new(
       :excludes,
       :includes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3748,7 +3973,8 @@ module Aws::Macie2
     class S3BucketDefinitionForJob < Struct.new(
       :account_id,
       :buckets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3762,7 +3988,8 @@ module Aws::Macie2
     class S3BucketOwner < Struct.new(
       :display_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3772,7 +3999,8 @@ module Aws::Macie2
     #   @return [Types::S3ClassificationScopeExclusion]
     class S3ClassificationScope < Struct.new(
       :excludes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3782,7 +4010,8 @@ module Aws::Macie2
     #   @return [Array<String>]
     class S3ClassificationScopeExclusion < Struct.new(
       :bucket_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3796,7 +4025,8 @@ module Aws::Macie2
     class S3ClassificationScopeExclusionUpdate < Struct.new(
       :bucket_names,
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3806,7 +4036,8 @@ module Aws::Macie2
     #   @return [Types::S3ClassificationScopeExclusionUpdate]
     class S3ClassificationScopeUpdate < Struct.new(
       :excludes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3824,7 +4055,8 @@ module Aws::Macie2
       :bucket_name,
       :key_prefix,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3842,7 +4074,8 @@ module Aws::Macie2
       :bucket_criteria,
       :bucket_definitions,
       :scoping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3896,7 +4129,8 @@ module Aws::Macie2
       :storage_class,
       :tags,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3910,7 +4144,8 @@ module Aws::Macie2
     class S3WordsList < Struct.new(
       :bucket_name,
       :object_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3924,7 +4159,8 @@ module Aws::Macie2
     class Scoping < Struct.new(
       :excludes,
       :includes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3938,7 +4174,8 @@ module Aws::Macie2
     class SearchResourcesBucketCriteria < Struct.new(
       :excludes,
       :includes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3952,7 +4189,8 @@ module Aws::Macie2
     class SearchResourcesCriteria < Struct.new(
       :simple_criterion,
       :tag_criterion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3962,7 +4200,8 @@ module Aws::Macie2
     #   @return [Array<Types::SearchResourcesCriteria>]
     class SearchResourcesCriteriaBlock < Struct.new(
       :and,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3983,7 +4222,8 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3996,7 +4236,8 @@ module Aws::Macie2
     class SearchResourcesResponse < Struct.new(
       :matching_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4014,7 +4255,8 @@ module Aws::Macie2
       :comparator,
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4028,7 +4270,8 @@ module Aws::Macie2
     class SearchResourcesSortCriteria < Struct.new(
       :attribute_name,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4042,7 +4285,8 @@ module Aws::Macie2
     class SearchResourcesTagCriterion < Struct.new(
       :comparator,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4056,7 +4300,8 @@ module Aws::Macie2
     class SearchResourcesTagCriterionPair < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4070,7 +4315,8 @@ module Aws::Macie2
     class SecurityHubConfiguration < Struct.new(
       :publish_classification_findings,
       :publish_policy_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4088,7 +4334,8 @@ module Aws::Macie2
       :category,
       :detections,
       :total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4110,7 +4357,8 @@ module Aws::Macie2
       :publicly_accessible_count,
       :total_count,
       :total_size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4120,7 +4368,8 @@ module Aws::Macie2
     #   @return [Array<String>]
     class SensitivityInspectionTemplateExcludes < Struct.new(
       :managed_data_identifier_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4138,7 +4387,8 @@ module Aws::Macie2
       :allow_list_ids,
       :custom_data_identifier_ids,
       :managed_data_identifier_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4152,7 +4402,8 @@ module Aws::Macie2
     class SensitivityInspectionTemplatesEntry < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4166,7 +4417,8 @@ module Aws::Macie2
     class ServerSideEncryption < Struct.new(
       :encryption_type,
       :kms_master_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4184,7 +4436,8 @@ module Aws::Macie2
       :is_service_limited,
       :unit,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4194,7 +4447,8 @@ module Aws::Macie2
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4208,7 +4462,8 @@ module Aws::Macie2
     class SessionContext < Struct.new(
       :attributes,
       :session_issuer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4222,7 +4477,8 @@ module Aws::Macie2
     class SessionContextAttributes < Struct.new(
       :creation_date,
       :mfa_authenticated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4248,7 +4504,8 @@ module Aws::Macie2
       :principal_id,
       :type,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4262,7 +4519,8 @@ module Aws::Macie2
     class Severity < Struct.new(
       :description,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4276,7 +4534,8 @@ module Aws::Macie2
     class SeverityLevel < Struct.new(
       :occurrences_threshold,
       :severity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4294,7 +4553,8 @@ module Aws::Macie2
       :comparator,
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4312,7 +4572,8 @@ module Aws::Macie2
       :comparator,
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4326,7 +4587,8 @@ module Aws::Macie2
     class SortCriteria < Struct.new(
       :attribute_name,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4340,7 +4602,8 @@ module Aws::Macie2
     class Statistics < Struct.new(
       :approximate_number_of_objects_to_process,
       :number_of_runs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4354,7 +4617,8 @@ module Aws::Macie2
     class SuppressDataIdentifier < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4368,7 +4632,8 @@ module Aws::Macie2
     class TagCriterionForJob < Struct.new(
       :comparator,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4382,7 +4647,8 @@ module Aws::Macie2
     class TagCriterionPairForJob < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4395,12 +4661,14 @@ module Aws::Macie2
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4422,7 +4690,8 @@ module Aws::Macie2
       :key,
       :tag_values,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4436,7 +4705,8 @@ module Aws::Macie2
     class TagValuePair < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4461,7 +4731,8 @@ module Aws::Macie2
       :maximum_match_distance,
       :regex,
       :sample_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4470,7 +4741,8 @@ module Aws::Macie2
     #   @return [Integer]
     class TestCustomDataIdentifierResponse < Struct.new(
       :match_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4480,7 +4752,8 @@ module Aws::Macie2
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4490,7 +4763,8 @@ module Aws::Macie2
     #   @return [String]
     class UnprocessableEntityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4508,7 +4782,8 @@ module Aws::Macie2
       :account_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4521,12 +4796,14 @@ module Aws::Macie2
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4547,7 +4824,8 @@ module Aws::Macie2
       :description,
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4560,7 +4838,8 @@ module Aws::Macie2
     class UpdateAllowListResponse < Struct.new(
       :arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4573,12 +4852,14 @@ module Aws::Macie2
     class UpdateAutomatedDiscoveryConfigurationRequest < Struct.new(
       :auto_enable_organization_members,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateAutomatedDiscoveryConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4591,12 +4872,14 @@ module Aws::Macie2
     class UpdateClassificationJobRequest < Struct.new(
       :job_id,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateClassificationJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4609,12 +4892,14 @@ module Aws::Macie2
     class UpdateClassificationScopeRequest < Struct.new(
       :id,
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateClassificationScopeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4647,7 +4932,8 @@ module Aws::Macie2
       :id,
       :name,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4660,7 +4946,8 @@ module Aws::Macie2
     class UpdateFindingsFilterResponse < Struct.new(
       :arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4673,12 +4960,14 @@ module Aws::Macie2
     class UpdateMacieSessionRequest < Struct.new(
       :finding_publishing_frequency,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateMacieSessionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4691,12 +4980,14 @@ module Aws::Macie2
     class UpdateMemberSessionRequest < Struct.new(
       :id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateMemberSessionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4705,12 +4996,14 @@ module Aws::Macie2
     #   @return [Boolean]
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateOrganizationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4723,12 +5016,14 @@ module Aws::Macie2
     class UpdateResourceProfileDetectionsRequest < Struct.new(
       :resource_arn,
       :suppress_data_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceProfileDetectionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4741,12 +5036,14 @@ module Aws::Macie2
     class UpdateResourceProfileRequest < Struct.new(
       :resource_arn,
       :sensitivity_score_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceProfileResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4760,7 +5057,8 @@ module Aws::Macie2
     class UpdateRetrievalConfiguration < Struct.new(
       :retrieval_mode,
       :role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4773,7 +5071,8 @@ module Aws::Macie2
     class UpdateRevealConfigurationRequest < Struct.new(
       :configuration,
       :retrieval_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4786,7 +5085,8 @@ module Aws::Macie2
     class UpdateRevealConfigurationResponse < Struct.new(
       :configuration,
       :retrieval_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4807,12 +5107,14 @@ module Aws::Macie2
       :excludes,
       :id,
       :includes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateSensitivityInspectionTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4834,7 +5136,8 @@ module Aws::Macie2
       :estimated_cost,
       :service_limit,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4856,7 +5159,8 @@ module Aws::Macie2
       :automated_discovery_free_trial_start_date,
       :free_trial_start_date,
       :usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4874,7 +5178,8 @@ module Aws::Macie2
       :comparator,
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4888,7 +5193,8 @@ module Aws::Macie2
     class UsageStatisticsSortBy < Struct.new(
       :key,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4906,7 +5212,8 @@ module Aws::Macie2
       :currency,
       :estimated_cost,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4940,7 +5247,8 @@ module Aws::Macie2
       :iam_user,
       :root,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4958,7 +5266,8 @@ module Aws::Macie2
       :account_id,
       :arn,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4976,7 +5285,8 @@ module Aws::Macie2
       :job_expires_at,
       :job_imminent_expiration_health_event_arn,
       :job_paused_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4986,7 +5296,8 @@ module Aws::Macie2
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4996,7 +5307,8 @@ module Aws::Macie2
     #   @return [String]
     class WeeklySchedule < Struct.new(
       :day_of_week,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

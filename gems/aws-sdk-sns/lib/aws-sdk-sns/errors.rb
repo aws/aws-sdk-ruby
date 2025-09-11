@@ -67,7 +67,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::AuthorizationErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::BatchEntryIdsNotDistinctException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::BatchRequestTooLongException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -107,7 +107,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::ConcurrentAccessException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::EmptyBatchRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::EndpointDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for endpoint disabled.</p>
@@ -149,7 +149,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::FilterPolicyLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -162,7 +162,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::InternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -175,7 +175,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::InvalidBatchEntryIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -189,7 +189,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -202,7 +202,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The parameter of an entry in a request doesn't abide by the specification. </p>
@@ -217,7 +217,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::InvalidSecurityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -230,7 +230,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -244,7 +244,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::KMSAccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -258,7 +258,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::KMSDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -273,7 +273,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::KMSInvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -287,7 +287,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::KMSNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -300,7 +300,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::KMSOptInRequired] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -316,7 +316,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::KMSThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -329,7 +329,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -343,7 +343,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::OptedOutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -356,7 +356,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::PlatformApplicationDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for platform application disabled.</p>
@@ -370,7 +370,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::ReplayLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -384,7 +384,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -398,7 +398,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::StaleTagException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -412,7 +412,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::SubscriptionLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -425,7 +425,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::TagLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -439,7 +439,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::TagPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -452,7 +452,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::ThrottledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Throttled request.</p>
@@ -466,7 +466,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::TooManyEntriesInBatchRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -479,7 +479,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::TopicLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -493,7 +493,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::UserErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -506,7 +506,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -519,7 +519,7 @@ module Aws::SNS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SNS::Types::VerificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

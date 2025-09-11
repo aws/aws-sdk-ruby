@@ -38,7 +38,7 @@ module Aws::GuardDuty
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GuardDuty::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message.</p>
@@ -57,7 +57,7 @@ module Aws::GuardDuty
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GuardDuty::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message.</p>
@@ -76,7 +76,7 @@ module Aws::GuardDuty
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GuardDuty::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message.</p>
@@ -95,7 +95,7 @@ module Aws::GuardDuty
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GuardDuty::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message.</p>
@@ -114,7 +114,7 @@ module Aws::GuardDuty
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GuardDuty::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message.</p>

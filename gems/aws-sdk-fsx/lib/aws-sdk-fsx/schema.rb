@@ -2583,7 +2583,6 @@ module Aws::FSx
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeNotFound)
         operation.traits = {}
       end)
-
     end
 
     class << self

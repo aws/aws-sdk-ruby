@@ -77,7 +77,6 @@ module Aws::ApiGatewayManagementApi
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PayloadTooLargeException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/@connections/{ConnectionId}", "code" => 200}}
       end)
-
     end
 
     class << self

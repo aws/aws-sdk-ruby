@@ -11,7 +11,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +49,8 @@ module Aws::InternetMonitor
       :experience_score,
       :percent_of_total_traffic_impacted,
       :percent_of_client_location_impacted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +59,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -99,7 +102,8 @@ module Aws::InternetMonitor
       :city,
       :latitude,
       :longitude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +112,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,7 +170,8 @@ module Aws::InternetMonitor
       :internet_measurements_log_delivery,
       :traffic_percentage_to_monitor,
       :health_events_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +184,8 @@ module Aws::InternetMonitor
     class CreateMonitorOutput < Struct.new(
       :arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,12 +194,14 @@ module Aws::InternetMonitor
     #   @return [String]
     class DeleteMonitorInput < Struct.new(
       :monitor_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMonitorOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +233,8 @@ module Aws::InternetMonitor
       :field,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +255,8 @@ module Aws::InternetMonitor
       :monitor_name,
       :event_id,
       :linked_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +308,8 @@ module Aws::InternetMonitor
       :percent_of_total_traffic_impacted,
       :impact_type,
       :health_score_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -311,7 +323,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class GetInternetEventInput < Struct.new(
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +357,8 @@ module Aws::InternetMonitor
       :client_location,
       :event_type,
       :event_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +374,8 @@ module Aws::InternetMonitor
     class GetMonitorInput < Struct.new(
       :monitor_name,
       :linked_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +442,8 @@ module Aws::InternetMonitor
       :internet_measurements_log_delivery,
       :traffic_percentage_to_monitor,
       :health_events_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +465,8 @@ module Aws::InternetMonitor
       :query_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +486,8 @@ module Aws::InternetMonitor
       :fields,
       :data,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +501,8 @@ module Aws::InternetMonitor
     class GetQueryStatusInput < Struct.new(
       :monitor_name,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -492,7 +511,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class GetQueryStatusOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +564,8 @@ module Aws::InternetMonitor
       :percent_of_total_traffic_impacted,
       :impact_type,
       :health_score_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -582,7 +603,8 @@ module Aws::InternetMonitor
       :performance_score_threshold,
       :availability_local_health_events_config,
       :performance_local_health_events_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -665,7 +687,8 @@ module Aws::InternetMonitor
       :caused_by,
       :internet_health,
       :ipv4_prefixes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +697,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class InternalServerErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +707,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +746,8 @@ module Aws::InternetMonitor
       :client_location,
       :event_type,
       :event_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +771,8 @@ module Aws::InternetMonitor
     class InternetHealth < Struct.new(
       :availability,
       :performance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +784,8 @@ module Aws::InternetMonitor
     #   @return [Types::S3Config]
     class InternetMeasurementsLogDelivery < Struct.new(
       :s3_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +794,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +831,8 @@ module Aws::InternetMonitor
       :max_results,
       :event_status,
       :linked_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +845,8 @@ module Aws::InternetMonitor
     class ListHealthEventsOperationOutput < Struct.new(
       :health_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +875,8 @@ module Aws::InternetMonitor
       :end_time,
       :event_status,
       :event_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +889,8 @@ module Aws::InternetMonitor
     class ListInternetEventsOutput < Struct.new(
       :internet_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +917,8 @@ module Aws::InternetMonitor
       :max_results,
       :monitor_status,
       :include_linked_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -897,7 +931,8 @@ module Aws::InternetMonitor
     class ListMonitorsOutput < Struct.new(
       :monitors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +941,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,7 +951,8 @@ module Aws::InternetMonitor
     #   @return [Hash<String, String>]
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -943,7 +980,8 @@ module Aws::InternetMonitor
       :status,
       :health_score_threshold,
       :min_traffic_impact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -971,7 +1009,8 @@ module Aws::InternetMonitor
       :monitor_arn,
       :status,
       :processing_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1024,8 @@ module Aws::InternetMonitor
     class Network < Struct.new(
       :as_name,
       :as_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1043,8 @@ module Aws::InternetMonitor
       :networks,
       :as_path,
       :network_event_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1012,7 +1053,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1056,7 +1098,8 @@ module Aws::InternetMonitor
       :percent_of_total_traffic_impacted,
       :percent_of_client_location_impacted,
       :round_trip_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1115,8 @@ module Aws::InternetMonitor
     class QueryField < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1125,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1145,8 @@ module Aws::InternetMonitor
       :p50,
       :p90,
       :p95,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,7 +1166,8 @@ module Aws::InternetMonitor
       :bucket_name,
       :bucket_prefix,
       :log_delivery_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1192,7 +1239,8 @@ module Aws::InternetMonitor
       :query_type,
       :filter_parameters,
       :linked_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1249,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class StartQueryOutput < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1214,12 +1263,14 @@ module Aws::InternetMonitor
     class StopQueryInput < Struct.new(
       :monitor_name,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopQueryOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1232,12 +1283,14 @@ module Aws::InternetMonitor
     class TagResourceOperationInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1246,7 +1299,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1309,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1268,12 +1323,14 @@ module Aws::InternetMonitor
     class UntagResourceOperationInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1388,8 @@ module Aws::InternetMonitor
       :internet_measurements_log_delivery,
       :traffic_percentage_to_monitor,
       :health_events_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1402,8 @@ module Aws::InternetMonitor
     class UpdateMonitorOutput < Struct.new(
       :monitor_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1412,8 @@ module Aws::InternetMonitor
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

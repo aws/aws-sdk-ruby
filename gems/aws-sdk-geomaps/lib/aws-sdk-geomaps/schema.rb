@@ -187,7 +187,6 @@ module Aws::GeoMaps
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/tiles/{Tileset}/{Z}/{X}/{Y}", "method" => "GET"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GetTileSuccess", "params" => {"Tileset" => "vector.basemap", "X" => "5190", "Y" => "11218", "Z" => "15"}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
-
     end
 
     class << self

@@ -489,7 +489,6 @@ module Aws::DLM
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/policies/{PolicyId}", "code" => 200}}
       end)
-
     end
 
     class << self

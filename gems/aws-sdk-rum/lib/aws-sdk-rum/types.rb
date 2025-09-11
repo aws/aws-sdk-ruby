@@ -11,7 +11,8 @@ module Aws::RUM
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +76,8 @@ module Aws::RUM
       :data_storage,
       :custom_events,
       :deobfuscation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,7 +171,8 @@ module Aws::RUM
       :allow_cookies,
       :telemetries,
       :enable_x_ray,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -192,7 +195,8 @@ module Aws::RUM
       :name,
       :id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +222,8 @@ module Aws::RUM
       :created,
       :last_modified,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +243,8 @@ module Aws::RUM
       :metric_definition,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -266,7 +272,8 @@ module Aws::RUM
       :destination,
       :destination_arn,
       :metric_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +286,8 @@ module Aws::RUM
     class BatchCreateRumMetricDefinitionsOutput < Struct.new(
       :errors,
       :metric_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +307,8 @@ module Aws::RUM
       :metric_definition_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +335,8 @@ module Aws::RUM
       :destination,
       :destination_arn,
       :metric_definition_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +349,8 @@ module Aws::RUM
     class BatchDeleteRumMetricDefinitionsOutput < Struct.new(
       :errors,
       :metric_definition_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +382,8 @@ module Aws::RUM
       :destination_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +398,8 @@ module Aws::RUM
     class BatchGetRumMetricDefinitionsOutput < Struct.new(
       :metric_definitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -403,7 +416,8 @@ module Aws::RUM
       :message,
       :resource_name,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -463,7 +477,8 @@ module Aws::RUM
       :cw_log_enabled,
       :custom_events,
       :deobfuscation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +487,8 @@ module Aws::RUM
     #   @return [String]
     class CreateAppMonitorOutput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +499,8 @@ module Aws::RUM
     #   @return [String]
     class CustomEvents < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +516,8 @@ module Aws::RUM
     class CwLog < Struct.new(
       :cw_log_enabled,
       :cw_log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -511,7 +529,8 @@ module Aws::RUM
     #   @return [Types::CwLog]
     class DataStorage < Struct.new(
       :cw_log,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,12 +539,14 @@ module Aws::RUM
     #   @return [String]
     class DeleteAppMonitorInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAppMonitorOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +560,8 @@ module Aws::RUM
     class DeleteResourcePolicyRequest < Struct.new(
       :name,
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +570,8 @@ module Aws::RUM
     #   @return [String]
     class DeleteResourcePolicyResponse < Struct.new(
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -567,12 +590,14 @@ module Aws::RUM
       :app_monitor_name,
       :destination,
       :destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRumMetricsDestinationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +611,8 @@ module Aws::RUM
     #   @return [Types::JavaScriptSourceMaps]
     class DeobfuscationConfiguration < Struct.new(
       :java_script_source_maps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +638,8 @@ module Aws::RUM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +653,8 @@ module Aws::RUM
     class GetAppMonitorDataOutput < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +663,8 @@ module Aws::RUM
     #   @return [String]
     class GetAppMonitorInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +673,8 @@ module Aws::RUM
     #   @return [Types::AppMonitor]
     class GetAppMonitorOutput < Struct.new(
       :app_monitor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -653,7 +683,8 @@ module Aws::RUM
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +697,8 @@ module Aws::RUM
     class GetResourcePolicyResponse < Struct.new(
       :policy_document,
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -679,7 +711,8 @@ module Aws::RUM
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +721,8 @@ module Aws::RUM
     #   @return [String]
     class InvalidPolicyRevisionIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +742,8 @@ module Aws::RUM
     class JavaScriptSourceMaps < Struct.new(
       :status,
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -722,7 +757,8 @@ module Aws::RUM
     class ListAppMonitorsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -736,7 +772,8 @@ module Aws::RUM
     class ListAppMonitorsOutput < Struct.new(
       :next_token,
       :app_monitor_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +793,8 @@ module Aws::RUM
       :app_monitor_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +809,8 @@ module Aws::RUM
     class ListRumMetricsDestinationsOutput < Struct.new(
       :destinations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +819,8 @@ module Aws::RUM
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +833,8 @@ module Aws::RUM
     class ListTagsForResourceOutput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +843,8 @@ module Aws::RUM
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +889,8 @@ module Aws::RUM
       :dimension_keys,
       :event_pattern,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1267,7 +1310,8 @@ module Aws::RUM
       :dimension_keys,
       :event_pattern,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1288,7 +1332,8 @@ module Aws::RUM
       :destination,
       :destination_arn,
       :iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1297,7 +1342,8 @@ module Aws::RUM
     #   @return [String]
     class PolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1306,7 +1352,8 @@ module Aws::RUM
     #   @return [String]
     class PolicySizeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1327,7 +1374,8 @@ module Aws::RUM
       :name,
       :policy_document,
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,7 +1388,8 @@ module Aws::RUM
     class PutResourcePolicyResponse < Struct.new(
       :policy_document,
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1370,12 +1419,14 @@ module Aws::RUM
       :user_details,
       :rum_events,
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutRumEventsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1409,12 +1460,14 @@ module Aws::RUM
       :destination,
       :destination_arn,
       :iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutRumMetricsDestinationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1443,7 +1496,8 @@ module Aws::RUM
     class QueryFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1514,8 @@ module Aws::RUM
       :message,
       :resource_name,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1489,7 +1544,8 @@ module Aws::RUM
       :type,
       :metadata,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1498,7 +1554,8 @@ module Aws::RUM
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1511,12 +1568,14 @@ module Aws::RUM
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1596,8 @@ module Aws::RUM
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1552,7 +1612,8 @@ module Aws::RUM
     class TimeRange < Struct.new(
       :after,
       :before,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1571,12 +1632,14 @@ module Aws::RUM
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1624,12 +1687,14 @@ module Aws::RUM
       :cw_log_enabled,
       :custom_events,
       :deobfuscation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateAppMonitorOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,12 +1725,14 @@ module Aws::RUM
       :destination_arn,
       :metric_definition,
       :metric_definition_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateRumMetricDefinitionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1747,8 @@ module Aws::RUM
     class UserDetails < Struct.new(
       :user_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1689,7 +1757,8 @@ module Aws::RUM
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

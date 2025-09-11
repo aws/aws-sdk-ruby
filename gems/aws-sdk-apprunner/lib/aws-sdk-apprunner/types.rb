@@ -24,7 +24,8 @@ module Aws::AppRunner
       :service_arn,
       :domain_name,
       :enable_www_subdomain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +47,8 @@ module Aws::AppRunner
       :service_arn,
       :custom_domain,
       :vpc_dns_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +64,8 @@ module Aws::AppRunner
     class AuthenticationConfiguration < Struct.new(
       :connection_arn,
       :access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +135,8 @@ module Aws::AppRunner
       :deleted_at,
       :has_associated_service,
       :is_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +179,8 @@ module Aws::AppRunner
       :created_at,
       :has_associated_service,
       :is_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -203,7 +208,8 @@ module Aws::AppRunner
       :type,
       :value,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +236,8 @@ module Aws::AppRunner
     class CodeConfiguration < Struct.new(
       :configuration_source,
       :code_configuration_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +287,8 @@ module Aws::AppRunner
       :port,
       :runtime_environment_variables,
       :runtime_environment_secrets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +315,8 @@ module Aws::AppRunner
       :source_code_version,
       :code_configuration,
       :source_directory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +342,8 @@ module Aws::AppRunner
       :provider_type,
       :status,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +369,8 @@ module Aws::AppRunner
       :provider_type,
       :status,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +428,8 @@ module Aws::AppRunner
       :min_size,
       :max_size,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +438,8 @@ module Aws::AppRunner
     #   @return [Types::AutoScalingConfiguration]
     class CreateAutoScalingConfigurationResponse < Struct.new(
       :auto_scaling_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -443,7 +456,8 @@ module Aws::AppRunner
       :connection_name,
       :provider_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +466,8 @@ module Aws::AppRunner
     #   @return [Types::Connection]
     class CreateConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -476,7 +491,8 @@ module Aws::AppRunner
       :observability_configuration_name,
       :trace_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -485,7 +501,8 @@ module Aws::AppRunner
     #   @return [Types::ObservabilityConfiguration]
     class CreateObservabilityConfigurationResponse < Struct.new(
       :observability_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +551,8 @@ module Aws::AppRunner
       :auto_scaling_configuration_arn,
       :network_configuration,
       :observability_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +565,8 @@ module Aws::AppRunner
     class CreateServiceResponse < Struct.new(
       :service,
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +593,8 @@ module Aws::AppRunner
       :subnets,
       :security_groups,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +603,8 @@ module Aws::AppRunner
     #   @return [Types::VpcConnector]
     class CreateVpcConnectorResponse < Struct.new(
       :vpc_connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +627,8 @@ module Aws::AppRunner
       :vpc_ingress_connection_name,
       :ingress_vpc_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +637,8 @@ module Aws::AppRunner
     #   @return [Types::VpcIngressConnection]
     class CreateVpcIngressConnectionResponse < Struct.new(
       :vpc_ingress_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +663,8 @@ module Aws::AppRunner
       :enable_www_subdomain,
       :certificate_validation_records,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -659,7 +683,8 @@ module Aws::AppRunner
     class DeleteAutoScalingConfigurationRequest < Struct.new(
       :auto_scaling_configuration_arn,
       :delete_all_revisions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +693,8 @@ module Aws::AppRunner
     #   @return [Types::AutoScalingConfiguration]
     class DeleteAutoScalingConfigurationResponse < Struct.new(
       :auto_scaling_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +703,8 @@ module Aws::AppRunner
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
       :connection_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +713,8 @@ module Aws::AppRunner
     #   @return [Types::Connection]
     class DeleteConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -699,7 +727,8 @@ module Aws::AppRunner
     #   @return [String]
     class DeleteObservabilityConfigurationRequest < Struct.new(
       :observability_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +737,8 @@ module Aws::AppRunner
     #   @return [Types::ObservabilityConfiguration]
     class DeleteObservabilityConfigurationResponse < Struct.new(
       :observability_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +747,8 @@ module Aws::AppRunner
     #   @return [String]
     class DeleteServiceRequest < Struct.new(
       :service_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +762,8 @@ module Aws::AppRunner
     class DeleteServiceResponse < Struct.new(
       :service,
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +773,8 @@ module Aws::AppRunner
     #   @return [String]
     class DeleteVpcConnectorRequest < Struct.new(
       :vpc_connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -750,7 +783,8 @@ module Aws::AppRunner
     #   @return [Types::VpcConnector]
     class DeleteVpcConnectorResponse < Struct.new(
       :vpc_connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +793,8 @@ module Aws::AppRunner
     #   @return [String]
     class DeleteVpcIngressConnectionRequest < Struct.new(
       :vpc_ingress_connection_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +803,8 @@ module Aws::AppRunner
     #   @return [Types::VpcIngressConnection]
     class DeleteVpcIngressConnectionResponse < Struct.new(
       :vpc_ingress_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +818,8 @@ module Aws::AppRunner
     #   @return [String]
     class DescribeAutoScalingConfigurationRequest < Struct.new(
       :auto_scaling_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +828,8 @@ module Aws::AppRunner
     #   @return [Types::AutoScalingConfiguration]
     class DescribeAutoScalingConfigurationResponse < Struct.new(
       :auto_scaling_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,7 +849,8 @@ module Aws::AppRunner
       :service_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,7 +877,8 @@ module Aws::AppRunner
       :custom_domains,
       :vpc_dns_targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -852,7 +892,8 @@ module Aws::AppRunner
     #   @return [String]
     class DescribeObservabilityConfigurationRequest < Struct.new(
       :observability_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +902,8 @@ module Aws::AppRunner
     #   @return [Types::ObservabilityConfiguration]
     class DescribeObservabilityConfigurationResponse < Struct.new(
       :observability_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +912,8 @@ module Aws::AppRunner
     #   @return [String]
     class DescribeServiceRequest < Struct.new(
       :service_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,7 +922,8 @@ module Aws::AppRunner
     #   @return [Types::Service]
     class DescribeServiceResponse < Struct.new(
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +933,8 @@ module Aws::AppRunner
     #   @return [String]
     class DescribeVpcConnectorRequest < Struct.new(
       :vpc_connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -898,7 +943,8 @@ module Aws::AppRunner
     #   @return [Types::VpcConnector]
     class DescribeVpcConnectorResponse < Struct.new(
       :vpc_connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +953,8 @@ module Aws::AppRunner
     #   @return [String]
     class DescribeVpcIngressConnectionRequest < Struct.new(
       :vpc_ingress_connection_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -916,7 +963,8 @@ module Aws::AppRunner
     #   @return [Types::VpcIngressConnection]
     class DescribeVpcIngressConnectionResponse < Struct.new(
       :vpc_ingress_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +977,8 @@ module Aws::AppRunner
     class DisassociateCustomDomainRequest < Struct.new(
       :service_arn,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +1000,8 @@ module Aws::AppRunner
       :service_arn,
       :custom_domain,
       :vpc_dns_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1018,8 @@ module Aws::AppRunner
     class EgressConfiguration < Struct.new(
       :egress_type,
       :vpc_connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -978,7 +1029,8 @@ module Aws::AppRunner
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
       :kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1023,7 +1075,8 @@ module Aws::AppRunner
       :timeout,
       :healthy_threshold,
       :unhealthy_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1114,8 @@ module Aws::AppRunner
       :start_command,
       :port,
       :runtime_environment_secrets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1134,8 @@ module Aws::AppRunner
       :image_identifier,
       :image_configuration,
       :image_repository_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1091,7 +1146,8 @@ module Aws::AppRunner
     #   @return [Boolean]
     class IngressConfiguration < Struct.new(
       :is_publicly_accessible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1112,7 +1168,8 @@ module Aws::AppRunner
     class IngressVpcConfiguration < Struct.new(
       :vpc_id,
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1135,7 +1192,8 @@ module Aws::AppRunner
       :cpu,
       :memory,
       :instance_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1144,7 +1202,8 @@ module Aws::AppRunner
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1212,8 @@ module Aws::AppRunner
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1222,8 @@ module Aws::AppRunner
     #   @return [String]
     class InvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1251,8 @@ module Aws::AppRunner
       :latest_only,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,7 +1266,8 @@ module Aws::AppRunner
     class ListAutoScalingConfigurationsResponse < Struct.new(
       :auto_scaling_configuration_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1224,7 +1287,8 @@ module Aws::AppRunner
       :connection_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1238,7 +1302,8 @@ module Aws::AppRunner
     class ListConnectionsResponse < Struct.new(
       :connection_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1266,7 +1331,8 @@ module Aws::AppRunner
       :latest_only,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1346,8 @@ module Aws::AppRunner
     class ListObservabilityConfigurationsResponse < Struct.new(
       :observability_configuration_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1300,7 +1367,8 @@ module Aws::AppRunner
       :service_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1382,8 @@ module Aws::AppRunner
     class ListOperationsResponse < Struct.new(
       :operation_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1338,7 +1407,8 @@ module Aws::AppRunner
       :auto_scaling_configuration_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1351,7 +1421,8 @@ module Aws::AppRunner
     class ListServicesForAutoScalingConfigurationResponse < Struct.new(
       :service_arn_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1438,8 @@ module Aws::AppRunner
     class ListServicesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1380,7 +1452,8 @@ module Aws::AppRunner
     class ListServicesResponse < Struct.new(
       :service_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1463,8 @@ module Aws::AppRunner
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1473,8 @@ module Aws::AppRunner
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1415,7 +1490,8 @@ module Aws::AppRunner
     class ListVpcConnectorsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,7 +1505,8 @@ module Aws::AppRunner
     class ListVpcConnectorsResponse < Struct.new(
       :vpc_connectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1522,8 @@ module Aws::AppRunner
     class ListVpcIngressConnectionsFilter < Struct.new(
       :service_arn,
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1543,8 @@ module Aws::AppRunner
       :filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1557,8 @@ module Aws::AppRunner
     class ListVpcIngressConnectionsResponse < Struct.new(
       :vpc_ingress_connection_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1498,7 +1578,8 @@ module Aws::AppRunner
       :egress_configuration,
       :ingress_configuration,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1624,8 @@ module Aws::AppRunner
       :status,
       :created_at,
       :deleted_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1571,7 +1653,8 @@ module Aws::AppRunner
       :observability_configuration_arn,
       :observability_configuration_name,
       :observability_configuration_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1610,7 +1693,8 @@ module Aws::AppRunner
       :started_at,
       :ended_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1619,7 +1703,8 @@ module Aws::AppRunner
     #   @return [String]
     class PauseServiceRequest < Struct.new(
       :service_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1633,7 +1718,8 @@ module Aws::AppRunner
     class PauseServiceResponse < Struct.new(
       :service,
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1728,8 @@ module Aws::AppRunner
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1738,8 @@ module Aws::AppRunner
     #   @return [String]
     class ResumeServiceRequest < Struct.new(
       :service_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1665,7 +1753,8 @@ module Aws::AppRunner
     class ResumeServiceResponse < Struct.new(
       :service,
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1747,7 +1836,8 @@ module Aws::AppRunner
       :auto_scaling_configuration_summary,
       :network_configuration,
       :observability_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1770,7 +1860,8 @@ module Aws::AppRunner
     class ServiceObservabilityConfiguration < Struct.new(
       :observability_enabled,
       :observability_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1786,7 +1877,8 @@ module Aws::AppRunner
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1926,8 @@ module Aws::AppRunner
       :created_at,
       :updated_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1850,7 +1943,8 @@ module Aws::AppRunner
     class SourceCodeVersion < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1879,7 +1973,8 @@ module Aws::AppRunner
       :image_repository,
       :auto_deployments_enabled,
       :authentication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1983,8 @@ module Aws::AppRunner
     #   @return [String]
     class StartDeploymentRequest < Struct.new(
       :service_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1898,7 +1994,8 @@ module Aws::AppRunner
     #   @return [String]
     class StartDeploymentResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1912,7 +2009,8 @@ module Aws::AppRunner
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,12 +2025,14 @@ module Aws::AppRunner
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1942,7 +2042,8 @@ module Aws::AppRunner
     #   @return [String]
     class TraceConfiguration < Struct.new(
       :vendor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1956,12 +2057,14 @@ module Aws::AppRunner
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1975,7 +2078,8 @@ module Aws::AppRunner
     #   @return [String]
     class UpdateDefaultAutoScalingConfigurationRequest < Struct.new(
       :auto_scaling_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1984,7 +2088,8 @@ module Aws::AppRunner
     #   @return [Types::AutoScalingConfiguration]
     class UpdateDefaultAutoScalingConfigurationResponse < Struct.new(
       :auto_scaling_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2021,7 +2126,8 @@ module Aws::AppRunner
       :health_check_configuration,
       :network_configuration,
       :observability_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2036,7 +2142,8 @@ module Aws::AppRunner
     class UpdateServiceResponse < Struct.new(
       :service,
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2050,7 +2157,8 @@ module Aws::AppRunner
     class UpdateVpcIngressConnectionRequest < Struct.new(
       :vpc_ingress_connection_arn,
       :ingress_vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2167,8 @@ module Aws::AppRunner
     #   @return [Types::VpcIngressConnection]
     class UpdateVpcIngressConnectionResponse < Struct.new(
       :vpc_ingress_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2108,7 +2217,8 @@ module Aws::AppRunner
       :status,
       :created_at,
       :deleted_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2131,7 +2241,8 @@ module Aws::AppRunner
       :vpc_ingress_connection_arn,
       :vpc_id,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2202,7 +2313,8 @@ module Aws::AppRunner
       :ingress_vpc_configuration,
       :created_at,
       :deleted_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2218,7 +2330,8 @@ module Aws::AppRunner
     class VpcIngressConnectionSummary < Struct.new(
       :vpc_ingress_connection_arn,
       :service_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

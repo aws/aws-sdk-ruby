@@ -36,7 +36,8 @@ module Aws::DocDB
     class AddSourceIdentifierToSubscriptionMessage < Struct.new(
       :subscription_name,
       :source_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +46,8 @@ module Aws::DocDB
     #   @return [Types::EventSubscription]
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +63,8 @@ module Aws::DocDB
     class AddTagsToResourceMessage < Struct.new(
       :resource_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +107,8 @@ module Aws::DocDB
       :resource_identifier,
       :apply_action,
       :opt_in_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +118,8 @@ module Aws::DocDB
     #   @return [Types::ResourcePendingMaintenanceActions]
     class ApplyPendingMaintenanceActionResult < Struct.new(
       :resource_pending_maintenance_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +129,8 @@ module Aws::DocDB
     #   @return [String]
     class AuthorizationNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +140,8 @@ module Aws::DocDB
     #   @return [String]
     class AvailabilityZone < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +181,8 @@ module Aws::DocDB
       :valid_from,
       :valid_till,
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,7 +201,8 @@ module Aws::DocDB
     class CertificateDetails < Struct.new(
       :ca_identifier,
       :valid_till,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +215,8 @@ module Aws::DocDB
     class CertificateMessage < Struct.new(
       :certificates,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +226,8 @@ module Aws::DocDB
     #   @return [String]
     class CertificateNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +245,8 @@ module Aws::DocDB
     class CloudwatchLogsExportConfiguration < Struct.new(
       :enable_log_types,
       :disable_log_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +282,8 @@ module Aws::DocDB
       :secret_arn,
       :secret_status,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +337,8 @@ module Aws::DocDB
       :target_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +347,8 @@ module Aws::DocDB
     #   @return [Types::DBClusterParameterGroup]
     class CopyDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -441,7 +456,8 @@ module Aws::DocDB
       :pre_signed_url,
       :copy_tags,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -450,7 +466,8 @@ module Aws::DocDB
     #   @return [Types::DBClusterSnapshot]
     class CopyDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +685,8 @@ module Aws::DocDB
       :serverless_v2_scaling_configuration,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +718,8 @@ module Aws::DocDB
       :db_parameter_group_family,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +728,8 @@ module Aws::DocDB
     #   @return [Types::DBClusterParameterGroup]
     class CreateDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +738,8 @@ module Aws::DocDB
     #   @return [Types::DBCluster]
     class CreateDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +783,8 @@ module Aws::DocDB
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +793,8 @@ module Aws::DocDB
     #   @return [Types::DBClusterSnapshot]
     class CreateDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -876,7 +899,8 @@ module Aws::DocDB
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :ca_certificate_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -885,7 +909,8 @@ module Aws::DocDB
     #   @return [Types::DBInstance]
     class CreateDBInstanceResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +936,8 @@ module Aws::DocDB
       :db_subnet_group_description,
       :subnet_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,7 +946,8 @@ module Aws::DocDB
     #   @return [Types::DBSubnetGroup]
     class CreateDBSubnetGroupResult < Struct.new(
       :db_subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1010,8 @@ module Aws::DocDB
       :source_ids,
       :enabled,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -992,7 +1020,8 @@ module Aws::DocDB
     #   @return [Types::EventSubscription]
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1026,7 +1055,8 @@ module Aws::DocDB
       :deletion_protection,
       :database_name,
       :storage_encrypted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,7 +1065,8 @@ module Aws::DocDB
     #   @return [Types::GlobalCluster]
     class CreateGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1202,7 +1233,8 @@ module Aws::DocDB
       :storage_type,
       :serverless_v2_scaling_configuration,
       :master_user_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,7 +1243,8 @@ module Aws::DocDB
     #   @return [String]
     class DBClusterAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1236,7 +1269,8 @@ module Aws::DocDB
       :is_cluster_writer,
       :db_cluster_parameter_group_status,
       :promotion_tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1252,7 +1286,8 @@ module Aws::DocDB
     class DBClusterMessage < Struct.new(
       :marker,
       :db_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1262,7 +1297,8 @@ module Aws::DocDB
     #   @return [String]
     class DBClusterNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1286,7 +1322,8 @@ module Aws::DocDB
       :db_parameter_group_family,
       :description,
       :db_cluster_parameter_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1296,7 +1333,8 @@ module Aws::DocDB
     #   @return [String]
     class DBClusterParameterGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1350,8 @@ module Aws::DocDB
     class DBClusterParameterGroupsMessage < Struct.new(
       :marker,
       :db_cluster_parameter_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1321,7 +1360,8 @@ module Aws::DocDB
     #   @return [String]
     class DBClusterQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1351,7 +1391,8 @@ module Aws::DocDB
     class DBClusterRole < Struct.new(
       :role_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1441,7 +1482,8 @@ module Aws::DocDB
       :db_cluster_snapshot_arn,
       :source_db_cluster_snapshot_arn,
       :storage_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1492,8 @@ module Aws::DocDB
     #   @return [String]
     class DBClusterSnapshotAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1467,7 +1510,8 @@ module Aws::DocDB
     class DBClusterSnapshotAttribute < Struct.new(
       :attribute_name,
       :attribute_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1482,7 +1526,8 @@ module Aws::DocDB
     class DBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1498,7 +1543,8 @@ module Aws::DocDB
     class DBClusterSnapshotMessage < Struct.new(
       :marker,
       :db_cluster_snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1508,7 +1554,8 @@ module Aws::DocDB
     #   @return [String]
     class DBClusterSnapshotNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1615,8 @@ module Aws::DocDB
       :supported_ca_certificate_identifiers,
       :supports_certificate_rotation_without_restart,
       :serverless_v2_features_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,7 +1632,8 @@ module Aws::DocDB
     class DBEngineVersionMessage < Struct.new(
       :marker,
       :db_engine_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1721,7 +1770,8 @@ module Aws::DocDB
       :certificate_details,
       :performance_insights_enabled,
       :performance_insights_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1730,7 +1780,8 @@ module Aws::DocDB
     #   @return [String]
     class DBInstanceAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1746,7 +1797,8 @@ module Aws::DocDB
     class DBInstanceMessage < Struct.new(
       :marker,
       :db_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1756,7 +1808,8 @@ module Aws::DocDB
     #   @return [String]
     class DBInstanceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1782,7 +1835,8 @@ module Aws::DocDB
       :normal,
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1791,7 +1845,8 @@ module Aws::DocDB
     #   @return [String]
     class DBParameterGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1801,7 +1856,8 @@ module Aws::DocDB
     #   @return [String]
     class DBParameterGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1866,8 @@ module Aws::DocDB
     #   @return [String]
     class DBParameterGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1820,7 +1877,8 @@ module Aws::DocDB
     #   @return [String]
     class DBSecurityGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1830,7 +1888,8 @@ module Aws::DocDB
     #   @return [String]
     class DBSnapshotAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,7 +1899,8 @@ module Aws::DocDB
     #   @return [String]
     class DBSnapshotNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1930,8 @@ module Aws::DocDB
       :subnet_group_status,
       :subnets,
       :db_subnet_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1880,7 +1941,8 @@ module Aws::DocDB
     #   @return [String]
     class DBSubnetGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1889,7 +1951,8 @@ module Aws::DocDB
     #   @return [String]
     class DBSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1905,7 +1968,8 @@ module Aws::DocDB
     class DBSubnetGroupMessage < Struct.new(
       :marker,
       :db_subnet_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1915,7 +1979,8 @@ module Aws::DocDB
     #   @return [String]
     class DBSubnetGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1924,7 +1989,8 @@ module Aws::DocDB
     #   @return [String]
     class DBSubnetGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1933,7 +1999,8 @@ module Aws::DocDB
     #   @return [String]
     class DBSubnetQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1943,7 +2010,8 @@ module Aws::DocDB
     #   @return [String]
     class DBUpgradeDependencyFailureFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2055,8 @@ module Aws::DocDB
       :db_cluster_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2009,7 +2078,8 @@ module Aws::DocDB
     #   @return [String]
     class DeleteDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2018,7 +2088,8 @@ module Aws::DocDB
     #   @return [Types::DBCluster]
     class DeleteDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2029,7 +2100,8 @@ module Aws::DocDB
     #   @return [String]
     class DeleteDBClusterSnapshotMessage < Struct.new(
       :db_cluster_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2038,7 +2110,8 @@ module Aws::DocDB
     #   @return [Types::DBClusterSnapshot]
     class DeleteDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2055,7 +2128,8 @@ module Aws::DocDB
     #   @return [String]
     class DeleteDBInstanceMessage < Struct.new(
       :db_instance_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2064,7 +2138,8 @@ module Aws::DocDB
     #   @return [Types::DBInstance]
     class DeleteDBInstanceResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2081,7 +2156,8 @@ module Aws::DocDB
     #   @return [String]
     class DeleteDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2091,7 +2167,8 @@ module Aws::DocDB
     #   @return [String]
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2177,8 @@ module Aws::DocDB
     #   @return [Types::EventSubscription]
     class DeleteEventSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2110,7 +2188,8 @@ module Aws::DocDB
     #   @return [String]
     class DeleteGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2119,7 +2198,8 @@ module Aws::DocDB
     #   @return [Types::GlobalCluster]
     class DeleteGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2156,7 +2236,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2191,7 +2272,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2230,7 +2312,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2329,8 @@ module Aws::DocDB
     class DescribeDBClusterParametersOutput < Struct.new(
       :parameters,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2256,7 +2340,8 @@ module Aws::DocDB
     #   @return [String]
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
       :db_cluster_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2266,7 +2351,8 @@ module Aws::DocDB
     #   @return [Types::DBClusterSnapshotAttributesResult]
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_attributes_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2348,7 +2434,8 @@ module Aws::DocDB
       :marker,
       :include_shared,
       :include_public,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2389,7 +2476,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2447,7 +2535,8 @@ module Aws::DocDB
       :default_only,
       :list_supported_character_sets,
       :list_supported_timezones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2493,7 +2582,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2521,7 +2611,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2550,7 +2641,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2560,7 +2652,8 @@ module Aws::DocDB
     #   @return [Types::EngineDefaults]
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
       :engine_defaults,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2576,7 +2669,8 @@ module Aws::DocDB
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2605,7 +2699,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2683,7 +2778,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2705,7 +2801,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2753,7 +2850,8 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2797,7 +2895,8 @@ module Aws::DocDB
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2816,7 +2915,8 @@ module Aws::DocDB
       :address,
       :port,
       :hosted_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2837,7 +2937,8 @@ module Aws::DocDB
       :db_parameter_group_family,
       :marker,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2867,7 +2968,8 @@ module Aws::DocDB
       :event_categories,
       :date,
       :source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2881,7 +2983,8 @@ module Aws::DocDB
     class EventCategoriesMap < Struct.new(
       :source_type,
       :event_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2891,7 +2994,8 @@ module Aws::DocDB
     #   @return [Array<Types::EventCategoriesMap>]
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2947,7 +3051,8 @@ module Aws::DocDB
       :event_categories_list,
       :enabled,
       :event_subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2956,7 +3061,8 @@ module Aws::DocDB
     #   @return [String]
     class EventSubscriptionQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2972,7 +3078,8 @@ module Aws::DocDB
     class EventSubscriptionsMessage < Struct.new(
       :marker,
       :event_subscriptions_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2988,7 +3095,8 @@ module Aws::DocDB
     class EventsMessage < Struct.new(
       :marker,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3118,8 @@ module Aws::DocDB
     class FailoverDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :target_db_instance_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3019,7 +3128,8 @@ module Aws::DocDB
     #   @return [Types::DBCluster]
     class FailoverDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3078,7 +3188,8 @@ module Aws::DocDB
       :target_db_cluster_identifier,
       :allow_data_loss,
       :switchover,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3087,7 +3198,8 @@ module Aws::DocDB
     #   @return [Types::GlobalCluster]
     class FailoverGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3103,7 +3215,8 @@ module Aws::DocDB
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3150,7 +3263,8 @@ module Aws::DocDB
       :storage_encrypted,
       :deletion_protection,
       :global_cluster_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3159,7 +3273,8 @@ module Aws::DocDB
     #   @return [String]
     class GlobalClusterAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3177,7 +3292,8 @@ module Aws::DocDB
       :db_cluster_arn,
       :readers,
       :is_writer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3186,7 +3302,8 @@ module Aws::DocDB
     #   @return [String]
     class GlobalClusterNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3195,7 +3312,8 @@ module Aws::DocDB
     #   @return [String]
     class GlobalClusterQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3208,7 +3326,8 @@ module Aws::DocDB
     class GlobalClustersMessage < Struct.new(
       :marker,
       :global_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3217,7 +3336,8 @@ module Aws::DocDB
     #   @return [String]
     class InstanceQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3226,7 +3346,8 @@ module Aws::DocDB
     #   @return [String]
     class InsufficientDBClusterCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3235,7 +3356,8 @@ module Aws::DocDB
     #   @return [String]
     class InsufficientDBInstanceCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3244,7 +3366,8 @@ module Aws::DocDB
     #   @return [String]
     class InsufficientStorageClusterCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3253,7 +3376,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidDBClusterSnapshotStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3262,7 +3386,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidDBClusterStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3272,7 +3397,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidDBInstanceStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3281,7 +3407,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidDBParameterGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3290,7 +3417,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidDBSecurityGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3299,7 +3427,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidDBSnapshotStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3308,7 +3437,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidDBSubnetGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3317,7 +3447,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidDBSubnetStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3327,7 +3458,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidEventSubscriptionStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3336,7 +3468,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidGlobalClusterStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3346,7 +3479,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidRestoreFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3356,7 +3490,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidSubnet < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3366,7 +3501,8 @@ module Aws::DocDB
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3375,7 +3511,8 @@ module Aws::DocDB
     #   @return [String]
     class KMSKeyNotAccessibleFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3390,7 +3527,8 @@ module Aws::DocDB
     class ListTagsForResourceMessage < Struct.new(
       :resource_name,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3589,7 +3727,8 @@ module Aws::DocDB
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :rotate_master_user_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3603,7 +3742,8 @@ module Aws::DocDB
     class ModifyDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3628,7 +3768,8 @@ module Aws::DocDB
     #   @return [String]
     class ModifyDBClusterParameterGroupOutput < Struct.new(
       :db_cluster_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3637,7 +3778,8 @@ module Aws::DocDB
     #   @return [Types::DBCluster]
     class ModifyDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3663,7 +3805,8 @@ module Aws::DocDB
       :attribute_name,
       :values_to_add,
       :values_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3673,7 +3816,8 @@ module Aws::DocDB
     #   @return [Types::DBClusterSnapshotAttributesResult]
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
       :db_cluster_snapshot_attributes_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3792,7 +3936,8 @@ module Aws::DocDB
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :certificate_rotation_restart,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3801,7 +3946,8 @@ module Aws::DocDB
     #   @return [Types::DBInstance]
     class ModifyDBInstanceResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3822,7 +3968,8 @@ module Aws::DocDB
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3831,7 +3978,8 @@ module Aws::DocDB
     #   @return [Types::DBSubnetGroup]
     class ModifyDBSubnetGroupResult < Struct.new(
       :db_subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3861,7 +4009,8 @@ module Aws::DocDB
       :source_type,
       :event_categories,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3870,7 +4019,8 @@ module Aws::DocDB
     #   @return [Types::EventSubscription]
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3903,7 +4053,8 @@ module Aws::DocDB
       :global_cluster_identifier,
       :new_global_cluster_identifier,
       :deletion_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3912,7 +4063,8 @@ module Aws::DocDB
     #   @return [Types::GlobalCluster]
     class ModifyGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3946,7 +4098,8 @@ module Aws::DocDB
       :availability_zones,
       :vpc,
       :storage_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3962,7 +4115,8 @@ module Aws::DocDB
     class OrderableDBInstanceOptionsMessage < Struct.new(
       :orderable_db_instance_options,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4010,7 +4164,8 @@ module Aws::DocDB
       :is_modifiable,
       :minimum_engine_version,
       :apply_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4027,7 +4182,8 @@ module Aws::DocDB
     class PendingCloudwatchLogsExports < Struct.new(
       :log_types_to_enable,
       :log_types_to_disable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4063,7 +4219,8 @@ module Aws::DocDB
       :opt_in_status,
       :current_apply_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4079,7 +4236,8 @@ module Aws::DocDB
     class PendingMaintenanceActionsMessage < Struct.new(
       :pending_maintenance_actions,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4152,7 +4310,8 @@ module Aws::DocDB
       :ca_certificate_identifier,
       :db_subnet_group_name,
       :pending_cloudwatch_logs_exports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4174,7 +4333,8 @@ module Aws::DocDB
     class RebootDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :force_failover,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4183,7 +4343,8 @@ module Aws::DocDB
     #   @return [Types::DBInstance]
     class RebootDBInstanceResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4197,7 +4358,8 @@ module Aws::DocDB
     class RemoveFromGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
       :db_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4206,7 +4368,8 @@ module Aws::DocDB
     #   @return [Types::GlobalCluster]
     class RemoveFromGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4222,7 +4385,8 @@ module Aws::DocDB
     class RemoveSourceIdentifierFromSubscriptionMessage < Struct.new(
       :subscription_name,
       :source_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4231,7 +4395,8 @@ module Aws::DocDB
     #   @return [Types::EventSubscription]
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4246,7 +4411,8 @@ module Aws::DocDB
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4269,7 +4435,8 @@ module Aws::DocDB
       :db_cluster_parameter_group_name,
       :reset_all_parameters,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4294,7 +4461,8 @@ module Aws::DocDB
     #   @return [String]
     class ResetDBClusterParameterGroupOutput < Struct.new(
       :db_cluster_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4303,7 +4471,8 @@ module Aws::DocDB
     #   @return [String]
     class ResourceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4320,7 +4489,8 @@ module Aws::DocDB
     class ResourcePendingMaintenanceActions < Struct.new(
       :resource_identifier,
       :pending_maintenance_action_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4445,7 +4615,8 @@ module Aws::DocDB
       :db_cluster_parameter_group_name,
       :serverless_v2_scaling_configuration,
       :storage_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4454,7 +4625,8 @@ module Aws::DocDB
     #   @return [Types::DBCluster]
     class RestoreDBClusterFromSnapshotResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4598,7 +4770,8 @@ module Aws::DocDB
       :deletion_protection,
       :serverless_v2_scaling_configuration,
       :storage_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4607,7 +4780,8 @@ module Aws::DocDB
     #   @return [Types::DBCluster]
     class RestoreDBClusterToPointInTimeResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4616,7 +4790,8 @@ module Aws::DocDB
     #   @return [String]
     class SNSInvalidTopicFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4625,7 +4800,8 @@ module Aws::DocDB
     #   @return [String]
     class SNSNoAuthorizationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4634,7 +4810,8 @@ module Aws::DocDB
     #   @return [String]
     class SNSTopicArnNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4652,7 +4829,8 @@ module Aws::DocDB
     class ServerlessV2FeaturesSupport < Struct.new(
       :min_capacity,
       :max_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4668,7 +4846,8 @@ module Aws::DocDB
     class ServerlessV2ScalingConfiguration < Struct.new(
       :min_capacity,
       :max_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4684,7 +4863,8 @@ module Aws::DocDB
     class ServerlessV2ScalingConfigurationInfo < Struct.new(
       :min_capacity,
       :max_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4694,7 +4874,8 @@ module Aws::DocDB
     #   @return [String]
     class SharedSnapshotQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4703,7 +4884,8 @@ module Aws::DocDB
     #   @return [String]
     class SnapshotQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4712,7 +4894,8 @@ module Aws::DocDB
     #   @return [String]
     class SourceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4723,7 +4906,8 @@ module Aws::DocDB
     #   @return [String]
     class StartDBClusterMessage < Struct.new(
       :db_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4732,7 +4916,8 @@ module Aws::DocDB
     #   @return [Types::DBCluster]
     class StartDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4743,7 +4928,8 @@ module Aws::DocDB
     #   @return [String]
     class StopDBClusterMessage < Struct.new(
       :db_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4752,7 +4938,8 @@ module Aws::DocDB
     #   @return [Types::DBCluster]
     class StopDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4762,7 +4949,8 @@ module Aws::DocDB
     #   @return [String]
     class StorageQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4772,7 +4960,8 @@ module Aws::DocDB
     #   @return [String]
     class StorageTypeNotSupportedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4790,7 +4979,8 @@ module Aws::DocDB
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4799,7 +4989,8 @@ module Aws::DocDB
     #   @return [String]
     class SubnetAlreadyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4808,7 +4999,8 @@ module Aws::DocDB
     #   @return [String]
     class SubscriptionAlreadyExistFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4817,7 +5009,8 @@ module Aws::DocDB
     #   @return [String]
     class SubscriptionCategoryNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4826,7 +5019,8 @@ module Aws::DocDB
     #   @return [String]
     class SubscriptionNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4865,7 +5059,8 @@ module Aws::DocDB
     class SwitchoverGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
       :target_db_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4874,7 +5069,8 @@ module Aws::DocDB
     #   @return [Types::GlobalCluster]
     class SwitchoverGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4888,7 +5084,8 @@ module Aws::DocDB
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4898,7 +5095,8 @@ module Aws::DocDB
     #   @return [Array<Types::Tag>]
     class TagListMessage < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4925,7 +5123,8 @@ module Aws::DocDB
       :description,
       :auto_upgrade,
       :is_major_version_upgrade,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4940,7 +5139,8 @@ module Aws::DocDB
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

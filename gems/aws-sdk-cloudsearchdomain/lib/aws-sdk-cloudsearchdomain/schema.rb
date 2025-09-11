@@ -191,7 +191,6 @@ module Aws::CloudSearchDomain
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentServiceException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2013-01-01/documents/batch?format=sdk", "code" => 200}}
       end)
-
     end
 
     class << self

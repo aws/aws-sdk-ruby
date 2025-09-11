@@ -20,7 +20,8 @@ module Aws::Deadline
     class AcceleratorCapabilities < Struct.new(
       :selections,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +36,8 @@ module Aws::Deadline
     class AcceleratorCountRange < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +95,8 @@ module Aws::Deadline
     class AcceleratorSelection < Struct.new(
       :name,
       :runtime,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -113,7 +116,8 @@ module Aws::Deadline
     class AcceleratorTotalMemoryMiBRange < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +130,8 @@ module Aws::Deadline
     class AccessDeniedException < Struct.new(
       :message,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +145,8 @@ module Aws::Deadline
     class AcquiredLimit < Struct.new(
       :limit_id,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +156,8 @@ module Aws::Deadline
     #   @return [String]
     class AssignedEnvironmentEnterSessionActionDefinition < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +167,8 @@ module Aws::Deadline
     #   @return [String]
     class AssignedEnvironmentExitSessionActionDefinition < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +190,8 @@ module Aws::Deadline
       :job_id,
       :session_actions,
       :log_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +205,8 @@ module Aws::Deadline
     class AssignedSessionAction < Struct.new(
       :session_action_id,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +229,8 @@ module Aws::Deadline
       :task_run,
       :sync_input_job_attachments,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EnvEnter < AssignedSessionActionDefinition; end
@@ -235,7 +246,8 @@ module Aws::Deadline
     #   @return [String]
     class AssignedSyncInputJobAttachmentsSessionActionDefinition < Struct.new(
       :step_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +265,8 @@ module Aws::Deadline
       :task_id,
       :step_id,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,12 +291,14 @@ module Aws::Deadline
       :principal_type,
       :identity_store_id,
       :membership_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateMemberToFarmResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -312,12 +327,14 @@ module Aws::Deadline
       :principal_type,
       :identity_store_id,
       :membership_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateMemberToFleetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,12 +367,14 @@ module Aws::Deadline
       :principal_type,
       :identity_store_id,
       :membership_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateMemberToJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,12 +403,14 @@ module Aws::Deadline
       :principal_type,
       :identity_store_id,
       :membership_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateMemberToQueueResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +423,8 @@ module Aws::Deadline
     class AssumeFleetRoleForReadRequest < Struct.new(
       :farm_id,
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +434,8 @@ module Aws::Deadline
     #   @return [Types::AwsCredentials]
     class AssumeFleetRoleForReadResponse < Struct.new(
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -429,7 +452,8 @@ module Aws::Deadline
       :farm_id,
       :fleet_id,
       :worker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +463,8 @@ module Aws::Deadline
     #   @return [Types::AwsCredentials]
     class AssumeFleetRoleForWorkerResponse < Struct.new(
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +477,8 @@ module Aws::Deadline
     class AssumeQueueRoleForReadRequest < Struct.new(
       :farm_id,
       :queue_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +488,8 @@ module Aws::Deadline
     #   @return [Types::AwsCredentials]
     class AssumeQueueRoleForReadResponse < Struct.new(
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +502,8 @@ module Aws::Deadline
     class AssumeQueueRoleForUserRequest < Struct.new(
       :farm_id,
       :queue_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -485,7 +513,8 @@ module Aws::Deadline
     #   @return [Types::AwsCredentials]
     class AssumeQueueRoleForUserResponse < Struct.new(
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +535,8 @@ module Aws::Deadline
       :fleet_id,
       :worker_id,
       :queue_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +546,8 @@ module Aws::Deadline
     #   @return [Types::AwsCredentials]
     class AssumeQueueRoleForWorkerResponse < Struct.new(
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -530,7 +561,8 @@ module Aws::Deadline
     class Attachments < Struct.new(
       :manifests,
       :file_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -558,7 +590,8 @@ module Aws::Deadline
       :secret_access_key,
       :session_token,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +614,8 @@ module Aws::Deadline
       :fleet_id,
       :worker_id,
       :identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +628,8 @@ module Aws::Deadline
     class BatchGetJobEntityResponse < Struct.new(
       :entities,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +650,8 @@ module Aws::Deadline
       :type,
       :threshold_percentage,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +665,8 @@ module Aws::Deadline
     class BudgetActionToRemove < Struct.new(
       :type,
       :threshold_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +677,8 @@ module Aws::Deadline
     class BudgetSchedule < Struct.new(
       :fixed,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Fixed < BudgetSchedule; end
@@ -712,7 +750,8 @@ module Aws::Deadline
       :created_at,
       :updated_by,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +777,8 @@ module Aws::Deadline
       :resource_id,
       :resource_type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +788,8 @@ module Aws::Deadline
     #   @return [Float]
     class ConsumedUsages < Struct.new(
       :approximate_dollar_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +811,8 @@ module Aws::Deadline
       :job_id,
       :queue_id,
       :target_s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -779,7 +821,8 @@ module Aws::Deadline
     #   @return [String]
     class CopyJobTemplateResponse < Struct.new(
       :template_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +865,8 @@ module Aws::Deadline
       :approximate_dollar_limit,
       :actions,
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +875,8 @@ module Aws::Deadline
     #   @return [String]
     class CreateBudgetResponse < Struct.new(
       :budget_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +907,8 @@ module Aws::Deadline
       :description,
       :kms_key_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -871,7 +917,8 @@ module Aws::Deadline
     #   @return [String]
     class CreateFarmResponse < Struct.new(
       :farm_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +978,8 @@ module Aws::Deadline
       :configuration,
       :tags,
       :host_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +988,8 @@ module Aws::Deadline
     #   @return [String]
     class CreateFleetResponse < Struct.new(
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1010,7 +1059,8 @@ module Aws::Deadline
       :max_retries_per_task,
       :max_worker_count,
       :source_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1019,7 +1069,8 @@ module Aws::Deadline
     #   @return [String]
     class CreateJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1044,7 +1095,8 @@ module Aws::Deadline
       :subnet_ids,
       :security_group_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1053,7 +1105,8 @@ module Aws::Deadline
     #   @return [String]
     class CreateLicenseEndpointResponse < Struct.new(
       :license_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1095,7 +1148,8 @@ module Aws::Deadline
       :max_count,
       :farm_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1159,8 @@ module Aws::Deadline
     #   @return [String]
     class CreateLimitResponse < Struct.new(
       :limit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1195,8 @@ module Aws::Deadline
       :subdomain,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1209,8 @@ module Aws::Deadline
     class CreateMonitorResponse < Struct.new(
       :monitor_id,
       :identity_center_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1184,7 +1241,8 @@ module Aws::Deadline
       :priority,
       :template_type,
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1193,7 +1251,8 @@ module Aws::Deadline
     #   @return [String]
     class CreateQueueEnvironmentResponse < Struct.new(
       :queue_environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,12 +1269,14 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateQueueFleetAssociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1232,12 +1293,14 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :limit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateQueueLimitAssociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1356,8 @@ module Aws::Deadline
       :required_file_system_location_names,
       :allowed_storage_profile_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1366,8 @@ module Aws::Deadline
     #   @return [String]
     class CreateQueueResponse < Struct.new(
       :queue_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1330,7 +1395,8 @@ module Aws::Deadline
       :display_name,
       :os_family,
       :file_system_locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1405,8 @@ module Aws::Deadline
     #   @return [String]
     class CreateStorageProfileResponse < Struct.new(
       :storage_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1431,8 @@ module Aws::Deadline
       :host_properties,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1441,8 @@ module Aws::Deadline
     #   @return [String]
     class CreateWorkerResponse < Struct.new(
       :worker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1471,8 @@ module Aws::Deadline
       :worker_capabilities,
       :storage_profile_id,
       :tag_propagation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1444,7 +1514,8 @@ module Aws::Deadline
       :cpu_architecture_type,
       :custom_amounts,
       :custom_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1462,7 +1533,8 @@ module Aws::Deadline
       :name,
       :operator,
       :date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1475,12 +1547,14 @@ module Aws::Deadline
     class DeleteBudgetRequest < Struct.new(
       :farm_id,
       :budget_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteBudgetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1489,12 +1563,14 @@ module Aws::Deadline
     #   @return [String]
     class DeleteFarmRequest < Struct.new(
       :farm_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFarmResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1511,12 +1587,14 @@ module Aws::Deadline
       :client_token,
       :farm_id,
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFleetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1525,12 +1603,14 @@ module Aws::Deadline
     #   @return [String]
     class DeleteLicenseEndpointRequest < Struct.new(
       :license_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLicenseEndpointResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,12 +1623,14 @@ module Aws::Deadline
     class DeleteLimitRequest < Struct.new(
       :farm_id,
       :limit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLimitResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1561,12 +1643,14 @@ module Aws::Deadline
     class DeleteMeteredProductRequest < Struct.new(
       :license_endpoint_id,
       :product_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMeteredProductResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,12 +1661,14 @@ module Aws::Deadline
     #   @return [String]
     class DeleteMonitorRequest < Struct.new(
       :monitor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMonitorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,12 +1685,14 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :queue_environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueEnvironmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,12 +1709,14 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueFleetAssociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1644,12 +1734,14 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :limit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueLimitAssociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,12 +1754,14 @@ module Aws::Deadline
     class DeleteQueueRequest < Struct.new(
       :farm_id,
       :queue_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,12 +1774,14 @@ module Aws::Deadline
     class DeleteStorageProfileRequest < Struct.new(
       :farm_id,
       :storage_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStorageProfileResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1702,12 +1798,14 @@ module Aws::Deadline
       :farm_id,
       :fleet_id,
       :worker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1827,8 @@ module Aws::Deadline
       :dependencies_unresolved,
       :consumers_resolved,
       :consumers_unresolved,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1742,12 +1841,14 @@ module Aws::Deadline
     class DisassociateMemberFromFarmRequest < Struct.new(
       :farm_id,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberFromFarmResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,12 +1865,14 @@ module Aws::Deadline
       :farm_id,
       :fleet_id,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberFromFleetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1790,12 +1893,14 @@ module Aws::Deadline
       :queue_id,
       :job_id,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberFromJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1812,12 +1917,14 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberFromQueueResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1835,7 +1942,8 @@ module Aws::Deadline
       :size_gi_b,
       :iops,
       :throughput_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1864,7 +1972,8 @@ module Aws::Deadline
       :environment_id,
       :schema_version,
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1886,7 +1995,8 @@ module Aws::Deadline
       :environment_id,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1900,7 +2010,8 @@ module Aws::Deadline
     class EnvironmentDetailsIdentifiers < Struct.new(
       :job_id,
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1910,7 +2021,8 @@ module Aws::Deadline
     #   @return [String]
     class EnvironmentEnterSessionActionDefinition < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1920,7 +2032,8 @@ module Aws::Deadline
     #   @return [String]
     class EnvironmentEnterSessionActionDefinitionSummary < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1930,7 +2043,8 @@ module Aws::Deadline
     #   @return [String]
     class EnvironmentExitSessionActionDefinition < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1940,7 +2054,8 @@ module Aws::Deadline
     #   @return [String]
     class EnvironmentExitSessionActionDefinitionSummary < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1966,7 +2081,8 @@ module Aws::Deadline
       :principal_type,
       :identity_store_id,
       :membership_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2003,7 +2119,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2017,7 +2134,8 @@ module Aws::Deadline
     class FieldSortExpression < Struct.new(
       :sort_order,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2036,7 +2154,8 @@ module Aws::Deadline
       :name,
       :path,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2050,7 +2169,8 @@ module Aws::Deadline
     class FixedBudgetSchedule < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2068,7 +2188,8 @@ module Aws::Deadline
       :name,
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2082,7 +2203,8 @@ module Aws::Deadline
     class FleetAttributeCapability < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2096,7 +2218,8 @@ module Aws::Deadline
     class FleetCapabilities < Struct.new(
       :amounts,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2111,7 +2234,8 @@ module Aws::Deadline
       :customer_managed,
       :service_managed_ec2,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomerManaged < FleetConfiguration; end
@@ -2145,7 +2269,8 @@ module Aws::Deadline
       :principal_type,
       :identity_store_id,
       :membership_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2214,7 +2339,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2227,7 +2353,8 @@ module Aws::Deadline
     class GetBudgetRequest < Struct.new(
       :farm_id,
       :budget_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2305,7 +2432,8 @@ module Aws::Deadline
       :updated_by,
       :updated_at,
       :queue_stopped_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2314,7 +2442,8 @@ module Aws::Deadline
     #   @return [String]
     class GetFarmRequest < Struct.new(
       :farm_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2357,7 +2486,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2370,7 +2500,8 @@ module Aws::Deadline
     class GetFleetRequest < Struct.new(
       :farm_id,
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2460,7 +2591,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2483,7 +2615,8 @@ module Aws::Deadline
       :step_details,
       :environment_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class JobDetails < GetJobEntityError; end
@@ -2506,7 +2639,8 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2610,7 +2744,8 @@ module Aws::Deadline
       :description,
       :max_worker_count,
       :source_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2619,7 +2754,8 @@ module Aws::Deadline
     #   @return [String]
     class GetLicenseEndpointRequest < Struct.new(
       :license_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2652,7 +2788,8 @@ module Aws::Deadline
       :dns_name,
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2802,8 @@ module Aws::Deadline
     class GetLimitRequest < Struct.new(
       :farm_id,
       :limit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2727,7 +2865,8 @@ module Aws::Deadline
       :limit_id,
       :current_count,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2737,7 +2876,8 @@ module Aws::Deadline
     #   @return [String]
     class GetMonitorRequest < Struct.new(
       :monitor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2792,7 +2932,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2809,7 +2950,8 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :queue_environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2850,7 +2992,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2867,7 +3010,8 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2900,7 +3044,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2917,7 +3062,8 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :limit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2950,7 +3096,8 @@ module Aws::Deadline
       :queue_id,
       :limit_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2963,7 +3110,8 @@ module Aws::Deadline
     class GetQueueRequest < Struct.new(
       :farm_id,
       :queue_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3053,7 +3201,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3074,7 +3223,8 @@ module Aws::Deadline
       :queue_id,
       :job_id,
       :session_action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3129,7 +3279,8 @@ module Aws::Deadline
       :definition,
       :acquired_limits,
       :manifests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3150,7 +3301,8 @@ module Aws::Deadline
       :queue_id,
       :job_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3203,7 +3355,8 @@ module Aws::Deadline
       :target_lifecycle_status,
       :host_properties,
       :worker_log,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3227,7 +3380,8 @@ module Aws::Deadline
       :aggregation_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3255,7 +3409,8 @@ module Aws::Deadline
       :next_token,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3276,7 +3431,8 @@ module Aws::Deadline
       :queue_id,
       :job_id,
       :step_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3356,7 +3512,8 @@ module Aws::Deadline
       :required_capabilities,
       :parameter_space,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3373,7 +3530,8 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :storage_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3397,7 +3555,8 @@ module Aws::Deadline
       :display_name,
       :os_family,
       :file_system_locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3410,7 +3569,8 @@ module Aws::Deadline
     class GetStorageProfileRequest < Struct.new(
       :farm_id,
       :storage_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3450,7 +3610,8 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       :file_system_locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3475,7 +3636,8 @@ module Aws::Deadline
       :job_id,
       :step_id,
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3528,7 +3690,8 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       :latest_session_action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3545,7 +3708,8 @@ module Aws::Deadline
       :farm_id,
       :fleet_id,
       :worker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3590,7 +3754,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3624,7 +3789,8 @@ module Aws::Deadline
     class HostConfiguration < Struct.new(
       :script_body,
       :script_timeout_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3643,7 +3809,8 @@ module Aws::Deadline
     class HostPropertiesRequest < Struct.new(
       :ip_addresses,
       :host_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3665,7 +3832,8 @@ module Aws::Deadline
       :host_name,
       :ec2_instance_arn,
       :ec2_instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3678,7 +3846,8 @@ module Aws::Deadline
     class InternalServerErrorException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3692,7 +3861,8 @@ module Aws::Deadline
     class IpAddresses < Struct.new(
       :ip_v4_addresses,
       :ip_v6_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3706,7 +3876,8 @@ module Aws::Deadline
     class JobAttachmentDetailsEntity < Struct.new(
       :job_id,
       :attachments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3724,7 +3895,8 @@ module Aws::Deadline
       :job_id,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3734,7 +3906,8 @@ module Aws::Deadline
     #   @return [String]
     class JobAttachmentDetailsIdentifiers < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3748,7 +3921,8 @@ module Aws::Deadline
     class JobAttachmentSettings < Struct.new(
       :s3_bucket_name,
       :root_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3786,7 +3960,8 @@ module Aws::Deadline
       :parameters,
       :schema_version,
       :path_mapping_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3804,7 +3979,8 @@ module Aws::Deadline
       :job_id,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3814,7 +3990,8 @@ module Aws::Deadline
     #   @return [String]
     class JobDetailsIdentifiers < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3837,7 +4014,8 @@ module Aws::Deadline
       :step_details,
       :environment_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class JobDetails < JobEntity; end
@@ -3866,7 +4044,8 @@ module Aws::Deadline
       :step_details,
       :environment_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class JobDetails < JobEntityIdentifiersUnion; end
@@ -3906,7 +4085,8 @@ module Aws::Deadline
       :principal_type,
       :identity_store_id,
       :membership_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3929,7 +4109,8 @@ module Aws::Deadline
       :string,
       :path,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Int < JobParameter; end
@@ -3954,7 +4135,8 @@ module Aws::Deadline
       :posix,
       :windows,
       :run_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4091,7 +4273,8 @@ module Aws::Deadline
       :job_parameters,
       :max_worker_count,
       :source_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4220,7 +4403,8 @@ module Aws::Deadline
       :max_retries_per_task,
       :max_worker_count,
       :source_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4242,7 +4426,8 @@ module Aws::Deadline
       :status,
       :status_message,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4298,7 +4483,8 @@ module Aws::Deadline
       :farm_id,
       :limit_id,
       :current_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4311,7 +4497,8 @@ module Aws::Deadline
     class ListAvailableMeteredProductsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4324,7 +4511,8 @@ module Aws::Deadline
     class ListAvailableMeteredProductsResponse < Struct.new(
       :metered_products,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4345,7 +4533,8 @@ module Aws::Deadline
       :farm_id,
       :max_results,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4358,7 +4547,8 @@ module Aws::Deadline
     class ListBudgetsResponse < Struct.new(
       :next_token,
       :budgets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4375,7 +4565,8 @@ module Aws::Deadline
       :farm_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4388,7 +4579,8 @@ module Aws::Deadline
     class ListFarmMembersResponse < Struct.new(
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4405,7 +4597,8 @@ module Aws::Deadline
       :next_token,
       :principal_id,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4418,7 +4611,8 @@ module Aws::Deadline
     class ListFarmsResponse < Struct.new(
       :next_token,
       :farms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4439,7 +4633,8 @@ module Aws::Deadline
       :fleet_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4452,7 +4647,8 @@ module Aws::Deadline
     class ListFleetMembersResponse < Struct.new(
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4484,7 +4680,8 @@ module Aws::Deadline
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4497,7 +4694,8 @@ module Aws::Deadline
     class ListFleetsResponse < Struct.new(
       :fleets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4522,7 +4720,8 @@ module Aws::Deadline
       :job_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4535,7 +4734,8 @@ module Aws::Deadline
     class ListJobMembersResponse < Struct.new(
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4560,7 +4760,8 @@ module Aws::Deadline
       :queue_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4573,7 +4774,8 @@ module Aws::Deadline
     class ListJobParameterDefinitionsResponse < Struct.new(
       :job_parameter_definitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4598,7 +4800,8 @@ module Aws::Deadline
       :queue_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4611,7 +4814,8 @@ module Aws::Deadline
     class ListJobsResponse < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4624,7 +4828,8 @@ module Aws::Deadline
     class ListLicenseEndpointsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4637,7 +4842,8 @@ module Aws::Deadline
     class ListLicenseEndpointsResponse < Struct.new(
       :license_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4654,7 +4860,8 @@ module Aws::Deadline
       :farm_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4667,7 +4874,8 @@ module Aws::Deadline
     class ListLimitsResponse < Struct.new(
       :limits,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4684,7 +4892,8 @@ module Aws::Deadline
       :license_endpoint_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4697,7 +4906,8 @@ module Aws::Deadline
     class ListMeteredProductsResponse < Struct.new(
       :metered_products,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4710,7 +4920,8 @@ module Aws::Deadline
     class ListMonitorsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4724,7 +4935,8 @@ module Aws::Deadline
     class ListMonitorsResponse < Struct.new(
       :next_token,
       :monitors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4745,7 +4957,8 @@ module Aws::Deadline
       :queue_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4758,7 +4971,8 @@ module Aws::Deadline
     class ListQueueEnvironmentsResponse < Struct.new(
       :environments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4783,7 +4997,8 @@ module Aws::Deadline
       :fleet_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4796,7 +5011,8 @@ module Aws::Deadline
     class ListQueueFleetAssociationsResponse < Struct.new(
       :queue_fleet_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4825,7 +5041,8 @@ module Aws::Deadline
       :limit_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4839,7 +5056,8 @@ module Aws::Deadline
     class ListQueueLimitAssociationsResponse < Struct.new(
       :queue_limit_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4860,7 +5078,8 @@ module Aws::Deadline
       :queue_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4873,7 +5092,8 @@ module Aws::Deadline
     class ListQueueMembersResponse < Struct.new(
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4913,7 +5133,8 @@ module Aws::Deadline
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4926,7 +5147,8 @@ module Aws::Deadline
     class ListQueuesResponse < Struct.new(
       :queues,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4959,7 +5181,8 @@ module Aws::Deadline
       :task_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4972,7 +5195,8 @@ module Aws::Deadline
     class ListSessionActionsResponse < Struct.new(
       :session_actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4997,7 +5221,8 @@ module Aws::Deadline
       :worker_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5010,7 +5235,8 @@ module Aws::Deadline
     class ListSessionsForWorkerResponse < Struct.new(
       :sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5035,7 +5261,8 @@ module Aws::Deadline
       :job_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5048,7 +5275,8 @@ module Aws::Deadline
     class ListSessionsResponse < Struct.new(
       :sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5077,7 +5305,8 @@ module Aws::Deadline
       :step_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5090,7 +5319,8 @@ module Aws::Deadline
     class ListStepConsumersResponse < Struct.new(
       :consumers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5119,7 +5349,8 @@ module Aws::Deadline
       :step_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5132,7 +5363,8 @@ module Aws::Deadline
     class ListStepDependenciesResponse < Struct.new(
       :dependencies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5157,7 +5389,8 @@ module Aws::Deadline
       :job_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5170,7 +5403,8 @@ module Aws::Deadline
     class ListStepsResponse < Struct.new(
       :steps,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5191,7 +5425,8 @@ module Aws::Deadline
       :queue_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5204,7 +5439,8 @@ module Aws::Deadline
     class ListStorageProfilesForQueueResponse < Struct.new(
       :storage_profiles,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5221,7 +5457,8 @@ module Aws::Deadline
       :farm_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5234,7 +5471,8 @@ module Aws::Deadline
     class ListStorageProfilesResponse < Struct.new(
       :storage_profiles,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5243,7 +5481,8 @@ module Aws::Deadline
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5252,7 +5491,8 @@ module Aws::Deadline
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5281,7 +5521,8 @@ module Aws::Deadline
       :step_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5294,7 +5535,8 @@ module Aws::Deadline
     class ListTasksResponse < Struct.new(
       :tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5315,7 +5557,8 @@ module Aws::Deadline
       :fleet_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5328,7 +5571,8 @@ module Aws::Deadline
     class ListWorkersResponse < Struct.new(
       :next_token,
       :workers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5350,7 +5594,8 @@ module Aws::Deadline
       :options,
       :parameters,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5381,7 +5626,8 @@ module Aws::Deadline
       :output_relative_directories,
       :input_manifest_path,
       :input_manifest_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5395,7 +5641,8 @@ module Aws::Deadline
     class MemoryMiBRange < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5417,7 +5664,8 @@ module Aws::Deadline
       :family,
       :vendor,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5473,7 +5721,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5491,7 +5740,8 @@ module Aws::Deadline
       :name,
       :operator,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5505,7 +5755,8 @@ module Aws::Deadline
     class ParameterSortExpression < Struct.new(
       :sort_order,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5519,7 +5770,8 @@ module Aws::Deadline
     class ParameterSpace < Struct.new(
       :parameters,
       :combination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5538,7 +5790,8 @@ module Aws::Deadline
       :source_path_format,
       :source_path,
       :destination_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5552,7 +5805,8 @@ module Aws::Deadline
     class PosixUser < Struct.new(
       :user,
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5565,12 +5819,14 @@ module Aws::Deadline
     class PutMeteredProductRequest < Struct.new(
       :license_endpoint_id,
       :product_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutMeteredProductResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5588,7 +5844,8 @@ module Aws::Deadline
       :queue_environment_id,
       :name,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5642,7 +5899,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5696,7 +5954,8 @@ module Aws::Deadline
       :queue_id,
       :limit_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5726,7 +5985,8 @@ module Aws::Deadline
       :principal_type,
       :identity_store_id,
       :membership_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5775,7 +6035,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5796,7 +6057,8 @@ module Aws::Deadline
       :resource_id,
       :resource_type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5817,7 +6079,8 @@ module Aws::Deadline
       :type,
       :threshold_percentage,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5831,7 +6094,8 @@ module Aws::Deadline
     class S3Location < Struct.new(
       :bucket_name,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5858,7 +6122,8 @@ module Aws::Deadline
       :string_filter,
       :group_filter,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DateTimeFilter < SearchFilterExpression; end
@@ -5882,7 +6147,8 @@ module Aws::Deadline
     class SearchGroupedFilterExpressions < Struct.new(
       :filters,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5914,7 +6180,8 @@ module Aws::Deadline
       :sort_expressions,
       :item_offset,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5931,7 +6198,8 @@ module Aws::Deadline
       :jobs,
       :next_item_offset,
       :total_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5950,7 +6218,8 @@ module Aws::Deadline
       :field_sort,
       :parameter_sort,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class UserJobsFirst < SearchSortExpression; end
@@ -5991,7 +6260,8 @@ module Aws::Deadline
       :sort_expressions,
       :item_offset,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6008,7 +6278,8 @@ module Aws::Deadline
       :steps,
       :next_item_offset,
       :total_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6044,7 +6315,8 @@ module Aws::Deadline
       :sort_expressions,
       :item_offset,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6061,7 +6333,8 @@ module Aws::Deadline
       :tasks,
       :next_item_offset,
       :total_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6088,7 +6361,8 @@ module Aws::Deadline
     class SearchTermFilterExpression < Struct.new(
       :search_term,
       :match_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6125,7 +6399,8 @@ module Aws::Deadline
       :sort_expressions,
       :item_offset,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6142,7 +6417,8 @@ module Aws::Deadline
       :workers,
       :next_item_offset,
       :total_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6164,7 +6440,8 @@ module Aws::Deadline
       :instance_market_options,
       :vpc_configuration,
       :storage_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6211,7 +6488,8 @@ module Aws::Deadline
       :excluded_instance_types,
       :custom_amounts,
       :custom_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6221,7 +6499,8 @@ module Aws::Deadline
     #   @return [String]
     class ServiceManagedEc2InstanceMarketOptions < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6255,7 +6534,8 @@ module Aws::Deadline
       :quota_code,
       :resource_id,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6278,7 +6558,8 @@ module Aws::Deadline
       :task_run,
       :sync_input_job_attachments,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EnvEnter < SessionActionDefinition; end
@@ -6307,7 +6588,8 @@ module Aws::Deadline
       :task_run,
       :sync_input_job_attachments,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EnvEnter < SessionActionDefinitionSummary; end
@@ -6352,7 +6634,8 @@ module Aws::Deadline
       :progress_percent,
       :definition,
       :manifests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6394,7 +6677,8 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       :target_lifecycle_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6412,7 +6696,8 @@ module Aws::Deadline
       :queue_ids,
       :fleet_ids,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class QueueIds < SessionsStatisticsResources; end
@@ -6454,7 +6739,8 @@ module Aws::Deadline
       :period,
       :group_by,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6465,7 +6751,8 @@ module Aws::Deadline
     #   @return [String]
     class StartSessionsStatisticsAggregationResponse < Struct.new(
       :aggregation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6524,7 +6811,8 @@ module Aws::Deadline
       :runtime_in_seconds,
       :aggregation_start_time,
       :aggregation_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6546,7 +6834,8 @@ module Aws::Deadline
       :max,
       :avg,
       :sum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6568,7 +6857,8 @@ module Aws::Deadline
       :min,
       :max,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6586,7 +6876,8 @@ module Aws::Deadline
       :name,
       :any_of,
       :all_of,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6600,7 +6891,8 @@ module Aws::Deadline
     class StepConsumer < Struct.new(
       :step_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6614,7 +6906,8 @@ module Aws::Deadline
     class StepDependency < Struct.new(
       :step_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6640,7 +6933,8 @@ module Aws::Deadline
       :schema_version,
       :template,
       :dependencies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6662,7 +6956,8 @@ module Aws::Deadline
       :step_id,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6676,7 +6971,8 @@ module Aws::Deadline
     class StepDetailsIdentifiers < Struct.new(
       :job_id,
       :step_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6690,7 +6986,8 @@ module Aws::Deadline
     class StepParameter < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6704,7 +7001,8 @@ module Aws::Deadline
     class StepRequiredCapabilities < Struct.new(
       :attributes,
       :amounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6820,7 +7118,8 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       :parameter_space,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6928,7 +7227,8 @@ module Aws::Deadline
       :started_at,
       :ended_at,
       :dependency_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6949,7 +7249,8 @@ module Aws::Deadline
       :storage_profile_id,
       :display_name,
       :os_family,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6967,7 +7268,8 @@ module Aws::Deadline
       :name,
       :operator,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6977,7 +7279,8 @@ module Aws::Deadline
     #   @return [String]
     class SyncInputJobAttachmentsSessionActionDefinition < Struct.new(
       :step_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6987,7 +7290,8 @@ module Aws::Deadline
     #   @return [String]
     class SyncInputJobAttachmentsSessionActionDefinitionSummary < Struct.new(
       :step_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7000,12 +7304,14 @@ module Aws::Deadline
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7033,7 +7339,8 @@ module Aws::Deadline
       :path,
       :chunk_int,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Int < TaskParameterValue; end
@@ -7054,7 +7361,8 @@ module Aws::Deadline
     class TaskRunManifestPropertiesRequest < Struct.new(
       :output_manifest_path,
       :output_manifest_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7068,7 +7376,8 @@ module Aws::Deadline
     class TaskRunManifestPropertiesResponse < Struct.new(
       :output_manifest_path,
       :output_manifest_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7086,7 +7395,8 @@ module Aws::Deadline
       :task_id,
       :step_id,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7104,7 +7414,8 @@ module Aws::Deadline
       :task_id,
       :step_id,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7158,7 +7469,8 @@ module Aws::Deadline
       :ended_at,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7212,7 +7524,8 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       :latest_session_action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7237,7 +7550,8 @@ module Aws::Deadline
       :quota_code,
       :retry_after_seconds,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7250,12 +7564,14 @@ module Aws::Deadline
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7318,12 +7634,14 @@ module Aws::Deadline
       :actions_to_add,
       :actions_to_remove,
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateBudgetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7346,12 +7664,14 @@ module Aws::Deadline
       :farm_id,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateFarmResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7410,12 +7730,14 @@ module Aws::Deadline
       :max_worker_count,
       :configuration,
       :host_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateFleetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7471,12 +7793,14 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7514,12 +7838,14 @@ module Aws::Deadline
       :display_name,
       :description,
       :max_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateLimitResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7543,12 +7869,14 @@ module Aws::Deadline
       :subdomain,
       :display_name,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateMonitorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7581,12 +7909,14 @@ module Aws::Deadline
       :priority,
       :template_type,
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateQueueEnvironmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7607,12 +7937,14 @@ module Aws::Deadline
       :queue_id,
       :fleet_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateQueueFleetAssociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7635,12 +7967,14 @@ module Aws::Deadline
       :queue_id,
       :limit_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateQueueLimitAssociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7704,12 +8038,14 @@ module Aws::Deadline
       :required_file_system_location_names_to_remove,
       :allowed_storage_profile_ids_to_add,
       :allowed_storage_profile_ids_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateQueueResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7738,12 +8074,14 @@ module Aws::Deadline
       :queue_id,
       :job_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateSessionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7772,12 +8110,14 @@ module Aws::Deadline
       :queue_id,
       :job_id,
       :step_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateStepResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7813,12 +8153,14 @@ module Aws::Deadline
       :os_family,
       :file_system_locations_to_add,
       :file_system_locations_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateStorageProfileResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7851,12 +8193,14 @@ module Aws::Deadline
       :job_id,
       :step_id,
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTaskResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7885,7 +8229,8 @@ module Aws::Deadline
       :status,
       :capabilities,
       :host_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7899,7 +8244,8 @@ module Aws::Deadline
     class UpdateWorkerResponse < Struct.new(
       :log,
       :host_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7920,7 +8266,8 @@ module Aws::Deadline
       :fleet_id,
       :worker_id,
       :updated_session_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7941,7 +8288,8 @@ module Aws::Deadline
       :cancel_session_actions,
       :desired_worker_status,
       :update_interval_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7982,7 +8330,8 @@ module Aws::Deadline
       :updated_at,
       :progress_percent,
       :manifests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7993,7 +8342,8 @@ module Aws::Deadline
     class UsageTrackingResource < Struct.new(
       :queue_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class QueueId < UsageTrackingResource; end
@@ -8006,7 +8356,8 @@ module Aws::Deadline
     #   @return [String]
     class UserJobsFirst < Struct.new(
       :user_identity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8020,7 +8371,8 @@ module Aws::Deadline
     class VCpuCountRange < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8042,7 +8394,8 @@ module Aws::Deadline
       :reason,
       :field_list,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8056,7 +8409,8 @@ module Aws::Deadline
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8066,7 +8420,8 @@ module Aws::Deadline
     #   @return [Array<String>]
     class VpcConfiguration < Struct.new(
       :resource_configuration_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8080,7 +8435,8 @@ module Aws::Deadline
     class WindowsUser < Struct.new(
       :user,
       :password_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8094,7 +8450,8 @@ module Aws::Deadline
     class WorkerAmountCapability < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8108,7 +8465,8 @@ module Aws::Deadline
     class WorkerAttributeCapability < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8122,7 +8480,8 @@ module Aws::Deadline
     class WorkerCapabilities < Struct.new(
       :amounts,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8160,7 +8519,8 @@ module Aws::Deadline
       :created_at,
       :updated_by,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8194,7 +8554,8 @@ module Aws::Deadline
       :lifecycle_status,
       :ended_at,
       :target_lifecycle_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8240,7 +8601,8 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

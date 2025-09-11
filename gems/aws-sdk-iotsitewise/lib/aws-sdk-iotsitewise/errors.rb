@@ -47,7 +47,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -61,7 +61,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::ConflictingOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::PreconditionFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::QueryTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -164,7 +164,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -187,7 +187,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -200,7 +200,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -216,7 +216,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -231,7 +231,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -249,7 +249,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -262,7 +262,7 @@ module Aws::IoTSiteWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSiteWise::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -37,7 +37,6 @@ module Aws::SESv2
     :endpoint_id,
     keyword_init: true
   ) do
-
     def initialize(options = {})
       self.region = options.fetch(:region, nil)
       self.use_dual_stack = options.fetch(:use_dual_stack, false)

@@ -2450,7 +2450,6 @@ module Aws::WorkMail
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

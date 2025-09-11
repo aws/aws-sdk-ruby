@@ -441,7 +441,6 @@ module Aws::MWAA
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/environments/{Name}"}}
       end)
-
     end
 
     class << self

@@ -56,7 +56,8 @@ module Aws::ARCRegionswitch
       :execution_action,
       :execution_region,
       :actual_recovery_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +111,8 @@ module Aws::ARCRegionswitch
       :execution_role,
       :active_plan_execution,
       :recovery_time_objective_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -119,7 +121,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,12 +147,14 @@ module Aws::ARCRegionswitch
       :step_name,
       :approval,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ApprovePlanExecutionStepResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -171,7 +176,8 @@ module Aws::ARCRegionswitch
       :cross_account_role,
       :external_id,
       :region_and_routing_controls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -190,7 +196,8 @@ module Aws::ARCRegionswitch
     class ArcRoutingControlState < Struct.new(
       :routing_control_arn,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +215,8 @@ module Aws::ARCRegionswitch
       :cross_account_role,
       :external_id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +238,8 @@ module Aws::ARCRegionswitch
       :external_id,
       :resource_identifier,
       :alarm_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -247,12 +256,14 @@ module Aws::ARCRegionswitch
       :plan_arn,
       :execution_id,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelPlanExecutionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +312,8 @@ module Aws::ARCRegionswitch
       :recovery_approach,
       :primary_region,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +322,8 @@ module Aws::ARCRegionswitch
     #   @return [Types::Plan]
     class CreatePlanResponse < Struct.new(
       :plan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -336,7 +349,8 @@ module Aws::ARCRegionswitch
       :retry_interval_minutes,
       :region_to_run,
       :ungraceful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -350,12 +364,14 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class DeletePlanRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePlanResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +397,8 @@ module Aws::ARCRegionswitch
       :ungraceful,
       :target_percent,
       :capacity_monitoring_approach,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -398,7 +415,8 @@ module Aws::ARCRegionswitch
     #   @return [Integer]
     class Ec2Ungraceful < Struct.new(
       :minimum_success_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +442,8 @@ module Aws::ARCRegionswitch
       :ungraceful,
       :target_percent,
       :capacity_monitoring_approach,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -441,7 +460,8 @@ module Aws::ARCRegionswitch
     #   @return [Integer]
     class EcsUngraceful < Struct.new(
       :minimum_success_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +479,8 @@ module Aws::ARCRegionswitch
       :cross_account_role,
       :external_id,
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +514,8 @@ module Aws::ARCRegionswitch
       :ungraceful,
       :target_percent,
       :capacity_monitoring_approach,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -510,7 +532,8 @@ module Aws::ARCRegionswitch
     #   @return [Integer]
     class EksResourceScalingUngraceful < Struct.new(
       :minimum_success_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +547,8 @@ module Aws::ARCRegionswitch
     class ExecutionApprovalConfiguration < Struct.new(
       :timeout_minutes,
       :approval_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -576,7 +600,8 @@ module Aws::ARCRegionswitch
       :eks_resource_scaling_config,
       :route53_health_check_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomActionLambdaConfig < ExecutionBlockConfiguration; end
@@ -630,7 +655,8 @@ module Aws::ARCRegionswitch
       :description,
       :event_id,
       :previous_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +673,8 @@ module Aws::ARCRegionswitch
       :plan_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +707,8 @@ module Aws::ARCRegionswitch
       :evaluation_state,
       :warnings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +729,8 @@ module Aws::ARCRegionswitch
       :execution_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +795,8 @@ module Aws::ARCRegionswitch
       :plan,
       :actual_recovery_time,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +805,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class GetPlanInRegionRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +815,8 @@ module Aws::ARCRegionswitch
     #   @return [Types::Plan]
     class GetPlanInRegionResponse < Struct.new(
       :plan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +825,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class GetPlanRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +835,8 @@ module Aws::ARCRegionswitch
     #   @return [Types::Plan]
     class GetPlanResponse < Struct.new(
       :plan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -836,7 +870,8 @@ module Aws::ARCRegionswitch
       :ungraceful,
       :global_cluster_identifier,
       :database_cluster_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -852,7 +887,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class GlobalAuroraUngraceful < Struct.new(
       :ungraceful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +897,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class IllegalArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +907,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class IllegalStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,7 +917,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +932,8 @@ module Aws::ARCRegionswitch
     class KubernetesResourceType < Struct.new(
       :api_version,
       :kind,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +951,8 @@ module Aws::ARCRegionswitch
       :namespace,
       :name,
       :hpa_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -921,7 +962,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class LambdaUngraceful < Struct.new(
       :behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -944,7 +986,8 @@ module Aws::ARCRegionswitch
       :cross_account_role,
       :external_id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -969,7 +1012,8 @@ module Aws::ARCRegionswitch
       :max_results,
       :next_token,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -982,7 +1026,8 @@ module Aws::ARCRegionswitch
     class ListPlanExecutionEventsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1048,8 @@ module Aws::ARCRegionswitch
       :max_results,
       :next_token,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1062,8 @@ module Aws::ARCRegionswitch
     class ListPlanExecutionsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1029,7 +1076,8 @@ module Aws::ARCRegionswitch
     class ListPlansInRegionRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1090,8 @@ module Aws::ARCRegionswitch
     class ListPlansInRegionResponse < Struct.new(
       :plans,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1055,7 +1104,8 @@ module Aws::ARCRegionswitch
     class ListPlansRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1118,8 @@ module Aws::ARCRegionswitch
     class ListPlansResponse < Struct.new(
       :plans,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1144,8 @@ module Aws::ARCRegionswitch
       :record_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1106,7 +1158,8 @@ module Aws::ARCRegionswitch
     class ListRoute53HealthChecksResponse < Struct.new(
       :health_checks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1168,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1178,8 @@ module Aws::ARCRegionswitch
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1193,8 @@ module Aws::ARCRegionswitch
     class MinimalWorkflow < Struct.new(
       :action,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1148,7 +1204,8 @@ module Aws::ARCRegionswitch
     #   @return [Array<Types::Step>]
     class ParallelExecutionBlockConfiguration < Struct.new(
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,7 +1267,8 @@ module Aws::ARCRegionswitch
       :owner,
       :version,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1286,8 @@ module Aws::ARCRegionswitch
       :cross_account_role,
       :external_id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1237,7 +1296,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1331,8 @@ module Aws::ARCRegionswitch
       :warning_status,
       :warning_updated_time,
       :warning_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1354,8 @@ module Aws::ARCRegionswitch
       :record_name,
       :health_check_id,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1323,7 +1385,8 @@ module Aws::ARCRegionswitch
       :hosted_zone_id,
       :record_name,
       :record_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1342,7 +1405,8 @@ module Aws::ARCRegionswitch
     class Route53ResourceRecordSet < Struct.new(
       :record_set_identifier,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1428,8 @@ module Aws::ARCRegionswitch
       :external_id,
       :cluster_arn,
       :service_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1393,7 +1458,8 @@ module Aws::ARCRegionswitch
       :mode,
       :comment,
       :latest_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1418,7 +1484,8 @@ module Aws::ARCRegionswitch
       :plan_version,
       :activate_region,
       :deactivate_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1507,8 @@ module Aws::ARCRegionswitch
       :description,
       :execution_block_configuration,
       :execution_block_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1466,7 +1534,8 @@ module Aws::ARCRegionswitch
       :start_time,
       :end_time,
       :step_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1479,12 +1548,14 @@ module Aws::ARCRegionswitch
     class TagResourceRequest < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1581,8 @@ module Aws::ARCRegionswitch
       :action,
       :conditions,
       :min_delay_minutes_between_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1524,7 +1596,8 @@ module Aws::ARCRegionswitch
     class TriggerCondition < Struct.new(
       :associated_alarm_name,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,12 +1610,14 @@ module Aws::ARCRegionswitch
     class UntagResourceRequest < Struct.new(
       :arn,
       :resource_tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1563,12 +1638,14 @@ module Aws::ARCRegionswitch
       :execution_id,
       :action,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdatePlanExecutionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1593,12 +1670,14 @@ module Aws::ARCRegionswitch
       :comment,
       :step_name,
       :action_to_take,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdatePlanExecutionStepResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1631,7 +1710,8 @@ module Aws::ARCRegionswitch
       :recovery_time_objective_minutes,
       :associated_alarms,
       :triggers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1640,7 +1720,8 @@ module Aws::ARCRegionswitch
     #   @return [Types::Plan]
     class UpdatePlanResponse < Struct.new(
       :plan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1743,8 @@ module Aws::ARCRegionswitch
       :workflow_target_action,
       :workflow_target_region,
       :workflow_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -41,7 +41,7 @@ module Aws::Billingconductor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::Billingconductor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::Billingconductor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -107,7 +107,7 @@ module Aws::Billingconductor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::Billingconductor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::ServiceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -171,7 +171,7 @@ module Aws::Billingconductor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::Billingconductor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

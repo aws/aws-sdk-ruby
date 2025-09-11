@@ -15,7 +15,8 @@ module Aws::CloudHSM
     class AddTagsToResourceRequest < Struct.new(
       :resource_arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::CloudHSM
     #   @return [String]
     class AddTagsToResourceResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::CloudHSM
     class CloudHsmInternalException < Struct.new(
       :message,
       :retryable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -57,7 +60,8 @@ module Aws::CloudHSM
     class CloudHsmServiceException < Struct.new(
       :message,
       :retryable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -72,7 +76,8 @@ module Aws::CloudHSM
     #   @return [String]
     class CreateHapgRequest < Struct.new(
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +87,8 @@ module Aws::CloudHSM
     #   @return [String]
     class CreateHapgResponse < Struct.new(
       :hapg_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,7 +143,8 @@ module Aws::CloudHSM
       :subscription_type,
       :client_token,
       :syslog_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +154,8 @@ module Aws::CloudHSM
     #   @return [String]
     class CreateHsmResponse < Struct.new(
       :hsm_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +170,8 @@ module Aws::CloudHSM
     class CreateLunaClientRequest < Struct.new(
       :label,
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +181,8 @@ module Aws::CloudHSM
     #   @return [String]
     class CreateLunaClientResponse < Struct.new(
       :client_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +192,8 @@ module Aws::CloudHSM
     #   @return [String]
     class DeleteHapgRequest < Struct.new(
       :hapg_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +203,8 @@ module Aws::CloudHSM
     #   @return [String]
     class DeleteHapgResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +214,8 @@ module Aws::CloudHSM
     #   @return [String]
     class DeleteHsmRequest < Struct.new(
       :hsm_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +225,8 @@ module Aws::CloudHSM
     #   @return [String]
     class DeleteHsmResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +235,8 @@ module Aws::CloudHSM
     #   @return [String]
     class DeleteLunaClientRequest < Struct.new(
       :client_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +245,8 @@ module Aws::CloudHSM
     #   @return [String]
     class DeleteLunaClientResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +256,8 @@ module Aws::CloudHSM
     #   @return [String]
     class DescribeHapgRequest < Struct.new(
       :hapg_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +300,8 @@ module Aws::CloudHSM
       :last_modified_timestamp,
       :partition_serial_list,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +317,8 @@ module Aws::CloudHSM
     class DescribeHsmRequest < Struct.new(
       :hsm_arn,
       :hsm_serial_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +420,8 @@ module Aws::CloudHSM
       :server_cert_uri,
       :server_cert_last_updated,
       :partitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +434,8 @@ module Aws::CloudHSM
     class DescribeLunaClientRequest < Struct.new(
       :client_arn,
       :certificate_fingerprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +460,8 @@ module Aws::CloudHSM
       :certificate_fingerprint,
       :last_modified_timestamp,
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +479,8 @@ module Aws::CloudHSM
       :client_arn,
       :client_version,
       :hapg_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +497,8 @@ module Aws::CloudHSM
       :config_type,
       :config_file,
       :config_cred,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +512,8 @@ module Aws::CloudHSM
     class InvalidRequestException < Struct.new(
       :message,
       :retryable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -499,7 +524,8 @@ module Aws::CloudHSM
 
     # <p>Contains the inputs for the <a>ListAvailableZones</a> action.</p>
     class ListAvailableZonesRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +534,8 @@ module Aws::CloudHSM
     #   @return [Array<String>]
     class ListAvailableZonesResponse < Struct.new(
       :az_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +545,8 @@ module Aws::CloudHSM
     #   @return [String]
     class ListHapgsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +560,8 @@ module Aws::CloudHSM
     class ListHapgsResponse < Struct.new(
       :hapg_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +571,8 @@ module Aws::CloudHSM
     #   @return [String]
     class ListHsmsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +587,8 @@ module Aws::CloudHSM
     class ListHsmsResponse < Struct.new(
       :hsm_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -567,7 +598,8 @@ module Aws::CloudHSM
     #   @return [String]
     class ListLunaClientsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +613,8 @@ module Aws::CloudHSM
     class ListLunaClientsResponse < Struct.new(
       :client_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +623,8 @@ module Aws::CloudHSM
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +633,8 @@ module Aws::CloudHSM
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,7 +652,8 @@ module Aws::CloudHSM
       :hapg_arn,
       :label,
       :partition_serial_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +662,8 @@ module Aws::CloudHSM
     #   @return [String]
     class ModifyHapgResponse < Struct.new(
       :hapg_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +698,8 @@ module Aws::CloudHSM
       :iam_role_arn,
       :external_id,
       :syslog_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +709,8 @@ module Aws::CloudHSM
     #   @return [String]
     class ModifyHsmResponse < Struct.new(
       :hsm_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +723,8 @@ module Aws::CloudHSM
     class ModifyLunaClientRequest < Struct.new(
       :client_arn,
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -693,7 +733,8 @@ module Aws::CloudHSM
     #   @return [String]
     class ModifyLunaClientResponse < Struct.new(
       :client_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +749,8 @@ module Aws::CloudHSM
     class RemoveTagsFromResourceRequest < Struct.new(
       :resource_arn,
       :tag_key_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +759,8 @@ module Aws::CloudHSM
     #   @return [String]
     class RemoveTagsFromResourceResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,7 +775,8 @@ module Aws::CloudHSM
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

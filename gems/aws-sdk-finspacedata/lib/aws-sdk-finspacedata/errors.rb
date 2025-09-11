@@ -40,7 +40,7 @@ module Aws::Finspacedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Finspacedata::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::Finspacedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Finspacedata::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::Finspacedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Finspacedata::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::Finspacedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Finspacedata::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::Finspacedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Finspacedata::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::Finspacedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Finspacedata::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -123,7 +123,7 @@ module Aws::Finspacedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Finspacedata::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -11,7 +11,8 @@ module Aws::Outposts
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +62,8 @@ module Aws::Outposts
       :postal_code,
       :country_code,
       :municipality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +90,8 @@ module Aws::Outposts
       :asset_type,
       :compute_attributes,
       :asset_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +118,8 @@ module Aws::Outposts
       :asset_id,
       :account_id,
       :aws_service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,7 +133,8 @@ module Aws::Outposts
     class AssetInstanceTypeCapacity < Struct.new(
       :instance_type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -144,7 +149,8 @@ module Aws::Outposts
     #   @return [Float]
     class AssetLocation < Struct.new(
       :rack_elevation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +169,8 @@ module Aws::Outposts
       :instance_id,
       :account_id,
       :aws_service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,12 +183,14 @@ module Aws::Outposts
     class CancelCapacityTaskInput < Struct.new(
       :capacity_task_id,
       :outpost_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelCapacityTaskOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,12 +199,14 @@ module Aws::Outposts
     #   @return [String]
     class CancelOrderInput < Struct.new(
       :order_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelOrderOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +220,8 @@ module Aws::Outposts
     class CapacityTaskFailure < Struct.new(
       :reason,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +260,8 @@ module Aws::Outposts
       :creation_date,
       :completion_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +295,8 @@ module Aws::Outposts
       :weight_lbs,
       :supported_uplink_gbps,
       :supported_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +339,8 @@ module Aws::Outposts
       :instance_families,
       :instance_type_capacities,
       :max_vcpus,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +357,8 @@ module Aws::Outposts
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +388,8 @@ module Aws::Outposts
       :client_tunnel_address,
       :server_tunnel_address,
       :allowed_ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +410,8 @@ module Aws::Outposts
       :line_items,
       :payment_option,
       :payment_term,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +420,8 @@ module Aws::Outposts
     #   @return [Types::Order]
     class CreateOrderOutput < Struct.new(
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +454,8 @@ module Aws::Outposts
       :availability_zone_id,
       :tags,
       :supported_hardware_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +464,8 @@ module Aws::Outposts
     #   @return [Types::Outpost]
     class CreateOutpostOutput < Struct.new(
       :outpost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -485,7 +506,8 @@ module Aws::Outposts
       :operating_address,
       :shipping_address,
       :rack_physical_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +516,8 @@ module Aws::Outposts
     #   @return [Types::Site]
     class CreateSiteOutput < Struct.new(
       :site,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,12 +526,14 @@ module Aws::Outposts
     #   @return [String]
     class DeleteOutpostInput < Struct.new(
       :outpost_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteOutpostOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,12 +542,14 @@ module Aws::Outposts
     #   @return [String]
     class DeleteSiteInput < Struct.new(
       :site_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSiteOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +567,8 @@ module Aws::Outposts
       :family,
       :max_size,
       :quantity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -553,7 +581,8 @@ module Aws::Outposts
     class GetCapacityTaskInput < Struct.new(
       :capacity_task_id,
       :outpost_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +689,8 @@ module Aws::Outposts
       :completion_date,
       :last_modified_date,
       :task_action_on_blocking_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -674,7 +704,8 @@ module Aws::Outposts
     #   @return [String]
     class GetCatalogItemInput < Struct.new(
       :catalog_item_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +714,8 @@ module Aws::Outposts
     #   @return [Types::CatalogItem]
     class GetCatalogItemOutput < Struct.new(
       :catalog_item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +724,8 @@ module Aws::Outposts
     #   @return [String]
     class GetConnectionRequest < Struct.new(
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,7 +738,8 @@ module Aws::Outposts
     class GetConnectionResponse < Struct.new(
       :connection_id,
       :connection_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +748,8 @@ module Aws::Outposts
     #   @return [String]
     class GetOrderInput < Struct.new(
       :order_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +758,8 @@ module Aws::Outposts
     #   @return [Types::Order]
     class GetOrderOutput < Struct.new(
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +776,8 @@ module Aws::Outposts
       :next_token,
       :max_results,
       :outpost_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +797,8 @@ module Aws::Outposts
       :next_token,
       :subscriptions,
       :contract_end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +807,8 @@ module Aws::Outposts
     #   @return [String]
     class GetOutpostInput < Struct.new(
       :outpost_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +825,8 @@ module Aws::Outposts
       :outpost_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +847,8 @@ module Aws::Outposts
       :next_token,
       :outpost_id,
       :outpost_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +857,8 @@ module Aws::Outposts
     #   @return [Types::Outpost]
     class GetOutpostOutput < Struct.new(
       :outpost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +884,8 @@ module Aws::Outposts
       :asset_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +898,8 @@ module Aws::Outposts
     class GetOutpostSupportedInstanceTypesOutput < Struct.new(
       :instance_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +912,8 @@ module Aws::Outposts
     class GetSiteAddressInput < Struct.new(
       :site_id,
       :address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -885,7 +930,8 @@ module Aws::Outposts
       :site_id,
       :address_type,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +940,8 @@ module Aws::Outposts
     #   @return [String]
     class GetSiteInput < Struct.new(
       :site_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +950,8 @@ module Aws::Outposts
     #   @return [Types::Site]
     class GetSiteOutput < Struct.new(
       :site,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +966,8 @@ module Aws::Outposts
     class InstanceTypeCapacity < Struct.new(
       :instance_type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -937,7 +986,8 @@ module Aws::Outposts
     class InstanceTypeItem < Struct.new(
       :instance_type,
       :vcp_us,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -957,7 +1007,8 @@ module Aws::Outposts
       :instances,
       :account_ids,
       :services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -966,7 +1017,8 @@ module Aws::Outposts
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1056,8 @@ module Aws::Outposts
       :asset_information_list,
       :previous_line_item_id,
       :previous_order_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1019,7 +1072,8 @@ module Aws::Outposts
     class LineItemAssetInformation < Struct.new(
       :asset_id,
       :mac_address_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1033,7 +1087,8 @@ module Aws::Outposts
     class LineItemRequest < Struct.new(
       :catalog_item_id,
       :quantity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1066,7 +1121,8 @@ module Aws::Outposts
       :aws_service_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1136,8 @@ module Aws::Outposts
     class ListAssetInstancesOutput < Struct.new(
       :asset_instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1162,8 @@ module Aws::Outposts
       :max_results,
       :next_token,
       :status_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1118,7 +1176,8 @@ module Aws::Outposts
     class ListAssetsOutput < Struct.new(
       :assets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1139,7 +1198,8 @@ module Aws::Outposts
       :capacity_task_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1213,8 @@ module Aws::Outposts
     class ListBlockingInstancesForCapacityTaskOutput < Struct.new(
       :blocking_instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,7 +1236,8 @@ module Aws::Outposts
       :max_results,
       :next_token,
       :capacity_task_status_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1188,7 +1250,8 @@ module Aws::Outposts
     class ListCapacityTasksOutput < Struct.new(
       :capacity_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1213,7 +1276,8 @@ module Aws::Outposts
       :item_class_filter,
       :supported_storage_filter,
       :ec2_family_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1290,8 @@ module Aws::Outposts
     class ListCatalogItemsOutput < Struct.new(
       :catalog_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1308,8 @@ module Aws::Outposts
       :outpost_identifier_filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1256,7 +1322,8 @@ module Aws::Outposts
     class ListOrdersOutput < Struct.new(
       :orders,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1348,8 @@ module Aws::Outposts
       :life_cycle_status_filter,
       :availability_zone_filter,
       :availability_zone_id_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1294,7 +1362,8 @@ module Aws::Outposts
     class ListOutpostsOutput < Struct.new(
       :outposts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1388,8 @@ module Aws::Outposts
       :operating_address_country_code_filter,
       :operating_address_state_or_region_filter,
       :operating_address_city_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1402,8 @@ module Aws::Outposts
     class ListSitesOutput < Struct.new(
       :sites,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1341,7 +1412,8 @@ module Aws::Outposts
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1350,7 +1422,8 @@ module Aws::Outposts
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1432,8 @@ module Aws::Outposts
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1506,8 @@ module Aws::Outposts
       :order_fulfilled_date,
       :payment_term,
       :order_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,7 +1568,8 @@ module Aws::Outposts
       :line_item_counts_by_status,
       :order_submission_date,
       :order_fulfilled_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1547,7 +1623,8 @@ module Aws::Outposts
       :tags,
       :site_arn,
       :supported_hardware_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1676,8 @@ module Aws::Outposts
       :fiber_optic_cable_type,
       :optical_standard,
       :maximum_supported_weight_lbs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1608,7 +1686,8 @@ module Aws::Outposts
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1622,7 +1701,8 @@ module Aws::Outposts
     class ShipmentInformation < Struct.new(
       :shipment_tracking_number,
       :shipment_carrier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1673,7 +1753,8 @@ module Aws::Outposts
       :operating_address_state_or_region,
       :operating_address_city,
       :rack_physical_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1722,7 +1803,8 @@ module Aws::Outposts
       :instances_to_exclude,
       :dry_run,
       :task_action_on_blocking_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1794,7 +1876,8 @@ module Aws::Outposts
       :completion_date,
       :last_modified_date,
       :task_action_on_blocking_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1820,7 +1903,8 @@ module Aws::Outposts
       :asset_id,
       :client_public_key,
       :network_interface_device_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1833,7 +1917,8 @@ module Aws::Outposts
     class StartConnectionResponse < Struct.new(
       :connection_id,
       :underlay_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +1988,8 @@ module Aws::Outposts
       :end_date,
       :monthly_recurring_price,
       :upfront_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1916,12 +2002,14 @@ module Aws::Outposts
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1934,12 +2022,14 @@ module Aws::Outposts
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1960,7 +2050,8 @@ module Aws::Outposts
       :name,
       :description,
       :supported_hardware_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1969,7 +2060,8 @@ module Aws::Outposts
     #   @return [Types::Outpost]
     class UpdateOutpostOutput < Struct.new(
       :outpost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2078,8 @@ module Aws::Outposts
       :site_id,
       :address_type,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1999,7 +2092,8 @@ module Aws::Outposts
     class UpdateSiteAddressOutput < Struct.new(
       :address_type,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2020,7 +2114,8 @@ module Aws::Outposts
       :name,
       :description,
       :notes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2029,7 +2124,8 @@ module Aws::Outposts
     #   @return [Types::Site]
     class UpdateSiteOutput < Struct.new(
       :site,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2193,7 +2289,8 @@ module Aws::Outposts
       :fiber_optic_cable_type,
       :optical_standard,
       :maximum_supported_weight_lbs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2202,7 +2299,8 @@ module Aws::Outposts
     #   @return [Types::Site]
     class UpdateSiteRackPhysicalPropertiesOutput < Struct.new(
       :site,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2211,7 +2309,8 @@ module Aws::Outposts
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

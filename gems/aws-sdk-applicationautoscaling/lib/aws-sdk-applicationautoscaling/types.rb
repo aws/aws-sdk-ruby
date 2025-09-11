@@ -16,7 +16,8 @@ module Aws::ApplicationAutoScaling
     class Alarm < Struct.new(
       :alarm_name,
       :alarm_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::ApplicationAutoScaling
     class CapacityForecast < Struct.new(
       :timestamps,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +50,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     class ConcurrentUpdateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,7 +108,8 @@ module Aws::ApplicationAutoScaling
       :statistic,
       :unit,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,12 +310,14 @@ module Aws::ApplicationAutoScaling
       :service_namespace,
       :resource_id,
       :scalable_dimension,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteScalingPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -512,12 +518,14 @@ module Aws::ApplicationAutoScaling
       :scheduled_action_name,
       :resource_id,
       :scalable_dimension,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteScheduledActionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -715,12 +723,14 @@ module Aws::ApplicationAutoScaling
       :service_namespace,
       :resource_id,
       :scalable_dimension,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterScalableTargetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -932,7 +942,8 @@ module Aws::ApplicationAutoScaling
       :scalable_dimension,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -946,7 +957,8 @@ module Aws::ApplicationAutoScaling
     class DescribeScalableTargetsResponse < Struct.new(
       :scalable_targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1177,8 @@ module Aws::ApplicationAutoScaling
       :max_results,
       :next_token,
       :include_not_scaled_activities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1192,8 @@ module Aws::ApplicationAutoScaling
     class DescribeScalingActivitiesResponse < Struct.new(
       :scaling_activities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1395,7 +1409,8 @@ module Aws::ApplicationAutoScaling
       :scalable_dimension,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1409,7 +1424,8 @@ module Aws::ApplicationAutoScaling
     class DescribeScalingPoliciesResponse < Struct.new(
       :scaling_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1641,8 @@ module Aws::ApplicationAutoScaling
       :scalable_dimension,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1656,8 @@ module Aws::ApplicationAutoScaling
     class DescribeScheduledActionsResponse < Struct.new(
       :scheduled_actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1669,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     class FailedResourceAccessException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1693,7 +1712,8 @@ module Aws::ApplicationAutoScaling
       :policy_name,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1736,8 @@ module Aws::ApplicationAutoScaling
       :load_forecast,
       :capacity_forecast,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1746,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1734,7 +1756,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1743,7 +1766,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1756,7 +1780,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1765,7 +1790,8 @@ module Aws::ApplicationAutoScaling
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1793,7 +1819,8 @@ module Aws::ApplicationAutoScaling
       :timestamps,
       :values,
       :metric_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1807,7 +1834,8 @@ module Aws::ApplicationAutoScaling
     class MetricDimension < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1850,7 +1878,8 @@ module Aws::ApplicationAutoScaling
       :max_capacity,
       :min_capacity,
       :current_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1892,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     class ObjectNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1901,7 +1931,8 @@ module Aws::ApplicationAutoScaling
     class PredefinedMetricSpecification < Struct.new(
       :predefined_metric_type,
       :resource_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1915,7 +1946,8 @@ module Aws::ApplicationAutoScaling
     #   @return [Array<Types::PredictiveScalingMetricDataQuery>]
     class PredictiveScalingCustomizedMetricSpecification < Struct.new(
       :metric_data_queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1941,7 +1973,8 @@ module Aws::ApplicationAutoScaling
       :dimensions,
       :metric_name,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2035,8 @@ module Aws::ApplicationAutoScaling
       :metric_stat,
       :label,
       :return_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2056,8 @@ module Aws::ApplicationAutoScaling
     class PredictiveScalingMetricDimension < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2078,7 +2113,8 @@ module Aws::ApplicationAutoScaling
       :customized_scaling_metric_specification,
       :customized_load_metric_specification,
       :customized_capacity_metric_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2110,7 +2146,8 @@ module Aws::ApplicationAutoScaling
       :metric,
       :stat,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2161,7 +2198,8 @@ module Aws::ApplicationAutoScaling
       :scheduling_buffer_time,
       :max_capacity_breach_behavior,
       :max_capacity_buffer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2232,7 +2270,8 @@ module Aws::ApplicationAutoScaling
     class PredictiveScalingPredefinedLoadMetricSpecification < Struct.new(
       :predefined_metric_type,
       :resource_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,7 +2341,8 @@ module Aws::ApplicationAutoScaling
     class PredictiveScalingPredefinedMetricPairSpecification < Struct.new(
       :predefined_metric_type,
       :resource_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2374,7 +2414,8 @@ module Aws::ApplicationAutoScaling
     class PredictiveScalingPredefinedScalingMetricSpecification < Struct.new(
       :predefined_metric_type,
       :resource_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2612,7 +2653,8 @@ module Aws::ApplicationAutoScaling
       :step_scaling_policy_configuration,
       :target_tracking_scaling_policy_configuration,
       :predictive_scaling_policy_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2625,7 +2667,8 @@ module Aws::ApplicationAutoScaling
     class PutScalingPolicyResponse < Struct.new(
       :policy_arn,
       :alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2874,12 +2917,14 @@ module Aws::ApplicationAutoScaling
       :start_time,
       :end_time,
       :scalable_target_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutScheduledActionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3179,7 +3224,8 @@ module Aws::ApplicationAutoScaling
       :role_arn,
       :suspended_state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3188,7 +3234,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     class RegisterScalableTargetResponse < Struct.new(
       :scalable_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3201,7 +3248,8 @@ module Aws::ApplicationAutoScaling
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3432,7 +3480,8 @@ module Aws::ApplicationAutoScaling
       :creation_time,
       :suspended_state,
       :scalable_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3455,7 +3504,8 @@ module Aws::ApplicationAutoScaling
     class ScalableTargetAction < Struct.new(
       :min_capacity,
       :max_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3690,7 +3740,8 @@ module Aws::ApplicationAutoScaling
       :status_message,
       :details,
       :not_scaled_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3934,7 +3985,8 @@ module Aws::ApplicationAutoScaling
       :predictive_scaling_policy_configuration,
       :alarms,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4189,7 +4241,8 @@ module Aws::ApplicationAutoScaling
       :end_time,
       :scalable_target_action,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4253,7 +4306,8 @@ module Aws::ApplicationAutoScaling
       :metric_interval_lower_bound,
       :metric_interval_upper_bound,
       :scaling_adjustment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4297,7 +4351,8 @@ module Aws::ApplicationAutoScaling
       :min_adjustment_magnitude,
       :cooldown,
       :metric_aggregation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4322,7 +4377,8 @@ module Aws::ApplicationAutoScaling
       :dynamic_scaling_in_suspended,
       :dynamic_scaling_out_suspended,
       :scheduled_scaling_suspended,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4346,12 +4402,14 @@ module Aws::ApplicationAutoScaling
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4377,7 +4435,8 @@ module Aws::ApplicationAutoScaling
       :dimensions,
       :metric_name,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4428,7 +4487,8 @@ module Aws::ApplicationAutoScaling
       :label,
       :metric_stat,
       :return_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4442,7 +4502,8 @@ module Aws::ApplicationAutoScaling
     class TargetTrackingMetricDimension < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4469,7 +4530,8 @@ module Aws::ApplicationAutoScaling
       :metric,
       :stat,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4518,7 +4580,8 @@ module Aws::ApplicationAutoScaling
       :scale_out_cooldown,
       :scale_in_cooldown,
       :disable_scale_in,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4531,7 +4594,8 @@ module Aws::ApplicationAutoScaling
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4548,12 +4612,14 @@ module Aws::ApplicationAutoScaling
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4563,7 +4629,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

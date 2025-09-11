@@ -3654,7 +3654,6 @@ module Aws::IAM
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
         operation.traits = {}
       end)
-
     end
 
     class << self

@@ -24,7 +24,8 @@ module Aws::PersonalizeEvents
     class Action < Struct.new(
       :action_id,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +112,8 @@ module Aws::PersonalizeEvents
       :recommendation_id,
       :impression,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -204,7 +206,8 @@ module Aws::PersonalizeEvents
       :recommendation_id,
       :impression,
       :metric_attribution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +216,8 @@ module Aws::PersonalizeEvents
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +239,8 @@ module Aws::PersonalizeEvents
     class Item < Struct.new(
       :item_id,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +250,8 @@ module Aws::PersonalizeEvents
     #   @return [String]
     class MetricAttribution < Struct.new(
       :event_attribution_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -259,7 +265,8 @@ module Aws::PersonalizeEvents
     class PutActionInteractionsRequest < Struct.new(
       :tracking_id,
       :action_interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +279,8 @@ module Aws::PersonalizeEvents
     class PutActionsRequest < Struct.new(
       :dataset_arn,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +305,8 @@ module Aws::PersonalizeEvents
       :user_id,
       :session_id,
       :event_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +319,8 @@ module Aws::PersonalizeEvents
     class PutItemsRequest < Struct.new(
       :dataset_arn,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +333,8 @@ module Aws::PersonalizeEvents
     class PutUsersRequest < Struct.new(
       :dataset_arn,
       :users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +343,8 @@ module Aws::PersonalizeEvents
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +353,8 @@ module Aws::PersonalizeEvents
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +376,8 @@ module Aws::PersonalizeEvents
     class User < Struct.new(
       :user_id,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

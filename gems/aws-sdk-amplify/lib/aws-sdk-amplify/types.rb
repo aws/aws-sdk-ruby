@@ -153,7 +153,8 @@ module Aws::Amplify
       :webhook_create_time,
       :waf_configuration,
       :job_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -167,7 +168,8 @@ module Aws::Amplify
     class Artifact < Struct.new(
       :artifact_file_name,
       :artifact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +220,8 @@ module Aws::Amplify
       :build_spec,
       :enable_pull_request_preview,
       :pull_request_environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +235,8 @@ module Aws::Amplify
     #   @return [String]
     class Backend < Struct.new(
       :stack_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +272,8 @@ module Aws::Amplify
       :deployment_artifacts,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,7 +282,8 @@ module Aws::Amplify
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +432,8 @@ module Aws::Amplify
       :backend_environment_arn,
       :backend,
       :compute_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -445,7 +452,8 @@ module Aws::Amplify
     #   @return [String]
     class CacheConfig < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +483,8 @@ module Aws::Amplify
       :type,
       :custom_certificate_arn,
       :certificate_verification_dns_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +510,8 @@ module Aws::Amplify
     class CertificateSettings < Struct.new(
       :type,
       :custom_certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +646,8 @@ module Aws::Amplify
       :auto_branch_creation_config,
       :job_config,
       :cache_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +657,8 @@ module Aws::Amplify
     #   @return [Types::App]
     class CreateAppResult < Struct.new(
       :app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +680,8 @@ module Aws::Amplify
       :environment_name,
       :stack_name,
       :deployment_artifacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +691,8 @@ module Aws::Amplify
     #   @return [Types::BackendEnvironment]
     class CreateBackendEnvironmentResult < Struct.new(
       :backend_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +805,8 @@ module Aws::Amplify
       :backend_environment_arn,
       :backend,
       :compute_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +817,8 @@ module Aws::Amplify
     #   @return [Types::Branch]
     class CreateBranchResult < Struct.new(
       :branch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +839,8 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :file_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +860,8 @@ module Aws::Amplify
       :job_id,
       :file_upload_urls,
       :zip_upload_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -880,7 +898,8 @@ module Aws::Amplify
       :auto_sub_domain_creation_patterns,
       :auto_sub_domain_iam_role,
       :certificate_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -891,7 +910,8 @@ module Aws::Amplify
     #   @return [Types::DomainAssociation]
     class CreateDomainAssociationResult < Struct.new(
       :domain_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +929,8 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -919,7 +940,8 @@ module Aws::Amplify
     #   @return [Types::Webhook]
     class CreateWebhookResult < Struct.new(
       :webhook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +986,8 @@ module Aws::Amplify
       :target,
       :status,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,7 +997,8 @@ module Aws::Amplify
     #   @return [String]
     class DeleteAppRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1009,8 @@ module Aws::Amplify
     #   @return [Types::App]
     class DeleteAppResult < Struct.new(
       :app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1024,8 @@ module Aws::Amplify
     class DeleteBackendEnvironmentRequest < Struct.new(
       :app_id,
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1009,7 +1035,8 @@ module Aws::Amplify
     #   @return [Types::BackendEnvironment]
     class DeleteBackendEnvironmentResult < Struct.new(
       :backend_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1023,7 +1050,8 @@ module Aws::Amplify
     class DeleteBranchRequest < Struct.new(
       :app_id,
       :branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1033,7 +1061,8 @@ module Aws::Amplify
     #   @return [Types::Branch]
     class DeleteBranchResult < Struct.new(
       :branch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1076,8 @@ module Aws::Amplify
     class DeleteDomainAssociationRequest < Struct.new(
       :app_id,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1056,7 +1086,8 @@ module Aws::Amplify
     #   @return [Types::DomainAssociation]
     class DeleteDomainAssociationResult < Struct.new(
       :domain_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1074,7 +1105,8 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1116,8 @@ module Aws::Amplify
     #   @return [Types::JobSummary]
     class DeleteJobResult < Struct.new(
       :job_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1127,8 @@ module Aws::Amplify
     #   @return [String]
     class DeleteWebhookRequest < Struct.new(
       :webhook_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1104,7 +1138,8 @@ module Aws::Amplify
     #   @return [Types::Webhook]
     class DeleteWebhookResult < Struct.new(
       :webhook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1113,7 +1148,8 @@ module Aws::Amplify
     #   @return [String]
     class DependentServiceFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1251,8 @@ module Aws::Amplify
       :certificate_verification_dns_record,
       :sub_domains,
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1276,8 @@ module Aws::Amplify
       :end_time,
       :domain_name,
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,7 +1287,8 @@ module Aws::Amplify
     #   @return [String]
     class GenerateAccessLogsResult < Struct.new(
       :log_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1259,7 +1298,8 @@ module Aws::Amplify
     #   @return [String]
     class GetAppRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1269,7 +1309,8 @@ module Aws::Amplify
     #   @return [Types::App]
     class GetAppResult < Struct.new(
       :app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1320,8 @@ module Aws::Amplify
     #   @return [String]
     class GetArtifactUrlRequest < Struct.new(
       :artifact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1335,8 @@ module Aws::Amplify
     class GetArtifactUrlResult < Struct.new(
       :artifact_id,
       :artifact_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1307,7 +1350,8 @@ module Aws::Amplify
     class GetBackendEnvironmentRequest < Struct.new(
       :app_id,
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1317,7 +1361,8 @@ module Aws::Amplify
     #   @return [Types::BackendEnvironment]
     class GetBackendEnvironmentResult < Struct.new(
       :backend_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1376,8 @@ module Aws::Amplify
     class GetBranchRequest < Struct.new(
       :app_id,
       :branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,7 +1386,8 @@ module Aws::Amplify
     #   @return [Types::Branch]
     class GetBranchResult < Struct.new(
       :branch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1354,7 +1401,8 @@ module Aws::Amplify
     class GetDomainAssociationRequest < Struct.new(
       :app_id,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1365,7 +1413,8 @@ module Aws::Amplify
     #   @return [Types::DomainAssociation]
     class GetDomainAssociationResult < Struct.new(
       :domain_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1383,7 +1432,8 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1392,7 +1442,8 @@ module Aws::Amplify
     #   @return [Types::Job]
     class GetJobResult < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1453,8 @@ module Aws::Amplify
     #   @return [String]
     class GetWebhookRequest < Struct.new(
       :webhook_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1412,7 +1464,8 @@ module Aws::Amplify
     #   @return [Types::Webhook]
     class GetWebhookResult < Struct.new(
       :webhook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1421,7 +1474,8 @@ module Aws::Amplify
     #   @return [String]
     class InternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1489,8 @@ module Aws::Amplify
     class Job < Struct.new(
       :summary,
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1497,7 +1552,8 @@ module Aws::Amplify
     #   @return [String]
     class JobConfig < Struct.new(
       :build_compute_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1559,7 +1615,8 @@ module Aws::Amplify
       :job_type,
       :source_url,
       :source_url_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1625,8 @@ module Aws::Amplify
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1583,7 +1641,8 @@ module Aws::Amplify
     class ListAppsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1658,8 @@ module Aws::Amplify
     class ListAppsResult < Struct.new(
       :apps,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1627,7 +1687,8 @@ module Aws::Amplify
       :job_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1703,8 @@ module Aws::Amplify
     class ListArtifactsResult < Struct.new(
       :artifacts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1728,8 @@ module Aws::Amplify
       :environment_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1681,7 +1744,8 @@ module Aws::Amplify
     class ListBackendEnvironmentsResult < Struct.new(
       :backend_environments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1701,7 +1765,8 @@ module Aws::Amplify
       :app_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1781,8 @@ module Aws::Amplify
     class ListBranchesResult < Struct.new(
       :branches,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1736,7 +1802,8 @@ module Aws::Amplify
       :app_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1751,7 +1818,8 @@ module Aws::Amplify
     class ListDomainAssociationsResult < Struct.new(
       :domain_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1775,7 +1843,8 @@ module Aws::Amplify
       :branch_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1790,7 +1859,8 @@ module Aws::Amplify
     class ListJobsResult < Struct.new(
       :job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1800,7 +1870,8 @@ module Aws::Amplify
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1881,8 @@ module Aws::Amplify
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1830,7 +1902,8 @@ module Aws::Amplify
       :app_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1918,8 @@ module Aws::Amplify
     class ListWebhooksResult < Struct.new(
       :webhooks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,7 +1928,8 @@ module Aws::Amplify
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1876,7 +1951,8 @@ module Aws::Amplify
       :status,
       :thumbnail_url,
       :branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1964,8 @@ module Aws::Amplify
     class ResourceNotFoundException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1921,7 +1998,8 @@ module Aws::Amplify
       :job_id,
       :source_url,
       :source_url_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1931,7 +2009,8 @@ module Aws::Amplify
     #   @return [Types::JobSummary]
     class StartDeploymentResult < Struct.new(
       :job_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1974,7 +2053,8 @@ module Aws::Amplify
       :commit_id,
       :commit_message,
       :commit_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1984,7 +2064,8 @@ module Aws::Amplify
     #   @return [Types::JobSummary]
     class StartJobResult < Struct.new(
       :job_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2035,7 +2116,8 @@ module Aws::Amplify
       :screenshots,
       :status_reason,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2053,7 +2135,8 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2063,7 +2146,8 @@ module Aws::Amplify
     #   @return [Types::JobSummary]
     class StopJobResult < Struct.new(
       :job_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2081,7 +2165,8 @@ module Aws::Amplify
       :sub_domain_setting,
       :verified,
       :dns_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2095,7 +2180,8 @@ module Aws::Amplify
     class SubDomainSetting < Struct.new(
       :prefix,
       :branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2109,13 +2195,15 @@ module Aws::Amplify
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the tag resource request. </p>
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2124,7 +2212,8 @@ module Aws::Amplify
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2138,13 +2227,15 @@ module Aws::Amplify
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the untag resource request. </p>
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2272,7 +2363,8 @@ module Aws::Amplify
       :access_token,
       :job_config,
       :cache_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2282,7 +2374,8 @@ module Aws::Amplify
     #   @return [Types::App]
     class UpdateAppResult < Struct.new(
       :app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2391,7 +2484,8 @@ module Aws::Amplify
       :backend_environment_arn,
       :backend,
       :compute_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2401,7 +2495,8 @@ module Aws::Amplify
     #   @return [Types::Branch]
     class UpdateBranchResult < Struct.new(
       :branch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2436,7 +2531,8 @@ module Aws::Amplify
       :auto_sub_domain_creation_patterns,
       :auto_sub_domain_iam_role,
       :certificate_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2447,7 +2543,8 @@ module Aws::Amplify
     #   @return [Types::DomainAssociation]
     class UpdateDomainAssociationResult < Struct.new(
       :domain_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2465,7 +2562,8 @@ module Aws::Amplify
       :webhook_id,
       :branch_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2475,7 +2573,8 @@ module Aws::Amplify
     #   @return [Types::Webhook]
     class UpdateWebhookResult < Struct.new(
       :webhook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2497,7 +2596,8 @@ module Aws::Amplify
       :web_acl_arn,
       :waf_status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2537,7 +2637,8 @@ module Aws::Amplify
       :description,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

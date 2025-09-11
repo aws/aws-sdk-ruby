@@ -12,7 +12,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::GameLiftStreams
     class AddStreamGroupLocationsInput < Struct.new(
       :identifier,
       :location_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::GameLiftStreams
     class AddStreamGroupLocationsOutput < Struct.new(
       :identifier,
       :locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +75,8 @@ module Aws::GameLiftStreams
       :created_at,
       :last_updated_at,
       :runtime_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +89,8 @@ module Aws::GameLiftStreams
     class AssociateApplicationsInput < Struct.new(
       :identifier,
       :application_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +103,8 @@ module Aws::GameLiftStreams
     class AssociateApplicationsOutput < Struct.new(
       :arn,
       :application_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +114,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +152,8 @@ module Aws::GameLiftStreams
       :application_log_output_uri,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +214,8 @@ module Aws::GameLiftStreams
       :created_at,
       :last_updated_at,
       :associated_stream_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +244,8 @@ module Aws::GameLiftStreams
       :location_configurations,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +294,8 @@ module Aws::GameLiftStreams
       :last_updated_at,
       :created_at,
       :associated_applications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -305,7 +316,8 @@ module Aws::GameLiftStreams
       :identifier,
       :stream_session_identifier,
       :signal_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +326,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class CreateStreamSessionConnectionOutput < Struct.new(
       :signal_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -328,7 +341,8 @@ module Aws::GameLiftStreams
     class DefaultApplication < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,7 +351,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class DeleteApplicationInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +361,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class DeleteStreamGroupInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +375,8 @@ module Aws::GameLiftStreams
     class DisassociateApplicationsInput < Struct.new(
       :identifier,
       :application_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +389,8 @@ module Aws::GameLiftStreams
     class DisassociateApplicationsOutput < Struct.new(
       :arn,
       :application_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -390,7 +408,8 @@ module Aws::GameLiftStreams
       :status,
       :status_reason,
       :output_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,12 +426,14 @@ module Aws::GameLiftStreams
       :identifier,
       :stream_session_identifier,
       :output_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ExportStreamSessionFilesOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -421,7 +442,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class GetApplicationInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +504,8 @@ module Aws::GameLiftStreams
       :created_at,
       :last_updated_at,
       :associated_stream_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,7 +514,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class GetStreamGroupInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +564,8 @@ module Aws::GameLiftStreams
       :last_updated_at,
       :created_at,
       :associated_applications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -553,7 +578,8 @@ module Aws::GameLiftStreams
     class GetStreamSessionInput < Struct.new(
       :identifier,
       :stream_session_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -638,7 +664,8 @@ module Aws::GameLiftStreams
       :created_at,
       :application_arn,
       :export_files_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -648,7 +675,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +689,8 @@ module Aws::GameLiftStreams
     class ListApplicationsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +703,8 @@ module Aws::GameLiftStreams
     class ListApplicationsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +717,8 @@ module Aws::GameLiftStreams
     class ListStreamGroupsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +731,8 @@ module Aws::GameLiftStreams
     class ListStreamGroupsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +753,8 @@ module Aws::GameLiftStreams
       :export_files_status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -734,7 +767,8 @@ module Aws::GameLiftStreams
     class ListStreamSessionsByAccountOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +793,8 @@ module Aws::GameLiftStreams
       :next_token,
       :max_results,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +807,8 @@ module Aws::GameLiftStreams
     class ListStreamSessionsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -781,7 +817,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -790,7 +827,8 @@ module Aws::GameLiftStreams
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +846,8 @@ module Aws::GameLiftStreams
       :location_name,
       :always_on_capacity,
       :on_demand_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +881,8 @@ module Aws::GameLiftStreams
       :requested_capacity,
       :allocated_capacity,
       :idle_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +895,8 @@ module Aws::GameLiftStreams
     class RemoveStreamGroupLocationsInput < Struct.new(
       :identifier,
       :locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +910,8 @@ module Aws::GameLiftStreams
     class ReplicationStatus < Struct.new(
       :location,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,7 +921,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +936,8 @@ module Aws::GameLiftStreams
     class RuntimeEnvironment < Struct.new(
       :type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +947,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +1001,8 @@ module Aws::GameLiftStreams
       :session_length_seconds,
       :additional_launch_args,
       :additional_environment_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1041,7 +1087,8 @@ module Aws::GameLiftStreams
       :created_at,
       :application_arn,
       :export_files_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,7 +1126,8 @@ module Aws::GameLiftStreams
       :status,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1169,8 @@ module Aws::GameLiftStreams
       :application_arn,
       :export_files_metadata,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1134,12 +1183,14 @@ module Aws::GameLiftStreams
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1203,8 @@ module Aws::GameLiftStreams
     class TerminateStreamSessionInput < Struct.new(
       :identifier,
       :stream_session_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1214,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,12 +1228,14 @@ module Aws::GameLiftStreams
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1256,8 @@ module Aws::GameLiftStreams
       :description,
       :application_log_paths,
       :application_log_output_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1262,7 +1318,8 @@ module Aws::GameLiftStreams
       :created_at,
       :last_updated_at,
       :associated_stream_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,7 +1340,8 @@ module Aws::GameLiftStreams
       :location_configurations,
       :description,
       :default_application_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1390,8 @@ module Aws::GameLiftStreams
       :last_updated_at,
       :created_at,
       :associated_applications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1342,7 +1401,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -1304,7 +1304,6 @@ module Aws::AppConfig
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/validators", "code" => 204}}
       end)
-
     end
 
     class << self

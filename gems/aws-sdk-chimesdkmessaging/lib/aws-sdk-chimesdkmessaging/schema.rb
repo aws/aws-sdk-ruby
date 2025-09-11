@@ -1556,7 +1556,6 @@ module Aws::ChimeSDKMessaging
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/channels/{ChannelArn}/readMarker", "code" => 200}}
       end)
-
     end
 
     class << self

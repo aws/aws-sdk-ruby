@@ -16,7 +16,8 @@ module Aws::AppStream
     class AccessEndpoint < Struct.new(
       :endpoint_type,
       :vpce_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +79,8 @@ module Aws::AppStream
       :packaging_type,
       :state,
       :app_block_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +144,8 @@ module Aws::AppStream
       :app_block_builder_errors,
       :state_change_reason,
       :access_endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +159,8 @@ module Aws::AppStream
     class AppBlockBuilderAppBlockAssociation < Struct.new(
       :app_block_arn,
       :app_block_builder_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +174,8 @@ module Aws::AppStream
     class AppBlockBuilderStateChangeReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +241,8 @@ module Aws::AppStream
       :platforms,
       :instance_families,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +256,8 @@ module Aws::AppStream
     class ApplicationFleetAssociation < Struct.new(
       :fleet_name,
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +271,8 @@ module Aws::AppStream
     class ApplicationSettings < Struct.new(
       :enabled,
       :settings_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +291,8 @@ module Aws::AppStream
       :enabled,
       :settings_group,
       :s3_bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +305,8 @@ module Aws::AppStream
     class AssociateAppBlockBuilderAppBlockRequest < Struct.new(
       :app_block_arn,
       :app_block_builder_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -305,7 +315,8 @@ module Aws::AppStream
     #   @return [Types::AppBlockBuilderAppBlockAssociation]
     class AssociateAppBlockBuilderAppBlockResult < Struct.new(
       :app_block_builder_app_block_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +329,8 @@ module Aws::AppStream
     class AssociateApplicationFleetRequest < Struct.new(
       :fleet_name,
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -329,7 +341,8 @@ module Aws::AppStream
     #   @return [Types::ApplicationFleetAssociation]
     class AssociateApplicationFleetResult < Struct.new(
       :application_fleet_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,12 +359,14 @@ module Aws::AppStream
       :stack_name,
       :entitlement_name,
       :application_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateApplicationToEntitlementResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,12 +379,14 @@ module Aws::AppStream
     class AssociateFleetRequest < Struct.new(
       :fleet_name,
       :stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateFleetResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +395,8 @@ module Aws::AppStream
     #   @return [Array<Types::UserStackAssociation>]
     class BatchAssociateUserStackRequest < Struct.new(
       :user_stack_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -387,7 +405,8 @@ module Aws::AppStream
     #   @return [Array<Types::UserStackAssociationError>]
     class BatchAssociateUserStackResult < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +415,8 @@ module Aws::AppStream
     #   @return [Array<Types::UserStackAssociation>]
     class BatchDisassociateUserStackRequest < Struct.new(
       :user_stack_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +425,8 @@ module Aws::AppStream
     #   @return [Array<Types::UserStackAssociationError>]
     class BatchDisassociateUserStackResult < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +446,8 @@ module Aws::AppStream
     class CertificateBasedAuthProperties < Struct.new(
       :status,
       :certificate_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +462,8 @@ module Aws::AppStream
     class ComputeCapacity < Struct.new(
       :desired_instances,
       :desired_sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -485,7 +508,8 @@ module Aws::AppStream
       :available_user_sessions,
       :active_user_sessions,
       :actual_user_sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +519,8 @@ module Aws::AppStream
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +541,8 @@ module Aws::AppStream
       :destination_image_name,
       :destination_region,
       :destination_image_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +551,8 @@ module Aws::AppStream
     #   @return [String]
     class CopyImageResponse < Struct.new(
       :destination_image_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +630,8 @@ module Aws::AppStream
       :enable_default_internet_access,
       :iam_role_arn,
       :access_endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +640,8 @@ module Aws::AppStream
     #   @return [Types::AppBlockBuilder]
     class CreateAppBlockBuilderResult < Struct.new(
       :app_block_builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +655,8 @@ module Aws::AppStream
     class CreateAppBlockBuilderStreamingURLRequest < Struct.new(
       :app_block_builder_name,
       :validity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -639,7 +669,8 @@ module Aws::AppStream
     class CreateAppBlockBuilderStreamingURLResult < Struct.new(
       :streaming_url,
       :expires,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +709,8 @@ module Aws::AppStream
       :tags,
       :post_setup_script_details,
       :packaging_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +719,8 @@ module Aws::AppStream
     #   @return [Types::AppBlock]
     class CreateAppBlockResult < Struct.new(
       :app_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -736,7 +769,8 @@ module Aws::AppStream
       :instance_families,
       :app_block_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +779,8 @@ module Aws::AppStream
     #   @return [Types::Application]
     class CreateApplicationResult < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +807,8 @@ module Aws::AppStream
       :organizational_unit_distinguished_names,
       :service_account_credentials,
       :certificate_based_auth_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -781,7 +817,8 @@ module Aws::AppStream
     #   @return [Types::DirectoryConfig]
     class CreateDirectoryConfigResult < Struct.new(
       :directory_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -806,7 +843,8 @@ module Aws::AppStream
       :description,
       :app_visibility,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +853,8 @@ module Aws::AppStream
     #   @return [Types::Entitlement]
     class CreateEntitlementResult < Struct.new(
       :entitlement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1117,7 +1156,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1126,7 +1166,8 @@ module Aws::AppStream
     #   @return [Types::Fleet]
     class CreateFleetResult < Struct.new(
       :fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1337,7 +1378,8 @@ module Aws::AppStream
       :appstream_agent_version,
       :tags,
       :access_endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1346,7 +1388,8 @@ module Aws::AppStream
     #   @return [Types::ImageBuilder]
     class CreateImageBuilderResult < Struct.new(
       :image_builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,7 +1403,8 @@ module Aws::AppStream
     class CreateImageBuilderStreamingURLRequest < Struct.new(
       :name,
       :validity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1417,8 @@ module Aws::AppStream
     class CreateImageBuilderStreamingURLResult < Struct.new(
       :streaming_url,
       :expires,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1430,7 +1475,8 @@ module Aws::AppStream
       :access_endpoints,
       :embed_host_domains,
       :streaming_experience_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1439,7 +1485,8 @@ module Aws::AppStream
     #   @return [Types::Stack]
     class CreateStackResult < Struct.new(
       :stack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1517,8 @@ module Aws::AppStream
       :application_id,
       :validity,
       :session_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1483,7 +1531,8 @@ module Aws::AppStream
     class CreateStreamingURLResult < Struct.new(
       :streaming_url,
       :expires,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,7 +1561,8 @@ module Aws::AppStream
       :theme_styling,
       :organization_logo_s3_location,
       :favicon_s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1521,7 +1571,8 @@ module Aws::AppStream
     #   @return [Types::Theme]
     class CreateThemeForStackResult < Struct.new(
       :theme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1605,8 @@ module Aws::AppStream
       :new_image_display_name,
       :new_image_tags,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1567,12 +1619,14 @@ module Aws::AppStream
     class CreateUpdatedImageResult < Struct.new(
       :image,
       :can_update_image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateUsageReportSubscriptionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1590,7 +1644,8 @@ module Aws::AppStream
     class CreateUsageReportSubscriptionResult < Struct.new(
       :s3_bucket_name,
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,12 +1676,14 @@ module Aws::AppStream
       :first_name,
       :last_name,
       :authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateUserResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,12 +1692,14 @@ module Aws::AppStream
     #   @return [String]
     class DeleteAppBlockBuilderRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAppBlockBuilderResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1649,12 +1708,14 @@ module Aws::AppStream
     #   @return [String]
     class DeleteAppBlockRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAppBlockResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1663,12 +1724,14 @@ module Aws::AppStream
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1677,12 +1740,14 @@ module Aws::AppStream
     #   @return [String]
     class DeleteDirectoryConfigRequest < Struct.new(
       :directory_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDirectoryConfigResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1695,12 +1760,14 @@ module Aws::AppStream
     class DeleteEntitlementRequest < Struct.new(
       :name,
       :stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEntitlementResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1709,12 +1776,14 @@ module Aws::AppStream
     #   @return [String]
     class DeleteFleetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFleetResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1792,8 @@ module Aws::AppStream
     #   @return [String]
     class DeleteImageBuilderRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1732,7 +1802,8 @@ module Aws::AppStream
     #   @return [Types::ImageBuilder]
     class DeleteImageBuilderResult < Struct.new(
       :image_builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,12 +1816,14 @@ module Aws::AppStream
     class DeleteImagePermissionsRequest < Struct.new(
       :name,
       :shared_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteImagePermissionsResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1759,7 +1832,8 @@ module Aws::AppStream
     #   @return [String]
     class DeleteImageRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1768,7 +1842,8 @@ module Aws::AppStream
     #   @return [Types::Image]
     class DeleteImageResult < Struct.new(
       :image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1777,12 +1852,14 @@ module Aws::AppStream
     #   @return [String]
     class DeleteStackRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStackResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1791,22 +1868,26 @@ module Aws::AppStream
     #   @return [String]
     class DeleteThemeForStackRequest < Struct.new(
       :stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteThemeForStackResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUsageReportSubscriptionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUsageReportSubscriptionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1822,12 +1903,14 @@ module Aws::AppStream
     class DeleteUserRequest < Struct.new(
       :user_name,
       :authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1932,8 @@ module Aws::AppStream
       :app_block_builder_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1947,8 @@ module Aws::AppStream
     class DescribeAppBlockBuilderAppBlockAssociationsResult < Struct.new(
       :app_block_builder_app_block_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1881,7 +1966,8 @@ module Aws::AppStream
       :names,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1895,7 +1981,8 @@ module Aws::AppStream
     class DescribeAppBlockBuildersResult < Struct.new(
       :app_block_builders,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1913,7 +2000,8 @@ module Aws::AppStream
       :arns,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +2015,8 @@ module Aws::AppStream
     class DescribeAppBlocksResult < Struct.new(
       :app_blocks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +2038,8 @@ module Aws::AppStream
       :application_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1963,7 +2053,8 @@ module Aws::AppStream
     class DescribeApplicationFleetAssociationsResult < Struct.new(
       :application_fleet_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1981,7 +2072,8 @@ module Aws::AppStream
       :arns,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,7 +2087,8 @@ module Aws::AppStream
     class DescribeApplicationsResult < Struct.new(
       :applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2012,7 +2105,8 @@ module Aws::AppStream
       :directory_names,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2025,7 +2119,8 @@ module Aws::AppStream
     class DescribeDirectoryConfigsResult < Struct.new(
       :directory_configs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2046,7 +2141,8 @@ module Aws::AppStream
       :stack_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2060,7 +2156,8 @@ module Aws::AppStream
     class DescribeEntitlementsResult < Struct.new(
       :entitlements,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,7 +2170,8 @@ module Aws::AppStream
     class DescribeFleetsRequest < Struct.new(
       :names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2086,7 +2184,8 @@ module Aws::AppStream
     class DescribeFleetsResult < Struct.new(
       :fleets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2103,7 +2202,8 @@ module Aws::AppStream
       :names,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2116,7 +2216,8 @@ module Aws::AppStream
     class DescribeImageBuildersResult < Struct.new(
       :image_builders,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2137,7 +2238,8 @@ module Aws::AppStream
       :max_results,
       :shared_aws_account_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2154,7 +2256,8 @@ module Aws::AppStream
       :name,
       :shared_image_permissions_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2179,7 +2282,8 @@ module Aws::AppStream
       :type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2192,7 +2296,8 @@ module Aws::AppStream
     class DescribeImagesResult < Struct.new(
       :images,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2227,7 +2332,8 @@ module Aws::AppStream
       :limit,
       :authentication_type,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2240,7 +2346,8 @@ module Aws::AppStream
     class DescribeSessionsResult < Struct.new(
       :sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2253,7 +2360,8 @@ module Aws::AppStream
     class DescribeStacksRequest < Struct.new(
       :names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2266,7 +2374,8 @@ module Aws::AppStream
     class DescribeStacksResult < Struct.new(
       :stacks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2275,7 +2384,8 @@ module Aws::AppStream
     #   @return [String]
     class DescribeThemeForStackRequest < Struct.new(
       :stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2284,7 +2394,8 @@ module Aws::AppStream
     #   @return [Types::Theme]
     class DescribeThemeForStackResult < Struct.new(
       :theme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2297,7 +2408,8 @@ module Aws::AppStream
     class DescribeUsageReportSubscriptionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2310,7 +2422,8 @@ module Aws::AppStream
     class DescribeUsageReportSubscriptionsResult < Struct.new(
       :usage_report_subscriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2338,7 +2451,8 @@ module Aws::AppStream
       :authentication_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2351,7 +2465,8 @@ module Aws::AppStream
     class DescribeUserStackAssociationsResult < Struct.new(
       :user_stack_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2368,7 +2483,8 @@ module Aws::AppStream
       :authentication_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2381,7 +2497,8 @@ module Aws::AppStream
     class DescribeUsersResult < Struct.new(
       :users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2413,7 +2530,8 @@ module Aws::AppStream
       :service_account_credentials,
       :created_time,
       :certificate_based_auth_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2429,12 +2547,14 @@ module Aws::AppStream
     class DisableUserRequest < Struct.new(
       :user_name,
       :authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableUserResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2447,12 +2567,14 @@ module Aws::AppStream
     class DisassociateAppBlockBuilderAppBlockRequest < Struct.new(
       :app_block_arn,
       :app_block_builder_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateAppBlockBuilderAppBlockResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2465,12 +2587,14 @@ module Aws::AppStream
     class DisassociateApplicationFleetRequest < Struct.new(
       :fleet_name,
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateApplicationFleetResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2487,12 +2611,14 @@ module Aws::AppStream
       :stack_name,
       :entitlement_name,
       :application_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateApplicationFromEntitlementResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2505,12 +2631,14 @@ module Aws::AppStream
     class DisassociateFleetRequest < Struct.new(
       :fleet_name,
       :stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFleetResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2524,7 +2652,8 @@ module Aws::AppStream
     class DomainJoinInfo < Struct.new(
       :directory_name,
       :organizational_unit_distinguished_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2540,12 +2669,14 @@ module Aws::AppStream
     class EnableUserRequest < Struct.new(
       :user_name,
       :authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableUserResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2555,7 +2686,8 @@ module Aws::AppStream
     #   @return [String]
     class EntitledApplication < Struct.new(
       :application_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2594,7 +2726,8 @@ module Aws::AppStream
       :attributes,
       :created_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2604,7 +2737,8 @@ module Aws::AppStream
     #   @return [String]
     class EntitlementAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2648,7 +2782,8 @@ module Aws::AppStream
     class EntitlementAttribute < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2658,7 +2793,8 @@ module Aws::AppStream
     #   @return [String]
     class EntitlementNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2672,7 +2808,8 @@ module Aws::AppStream
     class ErrorDetails < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2681,12 +2818,14 @@ module Aws::AppStream
     #   @return [String]
     class ExpireSessionRequest < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ExpireSessionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2971,7 +3110,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2985,7 +3125,8 @@ module Aws::AppStream
     class FleetError < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3103,7 +3244,8 @@ module Aws::AppStream
       :supported_instance_families,
       :dynamic_app_providers_enabled,
       :image_shared_with_others,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3335,7 +3477,8 @@ module Aws::AppStream
       :appstream_agent_version,
       :access_endpoints,
       :latest_appstream_agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3349,7 +3492,8 @@ module Aws::AppStream
     class ImageBuilderStateChangeReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3363,7 +3507,8 @@ module Aws::AppStream
     class ImagePermissions < Struct.new(
       :allow_fleet,
       :allow_image_builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3377,7 +3522,8 @@ module Aws::AppStream
     class ImageStateChangeReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3387,7 +3533,8 @@ module Aws::AppStream
     #   @return [String]
     class IncompatibleImageException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3397,7 +3544,8 @@ module Aws::AppStream
     #   @return [String]
     class InvalidAccountStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3407,7 +3555,8 @@ module Aws::AppStream
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3417,7 +3566,8 @@ module Aws::AppStream
     #   @return [String]
     class InvalidRoleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3431,7 +3581,8 @@ module Aws::AppStream
     class LastReportGenerationExecutionError < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3441,7 +3592,8 @@ module Aws::AppStream
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3454,7 +3606,8 @@ module Aws::AppStream
     class ListAssociatedFleetsRequest < Struct.new(
       :stack_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3467,7 +3620,8 @@ module Aws::AppStream
     class ListAssociatedFleetsResult < Struct.new(
       :names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3480,7 +3634,8 @@ module Aws::AppStream
     class ListAssociatedStacksRequest < Struct.new(
       :fleet_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3493,7 +3648,8 @@ module Aws::AppStream
     class ListAssociatedStacksResult < Struct.new(
       :names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3514,7 +3670,8 @@ module Aws::AppStream
       :entitlement_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3527,7 +3684,8 @@ module Aws::AppStream
     class ListEntitledApplicationsResult < Struct.new(
       :entitled_applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3536,7 +3694,8 @@ module Aws::AppStream
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3545,7 +3704,8 @@ module Aws::AppStream
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3559,7 +3719,8 @@ module Aws::AppStream
     class NetworkAccessConfiguration < Struct.new(
       :eni_private_ip_address,
       :eni_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3569,7 +3730,8 @@ module Aws::AppStream
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3579,7 +3741,8 @@ module Aws::AppStream
     #   @return [String]
     class RequestLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3589,7 +3752,8 @@ module Aws::AppStream
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3607,7 +3771,8 @@ module Aws::AppStream
       :error_code,
       :error_message,
       :error_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3617,7 +3782,8 @@ module Aws::AppStream
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3627,7 +3793,8 @@ module Aws::AppStream
     #   @return [String]
     class ResourceNotAvailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3637,7 +3804,8 @@ module Aws::AppStream
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3674,7 +3842,8 @@ module Aws::AppStream
     class S3Location < Struct.new(
       :s3_bucket,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3696,7 +3865,8 @@ module Aws::AppStream
       :executable_path,
       :executable_parameters,
       :timeout_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3712,7 +3882,8 @@ module Aws::AppStream
     class ServiceAccountCredentials < Struct.new(
       :account_name,
       :account_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3763,7 +3934,8 @@ module Aws::AppStream
       :authentication_type,
       :network_access_configuration,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3777,7 +3949,8 @@ module Aws::AppStream
     class SharedImagePermissions < Struct.new(
       :shared_account_id,
       :image_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3839,7 +4012,8 @@ module Aws::AppStream
       :access_endpoints,
       :embed_host_domains,
       :streaming_experience_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3853,7 +4027,8 @@ module Aws::AppStream
     class StackError < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3862,7 +4037,8 @@ module Aws::AppStream
     #   @return [String]
     class StartAppBlockBuilderRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3871,7 +4047,8 @@ module Aws::AppStream
     #   @return [Types::AppBlockBuilder]
     class StartAppBlockBuilderResult < Struct.new(
       :app_block_builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3880,12 +4057,14 @@ module Aws::AppStream
     #   @return [String]
     class StartFleetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartFleetResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3898,7 +4077,8 @@ module Aws::AppStream
     class StartImageBuilderRequest < Struct.new(
       :name,
       :appstream_agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3907,7 +4087,8 @@ module Aws::AppStream
     #   @return [Types::ImageBuilder]
     class StartImageBuilderResult < Struct.new(
       :image_builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3916,7 +4097,8 @@ module Aws::AppStream
     #   @return [String]
     class StopAppBlockBuilderRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3925,7 +4107,8 @@ module Aws::AppStream
     #   @return [Types::AppBlockBuilder]
     class StopAppBlockBuilderResult < Struct.new(
       :app_block_builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3934,12 +4117,14 @@ module Aws::AppStream
     #   @return [String]
     class StopFleetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopFleetResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3948,7 +4133,8 @@ module Aws::AppStream
     #   @return [String]
     class StopImageBuilderRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3957,7 +4143,8 @@ module Aws::AppStream
     #   @return [Types::ImageBuilder]
     class StopImageBuilderResult < Struct.new(
       :image_builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3979,7 +4166,8 @@ module Aws::AppStream
       :resource_identifier,
       :domains,
       :domains_require_admin_consent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3989,7 +4177,8 @@ module Aws::AppStream
     #   @return [String]
     class StreamingExperienceSettings < Struct.new(
       :preferred_protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4005,12 +4194,14 @@ module Aws::AppStream
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4048,7 +4239,8 @@ module Aws::AppStream
       :theme_organization_logo_url,
       :theme_favicon_url,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4062,7 +4254,8 @@ module Aws::AppStream
     class ThemeFooterLink < Struct.new(
       :display_name,
       :footer_link_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4075,12 +4268,14 @@ module Aws::AppStream
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4152,7 +4347,8 @@ module Aws::AppStream
       :iam_role_arn,
       :access_endpoints,
       :attributes_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4161,7 +4357,8 @@ module Aws::AppStream
     #   @return [Types::AppBlockBuilder]
     class UpdateAppBlockBuilderResult < Struct.new(
       :app_block_builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4202,7 +4399,8 @@ module Aws::AppStream
       :launch_parameters,
       :app_block_arn,
       :attributes_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4211,7 +4409,8 @@ module Aws::AppStream
     #   @return [Types::Application]
     class UpdateApplicationResult < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4238,7 +4437,8 @@ module Aws::AppStream
       :organizational_unit_distinguished_names,
       :service_account_credentials,
       :certificate_based_auth_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4247,7 +4447,8 @@ module Aws::AppStream
     #   @return [Types::DirectoryConfig]
     class UpdateDirectoryConfigResult < Struct.new(
       :directory_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4272,7 +4473,8 @@ module Aws::AppStream
       :description,
       :app_visibility,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4281,7 +4483,8 @@ module Aws::AppStream
     #   @return [Types::Entitlement]
     class UpdateEntitlementResult < Struct.new(
       :entitlement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4517,7 +4720,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4526,7 +4730,8 @@ module Aws::AppStream
     #   @return [Types::Fleet]
     class UpdateFleetResult < Struct.new(
       :fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4543,12 +4748,14 @@ module Aws::AppStream
       :name,
       :shared_account_id,
       :image_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateImagePermissionsResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4606,7 +4813,8 @@ module Aws::AppStream
       :access_endpoints,
       :embed_host_domains,
       :streaming_experience_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4615,7 +4823,8 @@ module Aws::AppStream
     #   @return [Types::Stack]
     class UpdateStackResult < Struct.new(
       :stack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4652,7 +4861,8 @@ module Aws::AppStream
       :favicon_s3_location,
       :state,
       :attributes_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4661,7 +4871,8 @@ module Aws::AppStream
     #   @return [Types::Theme]
     class UpdateThemeForStackResult < Struct.new(
       :theme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4688,7 +4899,8 @@ module Aws::AppStream
       :schedule,
       :last_generated_report_date,
       :subscription_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4746,7 +4958,8 @@ module Aws::AppStream
       :last_name,
       :created_time,
       :authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4767,7 +4980,8 @@ module Aws::AppStream
       :action,
       :permission,
       :maximum_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4792,7 +5006,8 @@ module Aws::AppStream
       :user_name,
       :authentication_type,
       :send_email_notification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4810,7 +5025,8 @@ module Aws::AppStream
       :user_stack_association,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4824,7 +5040,8 @@ module Aws::AppStream
     class VpcConfig < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

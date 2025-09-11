@@ -41,7 +41,7 @@ module Aws::CloudSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudSearch::Types::BaseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -58,7 +58,7 @@ module Aws::CloudSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudSearch::Types::DisabledOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -76,7 +76,7 @@ module Aws::CloudSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudSearch::Types::InternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -93,7 +93,7 @@ module Aws::CloudSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudSearch::Types::InvalidTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -110,7 +110,7 @@ module Aws::CloudSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudSearch::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -127,7 +127,7 @@ module Aws::CloudSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudSearch::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -144,7 +144,7 @@ module Aws::CloudSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudSearch::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -161,7 +161,7 @@ module Aws::CloudSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudSearch::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code

@@ -536,7 +536,6 @@ module Aws::ARCZonalShift
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/zonalshifts/{zonalShiftId}", "code" => 200}}
       end)
-
     end
 
     class << self

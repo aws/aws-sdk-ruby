@@ -11,7 +11,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::PaymentCryptography
     class Alias < Struct.new(
       :alias_name,
       :key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +36,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +50,8 @@ module Aws::PaymentCryptography
     class CreateAliasInput < Struct.new(
       :alias_name,
       :key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +60,8 @@ module Aws::PaymentCryptography
     #   @return [Types::Alias]
     class CreateAliasOutput < Struct.new(
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +90,8 @@ module Aws::PaymentCryptography
       :enabled,
       :tags,
       :derive_key_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +100,8 @@ module Aws::PaymentCryptography
     #   @return [Types::Key]
     class CreateKeyOutput < Struct.new(
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,12 +110,14 @@ module Aws::PaymentCryptography
     #   @return [String]
     class DeleteAliasInput < Struct.new(
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAliasOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +130,8 @@ module Aws::PaymentCryptography
     class DeleteKeyInput < Struct.new(
       :key_identifier,
       :delete_key_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +140,8 @@ module Aws::PaymentCryptography
     #   @return [Types::Key]
     class DeleteKeyOutput < Struct.new(
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +152,8 @@ module Aws::PaymentCryptography
     class DiffieHellmanDerivationData < Struct.new(
       :shared_information,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SharedInformation < DiffieHellmanDerivationData; end
@@ -158,7 +170,8 @@ module Aws::PaymentCryptography
     class ExportAttributes < Struct.new(
       :export_dukpt_initial_key,
       :key_check_value_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +209,8 @@ module Aws::PaymentCryptography
       :key_derivation_hash_algorithm,
       :derivation_data,
       :key_block_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +220,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class ExportDukptInitialKey < Struct.new(
       :key_serial_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +239,8 @@ module Aws::PaymentCryptography
       :certificate_authority_public_key_identifier,
       :wrapping_key_certificate,
       :wrapping_spec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +257,8 @@ module Aws::PaymentCryptography
       :key_material,
       :export_key_identifier,
       :export_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +281,8 @@ module Aws::PaymentCryptography
       :key_cryptogram,
       :diffie_hellman_tr31_key_block,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Tr31KeyBlock < ExportKeyMaterial; end
@@ -279,7 +297,8 @@ module Aws::PaymentCryptography
     #   @return [Types::WrappedKey]
     class ExportKeyOutput < Struct.new(
       :wrapped_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +312,8 @@ module Aws::PaymentCryptography
     class ExportTr31KeyBlock < Struct.new(
       :wrapping_key_identifier,
       :key_block_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +343,8 @@ module Aws::PaymentCryptography
       :key_block_format,
       :random_nonce,
       :key_block_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +353,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class GetAliasInput < Struct.new(
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +363,8 @@ module Aws::PaymentCryptography
     #   @return [Types::Alias]
     class GetAliasOutput < Struct.new(
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +373,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class GetKeyInput < Struct.new(
       :key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +383,8 @@ module Aws::PaymentCryptography
     #   @return [Types::Key]
     class GetKeyOutput < Struct.new(
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +397,8 @@ module Aws::PaymentCryptography
     class GetParametersForExportInput < Struct.new(
       :key_material_type,
       :signing_key_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -397,7 +423,8 @@ module Aws::PaymentCryptography
       :signing_key_algorithm,
       :export_token,
       :parameters_valid_until_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +437,8 @@ module Aws::PaymentCryptography
     class GetParametersForImportInput < Struct.new(
       :key_material_type,
       :wrapping_key_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +463,8 @@ module Aws::PaymentCryptography
       :wrapping_key_algorithm,
       :import_token,
       :parameters_valid_until_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +473,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class GetPublicKeyCertificateInput < Struct.new(
       :key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +487,8 @@ module Aws::PaymentCryptography
     class GetPublicKeyCertificateOutput < Struct.new(
       :key_certificate,
       :key_certificate_chain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +526,8 @@ module Aws::PaymentCryptography
       :key_derivation_hash_algorithm,
       :derivation_data,
       :wrapped_key_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +553,8 @@ module Aws::PaymentCryptography
       :wrapped_key_cryptogram,
       :import_token,
       :wrapping_spec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +575,8 @@ module Aws::PaymentCryptography
       :key_check_value_algorithm,
       :enabled,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +607,8 @@ module Aws::PaymentCryptography
       :key_cryptogram,
       :diffie_hellman_tr31_key_block,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RootCertificatePublicKey < ImportKeyMaterial; end
@@ -590,7 +625,8 @@ module Aws::PaymentCryptography
     #   @return [Types::Key]
     class ImportKeyOutput < Struct.new(
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +640,8 @@ module Aws::PaymentCryptography
     class ImportTr31KeyBlock < Struct.new(
       :wrapping_key_identifier,
       :wrapped_key_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +671,8 @@ module Aws::PaymentCryptography
       :wrapped_key_block,
       :key_block_format,
       :random_nonce,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +681,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,7 +744,8 @@ module Aws::PaymentCryptography
       :delete_pending_timestamp,
       :delete_timestamp,
       :derive_key_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +767,8 @@ module Aws::PaymentCryptography
       :key_class,
       :key_algorithm,
       :key_modes_of_use,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +790,8 @@ module Aws::PaymentCryptography
       :key_exportability,
       :key_version,
       :optional_blocks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +833,8 @@ module Aws::PaymentCryptography
       :verify,
       :derive_key,
       :no_restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -834,7 +877,8 @@ module Aws::PaymentCryptography
       :key_check_value,
       :exportable,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +895,8 @@ module Aws::PaymentCryptography
       :key_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +909,8 @@ module Aws::PaymentCryptography
     class ListAliasesOutput < Struct.new(
       :aliases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +927,8 @@ module Aws::PaymentCryptography
       :key_state,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +941,8 @@ module Aws::PaymentCryptography
     class ListKeysOutput < Struct.new(
       :keys,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +959,8 @@ module Aws::PaymentCryptography
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +973,8 @@ module Aws::PaymentCryptography
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -934,7 +984,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -943,7 +994,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class RestoreKeyInput < Struct.new(
       :key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +1004,8 @@ module Aws::PaymentCryptography
     #   @return [Types::Key]
     class RestoreKeyOutput < Struct.new(
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -966,7 +1019,8 @@ module Aws::PaymentCryptography
     class RootCertificatePublicKey < Struct.new(
       :key_attributes,
       :public_key_certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1029,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1039,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,7 +1049,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class StartKeyUsageInput < Struct.new(
       :key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1059,8 @@ module Aws::PaymentCryptography
     #   @return [Types::Key]
     class StartKeyUsageOutput < Struct.new(
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1069,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class StopKeyUsageInput < Struct.new(
       :key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1079,8 @@ module Aws::PaymentCryptography
     #   @return [Types::Key]
     class StopKeyUsageOutput < Struct.new(
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1094,8 @@ module Aws::PaymentCryptography
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,12 +1108,14 @@ module Aws::PaymentCryptography
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1124,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,7 +1143,8 @@ module Aws::PaymentCryptography
       :key_attributes,
       :public_key_certificate,
       :certificate_authority_public_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1092,12 +1157,14 @@ module Aws::PaymentCryptography
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1177,8 @@ module Aws::PaymentCryptography
     class UpdateAliasInput < Struct.new(
       :alias_name,
       :key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1187,8 @@ module Aws::PaymentCryptography
     #   @return [Types::Alias]
     class UpdateAliasOutput < Struct.new(
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1197,8 @@ module Aws::PaymentCryptography
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1224,8 @@ module Aws::PaymentCryptography
       :key_material,
       :key_check_value,
       :key_check_value_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

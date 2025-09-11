@@ -11,7 +11,8 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class CloudWatchLogsLogGroup < Struct.new(
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +36,8 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,12 +51,14 @@ module Aws::SimSpaceWeaver
     class CreateSnapshotInput < Struct.new(
       :simulation,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateSnapshotOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -70,12 +75,14 @@ module Aws::SimSpaceWeaver
       :simulation,
       :domain,
       :app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAppOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,12 +91,14 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class DeleteSimulationOperationInput < Struct.new(
       :simulation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSimulationOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +115,8 @@ module Aws::SimSpaceWeaver
       :simulation,
       :domain,
       :app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +153,8 @@ module Aws::SimSpaceWeaver
       :launch_overrides,
       :description,
       :endpoint_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +163,8 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class DescribeSimulationOperationInput < Struct.new(
       :simulation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -237,7 +249,8 @@ module Aws::SimSpaceWeaver
       :maximum_duration,
       :snapshot_s3_location,
       :start_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +289,8 @@ module Aws::SimSpaceWeaver
     class Domain < Struct.new(
       :name,
       :lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +299,8 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +311,8 @@ module Aws::SimSpaceWeaver
     #   @return [Array<String>]
     class LaunchOverrides < Struct.new(
       :launch_commands,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +337,8 @@ module Aws::SimSpaceWeaver
       :domain,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +355,8 @@ module Aws::SimSpaceWeaver
     class ListAppsOperationOutput < Struct.new(
       :apps,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +373,8 @@ module Aws::SimSpaceWeaver
     class ListSimulationsOperationInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +391,8 @@ module Aws::SimSpaceWeaver
     class ListSimulationsOperationOutput < Struct.new(
       :simulations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -382,7 +402,8 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -391,7 +412,8 @@ module Aws::SimSpaceWeaver
     #   @return [Hash<String, String>]
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +432,8 @@ module Aws::SimSpaceWeaver
     class LiveSimulationState < Struct.new(
       :domains,
       :clocks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -421,7 +444,8 @@ module Aws::SimSpaceWeaver
     #   @return [Types::CloudWatchLogsLogGroup]
     class LogDestination < Struct.new(
       :cloud_watch_logs_log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +455,8 @@ module Aws::SimSpaceWeaver
     #   @return [Array<Types::LogDestination>]
     class LoggingConfiguration < Struct.new(
       :destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +465,8 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +484,8 @@ module Aws::SimSpaceWeaver
     class S3Destination < Struct.new(
       :bucket_name,
       :object_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -480,7 +507,8 @@ module Aws::SimSpaceWeaver
     class S3Location < Struct.new(
       :bucket_name,
       :object_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +517,8 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -507,7 +536,8 @@ module Aws::SimSpaceWeaver
     class SimulationAppEndpointInfo < Struct.new(
       :address,
       :ingress_port_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +564,8 @@ module Aws::SimSpaceWeaver
       :domain,
       :status,
       :target_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -553,7 +584,8 @@ module Aws::SimSpaceWeaver
     class SimulationAppPortMapping < Struct.new(
       :declared,
       :actual,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -567,7 +599,8 @@ module Aws::SimSpaceWeaver
     class SimulationClock < Struct.new(
       :status,
       :target_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,7 +628,8 @@ module Aws::SimSpaceWeaver
       :creation_time,
       :status,
       :target_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +660,8 @@ module Aws::SimSpaceWeaver
       :name,
       :description,
       :launch_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +678,8 @@ module Aws::SimSpaceWeaver
       :name,
       :domain,
       :simulation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,12 +688,14 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class StartClockOperationInput < Struct.new(
       :simulation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartClockOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -716,7 +754,8 @@ module Aws::SimSpaceWeaver
       :maximum_duration,
       :tags,
       :snapshot_s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +774,8 @@ module Aws::SimSpaceWeaver
       :arn,
       :execution_id,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,12 +792,14 @@ module Aws::SimSpaceWeaver
       :simulation,
       :domain,
       :app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopAppOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,12 +808,14 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class StopClockOperationInput < Struct.new(
       :simulation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopClockOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,12 +824,14 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class StopSimulationOperationInput < Struct.new(
       :simulation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopSimulationOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -800,12 +846,14 @@ module Aws::SimSpaceWeaver
     class TagResourceOperationInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +862,8 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,12 +878,14 @@ module Aws::SimSpaceWeaver
     class UntagResourceOperationInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +894,8 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

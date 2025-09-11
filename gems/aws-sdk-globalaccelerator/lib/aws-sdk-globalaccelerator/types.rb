@@ -69,7 +69,8 @@ module Aws::GlobalAccelerator
       :last_modified_time,
       :dual_stack_dns_name,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -95,7 +96,8 @@ module Aws::GlobalAccelerator
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +115,8 @@ module Aws::GlobalAccelerator
     class AcceleratorEvent < Struct.new(
       :message,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +125,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class AcceleratorNotDisabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +135,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class AcceleratorNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +145,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -153,7 +159,8 @@ module Aws::GlobalAccelerator
     class AddCustomRoutingEndpointsRequest < Struct.new(
       :endpoint_configurations,
       :endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -166,7 +173,8 @@ module Aws::GlobalAccelerator
     class AddCustomRoutingEndpointsResponse < Struct.new(
       :endpoint_descriptions,
       :endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,7 +187,8 @@ module Aws::GlobalAccelerator
     class AddEndpointsRequest < Struct.new(
       :endpoint_configurations,
       :endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +201,8 @@ module Aws::GlobalAccelerator
     class AddEndpointsResponse < Struct.new(
       :endpoint_descriptions,
       :endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +215,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class AdvertiseByoipCidrRequest < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +225,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::ByoipCidr]
     class AdvertiseByoipCidrResponse < Struct.new(
       :byoip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +262,8 @@ module Aws::GlobalAccelerator
       :destination_addresses,
       :destination_ports,
       :allow_all_traffic_to_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -260,7 +273,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class AssociatedEndpointGroupFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +284,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class AssociatedListenerFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +317,8 @@ module Aws::GlobalAccelerator
       :resources,
       :last_modified_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +327,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class AttachmentNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +419,8 @@ module Aws::GlobalAccelerator
       :cidr,
       :state,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +438,8 @@ module Aws::GlobalAccelerator
     class ByoipCidrEvent < Struct.new(
       :message,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -429,7 +448,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class ByoipCidrNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +466,8 @@ module Aws::GlobalAccelerator
     class CidrAuthorizationContext < Struct.new(
       :message,
       :signature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +476,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +522,8 @@ module Aws::GlobalAccelerator
       :enabled,
       :idempotency_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +532,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::Accelerator]
     class CreateAcceleratorResponse < Struct.new(
       :accelerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +564,8 @@ module Aws::GlobalAccelerator
       :resources,
       :idempotency_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -549,7 +574,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::Attachment]
     class CreateCrossAccountAttachmentResponse < Struct.new(
       :cross_account_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +620,8 @@ module Aws::GlobalAccelerator
       :enabled,
       :idempotency_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +630,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::CustomRoutingAccelerator]
     class CreateCustomRoutingAcceleratorResponse < Struct.new(
       :accelerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +655,8 @@ module Aws::GlobalAccelerator
       :endpoint_group_region,
       :destination_configurations,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +665,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::CustomRoutingEndpointGroup]
     class CreateCustomRoutingEndpointGroupResponse < Struct.new(
       :endpoint_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +686,8 @@ module Aws::GlobalAccelerator
       :accelerator_arn,
       :port_ranges,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +696,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::CustomRoutingListener]
     class CreateCustomRoutingListenerResponse < Struct.new(
       :listener,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +762,8 @@ module Aws::GlobalAccelerator
       :threshold_count,
       :idempotency_token,
       :port_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -739,7 +772,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::EndpointGroup]
     class CreateEndpointGroupResponse < Struct.new(
       :endpoint_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -776,7 +810,8 @@ module Aws::GlobalAccelerator
       :protocol,
       :client_affinity,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +820,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::Listener]
     class CreateListenerResponse < Struct.new(
       :listener,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +851,8 @@ module Aws::GlobalAccelerator
       :endpoint_id,
       :cidr,
       :attachment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +903,8 @@ module Aws::GlobalAccelerator
       :status,
       :created_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +931,8 @@ module Aws::GlobalAccelerator
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -912,7 +951,8 @@ module Aws::GlobalAccelerator
       :from_port,
       :to_port,
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +971,8 @@ module Aws::GlobalAccelerator
       :from_port,
       :to_port,
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +988,8 @@ module Aws::GlobalAccelerator
     class CustomRoutingEndpointConfiguration < Struct.new(
       :endpoint_id,
       :attachment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +1001,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class CustomRoutingEndpointDescription < Struct.new(
       :endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1027,8 @@ module Aws::GlobalAccelerator
       :endpoint_group_region,
       :destination_descriptions,
       :endpoint_descriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1044,8 @@ module Aws::GlobalAccelerator
     class CustomRoutingListener < Struct.new(
       :listener_arn,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1009,7 +1054,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DeleteAcceleratorRequest < Struct.new(
       :accelerator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1064,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DeleteCrossAccountAttachmentRequest < Struct.new(
       :attachment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1027,7 +1074,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DeleteCustomRoutingAcceleratorRequest < Struct.new(
       :accelerator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1036,7 +1084,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DeleteCustomRoutingEndpointGroupRequest < Struct.new(
       :endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1045,7 +1094,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DeleteCustomRoutingListenerRequest < Struct.new(
       :listener_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1054,7 +1104,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DeleteEndpointGroupRequest < Struct.new(
       :endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1063,7 +1114,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DeleteListenerRequest < Struct.new(
       :listener_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1098,7 +1150,8 @@ module Aws::GlobalAccelerator
       :destination_addresses,
       :destination_ports,
       :deny_all_traffic_to_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1111,7 +1164,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DeprovisionByoipCidrRequest < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,7 +1174,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::ByoipCidr]
     class DeprovisionByoipCidrResponse < Struct.new(
       :byoip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1129,7 +1184,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DescribeAcceleratorAttributesRequest < Struct.new(
       :accelerator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1194,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::AcceleratorAttributes]
     class DescribeAcceleratorAttributesResponse < Struct.new(
       :accelerator_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1204,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DescribeAcceleratorRequest < Struct.new(
       :accelerator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1156,7 +1214,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::Accelerator]
     class DescribeAcceleratorResponse < Struct.new(
       :accelerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1224,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DescribeCrossAccountAttachmentRequest < Struct.new(
       :attachment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1174,7 +1234,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::Attachment]
     class DescribeCrossAccountAttachmentResponse < Struct.new(
       :cross_account_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,7 +1244,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DescribeCustomRoutingAcceleratorAttributesRequest < Struct.new(
       :accelerator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1192,7 +1254,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::CustomRoutingAcceleratorAttributes]
     class DescribeCustomRoutingAcceleratorAttributesResponse < Struct.new(
       :accelerator_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1264,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DescribeCustomRoutingAcceleratorRequest < Struct.new(
       :accelerator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,7 +1274,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::CustomRoutingAccelerator]
     class DescribeCustomRoutingAcceleratorResponse < Struct.new(
       :accelerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1219,7 +1284,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DescribeCustomRoutingEndpointGroupRequest < Struct.new(
       :endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1294,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::CustomRoutingEndpointGroup]
     class DescribeCustomRoutingEndpointGroupResponse < Struct.new(
       :endpoint_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1237,7 +1304,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DescribeCustomRoutingListenerRequest < Struct.new(
       :listener_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1246,7 +1314,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::CustomRoutingListener]
     class DescribeCustomRoutingListenerResponse < Struct.new(
       :listener,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1324,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DescribeEndpointGroupRequest < Struct.new(
       :endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1334,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::EndpointGroup]
     class DescribeEndpointGroupResponse < Struct.new(
       :endpoint_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1344,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class DescribeListenerRequest < Struct.new(
       :listener_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1282,7 +1354,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::Listener]
     class DescribeListenerResponse < Struct.new(
       :listener,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1323,7 +1396,8 @@ module Aws::GlobalAccelerator
       :destination_socket_address,
       :ip_address_type,
       :destination_traffic_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1406,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class EndpointAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,7 +1446,8 @@ module Aws::GlobalAccelerator
       :weight,
       :client_ip_preservation_enabled,
       :attachment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,7 +1489,8 @@ module Aws::GlobalAccelerator
       :health_state,
       :health_reason,
       :client_ip_preservation_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1472,7 +1549,8 @@ module Aws::GlobalAccelerator
       :health_check_interval_seconds,
       :threshold_count,
       :port_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1481,7 +1559,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class EndpointGroupAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1490,7 +1569,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class EndpointGroupNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1509,7 +1589,8 @@ module Aws::GlobalAccelerator
     class EndpointIdentifier < Struct.new(
       :endpoint_id,
       :client_ip_preservation_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1518,7 +1599,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class EndpointNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1528,7 +1610,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class IncorrectCidrStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1620,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1546,7 +1630,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class InvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1640,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,7 +1650,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class InvalidPortRangeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,7 +1671,8 @@ module Aws::GlobalAccelerator
       :ip_family,
       :ip_addresses,
       :ip_address_family,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1593,7 +1681,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,7 +1695,8 @@ module Aws::GlobalAccelerator
     class ListAcceleratorsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1619,7 +1709,8 @@ module Aws::GlobalAccelerator
     class ListAcceleratorsResponse < Struct.new(
       :accelerators,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1633,7 +1724,8 @@ module Aws::GlobalAccelerator
     class ListByoipCidrsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1646,7 +1738,8 @@ module Aws::GlobalAccelerator
     class ListByoipCidrsResponse < Struct.new(
       :byoip_cidrs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1659,7 +1752,8 @@ module Aws::GlobalAccelerator
     class ListCrossAccountAttachmentsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1672,12 +1766,14 @@ module Aws::GlobalAccelerator
     class ListCrossAccountAttachmentsResponse < Struct.new(
       :cross_account_attachments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ListCrossAccountResourceAccountsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1687,7 +1783,8 @@ module Aws::GlobalAccelerator
     #   @return [Array<String>]
     class ListCrossAccountResourceAccountsResponse < Struct.new(
       :resource_owner_aws_account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1708,7 +1805,8 @@ module Aws::GlobalAccelerator
       :resource_owner_aws_account_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1721,7 +1819,8 @@ module Aws::GlobalAccelerator
     class ListCrossAccountResourcesResponse < Struct.new(
       :cross_account_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1734,7 +1833,8 @@ module Aws::GlobalAccelerator
     class ListCustomRoutingAcceleratorsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1747,7 +1847,8 @@ module Aws::GlobalAccelerator
     class ListCustomRoutingAcceleratorsResponse < Struct.new(
       :accelerators,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1865,8 @@ module Aws::GlobalAccelerator
       :listener_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1777,7 +1879,8 @@ module Aws::GlobalAccelerator
     class ListCustomRoutingEndpointGroupsResponse < Struct.new(
       :endpoint_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1794,7 +1897,8 @@ module Aws::GlobalAccelerator
       :accelerator_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1807,7 +1911,8 @@ module Aws::GlobalAccelerator
     class ListCustomRoutingListenersResponse < Struct.new(
       :listeners,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1829,7 +1934,8 @@ module Aws::GlobalAccelerator
       :destination_address,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1842,7 +1948,8 @@ module Aws::GlobalAccelerator
     class ListCustomRoutingPortMappingsByDestinationResponse < Struct.new(
       :destination_port_mappings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1970,8 @@ module Aws::GlobalAccelerator
       :endpoint_group_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1876,7 +1984,8 @@ module Aws::GlobalAccelerator
     class ListCustomRoutingPortMappingsResponse < Struct.new(
       :port_mappings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1893,7 +2002,8 @@ module Aws::GlobalAccelerator
       :listener_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,7 +2016,8 @@ module Aws::GlobalAccelerator
     class ListEndpointGroupsResponse < Struct.new(
       :endpoint_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1923,7 +2034,8 @@ module Aws::GlobalAccelerator
       :accelerator_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1936,7 +2048,8 @@ module Aws::GlobalAccelerator
     class ListListenersResponse < Struct.new(
       :listeners,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1945,7 +2058,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1954,7 +2068,8 @@ module Aws::GlobalAccelerator
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2102,8 @@ module Aws::GlobalAccelerator
       :port_ranges,
       :protocol,
       :client_affinity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1996,7 +2112,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class ListenerNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2030,7 +2147,8 @@ module Aws::GlobalAccelerator
       :destination_socket_address,
       :protocols,
       :destination_traffic_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2051,7 +2169,8 @@ module Aws::GlobalAccelerator
     class PortOverride < Struct.new(
       :listener_port,
       :endpoint_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2065,7 +2184,8 @@ module Aws::GlobalAccelerator
     class PortRange < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2085,7 +2205,8 @@ module Aws::GlobalAccelerator
     class ProvisionByoipCidrRequest < Struct.new(
       :cidr,
       :cidr_authorization_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2094,7 +2215,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::ByoipCidr]
     class ProvisionByoipCidrResponse < Struct.new(
       :byoip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2108,7 +2230,8 @@ module Aws::GlobalAccelerator
     class RemoveCustomRoutingEndpointsRequest < Struct.new(
       :endpoint_ids,
       :endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2244,8 @@ module Aws::GlobalAccelerator
     class RemoveEndpointsRequest < Struct.new(
       :endpoint_identifiers,
       :endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2147,7 +2271,8 @@ module Aws::GlobalAccelerator
       :endpoint_id,
       :cidr,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2166,7 +2291,8 @@ module Aws::GlobalAccelerator
     class SocketAddress < Struct.new(
       :ip_address,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2180,7 +2306,8 @@ module Aws::GlobalAccelerator
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2193,12 +2320,14 @@ module Aws::GlobalAccelerator
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2207,7 +2336,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class TransactionInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2220,12 +2350,14 @@ module Aws::GlobalAccelerator
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2255,7 +2387,8 @@ module Aws::GlobalAccelerator
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2264,7 +2397,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::AcceleratorAttributes]
     class UpdateAcceleratorAttributesResponse < Struct.new(
       :accelerator_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2291,7 +2425,8 @@ module Aws::GlobalAccelerator
       :ip_address_type,
       :ip_addresses,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2300,7 +2435,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::Accelerator]
     class UpdateAcceleratorResponse < Struct.new(
       :accelerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2339,7 +2475,8 @@ module Aws::GlobalAccelerator
       :remove_principals,
       :add_resources,
       :remove_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2348,7 +2485,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::Attachment]
     class UpdateCrossAccountAttachmentResponse < Struct.new(
       :cross_account_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2378,7 +2516,8 @@ module Aws::GlobalAccelerator
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2387,7 +2526,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::CustomRoutingAcceleratorAttributes]
     class UpdateCustomRoutingAcceleratorAttributesResponse < Struct.new(
       :accelerator_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2414,7 +2554,8 @@ module Aws::GlobalAccelerator
       :ip_address_type,
       :ip_addresses,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2423,7 +2564,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::CustomRoutingAccelerator]
     class UpdateCustomRoutingAcceleratorResponse < Struct.new(
       :accelerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,7 +2581,8 @@ module Aws::GlobalAccelerator
     class UpdateCustomRoutingListenerRequest < Struct.new(
       :listener_arn,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2448,7 +2591,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::CustomRoutingListener]
     class UpdateCustomRoutingListenerResponse < Struct.new(
       :listener,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2503,7 +2647,8 @@ module Aws::GlobalAccelerator
       :health_check_interval_seconds,
       :threshold_count,
       :port_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2512,7 +2657,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::EndpointGroup]
     class UpdateEndpointGroupResponse < Struct.new(
       :endpoint_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2544,7 +2690,8 @@ module Aws::GlobalAccelerator
       :port_ranges,
       :protocol,
       :client_affinity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2553,7 +2700,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::Listener]
     class UpdateListenerResponse < Struct.new(
       :listener,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2565,7 +2713,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     class WithdrawByoipCidrRequest < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2574,7 +2723,8 @@ module Aws::GlobalAccelerator
     #   @return [Types::ByoipCidr]
     class WithdrawByoipCidrResponse < Struct.new(
       :byoip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

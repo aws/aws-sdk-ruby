@@ -38,7 +38,7 @@ module Aws::MarketplaceAgreement
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceAgreement::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The unique identifier for the error.</p>
@@ -56,7 +56,7 @@ module Aws::MarketplaceAgreement
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceAgreement::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The unique identifier for the error.</p>
@@ -74,7 +74,7 @@ module Aws::MarketplaceAgreement
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceAgreement::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The unique identifier for the error.</p>
@@ -102,7 +102,7 @@ module Aws::MarketplaceAgreement
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceAgreement::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The unique identifier for the error.</p>
@@ -120,7 +120,7 @@ module Aws::MarketplaceAgreement
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceAgreement::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The unique identifier associated with the error.</p>

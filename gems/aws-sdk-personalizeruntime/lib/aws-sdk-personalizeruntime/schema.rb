@@ -145,7 +145,6 @@ module Aws::PersonalizeRuntime
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/recommendations", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

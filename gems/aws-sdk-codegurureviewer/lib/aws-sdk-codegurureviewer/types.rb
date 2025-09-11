@@ -11,7 +11,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +58,8 @@ module Aws::CodeGuruReviewer
       :client_request_token,
       :tags,
       :kms_key_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -83,7 +85,8 @@ module Aws::CodeGuruReviewer
     class AssociateRepositoryResponse < Struct.new(
       :repository_association,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -99,7 +102,8 @@ module Aws::CodeGuruReviewer
     class BranchDiffSourceCodeType < Struct.new(
       :source_branch_name,
       :destination_branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +132,8 @@ module Aws::CodeGuruReviewer
     class CodeArtifacts < Struct.new(
       :source_code_artifacts_object_key,
       :build_artifacts_object_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +146,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class CodeCommitRepository < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +244,8 @@ module Aws::CodeGuruReviewer
       :metrics,
       :analysis_types,
       :config_file_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +321,8 @@ module Aws::CodeGuruReviewer
       :pull_request_id,
       :metrics_summary,
       :source_code_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,7 +351,8 @@ module Aws::CodeGuruReviewer
     class CodeReviewType < Struct.new(
       :repository_analysis,
       :analysis_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +375,8 @@ module Aws::CodeGuruReviewer
       :source_commit,
       :destination_commit,
       :merge_base_commit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -377,7 +387,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -403,7 +414,8 @@ module Aws::CodeGuruReviewer
       :repository_association_arn,
       :type,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +425,8 @@ module Aws::CodeGuruReviewer
     #   @return [Types::CodeReview]
     class CreateCodeReviewResponse < Struct.new(
       :code_review,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +436,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class DescribeCodeReviewRequest < Struct.new(
       :code_review_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +446,8 @@ module Aws::CodeGuruReviewer
     #   @return [Types::CodeReview]
     class DescribeCodeReviewResponse < Struct.new(
       :code_review,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +471,8 @@ module Aws::CodeGuruReviewer
       :code_review_arn,
       :recommendation_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -465,7 +481,8 @@ module Aws::CodeGuruReviewer
     #   @return [Types::RecommendationFeedback]
     class DescribeRecommendationFeedbackResponse < Struct.new(
       :recommendation_feedback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +491,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class DescribeRepositoryAssociationRequest < Struct.new(
       :association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +518,8 @@ module Aws::CodeGuruReviewer
     class DescribeRepositoryAssociationResponse < Struct.new(
       :repository_association,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +528,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class DisassociateRepositoryRequest < Struct.new(
       :association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +555,8 @@ module Aws::CodeGuruReviewer
     class DisassociateRepositoryResponse < Struct.new(
       :repository_association,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -552,7 +573,8 @@ module Aws::CodeGuruReviewer
     class EventInfo < Struct.new(
       :name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +583,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +611,8 @@ module Aws::CodeGuruReviewer
     class KMSKeyDetails < Struct.new(
       :kms_key_id,
       :encryption_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +667,8 @@ module Aws::CodeGuruReviewer
       :type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +681,8 @@ module Aws::CodeGuruReviewer
     class ListCodeReviewsResponse < Struct.new(
       :code_review_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +716,8 @@ module Aws::CodeGuruReviewer
       :code_review_arn,
       :user_ids,
       :recommendation_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +733,8 @@ module Aws::CodeGuruReviewer
     class ListRecommendationFeedbackResponse < Struct.new(
       :recommendation_feedback_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -724,7 +752,8 @@ module Aws::CodeGuruReviewer
       :next_token,
       :max_results,
       :code_review_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,7 +766,8 @@ module Aws::CodeGuruReviewer
     class ListRecommendationsResponse < Struct.new(
       :recommendation_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -818,7 +848,8 @@ module Aws::CodeGuruReviewer
       :owners,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +865,8 @@ module Aws::CodeGuruReviewer
     class ListRepositoryAssociationsResponse < Struct.new(
       :repository_association_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +875,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -865,7 +898,8 @@ module Aws::CodeGuruReviewer
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -891,7 +925,8 @@ module Aws::CodeGuruReviewer
       :metered_lines_of_code_count,
       :suppressed_lines_of_code_count,
       :findings_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +966,8 @@ module Aws::CodeGuruReviewer
       :metered_lines_of_code_count,
       :suppressed_lines_of_code_count,
       :findings_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +976,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,12 +997,14 @@ module Aws::CodeGuruReviewer
       :code_review_arn,
       :recommendation_id,
       :reactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutRecommendationFeedbackResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1041,8 @@ module Aws::CodeGuruReviewer
       :user_id,
       :created_time_stamp,
       :last_updated_time_stamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1025,7 +1065,8 @@ module Aws::CodeGuruReviewer
       :recommendation_id,
       :reactions,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1067,7 +1108,8 @@ module Aws::CodeGuruReviewer
       :recommendation_category,
       :rule_metadata,
       :severity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1092,7 +1134,8 @@ module Aws::CodeGuruReviewer
       :bitbucket,
       :git_hub_enterprise_server,
       :s3_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1151,8 @@ module Aws::CodeGuruReviewer
     class RepositoryAnalysis < Struct.new(
       :repository_head,
       :source_code_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1259,8 @@ module Aws::CodeGuruReviewer
       :created_time_stamp,
       :kms_key_details,
       :s3_repository_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1292,7 +1337,8 @@ module Aws::CodeGuruReviewer
       :owner,
       :provider_type,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1350,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class RepositoryHeadSourceCodeType < Struct.new(
       :branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1333,7 +1380,8 @@ module Aws::CodeGuruReviewer
       :requester,
       :event_info,
       :vendor_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1342,7 +1390,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1417,8 @@ module Aws::CodeGuruReviewer
       :short_description,
       :long_description,
       :rule_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1385,7 +1435,8 @@ module Aws::CodeGuruReviewer
     class S3BucketRepository < Struct.new(
       :name,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1450,8 @@ module Aws::CodeGuruReviewer
     class S3Repository < Struct.new(
       :name,
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1417,7 +1469,8 @@ module Aws::CodeGuruReviewer
     class S3RepositoryDetails < Struct.new(
       :bucket_name,
       :code_artifacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1503,8 @@ module Aws::CodeGuruReviewer
       :branch_diff,
       :s3_bucket_repository,
       :request_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,12 +1530,14 @@ module Aws::CodeGuruReviewer
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1501,7 +1557,8 @@ module Aws::CodeGuruReviewer
       :name,
       :connection_arn,
       :owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1567,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,12 +1581,14 @@ module Aws::CodeGuruReviewer
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1597,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -12,7 +12,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ActorDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26,7 +27,8 @@ module Aws::CodeCommit
     class Approval < Struct.new(
       :user_arn,
       :approval_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +66,8 @@ module Aws::CodeCommit
       :creation_date,
       :last_modified_user,
       :origin_approval_rule_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +77,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ApprovalRuleContentRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +88,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ApprovalRuleDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +107,8 @@ module Aws::CodeCommit
       :approval_rule_name,
       :approval_rule_id,
       :approval_rule_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +119,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ApprovalRuleNameAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +130,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ApprovalRuleNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,7 +145,8 @@ module Aws::CodeCommit
     class ApprovalRuleOverriddenEventMetadata < Struct.new(
       :revision_id,
       :override_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +184,8 @@ module Aws::CodeCommit
       :last_modified_date,
       :creation_date,
       :last_modified_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +195,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ApprovalRuleTemplateContentRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +207,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ApprovalRuleTemplateDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +219,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ApprovalRuleTemplateInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +232,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ApprovalRuleTemplateNameAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -229,7 +243,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ApprovalRuleTemplateNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -243,7 +258,8 @@ module Aws::CodeCommit
     class ApprovalStateChangedEventMetadata < Struct.new(
       :revision_id,
       :approval_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +269,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ApprovalStateRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -266,7 +283,8 @@ module Aws::CodeCommit
     class AssociateApprovalRuleTemplateWithRepositoryInput < Struct.new(
       :approval_rule_template_name,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +294,8 @@ module Aws::CodeCommit
     #   @return [String]
     class AuthorDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +313,8 @@ module Aws::CodeCommit
       :repository_name,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +330,8 @@ module Aws::CodeCommit
     class BatchAssociateApprovalRuleTemplateWithRepositoriesInput < Struct.new(
       :approval_rule_template_name,
       :repository_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +344,8 @@ module Aws::CodeCommit
     class BatchAssociateApprovalRuleTemplateWithRepositoriesOutput < Struct.new(
       :associated_repository_names,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +363,8 @@ module Aws::CodeCommit
       :file_path,
       :exception_name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +417,8 @@ module Aws::CodeCommit
       :conflict_detail_level,
       :conflict_resolution_strategy,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +447,8 @@ module Aws::CodeCommit
       :destination_commit_id,
       :source_commit_id,
       :base_commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +467,8 @@ module Aws::CodeCommit
       :repository_name,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +485,8 @@ module Aws::CodeCommit
     class BatchDisassociateApprovalRuleTemplateFromRepositoriesInput < Struct.new(
       :approval_rule_template_name,
       :repository_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +500,8 @@ module Aws::CodeCommit
     class BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput < Struct.new(
       :disassociated_repository_names,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,7 +519,8 @@ module Aws::CodeCommit
       :commit_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +537,8 @@ module Aws::CodeCommit
     class BatchGetCommitsInput < Struct.new(
       :commit_ids,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,7 +553,8 @@ module Aws::CodeCommit
     class BatchGetCommitsOutput < Struct.new(
       :commits,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +576,8 @@ module Aws::CodeCommit
       :repository_name,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -558,7 +590,8 @@ module Aws::CodeCommit
     #   @return [Array<String>]
     class BatchGetRepositoriesInput < Struct.new(
       :repository_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +609,8 @@ module Aws::CodeCommit
       :repositories,
       :repositories_not_found,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +620,8 @@ module Aws::CodeCommit
     #   @return [String]
     class BeforeCommitIdAndAfterCommitIdAreSameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,7 +631,8 @@ module Aws::CodeCommit
     #   @return [String]
     class BlobIdDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +642,8 @@ module Aws::CodeCommit
     #   @return [String]
     class BlobIdRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +679,8 @@ module Aws::CodeCommit
       :blob_id,
       :path,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +690,8 @@ module Aws::CodeCommit
     #   @return [String]
     class BranchDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +705,8 @@ module Aws::CodeCommit
     class BranchInfo < Struct.new(
       :branch_name,
       :commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +718,8 @@ module Aws::CodeCommit
     #   @return [String]
     class BranchNameExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -689,7 +730,8 @@ module Aws::CodeCommit
     #   @return [String]
     class BranchNameIsTagNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -699,7 +741,8 @@ module Aws::CodeCommit
     #   @return [String]
     class BranchNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +753,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CannotDeleteApprovalRuleFromTemplateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +765,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CannotModifyApprovalRuleFromTemplateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +780,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ClientRequestTokenRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +830,8 @@ module Aws::CodeCommit
       :client_request_token,
       :caller_reactions,
       :reaction_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -799,7 +846,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommentContentRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,7 +857,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommentContentSizeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +868,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommentDeletedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +880,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommentDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +891,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommentIdRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,7 +902,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommentNotCreatedByCallerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +941,8 @@ module Aws::CodeCommit
       :after_blob_id,
       :location,
       :comments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +985,8 @@ module Aws::CodeCommit
       :after_blob_id,
       :location,
       :comments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -972,7 +1027,8 @@ module Aws::CodeCommit
       :author,
       :committer,
       :additional_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -982,7 +1038,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommitDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -992,7 +1049,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommitIdDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1060,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommitIdRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1012,7 +1071,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommitIdsLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1022,7 +1082,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommitIdsListRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1032,7 +1093,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommitMessageLengthExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1104,8 @@ module Aws::CodeCommit
     #   @return [String]
     class CommitRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1115,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ConcurrentReferenceUpdateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1066,7 +1130,8 @@ module Aws::CodeCommit
     class Conflict < Struct.new(
       :conflict_metadata,
       :merge_hunks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1177,8 @@ module Aws::CodeCommit
       :file_mode_conflict,
       :object_type_conflict,
       :merge_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1139,7 +1205,8 @@ module Aws::CodeCommit
       :replace_contents,
       :delete_files,
       :set_file_modes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1202,7 +1269,8 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :approval_rule_template_content,
       :approval_rule_template_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,7 +1279,8 @@ module Aws::CodeCommit
     #   @return [Types::ApprovalRuleTemplate]
     class CreateApprovalRuleTemplateOutput < Struct.new(
       :approval_rule_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1229,7 +1298,8 @@ module Aws::CodeCommit
       :repository_name,
       :branch_name,
       :commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1349,8 @@ module Aws::CodeCommit
       :put_files,
       :delete_files,
       :set_file_modes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1375,8 @@ module Aws::CodeCommit
       :files_added,
       :files_updated,
       :files_deleted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1434,8 @@ module Aws::CodeCommit
       :pull_request_id,
       :approval_rule_name,
       :approval_rule_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,7 +1444,8 @@ module Aws::CodeCommit
     #   @return [Types::ApprovalRule]
     class CreatePullRequestApprovalRuleOutput < Struct.new(
       :approval_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1476,8 @@ module Aws::CodeCommit
       :description,
       :targets,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,7 +1486,8 @@ module Aws::CodeCommit
     #   @return [Types::PullRequest]
     class CreatePullRequestOutput < Struct.new(
       :pull_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1451,7 +1527,8 @@ module Aws::CodeCommit
       :repository_description,
       :tags,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1461,7 +1538,8 @@ module Aws::CodeCommit
     #   @return [Types::RepositoryMetadata]
     class CreateRepositoryOutput < Struct.new(
       :repository_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1521,7 +1599,8 @@ module Aws::CodeCommit
       :commit_message,
       :keep_empty_folders,
       :conflict_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1534,7 +1613,8 @@ module Aws::CodeCommit
     class CreateUnreferencedMergeCommitOutput < Struct.new(
       :commit_id,
       :tree_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1544,7 +1624,8 @@ module Aws::CodeCommit
     #   @return [String]
     class DefaultBranchCannotBeDeletedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1634,8 @@ module Aws::CodeCommit
     #   @return [String]
     class DeleteApprovalRuleTemplateInput < Struct.new(
       :approval_rule_template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1563,7 +1645,8 @@ module Aws::CodeCommit
     #   @return [String]
     class DeleteApprovalRuleTemplateOutput < Struct.new(
       :approval_rule_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1660,8 @@ module Aws::CodeCommit
     class DeleteBranchInput < Struct.new(
       :repository_name,
       :branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1671,8 @@ module Aws::CodeCommit
     #   @return [Types::BranchInfo]
     class DeleteBranchOutput < Struct.new(
       :deleted_branch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1597,7 +1682,8 @@ module Aws::CodeCommit
     #   @return [String]
     class DeleteCommentContentInput < Struct.new(
       :comment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,7 +1692,8 @@ module Aws::CodeCommit
     #   @return [Types::Comment]
     class DeleteCommentContentOutput < Struct.new(
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1703,8 @@ module Aws::CodeCommit
     #   @return [String]
     class DeleteFileEntry < Struct.new(
       :file_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1664,7 +1752,8 @@ module Aws::CodeCommit
       :commit_message,
       :name,
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1686,7 +1775,8 @@ module Aws::CodeCommit
       :blob_id,
       :tree_id,
       :file_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,7 +1789,8 @@ module Aws::CodeCommit
     class DeletePullRequestApprovalRuleInput < Struct.new(
       :pull_request_id,
       :approval_rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1712,7 +1803,8 @@ module Aws::CodeCommit
     #   @return [String]
     class DeletePullRequestApprovalRuleOutput < Struct.new(
       :approval_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1722,7 +1814,8 @@ module Aws::CodeCommit
     #   @return [String]
     class DeleteRepositoryInput < Struct.new(
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1732,7 +1825,8 @@ module Aws::CodeCommit
     #   @return [String]
     class DeleteRepositoryOutput < Struct.new(
       :repository_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1781,7 +1875,8 @@ module Aws::CodeCommit
       :conflict_detail_level,
       :conflict_resolution_strategy,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1905,8 @@ module Aws::CodeCommit
       :destination_commit_id,
       :source_commit_id,
       :base_commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,7 +1935,8 @@ module Aws::CodeCommit
       :actor_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1852,7 +1949,8 @@ module Aws::CodeCommit
     class DescribePullRequestEventsOutput < Struct.new(
       :pull_request_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1872,7 +1970,8 @@ module Aws::CodeCommit
       :before_blob,
       :after_blob,
       :change_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1883,7 +1982,8 @@ module Aws::CodeCommit
     #   @return [String]
     class DirectoryNameConflictsWithFileNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1896,7 +1996,8 @@ module Aws::CodeCommit
     class DisassociateApprovalRuleTemplateFromRepositoryInput < Struct.new(
       :approval_rule_template_name,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,7 +2007,8 @@ module Aws::CodeCommit
     #   @return [String]
     class EncryptionIntegrityChecksFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1916,7 +2018,8 @@ module Aws::CodeCommit
     #   @return [String]
     class EncryptionKeyAccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1926,7 +2029,8 @@ module Aws::CodeCommit
     #   @return [String]
     class EncryptionKeyDisabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1936,7 +2040,8 @@ module Aws::CodeCommit
     #   @return [String]
     class EncryptionKeyInvalidIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2052,8 @@ module Aws::CodeCommit
     #   @return [String]
     class EncryptionKeyInvalidUsageException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2063,8 @@ module Aws::CodeCommit
     #   @return [String]
     class EncryptionKeyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1967,7 +2074,8 @@ module Aws::CodeCommit
     #   @return [String]
     class EncryptionKeyRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1977,7 +2085,8 @@ module Aws::CodeCommit
     #   @return [String]
     class EncryptionKeyUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1992,7 +2101,8 @@ module Aws::CodeCommit
     class EvaluatePullRequestApprovalRulesInput < Struct.new(
       :pull_request_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2112,8 @@ module Aws::CodeCommit
     #   @return [Types::Evaluation]
     class EvaluatePullRequestApprovalRulesOutput < Struct.new(
       :evaluation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2024,7 +2135,8 @@ module Aws::CodeCommit
       :overridden,
       :approval_rules_satisfied,
       :approval_rules_not_satisfied,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2052,7 +2164,8 @@ module Aws::CodeCommit
       :absolute_path,
       :relative_path,
       :file_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2064,7 +2177,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FileContentAndSourceFileSpecifiedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2188,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FileContentRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2086,7 +2201,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FileContentSizeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2097,7 +2213,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FileDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2107,7 +2224,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FileEntryRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2126,7 +2244,8 @@ module Aws::CodeCommit
       :absolute_path,
       :blob_id,
       :file_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2137,7 +2256,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FileModeRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2275,8 @@ module Aws::CodeCommit
       :source,
       :destination,
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2166,7 +2287,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FileNameConflictsWithDirectoryNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2177,7 +2299,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FilePathConflictsWithSubmodulePathException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2195,7 +2318,8 @@ module Aws::CodeCommit
       :source,
       :destination,
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2213,7 +2337,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FileTooLargeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2236,7 +2361,8 @@ module Aws::CodeCommit
       :blob_id,
       :path,
       :revision_children,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2254,7 +2380,8 @@ module Aws::CodeCommit
       :tree_id,
       :absolute_path,
       :relative_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2266,7 +2393,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FolderContentSizeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2277,7 +2405,8 @@ module Aws::CodeCommit
     #   @return [String]
     class FolderDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2286,7 +2415,8 @@ module Aws::CodeCommit
     #   @return [String]
     class GetApprovalRuleTemplateInput < Struct.new(
       :approval_rule_template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2295,7 +2425,8 @@ module Aws::CodeCommit
     #   @return [Types::ApprovalRuleTemplate]
     class GetApprovalRuleTemplateOutput < Struct.new(
       :approval_rule_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2309,7 +2440,8 @@ module Aws::CodeCommit
     class GetBlobInput < Struct.new(
       :repository_name,
       :blob_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2319,7 +2451,8 @@ module Aws::CodeCommit
     #   @return [String]
     class GetBlobOutput < Struct.new(
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2333,7 +2466,8 @@ module Aws::CodeCommit
     class GetBranchInput < Struct.new(
       :repository_name,
       :branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2343,7 +2477,8 @@ module Aws::CodeCommit
     #   @return [Types::BranchInfo]
     class GetBranchOutput < Struct.new(
       :branch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2353,7 +2488,8 @@ module Aws::CodeCommit
     #   @return [String]
     class GetCommentInput < Struct.new(
       :comment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2362,7 +2498,8 @@ module Aws::CodeCommit
     #   @return [Types::Comment]
     class GetCommentOutput < Struct.new(
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2383,7 +2520,8 @@ module Aws::CodeCommit
       :reaction_user_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2396,7 +2534,8 @@ module Aws::CodeCommit
     class GetCommentReactionsOutput < Struct.new(
       :reactions_for_comment,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2424,7 +2563,8 @@ module Aws::CodeCommit
       :after_commit_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2437,7 +2577,8 @@ module Aws::CodeCommit
     class GetCommentsForComparedCommitOutput < Struct.new(
       :comments_for_compared_commit_data,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2471,7 +2612,8 @@ module Aws::CodeCommit
       :after_commit_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2484,7 +2626,8 @@ module Aws::CodeCommit
     class GetCommentsForPullRequestOutput < Struct.new(
       :comments_for_pull_request_data,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2498,7 +2641,8 @@ module Aws::CodeCommit
     class GetCommitInput < Struct.new(
       :repository_name,
       :commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2508,7 +2652,8 @@ module Aws::CodeCommit
     #   @return [Types::Commit]
     class GetCommitOutput < Struct.new(
       :commit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2551,7 +2696,8 @@ module Aws::CodeCommit
       :after_path,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2565,7 +2711,8 @@ module Aws::CodeCommit
     class GetDifferencesOutput < Struct.new(
       :differences,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2586,7 +2733,8 @@ module Aws::CodeCommit
       :repository_name,
       :commit_specifier,
       :file_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2621,7 +2769,8 @@ module Aws::CodeCommit
       :file_mode,
       :file_size,
       :file_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2648,7 +2797,8 @@ module Aws::CodeCommit
       :repository_name,
       :commit_specifier,
       :folder_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2683,7 +2833,8 @@ module Aws::CodeCommit
       :files,
       :symbolic_links,
       :sub_modules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2715,7 +2866,8 @@ module Aws::CodeCommit
       :destination_commit_specifier,
       :conflict_detail_level,
       :conflict_resolution_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2738,7 +2890,8 @@ module Aws::CodeCommit
       :destination_commit_id,
       :base_commit_id,
       :merged_commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2783,7 +2936,8 @@ module Aws::CodeCommit
       :max_conflict_files,
       :conflict_resolution_strategy,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2813,7 +2967,8 @@ module Aws::CodeCommit
       :base_commit_id,
       :conflict_metadata_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2850,7 +3005,8 @@ module Aws::CodeCommit
       :destination_commit_specifier,
       :conflict_detail_level,
       :conflict_resolution_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2871,7 +3027,8 @@ module Aws::CodeCommit
       :source_commit_id,
       :destination_commit_id,
       :base_commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2884,7 +3041,8 @@ module Aws::CodeCommit
     class GetPullRequestApprovalStatesInput < Struct.new(
       :pull_request_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2893,7 +3051,8 @@ module Aws::CodeCommit
     #   @return [Array<Types::Approval>]
     class GetPullRequestApprovalStatesOutput < Struct.new(
       :approvals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2902,7 +3061,8 @@ module Aws::CodeCommit
     #   @return [String]
     class GetPullRequestInput < Struct.new(
       :pull_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2911,7 +3071,8 @@ module Aws::CodeCommit
     #   @return [Types::PullRequest]
     class GetPullRequestOutput < Struct.new(
       :pull_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2926,7 +3087,8 @@ module Aws::CodeCommit
     class GetPullRequestOverrideStateInput < Struct.new(
       :pull_request_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2939,7 +3101,8 @@ module Aws::CodeCommit
     class GetPullRequestOverrideStateOutput < Struct.new(
       :overridden,
       :overrider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2954,7 +3117,8 @@ module Aws::CodeCommit
     #   @return [String]
     class GetRepositoryInput < Struct.new(
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2964,7 +3128,8 @@ module Aws::CodeCommit
     #   @return [Types::RepositoryMetadata]
     class GetRepositoryOutput < Struct.new(
       :repository_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2974,7 +3139,8 @@ module Aws::CodeCommit
     #   @return [String]
     class GetRepositoryTriggersInput < Struct.new(
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2988,7 +3154,8 @@ module Aws::CodeCommit
     class GetRepositoryTriggersOutput < Struct.new(
       :configuration_id,
       :triggers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2999,7 +3166,8 @@ module Aws::CodeCommit
     #   @return [String]
     class IdempotencyParameterMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3178,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidActorArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3020,7 +3189,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidApprovalRuleContentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3030,7 +3200,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidApprovalRuleNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3040,7 +3211,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidApprovalRuleTemplateContentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3052,7 +3224,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidApprovalRuleTemplateDescriptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3064,7 +3237,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidApprovalRuleTemplateNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3074,7 +3248,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidApprovalStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3084,7 +3259,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidAuthorArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3094,7 +3270,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidBlobIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3104,7 +3281,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidBranchNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3114,7 +3292,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidClientRequestTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3124,7 +3303,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidCommentIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3134,7 +3314,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidCommitException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3144,7 +3325,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidCommitIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3154,7 +3336,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidConflictDetailLevelException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3164,7 +3347,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidConflictResolutionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3174,7 +3358,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidConflictResolutionStrategyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3184,7 +3369,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidContinuationTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3194,7 +3380,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidDeletionParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3205,7 +3392,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidDescriptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3215,7 +3403,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidDestinationCommitSpecifierException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3226,7 +3415,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidEmailException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3237,7 +3427,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidFileLocationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3247,7 +3438,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidFileModeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3257,7 +3449,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidFilePositionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3267,7 +3460,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidMaxConflictFilesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3277,7 +3471,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidMaxMergeHunksException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3287,7 +3482,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidMaxResultsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3297,7 +3493,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidMergeOptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3307,7 +3504,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidOrderException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3317,7 +3515,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidOverrideStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3328,7 +3527,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidParentCommitIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3338,7 +3538,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidPathException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3348,7 +3549,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidPullRequestEventTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3358,7 +3560,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidPullRequestIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3368,7 +3571,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidPullRequestStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3378,7 +3582,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidPullRequestStatusUpdateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3388,7 +3593,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidReactionUserArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3398,7 +3604,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidReactionValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3410,7 +3617,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidReferenceNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3420,7 +3628,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRelativeFileVersionEnumException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3430,7 +3639,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidReplacementContentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3440,7 +3650,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidReplacementTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3450,7 +3661,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRepositoryDescriptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3465,7 +3677,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRepositoryNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3475,7 +3688,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRepositoryTriggerBranchNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3485,7 +3699,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRepositoryTriggerCustomDataException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3495,7 +3710,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRepositoryTriggerDestinationArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3505,7 +3721,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRepositoryTriggerEventsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3515,7 +3732,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRepositoryTriggerNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3527,7 +3745,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRepositoryTriggerRegionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3539,7 +3758,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidResourceArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3549,7 +3769,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRevisionIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3559,7 +3780,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidRuleContentSha256Exception < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3569,7 +3791,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidSortByException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3579,7 +3802,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidSourceCommitSpecifierException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3589,7 +3813,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidSystemTagUsageException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3599,7 +3824,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidTagKeysListException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3609,7 +3835,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidTagsMapException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3619,7 +3846,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidTargetBranchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3629,7 +3857,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidTargetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3640,7 +3869,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidTargetsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3650,7 +3880,8 @@ module Aws::CodeCommit
     #   @return [String]
     class InvalidTitleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3668,7 +3899,8 @@ module Aws::CodeCommit
       :source,
       :destination,
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3682,7 +3914,8 @@ module Aws::CodeCommit
     class ListApprovalRuleTemplatesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3695,7 +3928,8 @@ module Aws::CodeCommit
     class ListApprovalRuleTemplatesOutput < Struct.new(
       :approval_rule_template_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3713,7 +3947,8 @@ module Aws::CodeCommit
       :repository_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3726,7 +3961,8 @@ module Aws::CodeCommit
     class ListAssociatedApprovalRuleTemplatesForRepositoryOutput < Struct.new(
       :approval_rule_template_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3740,7 +3976,8 @@ module Aws::CodeCommit
     class ListBranchesInput < Struct.new(
       :repository_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3754,7 +3991,8 @@ module Aws::CodeCommit
     class ListBranchesOutput < Struct.new(
       :branches,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3781,7 +4019,8 @@ module Aws::CodeCommit
       :file_path,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3794,7 +4033,8 @@ module Aws::CodeCommit
     class ListFileCommitHistoryResponse < Struct.new(
       :revision_dag,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3821,7 +4061,8 @@ module Aws::CodeCommit
       :pull_request_status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3834,7 +4075,8 @@ module Aws::CodeCommit
     class ListPullRequestsOutput < Struct.new(
       :pull_request_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3852,7 +4094,8 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3865,7 +4108,8 @@ module Aws::CodeCommit
     class ListRepositoriesForApprovalRuleTemplateOutput < Struct.new(
       :repository_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3885,7 +4129,8 @@ module Aws::CodeCommit
       :next_token,
       :sort_by,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3901,7 +4146,8 @@ module Aws::CodeCommit
     class ListRepositoriesOutput < Struct.new(
       :repositories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3916,7 +4162,8 @@ module Aws::CodeCommit
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3929,7 +4176,8 @@ module Aws::CodeCommit
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3948,7 +4196,8 @@ module Aws::CodeCommit
       :file_path,
       :file_position,
       :relative_file_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3958,7 +4207,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ManualMergeRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3968,7 +4218,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MaximumBranchesExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3978,7 +4229,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MaximumConflictResolutionEntriesExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3988,7 +4240,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MaximumFileContentToLoadExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3999,7 +4252,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MaximumFileEntriesExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4009,7 +4263,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MaximumItemsToCompareExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4019,7 +4274,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MaximumNumberOfApprovalsExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4030,7 +4286,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MaximumOpenPullRequestsExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4040,7 +4297,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MaximumRepositoryNamesExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4050,7 +4308,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MaximumRepositoryTriggersExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4061,7 +4320,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MaximumRuleTemplatesAssociatedWithRepositoryException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4084,7 +4344,8 @@ module Aws::CodeCommit
       :source_commit_specifier,
       :destination_commit_specifier,
       :target_branch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4097,7 +4358,8 @@ module Aws::CodeCommit
     class MergeBranchesByFastForwardOutput < Struct.new(
       :commit_id,
       :tree_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4158,7 +4420,8 @@ module Aws::CodeCommit
       :commit_message,
       :keep_empty_folders,
       :conflict_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4171,7 +4434,8 @@ module Aws::CodeCommit
     class MergeBranchesBySquashOutput < Struct.new(
       :commit_id,
       :tree_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4232,7 +4496,8 @@ module Aws::CodeCommit
       :commit_message,
       :keep_empty_folders,
       :conflict_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4245,7 +4510,8 @@ module Aws::CodeCommit
     class MergeBranchesByThreeWayOutput < Struct.new(
       :commit_id,
       :tree_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4271,7 +4537,8 @@ module Aws::CodeCommit
       :source,
       :destination,
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4295,7 +4562,8 @@ module Aws::CodeCommit
       :start_line,
       :end_line,
       :hunk_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4317,7 +4585,8 @@ module Aws::CodeCommit
       :merged_by,
       :merge_commit_id,
       :merge_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4337,7 +4606,8 @@ module Aws::CodeCommit
     class MergeOperations < Struct.new(
       :source,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4347,7 +4617,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MergeOptionRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4365,7 +4636,8 @@ module Aws::CodeCommit
       :pull_request_id,
       :repository_name,
       :source_commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4374,7 +4646,8 @@ module Aws::CodeCommit
     #   @return [Types::PullRequest]
     class MergePullRequestByFastForwardOutput < Struct.new(
       :pull_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4430,7 +4703,8 @@ module Aws::CodeCommit
       :email,
       :keep_empty_folders,
       :conflict_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4439,7 +4713,8 @@ module Aws::CodeCommit
     #   @return [Types::PullRequest]
     class MergePullRequestBySquashOutput < Struct.new(
       :pull_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4495,7 +4770,8 @@ module Aws::CodeCommit
       :email,
       :keep_empty_folders,
       :conflict_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4504,7 +4780,8 @@ module Aws::CodeCommit
     #   @return [Types::PullRequest]
     class MergePullRequestByThreeWayOutput < Struct.new(
       :pull_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4514,7 +4791,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MultipleConflictResolutionEntriesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4524,7 +4802,8 @@ module Aws::CodeCommit
     #   @return [String]
     class MultipleRepositoriesInPullRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4534,7 +4813,8 @@ module Aws::CodeCommit
     #   @return [String]
     class NameLengthExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4544,7 +4824,8 @@ module Aws::CodeCommit
     #   @return [String]
     class NoChangeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4554,7 +4835,8 @@ module Aws::CodeCommit
     #   @return [String]
     class NumberOfRuleTemplatesExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4564,7 +4846,8 @@ module Aws::CodeCommit
     #   @return [String]
     class NumberOfRulesExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4582,7 +4865,8 @@ module Aws::CodeCommit
       :source,
       :destination,
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4592,7 +4876,8 @@ module Aws::CodeCommit
     #   @return [String]
     class OperationNotAllowedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4606,7 +4891,8 @@ module Aws::CodeCommit
     class OriginApprovalRuleTemplate < Struct.new(
       :approval_rule_template_id,
       :approval_rule_template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4616,7 +4902,8 @@ module Aws::CodeCommit
     #   @return [String]
     class OverrideAlreadySetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4637,7 +4924,8 @@ module Aws::CodeCommit
       :pull_request_id,
       :revision_id,
       :override_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4647,7 +4935,8 @@ module Aws::CodeCommit
     #   @return [String]
     class OverrideStatusRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4657,7 +4946,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ParentCommitDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4668,7 +4958,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ParentCommitIdOutdatedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4679,7 +4970,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ParentCommitIdRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4689,7 +4981,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PathDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4699,7 +4992,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PathRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4734,7 +5028,8 @@ module Aws::CodeCommit
       :location,
       :content,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4767,7 +5062,8 @@ module Aws::CodeCommit
       :after_blob_id,
       :location,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4805,7 +5101,8 @@ module Aws::CodeCommit
       :location,
       :content,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4844,7 +5141,8 @@ module Aws::CodeCommit
       :after_blob_id,
       :location,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4865,7 +5163,8 @@ module Aws::CodeCommit
       :in_reply_to,
       :client_request_token,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4874,7 +5173,8 @@ module Aws::CodeCommit
     #   @return [Types::Comment]
     class PostCommentReplyOutput < Struct.new(
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4928,7 +5228,8 @@ module Aws::CodeCommit
       :client_request_token,
       :revision_id,
       :approval_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4938,7 +5239,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PullRequestAlreadyClosedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4948,7 +5250,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PullRequestApprovalRulesNotSatisfiedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4959,7 +5262,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PullRequestCannotBeApprovedByAuthorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4981,7 +5285,8 @@ module Aws::CodeCommit
       :source_commit_id,
       :destination_commit_id,
       :merge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4991,7 +5296,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PullRequestDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5045,7 +5351,8 @@ module Aws::CodeCommit
       :approval_rule_event_metadata,
       :approval_state_changed_event_metadata,
       :approval_rule_overridden_event_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5055,7 +5362,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PullRequestIdRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5073,7 +5381,8 @@ module Aws::CodeCommit
       :repository_name,
       :destination_reference,
       :merge_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5095,7 +5404,8 @@ module Aws::CodeCommit
       :before_commit_id,
       :after_commit_id,
       :merge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5105,7 +5415,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PullRequestStatusChangedEventMetadata < Struct.new(
       :pull_request_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5115,7 +5426,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PullRequestStatusRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5152,7 +5464,8 @@ module Aws::CodeCommit
       :source_commit,
       :merge_base,
       :merge_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5166,7 +5479,8 @@ module Aws::CodeCommit
     class PutCommentReactionInput < Struct.new(
       :comment_id,
       :reaction_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5189,7 +5503,8 @@ module Aws::CodeCommit
       :file_mode,
       :file_content,
       :source_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5199,7 +5514,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PutFileEntryConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5251,7 +5567,8 @@ module Aws::CodeCommit
       :commit_message,
       :name,
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5268,7 +5585,8 @@ module Aws::CodeCommit
       :commit_id,
       :blob_id,
       :tree_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5282,7 +5600,8 @@ module Aws::CodeCommit
     class PutRepositoryTriggersInput < Struct.new(
       :repository_name,
       :triggers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5292,7 +5611,8 @@ module Aws::CodeCommit
     #   @return [String]
     class PutRepositoryTriggersOutput < Struct.new(
       :configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5311,7 +5631,8 @@ module Aws::CodeCommit
       :reaction,
       :reaction_users,
       :reactions_from_deleted_users_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5321,7 +5642,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ReactionLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5339,7 +5661,8 @@ module Aws::CodeCommit
       :emoji,
       :short_code,
       :unicode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5349,7 +5672,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ReactionValueRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5359,7 +5683,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ReferenceDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5369,7 +5694,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ReferenceNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5379,7 +5705,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ReferenceTypeNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5401,7 +5728,8 @@ module Aws::CodeCommit
       :replacement_type,
       :content,
       :file_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5411,7 +5739,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ReplacementContentRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5421,7 +5750,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ReplacementTypeRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5431,7 +5761,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5441,7 +5772,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5491,7 +5823,8 @@ module Aws::CodeCommit
       :clone_url_ssh,
       :arn,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5501,7 +5834,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryNameExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5515,7 +5849,8 @@ module Aws::CodeCommit
     class RepositoryNameIdPair < Struct.new(
       :repository_name,
       :repository_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5525,7 +5860,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5535,7 +5871,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryNamesRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5545,7 +5882,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryNotAssociatedWithPullRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5588,7 +5926,8 @@ module Aws::CodeCommit
       :custom_data,
       :branches,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5599,7 +5938,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryTriggerBranchNameListRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5610,7 +5950,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryTriggerDestinationArnRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5620,7 +5961,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryTriggerEventsListRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5634,7 +5976,8 @@ module Aws::CodeCommit
     class RepositoryTriggerExecutionFailure < Struct.new(
       :trigger,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5644,7 +5987,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryTriggerNameRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5654,7 +5998,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RepositoryTriggersListRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5666,7 +6011,8 @@ module Aws::CodeCommit
     #   @return [String]
     class ResourceArnRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5676,7 +6022,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RestrictedSourceFileException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5686,7 +6033,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RevisionIdRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5696,7 +6044,8 @@ module Aws::CodeCommit
     #   @return [String]
     class RevisionNotCurrentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5707,7 +6056,8 @@ module Aws::CodeCommit
     #   @return [String]
     class SameFileContentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5719,7 +6069,8 @@ module Aws::CodeCommit
     #   @return [String]
     class SamePathRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5733,7 +6084,8 @@ module Aws::CodeCommit
     class SetFileModeEntry < Struct.new(
       :file_path,
       :file_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5744,7 +6096,8 @@ module Aws::CodeCommit
     #   @return [String]
     class SourceAndDestinationAreSameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5754,7 +6107,8 @@ module Aws::CodeCommit
     #   @return [String]
     class SourceFileOrContentRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5768,7 +6122,8 @@ module Aws::CodeCommit
     class SourceFileSpecifier < Struct.new(
       :file_path,
       :is_move,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5791,7 +6146,8 @@ module Aws::CodeCommit
       :commit_id,
       :absolute_path,
       :relative_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5813,7 +6169,8 @@ module Aws::CodeCommit
       :absolute_path,
       :relative_path,
       :file_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5823,7 +6180,8 @@ module Aws::CodeCommit
     #   @return [String]
     class TagKeysListRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5833,7 +6191,8 @@ module Aws::CodeCommit
     #   @return [String]
     class TagPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5846,7 +6205,8 @@ module Aws::CodeCommit
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5856,7 +6216,8 @@ module Aws::CodeCommit
     #   @return [String]
     class TagsMapRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5875,7 +6236,8 @@ module Aws::CodeCommit
       :repository_name,
       :source_reference,
       :destination_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5885,7 +6247,8 @@ module Aws::CodeCommit
     #   @return [String]
     class TargetRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5895,7 +6258,8 @@ module Aws::CodeCommit
     #   @return [String]
     class TargetsRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5909,7 +6273,8 @@ module Aws::CodeCommit
     class TestRepositoryTriggersInput < Struct.new(
       :repository_name,
       :triggers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5924,7 +6289,8 @@ module Aws::CodeCommit
     class TestRepositoryTriggersOutput < Struct.new(
       :successful_executions,
       :failed_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5935,7 +6301,8 @@ module Aws::CodeCommit
     #   @return [String]
     class TipOfSourceReferenceIsDifferentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5946,7 +6313,8 @@ module Aws::CodeCommit
     #   @return [String]
     class TipsDivergenceExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5956,7 +6324,8 @@ module Aws::CodeCommit
     #   @return [String]
     class TitleRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5966,7 +6335,8 @@ module Aws::CodeCommit
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5979,7 +6349,8 @@ module Aws::CodeCommit
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5999,7 +6370,8 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :new_rule_content,
       :existing_rule_content_sha256,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6008,7 +6380,8 @@ module Aws::CodeCommit
     #   @return [Types::ApprovalRuleTemplate]
     class UpdateApprovalRuleTemplateContentOutput < Struct.new(
       :approval_rule_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6021,7 +6394,8 @@ module Aws::CodeCommit
     class UpdateApprovalRuleTemplateDescriptionInput < Struct.new(
       :approval_rule_template_name,
       :approval_rule_template_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6030,7 +6404,8 @@ module Aws::CodeCommit
     #   @return [Types::ApprovalRuleTemplate]
     class UpdateApprovalRuleTemplateDescriptionOutput < Struct.new(
       :approval_rule_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6043,7 +6418,8 @@ module Aws::CodeCommit
     class UpdateApprovalRuleTemplateNameInput < Struct.new(
       :old_approval_rule_template_name,
       :new_approval_rule_template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6052,7 +6428,8 @@ module Aws::CodeCommit
     #   @return [Types::ApprovalRuleTemplate]
     class UpdateApprovalRuleTemplateNameOutput < Struct.new(
       :approval_rule_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6066,7 +6443,8 @@ module Aws::CodeCommit
     class UpdateCommentInput < Struct.new(
       :comment_id,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6075,7 +6453,8 @@ module Aws::CodeCommit
     #   @return [Types::Comment]
     class UpdateCommentOutput < Struct.new(
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6089,7 +6468,8 @@ module Aws::CodeCommit
     class UpdateDefaultBranchInput < Struct.new(
       :repository_name,
       :default_branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6151,7 +6531,8 @@ module Aws::CodeCommit
       :approval_rule_name,
       :existing_rule_content_sha256,
       :new_rule_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6160,7 +6541,8 @@ module Aws::CodeCommit
     #   @return [Types::ApprovalRule]
     class UpdatePullRequestApprovalRuleContentOutput < Struct.new(
       :approval_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6177,7 +6559,8 @@ module Aws::CodeCommit
       :pull_request_id,
       :revision_id,
       :approval_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6191,7 +6574,8 @@ module Aws::CodeCommit
     class UpdatePullRequestDescriptionInput < Struct.new(
       :pull_request_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6200,7 +6584,8 @@ module Aws::CodeCommit
     #   @return [Types::PullRequest]
     class UpdatePullRequestDescriptionOutput < Struct.new(
       :pull_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6215,7 +6600,8 @@ module Aws::CodeCommit
     class UpdatePullRequestStatusInput < Struct.new(
       :pull_request_id,
       :pull_request_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6224,7 +6610,8 @@ module Aws::CodeCommit
     #   @return [Types::PullRequest]
     class UpdatePullRequestStatusOutput < Struct.new(
       :pull_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6237,7 +6624,8 @@ module Aws::CodeCommit
     class UpdatePullRequestTitleInput < Struct.new(
       :pull_request_id,
       :title,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6246,7 +6634,8 @@ module Aws::CodeCommit
     #   @return [Types::PullRequest]
     class UpdatePullRequestTitleOutput < Struct.new(
       :pull_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6260,7 +6649,8 @@ module Aws::CodeCommit
     class UpdateRepositoryDescriptionInput < Struct.new(
       :repository_name,
       :repository_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6276,7 +6666,8 @@ module Aws::CodeCommit
     class UpdateRepositoryEncryptionKeyInput < Struct.new(
       :repository_name,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6293,7 +6684,8 @@ module Aws::CodeCommit
       :repository_id,
       :kms_key_id,
       :original_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6307,7 +6699,8 @@ module Aws::CodeCommit
     class UpdateRepositoryNameInput < Struct.new(
       :old_name,
       :new_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6325,7 +6718,8 @@ module Aws::CodeCommit
       :name,
       :email,
       :date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

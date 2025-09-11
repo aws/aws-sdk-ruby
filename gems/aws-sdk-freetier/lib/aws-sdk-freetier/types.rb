@@ -11,7 +11,8 @@ module Aws::FreeTier
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::FreeTier
     class ActivityReward < Struct.new(
       :credit,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Credit < ActivityReward; end
@@ -47,7 +49,8 @@ module Aws::FreeTier
       :title,
       :reward,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +68,8 @@ module Aws::FreeTier
       :key,
       :values,
       :match_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -87,7 +91,8 @@ module Aws::FreeTier
       :and,
       :not,
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -133,7 +138,8 @@ module Aws::FreeTier
       :unit,
       :description,
       :free_tier_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -153,7 +159,8 @@ module Aws::FreeTier
     class GetAccountActivityRequest < Struct.new(
       :activity_id,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,12 +205,14 @@ module Aws::FreeTier
       :expires_at,
       :started_at,
       :completed_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAccountPlanStateRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +237,8 @@ module Aws::FreeTier
       :account_plan_status,
       :account_plan_remaining_credits,
       :account_plan_expiration_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +255,8 @@ module Aws::FreeTier
       :filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +269,8 @@ module Aws::FreeTier
     class GetFreeTierUsageResponse < Struct.new(
       :free_tier_usages,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +279,8 @@ module Aws::FreeTier
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +301,8 @@ module Aws::FreeTier
       :next_token,
       :max_results,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +315,8 @@ module Aws::FreeTier
     class ListAccountActivitiesResponse < Struct.new(
       :activities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,7 +330,8 @@ module Aws::FreeTier
     class MonetaryAmount < Struct.new(
       :amount,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -329,7 +345,8 @@ module Aws::FreeTier
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +355,8 @@ module Aws::FreeTier
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +365,8 @@ module Aws::FreeTier
     #   @return [String]
     class UpgradeAccountPlanRequest < Struct.new(
       :account_plan_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +383,8 @@ module Aws::FreeTier
       :account_id,
       :account_plan_type,
       :account_plan_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -373,7 +393,8 @@ module Aws::FreeTier
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

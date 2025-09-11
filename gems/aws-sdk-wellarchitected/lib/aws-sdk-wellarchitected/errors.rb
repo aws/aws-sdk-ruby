@@ -40,7 +40,7 @@ module Aws::WellArchitected
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WellArchitected::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::WellArchitected
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WellArchitected::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -74,7 +74,7 @@ module Aws::WellArchitected
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WellArchitected::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::WellArchitected
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WellArchitected::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::WellArchitected
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WellArchitected::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::WellArchitected
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WellArchitected::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -158,7 +158,7 @@ module Aws::WellArchitected
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WellArchitected::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -44,7 +44,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -122,7 +122,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::RequestEntityTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -148,7 +148,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -161,7 +161,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -174,7 +174,7 @@ module Aws::Synthetics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Synthetics::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

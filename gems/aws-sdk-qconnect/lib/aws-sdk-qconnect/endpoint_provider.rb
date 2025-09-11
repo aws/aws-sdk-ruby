@@ -42,7 +42,6 @@ module Aws::QConnect
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

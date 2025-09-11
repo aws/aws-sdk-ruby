@@ -52,7 +52,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::FleetCapacityExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::GameSessionFullException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::IdempotentParameterMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -124,7 +124,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::InvalidFleetStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::InvalidGameSessionStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -180,7 +180,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -195,7 +195,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::NotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -210,7 +210,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::OutOfCapacityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -225,7 +225,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::TaggingFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -241,7 +241,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::TerminalRoutingStrategyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -254,7 +254,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -267,7 +267,7 @@ module Aws::GameLift
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::UnsupportedRegionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

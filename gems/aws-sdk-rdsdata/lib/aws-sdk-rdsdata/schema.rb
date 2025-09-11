@@ -382,7 +382,6 @@ module Aws::RDSData
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionNotFoundException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/RollbackTransaction"}}
       end)
-
     end
 
     class << self

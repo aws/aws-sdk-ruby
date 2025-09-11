@@ -746,7 +746,6 @@ module Aws::TranscribeStreaming
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/stream-transcription", "code" => 200}}
       end)
-
     end
 
     class << self

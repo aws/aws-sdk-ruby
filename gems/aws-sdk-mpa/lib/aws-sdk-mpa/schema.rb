@@ -787,7 +787,6 @@ module Aws::MPA
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to update approval team"}, "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/approval-teams/{Arn}"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

@@ -39,7 +39,7 @@ module Aws::IoTFleetHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetHub::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::IoTFleetHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetHub::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::IoTFleetHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetHub::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::IoTFleetHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetHub::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::IoTFleetHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetHub::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::IoTFleetHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetHub::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

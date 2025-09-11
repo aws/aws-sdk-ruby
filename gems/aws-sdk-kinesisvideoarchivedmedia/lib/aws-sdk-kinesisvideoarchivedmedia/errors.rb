@@ -42,7 +42,7 @@ module Aws::KinesisVideoArchivedMedia
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoArchivedMedia::Types::ClientLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::KinesisVideoArchivedMedia
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoArchivedMedia::Types::InvalidArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::KinesisVideoArchivedMedia
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoArchivedMedia::Types::InvalidCodecPrivateDataException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::KinesisVideoArchivedMedia
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoArchivedMedia::Types::InvalidMediaFrameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::KinesisVideoArchivedMedia
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoArchivedMedia::Types::MissingCodecPrivateDataException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::KinesisVideoArchivedMedia
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoArchivedMedia::Types::NoDataRetentionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::KinesisVideoArchivedMedia
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoArchivedMedia::Types::NotAuthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -148,7 +148,7 @@ module Aws::KinesisVideoArchivedMedia
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoArchivedMedia::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -164,7 +164,7 @@ module Aws::KinesisVideoArchivedMedia
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoArchivedMedia::Types::UnsupportedStreamMediaTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

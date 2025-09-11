@@ -22621,7 +22621,6 @@ module Aws::EC2
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WithdrawByoipCidrResult)
         operation.traits = {}
       end)
-
     end
 
     class << self

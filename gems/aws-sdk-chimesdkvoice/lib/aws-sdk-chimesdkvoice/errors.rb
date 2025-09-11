@@ -45,7 +45,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -62,7 +62,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -79,7 +79,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -96,7 +96,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -113,7 +113,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::GoneException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -130,7 +130,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -147,7 +147,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -164,7 +164,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::ServiceFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -181,7 +181,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -198,7 +198,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::ThrottledClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -215,7 +215,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::UnauthorizedClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -232,7 +232,7 @@ module Aws::ChimeSDKVoice
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKVoice::Types::UnprocessableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code

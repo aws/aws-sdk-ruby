@@ -1590,7 +1590,6 @@ module Aws::CloudWatchEvents
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {}
       end)
-
     end
 
     class << self

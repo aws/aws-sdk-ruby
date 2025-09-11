@@ -45,7 +45,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -67,7 +67,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -89,7 +89,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -111,7 +111,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -133,7 +133,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -155,7 +155,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -182,7 +182,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::ServiceFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -204,7 +204,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -231,7 +231,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -253,7 +253,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -280,7 +280,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -302,7 +302,7 @@ module Aws::ChimeSDKMeetings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKMeetings::Types::UnprocessableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code

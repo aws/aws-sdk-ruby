@@ -1270,7 +1270,6 @@ module Aws::Inspector
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
         operation.traits = {}
       end)
-
     end
 
     class << self

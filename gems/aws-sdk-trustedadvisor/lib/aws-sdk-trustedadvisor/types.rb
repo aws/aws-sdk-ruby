@@ -11,7 +11,8 @@ module Aws::TrustedAdvisor
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +56,8 @@ module Aws::TrustedAdvisor
       :update_reason,
       :update_reason_code,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +66,8 @@ module Aws::TrustedAdvisor
     #   @return [Array<Types::RecommendationResourceExclusion>]
     class BatchUpdateRecommendationResourceExclusionRequest < Struct.new(
       :recommendation_resource_exclusions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -73,7 +76,8 @@ module Aws::TrustedAdvisor
     #   @return [Array<Types::UpdateRecommendationResourceExclusionError>]
     class BatchUpdateRecommendationResourceExclusionResponse < Struct.new(
       :batch_update_recommendation_resource_exclusion_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +115,8 @@ module Aws::TrustedAdvisor
       :aws_services,
       :source,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +125,8 @@ module Aws::TrustedAdvisor
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,7 +135,8 @@ module Aws::TrustedAdvisor
     #   @return [String]
     class GetOrganizationRecommendationRequest < Struct.new(
       :organization_recommendation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -138,7 +145,8 @@ module Aws::TrustedAdvisor
     #   @return [Types::OrganizationRecommendation]
     class GetOrganizationRecommendationResponse < Struct.new(
       :organization_recommendation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +155,8 @@ module Aws::TrustedAdvisor
     #   @return [String]
     class GetRecommendationRequest < Struct.new(
       :recommendation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +165,8 @@ module Aws::TrustedAdvisor
     #   @return [Types::Recommendation]
     class GetRecommendationResponse < Struct.new(
       :recommendation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,7 +175,8 @@ module Aws::TrustedAdvisor
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +207,8 @@ module Aws::TrustedAdvisor
       :aws_service,
       :source,
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +223,8 @@ module Aws::TrustedAdvisor
     class ListChecksResponse < Struct.new(
       :next_token,
       :check_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +247,8 @@ module Aws::TrustedAdvisor
       :max_results,
       :organization_recommendation_identifier,
       :affected_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +263,8 @@ module Aws::TrustedAdvisor
     class ListOrganizationRecommendationAccountsResponse < Struct.new(
       :next_token,
       :account_recommendation_lifecycle_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +299,8 @@ module Aws::TrustedAdvisor
       :region_code,
       :organization_recommendation_identifier,
       :affected_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +315,8 @@ module Aws::TrustedAdvisor
     class ListOrganizationRecommendationResourcesResponse < Struct.new(
       :next_token,
       :organization_recommendation_resource_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +363,8 @@ module Aws::TrustedAdvisor
       :check_identifier,
       :after_last_updated_at,
       :before_last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +379,8 @@ module Aws::TrustedAdvisor
     class ListOrganizationRecommendationsResponse < Struct.new(
       :next_token,
       :organization_recommendation_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +411,8 @@ module Aws::TrustedAdvisor
       :exclusion_status,
       :region_code,
       :recommendation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,7 +427,8 @@ module Aws::TrustedAdvisor
     class ListRecommendationResourcesResponse < Struct.new(
       :next_token,
       :recommendation_resource_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +475,8 @@ module Aws::TrustedAdvisor
       :check_identifier,
       :after_last_updated_at,
       :before_last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +491,8 @@ module Aws::TrustedAdvisor
     class ListRecommendationsResponse < Struct.new(
       :next_token,
       :recommendation_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -565,7 +588,8 @@ module Aws::TrustedAdvisor
       :update_reason,
       :update_reason_code,
       :resolved_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +635,8 @@ module Aws::TrustedAdvisor
       :exclusion_status,
       :account_id,
       :recommendation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -678,7 +703,8 @@ module Aws::TrustedAdvisor
       :created_at,
       :last_updated_at,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +800,8 @@ module Aws::TrustedAdvisor
       :update_reason,
       :update_reason_code,
       :resolved_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,7 +815,8 @@ module Aws::TrustedAdvisor
     class RecommendationCostOptimizingAggregates < Struct.new(
       :estimated_monthly_savings,
       :estimated_percent_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +826,8 @@ module Aws::TrustedAdvisor
     #   @return [Types::RecommendationCostOptimizingAggregates]
     class RecommendationPillarSpecificAggregates < Struct.new(
       :cost_optimizing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -812,7 +841,8 @@ module Aws::TrustedAdvisor
     class RecommendationResourceExclusion < Struct.new(
       :arn,
       :is_excluded,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -854,7 +884,8 @@ module Aws::TrustedAdvisor
       :last_updated_at,
       :exclusion_status,
       :recommendation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -878,7 +909,8 @@ module Aws::TrustedAdvisor
       :ok_count,
       :warning_count,
       :error_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +972,8 @@ module Aws::TrustedAdvisor
       :created_at,
       :last_updated_at,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -949,7 +982,8 @@ module Aws::TrustedAdvisor
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -958,7 +992,8 @@ module Aws::TrustedAdvisor
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -979,7 +1014,8 @@ module Aws::TrustedAdvisor
       :update_reason,
       :update_reason_code,
       :organization_recommendation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1036,8 @@ module Aws::TrustedAdvisor
       :update_reason,
       :update_reason_code,
       :recommendation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1055,8 @@ module Aws::TrustedAdvisor
       :arn,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1027,7 +1065,8 @@ module Aws::TrustedAdvisor
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -40,7 +40,7 @@ module Aws::NetworkMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkMonitor::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::NetworkMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkMonitor::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::NetworkMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkMonitor::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::NetworkMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkMonitor::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::NetworkMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkMonitor::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::NetworkMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkMonitor::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::NetworkMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkMonitor::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

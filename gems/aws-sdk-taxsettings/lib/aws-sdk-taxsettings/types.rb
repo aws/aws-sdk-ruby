@@ -12,7 +12,8 @@ module Aws::TaxSettings
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,7 +41,8 @@ module Aws::TaxSettings
       :tax_registration,
       :tax_inheritance_details,
       :account_meta_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +79,8 @@ module Aws::TaxSettings
       :address,
       :address_type,
       :address_role_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +185,8 @@ module Aws::TaxSettings
       :egypt_additional_info,
       :greece_additional_info,
       :uzbekistan_additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +297,8 @@ module Aws::TaxSettings
       :egypt_additional_info,
       :greece_additional_info,
       :uzbekistan_additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +344,8 @@ module Aws::TaxSettings
       :state_or_region,
       :postal_code,
       :country_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -349,7 +355,8 @@ module Aws::TaxSettings
     #   @return [String]
     class AttachmentUploadException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +375,8 @@ module Aws::TaxSettings
     class Authority < Struct.new(
       :country,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +397,8 @@ module Aws::TaxSettings
       :account_id,
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +407,8 @@ module Aws::TaxSettings
     #   @return [Array<String>]
     class BatchDeleteTaxRegistrationRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,7 +417,8 @@ module Aws::TaxSettings
     #   @return [Array<Types::BatchDeleteTaxRegistrationError>]
     class BatchDeleteTaxRegistrationResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +429,8 @@ module Aws::TaxSettings
     #   @return [Array<String>]
     class BatchGetTaxExemptionsRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -433,7 +445,8 @@ module Aws::TaxSettings
     class BatchGetTaxExemptionsResponse < Struct.new(
       :tax_exemption_details_map,
       :failed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +468,8 @@ module Aws::TaxSettings
       :account_id,
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +483,8 @@ module Aws::TaxSettings
     class BatchPutTaxRegistrationRequest < Struct.new(
       :account_ids,
       :tax_registration_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -485,7 +500,8 @@ module Aws::TaxSettings
     class BatchPutTaxRegistrationResponse < Struct.new(
       :status,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +516,8 @@ module Aws::TaxSettings
     class BrazilAdditionalInfo < Struct.new(
       :ccm_code,
       :legal_nature_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +562,8 @@ module Aws::TaxSettings
       :canada_quebec_sales_tax_number,
       :canada_retail_sales_tax_number,
       :is_reseller_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +573,8 @@ module Aws::TaxSettings
     #   @return [String]
     class CaseCreationLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +587,8 @@ module Aws::TaxSettings
     class ConflictException < Struct.new(
       :message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,12 +599,14 @@ module Aws::TaxSettings
     #   @return [String]
     class DeleteSupplementalTaxRegistrationRequest < Struct.new(
       :authority_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSupplementalTaxRegistrationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,12 +617,14 @@ module Aws::TaxSettings
     #   @return [String]
     class DeleteTaxRegistrationRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTaxRegistrationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +638,8 @@ module Aws::TaxSettings
     class DestinationS3Location < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -628,7 +653,8 @@ module Aws::TaxSettings
     class EgyptAdditionalInfo < Struct.new(
       :unique_identification_number,
       :unique_identification_number_expiration_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -639,7 +665,8 @@ module Aws::TaxSettings
     #   @return [String]
     class EstoniaAdditionalInfo < Struct.new(
       :registry_commercial_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +683,8 @@ module Aws::TaxSettings
     class ExemptionCertificate < Struct.new(
       :document_name,
       :document_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,12 +698,14 @@ module Aws::TaxSettings
     #   @return [String]
     class GeorgiaAdditionalInfo < Struct.new(
       :person_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetTaxExemptionTypesRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,12 +715,14 @@ module Aws::TaxSettings
     #   @return [Array<Types::TaxExemptionType>]
     class GetTaxExemptionTypesResponse < Struct.new(
       :tax_exemption_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetTaxInheritanceRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +732,8 @@ module Aws::TaxSettings
     #   @return [String]
     class GetTaxInheritanceResponse < Struct.new(
       :heritage_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +746,8 @@ module Aws::TaxSettings
     class GetTaxRegistrationDocumentRequest < Struct.new(
       :destination_s3_location,
       :tax_document_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +761,8 @@ module Aws::TaxSettings
     class GetTaxRegistrationDocumentResponse < Struct.new(
       :destination_file_path,
       :presigned_s3_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -736,7 +771,8 @@ module Aws::TaxSettings
     #   @return [String]
     class GetTaxRegistrationRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +781,8 @@ module Aws::TaxSettings
     #   @return [Types::TaxRegistration]
     class GetTaxRegistrationResponse < Struct.new(
       :tax_registration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +793,8 @@ module Aws::TaxSettings
     #   @return [String]
     class GreeceAdditionalInfo < Struct.new(
       :contracting_authority_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +808,8 @@ module Aws::TaxSettings
     #   @return [String]
     class IndiaAdditionalInfo < Struct.new(
       :pan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,7 +827,8 @@ module Aws::TaxSettings
       :tax_registration_number_type,
       :ppn_exception_designation_code,
       :decision_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +841,8 @@ module Aws::TaxSettings
     class InternalServerException < Struct.new(
       :message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +860,8 @@ module Aws::TaxSettings
     class IsraelAdditionalInfo < Struct.new(
       :dealer_type,
       :customer_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,7 +892,8 @@ module Aws::TaxSettings
       :cig_number,
       :cup_number,
       :tax_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +909,8 @@ module Aws::TaxSettings
     class Jurisdiction < Struct.new(
       :state_or_region,
       :country_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -876,7 +920,8 @@ module Aws::TaxSettings
     #   @return [String]
     class KenyaAdditionalInfo < Struct.new(
       :person_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +938,8 @@ module Aws::TaxSettings
     class ListSupplementalTaxRegistrationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +956,8 @@ module Aws::TaxSettings
     class ListSupplementalTaxRegistrationsResponse < Struct.new(
       :tax_registrations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +971,8 @@ module Aws::TaxSettings
     class ListTaxExemptionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,7 +986,8 @@ module Aws::TaxSettings
     class ListTaxExemptionsResponse < Struct.new(
       :next_token,
       :tax_exemption_details_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +1000,8 @@ module Aws::TaxSettings
     class ListTaxRegistrationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -965,7 +1015,8 @@ module Aws::TaxSettings
     class ListTaxRegistrationsResponse < Struct.new(
       :account_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1041,8 @@ module Aws::TaxSettings
       :service_tax_codes,
       :tax_information_number,
       :business_registration_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1015,7 +1067,8 @@ module Aws::TaxSettings
     class PolandAdditionalInfo < Struct.new(
       :individual_registration_number,
       :is_group_vat_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1026,7 +1079,8 @@ module Aws::TaxSettings
     #   @return [Types::SupplementalTaxRegistrationEntry]
     class PutSupplementalTaxRegistrationRequest < Struct.new(
       :tax_registration_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1043,7 +1097,8 @@ module Aws::TaxSettings
     class PutSupplementalTaxRegistrationResponse < Struct.new(
       :authority_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1069,7 +1124,8 @@ module Aws::TaxSettings
       :authority,
       :exemption_type,
       :exemption_certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,7 +1135,8 @@ module Aws::TaxSettings
     #   @return [String]
     class PutTaxExemptionResponse < Struct.new(
       :case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1089,12 +1146,14 @@ module Aws::TaxSettings
     #   @return [String]
     class PutTaxInheritanceRequest < Struct.new(
       :heritage_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutTaxInheritanceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1167,8 @@ module Aws::TaxSettings
     class PutTaxRegistrationRequest < Struct.new(
       :account_id,
       :tax_registration_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1179,8 @@ module Aws::TaxSettings
     #   @return [String]
     class PutTaxRegistrationResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1132,7 +1193,8 @@ module Aws::TaxSettings
     class ResourceNotFoundException < Struct.new(
       :message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1207,8 @@ module Aws::TaxSettings
     #   @return [String]
     class RomaniaAdditionalInfo < Struct.new(
       :tax_registration_number_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1222,8 @@ module Aws::TaxSettings
     #   @return [String]
     class SaudiArabiaAdditionalInfo < Struct.new(
       :tax_registration_number_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1237,8 @@ module Aws::TaxSettings
     class SourceS3Location < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,7 +1256,8 @@ module Aws::TaxSettings
       :business_representative_name,
       :line_of_business,
       :item_of_business,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1267,8 @@ module Aws::TaxSettings
     #   @return [String]
     class SpainAdditionalInfo < Struct.new(
       :registration_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1244,7 +1311,8 @@ module Aws::TaxSettings
       :address,
       :authority_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1275,7 +1343,8 @@ module Aws::TaxSettings
       :registration_type,
       :legal_name,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1292,7 +1361,8 @@ module Aws::TaxSettings
     class TaxDocumentMetadata < Struct.new(
       :tax_document_access_token,
       :tax_document_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1399,8 @@ module Aws::TaxSettings
       :expiration_date,
       :system_effective_date,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1356,7 +1427,8 @@ module Aws::TaxSettings
       :heritage_obtained_details,
       :heritage_obtained_parent_entity,
       :heritage_obtained_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1378,7 +1450,8 @@ module Aws::TaxSettings
       :display_name,
       :description,
       :applicable_jurisdictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1471,8 @@ module Aws::TaxSettings
     class TaxInheritanceDetails < Struct.new(
       :parent_entity_id,
       :inheritance_obtained_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1444,7 +1518,8 @@ module Aws::TaxSettings
       :certified_email_id,
       :additional_tax_information,
       :legal_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1461,7 +1536,8 @@ module Aws::TaxSettings
     class TaxRegistrationDocFile < Struct.new(
       :file_name,
       :file_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1552,8 @@ module Aws::TaxSettings
     class TaxRegistrationDocument < Struct.new(
       :s3_location,
       :file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1534,7 +1611,8 @@ module Aws::TaxSettings
       :additional_tax_information,
       :verification_details,
       :certified_email_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1581,7 +1659,8 @@ module Aws::TaxSettings
       :certified_email_id,
       :additional_tax_information,
       :jurisdiction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1607,7 +1686,8 @@ module Aws::TaxSettings
       :kep_email_id,
       :secondary_tax_id,
       :industries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,7 +1701,8 @@ module Aws::TaxSettings
     #   @return [String]
     class UkraineAdditionalInfo < Struct.new(
       :ukraine_trn_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1641,7 +1722,8 @@ module Aws::TaxSettings
     class UzbekistanAdditionalInfo < Struct.new(
       :tax_registration_number_type,
       :vat_registration_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1659,7 +1741,8 @@ module Aws::TaxSettings
       :message,
       :error_code,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1669,7 +1752,8 @@ module Aws::TaxSettings
     #   @return [String]
     class ValidationExceptionField < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1683,7 +1767,8 @@ module Aws::TaxSettings
     class VerificationDetails < Struct.new(
       :date_of_birth,
       :tax_registration_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1790,8 @@ module Aws::TaxSettings
       :electronic_transaction_code_number,
       :payment_voucher_number,
       :payment_voucher_number_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

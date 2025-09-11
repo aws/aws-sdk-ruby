@@ -47,7 +47,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::DashboardInvalidInputError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::DashboardNotFoundError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::InternalServiceFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -118,7 +118,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::InvalidFormatFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -132,7 +132,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::InvalidNextToken] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -146,7 +146,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::InvalidParameterCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -160,7 +160,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -174,7 +174,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -187,7 +187,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::LimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -201,7 +201,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::MissingRequiredParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -215,7 +215,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::ResourceNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -229,7 +229,7 @@ module Aws::CloudWatch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatch::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def resource_type

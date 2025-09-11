@@ -37,7 +37,7 @@ module Aws::AppConfigData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppConfigData::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::AppConfigData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppConfigData::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::AppConfigData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppConfigData::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::AppConfigData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppConfigData::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

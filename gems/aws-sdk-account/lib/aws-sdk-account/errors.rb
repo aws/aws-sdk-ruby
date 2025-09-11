@@ -39,7 +39,7 @@ module Aws::Account
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Account::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::Account
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Account::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::Account
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Account::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::Account
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Account::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::Account
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Account::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -141,7 +141,7 @@ module Aws::Account
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Account::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that informs you about what was invalid about the request.</p>

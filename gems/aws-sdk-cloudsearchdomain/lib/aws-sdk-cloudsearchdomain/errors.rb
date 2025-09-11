@@ -35,7 +35,7 @@ module Aws::CloudSearchDomain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudSearchDomain::Types::DocumentServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The return status of a document upload request, <code>error</code> or <code>success</code>.</p>
@@ -54,7 +54,7 @@ module Aws::CloudSearchDomain
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudSearchDomain::Types::SearchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error returned by the search service.</p>

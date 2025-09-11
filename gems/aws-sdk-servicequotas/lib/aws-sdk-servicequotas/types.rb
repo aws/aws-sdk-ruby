@@ -12,7 +12,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class AWSServiceAccessNotEnabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,17 +22,20 @@ module Aws::ServiceQuotas
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateServiceQuotaTemplateRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateServiceQuotaTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,12 +44,14 @@ module Aws::ServiceQuotas
     #   @return [String]
     class CreateSupportCaseRequest < Struct.new(
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateSupportCaseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,12 +71,14 @@ module Aws::ServiceQuotas
       :service_code,
       :quota_code,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceQuotaIncreaseRequestFromTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,17 +87,20 @@ module Aws::ServiceQuotas
     #   @return [String]
     class DependencyAccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateServiceQuotaTemplateRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateServiceQuotaTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +137,8 @@ module Aws::ServiceQuotas
     class ErrorReason < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +154,8 @@ module Aws::ServiceQuotas
     class GetAWSDefaultServiceQuotaRequest < Struct.new(
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,12 +164,14 @@ module Aws::ServiceQuotas
     #   @return [Types::ServiceQuota]
     class GetAWSDefaultServiceQuotaResponse < Struct.new(
       :quota,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAssociationForServiceQuotaTemplateRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -167,7 +182,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class GetAssociationForServiceQuotaTemplateResponse < Struct.new(
       :service_quota_template_association_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +192,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class GetRequestedServiceQuotaChangeRequest < Struct.new(
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +202,8 @@ module Aws::ServiceQuotas
     #   @return [Types::RequestedServiceQuotaChange]
     class GetRequestedServiceQuotaChangeResponse < Struct.new(
       :requested_quota,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +223,8 @@ module Aws::ServiceQuotas
       :service_code,
       :quota_code,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +233,8 @@ module Aws::ServiceQuotas
     #   @return [Types::ServiceQuotaIncreaseRequestInTemplate]
     class GetServiceQuotaIncreaseRequestFromTemplateResponse < Struct.new(
       :service_quota_increase_request_in_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +254,8 @@ module Aws::ServiceQuotas
       :service_code,
       :quota_code,
       :context_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -243,7 +264,8 @@ module Aws::ServiceQuotas
     #   @return [Types::ServiceQuota]
     class GetServiceQuotaResponse < Struct.new(
       :quota,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +274,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class IllegalArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +284,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +294,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class InvalidResourceStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +327,8 @@ module Aws::ServiceQuotas
       :service_code,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +344,8 @@ module Aws::ServiceQuotas
     class ListAWSDefaultServiceQuotasResponse < Struct.new(
       :next_token,
       :quotas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +392,8 @@ module Aws::ServiceQuotas
       :next_token,
       :max_results,
       :quota_requested_at_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +409,8 @@ module Aws::ServiceQuotas
     class ListRequestedServiceQuotaChangeHistoryByQuotaResponse < Struct.new(
       :next_token,
       :requested_quotas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +451,8 @@ module Aws::ServiceQuotas
       :next_token,
       :max_results,
       :quota_requested_at_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +468,8 @@ module Aws::ServiceQuotas
     class ListRequestedServiceQuotaChangeHistoryResponse < Struct.new(
       :next_token,
       :requested_quotas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +505,8 @@ module Aws::ServiceQuotas
       :aws_region,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +522,8 @@ module Aws::ServiceQuotas
     class ListServiceQuotaIncreaseRequestsInTemplateResponse < Struct.new(
       :service_quota_increase_request_in_template_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +565,8 @@ module Aws::ServiceQuotas
       :max_results,
       :quota_code,
       :quota_applied_at_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +582,8 @@ module Aws::ServiceQuotas
     class ListServiceQuotasResponse < Struct.new(
       :next_token,
       :quotas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +610,8 @@ module Aws::ServiceQuotas
     class ListServicesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -591,7 +627,8 @@ module Aws::ServiceQuotas
     class ListServicesResponse < Struct.new(
       :next_token,
       :services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -602,7 +639,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +649,8 @@ module Aws::ServiceQuotas
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +673,8 @@ module Aws::ServiceQuotas
       :metric_name,
       :metric_dimensions,
       :metric_statistic_recommendation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +683,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class NoAvailableOrganizationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +693,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class NoSuchResourceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +704,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class OrganizationNotInAllFeaturesModeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +729,8 @@ module Aws::ServiceQuotas
       :service_code,
       :aws_region,
       :desired_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +739,8 @@ module Aws::ServiceQuotas
     #   @return [Types::ServiceQuotaIncreaseRequestInTemplate]
     class PutServiceQuotaIncreaseRequestIntoTemplateResponse < Struct.new(
       :service_quota_increase_request_in_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +758,8 @@ module Aws::ServiceQuotas
       :context_scope,
       :context_scope_type,
       :context_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +769,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class QuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,7 +784,8 @@ module Aws::ServiceQuotas
     class QuotaPeriod < Struct.new(
       :period_value,
       :period_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +817,8 @@ module Aws::ServiceQuotas
       :desired_value,
       :context_id,
       :support_case_allowed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -778,7 +827,8 @@ module Aws::ServiceQuotas
     #   @return [Types::RequestedServiceQuotaChange]
     class RequestServiceQuotaIncreaseResponse < Struct.new(
       :requested_quota,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +937,8 @@ module Aws::ServiceQuotas
       :unit,
       :quota_requested_at_level,
       :quota_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -901,7 +952,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +962,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class ServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +978,8 @@ module Aws::ServiceQuotas
     class ServiceInfo < Struct.new(
       :service_code,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -994,7 +1048,8 @@ module Aws::ServiceQuotas
       :quota_applied_at_level,
       :quota_context,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1041,7 +1096,8 @@ module Aws::ServiceQuotas
       :aws_region,
       :unit,
       :global_quota,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1055,7 +1111,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class ServiceQuotaTemplateNotInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1130,8 @@ module Aws::ServiceQuotas
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1140,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class TagPolicyViolationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,12 +1155,14 @@ module Aws::ServiceQuotas
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1171,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class TemplatesNotAvailableInRegionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,7 +1182,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1131,7 +1194,8 @@ module Aws::ServiceQuotas
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,12 +1210,14 @@ module Aws::ServiceQuotas
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

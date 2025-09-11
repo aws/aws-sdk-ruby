@@ -13,7 +13,8 @@ module Aws::Codeartifact
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +40,8 @@ module Aws::Codeartifact
       :name,
       :size,
       :hashes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +118,8 @@ module Aws::Codeartifact
       :domain_owner,
       :repository,
       :external_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +130,8 @@ module Aws::Codeartifact
     #   @return [Types::RepositoryDescription]
     class AssociateExternalConnectionResult < Struct.new(
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +182,8 @@ module Aws::Codeartifact
       :namespace,
       :package,
       :association_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +206,8 @@ module Aws::Codeartifact
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +327,8 @@ module Aws::Codeartifact
       :version_revisions,
       :allow_overwrite,
       :include_from_upstream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +378,8 @@ module Aws::Codeartifact
     class CopyPackageVersionsResult < Struct.new(
       :successful_versions,
       :failed_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +409,8 @@ module Aws::Codeartifact
       :domain,
       :encryption_key,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +421,8 @@ module Aws::Codeartifact
     #   @return [Types::DomainDescription]
     class CreateDomainResult < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -450,7 +460,8 @@ module Aws::Codeartifact
       :contact_info,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +472,8 @@ module Aws::Codeartifact
     #   @return [Types::PackageGroupDescription]
     class CreatePackageGroupResult < Struct.new(
       :package_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +511,8 @@ module Aws::Codeartifact
       :description,
       :upstreams,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -510,7 +523,8 @@ module Aws::Codeartifact
     #   @return [Types::RepositoryDescription]
     class CreateRepositoryResult < Struct.new(
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +549,8 @@ module Aws::Codeartifact
       :domain,
       :domain_owner,
       :policy_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +561,8 @@ module Aws::Codeartifact
     #   @return [Types::ResourcePolicy]
     class DeleteDomainPermissionsPolicyResult < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +580,8 @@ module Aws::Codeartifact
     class DeleteDomainRequest < Struct.new(
       :domain,
       :domain_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +592,8 @@ module Aws::Codeartifact
     #   @return [Types::DomainDescription]
     class DeleteDomainResult < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +615,8 @@ module Aws::Codeartifact
       :domain,
       :domain_owner,
       :package_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -608,7 +627,8 @@ module Aws::Codeartifact
     #   @return [Types::PackageGroupDescription]
     class DeletePackageGroupResult < Struct.new(
       :package_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -675,7 +695,8 @@ module Aws::Codeartifact
       :format,
       :namespace,
       :package,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +707,8 @@ module Aws::Codeartifact
     #   @return [Types::PackageSummary]
     class DeletePackageResult < Struct.new(
       :deleted_package,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +795,8 @@ module Aws::Codeartifact
       :package,
       :versions,
       :expected_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -824,7 +847,8 @@ module Aws::Codeartifact
     class DeletePackageVersionsResult < Struct.new(
       :successful_versions,
       :failed_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +879,8 @@ module Aws::Codeartifact
       :domain_owner,
       :repository,
       :policy_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +891,8 @@ module Aws::Codeartifact
     #   @return [Types::ResourcePolicy]
     class DeleteRepositoryPermissionsPolicyResult < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +914,8 @@ module Aws::Codeartifact
       :domain,
       :domain_owner,
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -899,7 +926,8 @@ module Aws::Codeartifact
     #   @return [Types::RepositoryDescription]
     class DeleteRepositoryResult < Struct.new(
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +945,8 @@ module Aws::Codeartifact
     class DescribeDomainRequest < Struct.new(
       :domain,
       :domain_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +958,8 @@ module Aws::Codeartifact
     #   @return [Types::DomainDescription]
     class DescribeDomainResult < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +981,8 @@ module Aws::Codeartifact
       :domain,
       :domain_owner,
       :package_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -961,7 +992,8 @@ module Aws::Codeartifact
     #   @return [Types::PackageGroupDescription]
     class DescribePackageGroupResult < Struct.new(
       :package_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1028,7 +1060,8 @@ module Aws::Codeartifact
       :format,
       :namespace,
       :package,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1071,8 @@ module Aws::Codeartifact
     #   @return [Types::PackageDescription]
     class DescribePackageResult < Struct.new(
       :package,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1116,7 +1150,8 @@ module Aws::Codeartifact
       :namespace,
       :package,
       :package_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1163,8 @@ module Aws::Codeartifact
     #   @return [Types::PackageVersionDescription]
     class DescribePackageVersionResult < Struct.new(
       :package_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1188,8 @@ module Aws::Codeartifact
       :domain,
       :domain_owner,
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1200,8 @@ module Aws::Codeartifact
     #   @return [Types::RepositoryDescription]
     class DescribeRepositoryResult < Struct.new(
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1188,7 +1226,8 @@ module Aws::Codeartifact
       :domain_owner,
       :repository,
       :external_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1238,8 @@ module Aws::Codeartifact
     #   @return [Types::RepositoryDescription]
     class DisassociateExternalConnectionResult < Struct.new(
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1333,8 @@ module Aws::Codeartifact
       :versions,
       :version_revisions,
       :expected_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1343,7 +1384,8 @@ module Aws::Codeartifact
     class DisposePackageVersionsResult < Struct.new(
       :successful_versions,
       :failed_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1440,8 @@ module Aws::Codeartifact
       :repository_count,
       :asset_size_bytes,
       :s3_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1424,7 +1467,8 @@ module Aws::Codeartifact
     class DomainEntryPoint < Struct.new(
       :repository_name,
       :external_connection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1469,7 +1513,8 @@ module Aws::Codeartifact
       :status,
       :created_time,
       :encryption_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1539,7 +1584,8 @@ module Aws::Codeartifact
       :format,
       :namespace,
       :package,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1599,8 @@ module Aws::Codeartifact
     class GetAssociatedPackageGroupResult < Struct.new(
       :package_group,
       :association_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1578,7 +1625,8 @@ module Aws::Codeartifact
       :domain,
       :domain_owner,
       :duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1596,7 +1644,8 @@ module Aws::Codeartifact
     class GetAuthorizationTokenResult < Struct.new(
       :authorization_token,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1614,7 +1663,8 @@ module Aws::Codeartifact
     class GetDomainPermissionsPolicyRequest < Struct.new(
       :domain,
       :domain_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1675,8 @@ module Aws::Codeartifact
     #   @return [Types::ResourcePolicy]
     class GetDomainPermissionsPolicyResult < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1719,7 +1770,8 @@ module Aws::Codeartifact
       :package_version,
       :asset,
       :package_version_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1746,7 +1798,8 @@ module Aws::Codeartifact
       :asset_name,
       :package_version,
       :package_version_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1833,7 +1886,8 @@ module Aws::Codeartifact
       :namespace,
       :package,
       :package_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1894,7 +1948,8 @@ module Aws::Codeartifact
       :version,
       :version_revision,
       :readme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1929,7 +1984,8 @@ module Aws::Codeartifact
       :repository,
       :format,
       :endpoint_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1940,7 +1996,8 @@ module Aws::Codeartifact
     #   @return [String]
     class GetRepositoryEndpointResult < Struct.new(
       :repository_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1964,7 +2021,8 @@ module Aws::Codeartifact
       :domain,
       :domain_owner,
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1975,7 +2033,8 @@ module Aws::Codeartifact
     #   @return [Types::ResourcePolicy]
     class GetRepositoryPermissionsPolicyResult < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1984,7 +2043,8 @@ module Aws::Codeartifact
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2004,7 +2064,8 @@ module Aws::Codeartifact
     class LicenseInfo < Struct.new(
       :name,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2042,7 +2103,8 @@ module Aws::Codeartifact
       :origin_restriction_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2057,7 +2119,8 @@ module Aws::Codeartifact
     class ListAllowedRepositoriesForGroupResult < Struct.new(
       :allowed_repositories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2163,8 @@ module Aws::Codeartifact
       :max_results,
       :next_token,
       :preview,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2117,7 +2181,8 @@ module Aws::Codeartifact
     class ListAssociatedPackagesResult < Struct.new(
       :packages,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2134,7 +2199,8 @@ module Aws::Codeartifact
     class ListDomainsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2151,7 +2217,8 @@ module Aws::Codeartifact
     class ListDomainsResult < Struct.new(
       :domains,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2188,7 +2255,8 @@ module Aws::Codeartifact
       :max_results,
       :next_token,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2205,7 +2273,8 @@ module Aws::Codeartifact
     class ListPackageGroupsResult < Struct.new(
       :package_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2299,7 +2368,8 @@ module Aws::Codeartifact
       :package_version,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2366,7 +2436,8 @@ module Aws::Codeartifact
       :version_revision,
       :next_token,
       :assets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2445,7 +2516,8 @@ module Aws::Codeartifact
       :package,
       :package_version,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2517,7 +2589,8 @@ module Aws::Codeartifact
       :version_revision,
       :next_token,
       :dependencies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2622,7 +2695,8 @@ module Aws::Codeartifact
       :max_results,
       :next_token,
       :origin_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2698,7 +2772,8 @@ module Aws::Codeartifact
       :package,
       :versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2784,7 +2859,8 @@ module Aws::Codeartifact
       :next_token,
       :publish,
       :upstream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2802,7 +2878,8 @@ module Aws::Codeartifact
     class ListPackagesResult < Struct.new(
       :packages,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2845,7 +2922,8 @@ module Aws::Codeartifact
       :repository_prefix,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2862,7 +2940,8 @@ module Aws::Codeartifact
     class ListRepositoriesInDomainResult < Struct.new(
       :repositories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2884,7 +2963,8 @@ module Aws::Codeartifact
       :repository_prefix,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2902,7 +2982,8 @@ module Aws::Codeartifact
     class ListRepositoriesResult < Struct.new(
       :repositories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2938,7 +3019,8 @@ module Aws::Codeartifact
       :package_group,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2955,7 +3037,8 @@ module Aws::Codeartifact
     class ListSubPackageGroupsResult < Struct.new(
       :package_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2964,7 +3047,8 @@ module Aws::Codeartifact
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2973,7 +3057,8 @@ module Aws::Codeartifact
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResult < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3044,7 +3129,8 @@ module Aws::Codeartifact
       :package,
       :dependency_type,
       :version_requirement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3088,7 +3174,8 @@ module Aws::Codeartifact
       :namespace,
       :name,
       :origin_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3106,7 +3193,8 @@ module Aws::Codeartifact
     class PackageGroupAllowedRepository < Struct.new(
       :repository_name,
       :origin_restriction_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3165,7 +3253,8 @@ module Aws::Codeartifact
       :description,
       :origin_configuration,
       :parent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3175,7 +3264,8 @@ module Aws::Codeartifact
     #   @return [Hash<String, Types::PackageGroupOriginRestriction>]
     class PackageGroupOriginConfiguration < Struct.new(
       :restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3203,7 +3293,8 @@ module Aws::Codeartifact
       :effective_mode,
       :inherited_from,
       :repositories_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3222,7 +3313,8 @@ module Aws::Codeartifact
     class PackageGroupReference < Struct.new(
       :arn,
       :pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3279,7 +3371,8 @@ module Aws::Codeartifact
       :description,
       :origin_configuration,
       :parent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3290,7 +3383,8 @@ module Aws::Codeartifact
     #   @return [Types::PackageOriginRestrictions]
     class PackageOriginConfiguration < Struct.new(
       :restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3306,7 +3400,8 @@ module Aws::Codeartifact
     class PackageOriginRestrictions < Struct.new(
       :publish,
       :upstream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3358,7 +3453,8 @@ module Aws::Codeartifact
       :namespace,
       :package,
       :origin_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3467,7 +3563,8 @@ module Aws::Codeartifact
       :revision,
       :status,
       :origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3517,7 +3614,8 @@ module Aws::Codeartifact
     class PackageVersionError < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3533,7 +3631,8 @@ module Aws::Codeartifact
     class PackageVersionOrigin < Struct.new(
       :domain_entry_point,
       :origin_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3566,7 +3665,8 @@ module Aws::Codeartifact
       :revision,
       :status,
       :origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3627,7 +3727,8 @@ module Aws::Codeartifact
       :asset_name,
       :asset_sha256,
       :unfinished,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3660,7 +3761,8 @@ module Aws::Codeartifact
       :version_revision,
       :status,
       :asset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3690,7 +3792,8 @@ module Aws::Codeartifact
       :domain_owner,
       :policy_revision,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3699,7 +3802,8 @@ module Aws::Codeartifact
     #   @return [Types::ResourcePolicy]
     class PutDomainPermissionsPolicyResult < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3761,7 +3865,8 @@ module Aws::Codeartifact
       :namespace,
       :package,
       :restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3773,7 +3878,8 @@ module Aws::Codeartifact
     #   @return [Types::PackageOriginConfiguration]
     class PutPackageOriginConfigurationResult < Struct.new(
       :origin_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3808,7 +3914,8 @@ module Aws::Codeartifact
       :repository,
       :policy_revision,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3817,7 +3924,8 @@ module Aws::Codeartifact
     #   @return [Types::ResourcePolicy]
     class PutRepositoryPermissionsPolicyResult < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3877,7 +3985,8 @@ module Aws::Codeartifact
       :upstreams,
       :external_connections,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3943,7 +4052,8 @@ module Aws::Codeartifact
       :external_connection_name,
       :package_format,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3990,7 +4100,8 @@ module Aws::Codeartifact
       :arn,
       :description,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4013,7 +4124,8 @@ module Aws::Codeartifact
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4039,7 +4151,8 @@ module Aws::Codeartifact
       :resource_arn,
       :revision,
       :document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4062,7 +4175,8 @@ module Aws::Codeartifact
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4082,7 +4196,8 @@ module Aws::Codeartifact
     class SuccessfulPackageVersionInfo < Struct.new(
       :revision,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4096,7 +4211,8 @@ module Aws::Codeartifact
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4109,12 +4225,14 @@ module Aws::Codeartifact
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4131,7 +4249,8 @@ module Aws::Codeartifact
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4144,12 +4263,14 @@ module Aws::Codeartifact
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4187,7 +4308,8 @@ module Aws::Codeartifact
       :restrictions,
       :add_allowed_repositories,
       :remove_allowed_repositories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4202,7 +4324,8 @@ module Aws::Codeartifact
     class UpdatePackageGroupOriginConfigurationResult < Struct.new(
       :package_group,
       :allowed_repository_updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4238,7 +4361,8 @@ module Aws::Codeartifact
       :package_group,
       :contact_info,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4249,7 +4373,8 @@ module Aws::Codeartifact
     #   @return [Types::PackageGroupDescription]
     class UpdatePackageGroupResult < Struct.new(
       :package_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4336,7 +4461,8 @@ module Aws::Codeartifact
       :version_revisions,
       :expected_status,
       :target_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4353,7 +4479,8 @@ module Aws::Codeartifact
     class UpdatePackageVersionsStatusResult < Struct.new(
       :successful_versions,
       :failed_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4389,7 +4516,8 @@ module Aws::Codeartifact
       :repository,
       :description,
       :upstreams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4400,7 +4528,8 @@ module Aws::Codeartifact
     #   @return [Types::RepositoryDescription]
     class UpdateRepositoryResult < Struct.new(
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4414,7 +4543,8 @@ module Aws::Codeartifact
     #   @return [String]
     class UpstreamRepository < Struct.new(
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4426,7 +4556,8 @@ module Aws::Codeartifact
     #   @return [String]
     class UpstreamRepositoryInfo < Struct.new(
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4443,7 +4574,8 @@ module Aws::Codeartifact
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

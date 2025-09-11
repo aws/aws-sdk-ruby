@@ -1443,7 +1443,6 @@ module Aws::GlobalAccelerator
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
         operation.traits = {}
       end)
-
     end
 
     class << self

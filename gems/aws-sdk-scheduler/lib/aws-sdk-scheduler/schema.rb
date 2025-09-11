@@ -479,7 +479,6 @@ module Aws::Scheduler
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#requiredActions" => ["scheduler:TagResource", "scheduler:UntagResource"], "smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/schedules/{Name}"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

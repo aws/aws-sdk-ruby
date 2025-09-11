@@ -3256,7 +3256,6 @@ module Aws::QConnect
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/assistants/{assistantId}/sessions/{sessionId}/data", "method" => "PATCH"}}
       end)
-
     end
 
     class << self

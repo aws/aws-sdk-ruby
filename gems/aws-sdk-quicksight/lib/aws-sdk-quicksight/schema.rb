@@ -12522,7 +12522,6 @@ module Aws::QuickSight
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/accounts/{AwsAccountId}/vpc-connections/{VPCConnectionId}", "code" => 200}}
       end)
-
     end
 
     class << self

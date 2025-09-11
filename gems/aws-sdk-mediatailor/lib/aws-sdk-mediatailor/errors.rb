@@ -34,7 +34,7 @@ module Aws::MediaTailor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaTailor::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

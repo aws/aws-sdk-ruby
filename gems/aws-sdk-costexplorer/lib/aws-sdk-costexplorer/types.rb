@@ -12,7 +12,8 @@ module Aws::CostExplorer
     #   @return [Types::SavingsPlansPurchaseAnalysisDetails]
     class AnalysisDetails < Struct.new(
       :savings_plans_purchase_analysis_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::CostExplorer
     #   @return [String]
     class AnalysisNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +57,8 @@ module Aws::CostExplorer
       :error_code,
       :analysis_id,
       :commitment_purchase_analysis_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -100,7 +103,8 @@ module Aws::CostExplorer
       :impact,
       :monitor_arn,
       :feedback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +118,8 @@ module Aws::CostExplorer
     class AnomalyDateInterval < Struct.new(
       :start_date,
       :end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +284,8 @@ module Aws::CostExplorer
       :monitor_dimension,
       :monitor_specification,
       :dimensional_value_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -298,7 +304,8 @@ module Aws::CostExplorer
     class AnomalyScore < Struct.new(
       :max_score,
       :current_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -412,7 +419,8 @@ module Aws::CostExplorer
       :frequency,
       :subscription_name,
       :threshold_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +431,8 @@ module Aws::CostExplorer
     #   @return [String]
     class BackfillLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +441,8 @@ module Aws::CostExplorer
     #   @return [String]
     class BillExpirationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +452,8 @@ module Aws::CostExplorer
     #   @return [Types::SavingsPlansPurchaseAnalysisConfiguration]
     class CommitmentPurchaseAnalysisConfiguration < Struct.new(
       :savings_plans_purchase_analysis_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +478,8 @@ module Aws::CostExplorer
       :comparison_time_period_amount,
       :difference,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +510,8 @@ module Aws::CostExplorer
       :status,
       :last_updated_date,
       :last_used_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +548,8 @@ module Aws::CostExplorer
       :completed_at,
       :backfill_status,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +564,8 @@ module Aws::CostExplorer
     class CostAllocationTagStatusEntry < Struct.new(
       :tag_key,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +700,8 @@ module Aws::CostExplorer
     class CostAndUsageComparison < Struct.new(
       :cost_and_usage_selector,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -733,7 +749,8 @@ module Aws::CostExplorer
       :split_charge_rules,
       :processing_status,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +774,8 @@ module Aws::CostExplorer
     class CostCategoryInheritedValueDimension < Struct.new(
       :dimension_name,
       :dimension_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +790,8 @@ module Aws::CostExplorer
     class CostCategoryProcessingStatus < Struct.new(
       :component,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +834,8 @@ module Aws::CostExplorer
       :processing_status,
       :values,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -862,7 +882,8 @@ module Aws::CostExplorer
       :rule,
       :inherited_value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -896,7 +917,8 @@ module Aws::CostExplorer
       :targets,
       :method,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +932,8 @@ module Aws::CostExplorer
     class CostCategorySplitChargeRuleParameter < Struct.new(
       :type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,7 +961,8 @@ module Aws::CostExplorer
       :key,
       :values,
       :match_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1105,8 @@ module Aws::CostExplorer
       :cost_selector,
       :metrics,
       :cost_drivers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1106,7 +1131,8 @@ module Aws::CostExplorer
       :type,
       :name,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1150,8 @@ module Aws::CostExplorer
       :coverage_hours,
       :coverage_normalized_units,
       :coverage_cost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1142,7 +1169,8 @@ module Aws::CostExplorer
       :time_period,
       :groups,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1180,8 @@ module Aws::CostExplorer
     #   @return [String]
     class CoverageCost < Struct.new(
       :on_demand_cost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1174,7 +1203,8 @@ module Aws::CostExplorer
       :reserved_hours,
       :total_running_hours,
       :coverage_hours_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1207,7 +1237,8 @@ module Aws::CostExplorer
       :reserved_normalized_units,
       :total_running_normalized_units,
       :coverage_normalized_units_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1252,7 +1283,8 @@ module Aws::CostExplorer
     class CreateAnomalyMonitorRequest < Struct.new(
       :anomaly_monitor,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1293,8 @@ module Aws::CostExplorer
     #   @return [String]
     class CreateAnomalyMonitorResponse < Struct.new(
       :monitor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1306,7 +1339,8 @@ module Aws::CostExplorer
     class CreateAnomalySubscriptionRequest < Struct.new(
       :anomaly_subscription,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1315,7 +1349,8 @@ module Aws::CostExplorer
     #   @return [String]
     class CreateAnomalySubscriptionResponse < Struct.new(
       :subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1382,7 +1417,8 @@ module Aws::CostExplorer
       :default_value,
       :split_charge_rules,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1395,7 +1431,8 @@ module Aws::CostExplorer
     class CreateCostCategoryDefinitionResponse < Struct.new(
       :cost_category_arn,
       :effective_start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1448,7 +1485,8 @@ module Aws::CostExplorer
       :total_running_hours_in_lookback_period,
       :monthly_cost,
       :currency_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1457,7 +1495,8 @@ module Aws::CostExplorer
     #   @return [String]
     class DataUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1515,8 @@ module Aws::CostExplorer
     class DateInterval < Struct.new(
       :start,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1485,12 +1525,14 @@ module Aws::CostExplorer
     #   @return [String]
     class DeleteAnomalyMonitorRequest < Struct.new(
       :monitor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAnomalyMonitorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1499,12 +1541,14 @@ module Aws::CostExplorer
     #   @return [String]
     class DeleteAnomalySubscriptionRequest < Struct.new(
       :subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAnomalySubscriptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1557,8 @@ module Aws::CostExplorer
     #   @return [String]
     class DeleteCostCategoryDefinitionRequest < Struct.new(
       :cost_category_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1527,7 +1572,8 @@ module Aws::CostExplorer
     class DeleteCostCategoryDefinitionResponse < Struct.new(
       :cost_category_arn,
       :effective_end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1540,7 +1586,8 @@ module Aws::CostExplorer
     class DescribeCostCategoryDefinitionRequest < Struct.new(
       :cost_category_arn,
       :effective_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,7 +1597,8 @@ module Aws::CostExplorer
     #   @return [Types::CostCategory]
     class DescribeCostCategoryDefinitionResponse < Struct.new(
       :cost_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1585,7 +1633,8 @@ module Aws::CostExplorer
       :key,
       :values,
       :match_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1600,7 +1649,8 @@ module Aws::CostExplorer
     class DimensionValuesWithAttributes < Struct.new(
       :value,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1623,7 +1673,8 @@ module Aws::CostExplorer
       :disk_write_ops_per_second,
       :disk_read_bytes_per_second,
       :disk_write_bytes_per_second,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1637,7 +1688,8 @@ module Aws::CostExplorer
     class DynamoDBCapacityDetails < Struct.new(
       :capacity_units,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,7 +1712,8 @@ module Aws::CostExplorer
       :ebs_write_ops_per_second,
       :ebs_read_bytes_per_second,
       :ebs_write_bytes_per_second,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1700,7 +1753,8 @@ module Aws::CostExplorer
       :tenancy,
       :current_generation,
       :size_flex_eligible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1750,7 +1804,8 @@ module Aws::CostExplorer
       :network_performance,
       :storage,
       :vcpu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1784,7 +1839,8 @@ module Aws::CostExplorer
       :ebs_resource_utilization,
       :disk_resource_utilization,
       :network_resource_utilization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1852,8 @@ module Aws::CostExplorer
     #   @return [String]
     class EC2Specification < Struct.new(
       :offering_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1823,7 +1880,8 @@ module Aws::CostExplorer
       :region,
       :current_generation,
       :size_flex_eligible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1860,7 +1918,8 @@ module Aws::CostExplorer
       :product_description,
       :current_generation,
       :size_flex_eligible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2017,7 +2076,8 @@ module Aws::CostExplorer
       :dimensions,
       :tags,
       :cost_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2039,7 +2099,8 @@ module Aws::CostExplorer
       :mean_value,
       :prediction_interval_lower_bound,
       :prediction_interval_upper_bound,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2048,7 +2109,8 @@ module Aws::CostExplorer
     #   @return [String]
     class GenerationExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2076,7 +2138,8 @@ module Aws::CostExplorer
       :generation_started_time,
       :generation_completion_time,
       :estimated_completion_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2110,7 +2173,8 @@ module Aws::CostExplorer
       :total_impact,
       :next_page_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2124,7 +2188,8 @@ module Aws::CostExplorer
     class GetAnomaliesResponse < Struct.new(
       :anomalies,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2142,7 +2207,8 @@ module Aws::CostExplorer
       :monitor_arn_list,
       :next_page_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2157,7 +2223,8 @@ module Aws::CostExplorer
     class GetAnomalyMonitorsResponse < Struct.new(
       :anomaly_monitors,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2179,7 +2246,8 @@ module Aws::CostExplorer
       :monitor_arn,
       :next_page_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2262,8 @@ module Aws::CostExplorer
     class GetAnomalySubscriptionsResponse < Struct.new(
       :anomaly_subscriptions,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2214,7 +2283,8 @@ module Aws::CostExplorer
       :granularity,
       :services,
       :approximation_dimension,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2231,7 +2301,8 @@ module Aws::CostExplorer
       :services,
       :total_records,
       :lookback_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2245,7 +2316,8 @@ module Aws::CostExplorer
     #   @return [String]
     class GetCommitmentPurchaseAnalysisRequest < Struct.new(
       :analysis_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2282,7 +2354,8 @@ module Aws::CostExplorer
       :error_code,
       :analysis_details,
       :commitment_purchase_analysis_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2452,7 +2525,8 @@ module Aws::CostExplorer
       :group_by,
       :max_results,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2473,7 +2547,8 @@ module Aws::CostExplorer
       :cost_and_usage_comparisons,
       :total_cost_and_usage,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2551,7 +2626,8 @@ module Aws::CostExplorer
       :group_by,
       :billing_view_arn,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2575,7 +2651,8 @@ module Aws::CostExplorer
       :group_definitions,
       :results_by_time,
       :dimension_value_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2648,7 +2725,8 @@ module Aws::CostExplorer
       :group_by,
       :billing_view_arn,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2672,7 +2750,8 @@ module Aws::CostExplorer
       :group_definitions,
       :results_by_time,
       :dimension_value_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2886,7 +2965,8 @@ module Aws::CostExplorer
       :billing_view_arn,
       :max_results,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2914,7 +2994,8 @@ module Aws::CostExplorer
       :cost_category_values,
       :return_size,
       :total_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3085,7 +3166,8 @@ module Aws::CostExplorer
       :group_by,
       :max_results,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3099,7 +3181,8 @@ module Aws::CostExplorer
     class GetCostComparisonDriversResponse < Struct.new(
       :cost_comparison_drivers,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3272,7 +3355,8 @@ module Aws::CostExplorer
       :filter,
       :billing_view_arn,
       :prediction_interval_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3286,7 +3370,8 @@ module Aws::CostExplorer
     class GetCostForecastResponse < Struct.new(
       :total,
       :forecast_results_by_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3681,7 +3766,8 @@ module Aws::CostExplorer
       :billing_view_arn,
       :max_results,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3832,7 +3918,8 @@ module Aws::CostExplorer
       :return_size,
       :total_size,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4025,7 +4112,8 @@ module Aws::CostExplorer
       :next_page_token,
       :sort_by,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4043,7 +4131,8 @@ module Aws::CostExplorer
       :coverages_by_time,
       :total,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4216,7 +4305,8 @@ module Aws::CostExplorer
       :service_specification,
       :page_size,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4234,7 +4324,8 @@ module Aws::CostExplorer
       :metadata,
       :recommendations,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4418,7 +4509,8 @@ module Aws::CostExplorer
       :sort_by,
       :next_page_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4436,7 +4528,8 @@ module Aws::CostExplorer
       :utilizations_by_time,
       :total,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4588,7 +4681,8 @@ module Aws::CostExplorer
       :service,
       :page_size,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4617,7 +4711,8 @@ module Aws::CostExplorer
       :rightsizing_recommendations,
       :next_page_token,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4626,7 +4721,8 @@ module Aws::CostExplorer
     #   @return [String]
     class GetSavingsPlanPurchaseRecommendationDetailsRequest < Struct.new(
       :recommendation_detail_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4639,7 +4735,8 @@ module Aws::CostExplorer
     class GetSavingsPlanPurchaseRecommendationDetailsResponse < Struct.new(
       :recommendation_detail_id,
       :recommendation_detail_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4753,7 +4850,8 @@ module Aws::CostExplorer
       :next_token,
       :max_results,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4767,7 +4865,8 @@ module Aws::CostExplorer
     class GetSavingsPlansCoverageResponse < Struct.new(
       :savings_plans_coverages,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4817,7 +4916,8 @@ module Aws::CostExplorer
       :page_size,
       :lookback_period_in_days,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4836,7 +4936,8 @@ module Aws::CostExplorer
       :metadata,
       :savings_plans_purchase_recommendation,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4940,7 +5041,8 @@ module Aws::CostExplorer
       :next_token,
       :max_results,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4963,7 +5065,8 @@ module Aws::CostExplorer
       :total,
       :time_period,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5055,7 +5158,8 @@ module Aws::CostExplorer
       :granularity,
       :filter,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5070,7 +5174,8 @@ module Aws::CostExplorer
     class GetSavingsPlansUtilizationResponse < Struct.new(
       :savings_plans_utilizations_by_time,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5282,7 +5387,8 @@ module Aws::CostExplorer
       :billing_view_arn,
       :max_results,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5304,7 +5410,8 @@ module Aws::CostExplorer
       :tags,
       :return_size,
       :total_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5477,7 +5584,8 @@ module Aws::CostExplorer
       :filter,
       :billing_view_arn,
       :prediction_interval_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5491,7 +5599,8 @@ module Aws::CostExplorer
     class GetUsageForecastResponse < Struct.new(
       :total,
       :forecast_results_by_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5505,7 +5614,8 @@ module Aws::CostExplorer
     class Group < Struct.new(
       :keys,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5520,7 +5630,8 @@ module Aws::CostExplorer
     class GroupDefinition < Struct.new(
       :type,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5552,7 +5663,8 @@ module Aws::CostExplorer
       :total_actual_spend,
       :total_expected_spend,
       :total_impact_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5594,7 +5706,8 @@ module Aws::CostExplorer
       :elasti_cache_instance_details,
       :es_instance_details,
       :memory_db_instance_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5603,7 +5716,8 @@ module Aws::CostExplorer
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5612,7 +5726,8 @@ module Aws::CostExplorer
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5633,7 +5748,8 @@ module Aws::CostExplorer
       :next_page_token,
       :page_size,
       :analysis_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5646,7 +5762,8 @@ module Aws::CostExplorer
     class ListCommitmentPurchaseAnalysesResponse < Struct.new(
       :analysis_summary_list,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5663,7 +5780,8 @@ module Aws::CostExplorer
     class ListCostAllocationTagBackfillHistoryRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5680,7 +5798,8 @@ module Aws::CostExplorer
     class ListCostAllocationTagBackfillHistoryResponse < Struct.new(
       :backfill_requests,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5711,7 +5830,8 @@ module Aws::CostExplorer
       :type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5725,7 +5845,8 @@ module Aws::CostExplorer
     class ListCostAllocationTagsResponse < Struct.new(
       :cost_allocation_tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5743,7 +5864,8 @@ module Aws::CostExplorer
       :effective_on,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5758,7 +5880,8 @@ module Aws::CostExplorer
     class ListCostCategoryDefinitionsResponse < Struct.new(
       :cost_category_references,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5779,7 +5902,8 @@ module Aws::CostExplorer
       :recommendation_ids,
       :page_size,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5792,7 +5916,8 @@ module Aws::CostExplorer
     class ListSavingsPlansPurchaseRecommendationGenerationResponse < Struct.new(
       :generation_summary_list,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5802,7 +5927,8 @@ module Aws::CostExplorer
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5811,7 +5937,8 @@ module Aws::CostExplorer
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5838,7 +5965,8 @@ module Aws::CostExplorer
       :region,
       :current_generation,
       :size_flex_eligible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5858,7 +5986,8 @@ module Aws::CostExplorer
     class MetricValue < Struct.new(
       :amount,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5869,7 +5998,8 @@ module Aws::CostExplorer
     #   @return [Array<Types::TargetInstance>]
     class ModifyRecommendationDetail < Struct.new(
       :target_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5893,7 +6023,8 @@ module Aws::CostExplorer
       :network_out_bytes_per_second,
       :network_packets_in_per_second,
       :network_packets_out_per_second,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5907,7 +6038,8 @@ module Aws::CostExplorer
     class ProvideAnomalyFeedbackRequest < Struct.new(
       :anomaly_id,
       :feedback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5916,7 +6048,8 @@ module Aws::CostExplorer
     #   @return [String]
     class ProvideAnomalyFeedbackResponse < Struct.new(
       :anomaly_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5960,7 +6093,8 @@ module Aws::CostExplorer
       :license_model,
       :current_generation,
       :size_flex_eligible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6105,7 +6239,8 @@ module Aws::CostExplorer
       :current_average_coverage,
       :estimated_average_coverage,
       :metrics_over_lookback_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6134,7 +6269,8 @@ module Aws::CostExplorer
       :current_coverage,
       :estimated_coverage,
       :estimated_new_commitment_utilization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6161,7 +6297,8 @@ module Aws::CostExplorer
       :region,
       :current_generation,
       :size_flex_eligible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6177,7 +6314,8 @@ module Aws::CostExplorer
     #   @return [String]
     class RequestChangedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6263,7 +6401,8 @@ module Aws::CostExplorer
       :ri_cost_for_unused_hours,
       :realized_savings,
       :unrealized_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6277,7 +6416,8 @@ module Aws::CostExplorer
     class ReservationCoverageGroup < Struct.new(
       :attributes,
       :coverage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6315,7 +6455,8 @@ module Aws::CostExplorer
       :service_specification,
       :recommendation_details,
       :recommendation_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6454,7 +6595,8 @@ module Aws::CostExplorer
       :minimum_number_of_capacity_units_used_per_hour,
       :maximum_number_of_capacity_units_used_per_hour,
       :average_number_of_capacity_units_used_per_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6473,7 +6615,8 @@ module Aws::CostExplorer
       :recommendation_id,
       :generation_timestamp,
       :additional_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6495,7 +6638,8 @@ module Aws::CostExplorer
       :total_estimated_monthly_savings_amount,
       :total_estimated_monthly_savings_percentage,
       :currency_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6517,7 +6661,8 @@ module Aws::CostExplorer
       :value,
       :attributes,
       :utilization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6529,7 +6674,8 @@ module Aws::CostExplorer
     #   @return [Types::DynamoDBCapacityDetails]
     class ReservedCapacityDetails < Struct.new(
       :dynamo_db_capacity_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6539,7 +6685,8 @@ module Aws::CostExplorer
     #   @return [Types::EC2ResourceDetails]
     class ResourceDetails < Struct.new(
       :ec2_resource_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6551,7 +6698,8 @@ module Aws::CostExplorer
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6575,7 +6723,8 @@ module Aws::CostExplorer
     class ResourceTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6585,7 +6734,8 @@ module Aws::CostExplorer
     #   @return [Types::EC2ResourceUtilization]
     class ResourceUtilization < Struct.new(
       :ec2_resource_utilization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6607,7 +6757,8 @@ module Aws::CostExplorer
       :total,
       :groups,
       :estimated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6644,7 +6795,8 @@ module Aws::CostExplorer
       :modify_recommendation_detail,
       :terminate_recommendation_detail,
       :finding_reason_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6666,7 +6818,8 @@ module Aws::CostExplorer
     class RightsizingRecommendationConfiguration < Struct.new(
       :recommendation_target,
       :benefits_considered,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6694,7 +6847,8 @@ module Aws::CostExplorer
       :generation_timestamp,
       :lookback_period_in_days,
       :additional_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6717,7 +6871,8 @@ module Aws::CostExplorer
       :estimated_total_monthly_savings_amount,
       :savings_currency_code,
       :savings_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6750,7 +6905,8 @@ module Aws::CostExplorer
       :linked_account_name,
       :usage_type,
       :impact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6761,7 +6917,8 @@ module Aws::CostExplorer
     #   @return [Float]
     class RootCauseImpact < Struct.new(
       :contribution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6801,7 +6958,8 @@ module Aws::CostExplorer
       :term_in_years,
       :savings_plans_commitment,
       :offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6823,7 +6981,8 @@ module Aws::CostExplorer
       :amortized_recurring_commitment,
       :amortized_upfront_commitment,
       :total_amortized_commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6842,7 +7001,8 @@ module Aws::CostExplorer
       :attributes,
       :coverage,
       :time_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6867,7 +7027,8 @@ module Aws::CostExplorer
       :on_demand_cost,
       :total_cost,
       :coverage_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6885,7 +7046,8 @@ module Aws::CostExplorer
       :region,
       :instance_family,
       :offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6915,7 +7077,8 @@ module Aws::CostExplorer
       :savings_plans_to_add,
       :savings_plans_to_exclude,
       :look_back_time_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7015,7 +7178,8 @@ module Aws::CostExplorer
       :upfront_cost,
       :additional_metadata,
       :metrics_over_lookback_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7055,7 +7219,8 @@ module Aws::CostExplorer
       :lookback_period_in_days,
       :savings_plans_purchase_recommendation_details,
       :savings_plans_purchase_recommendation_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7142,7 +7307,8 @@ module Aws::CostExplorer
       :current_maximum_hourly_on_demand_spend,
       :current_average_hourly_on_demand_spend,
       :recommendation_detail_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7160,7 +7326,8 @@ module Aws::CostExplorer
       :recommendation_id,
       :generation_timestamp,
       :additional_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7222,7 +7389,8 @@ module Aws::CostExplorer
       :estimated_savings_percentage,
       :estimated_monthly_savings_amount,
       :estimated_on_demand_cost_with_current_commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7239,7 +7407,8 @@ module Aws::CostExplorer
     class SavingsPlansSavings < Struct.new(
       :net_savings,
       :on_demand_cost_equivalent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7265,7 +7434,8 @@ module Aws::CostExplorer
       :used_commitment,
       :unused_commitment,
       :utilization_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7287,7 +7457,8 @@ module Aws::CostExplorer
       :utilization,
       :savings,
       :amortized_commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7313,7 +7484,8 @@ module Aws::CostExplorer
       :utilization,
       :savings,
       :amortized_commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7345,7 +7517,8 @@ module Aws::CostExplorer
       :utilization,
       :savings,
       :amortized_commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7355,7 +7528,8 @@ module Aws::CostExplorer
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7366,7 +7540,8 @@ module Aws::CostExplorer
     #   @return [Types::EC2Specification]
     class ServiceSpecification < Struct.new(
       :ec2_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7380,7 +7555,8 @@ module Aws::CostExplorer
     class SortDefinition < Struct.new(
       :key,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7389,7 +7565,8 @@ module Aws::CostExplorer
     #   @return [Types::CommitmentPurchaseAnalysisConfiguration]
     class StartCommitmentPurchaseAnalysisRequest < Struct.new(
       :commitment_purchase_analysis_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7406,7 +7583,8 @@ module Aws::CostExplorer
       :analysis_id,
       :analysis_started_time,
       :estimated_completion_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7416,7 +7594,8 @@ module Aws::CostExplorer
     #   @return [String]
     class StartCostAllocationTagBackfillRequest < Struct.new(
       :backfill_from,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7427,12 +7606,14 @@ module Aws::CostExplorer
     #   @return [Types::CostAllocationTagBackfillRequest]
     class StartCostAllocationTagBackfillResponse < Struct.new(
       :backfill_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartSavingsPlansPurchaseRecommendationGenerationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7449,7 +7630,8 @@ module Aws::CostExplorer
       :recommendation_id,
       :generation_started_time,
       :estimated_completion_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7468,7 +7650,8 @@ module Aws::CostExplorer
       :address,
       :type,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7512,12 +7695,14 @@ module Aws::CostExplorer
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7545,7 +7730,8 @@ module Aws::CostExplorer
       :key,
       :values,
       :match_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7582,7 +7768,8 @@ module Aws::CostExplorer
       :resource_details,
       :expected_resource_utilization,
       :platform_differences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7602,7 +7789,8 @@ module Aws::CostExplorer
     class TerminateRecommendationDetail < Struct.new(
       :estimated_monthly_savings,
       :currency_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7615,7 +7803,8 @@ module Aws::CostExplorer
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7633,7 +7822,8 @@ module Aws::CostExplorer
       :numeric_operator,
       :start_value,
       :end_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7648,7 +7838,8 @@ module Aws::CostExplorer
     #   @return [String]
     class UnknownMonitorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7657,7 +7848,8 @@ module Aws::CostExplorer
     #   @return [String]
     class UnknownSubscriptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7668,7 +7860,8 @@ module Aws::CostExplorer
     #   @return [String]
     class UnresolvableUsageUnitException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7686,12 +7879,14 @@ module Aws::CostExplorer
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :resource_tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7704,7 +7899,8 @@ module Aws::CostExplorer
     class UpdateAnomalyMonitorRequest < Struct.new(
       :monitor_arn,
       :monitor_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7713,7 +7909,8 @@ module Aws::CostExplorer
     #   @return [String]
     class UpdateAnomalyMonitorResponse < Struct.new(
       :monitor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7789,7 +7986,8 @@ module Aws::CostExplorer
       :subscribers,
       :subscription_name,
       :threshold_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7798,7 +7996,8 @@ module Aws::CostExplorer
     #   @return [String]
     class UpdateAnomalySubscriptionResponse < Struct.new(
       :subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7817,7 +8016,8 @@ module Aws::CostExplorer
       :tag_key,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7827,7 +8027,8 @@ module Aws::CostExplorer
     #   @return [Array<Types::CostAllocationTagStatusEntry>]
     class UpdateCostAllocationTagsStatusRequest < Struct.new(
       :cost_allocation_tags_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7838,7 +8039,8 @@ module Aws::CostExplorer
     #   @return [Array<Types::UpdateCostAllocationTagsStatusError>]
     class UpdateCostAllocationTagsStatusResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7871,7 +8073,8 @@ module Aws::CostExplorer
       :rules,
       :default_value,
       :split_charge_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7884,7 +8087,8 @@ module Aws::CostExplorer
     class UpdateCostCategoryDefinitionResponse < Struct.new(
       :cost_category_arn,
       :effective_start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7902,7 +8106,8 @@ module Aws::CostExplorer
       :time_period,
       :groups,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

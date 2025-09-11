@@ -11,7 +11,8 @@ module Aws::LicenseManager
     #   @return [String]
     class AcceptGrantRequest < Struct.new(
       :grant_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28,7 +29,8 @@ module Aws::LicenseManager
       :grant_arn,
       :status,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +39,8 @@ module Aws::LicenseManager
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +50,8 @@ module Aws::LicenseManager
     #   @return [String]
     class AuthorizationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +61,8 @@ module Aws::LicenseManager
     #   @return [Time]
     class AutomatedDiscoveryInformation < Struct.new(
       :last_run_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +76,8 @@ module Aws::LicenseManager
     class BorrowConfiguration < Struct.new(
       :allow_early_check_in,
       :max_time_to_live_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,12 +90,14 @@ module Aws::LicenseManager
     class CheckInLicenseRequest < Struct.new(
       :license_consumption_token,
       :beneficiary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CheckInLicenseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -119,7 +127,8 @@ module Aws::LicenseManager
       :node_id,
       :checkout_metadata,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +165,8 @@ module Aws::LicenseManager
       :issued_at,
       :expiration,
       :checkout_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +199,8 @@ module Aws::LicenseManager
       :client_token,
       :beneficiary,
       :node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +237,8 @@ module Aws::LicenseManager
       :issued_at,
       :expiration,
       :license_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +247,8 @@ module Aws::LicenseManager
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +262,8 @@ module Aws::LicenseManager
     class ConsumedLicenseSummary < Struct.new(
       :resource_type,
       :consumed_licenses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +281,8 @@ module Aws::LicenseManager
       :renew_type,
       :provisional_configuration,
       :borrow_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +332,8 @@ module Aws::LicenseManager
       :home_region,
       :allowed_operations,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +350,8 @@ module Aws::LicenseManager
       :grant_arn,
       :status,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +388,8 @@ module Aws::LicenseManager
       :status_reason,
       :source_version,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -388,7 +406,8 @@ module Aws::LicenseManager
       :grant_arn,
       :status,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +483,8 @@ module Aws::LicenseManager
       :tags,
       :disassociate_when_not_found,
       :product_information_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +493,8 @@ module Aws::LicenseManager
     #   @return [String]
     class CreateLicenseConfigurationResponse < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -492,7 +513,8 @@ module Aws::LicenseManager
       :resource_arn,
       :source_license_context,
       :destination_license_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +523,8 @@ module Aws::LicenseManager
     #   @return [String]
     class CreateLicenseConversionTaskForResourceResponse < Struct.new(
       :license_conversion_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +565,8 @@ module Aws::LicenseManager
       :client_token,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +575,8 @@ module Aws::LicenseManager
     #   @return [String]
     class CreateLicenseManagerReportGeneratorResponse < Struct.new(
       :license_manager_report_generator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +632,8 @@ module Aws::LicenseManager
       :license_metadata,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +650,8 @@ module Aws::LicenseManager
       :license_arn,
       :status,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -679,7 +706,8 @@ module Aws::LicenseManager
       :status,
       :client_token,
       :source_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -696,7 +724,8 @@ module Aws::LicenseManager
       :license_arn,
       :version,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -724,7 +753,8 @@ module Aws::LicenseManager
       :expiration_in_days,
       :token_properties,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +771,8 @@ module Aws::LicenseManager
       :token_id,
       :token_type,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +786,8 @@ module Aws::LicenseManager
     class DatetimeRange < Struct.new(
       :begin,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +804,8 @@ module Aws::LicenseManager
       :grant_arn,
       :status_reason,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -789,7 +822,8 @@ module Aws::LicenseManager
       :grant_arn,
       :status,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,12 +832,14 @@ module Aws::LicenseManager
     #   @return [String]
     class DeleteLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLicenseConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -812,12 +848,14 @@ module Aws::LicenseManager
     #   @return [String]
     class DeleteLicenseManagerReportGeneratorRequest < Struct.new(
       :license_manager_report_generator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLicenseManagerReportGeneratorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +868,8 @@ module Aws::LicenseManager
     class DeleteLicenseRequest < Struct.new(
       :license_arn,
       :source_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +882,8 @@ module Aws::LicenseManager
     class DeleteLicenseResponse < Struct.new(
       :status,
       :deletion_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -852,12 +892,14 @@ module Aws::LicenseManager
     #   @return [String]
     class DeleteTokenRequest < Struct.new(
       :token_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTokenResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +929,8 @@ module Aws::LicenseManager
       :overage,
       :unit,
       :allow_check_in,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -905,7 +948,8 @@ module Aws::LicenseManager
       :name,
       :value,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +958,8 @@ module Aws::LicenseManager
     #   @return [String]
     class EntitlementNotAllowedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -936,7 +981,8 @@ module Aws::LicenseManager
       :consumed_value,
       :max_count,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -949,7 +995,8 @@ module Aws::LicenseManager
     class ExtendLicenseConsumptionRequest < Struct.new(
       :license_consumption_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1009,8 @@ module Aws::LicenseManager
     class ExtendLicenseConsumptionResponse < Struct.new(
       :license_consumption_token,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,7 +1022,8 @@ module Aws::LicenseManager
     class FailedDependencyException < Struct.new(
       :message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1039,8 @@ module Aws::LicenseManager
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1049,8 @@ module Aws::LicenseManager
     #   @return [String]
     class FilterLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1012,7 +1063,8 @@ module Aws::LicenseManager
     class GetAccessTokenRequest < Struct.new(
       :token,
       :token_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1021,7 +1073,8 @@ module Aws::LicenseManager
     #   @return [String]
     class GetAccessTokenResponse < Struct.new(
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1087,8 @@ module Aws::LicenseManager
     class GetGrantRequest < Struct.new(
       :grant_arn,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1043,7 +1097,8 @@ module Aws::LicenseManager
     #   @return [Types::Grant]
     class GetGrantResponse < Struct.new(
       :grant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1107,8 @@ module Aws::LicenseManager
     #   @return [String]
     class GetLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1125,7 +1181,8 @@ module Aws::LicenseManager
       :product_information_list,
       :automated_discovery_information,
       :disassociate_when_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1134,7 +1191,8 @@ module Aws::LicenseManager
     #   @return [String]
     class GetLicenseConversionTaskRequest < Struct.new(
       :license_conversion_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,7 +1233,8 @@ module Aws::LicenseManager
       :start_time,
       :license_conversion_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1184,7 +1243,8 @@ module Aws::LicenseManager
     #   @return [String]
     class GetLicenseManagerReportGeneratorRequest < Struct.new(
       :license_manager_report_generator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1193,7 +1253,8 @@ module Aws::LicenseManager
     #   @return [Types::ReportGenerator]
     class GetLicenseManagerReportGeneratorResponse < Struct.new(
       :report_generator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1206,7 +1267,8 @@ module Aws::LicenseManager
     class GetLicenseRequest < Struct.new(
       :license_arn,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1277,8 @@ module Aws::LicenseManager
     #   @return [Types::License]
     class GetLicenseResponse < Struct.new(
       :license,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1224,7 +1287,8 @@ module Aws::LicenseManager
     #   @return [String]
     class GetLicenseUsageRequest < Struct.new(
       :license_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1233,12 +1297,14 @@ module Aws::LicenseManager
     #   @return [Types::LicenseUsage]
     class GetLicenseUsageResponse < Struct.new(
       :license_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetServiceSettingsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1266,7 +1332,8 @@ module Aws::LicenseManager
       :organization_configuration,
       :enable_cross_accounts_discovery,
       :license_manager_resource_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1316,7 +1383,8 @@ module Aws::LicenseManager
       :version,
       :granted_operations,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1382,7 +1450,8 @@ module Aws::LicenseManager
       :create_time,
       :version,
       :received_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1391,7 +1460,8 @@ module Aws::LicenseManager
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1472,8 @@ module Aws::LicenseManager
     #   @return [String]
     class InvalidResourceStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1491,8 @@ module Aws::LicenseManager
       :name,
       :condition,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1507,8 @@ module Aws::LicenseManager
     class Issuer < Struct.new(
       :name,
       :sign_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1454,7 +1527,8 @@ module Aws::LicenseManager
       :name,
       :sign_key,
       :key_fingerprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1516,7 +1590,8 @@ module Aws::LicenseManager
       :license_metadata,
       :create_time,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1590,7 +1665,8 @@ module Aws::LicenseManager
       :managed_resource_summary_list,
       :product_information_list,
       :automated_discovery_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1692,8 @@ module Aws::LicenseManager
       :resource_owner_id,
       :association_time,
       :ami_association_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1646,7 +1723,8 @@ module Aws::LicenseManager
       :resource_owner_id,
       :association_time,
       :consumed_licenses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1740,8 @@ module Aws::LicenseManager
     class LicenseConversionContext < Struct.new(
       :usage_operation,
       :product_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1784,8 @@ module Aws::LicenseManager
       :start_time,
       :license_conversion_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1743,7 +1823,8 @@ module Aws::LicenseManager
       :resource_owner_id,
       :operation_requested_by,
       :metadata_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1757,7 +1838,8 @@ module Aws::LicenseManager
     class LicenseSpecification < Struct.new(
       :license_configuration_arn,
       :ami_association_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1767,7 +1849,8 @@ module Aws::LicenseManager
     #   @return [Array<Types::EntitlementUsage>]
     class LicenseUsage < Struct.new(
       :entitlement_usages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1776,7 +1859,8 @@ module Aws::LicenseManager
     #   @return [String]
     class LicenseUsageException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1793,7 +1877,8 @@ module Aws::LicenseManager
       :license_configuration_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1806,7 +1891,8 @@ module Aws::LicenseManager
     class ListAssociationsForLicenseConfigurationResponse < Struct.new(
       :license_configuration_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,7 +1940,8 @@ module Aws::LicenseManager
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1954,8 @@ module Aws::LicenseManager
     class ListDistributedGrantsResponse < Struct.new(
       :grants,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1884,7 +1972,8 @@ module Aws::LicenseManager
       :license_configuration_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1897,7 +1986,8 @@ module Aws::LicenseManager
     class ListFailuresForLicenseConfigurationOperationsResponse < Struct.new(
       :license_operation_failure_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1934,7 +2024,8 @@ module Aws::LicenseManager
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2038,8 @@ module Aws::LicenseManager
     class ListLicenseConfigurationsResponse < Struct.new(
       :license_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1966,7 +2058,8 @@ module Aws::LicenseManager
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1979,7 +2072,8 @@ module Aws::LicenseManager
     class ListLicenseConversionTasksResponse < Struct.new(
       :license_conversion_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2003,7 +2097,8 @@ module Aws::LicenseManager
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2016,7 +2111,8 @@ module Aws::LicenseManager
     class ListLicenseManagerReportGeneratorsResponse < Struct.new(
       :report_generators,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2033,7 +2129,8 @@ module Aws::LicenseManager
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2046,7 +2143,8 @@ module Aws::LicenseManager
     class ListLicenseSpecificationsForResourceResponse < Struct.new(
       :license_specifications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2063,7 +2161,8 @@ module Aws::LicenseManager
       :license_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2076,7 +2175,8 @@ module Aws::LicenseManager
     class ListLicenseVersionsResponse < Struct.new(
       :licenses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2119,7 +2219,8 @@ module Aws::LicenseManager
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2132,7 +2233,8 @@ module Aws::LicenseManager
     class ListLicensesResponse < Struct.new(
       :licenses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2165,7 +2267,8 @@ module Aws::LicenseManager
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2281,8 @@ module Aws::LicenseManager
     class ListReceivedGrantsForOrganizationResponse < Struct.new(
       :grants,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2226,7 +2330,8 @@ module Aws::LicenseManager
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2239,7 +2344,8 @@ module Aws::LicenseManager
     class ListReceivedGrantsResponse < Struct.new(
       :grants,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2268,7 +2374,8 @@ module Aws::LicenseManager
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2281,7 +2388,8 @@ module Aws::LicenseManager
     class ListReceivedLicensesForOrganizationResponse < Struct.new(
       :licenses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2329,7 +2437,8 @@ module Aws::LicenseManager
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2342,7 +2451,8 @@ module Aws::LicenseManager
     class ListReceivedLicensesResponse < Struct.new(
       :licenses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2397,7 +2507,8 @@ module Aws::LicenseManager
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2410,7 +2521,8 @@ module Aws::LicenseManager
     class ListResourceInventoryResponse < Struct.new(
       :resource_inventory_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2419,7 +2531,8 @@ module Aws::LicenseManager
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2541,8 @@ module Aws::LicenseManager
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2456,7 +2570,8 @@ module Aws::LicenseManager
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2469,7 +2584,8 @@ module Aws::LicenseManager
     class ListTokensResponse < Struct.new(
       :tokens,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2506,7 +2622,8 @@ module Aws::LicenseManager
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2519,7 +2636,8 @@ module Aws::LicenseManager
     class ListUsageForLicenseConfigurationResponse < Struct.new(
       :license_configuration_usage_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2533,7 +2651,8 @@ module Aws::LicenseManager
     class ManagedResourceSummary < Struct.new(
       :resource_type,
       :association_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2547,7 +2666,8 @@ module Aws::LicenseManager
     class Metadata < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2556,7 +2676,8 @@ module Aws::LicenseManager
     #   @return [String]
     class NoEntitlementsAllowedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2598,7 +2719,8 @@ module Aws::LicenseManager
     #   @return [String]
     class Options < Struct.new(
       :activation_override_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2608,7 +2730,8 @@ module Aws::LicenseManager
     #   @return [Boolean]
     class OrganizationConfiguration < Struct.new(
       :enable_integration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2627,7 +2750,8 @@ module Aws::LicenseManager
     class ProductCodeListItem < Struct.new(
       :product_code_id,
       :product_code_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2711,7 +2835,8 @@ module Aws::LicenseManager
     class ProductInformation < Struct.new(
       :resource_type,
       :product_information_filter_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2729,7 +2854,8 @@ module Aws::LicenseManager
       :product_information_filter_name,
       :product_information_filter_value,
       :product_information_filter_comparator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2739,7 +2865,8 @@ module Aws::LicenseManager
     #   @return [Integer]
     class ProvisionalConfiguration < Struct.new(
       :max_time_to_live_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2748,7 +2875,8 @@ module Aws::LicenseManager
     #   @return [String]
     class RateLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2766,7 +2894,8 @@ module Aws::LicenseManager
       :received_status,
       :received_status_reason,
       :allowed_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2778,7 +2907,8 @@ module Aws::LicenseManager
     class RedirectException < Struct.new(
       :location,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2787,7 +2917,8 @@ module Aws::LicenseManager
     #   @return [String]
     class RejectGrantRequest < Struct.new(
       :grant_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2804,7 +2935,8 @@ module Aws::LicenseManager
       :grant_arn,
       :status,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2814,7 +2946,8 @@ module Aws::LicenseManager
     #   @return [Array<String>]
     class ReportContext < Struct.new(
       :license_configuration_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2829,7 +2962,8 @@ module Aws::LicenseManager
     class ReportFrequency < Struct.new(
       :value,
       :period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2887,7 +3021,8 @@ module Aws::LicenseManager
       :s3_location,
       :create_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2917,7 +3052,8 @@ module Aws::LicenseManager
       :platform,
       :platform_version,
       :resource_owning_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2926,7 +3062,8 @@ module Aws::LicenseManager
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2935,7 +3072,8 @@ module Aws::LicenseManager
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2949,7 +3087,8 @@ module Aws::LicenseManager
     class S3Location < Struct.new(
       :bucket,
       :key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2958,7 +3097,8 @@ module Aws::LicenseManager
     #   @return [String]
     class ServerInternalException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2973,7 +3113,8 @@ module Aws::LicenseManager
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3009,12 +3150,14 @@ module Aws::LicenseManager
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3048,7 +3191,8 @@ module Aws::LicenseManager
       :token_properties,
       :role_arns,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3057,7 +3201,8 @@ module Aws::LicenseManager
     #   @return [String]
     class UnsupportedDigitalSignatureMethodException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3070,12 +3215,14 @@ module Aws::LicenseManager
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3117,12 +3264,14 @@ module Aws::LicenseManager
       :description,
       :product_information_list,
       :disassociate_when_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateLicenseConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3163,12 +3312,14 @@ module Aws::LicenseManager
       :report_frequency,
       :client_token,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateLicenseManagerReportGeneratorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3185,12 +3336,14 @@ module Aws::LicenseManager
       :resource_arn,
       :add_license_specifications,
       :remove_license_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateLicenseSpecificationsForResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3211,12 +3364,14 @@ module Aws::LicenseManager
       :sns_topic_arn,
       :organization_configuration,
       :enable_cross_accounts_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateServiceSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3225,7 +3380,8 @@ module Aws::LicenseManager
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

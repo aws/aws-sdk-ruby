@@ -24,7 +24,6 @@ module Aws::S3Vectors
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

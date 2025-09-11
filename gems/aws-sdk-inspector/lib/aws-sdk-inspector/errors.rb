@@ -44,7 +44,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Details of the exception error.</p>
@@ -69,7 +69,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::AgentsAlreadyRunningAssessmentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Details of the exception error.</p>
@@ -99,7 +99,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::AssessmentRunInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Details of the exception error.</p>
@@ -129,7 +129,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::InternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Details of the exception error.</p>
@@ -149,7 +149,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::InvalidCrossAccountRoleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Details of the exception error.</p>
@@ -174,7 +174,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Details of the exception error.</p>
@@ -199,7 +199,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Details of the exception error.</p>
@@ -224,7 +224,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::NoSuchEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Details of the exception error.</p>
@@ -249,7 +249,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::PreviewGenerationInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -262,7 +262,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::ServiceTemporarilyUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Details of the exception error.</p>
@@ -285,7 +285,7 @@ module Aws::Inspector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Inspector::Types::UnsupportedFeatureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

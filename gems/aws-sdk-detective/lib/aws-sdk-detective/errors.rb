@@ -41,7 +41,7 @@ module Aws::Detective
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Detective::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -74,7 +74,7 @@ module Aws::Detective
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Detective::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::Detective
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Detective::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::Detective
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Detective::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::Detective
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Detective::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::Detective
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Detective::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -155,7 +155,7 @@ module Aws::Detective
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Detective::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

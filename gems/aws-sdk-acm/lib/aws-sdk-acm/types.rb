@@ -11,7 +11,8 @@ module Aws::ACM
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::ACM
     class AddTagsToCertificateRequest < Struct.new(
       :certificate_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -138,7 +140,8 @@ module Aws::ACM
       :certificate_authority_arn,
       :renewal_eligibility,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +155,8 @@ module Aws::ACM
     class CertificateOptions < Struct.new(
       :certificate_transparency_logging_preference,
       :export,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +242,8 @@ module Aws::ACM
       :imported_at,
       :revoked_at,
       :managed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -247,7 +252,8 @@ module Aws::ACM
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,7 +262,8 @@ module Aws::ACM
     #   @return [String]
     class DeleteCertificateRequest < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +272,8 @@ module Aws::ACM
     #   @return [String]
     class DescribeCertificateRequest < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +282,8 @@ module Aws::ACM
     #   @return [Types::CertificateDetail]
     class DescribeCertificateResponse < Struct.new(
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +317,8 @@ module Aws::ACM
       :resource_record,
       :http_redirect,
       :validation_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -322,7 +332,8 @@ module Aws::ACM
     class DomainValidationOption < Struct.new(
       :domain_name,
       :validation_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +343,8 @@ module Aws::ACM
     #   @return [Integer]
     class ExpiryEventsConfiguration < Struct.new(
       :days_before_expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +357,8 @@ module Aws::ACM
     class ExportCertificateRequest < Struct.new(
       :certificate_arn,
       :passphrase,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +375,8 @@ module Aws::ACM
       :certificate,
       :certificate_chain,
       :private_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +390,8 @@ module Aws::ACM
     class ExtendedKeyUsage < Struct.new(
       :name,
       :oid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +417,8 @@ module Aws::ACM
       :key_types,
       :export_option,
       :managed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +427,8 @@ module Aws::ACM
     #   @return [Types::ExpiryEventsConfiguration]
     class GetAccountConfigurationResponse < Struct.new(
       :expiry_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +437,8 @@ module Aws::ACM
     #   @return [String]
     class GetCertificateRequest < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -433,7 +451,8 @@ module Aws::ACM
     class GetCertificateResponse < Struct.new(
       :certificate,
       :certificate_chain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +466,8 @@ module Aws::ACM
     class HttpRedirect < Struct.new(
       :redirect_from,
       :redirect_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +492,8 @@ module Aws::ACM
       :private_key,
       :certificate_chain,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -481,7 +502,8 @@ module Aws::ACM
     #   @return [String]
     class ImportCertificateResponse < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +512,8 @@ module Aws::ACM
     #   @return [String]
     class InvalidArgsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +522,8 @@ module Aws::ACM
     #   @return [String]
     class InvalidArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +532,8 @@ module Aws::ACM
     #   @return [String]
     class InvalidDomainValidationOptionsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +542,8 @@ module Aws::ACM
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +552,8 @@ module Aws::ACM
     #   @return [String]
     class InvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +562,8 @@ module Aws::ACM
     #   @return [String]
     class InvalidTagException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +573,8 @@ module Aws::ACM
     #   @return [String]
     class KeyUsage < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +583,8 @@ module Aws::ACM
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +613,8 @@ module Aws::ACM
       :max_items,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,7 +627,8 @@ module Aws::ACM
     class ListCertificatesResponse < Struct.new(
       :next_token,
       :certificate_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,7 +637,8 @@ module Aws::ACM
     #   @return [String]
     class ListTagsForCertificateRequest < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +647,8 @@ module Aws::ACM
     #   @return [Array<Types::Tag>]
     class ListTagsForCertificateResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +661,8 @@ module Aws::ACM
     class PutAccountConfigurationRequest < Struct.new(
       :expiry_events,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +675,8 @@ module Aws::ACM
     class RemoveTagsFromCertificateRequest < Struct.new(
       :certificate_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -649,7 +685,8 @@ module Aws::ACM
     #   @return [String]
     class RenewCertificateRequest < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +708,8 @@ module Aws::ACM
       :domain_validation_options,
       :renewal_status_reason,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -716,7 +754,8 @@ module Aws::ACM
       :tags,
       :key_algorithm,
       :managed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -725,7 +764,8 @@ module Aws::ACM
     #   @return [String]
     class RequestCertificateResponse < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -734,7 +774,8 @@ module Aws::ACM
     #   @return [String]
     class RequestInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -751,7 +792,8 @@ module Aws::ACM
       :certificate_arn,
       :domain,
       :validation_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +802,8 @@ module Aws::ACM
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +812,8 @@ module Aws::ACM
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +831,8 @@ module Aws::ACM
       :name,
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -800,7 +845,8 @@ module Aws::ACM
     class RevokeCertificateRequest < Struct.new(
       :certificate_arn,
       :revocation_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,7 +855,8 @@ module Aws::ACM
     #   @return [String]
     class RevokeCertificateResponse < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +870,8 @@ module Aws::ACM
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +880,8 @@ module Aws::ACM
     #   @return [String]
     class TagPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +890,8 @@ module Aws::ACM
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,7 +900,8 @@ module Aws::ACM
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -863,7 +914,8 @@ module Aws::ACM
     class UpdateCertificateOptionsRequest < Struct.new(
       :certificate_arn,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,7 +924,8 @@ module Aws::ACM
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -40,7 +40,7 @@ module Aws::ServiceCatalogAppRegistry
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalogAppRegistry::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::ServiceCatalogAppRegistry
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalogAppRegistry::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::ServiceCatalogAppRegistry
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalogAppRegistry::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::ServiceCatalogAppRegistry
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalogAppRegistry::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::ServiceCatalogAppRegistry
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalogAppRegistry::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message associated with the Throttling exception.</p>
@@ -118,7 +118,7 @@ module Aws::ServiceCatalogAppRegistry
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalogAppRegistry::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

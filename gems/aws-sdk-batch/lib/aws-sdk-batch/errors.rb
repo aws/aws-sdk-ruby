@@ -37,7 +37,7 @@ module Aws::Batch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Batch::Types::ClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -50,7 +50,7 @@ module Aws::Batch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Batch::Types::ServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

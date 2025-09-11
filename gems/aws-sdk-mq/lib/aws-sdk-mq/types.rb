@@ -16,7 +16,8 @@ module Aws::Mq
     class ActionRequired < Struct.new(
       :action_required_code,
       :action_required_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26,7 +27,8 @@ module Aws::Mq
     #   @return [String]
     class AvailabilityZone < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,7 +42,8 @@ module Aws::Mq
     class BadRequestException < Struct.new(
       :error_attribute,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +57,8 @@ module Aws::Mq
     class BrokerEngineType < Struct.new(
       :engine_type,
       :engine_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +76,8 @@ module Aws::Mq
       :console_url,
       :endpoints,
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +107,8 @@ module Aws::Mq
       :storage_type,
       :supported_deployment_modes,
       :supported_engine_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +146,8 @@ module Aws::Mq
       :deployment_mode,
       :engine_type,
       :host_instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +193,8 @@ module Aws::Mq
       :latest_revision,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +208,8 @@ module Aws::Mq
     class ConfigurationId < Struct.new(
       :id,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +227,8 @@ module Aws::Mq
       :created,
       :description,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +246,8 @@ module Aws::Mq
       :current,
       :history,
       :pending,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +261,8 @@ module Aws::Mq
     class ConflictException < Struct.new(
       :error_attribute,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +352,8 @@ module Aws::Mq
       :users,
       :data_replication_mode,
       :data_replication_primary_broker_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +366,8 @@ module Aws::Mq
     class CreateBrokerResponse < Struct.new(
       :broker_arn,
       :broker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +393,8 @@ module Aws::Mq
       :engine_version,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +423,8 @@ module Aws::Mq
       :id,
       :latest_revision,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +438,8 @@ module Aws::Mq
     class CreateTagsRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,12 +469,14 @@ module Aws::Mq
       :password,
       :username,
       :replication_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +490,8 @@ module Aws::Mq
     class DataReplicationCounterpart < Struct.new(
       :broker_id,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -485,7 +505,8 @@ module Aws::Mq
     class DataReplicationMetadataOutput < Struct.new(
       :data_replication_counterpart,
       :data_replication_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +515,8 @@ module Aws::Mq
     #   @return [String]
     class DeleteBrokerRequest < Struct.new(
       :broker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +525,8 @@ module Aws::Mq
     #   @return [String]
     class DeleteBrokerResponse < Struct.new(
       :broker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -512,7 +535,8 @@ module Aws::Mq
     #   @return [String]
     class DeleteConfigurationRequest < Struct.new(
       :configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +545,8 @@ module Aws::Mq
     #   @return [String]
     class DeleteConfigurationResponse < Struct.new(
       :configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +559,8 @@ module Aws::Mq
     class DeleteTagsRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,12 +573,14 @@ module Aws::Mq
     class DeleteUserRequest < Struct.new(
       :broker_id,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +597,8 @@ module Aws::Mq
       :engine_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +615,8 @@ module Aws::Mq
       :broker_engine_types,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +641,8 @@ module Aws::Mq
       :max_results,
       :next_token,
       :storage_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -628,7 +659,8 @@ module Aws::Mq
       :broker_instance_options,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -637,7 +669,8 @@ module Aws::Mq
     #   @return [String]
     class DescribeBrokerRequest < Struct.new(
       :broker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +807,8 @@ module Aws::Mq
       :data_replication_mode,
       :pending_data_replication_metadata,
       :pending_data_replication_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +817,8 @@ module Aws::Mq
     #   @return [String]
     class DescribeConfigurationRequest < Struct.new(
       :configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +863,8 @@ module Aws::Mq
       :latest_revision,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +877,8 @@ module Aws::Mq
     class DescribeConfigurationRevisionRequest < Struct.new(
       :configuration_id,
       :configuration_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +899,8 @@ module Aws::Mq
       :created,
       :data,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +913,8 @@ module Aws::Mq
     class DescribeUserRequest < Struct.new(
       :broker_id,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +943,8 @@ module Aws::Mq
       :pending,
       :username,
       :replication_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +958,8 @@ module Aws::Mq
     class EncryptionOptions < Struct.new(
       :kms_key_id,
       :use_aws_owned_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +969,8 @@ module Aws::Mq
     #   @return [String]
     class EngineVersion < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +984,8 @@ module Aws::Mq
     class ForbiddenException < Struct.new(
       :error_attribute,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +999,8 @@ module Aws::Mq
     class InternalServerErrorException < Struct.new(
       :error_attribute,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1055,8 @@ module Aws::Mq
       :user_role_name,
       :user_search_matching,
       :user_search_subtree,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1106,8 @@ module Aws::Mq
       :user_role_name,
       :user_search_matching,
       :user_search_subtree,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1074,7 +1120,8 @@ module Aws::Mq
     class ListBrokersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1087,7 +1134,8 @@ module Aws::Mq
     class ListBrokersResponse < Struct.new(
       :broker_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1104,7 +1152,8 @@ module Aws::Mq
       :configuration_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1125,7 +1174,8 @@ module Aws::Mq
       :max_results,
       :next_token,
       :revisions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1188,8 @@ module Aws::Mq
     class ListConfigurationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1206,8 @@ module Aws::Mq
       :configurations,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1216,8 @@ module Aws::Mq
     #   @return [String]
     class ListTagsRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1226,8 @@ module Aws::Mq
     #   @return [Hash<String, String>]
     class ListTagsResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1244,8 @@ module Aws::Mq
       :broker_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,7 +1266,8 @@ module Aws::Mq
       :max_results,
       :next_token,
       :users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1225,7 +1281,8 @@ module Aws::Mq
     class Logs < Struct.new(
       :audit,
       :general,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1251,7 +1308,8 @@ module Aws::Mq
       :general,
       :general_log_group,
       :pending,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1323,8 @@ module Aws::Mq
     class NotFoundException < Struct.new(
       :error_attribute,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1338,8 @@ module Aws::Mq
     class PendingLogs < Struct.new(
       :audit,
       :general,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1353,8 @@ module Aws::Mq
     class PromoteRequest < Struct.new(
       :broker_id,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1363,8 @@ module Aws::Mq
     #   @return [String]
     class PromoteResponse < Struct.new(
       :broker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,12 +1373,14 @@ module Aws::Mq
     #   @return [String]
     class RebootBrokerRequest < Struct.new(
       :broker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RebootBrokerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1398,8 @@ module Aws::Mq
       :attribute_name,
       :element_name,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1413,8 @@ module Aws::Mq
     class UnauthorizedException < Struct.new(
       :error_attribute,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1464,8 @@ module Aws::Mq
       :maintenance_window_start_time,
       :security_groups,
       :data_replication_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1459,7 +1526,8 @@ module Aws::Mq
       :data_replication_mode,
       :pending_data_replication_metadata,
       :pending_data_replication_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1477,7 +1545,8 @@ module Aws::Mq
       :configuration_id,
       :data,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1506,7 +1575,8 @@ module Aws::Mq
       :latest_revision,
       :name,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1536,12 +1606,14 @@ module Aws::Mq
       :password,
       :username,
       :replication_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1567,7 +1639,8 @@ module Aws::Mq
       :password,
       :username,
       :replication_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1585,7 +1658,8 @@ module Aws::Mq
       :console_access,
       :groups,
       :pending_change,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1673,8 @@ module Aws::Mq
     class UserSummary < Struct.new(
       :pending_change,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1617,7 +1692,8 @@ module Aws::Mq
       :day_of_week,
       :time_of_day,
       :time_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

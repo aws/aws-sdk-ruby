@@ -15,12 +15,14 @@ module Aws::SecurityHub
     class AcceptAdministratorInvitationRequest < Struct.new(
       :administrator_id,
       :invitation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AcceptAdministratorInvitationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33,12 +35,14 @@ module Aws::SecurityHub
     class AcceptInvitationRequest < Struct.new(
       :master_id,
       :invitation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AcceptInvitationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,7 +54,8 @@ module Aws::SecurityHub
     class AccessDeniedException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +69,8 @@ module Aws::SecurityHub
     class AccountDetails < Struct.new(
       :account_id,
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +136,8 @@ module Aws::SecurityHub
       :aws_api_call_action,
       :dns_request_action,
       :port_probe_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +147,8 @@ module Aws::SecurityHub
     #   @return [String]
     class ActionLocalIpDetails < Struct.new(
       :ip_address_v4,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +165,8 @@ module Aws::SecurityHub
     class ActionLocalPortDetails < Struct.new(
       :port,
       :port_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +195,8 @@ module Aws::SecurityHub
       :country,
       :city,
       :geo_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +212,8 @@ module Aws::SecurityHub
     class ActionRemotePortDetails < Struct.new(
       :port,
       :port_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +231,8 @@ module Aws::SecurityHub
       :action_target_arn,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +257,8 @@ module Aws::SecurityHub
       :id,
       :user,
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +292,8 @@ module Aws::SecurityHub
       :mfa_status,
       :created_time,
       :issuer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +332,8 @@ module Aws::SecurityHub
       :type,
       :credential_uid,
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +347,8 @@ module Aws::SecurityHub
     class Adjustment < Struct.new(
       :metric,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +364,8 @@ module Aws::SecurityHub
     class AdminAccount < Struct.new(
       :account_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +375,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AggregatorV2 < Struct.new(
       :aggregator_v2_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +390,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AssociatedStandard < Struct.new(
       :standards_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -400,7 +419,8 @@ module Aws::SecurityHub
       :configuration_policy_id,
       :association_type,
       :association_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +464,8 @@ module Aws::SecurityHub
       :route_table_association_id,
       :route_table_id,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +485,8 @@ module Aws::SecurityHub
     class AssociationStateDetails < Struct.new(
       :state,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -485,7 +507,8 @@ module Aws::SecurityHub
     class AutomationRulesAction < Struct.new(
       :type,
       :finding_fields_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +518,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AutomationRulesActionTypeObjectV2 < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -513,7 +537,8 @@ module Aws::SecurityHub
       :type,
       :finding_fields_update,
       :external_integration_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,7 +621,8 @@ module Aws::SecurityHub
       :created_at,
       :updated_at,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +678,8 @@ module Aws::SecurityHub
       :user_defined_fields,
       :workflow,
       :related_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +697,8 @@ module Aws::SecurityHub
       :severity_id,
       :comment,
       :status_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,7 +1063,8 @@ module Aws::SecurityHub
       :resource_application_arn,
       :resource_application_name,
       :aws_account_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1106,7 +1135,8 @@ module Aws::SecurityHub
       :created_at,
       :updated_at,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1148,7 +1178,8 @@ module Aws::SecurityHub
       :actions,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1193,8 @@ module Aws::SecurityHub
     class AvailabilityZone < Struct.new(
       :zone_name,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1311,8 @@ module Aws::SecurityHub
       :storage_type,
       :subnet_ids,
       :users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1334,8 @@ module Aws::SecurityHub
     class AwsAmazonMqBrokerEncryptionOptionsDetails < Struct.new(
       :kms_key_id,
       :use_aws_owned_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1369,7 +1403,8 @@ module Aws::SecurityHub
       :user_role_name,
       :user_search_matching,
       :user_search_subtree,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1407,7 +1442,8 @@ module Aws::SecurityHub
       :audit_log_group,
       :general_log_group,
       :pending,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1428,7 +1464,8 @@ module Aws::SecurityHub
     class AwsAmazonMqBrokerLogsPendingDetails < Struct.new(
       :audit,
       :general,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1454,7 +1491,8 @@ module Aws::SecurityHub
       :day_of_week,
       :time_of_day,
       :time_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1512,8 @@ module Aws::SecurityHub
     class AwsAmazonMqBrokerUsersDetails < Struct.new(
       :pending_change,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1522,7 +1561,8 @@ module Aws::SecurityHub
       :affected_resources,
       :first_seen,
       :last_seen,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1534,7 +1574,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsApiCallActionDomainDetails < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,7 +1591,8 @@ module Aws::SecurityHub
     class AwsApiGatewayAccessLogSettings < Struct.new(
       :format,
       :destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1617,8 @@ module Aws::SecurityHub
       :deployment_id,
       :stage_variable_overrides,
       :use_stage_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1588,7 +1631,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class AwsApiGatewayEndpointConfiguration < Struct.new(
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1661,7 +1705,8 @@ module Aws::SecurityHub
       :unauthorized_cache_control_header_strategy,
       :http_method,
       :resource_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1712,7 +1757,8 @@ module Aws::SecurityHub
       :minimum_compression_size,
       :api_key_source,
       :endpoint_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1797,7 +1843,8 @@ module Aws::SecurityHub
       :created_date,
       :last_updated_date,
       :web_acl_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1856,7 +1903,8 @@ module Aws::SecurityHub
       :protocol_type,
       :route_selection_expression,
       :cors_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1890,7 +1938,8 @@ module Aws::SecurityHub
       :data_trace_enabled,
       :throttling_burst_limit,
       :throttling_rate_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1964,7 +2013,8 @@ module Aws::SecurityHub
       :auto_deploy,
       :last_deployment_status_message,
       :api_gateway_managed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1996,7 +2046,8 @@ module Aws::SecurityHub
       :lambda_authorizer_config,
       :open_id_connect_config,
       :user_pool_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2075,7 +2126,8 @@ module Aws::SecurityHub
       :log_config,
       :additional_authentication_providers,
       :waf_web_acl_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2103,7 +2155,8 @@ module Aws::SecurityHub
       :authorizer_result_ttl_in_seconds,
       :authorizer_uri,
       :identity_validation_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2132,7 +2185,8 @@ module Aws::SecurityHub
       :cloud_watch_logs_role_arn,
       :exclude_verbose_content,
       :field_log_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2168,7 +2222,8 @@ module Aws::SecurityHub
       :client_id,
       :iat_tt_l,
       :issuer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2203,7 +2258,8 @@ module Aws::SecurityHub
       :aws_region,
       :default_action,
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2221,7 +2277,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsAthenaWorkGroupConfigurationResultConfigurationDetails]
     class AwsAthenaWorkGroupConfigurationDetails < Struct.new(
       :result_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2237,7 +2294,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails]
     class AwsAthenaWorkGroupConfigurationResultConfigurationDetails < Struct.new(
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2259,7 +2317,8 @@ module Aws::SecurityHub
     class AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails < Struct.new(
       :encryption_option,
       :kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2294,7 +2353,8 @@ module Aws::SecurityHub
       :description,
       :state,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2304,7 +2364,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2349,7 +2410,8 @@ module Aws::SecurityHub
       :availability_zones,
       :launch_template,
       :capacity_rebalance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2367,7 +2429,8 @@ module Aws::SecurityHub
       :launch_template_id,
       :launch_template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2381,7 +2444,8 @@ module Aws::SecurityHub
     class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails < Struct.new(
       :instances_distribution,
       :launch_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2492,8 @@ module Aws::SecurityHub
       :spot_allocation_strategy,
       :spot_instance_pools,
       :spot_max_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2442,7 +2507,8 @@ module Aws::SecurityHub
     class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails < Struct.new(
       :launch_template_specification,
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2460,7 +2526,8 @@ module Aws::SecurityHub
       :launch_template_id,
       :launch_template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2474,7 +2541,8 @@ module Aws::SecurityHub
     class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails < Struct.new(
       :instance_type,
       :weighted_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2498,7 +2566,8 @@ module Aws::SecurityHub
       :ebs,
       :no_device,
       :virtual_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2577,7 +2646,8 @@ module Aws::SecurityHub
       :snapshot_id,
       :volume_size,
       :volume_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2735,8 @@ module Aws::SecurityHub
       :spot_price,
       :user_data,
       :metadata_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2678,7 +2749,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2696,7 +2768,8 @@ module Aws::SecurityHub
       :http_endpoint,
       :http_put_response_hop_limit,
       :http_tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2721,7 +2794,8 @@ module Aws::SecurityHub
     class AwsBackupBackupPlanAdvancedBackupSettingsDetails < Struct.new(
       :backup_options,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2743,7 +2817,8 @@ module Aws::SecurityHub
       :backup_plan_name,
       :advanced_backup_settings,
       :backup_plan_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2770,7 +2845,8 @@ module Aws::SecurityHub
       :backup_plan_arn,
       :backup_plan_id,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2787,7 +2863,8 @@ module Aws::SecurityHub
     class AwsBackupBackupPlanLifecycleDetails < Struct.new(
       :delete_after_days,
       :move_to_cold_storage_after_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2884,8 @@ module Aws::SecurityHub
     class AwsBackupBackupPlanRuleCopyActionsDetails < Struct.new(
       :destination_backup_vault_arn,
       :lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2858,7 +2936,8 @@ module Aws::SecurityHub
       :completion_window_minutes,
       :copy_actions,
       :lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2894,7 +2973,8 @@ module Aws::SecurityHub
       :encryption_key_arn,
       :notifications,
       :access_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2933,7 +3013,8 @@ module Aws::SecurityHub
     class AwsBackupBackupVaultNotificationsDetails < Struct.new(
       :backup_vault_events,
       :sns_topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2951,7 +3032,8 @@ module Aws::SecurityHub
     class AwsBackupRecoveryPointCalculatedLifecycleDetails < Struct.new(
       :delete_at,
       :move_to_cold_storage_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2979,7 +3061,8 @@ module Aws::SecurityHub
       :backup_plan_id,
       :backup_plan_version,
       :backup_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3132,7 +3215,8 @@ module Aws::SecurityHub
       :status,
       :status_message,
       :storage_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3150,7 +3234,8 @@ module Aws::SecurityHub
     class AwsBackupRecoveryPointLifecycleDetails < Struct.new(
       :delete_after_days,
       :move_to_cold_storage_after_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3292,7 +3377,8 @@ module Aws::SecurityHub
       :subject,
       :subject_alternative_names,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3333,7 +3419,8 @@ module Aws::SecurityHub
       :validation_emails,
       :validation_method,
       :validation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3349,7 +3436,8 @@ module Aws::SecurityHub
     class AwsCertificateManagerCertificateExtendedKeyUsage < Struct.new(
       :name,
       :o_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3359,7 +3447,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsCertificateManagerCertificateKeyUsage < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3371,7 +3460,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsCertificateManagerCertificateOptions < Struct.new(
       :certificate_transparency_logging_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3409,7 +3499,8 @@ module Aws::SecurityHub
       :renewal_status,
       :renewal_status_reason,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3428,7 +3519,8 @@ module Aws::SecurityHub
       :name,
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3511,7 +3603,8 @@ module Aws::SecurityHub
       :stack_status,
       :stack_status_reason,
       :timeout_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3523,7 +3616,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsCloudFormationStackDriftInformationDetails < Struct.new(
       :stack_drift_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3545,7 +3639,8 @@ module Aws::SecurityHub
       :description,
       :output_key,
       :output_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3573,7 +3668,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsCloudFrontDistributionCacheBehavior < Struct.new(
       :viewer_protocol_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3583,7 +3679,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsCloudFrontDistributionCacheBehavior>]
     class AwsCloudFrontDistributionCacheBehaviors < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3611,7 +3708,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsCloudFrontDistributionDefaultCacheBehavior < Struct.new(
       :viewer_protocol_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3669,7 +3767,8 @@ module Aws::SecurityHub
       :viewer_certificate,
       :status,
       :web_acl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3692,7 +3791,8 @@ module Aws::SecurityHub
       :enabled,
       :include_cookies,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3729,7 +3829,8 @@ module Aws::SecurityHub
       :origin_protocol_policy,
       :origin_read_timeout,
       :origin_ssl_protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3739,7 +3840,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsCloudFrontDistributionOriginGroupFailover]
     class AwsCloudFrontDistributionOriginGroup < Struct.new(
       :failover_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3749,7 +3851,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsCloudFrontDistributionOriginGroupFailoverStatusCodes]
     class AwsCloudFrontDistributionOriginGroupFailover < Struct.new(
       :status_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3763,7 +3866,8 @@ module Aws::SecurityHub
     class AwsCloudFrontDistributionOriginGroupFailoverStatusCodes < Struct.new(
       :items,
       :quantity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3773,7 +3877,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsCloudFrontDistributionOriginGroup>]
     class AwsCloudFrontDistributionOriginGroups < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3806,7 +3911,8 @@ module Aws::SecurityHub
       :origin_path,
       :s3_origin_config,
       :custom_origin_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3817,7 +3923,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsCloudFrontDistributionOriginS3OriginConfig < Struct.new(
       :origin_access_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3836,7 +3943,8 @@ module Aws::SecurityHub
     class AwsCloudFrontDistributionOriginSslProtocols < Struct.new(
       :items,
       :quantity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3846,7 +3954,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsCloudFrontDistributionOriginItem>]
     class AwsCloudFrontDistributionOrigins < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3880,7 +3989,8 @@ module Aws::SecurityHub
       :iam_certificate_id,
       :minimum_protocol_version,
       :ssl_support_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3950,7 +4060,8 @@ module Aws::SecurityHub
       :sns_topic_arn,
       :sns_topic_name,
       :trail_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4078,7 +4189,8 @@ module Aws::SecurityHub
       :threshold_metric_id,
       :treat_missing_data,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4095,7 +4207,8 @@ module Aws::SecurityHub
     class AwsCloudWatchAlarmDimensionsDetails < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4137,7 +4250,8 @@ module Aws::SecurityHub
       :packaging,
       :path,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4183,7 +4297,8 @@ module Aws::SecurityHub
       :logs_config,
       :vpc_config,
       :secondary_artifacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4246,7 +4361,8 @@ module Aws::SecurityHub
       :image_pull_credentials_type,
       :registry_credential,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4264,7 +4380,8 @@ module Aws::SecurityHub
       :name,
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4283,7 +4400,8 @@ module Aws::SecurityHub
     class AwsCodeBuildProjectEnvironmentRegistryCredential < Struct.new(
       :credential,
       :credential_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4301,7 +4419,8 @@ module Aws::SecurityHub
       :group_name,
       :status,
       :stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4315,7 +4434,8 @@ module Aws::SecurityHub
     class AwsCodeBuildProjectLogsConfigDetails < Struct.new(
       :cloud_watch_logs,
       :s3_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4333,7 +4453,8 @@ module Aws::SecurityHub
       :encryption_disabled,
       :location,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4424,7 +4545,8 @@ module Aws::SecurityHub
       :location,
       :git_clone_depth,
       :insecure_ssl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4442,7 +4564,8 @@ module Aws::SecurityHub
       :vpc_id,
       :subnets,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4473,7 +4596,8 @@ module Aws::SecurityHub
       :max_age,
       :allow_methods,
       :allow_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4560,7 +4684,8 @@ module Aws::SecurityHub
       :server_name,
       :ssl_mode,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4642,7 +4767,8 @@ module Aws::SecurityHub
       :replication_instance_identifier,
       :replication_subnet_group,
       :vpc_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4655,7 +4781,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsDmsReplicationInstanceReplicationSubnetGroupDetails < Struct.new(
       :replication_subnet_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4668,7 +4795,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsDmsReplicationInstanceVpcSecurityGroupsDetails < Struct.new(
       :vpc_security_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4748,7 +4876,8 @@ module Aws::SecurityHub
       :table_mappings,
       :target_endpoint_arn,
       :task_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4762,7 +4891,8 @@ module Aws::SecurityHub
     class AwsDynamoDbTableAttributeDefinition < Struct.new(
       :attribute_name,
       :attribute_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4778,7 +4908,8 @@ module Aws::SecurityHub
     class AwsDynamoDbTableBillingModeSummary < Struct.new(
       :billing_mode,
       :last_update_to_pay_per_request_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4904,7 +5035,8 @@ module Aws::SecurityHub
       :table_size_bytes,
       :table_status,
       :deletion_protection_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4968,7 +5100,8 @@ module Aws::SecurityHub
       :key_schema,
       :projection,
       :provisioned_throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4983,7 +5116,8 @@ module Aws::SecurityHub
     class AwsDynamoDbTableKeySchema < Struct.new(
       :attribute_name,
       :key_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5006,7 +5140,8 @@ module Aws::SecurityHub
       :index_name,
       :key_schema,
       :projection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5039,7 +5174,8 @@ module Aws::SecurityHub
     class AwsDynamoDbTableProjection < Struct.new(
       :non_key_attributes,
       :projection_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5071,7 +5207,8 @@ module Aws::SecurityHub
       :number_of_decreases_today,
       :read_capacity_units,
       :write_capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5081,7 +5218,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     class AwsDynamoDbTableProvisionedThroughputOverride < Struct.new(
       :read_capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5139,7 +5277,8 @@ module Aws::SecurityHub
       :region_name,
       :replica_status,
       :replica_status_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5153,7 +5292,8 @@ module Aws::SecurityHub
     class AwsDynamoDbTableReplicaGlobalSecondaryIndex < Struct.new(
       :index_name,
       :provisioned_throughput_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5176,7 +5316,8 @@ module Aws::SecurityHub
       :source_table_arn,
       :restore_date_time,
       :restore_in_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5201,7 +5342,8 @@ module Aws::SecurityHub
       :status,
       :sse_type,
       :kms_master_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5215,7 +5357,8 @@ module Aws::SecurityHub
     class AwsDynamoDbTableStreamSpecification < Struct.new(
       :stream_enabled,
       :stream_view_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5229,7 +5372,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5260,7 +5404,8 @@ module Aws::SecurityHub
       :active_directory,
       :mutual_authentication,
       :federated_authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5280,7 +5425,8 @@ module Aws::SecurityHub
     class AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails < Struct.new(
       :saml_provider_arn,
       :self_service_saml_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5294,7 +5440,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails < Struct.new(
       :client_root_certificate_chain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5320,7 +5467,8 @@ module Aws::SecurityHub
       :enabled,
       :lambda_function_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5340,7 +5488,8 @@ module Aws::SecurityHub
     class AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5362,7 +5511,8 @@ module Aws::SecurityHub
     class AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails < Struct.new(
       :enabled,
       :banner_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5388,7 +5538,8 @@ module Aws::SecurityHub
       :enabled,
       :cloudwatch_log_group,
       :cloudwatch_log_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5494,7 +5645,8 @@ module Aws::SecurityHub
       :client_connect_options,
       :session_timeout_hours,
       :client_login_banner_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5545,7 +5697,8 @@ module Aws::SecurityHub
       :network_interface_id,
       :network_interface_owner_id,
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5608,7 +5761,8 @@ module Aws::SecurityHub
       :virtualization_type,
       :metadata_options,
       :monitoring,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5640,7 +5794,8 @@ module Aws::SecurityHub
       :http_put_response_hop_limit,
       :http_tokens,
       :instance_metadata_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5654,7 +5809,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2InstanceMonitoringDetails < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5664,7 +5820,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2InstanceNetworkInterfacesDetails < Struct.new(
       :network_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5700,7 +5857,8 @@ module Aws::SecurityHub
       :ebs,
       :no_device,
       :virtual_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5759,7 +5917,8 @@ module Aws::SecurityHub
       :throughput,
       :volume_size,
       :volume_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5779,7 +5938,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails < Struct.new(
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5800,7 +5960,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5822,7 +5983,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataCpuOptionsDetails < Struct.new(
       :core_count,
       :threads_per_core,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5836,7 +5998,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2LaunchTemplateDataCreditSpecificationDetails < Struct.new(
       :cpu_credits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6029,7 +6192,8 @@ module Aws::SecurityHub
       :security_group_id_set,
       :security_group_set,
       :user_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6043,7 +6207,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6063,7 +6228,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails < Struct.new(
       :count,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6077,7 +6243,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsEc2LaunchTemplateDataEnclaveOptionsDetails < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6091,7 +6258,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsEc2LaunchTemplateDataHibernationOptionsDetails < Struct.new(
       :configured,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6111,7 +6279,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataIamInstanceProfileDetails < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6131,7 +6300,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails < Struct.new(
       :market_type,
       :spot_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6169,7 +6339,8 @@ module Aws::SecurityHub
       :max_price,
       :spot_instance_type,
       :valid_until,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6189,7 +6360,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails < Struct.new(
       :max,
       :min,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6209,7 +6381,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails < Struct.new(
       :max,
       :min,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6230,7 +6403,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails < Struct.new(
       :max,
       :min,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6368,7 +6542,8 @@ module Aws::SecurityHub
       :spot_max_price_percentage_over_lowest_price,
       :total_local_storage_gb,
       :v_cpu_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6388,7 +6563,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails < Struct.new(
       :max,
       :min,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6408,7 +6584,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails < Struct.new(
       :max,
       :min,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6428,7 +6605,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails < Struct.new(
       :max,
       :min,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6448,7 +6626,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails < Struct.new(
       :max,
       :min,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6468,7 +6647,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails < Struct.new(
       :max,
       :min,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6482,7 +6662,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2LaunchTemplateDataLicenseSetDetails < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6496,7 +6677,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2LaunchTemplateDataMaintenanceOptionsDetails < Struct.new(
       :auto_recovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6536,7 +6718,8 @@ module Aws::SecurityHub
       :http_tokens,
       :http_put_response_hop_limit,
       :instance_metadata_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6552,7 +6735,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsEc2LaunchTemplateDataMonitoringDetails < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6687,7 +6871,8 @@ module Aws::SecurityHub
       :private_ip_addresses,
       :secondary_private_ip_address_count,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6701,7 +6886,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails < Struct.new(
       :ipv4_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6715,7 +6901,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails < Struct.new(
       :ipv6_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6729,7 +6916,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails < Struct.new(
       :ipv6_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6749,7 +6937,8 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails < Struct.new(
       :primary,
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6805,7 +6994,8 @@ module Aws::SecurityHub
       :partition_number,
       :spread_domain,
       :tenancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6831,7 +7021,8 @@ module Aws::SecurityHub
       :enable_resource_name_dns_aaaa_record,
       :enable_resource_name_dns_a_record,
       :hostname_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6869,7 +7060,8 @@ module Aws::SecurityHub
       :launch_template_data,
       :default_version_number,
       :latest_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6887,7 +7079,8 @@ module Aws::SecurityHub
       :network_acl_association_id,
       :network_acl_id,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6917,7 +7110,8 @@ module Aws::SecurityHub
       :vpc_id,
       :associations,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6956,7 +7150,8 @@ module Aws::SecurityHub
       :protocol,
       :rule_action,
       :rule_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6995,7 +7190,8 @@ module Aws::SecurityHub
       :instance_id,
       :instance_owner_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7033,7 +7229,8 @@ module Aws::SecurityHub
       :private_ip_addresses,
       :public_dns_name,
       :public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7044,7 +7241,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2NetworkInterfaceIpV6AddressDetail < Struct.new(
       :ip_v6_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7059,7 +7257,8 @@ module Aws::SecurityHub
     class AwsEc2NetworkInterfacePrivateIpAddressDetail < Struct.new(
       :private_ip_address,
       :private_dns_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7073,7 +7272,8 @@ module Aws::SecurityHub
     class AwsEc2NetworkInterfaceSecurityGroup < Struct.new(
       :group_name,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7117,7 +7317,8 @@ module Aws::SecurityHub
       :route_table_id,
       :route_set,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7147,7 +7348,8 @@ module Aws::SecurityHub
       :vpc_id,
       :ip_permissions,
       :ip_permissions_egress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7198,7 +7400,8 @@ module Aws::SecurityHub
       :ip_ranges,
       :ipv6_ranges,
       :prefix_list_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7209,7 +7412,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2SecurityGroupIpRange < Struct.new(
       :cidr_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7220,7 +7424,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2SecurityGroupIpv6Range < Struct.new(
       :cidr_ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7230,7 +7435,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2SecurityGroupPrefixListId < Struct.new(
       :prefix_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7265,7 +7471,8 @@ module Aws::SecurityHub
       :user_id,
       :vpc_id,
       :vpc_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7323,7 +7530,8 @@ module Aws::SecurityHub
       :subnet_id,
       :vpc_id,
       :ipv6_cidr_block_association_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7391,7 +7599,8 @@ module Aws::SecurityHub
       :dns_support,
       :multicast_support,
       :amazon_side_asn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7440,7 +7649,8 @@ module Aws::SecurityHub
       :delete_on_termination,
       :instance_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7528,7 +7738,8 @@ module Aws::SecurityHub
       :volume_id,
       :volume_type,
       :volume_scan_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7552,7 +7763,8 @@ module Aws::SecurityHub
       :ipv6_cidr_block_association_set,
       :dhcp_options_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7629,7 +7841,8 @@ module Aws::SecurityHub
       :service_name,
       :service_state,
       :service_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7639,7 +7852,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEc2VpcEndpointServiceServiceTypeDetails < Struct.new(
       :service_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7672,7 +7886,8 @@ module Aws::SecurityHub
       :requester_vpc_info,
       :status,
       :vpc_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7689,7 +7904,8 @@ module Aws::SecurityHub
     class AwsEc2VpcPeeringConnectionStatusDetails < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7731,7 +7947,8 @@ module Aws::SecurityHub
       :peering_options,
       :region,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7807,7 +8024,8 @@ module Aws::SecurityHub
       :options,
       :routes,
       :transit_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7821,7 +8039,8 @@ module Aws::SecurityHub
     class AwsEc2VpnConnectionOptionsDetails < Struct.new(
       :static_routes_only,
       :tunnel_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7900,7 +8119,8 @@ module Aws::SecurityHub
       :rekey_margin_time_seconds,
       :replay_window_size,
       :tunnel_inside_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7915,7 +8135,8 @@ module Aws::SecurityHub
     class AwsEc2VpnConnectionRoutesDetails < Struct.new(
       :destination_cidr_block,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7947,7 +8168,8 @@ module Aws::SecurityHub
       :outside_ip_address,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7996,7 +8218,8 @@ module Aws::SecurityHub
       :image_digest,
       :image_tags,
       :image_published_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8026,7 +8249,8 @@ module Aws::SecurityHub
       :lifecycle_policy,
       :repository_name,
       :repository_policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8036,7 +8260,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsEcrRepositoryImageScanningConfigurationDetails < Struct.new(
       :scan_on_push,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8050,7 +8275,8 @@ module Aws::SecurityHub
     class AwsEcrRepositoryLifecyclePolicyDetails < Struct.new(
       :lifecycle_policy_text,
       :registry_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8064,7 +8290,8 @@ module Aws::SecurityHub
     class AwsEcsClusterClusterSettingsDetails < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8074,7 +8301,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsEcsClusterConfigurationExecuteCommandConfigurationDetails]
     class AwsEcsClusterConfigurationDetails < Struct.new(
       :execute_command_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8092,7 +8320,8 @@ module Aws::SecurityHub
       :kms_key_id,
       :log_configuration,
       :logging,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8118,7 +8347,8 @@ module Aws::SecurityHub
       :s3_bucket_name,
       :s3_encryption_enabled,
       :s3_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8136,7 +8366,8 @@ module Aws::SecurityHub
       :base,
       :capacity_provider,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8190,7 +8421,8 @@ module Aws::SecurityHub
       :registered_container_instances_count,
       :running_tasks_count,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8218,7 +8450,8 @@ module Aws::SecurityHub
       :image,
       :mount_points,
       :privileged,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8239,7 +8472,8 @@ module Aws::SecurityHub
       :base,
       :capacity_provider,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8253,7 +8487,8 @@ module Aws::SecurityHub
     class AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails < Struct.new(
       :enable,
       :rollback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8275,7 +8510,8 @@ module Aws::SecurityHub
       :deployment_circuit_breaker,
       :maximum_percent,
       :minimum_healthy_percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8289,7 +8525,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEcsServiceDeploymentControllerDetails < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8392,7 +8629,8 @@ module Aws::SecurityHub
       :service_name,
       :service_registries,
       :task_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8416,7 +8654,8 @@ module Aws::SecurityHub
       :container_port,
       :load_balancer_name,
       :target_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8438,7 +8677,8 @@ module Aws::SecurityHub
       :assign_public_ip,
       :security_groups,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8448,7 +8688,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails]
     class AwsEcsServiceNetworkConfigurationDetails < Struct.new(
       :aws_vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8464,7 +8705,8 @@ module Aws::SecurityHub
     class AwsEcsServicePlacementConstraintsDetails < Struct.new(
       :expression,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8486,7 +8728,8 @@ module Aws::SecurityHub
     class AwsEcsServicePlacementStrategiesDetails < Struct.new(
       :field,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8512,7 +8755,8 @@ module Aws::SecurityHub
       :container_port,
       :port,
       :registry_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8548,7 +8792,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails < Struct.new(
       :condition,
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8765,7 +9010,8 @@ module Aws::SecurityHub
       :user,
       :volumes_from,
       :working_directory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8779,7 +9025,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8793,7 +9040,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8807,7 +9055,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails < Struct.new(
       :hostname,
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8838,7 +9087,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails < Struct.new(
       :options,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8864,7 +9114,8 @@ module Aws::SecurityHub
       :retries,
       :start_period,
       :timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8906,7 +9157,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails < Struct.new(
       :add,
       :drop,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8940,7 +9192,8 @@ module Aws::SecurityHub
       :shared_memory_size,
       :swappiness,
       :tmpfs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8958,7 +9211,8 @@ module Aws::SecurityHub
       :container_path,
       :host_path,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8989,7 +9243,8 @@ module Aws::SecurityHub
       :container_path,
       :mount_options,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9073,7 +9328,8 @@ module Aws::SecurityHub
       :log_driver,
       :options,
       :secret_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9089,7 +9345,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails < Struct.new(
       :name,
       :value_from,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9107,7 +9364,8 @@ module Aws::SecurityHub
       :container_path,
       :read_only,
       :source_volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9125,7 +9383,8 @@ module Aws::SecurityHub
       :container_port,
       :host_port,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9135,7 +9394,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails < Struct.new(
       :credentials_parameter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9153,7 +9413,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9168,7 +9429,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails < Struct.new(
       :name,
       :value_from,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9182,7 +9444,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails < Struct.new(
       :namespace,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9277,7 +9540,8 @@ module Aws::SecurityHub
       :hard_limit,
       :name,
       :soft_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9291,7 +9555,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails < Struct.new(
       :read_only,
       :source_container,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9430,7 +9695,8 @@ module Aws::SecurityHub
       :task_role_arn,
       :volumes,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9445,7 +9711,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionInferenceAcceleratorsDetails < Struct.new(
       :device_name,
       :device_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9459,7 +9726,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionPlacementConstraintsDetails < Struct.new(
       :expression,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9478,7 +9746,8 @@ module Aws::SecurityHub
       :container_name,
       :proxy_configuration_properties,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9492,7 +9761,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9514,7 +9784,8 @@ module Aws::SecurityHub
       :efs_volume_configuration,
       :host,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9541,7 +9812,8 @@ module Aws::SecurityHub
       :driver_opts,
       :labels,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9555,7 +9827,8 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails < Struct.new(
       :access_point_id,
       :iam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9581,7 +9854,8 @@ module Aws::SecurityHub
       :root_directory,
       :transit_encryption,
       :transit_encryption_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9591,7 +9865,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEcsTaskDefinitionVolumesHostDetails < Struct.new(
       :source_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9646,7 +9921,8 @@ module Aws::SecurityHub
       :group,
       :volumes,
       :containers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9665,7 +9941,8 @@ module Aws::SecurityHub
     class AwsEcsTaskVolumeDetails < Struct.new(
       :name,
       :host,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9678,7 +9955,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEcsTaskVolumeHostDetails < Struct.new(
       :source_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9716,7 +9994,8 @@ module Aws::SecurityHub
       :file_system_id,
       :posix_user,
       :root_directory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9738,7 +10017,8 @@ module Aws::SecurityHub
       :gid,
       :secondary_gids,
       :uid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9762,7 +10042,8 @@ module Aws::SecurityHub
       :owner_gid,
       :owner_uid,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9782,7 +10063,8 @@ module Aws::SecurityHub
     class AwsEfsAccessPointRootDirectoryDetails < Struct.new(
       :creation_info,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9856,7 +10138,8 @@ module Aws::SecurityHub
       :role_arn,
       :version,
       :logging,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9897,7 +10180,8 @@ module Aws::SecurityHub
     class AwsEksClusterLoggingClusterLoggingDetails < Struct.new(
       :enabled,
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9907,7 +10191,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsEksClusterLoggingClusterLoggingDetails>]
     class AwsEksClusterLoggingDetails < Struct.new(
       :cluster_logging,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9929,7 +10214,8 @@ module Aws::SecurityHub
       :security_group_ids,
       :subnet_ids,
       :endpoint_public_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10041,7 +10327,8 @@ module Aws::SecurityHub
       :status,
       :tier,
       :version_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10055,7 +10342,8 @@ module Aws::SecurityHub
     class AwsElasticBeanstalkEnvironmentEnvironmentLink < Struct.new(
       :environment_name,
       :link_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10077,7 +10365,8 @@ module Aws::SecurityHub
       :option_name,
       :resource_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10095,7 +10384,8 @@ module Aws::SecurityHub
       :name,
       :type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10161,7 +10451,8 @@ module Aws::SecurityHub
       :node_to_node_encryption_options,
       :service_software_options,
       :vpc_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10188,7 +10479,8 @@ module Aws::SecurityHub
     class AwsElasticsearchDomainDomainEndpointOptions < Struct.new(
       :enforce_https,
       :tls_security_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10224,7 +10516,8 @@ module Aws::SecurityHub
       :instance_type,
       :zone_awareness_config,
       :zone_awareness_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10234,7 +10527,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     class AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails < Struct.new(
       :availability_zone_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10248,7 +10542,8 @@ module Aws::SecurityHub
     class AwsElasticsearchDomainEncryptionAtRestOptions < Struct.new(
       :enabled,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10269,7 +10564,8 @@ module Aws::SecurityHub
       :index_slow_logs,
       :search_slow_logs,
       :audit_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10283,7 +10579,8 @@ module Aws::SecurityHub
     class AwsElasticsearchDomainLogPublishingOptionsLogConfig < Struct.new(
       :cloud_watch_logs_log_group_arn,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10293,7 +10590,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsElasticsearchDomainNodeToNodeEncryptionOptions < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10355,7 +10653,8 @@ module Aws::SecurityHub
       :new_version,
       :update_available,
       :update_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10378,7 +10677,8 @@ module Aws::SecurityHub
       :security_group_ids,
       :subnet_ids,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10394,7 +10694,8 @@ module Aws::SecurityHub
     class AwsElbAppCookieStickinessPolicy < Struct.new(
       :cookie_name,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10412,7 +10713,8 @@ module Aws::SecurityHub
     class AwsElbLbCookieStickinessPolicy < Struct.new(
       :cookie_expiration_period,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10436,7 +10738,8 @@ module Aws::SecurityHub
       :enabled,
       :s3_bucket_name,
       :s3_bucket_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10450,7 +10753,8 @@ module Aws::SecurityHub
     class AwsElbLoadBalancerAdditionalAttribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10485,7 +10789,8 @@ module Aws::SecurityHub
       :connection_settings,
       :cross_zone_load_balancing,
       :additional_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10500,7 +10805,8 @@ module Aws::SecurityHub
     class AwsElbLoadBalancerBackendServerDescription < Struct.new(
       :instance_port,
       :policy_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10516,7 +10822,8 @@ module Aws::SecurityHub
     class AwsElbLoadBalancerConnectionDraining < Struct.new(
       :enabled,
       :timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10527,7 +10834,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     class AwsElbLoadBalancerConnectionSettings < Struct.new(
       :idle_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10537,7 +10845,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsElbLoadBalancerCrossZoneLoadBalancing < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10618,7 +10927,8 @@ module Aws::SecurityHub
       :source_security_group,
       :subnets,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10663,7 +10973,8 @@ module Aws::SecurityHub
       :target,
       :timeout,
       :unhealthy_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10673,7 +10984,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsElbLoadBalancerInstance < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10708,7 +11020,8 @@ module Aws::SecurityHub
       :load_balancer_port,
       :protocol,
       :ssl_certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10722,7 +11035,8 @@ module Aws::SecurityHub
     class AwsElbLoadBalancerListenerDescription < Struct.new(
       :listener,
       :policy_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10742,7 +11056,8 @@ module Aws::SecurityHub
       :app_cookie_stickiness_policies,
       :lb_cookie_stickiness_policies,
       :other_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10756,7 +11071,8 @@ module Aws::SecurityHub
     class AwsElbLoadBalancerSourceSecurityGroup < Struct.new(
       :group_name,
       :owner_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10770,7 +11086,8 @@ module Aws::SecurityHub
     class AwsElbv2LoadBalancerAttribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10823,7 +11140,8 @@ module Aws::SecurityHub
       :type,
       :vpc_id,
       :load_balancer_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10850,7 +11168,8 @@ module Aws::SecurityHub
       :description,
       :registry_arn,
       :registry_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10919,7 +11238,8 @@ module Aws::SecurityHub
       :routing_config,
       :state,
       :state_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10931,7 +11251,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEventsEndpointEventBusesDetails < Struct.new(
       :event_bus_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10944,7 +11265,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEventsEndpointReplicationConfigDetails < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10956,7 +11278,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsEventsEndpointRoutingConfigFailoverConfigDetails]
     class AwsEventsEndpointRoutingConfigDetails < Struct.new(
       :failover_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10973,7 +11296,8 @@ module Aws::SecurityHub
     class AwsEventsEndpointRoutingConfigFailoverConfigDetails < Struct.new(
       :primary,
       :secondary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10985,7 +11309,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails < Struct.new(
       :health_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10997,7 +11322,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails < Struct.new(
       :route,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11022,7 +11348,8 @@ module Aws::SecurityHub
       :arn,
       :name,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11036,7 +11363,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesCloudTrailDetails < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11080,7 +11408,8 @@ module Aws::SecurityHub
       :kubernetes,
       :malware_protection,
       :s3_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11094,7 +11423,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesDnsLogsDetails < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11108,7 +11438,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesFlowLogsDetails < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11122,7 +11453,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11136,7 +11468,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails]
     class AwsGuardDutyDetectorDataSourcesKubernetesDetails < Struct.new(
       :audit_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11156,7 +11489,8 @@ module Aws::SecurityHub
     class AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails < Struct.new(
       :scan_ec2_instance_with_findings,
       :service_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11170,7 +11504,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails]
     class AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails < Struct.new(
       :ebs_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11190,7 +11525,8 @@ module Aws::SecurityHub
     class AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails < Struct.new(
       :reason,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11204,7 +11540,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesS3LogsDetails < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11242,7 +11579,8 @@ module Aws::SecurityHub
       :finding_publishing_frequency,
       :service_role,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11262,7 +11600,8 @@ module Aws::SecurityHub
     class AwsGuardDutyDetectorFeaturesDetails < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11310,7 +11649,8 @@ module Aws::SecurityHub
       :account_id,
       :access_key_id,
       :session_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11324,7 +11664,8 @@ module Aws::SecurityHub
     class AwsIamAccessKeySessionContext < Struct.new(
       :attributes,
       :session_issuer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11339,7 +11680,8 @@ module Aws::SecurityHub
     class AwsIamAccessKeySessionContextAttributes < Struct.new(
       :mfa_authenticated,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11366,7 +11708,8 @@ module Aws::SecurityHub
       :arn,
       :account_id,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11380,7 +11723,8 @@ module Aws::SecurityHub
     class AwsIamAttachedManagedPolicy < Struct.new(
       :policy_name,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11411,7 +11755,8 @@ module Aws::SecurityHub
       :group_name,
       :group_policy_list,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11421,7 +11766,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsIamGroupPolicy < Struct.new(
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11452,7 +11798,8 @@ module Aws::SecurityHub
       :instance_profile_name,
       :path,
       :roles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11483,7 +11830,8 @@ module Aws::SecurityHub
       :path,
       :role_id,
       :role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11498,7 +11846,8 @@ module Aws::SecurityHub
     class AwsIamPermissionsBoundary < Struct.new(
       :permissions_boundary_arn,
       :permissions_boundary_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11551,7 +11900,8 @@ module Aws::SecurityHub
       :policy_name,
       :policy_version_list,
       :update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11570,7 +11920,8 @@ module Aws::SecurityHub
       :version_id,
       :is_default_version,
       :create_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11618,7 +11969,8 @@ module Aws::SecurityHub
       :role_policy_list,
       :max_session_duration,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11628,7 +11980,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsIamRolePolicy < Struct.new(
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11667,7 +12020,8 @@ module Aws::SecurityHub
       :user_id,
       :user_name,
       :user_policy_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11677,7 +12031,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsIamUserPolicy < Struct.new(
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11711,7 +12066,8 @@ module Aws::SecurityHub
       :stream_encryption,
       :shard_count,
       :retention_period_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11727,7 +12083,8 @@ module Aws::SecurityHub
     class AwsKinesisStreamStreamEncryptionDetails < Struct.new(
       :encryption_type,
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11797,7 +12154,8 @@ module Aws::SecurityHub
       :origin,
       :description,
       :key_rotation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11819,7 +12177,8 @@ module Aws::SecurityHub
       :s3_key,
       :s3_object_version,
       :zip_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11829,7 +12188,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsLambdaFunctionDeadLetterConfig < Struct.new(
       :target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11918,7 +12278,8 @@ module Aws::SecurityHub
       :version,
       :architectures,
       :package_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11932,7 +12293,8 @@ module Aws::SecurityHub
     class AwsLambdaFunctionEnvironment < Struct.new(
       :variables,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11946,7 +12308,8 @@ module Aws::SecurityHub
     class AwsLambdaFunctionEnvironmentError < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11960,7 +12323,8 @@ module Aws::SecurityHub
     class AwsLambdaFunctionLayer < Struct.new(
       :arn,
       :code_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11970,7 +12334,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsLambdaFunctionTracingConfig < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11988,7 +12353,8 @@ module Aws::SecurityHub
       :security_group_ids,
       :subnet_ids,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12011,7 +12377,8 @@ module Aws::SecurityHub
       :version,
       :compatible_runtimes,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12029,7 +12396,8 @@ module Aws::SecurityHub
     class AwsMountPoint < Struct.new(
       :source_volume,
       :container_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12051,7 +12419,8 @@ module Aws::SecurityHub
       :sasl,
       :unauthenticated,
       :tls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12068,7 +12437,8 @@ module Aws::SecurityHub
     class AwsMskClusterClusterInfoClientAuthenticationSaslDetails < Struct.new(
       :iam,
       :scram,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12080,7 +12450,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12092,7 +12463,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12111,7 +12483,8 @@ module Aws::SecurityHub
     class AwsMskClusterClusterInfoClientAuthenticationTlsDetails < Struct.new(
       :certificate_authority_arn_list,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12124,7 +12497,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12163,7 +12537,8 @@ module Aws::SecurityHub
       :cluster_name,
       :client_authentication,
       :enhanced_monitoring,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12181,7 +12556,8 @@ module Aws::SecurityHub
     class AwsMskClusterClusterInfoEncryptionInfoDetails < Struct.new(
       :encryption_in_transit,
       :encryption_at_rest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12194,7 +12570,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails < Struct.new(
       :data_volume_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12213,7 +12590,8 @@ module Aws::SecurityHub
     class AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails < Struct.new(
       :in_cluster,
       :client_broker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12226,7 +12604,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsMskClusterClusterInfoDetails]
     class AwsMskClusterDetails < Struct.new(
       :cluster_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12272,7 +12651,8 @@ module Aws::SecurityHub
       :subnet_change_protection,
       :subnet_mappings,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12298,7 +12678,8 @@ module Aws::SecurityHub
       :firewall_policy_id,
       :firewall_policy_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12308,7 +12689,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsNetworkFirewallFirewallSubnetMappingsDetails < Struct.new(
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12344,7 +12726,8 @@ module Aws::SecurityHub
       :rule_group_id,
       :rule_group_name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12366,7 +12749,8 @@ module Aws::SecurityHub
       :enabled,
       :internal_user_database_enabled,
       :master_user_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12415,7 +12799,8 @@ module Aws::SecurityHub
       :warm_type,
       :zone_awareness_enabled,
       :dedicated_master_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12425,7 +12810,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     class AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails < Struct.new(
       :availability_zone_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12493,7 +12879,8 @@ module Aws::SecurityHub
       :log_publishing_options,
       :domain_endpoints,
       :advanced_security_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12519,7 +12906,8 @@ module Aws::SecurityHub
       :enforce_https,
       :custom_endpoint,
       :tls_security_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12533,7 +12921,8 @@ module Aws::SecurityHub
     class AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails < Struct.new(
       :enabled,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12547,7 +12936,8 @@ module Aws::SecurityHub
     class AwsOpenSearchServiceDomainLogPublishingOption < Struct.new(
       :cloud_watch_logs_log_group_arn,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12565,7 +12955,8 @@ module Aws::SecurityHub
       :index_slow_logs,
       :search_slow_logs,
       :audit_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12587,7 +12978,8 @@ module Aws::SecurityHub
       :master_user_arn,
       :master_user_name,
       :master_user_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12597,7 +12989,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12662,7 +13055,8 @@ module Aws::SecurityHub
       :update_available,
       :update_status,
       :optional_deployment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12676,7 +13070,8 @@ module Aws::SecurityHub
     class AwsOpenSearchServiceDomainVpcOptionsDetails < Struct.new(
       :security_group_ids,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12707,7 +13102,8 @@ module Aws::SecurityHub
     class AwsRdsDbClusterAssociatedRole < Struct.new(
       :role_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12950,7 +13346,8 @@ module Aws::SecurityHub
       :db_cluster_members,
       :iam_database_authentication_enabled,
       :auto_minor_version_upgrade,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12973,7 +13370,8 @@ module Aws::SecurityHub
       :promotion_tier,
       :db_instance_identifier,
       :db_cluster_parameter_group_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12987,7 +13385,8 @@ module Aws::SecurityHub
     class AwsRdsDbClusterOptionGroupMembership < Struct.new(
       :db_cluster_option_group_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13011,7 +13410,8 @@ module Aws::SecurityHub
     class AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute < Struct.new(
       :attribute_name,
       :attribute_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13098,7 +13498,8 @@ module Aws::SecurityHub
       :db_cluster_snapshot_identifier,
       :iam_database_authentication_enabled,
       :db_cluster_snapshot_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13121,7 +13522,8 @@ module Aws::SecurityHub
       :status,
       :fqdn,
       :iam_role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13159,7 +13561,8 @@ module Aws::SecurityHub
       :role_arn,
       :feature_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13450,7 +13853,8 @@ module Aws::SecurityHub
       :processor_features,
       :listener_endpoint,
       :max_allocated_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13468,7 +13872,8 @@ module Aws::SecurityHub
       :address,
       :port,
       :hosted_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13482,7 +13887,8 @@ module Aws::SecurityHub
     class AwsRdsDbInstanceVpcSecurityGroup < Struct.new(
       :vpc_security_group_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13496,7 +13902,8 @@ module Aws::SecurityHub
     class AwsRdsDbOptionGroupMembership < Struct.new(
       :option_group_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13510,7 +13917,8 @@ module Aws::SecurityHub
     class AwsRdsDbParameterGroup < Struct.new(
       :db_parameter_group_name,
       :parameter_apply_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13576,7 +13984,8 @@ module Aws::SecurityHub
       :db_subnet_group_name,
       :pending_cloud_watch_logs_exports,
       :processor_features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13590,7 +13999,8 @@ module Aws::SecurityHub
     class AwsRdsDbProcessorFeature < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13625,7 +14035,8 @@ module Aws::SecurityHub
       :ip_ranges,
       :owner_id,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13647,7 +14058,8 @@ module Aws::SecurityHub
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13661,7 +14073,8 @@ module Aws::SecurityHub
     class AwsRdsDbSecurityGroupIpRange < Struct.new(
       :cidr_ip,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13864,7 +14277,8 @@ module Aws::SecurityHub
       :iam_database_authentication_enabled,
       :processor_features,
       :dbi_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13886,7 +14300,8 @@ module Aws::SecurityHub
       :normal,
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13916,7 +14331,8 @@ module Aws::SecurityHub
       :subnet_group_status,
       :subnets,
       :db_subnet_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13934,7 +14350,8 @@ module Aws::SecurityHub
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13944,7 +14361,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsRdsDbSubnetGroupSubnetAvailabilityZone < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13993,7 +14411,8 @@ module Aws::SecurityHub
       :source_type,
       :status,
       :subscription_creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14007,7 +14426,8 @@ module Aws::SecurityHub
     class AwsRdsPendingCloudWatchLogsExports < Struct.new(
       :log_types_to_enable,
       :log_types_to_disable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14025,7 +14445,8 @@ module Aws::SecurityHub
       :node_role,
       :private_ip_address,
       :public_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14043,7 +14464,8 @@ module Aws::SecurityHub
       :cluster_parameter_status_list,
       :parameter_apply_status,
       :parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14067,7 +14489,8 @@ module Aws::SecurityHub
       :parameter_name,
       :parameter_apply_status,
       :parameter_apply_error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14081,7 +14504,8 @@ module Aws::SecurityHub
     class AwsRedshiftClusterClusterSecurityGroup < Struct.new(
       :cluster_security_group_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14111,7 +14535,8 @@ module Aws::SecurityHub
       :manual_snapshot_retention_period,
       :retention_period,
       :snapshot_copy_grant_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14132,7 +14557,8 @@ module Aws::SecurityHub
       :defer_maintenance_end_time,
       :defer_maintenance_identifier,
       :defer_maintenance_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14383,7 +14809,8 @@ module Aws::SecurityHub
       :vpc_id,
       :vpc_security_groups,
       :logging_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14397,7 +14824,8 @@ module Aws::SecurityHub
     class AwsRedshiftClusterElasticIpStatus < Struct.new(
       :elastic_ip,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14411,7 +14839,8 @@ module Aws::SecurityHub
     class AwsRedshiftClusterEndpoint < Struct.new(
       :address,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14437,7 +14866,8 @@ module Aws::SecurityHub
       :hsm_client_certificate_identifier,
       :hsm_configuration_identifier,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14453,7 +14883,8 @@ module Aws::SecurityHub
     class AwsRedshiftClusterIamRole < Struct.new(
       :apply_status,
       :iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14485,7 +14916,8 @@ module Aws::SecurityHub
       :last_successful_delivery_time,
       :logging_enabled,
       :s3_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14537,7 +14969,8 @@ module Aws::SecurityHub
       :node_type,
       :number_of_nodes,
       :publicly_accessible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14553,7 +14986,8 @@ module Aws::SecurityHub
     class AwsRedshiftClusterResizeInfo < Struct.new(
       :allow_cancel_resize,
       :resize_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14595,7 +15029,8 @@ module Aws::SecurityHub
       :progress_in_mega_bytes,
       :snapshot_size_in_mega_bytes,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14609,7 +15044,8 @@ module Aws::SecurityHub
     class AwsRedshiftClusterVpcSecurityGroup < Struct.new(
       :status,
       :vpc_security_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14621,7 +15057,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsRoute53HostedZoneConfigDetails < Struct.new(
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14652,7 +15089,8 @@ module Aws::SecurityHub
       :vpcs,
       :name_servers,
       :query_logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14674,7 +15112,8 @@ module Aws::SecurityHub
       :id,
       :name,
       :config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14692,7 +15131,8 @@ module Aws::SecurityHub
     class AwsRoute53HostedZoneVpcDetails < Struct.new(
       :id,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14704,7 +15144,8 @@ module Aws::SecurityHub
     #   @return [Types::CloudWatchLogsLogGroupArnConfigDetails]
     class AwsRoute53QueryLoggingConfigDetails < Struct.new(
       :cloud_watch_logs_log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14759,7 +15200,8 @@ module Aws::SecurityHub
       :network_origin,
       :public_access_block_configuration,
       :vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14773,7 +15215,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsS3AccessPointVpcConfigurationDetails < Struct.new(
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14795,7 +15238,8 @@ module Aws::SecurityHub
       :block_public_policy,
       :ignore_public_acls,
       :restrict_public_buckets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14805,7 +15249,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesDetails>]
     class AwsS3BucketBucketLifecycleConfigurationDetails < Struct.new(
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14816,7 +15261,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     class AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails < Struct.new(
       :days_after_initiation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14872,7 +15318,8 @@ module Aws::SecurityHub
       :prefix,
       :status,
       :transitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14882,7 +15329,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails]
     class AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails < Struct.new(
       :predicate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14905,7 +15353,8 @@ module Aws::SecurityHub
       :prefix,
       :tag,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14924,7 +15373,8 @@ module Aws::SecurityHub
       :prefix,
       :tag,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14938,7 +15388,8 @@ module Aws::SecurityHub
     class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14952,7 +15403,8 @@ module Aws::SecurityHub
     class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14966,7 +15418,8 @@ module Aws::SecurityHub
     class AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails < Struct.new(
       :days,
       :storage_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15012,7 +15465,8 @@ module Aws::SecurityHub
       :date,
       :days,
       :storage_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15026,7 +15480,8 @@ module Aws::SecurityHub
     class AwsS3BucketBucketVersioningConfiguration < Struct.new(
       :is_mfa_delete_enabled,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15093,7 +15548,8 @@ module Aws::SecurityHub
       :bucket_versioning_configuration,
       :object_lock_configuration,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15108,7 +15564,8 @@ module Aws::SecurityHub
     class AwsS3BucketLoggingConfiguration < Struct.new(
       :destination_bucket_name,
       :log_file_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15119,7 +15576,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsS3BucketNotificationConfigurationDetail>]
     class AwsS3BucketNotificationConfiguration < Struct.new(
       :configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15160,7 +15618,8 @@ module Aws::SecurityHub
       :filter,
       :destination,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15171,7 +15630,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsS3BucketNotificationConfigurationS3KeyFilter]
     class AwsS3BucketNotificationConfigurationFilter < Struct.new(
       :s3_key_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15181,7 +15641,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsS3BucketNotificationConfigurationS3KeyFilterRule>]
     class AwsS3BucketNotificationConfigurationS3KeyFilter < Struct.new(
       :filter_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15195,7 +15656,8 @@ module Aws::SecurityHub
     class AwsS3BucketNotificationConfigurationS3KeyFilterRule < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15215,7 +15677,8 @@ module Aws::SecurityHub
     class AwsS3BucketObjectLockConfiguration < Struct.new(
       :object_lock_enabled,
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15241,7 +15704,8 @@ module Aws::SecurityHub
       :days,
       :mode,
       :years,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15255,7 +15719,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails]
     class AwsS3BucketObjectLockConfigurationRuleDetails < Struct.new(
       :default_retention,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15271,7 +15736,8 @@ module Aws::SecurityHub
     class AwsS3BucketServerSideEncryptionByDefault < Struct.new(
       :sse_algorithm,
       :kms_master_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15281,7 +15747,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsS3BucketServerSideEncryptionRule>]
     class AwsS3BucketServerSideEncryptionConfiguration < Struct.new(
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15293,7 +15760,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsS3BucketServerSideEncryptionByDefault]
     class AwsS3BucketServerSideEncryptionRule < Struct.new(
       :apply_server_side_encryption_by_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15316,7 +15784,8 @@ module Aws::SecurityHub
       :index_document_suffix,
       :redirect_all_requests_to,
       :routing_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15332,7 +15801,8 @@ module Aws::SecurityHub
     class AwsS3BucketWebsiteConfigurationRedirectTo < Struct.new(
       :hostname,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15348,7 +15818,8 @@ module Aws::SecurityHub
     class AwsS3BucketWebsiteConfigurationRoutingRule < Struct.new(
       :condition,
       :redirect,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15362,7 +15833,8 @@ module Aws::SecurityHub
     class AwsS3BucketWebsiteConfigurationRoutingRuleCondition < Struct.new(
       :http_error_code_returned_equals,
       :key_prefix_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15392,7 +15864,8 @@ module Aws::SecurityHub
       :protocol,
       :replace_key_prefix_with,
       :replace_key_with,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15425,7 +15898,8 @@ module Aws::SecurityHub
       :content_type,
       :server_side_encryption,
       :ssekms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15556,7 +16030,8 @@ module Aws::SecurityHub
       :subnet_id,
       :url,
       :volume_size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15570,7 +16045,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails < Struct.new(
       :minimum_instance_metadata_service_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15610,7 +16086,8 @@ module Aws::SecurityHub
       :deleted,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15620,7 +16097,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     class AwsSecretsManagerSecretRotationRules < Struct.new(
       :automatically_after_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15875,7 +16353,8 @@ module Aws::SecurityHub
       :processed_at,
       :aws_account_name,
       :detection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16439,7 +16918,8 @@ module Aws::SecurityHub
       :aws_account_name,
       :resource_application_name,
       :resource_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16455,7 +16935,8 @@ module Aws::SecurityHub
     class AwsSecurityFindingIdentifier < Struct.new(
       :id,
       :product_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16511,7 +16992,8 @@ module Aws::SecurityHub
       :firehose_failure_feedback_role_arn,
       :http_success_feedback_role_arn,
       :http_failure_feedback_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16525,7 +17007,8 @@ module Aws::SecurityHub
     class AwsSnsTopicSubscription < Struct.new(
       :endpoint,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16549,7 +17032,8 @@ module Aws::SecurityHub
       :kms_master_key_id,
       :queue_name,
       :dead_letter_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16691,7 +17175,8 @@ module Aws::SecurityHub
       :non_compliant_medium_count,
       :non_compliant_unspecified_count,
       :patch_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16701,7 +17186,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsSsmComplianceSummary]
     class AwsSsmPatch < Struct.new(
       :compliance_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16712,7 +17198,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsSsmPatch]
     class AwsSsmPatchComplianceDetails < Struct.new(
       :patch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16770,7 +17257,8 @@ module Aws::SecurityHub
       :status,
       :tracing_configuration,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16784,7 +17272,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails < Struct.new(
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16800,7 +17289,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails]
     class AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails < Struct.new(
       :cloud_watch_logs_log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16826,7 +17316,8 @@ module Aws::SecurityHub
       :destinations,
       :include_execution_data,
       :level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16840,7 +17331,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class AwsStepFunctionStateMachineTracingConfigurationDetails < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16870,7 +17362,8 @@ module Aws::SecurityHub
       :rate_limit,
       :rule_id,
       :match_predicates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16927,7 +17420,8 @@ module Aws::SecurityHub
       :data_id,
       :negated,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16957,7 +17451,8 @@ module Aws::SecurityHub
       :rate_limit,
       :rule_id,
       :match_predicates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17013,7 +17508,8 @@ module Aws::SecurityHub
       :data_id,
       :negated,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17041,7 +17537,8 @@ module Aws::SecurityHub
       :name,
       :predicate_list,
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17069,7 +17566,8 @@ module Aws::SecurityHub
       :name,
       :rule_group_id,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17081,7 +17579,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsWafRegionalRuleGroupRulesActionDetails < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17107,7 +17606,8 @@ module Aws::SecurityHub
       :priority,
       :rule_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17132,7 +17632,8 @@ module Aws::SecurityHub
       :data_id,
       :negated,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17165,7 +17666,8 @@ module Aws::SecurityHub
       :name,
       :rules_list,
       :web_acl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17177,7 +17679,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsWafRegionalWebAclRulesListActionDetails < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17211,7 +17714,8 @@ module Aws::SecurityHub
       :priority,
       :rule_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17224,7 +17728,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsWafRegionalWebAclRulesListOverrideActionDetails < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17253,7 +17758,8 @@ module Aws::SecurityHub
       :name,
       :predicate_list,
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17281,7 +17787,8 @@ module Aws::SecurityHub
       :name,
       :rule_group_id,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17293,7 +17800,8 @@ module Aws::SecurityHub
     #   @return [String]
     class AwsWafRuleGroupRulesActionDetails < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17321,7 +17829,8 @@ module Aws::SecurityHub
       :priority,
       :rule_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17347,7 +17856,8 @@ module Aws::SecurityHub
       :data_id,
       :negated,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17369,7 +17879,8 @@ module Aws::SecurityHub
       :default_action,
       :rules,
       :web_acl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17421,7 +17932,8 @@ module Aws::SecurityHub
       :priority,
       :rule_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17436,7 +17948,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsWafv2CustomRequestHandlingDetails]
     class AwsWafv2ActionAllowDetails < Struct.new(
       :custom_request_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17451,7 +17964,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsWafv2CustomResponseDetails]
     class AwsWafv2ActionBlockDetails < Struct.new(
       :custom_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17471,7 +17985,8 @@ module Aws::SecurityHub
     class AwsWafv2CustomHttpHeader < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17485,7 +18000,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsWafv2CustomHttpHeader>]
     class AwsWafv2CustomRequestHandlingDetails < Struct.new(
       :insert_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17512,7 +18028,8 @@ module Aws::SecurityHub
       :custom_response_body_key,
       :response_code,
       :response_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17572,7 +18089,8 @@ module Aws::SecurityHub
       :rules,
       :scope,
       :visibility_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17587,7 +18105,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsWafv2CustomRequestHandlingDetails]
     class AwsWafv2RulesActionCaptchaDetails < Struct.new(
       :custom_request_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17602,7 +18121,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsWafv2CustomRequestHandlingDetails]
     class AwsWafv2RulesActionCountDetails < Struct.new(
       :custom_request_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17635,7 +18155,8 @@ module Aws::SecurityHub
       :block,
       :captcha,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17674,7 +18195,8 @@ module Aws::SecurityHub
       :override_action,
       :priority,
       :visibility_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17702,7 +18224,8 @@ module Aws::SecurityHub
       :cloud_watch_metrics_enabled,
       :metric_name,
       :sampled_requests_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17722,7 +18245,8 @@ module Aws::SecurityHub
     class AwsWafv2WebAclActionDetails < Struct.new(
       :allow,
       :block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17736,7 +18260,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails]
     class AwsWafv2WebAclCaptchaConfigDetails < Struct.new(
       :immunity_time_property,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17750,7 +18275,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     class AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails < Struct.new(
       :immunity_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17821,7 +18347,8 @@ module Aws::SecurityHub
       :description,
       :rules,
       :visibility_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17840,7 +18367,8 @@ module Aws::SecurityHub
       :key_id,
       :status,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17851,7 +18379,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class BatchDeleteAutomationRulesRequest < Struct.new(
       :automation_rules_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17869,7 +18398,8 @@ module Aws::SecurityHub
     class BatchDeleteAutomationRulesResponse < Struct.new(
       :processed_automation_rules,
       :unprocessed_automation_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17878,7 +18408,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class BatchDisableStandardsRequest < Struct.new(
       :standards_subscription_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17887,7 +18418,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::StandardsSubscription>]
     class BatchDisableStandardsResponse < Struct.new(
       :standards_subscriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17896,7 +18428,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::StandardsSubscriptionRequest>]
     class BatchEnableStandardsRequest < Struct.new(
       :standards_subscription_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17905,7 +18438,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::StandardsSubscription>]
     class BatchEnableStandardsResponse < Struct.new(
       :standards_subscriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17916,7 +18450,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class BatchGetAutomationRulesRequest < Struct.new(
       :automation_rules_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17934,7 +18469,8 @@ module Aws::SecurityHub
     class BatchGetAutomationRulesResponse < Struct.new(
       :rules,
       :unprocessed_automation_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17945,7 +18481,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::ConfigurationPolicyAssociation>]
     class BatchGetConfigurationPolicyAssociationsRequest < Struct.new(
       :configuration_policy_association_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17963,7 +18500,8 @@ module Aws::SecurityHub
     class BatchGetConfigurationPolicyAssociationsResponse < Struct.new(
       :configuration_policy_associations,
       :unprocessed_configuration_policy_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17974,7 +18512,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class BatchGetSecurityControlsRequest < Struct.new(
       :security_control_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17993,7 +18532,8 @@ module Aws::SecurityHub
     class BatchGetSecurityControlsResponse < Struct.new(
       :security_controls,
       :unprocessed_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18005,7 +18545,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::StandardsControlAssociationId>]
     class BatchGetStandardsControlAssociationsRequest < Struct.new(
       :standards_control_association_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18023,7 +18564,8 @@ module Aws::SecurityHub
     class BatchGetStandardsControlAssociationsResponse < Struct.new(
       :standards_control_association_details,
       :unprocessed_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18033,7 +18575,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsSecurityFinding>]
     class BatchImportFindingsRequest < Struct.new(
       :findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18050,7 +18593,8 @@ module Aws::SecurityHub
       :failed_count,
       :success_count,
       :failed_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18062,7 +18606,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::UpdateAutomationRulesRequestItem>]
     class BatchUpdateAutomationRulesRequest < Struct.new(
       :update_automation_rules_request_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18080,7 +18625,8 @@ module Aws::SecurityHub
     class BatchUpdateAutomationRulesResponse < Struct.new(
       :processed_automation_rules,
       :unprocessed_automation_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18177,7 +18723,8 @@ module Aws::SecurityHub
       :user_defined_fields,
       :workflow,
       :related_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18190,7 +18737,8 @@ module Aws::SecurityHub
     class BatchUpdateFindingsResponse < Struct.new(
       :processed_findings,
       :unprocessed_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18273,7 +18821,8 @@ module Aws::SecurityHub
       :finding_identifier,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18287,7 +18836,8 @@ module Aws::SecurityHub
     class BatchUpdateFindingsV2ProcessedFinding < Struct.new(
       :finding_identifier,
       :metadata_uid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18320,7 +18870,8 @@ module Aws::SecurityHub
       :comment,
       :severity_id,
       :status_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18333,7 +18884,8 @@ module Aws::SecurityHub
     class BatchUpdateFindingsV2Response < Struct.new(
       :processed_findings,
       :unprocessed_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18355,7 +18907,8 @@ module Aws::SecurityHub
       :metadata_uid,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18369,7 +18922,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::StandardsControlAssociationUpdate>]
     class BatchUpdateStandardsControlAssociationsRequest < Struct.new(
       :standards_control_association_updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18380,7 +18934,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::UnprocessedStandardsControlAssociationUpdate>]
     class BatchUpdateStandardsControlAssociationsResponse < Struct.new(
       :unprocessed_association_updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18395,7 +18950,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class BooleanConfigurationOptions < Struct.new(
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18405,7 +18961,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     class BooleanFilter < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18427,7 +18984,8 @@ module Aws::SecurityHub
       :row,
       :column_name,
       :cell_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18445,7 +19003,8 @@ module Aws::SecurityHub
       :association_id,
       :cidr_block,
       :cidr_block_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18455,7 +19014,8 @@ module Aws::SecurityHub
     #   @return [String]
     class City < Struct.new(
       :city_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18485,7 +19045,8 @@ module Aws::SecurityHub
       :status,
       :sensitive_data,
       :custom_data_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18499,7 +19060,8 @@ module Aws::SecurityHub
     class ClassificationStatus < Struct.new(
       :code,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18523,7 +19085,8 @@ module Aws::SecurityHub
       :cloud_watch_logs_log_group_arn,
       :hosted_zone_id,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18550,7 +19113,8 @@ module Aws::SecurityHub
       :provider_type,
       :project_name,
       :code_security_integration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18582,7 +19146,8 @@ module Aws::SecurityHub
       :file_name,
       :file_path,
       :start_line,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18652,7 +19217,8 @@ module Aws::SecurityHub
       :security_control_id,
       :associated_standards,
       :security_control_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18682,7 +19248,8 @@ module Aws::SecurityHub
       :number_filters,
       :map_filters,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18740,7 +19307,8 @@ module Aws::SecurityHub
       :enum,
       :enum_list,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Integer < ConfigurationOptions; end
@@ -18766,7 +19334,8 @@ module Aws::SecurityHub
     #   @return [Types::Target]
     class ConfigurationPolicyAssociation < Struct.new(
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18818,7 +19387,8 @@ module Aws::SecurityHub
       :updated_at,
       :association_status,
       :association_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18864,7 +19434,8 @@ module Aws::SecurityHub
       :description,
       :updated_at,
       :service_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18876,7 +19447,8 @@ module Aws::SecurityHub
     class ConflictException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18889,7 +19461,8 @@ module Aws::SecurityHub
     class ConnectorRegistrationsV2Request < Struct.new(
       :auth_code,
       :auth_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18902,7 +19475,8 @@ module Aws::SecurityHub
     class ConnectorRegistrationsV2Response < Struct.new(
       :connector_arn,
       :connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18932,7 +19506,8 @@ module Aws::SecurityHub
       :description,
       :provider_summary,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18971,7 +19546,8 @@ module Aws::SecurityHub
       :launched_at,
       :volume_mounts,
       :privileged,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18985,7 +19561,8 @@ module Aws::SecurityHub
     class Country < Struct.new(
       :country_code,
       :country_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19002,7 +19579,8 @@ module Aws::SecurityHub
       :name,
       :description,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19011,7 +19589,8 @@ module Aws::SecurityHub
     #   @return [String]
     class CreateActionTargetResponse < Struct.new(
       :action_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19032,7 +19611,8 @@ module Aws::SecurityHub
       :linked_regions,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19053,7 +19633,8 @@ module Aws::SecurityHub
       :aggregation_region,
       :region_linking_mode,
       :linked_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19115,7 +19696,8 @@ module Aws::SecurityHub
       :is_terminal,
       :criteria,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19126,7 +19708,8 @@ module Aws::SecurityHub
     #   @return [String]
     class CreateAutomationRuleResponse < Struct.new(
       :rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19163,7 +19746,8 @@ module Aws::SecurityHub
       :actions,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19176,7 +19760,8 @@ module Aws::SecurityHub
     class CreateAutomationRuleV2Response < Struct.new(
       :rule_arn,
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19212,7 +19797,8 @@ module Aws::SecurityHub
       :description,
       :configuration_policy,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19263,7 +19849,8 @@ module Aws::SecurityHub
       :updated_at,
       :created_at,
       :configuration_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19292,7 +19879,8 @@ module Aws::SecurityHub
       :kms_key_arn,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19309,7 +19897,8 @@ module Aws::SecurityHub
       :connector_arn,
       :connector_id,
       :auth_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19350,7 +19939,8 @@ module Aws::SecurityHub
     class CreateFindingAggregatorRequest < Struct.new(
       :region_linking_mode,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19371,7 +19961,8 @@ module Aws::SecurityHub
       :finding_aggregation_region,
       :region_linking_mode,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19392,7 +19983,8 @@ module Aws::SecurityHub
       :name,
       :filters,
       :group_by_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19401,7 +19993,8 @@ module Aws::SecurityHub
     #   @return [String]
     class CreateInsightResponse < Struct.new(
       :insight_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19411,7 +20004,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AccountDetails>]
     class CreateMembersRequest < Struct.new(
       :account_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19421,7 +20015,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::Result>]
     class CreateMembersResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19438,7 +20033,8 @@ module Aws::SecurityHub
       :connector_id,
       :finding_metadata_uid,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19451,7 +20047,8 @@ module Aws::SecurityHub
     class CreateTicketV2Response < Struct.new(
       :ticket_id,
       :ticket_src_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19462,7 +20059,8 @@ module Aws::SecurityHub
     class Criteria < Struct.new(
       :ocsf_finding_criteria,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OcsfFindingCriteria < Criteria; end
@@ -19487,7 +20085,8 @@ module Aws::SecurityHub
       :arn,
       :name,
       :occurrences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19501,7 +20100,8 @@ module Aws::SecurityHub
     class CustomDataIdentifiersResult < Struct.new(
       :detections,
       :total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19527,7 +20127,8 @@ module Aws::SecurityHub
       :base_vector,
       :source,
       :adjustments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19541,7 +20142,8 @@ module Aws::SecurityHub
     class DataClassificationDetails < Struct.new(
       :detailed_results_location,
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19561,7 +20163,8 @@ module Aws::SecurityHub
       :start,
       :end,
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19575,7 +20178,8 @@ module Aws::SecurityHub
     class DateRange < Struct.new(
       :value,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19584,7 +20188,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class DeclineInvitationsRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19594,7 +20199,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::Result>]
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19603,7 +20209,8 @@ module Aws::SecurityHub
     #   @return [String]
     class DeleteActionTargetRequest < Struct.new(
       :action_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19612,7 +20219,8 @@ module Aws::SecurityHub
     #   @return [String]
     class DeleteActionTargetResponse < Struct.new(
       :action_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19621,12 +20229,14 @@ module Aws::SecurityHub
     #   @return [String]
     class DeleteAggregatorV2Request < Struct.new(
       :aggregator_v2_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAggregatorV2Response < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19635,12 +20245,14 @@ module Aws::SecurityHub
     #   @return [String]
     class DeleteAutomationRuleV2Request < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAutomationRuleV2Response < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19651,12 +20263,14 @@ module Aws::SecurityHub
     #   @return [String]
     class DeleteConfigurationPolicyRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConfigurationPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19665,12 +20279,14 @@ module Aws::SecurityHub
     #   @return [String]
     class DeleteConnectorV2Request < Struct.new(
       :connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectorV2Response < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19679,12 +20295,14 @@ module Aws::SecurityHub
     #   @return [String]
     class DeleteFindingAggregatorRequest < Struct.new(
       :finding_aggregator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFindingAggregatorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19693,7 +20311,8 @@ module Aws::SecurityHub
     #   @return [String]
     class DeleteInsightRequest < Struct.new(
       :insight_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19702,7 +20321,8 @@ module Aws::SecurityHub
     #   @return [String]
     class DeleteInsightResponse < Struct.new(
       :insight_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19711,7 +20331,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class DeleteInvitationsRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19721,7 +20342,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::Result>]
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19730,7 +20352,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class DeleteMembersRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19740,7 +20363,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::Result>]
     class DeleteMembersResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19761,7 +20385,8 @@ module Aws::SecurityHub
       :action_target_arns,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19776,7 +20401,8 @@ module Aws::SecurityHub
     class DescribeActionTargetsResponse < Struct.new(
       :action_targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19785,7 +20411,8 @@ module Aws::SecurityHub
     #   @return [String]
     class DescribeHubRequest < Struct.new(
       :hub_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19823,12 +20450,14 @@ module Aws::SecurityHub
       :subscribed_at,
       :auto_enable_controls,
       :control_finding_generator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeOrganizationConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19864,7 +20493,8 @@ module Aws::SecurityHub
       :member_account_limit_reached,
       :auto_enable_standards,
       :organization_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19885,7 +20515,8 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       :product_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19898,7 +20529,8 @@ module Aws::SecurityHub
     class DescribeProductsResponse < Struct.new(
       :products,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19913,7 +20545,8 @@ module Aws::SecurityHub
     class DescribeProductsV2Request < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19927,12 +20560,14 @@ module Aws::SecurityHub
     class DescribeProductsV2Response < Struct.new(
       :products_v2,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeSecurityHubV2Request < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19945,7 +20580,8 @@ module Aws::SecurityHub
     class DescribeSecurityHubV2Response < Struct.new(
       :hub_v2_arn,
       :subscribed_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19967,7 +20603,8 @@ module Aws::SecurityHub
       :standards_subscription_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19980,7 +20617,8 @@ module Aws::SecurityHub
     class DescribeStandardsControlsResponse < Struct.new(
       :controls,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19997,7 +20635,8 @@ module Aws::SecurityHub
     class DescribeStandardsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20010,7 +20649,8 @@ module Aws::SecurityHub
     class DescribeStandardsResponse < Struct.new(
       :standards,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20025,7 +20665,8 @@ module Aws::SecurityHub
     #   @return [Types::Sequence]
     class Detection < Struct.new(
       :sequence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20034,12 +20675,14 @@ module Aws::SecurityHub
     #   @return [String]
     class DisableImportFindingsForProductRequest < Struct.new(
       :product_subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableImportFindingsForProductResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20053,52 +20696,62 @@ module Aws::SecurityHub
     class DisableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
       :feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableOrganizationAdminAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubV2Request < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubV2Response < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20107,12 +20760,14 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class DisassociateMembersRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateMembersResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20133,7 +20788,8 @@ module Aws::SecurityHub
       :domain,
       :protocol,
       :blocked,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20159,7 +20815,8 @@ module Aws::SecurityHub
       :default_value,
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20168,7 +20825,8 @@ module Aws::SecurityHub
     #   @return [String]
     class EnableImportFindingsForProductRequest < Struct.new(
       :product_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20177,7 +20835,8 @@ module Aws::SecurityHub
     #   @return [String]
     class EnableImportFindingsForProductResponse < Struct.new(
       :product_subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20192,7 +20851,8 @@ module Aws::SecurityHub
     class EnableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
       :feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20206,7 +20866,8 @@ module Aws::SecurityHub
     class EnableOrganizationAdminAccountResponse < Struct.new(
       :admin_account_id,
       :feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20235,12 +20896,14 @@ module Aws::SecurityHub
       :tags,
       :enable_default_standards,
       :control_finding_generator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableSecurityHubResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20249,7 +20912,8 @@ module Aws::SecurityHub
     #   @return [Hash<String, String>]
     class EnableSecurityHubV2Request < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20258,7 +20922,8 @@ module Aws::SecurityHub
     #   @return [String]
     class EnableSecurityHubV2Response < Struct.new(
       :hub_v2_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20278,7 +20943,8 @@ module Aws::SecurityHub
     class EnumConfigurationOptions < Struct.new(
       :default_value,
       :allowed_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20304,7 +20970,8 @@ module Aws::SecurityHub
       :default_value,
       :max_items,
       :allowed_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20314,7 +20981,8 @@ module Aws::SecurityHub
     #   @return [String]
     class ExternalIntegrationConfiguration < Struct.new(
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20345,7 +21013,8 @@ module Aws::SecurityHub
       :file_name,
       :resource_id,
       :hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20356,7 +21025,8 @@ module Aws::SecurityHub
     #   @return [String]
     class FindingAggregator < Struct.new(
       :finding_aggregator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20409,7 +21079,8 @@ module Aws::SecurityHub
       :update_source,
       :updates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20438,7 +21109,8 @@ module Aws::SecurityHub
       :updated_field,
       :old_value,
       :new_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20462,7 +21134,8 @@ module Aws::SecurityHub
     class FindingHistoryUpdateSource < Struct.new(
       :type,
       :identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20540,7 +21213,8 @@ module Aws::SecurityHub
       :related_findings,
       :severity,
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20593,7 +21267,8 @@ module Aws::SecurityHub
     class FindingProviderSeverity < Struct.new(
       :label,
       :original,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20623,7 +21298,8 @@ module Aws::SecurityHub
       :stateless_default_actions,
       :stateless_fragment_default_actions,
       :stateless_rule_group_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20633,7 +21309,8 @@ module Aws::SecurityHub
     #   @return [String]
     class FirewallPolicyStatefulRuleGroupReferencesDetails < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20647,7 +21324,8 @@ module Aws::SecurityHub
     class FirewallPolicyStatelessCustomActionsDetails < Struct.new(
       :action_definition,
       :action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20661,7 +21339,8 @@ module Aws::SecurityHub
     class FirewallPolicyStatelessRuleGroupReferencesDetails < Struct.new(
       :priority,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20691,7 +21370,8 @@ module Aws::SecurityHub
       :name,
       :description,
       :labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20705,12 +21385,14 @@ module Aws::SecurityHub
     class GeoLocation < Struct.new(
       :lon,
       :lat,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAdministratorAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20719,7 +21401,8 @@ module Aws::SecurityHub
     #   @return [Types::Invitation]
     class GetAdministratorAccountResponse < Struct.new(
       :administrator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20728,7 +21411,8 @@ module Aws::SecurityHub
     #   @return [String]
     class GetAggregatorV2Request < Struct.new(
       :aggregator_v2_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20749,7 +21433,8 @@ module Aws::SecurityHub
       :aggregation_region,
       :region_linking_mode,
       :linked_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20758,7 +21443,8 @@ module Aws::SecurityHub
     #   @return [String]
     class GetAutomationRuleV2Request < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20803,7 +21489,8 @@ module Aws::SecurityHub
       :actions,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20814,7 +21501,8 @@ module Aws::SecurityHub
     #   @return [Types::Target]
     class GetConfigurationPolicyAssociationRequest < Struct.new(
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20863,7 +21551,8 @@ module Aws::SecurityHub
       :updated_at,
       :association_status,
       :association_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20874,7 +21563,8 @@ module Aws::SecurityHub
     #   @return [String]
     class GetConfigurationPolicyRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20925,7 +21615,8 @@ module Aws::SecurityHub
       :updated_at,
       :created_at,
       :configuration_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20934,7 +21625,8 @@ module Aws::SecurityHub
     #   @return [String]
     class GetConnectorV2Request < Struct.new(
       :connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20975,7 +21667,8 @@ module Aws::SecurityHub
       :last_updated_at,
       :health,
       :provider_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20996,7 +21689,8 @@ module Aws::SecurityHub
       :standards_subscription_arns,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21010,7 +21704,8 @@ module Aws::SecurityHub
     class GetEnabledStandardsResponse < Struct.new(
       :standards_subscriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21019,7 +21714,8 @@ module Aws::SecurityHub
     #   @return [String]
     class GetFindingAggregatorRequest < Struct.new(
       :finding_aggregator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21040,7 +21736,8 @@ module Aws::SecurityHub
       :finding_aggregation_region,
       :region_linking_mode,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21090,7 +21787,8 @@ module Aws::SecurityHub
       :end_time,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21108,7 +21806,8 @@ module Aws::SecurityHub
     class GetFindingHistoryResponse < Struct.new(
       :records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21127,7 +21826,8 @@ module Aws::SecurityHub
       :group_by_rules,
       :sort_order,
       :max_statistic_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21136,7 +21836,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::GroupByResult>]
     class GetFindingStatisticsV2Response < Struct.new(
       :group_by_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21166,7 +21867,8 @@ module Aws::SecurityHub
       :sort_criteria,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21179,7 +21881,8 @@ module Aws::SecurityHub
     class GetFindingsResponse < Struct.new(
       :findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21205,7 +21908,8 @@ module Aws::SecurityHub
       :sort_criteria,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21219,7 +21923,8 @@ module Aws::SecurityHub
     class GetFindingsV2Response < Struct.new(
       :findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21228,7 +21933,8 @@ module Aws::SecurityHub
     #   @return [String]
     class GetInsightResultsRequest < Struct.new(
       :insight_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21237,7 +21943,8 @@ module Aws::SecurityHub
     #   @return [Types::InsightResults]
     class GetInsightResultsResponse < Struct.new(
       :insight_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21260,7 +21967,8 @@ module Aws::SecurityHub
       :insight_arns,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21273,12 +21981,14 @@ module Aws::SecurityHub
     class GetInsightsResponse < Struct.new(
       :insights,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetInvitationsCountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21288,12 +21998,14 @@ module Aws::SecurityHub
     #   @return [Integer]
     class GetInvitationsCountResponse < Struct.new(
       :invitations_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetMasterAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21303,7 +22015,8 @@ module Aws::SecurityHub
     #   @return [Types::Invitation]
     class GetMasterAccountResponse < Struct.new(
       :master,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21312,7 +22025,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class GetMembersRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21326,7 +22040,8 @@ module Aws::SecurityHub
     class GetMembersResponse < Struct.new(
       :members,
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21343,7 +22058,8 @@ module Aws::SecurityHub
       :group_by_rules,
       :sort_order,
       :max_statistic_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21352,7 +22068,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::GroupByResult>]
     class GetResourcesStatisticsV2Response < Struct.new(
       :group_by_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21375,7 +22092,8 @@ module Aws::SecurityHub
       :sort_criteria,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21389,7 +22107,8 @@ module Aws::SecurityHub
     class GetResourcesV2Response < Struct.new(
       :resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21400,7 +22119,8 @@ module Aws::SecurityHub
     #   @return [String]
     class GetSecurityControlDefinitionRequest < Struct.new(
       :security_control_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21412,7 +22132,8 @@ module Aws::SecurityHub
     #   @return [Types::SecurityControlDefinition]
     class GetSecurityControlDefinitionResponse < Struct.new(
       :security_control_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21426,7 +22147,8 @@ module Aws::SecurityHub
     class GroupByResult < Struct.new(
       :group_by_field,
       :group_by_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21440,7 +22162,8 @@ module Aws::SecurityHub
     class GroupByRule < Struct.new(
       :filters,
       :group_by_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21454,7 +22177,8 @@ module Aws::SecurityHub
     class GroupByValue < Struct.new(
       :field_value,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21472,7 +22196,8 @@ module Aws::SecurityHub
       :connector_status,
       :message,
       :last_checked_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21488,7 +22213,8 @@ module Aws::SecurityHub
     class IcmpTypeCode < Struct.new(
       :code,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21508,7 +22234,8 @@ module Aws::SecurityHub
       :id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21543,7 +22270,8 @@ module Aws::SecurityHub
       :values,
       :title,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21569,7 +22297,8 @@ module Aws::SecurityHub
       :name,
       :filters,
       :group_by_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21585,7 +22314,8 @@ module Aws::SecurityHub
     class InsightResultValue < Struct.new(
       :group_by_attribute_value,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21606,7 +22336,8 @@ module Aws::SecurityHub
       :insight_arn,
       :group_by_attribute,
       :result_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21632,7 +22363,8 @@ module Aws::SecurityHub
       :default_value,
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21664,7 +22396,8 @@ module Aws::SecurityHub
       :min,
       :max,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21676,7 +22409,8 @@ module Aws::SecurityHub
     class InternalException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21690,7 +22424,8 @@ module Aws::SecurityHub
     class InternalServerException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21702,7 +22437,8 @@ module Aws::SecurityHub
     class InvalidAccessException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21715,7 +22451,8 @@ module Aws::SecurityHub
     class InvalidInputException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21737,7 +22474,8 @@ module Aws::SecurityHub
       :invitation_id,
       :invited_at,
       :member_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21746,7 +22484,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class InviteMembersRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21756,7 +22495,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::Result>]
     class InviteMembersResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21766,7 +22506,8 @@ module Aws::SecurityHub
     #   @return [String]
     class IpFilter < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21788,7 +22529,8 @@ module Aws::SecurityHub
       :asn_org,
       :isp,
       :org,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21838,7 +22580,8 @@ module Aws::SecurityHub
       :association_id,
       :ipv6_cidr_block,
       :cidr_block_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21864,7 +22607,8 @@ module Aws::SecurityHub
       :domain,
       :auth_url,
       :auth_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21874,7 +22618,8 @@ module Aws::SecurityHub
     #   @return [String]
     class JiraCloudProviderConfiguration < Struct.new(
       :project_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21884,7 +22629,8 @@ module Aws::SecurityHub
     #   @return [String]
     class JiraCloudUpdateConfiguration < Struct.new(
       :project_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21894,7 +22640,8 @@ module Aws::SecurityHub
     #   @return [String]
     class KeywordFilter < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21907,7 +22654,8 @@ module Aws::SecurityHub
     class LimitExceededException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21922,7 +22670,8 @@ module Aws::SecurityHub
     class ListAggregatorsV2Request < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21936,7 +22685,8 @@ module Aws::SecurityHub
     class ListAggregatorsV2Response < Struct.new(
       :aggregators_v2,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21954,7 +22704,8 @@ module Aws::SecurityHub
     class ListAutomationRulesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21972,7 +22723,8 @@ module Aws::SecurityHub
     class ListAutomationRulesResponse < Struct.new(
       :automation_rules_metadata,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21987,7 +22739,8 @@ module Aws::SecurityHub
     class ListAutomationRulesV2Request < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22001,7 +22754,8 @@ module Aws::SecurityHub
     class ListAutomationRulesV2Response < Struct.new(
       :rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22026,7 +22780,8 @@ module Aws::SecurityHub
     class ListConfigurationPoliciesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22045,7 +22800,8 @@ module Aws::SecurityHub
     class ListConfigurationPoliciesResponse < Struct.new(
       :configuration_policy_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22076,7 +22832,8 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22096,7 +22853,8 @@ module Aws::SecurityHub
     class ListConfigurationPolicyAssociationsResponse < Struct.new(
       :configuration_policy_association_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22117,7 +22875,8 @@ module Aws::SecurityHub
       :max_results,
       :provider_name,
       :connector_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22131,7 +22890,8 @@ module Aws::SecurityHub
     class ListConnectorsV2Response < Struct.new(
       :next_token,
       :connectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22148,7 +22908,8 @@ module Aws::SecurityHub
     class ListEnabledProductsForImportRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22161,7 +22922,8 @@ module Aws::SecurityHub
     class ListEnabledProductsForImportResponse < Struct.new(
       :product_subscriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22174,7 +22936,8 @@ module Aws::SecurityHub
     class ListFindingAggregatorsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22189,7 +22952,8 @@ module Aws::SecurityHub
     class ListFindingAggregatorsResponse < Struct.new(
       :finding_aggregators,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22206,7 +22970,8 @@ module Aws::SecurityHub
     class ListInvitationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22219,7 +22984,8 @@ module Aws::SecurityHub
     class ListInvitationsResponse < Struct.new(
       :invitations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22245,7 +23011,8 @@ module Aws::SecurityHub
       :only_associated,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22258,7 +23025,8 @@ module Aws::SecurityHub
     class ListMembersResponse < Struct.new(
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22279,7 +23047,8 @@ module Aws::SecurityHub
       :max_results,
       :next_token,
       :feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22297,7 +23066,8 @@ module Aws::SecurityHub
       :admin_accounts,
       :next_token,
       :feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22322,7 +23092,8 @@ module Aws::SecurityHub
       :standards_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22338,7 +23109,8 @@ module Aws::SecurityHub
     class ListSecurityControlDefinitionsResponse < Struct.new(
       :security_control_definitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22366,7 +23138,8 @@ module Aws::SecurityHub
       :security_control_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22381,7 +23154,8 @@ module Aws::SecurityHub
     class ListStandardsControlAssociationsResponse < Struct.new(
       :standards_control_association_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22390,7 +23164,8 @@ module Aws::SecurityHub
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22399,7 +23174,8 @@ module Aws::SecurityHub
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22416,7 +23192,8 @@ module Aws::SecurityHub
     class LoadBalancerState < Struct.new(
       :code,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22440,7 +23217,8 @@ module Aws::SecurityHub
       :type,
       :path,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22511,7 +23289,8 @@ module Aws::SecurityHub
       :key,
       :value,
       :comparison,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22588,7 +23367,8 @@ module Aws::SecurityHub
       :member_status,
       :invited_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22646,7 +23426,8 @@ module Aws::SecurityHub
       :destination_ip_v6,
       :destination_port,
       :destination_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22669,7 +23450,8 @@ module Aws::SecurityHub
     class NetworkAutonomousSystem < Struct.new(
       :name,
       :number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22685,7 +23467,8 @@ module Aws::SecurityHub
     #   @return [String]
     class NetworkConnection < Struct.new(
       :direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22719,7 +23502,8 @@ module Aws::SecurityHub
       :local_port_details,
       :protocol,
       :blocked,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22773,7 +23557,8 @@ module Aws::SecurityHub
       :location,
       :autonomous_system,
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22808,7 +23593,8 @@ module Aws::SecurityHub
       :country,
       :lat,
       :lon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22828,7 +23614,8 @@ module Aws::SecurityHub
       :protocol,
       :destination,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22854,7 +23641,8 @@ module Aws::SecurityHub
       :component_type,
       :egress,
       :ingress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22868,7 +23656,8 @@ module Aws::SecurityHub
     class NetworkPathComponentDetails < Struct.new(
       :address,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22888,7 +23677,8 @@ module Aws::SecurityHub
       :text,
       :updated_by,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22902,7 +23692,8 @@ module Aws::SecurityHub
     class NoteUpdate < Struct.new(
       :text,
       :updated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22935,7 +23726,8 @@ module Aws::SecurityHub
       :eq,
       :gt,
       :lt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22961,7 +23753,8 @@ module Aws::SecurityHub
       :pages,
       :records,
       :cells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22975,7 +23768,8 @@ module Aws::SecurityHub
     class OcsfBooleanFilter < Struct.new(
       :field_name,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22989,7 +23783,8 @@ module Aws::SecurityHub
     class OcsfDateFilter < Struct.new(
       :field_name,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23003,7 +23798,8 @@ module Aws::SecurityHub
     class OcsfFindingFilters < Struct.new(
       :composite_filters,
       :composite_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23021,7 +23817,8 @@ module Aws::SecurityHub
       :cloud_account_uid,
       :finding_info_uid,
       :metadata_product_uid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23036,7 +23833,8 @@ module Aws::SecurityHub
     class OcsfMapFilter < Struct.new(
       :field_name,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23050,7 +23848,8 @@ module Aws::SecurityHub
     class OcsfNumberFilter < Struct.new(
       :field_name,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23064,7 +23863,8 @@ module Aws::SecurityHub
     class OcsfStringFilter < Struct.new(
       :field_name,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23106,7 +23906,8 @@ module Aws::SecurityHub
       :configuration_type,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23124,7 +23925,8 @@ module Aws::SecurityHub
       :page_number,
       :line_range,
       :offset_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23149,7 +23951,8 @@ module Aws::SecurityHub
     class ParameterConfiguration < Struct.new(
       :value_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23169,7 +23972,8 @@ module Aws::SecurityHub
     class ParameterDefinition < Struct.new(
       :description,
       :configuration_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23226,7 +24030,8 @@ module Aws::SecurityHub
       :enum,
       :enum_list,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Integer < ParameterValue; end
@@ -23304,7 +24109,8 @@ module Aws::SecurityHub
       :operation_end_time,
       :reboot_option,
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23324,7 +24130,8 @@ module Aws::SecurityHub
     class Policy < Struct.new(
       :security_hub,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SecurityHub < Policy; end
@@ -23342,7 +24149,8 @@ module Aws::SecurityHub
     class PortProbeAction < Struct.new(
       :port_probe_details,
       :blocked,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23362,7 +24170,8 @@ module Aws::SecurityHub
       :local_port_details,
       :local_ip_details,
       :remote_ip_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23376,7 +24185,8 @@ module Aws::SecurityHub
     class PortRange < Struct.new(
       :begin,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23390,7 +24200,8 @@ module Aws::SecurityHub
     class PortRangeFromTo < Struct.new(
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23424,7 +24235,8 @@ module Aws::SecurityHub
       :parent_pid,
       :launched_at,
       :terminated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23484,7 +24296,8 @@ module Aws::SecurityHub
       :marketplace_url,
       :activation_url,
       :product_subscription_resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23518,7 +24331,8 @@ module Aws::SecurityHub
       :integration_v2_types,
       :marketplace_url,
       :activation_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23532,7 +24346,8 @@ module Aws::SecurityHub
     #   @return [String]
     class PropagatingVgwSetDetails < Struct.new(
       :gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23547,7 +24362,8 @@ module Aws::SecurityHub
       :jira_cloud,
       :service_now,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class JiraCloud < ProviderConfiguration; end
@@ -23566,7 +24382,8 @@ module Aws::SecurityHub
       :jira_cloud,
       :service_now,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class JiraCloud < ProviderDetail; end
@@ -23584,7 +24401,8 @@ module Aws::SecurityHub
     class ProviderSummary < Struct.new(
       :provider_name,
       :connector_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23595,7 +24413,8 @@ module Aws::SecurityHub
     class ProviderUpdateConfiguration < Struct.new(
       :jira_cloud,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class JiraCloud < ProviderUpdateConfiguration; end
@@ -23616,7 +24435,8 @@ module Aws::SecurityHub
       :start,
       :end,
       :start_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23631,7 +24451,8 @@ module Aws::SecurityHub
     class Recommendation < Struct.new(
       :text,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23645,7 +24466,8 @@ module Aws::SecurityHub
     class Record < Struct.new(
       :json_path,
       :record_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23659,7 +24481,8 @@ module Aws::SecurityHub
     class RelatedFinding < Struct.new(
       :product_arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23669,7 +24492,8 @@ module Aws::SecurityHub
     #   @return [Types::Recommendation]
     class Remediation < Struct.new(
       :recommendation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23726,7 +24550,8 @@ module Aws::SecurityHub
       :details,
       :application_name,
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23738,7 +24563,8 @@ module Aws::SecurityHub
     class ResourceConflictException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24227,7 +25053,8 @@ module Aws::SecurityHub
       :aws_s3_access_point,
       :aws_ec2_client_vpn_endpoint,
       :code_repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24249,7 +25076,8 @@ module Aws::SecurityHub
       :product_name,
       :total_findings,
       :severities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24263,7 +25091,8 @@ module Aws::SecurityHub
     class ResourceGroupByRule < Struct.new(
       :group_by_field,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24278,7 +25107,8 @@ module Aws::SecurityHub
     class ResourceInUseException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24290,7 +25120,8 @@ module Aws::SecurityHub
     class ResourceNotFoundException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24344,7 +25175,8 @@ module Aws::SecurityHub
       :findings_summary,
       :resource_tags,
       :resource_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24382,7 +25214,8 @@ module Aws::SecurityHub
       :low,
       :informational,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24396,7 +25229,8 @@ module Aws::SecurityHub
     class ResourceTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24422,7 +25256,8 @@ module Aws::SecurityHub
       :number_filters,
       :map_filters,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24436,7 +25271,8 @@ module Aws::SecurityHub
     class ResourcesDateFilter < Struct.new(
       :field_name,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24450,7 +25286,8 @@ module Aws::SecurityHub
     class ResourcesFilters < Struct.new(
       :composite_filters,
       :composite_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24465,7 +25302,8 @@ module Aws::SecurityHub
     class ResourcesMapFilter < Struct.new(
       :field_name,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24479,7 +25317,8 @@ module Aws::SecurityHub
     class ResourcesNumberFilter < Struct.new(
       :field_name,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24493,7 +25332,8 @@ module Aws::SecurityHub
     class ResourcesStringFilter < Struct.new(
       :field_name,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24507,7 +25347,8 @@ module Aws::SecurityHub
     class Result < Struct.new(
       :account_id,
       :processing_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24611,7 +25452,8 @@ module Aws::SecurityHub
       :state,
       :transit_gateway_id,
       :vpc_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24627,7 +25469,8 @@ module Aws::SecurityHub
     class RuleGroupDetails < Struct.new(
       :rule_variables,
       :rules_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24649,7 +25492,8 @@ module Aws::SecurityHub
       :rules_string,
       :stateful_rules,
       :stateless_rules_and_custom_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24663,7 +25507,8 @@ module Aws::SecurityHub
     class RuleGroupSourceCustomActionsDetails < Struct.new(
       :action_definition,
       :action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24681,7 +25526,8 @@ module Aws::SecurityHub
       :generated_rules_type,
       :target_types,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24699,7 +25545,8 @@ module Aws::SecurityHub
       :action,
       :header,
       :rule_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24729,7 +25576,8 @@ module Aws::SecurityHub
       :protocol,
       :source,
       :source_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24743,7 +25591,8 @@ module Aws::SecurityHub
     class RuleGroupSourceStatefulRulesOptionsDetails < Struct.new(
       :keyword,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24757,7 +25606,8 @@ module Aws::SecurityHub
     class RuleGroupSourceStatelessRuleDefinition < Struct.new(
       :actions,
       :match_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24787,7 +25637,8 @@ module Aws::SecurityHub
       :source_ports,
       :sources,
       :tcp_flags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24801,7 +25652,8 @@ module Aws::SecurityHub
     class RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24811,7 +25663,8 @@ module Aws::SecurityHub
     #   @return [String]
     class RuleGroupSourceStatelessRuleMatchAttributesDestinations < Struct.new(
       :address_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24825,7 +25678,8 @@ module Aws::SecurityHub
     class RuleGroupSourceStatelessRuleMatchAttributesSourcePorts < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24835,7 +25689,8 @@ module Aws::SecurityHub
     #   @return [String]
     class RuleGroupSourceStatelessRuleMatchAttributesSources < Struct.new(
       :address_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24849,7 +25704,8 @@ module Aws::SecurityHub
     class RuleGroupSourceStatelessRuleMatchAttributesTcpFlags < Struct.new(
       :flags,
       :masks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24863,7 +25719,8 @@ module Aws::SecurityHub
     class RuleGroupSourceStatelessRulesAndCustomActionsDetails < Struct.new(
       :custom_actions,
       :stateless_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24877,7 +25734,8 @@ module Aws::SecurityHub
     class RuleGroupSourceStatelessRulesDetails < Struct.new(
       :priority,
       :rule_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24891,7 +25749,8 @@ module Aws::SecurityHub
     class RuleGroupVariables < Struct.new(
       :ip_sets,
       :port_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24901,7 +25760,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class RuleGroupVariablesIpSetsDetails < Struct.new(
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24911,7 +25771,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     class RuleGroupVariablesPortSetsDetails < Struct.new(
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24988,7 +25849,8 @@ module Aws::SecurityHub
       :update_status,
       :parameters,
       :last_update_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25008,7 +25870,8 @@ module Aws::SecurityHub
     class SecurityControlCustomParameter < Struct.new(
       :security_control_id,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25072,7 +25935,8 @@ module Aws::SecurityHub
       :current_region_availability,
       :customizable_properties,
       :parameter_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25092,7 +25956,8 @@ module Aws::SecurityHub
     class SecurityControlParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25121,7 +25986,8 @@ module Aws::SecurityHub
       :enabled_security_control_identifiers,
       :disabled_security_control_identifiers,
       :security_control_custom_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25153,7 +26019,8 @@ module Aws::SecurityHub
       :service_enabled,
       :enabled_standard_identifiers,
       :security_controls_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25171,7 +26038,8 @@ module Aws::SecurityHub
       :count,
       :type,
       :occurrences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25189,7 +26057,8 @@ module Aws::SecurityHub
       :category,
       :detections,
       :total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25230,7 +26099,8 @@ module Aws::SecurityHub
       :endpoints,
       :signals,
       :sequence_indicators,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25248,7 +26118,8 @@ module Aws::SecurityHub
       :instance_name,
       :client_id,
       :auth_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25266,7 +26137,8 @@ module Aws::SecurityHub
       :instance_name,
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25372,7 +26244,8 @@ module Aws::SecurityHub
       :label,
       :normalized,
       :original,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25439,7 +26312,8 @@ module Aws::SecurityHub
       :normalized,
       :product,
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25567,7 +26441,8 @@ module Aws::SecurityHub
       :count,
       :actor_ids,
       :endpoint_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25621,7 +26496,8 @@ module Aws::SecurityHub
       :remediation,
       :source_layer_hash,
       :source_layer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25635,7 +26511,8 @@ module Aws::SecurityHub
     class SortCriterion < Struct.new(
       :field,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25667,7 +26544,8 @@ module Aws::SecurityHub
       :description,
       :enabled_by_default,
       :standards_managed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25719,7 +26597,8 @@ module Aws::SecurityHub
       :remediation_url,
       :severity_rating,
       :related_requirements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25786,7 +26665,8 @@ module Aws::SecurityHub
       :standards_control_title,
       :standards_control_description,
       :standards_control_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25808,7 +26688,8 @@ module Aws::SecurityHub
     class StandardsControlAssociationId < Struct.new(
       :security_control_id,
       :standards_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25867,7 +26748,8 @@ module Aws::SecurityHub
       :updated_reason,
       :standards_control_title,
       :standards_control_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25892,7 +26774,8 @@ module Aws::SecurityHub
       :security_control_id,
       :association_status,
       :updated_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25909,7 +26792,8 @@ module Aws::SecurityHub
     class StandardsManagedBy < Struct.new(
       :company,
       :product,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25919,7 +26803,8 @@ module Aws::SecurityHub
     #   @return [String]
     class StandardsStatusReason < Struct.new(
       :status_reason_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25984,7 +26869,8 @@ module Aws::SecurityHub
       :standards_status,
       :standards_controls_updatable,
       :standards_status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25999,7 +26885,8 @@ module Aws::SecurityHub
     class StandardsSubscriptionRequest < Struct.new(
       :standards_arn,
       :standards_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26017,7 +26904,8 @@ module Aws::SecurityHub
     class StartConfigurationPolicyAssociationRequest < Struct.new(
       :configuration_policy_identifier,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26065,7 +26953,8 @@ module Aws::SecurityHub
       :updated_at,
       :association_status,
       :association_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26083,12 +26972,14 @@ module Aws::SecurityHub
     class StartConfigurationPolicyDisassociationRequest < Struct.new(
       :target,
       :configuration_policy_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartConfigurationPolicyDisassociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26098,7 +26989,8 @@ module Aws::SecurityHub
     #   @return [Types::StatelessCustomPublishMetricAction]
     class StatelessCustomActionDefinition < Struct.new(
       :publish_metric_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26108,7 +27000,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::StatelessCustomPublishMetricActionDimension>]
     class StatelessCustomPublishMetricAction < Struct.new(
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26118,7 +27011,8 @@ module Aws::SecurityHub
     #   @return [String]
     class StatelessCustomPublishMetricActionDimension < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26134,7 +27028,8 @@ module Aws::SecurityHub
     class StatusReason < Struct.new(
       :reason_code,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26160,7 +27055,8 @@ module Aws::SecurityHub
       :default_value,
       :re2_expression,
       :expression_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26259,7 +27155,8 @@ module Aws::SecurityHub
     class StringFilter < Struct.new(
       :value,
       :comparison,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26292,7 +27189,8 @@ module Aws::SecurityHub
       :re2_expression,
       :max_items,
       :expression_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26305,12 +27203,14 @@ module Aws::SecurityHub
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26338,7 +27238,8 @@ module Aws::SecurityHub
       :organizational_unit_id,
       :root_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AccountId < Target; end
@@ -26373,7 +27274,8 @@ module Aws::SecurityHub
       :severity,
       :item_count,
       :file_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26408,7 +27310,8 @@ module Aws::SecurityHub
       :last_observed_at,
       :source,
       :source_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26422,7 +27325,8 @@ module Aws::SecurityHub
     class ThrottlingException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26449,7 +27353,8 @@ module Aws::SecurityHub
       :rule_arn,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26478,7 +27383,8 @@ module Aws::SecurityHub
       :configuration_policy_association_identifiers,
       :error_code,
       :error_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26502,7 +27408,8 @@ module Aws::SecurityHub
       :security_control_id,
       :error_code,
       :error_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26527,7 +27434,8 @@ module Aws::SecurityHub
       :standards_control_association_id,
       :error_code,
       :error_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26550,7 +27458,8 @@ module Aws::SecurityHub
       :standards_control_association_update,
       :error_code,
       :error_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26563,12 +27472,14 @@ module Aws::SecurityHub
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26585,12 +27496,14 @@ module Aws::SecurityHub
       :action_target_arn,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateActionTargetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26607,7 +27520,8 @@ module Aws::SecurityHub
       :aggregator_v2_arn,
       :region_linking_mode,
       :linked_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26628,7 +27542,8 @@ module Aws::SecurityHub
       :aggregation_region,
       :region_linking_mode,
       :linked_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26661,12 +27576,14 @@ module Aws::SecurityHub
       :rule_name,
       :criteria,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateAutomationRuleV2Response < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26731,7 +27648,8 @@ module Aws::SecurityHub
       :is_terminal,
       :criteria,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26773,7 +27691,8 @@ module Aws::SecurityHub
       :description,
       :updated_reason,
       :configuration_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26824,7 +27743,8 @@ module Aws::SecurityHub
       :updated_at,
       :created_at,
       :configuration_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26845,12 +27765,14 @@ module Aws::SecurityHub
       :client_secret,
       :description,
       :provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateConnectorV2Response < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26894,7 +27816,8 @@ module Aws::SecurityHub
       :finding_aggregator_arn,
       :region_linking_mode,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26915,7 +27838,8 @@ module Aws::SecurityHub
       :finding_aggregation_region,
       :region_linking_mode,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26932,12 +27856,14 @@ module Aws::SecurityHub
       :filters,
       :note,
       :record_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateFindingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26958,12 +27884,14 @@ module Aws::SecurityHub
       :name,
       :filters,
       :group_by_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateInsightResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26995,12 +27923,14 @@ module Aws::SecurityHub
       :auto_enable,
       :auto_enable_standards,
       :organization_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateOrganizationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27024,12 +27954,14 @@ module Aws::SecurityHub
       :security_control_id,
       :parameters,
       :last_update_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateSecurityControlResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27058,12 +27990,14 @@ module Aws::SecurityHub
     class UpdateSecurityHubConfigurationRequest < Struct.new(
       :auto_enable_controls,
       :control_finding_generator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateSecurityHubConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27081,12 +28015,14 @@ module Aws::SecurityHub
       :standards_control_arn,
       :control_status,
       :disabled_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateStandardsControlResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27108,7 +28044,8 @@ module Aws::SecurityHub
     class UserAccount < Struct.new(
       :uid,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27120,7 +28057,8 @@ module Aws::SecurityHub
     class ValidationException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27137,7 +28075,8 @@ module Aws::SecurityHub
     class VolumeMount < Struct.new(
       :name,
       :mount_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27149,7 +28088,8 @@ module Aws::SecurityHub
     #   @return [String]
     class VpcInfoCidrBlockSetDetails < Struct.new(
       :cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27161,7 +28101,8 @@ module Aws::SecurityHub
     #   @return [String]
     class VpcInfoIpv6CidrBlockSetDetails < Struct.new(
       :ipv6_cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27183,7 +28124,8 @@ module Aws::SecurityHub
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27258,7 +28200,8 @@ module Aws::SecurityHub
       :exploit_available,
       :last_known_exploit_at,
       :code_vulnerabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27284,7 +28227,8 @@ module Aws::SecurityHub
       :cwes,
       :file_path,
       :source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27312,7 +28256,8 @@ module Aws::SecurityHub
       :vendor_severity,
       :vendor_created_at,
       :vendor_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27342,7 +28287,8 @@ module Aws::SecurityHub
     #   @return [String]
     class WafAction < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27352,7 +28298,8 @@ module Aws::SecurityHub
     #   @return [String]
     class WafExcludedRule < Struct.new(
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27365,7 +28312,8 @@ module Aws::SecurityHub
     #   @return [String]
     class WafOverrideAction < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27412,7 +28360,8 @@ module Aws::SecurityHub
     #   @return [String]
     class Workflow < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27457,7 +28406,8 @@ module Aws::SecurityHub
     #   @return [String]
     class WorkflowUpdate < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

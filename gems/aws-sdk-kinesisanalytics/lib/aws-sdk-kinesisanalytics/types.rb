@@ -21,12 +21,14 @@ module Aws::KinesisAnalytics
       :application_name,
       :current_application_version_id,
       :cloud_watch_logging_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddApplicationCloudWatchLoggingOptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,12 +52,14 @@ module Aws::KinesisAnalytics
       :current_application_version_id,
       :input_id,
       :input_processing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddApplicationInputProcessingConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,13 +78,15 @@ module Aws::KinesisAnalytics
       :application_name,
       :current_application_version_id,
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class AddApplicationInputResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,13 +110,15 @@ module Aws::KinesisAnalytics
       :application_name,
       :current_application_version_id,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class AddApplicationOutputResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,13 +139,15 @@ module Aws::KinesisAnalytics
       :application_name,
       :current_application_version_id,
       :reference_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class AddApplicationReferenceDataSourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,7 +220,8 @@ module Aws::KinesisAnalytics
       :cloud_watch_logging_option_descriptions,
       :application_code,
       :application_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +242,8 @@ module Aws::KinesisAnalytics
       :application_name,
       :application_arn,
       :application_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -257,7 +269,8 @@ module Aws::KinesisAnalytics
       :output_updates,
       :reference_data_source_updates,
       :cloud_watch_logging_option_updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -281,7 +294,8 @@ module Aws::KinesisAnalytics
     class CSVMappingParameters < Struct.new(
       :record_row_delimiter,
       :record_column_delimiter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +312,8 @@ module Aws::KinesisAnalytics
     class CloudWatchLoggingOption < Struct.new(
       :log_stream_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +331,8 @@ module Aws::KinesisAnalytics
       :cloud_watch_logging_option_id,
       :log_stream_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +350,8 @@ module Aws::KinesisAnalytics
       :cloud_watch_logging_option_id,
       :log_stream_arn_update,
       :role_arn_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +361,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class CodeValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -354,7 +372,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +438,8 @@ module Aws::KinesisAnalytics
       :cloud_watch_logging_options,
       :application_code,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +451,8 @@ module Aws::KinesisAnalytics
     #   @return [Types::ApplicationSummary]
     class CreateApplicationResponse < Struct.new(
       :application_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,12 +470,14 @@ module Aws::KinesisAnalytics
       :application_name,
       :current_application_version_id,
       :cloud_watch_logging_option_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationCloudWatchLoggingOptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,12 +495,14 @@ module Aws::KinesisAnalytics
       :application_name,
       :current_application_version_id,
       :input_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationInputProcessingConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,13 +531,15 @@ module Aws::KinesisAnalytics
       :application_name,
       :current_application_version_id,
       :output_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class DeleteApplicationOutputResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -536,12 +563,14 @@ module Aws::KinesisAnalytics
       :application_name,
       :current_application_version_id,
       :reference_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationReferenceDataSourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,13 +586,15 @@ module Aws::KinesisAnalytics
     class DeleteApplicationRequest < Struct.new(
       :application_name,
       :create_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class DeleteApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +604,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class DescribeApplicationRequest < Struct.new(
       :application_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +615,8 @@ module Aws::KinesisAnalytics
     #   @return [Types::ApplicationDetail]
     class DescribeApplicationResponse < Struct.new(
       :application_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +631,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class DestinationSchema < Struct.new(
       :record_format_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +658,8 @@ module Aws::KinesisAnalytics
       :input_starting_position_configuration,
       :s3_configuration,
       :input_processing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +681,8 @@ module Aws::KinesisAnalytics
       :parsed_input_records,
       :processed_input_records,
       :raw_input_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +730,8 @@ module Aws::KinesisAnalytics
       :kinesis_firehose_input,
       :input_parallelism,
       :input_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +749,8 @@ module Aws::KinesisAnalytics
     class InputConfiguration < Struct.new(
       :id,
       :input_starting_position_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +804,8 @@ module Aws::KinesisAnalytics
       :input_schema,
       :input_parallelism,
       :input_starting_position_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +826,8 @@ module Aws::KinesisAnalytics
     class InputLambdaProcessor < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +843,8 @@ module Aws::KinesisAnalytics
     class InputLambdaProcessorDescription < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +864,8 @@ module Aws::KinesisAnalytics
     class InputLambdaProcessorUpdate < Struct.new(
       :resource_arn_update,
       :role_arn_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,7 +880,8 @@ module Aws::KinesisAnalytics
     #   @return [Integer]
     class InputParallelism < Struct.new(
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -849,7 +892,8 @@ module Aws::KinesisAnalytics
     #   @return [Integer]
     class InputParallelismUpdate < Struct.new(
       :count_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -863,7 +907,8 @@ module Aws::KinesisAnalytics
     #   @return [Types::InputLambdaProcessor]
     class InputProcessingConfiguration < Struct.new(
       :input_lambda_processor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,7 +919,8 @@ module Aws::KinesisAnalytics
     #   @return [Types::InputLambdaProcessorDescription]
     class InputProcessingConfigurationDescription < Struct.new(
       :input_lambda_processor_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +930,8 @@ module Aws::KinesisAnalytics
     #   @return [Types::InputLambdaProcessorUpdate]
     class InputProcessingConfigurationUpdate < Struct.new(
       :input_lambda_processor_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +950,8 @@ module Aws::KinesisAnalytics
       :record_format_update,
       :record_encoding_update,
       :record_column_updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +981,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class InputStartingPositionConfiguration < Struct.new(
       :input_starting_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -973,7 +1022,8 @@ module Aws::KinesisAnalytics
       :kinesis_firehose_input_update,
       :input_schema_update,
       :input_parallelism_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1033,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class InvalidApplicationConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,7 +1044,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class InvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1055,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class JSONMappingParameters < Struct.new(
       :record_row_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1021,7 +1074,8 @@ module Aws::KinesisAnalytics
     class KinesisFirehoseInput < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1092,8 @@ module Aws::KinesisAnalytics
     class KinesisFirehoseInputDescription < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1055,7 +1110,8 @@ module Aws::KinesisAnalytics
     class KinesisFirehoseInputUpdate < Struct.new(
       :resource_arn_update,
       :role_arn_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1128,8 @@ module Aws::KinesisAnalytics
     class KinesisFirehoseOutput < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1089,7 +1146,8 @@ module Aws::KinesisAnalytics
     class KinesisFirehoseOutputDescription < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1109,7 +1167,8 @@ module Aws::KinesisAnalytics
     class KinesisFirehoseOutputUpdate < Struct.new(
       :resource_arn_update,
       :role_arn_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1125,7 +1184,8 @@ module Aws::KinesisAnalytics
     class KinesisStreamsInput < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1142,7 +1202,8 @@ module Aws::KinesisAnalytics
     class KinesisStreamsInputDescription < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1157,7 +1218,8 @@ module Aws::KinesisAnalytics
     class KinesisStreamsInputUpdate < Struct.new(
       :resource_arn_update,
       :role_arn_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1235,8 @@ module Aws::KinesisAnalytics
     class KinesisStreamsOutput < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1253,8 @@ module Aws::KinesisAnalytics
     class KinesisStreamsOutputDescription < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1209,7 +1273,8 @@ module Aws::KinesisAnalytics
     class KinesisStreamsOutputUpdate < Struct.new(
       :resource_arn_update,
       :role_arn_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1230,7 +1295,8 @@ module Aws::KinesisAnalytics
     class LambdaOutput < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,7 +1311,8 @@ module Aws::KinesisAnalytics
     class LambdaOutputDescription < Struct.new(
       :resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1332,8 @@ module Aws::KinesisAnalytics
     class LambdaOutputUpdate < Struct.new(
       :resource_arn_update,
       :role_arn_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1275,7 +1343,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1289,7 +1358,8 @@ module Aws::KinesisAnalytics
     class ListApplicationsRequest < Struct.new(
       :limit,
       :exclusive_start_application_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1303,7 +1373,8 @@ module Aws::KinesisAnalytics
     class ListApplicationsResponse < Struct.new(
       :application_summaries,
       :has_more_applications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1383,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1321,7 +1393,8 @@ module Aws::KinesisAnalytics
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,7 +1413,8 @@ module Aws::KinesisAnalytics
     class MappingParameters < Struct.new(
       :json_mapping_parameters,
       :csv_mapping_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1378,7 +1452,8 @@ module Aws::KinesisAnalytics
       :kinesis_firehose_output,
       :lambda_output,
       :destination_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1415,7 +1490,8 @@ module Aws::KinesisAnalytics
       :kinesis_firehose_output_description,
       :lambda_output_description,
       :destination_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1451,7 +1527,8 @@ module Aws::KinesisAnalytics
       :kinesis_firehose_output_update,
       :lambda_output_update,
       :destination_schema_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1472,7 +1549,8 @@ module Aws::KinesisAnalytics
       :name,
       :mapping,
       :sql_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1489,7 +1567,8 @@ module Aws::KinesisAnalytics
     class RecordFormat < Struct.new(
       :record_format_type,
       :mapping_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1509,7 +1588,8 @@ module Aws::KinesisAnalytics
       :table_name,
       :s3_reference_data_source,
       :reference_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1533,7 +1613,8 @@ module Aws::KinesisAnalytics
       :table_name,
       :s3_reference_data_source_description,
       :reference_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1556,7 +1637,8 @@ module Aws::KinesisAnalytics
       :table_name_update,
       :s3_reference_data_source_update,
       :reference_schema_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1648,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1659,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1673,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class ResourceProvisionedThroughputExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1609,7 +1694,8 @@ module Aws::KinesisAnalytics
       :role_arn,
       :bucket_arn,
       :file_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1630,7 +1716,8 @@ module Aws::KinesisAnalytics
       :bucket_arn,
       :file_key,
       :reference_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1735,8 @@ module Aws::KinesisAnalytics
       :bucket_arn,
       :file_key,
       :reference_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1754,8 @@ module Aws::KinesisAnalytics
       :bucket_arn_update,
       :file_key_update,
       :reference_role_arn_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1764,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1693,7 +1783,8 @@ module Aws::KinesisAnalytics
       :record_format,
       :record_encoding,
       :record_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1707,13 +1798,15 @@ module Aws::KinesisAnalytics
     class StartApplicationRequest < Struct.new(
       :application_name,
       :input_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class StartApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,13 +1816,15 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class StopApplicationRequest < Struct.new(
       :application_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class StopApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1840,8 @@ module Aws::KinesisAnalytics
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1758,12 +1854,14 @@ module Aws::KinesisAnalytics
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1772,7 +1870,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1788,7 +1887,8 @@ module Aws::KinesisAnalytics
       :message,
       :raw_input_records,
       :processed_input_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1797,7 +1897,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,12 +1911,14 @@ module Aws::KinesisAnalytics
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1833,12 +1936,14 @@ module Aws::KinesisAnalytics
       :application_name,
       :current_application_version_id,
       :application_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

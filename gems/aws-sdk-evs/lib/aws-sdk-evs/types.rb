@@ -20,7 +20,8 @@ module Aws::Evs
       :type,
       :result,
       :impaired_since,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +31,8 @@ module Aws::Evs
     #   @return [Array<String>]
     class ConnectivityInfo < Struct.new(
       :private_route_server_peerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +49,8 @@ module Aws::Evs
       :client_token,
       :environment_id,
       :host,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +63,8 @@ module Aws::Evs
     class CreateEnvironmentHostResponse < Struct.new(
       :environment_summary,
       :host,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +129,8 @@ module Aws::Evs
       :connectivity_info,
       :vcf_hostnames,
       :site_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +139,8 @@ module Aws::Evs
     #   @return [Types::Environment]
     class CreateEnvironmentResponse < Struct.new(
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +157,8 @@ module Aws::Evs
       :client_token,
       :environment_id,
       :host_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +171,8 @@ module Aws::Evs
     class DeleteEnvironmentHostResponse < Struct.new(
       :environment_summary,
       :host,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +185,8 @@ module Aws::Evs
     class DeleteEnvironmentRequest < Struct.new(
       :client_token,
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +195,8 @@ module Aws::Evs
     #   @return [Types::Environment]
     class DeleteEnvironmentResponse < Struct.new(
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +282,8 @@ module Aws::Evs
       :kms_key_id,
       :service_access_security_groups,
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +321,8 @@ module Aws::Evs
       :created_at,
       :modified_at,
       :environment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -319,7 +331,8 @@ module Aws::Evs
     #   @return [String]
     class GetEnvironmentRequest < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -328,7 +341,8 @@ module Aws::Evs
     #   @return [Types::Environment]
     class GetEnvironmentResponse < Struct.new(
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -382,7 +396,8 @@ module Aws::Evs
       :state_details,
       :ec2_instance_id,
       :network_interfaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +423,8 @@ module Aws::Evs
       :instance_type,
       :placement_group_id,
       :dedicated_host_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +434,8 @@ module Aws::Evs
     #   @return [String]
     class InitialVlanInfo < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +481,8 @@ module Aws::Evs
       :hcx,
       :expansion_vlan1,
       :expansion_vlan2,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +496,8 @@ module Aws::Evs
     class LicenseInfo < Struct.new(
       :solution_key,
       :vsan_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +514,8 @@ module Aws::Evs
       :next_token,
       :max_results,
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +528,8 @@ module Aws::Evs
     class ListEnvironmentHostsResponse < Struct.new(
       :next_token,
       :environment_hosts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +546,8 @@ module Aws::Evs
       :next_token,
       :max_results,
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +560,8 @@ module Aws::Evs
     class ListEnvironmentVlansResponse < Struct.new(
       :next_token,
       :environment_vlans,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +578,8 @@ module Aws::Evs
       :next_token,
       :max_results,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +592,8 @@ module Aws::Evs
     class ListEnvironmentsResponse < Struct.new(
       :next_token,
       :environment_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -577,7 +602,8 @@ module Aws::Evs
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +612,8 @@ module Aws::Evs
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,7 +623,8 @@ module Aws::Evs
     #   @return [String]
     class NetworkInterface < Struct.new(
       :network_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +642,8 @@ module Aws::Evs
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +653,8 @@ module Aws::Evs
     #   @return [String]
     class Secret < Struct.new(
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +664,8 @@ module Aws::Evs
     #   @return [Array<String>]
     class ServiceAccessSecurityGroups < Struct.new(
       :security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +675,8 @@ module Aws::Evs
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +686,8 @@ module Aws::Evs
     #   @return [String]
     class TagPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -667,12 +700,14 @@ module Aws::Evs
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +721,8 @@ module Aws::Evs
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -696,7 +732,8 @@ module Aws::Evs
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,12 +746,14 @@ module Aws::Evs
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,7 +771,8 @@ module Aws::Evs
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +786,8 @@ module Aws::Evs
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,7 +829,8 @@ module Aws::Evs
       :nsx_edge2,
       :sddc_manager,
       :cloud_builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +872,8 @@ module Aws::Evs
       :modified_at,
       :vlan_state,
       :state_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -47,7 +47,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::AnalysisNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::BackfillLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::BillExpirationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -88,7 +88,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::DataUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::GenerationExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -127,7 +127,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -141,7 +141,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::RequestChangedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -154,7 +154,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -172,7 +172,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -186,7 +186,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -203,7 +203,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::UnknownMonitorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -216,7 +216,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::UnknownSubscriptionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -231,7 +231,7 @@ module Aws::CostExplorer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::UnresolvableUsageUnitException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

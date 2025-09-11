@@ -40,7 +40,7 @@ module Aws::SSMIncidents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMIncidents::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::SSMIncidents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMIncidents::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::SSMIncidents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMIncidents::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::SSMIncidents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMIncidents::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::SSMIncidents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMIncidents::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::SSMIncidents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMIncidents::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -175,7 +175,7 @@ module Aws::SSMIncidents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMIncidents::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

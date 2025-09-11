@@ -4546,7 +4546,6 @@ module Aws::Redshift
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         operation.traits = {}
       end)
-
     end
 
     class << self

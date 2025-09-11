@@ -989,7 +989,6 @@ module Aws::MTurk
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFault)
         operation.traits = {}
       end)
-
     end
 
     class << self

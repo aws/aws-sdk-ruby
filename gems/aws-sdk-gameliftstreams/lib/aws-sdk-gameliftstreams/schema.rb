@@ -803,7 +803,6 @@ module Aws::GameLiftStreams
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update a StreamGroup"}, "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/streamgroups/{Identifier}"}}
       end)
-
     end
 
     class << self

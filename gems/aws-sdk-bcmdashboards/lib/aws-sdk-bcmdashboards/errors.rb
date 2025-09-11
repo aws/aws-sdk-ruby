@@ -39,7 +39,7 @@ module Aws::BCMDashboards
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDashboards::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::BCMDashboards
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDashboards::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::BCMDashboards
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDashboards::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::BCMDashboards
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDashboards::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::BCMDashboards
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDashboards::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::BCMDashboards
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDashboards::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

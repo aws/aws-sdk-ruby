@@ -1466,7 +1466,6 @@ module Aws::BCMPricingCalculator
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update name and expiration date time of the specified workload estimate"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

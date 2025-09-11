@@ -40,7 +40,7 @@ module Aws::ElasticTranscoder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticTranscoder::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::ElasticTranscoder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticTranscoder::Types::IncompatibleVersionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::ElasticTranscoder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticTranscoder::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::ElasticTranscoder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticTranscoder::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -94,7 +94,7 @@ module Aws::ElasticTranscoder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticTranscoder::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::ElasticTranscoder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticTranscoder::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::ElasticTranscoder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticTranscoder::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

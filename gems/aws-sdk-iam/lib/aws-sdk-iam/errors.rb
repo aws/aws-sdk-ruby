@@ -68,7 +68,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::AccountNotManagementOrDelegatedAdministratorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::CallerIsNotManagementAccountException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::CredentialReportExpiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::CredentialReportNotPresentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::CredentialReportNotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::DeleteConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::DuplicateCertificateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -181,7 +181,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::DuplicateSSHPublicKeyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -195,7 +195,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::EntityAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -211,7 +211,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::EntityTemporarilyUnmodifiableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -225,7 +225,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::InvalidAuthenticationCodeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -238,7 +238,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::InvalidCertificateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -252,7 +252,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -265,7 +265,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::InvalidPublicKeyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -279,7 +279,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::InvalidUserTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -293,7 +293,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::KeyPairMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -307,7 +307,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -321,7 +321,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::MalformedCertificateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -335,7 +335,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::MalformedPolicyDocumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -349,7 +349,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::NoSuchEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -363,7 +363,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::OpenIdIdpCommunicationErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -376,7 +376,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::OrganizationNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -391,7 +391,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::OrganizationNotInAllFeaturesModeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -405,7 +405,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::PasswordPolicyViolationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -419,7 +419,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::PolicyEvaluationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -433,7 +433,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::PolicyNotAttachableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -447,7 +447,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::ReportGenerationLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -460,7 +460,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::ServiceAccessNotEnabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -474,7 +474,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::ServiceFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -487,7 +487,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::ServiceNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -503,7 +503,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::UnmodifiableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -517,7 +517,7 @@ module Aws::IAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::UnrecognizedPublicKeyEncodingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

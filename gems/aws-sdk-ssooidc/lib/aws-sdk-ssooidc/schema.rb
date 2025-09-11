@@ -240,7 +240,6 @@ module Aws::SSOOIDC
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "POST", "uri" => "/device_authorization", "code" => 200}, "smithy.api#optionalAuth" => {}}
       end)
-
     end
 
     class << self

@@ -36,7 +36,8 @@ module Aws::OpenSearchServerless
       :policy,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +47,8 @@ module Aws::OpenSearchServerless
     #   @return [Integer]
     class AccessPolicyStats < Struct.new(
       :data_policy_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +78,8 @@ module Aws::OpenSearchServerless
       :description,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +89,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::CapacityLimits]
     class AccountSettingsDetail < Struct.new(
       :capacity_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -99,7 +103,8 @@ module Aws::OpenSearchServerless
     class BatchGetCollectionInput < Struct.new(
       :ids,
       :names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +117,8 @@ module Aws::OpenSearchServerless
     class BatchGetCollectionOutput < Struct.new(
       :collection_details,
       :collection_error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +127,8 @@ module Aws::OpenSearchServerless
     #   @return [Array<Types::LifecyclePolicyResourceIdentifier>]
     class BatchGetEffectiveLifecyclePolicyRequest < Struct.new(
       :resource_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +141,8 @@ module Aws::OpenSearchServerless
     class BatchGetEffectiveLifecyclePolicyResponse < Struct.new(
       :effective_lifecycle_policy_details,
       :effective_lifecycle_policy_error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +151,8 @@ module Aws::OpenSearchServerless
     #   @return [Array<Types::LifecyclePolicyIdentifier>]
     class BatchGetLifecyclePolicyRequest < Struct.new(
       :identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +165,8 @@ module Aws::OpenSearchServerless
     class BatchGetLifecyclePolicyResponse < Struct.new(
       :lifecycle_policy_details,
       :lifecycle_policy_error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,7 +175,8 @@ module Aws::OpenSearchServerless
     #   @return [Array<String>]
     class BatchGetVpcEndpointInput < Struct.new(
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +189,8 @@ module Aws::OpenSearchServerless
     class BatchGetVpcEndpointOutput < Struct.new(
       :vpc_endpoint_details,
       :vpc_endpoint_error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +204,8 @@ module Aws::OpenSearchServerless
     class CapacityLimits < Struct.new(
       :max_indexing_capacity_in_ocu,
       :max_search_capacity_in_ocu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +271,8 @@ module Aws::OpenSearchServerless
       :fips_endpoints,
       :failure_code,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +294,8 @@ module Aws::OpenSearchServerless
       :name,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +309,8 @@ module Aws::OpenSearchServerless
     class CollectionFilters < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +332,8 @@ module Aws::OpenSearchServerless
       :name,
       :status,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +342,8 @@ module Aws::OpenSearchServerless
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +368,8 @@ module Aws::OpenSearchServerless
       :description,
       :policy,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +378,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::AccessPolicyDetail]
     class CreateAccessPolicyOutput < Struct.new(
       :access_policy_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +425,8 @@ module Aws::OpenSearchServerless
       :standby_replicas,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +455,8 @@ module Aws::OpenSearchServerless
       :tags,
       :standby_replicas,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -443,7 +465,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::CreateCollectionDetail]
     class CreateCollectionOutput < Struct.new(
       :create_collection_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +484,8 @@ module Aws::OpenSearchServerless
       :instance_arn,
       :user_attribute,
       :group_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,12 +502,14 @@ module Aws::OpenSearchServerless
       :id,
       :index_name,
       :index_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateIndexResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +534,8 @@ module Aws::OpenSearchServerless
       :description,
       :policy,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +544,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::LifecyclePolicyDetail]
     class CreateLifecyclePolicyResponse < Struct.new(
       :lifecycle_policy_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +578,8 @@ module Aws::OpenSearchServerless
       :iam_identity_center_options,
       :iam_federation_options,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -559,7 +588,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::SecurityConfigDetail]
     class CreateSecurityConfigOutput < Struct.new(
       :security_config_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +614,8 @@ module Aws::OpenSearchServerless
       :description,
       :policy,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -593,7 +624,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::SecurityPolicyDetail]
     class CreateSecurityPolicyOutput < Struct.new(
       :security_policy_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +643,8 @@ module Aws::OpenSearchServerless
       :id,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +669,8 @@ module Aws::OpenSearchServerless
       :subnet_ids,
       :security_group_ids,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -645,7 +679,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::CreateVpcEndpointDetail]
     class CreateVpcEndpointOutput < Struct.new(
       :create_vpc_endpoint_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,12 +697,14 @@ module Aws::OpenSearchServerless
       :type,
       :name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +722,8 @@ module Aws::OpenSearchServerless
       :id,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,7 +736,8 @@ module Aws::OpenSearchServerless
     class DeleteCollectionInput < Struct.new(
       :id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -707,7 +746,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::DeleteCollectionDetail]
     class DeleteCollectionOutput < Struct.new(
       :delete_collection_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,12 +760,14 @@ module Aws::OpenSearchServerless
     class DeleteIndexRequest < Struct.new(
       :id,
       :index_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIndexResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -742,12 +784,14 @@ module Aws::OpenSearchServerless
       :type,
       :name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLifecyclePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,12 +804,14 @@ module Aws::OpenSearchServerless
     class DeleteSecurityConfigInput < Struct.new(
       :id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSecurityConfigOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,12 +828,14 @@ module Aws::OpenSearchServerless
       :type,
       :name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSecurityPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +853,8 @@ module Aws::OpenSearchServerless
       :id,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -818,7 +867,8 @@ module Aws::OpenSearchServerless
     class DeleteVpcEndpointInput < Struct.new(
       :id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -827,7 +877,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::DeleteVpcEndpointDetail]
     class DeleteVpcEndpointOutput < Struct.new(
       :delete_vpc_endpoint_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +908,8 @@ module Aws::OpenSearchServerless
       :resource_type,
       :retention_period,
       :no_min_retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,7 +931,8 @@ module Aws::OpenSearchServerless
       :resource,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +946,8 @@ module Aws::OpenSearchServerless
     class FipsEndpoints < Struct.new(
       :collection_endpoint,
       :dashboard_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +960,8 @@ module Aws::OpenSearchServerless
     class GetAccessPolicyInput < Struct.new(
       :type,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,12 +970,14 @@ module Aws::OpenSearchServerless
     #   @return [Types::AccessPolicyDetail]
     class GetAccessPolicyOutput < Struct.new(
       :access_policy_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAccountSettingsInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +986,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::AccountSettingsDetail]
     class GetAccountSettingsOutput < Struct.new(
       :account_settings_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +1000,8 @@ module Aws::OpenSearchServerless
     class GetIndexRequest < Struct.new(
       :id,
       :index_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,12 +1010,14 @@ module Aws::OpenSearchServerless
     #   @return [JSON]
     class GetIndexResponse < Struct.new(
       :index_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetPoliciesStatsInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +1042,8 @@ module Aws::OpenSearchServerless
       :security_config_stats,
       :lifecycle_policy_stats,
       :total_policy_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1052,8 @@ module Aws::OpenSearchServerless
     #   @return [String]
     class GetSecurityConfigInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1062,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::SecurityConfigDetail]
     class GetSecurityConfigOutput < Struct.new(
       :security_config_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1012,7 +1076,8 @@ module Aws::OpenSearchServerless
     class GetSecurityPolicyInput < Struct.new(
       :type,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1021,7 +1086,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::SecurityPolicyDetail]
     class GetSecurityPolicyOutput < Struct.new(
       :security_policy_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,7 +1101,8 @@ module Aws::OpenSearchServerless
     class IamFederationConfigOptions < Struct.new(
       :group_attribute,
       :user_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1132,8 @@ module Aws::OpenSearchServerless
       :application_description,
       :user_attribute,
       :group_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1074,7 +1142,8 @@ module Aws::OpenSearchServerless
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1177,8 @@ module Aws::OpenSearchServerless
       :policy,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1130,7 +1200,8 @@ module Aws::OpenSearchServerless
       :name,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1144,7 +1215,8 @@ module Aws::OpenSearchServerless
     class LifecyclePolicyIdentifier < Struct.new(
       :type,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,7 +1230,8 @@ module Aws::OpenSearchServerless
     class LifecyclePolicyResourceIdentifier < Struct.new(
       :type,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1168,7 +1241,8 @@ module Aws::OpenSearchServerless
     #   @return [Integer]
     class LifecyclePolicyStats < Struct.new(
       :retention_policy_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1198,7 +1272,8 @@ module Aws::OpenSearchServerless
       :description,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1219,7 +1294,8 @@ module Aws::OpenSearchServerless
       :resource,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1232,7 +1308,8 @@ module Aws::OpenSearchServerless
     class ListAccessPoliciesOutput < Struct.new(
       :access_policy_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,7 +1326,8 @@ module Aws::OpenSearchServerless
       :collection_filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1262,7 +1340,8 @@ module Aws::OpenSearchServerless
     class ListCollectionsOutput < Struct.new(
       :collection_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,7 +1362,8 @@ module Aws::OpenSearchServerless
       :resources,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1296,7 +1376,8 @@ module Aws::OpenSearchServerless
     class ListLifecyclePoliciesResponse < Struct.new(
       :lifecycle_policy_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1313,7 +1394,8 @@ module Aws::OpenSearchServerless
       :type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1326,7 +1408,8 @@ module Aws::OpenSearchServerless
     class ListSecurityConfigsOutput < Struct.new(
       :security_config_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1347,7 +1430,8 @@ module Aws::OpenSearchServerless
       :resource,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,7 +1444,8 @@ module Aws::OpenSearchServerless
     class ListSecurityPoliciesOutput < Struct.new(
       :security_policy_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1369,7 +1454,8 @@ module Aws::OpenSearchServerless
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1378,7 +1464,8 @@ module Aws::OpenSearchServerless
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1395,7 +1482,8 @@ module Aws::OpenSearchServerless
       :vpc_endpoint_filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1408,7 +1496,8 @@ module Aws::OpenSearchServerless
     class ListVpcEndpointsOutput < Struct.new(
       :vpc_endpoint_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1418,7 +1507,8 @@ module Aws::OpenSearchServerless
     #   @return [String]
     class OcuLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1427,7 +1517,8 @@ module Aws::OpenSearchServerless
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1453,7 +1544,8 @@ module Aws::OpenSearchServerless
       :group_attribute,
       :open_search_serverless_entity_id,
       :session_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1587,8 @@ module Aws::OpenSearchServerless
       :iam_federation_options,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1598,8 @@ module Aws::OpenSearchServerless
     #   @return [Integer]
     class SecurityConfigStats < Struct.new(
       :saml_config_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,7 +1629,8 @@ module Aws::OpenSearchServerless
       :description,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1569,7 +1664,8 @@ module Aws::OpenSearchServerless
       :policy,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1583,7 +1679,8 @@ module Aws::OpenSearchServerless
     class SecurityPolicyStats < Struct.new(
       :encryption_policy_count,
       :network_policy_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1613,7 +1710,8 @@ module Aws::OpenSearchServerless
       :description,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1737,8 @@ module Aws::OpenSearchServerless
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1653,7 +1752,8 @@ module Aws::OpenSearchServerless
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,12 +1766,14 @@ module Aws::OpenSearchServerless
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1684,12 +1786,14 @@ module Aws::OpenSearchServerless
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1822,8 @@ module Aws::OpenSearchServerless
       :description,
       :policy,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1727,7 +1832,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::AccessPolicyDetail]
     class UpdateAccessPolicyOutput < Struct.new(
       :access_policy_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1736,7 +1842,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::CapacityLimits]
     class UpdateAccountSettingsInput < Struct.new(
       :capacity_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1852,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::AccountSettingsDetail]
     class UpdateAccountSettingsOutput < Struct.new(
       :account_settings_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1783,7 +1891,8 @@ module Aws::OpenSearchServerless
       :arn,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1800,7 +1909,8 @@ module Aws::OpenSearchServerless
       :id,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1809,7 +1919,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::UpdateCollectionDetail]
     class UpdateCollectionOutput < Struct.new(
       :update_collection_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1823,7 +1934,8 @@ module Aws::OpenSearchServerless
     class UpdateIamIdentityCenterConfigOptions < Struct.new(
       :user_attribute,
       :group_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,12 +1952,14 @@ module Aws::OpenSearchServerless
       :id,
       :index_name,
       :index_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateIndexResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1874,7 +1988,8 @@ module Aws::OpenSearchServerless
       :description,
       :policy,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1883,7 +1998,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::LifecyclePolicyDetail]
     class UpdateLifecyclePolicyResponse < Struct.new(
       :lifecycle_policy_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1916,7 +2032,8 @@ module Aws::OpenSearchServerless
       :iam_identity_center_options_updates,
       :iam_federation_options,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1925,7 +2042,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::SecurityConfigDetail]
     class UpdateSecurityConfigOutput < Struct.new(
       :security_config_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1954,7 +2072,8 @@ module Aws::OpenSearchServerless
       :description,
       :policy,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1963,7 +2082,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::SecurityPolicyDetail]
     class UpdateSecurityPolicyOutput < Struct.new(
       :security_policy_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1993,7 +2113,8 @@ module Aws::OpenSearchServerless
       :subnet_ids,
       :security_group_ids,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2143,8 @@ module Aws::OpenSearchServerless
       :add_security_group_ids,
       :remove_security_group_ids,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2031,7 +2153,8 @@ module Aws::OpenSearchServerless
     #   @return [Types::UpdateVpcEndpointDetail]
     class UpdateVpcEndpointOutput < Struct.new(
       :update_vpc_endpoint_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2040,7 +2163,8 @@ module Aws::OpenSearchServerless
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2082,7 +2206,8 @@ module Aws::OpenSearchServerless
       :created_date,
       :failure_code,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2225,8 @@ module Aws::OpenSearchServerless
       :id,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2110,7 +2236,8 @@ module Aws::OpenSearchServerless
     #   @return [String]
     class VpcEndpointFilters < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2128,7 +2255,8 @@ module Aws::OpenSearchServerless
       :id,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -1892,7 +1892,6 @@ module Aws::ElasticsearchService
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2015-01-01/es/upgradeDomain", "code" => 200}}
       end)
-
     end
 
     class << self

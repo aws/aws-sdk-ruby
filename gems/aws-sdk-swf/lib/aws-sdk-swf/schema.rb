@@ -1561,7 +1561,6 @@ module Aws::SWF
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnknownResourceFault)
         operation.traits = {}
       end)
-
     end
 
     class << self

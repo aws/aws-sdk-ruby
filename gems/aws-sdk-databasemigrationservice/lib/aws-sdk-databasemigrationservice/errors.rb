@@ -60,7 +60,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::AccessDeniedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -74,7 +74,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::CollectorNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::FailedDependencyFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::InsufficientResourceCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -114,7 +114,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::InvalidCertificateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -127,7 +127,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::InvalidOperationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::InvalidResourceStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -154,7 +154,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::InvalidSubnet] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -168,7 +168,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::KMSAccessDeniedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -181,7 +181,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::KMSDisabledFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -194,7 +194,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::KMSFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -207,7 +207,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::KMSInvalidStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -220,7 +220,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::KMSKeyNotAccessibleFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -234,7 +234,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::KMSNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -247,7 +247,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::KMSThrottlingFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -260,7 +260,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::ReplicationSubnetGroupDoesNotCoverEnoughAZs] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -274,7 +274,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::ResourceAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -293,7 +293,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::ResourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -307,7 +307,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::ResourceQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -321,7 +321,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::S3AccessDeniedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -335,7 +335,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::S3ResourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -348,7 +348,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::SNSInvalidTopicFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -362,7 +362,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::SNSNoAuthorizationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -376,7 +376,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::StorageQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -390,7 +390,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::SubnetAlreadyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -404,7 +404,7 @@ module Aws::DatabaseMigrationService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DatabaseMigrationService::Types::UpgradeDependencyFailureFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>

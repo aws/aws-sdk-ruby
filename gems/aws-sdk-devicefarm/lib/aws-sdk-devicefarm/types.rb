@@ -49,7 +49,8 @@ module Aws::DeviceFarm
       :max_slots,
       :default_job_timeout_minutes,
       :skip_app_resign,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +60,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class ArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -153,7 +155,8 @@ module Aws::DeviceFarm
       :type,
       :extension,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +176,8 @@ module Aws::DeviceFarm
       :frequency,
       :architecture,
       :clock,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +186,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class CannotDeleteException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +221,8 @@ module Aws::DeviceFarm
       :errored,
       :stopped,
       :skipped,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -247,7 +253,8 @@ module Aws::DeviceFarm
       :description,
       :rules,
       :max_devices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -257,7 +264,8 @@ module Aws::DeviceFarm
     #   @return [Types::DevicePool]
     class CreateDevicePoolResult < Struct.new(
       :device_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +295,8 @@ module Aws::DeviceFarm
       :package_cleanup,
       :exclude_app_packages_from_cleanup,
       :reboot_after_use,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +305,8 @@ module Aws::DeviceFarm
     #   @return [Types::InstanceProfile]
     class CreateInstanceProfileResult < Struct.new(
       :instance_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -357,7 +367,8 @@ module Aws::DeviceFarm
       :downlink_jitter_ms,
       :uplink_loss_percent,
       :downlink_loss_percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,7 +378,8 @@ module Aws::DeviceFarm
     #   @return [Types::NetworkProfile]
     class CreateNetworkProfileResult < Struct.new(
       :network_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +398,8 @@ module Aws::DeviceFarm
       :name,
       :default_job_timeout_minutes,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +409,8 @@ module Aws::DeviceFarm
     #   @return [Types::Project]
     class CreateProjectResult < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +429,8 @@ module Aws::DeviceFarm
       :billing_method,
       :vpce_configuration_arns,
       :device_proxy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +518,8 @@ module Aws::DeviceFarm
       :configuration,
       :interaction_mode,
       :skip_app_resign,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +531,8 @@ module Aws::DeviceFarm
     #   @return [Types::RemoteAccessSession]
     class CreateRemoteAccessSessionResult < Struct.new(
       :remote_access_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +549,8 @@ module Aws::DeviceFarm
       :name,
       :description,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -541,7 +559,8 @@ module Aws::DeviceFarm
     #   @return [Types::TestGridProject]
     class CreateTestGridProjectResult < Struct.new(
       :test_grid_project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +574,8 @@ module Aws::DeviceFarm
     class CreateTestGridUrlRequest < Struct.new(
       :project_arn,
       :expires_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +589,8 @@ module Aws::DeviceFarm
     class CreateTestGridUrlResult < Struct.new(
       :url,
       :expires,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +707,8 @@ module Aws::DeviceFarm
       :name,
       :type,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -696,7 +718,8 @@ module Aws::DeviceFarm
     #   @return [Types::Upload]
     class CreateUploadResult < Struct.new(
       :upload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +742,8 @@ module Aws::DeviceFarm
       :vpce_service_name,
       :service_dns_name,
       :vpce_configuration_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +752,8 @@ module Aws::DeviceFarm
     #   @return [Types::VPCEConfiguration]
     class CreateVPCEConfigurationResult < Struct.new(
       :vpce_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -754,7 +779,8 @@ module Aws::DeviceFarm
       :ios_paths,
       :android_paths,
       :device_host_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -764,13 +790,15 @@ module Aws::DeviceFarm
     #   @return [String]
     class DeleteDevicePoolRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a delete device pool request.</p>
     class DeleteDevicePoolResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,12 +808,14 @@ module Aws::DeviceFarm
     #   @return [String]
     class DeleteInstanceProfileRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteInstanceProfileResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,12 +824,14 @@ module Aws::DeviceFarm
     #   @return [String]
     class DeleteNetworkProfileRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteNetworkProfileResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,13 +841,15 @@ module Aws::DeviceFarm
     #   @return [String]
     class DeleteProjectRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a delete project request.</p>
     class DeleteProjectResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -826,14 +860,16 @@ module Aws::DeviceFarm
     #   @return [String]
     class DeleteRemoteAccessSessionRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the server when a request is made to delete the remote access
     #             session.</p>
     class DeleteRemoteAccessSessionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,13 +879,15 @@ module Aws::DeviceFarm
     #   @return [String]
     class DeleteRunRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a delete run request.</p>
     class DeleteRunResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,12 +896,14 @@ module Aws::DeviceFarm
     #   @return [String]
     class DeleteTestGridProjectRequest < Struct.new(
       :project_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTestGridProjectResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,13 +913,15 @@ module Aws::DeviceFarm
     #   @return [String]
     class DeleteUploadRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a delete upload request.</p>
     class DeleteUploadResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,12 +931,14 @@ module Aws::DeviceFarm
     #   @return [String]
     class DeleteVPCEConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteVPCEConfigurationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1006,7 +1050,8 @@ module Aws::DeviceFarm
       :fleet_name,
       :instances,
       :availability,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1192,8 @@ module Aws::DeviceFarm
       :attribute,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1177,7 +1223,8 @@ module Aws::DeviceFarm
       :status,
       :udid,
       :instance_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1246,8 @@ module Aws::DeviceFarm
       :total,
       :metered,
       :unmetered,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,7 +1293,8 @@ module Aws::DeviceFarm
       :type,
       :rules,
       :max_devices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1312,8 @@ module Aws::DeviceFarm
       :device,
       :compatible,
       :incompatibility_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1327,8 @@ module Aws::DeviceFarm
     class DeviceProxy < Struct.new(
       :host,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1418,7 +1469,8 @@ module Aws::DeviceFarm
     class DeviceSelectionConfiguration < Struct.new(
       :filters,
       :max_devices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1438,7 +1490,8 @@ module Aws::DeviceFarm
       :filters,
       :matched_devices_count,
       :max_devices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1468,13 +1521,15 @@ module Aws::DeviceFarm
       :app_packages_cleanup,
       :video_capture,
       :skip_app_resign,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request sent to retrieve the account settings.</p>
     class GetAccountSettingsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1485,7 +1540,8 @@ module Aws::DeviceFarm
     #   @return [Types::AccountSettings]
     class GetAccountSettingsResult < Struct.new(
       :account_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1551,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetDeviceInstanceRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,7 +1561,8 @@ module Aws::DeviceFarm
     #   @return [Types::DeviceInstance]
     class GetDeviceInstanceResult < Struct.new(
       :device_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1580,7 +1638,8 @@ module Aws::DeviceFarm
       :test,
       :configuration,
       :project_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1594,7 +1653,8 @@ module Aws::DeviceFarm
     class GetDevicePoolCompatibilityResult < Struct.new(
       :compatible_devices,
       :incompatible_devices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1604,7 +1664,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetDevicePoolRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1614,7 +1675,8 @@ module Aws::DeviceFarm
     #   @return [Types::DevicePool]
     class GetDevicePoolResult < Struct.new(
       :device_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1624,7 +1686,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetDeviceRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1634,7 +1697,8 @@ module Aws::DeviceFarm
     #   @return [Types::Device]
     class GetDeviceResult < Struct.new(
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1643,7 +1707,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetInstanceProfileRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1652,7 +1717,8 @@ module Aws::DeviceFarm
     #   @return [Types::InstanceProfile]
     class GetInstanceProfileResult < Struct.new(
       :instance_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1728,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetJobRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1672,7 +1739,8 @@ module Aws::DeviceFarm
     #   @return [Types::Job]
     class GetJobResult < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1681,7 +1749,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetNetworkProfileRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1690,7 +1759,8 @@ module Aws::DeviceFarm
     #   @return [Types::NetworkProfile]
     class GetNetworkProfileResult < Struct.new(
       :network_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1702,7 +1772,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetOfferingStatusRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1721,7 +1792,8 @@ module Aws::DeviceFarm
       :current,
       :next_period,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1731,7 +1803,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetProjectRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1741,7 +1814,8 @@ module Aws::DeviceFarm
     #   @return [Types::Project]
     class GetProjectResult < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1753,7 +1827,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetRemoteAccessSessionRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1765,7 +1840,8 @@ module Aws::DeviceFarm
     #   @return [Types::RemoteAccessSession]
     class GetRemoteAccessSessionResult < Struct.new(
       :remote_access_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1775,7 +1851,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetRunRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1785,7 +1862,8 @@ module Aws::DeviceFarm
     #   @return [Types::Run]
     class GetRunResult < Struct.new(
       :run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1795,7 +1873,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetSuiteRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,7 +1884,8 @@ module Aws::DeviceFarm
     #   @return [Types::Suite]
     class GetSuiteResult < Struct.new(
       :suite,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1894,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetTestGridProjectRequest < Struct.new(
       :project_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1823,7 +1904,8 @@ module Aws::DeviceFarm
     #   @return [Types::TestGridProject]
     class GetTestGridProjectResult < Struct.new(
       :test_grid_project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,7 +1922,8 @@ module Aws::DeviceFarm
       :project_arn,
       :session_id,
       :session_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1932,8 @@ module Aws::DeviceFarm
     #   @return [Types::TestGridSession]
     class GetTestGridSessionResult < Struct.new(
       :test_grid_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1859,7 +1943,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetTestRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1954,8 @@ module Aws::DeviceFarm
     #   @return [Types::Test]
     class GetTestResult < Struct.new(
       :test,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1879,7 +1965,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetUploadRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1890,7 +1977,8 @@ module Aws::DeviceFarm
     #   @return [Types::Upload]
     class GetUploadResult < Struct.new(
       :upload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1900,7 +1988,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class GetVPCEConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1909,7 +1998,8 @@ module Aws::DeviceFarm
     #   @return [Types::VPCEConfiguration]
     class GetVPCEConfigurationResult < Struct.new(
       :vpce_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1919,7 +2009,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class IdempotencyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1954,7 +2045,8 @@ module Aws::DeviceFarm
     class IncompatibilityMessage < Struct.new(
       :message,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1970,7 +2062,8 @@ module Aws::DeviceFarm
     class InstallToRemoteAccessSessionRequest < Struct.new(
       :remote_access_session_arn,
       :app_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1981,7 +2074,8 @@ module Aws::DeviceFarm
     #   @return [Types::Upload]
     class InstallToRemoteAccessSessionResult < Struct.new(
       :app_upload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2016,7 +2110,8 @@ module Aws::DeviceFarm
       :reboot_after_use,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2026,7 +2121,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2036,7 +2132,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class InvalidOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2201,7 +2298,8 @@ module Aws::DeviceFarm
       :device_minutes,
       :video_endpoint,
       :video_capture,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2211,7 +2309,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2341,8 @@ module Aws::DeviceFarm
       :arn,
       :type,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2258,7 +2358,8 @@ module Aws::DeviceFarm
     class ListArtifactsResult < Struct.new(
       :artifacts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2272,7 +2373,8 @@ module Aws::DeviceFarm
     class ListDeviceInstancesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2286,7 +2388,8 @@ module Aws::DeviceFarm
     class ListDeviceInstancesResult < Struct.new(
       :device_instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2316,7 +2419,8 @@ module Aws::DeviceFarm
       :arn,
       :type,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2332,7 +2436,8 @@ module Aws::DeviceFarm
     class ListDevicePoolsResult < Struct.new(
       :device_pools,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2441,7 +2546,8 @@ module Aws::DeviceFarm
       :arn,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2457,7 +2563,8 @@ module Aws::DeviceFarm
     class ListDevicesResult < Struct.new(
       :devices,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2471,7 +2578,8 @@ module Aws::DeviceFarm
     class ListInstanceProfilesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2485,7 +2593,8 @@ module Aws::DeviceFarm
     class ListInstanceProfilesResult < Struct.new(
       :instance_profiles,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2500,7 +2609,8 @@ module Aws::DeviceFarm
     class ListJobsRequest < Struct.new(
       :arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2516,7 +2626,8 @@ module Aws::DeviceFarm
     class ListJobsResult < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2535,7 +2646,8 @@ module Aws::DeviceFarm
       :arn,
       :type,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2549,7 +2661,8 @@ module Aws::DeviceFarm
     class ListNetworkProfilesResult < Struct.new(
       :network_profiles,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2559,7 +2672,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class ListOfferingPromotionsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2573,7 +2687,8 @@ module Aws::DeviceFarm
     class ListOfferingPromotionsResult < Struct.new(
       :offering_promotions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2584,7 +2699,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class ListOfferingTransactionsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2600,7 +2716,8 @@ module Aws::DeviceFarm
     class ListOfferingTransactionsResult < Struct.new(
       :offering_transactions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2611,7 +2728,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class ListOfferingsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2626,7 +2744,8 @@ module Aws::DeviceFarm
     class ListOfferingsResult < Struct.new(
       :offerings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2643,7 +2762,8 @@ module Aws::DeviceFarm
     class ListProjectsRequest < Struct.new(
       :arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2659,7 +2779,8 @@ module Aws::DeviceFarm
     class ListProjectsResult < Struct.new(
       :projects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2676,7 +2797,8 @@ module Aws::DeviceFarm
     class ListRemoteAccessSessionsRequest < Struct.new(
       :arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2693,7 +2815,8 @@ module Aws::DeviceFarm
     class ListRemoteAccessSessionsResult < Struct.new(
       :remote_access_sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2709,7 +2832,8 @@ module Aws::DeviceFarm
     class ListRunsRequest < Struct.new(
       :arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2725,7 +2849,8 @@ module Aws::DeviceFarm
     class ListRunsResult < Struct.new(
       :runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2740,7 +2865,8 @@ module Aws::DeviceFarm
     class ListSamplesRequest < Struct.new(
       :arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2756,7 +2882,8 @@ module Aws::DeviceFarm
     class ListSamplesResult < Struct.new(
       :samples,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2771,7 +2898,8 @@ module Aws::DeviceFarm
     class ListSuitesRequest < Struct.new(
       :arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2787,7 +2915,8 @@ module Aws::DeviceFarm
     class ListSuitesResult < Struct.new(
       :suites,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2800,7 +2929,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2810,7 +2940,8 @@ module Aws::DeviceFarm
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2823,7 +2954,8 @@ module Aws::DeviceFarm
     class ListTestGridProjectsRequest < Struct.new(
       :max_result,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2837,7 +2969,8 @@ module Aws::DeviceFarm
     class ListTestGridProjectsResult < Struct.new(
       :test_grid_projects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2854,7 +2987,8 @@ module Aws::DeviceFarm
       :session_arn,
       :max_result,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2867,7 +3001,8 @@ module Aws::DeviceFarm
     class ListTestGridSessionActionsResult < Struct.new(
       :actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2888,7 +3023,8 @@ module Aws::DeviceFarm
       :type,
       :max_result,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2901,7 +3037,8 @@ module Aws::DeviceFarm
     class ListTestGridSessionArtifactsResult < Struct.new(
       :artifacts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2938,7 +3075,8 @@ module Aws::DeviceFarm
       :end_time_before,
       :max_result,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2951,7 +3089,8 @@ module Aws::DeviceFarm
     class ListTestGridSessionsResult < Struct.new(
       :test_grid_sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2966,7 +3105,8 @@ module Aws::DeviceFarm
     class ListTestsRequest < Struct.new(
       :arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2982,7 +3122,8 @@ module Aws::DeviceFarm
     class ListTestsResult < Struct.new(
       :tests,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2997,7 +3138,8 @@ module Aws::DeviceFarm
     class ListUniqueProblemsRequest < Struct.new(
       :arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3037,7 +3179,8 @@ module Aws::DeviceFarm
     class ListUniqueProblemsResult < Struct.new(
       :unique_problems,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3147,7 +3290,8 @@ module Aws::DeviceFarm
       :arn,
       :type,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3163,7 +3307,8 @@ module Aws::DeviceFarm
     class ListUploadsResult < Struct.new(
       :uploads,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3177,7 +3322,8 @@ module Aws::DeviceFarm
     class ListVPCEConfigurationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3192,7 +3338,8 @@ module Aws::DeviceFarm
     class ListVPCEConfigurationsResult < Struct.new(
       :vpce_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3208,7 +3355,8 @@ module Aws::DeviceFarm
     class Location < Struct.new(
       :latitude,
       :longitude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3222,7 +3370,8 @@ module Aws::DeviceFarm
     class MonetaryAmount < Struct.new(
       :amount,
       :currency_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3283,7 +3432,8 @@ module Aws::DeviceFarm
       :downlink_jitter_ms,
       :uplink_loss_percent,
       :downlink_loss_percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3300,7 +3450,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class NotEligibleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3310,7 +3461,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3336,7 +3488,8 @@ module Aws::DeviceFarm
       :type,
       :platform,
       :recurring_charges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3350,7 +3503,8 @@ module Aws::DeviceFarm
     class OfferingPromotion < Struct.new(
       :id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3372,7 +3526,8 @@ module Aws::DeviceFarm
       :offering,
       :quantity,
       :effective_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3398,7 +3553,8 @@ module Aws::DeviceFarm
       :offering_promotion_id,
       :created_on,
       :cost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3456,7 +3612,8 @@ module Aws::DeviceFarm
       :device,
       :result,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3470,7 +3627,8 @@ module Aws::DeviceFarm
     class ProblemDetail < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3498,7 +3656,8 @@ module Aws::DeviceFarm
       :default_job_timeout_minutes,
       :created,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3516,7 +3675,8 @@ module Aws::DeviceFarm
       :offering_id,
       :quantity,
       :offering_promotion_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3526,7 +3686,8 @@ module Aws::DeviceFarm
     #   @return [Types::OfferingTransaction]
     class PurchaseOfferingResult < Struct.new(
       :offering_transaction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3549,7 +3710,8 @@ module Aws::DeviceFarm
       :bluetooth,
       :nfc,
       :gps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3563,7 +3725,8 @@ module Aws::DeviceFarm
     class RecurringCharge < Struct.new(
       :cost,
       :frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3748,7 +3911,8 @@ module Aws::DeviceFarm
       :skip_app_resign,
       :vpc_config,
       :device_proxy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3762,7 +3926,8 @@ module Aws::DeviceFarm
     class RenewOfferingRequest < Struct.new(
       :offering_id,
       :quantity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3772,7 +3937,8 @@ module Aws::DeviceFarm
     #   @return [Types::OfferingTransaction]
     class RenewOfferingResult < Struct.new(
       :offering_transaction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3787,7 +3953,8 @@ module Aws::DeviceFarm
     class Resolution < Struct.new(
       :width,
       :height,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3905,7 +4072,8 @@ module Aws::DeviceFarm
       :attribute,
       :operator,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4166,7 +4334,8 @@ module Aws::DeviceFarm
       :test_spec_arn,
       :device_selection_result,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4244,7 +4413,8 @@ module Aws::DeviceFarm
       :arn,
       :type,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4299,7 +4469,8 @@ module Aws::DeviceFarm
       :radios,
       :auxiliary_apps,
       :billing_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4346,7 +4517,8 @@ module Aws::DeviceFarm
       :test,
       :configuration,
       :execution_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4356,7 +4528,8 @@ module Aws::DeviceFarm
     #   @return [Types::Run]
     class ScheduleRunResult < Struct.new(
       :run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4522,7 +4695,8 @@ module Aws::DeviceFarm
       :test_spec_arn,
       :filter,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4532,7 +4706,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class ServiceAccountException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4541,7 +4716,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class StopJobRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4550,7 +4726,8 @@ module Aws::DeviceFarm
     #   @return [Types::Job]
     class StopJobResult < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4560,7 +4737,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class StopRemoteAccessSessionRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4572,7 +4750,8 @@ module Aws::DeviceFarm
     #   @return [Types::RemoteAccessSession]
     class StopRemoteAccessSessionResult < Struct.new(
       :remote_access_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4582,7 +4761,8 @@ module Aws::DeviceFarm
     #   @return [String]
     class StopRunRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4592,7 +4772,8 @@ module Aws::DeviceFarm
     #   @return [Types::Run]
     class StopRunResult < Struct.new(
       :run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4742,7 +4923,8 @@ module Aws::DeviceFarm
       :counters,
       :message,
       :device_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4760,7 +4942,8 @@ module Aws::DeviceFarm
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4772,7 +4955,8 @@ module Aws::DeviceFarm
     class TagOperationException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4785,7 +4969,8 @@ module Aws::DeviceFarm
     class TagPolicyException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4803,12 +4988,14 @@ module Aws::DeviceFarm
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4957,7 +5144,8 @@ module Aws::DeviceFarm
       :counters,
       :message,
       :device_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4983,7 +5171,8 @@ module Aws::DeviceFarm
       :description,
       :vpc_config,
       :created,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5014,7 +5203,8 @@ module Aws::DeviceFarm
       :ended,
       :billing_minutes,
       :selenium_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5040,7 +5230,8 @@ module Aws::DeviceFarm
       :duration,
       :status_code,
       :request_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5062,7 +5253,8 @@ module Aws::DeviceFarm
       :filename,
       :type,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5080,7 +5272,8 @@ module Aws::DeviceFarm
       :security_group_ids,
       :subnet_ids,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5093,7 +5286,8 @@ module Aws::DeviceFarm
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5108,7 +5302,8 @@ module Aws::DeviceFarm
     class TrialMinutes < Struct.new(
       :total,
       :remaining,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5122,7 +5317,8 @@ module Aws::DeviceFarm
     class UniqueProblem < Struct.new(
       :message,
       :problems,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5139,12 +5335,14 @@ module Aws::DeviceFarm
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5161,7 +5359,8 @@ module Aws::DeviceFarm
       :arn,
       :profile_arn,
       :labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5170,7 +5369,8 @@ module Aws::DeviceFarm
     #   @return [Types::DeviceInstance]
     class UpdateDeviceInstanceResult < Struct.new(
       :device_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5213,7 +5413,8 @@ module Aws::DeviceFarm
       :rules,
       :max_devices,
       :clear_max_devices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5223,7 +5424,8 @@ module Aws::DeviceFarm
     #   @return [Types::DevicePool]
     class UpdateDevicePoolResult < Struct.new(
       :device_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5257,7 +5459,8 @@ module Aws::DeviceFarm
       :package_cleanup,
       :exclude_app_packages_from_cleanup,
       :reboot_after_use,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5266,7 +5469,8 @@ module Aws::DeviceFarm
     #   @return [Types::InstanceProfile]
     class UpdateInstanceProfileResult < Struct.new(
       :instance_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5329,7 +5533,8 @@ module Aws::DeviceFarm
       :downlink_jitter_ms,
       :uplink_loss_percent,
       :downlink_loss_percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5338,7 +5543,8 @@ module Aws::DeviceFarm
     #   @return [Types::NetworkProfile]
     class UpdateNetworkProfileResult < Struct.new(
       :network_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5360,7 +5566,8 @@ module Aws::DeviceFarm
       :name,
       :default_job_timeout_minutes,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5370,7 +5577,8 @@ module Aws::DeviceFarm
     #   @return [Types::Project]
     class UpdateProjectResult < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5391,7 +5599,8 @@ module Aws::DeviceFarm
       :name,
       :description,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5400,7 +5609,8 @@ module Aws::DeviceFarm
     #   @return [Types::TestGridProject]
     class UpdateTestGridProjectResult < Struct.new(
       :test_grid_project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5422,7 +5632,8 @@ module Aws::DeviceFarm
       :name,
       :content_type,
       :edit_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5431,7 +5642,8 @@ module Aws::DeviceFarm
     #   @return [Types::Upload]
     class UpdateUploadResult < Struct.new(
       :upload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5459,7 +5671,8 @@ module Aws::DeviceFarm
       :vpce_service_name,
       :service_dns_name,
       :vpce_configuration_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5468,7 +5681,8 @@ module Aws::DeviceFarm
     #   @return [Types::VPCEConfiguration]
     class UpdateVPCEConfigurationResult < Struct.new(
       :vpce_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5630,7 +5844,8 @@ module Aws::DeviceFarm
       :content_type,
       :message,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5658,7 +5873,8 @@ module Aws::DeviceFarm
       :vpce_service_name,
       :service_dns_name,
       :vpce_configuration_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5676,7 +5892,8 @@ module Aws::DeviceFarm
       :security_group_ids,
       :subnet_ids,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -39,7 +39,7 @@ module Aws::MigrationHubConfig
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubConfig::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::MigrationHubConfig
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubConfig::Types::DryRunOperation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::MigrationHubConfig
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubConfig::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::MigrationHubConfig
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubConfig::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::MigrationHubConfig
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubConfig::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::MigrationHubConfig
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubConfig::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

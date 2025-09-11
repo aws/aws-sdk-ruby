@@ -17,7 +17,8 @@ module Aws::EMRcontainers
     class AuthorizationConfiguration < Struct.new(
       :lake_formation_configuration,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +31,8 @@ module Aws::EMRcontainers
     class CancelJobRunRequest < Struct.new(
       :id,
       :virtual_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +45,8 @@ module Aws::EMRcontainers
     class CancelJobRunResponse < Struct.new(
       :id,
       :virtual_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +60,8 @@ module Aws::EMRcontainers
     class Certificate < Struct.new(
       :certificate_arn,
       :certificate_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +76,8 @@ module Aws::EMRcontainers
     class CloudWatchMonitoringConfiguration < Struct.new(
       :log_group_name,
       :log_stream_name_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +99,8 @@ module Aws::EMRcontainers
       :classification,
       :properties,
       :configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +114,8 @@ module Aws::EMRcontainers
     class ConfigurationOverrides < Struct.new(
       :application_configuration,
       :monitoring_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -119,7 +126,8 @@ module Aws::EMRcontainers
     class ContainerInfo < Struct.new(
       :eks_info,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EksInfo < ContainerInfo; end
@@ -136,7 +144,8 @@ module Aws::EMRcontainers
     class ContainerLogRotationConfiguration < Struct.new(
       :rotation_size,
       :max_files_to_keep,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +164,8 @@ module Aws::EMRcontainers
       :type,
       :id,
       :info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +190,8 @@ module Aws::EMRcontainers
       :job_template_data,
       :tags,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +212,8 @@ module Aws::EMRcontainers
       :name,
       :arn,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +257,8 @@ module Aws::EMRcontainers
       :configuration_overrides,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -266,7 +279,8 @@ module Aws::EMRcontainers
       :name,
       :arn,
       :virtual_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +301,8 @@ module Aws::EMRcontainers
       :name,
       :security_configuration_data,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +319,8 @@ module Aws::EMRcontainers
       :id,
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -329,7 +345,8 @@ module Aws::EMRcontainers
       :client_token,
       :tags,
       :security_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +363,8 @@ module Aws::EMRcontainers
       :id,
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -357,7 +375,8 @@ module Aws::EMRcontainers
     class Credentials < Struct.new(
       :token,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Token < Credentials; end
@@ -369,7 +388,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class DeleteJobTemplateRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +398,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class DeleteJobTemplateResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -391,7 +412,8 @@ module Aws::EMRcontainers
     class DeleteManagedEndpointRequest < Struct.new(
       :id,
       :virtual_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -404,7 +426,8 @@ module Aws::EMRcontainers
     class DeleteManagedEndpointResponse < Struct.new(
       :id,
       :virtual_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +436,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class DeleteVirtualClusterRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +446,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class DeleteVirtualClusterResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +460,8 @@ module Aws::EMRcontainers
     class DescribeJobRunRequest < Struct.new(
       :id,
       :virtual_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +470,8 @@ module Aws::EMRcontainers
     #   @return [Types::JobRun]
     class DescribeJobRunResponse < Struct.new(
       :job_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +480,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class DescribeJobTemplateRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +490,8 @@ module Aws::EMRcontainers
     #   @return [Types::JobTemplate]
     class DescribeJobTemplateResponse < Struct.new(
       :job_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +504,8 @@ module Aws::EMRcontainers
     class DescribeManagedEndpointRequest < Struct.new(
       :id,
       :virtual_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +514,8 @@ module Aws::EMRcontainers
     #   @return [Types::Endpoint]
     class DescribeManagedEndpointResponse < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +524,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class DescribeSecurityConfigurationRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -502,7 +534,8 @@ module Aws::EMRcontainers
     #   @return [Types::SecurityConfiguration]
     class DescribeSecurityConfigurationResponse < Struct.new(
       :security_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -511,7 +544,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class DescribeVirtualClusterRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +554,8 @@ module Aws::EMRcontainers
     #   @return [Types::VirtualCluster]
     class DescribeVirtualClusterResponse < Struct.new(
       :virtual_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +564,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class EKSRequestThrottledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +575,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class EksInfo < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -549,7 +586,8 @@ module Aws::EMRcontainers
     #   @return [Types::InTransitEncryptionConfiguration]
     class EncryptionConfiguration < Struct.new(
       :in_transit_encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +670,8 @@ module Aws::EMRcontainers
       :state_details,
       :failure_reason,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -667,7 +706,8 @@ module Aws::EMRcontainers
       :duration_in_seconds,
       :log_context,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +724,8 @@ module Aws::EMRcontainers
       :id,
       :credentials,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +735,8 @@ module Aws::EMRcontainers
     #   @return [Types::TLSCertificateConfiguration]
     class InTransitEncryptionConfiguration < Struct.new(
       :tls_certificate_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +745,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +761,8 @@ module Aws::EMRcontainers
     class JobDriver < Struct.new(
       :spark_submit_job_driver,
       :spark_sql_job_driver,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,7 +841,8 @@ module Aws::EMRcontainers
       :tags,
       :retry_policy_configuration,
       :retry_policy_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +887,8 @@ module Aws::EMRcontainers
       :job_template_data,
       :kms_key_arn,
       :decryption_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,7 +920,8 @@ module Aws::EMRcontainers
       :job_driver,
       :parameter_configuration,
       :job_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,7 +942,8 @@ module Aws::EMRcontainers
       :authorized_session_tag_value,
       :secure_namespace_info,
       :query_engine_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +976,8 @@ module Aws::EMRcontainers
       :states,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -941,7 +990,8 @@ module Aws::EMRcontainers
     class ListJobRunsResponse < Struct.new(
       :job_runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1012,8 @@ module Aws::EMRcontainers
       :created_before,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1026,8 @@ module Aws::EMRcontainers
     class ListJobTemplatesResponse < Struct.new(
       :templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1008,7 +1060,8 @@ module Aws::EMRcontainers
       :states,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1021,7 +1074,8 @@ module Aws::EMRcontainers
     class ListManagedEndpointsResponse < Struct.new(
       :endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1096,8 @@ module Aws::EMRcontainers
       :created_before,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1055,7 +1110,8 @@ module Aws::EMRcontainers
     class ListSecurityConfigurationsResponse < Struct.new(
       :security_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1120,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1130,8 @@ module Aws::EMRcontainers
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1113,7 +1171,8 @@ module Aws::EMRcontainers
       :max_results,
       :next_token,
       :eks_access_entry_integrated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1126,7 +1185,8 @@ module Aws::EMRcontainers
     class ListVirtualClustersResponse < Struct.new(
       :virtual_clusters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1200,8 @@ module Aws::EMRcontainers
     class ManagedLogs < Struct.new(
       :allow_aws_to_retain_logs,
       :encryption_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1166,7 +1227,8 @@ module Aws::EMRcontainers
       :cloud_watch_monitoring_configuration,
       :s3_monitoring_configuration,
       :container_log_rotation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1182,7 +1244,8 @@ module Aws::EMRcontainers
     class ParametricCloudWatchMonitoringConfiguration < Struct.new(
       :log_group_name,
       :log_stream_name_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1197,7 +1260,8 @@ module Aws::EMRcontainers
     class ParametricConfigurationOverrides < Struct.new(
       :application_configuration,
       :monitoring_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1216,7 +1280,8 @@ module Aws::EMRcontainers
       :persistent_app_ui,
       :cloud_watch_monitoring_configuration,
       :s3_monitoring_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1293,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class ParametricS3MonitoringConfiguration < Struct.new(
       :log_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1237,7 +1303,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class RequestThrottledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1246,7 +1313,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1256,7 +1324,8 @@ module Aws::EMRcontainers
     #   @return [Integer]
     class RetryPolicyConfiguration < Struct.new(
       :max_attempts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1266,7 +1335,8 @@ module Aws::EMRcontainers
     #   @return [Integer]
     class RetryPolicyExecution < Struct.new(
       :current_attempt_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1347,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class S3MonitoringConfiguration < Struct.new(
       :log_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1362,8 @@ module Aws::EMRcontainers
     class SecureNamespaceInfo < Struct.new(
       :cluster_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1328,7 +1400,8 @@ module Aws::EMRcontainers
       :created_by,
       :security_configuration_data,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1338,7 +1411,8 @@ module Aws::EMRcontainers
     #   @return [Types::AuthorizationConfiguration]
     class SecurityConfigurationData < Struct.new(
       :authorization_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1352,7 +1426,8 @@ module Aws::EMRcontainers
     class SparkSqlJobDriver < Struct.new(
       :entry_point,
       :spark_sql_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1370,7 +1445,8 @@ module Aws::EMRcontainers
       :entry_point,
       :entry_point_arguments,
       :spark_submit_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1419,7 +1495,8 @@ module Aws::EMRcontainers
       :job_template_id,
       :job_template_parameters,
       :retry_policy_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1517,8 @@ module Aws::EMRcontainers
       :name,
       :arn,
       :virtual_cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1461,7 +1539,8 @@ module Aws::EMRcontainers
       :certificate_provider_type,
       :public_certificate_secret_arn,
       :private_certificate_secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,12 +1553,14 @@ module Aws::EMRcontainers
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,7 +1574,8 @@ module Aws::EMRcontainers
     class TemplateParameterConfiguration < Struct.new(
       :type,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1506,12 +1588,14 @@ module Aws::EMRcontainers
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1520,7 +1604,8 @@ module Aws::EMRcontainers
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1563,7 +1648,8 @@ module Aws::EMRcontainers
       :created_at,
       :tags,
       :security_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

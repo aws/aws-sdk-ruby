@@ -11,7 +11,8 @@ module Aws::ApplicationSignals
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::ApplicationSignals
     class BatchGetServiceLevelObjectiveBudgetReportInput < Struct.new(
       :timestamp,
       :slo_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42,7 +44,8 @@ module Aws::ApplicationSignals
       :timestamp,
       :reports,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +63,8 @@ module Aws::ApplicationSignals
       :slo_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +81,8 @@ module Aws::ApplicationSignals
       :slo_ids,
       :add_exclusion_windows,
       :remove_exclusion_windows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +95,8 @@ module Aws::ApplicationSignals
     class BatchUpdateExclusionWindowsOutput < Struct.new(
       :slo_ids,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +113,8 @@ module Aws::ApplicationSignals
     #   @return [Integer]
     class BurnRateConfiguration < Struct.new(
       :look_back_window_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +139,8 @@ module Aws::ApplicationSignals
       :start_time,
       :duration_unit,
       :duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +149,8 @@ module Aws::ApplicationSignals
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +191,8 @@ module Aws::ApplicationSignals
       :goal,
       :tags,
       :burn_rate_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +201,8 @@ module Aws::ApplicationSignals
     #   @return [Types::ServiceLevelObjective]
     class CreateServiceLevelObjectiveOutput < Struct.new(
       :slo,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,12 +211,14 @@ module Aws::ApplicationSignals
     #   @return [String]
     class DeleteServiceLevelObjectiveInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceLevelObjectiveOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +261,8 @@ module Aws::ApplicationSignals
     class DependencyConfig < Struct.new(
       :dependency_key_attributes,
       :dependency_operation_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +286,8 @@ module Aws::ApplicationSignals
     class Dimension < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +309,8 @@ module Aws::ApplicationSignals
       :start_time,
       :recurrence_rule,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +362,8 @@ module Aws::ApplicationSignals
       :start_time,
       :end_time,
       :key_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -357,7 +374,8 @@ module Aws::ApplicationSignals
     #   @return [String]
     class GetServiceLevelObjectiveInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +384,8 @@ module Aws::ApplicationSignals
     #   @return [Types::ServiceLevelObjective]
     class GetServiceLevelObjectiveOutput < Struct.new(
       :slo,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +430,8 @@ module Aws::ApplicationSignals
       :start_time,
       :end_time,
       :log_group_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +460,8 @@ module Aws::ApplicationSignals
       :interval,
       :attainment_goal,
       :warning_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +476,8 @@ module Aws::ApplicationSignals
       :rolling_interval,
       :calendar_interval,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RollingInterval < Interval; end
@@ -520,7 +542,8 @@ module Aws::ApplicationSignals
       :key_attributes,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +573,8 @@ module Aws::ApplicationSignals
       :end_time,
       :service_dependencies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +635,8 @@ module Aws::ApplicationSignals
       :key_attributes,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +666,8 @@ module Aws::ApplicationSignals
       :end_time,
       :service_dependents,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +688,8 @@ module Aws::ApplicationSignals
       :id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +704,8 @@ module Aws::ApplicationSignals
     class ListServiceLevelObjectiveExclusionWindowsOutput < Struct.new(
       :exclusion_windows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +787,8 @@ module Aws::ApplicationSignals
       :metric_source_types,
       :include_linked_accounts,
       :slo_owner_aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +802,8 @@ module Aws::ApplicationSignals
     class ListServiceLevelObjectivesOutput < Struct.new(
       :slo_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +864,8 @@ module Aws::ApplicationSignals
       :key_attributes,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +895,8 @@ module Aws::ApplicationSignals
       :end_time,
       :service_operations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +940,8 @@ module Aws::ApplicationSignals
       :next_token,
       :include_linked_accounts,
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +973,8 @@ module Aws::ApplicationSignals
       :end_time,
       :service_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +990,8 @@ module Aws::ApplicationSignals
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -965,7 +1000,8 @@ module Aws::ApplicationSignals
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1022,8 @@ module Aws::ApplicationSignals
       :namespace,
       :metric_name,
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1105,8 @@ module Aws::ApplicationSignals
       :return_data,
       :period,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1104,7 +1142,8 @@ module Aws::ApplicationSignals
       :dimensions,
       :metric_name,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1132,7 +1171,8 @@ module Aws::ApplicationSignals
       :period,
       :stat,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1194,8 @@ module Aws::ApplicationSignals
       :good_count_metric,
       :bad_count_metric,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class GoodCountMetric < MonitoredRequestCountMetricDataQueries; end
@@ -1168,7 +1209,8 @@ module Aws::ApplicationSignals
     #   @return [String]
     class RecurrenceRule < Struct.new(
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1188,7 +1230,8 @@ module Aws::ApplicationSignals
       :request_based_sli_metric,
       :metric_threshold,
       :comparison_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1207,7 +1250,8 @@ module Aws::ApplicationSignals
       :request_based_sli_metric_config,
       :metric_threshold,
       :comparison_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1317,8 @@ module Aws::ApplicationSignals
       :total_request_count_metric,
       :monitored_request_count_metric,
       :dependency_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1341,7 +1386,8 @@ module Aws::ApplicationSignals
       :total_request_count_metric,
       :monitored_request_count_metric,
       :dependency_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1358,7 +1404,8 @@ module Aws::ApplicationSignals
       :resource_type,
       :resource_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1420,8 @@ module Aws::ApplicationSignals
     class RollingInterval < Struct.new(
       :duration_unit,
       :duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1558,8 @@ module Aws::ApplicationSignals
       :attribute_maps,
       :metric_references,
       :log_group_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1562,7 +1611,8 @@ module Aws::ApplicationSignals
       :dependency_key_attributes,
       :dependency_operation_name,
       :metric_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1666,8 @@ module Aws::ApplicationSignals
       :dependent_key_attributes,
       :dependent_operation_name,
       :metric_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1686,8 @@ module Aws::ApplicationSignals
       :sli_metric,
       :metric_threshold,
       :comparison_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1655,7 +1707,8 @@ module Aws::ApplicationSignals
       :sli_metric_config,
       :metric_threshold,
       :comparison_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1763,8 @@ module Aws::ApplicationSignals
       :metric_type,
       :metric_data_queries,
       :dependency_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,7 +1832,8 @@ module Aws::ApplicationSignals
       :period_seconds,
       :metric_data_queries,
       :dependency_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1850,7 +1905,8 @@ module Aws::ApplicationSignals
       :goal,
       :burn_rate_configurations,
       :metric_source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1945,7 +2001,8 @@ module Aws::ApplicationSignals
       :sli,
       :request_based_sli,
       :goal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1969,7 +2026,8 @@ module Aws::ApplicationSignals
       :arn,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2046,7 +2104,8 @@ module Aws::ApplicationSignals
       :created_time,
       :evaluation_type,
       :metric_source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2065,7 +2124,8 @@ module Aws::ApplicationSignals
     class ServiceOperation < Struct.new(
       :name,
       :metric_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2134,8 @@ module Aws::ApplicationSignals
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2189,17 +2250,20 @@ module Aws::ApplicationSignals
       :key_attributes,
       :attribute_maps,
       :metric_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartDiscoveryInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartDiscoveryOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2214,7 +2278,8 @@ module Aws::ApplicationSignals
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2234,12 +2299,14 @@ module Aws::ApplicationSignals
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2248,7 +2315,8 @@ module Aws::ApplicationSignals
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2268,12 +2336,14 @@ module Aws::ApplicationSignals
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2305,7 +2375,8 @@ module Aws::ApplicationSignals
       :request_based_sli_config,
       :goal,
       :burn_rate_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2314,7 +2385,8 @@ module Aws::ApplicationSignals
     #   @return [Types::ServiceLevelObjective]
     class UpdateServiceLevelObjectiveOutput < Struct.new(
       :slo,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2323,7 +2395,8 @@ module Aws::ApplicationSignals
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2337,7 +2410,8 @@ module Aws::ApplicationSignals
     class Window < Struct.new(
       :duration_unit,
       :duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

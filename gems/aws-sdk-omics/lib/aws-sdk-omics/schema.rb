@@ -3430,7 +3430,6 @@ module Aws::Omics
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.auth#unsignedPayload" => {}, "aws.iam#actionPermissionDescription" => "Grants permission to upload read set parts", "smithy.api#endpoint" => {"hostPrefix" => "storage-"}, "smithy.api#http" => {"method" => "PUT", "uri" => "/sequencestore/{sequenceStoreId}/upload/{uploadId}/part"}}
       end)
-
     end
 
     class << self

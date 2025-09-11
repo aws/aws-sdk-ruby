@@ -35,7 +35,7 @@ module Aws::IoTSecureTunneling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSecureTunneling::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -48,7 +48,7 @@ module Aws::IoTSecureTunneling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTSecureTunneling::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

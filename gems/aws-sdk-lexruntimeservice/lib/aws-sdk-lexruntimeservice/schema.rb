@@ -355,7 +355,6 @@ module Aws::LexRuntimeService
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/bot/{botName}/alias/{botAlias}/user/{userId}/session", "code" => 200}}
       end)
-
     end
 
     class << self

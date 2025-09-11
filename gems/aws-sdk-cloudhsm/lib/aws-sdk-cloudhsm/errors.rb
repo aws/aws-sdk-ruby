@@ -36,7 +36,7 @@ module Aws::CloudHSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudHSM::Types::CloudHsmInternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Additional information about the error.</p>
@@ -55,7 +55,7 @@ module Aws::CloudHSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudHSM::Types::CloudHsmServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Additional information about the error.</p>
@@ -74,7 +74,7 @@ module Aws::CloudHSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudHSM::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Additional information about the error.</p>

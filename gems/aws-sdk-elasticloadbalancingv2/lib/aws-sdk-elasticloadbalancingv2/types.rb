@@ -11,7 +11,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class ALPNPolicyNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +65,8 @@ module Aws::ElasticLoadBalancingV2
       :redirect_config,
       :fixed_response_config,
       :forward_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +81,8 @@ module Aws::ElasticLoadBalancingV2
     class AddListenerCertificatesInput < Struct.new(
       :listener_arn,
       :certificates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +91,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Certificate>]
     class AddListenerCertificatesOutput < Struct.new(
       :certificates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,12 +105,14 @@ module Aws::ElasticLoadBalancingV2
     class AddTagsInput < Struct.new(
       :resource_arns,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddTagsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -119,7 +125,8 @@ module Aws::ElasticLoadBalancingV2
     class AddTrustStoreRevocationsInput < Struct.new(
       :trust_store_arn,
       :revocation_contents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +135,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TrustStoreRevocation>]
     class AddTrustStoreRevocationsOutput < Struct.new(
       :trust_store_revocations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +154,8 @@ module Aws::ElasticLoadBalancingV2
       :state,
       :reason,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +164,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class AllocationIdNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,7 +179,8 @@ module Aws::ElasticLoadBalancingV2
     class AnomalyDetection < Struct.new(
       :result,
       :mitigation_in_effect,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +237,8 @@ module Aws::ElasticLoadBalancingV2
       :session_timeout,
       :authentication_request_extra_params,
       :on_unauthenticated_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +318,8 @@ module Aws::ElasticLoadBalancingV2
       :authentication_request_extra_params,
       :on_unauthenticated_request,
       :use_existing_client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +351,8 @@ module Aws::ElasticLoadBalancingV2
       :outpost_id,
       :load_balancer_addresses,
       :source_nat_ipv6_prefixes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +361,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class AvailabilityZoneNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -356,7 +371,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class CaCertificatesBundleNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +381,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class CapacityDecreaseRequestsLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +391,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class CapacityReservationPendingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -388,7 +406,8 @@ module Aws::ElasticLoadBalancingV2
     class CapacityReservationStatus < Struct.new(
       :code,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -397,7 +416,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class CapacityUnitsLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +433,8 @@ module Aws::ElasticLoadBalancingV2
     class Certificate < Struct.new(
       :certificate_arn,
       :is_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +443,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class CertificateNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -436,7 +458,8 @@ module Aws::ElasticLoadBalancingV2
     class Cipher < Struct.new(
       :name,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +540,8 @@ module Aws::ElasticLoadBalancingV2
       :alpn_policy,
       :tags,
       :mutual_authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +550,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Listener>]
     class CreateListenerOutput < Struct.new(
       :listeners,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +643,8 @@ module Aws::ElasticLoadBalancingV2
       :customer_owned_ipv4_pool,
       :enable_prefix_for_ipv6_source_nat,
       :ipam_pools,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +653,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::LoadBalancer>]
     class CreateLoadBalancerOutput < Struct.new(
       :load_balancers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +679,8 @@ module Aws::ElasticLoadBalancingV2
       :priority,
       :actions,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +689,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Rule>]
     class CreateRuleOutput < Struct.new(
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +827,8 @@ module Aws::ElasticLoadBalancingV2
       :target_type,
       :tags,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +837,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TargetGroup>]
     class CreateTargetGroupOutput < Struct.new(
       :target_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -833,7 +864,8 @@ module Aws::ElasticLoadBalancingV2
       :ca_certificates_bundle_s3_key,
       :ca_certificates_bundle_s3_object_version,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +874,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TrustStore>]
     class CreateTrustStoreOutput < Struct.new(
       :trust_stores,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +884,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DeleteAssociationSameAccountException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -860,12 +894,14 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DeleteListenerInput < Struct.new(
       :listener_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteListenerOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,12 +910,14 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DeleteLoadBalancerInput < Struct.new(
       :load_balancer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLoadBalancerOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,12 +926,14 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DeleteRuleInput < Struct.new(
       :rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,12 +946,14 @@ module Aws::ElasticLoadBalancingV2
     class DeleteSharedTrustStoreAssociationInput < Struct.new(
       :trust_store_arn,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSharedTrustStoreAssociationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,12 +962,14 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DeleteTargetGroupInput < Struct.new(
       :target_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTargetGroupOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -934,12 +978,14 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DeleteTrustStoreInput < Struct.new(
       :trust_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTrustStoreOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,12 +999,14 @@ module Aws::ElasticLoadBalancingV2
     class DeregisterTargetsInput < Struct.new(
       :target_group_arn,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterTargetsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -972,7 +1020,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeAccountLimitsInput < Struct.new(
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1035,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeAccountLimitsOutput < Struct.new(
       :limits,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1045,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DescribeCapacityReservationInput < Struct.new(
       :load_balancer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1067,8 @@ module Aws::ElasticLoadBalancingV2
       :decrease_requests_remaining,
       :minimum_load_balancer_capacity,
       :capacity_reservation_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1025,7 +1077,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DescribeListenerAttributesInput < Struct.new(
       :listener_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1087,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::ListenerAttribute>]
     class DescribeListenerAttributesOutput < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1106,8 @@ module Aws::ElasticLoadBalancingV2
       :listener_arn,
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1066,7 +1121,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeListenerCertificatesOutput < Struct.new(
       :certificates,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1088,7 +1144,8 @@ module Aws::ElasticLoadBalancingV2
       :listener_arns,
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1102,7 +1159,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeListenersOutput < Struct.new(
       :listeners,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1111,7 +1169,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DescribeLoadBalancerAttributesInput < Struct.new(
       :load_balancer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,7 +1179,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::LoadBalancerAttribute>]
     class DescribeLoadBalancerAttributesOutput < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1143,7 +1203,8 @@ module Aws::ElasticLoadBalancingV2
       :names,
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1157,7 +1218,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeLoadBalancersOutput < Struct.new(
       :load_balancers,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1241,8 @@ module Aws::ElasticLoadBalancingV2
       :rule_arns,
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1193,7 +1256,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeRulesOutput < Struct.new(
       :rules,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1216,7 +1280,8 @@ module Aws::ElasticLoadBalancingV2
       :marker,
       :page_size,
       :load_balancer_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1230,7 +1295,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeSSLPoliciesOutput < Struct.new(
       :ssl_policies,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1240,7 +1306,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     class DescribeTagsInput < Struct.new(
       :resource_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,7 +1316,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TagDescription>]
     class DescribeTagsOutput < Struct.new(
       :tag_descriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1258,7 +1326,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DescribeTargetGroupAttributesInput < Struct.new(
       :target_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1267,7 +1336,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TargetGroupAttribute>]
     class DescribeTargetGroupAttributesOutput < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1363,8 @@ module Aws::ElasticLoadBalancingV2
       :names,
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1307,7 +1378,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTargetGroupsOutput < Struct.new(
       :target_groups,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,7 +1396,8 @@ module Aws::ElasticLoadBalancingV2
       :target_group_arn,
       :targets,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1333,7 +1406,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TargetHealthDescription>]
     class DescribeTargetHealthOutput < Struct.new(
       :target_health_descriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1350,7 +1424,8 @@ module Aws::ElasticLoadBalancingV2
       :trust_store_arn,
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1439,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTrustStoreAssociationsOutput < Struct.new(
       :trust_store_associations,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1386,7 +1462,8 @@ module Aws::ElasticLoadBalancingV2
       :revocation_id,
       :revocation_type,
       :number_of_revoked_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1407,7 +1484,8 @@ module Aws::ElasticLoadBalancingV2
       :revocation_ids,
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1421,7 +1499,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTrustStoreRevocationsOutput < Struct.new(
       :trust_store_revocations,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1442,7 +1521,8 @@ module Aws::ElasticLoadBalancingV2
       :names,
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1456,7 +1536,8 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTrustStoresOutput < Struct.new(
       :trust_stores,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1546,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DuplicateListenerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1556,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DuplicateLoadBalancerNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1483,7 +1566,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DuplicateTagKeysException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1492,7 +1576,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DuplicateTargetGroupNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1501,7 +1586,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class DuplicateTrustStoreNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1521,7 +1607,8 @@ module Aws::ElasticLoadBalancingV2
       :message_body,
       :status_code,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1536,7 +1623,8 @@ module Aws::ElasticLoadBalancingV2
     class ForwardActionConfig < Struct.new(
       :target_groups,
       :target_group_stickiness_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1545,7 +1633,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class GetResourcePolicyInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1643,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class GetResourcePolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1563,7 +1653,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class GetTrustStoreCaCertificatesBundleInput < Struct.new(
       :trust_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1572,7 +1663,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class GetTrustStoreCaCertificatesBundleOutput < Struct.new(
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1585,7 +1677,8 @@ module Aws::ElasticLoadBalancingV2
     class GetTrustStoreRevocationContentInput < Struct.new(
       :trust_store_arn,
       :revocation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1594,7 +1687,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class GetTrustStoreRevocationContentOutput < Struct.new(
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1604,7 +1698,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class HealthUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1619,7 +1714,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     class HostHeaderConditionConfig < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1646,7 +1742,8 @@ module Aws::ElasticLoadBalancingV2
     class HttpHeaderConditionConfig < Struct.new(
       :http_header_name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1664,7 +1761,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     class HttpRequestMethodConditionConfig < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1673,7 +1771,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class IncompatibleProtocolsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1682,7 +1781,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class InsufficientCapacityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1691,7 +1791,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class InvalidCaCertificatesBundleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1700,7 +1801,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class InvalidConfigurationRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1709,7 +1811,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class InvalidLoadBalancerActionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1821,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class InvalidRevocationContentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1727,7 +1831,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class InvalidSchemeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1736,7 +1841,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class InvalidSecurityGroupException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1851,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class InvalidSubnetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1755,7 +1862,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class InvalidTargetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1767,7 +1875,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class IpamPools < Struct.new(
       :ipv4_ipam_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1859,7 +1968,8 @@ module Aws::ElasticLoadBalancingV2
     class Limit < Struct.new(
       :name,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +2013,8 @@ module Aws::ElasticLoadBalancingV2
       :default_actions,
       :alpn_policy,
       :mutual_authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2039,7 +2150,8 @@ module Aws::ElasticLoadBalancingV2
     class ListenerAttribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2048,7 +2160,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class ListenerNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2134,7 +2247,8 @@ module Aws::ElasticLoadBalancingV2
       :enforce_security_group_inbound_rules_on_private_link_traffic,
       :enable_prefix_for_ipv6_source_nat,
       :ipam_pools,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2157,7 +2271,8 @@ module Aws::ElasticLoadBalancingV2
       :allocation_id,
       :private_i_pv4_address,
       :i_pv6_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2347,7 +2462,8 @@ module Aws::ElasticLoadBalancingV2
     class LoadBalancerAttribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2356,7 +2472,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class LoadBalancerNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2374,7 +2491,8 @@ module Aws::ElasticLoadBalancingV2
     class LoadBalancerState < Struct.new(
       :code,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2396,7 +2514,8 @@ module Aws::ElasticLoadBalancingV2
     class Matcher < Struct.new(
       :http_code,
       :grpc_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2406,7 +2525,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Integer]
     class MinimumLoadBalancerCapacity < Struct.new(
       :capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2423,7 +2543,8 @@ module Aws::ElasticLoadBalancingV2
       :load_balancer_arn,
       :minimum_load_balancer_capacity,
       :reset_capacity_reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2444,7 +2565,8 @@ module Aws::ElasticLoadBalancingV2
       :decrease_requests_remaining,
       :minimum_load_balancer_capacity,
       :capacity_reservation_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2461,7 +2583,8 @@ module Aws::ElasticLoadBalancingV2
       :load_balancer_arn,
       :ipam_pools,
       :remove_ipam_pools,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2470,7 +2593,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Types::IpamPools]
     class ModifyIpPoolsOutput < Struct.new(
       :ipam_pools,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2483,7 +2607,8 @@ module Aws::ElasticLoadBalancingV2
     class ModifyListenerAttributesInput < Struct.new(
       :listener_arn,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2492,7 +2617,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::ListenerAttribute>]
     class ModifyListenerAttributesOutput < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2568,7 +2694,8 @@ module Aws::ElasticLoadBalancingV2
       :default_actions,
       :alpn_policy,
       :mutual_authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2577,7 +2704,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Listener>]
     class ModifyListenerOutput < Struct.new(
       :listeners,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2590,7 +2718,8 @@ module Aws::ElasticLoadBalancingV2
     class ModifyLoadBalancerAttributesInput < Struct.new(
       :load_balancer_arn,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2599,7 +2728,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::LoadBalancerAttribute>]
     class ModifyLoadBalancerAttributesOutput < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2616,7 +2746,8 @@ module Aws::ElasticLoadBalancingV2
       :rule_arn,
       :conditions,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2625,7 +2756,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Rule>]
     class ModifyRuleOutput < Struct.new(
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2638,7 +2770,8 @@ module Aws::ElasticLoadBalancingV2
     class ModifyTargetGroupAttributesInput < Struct.new(
       :target_group_arn,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2647,7 +2780,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TargetGroupAttribute>]
     class ModifyTargetGroupAttributesOutput < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2706,7 +2840,8 @@ module Aws::ElasticLoadBalancingV2
       :healthy_threshold_count,
       :unhealthy_threshold_count,
       :matcher,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2715,7 +2850,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TargetGroup>]
     class ModifyTargetGroupOutput < Struct.new(
       :target_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2736,7 +2872,8 @@ module Aws::ElasticLoadBalancingV2
       :ca_certificates_bundle_s3_bucket,
       :ca_certificates_bundle_s3_key,
       :ca_certificates_bundle_s3_object_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2745,7 +2882,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TrustStore>]
     class ModifyTrustStoreOutput < Struct.new(
       :trust_stores,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2773,7 +2911,8 @@ module Aws::ElasticLoadBalancingV2
       :ignore_client_certificate_expiry,
       :trust_store_association_status,
       :advertise_trust_store_ca_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2782,7 +2921,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2797,7 +2937,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     class PathPatternConditionConfig < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2806,7 +2947,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class PriorRequestNotCompleteException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2815,7 +2957,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class PriorityInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2835,7 +2978,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::QueryStringKeyValuePair>]
     class QueryStringConditionConfig < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2849,7 +2993,8 @@ module Aws::ElasticLoadBalancingV2
     class QueryStringKeyValuePair < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2908,7 +3053,8 @@ module Aws::ElasticLoadBalancingV2
       :path,
       :query,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2921,12 +3067,14 @@ module Aws::ElasticLoadBalancingV2
     class RegisterTargetsInput < Struct.new(
       :target_group_arn,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RegisterTargetsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2941,12 +3089,14 @@ module Aws::ElasticLoadBalancingV2
     class RemoveListenerCertificatesInput < Struct.new(
       :listener_arn,
       :certificates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveListenerCertificatesOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2959,12 +3109,14 @@ module Aws::ElasticLoadBalancingV2
     class RemoveTagsInput < Struct.new(
       :resource_arns,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveTagsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2977,12 +3129,14 @@ module Aws::ElasticLoadBalancingV2
     class RemoveTrustStoreRevocationsInput < Struct.new(
       :trust_store_arn,
       :revocation_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveTrustStoreRevocationsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2991,7 +3145,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3000,7 +3155,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3022,7 +3178,8 @@ module Aws::ElasticLoadBalancingV2
       :s3_key,
       :s3_object_version,
       :revocation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3031,7 +3188,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class RevocationContentNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3040,7 +3198,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class RevocationIdNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3071,7 +3230,8 @@ module Aws::ElasticLoadBalancingV2
       :conditions,
       :actions,
       :is_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3195,7 +3355,8 @@ module Aws::ElasticLoadBalancingV2
       :query_string_config,
       :http_request_method_config,
       :source_ip_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3204,7 +3365,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class RuleNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3218,7 +3380,8 @@ module Aws::ElasticLoadBalancingV2
     class RulePriorityPair < Struct.new(
       :rule_arn,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3227,7 +3390,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class SSLPolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3249,7 +3413,8 @@ module Aws::ElasticLoadBalancingV2
     class SetIpAddressTypeInput < Struct.new(
       :load_balancer_arn,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3258,7 +3423,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class SetIpAddressTypeOutput < Struct.new(
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3267,7 +3433,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::RulePriorityPair>]
     class SetRulePrioritiesInput < Struct.new(
       :rule_priorities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3276,7 +3443,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Rule>]
     class SetRulePrioritiesOutput < Struct.new(
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3294,7 +3462,8 @@ module Aws::ElasticLoadBalancingV2
       :load_balancer_arn,
       :security_groups,
       :enforce_security_group_inbound_rules_on_private_link_traffic,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3308,7 +3477,8 @@ module Aws::ElasticLoadBalancingV2
     class SetSecurityGroupsOutput < Struct.new(
       :security_group_ids,
       :enforce_security_group_inbound_rules_on_private_link_traffic,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3361,7 +3531,8 @@ module Aws::ElasticLoadBalancingV2
       :subnet_mappings,
       :ip_address_type,
       :enable_prefix_for_ipv6_source_nat,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3378,7 +3549,8 @@ module Aws::ElasticLoadBalancingV2
       :availability_zones,
       :ip_address_type,
       :enable_prefix_for_ipv6_source_nat,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3397,7 +3569,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     class SourceIpConditionConfig < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3419,7 +3592,8 @@ module Aws::ElasticLoadBalancingV2
       :ciphers,
       :name,
       :supported_load_balancer_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3448,7 +3622,8 @@ module Aws::ElasticLoadBalancingV2
       :private_i_pv4_address,
       :i_pv6_address,
       :source_nat_ipv6_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3457,7 +3632,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class SubnetNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3471,7 +3647,8 @@ module Aws::ElasticLoadBalancingV2
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3485,7 +3662,8 @@ module Aws::ElasticLoadBalancingV2
     class TagDescription < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3524,7 +3702,8 @@ module Aws::ElasticLoadBalancingV2
       :id,
       :port,
       :availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3615,7 +3794,8 @@ module Aws::ElasticLoadBalancingV2
       :target_type,
       :protocol_version,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3624,7 +3804,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TargetGroupAssociationLimitException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3837,7 +4018,8 @@ module Aws::ElasticLoadBalancingV2
     class TargetGroupAttribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3846,7 +4028,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TargetGroupNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3862,7 +4045,8 @@ module Aws::ElasticLoadBalancingV2
     class TargetGroupStickinessConfig < Struct.new(
       :enabled,
       :duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3877,7 +4061,8 @@ module Aws::ElasticLoadBalancingV2
     class TargetGroupTuple < Struct.new(
       :target_group_arn,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3983,7 +4168,8 @@ module Aws::ElasticLoadBalancingV2
       :state,
       :reason,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4011,7 +4197,8 @@ module Aws::ElasticLoadBalancingV2
       :target_health,
       :anomaly_detection,
       :administrative_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4020,7 +4207,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyActionsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4029,7 +4217,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyCertificatesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4038,7 +4227,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyListenersException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4048,7 +4238,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyLoadBalancersException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4058,7 +4249,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyRegistrationsForTargetIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4067,7 +4259,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyRulesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4076,7 +4269,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4086,7 +4280,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyTargetGroupsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4095,7 +4290,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyTargetsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4104,7 +4300,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyTrustStoreRevocationEntriesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4113,7 +4310,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyTrustStoresException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4124,7 +4322,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TooManyUniqueTargetGroupsPerLoadBalancerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4150,7 +4349,8 @@ module Aws::ElasticLoadBalancingV2
       :status,
       :number_of_ca_certificates,
       :total_revoked_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4160,7 +4360,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TrustStoreAssociation < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4169,7 +4370,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TrustStoreAssociationNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4178,7 +4380,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TrustStoreInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4187,7 +4390,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TrustStoreNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4196,7 +4400,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class TrustStoreNotReadyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4218,7 +4423,8 @@ module Aws::ElasticLoadBalancingV2
       :revocation_id,
       :revocation_type,
       :number_of_revoked_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4227,7 +4433,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     class UnsupportedProtocolException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4245,7 +4452,8 @@ module Aws::ElasticLoadBalancingV2
       :state,
       :availability_zone,
       :effective_capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

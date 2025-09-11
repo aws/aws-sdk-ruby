@@ -18,7 +18,8 @@ module Aws::ElasticBeanstalk
     class AbortEnvironmentUpdateMessage < Struct.new(
       :environment_id,
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +57,8 @@ module Aws::ElasticBeanstalk
       :versions,
       :configuration_templates,
       :resource_lifecycle_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +68,8 @@ module Aws::ElasticBeanstalk
     #   @return [Array<Types::ApplicationDescription>]
     class ApplicationDescriptionsMessage < Struct.new(
       :applications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +96,8 @@ module Aws::ElasticBeanstalk
       :request_count,
       :status_codes,
       :latency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -123,7 +127,8 @@ module Aws::ElasticBeanstalk
     class ApplicationResourceLifecycleConfig < Struct.new(
       :service_role,
       :version_lifecycle_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +141,8 @@ module Aws::ElasticBeanstalk
     class ApplicationResourceLifecycleDescriptionMessage < Struct.new(
       :application_name,
       :resource_lifecycle_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +218,8 @@ module Aws::ElasticBeanstalk
       :date_created,
       :date_updated,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +235,8 @@ module Aws::ElasticBeanstalk
     class ApplicationVersionDescriptionsMessage < Struct.new(
       :application_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +257,8 @@ module Aws::ElasticBeanstalk
     class ApplicationVersionLifecycleConfig < Struct.new(
       :max_count_rule,
       :max_age_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +276,8 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :environment_id,
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +299,8 @@ module Aws::ElasticBeanstalk
       :action_description,
       :action_type,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +315,8 @@ module Aws::ElasticBeanstalk
     class AssociateEnvironmentOperationsRoleMessage < Struct.new(
       :environment_name,
       :operations_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +326,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class AutoScalingGroup < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +375,8 @@ module Aws::ElasticBeanstalk
       :compute_type,
       :image,
       :timeout_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +386,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class Builder < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +439,8 @@ module Aws::ElasticBeanstalk
       :irq,
       :soft_irq,
       :privileged,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +450,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class CheckDNSAvailabilityMessage < Struct.new(
       :cname_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +476,8 @@ module Aws::ElasticBeanstalk
     class CheckDNSAvailabilityResultMessage < Struct.new(
       :available,
       :fully_qualified_cname,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +487,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class CodeBuildNotInServiceRegionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +512,8 @@ module Aws::ElasticBeanstalk
       :application_name,
       :group_name,
       :version_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +528,8 @@ module Aws::ElasticBeanstalk
     class ComposeEnvironmentsOutput < Struct.new(
       :environments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +643,8 @@ module Aws::ElasticBeanstalk
       :max_value,
       :max_length,
       :regex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +668,8 @@ module Aws::ElasticBeanstalk
       :namespace,
       :option_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +742,8 @@ module Aws::ElasticBeanstalk
       :date_created,
       :date_updated,
       :option_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +768,8 @@ module Aws::ElasticBeanstalk
       :description,
       :resource_lifecycle_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -754,7 +779,8 @@ module Aws::ElasticBeanstalk
     #   @return [Types::ApplicationDescription]
     class CreateApplicationOutput < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +851,8 @@ module Aws::ElasticBeanstalk
       :auto_create_application,
       :process,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -836,7 +863,8 @@ module Aws::ElasticBeanstalk
     #   @return [Types::ApplicationVersionDescription]
     class CreateApplicationVersionOutput < Struct.new(
       :application_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -912,7 +940,8 @@ module Aws::ElasticBeanstalk
       :description,
       :option_settings,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1014,8 @@ module Aws::ElasticBeanstalk
       :date_created,
       :date_updated,
       :option_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1116,8 @@ module Aws::ElasticBeanstalk
       :option_settings,
       :options_to_remove,
       :operations_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1266,8 @@ module Aws::ElasticBeanstalk
       :environment_links,
       :environment_arn,
       :operations_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1267,7 +1299,8 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :option_settings,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1313,8 @@ module Aws::ElasticBeanstalk
     class CreatePlatformVersionResult < Struct.new(
       :platform_summary,
       :builder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1324,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class CreateStorageLocationResultMessage < Struct.new(
       :s3_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1339,8 @@ module Aws::ElasticBeanstalk
     class CustomAmi < Struct.new(
       :virtualization_type,
       :image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1355,8 @@ module Aws::ElasticBeanstalk
     class DeleteApplicationMessage < Struct.new(
       :application_name,
       :terminate_env_by_force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1376,8 @@ module Aws::ElasticBeanstalk
       :application_name,
       :version_label,
       :delete_source_bundle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1391,8 @@ module Aws::ElasticBeanstalk
     class DeleteConfigurationTemplateMessage < Struct.new(
       :application_name,
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1406,8 @@ module Aws::ElasticBeanstalk
     class DeleteEnvironmentConfigurationMessage < Struct.new(
       :application_name,
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1376,7 +1416,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class DeletePlatformVersionRequest < Struct.new(
       :platform_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1385,7 +1426,8 @@ module Aws::ElasticBeanstalk
     #   @return [Types::PlatformSummary]
     class DeletePlatformVersionResult < Struct.new(
       :platform_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1465,8 @@ module Aws::ElasticBeanstalk
       :deployment_id,
       :status,
       :deployment_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1475,8 @@ module Aws::ElasticBeanstalk
     #   @return [Types::ResourceQuotas]
     class DescribeAccountAttributesResult < Struct.new(
       :resource_quotas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1504,8 @@ module Aws::ElasticBeanstalk
       :version_labels,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1471,7 +1516,8 @@ module Aws::ElasticBeanstalk
     #   @return [Array<String>]
     class DescribeApplicationsMessage < Struct.new(
       :application_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1551,8 @@ module Aws::ElasticBeanstalk
       :solution_stack_name,
       :platform_arn,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,7 +1570,8 @@ module Aws::ElasticBeanstalk
       :solution_stack_name,
       :platform_arn,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,7 +1598,8 @@ module Aws::ElasticBeanstalk
       :application_name,
       :template_name,
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1561,7 +1610,8 @@ module Aws::ElasticBeanstalk
     #   @return [Array<Types::ConfigurationSettingsDescription>]
     class DescribeConfigurationSettingsOutput < Struct.new(
       :configuration_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1583,7 +1633,8 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :environment_id,
       :attribute_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1676,8 @@ module Aws::ElasticBeanstalk
       :application_metrics,
       :instances_health,
       :refreshed_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1647,7 +1699,8 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :next_token,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1715,8 @@ module Aws::ElasticBeanstalk
     class DescribeEnvironmentManagedActionHistoryResult < Struct.new(
       :managed_action_history_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1734,8 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :environment_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1690,7 +1745,8 @@ module Aws::ElasticBeanstalk
     #   @return [Array<Types::ManagedAction>]
     class DescribeEnvironmentManagedActionsResult < Struct.new(
       :managed_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1766,8 @@ module Aws::ElasticBeanstalk
     class DescribeEnvironmentResourcesMessage < Struct.new(
       :environment_id,
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1763,7 +1820,8 @@ module Aws::ElasticBeanstalk
       :included_deleted_back_to,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,7 +1836,8 @@ module Aws::ElasticBeanstalk
     class DescribeEnvironmentsOutput < Struct.new(
       :environments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1843,7 +1902,8 @@ module Aws::ElasticBeanstalk
       :end_time,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1927,8 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :attribute_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1949,8 @@ module Aws::ElasticBeanstalk
       :instance_health_list,
       :refreshed_at,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1897,7 +1959,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class DescribePlatformVersionRequest < Struct.new(
       :platform_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,7 +1969,8 @@ module Aws::ElasticBeanstalk
     #   @return [Types::PlatformDescription]
     class DescribePlatformVersionResult < Struct.new(
       :platform_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1916,7 +1980,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class DisassociateEnvironmentOperationsRoleMessage < Struct.new(
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1926,7 +1991,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class ElasticBeanstalkServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2075,7 +2141,8 @@ module Aws::ElasticBeanstalk
       :environment_links,
       :environment_arn,
       :operations_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2167,8 @@ module Aws::ElasticBeanstalk
       :ec2_instance_id,
       :sample_timestamp,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2117,7 +2185,8 @@ module Aws::ElasticBeanstalk
     class EnvironmentLink < Struct.new(
       :link_name,
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2224,8 @@ module Aws::ElasticBeanstalk
       :load_balancers,
       :triggers,
       :queues,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2165,7 +2235,8 @@ module Aws::ElasticBeanstalk
     #   @return [Types::EnvironmentResourceDescription]
     class EnvironmentResourceDescriptionsMessage < Struct.new(
       :environment_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2176,7 +2247,8 @@ module Aws::ElasticBeanstalk
     #   @return [Types::LoadBalancerDescription]
     class EnvironmentResourcesDescription < Struct.new(
       :load_balancer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2221,7 +2293,8 @@ module Aws::ElasticBeanstalk
       :name,
       :type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2336,8 @@ module Aws::ElasticBeanstalk
       :platform_arn,
       :request_id,
       :severity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2352,8 @@ module Aws::ElasticBeanstalk
     class EventDescriptionsMessage < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2288,7 +2363,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class Instance < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2342,7 +2418,8 @@ module Aws::ElasticBeanstalk
       :warning,
       :degraded,
       :severe,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2353,7 +2430,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class InsufficientPrivilegesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2364,7 +2442,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2411,7 +2490,8 @@ module Aws::ElasticBeanstalk
       :p75,
       :p50,
       :p10,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2421,7 +2501,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class LaunchConfiguration < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2431,7 +2512,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class LaunchTemplate < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2445,7 +2527,8 @@ module Aws::ElasticBeanstalk
     class ListAvailableSolutionStacksResultMessage < Struct.new(
       :solution_stacks,
       :solution_stack_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2534,7 +2617,8 @@ module Aws::ElasticBeanstalk
       :filters,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2548,7 +2632,8 @@ module Aws::ElasticBeanstalk
     class ListPlatformBranchesResult < Struct.new(
       :platform_branch_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2570,7 +2655,8 @@ module Aws::ElasticBeanstalk
       :filters,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2584,7 +2670,8 @@ module Aws::ElasticBeanstalk
     class ListPlatformVersionsResult < Struct.new(
       :platform_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2594,7 +2681,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class ListTagsForResourceMessage < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2608,7 +2696,8 @@ module Aws::ElasticBeanstalk
     class Listener < Struct.new(
       :protocol,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2623,7 +2712,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class LoadBalancer < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2641,7 +2731,8 @@ module Aws::ElasticBeanstalk
       :load_balancer_name,
       :domain,
       :listeners,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2669,7 +2760,8 @@ module Aws::ElasticBeanstalk
       :action_type,
       :status,
       :window_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2707,7 +2799,8 @@ module Aws::ElasticBeanstalk
       :failure_description,
       :executed_time,
       :finished_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2717,7 +2810,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class ManagedActionInvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2738,7 +2832,8 @@ module Aws::ElasticBeanstalk
       :enabled,
       :max_age_in_days,
       :delete_source_from_s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2759,7 +2854,8 @@ module Aws::ElasticBeanstalk
       :enabled,
       :max_count,
       :delete_source_from_s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2770,7 +2866,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class OperationInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2786,7 +2883,8 @@ module Aws::ElasticBeanstalk
     class OptionRestrictionRegex < Struct.new(
       :pattern,
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2804,7 +2902,8 @@ module Aws::ElasticBeanstalk
       :resource_name,
       :namespace,
       :option_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2840,7 +2939,8 @@ module Aws::ElasticBeanstalk
       :lifecycle_state,
       :branch_order,
       :supported_tier_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2943,7 +3043,8 @@ module Aws::ElasticBeanstalk
       :platform_lifecycle_state,
       :platform_branch_name,
       :platform_branch_lifecycle_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3002,7 +3103,8 @@ module Aws::ElasticBeanstalk
       :type,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3016,7 +3118,8 @@ module Aws::ElasticBeanstalk
     class PlatformFramework < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3030,7 +3133,8 @@ module Aws::ElasticBeanstalk
     class PlatformProgrammingLanguage < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3091,7 +3195,8 @@ module Aws::ElasticBeanstalk
       :platform_version,
       :platform_branch_name,
       :platform_branch_lifecycle_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3101,7 +3206,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class PlatformVersionStillReferencedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3115,7 +3221,8 @@ module Aws::ElasticBeanstalk
     class Queue < Struct.new(
       :name,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3135,7 +3242,8 @@ module Aws::ElasticBeanstalk
     class RebuildEnvironmentMessage < Struct.new(
       :environment_id,
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3164,7 +3272,8 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       :info_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3174,7 +3283,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3186,7 +3296,8 @@ module Aws::ElasticBeanstalk
     #   @return [Integer]
     class ResourceQuota < Struct.new(
       :maximum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3213,7 +3324,8 @@ module Aws::ElasticBeanstalk
       :environment_quota,
       :configuration_template_quota,
       :custom_platform_quota,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3226,7 +3338,8 @@ module Aws::ElasticBeanstalk
     class ResourceTagsDescriptionMessage < Struct.new(
       :resource_arn,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3236,7 +3349,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class ResourceTypeNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3256,7 +3370,8 @@ module Aws::ElasticBeanstalk
     class RestartAppServerMessage < Struct.new(
       :environment_id,
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3283,7 +3398,8 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       :info_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3293,7 +3409,8 @@ module Aws::ElasticBeanstalk
     #   @return [Array<Types::EnvironmentInfoDescription>]
     class RetrieveEnvironmentInfoResultMessage < Struct.new(
       :environment_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3307,7 +3424,8 @@ module Aws::ElasticBeanstalk
     class S3Location < Struct.new(
       :s3_bucket,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3329,7 +3447,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class S3LocationNotInServiceRegionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3339,7 +3458,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class S3SubscriptionRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3371,7 +3491,8 @@ module Aws::ElasticBeanstalk
       :attribute,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3422,7 +3543,8 @@ module Aws::ElasticBeanstalk
       :deployment,
       :availability_zone,
       :instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3436,7 +3558,8 @@ module Aws::ElasticBeanstalk
     class SolutionStackDescription < Struct.new(
       :solution_stack_name,
       :permitted_file_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3493,7 +3616,8 @@ module Aws::ElasticBeanstalk
       :source_type,
       :source_repository,
       :source_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3504,7 +3628,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class SourceBundleDeletionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3518,7 +3643,8 @@ module Aws::ElasticBeanstalk
     class SourceConfiguration < Struct.new(
       :application_name,
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3546,7 +3672,8 @@ module Aws::ElasticBeanstalk
       :status3xx,
       :status4xx,
       :status5xx,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3583,7 +3710,8 @@ module Aws::ElasticBeanstalk
       :source_environment_name,
       :destination_environment_id,
       :destination_environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3599,7 +3727,8 @@ module Aws::ElasticBeanstalk
     class SystemStatus < Struct.new(
       :cpu_utilization,
       :load_average,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3613,7 +3742,8 @@ module Aws::ElasticBeanstalk
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3661,7 +3791,8 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :terminate_resources,
       :force_terminate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3810,7 +3941,8 @@ module Aws::ElasticBeanstalk
       :environment_links,
       :environment_arn,
       :operations_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3820,7 +3952,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class TooManyApplicationVersionsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3830,7 +3963,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class TooManyApplicationsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3840,7 +3974,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class TooManyBucketsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3850,7 +3985,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class TooManyConfigurationTemplatesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3860,7 +3996,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class TooManyEnvironmentsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3870,7 +4007,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class TooManyPlatformsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3883,7 +4021,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3893,7 +4032,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     class Trigger < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3911,7 +4051,8 @@ module Aws::ElasticBeanstalk
     class UpdateApplicationMessage < Struct.new(
       :application_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3921,7 +4062,8 @@ module Aws::ElasticBeanstalk
     #   @return [Types::ApplicationDescription]
     class UpdateApplicationOutput < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3934,7 +4076,8 @@ module Aws::ElasticBeanstalk
     class UpdateApplicationResourceLifecycleMessage < Struct.new(
       :application_name,
       :resource_lifecycle_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3956,7 +4099,8 @@ module Aws::ElasticBeanstalk
       :application_name,
       :version_label,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3967,7 +4111,8 @@ module Aws::ElasticBeanstalk
     #   @return [Types::ApplicationVersionDescription]
     class UpdateApplicationVersionOutput < Struct.new(
       :application_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4002,7 +4147,8 @@ module Aws::ElasticBeanstalk
       :description,
       :option_settings,
       :options_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4075,7 +4221,8 @@ module Aws::ElasticBeanstalk
       :date_created,
       :date_updated,
       :option_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4152,7 +4299,8 @@ module Aws::ElasticBeanstalk
       :platform_arn,
       :option_settings,
       :options_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4301,7 +4449,8 @@ module Aws::ElasticBeanstalk
       :environment_links,
       :environment_arn,
       :operations_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4324,7 +4473,8 @@ module Aws::ElasticBeanstalk
       :resource_arn,
       :tags_to_add,
       :tags_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4349,7 +4499,8 @@ module Aws::ElasticBeanstalk
       :template_name,
       :environment_name,
       :option_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4359,7 +4510,8 @@ module Aws::ElasticBeanstalk
     #   @return [Array<Types::ValidationMessage>]
     class ValidateConfigurationSettingsOutput < Struct.new(
       :messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4393,7 +4545,8 @@ module Aws::ElasticBeanstalk
       :severity,
       :namespace,
       :option_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

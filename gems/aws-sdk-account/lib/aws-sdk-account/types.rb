@@ -19,7 +19,8 @@ module Aws::Account
       :account_id,
       :primary_email,
       :otp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28,7 +29,8 @@ module Aws::Account
     #   @return [String]
     class AcceptPrimaryEmailUpdateResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +43,8 @@ module Aws::Account
     class AccessDeniedException < Struct.new(
       :message,
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +70,8 @@ module Aws::Account
       :email_address,
       :phone_number,
       :alternate_contact_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +84,8 @@ module Aws::Account
     class ConflictException < Struct.new(
       :message,
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +139,8 @@ module Aws::Account
       :phone_number,
       :company_name,
       :website_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +153,8 @@ module Aws::Account
     class DeleteAlternateContactRequest < Struct.new(
       :alternate_contact_type,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +167,8 @@ module Aws::Account
     class DisableRegionRequest < Struct.new(
       :account_id,
       :region_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +181,8 @@ module Aws::Account
     class EnableRegionRequest < Struct.new(
       :account_id,
       :region_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +191,8 @@ module Aws::Account
     #   @return [String]
     class GetAccountInformationRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +209,8 @@ module Aws::Account
       :account_id,
       :account_name,
       :account_created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +223,8 @@ module Aws::Account
     class GetAlternateContactRequest < Struct.new(
       :alternate_contact_type,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +233,8 @@ module Aws::Account
     #   @return [Types::AlternateContact]
     class GetAlternateContactResponse < Struct.new(
       :alternate_contact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +243,8 @@ module Aws::Account
     #   @return [String]
     class GetContactInformationRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +253,8 @@ module Aws::Account
     #   @return [Types::ContactInformation]
     class GetContactInformationResponse < Struct.new(
       :contact_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +263,8 @@ module Aws::Account
     #   @return [String]
     class GetPrimaryEmailRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -257,7 +273,8 @@ module Aws::Account
     #   @return [String]
     class GetPrimaryEmailResponse < Struct.new(
       :primary_email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +287,8 @@ module Aws::Account
     class GetRegionOptStatusRequest < Struct.new(
       :account_id,
       :region_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +301,8 @@ module Aws::Account
     class GetRegionOptStatusResponse < Struct.new(
       :region_name,
       :region_opt_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +315,8 @@ module Aws::Account
     class InternalServerException < Struct.new(
       :message,
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +337,8 @@ module Aws::Account
       :max_results,
       :next_token,
       :region_opt_status_contains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +351,8 @@ module Aws::Account
     class ListRegionsResponse < Struct.new(
       :next_token,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,7 +365,8 @@ module Aws::Account
     class PutAccountNameRequest < Struct.new(
       :account_name,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +395,8 @@ module Aws::Account
       :phone_number,
       :alternate_contact_type,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +409,8 @@ module Aws::Account
     class PutContactInformationRequest < Struct.new(
       :contact_information,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -399,7 +424,8 @@ module Aws::Account
     class Region < Struct.new(
       :region_name,
       :region_opt_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +438,8 @@ module Aws::Account
     class ResourceNotFoundException < Struct.new(
       :message,
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +452,8 @@ module Aws::Account
     class StartPrimaryEmailUpdateRequest < Struct.new(
       :account_id,
       :primary_email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +462,8 @@ module Aws::Account
     #   @return [String]
     class StartPrimaryEmailUpdateResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +476,8 @@ module Aws::Account
     class TooManyRequestsException < Struct.new(
       :message,
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -465,7 +495,8 @@ module Aws::Account
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +510,8 @@ module Aws::Account
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

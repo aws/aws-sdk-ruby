@@ -40,7 +40,7 @@ module Aws::WorkSpacesThinClient
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpacesThinClient::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::WorkSpacesThinClient
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpacesThinClient::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::WorkSpacesThinClient
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpacesThinClient::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -94,7 +94,7 @@ module Aws::WorkSpacesThinClient
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpacesThinClient::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -117,7 +117,7 @@ module Aws::WorkSpacesThinClient
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpacesThinClient::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -150,7 +150,7 @@ module Aws::WorkSpacesThinClient
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpacesThinClient::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -178,7 +178,7 @@ module Aws::WorkSpacesThinClient
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkSpacesThinClient::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

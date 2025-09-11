@@ -41,7 +41,7 @@ module Aws::Location
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Location::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::Location
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Location::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::Location
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Location::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::Location
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Location::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::Location
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Location::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message with the reason for the service quota exceeded exception error.</p>
@@ -112,7 +112,7 @@ module Aws::Location
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Location::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::Location
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Location::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -818,7 +818,6 @@ module Aws::Schemas
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}", "code" => 200}}
       end)
-
     end
 
     class << self

@@ -1889,7 +1889,6 @@ module Aws::Athena
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
         operation.traits = {}
       end)
-
     end
 
     class << self

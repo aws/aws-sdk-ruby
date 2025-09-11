@@ -11,7 +11,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +31,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class ConditionalCheckFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +41,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +80,8 @@ module Aws::CodeStarconnections
       :owner_account_id,
       :connection_status,
       :host_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +103,8 @@ module Aws::CodeStarconnections
       :connection_name,
       :tags,
       :host_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +121,8 @@ module Aws::CodeStarconnections
     class CreateConnectionOutput < Struct.new(
       :connection_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +151,8 @@ module Aws::CodeStarconnections
       :provider_endpoint,
       :vpc_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +165,8 @@ module Aws::CodeStarconnections
     class CreateHostOutput < Struct.new(
       :host_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +192,8 @@ module Aws::CodeStarconnections
       :repository_name,
       :encryption_key_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +202,8 @@ module Aws::CodeStarconnections
     #   @return [Types::RepositoryLinkInfo]
     class CreateRepositoryLinkOutput < Struct.new(
       :repository_link_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +243,8 @@ module Aws::CodeStarconnections
       :sync_type,
       :publish_deployment_status,
       :trigger_resource_update_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,7 +254,8 @@ module Aws::CodeStarconnections
     #   @return [Types::SyncConfiguration]
     class CreateSyncConfigurationOutput < Struct.new(
       :sync_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,12 +267,14 @@ module Aws::CodeStarconnections
     #   @return [String]
     class DeleteConnectionInput < Struct.new(
       :connection_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,12 +283,14 @@ module Aws::CodeStarconnections
     #   @return [String]
     class DeleteHostInput < Struct.new(
       :host_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteHostOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,12 +299,14 @@ module Aws::CodeStarconnections
     #   @return [String]
     class DeleteRepositoryLinkInput < Struct.new(
       :repository_link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRepositoryLinkOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,12 +320,14 @@ module Aws::CodeStarconnections
     class DeleteSyncConfigurationInput < Struct.new(
       :sync_type,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSyncConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,7 +336,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class GetConnectionInput < Struct.new(
       :connection_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +346,8 @@ module Aws::CodeStarconnections
     #   @return [Types::Connection]
     class GetConnectionOutput < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +356,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class GetHostInput < Struct.new(
       :host_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +382,8 @@ module Aws::CodeStarconnections
       :provider_type,
       :provider_endpoint,
       :vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,7 +392,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class GetRepositoryLinkInput < Struct.new(
       :repository_link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +402,8 @@ module Aws::CodeStarconnections
     #   @return [Types::RepositoryLinkInfo]
     class GetRepositoryLinkOutput < Struct.new(
       :repository_link_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +420,8 @@ module Aws::CodeStarconnections
       :branch,
       :repository_link_id,
       :sync_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +430,8 @@ module Aws::CodeStarconnections
     #   @return [Types::RepositorySyncAttempt]
     class GetRepositorySyncStatusOutput < Struct.new(
       :latest_sync,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +445,8 @@ module Aws::CodeStarconnections
     class GetResourceSyncStatusInput < Struct.new(
       :resource_name,
       :sync_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +464,8 @@ module Aws::CodeStarconnections
       :desired_state,
       :latest_successful_sync,
       :latest_sync,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +478,8 @@ module Aws::CodeStarconnections
     class GetSyncBlockerSummaryInput < Struct.new(
       :sync_type,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +488,8 @@ module Aws::CodeStarconnections
     #   @return [Types::SyncBlockerSummary]
     class GetSyncBlockerSummaryOutput < Struct.new(
       :sync_blocker_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,7 +503,8 @@ module Aws::CodeStarconnections
     class GetSyncConfigurationInput < Struct.new(
       :sync_type,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +513,8 @@ module Aws::CodeStarconnections
     #   @return [Types::SyncConfiguration]
     class GetSyncConfigurationOutput < Struct.new(
       :sync_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +556,8 @@ module Aws::CodeStarconnections
       :vpc_configuration,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -530,7 +566,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +576,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +586,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +611,8 @@ module Aws::CodeStarconnections
       :host_arn_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +628,8 @@ module Aws::CodeStarconnections
     class ListConnectionsOutput < Struct.new(
       :connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +644,8 @@ module Aws::CodeStarconnections
     class ListHostsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -619,7 +661,8 @@ module Aws::CodeStarconnections
     class ListHostsOutput < Struct.new(
       :hosts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +677,8 @@ module Aws::CodeStarconnections
     class ListRepositoryLinksInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +691,8 @@ module Aws::CodeStarconnections
     class ListRepositoryLinksOutput < Struct.new(
       :repository_links,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +705,8 @@ module Aws::CodeStarconnections
     class ListRepositorySyncDefinitionsInput < Struct.new(
       :repository_link_id,
       :sync_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -676,7 +722,8 @@ module Aws::CodeStarconnections
     class ListRepositorySyncDefinitionsOutput < Struct.new(
       :repository_sync_definitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +744,8 @@ module Aws::CodeStarconnections
       :next_token,
       :repository_link_id,
       :sync_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +758,8 @@ module Aws::CodeStarconnections
     class ListSyncConfigurationsOutput < Struct.new(
       :sync_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +768,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +778,8 @@ module Aws::CodeStarconnections
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -763,7 +814,8 @@ module Aws::CodeStarconnections
       :repository_link_arn,
       :repository_link_id,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -799,7 +851,8 @@ module Aws::CodeStarconnections
       :started_at,
       :status,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +875,8 @@ module Aws::CodeStarconnections
       :directory,
       :parent,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +898,8 @@ module Aws::CodeStarconnections
       :external_id,
       :time,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -853,7 +908,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +918,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +965,8 @@ module Aws::CodeStarconnections
       :status,
       :target_revision,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +988,8 @@ module Aws::CodeStarconnections
       :external_id,
       :time,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +998,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,7 +1008,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class RetryLatestCommitFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -978,7 +1039,8 @@ module Aws::CodeStarconnections
       :repository_name,
       :provider_type,
       :sha,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1078,8 @@ module Aws::CodeStarconnections
       :contexts,
       :resolved_reason,
       :resolved_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1093,8 @@ module Aws::CodeStarconnections
     class SyncBlockerContext < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1103,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class SyncBlockerDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1122,8 @@ module Aws::CodeStarconnections
       :resource_name,
       :parent_resource_name,
       :latest_blockers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1109,7 +1175,8 @@ module Aws::CodeStarconnections
       :sync_type,
       :publish_deployment_status,
       :trigger_resource_update_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1118,7 +1185,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class SyncConfigurationStillExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1201,8 @@ module Aws::CodeStarconnections
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,12 +1215,14 @@ module Aws::CodeStarconnections
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1160,7 +1231,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1169,7 +1241,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1178,7 +1251,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class UnsupportedProviderTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,12 +1265,14 @@ module Aws::CodeStarconnections
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1214,12 +1290,14 @@ module Aws::CodeStarconnections
       :host_arn,
       :provider_endpoint,
       :vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateHostOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1306,8 @@ module Aws::CodeStarconnections
     #   @return [String]
     class UpdateOutOfSyncException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,7 +1324,8 @@ module Aws::CodeStarconnections
       :connection_arn,
       :encryption_key_arn,
       :repository_link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1254,7 +1334,8 @@ module Aws::CodeStarconnections
     #   @return [Types::RepositoryLinkInfo]
     class UpdateRepositoryLinkOutput < Struct.new(
       :repository_link_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1275,7 +1356,8 @@ module Aws::CodeStarconnections
       :sync_type,
       :resource_name,
       :resolved_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1292,7 +1374,8 @@ module Aws::CodeStarconnections
       :resource_name,
       :parent_resource_name,
       :sync_blocker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1330,7 +1413,8 @@ module Aws::CodeStarconnections
       :sync_type,
       :publish_deployment_status,
       :trigger_resource_update_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1423,8 @@ module Aws::CodeStarconnections
     #   @return [Types::SyncConfiguration]
     class UpdateSyncConfigurationOutput < Struct.new(
       :sync_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1449,8 @@ module Aws::CodeStarconnections
       :subnet_ids,
       :security_group_ids,
       :tls_certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

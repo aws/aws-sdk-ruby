@@ -18,7 +18,8 @@ module Aws::Chatbot
     class AccountPreferences < Struct.new(
       :user_authorization_required,
       :training_data_collection_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31,12 +32,14 @@ module Aws::Chatbot
     class AssociateToConfigurationRequest < Struct.new(
       :resource,
       :chat_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateToConfigurationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +49,8 @@ module Aws::Chatbot
     #   @return [String]
     class AssociationListing < Struct.new(
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +97,8 @@ module Aws::Chatbot
       :tags,
       :state,
       :state_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +127,8 @@ module Aws::Chatbot
       :team_name,
       :state,
       :state_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +137,8 @@ module Aws::Chatbot
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +147,8 @@ module Aws::Chatbot
     #   @return [String]
     class CreateChimeWebhookConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +185,8 @@ module Aws::Chatbot
       :configuration_name,
       :logging_level,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +195,8 @@ module Aws::Chatbot
     #   @return [Types::ChimeWebhookConfiguration]
     class CreateChimeWebhookConfigurationResult < Struct.new(
       :webhook_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +226,8 @@ module Aws::Chatbot
       :tags,
       :client_token,
       :action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +236,8 @@ module Aws::Chatbot
     #   @return [String]
     class CreateCustomActionResult < Struct.new(
       :custom_action_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +246,8 @@ module Aws::Chatbot
     #   @return [String]
     class CreateSlackChannelConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +297,8 @@ module Aws::Chatbot
       :guardrail_policy_arns,
       :user_authorization_required,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +307,8 @@ module Aws::Chatbot
     #   @return [Types::SlackChannelConfiguration]
     class CreateSlackChannelConfigurationResult < Struct.new(
       :channel_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +317,8 @@ module Aws::Chatbot
     #   @return [String]
     class CreateTeamsChannelConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +376,8 @@ module Aws::Chatbot
       :guardrail_policy_arns,
       :user_authorization_required,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -369,7 +386,8 @@ module Aws::Chatbot
     #   @return [Types::TeamsChannelConfiguration]
     class CreateTeamsChannelConfigurationResult < Struct.new(
       :channel_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +413,8 @@ module Aws::Chatbot
       :alias_name,
       :attachments,
       :action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +436,8 @@ module Aws::Chatbot
       :button_text,
       :criteria,
       :variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +455,8 @@ module Aws::Chatbot
       :operator,
       :variable_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -445,7 +466,8 @@ module Aws::Chatbot
     #   @return [String]
     class CustomActionDefinition < Struct.new(
       :command_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +476,8 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteChimeWebhookConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -463,12 +486,14 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteChimeWebhookConfigurationRequest < Struct.new(
       :chat_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteChimeWebhookConfigurationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -477,12 +502,14 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteCustomActionRequest < Struct.new(
       :custom_action_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomActionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,7 +518,8 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteMicrosoftTeamsUserIdentityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,12 +532,14 @@ module Aws::Chatbot
     class DeleteMicrosoftTeamsUserIdentityRequest < Struct.new(
       :chat_configuration_arn,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMicrosoftTeamsUserIdentityResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +548,8 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteSlackChannelConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,12 +558,14 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteSlackChannelConfigurationRequest < Struct.new(
       :chat_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSlackChannelConfigurationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -541,7 +574,8 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteSlackUserIdentityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -558,12 +592,14 @@ module Aws::Chatbot
       :chat_configuration_arn,
       :slack_team_id,
       :slack_user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSlackUserIdentityResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +608,8 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteSlackWorkspaceAuthorizationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,12 +618,14 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteSlackWorkspaceAuthorizationRequest < Struct.new(
       :slack_team_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSlackWorkspaceAuthorizationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,7 +634,8 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteTeamsChannelConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,12 +644,14 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteTeamsChannelConfigurationRequest < Struct.new(
       :chat_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTeamsChannelConfigurationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +660,8 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteTeamsConfiguredTeamException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,12 +672,14 @@ module Aws::Chatbot
     #   @return [String]
     class DeleteTeamsConfiguredTeamRequest < Struct.new(
       :team_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTeamsConfiguredTeamResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +688,8 @@ module Aws::Chatbot
     #   @return [String]
     class DescribeChimeWebhookConfigurationsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +708,8 @@ module Aws::Chatbot
       :max_results,
       :next_token,
       :chat_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -676,7 +723,8 @@ module Aws::Chatbot
     class DescribeChimeWebhookConfigurationsResult < Struct.new(
       :next_token,
       :webhook_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +733,8 @@ module Aws::Chatbot
     #   @return [String]
     class DescribeSlackChannelConfigurationsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +753,8 @@ module Aws::Chatbot
       :max_results,
       :next_token,
       :chat_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +768,8 @@ module Aws::Chatbot
     class DescribeSlackChannelConfigurationsResult < Struct.new(
       :next_token,
       :slack_channel_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +778,8 @@ module Aws::Chatbot
     #   @return [String]
     class DescribeSlackUserIdentitiesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +798,8 @@ module Aws::Chatbot
       :chat_configuration_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +813,8 @@ module Aws::Chatbot
     class DescribeSlackUserIdentitiesResult < Struct.new(
       :slack_user_identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +823,8 @@ module Aws::Chatbot
     #   @return [String]
     class DescribeSlackWorkspacesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +839,8 @@ module Aws::Chatbot
     class DescribeSlackWorkspacesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +854,8 @@ module Aws::Chatbot
     class DescribeSlackWorkspacesResult < Struct.new(
       :slack_workspaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,12 +868,14 @@ module Aws::Chatbot
     class DisassociateFromConfigurationRequest < Struct.new(
       :resource,
       :chat_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromConfigurationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,12 +884,14 @@ module Aws::Chatbot
     #   @return [String]
     class GetAccountPreferencesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAccountPreferencesRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -839,7 +900,8 @@ module Aws::Chatbot
     #   @return [Types::AccountPreferences]
     class GetAccountPreferencesResult < Struct.new(
       :account_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +910,8 @@ module Aws::Chatbot
     #   @return [String]
     class GetCustomActionRequest < Struct.new(
       :custom_action_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +920,8 @@ module Aws::Chatbot
     #   @return [Types::CustomAction]
     class GetCustomActionResult < Struct.new(
       :custom_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +930,8 @@ module Aws::Chatbot
     #   @return [String]
     class GetTeamsChannelConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +940,8 @@ module Aws::Chatbot
     #   @return [String]
     class GetTeamsChannelConfigurationRequest < Struct.new(
       :chat_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +950,8 @@ module Aws::Chatbot
     #   @return [Types::TeamsChannelConfiguration]
     class GetTeamsChannelConfigurationResult < Struct.new(
       :channel_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +960,8 @@ module Aws::Chatbot
     #   @return [String]
     class InternalServiceError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +970,8 @@ module Aws::Chatbot
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +980,8 @@ module Aws::Chatbot
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,7 +990,8 @@ module Aws::Chatbot
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +1008,8 @@ module Aws::Chatbot
       :chat_configuration,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,7 +1022,8 @@ module Aws::Chatbot
     class ListAssociationsResult < Struct.new(
       :associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -963,7 +1036,8 @@ module Aws::Chatbot
     class ListCustomActionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -976,7 +1050,8 @@ module Aws::Chatbot
     class ListCustomActionsResult < Struct.new(
       :custom_actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1060,8 @@ module Aws::Chatbot
     #   @return [String]
     class ListMicrosoftTeamsConfiguredTeamsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,7 +1074,8 @@ module Aws::Chatbot
     class ListMicrosoftTeamsConfiguredTeamsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1088,8 @@ module Aws::Chatbot
     class ListMicrosoftTeamsConfiguredTeamsResult < Struct.new(
       :configured_teams,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1098,8 @@ module Aws::Chatbot
     #   @return [String]
     class ListMicrosoftTeamsUserIdentitiesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1118,8 @@ module Aws::Chatbot
       :chat_configuration_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1053,7 +1133,8 @@ module Aws::Chatbot
     class ListMicrosoftTeamsUserIdentitiesResult < Struct.new(
       :teams_user_identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1062,7 +1143,8 @@ module Aws::Chatbot
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1071,7 +1153,8 @@ module Aws::Chatbot
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1163,8 @@ module Aws::Chatbot
     #   @return [String]
     class ListTeamsChannelConfigurationsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1099,7 +1183,8 @@ module Aws::Chatbot
       :max_results,
       :next_token,
       :team_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1197,8 @@ module Aws::Chatbot
     class ListTeamsChannelConfigurationsResult < Struct.new(
       :next_token,
       :team_channel_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1207,8 @@ module Aws::Chatbot
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1130,7 +1217,8 @@ module Aws::Chatbot
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1198,7 +1286,8 @@ module Aws::Chatbot
       :tags,
       :state,
       :state_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1315,8 @@ module Aws::Chatbot
       :slack_team_id,
       :slack_user_id,
       :aws_user_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,7 +1339,8 @@ module Aws::Chatbot
       :slack_team_name,
       :state,
       :state_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1267,7 +1358,8 @@ module Aws::Chatbot
     class Tag < Struct.new(
       :tag_key,
       :tag_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,12 +1372,14 @@ module Aws::Chatbot
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1357,7 +1451,8 @@ module Aws::Chatbot
       :tags,
       :state,
       :state_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1395,7 +1490,8 @@ module Aws::Chatbot
       :aws_user_identity,
       :teams_channel_id,
       :teams_tenant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1404,7 +1500,8 @@ module Aws::Chatbot
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,7 +1510,8 @@ module Aws::Chatbot
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,12 +1524,14 @@ module Aws::Chatbot
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1540,8 @@ module Aws::Chatbot
     #   @return [String]
     class UpdateAccountPreferencesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1455,7 +1556,8 @@ module Aws::Chatbot
     class UpdateAccountPreferencesRequest < Struct.new(
       :user_authorization_required,
       :training_data_collection_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1464,7 +1566,8 @@ module Aws::Chatbot
     #   @return [Types::AccountPreferences]
     class UpdateAccountPreferencesResult < Struct.new(
       :account_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1473,7 +1576,8 @@ module Aws::Chatbot
     #   @return [String]
     class UpdateChimeWebhookConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1506,7 +1610,8 @@ module Aws::Chatbot
       :sns_topic_arns,
       :iam_role_arn,
       :logging_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1515,7 +1620,8 @@ module Aws::Chatbot
     #   @return [Types::ChimeWebhookConfiguration]
     class UpdateChimeWebhookConfigurationResult < Struct.new(
       :webhook_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1536,7 +1642,8 @@ module Aws::Chatbot
       :definition,
       :alias_name,
       :attachments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1545,7 +1652,8 @@ module Aws::Chatbot
     #   @return [String]
     class UpdateCustomActionResult < Struct.new(
       :custom_action_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1662,8 @@ module Aws::Chatbot
     #   @return [String]
     class UpdateSlackChannelConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1596,7 +1705,8 @@ module Aws::Chatbot
       :logging_level,
       :guardrail_policy_arns,
       :user_authorization_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1605,7 +1715,8 @@ module Aws::Chatbot
     #   @return [Types::SlackChannelConfiguration]
     class UpdateSlackChannelConfigurationResult < Struct.new(
       :channel_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1614,7 +1725,8 @@ module Aws::Chatbot
     #   @return [String]
     class UpdateTeamsChannelConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1654,7 +1766,8 @@ module Aws::Chatbot
       :logging_level,
       :guardrail_policy_arns,
       :user_authorization_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1663,7 +1776,8 @@ module Aws::Chatbot
     #   @return [Types::TeamsChannelConfiguration]
     class UpdateTeamsChannelConfigurationResult < Struct.new(
       :channel_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

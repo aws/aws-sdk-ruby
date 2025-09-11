@@ -14,7 +14,8 @@ module Aws::RedshiftServerless
     class AccessDeniedException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +37,8 @@ module Aws::RedshiftServerless
       :custom_domain_certificate_expiry_time,
       :custom_domain_name,
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +56,8 @@ module Aws::RedshiftServerless
     class ConfigParameter < Struct.new(
       :parameter_key,
       :parameter_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -63,7 +66,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +89,8 @@ module Aws::RedshiftServerless
       :snapshot_name,
       :retention_period,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +99,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Snapshot]
     class ConvertRecoveryPointToSnapshotResponse < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +117,8 @@ module Aws::RedshiftServerless
       :workgroup_name,
       :custom_domain_name,
       :custom_domain_certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +139,8 @@ module Aws::RedshiftServerless
       :workgroup_name,
       :custom_domain_certificate_arn,
       :custom_domain_certificate_expiry_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +169,8 @@ module Aws::RedshiftServerless
       :workgroup_name,
       :vpc_security_group_ids,
       :owner_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +179,8 @@ module Aws::RedshiftServerless
     #   @return [Types::EndpointAccess]
     class CreateEndpointAccessResponse < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +240,8 @@ module Aws::RedshiftServerless
       :manage_admin_password,
       :admin_password_secret_kms_key_id,
       :redshift_idc_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +250,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Namespace]
     class CreateNamespaceResponse < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -259,7 +271,8 @@ module Aws::RedshiftServerless
       :capacity,
       :offering_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +281,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Reservation]
     class CreateReservationResponse < Struct.new(
       :reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +339,8 @@ module Aws::RedshiftServerless
       :scheduled_action_description,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +349,8 @@ module Aws::RedshiftServerless
     #   @return [Types::ScheduledActionResponse]
     class CreateScheduledActionResponse < Struct.new(
       :scheduled_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +371,8 @@ module Aws::RedshiftServerless
       :destination_region,
       :snapshot_retention_period,
       :destination_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +381,8 @@ module Aws::RedshiftServerless
     #   @return [Types::SnapshotCopyConfiguration]
     class CreateSnapshotCopyConfigurationResponse < Struct.new(
       :snapshot_copy_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +403,8 @@ module Aws::RedshiftServerless
       :snapshot_name,
       :retention_period,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +413,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Snapshot]
     class CreateSnapshotResponse < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +438,8 @@ module Aws::RedshiftServerless
       :snapshot_name_prefix,
       :retention_period,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +465,8 @@ module Aws::RedshiftServerless
       :amount,
       :period,
       :breach_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +475,8 @@ module Aws::RedshiftServerless
     #   @return [Types::UsageLimit]
     class CreateUsageLimitResponse < Struct.new(
       :usage_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +543,8 @@ module Aws::RedshiftServerless
       :price_performance_target,
       :ip_address_type,
       :track_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +553,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Workgroup]
     class CreateWorkgroupResponse < Struct.new(
       :workgroup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,12 +567,14 @@ module Aws::RedshiftServerless
     class DeleteCustomDomainAssociationRequest < Struct.new(
       :workgroup_name,
       :custom_domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomDomainAssociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +583,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class DeleteEndpointAccessRequest < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -565,7 +593,8 @@ module Aws::RedshiftServerless
     #   @return [Types::EndpointAccess]
     class DeleteEndpointAccessResponse < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -582,7 +611,8 @@ module Aws::RedshiftServerless
       :namespace_name,
       :final_snapshot_name,
       :final_snapshot_retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -591,7 +621,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Namespace]
     class DeleteNamespaceResponse < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,12 +631,14 @@ module Aws::RedshiftServerless
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +647,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class DeleteScheduledActionRequest < Struct.new(
       :scheduled_action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -623,7 +657,8 @@ module Aws::RedshiftServerless
     #   @return [Types::ScheduledActionResponse]
     class DeleteScheduledActionResponse < Struct.new(
       :scheduled_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +667,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class DeleteSnapshotCopyConfigurationRequest < Struct.new(
       :snapshot_copy_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +677,8 @@ module Aws::RedshiftServerless
     #   @return [Types::SnapshotCopyConfiguration]
     class DeleteSnapshotCopyConfigurationResponse < Struct.new(
       :snapshot_copy_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +687,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class DeleteSnapshotRequest < Struct.new(
       :snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -659,7 +697,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Snapshot]
     class DeleteSnapshotResponse < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +707,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class DeleteUsageLimitRequest < Struct.new(
       :usage_limit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +717,8 @@ module Aws::RedshiftServerless
     #   @return [Types::UsageLimit]
     class DeleteUsageLimitResponse < Struct.new(
       :usage_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +727,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class DeleteWorkgroupRequest < Struct.new(
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +737,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Workgroup]
     class DeleteWorkgroupResponse < Struct.new(
       :workgroup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +756,8 @@ module Aws::RedshiftServerless
       :address,
       :port,
       :vpc_endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +804,8 @@ module Aws::RedshiftServerless
       :vpc_security_groups,
       :vpc_endpoint,
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +847,8 @@ module Aws::RedshiftServerless
       :duration_seconds,
       :workgroup_name,
       :custom_domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +874,8 @@ module Aws::RedshiftServerless
       :db_password,
       :expiration,
       :next_refresh_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +888,8 @@ module Aws::RedshiftServerless
     class GetCustomDomainAssociationRequest < Struct.new(
       :custom_domain_name,
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +910,8 @@ module Aws::RedshiftServerless
       :workgroup_name,
       :custom_domain_certificate_arn,
       :custom_domain_certificate_expiry_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -871,7 +920,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetEndpointAccessRequest < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -880,7 +930,8 @@ module Aws::RedshiftServerless
     #   @return [Types::EndpointAccess]
     class GetEndpointAccessResponse < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +940,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetNamespaceRequest < Struct.new(
       :namespace_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -898,7 +950,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Namespace]
     class GetNamespaceResponse < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +960,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetRecoveryPointRequest < Struct.new(
       :recovery_point_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -916,7 +970,8 @@ module Aws::RedshiftServerless
     #   @return [Types::RecoveryPoint]
     class GetRecoveryPointResponse < Struct.new(
       :recovery_point,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +980,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetReservationOfferingRequest < Struct.new(
       :offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -934,7 +990,8 @@ module Aws::RedshiftServerless
     #   @return [Types::ReservationOffering]
     class GetReservationOfferingResponse < Struct.new(
       :reservation_offering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -943,7 +1000,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetReservationRequest < Struct.new(
       :reservation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +1010,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Reservation]
     class GetReservationResponse < Struct.new(
       :reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -961,7 +1020,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1030,8 @@ module Aws::RedshiftServerless
     #   @return [Types::ResourcePolicy]
     class GetResourcePolicyResponse < Struct.new(
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -979,7 +1040,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetScheduledActionRequest < Struct.new(
       :scheduled_action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1050,8 @@ module Aws::RedshiftServerless
     #   @return [Types::ScheduledActionResponse]
     class GetScheduledActionResponse < Struct.new(
       :scheduled_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1068,8 @@ module Aws::RedshiftServerless
       :snapshot_name,
       :owner_account,
       :snapshot_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1078,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Snapshot]
     class GetSnapshotResponse < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1023,7 +1088,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetTableRestoreStatusRequest < Struct.new(
       :table_restore_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1033,7 +1099,8 @@ module Aws::RedshiftServerless
     #   @return [Types::TableRestoreStatus]
     class GetTableRestoreStatusResponse < Struct.new(
       :table_restore_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1109,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetTrackRequest < Struct.new(
       :track_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1119,8 @@ module Aws::RedshiftServerless
     #   @return [Types::ServerlessTrack]
     class GetTrackResponse < Struct.new(
       :track,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1129,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetUsageLimitRequest < Struct.new(
       :usage_limit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1069,7 +1139,8 @@ module Aws::RedshiftServerless
     #   @return [Types::UsageLimit]
     class GetUsageLimitResponse < Struct.new(
       :usage_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1078,7 +1149,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class GetWorkgroupRequest < Struct.new(
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1087,7 +1159,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Workgroup]
     class GetWorkgroupResponse < Struct.new(
       :workgroup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1169,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class InsufficientCapacityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1179,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1189,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class InvalidPaginationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1123,7 +1199,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class Ipv6CidrBlockNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1224,8 @@ module Aws::RedshiftServerless
       :max_results,
       :custom_domain_name,
       :custom_domain_certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1240,8 @@ module Aws::RedshiftServerless
     class ListCustomDomainAssociationsResponse < Struct.new(
       :next_token,
       :associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1269,8 @@ module Aws::RedshiftServerless
       :workgroup_name,
       :vpc_id,
       :owner_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1205,7 +1285,8 @@ module Aws::RedshiftServerless
     class ListEndpointAccessResponse < Struct.new(
       :next_token,
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1307,8 @@ module Aws::RedshiftServerless
       :source_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1241,7 +1323,8 @@ module Aws::RedshiftServerless
     class ListManagedWorkgroupsResponse < Struct.new(
       :next_token,
       :managed_workgroups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1257,7 +1340,8 @@ module Aws::RedshiftServerless
     class ListNamespacesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1272,7 +1356,8 @@ module Aws::RedshiftServerless
     class ListNamespacesResponse < Struct.new(
       :next_token,
       :namespaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1389,8 @@ module Aws::RedshiftServerless
       :end_time,
       :namespace_name,
       :namespace_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1405,8 @@ module Aws::RedshiftServerless
     class ListRecoveryPointsResponse < Struct.new(
       :recovery_points,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1419,8 @@ module Aws::RedshiftServerless
     class ListReservationOfferingsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1345,7 +1433,8 @@ module Aws::RedshiftServerless
     class ListReservationOfferingsResponse < Struct.new(
       :reservation_offerings_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1358,7 +1447,8 @@ module Aws::RedshiftServerless
     class ListReservationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,7 +1461,8 @@ module Aws::RedshiftServerless
     class ListReservationsResponse < Struct.new(
       :reservations_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1480,8 @@ module Aws::RedshiftServerless
       :next_token,
       :max_results,
       :namespace_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1494,8 @@ module Aws::RedshiftServerless
     class ListScheduledActionsResponse < Struct.new(
       :next_token,
       :scheduled_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1513,8 @@ module Aws::RedshiftServerless
       :namespace_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1434,7 +1528,8 @@ module Aws::RedshiftServerless
     class ListSnapshotCopyConfigurationsResponse < Struct.new(
       :next_token,
       :snapshot_copy_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1565,8 @@ module Aws::RedshiftServerless
       :owner_account,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1485,7 +1581,8 @@ module Aws::RedshiftServerless
     class ListSnapshotsResponse < Struct.new(
       :next_token,
       :snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1509,7 +1606,8 @@ module Aws::RedshiftServerless
       :max_results,
       :namespace_name,
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1524,7 +1622,8 @@ module Aws::RedshiftServerless
     class ListTableRestoreStatusResponse < Struct.new(
       :next_token,
       :table_restore_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1533,7 +1632,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1542,7 +1642,8 @@ module Aws::RedshiftServerless
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1561,7 +1662,8 @@ module Aws::RedshiftServerless
     class ListTracksRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1677,8 @@ module Aws::RedshiftServerless
     class ListTracksResponse < Struct.new(
       :tracks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1600,7 +1703,8 @@ module Aws::RedshiftServerless
       :usage_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,7 +1719,8 @@ module Aws::RedshiftServerless
     class ListUsageLimitsResponse < Struct.new(
       :usage_limits,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1740,8 @@ module Aws::RedshiftServerless
       :next_token,
       :max_results,
       :owner_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1757,8 @@ module Aws::RedshiftServerless
     class ListWorkgroupsResponse < Struct.new(
       :next_token,
       :workgroups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1785,8 @@ module Aws::RedshiftServerless
       :source_arn,
       :status,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1739,7 +1847,8 @@ module Aws::RedshiftServerless
       :creation_date,
       :admin_password_secret_arn,
       :admin_password_secret_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1767,7 +1876,8 @@ module Aws::RedshiftServerless
       :private_ip_address,
       :availability_zone,
       :ipv6_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1782,7 +1892,8 @@ module Aws::RedshiftServerless
     class PerformanceTarget < Struct.new(
       :status,
       :level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1801,7 +1912,8 @@ module Aws::RedshiftServerless
     class PutResourcePolicyRequest < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1922,8 @@ module Aws::RedshiftServerless
     #   @return [Types::ResourcePolicy]
     class PutResourcePolicyResponse < Struct.new(
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1841,7 +1954,8 @@ module Aws::RedshiftServerless
       :namespace_name,
       :workgroup_name,
       :namespace_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1899,7 +2013,8 @@ module Aws::RedshiftServerless
       :capacity,
       :offering,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1935,7 +2050,8 @@ module Aws::RedshiftServerless
       :hourly_charge,
       :currency_code,
       :offering_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1955,7 +2071,8 @@ module Aws::RedshiftServerless
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1969,7 +2086,8 @@ module Aws::RedshiftServerless
     class ResourcePolicy < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2104,8 @@ module Aws::RedshiftServerless
       :recovery_point_id,
       :namespace_name,
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1999,7 +2118,8 @@ module Aws::RedshiftServerless
     class RestoreFromRecoveryPointResponse < Struct.new(
       :recovery_point_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2038,7 +2158,8 @@ module Aws::RedshiftServerless
       :owner_account,
       :manage_admin_password,
       :admin_password_secret_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2055,7 +2176,8 @@ module Aws::RedshiftServerless
       :snapshot_name,
       :owner_account,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2222,8 @@ module Aws::RedshiftServerless
       :target_schema_name,
       :new_table_name,
       :activate_case_sensitive_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2109,7 +2232,8 @@ module Aws::RedshiftServerless
     #   @return [Types::TableRestoreStatus]
     class RestoreTableFromRecoveryPointResponse < Struct.new(
       :table_restore_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2156,7 +2280,8 @@ module Aws::RedshiftServerless
       :target_schema_name,
       :new_table_name,
       :activate_case_sensitive_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2165,7 +2290,8 @@ module Aws::RedshiftServerless
     #   @return [Types::TableRestoreStatus]
     class RestoreTableFromSnapshotResponse < Struct.new(
       :table_restore_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2182,7 +2308,8 @@ module Aws::RedshiftServerless
       :at,
       :cron,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class At < Schedule; end
@@ -2200,7 +2327,8 @@ module Aws::RedshiftServerless
     class ScheduledActionAssociation < Struct.new(
       :namespace_name,
       :scheduled_action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2265,7 +2393,8 @@ module Aws::RedshiftServerless
       :target_action,
       :namespace_name,
       :scheduled_action_uuid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2286,7 +2415,8 @@ module Aws::RedshiftServerless
       :track_name,
       :workgroup_version,
       :update_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2295,7 +2425,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2390,7 +2521,8 @@ module Aws::RedshiftServerless
       :accounts_with_provisioned_restore_access,
       :admin_password_secret_arn,
       :admin_password_secret_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2420,7 +2552,8 @@ module Aws::RedshiftServerless
       :destination_region,
       :snapshot_retention_period,
       :destination_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2492,7 +2625,8 @@ module Aws::RedshiftServerless
       :target_schema_name,
       :new_table_name,
       :recovery_point_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2506,7 +2640,8 @@ module Aws::RedshiftServerless
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2519,12 +2654,14 @@ module Aws::RedshiftServerless
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2539,7 +2676,8 @@ module Aws::RedshiftServerless
     class TargetAction < Struct.new(
       :create_snapshot,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CreateSnapshot < TargetAction; end
@@ -2554,7 +2692,8 @@ module Aws::RedshiftServerless
     class ThrottlingException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2567,7 +2706,8 @@ module Aws::RedshiftServerless
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2580,12 +2720,14 @@ module Aws::RedshiftServerless
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2602,7 +2744,8 @@ module Aws::RedshiftServerless
       :workgroup_name,
       :custom_domain_name,
       :custom_domain_certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2623,7 +2766,8 @@ module Aws::RedshiftServerless
       :workgroup_name,
       :custom_domain_certificate_arn,
       :custom_domain_certificate_expiry_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2636,7 +2780,8 @@ module Aws::RedshiftServerless
     class UpdateEndpointAccessRequest < Struct.new(
       :endpoint_name,
       :vpc_security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2645,7 +2790,8 @@ module Aws::RedshiftServerless
     #   @return [Types::EndpointAccess]
     class UpdateEndpointAccessResponse < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2695,7 +2841,8 @@ module Aws::RedshiftServerless
       :log_exports,
       :manage_admin_password,
       :admin_password_secret_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2704,7 +2851,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Namespace]
     class UpdateNamespaceResponse < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2756,7 +2904,8 @@ module Aws::RedshiftServerless
       :scheduled_action_description,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2765,7 +2914,8 @@ module Aws::RedshiftServerless
     #   @return [Types::ScheduledActionResponse]
     class UpdateScheduledActionResponse < Struct.new(
       :scheduled_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2778,7 +2928,8 @@ module Aws::RedshiftServerless
     class UpdateSnapshotCopyConfigurationRequest < Struct.new(
       :snapshot_copy_configuration_id,
       :snapshot_retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2787,7 +2938,8 @@ module Aws::RedshiftServerless
     #   @return [Types::SnapshotCopyConfiguration]
     class UpdateSnapshotCopyConfigurationResponse < Struct.new(
       :snapshot_copy_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2800,7 +2952,8 @@ module Aws::RedshiftServerless
     class UpdateSnapshotRequest < Struct.new(
       :snapshot_name,
       :retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2809,7 +2962,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Snapshot]
     class UpdateSnapshotResponse < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2823,7 +2977,8 @@ module Aws::RedshiftServerless
     class UpdateTarget < Struct.new(
       :track_name,
       :workgroup_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2842,7 +2997,8 @@ module Aws::RedshiftServerless
       :usage_limit_id,
       :amount,
       :breach_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2851,7 +3007,8 @@ module Aws::RedshiftServerless
     #   @return [Types::UsageLimit]
     class UpdateUsageLimitResponse < Struct.new(
       :usage_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2911,7 +3068,8 @@ module Aws::RedshiftServerless
       :ip_address_type,
       :price_performance_target,
       :track_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2920,7 +3078,8 @@ module Aws::RedshiftServerless
     #   @return [Types::Workgroup]
     class UpdateWorkgroupResponse < Struct.new(
       :workgroup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2954,7 +3113,8 @@ module Aws::RedshiftServerless
       :amount,
       :period,
       :breach_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2963,7 +3123,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2981,7 +3142,8 @@ module Aws::RedshiftServerless
       :vpc_endpoint_id,
       :vpc_id,
       :network_interfaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2995,7 +3157,8 @@ module Aws::RedshiftServerless
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3108,7 +3271,8 @@ module Aws::RedshiftServerless
       :price_performance_target,
       :track_name,
       :pending_track_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

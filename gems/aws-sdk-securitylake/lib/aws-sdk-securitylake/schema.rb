@@ -887,7 +887,6 @@ module Aws::SecurityLake
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to update a webhook invocation to notify a client when there is new data in the data lake", "aws.iam#requiredActions" => ["iam:CreateServiceLinkedRole", "iam:GetRole", "iam:DeleteRolePolicy", "iam:PutRolePolicy", "iam:PassRole", "s3:PutLifecycleConfiguration", "s3:PutBucketNotification", "s3:GetBucketNotification", "s3:PutBucketPolicy", "s3:PutBucketPublicAccessBlock", "s3:CreateBucket", "s3:ListBucket", "s3:PutBucketVersioning", "events:CreateApiDestination", "events:CreateConnection", "events:ListApiDestinations", "events:ListConnections", "events:PutRule", "events:DescribeRule", "events:PutTargets", "sqs:CreateQueue", "sqs:DeleteQueue", "sqs:GetQueueAttributes", "sqs:GetQueueUrl", "sqs:SetQueueAttributes"], "smithy.api#http" => {"method" => "PUT", "uri" => "/v1/subscribers/{subscriberId}/notification", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

@@ -19,7 +19,8 @@ module Aws::EC2
     class AcceleratorCount < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::EC2
     class AcceleratorCountRequest < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +56,8 @@ module Aws::EC2
     class AcceleratorTotalMemoryMiB < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -70,7 +73,8 @@ module Aws::EC2
     class AcceleratorTotalMemoryMiBRequest < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -91,7 +95,8 @@ module Aws::EC2
       :address,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -100,7 +105,8 @@ module Aws::EC2
     #   @return [Types::AddressTransfer]
     class AcceptAddressTransferResult < Struct.new(
       :address_transfer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +119,8 @@ module Aws::EC2
     class AcceptCapacityReservationBillingOwnershipRequest < Struct.new(
       :dry_run,
       :capacity_reservation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +129,8 @@ module Aws::EC2
     #   @return [Boolean]
     class AcceptCapacityReservationBillingOwnershipResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +153,8 @@ module Aws::EC2
       :dry_run,
       :reserved_instance_ids,
       :target_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +164,8 @@ module Aws::EC2
     #   @return [String]
     class AcceptReservedInstancesExchangeQuoteResult < Struct.new(
       :exchange_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +188,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :subnet_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +198,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayMulticastDomainAssociations]
     class AcceptTransitGatewayMulticastDomainAssociationsResult < Struct.new(
       :associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +214,8 @@ module Aws::EC2
     class AcceptTransitGatewayPeeringAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +224,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPeeringAttachment]
     class AcceptTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +240,8 @@ module Aws::EC2
     class AcceptTransitGatewayVpcAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +250,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayVpcAttachment]
     class AcceptTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +270,8 @@ module Aws::EC2
       :dry_run,
       :service_id,
       :vpc_endpoint_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +281,8 @@ module Aws::EC2
     #   @return [Array<Types::UnsuccessfulItem>]
     class AcceptVpcEndpointConnectionsResult < Struct.new(
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +298,8 @@ module Aws::EC2
     class AcceptVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +308,8 @@ module Aws::EC2
     #   @return [Types::VpcPeeringConnection]
     class AcceptVpcPeeringConnectionResult < Struct.new(
       :vpc_peering_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +331,8 @@ module Aws::EC2
       :network_insights_access_scope_id,
       :finding_id,
       :finding_components,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -329,7 +350,8 @@ module Aws::EC2
       :source,
       :destination,
       :through_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +369,8 @@ module Aws::EC2
       :source,
       :destination,
       :through_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +384,8 @@ module Aws::EC2
     class AccountAttribute < Struct.new(
       :attribute_name,
       :attribute_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +395,8 @@ module Aws::EC2
     #   @return [String]
     class AccountAttributeValue < Struct.new(
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +420,8 @@ module Aws::EC2
       :instance_type,
       :spot_instance_request_id,
       :instance_health,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +463,8 @@ module Aws::EC2
       :ike_version,
       :provisioning_status,
       :provisioning_status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +476,8 @@ module Aws::EC2
     #   @return [String]
     class AddIpamOperatingRegion < Struct.new(
       :region_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +517,8 @@ module Aws::EC2
     #   @return [String]
     class AddIpamOrganizationalUnitExclusion < Struct.new(
       :organizations_entity_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +533,8 @@ module Aws::EC2
     class AddPrefixListEntry < Struct.new(
       :cidr,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +556,8 @@ module Aws::EC2
       :principal,
       :service_permission_id,
       :service_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +595,8 @@ module Aws::EC2
       :rule_group_rule_options_pairs,
       :service_name,
       :load_balancers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -639,7 +671,8 @@ module Aws::EC2
       :service_managed,
       :instance_id,
       :public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +694,8 @@ module Aws::EC2
       :allocation_id,
       :ptr_record,
       :ptr_record_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -693,7 +727,8 @@ module Aws::EC2
       :transfer_offer_expiration_timestamp,
       :transfer_offer_accepted_timestamp,
       :address_transfer_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,7 +767,8 @@ module Aws::EC2
       :asn,
       :dry_run,
       :network_border_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +777,8 @@ module Aws::EC2
     #   @return [Types::ByoipCidr]
     class AdvertiseByoipCidrResult < Struct.new(
       :byoip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +822,8 @@ module Aws::EC2
       :tag_specifications,
       :ipam_pool_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -824,7 +862,8 @@ module Aws::EC2
       :customer_owned_ipv4_pool,
       :carrier_ip,
       :public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +961,8 @@ module Aws::EC2
       :instance_type,
       :quantity,
       :availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +973,8 @@ module Aws::EC2
     #   @return [Array<String>]
     class AllocateHostsResult < Struct.new(
       :host_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -994,7 +1035,8 @@ module Aws::EC2
       :preview_next_cidr,
       :allowed_cidrs,
       :disallowed_cidrs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1045,8 @@ module Aws::EC2
     #   @return [Types::IpamPoolAllocation]
     class AllocateIpamPoolCidrResult < Struct.new(
       :ipam_pool_allocation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1029,7 +1072,8 @@ module Aws::EC2
       :service_permission_id,
       :tags,
       :service_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1043,7 +1087,8 @@ module Aws::EC2
     class AlternatePathHint < Struct.new(
       :component_id,
       :component_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1118,8 @@ module Aws::EC2
       :protocol,
       :rule_action,
       :rule_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1091,7 +1137,8 @@ module Aws::EC2
       :id,
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1152,8 @@ module Aws::EC2
     class AnalysisLoadBalancerListener < Struct.new(
       :load_balancer_port,
       :instance_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1131,7 +1179,8 @@ module Aws::EC2
       :availability_zone_id,
       :instance,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,7 +1207,8 @@ module Aws::EC2
       :protocol,
       :source_addresses,
       :source_port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1289,8 @@ module Aws::EC2
       :carrier_gateway_id,
       :core_network_arn,
       :local_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1328,8 @@ module Aws::EC2
       :port_range,
       :prefix_list_id,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1299,7 +1351,8 @@ module Aws::EC2
       :vpc_id,
       :security_group_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1308,7 +1361,8 @@ module Aws::EC2
     #   @return [Array<String>]
     class ApplySecurityGroupsToClientVpnTargetNetworkResult < Struct.new(
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1330,7 +1384,8 @@ module Aws::EC2
       :cidr,
       :status_message,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1345,7 +1400,8 @@ module Aws::EC2
     class AsnAuthorizationContext < Struct.new(
       :message,
       :signature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1377,7 +1433,8 @@ module Aws::EC2
       :network_interface_id,
       :ipv6_addresses,
       :ipv6_address_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1395,7 +1452,8 @@ module Aws::EC2
       :assigned_ipv6_addresses,
       :assigned_ipv6_prefixes,
       :network_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1431,7 +1489,8 @@ module Aws::EC2
       :private_ip_addresses,
       :secondary_private_ip_address_count,
       :allow_reassignment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1448,7 +1507,8 @@ module Aws::EC2
       :network_interface_id,
       :assigned_private_ip_addresses,
       :assigned_ipv4_prefixes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1471,7 +1531,8 @@ module Aws::EC2
       :private_ip_addresses,
       :private_ip_address_count,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1484,7 +1545,8 @@ module Aws::EC2
     class AssignPrivateNatGatewayAddressResult < Struct.new(
       :nat_gateway_id,
       :nat_gateway_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1494,7 +1556,8 @@ module Aws::EC2
     #   @return [String]
     class AssignedPrivateIpAddress < Struct.new(
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1594,8 @@ module Aws::EC2
       :network_interface_id,
       :private_ip_address,
       :allow_reassociation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1540,7 +1604,8 @@ module Aws::EC2
     #   @return [String]
     class AssociateAddressResult < Struct.new(
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1557,7 +1622,8 @@ module Aws::EC2
       :dry_run,
       :capacity_reservation_id,
       :unused_reservation_billing_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1632,8 @@ module Aws::EC2
     #   @return [Boolean]
     class AssociateCapacityReservationBillingOwnerResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1588,7 +1655,8 @@ module Aws::EC2
       :subnet_id,
       :client_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1669,8 @@ module Aws::EC2
     class AssociateClientVpnTargetNetworkResult < Struct.new(
       :association_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,7 +1690,8 @@ module Aws::EC2
       :dhcp_options_id,
       :vpc_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1709,8 @@ module Aws::EC2
       :certificate_arn,
       :role_arn,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,7 +1728,8 @@ module Aws::EC2
       :certificate_s3_bucket_name,
       :certificate_s3_object_key,
       :encryption_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1742,8 @@ module Aws::EC2
     class AssociateIamInstanceProfileRequest < Struct.new(
       :iam_instance_profile,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1679,7 +1752,8 @@ module Aws::EC2
     #   @return [Types::IamInstanceProfileAssociation]
     class AssociateIamInstanceProfileResult < Struct.new(
       :iam_instance_profile_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1698,7 +1772,8 @@ module Aws::EC2
       :dry_run,
       :instance_event_window_id,
       :association_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1707,7 +1782,8 @@ module Aws::EC2
     #   @return [Types::InstanceEventWindow]
     class AssociateInstanceEventWindowResult < Struct.new(
       :instance_event_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1726,7 +1802,8 @@ module Aws::EC2
       :dry_run,
       :asn,
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1735,7 +1812,8 @@ module Aws::EC2
     #   @return [Types::AsnAssociation]
     class AssociateIpamByoasnResult < Struct.new(
       :asn_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1762,7 +1840,8 @@ module Aws::EC2
       :ipam_resource_discovery_id,
       :tag_specifications,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1771,7 +1850,8 @@ module Aws::EC2
     #   @return [Types::IpamResourceDiscoveryAssociation]
     class AssociateIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1794,7 +1874,8 @@ module Aws::EC2
       :allocation_ids,
       :private_ip_addresses,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1807,7 +1888,8 @@ module Aws::EC2
     class AssociateNatGatewayAddressResult < Struct.new(
       :nat_gateway_id,
       :nat_gateway_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1826,7 +1908,8 @@ module Aws::EC2
       :route_server_id,
       :vpc_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1835,7 +1918,8 @@ module Aws::EC2
     #   @return [Types::RouteServerAssociation]
     class AssociateRouteServerResult < Struct.new(
       :route_server_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1862,7 +1946,8 @@ module Aws::EC2
       :dry_run,
       :subnet_id,
       :route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1876,7 +1961,8 @@ module Aws::EC2
     class AssociateRouteTableResult < Struct.new(
       :association_id,
       :association_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1895,7 +1981,8 @@ module Aws::EC2
       :group_id,
       :vpc_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1904,7 +1991,8 @@ module Aws::EC2
     #   @return [String]
     class AssociateSecurityGroupVpcResult < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1925,7 +2013,8 @@ module Aws::EC2
       :ipv6_netmask_length,
       :subnet_id,
       :ipv6_cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1938,7 +2027,8 @@ module Aws::EC2
     class AssociateSubnetCidrBlockResult < Struct.new(
       :ipv6_cidr_block_association,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1961,7 +2051,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :subnet_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1970,7 +2061,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayMulticastDomainAssociations]
     class AssociateTransitGatewayMulticastDomainResult < Struct.new(
       :associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2081,8 @@ module Aws::EC2
       :transit_gateway_policy_table_id,
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1998,7 +2091,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPolicyTableAssociation]
     class AssociateTransitGatewayPolicyTableResult < Struct.new(
       :association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2017,7 +2111,8 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2026,7 +2121,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayAssociation]
     class AssociateTransitGatewayRouteTableResult < Struct.new(
       :association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2155,8 @@ module Aws::EC2
       :gre_key,
       :client_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2171,8 @@ module Aws::EC2
     class AssociateTrunkInterfaceResult < Struct.new(
       :interface_association,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2125,7 +2223,8 @@ module Aws::EC2
       :ipv6_netmask_length,
       :vpc_id,
       :amazon_provided_ipv6_cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2142,7 +2241,8 @@ module Aws::EC2
       :ipv6_cidr_block_association,
       :cidr_block_association,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2166,7 +2266,8 @@ module Aws::EC2
       :certificate_s3_bucket_name,
       :certificate_s3_object_key,
       :encryption_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2180,7 +2281,8 @@ module Aws::EC2
     class AssociatedTargetNetwork < Struct.new(
       :network_id,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2296,8 @@ module Aws::EC2
     class AssociationStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2216,7 +2319,8 @@ module Aws::EC2
       :partition_load_frequency,
       :partition_start_date,
       :partition_end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2239,7 +2343,8 @@ module Aws::EC2
       :instance_id,
       :vpc_id,
       :groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2248,7 +2353,8 @@ module Aws::EC2
     #   @return [Boolean]
     class AttachClassicLinkVpcResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2267,7 +2373,8 @@ module Aws::EC2
       :dry_run,
       :internet_gateway_id,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2307,7 +2414,8 @@ module Aws::EC2
       :network_interface_id,
       :instance_id,
       :device_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2321,7 +2429,8 @@ module Aws::EC2
     class AttachNetworkInterfaceResult < Struct.new(
       :attachment_id,
       :network_card_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2345,7 +2454,8 @@ module Aws::EC2
       :verified_access_trust_provider_id,
       :client_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2358,7 +2468,8 @@ module Aws::EC2
     class AttachVerifiedAccessTrustProviderResult < Struct.new(
       :verified_access_trust_provider,
       :verified_access_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2404,7 +2515,8 @@ module Aws::EC2
       :device,
       :state,
       :attach_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2540,8 @@ module Aws::EC2
       :instance_id,
       :volume_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2449,7 +2562,8 @@ module Aws::EC2
       :vpc_id,
       :vpn_gateway_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2459,7 +2573,8 @@ module Aws::EC2
     #   @return [Types::VpcAttachment]
     class AttachVpnGatewayResult < Struct.new(
       :vpc_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2480,7 +2595,8 @@ module Aws::EC2
     class AttachmentEnaSrdSpecification < Struct.new(
       :ena_srd_enabled,
       :ena_srd_udp_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2495,7 +2611,8 @@ module Aws::EC2
     #   @return [Boolean]
     class AttachmentEnaSrdUdpSpecification < Struct.new(
       :ena_srd_udp_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2505,7 +2622,8 @@ module Aws::EC2
     #   @return [Boolean]
     class AttributeBooleanValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2533,7 +2651,8 @@ module Aws::EC2
       :number_of_matched_accounts,
       :number_of_unmatched_accounts,
       :regional_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2543,7 +2662,8 @@ module Aws::EC2
     #   @return [String]
     class AttributeValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2573,7 +2693,8 @@ module Aws::EC2
       :access_all,
       :destination_cidr,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2609,7 +2730,8 @@ module Aws::EC2
       :description,
       :client_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2618,7 +2740,8 @@ module Aws::EC2
     #   @return [Types::ClientVpnAuthorizationRuleStatus]
     class AuthorizeClientVpnIngressResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2788,8 @@ module Aws::EC2
       :to_port,
       :cidr_ip,
       :ip_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2678,7 +2802,8 @@ module Aws::EC2
     class AuthorizeSecurityGroupEgressResult < Struct.new(
       :return,
       :security_group_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2756,7 +2881,8 @@ module Aws::EC2
       :to_port,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2769,7 +2895,8 @@ module Aws::EC2
     class AuthorizeSecurityGroupIngressResult < Struct.new(
       :return,
       :security_group_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2847,7 +2974,8 @@ module Aws::EC2
       :parent_zone_id,
       :group_long_name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2857,7 +2985,8 @@ module Aws::EC2
     #   @return [String]
     class AvailabilityZoneMessage < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2875,7 +3004,8 @@ module Aws::EC2
     class AvailableCapacity < Struct.new(
       :available_instance_capacity,
       :available_v_cpus,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2893,7 +3023,8 @@ module Aws::EC2
     class BaselineEbsBandwidthMbps < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2911,7 +3042,8 @@ module Aws::EC2
     class BaselineEbsBandwidthMbpsRequest < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2927,7 +3059,8 @@ module Aws::EC2
     #   @return [Types::CpuPerformanceFactor]
     class BaselinePerformanceFactors < Struct.new(
       :cpu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2943,7 +3076,8 @@ module Aws::EC2
     #   @return [Types::CpuPerformanceFactorRequest]
     class BaselinePerformanceFactorsRequest < Struct.new(
       :cpu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2951,7 +3085,8 @@ module Aws::EC2
     #   @return [String]
     class BlobAttributeValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2986,7 +3121,8 @@ module Aws::EC2
       :no_device,
       :device_name,
       :virtual_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3146,8 @@ module Aws::EC2
       :virtual_name,
       :ebs,
       :no_device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3034,7 +3171,8 @@ module Aws::EC2
     #   @return [String]
     class BlockPublicAccessStates < Struct.new(
       :internet_gateway_block_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3057,7 +3195,8 @@ module Aws::EC2
       :instance_id,
       :storage,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3067,7 +3206,8 @@ module Aws::EC2
     #   @return [Types::BundleTask]
     class BundleInstanceResult < Struct.new(
       :bundle_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3105,7 +3245,8 @@ module Aws::EC2
       :storage,
       :progress,
       :bundle_task_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3119,7 +3260,8 @@ module Aws::EC2
     class BundleTaskError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3141,7 +3283,8 @@ module Aws::EC2
       :ipam_id,
       :status_message,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3221,7 +3364,8 @@ module Aws::EC2
       :status_message,
       :state,
       :network_border_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3237,7 +3381,8 @@ module Aws::EC2
     class CancelBundleTaskRequest < Struct.new(
       :bundle_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3247,7 +3392,8 @@ module Aws::EC2
     #   @return [Types::BundleTask]
     class CancelBundleTaskResult < Struct.new(
       :bundle_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3261,7 +3407,8 @@ module Aws::EC2
     class CancelCapacityReservationFleetError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3274,7 +3421,8 @@ module Aws::EC2
     class CancelCapacityReservationFleetsRequest < Struct.new(
       :dry_run,
       :capacity_reservation_fleet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3288,7 +3436,8 @@ module Aws::EC2
     class CancelCapacityReservationFleetsResult < Struct.new(
       :successful_fleet_cancellations,
       :failed_fleet_cancellations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3301,7 +3450,8 @@ module Aws::EC2
     class CancelCapacityReservationRequest < Struct.new(
       :capacity_reservation_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3310,7 +3460,8 @@ module Aws::EC2
     #   @return [Boolean]
     class CancelCapacityReservationResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3329,7 +3480,8 @@ module Aws::EC2
       :dry_run,
       :conversion_task_id,
       :reason_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3344,7 +3496,8 @@ module Aws::EC2
     class CancelDeclarativePoliciesReportRequest < Struct.new(
       :dry_run,
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3353,7 +3506,8 @@ module Aws::EC2
     #   @return [Boolean]
     class CancelDeclarativePoliciesReportResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3363,7 +3517,8 @@ module Aws::EC2
     #   @return [String]
     class CancelExportTaskRequest < Struct.new(
       :export_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3378,7 +3533,8 @@ module Aws::EC2
     class CancelImageLaunchPermissionRequest < Struct.new(
       :image_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3387,7 +3543,8 @@ module Aws::EC2
     #   @return [Boolean]
     class CancelImageLaunchPermissionResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3406,7 +3563,8 @@ module Aws::EC2
       :cancel_reason,
       :dry_run,
       :import_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3423,7 +3581,8 @@ module Aws::EC2
       :import_task_id,
       :previous_state,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3433,7 +3592,8 @@ module Aws::EC2
     #   @return [String]
     class CancelReservedInstancesListingRequest < Struct.new(
       :reserved_instances_listing_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3443,7 +3603,8 @@ module Aws::EC2
     #   @return [Array<Types::ReservedInstancesListing>]
     class CancelReservedInstancesListingResult < Struct.new(
       :reserved_instances_listings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3457,7 +3618,8 @@ module Aws::EC2
     class CancelSpotFleetRequestsError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3471,7 +3633,8 @@ module Aws::EC2
     class CancelSpotFleetRequestsErrorItem < Struct.new(
       :error,
       :spot_fleet_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3495,7 +3658,8 @@ module Aws::EC2
       :dry_run,
       :spot_fleet_request_ids,
       :terminate_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3509,7 +3673,8 @@ module Aws::EC2
     class CancelSpotFleetRequestsResponse < Struct.new(
       :successful_fleet_requests,
       :unsuccessful_fleet_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3527,7 +3692,8 @@ module Aws::EC2
       :current_spot_fleet_request_state,
       :previous_spot_fleet_request_state,
       :spot_fleet_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3544,7 +3710,8 @@ module Aws::EC2
     class CancelSpotInstanceRequestsRequest < Struct.new(
       :dry_run,
       :spot_instance_request_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3554,7 +3721,8 @@ module Aws::EC2
     #   @return [Array<Types::CancelledSpotInstanceRequest>]
     class CancelSpotInstanceRequestsResult < Struct.new(
       :cancelled_spot_instance_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3568,7 +3736,8 @@ module Aws::EC2
     class CancelledSpotInstanceRequest < Struct.new(
       :spot_instance_request_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3585,7 +3754,8 @@ module Aws::EC2
     class CapacityAllocation < Struct.new(
       :allocation_type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3633,7 +3803,8 @@ module Aws::EC2
       :create_date,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3713,7 +3884,8 @@ module Aws::EC2
       :capacity_block_extension_end_date,
       :upfront_fee,
       :currency_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3784,7 +3956,8 @@ module Aws::EC2
       :upfront_fee,
       :currency_code,
       :tenancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3846,7 +4019,8 @@ module Aws::EC2
       :ultraserver_type,
       :ultraserver_count,
       :capacity_block_duration_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3891,7 +4065,8 @@ module Aws::EC2
       :total_available_capacity,
       :total_unavailable_capacity,
       :capacity_reservation_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4134,7 +4309,8 @@ module Aws::EC2
       :commitment_info,
       :delivery_preference,
       :capacity_block_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4170,7 +4346,8 @@ module Aws::EC2
       :status,
       :status_message,
       :capacity_reservation_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4187,7 +4364,8 @@ module Aws::EC2
     class CapacityReservationCommitmentInfo < Struct.new(
       :committed_instance_count,
       :commitment_end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4318,7 +4496,8 @@ module Aws::EC2
       :allocation_strategy,
       :instance_type_specifications,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4336,7 +4515,8 @@ module Aws::EC2
       :current_fleet_state,
       :previous_fleet_state,
       :capacity_reservation_fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4350,7 +4530,8 @@ module Aws::EC2
     class CapacityReservationGroup < Struct.new(
       :group_arn,
       :owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4372,7 +4553,8 @@ module Aws::EC2
       :availability_zone,
       :tenancy,
       :availability_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4400,7 +4582,8 @@ module Aws::EC2
     #   @return [String]
     class CapacityReservationOptions < Struct.new(
       :usage_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4427,7 +4610,8 @@ module Aws::EC2
     #   @return [String]
     class CapacityReservationOptionsRequest < Struct.new(
       :usage_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4473,7 +4657,8 @@ module Aws::EC2
     class CapacityReservationSpecification < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4504,7 +4689,8 @@ module Aws::EC2
     class CapacityReservationSpecificationResponse < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4526,7 +4712,8 @@ module Aws::EC2
       :total_capacity,
       :total_available_capacity,
       :total_unavailable_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4541,7 +4728,8 @@ module Aws::EC2
     class CapacityReservationTarget < Struct.new(
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4555,7 +4743,8 @@ module Aws::EC2
     class CapacityReservationTargetResponse < Struct.new(
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4581,7 +4770,8 @@ module Aws::EC2
       :state,
       :owner_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4591,7 +4781,8 @@ module Aws::EC2
     #   @return [String]
     class CertificateAuthentication < Struct.new(
       :client_root_certificate_chain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4602,7 +4793,8 @@ module Aws::EC2
     #   @return [String]
     class CertificateAuthenticationRequest < Struct.new(
       :client_root_certificate_chain_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4617,7 +4809,8 @@ module Aws::EC2
     class CidrAuthorizationContext < Struct.new(
       :message,
       :signature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4627,7 +4820,8 @@ module Aws::EC2
     #   @return [String]
     class CidrBlock < Struct.new(
       :cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4644,7 +4838,8 @@ module Aws::EC2
     class ClassicLinkDnsSupport < Struct.new(
       :classic_link_dns_supported,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4669,7 +4864,8 @@ module Aws::EC2
       :instance_id,
       :tags,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4679,7 +4875,8 @@ module Aws::EC2
     #   @return [String]
     class ClassicLoadBalancer < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4690,7 +4887,8 @@ module Aws::EC2
     #   @return [Array<Types::ClassicLoadBalancer>]
     class ClassicLoadBalancersConfig < Struct.new(
       :classic_load_balancers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4704,7 +4902,8 @@ module Aws::EC2
     class ClientCertificateRevocationListStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4718,7 +4917,8 @@ module Aws::EC2
     class ClientConnectOptions < Struct.new(
       :enabled,
       :lambda_function_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4736,7 +4936,8 @@ module Aws::EC2
       :enabled,
       :lambda_function_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4758,7 +4959,8 @@ module Aws::EC2
       :upload_end,
       :upload_size,
       :upload_start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4780,7 +4982,8 @@ module Aws::EC2
     class ClientLoginBannerOptions < Struct.new(
       :enabled,
       :banner_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4799,7 +5002,8 @@ module Aws::EC2
     class ClientLoginBannerResponseOptions < Struct.new(
       :enabled,
       :banner_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4821,7 +5025,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ClientRouteEnforcementOptions < Struct.new(
       :enforced,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4836,7 +5041,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ClientRouteEnforcementResponseOptions < Struct.new(
       :enforced,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4859,7 +5065,8 @@ module Aws::EC2
       :active_directory,
       :mutual_authentication,
       :federated_authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4882,7 +5089,8 @@ module Aws::EC2
       :active_directory,
       :mutual_authentication,
       :federated_authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4896,7 +5104,8 @@ module Aws::EC2
     class ClientVpnAuthorizationRuleStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4964,7 +5173,8 @@ module Aws::EC2
       :status,
       :connection_end_time,
       :posture_compliance_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4978,7 +5188,8 @@ module Aws::EC2
     class ClientVpnConnectionStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5104,7 +5315,8 @@ module Aws::EC2
       :disconnect_on_session_timeout,
       :endpoint_ip_address_type,
       :traffic_ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5118,7 +5330,8 @@ module Aws::EC2
     class ClientVpnEndpointAttributeStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5154,7 +5367,8 @@ module Aws::EC2
     class ClientVpnEndpointStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5191,7 +5405,8 @@ module Aws::EC2
       :origin,
       :status,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5205,7 +5420,8 @@ module Aws::EC2
     class ClientVpnRouteStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5227,7 +5443,8 @@ module Aws::EC2
       :log_enabled,
       :log_group_arn,
       :log_output_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5249,7 +5466,8 @@ module Aws::EC2
       :log_enabled,
       :log_group_arn,
       :log_output_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5271,7 +5489,8 @@ module Aws::EC2
       :aws_account_id,
       :aws_service,
       :co_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5297,7 +5516,8 @@ module Aws::EC2
       :cidr,
       :coip_pool_id,
       :local_gateway_route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5323,7 +5543,8 @@ module Aws::EC2
       :local_gateway_route_table_id,
       :tags,
       :pool_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5342,7 +5563,8 @@ module Aws::EC2
       :instance_id,
       :product_code,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5357,7 +5579,8 @@ module Aws::EC2
     class ConfirmProductInstanceResult < Struct.new(
       :return,
       :owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5375,7 +5598,8 @@ module Aws::EC2
       :enabled,
       :cloudwatch_log_group,
       :cloudwatch_log_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5393,7 +5617,8 @@ module Aws::EC2
       :enabled,
       :cloudwatch_log_group,
       :cloudwatch_log_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5433,7 +5658,8 @@ module Aws::EC2
       :connection_events,
       :connection_notification_state,
       :service_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5461,7 +5687,8 @@ module Aws::EC2
       :tcp_established_timeout,
       :udp_stream_timeout,
       :udp_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5489,7 +5716,8 @@ module Aws::EC2
       :tcp_established_timeout,
       :udp_timeout,
       :udp_stream_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5517,7 +5745,8 @@ module Aws::EC2
       :tcp_established_timeout,
       :udp_stream_timeout,
       :udp_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5545,7 +5774,8 @@ module Aws::EC2
       :tcp_established_timeout,
       :udp_stream_timeout,
       :udp_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5580,7 +5810,8 @@ module Aws::EC2
       :state,
       :status_message,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5612,7 +5843,8 @@ module Aws::EC2
       :name,
       :source_region,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5621,7 +5853,8 @@ module Aws::EC2
     #   @return [String]
     class CopyFpgaImageResult < Struct.new(
       :fpga_image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5763,7 +5996,8 @@ module Aws::EC2
       :destination_availability_zone,
       :destination_availability_zone_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5773,7 +6007,8 @@ module Aws::EC2
     #   @return [String]
     class CopyImageResult < Struct.new(
       :image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5887,7 +6122,8 @@ module Aws::EC2
       :completion_duration_minutes,
       :destination_availability_zone,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5900,7 +6136,8 @@ module Aws::EC2
     class CopySnapshotResult < Struct.new(
       :tags,
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5919,7 +6156,8 @@ module Aws::EC2
       :core_count,
       :threads_per_core,
       :amd_sev_snp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5942,7 +6180,8 @@ module Aws::EC2
       :core_count,
       :threads_per_core,
       :amd_sev_snp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5958,7 +6197,8 @@ module Aws::EC2
     #   @return [Array<Types::PerformanceFactorReference>]
     class CpuPerformanceFactor < Struct.new(
       :references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5974,7 +6214,8 @@ module Aws::EC2
     #   @return [Array<Types::PerformanceFactorReferenceRequest>]
     class CpuPerformanceFactorRequest < Struct.new(
       :references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5999,7 +6240,8 @@ module Aws::EC2
       :source_capacity_reservation_id,
       :instance_count,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6017,7 +6259,8 @@ module Aws::EC2
       :source_capacity_reservation,
       :destination_capacity_reservation,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6095,7 +6338,8 @@ module Aws::EC2
       :instance_match_criteria,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6146,7 +6390,8 @@ module Aws::EC2
       :tenancy,
       :fleet_capacity_reservations,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6343,7 +6588,8 @@ module Aws::EC2
       :start_date,
       :commitment_duration,
       :delivery_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6352,7 +6598,8 @@ module Aws::EC2
     #   @return [Types::CapacityReservation]
     class CreateCapacityReservationResult < Struct.new(
       :capacity_reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6377,7 +6624,8 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6386,7 +6634,8 @@ module Aws::EC2
     #   @return [Types::CarrierGateway]
     class CreateCarrierGatewayResult < Struct.new(
       :carrier_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6521,7 +6770,8 @@ module Aws::EC2
       :disconnect_on_session_timeout,
       :endpoint_ip_address_type,
       :traffic_ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6538,7 +6788,8 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :status,
       :dns_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6585,7 +6836,8 @@ module Aws::EC2
       :description,
       :client_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6594,7 +6846,8 @@ module Aws::EC2
     #   @return [Types::ClientVpnRouteStatus]
     class CreateClientVpnRouteResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6617,7 +6870,8 @@ module Aws::EC2
       :cidr,
       :coip_pool_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6628,7 +6882,8 @@ module Aws::EC2
     #   @return [Types::CoipCidr]
     class CreateCoipCidrResult < Struct.new(
       :coip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6651,7 +6906,8 @@ module Aws::EC2
       :local_gateway_route_table_id,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6660,7 +6916,8 @@ module Aws::EC2
     #   @return [Types::CoipPool]
     class CreateCoipPoolResult < Struct.new(
       :coip_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6717,7 +6974,8 @@ module Aws::EC2
       :ip_address,
       :bgp_asn_extended,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6727,7 +6985,8 @@ module Aws::EC2
     #   @return [Types::CustomerGateway]
     class CreateCustomerGatewayResult < Struct.new(
       :customer_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6755,7 +7014,8 @@ module Aws::EC2
       :dry_run,
       :ipv6_native,
       :availability_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6764,7 +7024,8 @@ module Aws::EC2
     #   @return [Types::Subnet]
     class CreateDefaultSubnetResult < Struct.new(
       :subnet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6775,7 +7036,8 @@ module Aws::EC2
     #   @return [Boolean]
     class CreateDefaultVpcRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6784,7 +7046,8 @@ module Aws::EC2
     #   @return [Types::Vpc]
     class CreateDefaultVpcResult < Struct.new(
       :vpc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6856,7 +7119,8 @@ module Aws::EC2
       :instance_id,
       :mac_credentials,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6865,7 +7129,8 @@ module Aws::EC2
     #   @return [Types::MacModificationTask]
     class CreateDelegateMacVolumeOwnershipTaskResult < Struct.new(
       :mac_modification_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6884,7 +7149,8 @@ module Aws::EC2
       :dhcp_configurations,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6893,7 +7159,8 @@ module Aws::EC2
     #   @return [Types::DhcpOptions]
     class CreateDhcpOptionsResult < Struct.new(
       :dhcp_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6917,7 +7184,8 @@ module Aws::EC2
       :dry_run,
       :vpc_id,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6931,7 +7199,8 @@ module Aws::EC2
     class CreateEgressOnlyInternetGatewayResult < Struct.new(
       :client_token,
       :egress_only_internet_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6956,7 +7225,8 @@ module Aws::EC2
       :lifecycle,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6984,7 +7254,8 @@ module Aws::EC2
       :instance_ids,
       :instance_type,
       :platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7088,7 +7359,8 @@ module Aws::EC2
       :replace_unhealthy_instances,
       :tag_specifications,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7107,7 +7379,8 @@ module Aws::EC2
       :fleet_id,
       :errors,
       :instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7213,7 +7486,8 @@ module Aws::EC2
       :tag_specifications,
       :max_aggregation_interval,
       :destination_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7231,7 +7505,8 @@ module Aws::EC2
       :client_token,
       :flow_log_ids,
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7267,7 +7542,8 @@ module Aws::EC2
       :name,
       :client_token,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7280,7 +7556,8 @@ module Aws::EC2
     class CreateFpgaImageResult < Struct.new(
       :fpga_image_id,
       :fpga_image_global_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7389,7 +7666,8 @@ module Aws::EC2
       :description,
       :no_reboot,
       :block_device_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7398,7 +7676,8 @@ module Aws::EC2
     #   @return [String]
     class CreateImageResult < Struct.new(
       :image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7433,7 +7712,8 @@ module Aws::EC2
       :account_ids,
       :client_token,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7442,7 +7722,8 @@ module Aws::EC2
     #   @return [String]
     class CreateImageUsageReportResult < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7518,7 +7799,8 @@ module Aws::EC2
       :client_token,
       :tag_specifications,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7531,7 +7813,8 @@ module Aws::EC2
     class CreateInstanceConnectEndpointResult < Struct.new(
       :instance_connect_endpoint,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7588,7 +7871,8 @@ module Aws::EC2
       :time_ranges,
       :cron_expression,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7597,7 +7881,8 @@ module Aws::EC2
     #   @return [Types::InstanceEventWindow]
     class CreateInstanceEventWindowResult < Struct.new(
       :instance_event_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7622,7 +7907,8 @@ module Aws::EC2
       :instance_id,
       :target_environment,
       :export_to_s3_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7631,7 +7917,8 @@ module Aws::EC2
     #   @return [Types::ExportTask]
     class CreateInstanceExportTaskResult < Struct.new(
       :export_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7646,7 +7933,8 @@ module Aws::EC2
     class CreateInternetGatewayRequest < Struct.new(
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7655,7 +7943,8 @@ module Aws::EC2
     #   @return [Types::InternetGateway]
     class CreateInternetGatewayResult < Struct.new(
       :internet_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7678,7 +7967,8 @@ module Aws::EC2
       :ipam_id,
       :tag_specifications,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7687,7 +7977,8 @@ module Aws::EC2
     #   @return [Types::IpamExternalResourceVerificationToken]
     class CreateIpamExternalResourceVerificationTokenResult < Struct.new(
       :ipam_external_resource_verification_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7783,7 +8074,8 @@ module Aws::EC2
       :aws_service,
       :public_ip_source,
       :source_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7792,7 +8084,8 @@ module Aws::EC2
     #   @return [Types::IpamPool]
     class CreateIpamPoolResult < Struct.new(
       :ipam_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7845,7 +8138,8 @@ module Aws::EC2
       :tier,
       :enable_private_gua,
       :metered_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7872,7 +8166,8 @@ module Aws::EC2
       :operating_regions,
       :tag_specifications,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7881,7 +8176,8 @@ module Aws::EC2
     #   @return [Types::IpamResourceDiscovery]
     class CreateIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7890,7 +8186,8 @@ module Aws::EC2
     #   @return [Types::Ipam]
     class CreateIpamResult < Struct.new(
       :ipam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7918,7 +8215,8 @@ module Aws::EC2
       :description,
       :tag_specifications,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7927,7 +8225,8 @@ module Aws::EC2
     #   @return [Types::IpamScope]
     class CreateIpamScopeResult < Struct.new(
       :ipam_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7960,7 +8259,8 @@ module Aws::EC2
       :key_name,
       :key_fingerprint,
       :key_material,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7992,7 +8292,8 @@ module Aws::EC2
       :tag_specifications,
       :key_format,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8037,7 +8338,8 @@ module Aws::EC2
       :launch_template_data,
       :operator,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8052,7 +8354,8 @@ module Aws::EC2
     class CreateLaunchTemplateResult < Struct.new(
       :launch_template,
       :warning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8113,7 +8416,8 @@ module Aws::EC2
       :version_description,
       :launch_template_data,
       :resolve_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8128,7 +8432,8 @@ module Aws::EC2
     class CreateLaunchTemplateVersionResult < Struct.new(
       :launch_template_version,
       :warning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8163,7 +8468,8 @@ module Aws::EC2
       :dry_run,
       :network_interface_id,
       :destination_prefix_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8172,7 +8478,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayRoute]
     class CreateLocalGatewayRouteResult < Struct.new(
       :route,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8201,7 +8508,8 @@ module Aws::EC2
       :mode,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8210,7 +8518,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayRouteTable]
     class CreateLocalGatewayRouteTableResult < Struct.new(
       :local_gateway_route_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8239,7 +8548,8 @@ module Aws::EC2
       :local_gateway_virtual_interface_group_id,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8248,7 +8558,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayRouteTableVirtualInterfaceGroupAssociation]
     class CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult < Struct.new(
       :local_gateway_route_table_virtual_interface_group_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8271,7 +8582,8 @@ module Aws::EC2
       :vpc_id,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8280,7 +8592,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayRouteTableVpcAssociation]
     class CreateLocalGatewayRouteTableVpcAssociationResult < Struct.new(
       :local_gateway_route_table_vpc_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8308,7 +8621,8 @@ module Aws::EC2
       :local_bgp_asn_extended,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8317,7 +8631,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayVirtualInterfaceGroup]
     class CreateLocalGatewayVirtualInterfaceGroupResult < Struct.new(
       :local_gateway_virtual_interface_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8361,7 +8676,8 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       :peer_bgp_asn_extended,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8370,7 +8686,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayVirtualInterface]
     class CreateLocalGatewayVirtualInterfaceResult < Struct.new(
       :local_gateway_virtual_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8455,7 +8772,8 @@ module Aws::EC2
       :mac_system_integrity_protection_configuration,
       :mac_system_integrity_protection_status,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8464,7 +8782,8 @@ module Aws::EC2
     #   @return [Types::MacModificationTask]
     class CreateMacSystemIntegrityProtectionModificationTaskResult < Struct.new(
       :mac_modification_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8505,7 +8824,8 @@ module Aws::EC2
       :tag_specifications,
       :address_family,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8514,7 +8834,8 @@ module Aws::EC2
     #   @return [Types::ManagedPrefixList]
     class CreateManagedPrefixListResult < Struct.new(
       :prefix_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8570,7 +8891,8 @@ module Aws::EC2
       :secondary_allocation_ids,
       :secondary_private_ip_addresses,
       :secondary_private_ip_address_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8583,7 +8905,8 @@ module Aws::EC2
     class CreateNatGatewayResult < Struct.new(
       :client_token,
       :nat_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8640,7 +8963,8 @@ module Aws::EC2
       :ipv6_cidr_block,
       :icmp_type_code,
       :port_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8664,7 +8988,8 @@ module Aws::EC2
       :client_token,
       :dry_run,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8677,7 +9002,8 @@ module Aws::EC2
     class CreateNetworkAclResult < Struct.new(
       :network_acl,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8705,7 +9031,8 @@ module Aws::EC2
       :client_token,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8718,7 +9045,8 @@ module Aws::EC2
     class CreateNetworkInsightsAccessScopeResult < Struct.new(
       :network_insights_access_scope,
       :network_insights_access_scope_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8772,7 +9100,8 @@ module Aws::EC2
       :client_token,
       :filter_at_source,
       :filter_at_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8781,7 +9110,8 @@ module Aws::EC2
     #   @return [Types::NetworkInsightsPath]
     class CreateNetworkInsightsPathResult < Struct.new(
       :network_insights_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8810,7 +9140,8 @@ module Aws::EC2
       :aws_service,
       :permission,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8820,7 +9151,8 @@ module Aws::EC2
     #   @return [Types::NetworkInterfacePermission]
     class CreateNetworkInterfacePermissionResult < Struct.new(
       :interface_permission,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8953,7 +9285,8 @@ module Aws::EC2
       :ipv6_addresses,
       :ipv6_address_count,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8966,7 +9299,8 @@ module Aws::EC2
     class CreateNetworkInterfaceResult < Struct.new(
       :network_interface,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9009,7 +9343,8 @@ module Aws::EC2
       :dry_run,
       :group_name,
       :strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9018,7 +9353,8 @@ module Aws::EC2
     #   @return [Types::PlacementGroup]
     class CreatePlacementGroupResult < Struct.new(
       :placement_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9038,7 +9374,8 @@ module Aws::EC2
       :dry_run,
       :tag_specifications,
       :network_border_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9047,7 +9384,8 @@ module Aws::EC2
     #   @return [String]
     class CreatePublicIpv4PoolResult < Struct.new(
       :pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9121,7 +9459,8 @@ module Aws::EC2
       :image_id,
       :delete_replaced_root_volume,
       :volume_initialization_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9130,7 +9469,8 @@ module Aws::EC2
     #   @return [Types::ReplaceRootVolumeTask]
     class CreateReplaceRootVolumeTaskResult < Struct.new(
       :replace_root_volume_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9157,7 +9497,8 @@ module Aws::EC2
       :instance_count,
       :price_schedules,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9167,7 +9508,8 @@ module Aws::EC2
     #   @return [Array<Types::ReservedInstancesListing>]
     class CreateReservedInstancesListingResult < Struct.new(
       :reserved_instances_listings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9208,7 +9550,8 @@ module Aws::EC2
       :name,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9217,7 +9560,8 @@ module Aws::EC2
     #   @return [String]
     class CreateRestoreImageTaskResult < Struct.new(
       :image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9294,7 +9638,8 @@ module Aws::EC2
       :network_interface_id,
       :vpc_peering_connection_id,
       :nat_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9303,7 +9648,8 @@ module Aws::EC2
     #   @return [Boolean]
     class CreateRouteResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9330,7 +9676,8 @@ module Aws::EC2
       :client_token,
       :dry_run,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9339,7 +9686,8 @@ module Aws::EC2
     #   @return [Types::RouteServerEndpoint]
     class CreateRouteServerEndpointResult < Struct.new(
       :route_server_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9366,7 +9714,8 @@ module Aws::EC2
       :bgp_options,
       :dry_run,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9375,7 +9724,8 @@ module Aws::EC2
     #   @return [Types::RouteServerPeer]
     class CreateRouteServerPeerResult < Struct.new(
       :route_server_peer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9411,7 +9761,8 @@ module Aws::EC2
       :persist_routes_duration,
       :sns_notifications_enabled,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9420,7 +9771,8 @@ module Aws::EC2
     #   @return [Types::RouteServer]
     class CreateRouteServerResult < Struct.new(
       :route_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9444,7 +9796,8 @@ module Aws::EC2
       :client_token,
       :dry_run,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9457,7 +9810,8 @@ module Aws::EC2
     class CreateRouteTableResult < Struct.new(
       :route_table,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9488,7 +9842,8 @@ module Aws::EC2
       :vpc_id,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9505,7 +9860,8 @@ module Aws::EC2
       :group_id,
       :tags,
       :security_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9646,7 +10002,8 @@ module Aws::EC2
       :encrypted,
       :kms_key_id,
       :data_encryption_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9705,7 +10062,8 @@ module Aws::EC2
       :tag_specifications,
       :location,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9769,7 +10127,8 @@ module Aws::EC2
       :dry_run,
       :copy_tags_from_source,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9778,7 +10137,8 @@ module Aws::EC2
     #   @return [Array<Types::SnapshotInfo>]
     class CreateSnapshotsResult < Struct.new(
       :snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9801,7 +10161,8 @@ module Aws::EC2
       :dry_run,
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9811,7 +10172,8 @@ module Aws::EC2
     #   @return [Types::SpotDatafeedSubscription]
     class CreateSpotDatafeedSubscriptionResult < Struct.new(
       :spot_datafeed_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9836,7 +10198,8 @@ module Aws::EC2
       :bucket,
       :s3_object_tags,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9845,7 +10208,8 @@ module Aws::EC2
     #   @return [String]
     class CreateStoreImageTaskResult < Struct.new(
       :object_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9888,7 +10252,8 @@ module Aws::EC2
       :description,
       :dry_run,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9897,7 +10262,8 @@ module Aws::EC2
     #   @return [Types::SubnetCidrReservation]
     class CreateSubnetCidrReservationResult < Struct.new(
       :subnet_cidr_reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9968,7 +10334,8 @@ module Aws::EC2
       :ipv6_ipam_pool_id,
       :ipv6_netmask_length,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9977,7 +10344,8 @@ module Aws::EC2
     #   @return [Types::Subnet]
     class CreateSubnetResult < Struct.new(
       :subnet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9998,7 +10366,8 @@ module Aws::EC2
       :dry_run,
       :resources,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10021,7 +10390,8 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10034,7 +10404,8 @@ module Aws::EC2
     class CreateTrafficMirrorFilterResult < Struct.new(
       :traffic_mirror_filter,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10095,7 +10466,8 @@ module Aws::EC2
       :dry_run,
       :client_token,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10108,7 +10480,8 @@ module Aws::EC2
     class CreateTrafficMirrorFilterRuleResult < Struct.new(
       :traffic_mirror_filter_rule,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10165,7 +10538,8 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10178,7 +10552,8 @@ module Aws::EC2
     class CreateTrafficMirrorSessionResult < Struct.new(
       :traffic_mirror_session,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10213,7 +10588,8 @@ module Aws::EC2
       :dry_run,
       :client_token,
       :gateway_load_balancer_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10226,7 +10602,8 @@ module Aws::EC2
     class CreateTrafficMirrorTargetResult < Struct.new(
       :traffic_mirror_target,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10267,7 +10644,8 @@ module Aws::EC2
       :inside_cidr_blocks,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10276,7 +10654,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayConnectPeer]
     class CreateTransitGatewayConnectPeerResult < Struct.new(
       :transit_gateway_connect_peer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10299,7 +10678,8 @@ module Aws::EC2
       :options,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10309,7 +10689,8 @@ module Aws::EC2
     #   @return [String]
     class CreateTransitGatewayConnectRequestOptions < Struct.new(
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10318,7 +10699,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayConnect]
     class CreateTransitGatewayConnectResult < Struct.new(
       :transit_gateway_connect,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10341,7 +10723,8 @@ module Aws::EC2
       :options,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10359,7 +10742,8 @@ module Aws::EC2
       :igmpv2_support,
       :static_sources_support,
       :auto_accept_shared_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10368,7 +10752,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayMulticastDomain]
     class CreateTransitGatewayMulticastDomainResult < Struct.new(
       :transit_gateway_multicast_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10403,7 +10788,8 @@ module Aws::EC2
       :options,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10413,7 +10799,8 @@ module Aws::EC2
     #   @return [String]
     class CreateTransitGatewayPeeringAttachmentRequestOptions < Struct.new(
       :dynamic_routing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10422,7 +10809,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPeeringAttachment]
     class CreateTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10441,7 +10829,8 @@ module Aws::EC2
       :transit_gateway_id,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10450,7 +10839,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPolicyTable]
     class CreateTransitGatewayPolicyTableResult < Struct.new(
       :transit_gateway_policy_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10477,7 +10867,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :blackhole,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10486,7 +10877,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPrefixListReference]
     class CreateTransitGatewayPrefixListReferenceResult < Struct.new(
       :transit_gateway_prefix_list_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10509,7 +10901,8 @@ module Aws::EC2
       :options,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10518,7 +10911,8 @@ module Aws::EC2
     #   @return [Types::TransitGateway]
     class CreateTransitGatewayResult < Struct.new(
       :transit_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10546,7 +10940,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :blackhole,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10555,7 +10950,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayRoute]
     class CreateTransitGatewayRouteResult < Struct.new(
       :route,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10578,7 +10974,8 @@ module Aws::EC2
       :peering_attachment_id,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10587,7 +10984,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayRouteTableAnnouncement]
     class CreateTransitGatewayRouteTableAnnouncementResult < Struct.new(
       :transit_gateway_route_table_announcement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10606,7 +11004,8 @@ module Aws::EC2
       :transit_gateway_id,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10615,7 +11014,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayRouteTable]
     class CreateTransitGatewayRouteTableResult < Struct.new(
       :transit_gateway_route_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10648,7 +11048,8 @@ module Aws::EC2
       :options,
       :tag_specifications,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10672,7 +11073,8 @@ module Aws::EC2
       :security_group_referencing_support,
       :ipv6_support,
       :appliance_mode_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10681,7 +11083,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayVpcAttachment]
     class CreateTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10703,7 +11106,8 @@ module Aws::EC2
       :subnet_ids,
       :cidr,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10726,7 +11130,8 @@ module Aws::EC2
       :protocol,
       :port,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10753,7 +11158,8 @@ module Aws::EC2
       :load_balancer_arn,
       :subnet_ids,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10767,7 +11173,8 @@ module Aws::EC2
     class CreateVerifiedAccessEndpointPortRange < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10801,7 +11208,8 @@ module Aws::EC2
       :rds_db_proxy_arn,
       :rds_endpoint,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10882,7 +11290,8 @@ module Aws::EC2
       :sse_specification,
       :rds_options,
       :cidr_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10891,7 +11300,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessEndpoint]
     class CreateVerifiedAccessEndpointResult < Struct.new(
       :verified_access_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10927,7 +11337,8 @@ module Aws::EC2
       :client_token,
       :dry_run,
       :sse_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10936,7 +11347,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessGroup]
     class CreateVerifiedAccessGroupResult < Struct.new(
       :verified_access_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10968,7 +11380,8 @@ module Aws::EC2
       :dry_run,
       :fips_enabled,
       :cidr_endpoints_custom_sub_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10977,7 +11390,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessInstance]
     class CreateVerifiedAccessInstanceResult < Struct.new(
       :verified_access_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11015,7 +11429,8 @@ module Aws::EC2
       :client_id,
       :client_secret,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11032,7 +11447,8 @@ module Aws::EC2
     class CreateVerifiedAccessTrustProviderDeviceOptions < Struct.new(
       :tenant_id,
       :public_signing_key_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11067,7 +11483,8 @@ module Aws::EC2
       :client_id,
       :client_secret,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11127,7 +11544,8 @@ module Aws::EC2
       :dry_run,
       :sse_specification,
       :native_application_oidc_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11136,7 +11554,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessTrustProvider]
     class CreateVerifiedAccessTrustProviderResult < Struct.new(
       :verified_access_trust_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11235,7 +11654,8 @@ module Aws::EC2
       :attachments,
       :encrypted,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11250,7 +11670,8 @@ module Aws::EC2
     class CreateVolumePermission < Struct.new(
       :user_id,
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11264,7 +11685,8 @@ module Aws::EC2
     class CreateVolumePermissionModifications < Struct.new(
       :add,
       :remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11474,7 +11896,8 @@ module Aws::EC2
       :volume_initialization_rate,
       :operator,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11513,7 +11936,8 @@ module Aws::EC2
       :vpc_id,
       :internet_gateway_exclusion_mode,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11522,7 +11946,8 @@ module Aws::EC2
     #   @return [Types::VpcBlockPublicAccessExclusion]
     class CreateVpcBlockPublicAccessExclusionResult < Struct.new(
       :vpc_block_public_access_exclusion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11557,7 +11982,8 @@ module Aws::EC2
       :connection_notification_arn,
       :connection_events,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11571,7 +11997,8 @@ module Aws::EC2
     class CreateVpcEndpointConnectionNotificationResult < Struct.new(
       :connection_notification,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11666,7 +12093,8 @@ module Aws::EC2
       :service_network_arn,
       :resource_configuration_arn,
       :service_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11680,7 +12108,8 @@ module Aws::EC2
     class CreateVpcEndpointResult < Struct.new(
       :vpc_endpoint,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11726,7 +12155,8 @@ module Aws::EC2
       :supported_regions,
       :client_token,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11740,7 +12170,8 @@ module Aws::EC2
     class CreateVpcEndpointServiceConfigurationResult < Struct.new(
       :service_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11776,7 +12207,8 @@ module Aws::EC2
       :vpc_id,
       :peer_vpc_id,
       :peer_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11785,7 +12217,8 @@ module Aws::EC2
     #   @return [Types::VpcPeeringConnection]
     class CreateVpcPeeringConnectionResult < Struct.new(
       :vpc_peering_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11854,7 +12287,8 @@ module Aws::EC2
       :dry_run,
       :instance_tenancy,
       :amazon_provided_ipv6_cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11863,7 +12297,8 @@ module Aws::EC2
     #   @return [Types::Vpc]
     class CreateVpcResult < Struct.new(
       :vpc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11906,7 +12341,8 @@ module Aws::EC2
       :pre_shared_key_storage,
       :dry_run,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11916,7 +12352,8 @@ module Aws::EC2
     #   @return [Types::VpnConnection]
     class CreateVpnConnectionResult < Struct.new(
       :vpn_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11930,7 +12367,8 @@ module Aws::EC2
     class CreateVpnConnectionRouteRequest < Struct.new(
       :destination_cidr_block,
       :vpn_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11962,7 +12400,8 @@ module Aws::EC2
       :tag_specifications,
       :amazon_side_asn,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11972,7 +12411,8 @@ module Aws::EC2
     #   @return [Types::VpnGateway]
     class CreateVpnGatewayResult < Struct.new(
       :vpn_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11984,7 +12424,8 @@ module Aws::EC2
     #   @return [String]
     class CreditSpecification < Struct.new(
       :cpu_credits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11996,7 +12437,8 @@ module Aws::EC2
     #   @return [String]
     class CreditSpecificationRequest < Struct.new(
       :cpu_credits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12049,7 +12491,8 @@ module Aws::EC2
       :type,
       :ip_address,
       :bgp_asn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12081,7 +12524,8 @@ module Aws::EC2
       :metric,
       :statistic,
       :period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12115,7 +12559,8 @@ module Aws::EC2
       :statistic,
       :period,
       :metric_points,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12168,7 +12613,8 @@ module Aws::EC2
       :end_time,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12183,7 +12629,8 @@ module Aws::EC2
     class DeleteCarrierGatewayRequest < Struct.new(
       :carrier_gateway_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12192,7 +12639,8 @@ module Aws::EC2
     #   @return [Types::CarrierGateway]
     class DeleteCarrierGatewayResult < Struct.new(
       :carrier_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12205,7 +12653,8 @@ module Aws::EC2
     class DeleteClientVpnEndpointRequest < Struct.new(
       :client_vpn_endpoint_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12214,7 +12663,8 @@ module Aws::EC2
     #   @return [Types::ClientVpnEndpointStatus]
     class DeleteClientVpnEndpointResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12235,7 +12685,8 @@ module Aws::EC2
       :target_vpc_subnet_id,
       :destination_cidr_block,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12244,7 +12695,8 @@ module Aws::EC2
     #   @return [Types::ClientVpnRouteStatus]
     class DeleteClientVpnRouteResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12265,7 +12717,8 @@ module Aws::EC2
       :cidr,
       :coip_pool_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12276,7 +12729,8 @@ module Aws::EC2
     #   @return [Types::CoipCidr]
     class DeleteCoipCidrResult < Struct.new(
       :coip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12291,7 +12745,8 @@ module Aws::EC2
     class DeleteCoipPoolRequest < Struct.new(
       :coip_pool_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12300,7 +12755,8 @@ module Aws::EC2
     #   @return [Types::CoipPool]
     class DeleteCoipPoolResult < Struct.new(
       :coip_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12317,7 +12773,8 @@ module Aws::EC2
     class DeleteCustomerGatewayRequest < Struct.new(
       :customer_gateway_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12332,7 +12789,8 @@ module Aws::EC2
     class DeleteDhcpOptionsRequest < Struct.new(
       :dhcp_options_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12347,7 +12805,8 @@ module Aws::EC2
     class DeleteEgressOnlyInternetGatewayRequest < Struct.new(
       :dry_run,
       :egress_only_internet_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12356,7 +12815,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DeleteEgressOnlyInternetGatewayResult < Struct.new(
       :return_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12370,7 +12830,8 @@ module Aws::EC2
     class DeleteFleetError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12384,7 +12845,8 @@ module Aws::EC2
     class DeleteFleetErrorItem < Struct.new(
       :error,
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12402,7 +12864,8 @@ module Aws::EC2
       :current_fleet_state,
       :previous_fleet_state,
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12429,7 +12892,8 @@ module Aws::EC2
       :dry_run,
       :fleet_ids,
       :terminate_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12442,7 +12906,8 @@ module Aws::EC2
     class DeleteFleetsResult < Struct.new(
       :successful_fleet_deletions,
       :unsuccessful_fleet_deletions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12458,7 +12923,8 @@ module Aws::EC2
     class DeleteFlowLogsRequest < Struct.new(
       :dry_run,
       :flow_log_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12467,7 +12933,8 @@ module Aws::EC2
     #   @return [Array<Types::UnsuccessfulItem>]
     class DeleteFlowLogsResult < Struct.new(
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12482,7 +12949,8 @@ module Aws::EC2
     class DeleteFpgaImageRequest < Struct.new(
       :dry_run,
       :fpga_image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12491,7 +12959,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DeleteFpgaImageResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12506,7 +12975,8 @@ module Aws::EC2
     class DeleteImageUsageReportRequest < Struct.new(
       :report_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12515,7 +12985,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DeleteImageUsageReportResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12530,7 +13001,8 @@ module Aws::EC2
     class DeleteInstanceConnectEndpointRequest < Struct.new(
       :dry_run,
       :instance_connect_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12539,7 +13011,8 @@ module Aws::EC2
     #   @return [Types::Ec2InstanceConnectEndpoint]
     class DeleteInstanceConnectEndpointResult < Struct.new(
       :instance_connect_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12559,7 +13032,8 @@ module Aws::EC2
       :dry_run,
       :force_delete,
       :instance_event_window_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12568,7 +13042,8 @@ module Aws::EC2
     #   @return [Types::InstanceEventWindowStateChange]
     class DeleteInstanceEventWindowResult < Struct.new(
       :instance_event_window_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12583,7 +13058,8 @@ module Aws::EC2
     class DeleteInternetGatewayRequest < Struct.new(
       :dry_run,
       :internet_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12598,7 +13074,8 @@ module Aws::EC2
     class DeleteIpamExternalResourceVerificationTokenRequest < Struct.new(
       :dry_run,
       :ipam_external_resource_verification_token_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12607,7 +13084,8 @@ module Aws::EC2
     #   @return [Types::IpamExternalResourceVerificationToken]
     class DeleteIpamExternalResourceVerificationTokenResult < Struct.new(
       :ipam_external_resource_verification_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12630,7 +13108,8 @@ module Aws::EC2
       :dry_run,
       :ipam_pool_id,
       :cascade,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12639,7 +13118,8 @@ module Aws::EC2
     #   @return [Types::IpamPool]
     class DeleteIpamPoolResult < Struct.new(
       :ipam_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12679,7 +13159,8 @@ module Aws::EC2
       :dry_run,
       :ipam_id,
       :cascade,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12694,7 +13175,8 @@ module Aws::EC2
     class DeleteIpamResourceDiscoveryRequest < Struct.new(
       :dry_run,
       :ipam_resource_discovery_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12703,7 +13185,8 @@ module Aws::EC2
     #   @return [Types::IpamResourceDiscovery]
     class DeleteIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12712,7 +13195,8 @@ module Aws::EC2
     #   @return [Types::Ipam]
     class DeleteIpamResult < Struct.new(
       :ipam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12727,7 +13211,8 @@ module Aws::EC2
     class DeleteIpamScopeRequest < Struct.new(
       :dry_run,
       :ipam_scope_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12736,7 +13221,8 @@ module Aws::EC2
     #   @return [Types::IpamScope]
     class DeleteIpamScopeResult < Struct.new(
       :ipam_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12755,7 +13241,8 @@ module Aws::EC2
       :key_name,
       :key_pair_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12768,7 +13255,8 @@ module Aws::EC2
     class DeleteKeyPairResult < Struct.new(
       :return,
       :key_pair_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12792,7 +13280,8 @@ module Aws::EC2
       :dry_run,
       :launch_template_id,
       :launch_template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12801,7 +13290,8 @@ module Aws::EC2
     #   @return [Types::LaunchTemplate]
     class DeleteLaunchTemplateResult < Struct.new(
       :launch_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12830,7 +13320,8 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12852,7 +13343,8 @@ module Aws::EC2
       :launch_template_name,
       :version_number,
       :response_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12870,7 +13362,8 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12883,7 +13376,8 @@ module Aws::EC2
     class DeleteLaunchTemplateVersionsResult < Struct.new(
       :successfully_deleted_launch_template_versions,
       :unsuccessfully_deleted_launch_template_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12909,7 +13403,8 @@ module Aws::EC2
       :local_gateway_route_table_id,
       :dry_run,
       :destination_prefix_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12918,7 +13413,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayRoute]
     class DeleteLocalGatewayRouteResult < Struct.new(
       :route,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12935,7 +13431,8 @@ module Aws::EC2
     class DeleteLocalGatewayRouteTableRequest < Struct.new(
       :local_gateway_route_table_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12944,7 +13441,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayRouteTable]
     class DeleteLocalGatewayRouteTableResult < Struct.new(
       :local_gateway_route_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12961,7 +13459,8 @@ module Aws::EC2
     class DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest < Struct.new(
       :local_gateway_route_table_virtual_interface_group_association_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12970,7 +13469,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayRouteTableVirtualInterfaceGroupAssociation]
     class DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult < Struct.new(
       :local_gateway_route_table_virtual_interface_group_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12985,7 +13485,8 @@ module Aws::EC2
     class DeleteLocalGatewayRouteTableVpcAssociationRequest < Struct.new(
       :local_gateway_route_table_vpc_association_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12994,7 +13495,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayRouteTableVpcAssociation]
     class DeleteLocalGatewayRouteTableVpcAssociationResult < Struct.new(
       :local_gateway_route_table_vpc_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13009,7 +13511,8 @@ module Aws::EC2
     class DeleteLocalGatewayVirtualInterfaceGroupRequest < Struct.new(
       :local_gateway_virtual_interface_group_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13018,7 +13521,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayVirtualInterfaceGroup]
     class DeleteLocalGatewayVirtualInterfaceGroupResult < Struct.new(
       :local_gateway_virtual_interface_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13033,7 +13537,8 @@ module Aws::EC2
     class DeleteLocalGatewayVirtualInterfaceRequest < Struct.new(
       :local_gateway_virtual_interface_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13042,7 +13547,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayVirtualInterface]
     class DeleteLocalGatewayVirtualInterfaceResult < Struct.new(
       :local_gateway_virtual_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13057,7 +13563,8 @@ module Aws::EC2
     class DeleteManagedPrefixListRequest < Struct.new(
       :dry_run,
       :prefix_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13066,7 +13573,8 @@ module Aws::EC2
     #   @return [Types::ManagedPrefixList]
     class DeleteManagedPrefixListResult < Struct.new(
       :prefix_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13081,7 +13589,8 @@ module Aws::EC2
     class DeleteNatGatewayRequest < Struct.new(
       :dry_run,
       :nat_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13090,7 +13599,8 @@ module Aws::EC2
     #   @return [String]
     class DeleteNatGatewayResult < Struct.new(
       :nat_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13113,7 +13623,8 @@ module Aws::EC2
       :network_acl_id,
       :rule_number,
       :egress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13128,7 +13639,8 @@ module Aws::EC2
     class DeleteNetworkAclRequest < Struct.new(
       :dry_run,
       :network_acl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13143,7 +13655,8 @@ module Aws::EC2
     class DeleteNetworkInsightsAccessScopeAnalysisRequest < Struct.new(
       :network_insights_access_scope_analysis_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13152,7 +13665,8 @@ module Aws::EC2
     #   @return [String]
     class DeleteNetworkInsightsAccessScopeAnalysisResult < Struct.new(
       :network_insights_access_scope_analysis_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13167,7 +13681,8 @@ module Aws::EC2
     class DeleteNetworkInsightsAccessScopeRequest < Struct.new(
       :dry_run,
       :network_insights_access_scope_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13176,7 +13691,8 @@ module Aws::EC2
     #   @return [String]
     class DeleteNetworkInsightsAccessScopeResult < Struct.new(
       :network_insights_access_scope_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13191,7 +13707,8 @@ module Aws::EC2
     class DeleteNetworkInsightsAnalysisRequest < Struct.new(
       :dry_run,
       :network_insights_analysis_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13200,7 +13717,8 @@ module Aws::EC2
     #   @return [String]
     class DeleteNetworkInsightsAnalysisResult < Struct.new(
       :network_insights_analysis_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13215,7 +13733,8 @@ module Aws::EC2
     class DeleteNetworkInsightsPathRequest < Struct.new(
       :dry_run,
       :network_insights_path_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13224,7 +13743,8 @@ module Aws::EC2
     #   @return [String]
     class DeleteNetworkInsightsPathResult < Struct.new(
       :network_insights_path_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13246,7 +13766,8 @@ module Aws::EC2
       :network_interface_permission_id,
       :force,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13256,7 +13777,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DeleteNetworkInterfacePermissionResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13273,7 +13795,8 @@ module Aws::EC2
     class DeleteNetworkInterfaceRequest < Struct.new(
       :dry_run,
       :network_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13288,7 +13811,8 @@ module Aws::EC2
     class DeletePlacementGroupRequest < Struct.new(
       :dry_run,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13307,7 +13831,8 @@ module Aws::EC2
       :dry_run,
       :pool_id,
       :network_border_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13316,7 +13841,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DeletePublicIpv4PoolResult < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13331,7 +13857,8 @@ module Aws::EC2
     class DeleteQueuedReservedInstancesError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13347,7 +13874,8 @@ module Aws::EC2
     class DeleteQueuedReservedInstancesRequest < Struct.new(
       :dry_run,
       :reserved_instances_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13360,7 +13888,8 @@ module Aws::EC2
     class DeleteQueuedReservedInstancesResult < Struct.new(
       :successful_queued_purchase_deletions,
       :failed_queued_purchase_deletions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13387,7 +13916,8 @@ module Aws::EC2
       :route_table_id,
       :destination_cidr_block,
       :destination_ipv6_cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13402,7 +13932,8 @@ module Aws::EC2
     class DeleteRouteServerEndpointRequest < Struct.new(
       :route_server_endpoint_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13411,7 +13942,8 @@ module Aws::EC2
     #   @return [Types::RouteServerEndpoint]
     class DeleteRouteServerEndpointResult < Struct.new(
       :route_server_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13426,7 +13958,8 @@ module Aws::EC2
     class DeleteRouteServerPeerRequest < Struct.new(
       :route_server_peer_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13435,7 +13968,8 @@ module Aws::EC2
     #   @return [Types::RouteServerPeer]
     class DeleteRouteServerPeerResult < Struct.new(
       :route_server_peer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13450,7 +13984,8 @@ module Aws::EC2
     class DeleteRouteServerRequest < Struct.new(
       :route_server_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13459,7 +13994,8 @@ module Aws::EC2
     #   @return [Types::RouteServer]
     class DeleteRouteServerResult < Struct.new(
       :route_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13474,7 +14010,8 @@ module Aws::EC2
     class DeleteRouteTableRequest < Struct.new(
       :dry_run,
       :route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13495,7 +14032,8 @@ module Aws::EC2
       :group_id,
       :group_name,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13508,7 +14046,8 @@ module Aws::EC2
     class DeleteSecurityGroupResult < Struct.new(
       :return,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13523,7 +14062,8 @@ module Aws::EC2
     class DeleteSnapshotRequest < Struct.new(
       :snapshot_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13567,7 +14107,8 @@ module Aws::EC2
     class DeleteSnapshotReturnCode < Struct.new(
       :snapshot_id,
       :return_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13580,7 +14121,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DeleteSpotDatafeedSubscriptionRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13595,7 +14137,8 @@ module Aws::EC2
     class DeleteSubnetCidrReservationRequest < Struct.new(
       :subnet_cidr_reservation_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13604,7 +14147,8 @@ module Aws::EC2
     #   @return [Types::SubnetCidrReservation]
     class DeleteSubnetCidrReservationResult < Struct.new(
       :deleted_subnet_cidr_reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13619,7 +14163,8 @@ module Aws::EC2
     class DeleteSubnetRequest < Struct.new(
       :subnet_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13646,7 +14191,8 @@ module Aws::EC2
       :dry_run,
       :resources,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13661,7 +14207,8 @@ module Aws::EC2
     class DeleteTrafficMirrorFilterRequest < Struct.new(
       :traffic_mirror_filter_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13670,7 +14217,8 @@ module Aws::EC2
     #   @return [String]
     class DeleteTrafficMirrorFilterResult < Struct.new(
       :traffic_mirror_filter_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13685,7 +14233,8 @@ module Aws::EC2
     class DeleteTrafficMirrorFilterRuleRequest < Struct.new(
       :traffic_mirror_filter_rule_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13694,7 +14243,8 @@ module Aws::EC2
     #   @return [String]
     class DeleteTrafficMirrorFilterRuleResult < Struct.new(
       :traffic_mirror_filter_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13709,7 +14259,8 @@ module Aws::EC2
     class DeleteTrafficMirrorSessionRequest < Struct.new(
       :traffic_mirror_session_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13718,7 +14269,8 @@ module Aws::EC2
     #   @return [String]
     class DeleteTrafficMirrorSessionResult < Struct.new(
       :traffic_mirror_session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13733,7 +14285,8 @@ module Aws::EC2
     class DeleteTrafficMirrorTargetRequest < Struct.new(
       :traffic_mirror_target_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13742,7 +14295,8 @@ module Aws::EC2
     #   @return [String]
     class DeleteTrafficMirrorTargetResult < Struct.new(
       :traffic_mirror_target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13757,7 +14311,8 @@ module Aws::EC2
     class DeleteTransitGatewayConnectPeerRequest < Struct.new(
       :transit_gateway_connect_peer_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13766,7 +14321,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayConnectPeer]
     class DeleteTransitGatewayConnectPeerResult < Struct.new(
       :transit_gateway_connect_peer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13781,7 +14337,8 @@ module Aws::EC2
     class DeleteTransitGatewayConnectRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13790,7 +14347,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayConnect]
     class DeleteTransitGatewayConnectResult < Struct.new(
       :transit_gateway_connect,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13805,7 +14363,8 @@ module Aws::EC2
     class DeleteTransitGatewayMulticastDomainRequest < Struct.new(
       :transit_gateway_multicast_domain_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13814,7 +14373,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayMulticastDomain]
     class DeleteTransitGatewayMulticastDomainResult < Struct.new(
       :transit_gateway_multicast_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13829,7 +14389,8 @@ module Aws::EC2
     class DeleteTransitGatewayPeeringAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13838,7 +14399,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPeeringAttachment]
     class DeleteTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13853,7 +14415,8 @@ module Aws::EC2
     class DeleteTransitGatewayPolicyTableRequest < Struct.new(
       :transit_gateway_policy_table_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13862,7 +14425,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPolicyTable]
     class DeleteTransitGatewayPolicyTableResult < Struct.new(
       :transit_gateway_policy_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13881,7 +14445,8 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :prefix_list_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13890,7 +14455,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPrefixListReference]
     class DeleteTransitGatewayPrefixListReferenceResult < Struct.new(
       :transit_gateway_prefix_list_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13905,7 +14471,8 @@ module Aws::EC2
     class DeleteTransitGatewayRequest < Struct.new(
       :transit_gateway_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13914,7 +14481,8 @@ module Aws::EC2
     #   @return [Types::TransitGateway]
     class DeleteTransitGatewayResult < Struct.new(
       :transit_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13933,7 +14501,8 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :destination_cidr_block,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13942,7 +14511,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayRoute]
     class DeleteTransitGatewayRouteResult < Struct.new(
       :route,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13957,7 +14527,8 @@ module Aws::EC2
     class DeleteTransitGatewayRouteTableAnnouncementRequest < Struct.new(
       :transit_gateway_route_table_announcement_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13966,7 +14537,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayRouteTableAnnouncement]
     class DeleteTransitGatewayRouteTableAnnouncementResult < Struct.new(
       :transit_gateway_route_table_announcement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13981,7 +14553,8 @@ module Aws::EC2
     class DeleteTransitGatewayRouteTableRequest < Struct.new(
       :transit_gateway_route_table_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13990,7 +14563,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayRouteTable]
     class DeleteTransitGatewayRouteTableResult < Struct.new(
       :transit_gateway_route_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14005,7 +14579,8 @@ module Aws::EC2
     class DeleteTransitGatewayVpcAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14014,7 +14589,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayVpcAttachment]
     class DeleteTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14034,7 +14610,8 @@ module Aws::EC2
       :verified_access_endpoint_id,
       :client_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14043,7 +14620,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessEndpoint]
     class DeleteVerifiedAccessEndpointResult < Struct.new(
       :verified_access_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14063,7 +14641,8 @@ module Aws::EC2
       :verified_access_group_id,
       :client_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14072,7 +14651,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessGroup]
     class DeleteVerifiedAccessGroupResult < Struct.new(
       :verified_access_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14092,7 +14672,8 @@ module Aws::EC2
       :verified_access_instance_id,
       :dry_run,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14101,7 +14682,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessInstance]
     class DeleteVerifiedAccessInstanceResult < Struct.new(
       :verified_access_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14121,7 +14703,8 @@ module Aws::EC2
       :verified_access_trust_provider_id,
       :dry_run,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14130,7 +14713,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessTrustProvider]
     class DeleteVerifiedAccessTrustProviderResult < Struct.new(
       :verified_access_trust_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14145,7 +14729,8 @@ module Aws::EC2
     class DeleteVolumeRequest < Struct.new(
       :volume_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14160,7 +14745,8 @@ module Aws::EC2
     class DeleteVpcBlockPublicAccessExclusionRequest < Struct.new(
       :dry_run,
       :exclusion_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14169,7 +14755,8 @@ module Aws::EC2
     #   @return [Types::VpcBlockPublicAccessExclusion]
     class DeleteVpcBlockPublicAccessExclusionResult < Struct.new(
       :vpc_block_public_access_exclusion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14184,7 +14771,8 @@ module Aws::EC2
     class DeleteVpcEndpointConnectionNotificationsRequest < Struct.new(
       :dry_run,
       :connection_notification_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14194,7 +14782,8 @@ module Aws::EC2
     #   @return [Array<Types::UnsuccessfulItem>]
     class DeleteVpcEndpointConnectionNotificationsResult < Struct.new(
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14209,7 +14798,8 @@ module Aws::EC2
     class DeleteVpcEndpointServiceConfigurationsRequest < Struct.new(
       :dry_run,
       :service_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14219,7 +14809,8 @@ module Aws::EC2
     #   @return [Array<Types::UnsuccessfulItem>]
     class DeleteVpcEndpointServiceConfigurationsResult < Struct.new(
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14234,7 +14825,8 @@ module Aws::EC2
     class DeleteVpcEndpointsRequest < Struct.new(
       :dry_run,
       :vpc_endpoint_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14243,7 +14835,8 @@ module Aws::EC2
     #   @return [Array<Types::UnsuccessfulItem>]
     class DeleteVpcEndpointsResult < Struct.new(
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14258,7 +14851,8 @@ module Aws::EC2
     class DeleteVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14267,7 +14861,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DeleteVpcPeeringConnectionResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14282,7 +14877,8 @@ module Aws::EC2
     class DeleteVpcRequest < Struct.new(
       :vpc_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14299,7 +14895,8 @@ module Aws::EC2
     class DeleteVpnConnectionRequest < Struct.new(
       :vpn_connection_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14313,7 +14910,8 @@ module Aws::EC2
     class DeleteVpnConnectionRouteRequest < Struct.new(
       :destination_cidr_block,
       :vpn_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14330,7 +14928,8 @@ module Aws::EC2
     class DeleteVpnGatewayRequest < Struct.new(
       :vpn_gateway_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14346,7 +14945,8 @@ module Aws::EC2
     class DeprovisionByoipCidrRequest < Struct.new(
       :cidr,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14355,7 +14955,8 @@ module Aws::EC2
     #   @return [Types::ByoipCidr]
     class DeprovisionByoipCidrResult < Struct.new(
       :byoip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14374,7 +14975,8 @@ module Aws::EC2
       :dry_run,
       :ipam_id,
       :asn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14383,7 +14985,8 @@ module Aws::EC2
     #   @return [Types::Byoasn]
     class DeprovisionIpamByoasnResult < Struct.new(
       :byoasn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14402,7 +15005,8 @@ module Aws::EC2
       :dry_run,
       :ipam_pool_id,
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14411,7 +15015,8 @@ module Aws::EC2
     #   @return [Types::IpamPoolCidr]
     class DeprovisionIpamPoolCidrResult < Struct.new(
       :ipam_pool_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14430,7 +15035,8 @@ module Aws::EC2
       :dry_run,
       :pool_id,
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14443,7 +15049,8 @@ module Aws::EC2
     class DeprovisionPublicIpv4PoolCidrResult < Struct.new(
       :pool_id,
       :deprovisioned_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14468,7 +15075,8 @@ module Aws::EC2
       :image_id,
       :delete_associated_snapshots,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14482,7 +15090,8 @@ module Aws::EC2
     class DeregisterImageResult < Struct.new(
       :return,
       :delete_snapshot_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14497,7 +15106,8 @@ module Aws::EC2
     class DeregisterInstanceEventNotificationAttributesRequest < Struct.new(
       :dry_run,
       :instance_tag_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14506,7 +15116,8 @@ module Aws::EC2
     #   @return [Types::InstanceTagNotificationAttribute]
     class DeregisterInstanceEventNotificationAttributesResult < Struct.new(
       :instance_tag_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14524,7 +15135,8 @@ module Aws::EC2
     class DeregisterInstanceTagAttributeRequest < Struct.new(
       :include_all_tags_of_instance,
       :instance_tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14547,7 +15159,8 @@ module Aws::EC2
       :group_ip_address,
       :network_interface_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14556,7 +15169,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayMulticastDeregisteredGroupMembers]
     class DeregisterTransitGatewayMulticastGroupMembersResult < Struct.new(
       :deregistered_multicast_group_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14579,7 +15193,8 @@ module Aws::EC2
       :group_ip_address,
       :network_interface_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14588,7 +15203,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayMulticastDeregisteredGroupSources]
     class DeregisterTransitGatewayMulticastGroupSourcesResult < Struct.new(
       :deregistered_multicast_group_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14603,7 +15219,8 @@ module Aws::EC2
     class DescribeAccountAttributesRequest < Struct.new(
       :dry_run,
       :attribute_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14612,7 +15229,8 @@ module Aws::EC2
     #   @return [Array<Types::AccountAttribute>]
     class DescribeAccountAttributesResult < Struct.new(
       :account_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14635,7 +15253,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14648,7 +15267,8 @@ module Aws::EC2
     class DescribeAddressTransfersResult < Struct.new(
       :address_transfers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14675,7 +15295,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14688,7 +15309,8 @@ module Aws::EC2
     class DescribeAddressesAttributeResult < Struct.new(
       :addresses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14756,7 +15378,8 @@ module Aws::EC2
       :dry_run,
       :filters,
       :allocation_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14765,7 +15388,8 @@ module Aws::EC2
     #   @return [Array<Types::Address>]
     class DescribeAddressesResult < Struct.new(
       :addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14776,7 +15400,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DescribeAggregateIdFormatRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14791,7 +15416,8 @@ module Aws::EC2
     class DescribeAggregateIdFormatResult < Struct.new(
       :use_long_ids_aggregated,
       :statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14881,7 +15507,8 @@ module Aws::EC2
       :all_availability_zones,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14890,7 +15517,8 @@ module Aws::EC2
     #   @return [Array<Types::AvailabilityZone>]
     class DescribeAvailabilityZonesResult < Struct.new(
       :availability_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14914,7 +15542,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14927,7 +15556,8 @@ module Aws::EC2
     class DescribeAwsNetworkPerformanceMetricSubscriptionsResult < Struct.new(
       :next_token,
       :subscriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14993,7 +15623,8 @@ module Aws::EC2
       :bundle_ids,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15002,7 +15633,8 @@ module Aws::EC2
     #   @return [Array<Types::BundleTask>]
     class DescribeBundleTasksResult < Struct.new(
       :bundle_tasks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15022,7 +15654,8 @@ module Aws::EC2
       :dry_run,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15035,7 +15668,8 @@ module Aws::EC2
     class DescribeByoipCidrsResult < Struct.new(
       :byoip_cidrs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15094,7 +15728,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15108,7 +15743,8 @@ module Aws::EC2
     class DescribeCapacityBlockExtensionHistoryResult < Struct.new(
       :capacity_block_extensions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15134,7 +15770,8 @@ module Aws::EC2
       :capacity_reservation_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15147,7 +15784,8 @@ module Aws::EC2
     class DescribeCapacityBlockExtensionOfferingsResult < Struct.new(
       :capacity_block_extension_offerings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15195,7 +15833,8 @@ module Aws::EC2
       :max_results,
       :ultraserver_type,
       :ultraserver_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15208,7 +15847,8 @@ module Aws::EC2
     class DescribeCapacityBlockOfferingsResult < Struct.new(
       :capacity_block_offerings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15240,7 +15880,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15253,7 +15894,8 @@ module Aws::EC2
     class DescribeCapacityBlockStatusResult < Struct.new(
       :capacity_block_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15322,7 +15964,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15335,7 +15978,8 @@ module Aws::EC2
     class DescribeCapacityBlocksResult < Struct.new(
       :capacity_blocks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15399,7 +16043,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15412,7 +16057,8 @@ module Aws::EC2
     class DescribeCapacityReservationBillingRequestsResult < Struct.new(
       :next_token,
       :capacity_reservation_billing_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15463,7 +16109,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15476,7 +16123,8 @@ module Aws::EC2
     class DescribeCapacityReservationFleetsResult < Struct.new(
       :capacity_reservation_fleets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15639,7 +16287,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15652,7 +16301,8 @@ module Aws::EC2
     class DescribeCapacityReservationsResult < Struct.new(
       :next_token,
       :capacity_reservations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15708,7 +16358,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15721,7 +16372,8 @@ module Aws::EC2
     class DescribeCarrierGatewaysResult < Struct.new(
       :carrier_gateways,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15774,7 +16426,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15787,7 +16440,8 @@ module Aws::EC2
     class DescribeClassicLinkInstancesResult < Struct.new(
       :instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15827,7 +16481,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15840,7 +16495,8 @@ module Aws::EC2
     class DescribeClientVpnAuthorizationRulesResult < Struct.new(
       :authorization_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15876,7 +16532,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15889,7 +16546,8 @@ module Aws::EC2
     class DescribeClientVpnConnectionsResult < Struct.new(
       :connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15925,7 +16583,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15938,7 +16597,8 @@ module Aws::EC2
     class DescribeClientVpnEndpointsResult < Struct.new(
       :client_vpn_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15977,7 +16637,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15990,7 +16651,8 @@ module Aws::EC2
     class DescribeClientVpnRoutesResult < Struct.new(
       :routes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16033,7 +16695,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16046,7 +16709,8 @@ module Aws::EC2
     class DescribeClientVpnTargetNetworksResult < Struct.new(
       :client_vpn_target_networks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16084,7 +16748,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16097,7 +16762,8 @@ module Aws::EC2
     class DescribeCoipPoolsResult < Struct.new(
       :coip_pools,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16112,7 +16778,8 @@ module Aws::EC2
     class DescribeConversionTasksRequest < Struct.new(
       :dry_run,
       :conversion_task_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16121,7 +16788,8 @@ module Aws::EC2
     #   @return [Array<Types::ConversionTask>]
     class DescribeConversionTasksResult < Struct.new(
       :conversion_tasks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16179,7 +16847,8 @@ module Aws::EC2
       :customer_gateway_ids,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16189,7 +16858,8 @@ module Aws::EC2
     #   @return [Array<Types::CustomerGateway>]
     class DescribeCustomerGatewaysResult < Struct.new(
       :customer_gateways,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16214,7 +16884,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :report_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16227,7 +16898,8 @@ module Aws::EC2
     class DescribeDeclarativePoliciesReportsResult < Struct.new(
       :next_token,
       :reports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16283,7 +16955,8 @@ module Aws::EC2
       :max_results,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16296,7 +16969,8 @@ module Aws::EC2
     class DescribeDhcpOptionsResult < Struct.new(
       :next_token,
       :dhcp_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16336,7 +17010,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16349,7 +17024,8 @@ module Aws::EC2
     class DescribeEgressOnlyInternetGatewaysResult < Struct.new(
       :egress_only_internet_gateways,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16405,7 +17081,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16425,7 +17102,8 @@ module Aws::EC2
       :elastic_gpu_set,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16453,7 +17131,8 @@ module Aws::EC2
       :export_image_task_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16467,7 +17146,8 @@ module Aws::EC2
     class DescribeExportImageTasksResult < Struct.new(
       :export_image_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16480,7 +17160,8 @@ module Aws::EC2
     class DescribeExportTasksRequest < Struct.new(
       :filters,
       :export_task_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16489,7 +17170,8 @@ module Aws::EC2
     #   @return [Array<Types::ExportTask>]
     class DescribeExportTasksResult < Struct.new(
       :export_tasks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16532,7 +17214,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16547,7 +17230,8 @@ module Aws::EC2
     class DescribeFastLaunchImagesResult < Struct.new(
       :fast_launch_images,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16595,7 +17279,8 @@ module Aws::EC2
       :state,
       :state_transition_reason,
       :state_transition_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16657,7 +17342,8 @@ module Aws::EC2
       :enabled_time,
       :disabling_time,
       :disabled_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16706,7 +17392,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16720,7 +17407,8 @@ module Aws::EC2
     class DescribeFastSnapshotRestoresResult < Struct.new(
       :fast_snapshot_restores,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16745,7 +17433,8 @@ module Aws::EC2
       :lifecycle,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16779,7 +17468,8 @@ module Aws::EC2
       :next_token,
       :fleet_id,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16810,7 +17500,8 @@ module Aws::EC2
       :next_token,
       :fleet_id,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16845,7 +17536,8 @@ module Aws::EC2
       :next_token,
       :fleet_id,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16864,7 +17556,8 @@ module Aws::EC2
       :active_instances,
       :next_token,
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16892,7 +17585,8 @@ module Aws::EC2
       :instance_ids,
       :instance_type,
       :platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16956,7 +17650,8 @@ module Aws::EC2
       :next_token,
       :fleet_ids,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16970,7 +17665,8 @@ module Aws::EC2
     class DescribeFleetsResult < Struct.new(
       :next_token,
       :fleets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17039,7 +17735,8 @@ module Aws::EC2
       :flow_log_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17052,7 +17749,8 @@ module Aws::EC2
     class DescribeFlowLogsResult < Struct.new(
       :flow_logs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17071,7 +17769,8 @@ module Aws::EC2
       :dry_run,
       :fpga_image_id,
       :attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17080,7 +17779,8 @@ module Aws::EC2
     #   @return [Types::FpgaImageAttribute]
     class DescribeFpgaImageAttributeResult < Struct.new(
       :fpga_image_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17160,7 +17860,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17173,7 +17874,8 @@ module Aws::EC2
     class DescribeFpgaImagesResult < Struct.new(
       :fpga_images,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17220,7 +17922,8 @@ module Aws::EC2
       :min_duration,
       :next_token,
       :offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17233,7 +17936,8 @@ module Aws::EC2
     class DescribeHostReservationOfferingsResult < Struct.new(
       :next_token,
       :offering_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17281,7 +17985,8 @@ module Aws::EC2
       :host_reservation_id_set,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17294,7 +17999,8 @@ module Aws::EC2
     class DescribeHostReservationsResult < Struct.new(
       :host_reservation_set,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17355,7 +18061,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17368,7 +18075,8 @@ module Aws::EC2
     class DescribeHostsResult < Struct.new(
       :hosts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17403,7 +18111,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17417,7 +18126,8 @@ module Aws::EC2
     class DescribeIamInstanceProfileAssociationsResult < Struct.new(
       :iam_instance_profile_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17439,7 +18149,8 @@ module Aws::EC2
     #   @return [String]
     class DescribeIdFormatRequest < Struct.new(
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17448,7 +18159,8 @@ module Aws::EC2
     #   @return [Array<Types::IdFormat>]
     class DescribeIdFormatResult < Struct.new(
       :statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17474,7 +18186,8 @@ module Aws::EC2
     class DescribeIdentityIdFormatRequest < Struct.new(
       :resource,
       :principal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17483,7 +18196,8 @@ module Aws::EC2
     #   @return [Array<Types::IdFormat>]
     class DescribeIdentityIdFormatResult < Struct.new(
       :statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17560,7 +18274,8 @@ module Aws::EC2
       :launch_permissions,
       :product_codes,
       :block_device_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17584,7 +18299,8 @@ module Aws::EC2
       :attribute,
       :image_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17632,7 +18348,8 @@ module Aws::EC2
       :next_token,
       :dry_run,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17646,7 +18363,8 @@ module Aws::EC2
     class DescribeImageReferencesResult < Struct.new(
       :next_token,
       :image_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17698,7 +18416,8 @@ module Aws::EC2
       :filters,
       :dry_run,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17712,7 +18431,8 @@ module Aws::EC2
     class DescribeImageUsageReportEntriesResult < Struct.new(
       :next_token,
       :image_usage_report_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17760,7 +18480,8 @@ module Aws::EC2
       :filters,
       :dry_run,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17774,7 +18495,8 @@ module Aws::EC2
     class DescribeImageUsageReportsResult < Struct.new(
       :next_token,
       :image_usage_reports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18031,7 +18753,8 @@ module Aws::EC2
       :next_token,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18045,7 +18768,8 @@ module Aws::EC2
     class DescribeImagesResult < Struct.new(
       :next_token,
       :images,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18073,7 +18797,8 @@ module Aws::EC2
       :import_task_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18088,7 +18813,8 @@ module Aws::EC2
     class DescribeImportImageTasksResult < Struct.new(
       :import_image_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18116,7 +18842,8 @@ module Aws::EC2
       :import_task_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18131,7 +18858,8 @@ module Aws::EC2
     class DescribeImportSnapshotTasksResult < Struct.new(
       :import_snapshot_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18209,7 +18937,8 @@ module Aws::EC2
       :user_data,
       :disable_api_stop,
       :groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18229,7 +18958,8 @@ module Aws::EC2
       :dry_run,
       :instance_id,
       :attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18293,7 +19023,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :instance_connect_endpoint_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18307,7 +19038,8 @@ module Aws::EC2
     class DescribeInstanceConnectEndpointsResult < Struct.new(
       :instance_connect_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18346,7 +19078,8 @@ module Aws::EC2
       :instance_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18360,7 +19093,8 @@ module Aws::EC2
     class DescribeInstanceCreditSpecificationsResult < Struct.new(
       :instance_credit_specifications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18371,7 +19105,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DescribeInstanceEventNotificationAttributesRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18380,7 +19115,8 @@ module Aws::EC2
     #   @return [Types::InstanceTagNotificationAttribute]
     class DescribeInstanceEventNotificationAttributesResult < Struct.new(
       :instance_tag_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18463,7 +19199,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18477,7 +19214,8 @@ module Aws::EC2
     class DescribeInstanceEventWindowsResult < Struct.new(
       :instance_event_windows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18572,7 +19310,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18586,7 +19325,8 @@ module Aws::EC2
     class DescribeInstanceImageMetadataResult < Struct.new(
       :instance_image_metadata,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18723,7 +19463,8 @@ module Aws::EC2
       :dry_run,
       :filters,
       :include_all_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18737,7 +19478,8 @@ module Aws::EC2
     class DescribeInstanceStatusResult < Struct.new(
       :instance_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18798,7 +19540,8 @@ module Aws::EC2
       :instance_ids,
       :group_names,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18812,7 +19555,8 @@ module Aws::EC2
     class DescribeInstanceTopologyResult < Struct.new(
       :instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18873,7 +19617,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18887,7 +19632,8 @@ module Aws::EC2
     class DescribeInstanceTypeOfferingsResult < Struct.new(
       :instance_type_offerings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19201,7 +19947,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19215,7 +19962,8 @@ module Aws::EC2
     class DescribeInstanceTypesResult < Struct.new(
       :instance_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19960,7 +20708,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19974,7 +20723,8 @@ module Aws::EC2
     class DescribeInstancesResult < Struct.new(
       :next_token,
       :reservations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20032,7 +20782,8 @@ module Aws::EC2
       :dry_run,
       :internet_gateway_ids,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20045,7 +20796,8 @@ module Aws::EC2
     class DescribeInternetGatewaysResult < Struct.new(
       :internet_gateways,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20065,7 +20817,8 @@ module Aws::EC2
       :dry_run,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20078,7 +20831,8 @@ module Aws::EC2
     class DescribeIpamByoasnResult < Struct.new(
       :byoasns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20153,7 +20907,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :ipam_external_resource_verification_token_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20166,7 +20921,8 @@ module Aws::EC2
     class DescribeIpamExternalResourceVerificationTokensResult < Struct.new(
       :next_token,
       :ipam_external_resource_verification_tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20193,7 +20949,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :ipam_pool_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20206,7 +20963,8 @@ module Aws::EC2
     class DescribeIpamPoolsResult < Struct.new(
       :next_token,
       :ipam_pools,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20233,7 +20991,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20246,7 +21005,8 @@ module Aws::EC2
     class DescribeIpamResourceDiscoveriesResult < Struct.new(
       :ipam_resource_discoveries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20273,7 +21033,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20286,7 +21047,8 @@ module Aws::EC2
     class DescribeIpamResourceDiscoveryAssociationsResult < Struct.new(
       :ipam_resource_discovery_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20313,7 +21075,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :ipam_scope_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20326,7 +21089,8 @@ module Aws::EC2
     class DescribeIpamScopesResult < Struct.new(
       :next_token,
       :ipam_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20353,7 +21117,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :ipam_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20366,7 +21131,8 @@ module Aws::EC2
     class DescribeIpamsResult < Struct.new(
       :next_token,
       :ipams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20405,7 +21171,8 @@ module Aws::EC2
       :max_results,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20418,7 +21185,8 @@ module Aws::EC2
     class DescribeIpv6PoolsResult < Struct.new(
       :ipv6_pools,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20471,7 +21239,8 @@ module Aws::EC2
       :include_public_key,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20480,7 +21249,8 @@ module Aws::EC2
     #   @return [Array<Types::KeyPairInfo>]
     class DescribeKeyPairsResult < Struct.new(
       :key_pairs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20624,7 +21394,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :resolve_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20638,7 +21409,8 @@ module Aws::EC2
     class DescribeLaunchTemplateVersionsResult < Struct.new(
       :launch_template_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20691,7 +21463,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20705,7 +21478,8 @@ module Aws::EC2
     class DescribeLaunchTemplatesResult < Struct.new(
       :launch_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20765,7 +21539,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20778,7 +21553,8 @@ module Aws::EC2
     class DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResult < Struct.new(
       :local_gateway_route_table_virtual_interface_group_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20838,7 +21614,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20851,7 +21628,8 @@ module Aws::EC2
     class DescribeLocalGatewayRouteTableVpcAssociationsResult < Struct.new(
       :local_gateway_route_table_vpc_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20906,7 +21684,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20919,7 +21698,8 @@ module Aws::EC2
     class DescribeLocalGatewayRouteTablesResult < Struct.new(
       :local_gateway_route_tables,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20965,7 +21745,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20978,7 +21759,8 @@ module Aws::EC2
     class DescribeLocalGatewayVirtualInterfaceGroupsResult < Struct.new(
       :local_gateway_virtual_interface_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21041,7 +21823,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21054,7 +21837,8 @@ module Aws::EC2
     class DescribeLocalGatewayVirtualInterfacesResult < Struct.new(
       :local_gateway_virtual_interfaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21100,7 +21884,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21113,7 +21898,8 @@ module Aws::EC2
     class DescribeLocalGatewaysResult < Struct.new(
       :local_gateways,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21150,7 +21936,8 @@ module Aws::EC2
       :next_token,
       :snapshot_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21164,7 +21951,8 @@ module Aws::EC2
     class DescribeLockedSnapshotsResult < Struct.new(
       :snapshots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21198,7 +21986,8 @@ module Aws::EC2
       :host_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21213,7 +22002,8 @@ module Aws::EC2
     class DescribeMacHostsResult < Struct.new(
       :mac_hosts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21262,7 +22052,8 @@ module Aws::EC2
       :mac_modification_task_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21275,7 +22066,8 @@ module Aws::EC2
     class DescribeMacModificationTasksResult < Struct.new(
       :mac_modification_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21317,7 +22109,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :prefix_list_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21330,7 +22123,8 @@ module Aws::EC2
     class DescribeManagedPrefixListsResult < Struct.new(
       :next_token,
       :prefix_lists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21368,7 +22162,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21381,7 +22176,8 @@ module Aws::EC2
     class DescribeMovingAddressesResult < Struct.new(
       :moving_address_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21438,7 +22234,8 @@ module Aws::EC2
       :max_results,
       :nat_gateway_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21451,7 +22248,8 @@ module Aws::EC2
     class DescribeNatGatewaysResult < Struct.new(
       :nat_gateways,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21561,7 +22359,8 @@ module Aws::EC2
       :dry_run,
       :network_acl_ids,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21574,7 +22373,8 @@ module Aws::EC2
     class DescribeNetworkAclsResult < Struct.new(
       :network_acls,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21614,7 +22414,8 @@ module Aws::EC2
       :max_results,
       :dry_run,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21627,7 +22428,8 @@ module Aws::EC2
     class DescribeNetworkInsightsAccessScopeAnalysesResult < Struct.new(
       :network_insights_access_scope_analyses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21655,7 +22457,8 @@ module Aws::EC2
       :max_results,
       :dry_run,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21668,7 +22471,8 @@ module Aws::EC2
     class DescribeNetworkInsightsAccessScopesResult < Struct.new(
       :network_insights_access_scopes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21716,7 +22520,8 @@ module Aws::EC2
       :max_results,
       :dry_run,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21729,7 +22534,8 @@ module Aws::EC2
     class DescribeNetworkInsightsAnalysesResult < Struct.new(
       :network_insights_analyses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21792,7 +22598,8 @@ module Aws::EC2
       :max_results,
       :dry_run,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21805,7 +22612,8 @@ module Aws::EC2
     class DescribeNetworkInsightsPathsResult < Struct.new(
       :network_insights_paths,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21826,7 +22634,8 @@ module Aws::EC2
       :dry_run,
       :network_interface_id,
       :attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21858,7 +22667,8 @@ module Aws::EC2
       :network_interface_id,
       :source_dest_check,
       :associate_public_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21909,7 +22719,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21924,7 +22735,8 @@ module Aws::EC2
     class DescribeNetworkInterfacePermissionsResult < Struct.new(
       :network_interface_permissions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22155,7 +22967,8 @@ module Aws::EC2
       :dry_run,
       :network_interface_ids,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22169,7 +22982,8 @@ module Aws::EC2
     class DescribeNetworkInterfacesResult < Struct.new(
       :network_interfaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22244,7 +23058,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22257,7 +23072,8 @@ module Aws::EC2
     class DescribeOutpostLagsResult < Struct.new(
       :outpost_lags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22329,7 +23145,8 @@ module Aws::EC2
       :dry_run,
       :group_names,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22338,7 +23155,8 @@ module Aws::EC2
     #   @return [Array<Types::PlacementGroup>]
     class DescribePlacementGroupsResult < Struct.new(
       :placement_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22376,7 +23194,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :prefix_list_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22389,7 +23208,8 @@ module Aws::EC2
     class DescribePrefixListsResult < Struct.new(
       :next_token,
       :prefix_lists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22426,7 +23246,8 @@ module Aws::EC2
       :resources,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22439,7 +23260,8 @@ module Aws::EC2
     class DescribePrincipalIdFormatResult < Struct.new(
       :principals,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22472,7 +23294,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22485,7 +23308,8 @@ module Aws::EC2
     class DescribePublicIpv4PoolsResult < Struct.new(
       :public_ipv4_pools,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22523,7 +23347,8 @@ module Aws::EC2
       :all_regions,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22532,7 +23357,8 @@ module Aws::EC2
     #   @return [Array<Types::Region>]
     class DescribeRegionsResult < Struct.new(
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22568,7 +23394,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22582,7 +23409,8 @@ module Aws::EC2
     class DescribeReplaceRootVolumeTasksResult < Struct.new(
       :replace_root_volume_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22620,7 +23448,8 @@ module Aws::EC2
       :reserved_instances_id,
       :reserved_instances_listing_id,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22630,7 +23459,8 @@ module Aws::EC2
     #   @return [Array<Types::ReservedInstancesListing>]
     class DescribeReservedInstancesListingsResult < Struct.new(
       :reserved_instances_listings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22710,7 +23540,8 @@ module Aws::EC2
       :reserved_instances_modification_ids,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22725,7 +23556,8 @@ module Aws::EC2
     class DescribeReservedInstancesModificationsResult < Struct.new(
       :next_token,
       :reserved_instances_modifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22877,7 +23709,8 @@ module Aws::EC2
       :offering_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22892,7 +23725,8 @@ module Aws::EC2
     class DescribeReservedInstancesOfferingsResult < Struct.new(
       :next_token,
       :reserved_instances_offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22999,7 +23833,8 @@ module Aws::EC2
       :dry_run,
       :filters,
       :offering_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23009,7 +23844,8 @@ module Aws::EC2
     #   @return [Array<Types::ReservedInstances>]
     class DescribeReservedInstancesResult < Struct.new(
       :reserved_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23036,7 +23872,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23049,7 +23886,8 @@ module Aws::EC2
     class DescribeRouteServerEndpointsResult < Struct.new(
       :route_server_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23076,7 +23914,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23089,7 +23928,8 @@ module Aws::EC2
     class DescribeRouteServerPeersResult < Struct.new(
       :route_server_peers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23116,7 +23956,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23129,7 +23970,8 @@ module Aws::EC2
     class DescribeRouteServersResult < Struct.new(
       :route_servers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23264,7 +24106,8 @@ module Aws::EC2
       :dry_run,
       :route_table_ids,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23278,7 +24121,8 @@ module Aws::EC2
     class DescribeRouteTablesResult < Struct.new(
       :route_tables,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23336,7 +24180,8 @@ module Aws::EC2
       :min_slot_duration_in_hours,
       :next_token,
       :recurrence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23350,7 +24195,8 @@ module Aws::EC2
     class DescribeScheduledInstanceAvailabilityResult < Struct.new(
       :next_token,
       :scheduled_instance_availability_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23399,7 +24245,8 @@ module Aws::EC2
       :next_token,
       :scheduled_instance_ids,
       :slot_start_time_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23413,7 +24260,8 @@ module Aws::EC2
     class DescribeScheduledInstancesResult < Struct.new(
       :next_token,
       :scheduled_instance_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23428,7 +24276,8 @@ module Aws::EC2
     class DescribeSecurityGroupReferencesRequest < Struct.new(
       :dry_run,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23437,7 +24286,8 @@ module Aws::EC2
     #   @return [Array<Types::SecurityGroupReference>]
     class DescribeSecurityGroupReferencesResult < Struct.new(
       :security_group_reference_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23483,7 +24333,8 @@ module Aws::EC2
       :dry_run,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23497,7 +24348,8 @@ module Aws::EC2
     class DescribeSecurityGroupRulesResult < Struct.new(
       :security_group_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23556,7 +24408,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23569,7 +24422,8 @@ module Aws::EC2
     class DescribeSecurityGroupVpcAssociationsResult < Struct.new(
       :security_group_vpc_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23729,7 +24583,8 @@ module Aws::EC2
       :max_results,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23742,7 +24597,8 @@ module Aws::EC2
     class DescribeSecurityGroupsResult < Struct.new(
       :next_token,
       :security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23801,7 +24657,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23814,7 +24671,8 @@ module Aws::EC2
     class DescribeServiceLinkVirtualInterfacesResult < Struct.new(
       :service_link_virtual_interfaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23833,7 +24691,8 @@ module Aws::EC2
       :attribute,
       :snapshot_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23851,7 +24710,8 @@ module Aws::EC2
       :product_codes,
       :snapshot_id,
       :create_volume_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23893,7 +24753,8 @@ module Aws::EC2
       :dry_run,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23907,7 +24768,8 @@ module Aws::EC2
     class DescribeSnapshotTierStatusResult < Struct.new(
       :snapshot_tier_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24014,7 +24876,8 @@ module Aws::EC2
       :snapshot_ids,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24028,7 +24891,8 @@ module Aws::EC2
     class DescribeSnapshotsResult < Struct.new(
       :next_token,
       :snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24041,7 +24905,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DescribeSpotDatafeedSubscriptionRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24051,7 +24916,8 @@ module Aws::EC2
     #   @return [Types::SpotDatafeedSubscription]
     class DescribeSpotDatafeedSubscriptionResult < Struct.new(
       :spot_datafeed_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24079,7 +24945,8 @@ module Aws::EC2
       :spot_fleet_request_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24099,7 +24966,8 @@ module Aws::EC2
       :active_instances,
       :next_token,
       :spot_fleet_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24136,7 +25004,8 @@ module Aws::EC2
       :start_time,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24168,7 +25037,8 @@ module Aws::EC2
       :next_token,
       :spot_fleet_request_id,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24196,7 +25066,8 @@ module Aws::EC2
       :spot_fleet_request_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24211,7 +25082,8 @@ module Aws::EC2
     class DescribeSpotFleetRequestsResponse < Struct.new(
       :next_token,
       :spot_fleet_request_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24440,7 +25312,8 @@ module Aws::EC2
       :dry_run,
       :spot_instance_request_ids,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24455,7 +25328,8 @@ module Aws::EC2
     class DescribeSpotInstanceRequestsResult < Struct.new(
       :spot_instance_requests,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24552,7 +25426,8 @@ module Aws::EC2
       :availability_zone,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24567,7 +25442,8 @@ module Aws::EC2
     class DescribeSpotPriceHistoryResult < Struct.new(
       :next_token,
       :spot_price_history,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24592,7 +25468,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24605,7 +25482,8 @@ module Aws::EC2
     class DescribeStaleSecurityGroupsResult < Struct.new(
       :next_token,
       :stale_security_group_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24653,7 +25531,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24667,7 +25546,8 @@ module Aws::EC2
     class DescribeStoreImageTasksResult < Struct.new(
       :store_image_task_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24830,7 +25710,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24843,7 +25724,8 @@ module Aws::EC2
     class DescribeSubnetsResult < Struct.new(
       :next_token,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24894,7 +25776,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24908,7 +25791,8 @@ module Aws::EC2
     class DescribeTagsResult < Struct.new(
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24978,7 +25862,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24991,7 +25876,8 @@ module Aws::EC2
     class DescribeTrafficMirrorFilterRulesResult < Struct.new(
       :traffic_mirror_filter_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25029,7 +25915,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25042,7 +25929,8 @@ module Aws::EC2
     class DescribeTrafficMirrorFiltersResult < Struct.new(
       :traffic_mirror_filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25108,7 +25996,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25121,7 +26010,8 @@ module Aws::EC2
     class DescribeTrafficMirrorSessionsResult < Struct.new(
       :traffic_mirror_sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25171,7 +26061,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25184,7 +26075,8 @@ module Aws::EC2
     class DescribeTrafficMirrorTargetsResult < Struct.new(
       :traffic_mirror_targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25253,7 +26145,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25266,7 +26159,8 @@ module Aws::EC2
     class DescribeTransitGatewayAttachmentsResult < Struct.new(
       :transit_gateway_attachments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25310,7 +26204,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25323,7 +26218,8 @@ module Aws::EC2
     class DescribeTransitGatewayConnectPeersResult < Struct.new(
       :transit_gateway_connect_peers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25379,7 +26275,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25392,7 +26289,8 @@ module Aws::EC2
     class DescribeTransitGatewayConnectsResult < Struct.new(
       :transit_gateway_connects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25434,7 +26332,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25447,7 +26346,8 @@ module Aws::EC2
     class DescribeTransitGatewayMulticastDomainsResult < Struct.new(
       :transit_gateway_multicast_domains,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25506,7 +26406,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25519,7 +26420,8 @@ module Aws::EC2
     class DescribeTransitGatewayPeeringAttachmentsResult < Struct.new(
       :transit_gateway_peering_attachments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25547,7 +26449,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25560,7 +26463,8 @@ module Aws::EC2
     class DescribeTransitGatewayPolicyTablesResult < Struct.new(
       :transit_gateway_policy_tables,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25588,7 +26492,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25601,7 +26506,8 @@ module Aws::EC2
     class DescribeTransitGatewayRouteTableAnnouncementsResult < Struct.new(
       :transit_gateway_route_table_announcements,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25653,7 +26559,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25666,7 +26573,8 @@ module Aws::EC2
     class DescribeTransitGatewayRouteTablesResult < Struct.new(
       :transit_gateway_route_tables,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25712,7 +26620,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25725,7 +26634,8 @@ module Aws::EC2
     class DescribeTransitGatewayVpcAttachmentsResult < Struct.new(
       :transit_gateway_vpc_attachments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25808,7 +26718,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25821,7 +26732,8 @@ module Aws::EC2
     class DescribeTransitGatewaysResult < Struct.new(
       :transit_gateways,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25859,7 +26771,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25872,7 +26785,8 @@ module Aws::EC2
     class DescribeTrunkInterfaceAssociationsResult < Struct.new(
       :interface_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25908,7 +26822,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25921,7 +26836,8 @@ module Aws::EC2
     class DescribeVerifiedAccessEndpointsResult < Struct.new(
       :verified_access_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25953,7 +26869,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25966,7 +26883,8 @@ module Aws::EC2
     class DescribeVerifiedAccessGroupsResult < Struct.new(
       :verified_access_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25994,7 +26912,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26007,7 +26926,8 @@ module Aws::EC2
     class DescribeVerifiedAccessInstanceLoggingConfigurationsResult < Struct.new(
       :logging_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26035,7 +26955,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26048,7 +26969,8 @@ module Aws::EC2
     class DescribeVerifiedAccessInstancesResult < Struct.new(
       :verified_access_instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26076,7 +26998,8 @@ module Aws::EC2
       :next_token,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26089,7 +27012,8 @@ module Aws::EC2
     class DescribeVerifiedAccessTrustProvidersResult < Struct.new(
       :verified_access_trust_providers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26108,7 +27032,8 @@ module Aws::EC2
       :attribute,
       :volume_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26125,7 +27050,8 @@ module Aws::EC2
       :auto_enable_io,
       :product_codes,
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26217,7 +27143,8 @@ module Aws::EC2
       :volume_ids,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26231,7 +27158,8 @@ module Aws::EC2
     class DescribeVolumeStatusResult < Struct.new(
       :next_token,
       :volume_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26309,7 +27237,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26323,7 +27252,8 @@ module Aws::EC2
     class DescribeVolumesModificationsResult < Struct.new(
       :next_token,
       :volumes_modifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26452,7 +27382,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26466,7 +27397,8 @@ module Aws::EC2
     class DescribeVolumesResult < Struct.new(
       :next_token,
       :volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26485,7 +27417,8 @@ module Aws::EC2
       :attribute,
       :vpc_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26511,7 +27444,8 @@ module Aws::EC2
       :enable_dns_support,
       :enable_network_address_usage_metrics,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26568,7 +27502,8 @@ module Aws::EC2
       :exclusion_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26581,7 +27516,8 @@ module Aws::EC2
     class DescribeVpcBlockPublicAccessExclusionsResult < Struct.new(
       :vpc_block_public_access_exclusions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26592,7 +27528,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DescribeVpcBlockPublicAccessOptionsRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26601,7 +27538,8 @@ module Aws::EC2
     #   @return [Types::VpcBlockPublicAccessOptions]
     class DescribeVpcBlockPublicAccessOptionsResult < Struct.new(
       :vpc_block_public_access_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26620,7 +27558,8 @@ module Aws::EC2
       :vpc_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26633,7 +27572,8 @@ module Aws::EC2
     class DescribeVpcClassicLinkDnsSupportResult < Struct.new(
       :next_token,
       :vpcs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26668,7 +27608,8 @@ module Aws::EC2
       :dry_run,
       :vpc_ids,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26677,7 +27618,8 @@ module Aws::EC2
     #   @return [Array<Types::VpcClassicLink>]
     class DescribeVpcClassicLinkResult < Struct.new(
       :vpcs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26737,7 +27679,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26750,7 +27693,8 @@ module Aws::EC2
     class DescribeVpcEndpointAssociationsResult < Struct.new(
       :vpc_endpoint_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26808,7 +27752,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26822,7 +27767,8 @@ module Aws::EC2
     class DescribeVpcEndpointConnectionNotificationsResult < Struct.new(
       :connection_notification_set,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26880,7 +27826,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26893,7 +27840,8 @@ module Aws::EC2
     class DescribeVpcEndpointConnectionsResult < Struct.new(
       :vpc_endpoint_connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26952,7 +27900,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26965,7 +27914,8 @@ module Aws::EC2
     class DescribeVpcEndpointServiceConfigurationsResult < Struct.new(
       :service_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27008,7 +27958,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27021,7 +27972,8 @@ module Aws::EC2
     class DescribeVpcEndpointServicePermissionsResult < Struct.new(
       :allowed_principals,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27085,7 +28037,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :service_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27102,7 +28055,8 @@ module Aws::EC2
       :service_names,
       :service_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27173,7 +28127,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27186,7 +28141,8 @@ module Aws::EC2
     class DescribeVpcEndpointsResult < Struct.new(
       :vpc_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27277,7 +28233,8 @@ module Aws::EC2
       :dry_run,
       :vpc_peering_connection_ids,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27290,7 +28247,8 @@ module Aws::EC2
     class DescribeVpcPeeringConnectionsResult < Struct.new(
       :vpc_peering_connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27391,7 +28349,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27404,7 +28363,8 @@ module Aws::EC2
     class DescribeVpcsResult < Struct.new(
       :next_token,
       :vpcs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27488,7 +28448,8 @@ module Aws::EC2
       :filters,
       :vpn_connection_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27498,7 +28459,8 @@ module Aws::EC2
     #   @return [Array<Types::VpnConnection>]
     class DescribeVpnConnectionsResult < Struct.new(
       :vpn_connections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27566,7 +28528,8 @@ module Aws::EC2
       :filters,
       :vpn_gateway_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27576,7 +28539,8 @@ module Aws::EC2
     #   @return [Array<Types::VpnGateway>]
     class DescribeVpnGatewaysResult < Struct.new(
       :vpn_gateways,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27596,7 +28560,8 @@ module Aws::EC2
       :file_format,
       :hive_compatible_partitions,
       :per_hour_partition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27614,7 +28579,8 @@ module Aws::EC2
       :file_format,
       :hive_compatible_partitions,
       :per_hour_partition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27633,7 +28599,8 @@ module Aws::EC2
       :dry_run,
       :instance_id,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27642,7 +28609,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DetachClassicLinkVpcResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27661,7 +28629,8 @@ module Aws::EC2
       :dry_run,
       :internet_gateway_id,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27703,7 +28672,8 @@ module Aws::EC2
       :dry_run,
       :attachment_id,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27727,7 +28697,8 @@ module Aws::EC2
       :verified_access_trust_provider_id,
       :client_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27740,7 +28711,8 @@ module Aws::EC2
     class DetachVerifiedAccessTrustProviderResult < Struct.new(
       :verified_access_trust_provider,
       :verified_access_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27786,7 +28758,8 @@ module Aws::EC2
       :device,
       :state,
       :attach_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27818,7 +28791,8 @@ module Aws::EC2
       :instance_id,
       :volume_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27839,7 +28813,8 @@ module Aws::EC2
       :vpc_id,
       :vpn_gateway_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27855,7 +28830,8 @@ module Aws::EC2
     class DeviceOptions < Struct.new(
       :tenant_id,
       :public_signing_key_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27869,7 +28845,8 @@ module Aws::EC2
     class DhcpConfiguration < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27891,7 +28868,8 @@ module Aws::EC2
       :tags,
       :dhcp_options_id,
       :dhcp_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27901,7 +28879,8 @@ module Aws::EC2
     #   @return [String]
     class DirectoryServiceAuthentication < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27911,7 +28890,8 @@ module Aws::EC2
     #   @return [String]
     class DirectoryServiceAuthenticationRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27926,7 +28906,8 @@ module Aws::EC2
     class DisableAddressTransferRequest < Struct.new(
       :allocation_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27935,7 +28916,8 @@ module Aws::EC2
     #   @return [Types::AddressTransfer]
     class DisableAddressTransferResult < Struct.new(
       :address_transfer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27946,7 +28928,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableAllowedImagesSettingsRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27956,7 +28939,8 @@ module Aws::EC2
     #   @return [String]
     class DisableAllowedImagesSettingsResult < Struct.new(
       :allowed_images_settings_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27983,7 +28967,8 @@ module Aws::EC2
       :metric,
       :statistic,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27992,7 +28977,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableAwsNetworkPerformanceMetricSubscriptionResult < Struct.new(
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28003,7 +28989,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableEbsEncryptionByDefaultRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28012,7 +28999,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableEbsEncryptionByDefaultResult < Struct.new(
       :ebs_encryption_by_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28033,7 +29021,8 @@ module Aws::EC2
       :image_id,
       :force,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28078,7 +29067,8 @@ module Aws::EC2
       :state,
       :state_transition_reason,
       :state_transition_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28092,7 +29082,8 @@ module Aws::EC2
     class DisableFastSnapshotRestoreErrorItem < Struct.new(
       :snapshot_id,
       :fast_snapshot_restore_state_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28106,7 +29097,8 @@ module Aws::EC2
     class DisableFastSnapshotRestoreStateError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28120,7 +29112,8 @@ module Aws::EC2
     class DisableFastSnapshotRestoreStateErrorItem < Struct.new(
       :availability_zone,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28182,7 +29175,8 @@ module Aws::EC2
       :enabled_time,
       :disabling_time,
       :disabled_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28201,7 +29195,8 @@ module Aws::EC2
       :availability_zones,
       :source_snapshot_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28214,7 +29209,8 @@ module Aws::EC2
     class DisableFastSnapshotRestoresResult < Struct.new(
       :successful,
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28225,7 +29221,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableImageBlockPublicAccessRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28235,7 +29232,8 @@ module Aws::EC2
     #   @return [String]
     class DisableImageBlockPublicAccessResult < Struct.new(
       :image_block_public_access_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28250,7 +29248,8 @@ module Aws::EC2
     class DisableImageDeprecationRequest < Struct.new(
       :image_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28259,7 +29258,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableImageDeprecationResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28274,7 +29274,8 @@ module Aws::EC2
     class DisableImageDeregistrationProtectionRequest < Struct.new(
       :image_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28283,7 +29284,8 @@ module Aws::EC2
     #   @return [String]
     class DisableImageDeregistrationProtectionResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28298,7 +29300,8 @@ module Aws::EC2
     class DisableImageRequest < Struct.new(
       :image_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28307,7 +29310,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableImageResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28322,7 +29326,8 @@ module Aws::EC2
     class DisableIpamOrganizationAdminAccountRequest < Struct.new(
       :dry_run,
       :delegated_admin_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28331,7 +29336,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableIpamOrganizationAdminAccountResult < Struct.new(
       :success,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28350,7 +29356,8 @@ module Aws::EC2
       :route_server_id,
       :route_table_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28359,7 +29366,8 @@ module Aws::EC2
     #   @return [Types::RouteServerPropagation]
     class DisableRouteServerPropagationResult < Struct.new(
       :route_server_propagation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28368,7 +29376,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableSerialConsoleAccessRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28379,7 +29388,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableSerialConsoleAccessResult < Struct.new(
       :serial_console_access_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28390,7 +29400,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableSnapshotBlockPublicAccessRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28399,7 +29410,8 @@ module Aws::EC2
     #   @return [String]
     class DisableSnapshotBlockPublicAccessResult < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28422,7 +29434,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       :transit_gateway_route_table_announcement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28431,7 +29444,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPropagation]
     class DisableTransitGatewayRouteTablePropagationResult < Struct.new(
       :propagation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28452,7 +29466,8 @@ module Aws::EC2
       :gateway_id,
       :route_table_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28461,7 +29476,8 @@ module Aws::EC2
     #   @return [String]
     class DisableVpcClassicLinkDnsSupportRequest < Struct.new(
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28470,7 +29486,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableVpcClassicLinkDnsSupportResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28485,7 +29502,8 @@ module Aws::EC2
     class DisableVpcClassicLinkRequest < Struct.new(
       :dry_run,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28494,7 +29512,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisableVpcClassicLinkResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28513,7 +29532,8 @@ module Aws::EC2
       :association_id,
       :public_ip,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28530,7 +29550,8 @@ module Aws::EC2
       :dry_run,
       :capacity_reservation_id,
       :unused_reservation_billing_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28539,7 +29560,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisassociateCapacityReservationBillingOwnerResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28556,7 +29578,8 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :association_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28569,7 +29592,8 @@ module Aws::EC2
     class DisassociateClientVpnTargetNetworkResult < Struct.new(
       :association_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28586,7 +29610,8 @@ module Aws::EC2
       :certificate_arn,
       :role_arn,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28595,7 +29620,8 @@ module Aws::EC2
     #   @return [Boolean]
     class DisassociateEnclaveCertificateIamRoleResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28604,7 +29630,8 @@ module Aws::EC2
     #   @return [String]
     class DisassociateIamInstanceProfileRequest < Struct.new(
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28613,7 +29640,8 @@ module Aws::EC2
     #   @return [Types::IamInstanceProfileAssociation]
     class DisassociateIamInstanceProfileResult < Struct.new(
       :iam_instance_profile_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28632,7 +29660,8 @@ module Aws::EC2
       :dry_run,
       :instance_event_window_id,
       :association_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28641,7 +29670,8 @@ module Aws::EC2
     #   @return [Types::InstanceEventWindow]
     class DisassociateInstanceEventWindowResult < Struct.new(
       :instance_event_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28660,7 +29690,8 @@ module Aws::EC2
       :dry_run,
       :asn,
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28669,7 +29700,8 @@ module Aws::EC2
     #   @return [Types::AsnAssociation]
     class DisassociateIpamByoasnResult < Struct.new(
       :asn_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28684,7 +29716,8 @@ module Aws::EC2
     class DisassociateIpamResourceDiscoveryRequest < Struct.new(
       :dry_run,
       :ipam_resource_discovery_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28693,7 +29726,8 @@ module Aws::EC2
     #   @return [Types::IpamResourceDiscoveryAssociation]
     class DisassociateIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28716,7 +29750,8 @@ module Aws::EC2
       :association_ids,
       :max_drain_duration_seconds,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28729,7 +29764,8 @@ module Aws::EC2
     class DisassociateNatGatewayAddressResult < Struct.new(
       :nat_gateway_id,
       :nat_gateway_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28748,7 +29784,8 @@ module Aws::EC2
       :route_server_id,
       :vpc_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28757,7 +29794,8 @@ module Aws::EC2
     #   @return [Types::RouteServerAssociation]
     class DisassociateRouteServerResult < Struct.new(
       :route_server_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28772,7 +29810,8 @@ module Aws::EC2
     class DisassociateRouteTableRequest < Struct.new(
       :dry_run,
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28791,7 +29830,8 @@ module Aws::EC2
       :group_id,
       :vpc_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28800,7 +29840,8 @@ module Aws::EC2
     #   @return [String]
     class DisassociateSecurityGroupVpcResult < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28809,7 +29850,8 @@ module Aws::EC2
     #   @return [String]
     class DisassociateSubnetCidrBlockRequest < Struct.new(
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28822,7 +29864,8 @@ module Aws::EC2
     class DisassociateSubnetCidrBlockResult < Struct.new(
       :ipv6_cidr_block_association,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28845,7 +29888,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :subnet_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28854,7 +29898,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayMulticastDomainAssociations]
     class DisassociateTransitGatewayMulticastDomainResult < Struct.new(
       :associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28873,7 +29918,8 @@ module Aws::EC2
       :transit_gateway_policy_table_id,
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28882,7 +29928,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPolicyTableAssociation]
     class DisassociateTransitGatewayPolicyTableResult < Struct.new(
       :association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28901,7 +29948,8 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28910,7 +29958,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayAssociation]
     class DisassociateTransitGatewayRouteTableResult < Struct.new(
       :association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28931,7 +29980,8 @@ module Aws::EC2
       :association_id,
       :client_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28946,7 +29996,8 @@ module Aws::EC2
     class DisassociateTrunkInterfaceResult < Struct.new(
       :return,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28955,7 +30006,8 @@ module Aws::EC2
     #   @return [String]
     class DisassociateVpcCidrBlockRequest < Struct.new(
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28972,7 +30024,8 @@ module Aws::EC2
       :ipv6_cidr_block_association,
       :cidr_block_association,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28990,7 +30043,8 @@ module Aws::EC2
       :description,
       :image,
       :volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29015,7 +30069,8 @@ module Aws::EC2
       :format,
       :import_manifest_url,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29037,7 +30092,8 @@ module Aws::EC2
       :format,
       :bytes,
       :import_manifest_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29051,7 +30107,8 @@ module Aws::EC2
     class DiskImageVolumeDescription < Struct.new(
       :id,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29069,7 +30126,8 @@ module Aws::EC2
       :size_in_gb,
       :count,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29083,7 +30141,8 @@ module Aws::EC2
     class DnsEntry < Struct.new(
       :dns_name,
       :hosted_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29097,7 +30156,8 @@ module Aws::EC2
     class DnsOptions < Struct.new(
       :dns_record_ip_type,
       :private_dns_only_for_inbound_resolver_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29114,7 +30174,8 @@ module Aws::EC2
     class DnsOptionsSpecification < Struct.new(
       :dns_record_ip_type,
       :private_dns_only_for_inbound_resolver_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29131,7 +30192,8 @@ module Aws::EC2
     class DnsServersOptionsModifyStructure < Struct.new(
       :custom_dns_servers,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29324,7 +30386,8 @@ module Aws::EC2
       :encrypted,
       :volume_initialization_rate,
       :availability_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29367,7 +30430,8 @@ module Aws::EC2
       :snapshot_id,
       :volume_size,
       :volume_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29402,7 +30466,8 @@ module Aws::EC2
       :nvme_support,
       :maximum_ebs_attachments,
       :attachment_limit_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29439,7 +30504,8 @@ module Aws::EC2
       :associated_resource,
       :volume_owner_id,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29454,7 +30520,8 @@ module Aws::EC2
     class EbsInstanceBlockDeviceSpecification < Struct.new(
       :volume_id,
       :delete_on_termination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29486,7 +30553,8 @@ module Aws::EC2
       :maximum_bandwidth_in_mbps,
       :maximum_throughput_in_m_bps,
       :maximum_iops,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29504,7 +30572,8 @@ module Aws::EC2
       :impaired_since,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29518,7 +30587,8 @@ module Aws::EC2
     class EbsStatusSummary < Struct.new(
       :details,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29606,7 +30676,8 @@ module Aws::EC2
       :tags,
       :ip_address_type,
       :public_dns_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29616,7 +30687,8 @@ module Aws::EC2
     #   @return [Integer]
     class EfaInfo < Struct.new(
       :maximum_efa_interfaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29634,7 +30706,8 @@ module Aws::EC2
       :attachments,
       :egress_only_internet_gateway_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29660,7 +30733,8 @@ module Aws::EC2
       :elastic_gpu_association_id,
       :elastic_gpu_association_state,
       :elastic_gpu_association_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29673,7 +30747,8 @@ module Aws::EC2
     #   @return [String]
     class ElasticGpuHealth < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29686,7 +30761,8 @@ module Aws::EC2
     #   @return [String]
     class ElasticGpuSpecification < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29702,7 +30778,8 @@ module Aws::EC2
     #   @return [String]
     class ElasticGpuSpecificationResponse < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29739,7 +30816,8 @@ module Aws::EC2
       :elastic_gpu_state,
       :instance_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29763,7 +30841,8 @@ module Aws::EC2
     class ElasticInferenceAccelerator < Struct.new(
       :type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29798,7 +30877,8 @@ module Aws::EC2
       :elastic_inference_accelerator_association_id,
       :elastic_inference_accelerator_association_state,
       :elastic_inference_accelerator_association_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29819,7 +30899,8 @@ module Aws::EC2
     class EnaSrdSpecification < Struct.new(
       :ena_srd_enabled,
       :ena_srd_udp_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29836,7 +30917,8 @@ module Aws::EC2
     class EnaSrdSpecificationRequest < Struct.new(
       :ena_srd_enabled,
       :ena_srd_udp_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29851,7 +30933,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnaSrdUdpSpecification < Struct.new(
       :ena_srd_udp_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29862,7 +30945,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnaSrdUdpSpecificationRequest < Struct.new(
       :ena_srd_udp_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29881,7 +30965,8 @@ module Aws::EC2
       :allocation_id,
       :transfer_account_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29890,7 +30975,8 @@ module Aws::EC2
     #   @return [Types::AddressTransfer]
     class EnableAddressTransferResult < Struct.new(
       :address_transfer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29907,7 +30993,8 @@ module Aws::EC2
     class EnableAllowedImagesSettingsRequest < Struct.new(
       :allowed_images_settings_state,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29917,7 +31004,8 @@ module Aws::EC2
     #   @return [String]
     class EnableAllowedImagesSettingsResult < Struct.new(
       :allowed_images_settings_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29944,7 +31032,8 @@ module Aws::EC2
       :metric,
       :statistic,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29953,7 +31042,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableAwsNetworkPerformanceMetricSubscriptionResult < Struct.new(
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29964,7 +31054,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableEbsEncryptionByDefaultRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29973,7 +31064,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableEbsEncryptionByDefaultResult < Struct.new(
       :ebs_encryption_by_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30011,7 +31103,8 @@ module Aws::EC2
       :launch_template,
       :max_parallel_launches,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30057,7 +31150,8 @@ module Aws::EC2
       :state,
       :state_transition_reason,
       :state_transition_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30071,7 +31165,8 @@ module Aws::EC2
     class EnableFastSnapshotRestoreErrorItem < Struct.new(
       :snapshot_id,
       :fast_snapshot_restore_state_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30085,7 +31180,8 @@ module Aws::EC2
     class EnableFastSnapshotRestoreStateError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30099,7 +31195,8 @@ module Aws::EC2
     class EnableFastSnapshotRestoreStateErrorItem < Struct.new(
       :availability_zone,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30161,7 +31258,8 @@ module Aws::EC2
       :enabled_time,
       :disabling_time,
       :disabled_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30181,7 +31279,8 @@ module Aws::EC2
       :availability_zones,
       :source_snapshot_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30194,7 +31293,8 @@ module Aws::EC2
     class EnableFastSnapshotRestoresResult < Struct.new(
       :successful,
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30211,7 +31311,8 @@ module Aws::EC2
     class EnableImageBlockPublicAccessRequest < Struct.new(
       :image_block_public_access_state,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30221,7 +31322,8 @@ module Aws::EC2
     #   @return [String]
     class EnableImageBlockPublicAccessResult < Struct.new(
       :image_block_public_access_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30245,7 +31347,8 @@ module Aws::EC2
       :image_id,
       :deprecate_at,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30254,7 +31357,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableImageDeprecationResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30274,7 +31378,8 @@ module Aws::EC2
       :image_id,
       :with_cooldown,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30283,7 +31388,8 @@ module Aws::EC2
     #   @return [String]
     class EnableImageDeregistrationProtectionResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30298,7 +31404,8 @@ module Aws::EC2
     class EnableImageRequest < Struct.new(
       :image_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30307,7 +31414,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableImageResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30322,7 +31430,8 @@ module Aws::EC2
     class EnableIpamOrganizationAdminAccountRequest < Struct.new(
       :dry_run,
       :delegated_admin_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30331,7 +31440,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableIpamOrganizationAdminAccountResult < Struct.new(
       :success,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30342,7 +31452,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableReachabilityAnalyzerOrganizationSharingRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30351,7 +31462,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableReachabilityAnalyzerOrganizationSharingResult < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30370,7 +31482,8 @@ module Aws::EC2
       :route_server_id,
       :route_table_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30379,7 +31492,8 @@ module Aws::EC2
     #   @return [Types::RouteServerPropagation]
     class EnableRouteServerPropagationResult < Struct.new(
       :route_server_propagation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30388,7 +31502,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableSerialConsoleAccessRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30399,7 +31514,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableSerialConsoleAccessResult < Struct.new(
       :serial_console_access_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30433,7 +31549,8 @@ module Aws::EC2
     class EnableSnapshotBlockPublicAccessRequest < Struct.new(
       :state,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30444,7 +31561,8 @@ module Aws::EC2
     #   @return [String]
     class EnableSnapshotBlockPublicAccessResult < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30467,7 +31585,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       :transit_gateway_route_table_announcement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30476,7 +31595,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPropagation]
     class EnableTransitGatewayRouteTablePropagationResult < Struct.new(
       :propagation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30500,7 +31620,8 @@ module Aws::EC2
       :gateway_id,
       :route_table_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30515,7 +31636,8 @@ module Aws::EC2
     class EnableVolumeIORequest < Struct.new(
       :dry_run,
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30524,7 +31646,8 @@ module Aws::EC2
     #   @return [String]
     class EnableVpcClassicLinkDnsSupportRequest < Struct.new(
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30533,7 +31656,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableVpcClassicLinkDnsSupportResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30548,7 +31672,8 @@ module Aws::EC2
     class EnableVpcClassicLinkRequest < Struct.new(
       :dry_run,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30557,7 +31682,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnableVpcClassicLinkResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30569,7 +31695,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnclaveOptions < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30583,7 +31710,8 @@ module Aws::EC2
     #   @return [Boolean]
     class EnclaveOptionsRequest < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30731,7 +31859,8 @@ module Aws::EC2
       :event_description,
       :event_sub_type,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30961,7 +32090,8 @@ module Aws::EC2
       :component_region,
       :firewall_stateless_rule,
       :firewall_stateful_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30974,7 +32104,8 @@ module Aws::EC2
     class ExportClientVpnClientCertificateRevocationListRequest < Struct.new(
       :client_vpn_endpoint_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30987,7 +32118,8 @@ module Aws::EC2
     class ExportClientVpnClientCertificateRevocationListResult < Struct.new(
       :certificate_revocation_list,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31000,7 +32132,8 @@ module Aws::EC2
     class ExportClientVpnClientConfigurationRequest < Struct.new(
       :client_vpn_endpoint_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31009,7 +32142,8 @@ module Aws::EC2
     #   @return [String]
     class ExportClientVpnClientConfigurationResult < Struct.new(
       :client_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31049,7 +32183,8 @@ module Aws::EC2
       :s3_export_location,
       :role_name,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31096,7 +32231,8 @@ module Aws::EC2
       :status,
       :status_message,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31135,7 +32271,8 @@ module Aws::EC2
       :status,
       :status_message,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31169,7 +32306,8 @@ module Aws::EC2
       :state,
       :status_message,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31183,7 +32321,8 @@ module Aws::EC2
     class ExportTaskS3Location < Struct.new(
       :s3_bucket,
       :s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31197,7 +32336,8 @@ module Aws::EC2
     class ExportTaskS3LocationRequest < Struct.new(
       :s3_bucket,
       :s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31222,7 +32362,8 @@ module Aws::EC2
       :disk_image_format,
       :s3_bucket,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31248,7 +32389,8 @@ module Aws::EC2
       :container_format,
       :s3_bucket,
       :s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31310,7 +32452,8 @@ module Aws::EC2
       :filters,
       :s3_bucket,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31320,7 +32463,8 @@ module Aws::EC2
     #   @return [String]
     class ExportTransitGatewayRoutesResult < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31335,7 +32479,8 @@ module Aws::EC2
     class ExportVerifiedAccessInstanceClientConfigurationRequest < Struct.new(
       :verified_access_instance_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31364,7 +32509,8 @@ module Aws::EC2
       :device_trust_providers,
       :user_trust_provider,
       :open_vpn_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31378,7 +32524,8 @@ module Aws::EC2
     class FailedCapacityReservationFleetCancellationResult < Struct.new(
       :capacity_reservation_fleet_id,
       :cancel_capacity_reservation_fleet_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31392,7 +32539,8 @@ module Aws::EC2
     class FailedQueuedPurchaseDeletion < Struct.new(
       :error,
       :reserved_instances_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31417,7 +32565,8 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31435,7 +32584,8 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31447,7 +32597,8 @@ module Aws::EC2
     #   @return [Integer]
     class FastLaunchSnapshotConfigurationRequest < Struct.new(
       :target_resource_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31459,7 +32610,8 @@ module Aws::EC2
     #   @return [Integer]
     class FastLaunchSnapshotConfigurationResponse < Struct.new(
       :target_resource_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31473,7 +32625,8 @@ module Aws::EC2
     class FederatedAuthentication < Struct.new(
       :saml_provider_arn,
       :self_service_saml_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31487,7 +32640,8 @@ module Aws::EC2
     class FederatedAuthenticationRequest < Struct.new(
       :saml_provider_arn,
       :self_service_saml_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31507,7 +32661,8 @@ module Aws::EC2
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31521,7 +32676,8 @@ module Aws::EC2
     class FilterPortRange < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31560,7 +32716,8 @@ module Aws::EC2
       :protocol,
       :rule_action,
       :direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31599,7 +32756,8 @@ module Aws::EC2
       :protocols,
       :rule_action,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31658,7 +32816,8 @@ module Aws::EC2
       :virtual_name,
       :ebs,
       :no_device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31718,7 +32877,8 @@ module Aws::EC2
       :create_date,
       :weight,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31841,7 +33001,8 @@ module Aws::EC2
       :errors,
       :instances,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31973,7 +33134,8 @@ module Aws::EC2
       :snapshot_id,
       :volume_size,
       :volume_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31988,7 +33150,8 @@ module Aws::EC2
     class FleetLaunchTemplateConfig < Struct.new(
       :launch_template_specification,
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32006,7 +33169,8 @@ module Aws::EC2
     class FleetLaunchTemplateConfigRequest < Struct.new(
       :launch_template_specification,
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32162,7 +33326,8 @@ module Aws::EC2
       :instance_requirements,
       :image_id,
       :block_device_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32318,7 +33483,8 @@ module Aws::EC2
       :block_device_mappings,
       :instance_requirements,
       :image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32347,7 +33513,8 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32373,7 +33540,8 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32404,7 +33572,8 @@ module Aws::EC2
     class FleetSpotCapacityRebalance < Struct.new(
       :replacement_strategy,
       :termination_delay,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32436,7 +33605,8 @@ module Aws::EC2
     class FleetSpotCapacityRebalanceRequest < Struct.new(
       :replacement_strategy,
       :termination_delay,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32448,7 +33618,8 @@ module Aws::EC2
     #   @return [Types::FleetSpotCapacityRebalance]
     class FleetSpotMaintenanceStrategies < Struct.new(
       :capacity_rebalance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32459,7 +33630,8 @@ module Aws::EC2
     #   @return [Types::FleetSpotCapacityRebalanceRequest]
     class FleetSpotMaintenanceStrategiesRequest < Struct.new(
       :capacity_rebalance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32539,7 +33711,8 @@ module Aws::EC2
       :tags,
       :max_aggregation_interval,
       :destination_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32561,7 +33734,8 @@ module Aws::EC2
       :manufacturer,
       :count,
       :memory_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32571,7 +33745,8 @@ module Aws::EC2
     #   @return [Integer]
     class FpgaDeviceMemoryInfo < Struct.new(
       :size_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32641,7 +33816,8 @@ module Aws::EC2
       :public,
       :data_retention_support,
       :instance_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32667,7 +33843,8 @@ module Aws::EC2
       :description,
       :load_permissions,
       :product_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32699,7 +33876,8 @@ module Aws::EC2
     class FpgaImageState < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32713,7 +33891,8 @@ module Aws::EC2
     class FpgaInfo < Struct.new(
       :fpgas,
       :total_fpga_memory_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32730,7 +33909,8 @@ module Aws::EC2
       :vpn_connection_id,
       :vpn_tunnel_outside_ip_address,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32739,7 +33919,8 @@ module Aws::EC2
     #   @return [Types::ActiveVpnTunnelStatus]
     class GetActiveVpnTunnelStatusResult < Struct.new(
       :active_vpn_tunnel_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32750,7 +33931,8 @@ module Aws::EC2
     #   @return [Boolean]
     class GetAllowedImagesSettingsRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32798,7 +33980,8 @@ module Aws::EC2
       :state,
       :image_criteria,
       :managed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32812,7 +33995,8 @@ module Aws::EC2
     class GetAssociatedEnclaveCertificateIamRolesRequest < Struct.new(
       :certificate_arn,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32821,7 +34005,8 @@ module Aws::EC2
     #   @return [Array<Types::AssociatedRole>]
     class GetAssociatedEnclaveCertificateIamRolesResult < Struct.new(
       :associated_roles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32845,7 +34030,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32858,7 +34044,8 @@ module Aws::EC2
     class GetAssociatedIpv6PoolCidrsResult < Struct.new(
       :ipv6_cidr_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32891,7 +34078,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32904,7 +34092,8 @@ module Aws::EC2
     class GetAwsNetworkPerformanceDataResult < Struct.new(
       :data_responses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32926,7 +34115,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33021,7 +34211,8 @@ module Aws::EC2
       :available_instance_count,
       :state,
       :instance_usages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33067,7 +34258,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33088,7 +34280,8 @@ module Aws::EC2
       :coip_address_usages,
       :local_gateway_route_table_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33108,7 +34301,8 @@ module Aws::EC2
       :instance_id,
       :latest,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33126,7 +34320,8 @@ module Aws::EC2
       :instance_id,
       :timestamp,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33146,7 +34341,8 @@ module Aws::EC2
       :dry_run,
       :instance_id,
       :wake_up,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33159,7 +34355,8 @@ module Aws::EC2
     class GetConsoleScreenshotResult < Struct.new(
       :image_data,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33174,7 +34371,8 @@ module Aws::EC2
     class GetDeclarativePoliciesReportSummaryRequest < Struct.new(
       :dry_run,
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33231,7 +34429,8 @@ module Aws::EC2
       :number_of_accounts,
       :number_of_failed_accounts,
       :attribute_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33246,7 +34445,8 @@ module Aws::EC2
     class GetDefaultCreditSpecificationRequest < Struct.new(
       :dry_run,
       :instance_family,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33255,7 +34455,8 @@ module Aws::EC2
     #   @return [Types::InstanceFamilyCreditSpecification]
     class GetDefaultCreditSpecificationResult < Struct.new(
       :instance_family_credit_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33266,7 +34467,8 @@ module Aws::EC2
     #   @return [Boolean]
     class GetEbsDefaultKmsKeyIdRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33275,7 +34477,8 @@ module Aws::EC2
     #   @return [String]
     class GetEbsDefaultKmsKeyIdResult < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33286,7 +34489,8 @@ module Aws::EC2
     #   @return [Boolean]
     class GetEbsEncryptionByDefaultRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33299,7 +34503,8 @@ module Aws::EC2
     class GetEbsEncryptionByDefaultResult < Struct.new(
       :ebs_encryption_by_default,
       :sse_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33322,7 +34527,8 @@ module Aws::EC2
       :flow_log_id,
       :config_delivery_s3_destination_arn,
       :integrate_services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33331,7 +34537,8 @@ module Aws::EC2
     #   @return [String]
     class GetFlowLogsIntegrationTemplateResult < Struct.new(
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33355,7 +34562,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33369,7 +34577,8 @@ module Aws::EC2
     class GetGroupsForCapacityReservationResult < Struct.new(
       :next_token,
       :capacity_reservation_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33382,7 +34591,8 @@ module Aws::EC2
     class GetHostReservationPurchasePreviewRequest < Struct.new(
       :host_id_set,
       :offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33406,7 +34616,8 @@ module Aws::EC2
       :purchase,
       :total_hourly_price,
       :total_upfront_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33417,7 +34628,8 @@ module Aws::EC2
     #   @return [Boolean]
     class GetImageBlockPublicAccessStateRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33456,7 +34668,8 @@ module Aws::EC2
     class GetImageBlockPublicAccessStateResult < Struct.new(
       :image_block_public_access_state,
       :managed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33467,7 +34680,8 @@ module Aws::EC2
     #   @return [Boolean]
     class GetInstanceMetadataDefaultsRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33476,7 +34690,8 @@ module Aws::EC2
     #   @return [Types::InstanceMetadataDefaultsResponse]
     class GetInstanceMetadataDefaultsResult < Struct.new(
       :account_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33501,7 +34716,8 @@ module Aws::EC2
       :key_type,
       :key_format,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33522,7 +34738,8 @@ module Aws::EC2
       :key_type,
       :key_format,
       :key_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33559,7 +34776,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33573,7 +34791,8 @@ module Aws::EC2
     class GetInstanceTypesFromInstanceRequirementsResult < Struct.new(
       :instance_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33588,7 +34807,8 @@ module Aws::EC2
     class GetInstanceUefiDataRequest < Struct.new(
       :instance_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33601,7 +34821,8 @@ module Aws::EC2
     class GetInstanceUefiDataResult < Struct.new(
       :instance_id,
       :uefi_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33641,7 +34862,8 @@ module Aws::EC2
       :end_time,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33654,7 +34876,8 @@ module Aws::EC2
     class GetIpamAddressHistoryResult < Struct.new(
       :history_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33685,7 +34908,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33698,7 +34922,8 @@ module Aws::EC2
     class GetIpamDiscoveredAccountsResult < Struct.new(
       :ipam_discovered_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33729,7 +34954,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33746,7 +34972,8 @@ module Aws::EC2
       :ipam_discovered_public_addresses,
       :oldest_sample_time,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33777,7 +35004,8 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33790,7 +35018,8 @@ module Aws::EC2
     class GetIpamDiscoveredResourceCidrsResult < Struct.new(
       :ipam_discovered_resource_cidrs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33821,7 +35050,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33834,7 +35064,8 @@ module Aws::EC2
     class GetIpamPoolAllocationsResult < Struct.new(
       :ipam_pool_allocations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33861,7 +35092,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33874,7 +35106,8 @@ module Aws::EC2
     class GetIpamPoolCidrsResult < Struct.new(
       :ipam_pool_cidrs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33921,7 +35154,8 @@ module Aws::EC2
       :resource_type,
       :resource_tag,
       :resource_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33934,7 +35168,8 @@ module Aws::EC2
     class GetIpamResourceCidrsResult < Struct.new(
       :next_token,
       :ipam_resource_cidrs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33950,7 +35185,8 @@ module Aws::EC2
     class GetLaunchTemplateDataRequest < Struct.new(
       :dry_run,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33959,7 +35195,8 @@ module Aws::EC2
     #   @return [Types::ResponseLaunchTemplateData]
     class GetLaunchTemplateDataResult < Struct.new(
       :launch_template_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33983,7 +35220,8 @@ module Aws::EC2
       :prefix_list_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33996,7 +35234,8 @@ module Aws::EC2
     class GetManagedPrefixListAssociationsResult < Struct.new(
       :prefix_list_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34024,7 +35263,8 @@ module Aws::EC2
       :target_version,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34037,7 +35277,8 @@ module Aws::EC2
     class GetManagedPrefixListEntriesResult < Struct.new(
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34061,7 +35302,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34082,7 +35324,8 @@ module Aws::EC2
       :analysis_status,
       :analysis_findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34097,7 +35340,8 @@ module Aws::EC2
     class GetNetworkInsightsAccessScopeContentRequest < Struct.new(
       :network_insights_access_scope_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34106,7 +35350,8 @@ module Aws::EC2
     #   @return [Types::NetworkInsightsAccessScopeContent]
     class GetNetworkInsightsAccessScopeContentResult < Struct.new(
       :network_insights_access_scope_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34121,7 +35366,8 @@ module Aws::EC2
     class GetPasswordDataRequest < Struct.new(
       :instance_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34139,7 +35385,8 @@ module Aws::EC2
       :instance_id,
       :timestamp,
       :password_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34161,7 +35408,8 @@ module Aws::EC2
       :dry_run,
       :reserved_instance_ids,
       :target_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34204,7 +35452,8 @@ module Aws::EC2
       :target_configuration_value_rollup,
       :target_configuration_value_set,
       :validation_failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34219,7 +35468,8 @@ module Aws::EC2
     class GetRouteServerAssociationsRequest < Struct.new(
       :route_server_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34228,7 +35478,8 @@ module Aws::EC2
     #   @return [Array<Types::RouteServerAssociation>]
     class GetRouteServerAssociationsResult < Struct.new(
       :route_server_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34247,7 +35498,8 @@ module Aws::EC2
       :route_server_id,
       :route_table_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34256,7 +35508,8 @@ module Aws::EC2
     #   @return [Array<Types::RouteServerPropagation>]
     class GetRouteServerPropagationsResult < Struct.new(
       :route_server_propagations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34283,7 +35536,8 @@ module Aws::EC2
       :max_results,
       :dry_run,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34300,7 +35554,8 @@ module Aws::EC2
       :are_routes_persisted,
       :routes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34351,7 +35606,8 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34364,7 +35620,8 @@ module Aws::EC2
     class GetSecurityGroupsForVpcResult < Struct.new(
       :next_token,
       :security_group_for_vpcs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34373,7 +35630,8 @@ module Aws::EC2
     #   @return [Boolean]
     class GetSerialConsoleAccessStatusRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34399,7 +35657,8 @@ module Aws::EC2
     class GetSerialConsoleAccessStatusResult < Struct.new(
       :serial_console_access_enabled,
       :managed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34410,7 +35669,8 @@ module Aws::EC2
     #   @return [Boolean]
     class GetSnapshotBlockPublicAccessStateRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34454,7 +35714,8 @@ module Aws::EC2
     class GetSnapshotBlockPublicAccessStateResult < Struct.new(
       :state,
       :managed_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34511,7 +35772,8 @@ module Aws::EC2
       :dry_run,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34540,7 +35802,8 @@ module Aws::EC2
     class GetSpotPlacementScoresResult < Struct.new(
       :spot_placement_scores,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34588,7 +35851,8 @@ module Aws::EC2
       :dry_run,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34605,7 +35869,8 @@ module Aws::EC2
       :subnet_ipv4_cidr_reservations,
       :subnet_ipv6_cidr_reservations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34639,7 +35904,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34652,7 +35918,8 @@ module Aws::EC2
     class GetTransitGatewayAttachmentPropagationsResult < Struct.new(
       :transit_gateway_attachment_propagations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34704,7 +35971,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34717,7 +35985,8 @@ module Aws::EC2
     class GetTransitGatewayMulticastDomainAssociationsResult < Struct.new(
       :multicast_domain_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34745,7 +36014,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34758,7 +36028,8 @@ module Aws::EC2
     class GetTransitGatewayPolicyTableAssociationsResult < Struct.new(
       :associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34786,7 +36057,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34795,7 +36067,8 @@ module Aws::EC2
     #   @return [Array<Types::TransitGatewayPolicyTableEntry>]
     class GetTransitGatewayPolicyTableEntriesResult < Struct.new(
       :transit_gateway_policy_table_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34855,7 +36128,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34868,7 +36142,8 @@ module Aws::EC2
     class GetTransitGatewayPrefixListReferencesResult < Struct.new(
       :transit_gateway_prefix_list_references,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34912,7 +36187,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34925,7 +36201,8 @@ module Aws::EC2
     class GetTransitGatewayRouteTableAssociationsResult < Struct.new(
       :associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34969,7 +36246,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34982,7 +36260,8 @@ module Aws::EC2
     class GetTransitGatewayRouteTablePropagationsResult < Struct.new(
       :transit_gateway_route_table_propagations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34997,7 +36276,8 @@ module Aws::EC2
     class GetVerifiedAccessEndpointPolicyRequest < Struct.new(
       :verified_access_endpoint_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35010,7 +36290,8 @@ module Aws::EC2
     class GetVerifiedAccessEndpointPolicyResult < Struct.new(
       :policy_enabled,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35034,7 +36315,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35047,7 +36329,8 @@ module Aws::EC2
     class GetVerifiedAccessEndpointTargetsResult < Struct.new(
       :verified_access_endpoint_targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35062,7 +36345,8 @@ module Aws::EC2
     class GetVerifiedAccessGroupPolicyRequest < Struct.new(
       :verified_access_group_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35075,7 +36359,8 @@ module Aws::EC2
     class GetVerifiedAccessGroupPolicyResult < Struct.new(
       :policy_enabled,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35106,7 +36391,8 @@ module Aws::EC2
       :internet_key_exchange_version,
       :sample_type,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35115,7 +36401,8 @@ module Aws::EC2
     #   @return [String]
     class GetVpnConnectionDeviceSampleConfigurationResult < Struct.new(
       :vpn_connection_device_sample_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35146,7 +36433,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35164,7 +36452,8 @@ module Aws::EC2
     class GetVpnConnectionDeviceTypesResult < Struct.new(
       :vpn_connection_device_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35181,7 +36470,8 @@ module Aws::EC2
       :vpn_connection_id,
       :vpn_tunnel_outside_ip_address,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35210,7 +36500,8 @@ module Aws::EC2
       :vpn_gateway_id,
       :vpn_tunnel_outside_ip_address,
       :maintenance_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35232,7 +36523,8 @@ module Aws::EC2
       :manufacturer,
       :count,
       :memory_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35242,7 +36534,8 @@ module Aws::EC2
     #   @return [Integer]
     class GpuDeviceMemoryInfo < Struct.new(
       :size_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35256,7 +36549,8 @@ module Aws::EC2
     class GpuInfo < Struct.new(
       :gpus,
       :total_gpu_memory_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35270,7 +36564,8 @@ module Aws::EC2
     class GroupIdentifier < Struct.new(
       :group_id,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35284,7 +36579,8 @@ module Aws::EC2
     #   @return [Boolean]
     class HibernationOptions < Struct.new(
       :configured,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35314,7 +36610,8 @@ module Aws::EC2
     #   @return [Boolean]
     class HibernationOptionsRequest < Struct.new(
       :configured,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35352,7 +36649,8 @@ module Aws::EC2
       :event_information,
       :event_type,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35371,7 +36669,8 @@ module Aws::EC2
       :event_information,
       :event_type,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35464,7 +36763,8 @@ module Aws::EC2
       :outpost_arn,
       :host_maintenance,
       :asset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35483,7 +36783,8 @@ module Aws::EC2
       :instance_id,
       :instance_type,
       :owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35517,7 +36818,8 @@ module Aws::EC2
       :offering_id,
       :payment_option,
       :upfront_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35545,7 +36847,8 @@ module Aws::EC2
       :instance_family,
       :sockets,
       :total_v_cpus,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35612,7 +36915,8 @@ module Aws::EC2
       :state,
       :upfront_price,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35622,7 +36926,8 @@ module Aws::EC2
     #   @return [String]
     class IKEVersionsListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35632,7 +36937,8 @@ module Aws::EC2
     #   @return [String]
     class IKEVersionsRequestListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35646,7 +36952,8 @@ module Aws::EC2
     class IamInstanceProfile < Struct.new(
       :arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35672,7 +36979,8 @@ module Aws::EC2
       :iam_instance_profile,
       :state,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35686,7 +36994,8 @@ module Aws::EC2
     class IamInstanceProfileSpecification < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35700,7 +37009,8 @@ module Aws::EC2
     class IcmpTypeCode < Struct.new(
       :code,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35718,7 +37028,8 @@ module Aws::EC2
       :deadline,
       :resource,
       :use_long_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35917,7 +37228,8 @@ module Aws::EC2
       :kernel_id,
       :ramdisk_id,
       :platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35946,7 +37258,8 @@ module Aws::EC2
     #   @return [Array<String>]
     class ImageCriterion < Struct.new(
       :image_providers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35976,7 +37289,8 @@ module Aws::EC2
     #   @return [Array<String>]
     class ImageCriterionRequest < Struct.new(
       :image_providers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36009,7 +37323,8 @@ module Aws::EC2
       :snapshot_id,
       :url,
       :user_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36063,7 +37378,8 @@ module Aws::EC2
       :deprecation_time,
       :image_allowed,
       :is_public,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36089,7 +37405,8 @@ module Aws::EC2
       :description,
       :recycle_bin_enter_time,
       :recycle_bin_exit_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36107,7 +37424,8 @@ module Aws::EC2
       :image_id,
       :resource_type,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36164,7 +37482,8 @@ module Aws::EC2
       :creation_time,
       :expiration_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36196,7 +37515,8 @@ module Aws::EC2
       :account_id,
       :image_id,
       :report_creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36214,7 +37534,8 @@ module Aws::EC2
     class ImageUsageResourceType < Struct.new(
       :resource_type,
       :resource_type_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36228,7 +37549,8 @@ module Aws::EC2
     class ImageUsageResourceTypeOption < Struct.new(
       :option_name,
       :option_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36248,7 +37570,8 @@ module Aws::EC2
     class ImageUsageResourceTypeOptionRequest < Struct.new(
       :option_name,
       :option_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36266,7 +37589,8 @@ module Aws::EC2
     class ImageUsageResourceTypeRequest < Struct.new(
       :resource_type,
       :resource_type_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36284,7 +37608,8 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :certificate_revocation_list,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36293,7 +37618,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ImportClientVpnClientCertificateRevocationListResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36303,7 +37629,8 @@ module Aws::EC2
     #   @return [String]
     class ImportImageLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36313,7 +37640,8 @@ module Aws::EC2
     #   @return [String]
     class ImportImageLicenseConfigurationResponse < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36429,7 +37757,8 @@ module Aws::EC2
       :tag_specifications,
       :usage_operation,
       :boot_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36498,7 +37827,8 @@ module Aws::EC2
       :license_specifications,
       :tags,
       :usage_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36576,7 +37906,8 @@ module Aws::EC2
       :license_specifications,
       :usage_operation,
       :boot_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36628,7 +37959,8 @@ module Aws::EC2
       :subnet_id,
       :instance_initiated_shutdown_behavior,
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36655,7 +37987,8 @@ module Aws::EC2
       :launch_specification,
       :disk_images,
       :platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36664,7 +37997,8 @@ module Aws::EC2
     #   @return [Types::ConversionTask]
     class ImportInstanceResult < Struct.new(
       :conversion_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36686,7 +38020,8 @@ module Aws::EC2
       :instance_id,
       :platform,
       :volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36724,7 +38059,8 @@ module Aws::EC2
       :status,
       :status_message,
       :volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36747,7 +38083,8 @@ module Aws::EC2
       :dry_run,
       :key_name,
       :public_key_material,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36775,7 +38112,8 @@ module Aws::EC2
       :key_name,
       :key_pair_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36842,7 +38180,8 @@ module Aws::EC2
       :kms_key_id,
       :role_name,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36863,7 +38202,8 @@ module Aws::EC2
       :import_task_id,
       :snapshot_task_detail,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36885,7 +38225,8 @@ module Aws::EC2
       :import_task_id,
       :snapshot_task_detail,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36920,7 +38261,8 @@ module Aws::EC2
       :image,
       :description,
       :volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36929,7 +38271,8 @@ module Aws::EC2
     #   @return [Types::ConversionTask]
     class ImportVolumeResult < Struct.new(
       :conversion_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36959,7 +38302,8 @@ module Aws::EC2
       :description,
       :image,
       :volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36977,7 +38321,8 @@ module Aws::EC2
     class InferenceAcceleratorInfo < Struct.new(
       :accelerators,
       :total_inference_memory_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37002,7 +38347,8 @@ module Aws::EC2
       :name,
       :manufacturer,
       :memory_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37015,7 +38361,8 @@ module Aws::EC2
     #   @return [Integer]
     class InferenceDeviceMemoryInfo < Struct.new(
       :size_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37048,7 +38395,8 @@ module Aws::EC2
       :initialization_type,
       :progress,
       :estimated_time_to_complete_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37343,7 +38691,8 @@ module Aws::EC2
       :vpc_id,
       :private_ip_address,
       :public_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37364,7 +38713,8 @@ module Aws::EC2
     class InstanceAttachmentEnaSrdSpecification < Struct.new(
       :ena_srd_enabled,
       :ena_srd_udp_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37379,7 +38729,8 @@ module Aws::EC2
     #   @return [Boolean]
     class InstanceAttachmentEnaSrdUdpSpecification < Struct.new(
       :ena_srd_udp_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37394,7 +38745,8 @@ module Aws::EC2
     class InstanceBlockDeviceMapping < Struct.new(
       :device_name,
       :ebs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37417,7 +38769,8 @@ module Aws::EC2
       :ebs,
       :virtual_name,
       :no_device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37438,7 +38791,8 @@ module Aws::EC2
       :available_capacity,
       :instance_type,
       :total_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37452,7 +38806,8 @@ module Aws::EC2
     class InstanceConnectEndpointDnsNames < Struct.new(
       :dns_name,
       :fips_dns_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37467,7 +38822,8 @@ module Aws::EC2
     class InstanceConnectEndpointPublicDnsNames < Struct.new(
       :ipv4,
       :dualstack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37482,7 +38838,8 @@ module Aws::EC2
     class InstanceCount < Struct.new(
       :instance_count,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37498,7 +38855,8 @@ module Aws::EC2
     class InstanceCreditSpecification < Struct.new(
       :instance_id,
       :cpu_credits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37516,7 +38874,8 @@ module Aws::EC2
     class InstanceCreditSpecificationRequest < Struct.new(
       :instance_id,
       :cpu_credits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37550,7 +38909,8 @@ module Aws::EC2
       :association_target,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37576,7 +38936,8 @@ module Aws::EC2
       :instance_ids,
       :instance_tags,
       :dedicated_host_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37598,7 +38959,8 @@ module Aws::EC2
       :instance_ids,
       :tags,
       :dedicated_host_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37617,7 +38979,8 @@ module Aws::EC2
       :instance_ids,
       :instance_tags,
       :dedicated_host_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37631,7 +38994,8 @@ module Aws::EC2
     class InstanceEventWindowStateChange < Struct.new(
       :instance_event_window_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37653,7 +39017,8 @@ module Aws::EC2
       :start_hour,
       :end_week_day,
       :end_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37675,7 +39040,8 @@ module Aws::EC2
       :start_hour,
       :end_week_day,
       :end_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37689,7 +39055,8 @@ module Aws::EC2
     class InstanceExportDetails < Struct.new(
       :instance_id,
       :target_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37705,7 +39072,8 @@ module Aws::EC2
     class InstanceFamilyCreditSpecification < Struct.new(
       :instance_family,
       :cpu_credits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37751,7 +39119,8 @@ module Aws::EC2
       :tags,
       :image_metadata,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37761,7 +39130,8 @@ module Aws::EC2
     #   @return [String]
     class InstanceIpv4Prefix < Struct.new(
       :ipv4_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37776,7 +39146,8 @@ module Aws::EC2
     class InstanceIpv6Address < Struct.new(
       :ipv6_address,
       :is_primary_ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37786,7 +39157,8 @@ module Aws::EC2
     #   @return [String]
     class InstanceIpv6AddressRequest < Struct.new(
       :ipv6_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37796,7 +39168,8 @@ module Aws::EC2
     #   @return [String]
     class InstanceIpv6Prefix < Struct.new(
       :ipv6_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37830,7 +39203,8 @@ module Aws::EC2
     class InstanceMaintenanceOptions < Struct.new(
       :auto_recovery,
       :reboot_migration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37841,7 +39215,8 @@ module Aws::EC2
     #   @return [String]
     class InstanceMaintenanceOptionsRequest < Struct.new(
       :auto_recovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37855,7 +39230,8 @@ module Aws::EC2
     class InstanceMarketOptionsRequest < Struct.new(
       :market_type,
       :spot_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37914,7 +39290,8 @@ module Aws::EC2
       :instance_metadata_tags,
       :managed_by,
       :managed_exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37980,7 +39357,8 @@ module Aws::EC2
       :http_endpoint,
       :http_protocol_ipv6,
       :instance_metadata_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38038,7 +39416,8 @@ module Aws::EC2
       :http_endpoint,
       :http_protocol_ipv6,
       :instance_metadata_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38052,7 +39431,8 @@ module Aws::EC2
     class InstanceMonitoring < Struct.new(
       :instance_id,
       :monitoring,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38145,7 +39525,8 @@ module Aws::EC2
       :ipv6_prefixes,
       :connection_tracking_configuration,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38171,7 +39552,8 @@ module Aws::EC2
       :ip_owner_id,
       :public_dns_name,
       :public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38211,7 +39593,8 @@ module Aws::EC2
       :network_card_index,
       :ena_srd_specification,
       :ena_queue_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38360,7 +39743,8 @@ module Aws::EC2
       :ena_srd_specification,
       :connection_tracking_specification,
       :ena_queue_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38373,7 +39757,8 @@ module Aws::EC2
     #   @return [String]
     class InstanceNetworkPerformanceOptions < Struct.new(
       :bandwidth_weighting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38401,7 +39786,8 @@ module Aws::EC2
     #   @return [String]
     class InstanceNetworkPerformanceOptionsRequest < Struct.new(
       :bandwidth_weighting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38425,7 +39811,8 @@ module Aws::EC2
       :primary,
       :private_dns_name,
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38817,7 +40204,8 @@ module Aws::EC2
       :allowed_instance_types,
       :max_spot_price_as_percentage_of_optimal_on_demand_price,
       :baseline_performance_factors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39210,7 +40598,8 @@ module Aws::EC2
       :allowed_instance_types,
       :max_spot_price_as_percentage_of_optimal_on_demand_price,
       :baseline_performance_factors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39233,7 +40622,8 @@ module Aws::EC2
       :architecture_types,
       :virtualization_types,
       :instance_requirements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39254,7 +40644,8 @@ module Aws::EC2
       :instance_id,
       :exclude_boot_volume,
       :exclude_data_volume_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39309,7 +40700,8 @@ module Aws::EC2
     class InstanceState < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39327,7 +40719,8 @@ module Aws::EC2
       :instance_id,
       :current_state,
       :previous_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39377,7 +40770,8 @@ module Aws::EC2
       :instance_status,
       :system_status,
       :attached_ebs_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39396,7 +40790,8 @@ module Aws::EC2
       :impaired_since,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39429,7 +40824,8 @@ module Aws::EC2
       :not_after,
       :not_before,
       :not_before_deadline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39443,7 +40839,8 @@ module Aws::EC2
     class InstanceStatusSummary < Struct.new(
       :details,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39465,7 +40862,8 @@ module Aws::EC2
       :disks,
       :nvme_support,
       :encryption_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39481,7 +40879,8 @@ module Aws::EC2
     class InstanceTagNotificationAttribute < Struct.new(
       :instance_tag_keys,
       :include_all_tags_of_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39518,7 +40917,8 @@ module Aws::EC2
       :availability_zone,
       :zone_id,
       :capacity_block_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39657,7 +41057,8 @@ module Aws::EC2
       :neuron_info,
       :phc_support,
       :reboot_migration_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39667,7 +41068,8 @@ module Aws::EC2
     #   @return [String]
     class InstanceTypeInfoFromInstanceRequirements < Struct.new(
       :instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39688,7 +41090,8 @@ module Aws::EC2
       :instance_type,
       :location_type,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39704,7 +41107,8 @@ module Aws::EC2
     class InstanceUsage < Struct.new(
       :account_id,
       :used_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39714,7 +41118,8 @@ module Aws::EC2
     #   @return [Array<Types::AthenaIntegration>]
     class IntegrateServices < Struct.new(
       :athena_integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39736,7 +41141,8 @@ module Aws::EC2
       :internet_gateway_id,
       :owner_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39752,7 +41158,8 @@ module Aws::EC2
     class InternetGatewayAttachment < Struct.new(
       :state,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39796,7 +41203,8 @@ module Aws::EC2
       :ip_ranges,
       :ipv6_ranges,
       :prefix_list_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39821,7 +41229,8 @@ module Aws::EC2
     class IpRange < Struct.new(
       :description,
       :cidr_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39913,7 +41322,8 @@ module Aws::EC2
       :tier,
       :enable_private_gua,
       :metered_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39964,7 +41374,8 @@ module Aws::EC2
       :vpc_id,
       :sampled_start_time,
       :sampled_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39978,7 +41389,8 @@ module Aws::EC2
     class IpamCidrAuthorizationContext < Struct.new(
       :message,
       :signature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40009,7 +41421,8 @@ module Aws::EC2
       :last_attempted_discovery_time,
       :last_successful_discovery_time,
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40091,7 +41504,8 @@ module Aws::EC2
       :network_border_group,
       :security_groups,
       :sample_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40167,7 +41581,8 @@ module Aws::EC2
       :network_interface_attachment_status,
       :sample_time,
       :availability_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40206,7 +41621,8 @@ module Aws::EC2
     class IpamDiscoveryFailureReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40257,7 +41673,8 @@ module Aws::EC2
       :status,
       :tags,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40268,7 +41685,8 @@ module Aws::EC2
     #   @return [String]
     class IpamOperatingRegion < Struct.new(
       :region_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40278,7 +41696,8 @@ module Aws::EC2
     #   @return [String]
     class IpamOrganizationalUnitExclusion < Struct.new(
       :organizations_entity_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40401,7 +41820,8 @@ module Aws::EC2
       :aws_service,
       :public_ip_source,
       :source_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40436,7 +41856,8 @@ module Aws::EC2
       :resource_type,
       :resource_region,
       :resource_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40463,7 +41884,8 @@ module Aws::EC2
       :failure_reason,
       :ipam_pool_cidr_id,
       :netmask_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40477,7 +41899,8 @@ module Aws::EC2
     class IpamPoolCidrFailureReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40499,7 +41922,8 @@ module Aws::EC2
       :resource_type,
       :resource_region,
       :resource_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40521,7 +41945,8 @@ module Aws::EC2
       :resource_type,
       :resource_region,
       :resource_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40535,7 +41960,8 @@ module Aws::EC2
     class IpamPublicAddressSecurityGroup < Struct.new(
       :group_name,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40549,7 +41975,8 @@ module Aws::EC2
     class IpamPublicAddressTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40559,7 +41986,8 @@ module Aws::EC2
     #   @return [Array<Types::IpamPublicAddressTag>]
     class IpamPublicAddressTags < Struct.new(
       :eip_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40643,7 +42071,8 @@ module Aws::EC2
       :overlap_status,
       :vpc_id,
       :availability_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40739,7 +42168,8 @@ module Aws::EC2
       :state,
       :tags,
       :organizational_unit_exclusions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40839,7 +42269,8 @@ module Aws::EC2
       :resource_discovery_status,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40854,7 +42285,8 @@ module Aws::EC2
     class IpamResourceTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40906,7 +42338,8 @@ module Aws::EC2
       :pool_count,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40918,7 +42351,8 @@ module Aws::EC2
     #   @return [String]
     class Ipv4PrefixSpecification < Struct.new(
       :ipv4_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40930,7 +42364,8 @@ module Aws::EC2
     #   @return [String]
     class Ipv4PrefixSpecificationRequest < Struct.new(
       :ipv4_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40940,7 +42375,8 @@ module Aws::EC2
     #   @return [String]
     class Ipv4PrefixSpecificationResponse < Struct.new(
       :ipv4_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40954,7 +42390,8 @@ module Aws::EC2
     class Ipv6CidrAssociation < Struct.new(
       :ipv6_cidr,
       :associated_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40964,7 +42401,8 @@ module Aws::EC2
     #   @return [String]
     class Ipv6CidrBlock < Struct.new(
       :ipv6_cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40986,7 +42424,8 @@ module Aws::EC2
       :description,
       :pool_cidr_blocks,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40996,7 +42435,8 @@ module Aws::EC2
     #   @return [String]
     class Ipv6PrefixSpecification < Struct.new(
       :ipv6_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41006,7 +42446,8 @@ module Aws::EC2
     #   @return [String]
     class Ipv6PrefixSpecificationRequest < Struct.new(
       :ipv6_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41016,7 +42457,8 @@ module Aws::EC2
     #   @return [String]
     class Ipv6PrefixSpecificationResponse < Struct.new(
       :ipv6_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41041,7 +42483,8 @@ module Aws::EC2
     class Ipv6Range < Struct.new(
       :description,
       :cidr_ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41099,7 +42542,8 @@ module Aws::EC2
       :create_time,
       :key_name,
       :key_fingerprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41113,7 +42557,8 @@ module Aws::EC2
     class LastError < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41136,7 +42581,8 @@ module Aws::EC2
       :organizational_unit_arn,
       :user_id,
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41152,7 +42598,8 @@ module Aws::EC2
     class LaunchPermissionModifications < Struct.new(
       :add,
       :remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41221,7 +42668,8 @@ module Aws::EC2
       :subnet_id,
       :security_groups,
       :monitoring,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41259,7 +42707,8 @@ module Aws::EC2
       :latest_version_number,
       :tags,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41274,7 +42723,8 @@ module Aws::EC2
     class LaunchTemplateAndOverridesResponse < Struct.new(
       :launch_template_specification,
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41296,7 +42746,8 @@ module Aws::EC2
       :virtual_name,
       :ebs,
       :no_device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41322,7 +42773,8 @@ module Aws::EC2
       :virtual_name,
       :ebs,
       :no_device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41362,7 +42814,8 @@ module Aws::EC2
     class LaunchTemplateCapacityReservationSpecificationRequest < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41391,7 +42844,8 @@ module Aws::EC2
     class LaunchTemplateCapacityReservationSpecificationResponse < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41408,7 +42862,8 @@ module Aws::EC2
     class LaunchTemplateConfig < Struct.new(
       :launch_template_specification,
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41428,7 +42883,8 @@ module Aws::EC2
       :core_count,
       :threads_per_core,
       :amd_sev_snp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41451,7 +42907,8 @@ module Aws::EC2
       :core_count,
       :threads_per_core,
       :amd_sev_snp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41494,7 +42951,8 @@ module Aws::EC2
       :volume_type,
       :throughput,
       :volume_initialization_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41609,7 +43067,8 @@ module Aws::EC2
       :volume_type,
       :throughput,
       :volume_initialization_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41628,7 +43087,8 @@ module Aws::EC2
     class LaunchTemplateElasticInferenceAccelerator < Struct.new(
       :type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41647,7 +43107,8 @@ module Aws::EC2
     class LaunchTemplateElasticInferenceAcceleratorResponse < Struct.new(
       :type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41668,7 +43129,8 @@ module Aws::EC2
     class LaunchTemplateEnaSrdSpecification < Struct.new(
       :ena_srd_enabled,
       :ena_srd_udp_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41683,7 +43145,8 @@ module Aws::EC2
     #   @return [Boolean]
     class LaunchTemplateEnaSrdUdpSpecification < Struct.new(
       :ena_srd_udp_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41694,7 +43157,8 @@ module Aws::EC2
     #   @return [Boolean]
     class LaunchTemplateEnclaveOptions < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41707,7 +43171,8 @@ module Aws::EC2
     #   @return [Boolean]
     class LaunchTemplateEnclaveOptionsRequest < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41718,7 +43183,8 @@ module Aws::EC2
     #   @return [Boolean]
     class LaunchTemplateHibernationOptions < Struct.new(
       :configured,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41733,7 +43199,8 @@ module Aws::EC2
     #   @return [Boolean]
     class LaunchTemplateHibernationOptionsRequest < Struct.new(
       :configured,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41747,7 +43214,8 @@ module Aws::EC2
     class LaunchTemplateIamInstanceProfileSpecification < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41761,7 +43229,8 @@ module Aws::EC2
     class LaunchTemplateIamInstanceProfileSpecificationRequest < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41772,7 +43241,8 @@ module Aws::EC2
     #   @return [String]
     class LaunchTemplateInstanceMaintenanceOptions < Struct.new(
       :auto_recovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41783,7 +43253,8 @@ module Aws::EC2
     #   @return [String]
     class LaunchTemplateInstanceMaintenanceOptionsRequest < Struct.new(
       :auto_recovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41797,7 +43268,8 @@ module Aws::EC2
     class LaunchTemplateInstanceMarketOptions < Struct.new(
       :market_type,
       :spot_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41811,7 +43283,8 @@ module Aws::EC2
     class LaunchTemplateInstanceMarketOptionsRequest < Struct.new(
       :market_type,
       :spot_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41881,7 +43354,8 @@ module Aws::EC2
       :http_endpoint,
       :http_protocol_ipv6,
       :instance_metadata_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41944,7 +43418,8 @@ module Aws::EC2
       :http_endpoint,
       :http_protocol_ipv6,
       :instance_metadata_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42060,7 +43535,8 @@ module Aws::EC2
       :ena_srd_specification,
       :connection_tracking_specification,
       :ena_queue_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42195,7 +43671,8 @@ module Aws::EC2
       :ena_srd_specification,
       :connection_tracking_specification,
       :ena_queue_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42205,7 +43682,8 @@ module Aws::EC2
     #   @return [String]
     class LaunchTemplateLicenseConfiguration < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42215,7 +43693,8 @@ module Aws::EC2
     #   @return [String]
     class LaunchTemplateLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42229,7 +43708,8 @@ module Aws::EC2
     #   @return [String]
     class LaunchTemplateNetworkPerformanceOptions < Struct.new(
       :bandwidth_weighting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42259,7 +43739,8 @@ module Aws::EC2
     #   @return [String]
     class LaunchTemplateNetworkPerformanceOptionsRequest < Struct.new(
       :bandwidth_weighting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42328,7 +43809,8 @@ module Aws::EC2
       :weighted_capacity,
       :priority,
       :instance_requirements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42377,7 +43859,8 @@ module Aws::EC2
       :host_resource_group_arn,
       :partition_number,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42430,7 +43913,8 @@ module Aws::EC2
       :host_resource_group_arn,
       :partition_number,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42450,7 +43934,8 @@ module Aws::EC2
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42473,7 +43958,8 @@ module Aws::EC2
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42499,7 +43985,8 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42534,7 +44021,8 @@ module Aws::EC2
       :block_duration_minutes,
       :valid_until,
       :instance_interruption_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42584,7 +44072,8 @@ module Aws::EC2
       :block_duration_minutes,
       :valid_until,
       :instance_interruption_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42598,7 +44087,8 @@ module Aws::EC2
     class LaunchTemplateTagSpecification < Struct.new(
       :resource_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42620,7 +44110,8 @@ module Aws::EC2
     class LaunchTemplateTagSpecificationRequest < Struct.new(
       :resource_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42662,7 +44153,8 @@ module Aws::EC2
       :default_version,
       :launch_template_data,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42673,7 +44165,8 @@ module Aws::EC2
     #   @return [Boolean]
     class LaunchTemplatesMonitoring < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42684,7 +44177,8 @@ module Aws::EC2
     #   @return [Boolean]
     class LaunchTemplatesMonitoringRequest < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42694,7 +44188,8 @@ module Aws::EC2
     #   @return [String]
     class LicenseConfiguration < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42704,7 +44199,8 @@ module Aws::EC2
     #   @return [String]
     class LicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42730,7 +44226,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42744,7 +44241,8 @@ module Aws::EC2
     class ListImagesInRecycleBinResult < Struct.new(
       :images,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42771,7 +44269,8 @@ module Aws::EC2
       :next_token,
       :snapshot_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42785,7 +44284,8 @@ module Aws::EC2
     class ListSnapshotsInRecycleBinResult < Struct.new(
       :snapshots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42800,7 +44300,8 @@ module Aws::EC2
     class LoadBalancersConfig < Struct.new(
       :classic_load_balancers_config,
       :target_groups_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42814,7 +44315,8 @@ module Aws::EC2
     class LoadPermission < Struct.new(
       :user_id,
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42828,7 +44330,8 @@ module Aws::EC2
     class LoadPermissionModifications < Struct.new(
       :add,
       :remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42842,7 +44345,8 @@ module Aws::EC2
     class LoadPermissionRequest < Struct.new(
       :group,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42868,7 +44372,8 @@ module Aws::EC2
       :owner_id,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42920,7 +44425,8 @@ module Aws::EC2
       :coip_pool_id,
       :network_interface_id,
       :destination_prefix_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42962,7 +44468,8 @@ module Aws::EC2
       :tags,
       :mode,
       :state_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43000,7 +44507,8 @@ module Aws::EC2
       :owner_id,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43038,7 +44546,8 @@ module Aws::EC2
       :owner_id,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43100,7 +44609,8 @@ module Aws::EC2
       :owner_id,
       :tags,
       :configuration_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43142,7 +44652,8 @@ module Aws::EC2
       :local_gateway_virtual_interface_group_arn,
       :tags,
       :configuration_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43219,7 +44730,8 @@ module Aws::EC2
       :cool_off_period,
       :lock_duration,
       :expiration_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43286,7 +44798,8 @@ module Aws::EC2
       :lock_created_on,
       :lock_expires_on,
       :lock_duration_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43357,7 +44870,8 @@ module Aws::EC2
       :lock_created_on,
       :lock_duration_start_time,
       :lock_expires_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43377,7 +44891,8 @@ module Aws::EC2
     class MacHost < Struct.new(
       :host_id,
       :mac_os_latest_supported_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43414,7 +44929,8 @@ module Aws::EC2
       :tags,
       :task_state,
       :task_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43452,7 +44968,8 @@ module Aws::EC2
       :kext_signing,
       :nvram_protections,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43486,7 +45003,8 @@ module Aws::EC2
       :filesystem_protections,
       :kext_signing,
       :nvram_protections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43504,7 +45022,8 @@ module Aws::EC2
       :pending_maintenance,
       :maintenance_auto_applied_after,
       :last_maintenance_applied,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43550,7 +45069,8 @@ module Aws::EC2
       :version,
       :tags,
       :owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43565,7 +45085,8 @@ module Aws::EC2
     class MediaAcceleratorInfo < Struct.new(
       :accelerators,
       :total_media_memory_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43587,7 +45108,8 @@ module Aws::EC2
       :name,
       :manufacturer,
       :memory_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43597,7 +45119,8 @@ module Aws::EC2
     #   @return [Integer]
     class MediaDeviceMemoryInfo < Struct.new(
       :size_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43614,7 +45137,8 @@ module Aws::EC2
     class MemoryGiBPerVCpu < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43630,7 +45154,8 @@ module Aws::EC2
     class MemoryGiBPerVCpuRequest < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43640,7 +45165,8 @@ module Aws::EC2
     #   @return [Integer]
     class MemoryInfo < Struct.new(
       :size_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43656,7 +45182,8 @@ module Aws::EC2
     class MemoryMiB < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43672,7 +45199,8 @@ module Aws::EC2
     class MemoryMiBRequest < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43694,7 +45222,8 @@ module Aws::EC2
       :end_date,
       :value,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43713,7 +45242,8 @@ module Aws::EC2
       :allocation_id,
       :domain_name,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43722,7 +45252,8 @@ module Aws::EC2
     #   @return [Types::AddressAttribute]
     class ModifyAddressAttributeResult < Struct.new(
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43743,7 +45274,8 @@ module Aws::EC2
       :group_name,
       :opt_in_status,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43752,7 +45284,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyAvailabilityZoneGroupResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43793,7 +45326,8 @@ module Aws::EC2
       :end_date,
       :dry_run,
       :remove_end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43802,7 +45336,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyCapacityReservationFleetResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43872,7 +45407,8 @@ module Aws::EC2
       :dry_run,
       :additional_info,
       :instance_match_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43881,7 +45417,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyCapacityReservationResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43982,7 +45519,8 @@ module Aws::EC2
       :client_login_banner_options,
       :client_route_enforcement_options,
       :disconnect_on_session_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43991,7 +45529,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyClientVpnEndpointResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44012,7 +45551,8 @@ module Aws::EC2
       :dry_run,
       :instance_family,
       :cpu_credits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44021,7 +45561,8 @@ module Aws::EC2
     #   @return [Types::InstanceFamilyCreditSpecification]
     class ModifyDefaultCreditSpecificationResult < Struct.new(
       :instance_family_credit_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44056,7 +45597,8 @@ module Aws::EC2
     class ModifyEbsDefaultKmsKeyIdRequest < Struct.new(
       :kms_key_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44065,7 +45607,8 @@ module Aws::EC2
     #   @return [String]
     class ModifyEbsDefaultKmsKeyIdResult < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44098,7 +45641,8 @@ module Aws::EC2
       :fleet_id,
       :target_capacity_specification,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44108,7 +45652,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyFleetResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44156,7 +45701,8 @@ module Aws::EC2
       :load_permission,
       :description,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44165,7 +45711,8 @@ module Aws::EC2
     #   @return [Types::FpgaImageAttribute]
     class ModifyFpgaImageAttributeResult < Struct.new(
       :fpga_image_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44207,7 +45754,8 @@ module Aws::EC2
       :host_maintenance,
       :host_ids,
       :auto_placement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44221,7 +45769,8 @@ module Aws::EC2
     class ModifyHostsResult < Struct.new(
       :successful,
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44245,7 +45794,8 @@ module Aws::EC2
     class ModifyIdFormatRequest < Struct.new(
       :resource,
       :use_long_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44275,7 +45825,8 @@ module Aws::EC2
       :resource,
       :use_long_ids,
       :principal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44354,7 +45905,8 @@ module Aws::EC2
       :organizational_unit_arns,
       :imds_support,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44485,7 +46037,8 @@ module Aws::EC2
       :ebs_optimized,
       :sriov_net_support,
       :ena_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44502,7 +46055,8 @@ module Aws::EC2
       :instance_id,
       :capacity_reservation_specification,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44511,7 +46065,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyInstanceCapacityReservationAttributesResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44567,7 +46122,8 @@ module Aws::EC2
       :ip_address_type,
       :security_group_ids,
       :preserve_client_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44577,7 +46133,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyInstanceConnectEndpointResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44600,7 +46157,8 @@ module Aws::EC2
       :core_count,
       :threads_per_core,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44619,7 +46177,8 @@ module Aws::EC2
       :instance_id,
       :core_count,
       :threads_per_core,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44640,7 +46199,8 @@ module Aws::EC2
       :dry_run,
       :client_token,
       :instance_credit_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44655,7 +46215,8 @@ module Aws::EC2
     class ModifyInstanceCreditSpecificationResult < Struct.new(
       :successful_instance_credit_specifications,
       :unsuccessful_instance_credit_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44678,7 +46239,8 @@ module Aws::EC2
       :instance_id,
       :instance_event_id,
       :not_before,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44687,7 +46249,8 @@ module Aws::EC2
     #   @return [Types::InstanceStatusEvent]
     class ModifyInstanceEventStartTimeResult < Struct.new(
       :event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44743,7 +46306,8 @@ module Aws::EC2
       :instance_event_window_id,
       :time_ranges,
       :cron_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44752,7 +46316,8 @@ module Aws::EC2
     #   @return [Types::InstanceEventWindow]
     class ModifyInstanceEventWindowResult < Struct.new(
       :instance_event_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44796,7 +46361,8 @@ module Aws::EC2
       :auto_recovery,
       :reboot_migration,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44833,7 +46399,8 @@ module Aws::EC2
       :instance_id,
       :auto_recovery,
       :reboot_migration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44879,7 +46446,8 @@ module Aws::EC2
       :http_endpoint,
       :instance_metadata_tags,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44889,7 +46457,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyInstanceMetadataDefaultsResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44968,7 +46537,8 @@ module Aws::EC2
       :dry_run,
       :http_protocol_ipv6,
       :instance_metadata_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44981,7 +46551,8 @@ module Aws::EC2
     class ModifyInstanceMetadataOptionsResult < Struct.new(
       :instance_id,
       :instance_metadata_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45016,7 +46587,8 @@ module Aws::EC2
       :instance_id,
       :bandwidth_weighting,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45029,7 +46601,8 @@ module Aws::EC2
     class ModifyInstanceNetworkPerformanceResult < Struct.new(
       :instance_id,
       :bandwidth_weighting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45080,7 +46653,8 @@ module Aws::EC2
       :tenancy,
       :affinity,
       :host_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45089,7 +46663,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyInstancePlacementResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45147,7 +46722,8 @@ module Aws::EC2
       :clear_allocation_default_netmask_length,
       :add_allocation_resource_tags,
       :remove_allocation_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45156,7 +46732,8 @@ module Aws::EC2
     #   @return [Types::IpamPool]
     class ModifyIpamPoolResult < Struct.new(
       :ipam_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45207,7 +46784,8 @@ module Aws::EC2
       :tier,
       :enable_private_gua,
       :metered_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45242,7 +46820,8 @@ module Aws::EC2
       :current_ipam_scope_id,
       :destination_ipam_scope_id,
       :monitored,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45251,7 +46830,8 @@ module Aws::EC2
     #   @return [Types::IpamResourceCidr]
     class ModifyIpamResourceCidrResult < Struct.new(
       :ipam_resource_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45296,7 +46876,8 @@ module Aws::EC2
       :remove_operating_regions,
       :add_organizational_unit_exclusions,
       :remove_organizational_unit_exclusions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45305,7 +46886,8 @@ module Aws::EC2
     #   @return [Types::IpamResourceDiscovery]
     class ModifyIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45314,7 +46896,8 @@ module Aws::EC2
     #   @return [Types::Ipam]
     class ModifyIpamResult < Struct.new(
       :ipam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45333,7 +46916,8 @@ module Aws::EC2
       :dry_run,
       :ipam_scope_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45342,7 +46926,8 @@ module Aws::EC2
     #   @return [Types::IpamScope]
     class ModifyIpamScopeResult < Struct.new(
       :ipam_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45379,7 +46964,8 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :default_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45388,7 +46974,8 @@ module Aws::EC2
     #   @return [Types::LaunchTemplate]
     class ModifyLaunchTemplateResult < Struct.new(
       :launch_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45424,7 +47011,8 @@ module Aws::EC2
       :network_interface_id,
       :dry_run,
       :destination_prefix_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45433,7 +47021,8 @@ module Aws::EC2
     #   @return [Types::LocalGatewayRoute]
     class ModifyLocalGatewayRouteResult < Struct.new(
       :route,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45472,7 +47061,8 @@ module Aws::EC2
       :add_entries,
       :remove_entries,
       :max_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45481,7 +47071,8 @@ module Aws::EC2
     #   @return [Types::ManagedPrefixList]
     class ModifyManagedPrefixListResult < Struct.new(
       :prefix_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45558,7 +47149,8 @@ module Aws::EC2
       :source_dest_check,
       :groups,
       :attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45591,7 +47183,8 @@ module Aws::EC2
       :private_dns_hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45601,7 +47194,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyPrivateDnsNameOptionsResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45634,7 +47228,8 @@ module Aws::EC2
       :network_interface_id,
       :hostname_type,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45643,7 +47238,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyPublicIpDnsNameOptionsResult < Struct.new(
       :successful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45663,7 +47259,8 @@ module Aws::EC2
       :reserved_instances_ids,
       :client_token,
       :target_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45673,7 +47270,8 @@ module Aws::EC2
     #   @return [String]
     class ModifyReservedInstancesResult < Struct.new(
       :reserved_instances_modification_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45712,7 +47310,8 @@ module Aws::EC2
       :persist_routes_duration,
       :sns_notifications_enabled,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45721,7 +47320,8 @@ module Aws::EC2
     #   @return [Types::RouteServer]
     class ModifyRouteServerResult < Struct.new(
       :route_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45740,7 +47340,8 @@ module Aws::EC2
       :group_id,
       :security_group_rules,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45749,7 +47350,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifySecurityGroupRulesResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45784,7 +47386,8 @@ module Aws::EC2
       :snapshot_id,
       :user_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45803,7 +47406,8 @@ module Aws::EC2
       :snapshot_id,
       :storage_tier,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45816,7 +47420,8 @@ module Aws::EC2
     class ModifySnapshotTierResult < Struct.new(
       :snapshot_id,
       :tiering_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45851,7 +47456,8 @@ module Aws::EC2
       :spot_fleet_request_id,
       :target_capacity,
       :excess_capacity_termination_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45862,7 +47468,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifySpotFleetRequestResponse < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45938,7 +47545,8 @@ module Aws::EC2
       :enable_resource_name_dns_aaaa_record_on_launch,
       :enable_lni_at_device_index,
       :disable_lni_at_device_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45961,7 +47569,8 @@ module Aws::EC2
       :add_network_services,
       :remove_network_services,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45970,7 +47579,8 @@ module Aws::EC2
     #   @return [Types::TrafficMirrorFilter]
     class ModifyTrafficMirrorFilterNetworkServicesResult < Struct.new(
       :traffic_mirror_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46027,7 +47637,8 @@ module Aws::EC2
       :description,
       :remove_fields,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46039,7 +47650,8 @@ module Aws::EC2
     #   @return [Types::TrafficMirrorFilterRule]
     class ModifyTrafficMirrorFilterRuleResult < Struct.new(
       :traffic_mirror_filter_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46085,7 +47697,8 @@ module Aws::EC2
       :description,
       :remove_fields,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46094,7 +47707,8 @@ module Aws::EC2
     #   @return [Types::TrafficMirrorSession]
     class ModifyTrafficMirrorSessionResult < Struct.new(
       :traffic_mirror_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46170,7 +47784,8 @@ module Aws::EC2
       :default_route_table_propagation,
       :propagation_default_route_table_id,
       :amazon_side_asn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46197,7 +47812,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :blackhole,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46206,7 +47822,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPrefixListReference]
     class ModifyTransitGatewayPrefixListReferenceResult < Struct.new(
       :transit_gateway_prefix_list_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46229,7 +47846,8 @@ module Aws::EC2
       :description,
       :options,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46238,7 +47856,8 @@ module Aws::EC2
     #   @return [Types::TransitGateway]
     class ModifyTransitGatewayResult < Struct.new(
       :transit_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46265,7 +47884,8 @@ module Aws::EC2
       :remove_subnet_ids,
       :options,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46291,7 +47911,8 @@ module Aws::EC2
       :security_group_referencing_support,
       :ipv6_support,
       :appliance_mode_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46300,7 +47921,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayVpcAttachment]
     class ModifyTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46310,7 +47932,8 @@ module Aws::EC2
     #   @return [Array<Types::ModifyVerifiedAccessEndpointPortRange>]
     class ModifyVerifiedAccessEndpointCidrOptions < Struct.new(
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46329,7 +47952,8 @@ module Aws::EC2
       :protocol,
       :port,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46352,7 +47976,8 @@ module Aws::EC2
       :protocol,
       :port,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46384,7 +48009,8 @@ module Aws::EC2
       :client_token,
       :dry_run,
       :sse_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46401,7 +48027,8 @@ module Aws::EC2
       :policy_enabled,
       :policy_document,
       :sse_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46415,7 +48042,8 @@ module Aws::EC2
     class ModifyVerifiedAccessEndpointPortRange < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46433,7 +48061,8 @@ module Aws::EC2
       :subnet_ids,
       :port,
       :rds_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46478,7 +48107,8 @@ module Aws::EC2
       :dry_run,
       :rds_options,
       :cidr_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46487,7 +48117,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessEndpoint]
     class ModifyVerifiedAccessEndpointResult < Struct.new(
       :verified_access_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46519,7 +48150,8 @@ module Aws::EC2
       :client_token,
       :dry_run,
       :sse_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46536,7 +48168,8 @@ module Aws::EC2
       :policy_enabled,
       :policy_document,
       :sse_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46564,7 +48197,8 @@ module Aws::EC2
       :description,
       :client_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46573,7 +48207,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessGroup]
     class ModifyVerifiedAccessGroupResult < Struct.new(
       :verified_access_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46597,7 +48232,8 @@ module Aws::EC2
       :access_logs,
       :dry_run,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46606,7 +48242,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessInstanceLoggingConfiguration]
     class ModifyVerifiedAccessInstanceLoggingConfigurationResult < Struct.new(
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46634,7 +48271,8 @@ module Aws::EC2
       :dry_run,
       :client_token,
       :cidr_endpoints_custom_sub_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46643,7 +48281,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessInstance]
     class ModifyVerifiedAccessInstanceResult < Struct.new(
       :verified_access_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46681,7 +48320,8 @@ module Aws::EC2
       :client_id,
       :client_secret,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46691,7 +48331,8 @@ module Aws::EC2
     #   @return [String]
     class ModifyVerifiedAccessTrustProviderDeviceOptions < Struct.new(
       :public_signing_key_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46725,7 +48366,8 @@ module Aws::EC2
       :client_id,
       :client_secret,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46766,7 +48408,8 @@ module Aws::EC2
       :client_token,
       :sse_specification,
       :native_application_oidc_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46775,7 +48418,8 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessTrustProvider]
     class ModifyVerifiedAccessTrustProviderResult < Struct.new(
       :verified_access_trust_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46794,7 +48438,8 @@ module Aws::EC2
       :auto_enable_io,
       :volume_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46884,7 +48529,8 @@ module Aws::EC2
       :iops,
       :throughput,
       :multi_attach_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46893,7 +48539,8 @@ module Aws::EC2
     #   @return [Types::VolumeModification]
     class ModifyVolumeResult < Struct.new(
       :volume_modification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46920,7 +48567,8 @@ module Aws::EC2
       :enable_dns_support,
       :vpc_id,
       :enable_network_address_usage_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46949,7 +48597,8 @@ module Aws::EC2
       :dry_run,
       :exclusion_id,
       :internet_gateway_exclusion_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46958,7 +48607,8 @@ module Aws::EC2
     #   @return [Types::VpcBlockPublicAccessExclusion]
     class ModifyVpcBlockPublicAccessExclusionResult < Struct.new(
       :vpc_block_public_access_exclusion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46987,7 +48637,8 @@ module Aws::EC2
     class ModifyVpcBlockPublicAccessOptionsRequest < Struct.new(
       :dry_run,
       :internet_gateway_block_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46996,7 +48647,8 @@ module Aws::EC2
     #   @return [Types::VpcBlockPublicAccessOptions]
     class ModifyVpcBlockPublicAccessOptionsResult < Struct.new(
       :vpc_block_public_access_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47020,7 +48672,8 @@ module Aws::EC2
       :connection_notification_id,
       :connection_notification_arn,
       :connection_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47029,7 +48682,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyVpcEndpointConnectionNotificationResult < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47095,7 +48749,8 @@ module Aws::EC2
       :dns_options,
       :private_dns_enabled,
       :subnet_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47104,7 +48759,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyVpcEndpointResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47165,7 +48821,8 @@ module Aws::EC2
       :remove_supported_ip_address_types,
       :add_supported_regions,
       :remove_supported_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47174,7 +48831,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyVpcEndpointServiceConfigurationResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47195,7 +48853,8 @@ module Aws::EC2
       :dry_run,
       :service_id,
       :payer_responsibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47204,7 +48863,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyVpcEndpointServicePayerResponsibilityResult < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47230,7 +48890,8 @@ module Aws::EC2
       :service_id,
       :add_allowed_principals,
       :remove_allowed_principals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47243,7 +48904,8 @@ module Aws::EC2
     class ModifyVpcEndpointServicePermissionsResult < Struct.new(
       :added_principals,
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47266,7 +48928,8 @@ module Aws::EC2
       :dry_run,
       :requester_peering_connection_options,
       :vpc_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47279,7 +48942,8 @@ module Aws::EC2
     class ModifyVpcPeeringConnectionOptionsResult < Struct.new(
       :accepter_peering_connection_options,
       :requester_peering_connection_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47298,7 +48962,8 @@ module Aws::EC2
       :vpc_id,
       :instance_tenancy,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47308,7 +48973,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ModifyVpcTenancyResult < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47345,7 +49011,8 @@ module Aws::EC2
       :local_ipv6_network_cidr,
       :remote_ipv6_network_cidr,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47354,7 +49021,8 @@ module Aws::EC2
     #   @return [Types::VpnConnection]
     class ModifyVpnConnectionOptionsResult < Struct.new(
       :vpn_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47383,7 +49051,8 @@ module Aws::EC2
       :customer_gateway_id,
       :vpn_gateway_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47392,7 +49061,8 @@ module Aws::EC2
     #   @return [Types::VpnConnection]
     class ModifyVpnConnectionResult < Struct.new(
       :vpn_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47412,7 +49082,8 @@ module Aws::EC2
       :vpn_connection_id,
       :vpn_tunnel_outside_ip_address,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47421,7 +49092,8 @@ module Aws::EC2
     #   @return [Types::VpnConnection]
     class ModifyVpnTunnelCertificateResult < Struct.new(
       :vpn_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47455,7 +49127,8 @@ module Aws::EC2
       :dry_run,
       :skip_tunnel_replacement,
       :pre_shared_key_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47464,7 +49137,8 @@ module Aws::EC2
     #   @return [Types::VpnConnection]
     class ModifyVpnTunnelOptionsResult < Struct.new(
       :vpn_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47661,7 +49335,8 @@ module Aws::EC2
       :startup_action,
       :log_options,
       :enable_tunnel_lifecycle_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47676,7 +49351,8 @@ module Aws::EC2
     class MonitorInstancesRequest < Struct.new(
       :instance_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47685,7 +49361,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceMonitoring>]
     class MonitorInstancesResult < Struct.new(
       :instance_monitorings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47696,7 +49373,8 @@ module Aws::EC2
     #   @return [String]
     class Monitoring < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47711,7 +49389,8 @@ module Aws::EC2
     class MoveAddressToVpcRequest < Struct.new(
       :dry_run,
       :public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47724,7 +49403,8 @@ module Aws::EC2
     class MoveAddressToVpcResult < Struct.new(
       :allocation_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47747,7 +49427,8 @@ module Aws::EC2
       :cidr,
       :ipam_pool_id,
       :ipam_pool_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47756,7 +49437,8 @@ module Aws::EC2
     #   @return [Types::ByoipCidr]
     class MoveByoipCidrToIpamResult < Struct.new(
       :byoip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47782,7 +49464,8 @@ module Aws::EC2
       :source_capacity_reservation_id,
       :destination_capacity_reservation_id,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47800,7 +49483,8 @@ module Aws::EC2
       :source_capacity_reservation,
       :destination_capacity_reservation,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47817,7 +49501,8 @@ module Aws::EC2
     class MovingAddressStatus < Struct.new(
       :move_status,
       :public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47922,7 +49607,8 @@ module Aws::EC2
       :vpc_id,
       :tags,
       :connectivity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47960,7 +49646,8 @@ module Aws::EC2
       :is_primary,
       :failure_message,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47994,7 +49681,8 @@ module Aws::EC2
       :user_info_endpoint,
       :client_id,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48028,7 +49716,8 @@ module Aws::EC2
       :tags,
       :vpc_id,
       :owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48046,7 +49735,8 @@ module Aws::EC2
       :network_acl_association_id,
       :network_acl_id,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48084,7 +49774,8 @@ module Aws::EC2
       :protocol,
       :rule_action,
       :rule_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48107,7 +49798,8 @@ module Aws::EC2
     class NetworkBandwidthGbps < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48130,7 +49822,8 @@ module Aws::EC2
     class NetworkBandwidthGbpsRequest < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48168,7 +49861,8 @@ module Aws::EC2
       :default_ena_queue_count_per_interface,
       :maximum_ena_queue_count,
       :maximum_ena_queue_count_per_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48237,7 +49931,8 @@ module Aws::EC2
       :ena_srd_supported,
       :bandwidth_weightings,
       :flexible_ena_queues_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48263,7 +49958,8 @@ module Aws::EC2
       :created_date,
       :updated_date,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48313,7 +50009,8 @@ module Aws::EC2
       :findings_found,
       :analyzed_eni_count,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48331,7 +50028,8 @@ module Aws::EC2
       :network_insights_access_scope_id,
       :match_paths,
       :exclude_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48405,7 +50103,8 @@ module Aws::EC2
       :alternate_path_hints,
       :suggested_accounts,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48467,7 +50166,8 @@ module Aws::EC2
       :tags,
       :filter_at_source,
       :filter_at_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48606,7 +50306,8 @@ module Aws::EC2
       :ipv6_address,
       :operator,
       :associated_subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48644,7 +50345,8 @@ module Aws::EC2
       :public_ip,
       :customer_owned_ip,
       :carrier_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48692,7 +50394,8 @@ module Aws::EC2
       :status,
       :ena_srd_specification,
       :ena_queue_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48715,7 +50418,8 @@ module Aws::EC2
       :ena_queue_count,
       :attachment_id,
       :delete_on_termination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48731,7 +50435,8 @@ module Aws::EC2
     class NetworkInterfaceCount < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48747,7 +50452,8 @@ module Aws::EC2
     class NetworkInterfaceCountRequest < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48768,7 +50474,8 @@ module Aws::EC2
       :ipv6_address,
       :public_ipv6_dns_name,
       :is_primary_ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48798,7 +50505,8 @@ module Aws::EC2
       :aws_service,
       :permission,
       :permission_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48812,7 +50520,8 @@ module Aws::EC2
     class NetworkInterfacePermissionState < Struct.new(
       :state,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48836,7 +50545,8 @@ module Aws::EC2
       :primary,
       :private_dns_name,
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48850,7 +50560,8 @@ module Aws::EC2
     class NeuronDeviceCoreInfo < Struct.new(
       :count,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48872,7 +50583,8 @@ module Aws::EC2
       :name,
       :core_info,
       :memory_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48882,7 +50594,8 @@ module Aws::EC2
     #   @return [Integer]
     class NeuronDeviceMemoryInfo < Struct.new(
       :size_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48897,7 +50610,8 @@ module Aws::EC2
     class NeuronInfo < Struct.new(
       :neuron_devices,
       :total_neuron_device_memory_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48911,7 +50625,8 @@ module Aws::EC2
     class NewDhcpConfiguration < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48921,7 +50636,8 @@ module Aws::EC2
     #   @return [Array<String>]
     class NitroTpmInfo < Struct.new(
       :supported_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48956,7 +50672,8 @@ module Aws::EC2
       :client_id,
       :client_secret,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49014,7 +50731,8 @@ module Aws::EC2
       :single_availability_zone,
       :min_target_capacity,
       :max_total_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49071,7 +50789,8 @@ module Aws::EC2
       :single_availability_zone,
       :min_target_capacity,
       :max_total_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49081,7 +50800,8 @@ module Aws::EC2
     #   @return [String]
     class OperatorRequest < Struct.new(
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49097,7 +50817,8 @@ module Aws::EC2
     class OperatorResponse < Struct.new(
       :managed,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49131,7 +50852,8 @@ module Aws::EC2
       :local_gateway_virtual_interface_ids,
       :service_link_virtual_interface_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49165,7 +50887,8 @@ module Aws::EC2
       :source_prefix_lists,
       :destination_prefix_lists,
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49199,7 +50922,8 @@ module Aws::EC2
       :source_prefix_lists,
       :destination_prefix_lists,
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49285,7 +51009,8 @@ module Aws::EC2
       :firewall_stateless_rule,
       :firewall_stateful_rule,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49308,7 +51033,8 @@ module Aws::EC2
       :source_port_range,
       :destination_address,
       :destination_port_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49331,7 +51057,8 @@ module Aws::EC2
       :source_port_range,
       :destination_address,
       :destination_port_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49345,7 +51072,8 @@ module Aws::EC2
     class PathStatement < Struct.new(
       :packet_header_statement,
       :resource_statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49359,7 +51087,8 @@ module Aws::EC2
     class PathStatementRequest < Struct.new(
       :packet_header_statement,
       :resource_statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49381,7 +51110,8 @@ module Aws::EC2
       :vendor_id,
       :subsystem_id,
       :subsystem_vendor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49395,7 +51125,8 @@ module Aws::EC2
     class PeeringAttachmentStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49414,7 +51145,8 @@ module Aws::EC2
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49433,7 +51165,8 @@ module Aws::EC2
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49455,7 +51188,8 @@ module Aws::EC2
       :core_network_id,
       :owner_id,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49531,7 +51265,8 @@ module Aws::EC2
     #   @return [String]
     class PerformanceFactorReference < Struct.new(
       :instance_family,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49607,7 +51342,8 @@ module Aws::EC2
     #   @return [String]
     class PerformanceFactorReferenceRequest < Struct.new(
       :instance_family,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49617,7 +51353,8 @@ module Aws::EC2
     #   @return [Integer]
     class Phase1DHGroupNumbersListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49628,7 +51365,8 @@ module Aws::EC2
     #   @return [Integer]
     class Phase1DHGroupNumbersRequestListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49638,7 +51376,8 @@ module Aws::EC2
     #   @return [String]
     class Phase1EncryptionAlgorithmsListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49649,7 +51388,8 @@ module Aws::EC2
     #   @return [String]
     class Phase1EncryptionAlgorithmsRequestListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49659,7 +51399,8 @@ module Aws::EC2
     #   @return [String]
     class Phase1IntegrityAlgorithmsListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49670,7 +51411,8 @@ module Aws::EC2
     #   @return [String]
     class Phase1IntegrityAlgorithmsRequestListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49680,7 +51422,8 @@ module Aws::EC2
     #   @return [Integer]
     class Phase2DHGroupNumbersListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49691,7 +51434,8 @@ module Aws::EC2
     #   @return [Integer]
     class Phase2DHGroupNumbersRequestListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49701,7 +51445,8 @@ module Aws::EC2
     #   @return [String]
     class Phase2EncryptionAlgorithmsListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49712,7 +51457,8 @@ module Aws::EC2
     #   @return [String]
     class Phase2EncryptionAlgorithmsRequestListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49722,7 +51468,8 @@ module Aws::EC2
     #   @return [String]
     class Phase2IntegrityAlgorithmsListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49733,7 +51480,8 @@ module Aws::EC2
     #   @return [String]
     class Phase2IntegrityAlgorithmsRequestListValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49802,7 +51550,8 @@ module Aws::EC2
       :host_resource_group_arn,
       :group_id,
       :availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49842,7 +51591,8 @@ module Aws::EC2
       :tags,
       :group_arn,
       :spread_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49852,7 +51602,8 @@ module Aws::EC2
     #   @return [Array<String>]
     class PlacementGroupInfo < Struct.new(
       :supported_strategies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49862,7 +51613,8 @@ module Aws::EC2
     #   @return [String]
     class PlacementResponse < Struct.new(
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49872,7 +51624,8 @@ module Aws::EC2
     #   @return [String]
     class PoolCidrBlock < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49886,7 +51639,8 @@ module Aws::EC2
     class PortRange < Struct.new(
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49904,7 +51658,8 @@ module Aws::EC2
       :cidrs,
       :prefix_list_id,
       :prefix_list_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49918,7 +51673,8 @@ module Aws::EC2
     class PrefixListAssociation < Struct.new(
       :resource_id,
       :resource_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49932,7 +51688,8 @@ module Aws::EC2
     class PrefixListEntry < Struct.new(
       :cidr,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49948,7 +51705,8 @@ module Aws::EC2
     class PrefixListId < Struct.new(
       :description,
       :prefix_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49979,7 +51737,8 @@ module Aws::EC2
       :currency_code,
       :price,
       :term,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49999,7 +51758,8 @@ module Aws::EC2
       :term,
       :price,
       :currency_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50013,7 +51773,8 @@ module Aws::EC2
     class PricingDetail < Struct.new(
       :count,
       :price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50027,7 +51788,8 @@ module Aws::EC2
     class PrincipalIdFormat < Struct.new(
       :arn,
       :statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50037,7 +51799,8 @@ module Aws::EC2
     #   @return [String]
     class PrivateDnsDetails < Struct.new(
       :private_dns_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50062,7 +51825,8 @@ module Aws::EC2
       :type,
       :value,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50085,7 +51849,8 @@ module Aws::EC2
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50108,7 +51873,8 @@ module Aws::EC2
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50128,7 +51894,8 @@ module Aws::EC2
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50143,7 +51910,8 @@ module Aws::EC2
     class PrivateIpAddressSpecification < Struct.new(
       :primary,
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50168,7 +51936,8 @@ module Aws::EC2
       :sustained_clock_speed_in_ghz,
       :supported_features,
       :manufacturer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50182,7 +51951,8 @@ module Aws::EC2
     class ProductCode < Struct.new(
       :product_code_id,
       :product_code_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50192,7 +51962,8 @@ module Aws::EC2
     #   @return [String]
     class PropagatingVgw < Struct.new(
       :gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50251,7 +52022,8 @@ module Aws::EC2
       :pool_tag_specifications,
       :multi_region,
       :network_border_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50260,7 +52032,8 @@ module Aws::EC2
     #   @return [Types::ByoipCidr]
     class ProvisionByoipCidrResult < Struct.new(
       :byoip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50283,7 +52056,8 @@ module Aws::EC2
       :ipam_id,
       :asn,
       :asn_authorization_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50292,7 +52066,8 @@ module Aws::EC2
     #   @return [Types::Byoasn]
     class ProvisionIpamByoasnResult < Struct.new(
       :byoasn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50331,7 +52106,8 @@ module Aws::EC2
       :client_token,
       :verification_method,
       :ipam_external_resource_verification_token_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50340,7 +52116,8 @@ module Aws::EC2
     #   @return [Types::IpamPoolCidr]
     class ProvisionIpamPoolCidrResult < Struct.new(
       :ipam_pool_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50367,7 +52144,8 @@ module Aws::EC2
       :pool_id,
       :netmask_length,
       :network_border_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50380,7 +52158,8 @@ module Aws::EC2
     class ProvisionPublicIpv4PoolCidrResult < Struct.new(
       :pool_id,
       :pool_address_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50407,7 +52186,8 @@ module Aws::EC2
       :request_time,
       :requested,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50425,7 +52205,8 @@ module Aws::EC2
       :value,
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50447,7 +52228,8 @@ module Aws::EC2
       :public_ipv4_dns_name,
       :public_ipv6_dns_name,
       :public_dual_stack_dns_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50483,7 +52265,8 @@ module Aws::EC2
       :total_available_address_count,
       :network_border_group,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50505,7 +52288,8 @@ module Aws::EC2
       :last_address,
       :address_count,
       :available_address_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50546,7 +52330,8 @@ module Aws::EC2
       :instance_family,
       :payment_option,
       :upfront_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50563,7 +52348,8 @@ module Aws::EC2
       :capacity_block_extension_offering_id,
       :capacity_reservation_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50572,7 +52358,8 @@ module Aws::EC2
     #   @return [Array<Types::CapacityBlockExtension>]
     class PurchaseCapacityBlockExtensionResult < Struct.new(
       :capacity_block_extensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50593,7 +52380,8 @@ module Aws::EC2
       :tag_specifications,
       :capacity_block_offering_id,
       :instance_platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50606,7 +52394,8 @@ module Aws::EC2
     class PurchaseCapacityBlockResult < Struct.new(
       :capacity_reservation,
       :capacity_blocks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50642,7 +52431,8 @@ module Aws::EC2
       :limit_price,
       :offering_id,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50669,7 +52459,8 @@ module Aws::EC2
       :purchase,
       :total_hourly_price,
       :total_upfront_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50683,7 +52474,8 @@ module Aws::EC2
     class PurchaseRequest < Struct.new(
       :instance_count,
       :purchase_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50714,7 +52506,8 @@ module Aws::EC2
       :purchase_time,
       :dry_run,
       :limit_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50725,7 +52518,8 @@ module Aws::EC2
     #   @return [String]
     class PurchaseReservedInstancesOfferingResult < Struct.new(
       :reserved_instances_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50746,7 +52540,8 @@ module Aws::EC2
       :client_token,
       :dry_run,
       :purchase_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50756,7 +52551,8 @@ module Aws::EC2
     #   @return [Array<Types::ScheduledInstance>]
     class PurchaseScheduledInstancesResult < Struct.new(
       :scheduled_instance_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50771,7 +52567,8 @@ module Aws::EC2
     class RebootInstancesRequest < Struct.new(
       :instance_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50785,7 +52582,8 @@ module Aws::EC2
     class RecurringCharge < Struct.new(
       :amount,
       :frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50811,7 +52609,8 @@ module Aws::EC2
       :user_id,
       :vpc_id,
       :vpc_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50830,7 +52629,8 @@ module Aws::EC2
       :opt_in_status,
       :region_name,
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50850,7 +52650,8 @@ module Aws::EC2
       :region_name,
       :number_of_matched_accounts,
       :number_of_unmatched_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50980,7 +52781,8 @@ module Aws::EC2
       :virtualization_type,
       :sriov_net_support,
       :ena_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50990,7 +52792,8 @@ module Aws::EC2
     #   @return [String]
     class RegisterImageResult < Struct.new(
       :image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51005,7 +52808,8 @@ module Aws::EC2
     class RegisterInstanceEventNotificationAttributesRequest < Struct.new(
       :dry_run,
       :instance_tag_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51014,7 +52818,8 @@ module Aws::EC2
     #   @return [Types::InstanceTagNotificationAttribute]
     class RegisterInstanceEventNotificationAttributesResult < Struct.new(
       :instance_tag_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51032,7 +52837,8 @@ module Aws::EC2
     class RegisterInstanceTagAttributeRequest < Struct.new(
       :include_all_tags_of_instance,
       :instance_tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51055,7 +52861,8 @@ module Aws::EC2
       :group_ip_address,
       :network_interface_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51064,7 +52871,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayMulticastRegisteredGroupMembers]
     class RegisterTransitGatewayMulticastGroupMembersResult < Struct.new(
       :registered_multicast_group_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51087,7 +52895,8 @@ module Aws::EC2
       :group_ip_address,
       :network_interface_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51096,7 +52905,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayMulticastRegisteredGroupSources]
     class RegisterTransitGatewayMulticastGroupSourcesResult < Struct.new(
       :registered_multicast_group_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51109,7 +52919,8 @@ module Aws::EC2
     class RejectCapacityReservationBillingOwnershipRequest < Struct.new(
       :dry_run,
       :capacity_reservation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51118,7 +52929,8 @@ module Aws::EC2
     #   @return [Boolean]
     class RejectCapacityReservationBillingOwnershipResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51141,7 +52953,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :subnet_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51150,7 +52963,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayMulticastDomainAssociations]
     class RejectTransitGatewayMulticastDomainAssociationsResult < Struct.new(
       :associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51165,7 +52979,8 @@ module Aws::EC2
     class RejectTransitGatewayPeeringAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51174,7 +52989,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayPeeringAttachment]
     class RejectTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51189,7 +53005,8 @@ module Aws::EC2
     class RejectTransitGatewayVpcAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51198,7 +53015,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayVpcAttachment]
     class RejectTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51217,7 +53035,8 @@ module Aws::EC2
       :dry_run,
       :service_id,
       :vpc_endpoint_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51226,7 +53045,8 @@ module Aws::EC2
     #   @return [Array<Types::UnsuccessfulItem>]
     class RejectVpcEndpointConnectionsResult < Struct.new(
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51241,7 +53061,8 @@ module Aws::EC2
     class RejectVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51250,7 +53071,8 @@ module Aws::EC2
     #   @return [Boolean]
     class RejectVpcPeeringConnectionResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51275,7 +53097,8 @@ module Aws::EC2
       :public_ip,
       :network_border_group,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51284,7 +53107,8 @@ module Aws::EC2
     #   @return [Array<String>]
     class ReleaseHostsRequest < Struct.new(
       :host_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51298,7 +53122,8 @@ module Aws::EC2
     class ReleaseHostsResult < Struct.new(
       :successful,
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51321,7 +53146,8 @@ module Aws::EC2
       :ipam_pool_id,
       :cidr,
       :ipam_pool_allocation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51330,7 +53156,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ReleaseIpamPoolAllocationResult < Struct.new(
       :success,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51342,7 +53169,8 @@ module Aws::EC2
     #   @return [String]
     class RemoveIpamOperatingRegion < Struct.new(
       :region_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51382,7 +53210,8 @@ module Aws::EC2
     #   @return [String]
     class RemoveIpamOrganizationalUnitExclusion < Struct.new(
       :organizations_entity_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51392,7 +53221,8 @@ module Aws::EC2
     #   @return [String]
     class RemovePrefixListEntry < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51405,7 +53235,8 @@ module Aws::EC2
     class ReplaceIamInstanceProfileAssociationRequest < Struct.new(
       :iam_instance_profile,
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51414,7 +53245,8 @@ module Aws::EC2
     #   @return [Types::IamInstanceProfileAssociation]
     class ReplaceIamInstanceProfileAssociationResult < Struct.new(
       :iam_instance_profile_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51430,7 +53262,8 @@ module Aws::EC2
     class ReplaceImageCriteriaInAllowedImagesSettingsRequest < Struct.new(
       :image_criteria,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51439,7 +53272,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ReplaceImageCriteriaInAllowedImagesSettingsResult < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51458,7 +53292,8 @@ module Aws::EC2
       :dry_run,
       :association_id,
       :network_acl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51467,7 +53302,8 @@ module Aws::EC2
     #   @return [String]
     class ReplaceNetworkAclAssociationResult < Struct.new(
       :new_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51524,7 +53360,8 @@ module Aws::EC2
       :ipv6_cidr_block,
       :icmp_type_code,
       :port_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51602,7 +53439,8 @@ module Aws::EC2
       :image_id,
       :snapshot_id,
       :delete_replaced_root_volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51683,7 +53521,8 @@ module Aws::EC2
       :network_interface_id,
       :vpc_peering_connection_id,
       :nat_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51702,7 +53541,8 @@ module Aws::EC2
       :dry_run,
       :association_id,
       :route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51715,7 +53555,8 @@ module Aws::EC2
     class ReplaceRouteTableAssociationResult < Struct.new(
       :new_association_id,
       :association_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51742,7 +53583,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :blackhole,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51751,7 +53593,8 @@ module Aws::EC2
     #   @return [Types::TransitGatewayRoute]
     class ReplaceTransitGatewayRouteResult < Struct.new(
       :route,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51772,7 +53615,8 @@ module Aws::EC2
       :vpn_tunnel_outside_ip_address,
       :apply_pending_maintenance,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51781,7 +53625,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ReplaceVpnTunnelResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51862,7 +53707,8 @@ module Aws::EC2
       :end_time,
       :reason_codes,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51876,7 +53722,8 @@ module Aws::EC2
     class RequestFilterPortRange < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51890,7 +53737,8 @@ module Aws::EC2
     class RequestIpamResourceTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52204,7 +54052,8 @@ module Aws::EC2
       :disable_api_stop,
       :operator,
       :network_performance_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52221,7 +54070,8 @@ module Aws::EC2
     class RequestSpotFleetRequest < Struct.new(
       :dry_run,
       :spot_fleet_request_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52231,7 +54081,8 @@ module Aws::EC2
     #   @return [String]
     class RequestSpotFleetResponse < Struct.new(
       :spot_fleet_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52339,7 +54190,8 @@ module Aws::EC2
       :launch_group,
       :availability_zone_group,
       :block_duration_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52349,7 +54201,8 @@ module Aws::EC2
     #   @return [Array<Types::SpotInstanceRequest>]
     class RequestSpotInstancesResult < Struct.new(
       :spot_instance_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52425,7 +54278,8 @@ module Aws::EC2
       :ramdisk_id,
       :subnet_id,
       :user_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52454,7 +54308,8 @@ module Aws::EC2
       :requester_id,
       :groups,
       :instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52506,7 +54361,8 @@ module Aws::EC2
       :availability_zone_id,
       :ebs_optimized,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52525,7 +54381,8 @@ module Aws::EC2
       :hourly_price,
       :remaining_total_value,
       :remaining_upfront_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52541,7 +54398,8 @@ module Aws::EC2
     class ReservedInstanceLimitPrice < Struct.new(
       :amount,
       :currency_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52555,7 +54413,8 @@ module Aws::EC2
     class ReservedInstanceReservationValue < Struct.new(
       :reservation_value,
       :reserved_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52638,7 +54497,8 @@ module Aws::EC2
       :instance_count,
       :product_description,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52672,7 +54532,8 @@ module Aws::EC2
       :platform,
       :scope,
       :availability_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52682,7 +54543,8 @@ module Aws::EC2
     #   @return [String]
     class ReservedInstancesId < Struct.new(
       :reserved_instances_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52731,7 +54593,8 @@ module Aws::EC2
       :status_message,
       :tags,
       :update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52776,7 +54639,8 @@ module Aws::EC2
       :status,
       :status_message,
       :update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52792,7 +54656,8 @@ module Aws::EC2
     class ReservedInstancesModificationResult < Struct.new(
       :reserved_instances_id,
       :target_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52870,7 +54735,8 @@ module Aws::EC2
       :usage_price,
       :fixed_price,
       :product_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52889,7 +54755,8 @@ module Aws::EC2
       :allocation_id,
       :attribute,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52898,7 +54765,8 @@ module Aws::EC2
     #   @return [Types::AddressAttribute]
     class ResetAddressAttributeResult < Struct.new(
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52909,7 +54777,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ResetEbsDefaultKmsKeyIdRequest < Struct.new(
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52918,7 +54787,8 @@ module Aws::EC2
     #   @return [String]
     class ResetEbsDefaultKmsKeyIdResult < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52937,7 +54807,8 @@ module Aws::EC2
       :dry_run,
       :fpga_image_id,
       :attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52946,7 +54817,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ResetFpgaImageAttributeResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52967,7 +54839,8 @@ module Aws::EC2
       :attribute,
       :image_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52990,7 +54863,8 @@ module Aws::EC2
       :dry_run,
       :instance_id,
       :attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53012,7 +54886,8 @@ module Aws::EC2
       :dry_run,
       :network_interface_id,
       :source_dest_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53032,7 +54907,8 @@ module Aws::EC2
       :attribute,
       :snapshot_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53046,7 +54922,8 @@ module Aws::EC2
     class ResourceStatement < Struct.new(
       :resources,
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53060,7 +54937,8 @@ module Aws::EC2
     class ResourceStatementRequest < Struct.new(
       :resources,
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53113,7 +54991,8 @@ module Aws::EC2
     class ResourceTypeOption < Struct.new(
       :option_name,
       :option_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53130,7 +55009,8 @@ module Aws::EC2
     class ResourceTypeRequest < Struct.new(
       :resource_type,
       :resource_type_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53145,7 +55025,8 @@ module Aws::EC2
     class ResponseError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53327,7 +55208,8 @@ module Aws::EC2
       :disable_api_stop,
       :operator,
       :network_performance_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53342,7 +55224,8 @@ module Aws::EC2
     class RestoreAddressToClassicRequest < Struct.new(
       :dry_run,
       :public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53355,7 +55238,8 @@ module Aws::EC2
     class RestoreAddressToClassicResult < Struct.new(
       :public_ip,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53370,7 +55254,8 @@ module Aws::EC2
     class RestoreImageFromRecycleBinRequest < Struct.new(
       :image_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53379,7 +55264,8 @@ module Aws::EC2
     #   @return [Boolean]
     class RestoreImageFromRecycleBinResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53402,7 +55288,8 @@ module Aws::EC2
       :prefix_list_id,
       :previous_version,
       :current_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53411,7 +55298,8 @@ module Aws::EC2
     #   @return [Types::ManagedPrefixList]
     class RestoreManagedPrefixListVersionResult < Struct.new(
       :prefix_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53426,7 +55314,8 @@ module Aws::EC2
     class RestoreSnapshotFromRecycleBinRequest < Struct.new(
       :snapshot_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53476,7 +55365,8 @@ module Aws::EC2
       :volume_id,
       :volume_size,
       :sse_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53506,7 +55396,8 @@ module Aws::EC2
       :temporary_restore_days,
       :permanent_restore,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53529,7 +55420,8 @@ module Aws::EC2
       :restore_start_time,
       :restore_duration,
       :is_permanent_restore,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53555,7 +55447,8 @@ module Aws::EC2
       :access_group_id,
       :revoke_all_groups,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53564,7 +55457,8 @@ module Aws::EC2
     #   @return [Types::ClientVpnAuthorizationRuleStatus]
     class RevokeClientVpnIngressResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53614,7 +55508,8 @@ module Aws::EC2
       :to_port,
       :cidr_ip,
       :ip_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53633,7 +55528,8 @@ module Aws::EC2
       :return,
       :unknown_ip_permissions,
       :revoked_security_group_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53693,7 +55589,8 @@ module Aws::EC2
       :to_port,
       :security_group_rule_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53712,7 +55609,8 @@ module Aws::EC2
       :return,
       :unknown_ip_permissions,
       :revoked_security_group_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53762,7 +55660,8 @@ module Aws::EC2
       :prefix_list_id,
       :referenced_group_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53857,7 +55756,8 @@ module Aws::EC2
       :core_network_arn,
       :odb_network_arn,
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53911,7 +55811,8 @@ module Aws::EC2
       :persist_routes_duration,
       :sns_notifications_enabled,
       :sns_topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53930,7 +55831,8 @@ module Aws::EC2
       :route_server_id,
       :vpc_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53940,7 +55842,8 @@ module Aws::EC2
     #   @return [String]
     class RouteServerBfdStatus < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53966,7 +55869,8 @@ module Aws::EC2
     class RouteServerBgpOptions < Struct.new(
       :peer_asn,
       :peer_liveness_detection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53991,7 +55895,8 @@ module Aws::EC2
     class RouteServerBgpOptionsRequest < Struct.new(
       :peer_asn,
       :peer_liveness_detection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54001,7 +55906,8 @@ module Aws::EC2
     #   @return [String]
     class RouteServerBgpStatus < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54044,7 +55950,8 @@ module Aws::EC2
       :state,
       :failure_reason,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54118,7 +56025,8 @@ module Aws::EC2
       :bgp_status,
       :bfd_status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54137,7 +56045,8 @@ module Aws::EC2
       :route_server_id,
       :route_table_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54177,7 +56086,8 @@ module Aws::EC2
       :as_paths,
       :med,
       :next_hop_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54195,7 +56105,8 @@ module Aws::EC2
       :route_table_id,
       :route_installation_status,
       :route_installation_status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54229,7 +56140,8 @@ module Aws::EC2
       :tags,
       :vpc_id,
       :owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54263,7 +56175,8 @@ module Aws::EC2
       :gateway_id,
       :public_ipv4_pool,
       :association_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54277,7 +56190,8 @@ module Aws::EC2
     class RouteTableAssociationState < Struct.new(
       :state,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54291,7 +56205,8 @@ module Aws::EC2
     class RuleGroupRuleOptionsPair < Struct.new(
       :rule_group_arn,
       :rule_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54305,7 +56220,8 @@ module Aws::EC2
     class RuleGroupTypePair < Struct.new(
       :rule_group_arn,
       :rule_group_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54319,7 +56235,8 @@ module Aws::EC2
     class RuleOption < Struct.new(
       :keyword,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54330,7 +56247,8 @@ module Aws::EC2
     #   @return [Boolean]
     class RunInstancesMonitoringEnabled < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54359,7 +56277,8 @@ module Aws::EC2
       :requester_id,
       :groups,
       :instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54679,7 +56598,8 @@ module Aws::EC2
       :network_interfaces,
       :iam_instance_profile,
       :ebs_optimized,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54710,7 +56630,8 @@ module Aws::EC2
       :instance_count,
       :launch_specification,
       :scheduled_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54720,7 +56641,8 @@ module Aws::EC2
     #   @return [Array<String>]
     class RunScheduledInstancesResult < Struct.new(
       :instance_id_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54740,7 +56662,8 @@ module Aws::EC2
     class S3ObjectTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54772,7 +56695,8 @@ module Aws::EC2
       :prefix,
       :upload_policy,
       :upload_policy_signature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54838,7 +56762,8 @@ module Aws::EC2
       :term_end_date,
       :term_start_date,
       :total_scheduled_instance_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54896,7 +56821,8 @@ module Aws::EC2
       :recurrence,
       :slot_duration_in_hours,
       :total_scheduled_instance_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54923,7 +56849,8 @@ module Aws::EC2
       :occurrence_day_set,
       :occurrence_relative_to_end,
       :occurrence_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54953,7 +56880,8 @@ module Aws::EC2
       :occurrence_days,
       :occurrence_relative_to_end,
       :occurrence_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54982,7 +56910,8 @@ module Aws::EC2
       :ebs,
       :no_device,
       :virtual_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55018,7 +56947,8 @@ module Aws::EC2
       :snapshot_id,
       :volume_size,
       :volume_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55032,7 +56962,8 @@ module Aws::EC2
     class ScheduledInstancesIamInstanceProfile < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55042,7 +56973,8 @@ module Aws::EC2
     #   @return [String]
     class ScheduledInstancesIpv6Address < Struct.new(
       :ipv6_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55109,7 +57041,8 @@ module Aws::EC2
       :security_group_ids,
       :subnet_id,
       :user_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55119,7 +57052,8 @@ module Aws::EC2
     #   @return [Boolean]
     class ScheduledInstancesMonitoring < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55179,7 +57113,8 @@ module Aws::EC2
       :private_ip_address_configs,
       :secondary_private_ip_address_count,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55193,7 +57128,8 @@ module Aws::EC2
     class ScheduledInstancesPlacement < Struct.new(
       :availability_zone,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55207,7 +57143,8 @@ module Aws::EC2
     class ScheduledInstancesPrivateIpAddressConfig < Struct.new(
       :primary,
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55267,7 +57204,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55280,7 +57218,8 @@ module Aws::EC2
     class SearchLocalGatewayRoutesResult < Struct.new(
       :routes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55346,7 +57285,8 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55359,7 +57299,8 @@ module Aws::EC2
     class SearchTransitGatewayMulticastGroupsResult < Struct.new(
       :multicast_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55428,7 +57369,8 @@ module Aws::EC2
       :filters,
       :max_results,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55441,7 +57383,8 @@ module Aws::EC2
     class SearchTransitGatewayRoutesResult < Struct.new(
       :routes,
       :additional_routes_available,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55483,7 +57426,8 @@ module Aws::EC2
       :group_name,
       :description,
       :ip_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55513,7 +57457,8 @@ module Aws::EC2
       :group_id,
       :tags,
       :primary_vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55527,7 +57472,8 @@ module Aws::EC2
     class SecurityGroupIdentifier < Struct.new(
       :group_id,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55551,7 +57497,8 @@ module Aws::EC2
       :referencing_vpc_id,
       :vpc_peering_connection_id,
       :transit_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55618,7 +57565,8 @@ module Aws::EC2
       :description,
       :tags,
       :security_group_rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55633,7 +57581,8 @@ module Aws::EC2
     class SecurityGroupRuleDescription < Struct.new(
       :security_group_rule_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55702,7 +57651,8 @@ module Aws::EC2
       :prefix_list_id,
       :referenced_group_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55716,7 +57666,8 @@ module Aws::EC2
     class SecurityGroupRuleUpdate < Struct.new(
       :security_group_rule_id,
       :security_group_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55746,7 +57697,8 @@ module Aws::EC2
       :state,
       :state_reason,
       :group_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55761,7 +57713,8 @@ module Aws::EC2
     class SendDiagnosticInterruptRequest < Struct.new(
       :instance_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55843,7 +57796,8 @@ module Aws::EC2
       :tags,
       :supported_regions,
       :remote_access_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55921,7 +57875,8 @@ module Aws::EC2
       :tags,
       :private_dns_name_verification_state,
       :supported_ip_address_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55975,7 +57930,8 @@ module Aws::EC2
       :outpost_lag_id,
       :tags,
       :configuration_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55985,7 +57941,8 @@ module Aws::EC2
     #   @return [String]
     class ServiceTypeDetail < Struct.new(
       :service_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55999,7 +57956,8 @@ module Aws::EC2
     class SlotDateTimeRangeRequest < Struct.new(
       :earliest_time,
       :latest_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56013,7 +57971,8 @@ module Aws::EC2
     class SlotStartTimeRangeRequest < Struct.new(
       :earliest_time,
       :latest_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56154,7 +58113,8 @@ module Aws::EC2
       :encrypted,
       :kms_key_id,
       :data_encryption_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56200,7 +58160,8 @@ module Aws::EC2
       :status_message,
       :url,
       :user_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56225,7 +58186,8 @@ module Aws::EC2
       :format,
       :url,
       :user_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56287,7 +58249,8 @@ module Aws::EC2
       :outpost_arn,
       :sse_type,
       :availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56313,7 +58276,8 @@ module Aws::EC2
       :recycle_bin_exit_time,
       :description,
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56363,7 +58327,8 @@ module Aws::EC2
       :status_message,
       :url,
       :user_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56421,7 +58386,8 @@ module Aws::EC2
       :last_tiering_operation_status_detail,
       :archival_complete_time,
       :restore_expiry_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56454,7 +58420,8 @@ module Aws::EC2
     class SpotCapacityRebalance < Struct.new(
       :replacement_strategy,
       :termination_delay,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56480,7 +58447,8 @@ module Aws::EC2
       :owner_id,
       :prefix,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56603,7 +58571,8 @@ module Aws::EC2
       :tag_specifications,
       :instance_requirements,
       :security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56615,7 +58584,8 @@ module Aws::EC2
     #   @return [Boolean]
     class SpotFleetMonitoring < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56650,7 +58620,8 @@ module Aws::EC2
       :spot_fleet_request_id,
       :spot_fleet_request_state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56916,7 +58887,8 @@ module Aws::EC2
       :context,
       :target_capacity_unit_type,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56934,7 +58906,8 @@ module Aws::EC2
     class SpotFleetTagSpecification < Struct.new(
       :resource_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57043,7 +59016,8 @@ module Aws::EC2
       :valid_from,
       :valid_until,
       :instance_interruption_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57057,7 +59031,8 @@ module Aws::EC2
     class SpotInstanceStateFault < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57076,7 +59051,8 @@ module Aws::EC2
       :code,
       :message,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57090,7 +59066,8 @@ module Aws::EC2
     #   @return [Types::SpotCapacityRebalance]
     class SpotMaintenanceStrategies < Struct.new(
       :capacity_rebalance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57154,7 +59131,8 @@ module Aws::EC2
       :block_duration_minutes,
       :valid_until,
       :instance_interruption_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57276,7 +59254,8 @@ module Aws::EC2
       :single_availability_zone,
       :min_target_capacity,
       :max_total_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57397,7 +59376,8 @@ module Aws::EC2
       :single_availability_zone,
       :min_target_capacity,
       :max_total_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57419,7 +59399,8 @@ module Aws::EC2
       :availability_zone,
       :group_name,
       :tenancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57442,7 +59423,8 @@ module Aws::EC2
       :region,
       :availability_zone_id,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57481,7 +59463,8 @@ module Aws::EC2
       :product_description,
       :spot_price,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57514,7 +59497,8 @@ module Aws::EC2
       :prefix_list_ids,
       :to_port,
       :user_id_group_pairs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57544,7 +59528,8 @@ module Aws::EC2
       :stale_ip_permissions,
       :stale_ip_permissions_egress,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57587,7 +59572,8 @@ module Aws::EC2
       :s3_prefix,
       :target_id,
       :tag_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57596,7 +59582,8 @@ module Aws::EC2
     #   @return [String]
     class StartDeclarativePoliciesReportResult < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57615,7 +59602,8 @@ module Aws::EC2
       :instance_ids,
       :additional_info,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57624,7 +59612,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceStateChange>]
     class StartInstancesResult < Struct.new(
       :starting_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57648,7 +59637,8 @@ module Aws::EC2
       :dry_run,
       :tag_specifications,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57657,7 +59647,8 @@ module Aws::EC2
     #   @return [Types::NetworkInsightsAccessScopeAnalysis]
     class StartNetworkInsightsAccessScopeAnalysisResult < Struct.new(
       :network_insights_access_scope_analysis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57693,7 +59684,8 @@ module Aws::EC2
       :dry_run,
       :tag_specifications,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57702,7 +59694,8 @@ module Aws::EC2
     #   @return [Types::NetworkInsightsAnalysis]
     class StartNetworkInsightsAnalysisResult < Struct.new(
       :network_insights_analysis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57717,7 +59710,8 @@ module Aws::EC2
     class StartVpcEndpointServicePrivateDnsVerificationRequest < Struct.new(
       :dry_run,
       :service_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57726,7 +59720,8 @@ module Aws::EC2
     #   @return [Boolean]
     class StartVpcEndpointServicePrivateDnsVerificationResult < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57807,7 +59802,8 @@ module Aws::EC2
     class StateReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57857,7 +59853,8 @@ module Aws::EC2
       :skip_os_shutdown,
       :dry_run,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57866,7 +59863,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceStateChange>]
     class StopInstancesResult < Struct.new(
       :stopping_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57876,7 +59874,8 @@ module Aws::EC2
     #   @return [Types::S3Storage]
     class Storage < Struct.new(
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57890,7 +59889,8 @@ module Aws::EC2
     class StorageLocation < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57926,7 +59926,8 @@ module Aws::EC2
       :progress_percentage,
       :store_task_state,
       :store_task_failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58052,7 +60053,8 @@ module Aws::EC2
       :availability_zone,
       :default_for_az,
       :map_public_ip_on_launch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58066,7 +60068,8 @@ module Aws::EC2
     class SubnetAssociation < Struct.new(
       :subnet_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58080,7 +60083,8 @@ module Aws::EC2
     class SubnetCidrBlockState < Struct.new(
       :state,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58114,7 +60118,8 @@ module Aws::EC2
       :owner_id,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58140,7 +60145,8 @@ module Aws::EC2
       :subnet_id,
       :ipv4,
       :ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58154,7 +60160,8 @@ module Aws::EC2
     class SubnetIpPrefixes < Struct.new(
       :subnet_id,
       :ip_prefixes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58180,7 +60187,8 @@ module Aws::EC2
       :ipv6_cidr_block_state,
       :ipv6_address_attribute,
       :ip_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58206,7 +60214,8 @@ module Aws::EC2
       :metric,
       :statistic,
       :period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58217,7 +60226,8 @@ module Aws::EC2
     #   @return [String]
     class SuccessfulInstanceCreditSpecificationItem < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58227,7 +60237,8 @@ module Aws::EC2
     #   @return [String]
     class SuccessfulQueuedPurchaseDeletion < Struct.new(
       :reserved_instances_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58242,7 +60253,8 @@ module Aws::EC2
     class SupportedRegionDetail < Struct.new(
       :region,
       :service_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58259,7 +60271,8 @@ module Aws::EC2
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58281,7 +60294,8 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58302,7 +60316,8 @@ module Aws::EC2
     class TagSpecification < Struct.new(
       :resource_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58339,7 +60354,8 @@ module Aws::EC2
       :spot_target_capacity,
       :default_target_capacity_type,
       :target_capacity_unit_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58378,7 +60394,8 @@ module Aws::EC2
       :spot_target_capacity,
       :default_target_capacity_type,
       :target_capacity_unit_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58393,7 +60410,8 @@ module Aws::EC2
     class TargetConfiguration < Struct.new(
       :instance_count,
       :offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58408,7 +60426,8 @@ module Aws::EC2
     class TargetConfigurationRequest < Struct.new(
       :instance_count,
       :offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58418,7 +60437,8 @@ module Aws::EC2
     #   @return [String]
     class TargetGroup < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58429,7 +60449,8 @@ module Aws::EC2
     #   @return [Array<Types::TargetGroup>]
     class TargetGroupsConfig < Struct.new(
       :target_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58459,7 +60480,8 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :status,
       :security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58475,7 +60497,8 @@ module Aws::EC2
     class TargetReservationValue < Struct.new(
       :reservation_value,
       :target_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58497,7 +60520,8 @@ module Aws::EC2
       :connection_id,
       :username,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58514,7 +60538,8 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :username,
       :connection_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58532,7 +60557,8 @@ module Aws::EC2
       :connection_id,
       :previous_status,
       :current_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58563,7 +60589,8 @@ module Aws::EC2
       :force,
       :skip_os_shutdown,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58572,7 +60599,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceStateChange>]
     class TerminateInstancesResult < Struct.new(
       :terminating_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58582,7 +60610,8 @@ module Aws::EC2
     #   @return [Types::ResourceStatement]
     class ThroughResourcesStatement < Struct.new(
       :resource_statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58592,7 +60621,8 @@ module Aws::EC2
     #   @return [Types::ResourceStatementRequest]
     class ThroughResourcesStatementRequest < Struct.new(
       :resource_statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58608,7 +60638,8 @@ module Aws::EC2
     class TotalLocalStorageGB < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58624,7 +60655,8 @@ module Aws::EC2
     class TotalLocalStorageGBRequest < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58654,7 +60686,8 @@ module Aws::EC2
       :network_services,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58708,7 +60741,8 @@ module Aws::EC2
       :source_cidr_block,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58722,7 +60756,8 @@ module Aws::EC2
     class TrafficMirrorPortRange < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58736,7 +60771,8 @@ module Aws::EC2
     class TrafficMirrorPortRangeRequest < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58783,7 +60819,8 @@ module Aws::EC2
       :virtual_network_id,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58821,7 +60858,8 @@ module Aws::EC2
       :owner_id,
       :tags,
       :gateway_load_balancer_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58859,7 +60897,8 @@ module Aws::EC2
       :creation_time,
       :options,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58885,7 +60924,8 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58931,7 +60971,8 @@ module Aws::EC2
       :association,
       :creation_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58945,7 +60986,8 @@ module Aws::EC2
     class TransitGatewayAttachmentAssociation < Struct.new(
       :transit_gateway_route_table_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58971,7 +61013,8 @@ module Aws::EC2
       :transit_gateway_address,
       :peer_address,
       :bgp_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58985,7 +61028,8 @@ module Aws::EC2
     class TransitGatewayAttachmentPropagation < Struct.new(
       :transit_gateway_route_table_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59019,7 +61063,8 @@ module Aws::EC2
       :creation_time,
       :options,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59029,7 +61074,8 @@ module Aws::EC2
     #   @return [String]
     class TransitGatewayConnectOptions < Struct.new(
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59059,7 +61105,8 @@ module Aws::EC2
       :creation_time,
       :connect_peer_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59085,7 +61132,8 @@ module Aws::EC2
       :inside_cidr_blocks,
       :protocol,
       :bgp_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59095,7 +61143,8 @@ module Aws::EC2
     #   @return [Integer]
     class TransitGatewayConnectRequestBgpOptions < Struct.new(
       :peer_asn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59113,7 +61162,8 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :deregistered_network_interface_ids,
       :group_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59131,7 +61181,8 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :deregistered_network_interface_ids,
       :group_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59169,7 +61220,8 @@ module Aws::EC2
       :state,
       :creation_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59195,7 +61247,8 @@ module Aws::EC2
       :resource_type,
       :resource_owner_id,
       :subnet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59225,7 +61278,8 @@ module Aws::EC2
       :resource_type,
       :resource_owner_id,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59243,7 +61297,8 @@ module Aws::EC2
       :igmpv2_support,
       :static_sources_support,
       :auto_accept_shared_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59293,7 +61348,8 @@ module Aws::EC2
       :group_source,
       :member_type,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59311,7 +61367,8 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :registered_network_interface_ids,
       :group_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59329,7 +61386,8 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :registered_network_interface_ids,
       :group_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59388,7 +61446,8 @@ module Aws::EC2
       :dns_support,
       :security_group_referencing_support,
       :multicast_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59430,7 +61489,8 @@ module Aws::EC2
       :state,
       :creation_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59440,7 +61500,8 @@ module Aws::EC2
     #   @return [String]
     class TransitGatewayPeeringAttachmentOptions < Struct.new(
       :dynamic_routing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59470,7 +61531,8 @@ module Aws::EC2
       :destination_port_range,
       :protocol,
       :meta_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59484,7 +61546,8 @@ module Aws::EC2
     class TransitGatewayPolicyRuleMetaData < Struct.new(
       :meta_data_key,
       :meta_data_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59510,7 +61573,8 @@ module Aws::EC2
       :state,
       :creation_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59536,7 +61600,8 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59554,7 +61619,8 @@ module Aws::EC2
       :policy_rule_number,
       :policy_rule,
       :target_route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59572,7 +61638,8 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :resource_type,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59602,7 +61669,8 @@ module Aws::EC2
       :state,
       :blackhole,
       :transit_gateway_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59632,7 +61700,8 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :state,
       :transit_gateway_route_table_announcement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59679,7 +61748,8 @@ module Aws::EC2
       :security_group_referencing_support,
       :multicast_support,
       :transit_gateway_cidr_blocks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59709,7 +61779,8 @@ module Aws::EC2
       :transit_gateway_attachments,
       :type,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59727,7 +61798,8 @@ module Aws::EC2
       :resource_id,
       :transit_gateway_attachment_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59761,7 +61833,8 @@ module Aws::EC2
       :default_propagation_route_table,
       :creation_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59811,7 +61884,8 @@ module Aws::EC2
       :state,
       :creation_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59833,7 +61907,8 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59859,7 +61934,8 @@ module Aws::EC2
       :resource_type,
       :state,
       :transit_gateway_route_table_announcement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59901,7 +61977,8 @@ module Aws::EC2
       :attachment_id,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59943,7 +62020,8 @@ module Aws::EC2
       :creation_time,
       :options,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59967,7 +62045,8 @@ module Aws::EC2
       :security_group_referencing_support,
       :ipv6_support,
       :appliance_mode_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60001,7 +62080,8 @@ module Aws::EC2
       :vlan_id,
       :gre_key,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60100,7 +62180,8 @@ module Aws::EC2
       :startup_action,
       :log_options,
       :enable_tunnel_lifecycle_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60117,7 +62198,8 @@ module Aws::EC2
       :ipv6_prefixes,
       :network_interface_id,
       :ipv6_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60134,7 +62216,8 @@ module Aws::EC2
       :network_interface_id,
       :unassigned_ipv6_addresses,
       :unassigned_ipv6_prefixes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60153,7 +62236,8 @@ module Aws::EC2
       :ipv4_prefixes,
       :network_interface_id,
       :private_ip_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60176,7 +62260,8 @@ module Aws::EC2
       :private_ip_addresses,
       :max_drain_duration_seconds,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60189,7 +62274,8 @@ module Aws::EC2
     class UnassignPrivateNatGatewayAddressResult < Struct.new(
       :nat_gateway_id,
       :nat_gateway_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60204,7 +62290,8 @@ module Aws::EC2
     class UnlockSnapshotRequest < Struct.new(
       :snapshot_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60213,7 +62300,8 @@ module Aws::EC2
     #   @return [String]
     class UnlockSnapshotResult < Struct.new(
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60228,7 +62316,8 @@ module Aws::EC2
     class UnmonitorInstancesRequest < Struct.new(
       :instance_ids,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60237,7 +62326,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceMonitoring>]
     class UnmonitorInstancesResult < Struct.new(
       :instance_monitorings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60253,7 +62343,8 @@ module Aws::EC2
     class UnsuccessfulInstanceCreditSpecificationItem < Struct.new(
       :instance_id,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60268,7 +62359,8 @@ module Aws::EC2
     class UnsuccessfulInstanceCreditSpecificationItemError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60282,7 +62374,8 @@ module Aws::EC2
     class UnsuccessfulItem < Struct.new(
       :error,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60296,7 +62389,8 @@ module Aws::EC2
     class UnsuccessfulItemError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60328,7 +62422,8 @@ module Aws::EC2
       :group_name,
       :ip_permissions,
       :security_group_rule_descriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60337,7 +62432,8 @@ module Aws::EC2
     #   @return [Boolean]
     class UpdateSecurityGroupRuleDescriptionsEgressResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60370,7 +62466,8 @@ module Aws::EC2
       :group_name,
       :ip_permissions,
       :security_group_rule_descriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60379,7 +62476,8 @@ module Aws::EC2
     #   @return [Boolean]
     class UpdateSecurityGroupRuleDescriptionsIngressResult < Struct.new(
       :return,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60393,7 +62491,8 @@ module Aws::EC2
     class UserBucket < Struct.new(
       :s3_bucket,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60407,7 +62506,8 @@ module Aws::EC2
     class UserBucketDetails < Struct.new(
       :s3_bucket,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60419,7 +62519,8 @@ module Aws::EC2
     #   @return [String]
     class UserData < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60462,7 +62563,8 @@ module Aws::EC2
       :vpc_id,
       :vpc_peering_connection_id,
       :peering_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60478,7 +62580,8 @@ module Aws::EC2
     class VCpuCountRange < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60492,7 +62595,8 @@ module Aws::EC2
     class VCpuCountRangeRequest < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60518,7 +62622,8 @@ module Aws::EC2
       :default_threads_per_core,
       :valid_cores,
       :valid_threads_per_core,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60536,7 +62641,8 @@ module Aws::EC2
     class ValidationError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60548,7 +62654,8 @@ module Aws::EC2
     #   @return [Array<Types::ValidationError>]
     class ValidationWarning < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60644,7 +62751,8 @@ module Aws::EC2
       :sse_specification,
       :rds_options,
       :cidr_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60666,7 +62774,8 @@ module Aws::EC2
       :port_ranges,
       :protocol,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60688,7 +62797,8 @@ module Aws::EC2
       :protocol,
       :port,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60715,7 +62825,8 @@ module Aws::EC2
       :load_balancer_arn,
       :subnet_ids,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60729,7 +62840,8 @@ module Aws::EC2
     class VerifiedAccessEndpointPortRange < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60763,7 +62875,8 @@ module Aws::EC2
       :rds_db_proxy_arn,
       :rds_endpoint,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60777,7 +62890,8 @@ module Aws::EC2
     class VerifiedAccessEndpointStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60795,7 +62909,8 @@ module Aws::EC2
       :verified_access_endpoint_id,
       :verified_access_endpoint_target_ip_address,
       :verified_access_endpoint_target_dns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60841,7 +62956,8 @@ module Aws::EC2
       :deletion_time,
       :tags,
       :sse_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60879,7 +62995,8 @@ module Aws::EC2
       :tags,
       :fips_enabled,
       :cidr_endpoints_custom_sub_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60893,7 +63010,8 @@ module Aws::EC2
     class VerifiedAccessInstanceCustomSubDomain < Struct.new(
       :sub_domain,
       :nameservers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60907,7 +63025,8 @@ module Aws::EC2
     class VerifiedAccessInstanceLoggingConfiguration < Struct.new(
       :verified_access_instance_id,
       :access_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60921,7 +63040,8 @@ module Aws::EC2
     class VerifiedAccessInstanceOpenVpnClientConfiguration < Struct.new(
       :config,
       :routes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60931,7 +63051,8 @@ module Aws::EC2
     #   @return [String]
     class VerifiedAccessInstanceOpenVpnClientConfigurationRoute < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60977,7 +63098,8 @@ module Aws::EC2
       :client_id,
       :client_secret,
       :pkce_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60995,7 +63117,8 @@ module Aws::EC2
       :enabled,
       :delivery_status,
       :log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61009,7 +63132,8 @@ module Aws::EC2
     class VerifiedAccessLogCloudWatchLogsDestinationOptions < Struct.new(
       :enabled,
       :log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61023,7 +63147,8 @@ module Aws::EC2
     class VerifiedAccessLogDeliveryStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61041,7 +63166,8 @@ module Aws::EC2
       :enabled,
       :delivery_status,
       :delivery_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61055,7 +63181,8 @@ module Aws::EC2
     class VerifiedAccessLogKinesisDataFirehoseDestinationOptions < Struct.new(
       :enabled,
       :delivery_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61083,7 +63210,8 @@ module Aws::EC2
       :kinesis_data_firehose,
       :log_version,
       :include_trust_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61109,7 +63237,8 @@ module Aws::EC2
       :bucket_name,
       :prefix,
       :bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61131,7 +63260,8 @@ module Aws::EC2
       :bucket_name,
       :prefix,
       :bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61157,7 +63287,8 @@ module Aws::EC2
       :kinesis_data_firehose,
       :log_version,
       :include_trust_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61179,7 +63310,8 @@ module Aws::EC2
     class VerifiedAccessSseSpecificationRequest < Struct.new(
       :customer_managed_key_enabled,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61195,7 +63327,8 @@ module Aws::EC2
     class VerifiedAccessSseSpecificationResponse < Struct.new(
       :customer_managed_key_enabled,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61253,7 +63386,8 @@ module Aws::EC2
       :tags,
       :sse_specification,
       :native_application_oidc_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61279,7 +63413,8 @@ module Aws::EC2
       :trust_provider_type,
       :user_trust_provider_type,
       :device_trust_provider_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61310,7 +63445,8 @@ module Aws::EC2
       :status,
       :status_message,
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61409,7 +63545,8 @@ module Aws::EC2
       :attachments,
       :encrypted,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61455,7 +63592,8 @@ module Aws::EC2
       :device,
       :state,
       :attach_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61465,7 +63603,8 @@ module Aws::EC2
     #   @return [Integer]
     class VolumeDetail < Struct.new(
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61535,7 +63674,8 @@ module Aws::EC2
       :progress,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61557,7 +63697,8 @@ module Aws::EC2
       :description,
       :event_id,
       :event_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61571,7 +63712,8 @@ module Aws::EC2
     class VolumeStatusAttachmentStatus < Struct.new(
       :io_performance,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61604,7 +63746,8 @@ module Aws::EC2
     class VolumeStatusDetails < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61634,7 +63777,8 @@ module Aws::EC2
       :not_after,
       :not_before,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61648,7 +63792,8 @@ module Aws::EC2
     class VolumeStatusInfo < Struct.new(
       :details,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61696,7 +63841,8 @@ module Aws::EC2
       :attachment_statuses,
       :initialization_status_details,
       :availability_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61749,7 +63895,8 @@ module Aws::EC2
       :state,
       :cidr_block,
       :dhcp_options_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61763,7 +63910,8 @@ module Aws::EC2
     class VpcAttachment < Struct.new(
       :vpc_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61817,7 +63965,8 @@ module Aws::EC2
       :last_update_timestamp,
       :deletion_timestamp,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61881,7 +64030,8 @@ module Aws::EC2
       :last_update_timestamp,
       :managed_by,
       :exclusions_allowed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61899,7 +64049,8 @@ module Aws::EC2
       :association_id,
       :cidr_block,
       :cidr_block_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61913,7 +64064,8 @@ module Aws::EC2
     class VpcCidrBlockState < Struct.new(
       :state,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61934,7 +64086,8 @@ module Aws::EC2
       :classic_link_enabled,
       :tags,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61960,7 +64113,8 @@ module Aws::EC2
       :state_message,
       :resource_exclusions,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61971,7 +64125,8 @@ module Aws::EC2
     class VpcEncryptionControlExclusion < Struct.new(
       :state,
       :state_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61991,7 +64146,8 @@ module Aws::EC2
       :nat_gateway,
       :virtual_private_gateway,
       :vpc_peering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62098,7 +64254,8 @@ module Aws::EC2
       :service_network_arn,
       :resource_configuration_arn,
       :service_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62155,7 +64312,8 @@ module Aws::EC2
       :associated_resource_arn,
       :resource_configuration_group_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62209,7 +64367,8 @@ module Aws::EC2
       :vpc_endpoint_connection_id,
       :tags,
       :vpc_endpoint_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62244,7 +64403,8 @@ module Aws::EC2
       :ipv6_pool,
       :ipv6_address_attribute,
       :ip_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62274,7 +64434,8 @@ module Aws::EC2
       :status,
       :tags,
       :vpc_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62293,7 +64454,8 @@ module Aws::EC2
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62307,7 +64469,8 @@ module Aws::EC2
     class VpcPeeringConnectionStateReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62341,7 +64504,8 @@ module Aws::EC2
       :peering_options,
       :vpc_id,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62416,7 +64580,8 @@ module Aws::EC2
       :type,
       :customer_gateway_id,
       :vpn_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62441,7 +64606,8 @@ module Aws::EC2
       :vendor,
       :platform,
       :software,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62492,7 +64658,8 @@ module Aws::EC2
       :transport_transit_gateway_attachment_id,
       :tunnel_inside_ip_version,
       :tunnel_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62559,7 +64726,8 @@ module Aws::EC2
       :outside_ip_address_type,
       :transport_transit_gateway_attachment_id,
       :static_routes_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62595,7 +64763,8 @@ module Aws::EC2
       :type,
       :availability_zone,
       :vpc_attachments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62613,7 +64782,8 @@ module Aws::EC2
       :destination_cidr_block,
       :source,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62623,7 +64793,8 @@ module Aws::EC2
     #   @return [Types::CloudWatchLogOptions]
     class VpnTunnelLogOptions < Struct.new(
       :cloud_watch_log_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62633,7 +64804,8 @@ module Aws::EC2
     #   @return [Types::CloudWatchLogOptionsSpecification]
     class VpnTunnelLogOptionsSpecification < Struct.new(
       :cloud_watch_log_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62829,7 +65001,8 @@ module Aws::EC2
       :startup_action,
       :log_options,
       :enable_tunnel_lifecycle_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62844,7 +65017,8 @@ module Aws::EC2
     class WithdrawByoipCidrRequest < Struct.new(
       :cidr,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62853,7 +65027,8 @@ module Aws::EC2
     #   @return [Types::ByoipCidr]
     class WithdrawByoipCidrResult < Struct.new(
       :byoip_cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

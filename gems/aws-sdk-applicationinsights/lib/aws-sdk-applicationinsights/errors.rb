@@ -41,7 +41,7 @@ module Aws::ApplicationInsights
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationInsights::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::ApplicationInsights
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationInsights::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::ApplicationInsights
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationInsights::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::ApplicationInsights
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationInsights::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::ApplicationInsights
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationInsights::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::ApplicationInsights
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationInsights::Types::TagsAlreadyExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::ApplicationInsights
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationInsights::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -138,7 +138,7 @@ module Aws::ApplicationInsights
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationInsights::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -17,7 +17,8 @@ module Aws::SWF
     class ActivityTaskCancelRequestedEventAttributes < Struct.new(
       :decision_task_completed_event_id,
       :activity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -46,7 +47,8 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       :latest_cancel_requested_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -73,7 +75,8 @@ module Aws::SWF
       :result,
       :scheduled_event_id,
       :started_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -103,7 +106,8 @@ module Aws::SWF
       :details,
       :scheduled_event_id,
       :started_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -166,7 +170,8 @@ module Aws::SWF
       :task_priority,
       :decision_task_completed_event_id,
       :heartbeat_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -185,7 +190,8 @@ module Aws::SWF
     class ActivityTaskStartedEventAttributes < Struct.new(
       :identity,
       :scheduled_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -215,7 +221,8 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -241,7 +248,8 @@ module Aws::SWF
     class ActivityType < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +312,8 @@ module Aws::SWF
       :default_task_priority,
       :default_task_schedule_to_start_timeout,
       :default_task_schedule_to_close_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +339,8 @@ module Aws::SWF
       :description,
       :creation_date,
       :deprecation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +371,8 @@ module Aws::SWF
     #   @return [String]
     class CancelTimerDecisionAttributes < Struct.new(
       :timer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +395,8 @@ module Aws::SWF
       :timer_id,
       :cause,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -420,7 +432,8 @@ module Aws::SWF
     #   @return [String]
     class CancelWorkflowExecutionDecisionAttributes < Struct.new(
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +452,8 @@ module Aws::SWF
     class CancelWorkflowExecutionFailedEventAttributes < Struct.new(
       :cause,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -476,7 +490,8 @@ module Aws::SWF
       :details,
       :initiated_event_id,
       :started_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -511,7 +526,8 @@ module Aws::SWF
       :result,
       :initiated_event_id,
       :started_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -553,7 +569,8 @@ module Aws::SWF
       :details,
       :initiated_event_id,
       :started_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -581,7 +598,8 @@ module Aws::SWF
       :workflow_execution,
       :workflow_type,
       :initiated_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -614,7 +632,8 @@ module Aws::SWF
       :workflow_type,
       :initiated_event_id,
       :started_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -651,7 +670,8 @@ module Aws::SWF
       :timeout_type,
       :initiated_event_id,
       :started_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -669,7 +689,8 @@ module Aws::SWF
     #   @return [String]
     class CloseStatusFilter < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -699,7 +720,8 @@ module Aws::SWF
     #   @return [String]
     class CompleteWorkflowExecutionDecisionAttributes < Struct.new(
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +742,8 @@ module Aws::SWF
     class CompleteWorkflowExecutionFailedEventAttributes < Struct.new(
       :cause,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -844,7 +867,8 @@ module Aws::SWF
       :tag_list,
       :workflow_type_version,
       :lambda_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -865,7 +889,8 @@ module Aws::SWF
     class ContinueAsNewWorkflowExecutionFailedEventAttributes < Struct.new(
       :cause,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -943,7 +968,8 @@ module Aws::SWF
       :type_filter,
       :tag_filter,
       :close_status_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +985,8 @@ module Aws::SWF
     class CountClosedWorkflowExecutionsOutput < Struct.new(
       :count,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1008,7 +1035,8 @@ module Aws::SWF
       :type_filter,
       :tag_filter,
       :execution_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1024,7 +1052,8 @@ module Aws::SWF
     class CountOpenWorkflowExecutionsOutput < Struct.new(
       :count,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1043,7 +1072,8 @@ module Aws::SWF
     class CountPendingActivityTasksInput < Struct.new(
       :domain,
       :task_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1087,8 @@ module Aws::SWF
     class CountPendingActivityTasksOutput < Struct.new(
       :count,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1076,7 +1107,8 @@ module Aws::SWF
     class CountPendingDecisionTasksInput < Struct.new(
       :domain,
       :task_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1122,8 @@ module Aws::SWF
     class CountPendingDecisionTasksOutput < Struct.new(
       :count,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1428,7 +1461,8 @@ module Aws::SWF
       :request_cancel_external_workflow_execution_decision_attributes,
       :start_child_workflow_execution_decision_attributes,
       :schedule_lambda_function_decision_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1458,7 +1492,8 @@ module Aws::SWF
       :started_event_id,
       :task_list,
       :task_list_schedule_to_start_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1491,7 +1526,8 @@ module Aws::SWF
       :task_priority,
       :start_to_close_timeout,
       :schedule_to_start_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1507,7 +1543,8 @@ module Aws::SWF
     class DecisionTaskStartedEventAttributes < Struct.new(
       :identity,
       :scheduled_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1534,7 +1571,8 @@ module Aws::SWF
       :timeout_type,
       :scheduled_event_id,
       :started_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1559,7 +1597,8 @@ module Aws::SWF
     #   @return [String]
     class DefaultUndefinedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1572,7 +1611,8 @@ module Aws::SWF
     class DeleteActivityTypeInput < Struct.new(
       :domain,
       :activity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1585,7 +1625,8 @@ module Aws::SWF
     class DeleteWorkflowTypeInput < Struct.new(
       :domain,
       :workflow_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1598,7 +1639,8 @@ module Aws::SWF
     class DeprecateActivityTypeInput < Struct.new(
       :domain,
       :activity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1607,7 +1649,8 @@ module Aws::SWF
     #   @return [String]
     class DeprecateDomainInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1620,7 +1663,8 @@ module Aws::SWF
     class DeprecateWorkflowTypeInput < Struct.new(
       :domain,
       :workflow_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1679,8 @@ module Aws::SWF
     class DescribeActivityTypeInput < Struct.new(
       :domain,
       :activity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1665,7 +1710,8 @@ module Aws::SWF
     class DescribeActivityTypeOutput < Struct.new(
       :type_info,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1674,7 +1720,8 @@ module Aws::SWF
     #   @return [String]
     class DescribeDomainInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1690,7 +1737,8 @@ module Aws::SWF
     class DescribeDomainOutput < Struct.new(
       :domain_info,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1703,7 +1751,8 @@ module Aws::SWF
     class DescribeWorkflowExecutionInput < Struct.new(
       :domain,
       :execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1730,7 +1779,8 @@ module Aws::SWF
       :open_counts,
       :latest_activity_task_timestamp,
       :latest_execution_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1743,7 +1793,8 @@ module Aws::SWF
     class DescribeWorkflowTypeInput < Struct.new(
       :domain,
       :workflow_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1770,7 +1821,8 @@ module Aws::SWF
     class DescribeWorkflowTypeOutput < Struct.new(
       :type_info,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1780,7 +1832,8 @@ module Aws::SWF
     #   @return [String]
     class DomainAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1790,7 +1843,8 @@ module Aws::SWF
     #   @return [String]
     class DomainConfiguration < Struct.new(
       :workflow_execution_retention_period_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1800,7 +1854,8 @@ module Aws::SWF
     #   @return [String]
     class DomainDeprecatedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1836,7 +1891,8 @@ module Aws::SWF
       :status,
       :description,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1853,7 +1909,8 @@ module Aws::SWF
     class ExecutionTimeFilter < Struct.new(
       :oldest_date,
       :latest_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1927,8 @@ module Aws::SWF
     class ExternalWorkflowExecutionCancelRequestedEventAttributes < Struct.new(
       :workflow_execution,
       :initiated_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1891,7 +1949,8 @@ module Aws::SWF
     class ExternalWorkflowExecutionSignaledEventAttributes < Struct.new(
       :workflow_execution,
       :initiated_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1932,7 +1991,8 @@ module Aws::SWF
     class FailWorkflowExecutionDecisionAttributes < Struct.new(
       :reason,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2013,8 @@ module Aws::SWF
     class FailWorkflowExecutionFailedEventAttributes < Struct.new(
       :cause,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1992,7 +2053,8 @@ module Aws::SWF
       :next_page_token,
       :maximum_page_size,
       :reverse_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2009,7 +2071,8 @@ module Aws::SWF
     class GetWorkflowExecutionHistoryOutput < Struct.new(
       :events,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2514,7 +2577,8 @@ module Aws::SWF
       :lambda_function_timed_out_event_attributes,
       :schedule_lambda_function_failed_event_attributes,
       :start_lambda_function_failed_event_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2540,7 +2604,8 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2571,7 +2636,8 @@ module Aws::SWF
       :started_event_id,
       :reason,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2610,7 +2676,8 @@ module Aws::SWF
       :input,
       :start_to_close_timeout,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2627,7 +2694,8 @@ module Aws::SWF
     #   @return [Integer]
     class LambdaFunctionStartedEventAttributes < Struct.new(
       :scheduled_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2652,7 +2720,8 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       :timeout_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2668,7 +2737,8 @@ module Aws::SWF
     #   @return [String]
     class LimitExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2706,7 +2776,8 @@ module Aws::SWF
       :next_page_token,
       :maximum_page_size,
       :reverse_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2723,7 +2794,8 @@ module Aws::SWF
     class ListActivityTypesOutput < Struct.new(
       :type_infos,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2819,7 +2891,8 @@ module Aws::SWF
       :next_page_token,
       :maximum_page_size,
       :reverse_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2836,7 +2909,8 @@ module Aws::SWF
     class ListClosedWorkflowExecutionsOutput < Struct.new(
       :execution_infos,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2866,7 +2940,8 @@ module Aws::SWF
       :registration_status,
       :maximum_page_size,
       :reverse_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2883,7 +2958,8 @@ module Aws::SWF
     class ListDomainsOutput < Struct.new(
       :domain_infos,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2946,7 +3022,8 @@ module Aws::SWF
       :maximum_page_size,
       :reverse_order,
       :execution_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2963,7 +3040,8 @@ module Aws::SWF
     class ListOpenWorkflowExecutionsOutput < Struct.new(
       :execution_infos,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2972,7 +3050,8 @@ module Aws::SWF
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2981,7 +3060,8 @@ module Aws::SWF
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3019,7 +3099,8 @@ module Aws::SWF
       :next_page_token,
       :maximum_page_size,
       :reverse_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3036,7 +3117,8 @@ module Aws::SWF
     class ListWorkflowTypesOutput < Struct.new(
       :type_infos,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3056,7 +3138,8 @@ module Aws::SWF
       :marker_name,
       :details,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3071,7 +3154,8 @@ module Aws::SWF
     #   @return [String]
     class OperationNotPermittedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3094,7 +3178,8 @@ module Aws::SWF
       :domain,
       :task_list,
       :identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3124,7 +3209,8 @@ module Aws::SWF
       :workflow_execution,
       :activity_type,
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3185,7 +3271,8 @@ module Aws::SWF
       :maximum_page_size,
       :reverse_order,
       :start_at_previous_started_event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3222,7 +3309,8 @@ module Aws::SWF
       :events,
       :next_page_token,
       :previous_started_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3247,7 +3335,8 @@ module Aws::SWF
     class RecordActivityTaskHeartbeatInput < Struct.new(
       :task_token,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3257,7 +3346,8 @@ module Aws::SWF
     #   @return [Boolean]
     class RecordActivityTaskHeartbeatOutput < Struct.new(
       :cancel_requested,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3298,7 +3388,8 @@ module Aws::SWF
     class RecordMarkerDecisionAttributes < Struct.new(
       :marker_name,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3323,7 +3414,8 @@ module Aws::SWF
       :marker_name,
       :cause,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3418,7 +3510,8 @@ module Aws::SWF
       :default_task_priority,
       :default_task_schedule_to_start_timeout,
       :default_task_schedule_to_close_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3453,7 +3546,8 @@ module Aws::SWF
       :description,
       :workflow_execution_retention_period_in_days,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3559,7 +3653,8 @@ module Aws::SWF
       :default_task_priority,
       :default_child_policy,
       :default_lambda_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3590,7 +3685,8 @@ module Aws::SWF
     #   @return [String]
     class RequestCancelActivityTaskDecisionAttributes < Struct.new(
       :activity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3615,7 +3711,8 @@ module Aws::SWF
       :activity_id,
       :cause,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3659,7 +3756,8 @@ module Aws::SWF
       :workflow_id,
       :run_id,
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3700,7 +3798,8 @@ module Aws::SWF
       :initiated_event_id,
       :decision_task_completed_event_id,
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3731,7 +3830,8 @@ module Aws::SWF
       :run_id,
       :decision_task_completed_event_id,
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3753,7 +3853,8 @@ module Aws::SWF
       :domain,
       :workflow_id,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3769,7 +3870,8 @@ module Aws::SWF
     class ResourceTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3788,7 +3890,8 @@ module Aws::SWF
     class RespondActivityTaskCanceledInput < Struct.new(
       :task_token,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3808,7 +3911,8 @@ module Aws::SWF
     class RespondActivityTaskCompletedInput < Struct.new(
       :task_token,
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3831,7 +3935,8 @@ module Aws::SWF
       :task_token,
       :reason,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3866,7 +3971,8 @@ module Aws::SWF
       :execution_context,
       :task_list,
       :task_list_schedule_to_start_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3988,7 +4094,8 @@ module Aws::SWF
       :schedule_to_start_timeout,
       :start_to_close_timeout,
       :heartbeat_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4017,7 +4124,8 @@ module Aws::SWF
       :activity_id,
       :cause,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4052,7 +4160,8 @@ module Aws::SWF
       :control,
       :input,
       :start_to_close_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4084,7 +4193,8 @@ module Aws::SWF
       :name,
       :cause,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4140,7 +4250,8 @@ module Aws::SWF
       :signal_name,
       :input,
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4180,7 +4291,8 @@ module Aws::SWF
       :initiated_event_id,
       :decision_task_completed_event_id,
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4218,7 +4330,8 @@ module Aws::SWF
       :input,
       :decision_task_completed_event_id,
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4249,7 +4362,8 @@ module Aws::SWF
       :run_id,
       :signal_name,
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4393,7 +4507,8 @@ module Aws::SWF
       :child_policy,
       :tag_list,
       :lambda_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4436,7 +4551,8 @@ module Aws::SWF
       :initiated_event_id,
       :decision_task_completed_event_id,
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4523,7 +4639,8 @@ module Aws::SWF
       :task_start_to_close_timeout,
       :tag_list,
       :lambda_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4554,7 +4671,8 @@ module Aws::SWF
       :scheduled_event_id,
       :cause,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4604,7 +4722,8 @@ module Aws::SWF
       :timer_id,
       :control,
       :start_to_fire_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4629,7 +4748,8 @@ module Aws::SWF
       :timer_id,
       :cause,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4770,7 +4890,8 @@ module Aws::SWF
       :task_start_to_close_timeout,
       :child_policy,
       :lambda_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4781,7 +4902,8 @@ module Aws::SWF
     #   @return [String]
     class StartWorkflowExecutionOutput < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4794,7 +4916,8 @@ module Aws::SWF
     #   @return [String]
     class TagFilter < Struct.new(
       :tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4808,7 +4931,8 @@ module Aws::SWF
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4818,7 +4942,8 @@ module Aws::SWF
     #   @return [String]
     class TaskList < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4873,7 +4998,8 @@ module Aws::SWF
       :reason,
       :details,
       :child_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4897,7 +5023,8 @@ module Aws::SWF
       :timer_id,
       :started_event_id,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4919,7 +5046,8 @@ module Aws::SWF
     class TimerFiredEventAttributes < Struct.new(
       :timer_id,
       :started_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4949,7 +5077,8 @@ module Aws::SWF
       :control,
       :start_to_fire_timeout,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4963,7 +5092,8 @@ module Aws::SWF
     #   @return [String]
     class TooManyTagsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4973,7 +5103,8 @@ module Aws::SWF
     #   @return [String]
     class TypeAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4983,7 +5114,8 @@ module Aws::SWF
     #   @return [String]
     class TypeDeprecatedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4992,7 +5124,8 @@ module Aws::SWF
     #   @return [String]
     class TypeNotDeprecatedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5005,7 +5138,8 @@ module Aws::SWF
     class UndeprecateActivityTypeInput < Struct.new(
       :domain,
       :activity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5014,7 +5148,8 @@ module Aws::SWF
     #   @return [String]
     class UndeprecateDomainInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5027,7 +5162,8 @@ module Aws::SWF
     class UndeprecateWorkflowTypeInput < Struct.new(
       :domain,
       :workflow_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5037,7 +5173,8 @@ module Aws::SWF
     #   @return [String]
     class UnknownResourceFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5050,7 +5187,8 @@ module Aws::SWF
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5064,7 +5202,8 @@ module Aws::SWF
     class WorkflowExecution < Struct.new(
       :workflow_id,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5075,7 +5214,8 @@ module Aws::SWF
     #   @return [String]
     class WorkflowExecutionAlreadyStartedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5096,7 +5236,8 @@ module Aws::SWF
       :external_workflow_execution,
       :external_initiated_event_id,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5117,7 +5258,8 @@ module Aws::SWF
     class WorkflowExecutionCanceledEventAttributes < Struct.new(
       :details,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5138,7 +5280,8 @@ module Aws::SWF
     class WorkflowExecutionCompletedEventAttributes < Struct.new(
       :result,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5195,7 +5338,8 @@ module Aws::SWF
       :task_priority,
       :child_policy,
       :lambda_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5269,7 +5413,8 @@ module Aws::SWF
       :tag_list,
       :workflow_type,
       :lambda_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5294,7 +5439,8 @@ module Aws::SWF
       :reason,
       :details,
       :decision_task_completed_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5309,7 +5455,8 @@ module Aws::SWF
     #   @return [String]
     class WorkflowExecutionFilter < Struct.new(
       :workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5380,7 +5527,8 @@ module Aws::SWF
       :parent,
       :tag_list,
       :cancel_requested,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5411,7 +5559,8 @@ module Aws::SWF
       :open_timers,
       :open_child_workflow_executions,
       :open_lambda_functions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5446,7 +5595,8 @@ module Aws::SWF
       :input,
       :external_workflow_execution,
       :external_initiated_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5531,7 +5681,8 @@ module Aws::SWF
       :parent_workflow_execution,
       :parent_initiated_event_id,
       :lambda_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5575,7 +5726,8 @@ module Aws::SWF
       :details,
       :child_policy,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5606,7 +5758,8 @@ module Aws::SWF
     class WorkflowExecutionTimedOutEventAttributes < Struct.new(
       :timeout_type,
       :child_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5628,7 +5781,8 @@ module Aws::SWF
     class WorkflowType < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5708,7 +5862,8 @@ module Aws::SWF
       :default_task_priority,
       :default_child_policy,
       :default_lambda_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5723,7 +5878,8 @@ module Aws::SWF
     class WorkflowTypeFilter < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5749,7 +5905,8 @@ module Aws::SWF
       :description,
       :creation_date,
       :deprecation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

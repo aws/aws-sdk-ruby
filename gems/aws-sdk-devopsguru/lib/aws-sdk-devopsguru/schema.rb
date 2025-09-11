@@ -1549,7 +1549,6 @@ module Aws::DevOpsGuru
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/service-integrations", "code" => 200}}
       end)
-
     end
 
     class << self

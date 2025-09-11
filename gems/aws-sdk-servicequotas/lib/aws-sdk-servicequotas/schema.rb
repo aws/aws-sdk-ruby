@@ -651,7 +651,6 @@ module Aws::ServiceQuotas
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {}
       end)
-
     end
 
     class << self

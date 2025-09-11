@@ -66,7 +66,7 @@ module Aws
               session_token: 'session',
               account_id: '123456789012'
             )
-            expect(client.config.credentials.identity).to be_nil
+            expect(client.config.credentials.provider).to eq(mock_instance_creds)
           end
 
           it 'tracks the correct feature id' do
@@ -108,7 +108,7 @@ module Aws
             expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
             ENV['AWS_SESSION_TOKEN'] = 'session'
             ENV['AWS_ACCOUNT_ID'] = '123456789012'
-            expect(client.config.credentials.identity).to be_nil
+            expect(client.config.credentials.provider).to eq(mock_instance_creds)
           end
 
           it 'tracks the correct feature id' do
@@ -163,7 +163,7 @@ module Aws
               aws_account_id = 123456789012
             CONFIG
             mock_shared_config(shared_config)
-            expect(client.config.credentials.identity).to be_nil
+            expect(client.config.credentials.provider).to eq(mock_instance_creds)
           end
 
           it 'fails to resolve static credentials when profile does not exist' do
@@ -177,7 +177,7 @@ module Aws
             CONFIG
             mock_shared_config(shared_config)
             client = client_class.new(profile: 'nonexistent')
-            expect(client.config.credentials.identity).to be_nil
+            expect(client.config.credentials.provider).to eq(mock_instance_creds)
           end
 
           it 'tracks the correct feature id' do
@@ -195,6 +195,137 @@ module Aws
               stub_responses: true
             )
             expect(metrics_from_user_agent_header(client.operation)).to include('n')
+          end
+        end
+
+        describe '#profile_sso_credentials' do
+          let(:mock_sso_creds) do
+            double(
+              'SSOCredentials',
+              identity: Credentials.new(
+                access_key_id: 'ACCESS_KEY_SSO',
+                secret_access_key: 'SECRET_AK_SSO',
+                session_token: 'TOKEN_SSO'
+              ),
+              features: %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
+            )
+          end
+
+          before(:each) do
+            allow(SSO::SSOCredentials).to receive(:new).and_return(mock_sso_creds)
+            allow(mock_sso_creds).to receive(:features=).with(%w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
+          end
+
+          it 'resolves sso credentials from profile' do
+            shared_config = <<~CONFIG
+              [profile default]
+              sso_session = SSO_SESSION
+              sso_account_id = 012345678901
+              sso_role_name = SSO_ROLE_NAME
+
+              [sso-session SSO_SESSION]
+              sso_region = us-east-1
+              sso_start_url = SSO_START_URL
+            CONFIG
+            mock_shared_config(shared_config)
+            client = client_class.new
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('ACCESS_KEY_SSO')
+            expect(creds.secret_access_key).to eq('SECRET_AK_SSO')
+            expect(creds.session_token).to eq('TOKEN_SSO')
+          end
+
+          it 'resolves sso credentials when sso_region and sso_start_url are set on both profile and session' do
+            shared_config = <<~CONFIG
+              [profile default]
+              sso_session = SSO_SESSION
+              sso_account_id = 012345678901
+              sso_role_name = SSO_ROLE_NAME
+              sso_region = us-east-1
+              sso_start_url = SSO_START_URL
+
+              [sso-session SSO_SESSION]
+              sso_region = us-east-1
+              sso_start_url = SSO_START_URL
+            CONFIG
+            mock_shared_config(shared_config)
+            client = client_class.new
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('ACCESS_KEY_SSO')
+            expect(creds.secret_access_key).to eq('SECRET_AK_SSO')
+            expect(creds.session_token).to eq('TOKEN_SSO')
+          end
+
+          it 'fails to resolve sso credentials when profile does not exist' do
+            expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+            client = client_class.new(profile: 'nonexistent')
+            expect(client.config.credentials.provider).to eq(mock_instance_creds)
+          end
+
+          it 'fails to resolve sso credentials when profile is missing required fields' do
+            expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+            shared_config = <<~CONFIG
+              [profile default]
+              sso_session = SSO_SESSION
+
+              [sso-session SSO_SESSION]
+              sso_region = us-east-1
+              sso_start_url = SSO_START_URL
+            CONFIG
+            mock_shared_config(shared_config)
+            expect(client.config.credentials.provider).to eq(mock_instance_creds)
+          end
+
+          it 'raises if sso_region conflicts when set on both profile and session' do
+            shared_config = <<~CONFIG
+              [profile default]
+              sso_session = SSO_SESSION
+              sso_account_id = 012345678901
+              sso_role_name = SSO_ROLE_NAME
+              sso_region = us-west-2
+
+              [sso-session SSO_SESSION]
+              sso_region = us-east-1
+              sso_start_url = SSO_START_URL
+            CONFIG
+            mock_shared_config(shared_config)
+            expect do
+              client.config.credentials.identity
+            end.to raise_error(/Please remove the SSO region from the profile/)
+          end
+
+          it 'raises if sso_start_url conflicts when set on both profile and session' do
+            shared_config = <<~CONFIG
+              [profile default]
+              sso_session = SSO_SESSION
+              sso_account_id = 012345678901
+              sso_role_name = SSO_ROLE_NAME
+              sso_start_url = SSO_START_URL_PROFILE
+
+              [sso-session SSO_SESSION]
+              sso_region = us-east-1
+              sso_start_url = SSO_START_URL
+            CONFIG
+            mock_shared_config(shared_config)
+            expect do
+              client.config.credentials.identity
+            end.to raise_error(/Please remove the SSO start URL from the profile/)
+          end
+
+          it 'tracks the correct feature id' do
+            shared_config = <<~CONFIG
+              [profile default]
+              sso_session = SSO_SESSION
+              sso_account_id = 012345678901
+              sso_role_name = SSO_ROLE_NAME
+
+              [sso-session SSO_SESSION]
+              sso_region = us-east-1
+              sso_start_url = SSO_START_URL
+            CONFIG
+            mock_shared_config(shared_config)
+            client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
+            expect(metrics_from_user_agent_header(client.operation)).to include('r', 's')
           end
         end
 
@@ -217,7 +348,7 @@ module Aws
               [profile default]
             CONFIG
             mock_shared_config(shared_config)
-            expect(client.config.credentials.identity).to be_nil
+            expect(client.config.credentials.provider).to eq(mock_instance_creds)
           end
 
           it 'fails to resolve process credentials when profile does not exist' do
@@ -228,7 +359,7 @@ module Aws
             CONFIG
             mock_shared_config(shared_config)
             client = client_class.new(profile: 'nonexistent')
-            expect(client.config.credentials.identity).to be_nil
+            expect(client.config.credentials.provider).to eq(mock_instance_creds)
           end
 
           it 'tracks the correct feature id' do
@@ -290,7 +421,7 @@ module Aws
           it 'fails to resolve container credentials when neither relative nor full uri is set' do
             expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
             stub_const('ENV', {})
-            expect(client.config.credentials.identity).to be_nil
+            expect(client.config.credentials.provider).to eq(mock_instance_creds)
           end
 
           it 'tracks the correct feature id' do
@@ -350,7 +481,7 @@ module Aws
 
           it 'fails to resolve instance profile credentials when AWS_EC2_METADATA_DISABLED is true' do
             ENV['AWS_EC2_METADATA_DISABLED'] = 'true'
-            expect(client.config.credentials.identity).to be_nil
+            expect(client.config.credentials.provider).to be_nil
           end
 
           it 'tracks the correct feature id' do
@@ -428,6 +559,14 @@ module Aws
               stub_const('ENV', values)
             when 'configFiles'
               mock_shared_config(values['aws']) if values['aws']
+            when 'ssoResponse'
+              sso_provider = double(
+                'SSOCredentials',
+                identity: credentials(values)
+              )
+              allow(Aws::SSO::SSOCredentials)
+                .to receive(:new).and_return(sso_provider)
+              allow(sso_provider).to receive(:features=)
             when 'processResponse'
               process_provider = double(
                 'ProcessCredentials',
@@ -452,7 +591,7 @@ module Aws
               )
               allow(InstanceProfileCredentials)
                 .to receive(:new).and_return(instance_provider)
-            when 'stsResponse', 'ssoResponse'
+            when 'stsResponse'
               # Not implemented yet
               next
             else
@@ -470,8 +609,7 @@ module Aws
             '4' => 'ENV WebID: Not implemented',
             '6' => 'Source Profile: Not implemented',
             '7' => 'Credential Source: Not implemented',
-            '8' => 'WebID: Not implemented',
-            '9' => 'SSO: Not implemented'
+            '8' => 'WebID: Not implemented'
           }
 
           it "passes: #{test_case['documentation']}" do

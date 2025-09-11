@@ -16,7 +16,8 @@ module Aws::OpsWorks
     class AgentVersion < Struct.new(
       :version,
       :configuration_manager,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +89,8 @@ module Aws::OpsWorks
       :attributes,
       :created_at,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,7 +103,8 @@ module Aws::OpsWorks
     class AssignInstanceRequest < Struct.new(
       :instance_id,
       :layer_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +117,8 @@ module Aws::OpsWorks
     class AssignVolumeRequest < Struct.new(
       :volume_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +131,8 @@ module Aws::OpsWorks
     class AssociateElasticIpRequest < Struct.new(
       :elastic_ip,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +145,8 @@ module Aws::OpsWorks
     class AttachElasticLoadBalancerRequest < Struct.new(
       :elastic_load_balancer_name,
       :layer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -188,7 +194,8 @@ module Aws::OpsWorks
       :memory_threshold,
       :load_threshold,
       :alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +220,8 @@ module Aws::OpsWorks
       :no_device,
       :virtual_name,
       :ebs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +235,8 @@ module Aws::OpsWorks
     class ChefConfiguration < Struct.new(
       :manage_berkshelf,
       :berkshelf_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +533,8 @@ module Aws::OpsWorks
       :clone_app_ids,
       :default_root_device_type,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +544,8 @@ module Aws::OpsWorks
     #   @return [String]
     class CloneStackResult < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +559,8 @@ module Aws::OpsWorks
     class CloudWatchLogsConfiguration < Struct.new(
       :enabled,
       :log_streams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -619,7 +631,8 @@ module Aws::OpsWorks
       :buffer_duration,
       :batch_count,
       :batch_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +754,8 @@ module Aws::OpsWorks
       :exit_code,
       :log_url,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +819,8 @@ module Aws::OpsWorks
       :ssl_configuration,
       :attributes,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +830,8 @@ module Aws::OpsWorks
     #   @return [String]
     class CreateAppResult < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +873,8 @@ module Aws::OpsWorks
       :command,
       :comment,
       :custom_json,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -867,7 +884,8 @@ module Aws::OpsWorks
     #   @return [String]
     class CreateDeploymentResult < Struct.new(
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1056,8 @@ module Aws::OpsWorks
       :ebs_optimized,
       :agent_version,
       :tenancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1067,8 @@ module Aws::OpsWorks
     #   @return [String]
     class CreateInstanceResult < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1173,8 @@ module Aws::OpsWorks
       :install_updates_on_boot,
       :use_ebs_optimized_instances,
       :lifecycle_event_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1184,8 @@ module Aws::OpsWorks
     #   @return [String]
     class CreateLayerResult < Struct.new(
       :layer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1482,8 @@ module Aws::OpsWorks
       :default_ssh_key_name,
       :default_root_device_type,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1471,7 +1494,8 @@ module Aws::OpsWorks
     #   @return [String]
     class CreateStackResult < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1497,7 +1521,8 @@ module Aws::OpsWorks
       :ssh_username,
       :ssh_public_key,
       :allow_self_management,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1507,7 +1532,8 @@ module Aws::OpsWorks
     #   @return [String]
     class CreateUserProfileResult < Struct.new(
       :iam_user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1552,8 @@ module Aws::OpsWorks
       :type,
       :arn,
       :database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,7 +1562,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DeleteAppRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1552,7 +1580,8 @@ module Aws::OpsWorks
       :instance_id,
       :delete_elastic_ip,
       :delete_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1561,7 +1590,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DeleteLayerRequest < Struct.new(
       :layer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1570,7 +1600,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DeleteStackRequest < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1579,7 +1610,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DeleteUserProfileRequest < Struct.new(
       :iam_user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1682,8 @@ module Aws::OpsWorks
       :status,
       :custom_json,
       :instance_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1744,7 +1777,8 @@ module Aws::OpsWorks
     class DeploymentCommand < Struct.new(
       :name,
       :args,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1753,7 +1787,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DeregisterEcsClusterRequest < Struct.new(
       :ecs_cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1762,7 +1797,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DeregisterElasticIpRequest < Struct.new(
       :elastic_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1771,7 +1807,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DeregisterInstanceRequest < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1780,7 +1817,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DeregisterRdsDbInstanceRequest < Struct.new(
       :rds_db_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1790,7 +1828,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DeregisterVolumeRequest < Struct.new(
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1803,7 +1842,8 @@ module Aws::OpsWorks
     class DescribeAgentVersionsRequest < Struct.new(
       :stack_id,
       :configuration_manager,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1854,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::AgentVersion>]
     class DescribeAgentVersionsResult < Struct.new(
       :agent_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1830,7 +1871,8 @@ module Aws::OpsWorks
     class DescribeAppsRequest < Struct.new(
       :stack_id,
       :app_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,7 +1882,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::App>]
     class DescribeAppsResult < Struct.new(
       :apps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1861,7 +1904,8 @@ module Aws::OpsWorks
       :deployment_id,
       :instance_id,
       :command_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1871,7 +1915,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::Command>]
     class DescribeCommandsResult < Struct.new(
       :commands,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1892,7 +1937,8 @@ module Aws::OpsWorks
       :stack_id,
       :app_id,
       :deployment_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1902,7 +1948,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::Deployment>]
     class DescribeDeploymentsResult < Struct.new(
       :deployments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1932,7 +1979,8 @@ module Aws::OpsWorks
       :stack_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +1997,8 @@ module Aws::OpsWorks
     class DescribeEcsClustersResult < Struct.new(
       :ecs_clusters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1970,7 +2019,8 @@ module Aws::OpsWorks
       :instance_id,
       :stack_id,
       :ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1980,7 +2030,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::ElasticIp>]
     class DescribeElasticIpsResult < Struct.new(
       :elastic_ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1993,7 +2044,8 @@ module Aws::OpsWorks
     class DescribeElasticLoadBalancersRequest < Struct.new(
       :stack_id,
       :layer_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2004,7 +2056,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::ElasticLoadBalancer>]
     class DescribeElasticLoadBalancersResult < Struct.new(
       :elastic_load_balancers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2025,7 +2078,8 @@ module Aws::OpsWorks
       :stack_id,
       :layer_id,
       :instance_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2035,7 +2089,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::Instance>]
     class DescribeInstancesResult < Struct.new(
       :instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2049,7 +2104,8 @@ module Aws::OpsWorks
     class DescribeLayersRequest < Struct.new(
       :stack_id,
       :layer_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2115,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::Layer>]
     class DescribeLayersResult < Struct.new(
       :layers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2068,7 +2125,8 @@ module Aws::OpsWorks
     #   @return [Array<String>]
     class DescribeLoadBasedAutoScalingRequest < Struct.new(
       :layer_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2079,7 +2137,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::LoadBasedAutoScalingConfiguration>]
     class DescribeLoadBasedAutoScalingResult < Struct.new(
       :load_based_auto_scaling_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2089,7 +2148,8 @@ module Aws::OpsWorks
     #   @return [Types::SelfUserProfile]
     class DescribeMyUserProfileResult < Struct.new(
       :user_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2159,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::OperatingSystem>]
     class DescribeOperatingSystemsResponse < Struct.new(
       :operating_systems,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2114,7 +2175,8 @@ module Aws::OpsWorks
     class DescribePermissionsRequest < Struct.new(
       :iam_user_arn,
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2138,7 +2200,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::Permission>]
     class DescribePermissionsResult < Struct.new(
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2158,7 +2221,8 @@ module Aws::OpsWorks
       :instance_id,
       :stack_id,
       :raid_array_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2168,7 +2232,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::RaidArray>]
     class DescribeRaidArraysResult < Struct.new(
       :raid_arrays,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2182,7 +2247,8 @@ module Aws::OpsWorks
     class DescribeRdsDbInstancesRequest < Struct.new(
       :stack_id,
       :rds_db_instance_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2192,7 +2258,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::RdsDbInstance>]
     class DescribeRdsDbInstancesResult < Struct.new(
       :rds_db_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2213,7 +2280,8 @@ module Aws::OpsWorks
       :stack_id,
       :instance_id,
       :service_error_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2223,7 +2291,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::ServiceError>]
     class DescribeServiceErrorsResult < Struct.new(
       :service_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2232,7 +2301,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DescribeStackProvisioningParametersRequest < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2316,8 @@ module Aws::OpsWorks
     class DescribeStackProvisioningParametersResult < Struct.new(
       :agent_installer_url,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2255,7 +2326,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DescribeStackSummaryRequest < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2265,7 +2337,8 @@ module Aws::OpsWorks
     #   @return [Types::StackSummary]
     class DescribeStackSummaryResult < Struct.new(
       :stack_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2277,7 +2350,8 @@ module Aws::OpsWorks
     #   @return [Array<String>]
     class DescribeStacksRequest < Struct.new(
       :stack_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2287,7 +2361,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::Stack>]
     class DescribeStacksResult < Struct.new(
       :stacks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2296,7 +2371,8 @@ module Aws::OpsWorks
     #   @return [Array<String>]
     class DescribeTimeBasedAutoScalingRequest < Struct.new(
       :instance_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2307,7 +2383,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::TimeBasedAutoScalingConfiguration>]
     class DescribeTimeBasedAutoScalingResult < Struct.new(
       :time_based_auto_scaling_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2316,7 +2393,8 @@ module Aws::OpsWorks
     #   @return [Array<String>]
     class DescribeUserProfilesRequest < Struct.new(
       :iam_user_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2326,7 +2404,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::UserProfile>]
     class DescribeUserProfilesResult < Struct.new(
       :user_profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2351,7 +2430,8 @@ module Aws::OpsWorks
       :stack_id,
       :raid_array_id,
       :volume_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2361,7 +2441,8 @@ module Aws::OpsWorks
     #   @return [Array<Types::Volume>]
     class DescribeVolumesResult < Struct.new(
       :volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2374,7 +2455,8 @@ module Aws::OpsWorks
     class DetachElasticLoadBalancerRequest < Struct.new(
       :elastic_load_balancer_name,
       :layer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2383,7 +2465,8 @@ module Aws::OpsWorks
     #   @return [String]
     class DisassociateElasticIpRequest < Struct.new(
       :elastic_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2498,8 @@ module Aws::OpsWorks
       :volume_size,
       :volume_type,
       :delete_on_termination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2437,7 +2521,8 @@ module Aws::OpsWorks
       :ecs_cluster_name,
       :stack_id,
       :registered_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,7 +2548,8 @@ module Aws::OpsWorks
       :domain,
       :region,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2505,7 +2591,8 @@ module Aws::OpsWorks
       :availability_zones,
       :subnet_ids,
       :ec2_instance_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2528,7 +2615,8 @@ module Aws::OpsWorks
       :key,
       :value,
       :secure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2537,7 +2625,8 @@ module Aws::OpsWorks
     #   @return [String]
     class GetHostnameSuggestionRequest < Struct.new(
       :layer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2551,7 +2640,8 @@ module Aws::OpsWorks
     class GetHostnameSuggestionResult < Struct.new(
       :layer_id,
       :hostname,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2566,7 +2656,8 @@ module Aws::OpsWorks
     class GrantAccessRequest < Struct.new(
       :instance_id,
       :valid_for_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2577,7 +2668,8 @@ module Aws::OpsWorks
     #   @return [Types::TemporaryCredential]
     class GrantAccessResult < Struct.new(
       :temporary_credential,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2850,7 +2942,8 @@ module Aws::OpsWorks
       :subnet_id,
       :tenancy,
       :virtualization_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2865,7 +2958,8 @@ module Aws::OpsWorks
     class InstanceIdentity < Struct.new(
       :document,
       :signature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2951,7 +3045,8 @@ module Aws::OpsWorks
       :terminated,
       :terminating,
       :unassigning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3076,7 +3171,8 @@ module Aws::OpsWorks
       :install_updates_on_boot,
       :use_ebs_optimized_instances,
       :lifecycle_event_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3087,7 +3183,8 @@ module Aws::OpsWorks
     #   @return [Types::ShutdownEventConfiguration]
     class LifecycleEventConfiguration < Struct.new(
       :shutdown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3108,7 +3205,8 @@ module Aws::OpsWorks
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3126,7 +3224,8 @@ module Aws::OpsWorks
     class ListTagsResult < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3150,7 +3249,8 @@ module Aws::OpsWorks
       :enable,
       :up_scaling,
       :down_scaling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3184,7 +3284,8 @@ module Aws::OpsWorks
       :reported_name,
       :reported_version,
       :supported,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3199,7 +3300,8 @@ module Aws::OpsWorks
     class OperatingSystemConfigurationManager < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3256,7 +3358,8 @@ module Aws::OpsWorks
       :allow_ssh,
       :allow_sudo,
       :level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3314,7 +3417,8 @@ module Aws::OpsWorks
       :stack_id,
       :volume_type,
       :iops,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3359,7 +3463,8 @@ module Aws::OpsWorks
       :engine,
       :stack_id,
       :missing_on_rds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3368,7 +3473,8 @@ module Aws::OpsWorks
     #   @return [String]
     class RebootInstanceRequest < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3403,7 +3509,8 @@ module Aws::OpsWorks
       :deploy,
       :undeploy,
       :shutdown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3416,7 +3523,8 @@ module Aws::OpsWorks
     class RegisterEcsClusterRequest < Struct.new(
       :ecs_cluster_arn,
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3426,7 +3534,8 @@ module Aws::OpsWorks
     #   @return [String]
     class RegisterEcsClusterResult < Struct.new(
       :ecs_cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3439,7 +3548,8 @@ module Aws::OpsWorks
     class RegisterElasticIpRequest < Struct.new(
       :elastic_ip,
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3449,7 +3559,8 @@ module Aws::OpsWorks
     #   @return [String]
     class RegisterElasticIpResult < Struct.new(
       :elastic_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3490,7 +3601,8 @@ module Aws::OpsWorks
       :rsa_public_key,
       :rsa_public_key_fingerprint,
       :instance_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3500,7 +3612,8 @@ module Aws::OpsWorks
     #   @return [String]
     class RegisterInstanceResult < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3521,7 +3634,8 @@ module Aws::OpsWorks
       :rds_db_instance_arn,
       :db_user,
       :db_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3534,7 +3648,8 @@ module Aws::OpsWorks
     class RegisterVolumeRequest < Struct.new(
       :ec2_volume_id,
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3544,7 +3659,8 @@ module Aws::OpsWorks
     #   @return [String]
     class RegisterVolumeResult < Struct.new(
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3562,7 +3678,8 @@ module Aws::OpsWorks
       :family,
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3572,7 +3689,8 @@ module Aws::OpsWorks
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3594,7 +3712,8 @@ module Aws::OpsWorks
       :name,
       :ssh_username,
       :ssh_public_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3624,7 +3743,8 @@ module Aws::OpsWorks
       :type,
       :message,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3649,7 +3769,8 @@ module Aws::OpsWorks
       :enable,
       :up_scaling,
       :down_scaling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3702,7 +3823,8 @@ module Aws::OpsWorks
       :allow_ssh,
       :allow_sudo,
       :level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3715,7 +3837,8 @@ module Aws::OpsWorks
     class SetTimeBasedAutoScalingRequest < Struct.new(
       :instance_id,
       :auto_scaling_schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3731,7 +3854,8 @@ module Aws::OpsWorks
     class ShutdownEventConfiguration < Struct.new(
       :execution_timeout,
       :delay_until_elb_connections_drained,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3789,7 +3913,8 @@ module Aws::OpsWorks
       :password,
       :ssh_key,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3807,7 +3932,8 @@ module Aws::OpsWorks
       :certificate,
       :private_key,
       :chain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3918,7 +4044,8 @@ module Aws::OpsWorks
       :created_at,
       :default_root_device_type,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3933,7 +4060,8 @@ module Aws::OpsWorks
     class StackConfigurationManager < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3963,7 +4091,8 @@ module Aws::OpsWorks
       :layers_count,
       :apps_count,
       :instances_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3972,7 +4101,8 @@ module Aws::OpsWorks
     #   @return [String]
     class StartInstanceRequest < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3981,7 +4111,8 @@ module Aws::OpsWorks
     #   @return [String]
     class StartStackRequest < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3998,7 +4129,8 @@ module Aws::OpsWorks
     class StopInstanceRequest < Struct.new(
       :instance_id,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4007,7 +4139,8 @@ module Aws::OpsWorks
     #   @return [String]
     class StopStackRequest < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4041,7 +4174,8 @@ module Aws::OpsWorks
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4065,7 +4199,8 @@ module Aws::OpsWorks
       :password,
       :valid_for_in_minutes,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4079,7 +4214,8 @@ module Aws::OpsWorks
     class TimeBasedAutoScalingConfiguration < Struct.new(
       :instance_id,
       :auto_scaling_schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4088,7 +4224,8 @@ module Aws::OpsWorks
     #   @return [String]
     class UnassignInstanceRequest < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4097,7 +4234,8 @@ module Aws::OpsWorks
     #   @return [String]
     class UnassignVolumeRequest < Struct.new(
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4110,7 +4248,8 @@ module Aws::OpsWorks
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4169,7 +4308,8 @@ module Aws::OpsWorks
       :ssl_configuration,
       :attributes,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4182,7 +4322,8 @@ module Aws::OpsWorks
     class UpdateElasticIpRequest < Struct.new(
       :elastic_ip,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4313,7 +4454,8 @@ module Aws::OpsWorks
       :install_updates_on_boot,
       :ebs_optimized,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4411,7 +4553,8 @@ module Aws::OpsWorks
       :install_updates_on_boot,
       :use_ebs_optimized_instances,
       :lifecycle_event_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4420,7 +4563,8 @@ module Aws::OpsWorks
     #   @return [String]
     class UpdateMyUserProfileRequest < Struct.new(
       :ssh_public_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4437,7 +4581,8 @@ module Aws::OpsWorks
       :rds_db_instance_arn,
       :db_user,
       :db_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4677,7 +4822,8 @@ module Aws::OpsWorks
       :default_root_device_type,
       :use_opsworks_security_groups,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4703,7 +4849,8 @@ module Aws::OpsWorks
       :ssh_username,
       :ssh_public_key,
       :allow_self_management,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4720,7 +4867,8 @@ module Aws::OpsWorks
       :volume_id,
       :name,
       :mount_point,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4748,7 +4896,8 @@ module Aws::OpsWorks
       :ssh_username,
       :ssh_public_key,
       :allow_self_management,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4758,7 +4907,8 @@ module Aws::OpsWorks
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4847,7 +4997,8 @@ module Aws::OpsWorks
       :volume_type,
       :iops,
       :encrypted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4907,7 +5058,8 @@ module Aws::OpsWorks
       :volume_type,
       :iops,
       :encrypted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4956,7 +5108,8 @@ module Aws::OpsWorks
       :friday,
       :saturday,
       :sunday,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

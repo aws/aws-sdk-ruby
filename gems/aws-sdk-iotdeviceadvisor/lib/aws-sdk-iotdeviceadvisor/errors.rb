@@ -37,7 +37,7 @@ module Aws::IotDeviceAdvisor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IotDeviceAdvisor::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Sends a Conflict Exception message.</p>
@@ -51,7 +51,7 @@ module Aws::IotDeviceAdvisor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IotDeviceAdvisor::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Sends an Internal Failure Exception message.</p>
@@ -65,7 +65,7 @@ module Aws::IotDeviceAdvisor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IotDeviceAdvisor::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Sends a Resource Not Found Exception message.</p>
@@ -79,7 +79,7 @@ module Aws::IotDeviceAdvisor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IotDeviceAdvisor::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Sends a Validation Exception message.</p>

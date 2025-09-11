@@ -47,7 +47,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be <code>access_denied</code>.</p>
@@ -68,7 +68,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::AuthorizationPendingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be
@@ -89,7 +89,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::ExpiredTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be <code>expired_token</code>.</p>
@@ -110,7 +110,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be <code>server_error</code>.</p>
@@ -132,7 +132,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::InvalidClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be
@@ -154,7 +154,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::InvalidClientMetadataException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be
@@ -176,7 +176,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::InvalidGrantException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be <code>invalid_grant</code>.</p>
@@ -197,7 +197,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::InvalidRedirectUriException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be
@@ -219,7 +219,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be
@@ -241,7 +241,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::InvalidRequestRegionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be
@@ -272,7 +272,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::InvalidScopeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be <code>invalid_scope</code>.</p>
@@ -293,7 +293,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::SlowDownException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be <code>slow_down</code>.</p>
@@ -314,7 +314,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::UnauthorizedClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be
@@ -335,7 +335,7 @@ module Aws::SSOOIDC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSOOIDC::Types::UnsupportedGrantTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Single error code. For this exception the value will be

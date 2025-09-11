@@ -925,7 +925,6 @@ module Aws::MigrationHubStrategy
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/update-server-config/"}}
       end)
-
     end
 
     class << self

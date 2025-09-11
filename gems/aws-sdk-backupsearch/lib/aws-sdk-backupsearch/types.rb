@@ -12,7 +12,8 @@ module Aws::BackupSearch
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26,7 +27,8 @@ module Aws::BackupSearch
     class BackupCreationTimeFilter < Struct.new(
       :created_after,
       :created_before,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +46,8 @@ module Aws::BackupSearch
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +65,8 @@ module Aws::BackupSearch
       :recovery_points_scanned_count,
       :items_scanned_count,
       :items_matched_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +88,8 @@ module Aws::BackupSearch
       :sizes,
       :creation_times,
       :last_modification_times,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +127,8 @@ module Aws::BackupSearch
       :file_size,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +162,8 @@ module Aws::BackupSearch
       :completion_time,
       :status_message,
       :search_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -167,7 +174,8 @@ module Aws::BackupSearch
     class ExportSpecification < Struct.new(
       :s3_export_specification,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3ExportSpecification < ExportSpecification; end
@@ -179,7 +187,8 @@ module Aws::BackupSearch
     #   @return [String]
     class GetSearchJobInput < Struct.new(
       :search_job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +241,8 @@ module Aws::BackupSearch
       :creation_time,
       :search_job_identifier,
       :search_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +251,8 @@ module Aws::BackupSearch
     #   @return [String]
     class GetSearchResultExportJobInput < Struct.new(
       :export_job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +289,8 @@ module Aws::BackupSearch
       :status_message,
       :export_specification,
       :search_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +304,8 @@ module Aws::BackupSearch
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +319,8 @@ module Aws::BackupSearch
     class ItemFilters < Struct.new(
       :s3_item_filters,
       :ebs_item_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +337,8 @@ module Aws::BackupSearch
       :search_job_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -336,7 +351,8 @@ module Aws::BackupSearch
     class ListSearchJobBackupsOutput < Struct.new(
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +369,8 @@ module Aws::BackupSearch
       :search_job_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +383,8 @@ module Aws::BackupSearch
     class ListSearchJobResultsOutput < Struct.new(
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -383,7 +401,8 @@ module Aws::BackupSearch
       :by_status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +415,8 @@ module Aws::BackupSearch
     class ListSearchJobsOutput < Struct.new(
       :search_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +437,8 @@ module Aws::BackupSearch
       :search_job_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -430,7 +451,8 @@ module Aws::BackupSearch
     class ListSearchResultExportJobsOutput < Struct.new(
       :export_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +461,8 @@ module Aws::BackupSearch
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +471,8 @@ module Aws::BackupSearch
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +486,8 @@ module Aws::BackupSearch
     class LongCondition < Struct.new(
       :value,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -485,7 +510,8 @@ module Aws::BackupSearch
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +526,8 @@ module Aws::BackupSearch
       :s3_result_item,
       :ebs_result_item,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3ResultItem < ResultItem; end
@@ -518,7 +545,8 @@ module Aws::BackupSearch
     class S3ExportSpecification < Struct.new(
       :destination_bucket,
       :destination_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +572,8 @@ module Aws::BackupSearch
       :creation_times,
       :version_ids,
       :e_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -582,7 +611,8 @@ module Aws::BackupSearch
       :creation_time,
       :e_tag,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +646,8 @@ module Aws::BackupSearch
       :source_resource_arn,
       :index_creation_time,
       :backup_creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +685,8 @@ module Aws::BackupSearch
       :completion_time,
       :search_scope_summary,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +712,8 @@ module Aws::BackupSearch
       :source_resource_arns,
       :backup_resource_arns,
       :backup_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +727,8 @@ module Aws::BackupSearch
     class SearchScopeSummary < Struct.new(
       :total_recovery_points_to_scan_count,
       :total_items_to_scan_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +754,8 @@ module Aws::BackupSearch
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +784,8 @@ module Aws::BackupSearch
       :client_token,
       :search_scope,
       :item_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +802,8 @@ module Aws::BackupSearch
       :search_job_arn,
       :creation_time,
       :search_job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +828,8 @@ module Aws::BackupSearch
       :client_token,
       :tags,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +842,8 @@ module Aws::BackupSearch
     class StartSearchResultExportJobOutput < Struct.new(
       :export_job_arn,
       :export_job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,12 +852,14 @@ module Aws::BackupSearch
     #   @return [String]
     class StopSearchJobInput < Struct.new(
       :search_job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopSearchJobOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +873,8 @@ module Aws::BackupSearch
     class StringCondition < Struct.new(
       :value,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -850,12 +892,14 @@ module Aws::BackupSearch
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,7 +921,8 @@ module Aws::BackupSearch
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -891,7 +936,8 @@ module Aws::BackupSearch
     class TimeCondition < Struct.new(
       :value,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -909,12 +955,14 @@ module Aws::BackupSearch
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +972,8 @@ module Aws::BackupSearch
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

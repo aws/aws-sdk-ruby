@@ -44,7 +44,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -117,7 +117,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -143,7 +143,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -177,7 +177,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::InternetMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InternetMonitor::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

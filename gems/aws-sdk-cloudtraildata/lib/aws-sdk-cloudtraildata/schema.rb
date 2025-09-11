@@ -78,7 +78,6 @@ module Aws::CloudTrailData
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/PutAuditEvents", "method" => "POST"}}
       end)
-
     end
 
     class << self

@@ -78,7 +78,6 @@ module Aws::MarketplaceEntitlementService
         operation.traits = {}
         operation[:paginator] = Paginators::GetEntitlements.new
       end)
-
     end
 
     class << self

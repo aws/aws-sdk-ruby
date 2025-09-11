@@ -45,7 +45,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -88,7 +88,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::KmsDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::KmsInvalidKeyUsageException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::KmsInvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -127,7 +127,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::KmsNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -166,7 +166,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -183,7 +183,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -204,7 +204,7 @@ module Aws::S3Vectors
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Vectors::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

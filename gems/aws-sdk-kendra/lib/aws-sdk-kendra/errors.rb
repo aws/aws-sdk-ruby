@@ -46,7 +46,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::FeaturedResultsConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An explanation for the conflicting queries.</p>
@@ -97,7 +97,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -111,7 +111,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::ResourceAlreadyExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::ResourceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -183,7 +183,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -197,7 +197,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -211,7 +211,7 @@ module Aws::Kendra
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kendra::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

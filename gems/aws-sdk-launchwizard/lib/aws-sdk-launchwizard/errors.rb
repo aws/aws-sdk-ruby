@@ -38,7 +38,7 @@ module Aws::LaunchWizard
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LaunchWizard::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::LaunchWizard
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LaunchWizard::Types::ResourceLimitException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::LaunchWizard
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LaunchWizard::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::LaunchWizard
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LaunchWizard::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

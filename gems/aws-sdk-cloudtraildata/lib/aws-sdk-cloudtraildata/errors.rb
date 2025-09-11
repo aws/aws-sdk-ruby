@@ -39,7 +39,7 @@ module Aws::CloudTrailData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrailData::Types::ChannelInsufficientPermission] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::CloudTrailData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrailData::Types::ChannelNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::CloudTrailData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrailData::Types::ChannelUnsupportedSchema] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::CloudTrailData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrailData::Types::DuplicatedAuditEventId] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::CloudTrailData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrailData::Types::InvalidChannelARN] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::CloudTrailData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrailData::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

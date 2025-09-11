@@ -2213,7 +2213,6 @@ module Aws::PartnerCentralSelling
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to update Opportunities on AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/UpdateOpportunity", "code" => 200}}
       end)
-
     end
 
     class << self

@@ -3566,7 +3566,6 @@ module Aws::APIGateway
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/vpclinks/{vpcLinkId}", "code" => 200}}
       end)
-
     end
 
     class << self

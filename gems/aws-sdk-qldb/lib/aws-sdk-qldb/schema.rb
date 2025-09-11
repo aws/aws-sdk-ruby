@@ -518,7 +518,6 @@ module Aws::QLDB
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/ledgers/{Name}/permissions-mode", "code" => 200}}
       end)
-
     end
 
     class << self

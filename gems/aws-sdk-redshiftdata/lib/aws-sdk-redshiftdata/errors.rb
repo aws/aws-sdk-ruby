@@ -42,7 +42,7 @@ module Aws::RedshiftData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftData::Types::ActiveSessionsExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::RedshiftData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftData::Types::ActiveStatementsExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::RedshiftData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftData::Types::BatchExecuteStatementException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::RedshiftData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftData::Types::DatabaseConnectionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::RedshiftData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftData::Types::ExecuteStatementException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>
@@ -118,7 +118,7 @@ module Aws::RedshiftData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftData::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>
@@ -132,7 +132,7 @@ module Aws::RedshiftData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftData::Types::QueryTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -145,7 +145,7 @@ module Aws::RedshiftData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftData::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>
@@ -164,7 +164,7 @@ module Aws::RedshiftData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftData::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>

@@ -11,7 +11,8 @@ module Aws::Finspace
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +42,8 @@ module Aws::Finspace
       :metric_target,
       :scale_in_cooldown_seconds,
       :scale_out_cooldown_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +88,8 @@ module Aws::Finspace
     class CapacityConfiguration < Struct.new(
       :node_type,
       :node_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +115,8 @@ module Aws::Finspace
       :change_type,
       :s3_path,
       :db_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +134,8 @@ module Aws::Finspace
       :s3_bucket,
       :s3_key,
       :s3_object_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +148,8 @@ module Aws::Finspace
     class ConflictException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +206,8 @@ module Aws::Finspace
       :federation_parameters,
       :superuser_parameters,
       :data_bundles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +224,8 @@ module Aws::Finspace
       :environment_id,
       :environment_arn,
       :environment_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +302,8 @@ module Aws::Finspace
       :database_name,
       :change_requests,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +354,8 @@ module Aws::Finspace
       :last_modified_timestamp,
       :status,
       :error_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +477,8 @@ module Aws::Finspace
       :availability_zone_id,
       :tags,
       :scaling_group_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +644,8 @@ module Aws::Finspace
       :availability_zone_id,
       :created_timestamp,
       :scaling_group_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -658,7 +670,8 @@ module Aws::Finspace
       :description,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +700,8 @@ module Aws::Finspace
       :description,
       :created_timestamp,
       :last_modified_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +782,8 @@ module Aws::Finspace
       :description,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +860,8 @@ module Aws::Finspace
       :created_timestamp,
       :last_modified_timestamp,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -876,7 +892,8 @@ module Aws::Finspace
       :kms_key_id,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +926,8 @@ module Aws::Finspace
       :environment_arn,
       :kms_key_id,
       :creation_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1001,8 @@ module Aws::Finspace
       :host_type,
       :availability_zone_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1066,8 @@ module Aws::Finspace
       :status,
       :last_modified_timestamp,
       :created_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1092,8 @@ module Aws::Finspace
       :iam_role,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1095,7 +1116,8 @@ module Aws::Finspace
       :user_arn,
       :environment_id,
       :iam_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1144,7 +1166,8 @@ module Aws::Finspace
       :az_mode,
       :availability_zone_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1251,8 @@ module Aws::Finspace
       :description,
       :availability_zone_ids,
       :created_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1266,8 @@ module Aws::Finspace
     class CustomDNSServer < Struct.new(
       :custom_dns_server_name,
       :custom_dns_server_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1251,12 +1276,14 @@ module Aws::Finspace
     #   @return [String]
     class DeleteEnvironmentRequest < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,12 +1300,14 @@ module Aws::Finspace
       :environment_id,
       :cluster_name,
       :node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKxClusterNodeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1295,12 +1324,14 @@ module Aws::Finspace
       :environment_id,
       :cluster_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKxClusterResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1317,12 +1348,14 @@ module Aws::Finspace
       :environment_id,
       :database_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKxDatabaseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1343,12 +1376,14 @@ module Aws::Finspace
       :database_name,
       :dataview_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKxDataviewResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1361,12 +1396,14 @@ module Aws::Finspace
     class DeleteKxEnvironmentRequest < Struct.new(
       :environment_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKxEnvironmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1383,12 +1420,14 @@ module Aws::Finspace
       :environment_id,
       :scaling_group_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKxScalingGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1405,12 +1444,14 @@ module Aws::Finspace
       :user_name,
       :environment_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKxUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,12 +1470,14 @@ module Aws::Finspace
       :environment_id,
       :volume_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKxVolumeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1489,7 +1532,8 @@ module Aws::Finspace
       :dedicated_service_account_id,
       :federation_mode,
       :federation_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1547,8 @@ module Aws::Finspace
     class ErrorInfo < Struct.new(
       :error_message,
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1582,8 @@ module Aws::Finspace
       :federation_urn,
       :federation_provider_name,
       :attribute_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1546,7 +1592,8 @@ module Aws::Finspace
     #   @return [String]
     class GetEnvironmentRequest < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1602,8 @@ module Aws::Finspace
     #   @return [Types::Environment]
     class GetEnvironmentResponse < Struct.new(
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1572,7 +1620,8 @@ module Aws::Finspace
       :environment_id,
       :database_name,
       :changeset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1629,7 +1678,8 @@ module Aws::Finspace
       :last_modified_timestamp,
       :status,
       :error_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1692,8 @@ module Aws::Finspace
     class GetKxClusterRequest < Struct.new(
       :environment_id,
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1804,7 +1855,8 @@ module Aws::Finspace
       :availability_zone_id,
       :created_timestamp,
       :scaling_group_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1823,7 +1875,8 @@ module Aws::Finspace
       :user_arn,
       :environment_id,
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1832,7 +1885,8 @@ module Aws::Finspace
     #   @return [String]
     class GetKxConnectionStringResponse < Struct.new(
       :signed_connection_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1899,8 @@ module Aws::Finspace
     class GetKxDatabaseRequest < Struct.new(
       :environment_id,
       :database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1890,7 +1945,8 @@ module Aws::Finspace
       :num_bytes,
       :num_changesets,
       :num_files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1915,7 +1971,8 @@ module Aws::Finspace
       :environment_id,
       :database_name,
       :dataview_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2007,7 +2064,8 @@ module Aws::Finspace
       :last_modified_timestamp,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2022,7 +2080,8 @@ module Aws::Finspace
     #   @return [String]
     class GetKxEnvironmentRequest < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2096,7 +2155,8 @@ module Aws::Finspace
       :update_timestamp,
       :availability_zone_ids,
       :certificate_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2109,7 +2169,8 @@ module Aws::Finspace
     class GetKxScalingGroupRequest < Struct.new(
       :environment_id,
       :scaling_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2229,7 +2290,8 @@ module Aws::Finspace
       :status_reason,
       :last_modified_timestamp,
       :created_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2304,8 @@ module Aws::Finspace
     class GetKxUserRequest < Struct.new(
       :user_name,
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2265,7 +2328,8 @@ module Aws::Finspace
       :user_arn,
       :environment_id,
       :iam_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2342,8 @@ module Aws::Finspace
     class GetKxVolumeRequest < Struct.new(
       :environment_id,
       :volume_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2440,8 @@ module Aws::Finspace
       :availability_zone_ids,
       :last_modified_timestamp,
       :attached_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2394,7 +2460,8 @@ module Aws::Finspace
     class IcmpTypeCode < Struct.new(
       :type,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2410,7 +2477,8 @@ module Aws::Finspace
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2419,7 +2487,8 @@ module Aws::Finspace
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,7 +2532,8 @@ module Aws::Finspace
       :cluster_name,
       :cluster_type,
       :cluster_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2489,7 +2559,8 @@ module Aws::Finspace
     class KxCacheStorageConfiguration < Struct.new(
       :type,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2532,7 +2603,8 @@ module Aws::Finspace
       :active_from_timestamp,
       :last_modified_timestamp,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2652,7 +2724,8 @@ module Aws::Finspace
       :availability_zone_id,
       :last_modified_timestamp,
       :created_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2679,7 +2752,8 @@ module Aws::Finspace
     #   @return [String]
     class KxClusterCodeDeploymentConfiguration < Struct.new(
       :deployment_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2693,7 +2767,8 @@ module Aws::Finspace
     class KxCommandLineArgument < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2719,7 +2794,8 @@ module Aws::Finspace
       :cache_type,
       :db_paths,
       :dataview_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2751,7 +2827,8 @@ module Aws::Finspace
       :changeset_id,
       :dataview_name,
       :dataview_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2769,7 +2846,8 @@ module Aws::Finspace
       :database_name,
       :created_timestamp,
       :last_modified_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2804,7 +2882,8 @@ module Aws::Finspace
       :attached_clusters,
       :created_timestamp,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2832,7 +2911,8 @@ module Aws::Finspace
       :dataview_version_id,
       :changeset_id,
       :segment_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2918,7 +2998,8 @@ module Aws::Finspace
       :created_timestamp,
       :last_modified_timestamp,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2948,7 +3029,8 @@ module Aws::Finspace
       :db_paths,
       :volume_name,
       :on_demand,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2977,7 +3059,8 @@ module Aws::Finspace
     #   @return [String]
     class KxDeploymentConfiguration < Struct.new(
       :deployment_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3080,7 +3163,8 @@ module Aws::Finspace
       :update_timestamp,
       :availability_zone_ids,
       :certificate_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3103,7 +3187,8 @@ module Aws::Finspace
     class KxNAS1Configuration < Struct.new(
       :type,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3136,7 +3221,8 @@ module Aws::Finspace
       :availability_zone_id,
       :launch_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3162,7 +3248,8 @@ module Aws::Finspace
       :type,
       :size,
       :volume_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3255,7 +3342,8 @@ module Aws::Finspace
       :status_reason,
       :last_modified_timestamp,
       :created_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3293,7 +3381,8 @@ module Aws::Finspace
       :memory_reservation,
       :node_count,
       :cpu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3321,7 +3410,8 @@ module Aws::Finspace
       :iam_role,
       :create_timestamp,
       :update_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3399,7 +3489,8 @@ module Aws::Finspace
       :availability_zone_ids,
       :created_timestamp,
       :last_modified_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3408,7 +3499,8 @@ module Aws::Finspace
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3423,7 +3515,8 @@ module Aws::Finspace
     class ListEnvironmentsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3437,7 +3530,8 @@ module Aws::Finspace
     class ListEnvironmentsResponse < Struct.new(
       :environments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3458,7 +3552,8 @@ module Aws::Finspace
       :database_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3471,7 +3566,8 @@ module Aws::Finspace
     class ListKxChangesetsResponse < Struct.new(
       :kx_changesets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3492,7 +3588,8 @@ module Aws::Finspace
       :cluster_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3505,7 +3602,8 @@ module Aws::Finspace
     class ListKxClusterNodesResponse < Struct.new(
       :nodes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3543,7 +3641,8 @@ module Aws::Finspace
       :cluster_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3556,7 +3655,8 @@ module Aws::Finspace
     class ListKxClustersResponse < Struct.new(
       :kx_cluster_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3573,7 +3673,8 @@ module Aws::Finspace
       :environment_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3586,7 +3687,8 @@ module Aws::Finspace
     class ListKxDatabasesResponse < Struct.new(
       :kx_databases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3610,7 +3712,8 @@ module Aws::Finspace
       :database_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3626,7 +3729,8 @@ module Aws::Finspace
     class ListKxDataviewsResponse < Struct.new(
       :kx_dataviews,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3639,7 +3743,8 @@ module Aws::Finspace
     class ListKxEnvironmentsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3652,7 +3757,8 @@ module Aws::Finspace
     class ListKxEnvironmentsResponse < Struct.new(
       :environments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3670,7 +3776,8 @@ module Aws::Finspace
       :environment_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3685,7 +3792,8 @@ module Aws::Finspace
     class ListKxScalingGroupsResponse < Struct.new(
       :scaling_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3702,7 +3810,8 @@ module Aws::Finspace
       :environment_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3715,7 +3824,8 @@ module Aws::Finspace
     class ListKxUsersResponse < Struct.new(
       :users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3738,7 +3848,8 @@ module Aws::Finspace
       :max_results,
       :next_token,
       :volume_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3753,7 +3864,8 @@ module Aws::Finspace
     class ListKxVolumesResponse < Struct.new(
       :kx_volume_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3762,7 +3874,8 @@ module Aws::Finspace
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3771,7 +3884,8 @@ module Aws::Finspace
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3816,7 +3930,8 @@ module Aws::Finspace
       :port_range,
       :icmp_type_code,
       :cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3836,7 +3951,8 @@ module Aws::Finspace
     class PortRange < Struct.new(
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3851,7 +3967,8 @@ module Aws::Finspace
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3860,7 +3977,8 @@ module Aws::Finspace
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3870,7 +3988,8 @@ module Aws::Finspace
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3888,7 +4007,8 @@ module Aws::Finspace
       :email_address,
       :first_name,
       :last_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3901,12 +4021,14 @@ module Aws::Finspace
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3915,7 +4037,8 @@ module Aws::Finspace
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3930,7 +4053,8 @@ module Aws::Finspace
     #   @return [Array<String>]
     class TickerplantLogConfiguration < Struct.new(
       :tickerplant_log_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3951,7 +4075,8 @@ module Aws::Finspace
       :transit_gateway_id,
       :routable_cidr_space,
       :attachment_network_acl_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3965,12 +4090,14 @@ module Aws::Finspace
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4005,7 +4132,8 @@ module Aws::Finspace
       :description,
       :federation_mode,
       :federation_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4014,7 +4142,8 @@ module Aws::Finspace
     #   @return [Types::Environment]
     class UpdateEnvironmentResponse < Struct.new(
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4056,12 +4185,14 @@ module Aws::Finspace
       :initialization_script,
       :command_line_arguments,
       :deployment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateKxClusterCodeConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4088,12 +4219,14 @@ module Aws::Finspace
       :client_token,
       :databases,
       :deployment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateKxClusterDatabasesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4114,7 +4247,8 @@ module Aws::Finspace
       :database_name,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4135,7 +4269,8 @@ module Aws::Finspace
       :environment_id,
       :description,
       :last_modified_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4172,7 +4307,8 @@ module Aws::Finspace
       :changeset_id,
       :segment_configurations,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4263,7 +4399,8 @@ module Aws::Finspace
       :description,
       :created_timestamp,
       :last_modified_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4290,7 +4427,8 @@ module Aws::Finspace
       :transit_gateway_configuration,
       :custom_dns_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4359,7 +4497,8 @@ module Aws::Finspace
       :creation_timestamp,
       :update_timestamp,
       :availability_zone_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4380,7 +4519,8 @@ module Aws::Finspace
       :name,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4449,7 +4589,8 @@ module Aws::Finspace
       :creation_timestamp,
       :update_timestamp,
       :availability_zone_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4470,7 +4611,8 @@ module Aws::Finspace
       :user_name,
       :iam_role,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4493,7 +4635,8 @@ module Aws::Finspace
       :user_arn,
       :environment_id,
       :iam_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4521,7 +4664,8 @@ module Aws::Finspace
       :description,
       :client_token,
       :nas1_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4616,7 +4760,8 @@ module Aws::Finspace
       :availability_zone_ids,
       :last_modified_timestamp,
       :attached_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4625,7 +4770,8 @@ module Aws::Finspace
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4642,7 +4788,8 @@ module Aws::Finspace
     class Volume < Struct.new(
       :volume_name,
       :volume_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4669,7 +4816,8 @@ module Aws::Finspace
       :security_group_ids,
       :subnet_ids,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

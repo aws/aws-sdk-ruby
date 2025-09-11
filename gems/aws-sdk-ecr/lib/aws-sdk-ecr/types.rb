@@ -16,7 +16,8 @@ module Aws::ECR
     class Attribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +42,8 @@ module Aws::ECR
       :authorization_token,
       :expires_at,
       :proxy_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +90,8 @@ module Aws::ECR
       :in_use_count,
       :registry,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +109,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :layer_digests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +124,8 @@ module Aws::ECR
     class BatchCheckLayerAvailabilityResponse < Struct.new(
       :layers,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +147,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +161,8 @@ module Aws::ECR
     class BatchDeleteImageResponse < Struct.new(
       :image_ids,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +190,8 @@ module Aws::ECR
       :repository_name,
       :image_ids,
       :accepted_media_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +204,8 @@ module Aws::ECR
     class BatchGetImageResponse < Struct.new(
       :images,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +214,8 @@ module Aws::ECR
     #   @return [Array<String>]
     class BatchGetRepositoryScanningConfigurationRequest < Struct.new(
       :repository_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +228,8 @@ module Aws::ECR
     class BatchGetRepositoryScanningConfigurationResponse < Struct.new(
       :scanning_configurations,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +252,8 @@ module Aws::ECR
       :repository_name,
       :upload_id,
       :layer_digests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +274,8 @@ module Aws::ECR
       :repository_name,
       :upload_id,
       :layer_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +360,8 @@ module Aws::ECR
       :credential_arn,
       :custom_role_arn,
       :upstream_repository_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +400,8 @@ module Aws::ECR
       :credential_arn,
       :custom_role_arn,
       :upstream_repository_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +473,8 @@ module Aws::ECR
       :lifecycle_policy,
       :applied_for,
       :custom_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +487,8 @@ module Aws::ECR
     class CreateRepositoryCreationTemplateResponse < Struct.new(
       :registry_id,
       :repository_creation_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +534,8 @@ module Aws::ECR
       :image_tag_mutability_exclusion_filters,
       :image_scanning_configuration,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +544,8 @@ module Aws::ECR
     #   @return [Types::Repository]
     class CreateRepositoryResponse < Struct.new(
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +567,8 @@ module Aws::ECR
       :scoring_vector,
       :source,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -567,7 +587,8 @@ module Aws::ECR
     class CvssScoreAdjustment < Struct.new(
       :metric,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -593,7 +614,8 @@ module Aws::ECR
       :score_source,
       :scoring_vector,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -612,7 +634,8 @@ module Aws::ECR
     class DeleteLifecyclePolicyRequest < Struct.new(
       :registry_id,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +656,8 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       :last_evaluated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -648,7 +672,8 @@ module Aws::ECR
     class DeletePullThroughCacheRuleRequest < Struct.new(
       :ecr_repository_prefix,
       :registry_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,12 +707,14 @@ module Aws::ECR
       :credential_arn,
       :custom_role_arn,
       :upstream_repository_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRegistryPolicyRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +727,8 @@ module Aws::ECR
     class DeleteRegistryPolicyResponse < Struct.new(
       :registry_id,
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +738,8 @@ module Aws::ECR
     #   @return [String]
     class DeleteRepositoryCreationTemplateRequest < Struct.new(
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +752,8 @@ module Aws::ECR
     class DeleteRepositoryCreationTemplateResponse < Struct.new(
       :registry_id,
       :repository_creation_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +768,8 @@ module Aws::ECR
     class DeleteRepositoryPolicyRequest < Struct.new(
       :registry_id,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +786,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +806,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +816,8 @@ module Aws::ECR
     #   @return [Types::Repository]
     class DeleteRepositoryResponse < Struct.new(
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -800,7 +834,8 @@ module Aws::ECR
       :repository_name,
       :image_id,
       :registry_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +852,8 @@ module Aws::ECR
       :repository_name,
       :image_id,
       :replication_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +891,8 @@ module Aws::ECR
       :image_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +925,8 @@ module Aws::ECR
       :image_scan_status,
       :image_scan_findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -901,7 +939,8 @@ module Aws::ECR
     #   @return [String]
     class DescribeImagesFilter < Struct.new(
       :tag_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -945,7 +984,8 @@ module Aws::ECR
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -963,7 +1003,8 @@ module Aws::ECR
     class DescribeImagesResponse < Struct.new(
       :image_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1041,8 @@ module Aws::ECR
       :ecr_repository_prefixes,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1017,12 +1059,14 @@ module Aws::ECR
     class DescribePullThroughCacheRulesResponse < Struct.new(
       :pull_through_cache_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeRegistryRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,7 +1079,8 @@ module Aws::ECR
     class DescribeRegistryResponse < Struct.new(
       :registry_id,
       :replication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1076,7 +1121,8 @@ module Aws::ECR
       :repository_names,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1139,8 @@ module Aws::ECR
     class DescribeRepositoriesResponse < Struct.new(
       :repositories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1131,7 +1178,8 @@ module Aws::ECR
       :prefixes,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1201,8 @@ module Aws::ECR
       :registry_id,
       :repository_creation_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1212,8 @@ module Aws::ECR
     #   @return [String]
     class EmptyUploadException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,7 +1253,8 @@ module Aws::ECR
     class EncryptionConfiguration < Struct.new(
       :encryption_type,
       :kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1233,7 +1284,8 @@ module Aws::ECR
     class EncryptionConfigurationForRepositoryCreationTemplate < Struct.new(
       :encryption_type,
       :kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,7 +1363,8 @@ module Aws::ECR
       :updated_at,
       :fix_available,
       :exploit_available,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1326,7 +1379,8 @@ module Aws::ECR
     #   @return [String]
     class GetAccountSettingRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1342,7 +1396,8 @@ module Aws::ECR
     class GetAccountSettingResponse < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1354,7 +1409,8 @@ module Aws::ECR
     #   @return [Array<String>]
     class GetAuthorizationTokenRequest < Struct.new(
       :registry_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1424,8 @@ module Aws::ECR
     #   @return [Array<Types::AuthorizationData>]
     class GetAuthorizationTokenResponse < Struct.new(
       :authorization_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1386,7 +1443,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :layer_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1457,8 @@ module Aws::ECR
     class GetDownloadUrlForLayerResponse < Struct.new(
       :download_url,
       :layer_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1504,8 @@ module Aws::ECR
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1482,7 +1542,8 @@ module Aws::ECR
       :next_token,
       :preview_results,
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1496,7 +1557,8 @@ module Aws::ECR
     class GetLifecyclePolicyRequest < Struct.new(
       :registry_id,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,12 +1579,14 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       :last_evaluated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetRegistryPolicyRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,12 +1599,14 @@ module Aws::ECR
     class GetRegistryPolicyResponse < Struct.new(
       :registry_id,
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetRegistryScanningConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1619,8 @@ module Aws::ECR
     class GetRegistryScanningConfigurationResponse < Struct.new(
       :registry_id,
       :scanning_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1567,7 +1634,8 @@ module Aws::ECR
     class GetRepositoryPolicyRequest < Struct.new(
       :registry_id,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,7 +1652,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1610,7 +1679,8 @@ module Aws::ECR
       :image_id,
       :image_manifest,
       :image_manifest_media_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,7 +1691,8 @@ module Aws::ECR
     #   @return [String]
     class ImageAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1690,7 +1761,8 @@ module Aws::ECR
       :image_manifest_media_type,
       :artifact_media_type,
       :last_recorded_pull_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1700,7 +1772,8 @@ module Aws::ECR
     #   @return [String]
     class ImageDigestDoesNotMatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1791,8 @@ module Aws::ECR
       :image_id,
       :failure_code,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1732,7 +1806,8 @@ module Aws::ECR
     class ImageIdentifier < Struct.new(
       :image_digest,
       :image_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1741,7 +1816,8 @@ module Aws::ECR
     #   @return [String]
     class ImageNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1763,7 +1839,8 @@ module Aws::ECR
       :registry_id,
       :status,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1789,7 +1866,8 @@ module Aws::ECR
       :uri,
       :severity,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1815,7 +1893,8 @@ module Aws::ECR
       :finding_severity_counts,
       :findings,
       :enhanced_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1833,7 +1912,8 @@ module Aws::ECR
       :image_scan_completed_at,
       :vulnerability_source_updated_at,
       :finding_severity_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1847,7 +1927,8 @@ module Aws::ECR
     class ImageScanStatus < Struct.new(
       :status,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1860,7 +1941,8 @@ module Aws::ECR
     #   @return [Boolean]
     class ImageScanningConfiguration < Struct.new(
       :scan_on_push,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1875,7 +1957,8 @@ module Aws::ECR
     #   @return [String]
     class ImageTagAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1889,7 +1972,8 @@ module Aws::ECR
     class ImageTagMutabilityExclusionFilter < Struct.new(
       :filter_type,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +1987,8 @@ module Aws::ECR
     class InitiateLayerUploadRequest < Struct.new(
       :registry_id,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +2002,8 @@ module Aws::ECR
     class InitiateLayerUploadResponse < Struct.new(
       :upload_id,
       :part_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1928,7 +2014,8 @@ module Aws::ECR
     #   @return [String]
     class InvalidLayerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1956,7 +2043,8 @@ module Aws::ECR
       :upload_id,
       :last_valid_byte_received,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1967,7 +2055,8 @@ module Aws::ECR
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1977,7 +2066,8 @@ module Aws::ECR
     #   @return [String]
     class InvalidTagParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1990,7 +2080,8 @@ module Aws::ECR
     class KmsException < Struct.new(
       :message,
       :kms_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2014,7 +2105,8 @@ module Aws::ECR
       :layer_availability,
       :layer_size,
       :media_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2024,7 +2116,8 @@ module Aws::ECR
     #   @return [String]
     class LayerAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2042,7 +2135,8 @@ module Aws::ECR
       :layer_digest,
       :failure_code,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2053,7 +2147,8 @@ module Aws::ECR
     #   @return [String]
     class LayerInaccessibleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2063,7 +2158,8 @@ module Aws::ECR
     #   @return [String]
     class LayerPartTooSmallException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2170,8 @@ module Aws::ECR
     #   @return [String]
     class LayersNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2084,7 +2181,8 @@ module Aws::ECR
     #   @return [String]
     class LifecyclePolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2094,7 +2192,8 @@ module Aws::ECR
     #   @return [String]
     class LifecyclePolicyPreviewFilter < Struct.new(
       :tag_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2104,7 +2203,8 @@ module Aws::ECR
     #   @return [String]
     class LifecyclePolicyPreviewInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2113,7 +2213,8 @@ module Aws::ECR
     #   @return [String]
     class LifecyclePolicyPreviewNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2140,7 +2241,8 @@ module Aws::ECR
       :image_pushed_at,
       :action,
       :applied_rule_priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2150,7 +2252,8 @@ module Aws::ECR
     #   @return [Integer]
     class LifecyclePolicyPreviewSummary < Struct.new(
       :expiring_image_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2160,7 +2263,8 @@ module Aws::ECR
     #   @return [String]
     class LifecyclePolicyRuleAction < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2172,7 +2276,8 @@ module Aws::ECR
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2184,7 +2289,8 @@ module Aws::ECR
     #   @return [String]
     class ListImagesFilter < Struct.new(
       :tag_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2226,7 +2332,8 @@ module Aws::ECR
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2243,7 +2350,8 @@ module Aws::ECR
     class ListImagesResponse < Struct.new(
       :image_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2253,7 +2361,8 @@ module Aws::ECR
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2262,7 +2371,8 @@ module Aws::ECR
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2309,7 +2419,8 @@ module Aws::ECR
       :vendor_updated_at,
       :vulnerability_id,
       :vulnerable_packages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2354,7 +2465,8 @@ module Aws::ECR
       :upstream_repository_prefix,
       :upstream_registry,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2364,7 +2476,8 @@ module Aws::ECR
     #   @return [String]
     class PullThroughCacheRuleAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2374,7 +2487,8 @@ module Aws::ECR
     #   @return [String]
     class PullThroughCacheRuleNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2391,7 +2505,8 @@ module Aws::ECR
     class PutAccountSettingRequest < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2404,7 +2519,8 @@ module Aws::ECR
     class PutAccountSettingResponse < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2437,7 +2553,8 @@ module Aws::ECR
       :image_manifest_media_type,
       :image_tag,
       :image_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2446,7 +2563,8 @@ module Aws::ECR
     #   @return [Types::Image]
     class PutImageResponse < Struct.new(
       :image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2468,7 +2586,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_scanning_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2485,7 +2604,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_scanning_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2631,8 @@ module Aws::ECR
       :repository_name,
       :image_tag_mutability,
       :image_tag_mutability_exclusion_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2532,7 +2653,8 @@ module Aws::ECR
       :repository_name,
       :image_tag_mutability,
       :image_tag_mutability_exclusion_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2550,7 +2672,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :lifecycle_policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2567,7 +2690,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :lifecycle_policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2578,7 +2702,8 @@ module Aws::ECR
     #   @return [String]
     class PutRegistryPolicyRequest < Struct.new(
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2591,7 +2716,8 @@ module Aws::ECR
     class PutRegistryPolicyResponse < Struct.new(
       :registry_id,
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2614,7 +2740,8 @@ module Aws::ECR
     class PutRegistryScanningConfigurationRequest < Struct.new(
       :scan_type,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2623,7 +2750,8 @@ module Aws::ECR
     #   @return [Types::RegistryScanningConfiguration]
     class PutRegistryScanningConfigurationResponse < Struct.new(
       :registry_scanning_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2632,7 +2760,8 @@ module Aws::ECR
     #   @return [Types::ReplicationConfiguration]
     class PutReplicationConfigurationRequest < Struct.new(
       :replication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2641,7 +2770,8 @@ module Aws::ECR
     #   @return [Types::ReplicationConfiguration]
     class PutReplicationConfigurationResponse < Struct.new(
       :replication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2655,7 +2785,8 @@ module Aws::ECR
     class Recommendation < Struct.new(
       :url,
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2664,7 +2795,8 @@ module Aws::ECR
     #   @return [String]
     class ReferencedImagesNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2673,7 +2805,8 @@ module Aws::ECR
     #   @return [String]
     class RegistryPolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2687,7 +2820,8 @@ module Aws::ECR
     class RegistryScanningConfiguration < Struct.new(
       :scan_type,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2707,7 +2841,8 @@ module Aws::ECR
     class RegistryScanningRule < Struct.new(
       :scan_frequency,
       :repository_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2718,7 +2853,8 @@ module Aws::ECR
     #   @return [Types::Recommendation]
     class Remediation < Struct.new(
       :recommendation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2729,7 +2865,8 @@ module Aws::ECR
     #   @return [Array<Types::ReplicationRule>]
     class ReplicationConfiguration < Struct.new(
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2744,7 +2881,8 @@ module Aws::ECR
     class ReplicationDestination < Struct.new(
       :region,
       :registry_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2761,7 +2899,8 @@ module Aws::ECR
     class ReplicationRule < Struct.new(
       :destinations,
       :repository_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2946,8 @@ module Aws::ECR
       :image_tag_mutability_exclusion_filters,
       :image_scanning_configuration,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2817,7 +2957,8 @@ module Aws::ECR
     #   @return [String]
     class RepositoryAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2885,7 +3026,8 @@ module Aws::ECR
       :custom_role_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2906,7 +3048,8 @@ module Aws::ECR
     class RepositoryFilter < Struct.new(
       :filter,
       :filter_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2917,7 +3060,8 @@ module Aws::ECR
     #   @return [String]
     class RepositoryNotEmptyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2928,7 +3072,8 @@ module Aws::ECR
     #   @return [String]
     class RepositoryNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2939,7 +3084,8 @@ module Aws::ECR
     #   @return [String]
     class RepositoryPolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2965,7 +3111,8 @@ module Aws::ECR
       :scan_on_push,
       :scan_frequency,
       :applied_scan_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2989,7 +3136,8 @@ module Aws::ECR
       :repository_name,
       :failure_code,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3011,7 +3159,8 @@ module Aws::ECR
       :id,
       :tags,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3022,7 +3171,8 @@ module Aws::ECR
     #   @return [Types::AwsEcrContainerImageDetails]
     class ResourceDetails < Struct.new(
       :aws_ecr_container_image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3032,7 +3182,8 @@ module Aws::ECR
     #   @return [String]
     class ScanNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3048,7 +3199,8 @@ module Aws::ECR
     class ScanningRepositoryFilter < Struct.new(
       :filter,
       :filter_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3058,7 +3210,8 @@ module Aws::ECR
     #   @return [Types::CvssScoreDetails]
     class ScoreDetails < Struct.new(
       :cvss,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3068,7 +3221,8 @@ module Aws::ECR
     #   @return [String]
     class SecretNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3078,7 +3232,8 @@ module Aws::ECR
     #   @return [String]
     class ServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3104,7 +3259,8 @@ module Aws::ECR
       :repository_name,
       :policy_text,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3121,7 +3277,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3139,7 +3296,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3160,7 +3318,8 @@ module Aws::ECR
       :repository_name,
       :image_id,
       :image_scan_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3179,7 +3338,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :lifecycle_policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3200,7 +3360,8 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3217,7 +3378,8 @@ module Aws::ECR
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3233,12 +3395,14 @@ module Aws::ECR
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3248,7 +3412,8 @@ module Aws::ECR
     #   @return [String]
     class TemplateAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3258,7 +3423,8 @@ module Aws::ECR
     #   @return [String]
     class TemplateNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3268,7 +3434,8 @@ module Aws::ECR
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3278,7 +3445,8 @@ module Aws::ECR
     #   @return [String]
     class UnableToAccessSecretException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3288,7 +3456,8 @@ module Aws::ECR
     #   @return [String]
     class UnableToDecryptSecretValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3299,7 +3468,8 @@ module Aws::ECR
     #   @return [String]
     class UnableToGetUpstreamImageException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3309,7 +3479,8 @@ module Aws::ECR
     #   @return [String]
     class UnableToGetUpstreamLayerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3318,7 +3489,8 @@ module Aws::ECR
     #   @return [String]
     class UnsupportedImageTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3327,7 +3499,8 @@ module Aws::ECR
     #   @return [String]
     class UnsupportedUpstreamRegistryException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3341,12 +3514,14 @@ module Aws::ECR
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3371,7 +3546,8 @@ module Aws::ECR
       :ecr_repository_prefix,
       :credential_arn,
       :custom_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3402,7 +3578,8 @@ module Aws::ECR
       :credential_arn,
       :custom_role_arn,
       :upstream_repository_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3468,7 +3645,8 @@ module Aws::ECR
       :lifecycle_policy,
       :applied_for,
       :custom_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3481,7 +3659,8 @@ module Aws::ECR
     class UpdateRepositoryCreationTemplateResponse < Struct.new(
       :registry_id,
       :repository_creation_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3512,7 +3691,8 @@ module Aws::ECR
       :part_first_byte,
       :part_last_byte,
       :layer_part_blob,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3533,7 +3713,8 @@ module Aws::ECR
       :repository_name,
       :upload_id,
       :last_byte_received,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3544,7 +3725,8 @@ module Aws::ECR
     #   @return [String]
     class UploadNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3558,7 +3740,8 @@ module Aws::ECR
     class ValidatePullThroughCacheRuleRequest < Struct.new(
       :ecr_repository_prefix,
       :registry_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3601,7 +3784,8 @@ module Aws::ECR
       :upstream_repository_prefix,
       :is_valid,
       :failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3615,7 +3799,8 @@ module Aws::ECR
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3657,7 +3842,8 @@ module Aws::ECR
       :source_layer_hash,
       :version,
       :fixed_in_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

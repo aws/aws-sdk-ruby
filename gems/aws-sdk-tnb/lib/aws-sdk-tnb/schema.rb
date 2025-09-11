@@ -1047,7 +1047,6 @@ module Aws::Tnb
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/sol/nsd/v1/ns_descriptors/{nsdInfoId}/nsd_content/validate", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

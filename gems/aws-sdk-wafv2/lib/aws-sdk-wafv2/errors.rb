@@ -53,7 +53,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFAssociatedItemException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFConfigurationWarningException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFDuplicateItemException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFExpiredManagedRuleGroupVersionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFInternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -132,7 +132,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFInvalidOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -163,7 +163,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFInvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -214,7 +214,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFInvalidPermissionPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -228,7 +228,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFInvalidResourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -244,7 +244,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFLimitsExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -264,7 +264,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFLogDestinationPermissionIssueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -280,7 +280,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFNonexistentItemException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -295,7 +295,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFOptimisticLockException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -315,7 +315,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFServiceLinkedRoleErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -329,7 +329,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFSubscriptionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -342,7 +342,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFTagOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -356,7 +356,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFTagOperationInternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -373,7 +373,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFUnavailableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -387,7 +387,7 @@ module Aws::WAFV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFV2::Types::WAFUnsupportedAggregateKeyTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

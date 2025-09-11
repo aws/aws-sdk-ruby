@@ -40,7 +40,7 @@ module Aws::Identitystore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Identitystore::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::Identitystore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Identitystore::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::Identitystore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Identitystore::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::Identitystore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Identitystore::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An enum object indicating the type of resource in the identity store service. Valid values include USER, GROUP, and IDENTITY_STORE.</p>
@@ -158,7 +158,7 @@ module Aws::Identitystore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Identitystore::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -176,7 +176,7 @@ module Aws::Identitystore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Identitystore::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -209,7 +209,7 @@ module Aws::Identitystore
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Identitystore::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

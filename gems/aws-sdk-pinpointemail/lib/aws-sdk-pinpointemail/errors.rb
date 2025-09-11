@@ -44,7 +44,7 @@ module Aws::PinpointEmail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointEmail::Types::AccountSuspendedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::PinpointEmail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointEmail::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::PinpointEmail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointEmail::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::PinpointEmail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointEmail::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::PinpointEmail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointEmail::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::PinpointEmail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointEmail::Types::MailFromDomainNotVerifiedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -122,7 +122,7 @@ module Aws::PinpointEmail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointEmail::Types::MessageRejected] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::PinpointEmail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointEmail::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::PinpointEmail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointEmail::Types::SendingPausedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -162,7 +162,7 @@ module Aws::PinpointEmail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointEmail::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

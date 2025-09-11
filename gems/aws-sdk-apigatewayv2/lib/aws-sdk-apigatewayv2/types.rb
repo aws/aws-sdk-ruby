@@ -10,7 +10,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::ApiGatewayV2
     class AccessLogSettings < Struct.new(
       :destination_arn,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +100,8 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +123,8 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :api_mapping_key,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -171,7 +175,8 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +186,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +197,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +228,8 @@ module Aws::ApiGatewayV2
       :allow_origins,
       :expose_headers,
       :max_age,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -243,7 +251,8 @@ module Aws::ApiGatewayV2
       :api_mapping_key,
       :domain_name,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +273,8 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :api_mapping_key,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +336,8 @@ module Aws::ApiGatewayV2
       :tags,
       :target,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -399,7 +410,8 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -450,7 +462,8 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +513,8 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +532,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :description,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +562,8 @@ module Aws::ApiGatewayV2
       :deployment_status,
       :deployment_status_message,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +589,8 @@ module Aws::ApiGatewayV2
       :mutual_tls_authentication,
       :routing_mode,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +623,8 @@ module Aws::ApiGatewayV2
       :mutual_tls_authentication,
       :routing_mode,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -689,7 +707,8 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +742,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +772,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +863,8 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +890,8 @@ module Aws::ApiGatewayV2
       :description,
       :name,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +916,8 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +971,8 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +1002,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :route_id,
       :route_response_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1028,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :route_response_id,
       :route_response_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,7 +1086,8 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1112,8 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_id,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1109,7 +1138,8 @@ module Aws::ApiGatewayV2
       :priority,
       :routing_rule_arn,
       :routing_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1189,8 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1251,8 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1274,8 @@ module Aws::ApiGatewayV2
       :security_group_ids,
       :subnet_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,7 +1316,8 @@ module Aws::ApiGatewayV2
       :vpc_link_status,
       :vpc_link_status_message,
       :vpc_link_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1296,7 +1330,8 @@ module Aws::ApiGatewayV2
     class DeleteAccessLogSettingsRequest < Struct.new(
       :api_id,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1344,8 @@ module Aws::ApiGatewayV2
     class DeleteApiMappingRequest < Struct.new(
       :api_mapping_id,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1318,7 +1354,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class DeleteApiRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1368,8 @@ module Aws::ApiGatewayV2
     class DeleteAuthorizerRequest < Struct.new(
       :api_id,
       :authorizer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,7 +1378,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class DeleteCorsConfigurationRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1392,8 @@ module Aws::ApiGatewayV2
     class DeleteDeploymentRequest < Struct.new(
       :api_id,
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1402,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class DeleteDomainNameRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1375,7 +1416,8 @@ module Aws::ApiGatewayV2
     class DeleteIntegrationRequest < Struct.new(
       :api_id,
       :integration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1392,7 +1434,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :integration_id,
       :integration_response_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1405,7 +1448,8 @@ module Aws::ApiGatewayV2
     class DeleteModelRequest < Struct.new(
       :api_id,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1418,7 +1462,8 @@ module Aws::ApiGatewayV2
     class DeleteRouteRequest < Struct.new(
       :api_id,
       :route_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1480,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :request_parameter_key,
       :route_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1498,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :route_id,
       :route_response_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1469,7 +1516,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :route_key,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1486,7 +1534,8 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_id,
       :routing_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1499,7 +1548,8 @@ module Aws::ApiGatewayV2
     class DeleteStageRequest < Struct.new(
       :api_id,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1508,12 +1558,14 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class DeleteVpcLinkRequest < Struct.new(
       :vpc_link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteVpcLinkResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1595,8 @@ module Aws::ApiGatewayV2
       :deployment_status,
       :deployment_status_message,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1630,8 @@ module Aws::ApiGatewayV2
       :mutual_tls_authentication,
       :routing_mode,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1627,7 +1681,8 @@ module Aws::ApiGatewayV2
       :ip_address_type,
       :security_policy,
       :ownership_verification_certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1711,8 @@ module Aws::ApiGatewayV2
       :output_type,
       :specification,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1665,7 +1721,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class ExportApiResponse < Struct.new(
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1735,8 @@ module Aws::ApiGatewayV2
     class GetApiMappingRequest < Struct.new(
       :api_mapping_id,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,7 +1757,8 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :api_mapping_key,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1775,8 @@ module Aws::ApiGatewayV2
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1789,8 @@ module Aws::ApiGatewayV2
     class GetApiMappingsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1738,7 +1799,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class GetApiRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1811,7 +1873,8 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1824,7 +1887,8 @@ module Aws::ApiGatewayV2
     class GetApisRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1837,7 +1901,8 @@ module Aws::ApiGatewayV2
     class GetApisResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1850,7 +1915,8 @@ module Aws::ApiGatewayV2
     class GetAuthorizerRequest < Struct.new(
       :api_id,
       :authorizer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1900,7 +1966,8 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +1984,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1930,7 +1998,8 @@ module Aws::ApiGatewayV2
     class GetAuthorizersResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1943,7 +2012,8 @@ module Aws::ApiGatewayV2
     class GetDeploymentRequest < Struct.new(
       :api_id,
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1972,7 +2042,8 @@ module Aws::ApiGatewayV2
       :deployment_status,
       :deployment_status_message,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2060,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2074,8 @@ module Aws::ApiGatewayV2
     class GetDeploymentsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2011,7 +2084,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class GetDomainNameRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2044,7 +2118,8 @@ module Aws::ApiGatewayV2
       :mutual_tls_authentication,
       :routing_mode,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2057,7 +2132,8 @@ module Aws::ApiGatewayV2
     class GetDomainNamesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2070,7 +2146,8 @@ module Aws::ApiGatewayV2
     class GetDomainNamesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2083,7 +2160,8 @@ module Aws::ApiGatewayV2
     class GetIntegrationRequest < Struct.new(
       :api_id,
       :integration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2178,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :integration_id,
       :integration_response_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2129,7 +2208,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2150,7 +2230,8 @@ module Aws::ApiGatewayV2
       :integration_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2163,7 +2244,8 @@ module Aws::ApiGatewayV2
     class GetIntegrationResponsesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2253,7 +2335,8 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2270,7 +2353,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2283,7 +2367,8 @@ module Aws::ApiGatewayV2
     class GetIntegrationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2296,7 +2381,8 @@ module Aws::ApiGatewayV2
     class GetModelRequest < Struct.new(
       :api_id,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2321,7 +2407,8 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2334,7 +2421,8 @@ module Aws::ApiGatewayV2
     class GetModelTemplateRequest < Struct.new(
       :api_id,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2343,7 +2431,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class GetModelTemplateResponse < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2360,7 +2449,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2373,7 +2463,8 @@ module Aws::ApiGatewayV2
     class GetModelsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2386,7 +2477,8 @@ module Aws::ApiGatewayV2
     class GetRouteRequest < Struct.new(
       :api_id,
       :route_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2403,7 +2495,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :route_id,
       :route_response_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2521,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :route_response_id,
       :route_response_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2449,7 +2543,8 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       :route_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2462,7 +2557,8 @@ module Aws::ApiGatewayV2
     class GetRouteResponsesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2519,7 +2615,8 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2536,7 +2633,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2549,7 +2647,8 @@ module Aws::ApiGatewayV2
     class GetRoutesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2566,7 +2665,8 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_id,
       :routing_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2591,7 +2691,8 @@ module Aws::ApiGatewayV2
       :priority,
       :routing_rule_arn,
       :routing_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2604,7 +2705,8 @@ module Aws::ApiGatewayV2
     class GetStageRequest < Struct.new(
       :api_id,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2767,8 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2682,7 +2785,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2695,7 +2799,8 @@ module Aws::ApiGatewayV2
     class GetStagesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2704,7 +2809,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class GetTagsRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2713,7 +2819,8 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String, String>]
     class GetTagsResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2722,7 +2829,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class GetVpcLinkRequest < Struct.new(
       :vpc_link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2763,7 +2871,8 @@ module Aws::ApiGatewayV2
       :vpc_link_status,
       :vpc_link_status_message,
       :vpc_link_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2776,7 +2885,8 @@ module Aws::ApiGatewayV2
     class GetVpcLinksRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2789,7 +2899,8 @@ module Aws::ApiGatewayV2
     class GetVpcLinksResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2918,8 @@ module Aws::ApiGatewayV2
       :basepath,
       :body,
       :fail_on_warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2880,7 +2992,8 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2971,7 +3084,8 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3001,7 +3115,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3016,7 +3131,8 @@ module Aws::ApiGatewayV2
     class JWTConfiguration < Struct.new(
       :audience,
       :issuer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3037,7 +3153,8 @@ module Aws::ApiGatewayV2
       :domain_name_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3050,7 +3167,8 @@ module Aws::ApiGatewayV2
     class ListRoutingRulesResponse < Struct.new(
       :next_token,
       :routing_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3076,7 +3194,8 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3093,7 +3212,8 @@ module Aws::ApiGatewayV2
       :truststore_uri,
       :truststore_version,
       :truststore_warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3106,7 +3226,8 @@ module Aws::ApiGatewayV2
     class MutualTlsAuthenticationInput < Struct.new(
       :truststore_uri,
       :truststore_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3120,7 +3241,8 @@ module Aws::ApiGatewayV2
     class NotFoundException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3130,7 +3252,8 @@ module Aws::ApiGatewayV2
     #   @return [Boolean]
     class ParameterConstraints < Struct.new(
       :required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3159,7 +3282,8 @@ module Aws::ApiGatewayV2
       :domain_name_id,
       :priority,
       :routing_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3184,7 +3308,8 @@ module Aws::ApiGatewayV2
       :priority,
       :routing_rule_arn,
       :routing_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3206,7 +3331,8 @@ module Aws::ApiGatewayV2
       :basepath,
       :body,
       :fail_on_warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3279,7 +3405,8 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3292,7 +3419,8 @@ module Aws::ApiGatewayV2
     class ResetAuthorizersCacheRequest < Struct.new(
       :api_id,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3350,7 +3478,8 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3376,7 +3505,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :route_response_id,
       :route_response_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3402,7 +3532,8 @@ module Aws::ApiGatewayV2
       :logging_level,
       :throttling_burst_limit,
       :throttling_rate_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3428,7 +3559,8 @@ module Aws::ApiGatewayV2
       :priority,
       :routing_rule_arn,
       :routing_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3438,7 +3570,8 @@ module Aws::ApiGatewayV2
     #   @return [Types::RoutingRuleActionInvokeApi]
     class RoutingRuleAction < Struct.new(
       :invoke_api,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3456,7 +3589,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :stage,
       :strip_base_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3470,7 +3604,8 @@ module Aws::ApiGatewayV2
     class RoutingRuleCondition < Struct.new(
       :match_base_paths,
       :match_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3480,7 +3615,8 @@ module Aws::ApiGatewayV2
     #   @return [Array<String>]
     class RoutingRuleMatchBasePaths < Struct.new(
       :any_of,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3494,7 +3630,8 @@ module Aws::ApiGatewayV2
     class RoutingRuleMatchHeaderValue < Struct.new(
       :header,
       :value_glob,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3504,7 +3641,8 @@ module Aws::ApiGatewayV2
     #   @return [Array<Types::RoutingRuleMatchHeaderValue>]
     class RoutingRuleMatchHeaders < Struct.new(
       :any_of,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3566,7 +3704,8 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3580,12 +3719,14 @@ module Aws::ApiGatewayV2
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3595,7 +3736,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class TlsConfig < Struct.new(
       :server_name_to_verify,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3605,7 +3747,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     class TlsConfigInput < Struct.new(
       :server_name_to_verify,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3619,7 +3762,8 @@ module Aws::ApiGatewayV2
     class TooManyRequestsException < Struct.new(
       :limit_type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3632,7 +3776,8 @@ module Aws::ApiGatewayV2
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3658,7 +3803,8 @@ module Aws::ApiGatewayV2
       :api_mapping_key,
       :domain_name,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3679,7 +3825,8 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :api_mapping_key,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3737,7 +3884,8 @@ module Aws::ApiGatewayV2
       :route_selection_expression,
       :target,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3810,7 +3958,8 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3865,7 +4014,8 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3915,7 +4065,8 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3933,7 +4084,8 @@ module Aws::ApiGatewayV2
       :api_id,
       :deployment_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3962,7 +4114,8 @@ module Aws::ApiGatewayV2
       :deployment_status,
       :deployment_status_message,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3984,7 +4137,8 @@ module Aws::ApiGatewayV2
       :domain_name_configurations,
       :mutual_tls_authentication,
       :routing_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4017,7 +4171,8 @@ module Aws::ApiGatewayV2
       :mutual_tls_authentication,
       :routing_mode,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4104,7 +4259,8 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4149,7 +4305,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4178,7 +4335,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4268,7 +4426,8 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4298,7 +4457,8 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4323,7 +4483,8 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4381,7 +4542,8 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4415,7 +4577,8 @@ module Aws::ApiGatewayV2
       :route_id,
       :route_response_id,
       :route_response_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4440,7 +4603,8 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :route_response_id,
       :route_response_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4497,7 +4661,8 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4543,7 +4708,8 @@ module Aws::ApiGatewayV2
       :route_settings,
       :stage_name,
       :stage_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4604,7 +4770,8 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4618,7 +4785,8 @@ module Aws::ApiGatewayV2
     class UpdateVpcLinkRequest < Struct.new(
       :name,
       :vpc_link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4659,7 +4827,8 @@ module Aws::ApiGatewayV2
       :vpc_link_status,
       :vpc_link_status_message,
       :vpc_link_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4701,7 +4870,8 @@ module Aws::ApiGatewayV2
       :vpc_link_status,
       :vpc_link_status_message,
       :vpc_link_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

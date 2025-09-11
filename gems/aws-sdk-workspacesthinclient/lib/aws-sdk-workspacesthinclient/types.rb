@@ -11,7 +11,8 @@ module Aws::WorkSpacesThinClient
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28,7 +29,8 @@ module Aws::WorkSpacesThinClient
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +79,8 @@ module Aws::WorkSpacesThinClient
       :client_token,
       :tags,
       :device_creation_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +89,8 @@ module Aws::WorkSpacesThinClient
     #   @return [Types::EnvironmentSummary]
     class CreateEnvironmentResponse < Struct.new(
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -99,12 +103,14 @@ module Aws::WorkSpacesThinClient
     class DeleteDeviceRequest < Struct.new(
       :id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDeviceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -117,12 +123,14 @@ module Aws::WorkSpacesThinClient
     class DeleteEnvironmentRequest < Struct.new(
       :id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,12 +147,14 @@ module Aws::WorkSpacesThinClient
       :id,
       :target_device_status,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterDeviceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +244,8 @@ module Aws::WorkSpacesThinClient
       :arn,
       :kms_key_arn,
       :last_user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +315,8 @@ module Aws::WorkSpacesThinClient
       :updated_at,
       :arn,
       :last_user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +398,8 @@ module Aws::WorkSpacesThinClient
       :arn,
       :kms_key_arn,
       :device_creation_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +461,8 @@ module Aws::WorkSpacesThinClient
       :created_at,
       :updated_at,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +471,8 @@ module Aws::WorkSpacesThinClient
     #   @return [String]
     class GetDeviceRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +481,8 @@ module Aws::WorkSpacesThinClient
     #   @return [Types::Device]
     class GetDeviceResponse < Struct.new(
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +491,8 @@ module Aws::WorkSpacesThinClient
     #   @return [String]
     class GetEnvironmentRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +501,8 @@ module Aws::WorkSpacesThinClient
     #   @return [Types::Environment]
     class GetEnvironmentResponse < Struct.new(
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +511,8 @@ module Aws::WorkSpacesThinClient
     #   @return [String]
     class GetSoftwareSetRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -502,7 +521,8 @@ module Aws::WorkSpacesThinClient
     #   @return [Types::SoftwareSet]
     class GetSoftwareSetResponse < Struct.new(
       :software_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +535,8 @@ module Aws::WorkSpacesThinClient
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +549,8 @@ module Aws::WorkSpacesThinClient
     class ListDevicesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -541,7 +563,8 @@ module Aws::WorkSpacesThinClient
     class ListDevicesResponse < Struct.new(
       :devices,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +577,8 @@ module Aws::WorkSpacesThinClient
     class ListEnvironmentsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -567,7 +591,8 @@ module Aws::WorkSpacesThinClient
     class ListEnvironmentsResponse < Struct.new(
       :environments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -580,7 +605,8 @@ module Aws::WorkSpacesThinClient
     class ListSoftwareSetsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -593,7 +619,8 @@ module Aws::WorkSpacesThinClient
     class ListSoftwareSetsResponse < Struct.new(
       :software_sets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -602,7 +629,8 @@ module Aws::WorkSpacesThinClient
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +639,8 @@ module Aws::WorkSpacesThinClient
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -645,7 +674,8 @@ module Aws::WorkSpacesThinClient
       :end_time_minute,
       :days_of_the_week,
       :apply_time_of,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +692,8 @@ module Aws::WorkSpacesThinClient
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +718,8 @@ module Aws::WorkSpacesThinClient
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +733,8 @@ module Aws::WorkSpacesThinClient
     class Software < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +768,8 @@ module Aws::WorkSpacesThinClient
       :validation_status,
       :software,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +799,8 @@ module Aws::WorkSpacesThinClient
       :supported_until,
       :validation_status,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -778,12 +813,14 @@ module Aws::WorkSpacesThinClient
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +841,8 @@ module Aws::WorkSpacesThinClient
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,12 +855,14 @@ module Aws::WorkSpacesThinClient
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +883,8 @@ module Aws::WorkSpacesThinClient
       :name,
       :desired_software_set_id,
       :software_set_update_schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -852,7 +893,8 @@ module Aws::WorkSpacesThinClient
     #   @return [Types::DeviceSummary]
     class UpdateDeviceResponse < Struct.new(
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +935,8 @@ module Aws::WorkSpacesThinClient
       :software_set_update_mode,
       :desired_software_set_id,
       :device_creation_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +945,8 @@ module Aws::WorkSpacesThinClient
     #   @return [Types::EnvironmentSummary]
     class UpdateEnvironmentResponse < Struct.new(
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,12 +959,14 @@ module Aws::WorkSpacesThinClient
     class UpdateSoftwareSetRequest < Struct.new(
       :id,
       :validation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateSoftwareSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +983,8 @@ module Aws::WorkSpacesThinClient
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +998,8 @@ module Aws::WorkSpacesThinClient
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

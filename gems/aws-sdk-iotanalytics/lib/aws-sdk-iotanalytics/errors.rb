@@ -40,7 +40,7 @@ module Aws::IoTAnalytics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTAnalytics::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::IoTAnalytics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTAnalytics::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::IoTAnalytics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTAnalytics::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::IoTAnalytics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTAnalytics::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -102,7 +102,7 @@ module Aws::IoTAnalytics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTAnalytics::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::IoTAnalytics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTAnalytics::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::IoTAnalytics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTAnalytics::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -9,7 +9,7 @@ module Aws
     #
     # @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-imds-credentials.html
     class InstanceProfileCredentials
-      include CredentialsProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # Raised when InstanceProfileCredentialsProvider fails to parse the metadata response after retries

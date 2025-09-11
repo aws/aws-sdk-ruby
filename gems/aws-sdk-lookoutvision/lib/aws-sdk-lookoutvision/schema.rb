@@ -790,7 +790,6 @@ module Aws::LookoutVision
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/2020-11-20/projects/{ProjectName}/datasets/{DatasetType}/entries", "code" => 202}}
       end)
-
     end
 
     class << self

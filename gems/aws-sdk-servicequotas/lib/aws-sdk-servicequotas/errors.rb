@@ -51,7 +51,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::AWSServiceAccessNotEnabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -64,7 +64,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::DependencyAccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::IllegalArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -103,7 +103,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::InvalidPaginationTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::InvalidResourceStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::NoAvailableOrganizationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::NoSuchResourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::OrganizationNotInAllFeaturesModeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -170,7 +170,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::QuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -183,7 +183,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -196,7 +196,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::ServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -209,7 +209,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::ServiceQuotaTemplateNotInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -222,7 +222,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::TagPolicyViolationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -235,7 +235,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::TemplatesNotAvailableInRegionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -249,7 +249,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -264,7 +264,7 @@ module Aws::ServiceQuotas
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceQuotas::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -13,7 +13,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +56,8 @@ module Aws::Route53Resolver
       :name,
       :mutation_protection,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +67,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallRuleGroupAssociation]
     class AssociateFirewallRuleGroupResponse < Struct.new(
       :firewall_rule_group_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +82,8 @@ module Aws::Route53Resolver
     class AssociateResolverEndpointIpAddressRequest < Struct.new(
       :resolver_endpoint_id,
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +92,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverEndpoint]
     class AssociateResolverEndpointIpAddressResponse < Struct.new(
       :resolver_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +109,8 @@ module Aws::Route53Resolver
     class AssociateResolverQueryLogConfigRequest < Struct.new(
       :resolver_query_log_config_id,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +119,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverQueryLogConfigAssociation]
     class AssociateResolverQueryLogConfigResponse < Struct.new(
       :resolver_query_log_config_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +138,8 @@ module Aws::Route53Resolver
       :resolver_rule_id,
       :name,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +148,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverRuleAssociation]
     class AssociateResolverRuleResponse < Struct.new(
       :resolver_rule_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +160,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +180,8 @@ module Aws::Route53Resolver
       :creator_request_id,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,7 +190,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallDomainList]
     class CreateFirewallDomainListResponse < Struct.new(
       :firewall_domain_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +210,8 @@ module Aws::Route53Resolver
       :creator_request_id,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +220,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallRuleGroup]
     class CreateFirewallRuleGroupResponse < Struct.new(
       :firewall_rule_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +399,8 @@ module Aws::Route53Resolver
       :qtype,
       :dns_threat_protection,
       :confidence_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +410,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallRule]
     class CreateFirewallRuleResponse < Struct.new(
       :firewall_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +450,8 @@ module Aws::Route53Resolver
       :preferred_instance_type,
       :outpost_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +461,8 @@ module Aws::Route53Resolver
     #   @return [Types::OutpostResolver]
     class CreateOutpostResolverResponse < Struct.new(
       :outpost_resolver,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +578,8 @@ module Aws::Route53Resolver
       :tags,
       :resolver_endpoint_type,
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +588,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverEndpoint]
     class CreateResolverEndpointResponse < Struct.new(
       :resolver_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +640,8 @@ module Aws::Route53Resolver
       :destination_arn,
       :creator_request_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +650,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverQueryLogConfig]
     class CreateResolverQueryLogConfigResponse < Struct.new(
       :resolver_query_log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +704,8 @@ module Aws::Route53Resolver
       :resolver_endpoint_id,
       :tags,
       :delegation_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +714,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverRule]
     class CreateResolverRuleResponse < Struct.new(
       :resolver_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +724,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class DeleteFirewallDomainListRequest < Struct.new(
       :firewall_domain_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +734,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallDomainList]
     class DeleteFirewallDomainListResponse < Struct.new(
       :firewall_domain_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +744,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class DeleteFirewallRuleGroupRequest < Struct.new(
       :firewall_rule_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +754,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallRuleGroup]
     class DeleteFirewallRuleGroupResponse < Struct.new(
       :firewall_rule_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +829,8 @@ module Aws::Route53Resolver
       :firewall_domain_list_id,
       :firewall_threat_protection_id,
       :qtype,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -810,7 +839,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallRule]
     class DeleteFirewallRuleResponse < Struct.new(
       :firewall_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +849,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class DeleteOutpostResolverRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +860,8 @@ module Aws::Route53Resolver
     #   @return [Types::OutpostResolver]
     class DeleteOutpostResolverResponse < Struct.new(
       :outpost_resolver,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,7 +870,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class DeleteResolverEndpointRequest < Struct.new(
       :resolver_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +880,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverEndpoint]
     class DeleteResolverEndpointResponse < Struct.new(
       :resolver_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +890,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class DeleteResolverQueryLogConfigRequest < Struct.new(
       :resolver_query_log_config_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -865,7 +900,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverQueryLogConfig]
     class DeleteResolverQueryLogConfigResponse < Struct.new(
       :resolver_query_log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,7 +910,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class DeleteResolverRuleRequest < Struct.new(
       :resolver_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +920,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverRule]
     class DeleteResolverRuleResponse < Struct.new(
       :resolver_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +930,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class DisassociateFirewallRuleGroupRequest < Struct.new(
       :firewall_rule_group_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -901,7 +940,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallRuleGroupAssociation]
     class DisassociateFirewallRuleGroupResponse < Struct.new(
       :firewall_rule_group_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +954,8 @@ module Aws::Route53Resolver
     class DisassociateResolverEndpointIpAddressRequest < Struct.new(
       :resolver_endpoint_id,
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +964,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverEndpoint]
     class DisassociateResolverEndpointIpAddressResponse < Struct.new(
       :resolver_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -936,7 +978,8 @@ module Aws::Route53Resolver
     class DisassociateResolverQueryLogConfigRequest < Struct.new(
       :resolver_query_log_config_id,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -945,7 +988,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverQueryLogConfigAssociation]
     class DisassociateResolverQueryLogConfigResponse < Struct.new(
       :resolver_query_log_config_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -958,7 +1002,8 @@ module Aws::Route53Resolver
     class DisassociateResolverRuleRequest < Struct.new(
       :vpc_id,
       :resolver_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1012,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverRuleAssociation]
     class DisassociateResolverRuleResponse < Struct.new(
       :resolver_rule_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1272,8 @@ module Aws::Route53Resolver
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1307,8 @@ module Aws::Route53Resolver
       :resource_id,
       :owner_id,
       :firewall_fail_open,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1357,8 @@ module Aws::Route53Resolver
       :creator_request_id,
       :creation_time,
       :modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1338,7 +1387,8 @@ module Aws::Route53Resolver
       :name,
       :creator_request_id,
       :managed_owner_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1533,7 +1583,8 @@ module Aws::Route53Resolver
       :qtype,
       :dns_threat_protection,
       :confidence_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1638,8 @@ module Aws::Route53Resolver
       :share_status,
       :creation_time,
       :modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1702,8 @@ module Aws::Route53Resolver
       :creator_request_id,
       :creation_time,
       :modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1738,8 @@ module Aws::Route53Resolver
       :owner_id,
       :creator_request_id,
       :share_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1748,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetFirewallConfigRequest < Struct.new(
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1704,7 +1759,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallConfig]
     class GetFirewallConfigResponse < Struct.new(
       :firewall_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1713,7 +1769,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetFirewallDomainListRequest < Struct.new(
       :firewall_domain_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1722,7 +1779,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallDomainList]
     class GetFirewallDomainListResponse < Struct.new(
       :firewall_domain_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1731,7 +1789,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetFirewallRuleGroupAssociationRequest < Struct.new(
       :firewall_rule_group_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1740,7 +1799,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallRuleGroupAssociation]
     class GetFirewallRuleGroupAssociationResponse < Struct.new(
       :firewall_rule_group_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1749,7 +1809,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetFirewallRuleGroupPolicyRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1760,7 +1821,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetFirewallRuleGroupPolicyResponse < Struct.new(
       :firewall_rule_group_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1769,7 +1831,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetFirewallRuleGroupRequest < Struct.new(
       :firewall_rule_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,7 +1841,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallRuleGroup]
     class GetFirewallRuleGroupResponse < Struct.new(
       :firewall_rule_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1787,7 +1851,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetOutpostResolverRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1797,7 +1862,8 @@ module Aws::Route53Resolver
     #   @return [Types::OutpostResolver]
     class GetOutpostResolverResponse < Struct.new(
       :outpost_resolver,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1806,7 +1872,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverConfigRequest < Struct.new(
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1816,7 +1883,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverConfig]
     class GetResolverConfigResponse < Struct.new(
       :resolver_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1825,7 +1893,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverDnssecConfigRequest < Struct.new(
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1903,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverDnssecConfig]
     class GetResolverDnssecConfigResponse < Struct.new(
       :resolver_dnssec_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1843,7 +1913,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverEndpointRequest < Struct.new(
       :resolver_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1852,7 +1923,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverEndpoint]
     class GetResolverEndpointResponse < Struct.new(
       :resolver_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1861,7 +1933,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverQueryLogConfigAssociationRequest < Struct.new(
       :resolver_query_log_config_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1943,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverQueryLogConfigAssociation]
     class GetResolverQueryLogConfigAssociationResponse < Struct.new(
       :resolver_query_log_config_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1879,7 +1953,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverQueryLogConfigPolicyRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1889,7 +1964,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverQueryLogConfigPolicyResponse < Struct.new(
       :resolver_query_log_config_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1898,7 +1974,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverQueryLogConfigRequest < Struct.new(
       :resolver_query_log_config_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1907,7 +1984,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverQueryLogConfig]
     class GetResolverQueryLogConfigResponse < Struct.new(
       :resolver_query_log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1916,7 +1994,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverRuleAssociationRequest < Struct.new(
       :resolver_rule_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1925,7 +2004,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverRuleAssociation]
     class GetResolverRuleAssociationResponse < Struct.new(
       :resolver_rule_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1934,7 +2014,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverRulePolicyRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1943,7 +2024,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverRulePolicyResponse < Struct.new(
       :resolver_rule_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1952,7 +2034,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class GetResolverRuleRequest < Struct.new(
       :resolver_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1961,7 +2044,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverRule]
     class GetResolverRuleResponse < Struct.new(
       :resolver_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1981,7 +2065,8 @@ module Aws::Route53Resolver
       :firewall_domain_list_id,
       :operation,
       :domain_file_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2087,8 @@ module Aws::Route53Resolver
       :name,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2011,7 +2097,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2020,7 +2107,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2033,7 +2121,8 @@ module Aws::Route53Resolver
     class InvalidParameterException < Struct.new(
       :message,
       :field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2042,7 +2131,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class InvalidPolicyDocument < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2051,7 +2141,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2060,7 +2151,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class InvalidTagException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2083,7 +2175,8 @@ module Aws::Route53Resolver
       :subnet_id,
       :ip,
       :ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2125,7 +2218,8 @@ module Aws::Route53Resolver
       :status_message,
       :creation_time,
       :modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2249,8 @@ module Aws::Route53Resolver
       :subnet_id,
       :ip,
       :ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2168,7 +2263,8 @@ module Aws::Route53Resolver
     class LimitExceededException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2188,7 +2284,8 @@ module Aws::Route53Resolver
     class ListFirewallConfigsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2203,7 +2300,8 @@ module Aws::Route53Resolver
     class ListFirewallConfigsResponse < Struct.new(
       :next_token,
       :firewall_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2223,7 +2321,8 @@ module Aws::Route53Resolver
     class ListFirewallDomainListsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2239,7 +2338,8 @@ module Aws::Route53Resolver
     class ListFirewallDomainListsResponse < Struct.new(
       :next_token,
       :firewall_domain_lists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2363,8 @@ module Aws::Route53Resolver
       :firewall_domain_list_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2279,7 +2380,8 @@ module Aws::Route53Resolver
     class ListFirewallDomainsResponse < Struct.new(
       :next_token,
       :domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2319,7 +2421,8 @@ module Aws::Route53Resolver
       :status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2334,7 +2437,8 @@ module Aws::Route53Resolver
     class ListFirewallRuleGroupAssociationsResponse < Struct.new(
       :next_token,
       :firewall_rule_group_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2354,7 +2458,8 @@ module Aws::Route53Resolver
     class ListFirewallRuleGroupsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2369,7 +2474,8 @@ module Aws::Route53Resolver
     class ListFirewallRuleGroupsResponse < Struct.new(
       :next_token,
       :firewall_rule_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2418,7 +2524,8 @@ module Aws::Route53Resolver
       :action,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2434,7 +2541,8 @@ module Aws::Route53Resolver
     class ListFirewallRulesResponse < Struct.new(
       :next_token,
       :firewall_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2454,7 +2562,8 @@ module Aws::Route53Resolver
       :outpost_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2469,7 +2578,8 @@ module Aws::Route53Resolver
     class ListOutpostResolversResponse < Struct.new(
       :outpost_resolvers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2488,7 +2598,8 @@ module Aws::Route53Resolver
     class ListResolverConfigsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2507,7 +2618,8 @@ module Aws::Route53Resolver
     class ListResolverConfigsResponse < Struct.new(
       :next_token,
       :resolver_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2530,7 +2642,8 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2551,7 +2664,8 @@ module Aws::Route53Resolver
     class ListResolverDnssecConfigsResponse < Struct.new(
       :next_token,
       :resolver_dnssec_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2572,7 +2686,8 @@ module Aws::Route53Resolver
       :resolver_endpoint_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2592,7 +2707,8 @@ module Aws::Route53Resolver
       :next_token,
       :max_results,
       :ip_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2616,7 +2732,8 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2634,7 +2751,8 @@ module Aws::Route53Resolver
       :next_token,
       :max_results,
       :resolver_endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2743,7 +2861,8 @@ module Aws::Route53Resolver
       :filters,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2770,7 +2889,8 @@ module Aws::Route53Resolver
       :total_count,
       :total_filtered_count,
       :resolver_query_log_config_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2890,7 +3010,8 @@ module Aws::Route53Resolver
       :filters,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2917,7 +3038,8 @@ module Aws::Route53Resolver
       :total_count,
       :total_filtered_count,
       :resolver_query_log_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2947,7 +3069,8 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2967,7 +3090,8 @@ module Aws::Route53Resolver
       :next_token,
       :max_results,
       :resolver_rule_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2991,7 +3115,8 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3135,8 @@ module Aws::Route53Resolver
       :next_token,
       :max_results,
       :resolver_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3030,7 +3156,8 @@ module Aws::Route53Resolver
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3045,7 +3172,8 @@ module Aws::Route53Resolver
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3098,7 +3226,8 @@ module Aws::Route53Resolver
       :status,
       :status_message,
       :outpost_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3111,7 +3240,8 @@ module Aws::Route53Resolver
     class PutFirewallRuleGroupPolicyRequest < Struct.new(
       :arn,
       :firewall_rule_group_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3120,7 +3250,8 @@ module Aws::Route53Resolver
     #   @return [Boolean]
     class PutFirewallRuleGroupPolicyResponse < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3159,7 +3290,8 @@ module Aws::Route53Resolver
     class PutResolverQueryLogConfigPolicyRequest < Struct.new(
       :arn,
       :resolver_query_log_config_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3169,7 +3301,8 @@ module Aws::Route53Resolver
     #   @return [Boolean]
     class PutResolverQueryLogConfigPolicyResponse < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3217,7 +3350,8 @@ module Aws::Route53Resolver
     class PutResolverRulePolicyRequest < Struct.new(
       :arn,
       :resolver_rule_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3227,7 +3361,8 @@ module Aws::Route53Resolver
     #   @return [Boolean]
     class PutResolverRulePolicyResponse < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3277,7 +3412,8 @@ module Aws::Route53Resolver
       :resource_id,
       :owner_id,
       :autodefined_reverse,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3317,7 +3453,8 @@ module Aws::Route53Resolver
       :owner_id,
       :resource_id,
       :validation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3500,7 +3637,8 @@ module Aws::Route53Resolver
       :preferred_instance_type,
       :resolver_endpoint_type,
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3584,7 +3722,8 @@ module Aws::Route53Resolver
       :destination_arn,
       :creator_request_id,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3659,7 +3798,8 @@ module Aws::Route53Resolver
       :error,
       :error_message,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3748,7 +3888,8 @@ module Aws::Route53Resolver
       :creation_time,
       :modification_time,
       :delegation_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3786,7 +3927,8 @@ module Aws::Route53Resolver
       :vpc_id,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3807,7 +3949,8 @@ module Aws::Route53Resolver
       :name,
       :target_ips,
       :resolver_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3820,7 +3963,8 @@ module Aws::Route53Resolver
     class ResourceExistsException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3833,7 +3977,8 @@ module Aws::Route53Resolver
     class ResourceInUseException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3846,7 +3991,8 @@ module Aws::Route53Resolver
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3859,7 +4005,8 @@ module Aws::Route53Resolver
     class ResourceUnavailableException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3868,7 +4015,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3884,7 +4032,8 @@ module Aws::Route53Resolver
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3930,12 +4079,14 @@ module Aws::Route53Resolver
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3969,7 +4120,8 @@ module Aws::Route53Resolver
       :ipv6,
       :protocol,
       :server_name_indication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3978,7 +4130,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3987,7 +4140,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class UnknownResourceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4033,12 +4187,14 @@ module Aws::Route53Resolver
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4062,7 +4218,8 @@ module Aws::Route53Resolver
     class UpdateFirewallConfigRequest < Struct.new(
       :resource_id,
       :firewall_fail_open,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4071,7 +4228,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallConfig]
     class UpdateFirewallConfigResponse < Struct.new(
       :firewall_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4120,7 +4278,8 @@ module Aws::Route53Resolver
       :firewall_domain_list_id,
       :operation,
       :domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4141,7 +4300,8 @@ module Aws::Route53Resolver
       :name,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4167,7 +4327,8 @@ module Aws::Route53Resolver
       :priority,
       :mutation_protection,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4176,7 +4337,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallRuleGroupAssociation]
     class UpdateFirewallRuleGroupAssociationResponse < Struct.new(
       :firewall_rule_group_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4365,7 +4527,8 @@ module Aws::Route53Resolver
       :qtype,
       :dns_threat_protection,
       :confidence_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4374,7 +4537,8 @@ module Aws::Route53Resolver
     #   @return [Types::FirewallRule]
     class UpdateFirewallRuleResponse < Struct.new(
       :firewall_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4392,7 +4556,8 @@ module Aws::Route53Resolver
     class UpdateIpAddress < Struct.new(
       :ip_id,
       :ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4415,7 +4580,8 @@ module Aws::Route53Resolver
       :name,
       :instance_count,
       :preferred_instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4424,7 +4590,8 @@ module Aws::Route53Resolver
     #   @return [Types::OutpostResolver]
     class UpdateOutpostResolverResponse < Struct.new(
       :outpost_resolver,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4448,7 +4615,8 @@ module Aws::Route53Resolver
     class UpdateResolverConfigRequest < Struct.new(
       :resource_id,
       :autodefined_reverse_flag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4457,7 +4625,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverConfig]
     class UpdateResolverConfigResponse < Struct.new(
       :resolver_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4471,7 +4640,8 @@ module Aws::Route53Resolver
     class UpdateResolverDnssecConfigRequest < Struct.new(
       :resource_id,
       :validation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4480,7 +4650,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverDnssecConfig]
     class UpdateResolverDnssecConfigResponse < Struct.new(
       :resolver_dnssec_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4558,7 +4729,8 @@ module Aws::Route53Resolver
       :resolver_endpoint_type,
       :update_ip_addresses,
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4567,7 +4739,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverEndpoint]
     class UpdateResolverEndpointResponse < Struct.new(
       :resolver_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4580,7 +4753,8 @@ module Aws::Route53Resolver
     class UpdateResolverRuleRequest < Struct.new(
       :resolver_rule_id,
       :config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4589,7 +4763,8 @@ module Aws::Route53Resolver
     #   @return [Types::ResolverRule]
     class UpdateResolverRuleResponse < Struct.new(
       :resolver_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4599,7 +4774,8 @@ module Aws::Route53Resolver
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

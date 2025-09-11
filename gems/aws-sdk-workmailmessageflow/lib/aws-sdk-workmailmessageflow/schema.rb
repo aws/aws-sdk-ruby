@@ -72,7 +72,6 @@ module Aws::WorkMailMessageFlow
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/messages/{messageId}", "code" => 200}}
       end)
-
     end
 
     class << self

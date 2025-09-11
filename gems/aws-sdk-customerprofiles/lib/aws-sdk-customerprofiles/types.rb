@@ -11,7 +11,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +37,8 @@ module Aws::CustomerProfiles
       :key_name,
       :values,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +51,8 @@ module Aws::CustomerProfiles
     class AddProfileKeyResponse < Struct.new(
       :key_name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +68,8 @@ module Aws::CustomerProfiles
     class AdditionalSearchKey < Struct.new(
       :key_name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +117,8 @@ module Aws::CustomerProfiles
       :province,
       :country,
       :postal_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +148,8 @@ module Aws::CustomerProfiles
       :postal_code,
       :province,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -159,7 +165,8 @@ module Aws::CustomerProfiles
     class AppflowIntegration < Struct.new(
       :flow_definition,
       :batches,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,7 +186,8 @@ module Aws::CustomerProfiles
       :source_connector_type,
       :connector_profile_name,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +206,8 @@ module Aws::CustomerProfiles
       :records_processed,
       :steps_completed,
       :total_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -251,7 +260,8 @@ module Aws::CustomerProfiles
       :batch_records_end_time,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -274,7 +284,8 @@ module Aws::CustomerProfiles
     class AttributeDetails < Struct.new(
       :attributes,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +299,8 @@ module Aws::CustomerProfiles
     class AttributeDimension < Struct.new(
       :dimension_type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +310,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class AttributeItem < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +398,8 @@ module Aws::CustomerProfiles
       :address,
       :phone_number,
       :email_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +409,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class AttributeValueItem < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +438,8 @@ module Aws::CustomerProfiles
       :consolidation,
       :conflict_resolution,
       :min_allowed_confidence_score_for_merging,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +448,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +465,8 @@ module Aws::CustomerProfiles
     class Batch < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +484,8 @@ module Aws::CustomerProfiles
       :code,
       :message,
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +507,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :profile_ids,
       :condition_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +526,8 @@ module Aws::CustomerProfiles
       :errors,
       :calculated_attribute_values,
       :condition_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +545,8 @@ module Aws::CustomerProfiles
       :code,
       :message,
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +559,8 @@ module Aws::CustomerProfiles
     class BatchGetProfileRequest < Struct.new(
       :domain_name,
       :profile_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +574,8 @@ module Aws::CustomerProfiles
     class BatchGetProfileResponse < Struct.new(
       :errors,
       :profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +593,8 @@ module Aws::CustomerProfiles
       :dimension_type,
       :values,
       :condition_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +626,8 @@ module Aws::CustomerProfiles
       :profile_id,
       :value,
       :last_object_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -613,7 +639,8 @@ module Aws::CustomerProfiles
     #   @return [Types::RangeOverride]
     class ConditionOverrides < Struct.new(
       :range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +660,8 @@ module Aws::CustomerProfiles
       :range,
       :object_count,
       :threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +689,8 @@ module Aws::CustomerProfiles
     class ConflictResolution < Struct.new(
       :conflict_resolving_model,
       :source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +716,8 @@ module Aws::CustomerProfiles
       :salesforce,
       :service_now,
       :zendesk,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +727,8 @@ module Aws::CustomerProfiles
     #   @return [Array<Array<String>>]
     class Consolidation < Struct.new(
       :matching_attributes_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +751,8 @@ module Aws::CustomerProfiles
       :key_value,
       :profile_id,
       :contact_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +801,8 @@ module Aws::CustomerProfiles
       :statistic,
       :use_historical_data,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +865,8 @@ module Aws::CustomerProfiles
       :status,
       :readiness,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -871,7 +905,8 @@ module Aws::CustomerProfiles
       :layout_type,
       :layout,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -919,7 +954,8 @@ module Aws::CustomerProfiles
       :tags,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -974,7 +1010,8 @@ module Aws::CustomerProfiles
       :matching,
       :rule_based_matching,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1067,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1090,8 @@ module Aws::CustomerProfiles
       :uri,
       :event_stream_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1104,8 @@ module Aws::CustomerProfiles
     class CreateEventStreamResponse < Struct.new(
       :event_stream_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1104,7 +1144,8 @@ module Aws::CustomerProfiles
       :segment_filter,
       :event_trigger_limits,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1188,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1176,7 +1218,8 @@ module Aws::CustomerProfiles
       :object_type_name,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1189,7 +1232,8 @@ module Aws::CustomerProfiles
     class CreateIntegrationWorkflowResponse < Struct.new(
       :workflow_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1345,8 @@ module Aws::CustomerProfiles
       :gender_string,
       :profile_type,
       :engagement_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1310,7 +1355,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class CreateProfileResponse < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,7 +1386,8 @@ module Aws::CustomerProfiles
       :description,
       :segment_groups,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1369,7 +1416,8 @@ module Aws::CustomerProfiles
       :created_at,
       :segment_definition_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1382,7 +1430,8 @@ module Aws::CustomerProfiles
     class CreateSegmentEstimateRequest < Struct.new(
       :domain_name,
       :segment_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1401,7 +1450,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :estimate_id,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1438,7 +1488,8 @@ module Aws::CustomerProfiles
       :encryption_key,
       :role_arn,
       :destination_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1447,7 +1498,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class CreateSegmentSnapshotResponse < Struct.new(
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1477,7 +1529,8 @@ module Aws::CustomerProfiles
       :fields,
       :unique_key,
       :data_expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1486,7 +1539,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class CreateUploadJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1500,7 +1554,8 @@ module Aws::CustomerProfiles
     class DateDimension < Struct.new(
       :dimension_type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,12 +1568,14 @@ module Aws::CustomerProfiles
     class DeleteCalculatedAttributeDefinitionRequest < Struct.new(
       :domain_name,
       :calculated_attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCalculatedAttributeDefinitionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1588,8 @@ module Aws::CustomerProfiles
     class DeleteDomainLayoutRequest < Struct.new(
       :domain_name,
       :layout_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1540,7 +1598,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class DeleteDomainLayoutResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,7 +1608,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1558,7 +1618,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class DeleteDomainResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1571,12 +1632,14 @@ module Aws::CustomerProfiles
     class DeleteEventStreamRequest < Struct.new(
       :domain_name,
       :event_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEventStreamResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1652,8 @@ module Aws::CustomerProfiles
     class DeleteEventTriggerRequest < Struct.new(
       :domain_name,
       :event_trigger_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1598,7 +1662,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class DeleteEventTriggerResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1676,8 @@ module Aws::CustomerProfiles
     class DeleteIntegrationRequest < Struct.new(
       :domain_name,
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1620,7 +1686,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class DeleteIntegrationResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1641,7 +1708,8 @@ module Aws::CustomerProfiles
       :key_name,
       :values,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1718,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class DeleteProfileKeyResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1671,7 +1740,8 @@ module Aws::CustomerProfiles
       :profile_object_unique_key,
       :object_type_name,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1750,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class DeleteProfileObjectResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1693,7 +1764,8 @@ module Aws::CustomerProfiles
     class DeleteProfileObjectTypeRequest < Struct.new(
       :domain_name,
       :object_type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1702,7 +1774,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class DeleteProfileObjectTypeResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1715,7 +1788,8 @@ module Aws::CustomerProfiles
     class DeleteProfileRequest < Struct.new(
       :profile_id,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1724,7 +1798,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class DeleteProfileResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1737,7 +1812,8 @@ module Aws::CustomerProfiles
     class DeleteSegmentDefinitionRequest < Struct.new(
       :domain_name,
       :segment_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1746,7 +1822,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class DeleteSegmentDefinitionResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1759,12 +1836,14 @@ module Aws::CustomerProfiles
     class DeleteWorkflowRequest < Struct.new(
       :domain_name,
       :workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkflowResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1783,7 +1862,8 @@ module Aws::CustomerProfiles
       :uri,
       :status,
       :unhealthy_since,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1876,8 @@ module Aws::CustomerProfiles
     class DetectProfileObjectTypeRequest < Struct.new(
       :objects,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1806,7 +1887,8 @@ module Aws::CustomerProfiles
     #   @return [Array<Types::DetectedProfileObjectType>]
     class DetectProfileObjectTypeResponse < Struct.new(
       :detected_profile_object_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1825,7 +1907,8 @@ module Aws::CustomerProfiles
       :source_last_updated_timestamp_format,
       :fields,
       :keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,7 +1923,8 @@ module Aws::CustomerProfiles
       :profile_attributes,
       :calculated_attributes,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ProfileAttributes < Dimension; end
@@ -1868,7 +1952,8 @@ module Aws::CustomerProfiles
       :metering_profile_count,
       :object_count,
       :total_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1891,7 +1976,8 @@ module Aws::CustomerProfiles
     class EngagementPreferences < Struct.new(
       :phone,
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1915,7 +2001,8 @@ module Aws::CustomerProfiles
       :status,
       :unhealthy_since,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +2036,8 @@ module Aws::CustomerProfiles
       :stopped_since,
       :destination_summary,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1963,7 +2051,8 @@ module Aws::CustomerProfiles
     class EventTriggerCondition < Struct.new(
       :event_trigger_dimensions,
       :logical_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1973,7 +2062,8 @@ module Aws::CustomerProfiles
     #   @return [Array<Types::ObjectAttribute>]
     class EventTriggerDimension < Struct.new(
       :object_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2079,8 @@ module Aws::CustomerProfiles
     class EventTriggerLimits < Struct.new(
       :event_expiration,
       :periods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2019,7 +2110,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2034,7 +2126,8 @@ module Aws::CustomerProfiles
     #   @return [Types::S3ExportingConfig]
     class ExportingConfig < Struct.new(
       :s3_exporting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2044,7 +2137,8 @@ module Aws::CustomerProfiles
     #   @return [Types::S3ExportingLocation]
     class ExportingLocation < Struct.new(
       :s3_exporting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2153,8 @@ module Aws::CustomerProfiles
     class ExtraLengthValueProfileDimension < Struct.new(
       :dimension_type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2157,7 +2252,8 @@ module Aws::CustomerProfiles
       :attributes,
       :profile_type,
       :engagement_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2172,7 +2268,8 @@ module Aws::CustomerProfiles
     class Filter < Struct.new(
       :include,
       :groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2187,7 +2284,8 @@ module Aws::CustomerProfiles
     class FilterAttributeDimension < Struct.new(
       :dimension_type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2197,7 +2295,8 @@ module Aws::CustomerProfiles
     #   @return [Hash<String, Types::FilterAttributeDimension>]
     class FilterDimension < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2211,7 +2310,8 @@ module Aws::CustomerProfiles
     class FilterGroup < Struct.new(
       :type,
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2247,7 +2347,8 @@ module Aws::CustomerProfiles
       :source_flow_config,
       :tasks,
       :trigger_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2364,8 @@ module Aws::CustomerProfiles
     class FoundByKeyValue < Struct.new(
       :key_name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2285,7 +2387,8 @@ module Aws::CustomerProfiles
       :consolidation,
       :conflict_resolution,
       :min_allowed_confidence_score_for_merging,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2307,7 +2410,8 @@ module Aws::CustomerProfiles
       :number_of_matches_in_sample,
       :number_of_profiles_in_sample,
       :number_of_profiles_will_be_merged,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2327,7 +2431,8 @@ module Aws::CustomerProfiles
     class GetCalculatedAttributeDefinitionRequest < Struct.new(
       :domain_name,
       :calculated_attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2390,7 +2495,8 @@ module Aws::CustomerProfiles
       :status,
       :readiness,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2407,7 +2513,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :profile_id,
       :calculated_attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2434,7 +2541,8 @@ module Aws::CustomerProfiles
       :is_data_partial,
       :value,
       :last_object_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2447,7 +2555,8 @@ module Aws::CustomerProfiles
     class GetDomainLayoutRequest < Struct.new(
       :domain_name,
       :layout_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2494,7 +2603,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2508,7 +2618,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class GetDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2568,7 +2679,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2581,7 +2693,8 @@ module Aws::CustomerProfiles
     class GetEventStreamRequest < Struct.new(
       :domain_name,
       :event_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2614,7 +2727,8 @@ module Aws::CustomerProfiles
       :stopped_since,
       :destination_details,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2627,7 +2741,8 @@ module Aws::CustomerProfiles
     class GetEventTriggerRequest < Struct.new(
       :domain_name,
       :event_trigger_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2670,7 +2785,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2683,7 +2799,8 @@ module Aws::CustomerProfiles
     class GetIdentityResolutionJobRequest < Struct.new(
       :domain_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2767,7 +2884,8 @@ module Aws::CustomerProfiles
       :auto_merging,
       :exporting_location,
       :job_stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2780,7 +2898,8 @@ module Aws::CustomerProfiles
     class GetIntegrationRequest < Struct.new(
       :domain_name,
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2835,7 +2954,8 @@ module Aws::CustomerProfiles
       :is_unstructured,
       :role_arn,
       :event_trigger_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2853,7 +2973,8 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2874,7 +2995,8 @@ module Aws::CustomerProfiles
       :match_generation_date,
       :potential_matches,
       :matches,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2887,7 +3009,8 @@ module Aws::CustomerProfiles
     class GetProfileObjectTypeRequest < Struct.new(
       :domain_name,
       :object_type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2954,7 +3077,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2968,7 +3092,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class GetProfileObjectTypeTemplateRequest < Struct.new(
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3006,7 +3131,8 @@ module Aws::CustomerProfiles
       :source_last_updated_timestamp_format,
       :fields,
       :keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3024,7 +3150,8 @@ module Aws::CustomerProfiles
     class GetSegmentDefinitionRequest < Struct.new(
       :domain_name,
       :segment_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3057,7 +3184,8 @@ module Aws::CustomerProfiles
       :segment_definition_arn,
       :created_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3070,7 +3198,8 @@ module Aws::CustomerProfiles
     class GetSegmentEstimateRequest < Struct.new(
       :domain_name,
       :estimate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3100,7 +3229,8 @@ module Aws::CustomerProfiles
       :estimate,
       :message,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3122,7 +3252,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :segment_definition_name,
       :profile_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3140,7 +3271,8 @@ module Aws::CustomerProfiles
       :segment_definition_name,
       :profiles,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3157,7 +3289,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :segment_definition_name,
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3193,7 +3326,8 @@ module Aws::CustomerProfiles
       :encryption_key,
       :role_arn,
       :destination_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3222,7 +3356,8 @@ module Aws::CustomerProfiles
       :match_type,
       :search_key,
       :search_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3258,7 +3393,8 @@ module Aws::CustomerProfiles
       :rule_level,
       :confidence_score,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3272,7 +3408,8 @@ module Aws::CustomerProfiles
     class GetUploadJobPathRequest < Struct.new(
       :domain_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3303,7 +3440,8 @@ module Aws::CustomerProfiles
       :url,
       :client_token,
       :valid_until,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3316,7 +3454,8 @@ module Aws::CustomerProfiles
     class GetUploadJobRequest < Struct.new(
       :domain_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3409,7 +3548,8 @@ module Aws::CustomerProfiles
       :unique_key,
       :results_summary,
       :data_expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3422,7 +3562,8 @@ module Aws::CustomerProfiles
     class GetWorkflowRequest < Struct.new(
       :domain_name,
       :workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3459,7 +3600,8 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :attributes,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3481,7 +3623,8 @@ module Aws::CustomerProfiles
       :workflow_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3502,7 +3645,8 @@ module Aws::CustomerProfiles
       :workflow_type,
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3524,7 +3668,8 @@ module Aws::CustomerProfiles
       :source_segments,
       :source_type,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3603,7 +3748,8 @@ module Aws::CustomerProfiles
       :job_stats,
       :exporting_location,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3615,7 +3761,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class IncrementalPullConfig < Struct.new(
       :datetime_type_field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3625,7 +3772,8 @@ module Aws::CustomerProfiles
     #   @return [Types::AppflowIntegration]
     class IntegrationConfig < Struct.new(
       :appflow_integration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3634,7 +3782,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3648,7 +3797,8 @@ module Aws::CustomerProfiles
     class JobSchedule < Struct.new(
       :day_of_the_week,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3666,7 +3816,8 @@ module Aws::CustomerProfiles
       :number_of_profiles_reviewed,
       :number_of_matches_found,
       :number_of_merges_done,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3714,7 +3865,8 @@ module Aws::CustomerProfiles
       :tags,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3740,7 +3892,8 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       :include_hidden,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3753,7 +3906,8 @@ module Aws::CustomerProfiles
     class ListAccountIntegrationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3794,7 +3948,8 @@ module Aws::CustomerProfiles
       :use_historical_data,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3812,7 +3967,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3826,7 +3982,8 @@ module Aws::CustomerProfiles
     class ListCalculatedAttributeDefinitionsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3854,7 +4011,8 @@ module Aws::CustomerProfiles
       :is_data_partial,
       :value,
       :last_object_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3876,7 +4034,8 @@ module Aws::CustomerProfiles
       :max_results,
       :domain_name,
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3890,7 +4049,8 @@ module Aws::CustomerProfiles
     class ListCalculatedAttributesForProfileResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3912,7 +4072,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3929,7 +4090,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3942,7 +4104,8 @@ module Aws::CustomerProfiles
     class ListDomainLayoutsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3955,7 +4118,8 @@ module Aws::CustomerProfiles
     class ListDomainsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3968,7 +4132,8 @@ module Aws::CustomerProfiles
     class ListDomainsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3985,7 +4150,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3998,7 +4164,8 @@ module Aws::CustomerProfiles
     class ListEventStreamsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4015,7 +4182,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4028,7 +4196,8 @@ module Aws::CustomerProfiles
     class ListEventTriggersResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4046,7 +4215,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4059,7 +4229,8 @@ module Aws::CustomerProfiles
     class ListIdentityResolutionJobsResponse < Struct.new(
       :identity_resolution_jobs_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4114,7 +4285,8 @@ module Aws::CustomerProfiles
       :is_unstructured,
       :role_arn,
       :event_trigger_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4135,7 +4307,8 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       :include_hidden,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4148,7 +4321,8 @@ module Aws::CustomerProfiles
     class ListIntegrationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4162,7 +4336,8 @@ module Aws::CustomerProfiles
     class ListObjectTypeAttributeItem < Struct.new(
       :attribute_name,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4183,7 +4358,8 @@ module Aws::CustomerProfiles
       :max_results,
       :domain_name,
       :object_type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4196,7 +4372,8 @@ module Aws::CustomerProfiles
     class ListObjectTypeAttributesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4230,7 +4407,8 @@ module Aws::CustomerProfiles
       :max_profile_object_count,
       :max_available_profile_object_count,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4248,7 +4426,8 @@ module Aws::CustomerProfiles
       :template_id,
       :source_name,
       :source_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4261,7 +4440,8 @@ module Aws::CustomerProfiles
     class ListProfileObjectTypeTemplatesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4274,7 +4454,8 @@ module Aws::CustomerProfiles
     class ListProfileObjectTypeTemplatesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4291,7 +4472,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4304,7 +4486,8 @@ module Aws::CustomerProfiles
     class ListProfileObjectTypesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4323,7 +4506,8 @@ module Aws::CustomerProfiles
       :object_type_name,
       :profile_object_unique_key,
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4353,7 +4537,8 @@ module Aws::CustomerProfiles
       :object_type_name,
       :profile_id,
       :object_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4366,7 +4551,8 @@ module Aws::CustomerProfiles
     class ListProfileObjectsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4384,7 +4570,8 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4398,7 +4585,8 @@ module Aws::CustomerProfiles
     class ListRuleBasedMatchesResponse < Struct.new(
       :match_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4415,7 +4603,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4428,7 +4617,8 @@ module Aws::CustomerProfiles
     class ListSegmentDefinitionsResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4437,7 +4627,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4446,7 +4637,8 @@ module Aws::CustomerProfiles
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4464,7 +4656,8 @@ module Aws::CustomerProfiles
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4477,7 +4670,8 @@ module Aws::CustomerProfiles
     class ListUploadJobsResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4507,7 +4701,8 @@ module Aws::CustomerProfiles
       :status_description,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4541,7 +4736,8 @@ module Aws::CustomerProfiles
       :query_end_date,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4554,7 +4750,8 @@ module Aws::CustomerProfiles
     class ListWorkflowsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4564,7 +4761,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class MarketoSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4588,7 +4786,8 @@ module Aws::CustomerProfiles
       :match_id,
       :profile_ids,
       :confidence_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4611,7 +4810,8 @@ module Aws::CustomerProfiles
       :job_schedule,
       :auto_merging,
       :exporting_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4634,7 +4834,8 @@ module Aws::CustomerProfiles
       :job_schedule,
       :auto_merging,
       :exporting_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4701,7 +4902,8 @@ module Aws::CustomerProfiles
     #   @return [Array<String>]
     class MatchingRule < Struct.new(
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4724,7 +4926,8 @@ module Aws::CustomerProfiles
       :main_profile_id,
       :profile_ids_to_be_merged,
       :field_source_profile_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4733,7 +4936,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class MergeProfilesResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4756,7 +4960,8 @@ module Aws::CustomerProfiles
       :field_name,
       :comparison_operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4775,7 +4980,8 @@ module Aws::CustomerProfiles
     class ObjectFilter < Struct.new(
       :key_name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4795,7 +5001,8 @@ module Aws::CustomerProfiles
       :source,
       :target,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4818,7 +5025,8 @@ module Aws::CustomerProfiles
     class ObjectTypeKey < Struct.new(
       :standard_identifiers,
       :field_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4841,7 +5049,8 @@ module Aws::CustomerProfiles
       :value,
       :max_invocations_per_profile,
       :unlimited,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4985,7 +5194,8 @@ module Aws::CustomerProfiles
       :gender_string,
       :profile_type,
       :engagement_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4998,7 +5208,8 @@ module Aws::CustomerProfiles
     class ProfileAttributeValuesRequest < Struct.new(
       :domain_name,
       :attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5019,7 +5230,8 @@ module Aws::CustomerProfiles
       :attribute_name,
       :items,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5119,7 +5331,8 @@ module Aws::CustomerProfiles
       :billing_address,
       :attributes,
       :profile_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5133,7 +5346,8 @@ module Aws::CustomerProfiles
     class ProfileDimension < Struct.new(
       :dimension_type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5151,7 +5365,8 @@ module Aws::CustomerProfiles
       :profile_id,
       :message,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5169,7 +5384,8 @@ module Aws::CustomerProfiles
       :profile_id,
       :query_result,
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5183,7 +5399,8 @@ module Aws::CustomerProfiles
     class ProfileTypeDimension < Struct.new(
       :dimension_type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5224,7 +5441,8 @@ module Aws::CustomerProfiles
       :object_type_names,
       :role_arn,
       :event_trigger_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5279,7 +5497,8 @@ module Aws::CustomerProfiles
       :is_unstructured,
       :role_arn,
       :event_trigger_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5296,7 +5515,8 @@ module Aws::CustomerProfiles
       :object_type_name,
       :object,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5305,7 +5525,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class PutProfileObjectResponse < Struct.new(
       :profile_object_unique_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5370,7 +5591,8 @@ module Aws::CustomerProfiles
       :fields,
       :keys,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5438,7 +5660,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5481,7 +5704,8 @@ module Aws::CustomerProfiles
       :value_range,
       :timestamp_source,
       :timestamp_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5505,7 +5729,8 @@ module Aws::CustomerProfiles
       :start,
       :end,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5526,7 +5751,8 @@ module Aws::CustomerProfiles
     class Readiness < Struct.new(
       :progress_percentage,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5535,7 +5761,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5554,7 +5781,8 @@ module Aws::CustomerProfiles
       :updated_records,
       :created_records,
       :failed_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5597,7 +5825,8 @@ module Aws::CustomerProfiles
       :attribute_types_selector,
       :conflict_resolution,
       :exporting_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5667,7 +5896,8 @@ module Aws::CustomerProfiles
       :attribute_types_selector,
       :conflict_resolution,
       :exporting_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5681,7 +5911,8 @@ module Aws::CustomerProfiles
     class S3ExportingConfig < Struct.new(
       :s3_bucket_name,
       :s3_key_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5695,7 +5926,8 @@ module Aws::CustomerProfiles
     class S3ExportingLocation < Struct.new(
       :s3_bucket_name,
       :s3_key_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5709,7 +5941,8 @@ module Aws::CustomerProfiles
     class S3SourceProperties < Struct.new(
       :bucket_name,
       :bucket_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5728,7 +5961,8 @@ module Aws::CustomerProfiles
       :object,
       :enable_dynamic_field_update,
       :include_deleted_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5774,7 +6008,8 @@ module Aws::CustomerProfiles
       :timezone,
       :schedule_offset,
       :first_execution_from,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5841,7 +6076,8 @@ module Aws::CustomerProfiles
       :values,
       :additional_search_keys,
       :logical_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5854,7 +6090,8 @@ module Aws::CustomerProfiles
     class SearchProfilesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5884,7 +6121,8 @@ module Aws::CustomerProfiles
       :segment_definition_arn,
       :created_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5899,7 +6137,8 @@ module Aws::CustomerProfiles
     class SegmentGroup < Struct.new(
       :groups,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5918,7 +6157,8 @@ module Aws::CustomerProfiles
     class SegmentGroupStructure < Struct.new(
       :groups,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5928,7 +6168,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class ServiceNowSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5955,7 +6196,8 @@ module Aws::CustomerProfiles
       :salesforce,
       :service_now,
       :zendesk,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5982,7 +6224,8 @@ module Aws::CustomerProfiles
       :connector_type,
       :incremental_pull_config,
       :source_connector_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5992,7 +6235,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class SourceSegment < Struct.new(
       :segment_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6005,12 +6249,14 @@ module Aws::CustomerProfiles
     class StartUploadJobRequest < Struct.new(
       :domain_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartUploadJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6023,12 +6269,14 @@ module Aws::CustomerProfiles
     class StopUploadJobRequest < Struct.new(
       :domain_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopUploadJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6041,12 +6289,14 @@ module Aws::CustomerProfiles
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6075,7 +6325,8 @@ module Aws::CustomerProfiles
       :source_fields,
       :task_properties,
       :task_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6089,7 +6340,8 @@ module Aws::CustomerProfiles
     class Threshold < Struct.new(
       :value,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6098,7 +6350,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6114,7 +6367,8 @@ module Aws::CustomerProfiles
     class TriggerConfig < Struct.new(
       :trigger_type,
       :trigger_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6125,7 +6379,8 @@ module Aws::CustomerProfiles
     #   @return [Types::ScheduledTriggerProperties]
     class TriggerProperties < Struct.new(
       :scheduled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6138,12 +6393,14 @@ module Aws::CustomerProfiles
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6190,7 +6447,8 @@ module Aws::CustomerProfiles
       :province,
       :country,
       :postal_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6216,7 +6474,8 @@ module Aws::CustomerProfiles
       :display_name,
       :description,
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6275,7 +6534,8 @@ module Aws::CustomerProfiles
       :status,
       :readiness,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6310,7 +6570,8 @@ module Aws::CustomerProfiles
       :is_default,
       :layout_type,
       :layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6357,7 +6618,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6414,7 +6676,8 @@ module Aws::CustomerProfiles
       :matching,
       :rule_based_matching,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6470,7 +6733,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6505,7 +6769,8 @@ module Aws::CustomerProfiles
       :event_trigger_conditions,
       :segment_filter,
       :event_trigger_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6548,7 +6813,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6664,7 +6930,8 @@ module Aws::CustomerProfiles
       :gender_string,
       :profile_type,
       :engagement_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6673,7 +6940,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class UpdateProfileResponse < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6707,7 +6975,8 @@ module Aws::CustomerProfiles
       :created_at,
       :completed_at,
       :data_expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6726,7 +6995,8 @@ module Aws::CustomerProfiles
     class ValueRange < Struct.new(
       :start,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6736,7 +7006,8 @@ module Aws::CustomerProfiles
     #   @return [Types::AppflowIntegrationWorkflowAttributes]
     class WorkflowAttributes < Struct.new(
       :appflow_integration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6746,7 +7017,8 @@ module Aws::CustomerProfiles
     #   @return [Types::AppflowIntegrationWorkflowMetrics]
     class WorkflowMetrics < Struct.new(
       :appflow_integration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6756,7 +7028,8 @@ module Aws::CustomerProfiles
     #   @return [Types::AppflowIntegrationWorkflowStep]
     class WorkflowStepItem < Struct.new(
       :appflow_integration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6766,7 +7039,8 @@ module Aws::CustomerProfiles
     #   @return [String]
     class ZendeskSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -17,7 +17,8 @@ module Aws::QBusiness
       :payload,
       :s3,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Payload < APISchema; end
@@ -35,7 +36,8 @@ module Aws::QBusiness
     class AccessConfiguration < Struct.new(
       :access_controls,
       :member_relation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +51,8 @@ module Aws::QBusiness
     class AccessControl < Struct.new(
       :principals,
       :member_relation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +61,8 @@ module Aws::QBusiness
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +76,8 @@ module Aws::QBusiness
     class ActionConfiguration < Struct.new(
       :action,
       :filter_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +95,8 @@ module Aws::QBusiness
       :plugin_id,
       :payload,
       :payload_field_name_separator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +114,8 @@ module Aws::QBusiness
       :plugin_id,
       :payload,
       :payload_field_name_separator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -118,7 +125,8 @@ module Aws::QBusiness
     #   @return [JSON]
     class ActionExecutionPayloadField < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +136,8 @@ module Aws::QBusiness
     #   @return [Types::AttributeFilter]
     class ActionFilterConfiguration < Struct.new(
       :document_attribute_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +159,8 @@ module Aws::QBusiness
       :plugin_type,
       :payload,
       :payload_field_name_separator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +194,8 @@ module Aws::QBusiness
       :plugin_type,
       :payload,
       :payload_field_name_separator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +237,8 @@ module Aws::QBusiness
       :allowed_format,
       :array_item_json_schema,
       :required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +252,8 @@ module Aws::QBusiness
     class ActionReviewPayloadFieldAllowedValue < Struct.new(
       :value,
       :display_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +275,8 @@ module Aws::QBusiness
       :display_name,
       :instruction_example,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +310,8 @@ module Aws::QBusiness
       :status,
       :identity_type,
       :quick_sight_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +321,8 @@ module Aws::QBusiness
     #   @return [String]
     class AppliedAttachmentsConfiguration < Struct.new(
       :attachments_control_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +332,8 @@ module Aws::QBusiness
     #   @return [String]
     class AppliedCreatorModeConfiguration < Struct.new(
       :creator_mode_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +343,8 @@ module Aws::QBusiness
     #   @return [String]
     class AppliedOrchestrationConfiguration < Struct.new(
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +369,8 @@ module Aws::QBusiness
       :actions,
       :conditions,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +379,8 @@ module Aws::QBusiness
     #   @return [String]
     class AssociatePermissionResponse < Struct.new(
       :statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +394,8 @@ module Aws::QBusiness
     class AssociatedGroup < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -388,7 +409,8 @@ module Aws::QBusiness
     class AssociatedUser < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +456,8 @@ module Aws::QBusiness
       :created_at,
       :status,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +475,8 @@ module Aws::QBusiness
       :data,
       :name,
       :copy_from,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +486,8 @@ module Aws::QBusiness
     #   @return [Types::AttachmentInput]
     class AttachmentInputEvent < Struct.new(
       :attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +513,8 @@ module Aws::QBusiness
       :error,
       :attachment_id,
       :conversation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +524,8 @@ module Aws::QBusiness
     #   @return [String]
     class AttachmentsConfiguration < Struct.new(
       :attachments_control_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +571,8 @@ module Aws::QBusiness
       :greater_than_or_equals,
       :less_than,
       :less_than_or_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +582,8 @@ module Aws::QBusiness
     #   @return [String]
     class AudioExtractionConfiguration < Struct.new(
       :audio_extraction_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -580,7 +609,8 @@ module Aws::QBusiness
       :start_time_milliseconds,
       :end_time_milliseconds,
       :audio_extraction_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +620,8 @@ module Aws::QBusiness
     #   @return [String]
     class AuthChallengeRequest < Struct.new(
       :authorization_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,7 +631,8 @@ module Aws::QBusiness
     #   @return [String]
     class AuthChallengeRequestEvent < Struct.new(
       :authorization_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +642,8 @@ module Aws::QBusiness
     #   @return [Hash<String, String>]
     class AuthChallengeResponse < Struct.new(
       :response_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +653,8 @@ module Aws::QBusiness
     #   @return [Hash<String, String>]
     class AuthChallengeResponseEvent < Struct.new(
       :response_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +668,8 @@ module Aws::QBusiness
     class AutoSubscriptionConfiguration < Struct.new(
       :auto_subscribe,
       :default_subscription_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -648,7 +683,8 @@ module Aws::QBusiness
     class BasicAuthConfiguration < Struct.new(
       :secret_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +705,8 @@ module Aws::QBusiness
       :index_id,
       :documents,
       :data_source_sync_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +715,8 @@ module Aws::QBusiness
     #   @return [Array<Types::FailedDocument>]
     class BatchDeleteDocumentResponse < Struct.new(
       :failed_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +741,8 @@ module Aws::QBusiness
       :documents,
       :role_arn,
       :data_source_sync_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +751,8 @@ module Aws::QBusiness
     #   @return [Array<Types::FailedDocument>]
     class BatchPutDocumentResponse < Struct.new(
       :failed_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +766,8 @@ module Aws::QBusiness
     class BlockedPhrasesConfiguration < Struct.new(
       :blocked_phrases,
       :system_message_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +785,8 @@ module Aws::QBusiness
       :blocked_phrases_to_create_or_update,
       :blocked_phrases_to_delete,
       :system_message_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -754,7 +796,8 @@ module Aws::QBusiness
     #   @return [Array<String>]
     class BrowserExtensionConfiguration < Struct.new(
       :enabled_browser_extensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +810,8 @@ module Aws::QBusiness
     class CancelSubscriptionRequest < Struct.new(
       :application_id,
       :subscription_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +828,8 @@ module Aws::QBusiness
       :subscription_arn,
       :current_subscription,
       :next_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +862,8 @@ module Aws::QBusiness
       :parent_message_id,
       :client_token,
       :input_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +894,8 @@ module Aws::QBusiness
       :end_of_input_event,
       :auth_challenge_response_event,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ConfigurationEvent < ChatInputStream; end
@@ -867,7 +914,8 @@ module Aws::QBusiness
     class ChatModeConfiguration < Struct.new(
       :plugin_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PluginConfiguration < ChatModeConfiguration; end
@@ -879,7 +927,8 @@ module Aws::QBusiness
     #   @return [Types::ChatOutputStream]
     class ChatOutput < Struct.new(
       :output_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +955,8 @@ module Aws::QBusiness
       :failed_attachment_event,
       :auth_challenge_request_event,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TextEvent < ChatOutputStream; end
@@ -947,7 +997,8 @@ module Aws::QBusiness
       :status,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -973,7 +1024,8 @@ module Aws::QBusiness
       :status,
       :error,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1082,8 @@ module Aws::QBusiness
       :chat_mode,
       :chat_mode_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1067,7 +1120,8 @@ module Aws::QBusiness
       :auth_challenge_request,
       :source_attributions,
       :failed_attachments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1092,7 +1146,8 @@ module Aws::QBusiness
       :user_id,
       :document_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1113,7 +1168,8 @@ module Aws::QBusiness
       :user_aliases,
       :has_access,
       :document_acl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1131,7 +1187,8 @@ module Aws::QBusiness
       :chat_mode,
       :chat_mode_configuration,
       :attribute_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1206,8 @@ module Aws::QBusiness
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1217,8 @@ module Aws::QBusiness
     #   @return [String]
     class ContentBlockerRule < Struct.new(
       :system_message_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1169,7 +1228,8 @@ module Aws::QBusiness
     #   @return [Array<Types::EligibleDataSource>]
     class ContentRetrievalRule < Struct.new(
       :eligible_data_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1180,7 +1240,8 @@ module Aws::QBusiness
     class ContentSource < Struct.new(
       :retriever,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Retriever < ContentSource; end
@@ -1201,7 +1262,8 @@ module Aws::QBusiness
       :conversation_id,
       :title,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1277,8 @@ module Aws::QBusiness
     class ConversationSource < Struct.new(
       :conversation_id,
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1289,8 @@ module Aws::QBusiness
     class CopyFromSource < Struct.new(
       :conversation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Conversation < CopyFromSource; end
@@ -1246,7 +1310,8 @@ module Aws::QBusiness
       :application_id,
       :web_experience_id,
       :session_duration_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1320,8 @@ module Aws::QBusiness
     #   @return [String]
     class CreateAnonymousWebExperienceUrlResponse < Struct.new(
       :anonymous_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1316,7 +1382,8 @@ module Aws::QBusiness
       :q_apps_configuration,
       :personalization_configuration,
       :quick_sight_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1396,8 @@ module Aws::QBusiness
     class CreateApplicationResponse < Struct.new(
       :application_id,
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1354,7 +1422,8 @@ module Aws::QBusiness
       :client_token,
       :response_configurations,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1436,8 @@ module Aws::QBusiness
     class CreateChatResponseConfigurationResponse < Struct.new(
       :chat_response_configuration_id,
       :chat_response_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1400,7 +1470,8 @@ module Aws::QBusiness
       :display_name,
       :authentication_detail,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1417,7 +1488,8 @@ module Aws::QBusiness
       :data_accessor_id,
       :idc_application_arn,
       :data_accessor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1542,8 @@ module Aws::QBusiness
       :client_token,
       :document_enrichment_configuration,
       :media_extraction_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1483,7 +1556,8 @@ module Aws::QBusiness
     class CreateDataSourceResponse < Struct.new(
       :data_source_id,
       :data_source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1516,7 +1590,8 @@ module Aws::QBusiness
       :tags,
       :capacity_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1529,7 +1604,8 @@ module Aws::QBusiness
     class CreateIndexResponse < Struct.new(
       :index_id,
       :index_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1642,8 @@ module Aws::QBusiness
       :custom_plugin_configuration,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1583,7 +1660,8 @@ module Aws::QBusiness
       :plugin_id,
       :plugin_arn,
       :build_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1694,8 @@ module Aws::QBusiness
       :role_arn,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1629,7 +1708,8 @@ module Aws::QBusiness
     class CreateRetrieverResponse < Struct.new(
       :retriever_id,
       :retriever_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1730,8 @@ module Aws::QBusiness
       :principal,
       :type,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1671,7 +1752,8 @@ module Aws::QBusiness
       :subscription_arn,
       :current_subscription,
       :next_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1692,12 +1774,14 @@ module Aws::QBusiness
       :user_id,
       :user_aliases,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1750,7 +1834,8 @@ module Aws::QBusiness
       :identity_provider_configuration,
       :browser_extension_configuration,
       :customization_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1763,7 +1848,8 @@ module Aws::QBusiness
     class CreateWebExperienceResponse < Struct.new(
       :web_experience_id,
       :web_experience_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1773,7 +1859,8 @@ module Aws::QBusiness
     #   @return [String]
     class CreatorModeConfiguration < Struct.new(
       :creator_mode_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1791,7 +1878,8 @@ module Aws::QBusiness
       :description,
       :api_schema_type,
       :api_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1813,7 +1901,8 @@ module Aws::QBusiness
       :logo_url,
       :font_url,
       :favicon_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1851,7 +1940,8 @@ module Aws::QBusiness
       :authentication_detail,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1862,7 +1952,8 @@ module Aws::QBusiness
     class DataAccessorAuthenticationConfiguration < Struct.new(
       :idc_trusted_token_issuer_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IdcTrustedTokenIssuerConfiguration < DataAccessorAuthenticationConfiguration; end
@@ -1883,7 +1974,8 @@ module Aws::QBusiness
       :authentication_type,
       :authentication_configuration,
       :external_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1893,7 +1985,8 @@ module Aws::QBusiness
     #   @return [String]
     class DataAccessorIdcTrustedTokenIssuerConfiguration < Struct.new(
       :idc_trusted_token_issuer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1923,7 +2016,8 @@ module Aws::QBusiness
       :created_at,
       :updated_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2051,8 @@ module Aws::QBusiness
       :error,
       :data_source_error_code,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2078,8 @@ module Aws::QBusiness
       :documents_deleted,
       :documents_failed,
       :documents_scanned,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1997,7 +2093,8 @@ module Aws::QBusiness
     class DataSourceVpcConfiguration < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2011,7 +2108,8 @@ module Aws::QBusiness
     class DateAttributeBoostingConfiguration < Struct.new(
       :boosting_level,
       :boosting_duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2020,12 +2118,14 @@ module Aws::QBusiness
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2046,12 +2146,14 @@ module Aws::QBusiness
       :conversation_id,
       :attachment_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAttachmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2060,12 +2162,14 @@ module Aws::QBusiness
     #   @return [String]
     class DeleteChatControlsConfigurationRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteChatControlsConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2078,12 +2182,14 @@ module Aws::QBusiness
     class DeleteChatResponseConfigurationRequest < Struct.new(
       :application_id,
       :chat_response_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteChatResponseConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,12 +2206,14 @@ module Aws::QBusiness
       :conversation_id,
       :application_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConversationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2118,12 +2226,14 @@ module Aws::QBusiness
     class DeleteDataAccessorRequest < Struct.new(
       :application_id,
       :data_accessor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataAccessorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2140,12 +2250,14 @@ module Aws::QBusiness
       :application_id,
       :index_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataSourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2267,8 @@ module Aws::QBusiness
     #   @return [String]
     class DeleteDocument < Struct.new(
       :document_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2176,12 +2289,14 @@ module Aws::QBusiness
       :index_id,
       :group_name,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,12 +2309,14 @@ module Aws::QBusiness
     class DeleteIndexRequest < Struct.new(
       :application_id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIndexResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2212,12 +2329,14 @@ module Aws::QBusiness
     class DeletePluginRequest < Struct.new(
       :application_id,
       :plugin_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePluginResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2230,12 +2349,14 @@ module Aws::QBusiness
     class DeleteRetrieverRequest < Struct.new(
       :application_id,
       :retriever_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRetrieverResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2248,12 +2369,14 @@ module Aws::QBusiness
     class DeleteUserRequest < Struct.new(
       :application_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2266,12 +2389,14 @@ module Aws::QBusiness
     class DeleteWebExperienceRequest < Struct.new(
       :application_id,
       :web_experience_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWebExperienceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2284,12 +2409,14 @@ module Aws::QBusiness
     class DisassociatePermissionRequest < Struct.new(
       :application_id,
       :statement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociatePermissionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2327,7 +2454,8 @@ module Aws::QBusiness
       :access_configuration,
       :document_enrichment_configuration,
       :media_extraction_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2341,7 +2469,8 @@ module Aws::QBusiness
     class DocumentAcl < Struct.new(
       :allowlist,
       :deny_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2359,7 +2488,8 @@ module Aws::QBusiness
       :member_relation,
       :users,
       :groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2373,7 +2503,8 @@ module Aws::QBusiness
     class DocumentAclGroup < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2387,7 +2518,8 @@ module Aws::QBusiness
     class DocumentAclMembership < Struct.new(
       :member_relation,
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2401,7 +2533,8 @@ module Aws::QBusiness
     class DocumentAclUser < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2548,8 @@ module Aws::QBusiness
     class DocumentAttribute < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2438,7 +2572,8 @@ module Aws::QBusiness
       :date_configuration,
       :string_list_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class NumberConfiguration < DocumentAttributeBoostingConfiguration; end
@@ -2462,7 +2597,8 @@ module Aws::QBusiness
       :key,
       :operator,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2480,7 +2616,8 @@ module Aws::QBusiness
       :name,
       :type,
       :search,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2498,7 +2635,8 @@ module Aws::QBusiness
       :key,
       :value,
       :attribute_value_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2521,7 +2659,8 @@ module Aws::QBusiness
       :long_value,
       :date_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringValue < DocumentAttributeValue; end
@@ -2542,7 +2681,8 @@ module Aws::QBusiness
       :blob,
       :s3,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Blob < DocumentContent; end
@@ -2572,7 +2712,8 @@ module Aws::QBusiness
       :error,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2590,7 +2731,8 @@ module Aws::QBusiness
       :inline_configurations,
       :pre_extraction_hook_configuration,
       :post_extraction_hook_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2604,7 +2746,8 @@ module Aws::QBusiness
     class EligibleDataSource < Struct.new(
       :index_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2614,13 +2757,15 @@ module Aws::QBusiness
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The end of the streaming input for the <code>Chat</code> API.</p>
     class EndOfInputEvent < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2634,7 +2779,8 @@ module Aws::QBusiness
     class ErrorDetail < Struct.new(
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2643,7 +2789,8 @@ module Aws::QBusiness
     #   @return [String]
     class ExternalResourceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2812,8 @@ module Aws::QBusiness
       :user_message_id,
       :system_message_id,
       :attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2683,7 +2831,8 @@ module Aws::QBusiness
       :id,
       :error,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2692,7 +2841,8 @@ module Aws::QBusiness
     #   @return [String]
     class GetApplicationRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2773,7 +2923,8 @@ module Aws::QBusiness
       :auto_subscription_configuration,
       :client_ids_for_oidc,
       :quick_sight_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2790,7 +2941,8 @@ module Aws::QBusiness
       :application_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2823,7 +2975,8 @@ module Aws::QBusiness
       :creator_mode_configuration,
       :next_token,
       :hallucination_reduction_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2836,7 +2989,8 @@ module Aws::QBusiness
     class GetChatResponseConfigurationRequest < Struct.new(
       :application_id,
       :chat_response_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2865,7 +3019,8 @@ module Aws::QBusiness
       :created_at,
       :in_use_configuration,
       :last_update_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2878,7 +3033,8 @@ module Aws::QBusiness
     class GetDataAccessorRequest < Struct.new(
       :application_id,
       :data_accessor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2923,7 +3079,8 @@ module Aws::QBusiness
       :authentication_detail,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2940,7 +3097,8 @@ module Aws::QBusiness
       :application_id,
       :index_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3013,7 +3171,8 @@ module Aws::QBusiness
       :error,
       :document_enrichment_configuration,
       :media_extraction_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3038,7 +3197,8 @@ module Aws::QBusiness
       :data_source_id,
       :document_id,
       :output_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3051,7 +3211,8 @@ module Aws::QBusiness
     class GetDocumentContentResponse < Struct.new(
       :presigned_url,
       :mime_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3072,7 +3233,8 @@ module Aws::QBusiness
       :index_id,
       :group_name,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3085,7 +3247,8 @@ module Aws::QBusiness
     class GetGroupResponse < Struct.new(
       :status,
       :status_history,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3098,7 +3261,8 @@ module Aws::QBusiness
     class GetIndexRequest < Struct.new(
       :application_id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3155,7 +3319,8 @@ module Aws::QBusiness
       :document_attribute_configurations,
       :error,
       :index_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3176,7 +3341,8 @@ module Aws::QBusiness
       :conversation_id,
       :message_id,
       :media_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3189,7 +3355,8 @@ module Aws::QBusiness
     class GetMediaResponse < Struct.new(
       :media_bytes,
       :media_mime_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3202,7 +3369,8 @@ module Aws::QBusiness
     class GetPluginRequest < Struct.new(
       :application_id,
       :plugin_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3255,7 +3423,8 @@ module Aws::QBusiness
       :state,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3264,7 +3433,8 @@ module Aws::QBusiness
     #   @return [String]
     class GetPolicyRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3273,7 +3443,8 @@ module Aws::QBusiness
     #   @return [String]
     class GetPolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3286,7 +3457,8 @@ module Aws::QBusiness
     class GetRetrieverRequest < Struct.new(
       :application_id,
       :retriever_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3331,7 +3503,8 @@ module Aws::QBusiness
       :role_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3344,7 +3517,8 @@ module Aws::QBusiness
     class GetUserRequest < Struct.new(
       :application_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3353,7 +3527,8 @@ module Aws::QBusiness
     #   @return [Array<Types::UserAlias>]
     class GetUserResponse < Struct.new(
       :user_aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3366,7 +3541,8 @@ module Aws::QBusiness
     class GetWebExperienceRequest < Struct.new(
       :application_id,
       :web_experience_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3445,7 +3621,8 @@ module Aws::QBusiness
       :error,
       :browser_extension_configuration,
       :customization_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3463,7 +3640,8 @@ module Aws::QBusiness
       :member_groups,
       :member_users,
       :s3_path_for_group_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3481,7 +3659,8 @@ module Aws::QBusiness
       :status,
       :last_updated_at,
       :error_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3491,7 +3670,8 @@ module Aws::QBusiness
     #   @return [String]
     class GroupSummary < Struct.new(
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3501,7 +3681,8 @@ module Aws::QBusiness
     #   @return [String]
     class HallucinationReductionConfiguration < Struct.new(
       :hallucination_reduction_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3523,7 +3704,8 @@ module Aws::QBusiness
       :lambda_arn,
       :s3_bucket_name,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3537,7 +3719,8 @@ module Aws::QBusiness
     class IdcAuthConfiguration < Struct.new(
       :idc_application_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3552,7 +3735,8 @@ module Aws::QBusiness
       :saml_configuration,
       :open_id_connect_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SamlConfiguration < IdentityProviderConfiguration; end
@@ -3566,7 +3750,8 @@ module Aws::QBusiness
     #   @return [String]
     class ImageExtractionConfiguration < Struct.new(
       :image_extraction_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3580,7 +3765,8 @@ module Aws::QBusiness
     class ImageSourceDetails < Struct.new(
       :media_id,
       :media_mime_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3606,7 +3792,8 @@ module Aws::QBusiness
       :created_at,
       :updated_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3616,7 +3803,8 @@ module Aws::QBusiness
     #   @return [Integer]
     class IndexCapacityConfiguration < Struct.new(
       :units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3626,7 +3814,8 @@ module Aws::QBusiness
     #   @return [Types::TextDocumentStatistics]
     class IndexStatistics < Struct.new(
       :text_document_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3644,7 +3833,8 @@ module Aws::QBusiness
       :condition,
       :target,
       :document_content_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3682,7 +3872,8 @@ module Aws::QBusiness
       :tone,
       :custom_instructions,
       :examples,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3691,7 +3882,8 @@ module Aws::QBusiness
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3701,7 +3893,8 @@ module Aws::QBusiness
     #   @return [String]
     class KendraIndexConfiguration < Struct.new(
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3710,7 +3903,8 @@ module Aws::QBusiness
     #   @return [String]
     class LicenseNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3723,7 +3917,8 @@ module Aws::QBusiness
     class ListApplicationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3736,7 +3931,8 @@ module Aws::QBusiness
     class ListApplicationsResponse < Struct.new(
       :next_token,
       :applications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3761,7 +3957,8 @@ module Aws::QBusiness
       :user_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3774,7 +3971,8 @@ module Aws::QBusiness
     class ListAttachmentsResponse < Struct.new(
       :attachments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3791,7 +3989,8 @@ module Aws::QBusiness
       :application_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3804,7 +4003,8 @@ module Aws::QBusiness
     class ListChatResponseConfigurationsResponse < Struct.new(
       :chat_response_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3825,7 +4025,8 @@ module Aws::QBusiness
       :user_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3838,7 +4039,8 @@ module Aws::QBusiness
     class ListConversationsResponse < Struct.new(
       :next_token,
       :conversations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3855,7 +4057,8 @@ module Aws::QBusiness
       :application_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3868,7 +4071,8 @@ module Aws::QBusiness
     class ListDataAccessorsResponse < Struct.new(
       :data_accessors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3905,7 +4109,8 @@ module Aws::QBusiness
       :start_time,
       :end_time,
       :status_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3918,7 +4123,8 @@ module Aws::QBusiness
     class ListDataSourceSyncJobsResponse < Struct.new(
       :history,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3939,7 +4145,8 @@ module Aws::QBusiness
       :index_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3952,7 +4159,8 @@ module Aws::QBusiness
     class ListDataSourcesResponse < Struct.new(
       :data_sources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3977,7 +4185,8 @@ module Aws::QBusiness
       :data_source_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3990,7 +4199,8 @@ module Aws::QBusiness
     class ListDocumentsResponse < Struct.new(
       :document_detail_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4019,7 +4229,8 @@ module Aws::QBusiness
       :data_source_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4032,7 +4243,8 @@ module Aws::QBusiness
     class ListGroupsResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4049,7 +4261,8 @@ module Aws::QBusiness
       :application_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4062,7 +4275,8 @@ module Aws::QBusiness
     class ListIndicesResponse < Struct.new(
       :next_token,
       :indices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4087,7 +4301,8 @@ module Aws::QBusiness
       :user_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4100,7 +4315,8 @@ module Aws::QBusiness
     class ListMessagesResponse < Struct.new(
       :messages,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4121,7 +4337,8 @@ module Aws::QBusiness
       :plugin_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4134,7 +4351,8 @@ module Aws::QBusiness
     class ListPluginActionsResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4151,7 +4369,8 @@ module Aws::QBusiness
       :plugin_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4164,7 +4383,8 @@ module Aws::QBusiness
     class ListPluginTypeActionsResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4177,7 +4397,8 @@ module Aws::QBusiness
     class ListPluginTypeMetadataRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4190,7 +4411,8 @@ module Aws::QBusiness
     class ListPluginTypeMetadataResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4207,7 +4429,8 @@ module Aws::QBusiness
       :application_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4220,7 +4443,8 @@ module Aws::QBusiness
     class ListPluginsResponse < Struct.new(
       :next_token,
       :plugins,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4237,7 +4461,8 @@ module Aws::QBusiness
       :application_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4250,7 +4475,8 @@ module Aws::QBusiness
     class ListRetrieversResponse < Struct.new(
       :retrievers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4267,7 +4493,8 @@ module Aws::QBusiness
       :application_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4280,7 +4507,8 @@ module Aws::QBusiness
     class ListSubscriptionsResponse < Struct.new(
       :next_token,
       :subscriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4289,7 +4517,8 @@ module Aws::QBusiness
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4298,7 +4527,8 @@ module Aws::QBusiness
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4315,7 +4545,8 @@ module Aws::QBusiness
       :application_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4328,7 +4559,8 @@ module Aws::QBusiness
     class ListWebExperiencesResponse < Struct.new(
       :web_experiences,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4346,7 +4578,8 @@ module Aws::QBusiness
       :image_extraction_configuration,
       :audio_extraction_configuration,
       :video_extraction_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4355,7 +4588,8 @@ module Aws::QBusiness
     #   @return [String]
     class MediaTooLargeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4369,7 +4603,8 @@ module Aws::QBusiness
     class MemberGroup < Struct.new(
       :group_name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4383,7 +4618,8 @@ module Aws::QBusiness
     class MemberUser < Struct.new(
       :user_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4421,7 +4657,8 @@ module Aws::QBusiness
       :source_attribution,
       :action_review,
       :action_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4443,7 +4680,8 @@ module Aws::QBusiness
       :reason,
       :comment,
       :submitted_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4469,7 +4707,8 @@ module Aws::QBusiness
       :system_message_id,
       :source_attributions,
       :final_text_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4487,13 +4726,15 @@ module Aws::QBusiness
       :index_id,
       :version,
       :boosting_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Information about invoking a custom plugin without any authentication or authorization requirement.</p>
     class NoAuthConfiguration < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4507,7 +4748,8 @@ module Aws::QBusiness
     class NumberAttributeBoostingConfiguration < Struct.new(
       :boosting_level,
       :boosting_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4529,7 +4771,8 @@ module Aws::QBusiness
       :role_arn,
       :authorization_url,
       :token_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4543,7 +4786,8 @@ module Aws::QBusiness
     class OpenIDConnectProviderConfiguration < Struct.new(
       :secrets_arn,
       :secrets_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4553,7 +4797,8 @@ module Aws::QBusiness
     #   @return [String]
     class OrchestrationConfiguration < Struct.new(
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4571,7 +4816,8 @@ module Aws::QBusiness
       :condition_operator,
       :condition_key,
       :condition_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4581,7 +4827,8 @@ module Aws::QBusiness
     #   @return [String]
     class PersonalizationConfiguration < Struct.new(
       :personalization_control_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4619,7 +4866,8 @@ module Aws::QBusiness
       :build_status,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4642,7 +4890,8 @@ module Aws::QBusiness
       :no_auth_configuration,
       :idc_auth_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class BasicAuthConfiguration < PluginAuthConfiguration; end
@@ -4658,7 +4907,8 @@ module Aws::QBusiness
     #   @return [String]
     class PluginConfiguration < Struct.new(
       :plugin_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4676,7 +4926,8 @@ module Aws::QBusiness
       :type,
       :category,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4691,7 +4942,8 @@ module Aws::QBusiness
       :user,
       :group,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class User < Principal; end
@@ -4713,7 +4965,8 @@ module Aws::QBusiness
       :name,
       :access,
       :membership_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4731,7 +4984,8 @@ module Aws::QBusiness
       :id,
       :access,
       :membership_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4760,7 +5014,8 @@ module Aws::QBusiness
       :message_id,
       :message_copied_at,
       :message_usefulness,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4793,12 +5048,14 @@ module Aws::QBusiness
       :type,
       :group_members,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4808,7 +5065,8 @@ module Aws::QBusiness
     #   @return [String]
     class QAppsConfiguration < Struct.new(
       :q_apps_control_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4818,7 +5076,8 @@ module Aws::QBusiness
     #   @return [String]
     class QuickSightConfiguration < Struct.new(
       :client_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4848,7 +5107,8 @@ module Aws::QBusiness
       :document_uri,
       :document_attributes,
       :score_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4866,7 +5126,8 @@ module Aws::QBusiness
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4876,7 +5137,8 @@ module Aws::QBusiness
     #   @return [Types::InstructionCollection]
     class ResponseConfiguration < Struct.new(
       :instruction_collection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4902,7 +5164,8 @@ module Aws::QBusiness
       :type,
       :status,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4917,7 +5180,8 @@ module Aws::QBusiness
       :native_index_configuration,
       :kendra_index_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class NativeIndexConfiguration < RetrieverConfiguration; end
@@ -4931,7 +5195,8 @@ module Aws::QBusiness
     #   @return [String]
     class RetrieverContentSource < Struct.new(
       :retriever_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4953,7 +5218,8 @@ module Aws::QBusiness
       :excluded_users_and_groups,
       :rule_type,
       :rule_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4968,7 +5234,8 @@ module Aws::QBusiness
       :content_blocker_rule,
       :content_retrieval_rule,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ContentBlockerRule < RuleConfiguration; end
@@ -4986,7 +5253,8 @@ module Aws::QBusiness
     class S3 < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5008,7 +5276,8 @@ module Aws::QBusiness
       :role_arn,
       :user_id_attribute,
       :user_group_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5018,7 +5287,8 @@ module Aws::QBusiness
     #   @return [String]
     class SamlProviderConfiguration < Struct.new(
       :authentication_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5028,7 +5298,8 @@ module Aws::QBusiness
     #   @return [String]
     class ScoreAttributes < Struct.new(
       :score_confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5057,7 +5328,8 @@ module Aws::QBusiness
       :attribute_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5070,7 +5342,8 @@ module Aws::QBusiness
     class SearchRelevantContentResponse < Struct.new(
       :relevant_content,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5088,7 +5361,8 @@ module Aws::QBusiness
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5098,7 +5372,8 @@ module Aws::QBusiness
     #   @return [String]
     class SnippetExcerpt < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5140,7 +5415,8 @@ module Aws::QBusiness
       :document_id,
       :index_id,
       :datasource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5159,7 +5435,8 @@ module Aws::QBusiness
       :audio_source_details,
       :video_source_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ImageSourceDetails < SourceDetails; end
@@ -5181,7 +5458,8 @@ module Aws::QBusiness
       :data_source_id,
       :application_id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5190,7 +5468,8 @@ module Aws::QBusiness
     #   @return [String]
     class StartDataSourceSyncJobResponse < Struct.new(
       :execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5207,12 +5486,14 @@ module Aws::QBusiness
       :data_source_id,
       :application_id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopDataSourceSyncJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5226,7 +5507,8 @@ module Aws::QBusiness
     class StringAttributeBoostingConfiguration < Struct.new(
       :boosting_level,
       :attribute_value_boosting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5236,7 +5518,8 @@ module Aws::QBusiness
     #   @return [String]
     class StringListAttributeBoostingConfiguration < Struct.new(
       :boosting_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5262,7 +5545,8 @@ module Aws::QBusiness
       :principal,
       :current_subscription,
       :next_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5272,7 +5556,8 @@ module Aws::QBusiness
     #   @return [String]
     class SubscriptionDetails < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5287,7 +5572,8 @@ module Aws::QBusiness
       :user,
       :group,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class User < SubscriptionPrincipal; end
@@ -5305,7 +5591,8 @@ module Aws::QBusiness
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5318,12 +5605,14 @@ module Aws::QBusiness
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5337,7 +5626,8 @@ module Aws::QBusiness
     class TextDocumentStatistics < Struct.new(
       :indexed_text_bytes,
       :indexed_text_document_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5347,7 +5637,8 @@ module Aws::QBusiness
     #   @return [String]
     class TextInputEvent < Struct.new(
       :user_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5373,7 +5664,8 @@ module Aws::QBusiness
       :user_message_id,
       :system_message_id,
       :system_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5409,7 +5701,8 @@ module Aws::QBusiness
       :media_id,
       :media_mime_type,
       :source_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5418,7 +5711,8 @@ module Aws::QBusiness
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5440,7 +5734,8 @@ module Aws::QBusiness
       :description,
       :example_chat_messages,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5453,12 +5748,14 @@ module Aws::QBusiness
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5499,12 +5796,14 @@ module Aws::QBusiness
       :q_apps_configuration,
       :personalization_configuration,
       :auto_subscription_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5545,12 +5844,14 @@ module Aws::QBusiness
       :topic_configurations_to_delete,
       :creator_mode_configuration,
       :hallucination_reduction_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateChatControlsConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5575,12 +5876,14 @@ module Aws::QBusiness
       :display_name,
       :response_configurations,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateChatResponseConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5605,12 +5908,14 @@ module Aws::QBusiness
       :action_configurations,
       :authentication_detail,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDataAccessorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5659,12 +5964,14 @@ module Aws::QBusiness
       :role_arn,
       :document_enrichment_configuration,
       :media_extraction_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDataSourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5693,12 +6000,14 @@ module Aws::QBusiness
       :description,
       :capacity_configuration,
       :document_attribute_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateIndexResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5731,12 +6040,14 @@ module Aws::QBusiness
       :server_url,
       :custom_plugin_configuration,
       :auth_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdatePluginResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5761,12 +6072,14 @@ module Aws::QBusiness
       :configuration,
       :display_name,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateRetrieverResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5783,7 +6096,8 @@ module Aws::QBusiness
       :application_id,
       :subscription_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5800,7 +6114,8 @@ module Aws::QBusiness
       :subscription_arn,
       :current_subscription,
       :next_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5821,7 +6136,8 @@ module Aws::QBusiness
       :user_id,
       :user_aliases_to_update,
       :user_aliases_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5838,7 +6154,8 @@ module Aws::QBusiness
       :user_aliases_added,
       :user_aliases_updated,
       :user_aliases_deleted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5893,12 +6210,14 @@ module Aws::QBusiness
       :origins,
       :browser_extension_configuration,
       :customization_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateWebExperienceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5916,7 +6235,8 @@ module Aws::QBusiness
       :index_id,
       :data_source_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5930,7 +6250,8 @@ module Aws::QBusiness
     class UsersAndGroups < Struct.new(
       :user_ids,
       :user_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5948,7 +6269,8 @@ module Aws::QBusiness
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5962,7 +6284,8 @@ module Aws::QBusiness
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5972,7 +6295,8 @@ module Aws::QBusiness
     #   @return [String]
     class VideoExtractionConfiguration < Struct.new(
       :video_extraction_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5998,7 +6322,8 @@ module Aws::QBusiness
       :start_time_milliseconds,
       :end_time_milliseconds,
       :video_extraction_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6024,7 +6349,8 @@ module Aws::QBusiness
       :updated_at,
       :default_endpoint,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6035,7 +6361,8 @@ module Aws::QBusiness
     class WebExperienceAuthConfiguration < Struct.new(
       :saml_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SamlConfiguration < WebExperienceAuthConfiguration; end

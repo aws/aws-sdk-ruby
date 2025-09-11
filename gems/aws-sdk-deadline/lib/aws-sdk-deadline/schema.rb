@@ -4106,7 +4106,6 @@ module Aws::Deadline
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#iamAction" => {"name" => "UpdateWorkerSchedule", "documentation" => "Grants permission to update the schedule for a worker", "requiredActions" => ["logs:CreateLogStream"]}, "smithy.api#endpoint" => {"hostPrefix" => "scheduling."}, "smithy.api#http" => {"method" => "PATCH", "uri" => "/2023-10-12/farms/{farmId}/fleets/{fleetId}/workers/{workerId}/schedule", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

@@ -40,7 +40,7 @@ module Aws::ResourceGroupsTaggingAPI
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroupsTaggingAPI::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -72,7 +72,7 @@ module Aws::ResourceGroupsTaggingAPI
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroupsTaggingAPI::Types::ConstraintViolationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::ResourceGroupsTaggingAPI
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroupsTaggingAPI::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::ResourceGroupsTaggingAPI
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroupsTaggingAPI::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::ResourceGroupsTaggingAPI
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroupsTaggingAPI::Types::PaginationTokenExpiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::ResourceGroupsTaggingAPI
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroupsTaggingAPI::Types::ThrottledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

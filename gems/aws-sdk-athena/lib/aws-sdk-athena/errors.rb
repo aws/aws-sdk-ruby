@@ -40,7 +40,7 @@ module Aws::Athena
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Athena::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::Athena
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Athena::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def athena_error_code
@@ -76,7 +76,7 @@ module Aws::Athena
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Athena::Types::MetadataException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -89,7 +89,7 @@ module Aws::Athena
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Athena::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -107,7 +107,7 @@ module Aws::Athena
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Athena::Types::SessionAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::Athena
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Athena::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

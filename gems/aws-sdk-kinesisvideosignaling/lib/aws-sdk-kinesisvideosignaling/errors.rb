@@ -40,7 +40,7 @@ module Aws::KinesisVideoSignaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoSignaling::Types::ClientLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::KinesisVideoSignaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoSignaling::Types::InvalidArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::KinesisVideoSignaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoSignaling::Types::InvalidClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::KinesisVideoSignaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoSignaling::Types::NotAuthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::KinesisVideoSignaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoSignaling::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -107,7 +107,7 @@ module Aws::KinesisVideoSignaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoSignaling::Types::SessionExpiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -2274,7 +2274,6 @@ module Aws::Neptune
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
         operation.traits = {}
       end)
-
     end
 
     class << self

@@ -815,7 +815,6 @@ module Aws::Grafana
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "PUT", "uri" => "/workspaces/{workspaceId}/configuration"}}
       end)
-
     end
 
     class << self

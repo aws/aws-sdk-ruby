@@ -51,7 +51,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::CustomerNotEntitledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -64,7 +64,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::DisabledApiException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::DuplicateRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::ExpiredTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -110,7 +110,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InternalServiceErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -124,7 +124,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InvalidCustomerIdentifierException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InvalidEndpointRegionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InvalidProductCodeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -166,7 +166,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InvalidPublicKeyVersionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -182,7 +182,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InvalidRegionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -195,7 +195,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InvalidTagException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -208,7 +208,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InvalidTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -221,7 +221,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InvalidUsageAllocationsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -235,7 +235,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InvalidUsageDimensionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -248,7 +248,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::PlatformNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -261,7 +261,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -278,7 +278,7 @@ module Aws::MarketplaceMetering
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::TimestampOutOfBoundsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

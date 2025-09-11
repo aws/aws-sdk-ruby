@@ -50,7 +50,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::CallRateLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::IdempotentParameterMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::InvalidPaginationTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::InvalidParameterCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -172,7 +172,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::InvalidVersionNumberException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -185,7 +185,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -199,7 +199,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ResourceDependencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -213,7 +213,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -226,7 +226,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -240,7 +240,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -255,7 +255,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -268,7 +268,7 @@ module Aws::Imagebuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

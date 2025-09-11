@@ -441,7 +441,6 @@ module Aws::Evs
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagPolicyException)
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "aws:TagKeys"], "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

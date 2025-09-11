@@ -43,7 +43,7 @@ module Aws::ApplicationAutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationAutoScaling::Types::ConcurrentUpdateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -59,7 +59,7 @@ module Aws::ApplicationAutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationAutoScaling::Types::FailedResourceAccessException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -72,7 +72,7 @@ module Aws::ApplicationAutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationAutoScaling::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::ApplicationAutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationAutoScaling::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::ApplicationAutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationAutoScaling::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::ApplicationAutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationAutoScaling::Types::ObjectNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::ApplicationAutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationAutoScaling::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::ApplicationAutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationAutoScaling::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -165,7 +165,7 @@ module Aws::ApplicationAutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationAutoScaling::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

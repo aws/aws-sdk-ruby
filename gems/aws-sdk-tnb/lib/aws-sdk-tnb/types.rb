@@ -11,7 +11,8 @@ module Aws::Tnb
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::Tnb
     #   @return [String]
     class CancelSolNetworkOperationInput < Struct.new(
       :ns_lcm_op_occ_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +31,8 @@ module Aws::Tnb
     #   @return [Hash<String, String>]
     class CreateSolFunctionPackageInput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +61,8 @@ module Aws::Tnb
       :operational_state,
       :usage_state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +83,8 @@ module Aws::Tnb
       :ns_name,
       :ns_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +109,8 @@ module Aws::Tnb
       :nsd_info_id,
       :ns_instance_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +119,8 @@ module Aws::Tnb
     #   @return [Hash<String, String>]
     class CreateSolNetworkPackageInput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +149,8 @@ module Aws::Tnb
       :nsd_operational_state,
       :nsd_usage_state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +159,8 @@ module Aws::Tnb
     #   @return [String]
     class DeleteSolFunctionPackageInput < Struct.new(
       :vnf_pkg_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +169,8 @@ module Aws::Tnb
     #   @return [String]
     class DeleteSolNetworkInstanceInput < Struct.new(
       :ns_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,7 +179,8 @@ module Aws::Tnb
     #   @return [String]
     class DeleteSolNetworkPackageInput < Struct.new(
       :nsd_info_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +194,8 @@ module Aws::Tnb
     class ErrorInfo < Struct.new(
       :cause,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,7 +206,8 @@ module Aws::Tnb
     #   @return [Array<Types::ToscaOverride>]
     class FunctionArtifactMeta < Struct.new(
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -203,7 +216,8 @@ module Aws::Tnb
     #   @return [String]
     class GetSolFunctionInstanceInput < Struct.new(
       :vnf_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +232,8 @@ module Aws::Tnb
     class GetSolFunctionInstanceMetadata < Struct.new(
       :created_at,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -273,7 +288,8 @@ module Aws::Tnb
       :instantiated_vnf_info,
       :metadata,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -286,7 +302,8 @@ module Aws::Tnb
     class GetSolFunctionPackageContentInput < Struct.new(
       :vnf_pkg_id,
       :accept,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +316,8 @@ module Aws::Tnb
     class GetSolFunctionPackageContentOutput < Struct.new(
       :content_type,
       :package_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,7 +331,8 @@ module Aws::Tnb
     class GetSolFunctionPackageDescriptorInput < Struct.new(
       :vnf_pkg_id,
       :accept,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +345,8 @@ module Aws::Tnb
     class GetSolFunctionPackageDescriptorOutput < Struct.new(
       :content_type,
       :vnfd,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +355,8 @@ module Aws::Tnb
     #   @return [String]
     class GetSolFunctionPackageInput < Struct.new(
       :vnf_pkg_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -354,7 +375,8 @@ module Aws::Tnb
       :vnfd,
       :created_at,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -404,7 +426,8 @@ module Aws::Tnb
       :vnfd_version,
       :metadata,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +438,8 @@ module Aws::Tnb
     #   @return [String]
     class GetSolInstantiatedVnfInfo < Struct.new(
       :vnf_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +448,8 @@ module Aws::Tnb
     #   @return [String]
     class GetSolNetworkInstanceInput < Struct.new(
       :ns_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +464,8 @@ module Aws::Tnb
     class GetSolNetworkInstanceMetadata < Struct.new(
       :created_at,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -486,7 +512,8 @@ module Aws::Tnb
       :lcm_op_info,
       :metadata,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +522,8 @@ module Aws::Tnb
     #   @return [String]
     class GetSolNetworkOperationInput < Struct.new(
       :ns_lcm_op_occ_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +555,8 @@ module Aws::Tnb
       :instantiate_metadata,
       :created_at,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +602,8 @@ module Aws::Tnb
       :metadata,
       :tasks,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +634,8 @@ module Aws::Tnb
       :task_status,
       :task_start_time,
       :task_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,7 +648,8 @@ module Aws::Tnb
     class GetSolNetworkPackageContentInput < Struct.new(
       :nsd_info_id,
       :accept,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -630,7 +662,8 @@ module Aws::Tnb
     class GetSolNetworkPackageContentOutput < Struct.new(
       :content_type,
       :nsd_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -639,7 +672,8 @@ module Aws::Tnb
     #   @return [String]
     class GetSolNetworkPackageDescriptorInput < Struct.new(
       :nsd_info_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +686,8 @@ module Aws::Tnb
     class GetSolNetworkPackageDescriptorOutput < Struct.new(
       :content_type,
       :nsd,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +696,8 @@ module Aws::Tnb
     #   @return [String]
     class GetSolNetworkPackageInput < Struct.new(
       :nsd_info_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -681,7 +717,8 @@ module Aws::Tnb
       :nsd,
       :created_at,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,7 +769,8 @@ module Aws::Tnb
       :vnf_pkg_ids,
       :metadata,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,7 +785,8 @@ module Aws::Tnb
     class GetSolVnfInfo < Struct.new(
       :vnf_state,
       :vnfc_resource_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +797,8 @@ module Aws::Tnb
     #   @return [Types::GetSolVnfcResourceInfoMetadata]
     class GetSolVnfcResourceInfo < Struct.new(
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +817,8 @@ module Aws::Tnb
       :node_group,
       :cluster,
       :helm_chart,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +832,8 @@ module Aws::Tnb
     class InstantiateMetadata < Struct.new(
       :nsd_info_id,
       :additional_params_for_ns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +856,8 @@ module Aws::Tnb
       :dry_run,
       :additional_params_for_ns,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -827,7 +870,8 @@ module Aws::Tnb
     class InstantiateSolNetworkInstanceOutput < Struct.new(
       :ns_lcm_op_occ_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -836,7 +880,8 @@ module Aws::Tnb
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +892,8 @@ module Aws::Tnb
     #   @return [String]
     class LcmOperationInfo < Struct.new(
       :ns_lcm_op_occ_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +933,8 @@ module Aws::Tnb
       :instantiation_state,
       :instantiated_vnf_info,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +949,8 @@ module Aws::Tnb
     class ListSolFunctionInstanceMetadata < Struct.new(
       :created_at,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,7 +963,8 @@ module Aws::Tnb
     class ListSolFunctionInstancesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +977,8 @@ module Aws::Tnb
     class ListSolFunctionInstancesOutput < Struct.new(
       :next_token,
       :function_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1025,8 @@ module Aws::Tnb
       :vnf_product_name,
       :vnfd_version,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1041,8 @@ module Aws::Tnb
     class ListSolFunctionPackageMetadata < Struct.new(
       :created_at,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1055,8 @@ module Aws::Tnb
     class ListSolFunctionPackagesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1069,8 @@ module Aws::Tnb
     class ListSolFunctionPackagesOutput < Struct.new(
       :next_token,
       :function_packages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1055,7 +1109,8 @@ module Aws::Tnb
       :nsd_info_id,
       :ns_state,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1070,7 +1125,8 @@ module Aws::Tnb
     class ListSolNetworkInstanceMetadata < Struct.new(
       :created_at,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1083,7 +1139,8 @@ module Aws::Tnb
     class ListSolNetworkInstancesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1153,8 @@ module Aws::Tnb
     class ListSolNetworkInstancesOutput < Struct.new(
       :next_token,
       :network_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1134,7 +1192,8 @@ module Aws::Tnb
       :update_type,
       :error,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1151,7 +1210,8 @@ module Aws::Tnb
       :ns_instance_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1176,7 +1236,8 @@ module Aws::Tnb
       :vnf_instance_id,
       :created_at,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1189,7 +1250,8 @@ module Aws::Tnb
     class ListSolNetworkOperationsOutput < Struct.new(
       :next_token,
       :network_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,7 +1307,8 @@ module Aws::Tnb
       :nsd_invariant_id,
       :vnf_pkg_ids,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1323,8 @@ module Aws::Tnb
     class ListSolNetworkPackageMetadata < Struct.new(
       :created_at,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1337,8 @@ module Aws::Tnb
     class ListSolNetworkPackagesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1286,7 +1351,8 @@ module Aws::Tnb
     class ListSolNetworkPackagesOutput < Struct.new(
       :next_token,
       :network_packages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1295,7 +1361,8 @@ module Aws::Tnb
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1371,8 @@ module Aws::Tnb
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1387,8 @@ module Aws::Tnb
     class ModifyVnfInfoMetadata < Struct.new(
       :vnf_instance_id,
       :vnf_configurable_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1330,7 +1399,8 @@ module Aws::Tnb
     #   @return [Array<Types::ToscaOverride>]
     class NetworkArtifactMeta < Struct.new(
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1414,8 @@ module Aws::Tnb
     class ProblemDetails < Struct.new(
       :detail,
       :title,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1361,7 +1432,8 @@ module Aws::Tnb
       :vnf_pkg_id,
       :content_type,
       :file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1445,8 @@ module Aws::Tnb
     #   @return [Types::FunctionArtifactMeta]
     class PutSolFunctionPackageContentMetadata < Struct.new(
       :vnfd,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1475,8 @@ module Aws::Tnb
       :vnf_provider,
       :vnfd_version,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1419,7 +1493,8 @@ module Aws::Tnb
       :nsd_info_id,
       :content_type,
       :file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1431,7 +1506,8 @@ module Aws::Tnb
     #   @return [Types::NetworkArtifactMeta]
     class PutSolNetworkPackageContentMetadata < Struct.new(
       :nsd,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1464,7 +1540,8 @@ module Aws::Tnb
       :nsd_version,
       :vnf_pkg_ids,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1473,7 +1550,8 @@ module Aws::Tnb
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1482,7 +1560,8 @@ module Aws::Tnb
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,12 +1574,14 @@ module Aws::Tnb
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1594,8 @@ module Aws::Tnb
     class TerminateSolNetworkInstanceInput < Struct.new(
       :ns_instance_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1608,8 @@ module Aws::Tnb
     class TerminateSolNetworkInstanceOutput < Struct.new(
       :ns_lcm_op_occ_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,7 +1618,8 @@ module Aws::Tnb
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,7 +1633,8 @@ module Aws::Tnb
     class ToscaOverride < Struct.new(
       :name,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1562,12 +1647,14 @@ module Aws::Tnb
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1581,7 +1668,8 @@ module Aws::Tnb
     class UpdateNsMetadata < Struct.new(
       :nsd_info_id,
       :additional_params_for_ns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1594,7 +1682,8 @@ module Aws::Tnb
     class UpdateSolFunctionPackageInput < Struct.new(
       :vnf_pkg_id,
       :operational_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1603,7 +1692,8 @@ module Aws::Tnb
     #   @return [String]
     class UpdateSolFunctionPackageOutput < Struct.new(
       :operational_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1732,8 @@ module Aws::Tnb
       :modify_vnf_info_data,
       :update_ns,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1655,7 +1746,8 @@ module Aws::Tnb
     class UpdateSolNetworkInstanceOutput < Struct.new(
       :ns_lcm_op_occ_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1672,7 +1764,8 @@ module Aws::Tnb
     class UpdateSolNetworkModify < Struct.new(
       :vnf_instance_id,
       :vnf_configurable_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1778,8 @@ module Aws::Tnb
     class UpdateSolNetworkPackageInput < Struct.new(
       :nsd_info_id,
       :nsd_operational_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1788,8 @@ module Aws::Tnb
     #   @return [String]
     class UpdateSolNetworkPackageOutput < Struct.new(
       :nsd_operational_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1708,7 +1803,8 @@ module Aws::Tnb
     class UpdateSolNetworkServiceData < Struct.new(
       :nsd_info_id,
       :additional_params_for_ns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1821,8 @@ module Aws::Tnb
       :vnf_pkg_id,
       :content_type,
       :file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1737,7 +1834,8 @@ module Aws::Tnb
     #   @return [Types::FunctionArtifactMeta]
     class ValidateSolFunctionPackageContentMetadata < Struct.new(
       :vnfd,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1766,7 +1864,8 @@ module Aws::Tnb
       :vnf_provider,
       :vnfd_version,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1783,7 +1882,8 @@ module Aws::Tnb
       :nsd_info_id,
       :content_type,
       :file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1795,7 +1895,8 @@ module Aws::Tnb
     #   @return [Types::NetworkArtifactMeta]
     class ValidateSolNetworkPackageContentMetadata < Struct.new(
       :nsd,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1828,7 +1929,8 @@ module Aws::Tnb
       :nsd_version,
       :vnf_pkg_ids,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1838,7 +1940,8 @@ module Aws::Tnb
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

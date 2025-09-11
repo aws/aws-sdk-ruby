@@ -43,7 +43,7 @@ module Aws::Backup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Backup::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -81,7 +81,7 @@ module Aws::Backup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Backup::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -108,7 +108,7 @@ module Aws::Backup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Backup::Types::DependencyFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -136,7 +136,7 @@ module Aws::Backup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Backup::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -164,7 +164,7 @@ module Aws::Backup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Backup::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -192,7 +192,7 @@ module Aws::Backup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Backup::Types::InvalidResourceStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -220,7 +220,7 @@ module Aws::Backup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Backup::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -247,7 +247,7 @@ module Aws::Backup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Backup::Types::MissingParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -274,7 +274,7 @@ module Aws::Backup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Backup::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -301,7 +301,7 @@ module Aws::Backup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Backup::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code

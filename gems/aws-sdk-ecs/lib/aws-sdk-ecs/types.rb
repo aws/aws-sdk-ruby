@@ -12,7 +12,8 @@ module Aws::ECS
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +40,8 @@ module Aws::ECS
       :production_listener_rule,
       :test_listener_rule,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +76,8 @@ module Aws::ECS
       :type,
       :status,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +91,8 @@ module Aws::ECS
     class AttachmentStateChange < Struct.new(
       :attachment_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -119,7 +123,8 @@ module Aws::ECS
       :value,
       :target_type,
       :target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +136,8 @@ module Aws::ECS
     #   @return [String]
     class AttributeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -166,7 +172,8 @@ module Aws::ECS
       :managed_scaling,
       :managed_termination_protection,
       :managed_draining,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +203,8 @@ module Aws::ECS
       :managed_scaling,
       :managed_termination_protection,
       :managed_draining,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +243,8 @@ module Aws::ECS
       :subnets,
       :security_groups,
       :assign_public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -246,7 +255,8 @@ module Aws::ECS
     #   @return [String]
     class BlockedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +342,8 @@ module Aws::ECS
       :update_status,
       :update_status_reason,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -429,7 +440,8 @@ module Aws::ECS
       :capacity_provider,
       :weight,
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -447,7 +459,8 @@ module Aws::ECS
     #   @return [String]
     class ClientException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +656,8 @@ module Aws::ECS
       :attachments,
       :attachments_status,
       :service_connect_defaults,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -665,7 +679,8 @@ module Aws::ECS
     class ClusterConfiguration < Struct.new(
       :execute_command_configuration,
       :managed_storage_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +692,8 @@ module Aws::ECS
     #   @return [String]
     class ClusterContainsContainerInstancesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +706,8 @@ module Aws::ECS
     #   @return [String]
     class ClusterContainsServicesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +717,8 @@ module Aws::ECS
     #   @return [String]
     class ClusterContainsTasksException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +728,8 @@ module Aws::ECS
     #   @return [String]
     class ClusterNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,7 +751,8 @@ module Aws::ECS
     #   @return [String]
     class ClusterServiceConnectDefaults < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +788,8 @@ module Aws::ECS
     #   @return [String]
     class ClusterServiceConnectDefaultsRequest < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +822,8 @@ module Aws::ECS
     class ClusterSetting < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +838,8 @@ module Aws::ECS
     class ConflictException < Struct.new(
       :resource_ids,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,7 +918,8 @@ module Aws::ECS
       :memory,
       :memory_reservation,
       :gpu_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,7 +1588,8 @@ module Aws::ECS
       :resource_requirements,
       :firelens_configuration,
       :credential_specs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1638,7 +1663,8 @@ module Aws::ECS
     class ContainerDependency < Struct.new(
       :container_name,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1663,7 +1689,8 @@ module Aws::ECS
       :container_name,
       :image_digest,
       :image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1817,7 +1844,8 @@ module Aws::ECS
       :attachments,
       :tags,
       :health_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1841,7 +1869,8 @@ module Aws::ECS
     class ContainerInstanceHealthStatus < Struct.new(
       :overall_status,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1896,7 +1925,8 @@ module Aws::ECS
       :memory,
       :memory_reservation,
       :resource_requirements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +1957,8 @@ module Aws::ECS
       :enabled,
       :ignored_exit_codes,
       :restart_attempt_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1962,7 +1993,8 @@ module Aws::ECS
       :network_bindings,
       :reason,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2015,7 +2047,8 @@ module Aws::ECS
       :name,
       :auto_scaling_group_provider,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2024,7 +2057,8 @@ module Aws::ECS
     #   @return [Types::CapacityProvider]
     class CreateCapacityProviderResponse < Struct.new(
       :capacity_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2155,8 @@ module Aws::ECS
       :capacity_providers,
       :default_capacity_provider_strategy,
       :service_connect_defaults,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2130,7 +2165,8 @@ module Aws::ECS
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,7 +2475,8 @@ module Aws::ECS
       :service_connect_configuration,
       :volume_configurations,
       :vpc_lattice_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2458,7 +2495,8 @@ module Aws::ECS
     #   @return [Types::Service]
     class CreateServiceResponse < Struct.new(
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2581,7 +2619,8 @@ module Aws::ECS
       :scale,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2593,7 +2632,8 @@ module Aws::ECS
     #   @return [Types::TaskSet]
     class CreateTaskSetResponse < Struct.new(
       :task_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2611,7 +2651,8 @@ module Aws::ECS
     class CreatedAt < Struct.new(
       :before,
       :after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2634,7 +2675,8 @@ module Aws::ECS
     class DeleteAccountSettingRequest < Struct.new(
       :name,
       :principal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2643,7 +2685,8 @@ module Aws::ECS
     #   @return [Types::Setting]
     class DeleteAccountSettingResponse < Struct.new(
       :setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2660,7 +2703,8 @@ module Aws::ECS
     class DeleteAttributesRequest < Struct.new(
       :cluster,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2669,7 +2713,8 @@ module Aws::ECS
     #   @return [Array<Types::Attribute>]
     class DeleteAttributesResponse < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2678,7 +2723,8 @@ module Aws::ECS
     #   @return [String]
     class DeleteCapacityProviderRequest < Struct.new(
       :capacity_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2687,7 +2733,8 @@ module Aws::ECS
     #   @return [Types::CapacityProvider]
     class DeleteCapacityProviderResponse < Struct.new(
       :capacity_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2696,7 +2743,8 @@ module Aws::ECS
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2705,7 +2753,8 @@ module Aws::ECS
     #   @return [Types::Cluster]
     class DeleteClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2725,7 +2774,8 @@ module Aws::ECS
       :cluster,
       :service,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2734,7 +2784,8 @@ module Aws::ECS
     #   @return [Types::Service]
     class DeleteServiceResponse < Struct.new(
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2746,7 +2797,8 @@ module Aws::ECS
     #   @return [Array<String>]
     class DeleteTaskDefinitionsRequest < Struct.new(
       :task_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2759,7 +2811,8 @@ module Aws::ECS
     class DeleteTaskDefinitionsResponse < Struct.new(
       :task_definitions,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2783,7 +2836,8 @@ module Aws::ECS
       :service,
       :task_set,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2792,7 +2846,8 @@ module Aws::ECS
     #   @return [Types::TaskSet]
     class DeleteTaskSetResponse < Struct.new(
       :task_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2940,7 +2995,8 @@ module Aws::ECS
       :volume_configurations,
       :fargate_ephemeral_storage,
       :vpc_lattice_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2980,7 +3036,8 @@ module Aws::ECS
       :alarm_names,
       :rollback,
       :enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3013,7 +3070,8 @@ module Aws::ECS
     class DeploymentCircuitBreaker < Struct.new(
       :enable,
       :rollback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3190,7 +3248,8 @@ module Aws::ECS
       :strategy,
       :bake_time_in_minutes,
       :lifecycle_hooks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3305,7 +3364,8 @@ module Aws::ECS
     #   @return [String]
     class DeploymentController < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3316,7 +3376,8 @@ module Aws::ECS
     #   @return [String]
     class DeploymentEphemeralStorage < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3378,7 +3439,8 @@ module Aws::ECS
       :hook_target_arn,
       :role_arn,
       :lifecycle_stages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3406,7 +3468,8 @@ module Aws::ECS
       :cluster,
       :container_instance,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3415,7 +3478,8 @@ module Aws::ECS
     #   @return [Types::ContainerInstance]
     class DeregisterContainerInstanceResponse < Struct.new(
       :container_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3426,7 +3490,8 @@ module Aws::ECS
     #   @return [String]
     class DeregisterTaskDefinitionRequest < Struct.new(
       :task_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3435,7 +3500,8 @@ module Aws::ECS
     #   @return [Types::TaskDefinition]
     class DeregisterTaskDefinitionResponse < Struct.new(
       :task_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3476,7 +3542,8 @@ module Aws::ECS
       :include,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3497,7 +3564,8 @@ module Aws::ECS
       :capacity_providers,
       :failures,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3522,7 +3590,8 @@ module Aws::ECS
     class DescribeClustersRequest < Struct.new(
       :clusters,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3535,7 +3604,8 @@ module Aws::ECS
     class DescribeClustersResponse < Struct.new(
       :clusters,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3559,7 +3629,8 @@ module Aws::ECS
       :cluster,
       :container_instances,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3572,7 +3643,8 @@ module Aws::ECS
     class DescribeContainerInstancesResponse < Struct.new(
       :container_instances,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3582,7 +3654,8 @@ module Aws::ECS
     #   @return [Array<String>]
     class DescribeServiceDeploymentsRequest < Struct.new(
       :service_deployment_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3598,7 +3671,8 @@ module Aws::ECS
     class DescribeServiceDeploymentsResponse < Struct.new(
       :service_deployments,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3609,7 +3683,8 @@ module Aws::ECS
     #   @return [Array<String>]
     class DescribeServiceRevisionsRequest < Struct.new(
       :service_revision_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3622,7 +3697,8 @@ module Aws::ECS
     class DescribeServiceRevisionsResponse < Struct.new(
       :service_revisions,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3644,7 +3720,8 @@ module Aws::ECS
       :cluster,
       :services,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3657,7 +3734,8 @@ module Aws::ECS
     class DescribeServicesResponse < Struct.new(
       :services,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3675,7 +3753,8 @@ module Aws::ECS
     class DescribeTaskDefinitionRequest < Struct.new(
       :task_definition,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3720,7 +3799,8 @@ module Aws::ECS
     class DescribeTaskDefinitionResponse < Struct.new(
       :task_definition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3745,7 +3825,8 @@ module Aws::ECS
       :service,
       :task_sets,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3758,7 +3839,8 @@ module Aws::ECS
     class DescribeTaskSetsResponse < Struct.new(
       :task_sets,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3778,7 +3860,8 @@ module Aws::ECS
       :cluster,
       :tasks,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3791,7 +3874,8 @@ module Aws::ECS
     class DescribeTasksResponse < Struct.new(
       :tasks,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3811,7 +3895,8 @@ module Aws::ECS
       :host_path,
       :container_path,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3826,7 +3911,8 @@ module Aws::ECS
     class DiscoverPollEndpointRequest < Struct.new(
       :container_instance,
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3844,7 +3930,8 @@ module Aws::ECS
       :endpoint,
       :telemetry_endpoint,
       :service_connect_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3890,7 +3977,8 @@ module Aws::ECS
       :driver,
       :driver_opts,
       :labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3912,7 +4000,8 @@ module Aws::ECS
       :resource_type,
       :tags,
       :propagate_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3935,7 +4024,8 @@ module Aws::ECS
     class EFSAuthorizationConfig < Struct.new(
       :access_point_id,
       :iam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3977,7 +4067,8 @@ module Aws::ECS
       :transit_encryption,
       :transit_encryption_port,
       :authorization_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4026,7 +4117,8 @@ module Aws::ECS
     class EnvironmentFile < Struct.new(
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4053,7 +4145,8 @@ module Aws::ECS
     #   @return [Integer]
     class EphemeralStorage < Struct.new(
       :size_in_gi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4099,7 +4192,8 @@ module Aws::ECS
       :kms_key_id,
       :logging,
       :log_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4134,7 +4228,8 @@ module Aws::ECS
       :s3_bucket_name,
       :s3_encryption_enabled,
       :s3_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4167,7 +4262,8 @@ module Aws::ECS
       :command,
       :interactive,
       :task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4199,7 +4295,8 @@ module Aws::ECS
       :interactive,
       :session,
       :task_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4224,7 +4321,8 @@ module Aws::ECS
     class FSxWindowsFileServerAuthorizationConfig < Struct.new(
       :credentials_parameter,
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4246,7 +4344,8 @@ module Aws::ECS
       :file_system_id,
       :root_directory,
       :authorization_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4265,7 +4364,8 @@ module Aws::ECS
       :arn,
       :reason,
       :detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4293,7 +4393,8 @@ module Aws::ECS
     class FirelensConfiguration < Struct.new(
       :type,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4307,7 +4408,8 @@ module Aws::ECS
     class GetTaskProtectionRequest < Struct.new(
       :cluster,
       :tasks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4337,7 +4439,8 @@ module Aws::ECS
     class GetTaskProtectionResponse < Struct.new(
       :protected_tasks,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4589,7 +4692,8 @@ module Aws::ECS
       :timeout,
       :retries,
       :start_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4604,7 +4708,8 @@ module Aws::ECS
     class HostEntry < Struct.new(
       :hostname,
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4623,7 +4728,8 @@ module Aws::ECS
     #   @return [String]
     class HostVolumeProperties < Struct.new(
       :source_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4639,7 +4745,8 @@ module Aws::ECS
     class InferenceAccelerator < Struct.new(
       :device_name,
       :device_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4657,7 +4764,8 @@ module Aws::ECS
     class InferenceAcceleratorOverride < Struct.new(
       :device_name,
       :device_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4680,7 +4788,8 @@ module Aws::ECS
       :status,
       :last_updated,
       :last_status_change,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4693,7 +4802,8 @@ module Aws::ECS
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4769,7 +4879,8 @@ module Aws::ECS
     class KernelCapabilities < Struct.new(
       :add,
       :drop,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4785,7 +4896,8 @@ module Aws::ECS
     class KeyValuePair < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4795,7 +4907,8 @@ module Aws::ECS
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4881,7 +4994,8 @@ module Aws::ECS
       :tmpfs,
       :max_swap,
       :swappiness,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4936,7 +5050,8 @@ module Aws::ECS
       :effective_settings,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4953,7 +5068,8 @@ module Aws::ECS
     class ListAccountSettingsResponse < Struct.new(
       :settings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4998,7 +5114,8 @@ module Aws::ECS
       :attribute_value,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5015,7 +5132,8 @@ module Aws::ECS
     class ListAttributesResponse < Struct.new(
       :attributes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5042,7 +5160,8 @@ module Aws::ECS
     class ListClustersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5060,7 +5179,8 @@ module Aws::ECS
     class ListClustersResponse < Struct.new(
       :cluster_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5107,7 +5227,8 @@ module Aws::ECS
       :next_token,
       :max_results,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5125,7 +5246,8 @@ module Aws::ECS
     class ListContainerInstancesResponse < Struct.new(
       :container_instance_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5172,7 +5294,8 @@ module Aws::ECS
       :created_at,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5216,7 +5339,8 @@ module Aws::ECS
     class ListServiceDeploymentsResponse < Struct.new(
       :service_deployments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5253,7 +5377,8 @@ module Aws::ECS
       :namespace,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5271,7 +5396,8 @@ module Aws::ECS
     class ListServicesByNamespaceResponse < Struct.new(
       :service_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5313,7 +5439,8 @@ module Aws::ECS
       :max_results,
       :launch_type,
       :scheduling_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5331,7 +5458,8 @@ module Aws::ECS
     class ListServicesResponse < Struct.new(
       :service_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5342,7 +5470,8 @@ module Aws::ECS
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5351,7 +5480,8 @@ module Aws::ECS
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5400,7 +5530,8 @@ module Aws::ECS
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5418,7 +5549,8 @@ module Aws::ECS
     class ListTaskDefinitionFamiliesResponse < Struct.new(
       :families,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5470,7 +5602,8 @@ module Aws::ECS
       :sort,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5488,7 +5621,8 @@ module Aws::ECS
     class ListTaskDefinitionsResponse < Struct.new(
       :task_definition_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5566,7 +5700,8 @@ module Aws::ECS
       :service_name,
       :desired_status,
       :launch_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5583,7 +5718,8 @@ module Aws::ECS
     class ListTasksResponse < Struct.new(
       :task_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5642,7 +5778,8 @@ module Aws::ECS
       :container_name,
       :container_port,
       :advanced_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5883,7 +6020,8 @@ module Aws::ECS
       :log_driver,
       :options,
       :secret_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5906,7 +6044,8 @@ module Aws::ECS
       :name,
       :reason,
       :last_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5928,7 +6067,8 @@ module Aws::ECS
       :managed_agent_name,
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5973,7 +6113,8 @@ module Aws::ECS
       :minimum_scaling_step_size,
       :maximum_scaling_step_size,
       :instance_warmup_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5998,7 +6139,8 @@ module Aws::ECS
     class ManagedStorageConfiguration < Struct.new(
       :kms_key_id,
       :fargate_ephemeral_storage_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6011,7 +6153,8 @@ module Aws::ECS
     #   @return [String]
     class MissingVersionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6032,7 +6175,8 @@ module Aws::ECS
       :source_volume,
       :container_path,
       :read_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6042,7 +6186,8 @@ module Aws::ECS
     #   @return [String]
     class NamespaceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6135,7 +6280,8 @@ module Aws::ECS
       :protocol,
       :container_port_range,
       :host_port_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6148,7 +6294,8 @@ module Aws::ECS
     #   @return [Types::AwsVpcConfiguration]
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6167,7 +6314,8 @@ module Aws::ECS
       :attachment_id,
       :private_ipv4_address,
       :ipv6_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6179,7 +6327,8 @@ module Aws::ECS
     #   @return [String]
     class NoUpdateAvailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6204,7 +6353,8 @@ module Aws::ECS
     class PlacementConstraint < Struct.new(
       :type,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6231,7 +6381,8 @@ module Aws::ECS
     class PlacementStrategy < Struct.new(
       :type,
       :field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6249,7 +6400,8 @@ module Aws::ECS
     class PlatformDevice < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6260,7 +6412,8 @@ module Aws::ECS
     #   @return [String]
     class PlatformTaskDefinitionIncompatibilityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6270,7 +6423,8 @@ module Aws::ECS
     #   @return [String]
     class PlatformUnknownException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6443,7 +6597,8 @@ module Aws::ECS
       :name,
       :app_protocol,
       :container_port_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6463,7 +6618,8 @@ module Aws::ECS
       :task_arn,
       :protection_enabled,
       :expiration_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6538,7 +6694,8 @@ module Aws::ECS
       :type,
       :container_name,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6695,7 +6852,8 @@ module Aws::ECS
     class PutAccountSettingDefaultRequest < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6704,7 +6862,8 @@ module Aws::ECS
     #   @return [Types::Setting]
     class PutAccountSettingDefaultResponse < Struct.new(
       :setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6871,7 +7030,8 @@ module Aws::ECS
       :name,
       :value,
       :principal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6880,7 +7040,8 @@ module Aws::ECS
     #   @return [Types::Setting]
     class PutAccountSettingResponse < Struct.new(
       :setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6895,7 +7056,8 @@ module Aws::ECS
     class PutAttributesRequest < Struct.new(
       :cluster,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6904,7 +7066,8 @@ module Aws::ECS
     #   @return [Array<Types::Attribute>]
     class PutAttributesResponse < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6943,7 +7106,8 @@ module Aws::ECS
       :cluster,
       :capacity_providers,
       :default_capacity_provider_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6952,7 +7116,8 @@ module Aws::ECS
     #   @return [Types::Cluster]
     class PutClusterCapacityProvidersResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7034,7 +7199,8 @@ module Aws::ECS
       :attributes,
       :platform_devices,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7043,7 +7209,8 @@ module Aws::ECS
     #   @return [Types::ContainerInstance]
     class RegisterContainerInstanceResponse < Struct.new(
       :container_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7319,7 +7486,8 @@ module Aws::ECS
       :ephemeral_storage,
       :runtime_platform,
       :enable_fault_injection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7332,7 +7500,8 @@ module Aws::ECS
     class RegisterTaskDefinitionResponse < Struct.new(
       :task_definition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7349,7 +7518,8 @@ module Aws::ECS
     #   @return [String]
     class RepositoryCredentials < Struct.new(
       :credentials_parameter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7359,7 +7529,8 @@ module Aws::ECS
     #   @return [Array<Types::ServiceRevisionLoadBalancer>]
     class ResolvedConfiguration < Struct.new(
       :load_balancers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7395,7 +7566,8 @@ module Aws::ECS
       :long_value,
       :integer_value,
       :string_set_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7412,7 +7584,8 @@ module Aws::ECS
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7422,7 +7595,8 @@ module Aws::ECS
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7446,7 +7620,8 @@ module Aws::ECS
     class ResourceRequirement < Struct.new(
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7465,7 +7640,8 @@ module Aws::ECS
       :reason,
       :started_at,
       :service_revision_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7660,7 +7836,8 @@ module Aws::ECS
       :task_definition,
       :client_token,
       :volume_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7676,7 +7853,8 @@ module Aws::ECS
     class RunTaskResponse < Struct.new(
       :tasks,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7694,7 +7872,8 @@ module Aws::ECS
     class RuntimePlatform < Struct.new(
       :cpu_architecture,
       :operating_system_family,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7710,7 +7889,8 @@ module Aws::ECS
     class Scale < Struct.new(
       :value,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7753,7 +7933,8 @@ module Aws::ECS
     class Secret < Struct.new(
       :name,
       :value_from,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7763,7 +7944,8 @@ module Aws::ECS
     #   @return [String]
     class ServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7998,7 +8180,8 @@ module Aws::ECS
       :propagate_tags,
       :enable_execute_command,
       :availability_zone_rebalancing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8045,7 +8228,8 @@ module Aws::ECS
       :port,
       :dns_name,
       :test_traffic_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8125,7 +8309,8 @@ module Aws::ECS
       :namespace,
       :services,
       :log_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8181,7 +8366,8 @@ module Aws::ECS
       :ingress_port_override,
       :timeout,
       :tls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8207,7 +8393,8 @@ module Aws::ECS
     class ServiceConnectServiceResource < Struct.new(
       :discovery_name,
       :discovery_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8219,7 +8406,8 @@ module Aws::ECS
     #   @return [String]
     class ServiceConnectTestTrafficHeaderMatchRules < Struct.new(
       :exact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8237,7 +8425,8 @@ module Aws::ECS
     class ServiceConnectTestTrafficHeaderRules < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8252,7 +8441,8 @@ module Aws::ECS
     #   @return [Types::ServiceConnectTestTrafficHeaderRules]
     class ServiceConnectTestTrafficRules < Struct.new(
       :header,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8262,7 +8452,8 @@ module Aws::ECS
     #   @return [String]
     class ServiceConnectTlsCertificateAuthority < Struct.new(
       :aws_pca_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8280,7 +8471,8 @@ module Aws::ECS
       :issuer_certificate_authority,
       :kms_key,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8418,7 +8610,8 @@ module Aws::ECS
       :rollback,
       :deployment_circuit_breaker,
       :alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8443,7 +8636,8 @@ module Aws::ECS
       :status,
       :alarm_names,
       :triggered_alarm_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8491,7 +8685,8 @@ module Aws::ECS
       :target_service_revision_arn,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8524,7 +8719,8 @@ module Aws::ECS
       :status,
       :failure_count,
       :threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8540,7 +8736,8 @@ module Aws::ECS
     #   @return [String]
     class ServiceDeploymentNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8558,7 +8755,8 @@ module Aws::ECS
       :id,
       :created_at,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8727,7 +8925,8 @@ module Aws::ECS
       :tag_specifications,
       :role_arn,
       :filesystem_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8738,7 +8937,8 @@ module Aws::ECS
     #   @return [String]
     class ServiceNotActiveException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8749,7 +8949,8 @@ module Aws::ECS
     #   @return [String]
     class ServiceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8793,7 +8994,8 @@ module Aws::ECS
       :port,
       :container_name,
       :container_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8891,7 +9093,8 @@ module Aws::ECS
       :created_at,
       :vpc_lattice_configurations,
       :resolved_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8910,7 +9113,8 @@ module Aws::ECS
     class ServiceRevisionLoadBalancer < Struct.new(
       :target_group_arn,
       :production_listener_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8933,7 +9137,8 @@ module Aws::ECS
       :requested_task_count,
       :running_task_count,
       :pending_task_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8960,7 +9165,8 @@ module Aws::ECS
     class ServiceVolumeConfiguration < Struct.new(
       :name,
       :managed_ebs_volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8980,7 +9186,8 @@ module Aws::ECS
       :session_id,
       :stream_url,
       :token_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9007,7 +9214,8 @@ module Aws::ECS
       :value,
       :principal_arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9125,7 +9333,8 @@ module Aws::ECS
       :tags,
       :task_definition,
       :volume_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9139,7 +9348,8 @@ module Aws::ECS
     class StartTaskResponse < Struct.new(
       :tasks,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9153,7 +9363,8 @@ module Aws::ECS
     class StopServiceDeploymentRequest < Struct.new(
       :service_deployment_arn,
       :stop_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9162,7 +9373,8 @@ module Aws::ECS
     #   @return [String]
     class StopServiceDeploymentResponse < Struct.new(
       :service_deployment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9183,7 +9395,8 @@ module Aws::ECS
       :cluster,
       :task,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9192,7 +9405,8 @@ module Aws::ECS
     #   @return [Types::Task]
     class StopTaskResponse < Struct.new(
       :task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9206,7 +9420,8 @@ module Aws::ECS
     class SubmitAttachmentStateChangesRequest < Struct.new(
       :cluster,
       :attachments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9215,7 +9430,8 @@ module Aws::ECS
     #   @return [String]
     class SubmitAttachmentStateChangesResponse < Struct.new(
       :acknowledgment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9252,7 +9468,8 @@ module Aws::ECS
       :exit_code,
       :reason,
       :network_bindings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9261,7 +9478,8 @@ module Aws::ECS
     #   @return [String]
     class SubmitContainerStateChangeResponse < Struct.new(
       :acknowledgment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9306,7 +9524,8 @@ module Aws::ECS
       :pull_started_at,
       :pull_stopped_at,
       :execution_stopped_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9315,7 +9534,8 @@ module Aws::ECS
     #   @return [String]
     class SubmitTaskStateChangeResponse < Struct.new(
       :acknowledgment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9381,7 +9601,8 @@ module Aws::ECS
     class SystemControl < Struct.new(
       :namespace,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9429,7 +9650,8 @@ module Aws::ECS
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9487,12 +9709,14 @@ module Aws::ECS
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9517,7 +9741,8 @@ module Aws::ECS
     #   @return [String]
     class TargetNotConnectedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9529,7 +9754,8 @@ module Aws::ECS
     #   @return [String]
     class TargetNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9801,7 +10027,8 @@ module Aws::ECS
       :version,
       :ephemeral_storage,
       :fargate_ephemeral_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10080,7 +10307,8 @@ module Aws::ECS
       :registered_by,
       :ephemeral_storage,
       :enable_fault_injection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10106,7 +10334,8 @@ module Aws::ECS
     class TaskDefinitionPlacementConstraint < Struct.new(
       :type,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10123,7 +10352,8 @@ module Aws::ECS
     class TaskEphemeralStorage < Struct.new(
       :size_in_gi_b,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10295,7 +10525,8 @@ module Aws::ECS
       :role_arn,
       :termination_policy,
       :filesystem_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10310,7 +10541,8 @@ module Aws::ECS
     #   @return [Boolean]
     class TaskManagedEBSVolumeTerminationPolicy < Struct.new(
       :delete_on_termination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10361,7 +10593,8 @@ module Aws::ECS
       :memory,
       :task_role_arn,
       :ephemeral_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10562,7 +10795,8 @@ module Aws::ECS
       :stability_status_at,
       :tags,
       :fargate_ephemeral_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10580,7 +10814,8 @@ module Aws::ECS
     #   @return [String]
     class TaskSetNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10599,7 +10834,8 @@ module Aws::ECS
     class TaskVolumeConfiguration < Struct.new(
       :name,
       :managed_ebs_volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10628,7 +10864,8 @@ module Aws::ECS
     class TimeoutConfiguration < Struct.new(
       :idle_timeout_seconds,
       :per_request_timeout_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10653,7 +10890,8 @@ module Aws::ECS
       :container_path,
       :size,
       :mount_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10689,7 +10927,8 @@ module Aws::ECS
       :name,
       :soft_limit,
       :hard_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10705,7 +10944,8 @@ module Aws::ECS
     #   @return [String]
     class UnsupportedFeatureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10720,12 +10960,14 @@ module Aws::ECS
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10739,7 +10981,8 @@ module Aws::ECS
     class UpdateCapacityProviderRequest < Struct.new(
       :name,
       :auto_scaling_group_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10748,7 +10991,8 @@ module Aws::ECS
     #   @return [Types::CapacityProvider]
     class UpdateCapacityProviderResponse < Struct.new(
       :capacity_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10780,7 +11024,8 @@ module Aws::ECS
       :settings,
       :configuration,
       :service_connect_defaults,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10789,7 +11034,8 @@ module Aws::ECS
     #   @return [Types::Cluster]
     class UpdateClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10811,7 +11057,8 @@ module Aws::ECS
     class UpdateClusterSettingsRequest < Struct.new(
       :cluster,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10820,7 +11067,8 @@ module Aws::ECS
     #   @return [Types::Cluster]
     class UpdateClusterSettingsResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10835,7 +11083,8 @@ module Aws::ECS
     class UpdateContainerAgentRequest < Struct.new(
       :cluster,
       :container_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10844,7 +11093,8 @@ module Aws::ECS
     #   @return [Types::ContainerInstance]
     class UpdateContainerAgentResponse < Struct.new(
       :container_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10867,7 +11117,8 @@ module Aws::ECS
       :cluster,
       :container_instances,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10880,7 +11131,8 @@ module Aws::ECS
     class UpdateContainerInstancesStateResponse < Struct.new(
       :container_instances,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10894,7 +11146,8 @@ module Aws::ECS
     #   @return [String]
     class UpdateInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10913,7 +11166,8 @@ module Aws::ECS
       :cluster,
       :service,
       :primary_task_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10922,7 +11176,8 @@ module Aws::ECS
     #   @return [Types::TaskSet]
     class UpdateServicePrimaryTaskSetResponse < Struct.new(
       :task_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11168,7 +11423,8 @@ module Aws::ECS
       :service_connect_configuration,
       :volume_configurations,
       :vpc_lattice_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11177,7 +11433,8 @@ module Aws::ECS
     #   @return [Types::Service]
     class UpdateServiceResponse < Struct.new(
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11206,7 +11463,8 @@ module Aws::ECS
       :tasks,
       :protection_enabled,
       :expires_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11236,7 +11494,8 @@ module Aws::ECS
     class UpdateTaskProtectionResponse < Struct.new(
       :protected_tasks,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11259,7 +11518,8 @@ module Aws::ECS
       :service,
       :task_set,
       :scale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11268,7 +11528,8 @@ module Aws::ECS
     #   @return [Types::TaskSet]
     class UpdateTaskSetResponse < Struct.new(
       :task_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11288,7 +11549,8 @@ module Aws::ECS
       :agent_version,
       :agent_hash,
       :docker_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11360,7 +11622,8 @@ module Aws::ECS
       :efs_volume_configuration,
       :fsx_windows_file_server_volume_configuration,
       :configured_at_launch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11377,7 +11640,8 @@ module Aws::ECS
     class VolumeFrom < Struct.new(
       :source_container,
       :read_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11400,7 +11664,8 @@ module Aws::ECS
       :role_arn,
       :target_group_arn,
       :port_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

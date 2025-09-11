@@ -51,7 +51,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -65,7 +65,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -79,7 +79,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -93,7 +93,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::EntityNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -107,7 +107,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::ExpiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the error.</p>
@@ -121,7 +121,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::GlueEncryptionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -135,7 +135,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -149,7 +149,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -163,7 +163,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::OperationTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -177,7 +177,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::PermissionTypeMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -191,7 +191,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::ResourceNotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the error.</p>
@@ -205,7 +205,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::ResourceNumberLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -219,7 +219,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::StatisticsNotReadyYetException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the error.</p>
@@ -233,7 +233,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::ThrottledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the error.</p>
@@ -255,7 +255,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::TransactionCanceledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the error.</p>
@@ -269,7 +269,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::TransactionCommitInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the error.</p>
@@ -283,7 +283,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::TransactionCommittedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the error.</p>
@@ -297,7 +297,7 @@ module Aws::LakeFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::WorkUnitsNotReadyYetException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the error.</p>

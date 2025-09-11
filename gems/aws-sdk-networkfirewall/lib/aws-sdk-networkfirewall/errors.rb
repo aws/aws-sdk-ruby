@@ -46,7 +46,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::InsufficientCapacityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -74,7 +74,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::InvalidOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::InvalidResourcePolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::InvalidTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::LogDestinationPermissionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -165,7 +165,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -178,7 +178,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::ResourceOwnerCheckException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -191,7 +191,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -204,7 +204,7 @@ module Aws::NetworkFirewall
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFirewall::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

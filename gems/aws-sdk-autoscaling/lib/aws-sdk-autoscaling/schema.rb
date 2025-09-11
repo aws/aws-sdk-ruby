@@ -2089,7 +2089,6 @@ module Aws::AutoScaling
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
         operation.traits = {}
       end)
-
     end
 
     class << self

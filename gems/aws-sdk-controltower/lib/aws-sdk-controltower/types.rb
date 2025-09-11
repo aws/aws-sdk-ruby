@@ -11,7 +11,8 @@ module Aws::ControlTower
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +42,8 @@ module Aws::ControlTower
       :start_time,
       :end_time,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +61,8 @@ module Aws::ControlTower
       :arn,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +71,8 @@ module Aws::ControlTower
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +114,8 @@ module Aws::ControlTower
       :control_identifier,
       :target_identifier,
       :enabled_control_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +141,8 @@ module Aws::ControlTower
       :enabled_control_identifiers,
       :statuses,
       :control_operation_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +184,8 @@ module Aws::ControlTower
       :control_identifier,
       :target_identifier,
       :enabled_control_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -195,7 +202,8 @@ module Aws::ControlTower
       :version,
       :manifest,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +216,8 @@ module Aws::ControlTower
     class CreateLandingZoneOutput < Struct.new(
       :arn,
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +226,8 @@ module Aws::ControlTower
     #   @return [String]
     class DeleteLandingZoneInput < Struct.new(
       :landing_zone_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +236,8 @@ module Aws::ControlTower
     #   @return [String]
     class DeleteLandingZoneOutput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +246,8 @@ module Aws::ControlTower
     #   @return [String]
     class DisableBaselineInput < Struct.new(
       :enabled_baseline_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -244,7 +256,8 @@ module Aws::ControlTower
     #   @return [String]
     class DisableBaselineOutput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -257,7 +270,8 @@ module Aws::ControlTower
     class DisableControlInput < Struct.new(
       :control_identifier,
       :target_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -266,7 +280,8 @@ module Aws::ControlTower
     #   @return [String]
     class DisableControlOutput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +291,8 @@ module Aws::ControlTower
     #   @return [String]
     class DriftStatusSummary < Struct.new(
       :drift_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +317,8 @@ module Aws::ControlTower
       :baseline_identifier,
       :target_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +331,8 @@ module Aws::ControlTower
     class EnableBaselineOutput < Struct.new(
       :operation_identifier,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +353,8 @@ module Aws::ControlTower
       :target_identifier,
       :tags,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +367,8 @@ module Aws::ControlTower
     class EnableControlOutput < Struct.new(
       :operation_identifier,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +406,8 @@ module Aws::ControlTower
       :parent_identifier,
       :status_summary,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +417,8 @@ module Aws::ControlTower
     #   @return [Types::EnabledBaselineDriftTypes]
     class EnabledBaselineDriftStatusSummary < Struct.new(
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -406,7 +428,8 @@ module Aws::ControlTower
     #   @return [Types::EnabledBaselineInheritanceDrift]
     class EnabledBaselineDriftTypes < Struct.new(
       :inheritance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +455,8 @@ module Aws::ControlTower
       :parent_identifiers,
       :statuses,
       :inheritance_drift_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +466,8 @@ module Aws::ControlTower
     #   @return [String]
     class EnabledBaselineInheritanceDrift < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +481,8 @@ module Aws::ControlTower
     class EnabledBaselineParameter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,7 +496,8 @@ module Aws::ControlTower
     class EnabledBaselineParameterSummary < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +531,8 @@ module Aws::ControlTower
       :target_identifier,
       :parent_identifier,
       :status_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +566,8 @@ module Aws::ControlTower
       :status_summary,
       :drift_status_summary,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +585,8 @@ module Aws::ControlTower
       :control_identifiers,
       :statuses,
       :drift_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -570,7 +600,8 @@ module Aws::ControlTower
     class EnabledControlParameter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +615,8 @@ module Aws::ControlTower
     class EnabledControlParameterSummary < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +642,8 @@ module Aws::ControlTower
       :target_identifier,
       :status_summary,
       :drift_status_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +657,8 @@ module Aws::ControlTower
     class EnablementStatusSummary < Struct.new(
       :status,
       :last_operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +667,8 @@ module Aws::ControlTower
     #   @return [String]
     class GetBaselineInput < Struct.new(
       :baseline_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +677,8 @@ module Aws::ControlTower
     #   @return [String]
     class GetBaselineOperationInput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,7 +687,8 @@ module Aws::ControlTower
     #   @return [Types::BaselineOperation]
     class GetBaselineOperationOutput < Struct.new(
       :baseline_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +705,8 @@ module Aws::ControlTower
       :arn,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +715,8 @@ module Aws::ControlTower
     #   @return [String]
     class GetControlOperationInput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +725,8 @@ module Aws::ControlTower
     #   @return [Types::ControlOperation]
     class GetControlOperationOutput < Struct.new(
       :control_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +735,8 @@ module Aws::ControlTower
     #   @return [String]
     class GetEnabledBaselineInput < Struct.new(
       :enabled_baseline_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +745,8 @@ module Aws::ControlTower
     #   @return [Types::EnabledBaselineDetails]
     class GetEnabledBaselineOutput < Struct.new(
       :enabled_baseline_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +755,8 @@ module Aws::ControlTower
     #   @return [String]
     class GetEnabledControlInput < Struct.new(
       :enabled_control_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -722,7 +765,8 @@ module Aws::ControlTower
     #   @return [Types::EnabledControlDetails]
     class GetEnabledControlOutput < Struct.new(
       :enabled_control_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +775,8 @@ module Aws::ControlTower
     #   @return [String]
     class GetLandingZoneInput < Struct.new(
       :landing_zone_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +785,8 @@ module Aws::ControlTower
     #   @return [String]
     class GetLandingZoneOperationInput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +795,8 @@ module Aws::ControlTower
     #   @return [Types::LandingZoneOperationDetail]
     class GetLandingZoneOperationOutput < Struct.new(
       :operation_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +805,8 @@ module Aws::ControlTower
     #   @return [Types::LandingZoneDetail]
     class GetLandingZoneOutput < Struct.new(
       :landing_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +815,8 @@ module Aws::ControlTower
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,7 +846,8 @@ module Aws::ControlTower
       :status,
       :latest_available_version,
       :drift_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +857,8 @@ module Aws::ControlTower
     #   @return [String]
     class LandingZoneDriftStatusSummary < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +888,8 @@ module Aws::ControlTower
       :start_time,
       :end_time,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +903,8 @@ module Aws::ControlTower
     class LandingZoneOperationFilter < Struct.new(
       :types,
       :statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +922,8 @@ module Aws::ControlTower
       :operation_type,
       :operation_identifier,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,7 +933,8 @@ module Aws::ControlTower
     #   @return [String]
     class LandingZoneSummary < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +947,8 @@ module Aws::ControlTower
     class ListBaselinesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -905,7 +961,8 @@ module Aws::ControlTower
     class ListBaselinesOutput < Struct.new(
       :baselines,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +979,8 @@ module Aws::ControlTower
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -935,7 +993,8 @@ module Aws::ControlTower
     class ListControlOperationsOutput < Struct.new(
       :control_operations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +1015,8 @@ module Aws::ControlTower
       :next_token,
       :max_results,
       :include_children,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -969,7 +1029,8 @@ module Aws::ControlTower
     class ListEnabledBaselinesOutput < Struct.new(
       :enabled_baselines,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1051,8 @@ module Aws::ControlTower
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1065,8 @@ module Aws::ControlTower
     class ListEnabledControlsOutput < Struct.new(
       :enabled_controls,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1083,8 @@ module Aws::ControlTower
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1033,7 +1097,8 @@ module Aws::ControlTower
     class ListLandingZoneOperationsOutput < Struct.new(
       :landing_zone_operations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1046,7 +1111,8 @@ module Aws::ControlTower
     class ListLandingZonesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,7 +1125,8 @@ module Aws::ControlTower
     class ListLandingZonesOutput < Struct.new(
       :landing_zones,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1135,8 @@ module Aws::ControlTower
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1077,7 +1145,8 @@ module Aws::ControlTower
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1087,7 +1156,8 @@ module Aws::ControlTower
     #   @return [String]
     class Region < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1166,8 @@ module Aws::ControlTower
     #   @return [String]
     class ResetEnabledBaselineInput < Struct.new(
       :enabled_baseline_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1176,8 @@ module Aws::ControlTower
     #   @return [String]
     class ResetEnabledBaselineOutput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1186,8 @@ module Aws::ControlTower
     #   @return [String]
     class ResetEnabledControlInput < Struct.new(
       :enabled_control_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1123,7 +1196,8 @@ module Aws::ControlTower
     #   @return [String]
     class ResetEnabledControlOutput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1132,7 +1206,8 @@ module Aws::ControlTower
     #   @return [String]
     class ResetLandingZoneInput < Struct.new(
       :landing_zone_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,7 +1216,8 @@ module Aws::ControlTower
     #   @return [String]
     class ResetLandingZoneOutput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1150,7 +1226,8 @@ module Aws::ControlTower
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1236,8 @@ module Aws::ControlTower
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1172,12 +1250,14 @@ module Aws::ControlTower
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1198,7 +1278,8 @@ module Aws::ControlTower
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,12 +1292,14 @@ module Aws::ControlTower
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1233,7 +1316,8 @@ module Aws::ControlTower
       :baseline_version,
       :parameters,
       :enabled_baseline_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1326,8 @@ module Aws::ControlTower
     #   @return [String]
     class UpdateEnabledBaselineOutput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1340,8 @@ module Aws::ControlTower
     class UpdateEnabledControlInput < Struct.new(
       :parameters,
       :enabled_control_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1350,8 @@ module Aws::ControlTower
     #   @return [String]
     class UpdateEnabledControlOutput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1368,8 @@ module Aws::ControlTower
       :version,
       :manifest,
       :landing_zone_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1378,8 @@ module Aws::ControlTower
     #   @return [String]
     class UpdateLandingZoneOutput < Struct.new(
       :operation_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1299,7 +1388,8 @@ module Aws::ControlTower
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

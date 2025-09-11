@@ -11,7 +11,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +58,8 @@ module Aws::ManagedBlockchain
       :arn,
       :tags,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,7 +94,8 @@ module Aws::ManagedBlockchain
       :creation_date,
       :arn,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +116,8 @@ module Aws::ManagedBlockchain
       :threshold_percentage,
       :proposal_duration_in_hours,
       :threshold_comparator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +181,8 @@ module Aws::ManagedBlockchain
       :accessor_type,
       :tags,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +201,8 @@ module Aws::ManagedBlockchain
       :accessor_id,
       :billing_token,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +223,8 @@ module Aws::ManagedBlockchain
       :invitation_id,
       :network_id,
       :member_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +233,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class CreateMemberOutput < Struct.new(
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +287,8 @@ module Aws::ManagedBlockchain
       :voting_policy,
       :member_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +301,8 @@ module Aws::ManagedBlockchain
     class CreateNetworkOutput < Struct.new(
       :network_id,
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +340,8 @@ module Aws::ManagedBlockchain
       :member_id,
       :node_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +350,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class CreateNodeOutput < Struct.new(
       :node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +387,8 @@ module Aws::ManagedBlockchain
       :actions,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +397,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class CreateProposalOutput < Struct.new(
       :proposal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,12 +407,14 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class DeleteAccessorInput < Struct.new(
       :accessor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessorOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,12 +427,14 @@ module Aws::ManagedBlockchain
     class DeleteMemberInput < Struct.new(
       :network_id,
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMemberOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,12 +460,14 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       :node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteNodeOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +476,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class GetAccessorInput < Struct.new(
       :accessor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -465,7 +486,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::Accessor]
     class GetAccessorOutput < Struct.new(
       :accessor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +500,8 @@ module Aws::ManagedBlockchain
     class GetMemberInput < Struct.new(
       :network_id,
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +510,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::Member]
     class GetMemberOutput < Struct.new(
       :member,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +520,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class GetNetworkInput < Struct.new(
       :network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +530,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::Network]
     class GetNetworkOutput < Struct.new(
       :network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,7 +549,8 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       :node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +559,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::Node]
     class GetNodeOutput < Struct.new(
       :node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +573,8 @@ module Aws::ManagedBlockchain
     class GetProposalInput < Struct.new(
       :network_id,
       :proposal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +583,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::Proposal]
     class GetProposalOutput < Struct.new(
       :proposal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,13 +593,15 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class IllegalActionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure.</p>
     class InternalServiceErrorException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +610,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,7 +664,8 @@ module Aws::ManagedBlockchain
       :status,
       :network_summary,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +676,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class InviteAction < Struct.new(
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +699,8 @@ module Aws::ManagedBlockchain
       :max_results,
       :next_token,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +714,8 @@ module Aws::ManagedBlockchain
     class ListAccessorsOutput < Struct.new(
       :accessors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +728,8 @@ module Aws::ManagedBlockchain
     class ListInvitationsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +742,8 @@ module Aws::ManagedBlockchain
     class ListInvitationsOutput < Struct.new(
       :invitations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +774,8 @@ module Aws::ManagedBlockchain
       :is_owned,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +788,8 @@ module Aws::ManagedBlockchain
     class ListMembersOutput < Struct.new(
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +815,8 @@ module Aws::ManagedBlockchain
       :status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +829,8 @@ module Aws::ManagedBlockchain
     class ListNetworksOutput < Struct.new(
       :networks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +856,8 @@ module Aws::ManagedBlockchain
       :status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -826,7 +870,8 @@ module Aws::ManagedBlockchain
     class ListNodesOutput < Struct.new(
       :nodes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +900,8 @@ module Aws::ManagedBlockchain
       :proposal_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,7 +918,8 @@ module Aws::ManagedBlockchain
     class ListProposalVotesOutput < Struct.new(
       :proposal_votes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,7 +942,8 @@ module Aws::ManagedBlockchain
       :network_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +956,8 @@ module Aws::ManagedBlockchain
     class ListProposalsOutput < Struct.new(
       :proposals,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +966,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -926,7 +976,8 @@ module Aws::ManagedBlockchain
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -936,7 +987,8 @@ module Aws::ManagedBlockchain
     #   @return [Boolean]
     class LogConfiguration < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -946,7 +998,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::LogConfiguration]
     class LogConfigurations < Struct.new(
       :cloudwatch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1032,7 +1085,8 @@ module Aws::ManagedBlockchain
       :tags,
       :arn,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,7 +1133,8 @@ module Aws::ManagedBlockchain
       :log_publishing_configuration,
       :tags,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1148,8 @@ module Aws::ManagedBlockchain
     class MemberFabricAttributes < Struct.new(
       :admin_username,
       :ca_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1107,7 +1163,8 @@ module Aws::ManagedBlockchain
     class MemberFabricConfiguration < Struct.new(
       :admin_username,
       :admin_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1117,7 +1174,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::LogConfigurations]
     class MemberFabricLogPublishingConfiguration < Struct.new(
       :ca_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1185,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::MemberFabricAttributes]
     class MemberFrameworkAttributes < Struct.new(
       :fabric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1137,7 +1196,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::MemberFabricConfiguration]
     class MemberFrameworkConfiguration < Struct.new(
       :fabric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1207,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::MemberFabricLogPublishingConfiguration]
     class MemberLogPublishingConfiguration < Struct.new(
       :fabric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1276,8 @@ module Aws::ManagedBlockchain
       :creation_date,
       :is_owned,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1270,7 +1332,8 @@ module Aws::ManagedBlockchain
       :creation_date,
       :tags,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1286,7 +1349,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class NetworkEthereumAttributes < Struct.new(
       :chain_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1300,7 +1364,8 @@ module Aws::ManagedBlockchain
     class NetworkFabricAttributes < Struct.new(
       :ordering_service_endpoint,
       :edition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1310,7 +1375,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class NetworkFabricConfiguration < Struct.new(
       :edition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,7 +1390,8 @@ module Aws::ManagedBlockchain
     class NetworkFrameworkAttributes < Struct.new(
       :fabric,
       :ethereum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1338,7 +1405,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::NetworkFabricConfiguration]
     class NetworkFrameworkConfiguration < Struct.new(
       :fabric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1376,7 +1444,8 @@ module Aws::ManagedBlockchain
       :status,
       :creation_date,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1547,8 @@ module Aws::ManagedBlockchain
       :tags,
       :arn,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1502,7 +1572,8 @@ module Aws::ManagedBlockchain
       :availability_zone,
       :log_publishing_configuration,
       :state_db,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1516,7 +1587,8 @@ module Aws::ManagedBlockchain
     class NodeEthereumAttributes < Struct.new(
       :http_endpoint,
       :web_socket_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1602,8 @@ module Aws::ManagedBlockchain
     class NodeFabricAttributes < Struct.new(
       :peer_endpoint,
       :peer_event_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1544,7 +1617,8 @@ module Aws::ManagedBlockchain
     class NodeFabricLogPublishingConfiguration < Struct.new(
       :chaincode_logs,
       :peer_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1558,7 +1632,8 @@ module Aws::ManagedBlockchain
     class NodeFrameworkAttributes < Struct.new(
       :fabric,
       :ethereum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1643,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::NodeFabricLogPublishingConfiguration]
     class NodeLogPublishingConfiguration < Struct.new(
       :fabric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1598,7 +1674,8 @@ module Aws::ManagedBlockchain
       :availability_zone,
       :instance_type,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1771,8 @@ module Aws::ManagedBlockchain
       :outstanding_vote_count,
       :tags,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1715,7 +1793,8 @@ module Aws::ManagedBlockchain
     class ProposalActions < Struct.new(
       :invitations,
       :removals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1788,7 +1867,8 @@ module Aws::ManagedBlockchain
       :creation_date,
       :expiration_date,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1797,12 +1877,14 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class RejectInvitationInput < Struct.new(
       :invitation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RejectInvitationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1813,7 +1895,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class RemoveAction < Struct.new(
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1822,7 +1905,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1832,7 +1916,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1930,8 @@ module Aws::ManagedBlockchain
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,7 +1940,8 @@ module Aws::ManagedBlockchain
     #   @return [String]
     class ResourceNotReadyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,12 +1954,14 @@ module Aws::ManagedBlockchain
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1881,7 +1970,8 @@ module Aws::ManagedBlockchain
     #          creating resources that exceed your service limit for this resource type. 
     #          Request a limit increase or delete unused resources if possible.</p>
     class ThrottlingException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1894,7 +1984,8 @@ module Aws::ManagedBlockchain
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1907,12 +1998,14 @@ module Aws::ManagedBlockchain
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1929,12 +2022,14 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       :log_publishing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateMemberOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1956,12 +2051,14 @@ module Aws::ManagedBlockchain
       :member_id,
       :node_id,
       :log_publishing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNodeOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,12 +2086,14 @@ module Aws::ManagedBlockchain
       :proposal_id,
       :voter_member_id,
       :vote,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class VoteOnProposalOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2021,7 +2120,8 @@ module Aws::ManagedBlockchain
       :vote,
       :member_name,
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2034,7 +2134,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::ApprovalThresholdPolicy]
     class VotingPolicy < Struct.new(
       :approval_threshold_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

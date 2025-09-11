@@ -11,7 +11,8 @@ module Aws::Artifact
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::Artifact
     #   @return [String]
     class AccountSettings < Struct.new(
       :notification_subscription_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::Artifact
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -96,12 +99,14 @@ module Aws::Artifact
       :acceptance_terms,
       :terminate_terms,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAccountSettingsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +115,8 @@ module Aws::Artifact
     #   @return [Types::AccountSettings]
     class GetAccountSettingsResponse < Struct.new(
       :account_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +129,8 @@ module Aws::Artifact
     class GetReportMetadataRequest < Struct.new(
       :report_id,
       :report_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +139,8 @@ module Aws::Artifact
     #   @return [Types::ReportDetail]
     class GetReportMetadataResponse < Struct.new(
       :report_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +157,8 @@ module Aws::Artifact
       :report_id,
       :report_version,
       :term_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +167,8 @@ module Aws::Artifact
     #   @return [String]
     class GetReportResponse < Struct.new(
       :document_presigned_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -171,7 +181,8 @@ module Aws::Artifact
     class GetTermForReportRequest < Struct.new(
       :report_id,
       :report_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +195,8 @@ module Aws::Artifact
     class GetTermForReportResponse < Struct.new(
       :document_presigned_url,
       :term_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -197,7 +209,8 @@ module Aws::Artifact
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,7 +223,8 @@ module Aws::Artifact
     class ListCustomerAgreementsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +237,8 @@ module Aws::Artifact
     class ListCustomerAgreementsResponse < Struct.new(
       :customer_agreements,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +251,8 @@ module Aws::Artifact
     class ListReportsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +265,8 @@ module Aws::Artifact
     class ListReportsResponse < Struct.new(
       :reports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +275,8 @@ module Aws::Artifact
     #   @return [String]
     class PutAccountSettingsRequest < Struct.new(
       :notification_subscription_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +285,8 @@ module Aws::Artifact
     #   @return [Types::AccountSettings]
     class PutAccountSettingsResponse < Struct.new(
       :account_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +372,8 @@ module Aws::Artifact
       :sequence_number,
       :upload_state,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +439,8 @@ module Aws::Artifact
       :product_name,
       :status_message,
       :acceptance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -436,7 +457,8 @@ module Aws::Artifact
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +483,8 @@ module Aws::Artifact
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +505,8 @@ module Aws::Artifact
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +523,8 @@ module Aws::Artifact
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -513,7 +538,8 @@ module Aws::Artifact
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -1039,7 +1039,6 @@ module Aws::Finspacedata
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#deprecated" => {"message" => "This method will be discontinued."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/user/{userId}", "code" => 200}}
       end)
-
     end
 
     class << self

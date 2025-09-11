@@ -28,7 +28,8 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :upload_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +47,8 @@ module Aws::Glacier
     class AbortVaultLockInput < Struct.new(
       :account_id,
       :vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -69,7 +71,8 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +106,8 @@ module Aws::Glacier
       :record_delimiter,
       :field_delimiter,
       :quote_character,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -133,7 +137,8 @@ module Aws::Glacier
       :record_delimiter,
       :field_delimiter,
       :quote_character,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +175,8 @@ module Aws::Glacier
       :upload_id,
       :archive_size,
       :checksum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +197,8 @@ module Aws::Glacier
       :location,
       :checksum,
       :archive_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +220,8 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :lock_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +239,8 @@ module Aws::Glacier
     class CreateVaultInput < Struct.new(
       :account_id,
       :vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +250,8 @@ module Aws::Glacier
     #   @return [String]
     class CreateVaultOutput < Struct.new(
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +262,8 @@ module Aws::Glacier
     #   @return [Array<Types::DataRetrievalRule>]
     class DataRetrievalPolicy < Struct.new(
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +281,8 @@ module Aws::Glacier
     class DataRetrievalRule < Struct.new(
       :strategy,
       :bytes_per_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +304,8 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :archive_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +323,8 @@ module Aws::Glacier
     class DeleteVaultAccessPolicyInput < Struct.new(
       :account_id,
       :vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -328,7 +342,8 @@ module Aws::Glacier
     class DeleteVaultInput < Struct.new(
       :account_id,
       :vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +362,8 @@ module Aws::Glacier
     class DeleteVaultNotificationsInput < Struct.new(
       :account_id,
       :vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -369,7 +385,8 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +523,8 @@ module Aws::Glacier
       :job_output_path,
       :select_parameters,
       :output_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -530,7 +548,8 @@ module Aws::Glacier
     class DescribeVaultInput < Struct.new(
       :account_id,
       :vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +587,8 @@ module Aws::Glacier
       :last_inventory_date,
       :number_of_archives,
       :size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -612,7 +632,8 @@ module Aws::Glacier
       :last_inventory_date,
       :number_of_archives,
       :size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -640,7 +661,8 @@ module Aws::Glacier
       :encryption_type,
       :kms_key_id,
       :kms_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +676,8 @@ module Aws::Glacier
     #   @return [String]
     class GetDataRetrievalPolicyInput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +688,8 @@ module Aws::Glacier
     #   @return [Types::DataRetrievalPolicy]
     class GetDataRetrievalPolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +750,8 @@ module Aws::Glacier
       :vault_name,
       :job_id,
       :range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +811,8 @@ module Aws::Glacier
       :accept_ranges,
       :content_type,
       :archive_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -810,7 +836,8 @@ module Aws::Glacier
     class GetVaultAccessPolicyInput < Struct.new(
       :account_id,
       :vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +847,8 @@ module Aws::Glacier
     #   @return [Types::VaultAccessPolicy]
     class GetVaultAccessPolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,7 +866,8 @@ module Aws::Glacier
     class GetVaultLockInput < Struct.new(
       :account_id,
       :vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +893,8 @@ module Aws::Glacier
       :state,
       :expiration_date,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +913,8 @@ module Aws::Glacier
     class GetVaultNotificationsInput < Struct.new(
       :account_id,
       :vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +924,8 @@ module Aws::Glacier
     #   @return [Types::VaultNotificationConfig]
     class GetVaultNotificationsOutput < Struct.new(
       :vault_notification_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1062,8 @@ module Aws::Glacier
       :job_output_path,
       :select_parameters,
       :output_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1049,7 +1082,8 @@ module Aws::Glacier
     class Grant < Struct.new(
       :grantee,
       :permission,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1109,8 @@ module Aws::Glacier
       :uri,
       :id,
       :email_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1097,7 +1132,8 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :job_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1151,8 @@ module Aws::Glacier
       :location,
       :job_id,
       :job_output_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1183,8 @@ module Aws::Glacier
       :vault_name,
       :archive_description,
       :part_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1161,7 +1199,8 @@ module Aws::Glacier
     class InitiateMultipartUploadOutput < Struct.new(
       :location,
       :upload_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1184,7 +1223,8 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1194,7 +1234,8 @@ module Aws::Glacier
     #   @return [String]
     class InitiateVaultLockOutput < Struct.new(
       :lock_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,7 +1245,8 @@ module Aws::Glacier
     #   @return [Types::CSVInput]
     class InputSerialization < Struct.new(
       :csv,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1221,7 +1263,8 @@ module Aws::Glacier
       :type,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1282,8 @@ module Aws::Glacier
       :type,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1275,7 +1319,8 @@ module Aws::Glacier
       :end_date,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1305,7 +1350,8 @@ module Aws::Glacier
       :end_date,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1419,8 @@ module Aws::Glacier
       :inventory_retrieval_parameters,
       :select_parameters,
       :output_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1391,7 +1438,8 @@ module Aws::Glacier
       :type,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1480,8 @@ module Aws::Glacier
       :marker,
       :statuscode,
       :completed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1451,7 +1500,8 @@ module Aws::Glacier
     class ListJobsOutput < Struct.new(
       :job_list,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1482,7 +1532,8 @@ module Aws::Glacier
       :vault_name,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1498,7 +1549,8 @@ module Aws::Glacier
     class ListMultipartUploadsOutput < Struct.new(
       :uploads_list,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1534,7 +1586,8 @@ module Aws::Glacier
       :upload_id,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1628,8 @@ module Aws::Glacier
       :creation_date,
       :parts,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1592,7 +1646,8 @@ module Aws::Glacier
     #   @return [String]
     class ListProvisionedCapacityInput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1656,8 @@ module Aws::Glacier
     #   @return [Array<Types::ProvisionedCapacityDescription>]
     class ListProvisionedCapacityOutput < Struct.new(
       :provisioned_capacity_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1619,7 +1675,8 @@ module Aws::Glacier
     class ListTagsForVaultInput < Struct.new(
       :account_id,
       :vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1629,7 +1686,8 @@ module Aws::Glacier
     #   @return [Hash<String, String>]
     class ListTagsForVaultOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1655,7 +1713,8 @@ module Aws::Glacier
       :account_id,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1729,8 @@ module Aws::Glacier
     class ListVaultsOutput < Struct.new(
       :vault_list,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1688,7 +1748,8 @@ module Aws::Glacier
       :type,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1698,7 +1759,8 @@ module Aws::Glacier
     #   @return [Types::S3Location]
     class OutputLocation < Struct.new(
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1708,7 +1770,8 @@ module Aws::Glacier
     #   @return [Types::CSVOutput]
     class OutputSerialization < Struct.new(
       :csv,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1786,8 @@ module Aws::Glacier
     class PartListElement < Struct.new(
       :range_in_bytes,
       :sha256_tree_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1742,7 +1806,8 @@ module Aws::Glacier
       :type,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1760,7 +1825,8 @@ module Aws::Glacier
       :capacity_id,
       :start_date,
       :expiration_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1772,7 +1838,8 @@ module Aws::Glacier
     #   @return [String]
     class PurchaseProvisionedCapacityInput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1781,7 +1848,8 @@ module Aws::Glacier
     #   @return [String]
     class PurchaseProvisionedCapacityOutput < Struct.new(
       :capacity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1803,7 +1871,8 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1823,7 +1892,8 @@ module Aws::Glacier
       :type,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1843,7 +1913,8 @@ module Aws::Glacier
       :type,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1881,7 +1952,8 @@ module Aws::Glacier
       :tagging,
       :user_metadata,
       :storage_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +1975,8 @@ module Aws::Glacier
       :expression_type,
       :expression,
       :output_serialization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1921,7 +1994,8 @@ module Aws::Glacier
       :type,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1939,7 +2013,8 @@ module Aws::Glacier
     class SetDataRetrievalPolicyInput < Struct.new(
       :account_id,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1961,7 +2036,8 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1984,7 +2060,8 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :vault_notification_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2014,7 +2091,8 @@ module Aws::Glacier
       :archive_description,
       :checksum,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2035,7 +2113,8 @@ module Aws::Glacier
       :location,
       :checksum,
       :archive_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2064,7 +2143,8 @@ module Aws::Glacier
       :archive_description,
       :part_size_in_bytes,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2107,7 +2187,8 @@ module Aws::Glacier
       :checksum,
       :range,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2117,7 +2198,8 @@ module Aws::Glacier
     #   @return [String]
     class UploadMultipartPartOutput < Struct.new(
       :checksum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2127,7 +2209,8 @@ module Aws::Glacier
     #   @return [String]
     class VaultAccessPolicy < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2137,7 +2220,8 @@ module Aws::Glacier
     #   @return [String]
     class VaultLockPolicy < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2153,7 +2237,8 @@ module Aws::Glacier
     class VaultNotificationConfig < Struct.new(
       :sns_topic,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
