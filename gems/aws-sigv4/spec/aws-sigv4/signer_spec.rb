@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'spec_helper'
+require_relative '../spec_helper'
 
 require 'tempfile'
 require 'base64'
 
 module Aws
-  module Sigv4
+  module SigV4
     describe Signer do
       let(:credentials) do
         {
@@ -19,7 +19,7 @@ module Aws
         {
           service: 'SERVICE',
           region: 'REGION',
-          credentials_provider: StaticCredentialsProvider.new(credentials)
+          credentials: credentials
         }
       end
 
@@ -28,10 +28,9 @@ module Aws
           expect do
             Signer.new(
               region: 'us-east-1',
-              access_key_id: 'akid',
-              secret_access_key: 'secret'
+              credentials: credentials
             )
-          end.to raise_error(ArgumentError, /:service/)
+          end.to raise_error(Errors::MissingServiceError)
         end
 
         it 'accepts a string' do
@@ -44,10 +43,9 @@ module Aws
           expect do
             Signer.new(
               service: 'ec2',
-              access_key_id: 'akid',
-              secret_access_key: 'secret'
+              credentials: credentials
             )
-          end.to raise_error(ArgumentError, /:region/)
+          end.to raise_error(Errors::MissingRegionError)
         end
 
         it 'accepts a string' do
@@ -61,14 +59,16 @@ module Aws
         it 'requires credentials' do
           expect do
             Signer.new(options)
-          end.to raise_error(ArgumentError, /missing credentials/)
+          end.to raise_error(Errors::MissingCredentialsError)
         end
 
         it 'accepts :access_key_id and :secret_access_key' do
-          signer = Signer.new(options.merge(
-                                access_key_id: 'akid',
-                                secret_access_key: 'secret'
-                              ))
+          signer = Signer.new(
+            options.merge(
+              access_key_id: 'akid',
+              secret_access_key: 'secret'
+            )
+          )
           creds = signer.credentials_provider.credentials
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
@@ -76,11 +76,13 @@ module Aws
         end
 
         it 'accepts credentials with a session token' do
-          signer = Signer.new(options.merge(
-                                access_key_id: 'akid',
-                                secret_access_key: 'secret',
-                                session_token: 'token'
-                              ))
+          signer = Signer.new(
+            options.merge(
+              access_key_id: 'akid',
+              secret_access_key: 'secret',
+              session_token: 'token'
+            )
+          )
           creds = signer.credentials_provider.credentials
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
@@ -88,13 +90,15 @@ module Aws
         end
 
         it 'accepts :credentials' do
-          signer = Signer.new(options.merge(
-                                credentials: Credentials.new(
-                                  access_key_id: 'akid',
-                                  secret_access_key: 'secret',
-                                  session_token: 'token'
-                                )
-                              ))
+          signer = Signer.new(
+            options.merge(
+              credentials: Credentials.new(
+                access_key_id: 'akid',
+                secret_access_key: 'secret',
+                session_token: 'token'
+              )
+            )
+          )
           creds = signer.credentials_provider.credentials
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
@@ -102,13 +106,15 @@ module Aws
         end
 
         it 'accepts :credentials_provider' do
-          signer = Signer.new(options.merge(
-                                credentials_provider: StaticCredentialsProvider.new(
-                                  access_key_id: 'akid',
-                                  secret_access_key: 'secret',
-                                  session_token: 'token'
-                                )
-                              ))
+          signer = Signer.new(
+            options.merge(
+              credentials_provider: StaticCredentials.new(
+                access_key_id: 'akid',
+                secret_access_key: 'secret',
+                session_token: 'token'
+              )
+            )
+          )
           creds = signer.credentials_provider.credentials
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
@@ -116,559 +122,538 @@ module Aws
         end
 
         it 'accepts empty credentials' do
-          signer = Signer.new(options.merge(
-                                access_key_id: '',
-                                secret_access_key: ''
-                              ))
+          signer = Signer.new(
+            options.merge(
+              access_key_id: '',
+              secret_access_key: ''
+            )
+          )
           creds = signer.credentials_provider.credentials
           expect(creds.access_key_id).to eq('')
           expect(creds.secret_access_key).to eq('')
         end
       end
 
-      context '#sign_request' do
-        let(:request) do
-          {
-            http_method: 'GET',
-            url: 'http://domain.com'
-          }
-        end
-
-        it 'populates the Host header' do
-          signature = Signer.new(options).sign_request(request)
-
-          expect(signature.headers['host']).to eq('domain.com')
-        end
-
-        context 'when a Host header is provided' do
-          it 'uses the provided Host header' do
-            signature = Signer.new(options).sign_request(
-              request.merge(headers: { 'host' => 'otherdomain.com' })
-            )
-
-            expect(signature.headers['host']).to eql('otherdomain.com')
-          end
-        end
-
-        context 'when credentials are not set' do
-          let(:creds) do
-            Credentials.new(access_key_id: '', secret_access_key: '')
-          end
-
-          it 'raises a MissingCredentialsError' do
-            signer = Signer.new(
-              options.merge(
-                credentials_provider: StaticCredentialsProvider.new(
-                  credentials: creds
-                )
-              )
-            )
-            expect { signer.sign_request(request) }
-              .to raise_error(Errors::MissingCredentialsError)
-          end
-        end
-
-        context 'when URI schema is known' do
-          it 'omits port in Host when port not provided' do
-            signature = Signer.new(options).sign_request(
-              http_method: 'GET',
-              url: 'https://domain.com'
-            )
-            expect(signature.headers['host']).to eq('domain.com')
-          end
-
-          it 'omits port in Host when default port and uri port are the same' do
-            signature = Signer.new(options).sign_request(
-              http_method: 'GET',
-              url: 'https://domain.com:443'
-            )
-            expect(signature.headers['host']).to eq('domain.com')
-          end
-
-          it 'includes port in Host when default port and uri port are different' do
-            signature = Signer.new(options).sign_request(
-              http_method: 'GET',
-              url: 'https://domain.com:123'
-            )
-            expect(signature.headers['host']).to eq('domain.com:123')
-          end
-        end
-
-        context 'when URI schema is unknown' do
-          it 'omits port in Host when uri port not provided' do
-            signature = Signer.new(options).sign_request(
-              http_method: 'GET',
-              url: 'abcd://domain.com'
-            )
-            expect(signature.headers['host']).to eq('domain.com')
-          end
-
-          it 'includes port in Host when uri port provided' do
-            signature = Signer.new(options).sign_request(
-              http_method: 'GET',
-              url: 'abcd://domain.com:123'
-            )
-            expect(signature.headers['host']).to eq('domain.com:123')
-          end
-        end
-
-        it 'sets the X-Amz-Date header' do
-          now = Time.now
-          allow(Time).to receive(:now).and_return(now)
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com:123'
-          )
-          expect(signature.headers['x-amz-date']).to eq(now.utc.strftime('%Y%m%dT%H%M%SZ'))
-        end
-
-        it 'uses the X-Amz-Date header of the request if present' do
-          now = Time.now.utc.strftime('%Y%m%dT%H%M%SZ')
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com',
-            headers: {
-              'X-Amz-Date' => now
-            }
-          )
-          expect(signature.headers['x-amz-date']).to eq(now)
-        end
-
-        it "populates the 'X-Amz-Security-Token' header with session token" do
-          credentials[:session_token] = 'token'
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com'
-          )
-          expect(signature.headers['x-amz-security-token']).to eq('token')
-        end
-
-        it "omits 'X-Amz-Security-Token' header when session token is nil" do
-          credentials.delete(:session_token)
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com'
-          )
-          expect(signature.headers['x-amz-security-token']).to be(nil)
-        end
-
-        it 'adds the X-Amz-Content-Sha256 header by default' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com',
-            body: 'abc'
-          )
-          expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
-        end
-
-        it 'adds the X-Amz-Content-Sha256 header if :apply_checksum_header is true' do
-          options[:apply_checksum_header] = true
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com',
-            body: 'abc'
-          )
-          expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
-        end
-
-        it 'can omit the X-Amz-Content-Sha256 header if :apply_checksum_header is false' do
-          options[:apply_checksum_header] = false
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com',
-            body: 'abc'
-          )
-          expect(signature.headers['x-amz-content-sha256']).to be(nil)
-        end
-
-        it 'computes the checksum of files without loading them into memory' do
-          body = Tempfile.new('tempfile')
-          body.write('abc')
-          body.flush
-          expect(body).not_to receive(:read)
-          expect(body).not_to receive(:rewind)
-          signature = Signer.new(options).sign_request(
-            http_method: 'POST',
-            url: 'https://domain.com',
-            body: body
-          )
-          expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
-          body.unlink
-        end
-
-        it 'reads non-file IO objects into  memory to compute checksusm' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com',
-            body: StringIO.new('abc')
-          )
-          expect(signature.content_sha256).to eq(Digest::SHA256.hexdigest('abc'))
-        end
-
-        it 'does not read the body if X-Amz-Content-Sha256 if already present' do
-          body = StringIO.new('body')
-          expect(body).to_not receive(:read)
-          expect(body).to_not receive(:rewind)
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com',
-            headers: {
-              'X-Amz-Content-Sha256' => 'hexdigest'
-            },
-            body: body
-          )
-          expect(signature.headers['x-amz-content-sha256']).to eq('hexdigest')
-        end
-
-        it "populates the 'Authorization' header" do
-          headers = {}
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com',
-            headers: headers
-          )
-          # applied to the signature headers, not the request
-          expect(headers['authorization']).to be(nil)
-          expect(signature.headers['authorization']).to_not be(nil)
-        end
-
-        it 'signs the request' do
-          options[:unsigned_headers] = ['content-length']
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'https://domain.com',
-            headers: {
-              'Foo' => 'foo',
-              'Bar' => 'bar  bar',
-              'Bar2' => '"bar bar"',
-              'Content-Length' => '9',
-              'X-Amz-Date' => '20120101T112233Z'
-            },
-            body: StringIO.new('http-body')
-          )
-          expect(signature.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=4bae5054b2e035212a0eb42339a957809a8c9428e628fd4b92e5a295d0fa6e5b')
-        end
-
-        it 'escapes path for the canonical request by default' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com/foo%bar'
-          )
-          expect(signature.canonical_request.lines.to_a[1]).to eq "/foo%25bar\n"
-        end
-
-        it 'escapes path for the canonical request if :uri_escape_path is true' do
-          options[:uri_escape_path] = true
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com/foo%bar'
-          )
-          expect(signature.canonical_request.lines.to_a[1]).to eq "/foo%25bar\n"
-        end
-
-        it 'does not escape path for the canonical request if :uri_escape_path is false' do
-          options[:uri_escape_path] = false
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com/foo%bar'
-          )
-          expect(signature.canonical_request.lines.to_a[1]).to eq "/foo%bar\n"
-        end
-
-        it 'can sign with s3session tokens' do
-          options[:signing_algorithm] = :'sigv4-s3express'
-          options[:credentials_provider] = StaticCredentialsProvider.new(
-            access_key_id: 's3-akid',
-            secret_access_key: 's3-secret',
-            session_token: 's3-token'
-          )
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com'
-          )
-          expect(signature.headers['x-amz-s3session-token']).to eq('s3-token')
-        end
-      end
-
-      context '#sign_event' do
-        before(:each) do
-          allow(Time).to receive(:now).and_return(now)
-          allow(now).to receive(:utc).and_return(utc)
-          allow(now).to receive(:to_i).and_return(time_i)
-          allow(utc).to receive(:strftime).and_return(datetime)
-        end
-
-        let(:now) { double('now') }
-        let(:utc) { double('utc-time') }
-        let(:time_i) { 1_546_045_446 }
-        let(:datetime) { '20130524T000000Z' }
-
-        it 'support event signning' do
-          headers, signature = Signer.new(options).sign_event(
-            '', 'foo', Aws::EventStream::Encoder.new
-          )
-          expect(headers[':date'].value).to eq(1_546_045_446_000)
-          expect(Base64.strict_encode64(headers[':chunk-signature'].value)).to eq('IEu14nE+lTVGgOlSKYbTrAMErq/TM5fznmVAylH/4iY=')
-          expect(signature).to eq('204bb5e2713e95354680e9522986d3ac0304aeafd33397f39e6540ca51ffe226')
-        end
-      end
-
-      context ':canonical_request' do
-        it 'lower-cases and sort all header keys except authorization' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com',
-            headers: {
-              'Xyz' => '1',
-              'Abc' => '2',
-              'Mno' => '3',
-              'Authorization' => '4',
-              'authorization' => '5',
-              'X-Amz-Date' => '20161024T184027Z'
-            }
-          )
-          expect(signature.canonical_request).to eq(<<~EOF.strip)
-            PUT
-            /
-
-            abc:2
-            host:domain.com
-            mno:3
-            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-            x-amz-date:20161024T184027Z
-            xyz:1
-
-            abc;host;mno;x-amz-content-sha256;x-amz-date;xyz
-            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-          EOF
-        end
-
-        it 'can ignore configured headers' do
-          # case insenstive
-          options[:unsigned_headers] = %w[cache-control User-Agent]
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com',
-            headers: {
-              'Abc' => '2',
-              'Cache-Control' => '4',
-              'User-Agent' => '5',
-              'X-Amz-Date' => '20161024T184027Z'
-            }
-          )
-          expect(signature.canonical_request).to eq(<<~EOF.strip)
-            PUT
-            /
-
-            abc:2
-            host:domain.com
-            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-            x-amz-date:20161024T184027Z
-
-            abc;host;x-amz-content-sha256;x-amz-date
-            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-          EOF
-        end
-
-        it 'lower-cases and sorts header by key except authorization' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com',
-            headers: {
-              'Abc' => '1',
-              'Mno' => '2',
-              'Xyz' => '3',
-              'Authorization' => '4',
-              'authorization' => '5',
-              'X-Amz-Date' => '20160101T112233Z'
-            },
-            body: ''
-          )
-          expect(signature.canonical_request).to eq(<<~EOS.strip)
-            PUT
-            /
-
-            abc:1
-            host:domain.com
-            mno:2
-            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-            x-amz-date:20160101T112233Z
-            xyz:3
-
-            abc;host;mno;x-amz-content-sha256;x-amz-date;xyz
-            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-          EOS
-        end
-
-        it 'prunes expanded whitespace in header values' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com',
-            headers: {
-              'Abc' => 'a  b  c', # double spaces between letters
-              'X-Amz-Date' => '20160101T112233Z'
-            }
-            # defaults body to the empty string
-          )
-          expect(signature.canonical_request).to eq(<<~EOF.strip)
-            PUT
-            /
-
-            abc:a b c
-            host:domain.com
-            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-            x-amz-date:20160101T112233Z
-
-            abc;host;x-amz-content-sha256;x-amz-date
-            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-          EOF
-        end
-
-        it 'normalizes valueless-querystring keys with a trailing =' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com?other=&test&x-amz-header=foo',
-            headers: {
-              'X-Amz-Date' => '20160101T112233Z'
-            }
-          )
-          expect(signature.canonical_request).to eq(<<~EOF.strip)
-            PUT
-            /
-            other=&test=&x-amz-header=foo
-            host:domain.com
-            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-            x-amz-date:20160101T112233Z
-
-            host;x-amz-content-sha256;x-amz-date
-            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-          EOF
-        end
-
-        it 'sorts the query parameters' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com?foo=&bar=&baz=',
-            headers: {
-              'X-Amz-Date' => '20160101T112233Z'
-            }
-          )
-          expect(signature.canonical_request).to eq(<<~EOF.strip)
-            PUT
-            /
-            bar=&baz=&foo=
-            host:domain.com
-            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-            x-amz-date:20160101T112233Z
-
-            host;x-amz-content-sha256;x-amz-date
-            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-          EOF
-        end
-
-        it 'sorts by name, params with same name are ordered by value' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com?q.options=abc&q=xyz&q=mno',
-            headers: {
-              'X-Amz-Date' => '20160101T112233Z'
-            }
-          )
-          expect(signature.canonical_request).to include('q=mno&q=xyz&q.options=abc')
-        end
-
-        it 'uses the X-Amz-Content-Sha256 header when present' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com',
-            headers: {
-              'X-Amz-Date' => '20160101T112233Z',
-              'X-Amz-Content-Sha256' => 'CHECKSUM'
-            }
-          )
-          expect(signature.canonical_request).to eq(<<~EOF.strip)
-            PUT
-            /
-
-            host:domain.com
-            x-amz-content-sha256:CHECKSUM
-            x-amz-date:20160101T112233Z
-
-            host;x-amz-content-sha256;x-amz-date
-            CHECKSUM
-          EOF
-        end
-      end
-
-      describe '#presign_url' do
-        let(:now) { Time.now }
-
-        let(:credentials) do
-          {
-            access_key_id: 'akid',
-            secret_access_key: 'secret',
-            session_token: nil,
-            expiration: expiration
-          }
-        end
-
-        let(:signer_options) do
-          {
-            service: 'SERVICE',
-            region: 'REGION',
-            credentials_provider: double(credentials: double(credentials), expiration: expiration)
-          }
-        end
-
-        let(:presign_options) do
-          {
-            http_method: 'GET',
-            url: 'https://example.com',
-            expires_in: expires_in,
-            time: now
-          }
-        end
-
-        let(:expires_in) { 60 }
-
-        let(:signer) { Signer.new(signer_options) }
-
-        context 'expiration is nil' do
-          let(:expiration) { nil }
-
-          it 'creates a presigned url with the provided expires_at' do
-            url = signer.presign_url(presign_options)
-            expect(url.to_s).to include('X-Amz-Expires=60')
-          end
-        end
-
-        context 'expiration is after expires_at' do
-          let(:expiration) { now + 3600 }
-
-          it 'creates a presigned url with the provided expires_at' do
-            url = signer.presign_url(presign_options)
-            expect(url.to_s).to include('X-Amz-Expires=60')
-          end
-        end
-
-        context 'expiration is before expires_at' do
-          let(:expiration) { now + 10 }
-
-          it 'creates a presigned url that expires at the credential expiration time' do
-            url = signer.presign_url(presign_options)
-            expect(url.to_s).to include('X-Amz-Expires=10')
-          end
-        end
-
-        context 'expired credentials (static stability)' do
-          let(:expiration) { now - 10 }
-
-          it 'creates a presigned url with the provided expires_at' do
-            url = signer.presign_url(presign_options)
-            expect(url.to_s).to include('X-Amz-Expires=60')
-          end
-        end
-      end
+      # context '#sign_request' do
+      #   let(:request) do
+      #     {
+      #       http_method: 'GET',
+      #       url: 'http://domain.com'
+      #     }
+      #   end
+
+      #   it 'populates the Host header' do
+      #     signature = Signer.new(options).sign_request(request)
+
+      #     expect(signature.headers['host']).to eq('domain.com')
+      #   end
+
+      #   context 'when a Host header is provided' do
+      #     it 'uses the provided Host header' do
+      #       signature = Signer.new(options).sign_request(
+      #         request.merge(headers: { 'host' => 'otherdomain.com' })
+      #       )
+
+      #       expect(signature.headers['host']).to eql('otherdomain.com')
+      #     end
+      #   end
+
+      #   context 'when credentials are not set' do
+      #     let(:creds) do
+      #       Credentials.new(access_key_id: '', secret_access_key: '')
+      #     end
+
+      #     it 'raises a MissingCredentialsError' do
+      #       signer = Signer.new(
+      #         options.merge(
+      #           credentials_provider: StaticCredentialsProvider.new(
+      #             credentials: creds
+      #           )
+      #         )
+      #       )
+      #       expect { signer.sign_request(request) }
+      #         .to raise_error(Errors::MissingCredentialsError)
+      #     end
+      #   end
+
+      #   context 'when URI schema is known' do
+      #     it 'omits port in Host when port not provided' do
+      #       signature = Signer.new(options).sign_request(
+      #         http_method: 'GET',
+      #         url: 'https://domain.com'
+      #       )
+      #       expect(signature.headers['host']).to eq('domain.com')
+      #     end
+
+      #     it 'omits port in Host when default port and uri port are the same' do
+      #       signature = Signer.new(options).sign_request(
+      #         http_method: 'GET',
+      #         url: 'https://domain.com:443'
+      #       )
+      #       expect(signature.headers['host']).to eq('domain.com')
+      #     end
+
+      #     it 'includes port in Host when default port and uri port are different' do
+      #       signature = Signer.new(options).sign_request(
+      #         http_method: 'GET',
+      #         url: 'https://domain.com:123'
+      #       )
+      #       expect(signature.headers['host']).to eq('domain.com:123')
+      #     end
+      #   end
+
+      #   context 'when URI schema is unknown' do
+      #     it 'omits port in Host when uri port not provided' do
+      #       signature = Signer.new(options).sign_request(
+      #         http_method: 'GET',
+      #         url: 'abcd://domain.com'
+      #       )
+      #       expect(signature.headers['host']).to eq('domain.com')
+      #     end
+
+      #     it 'includes port in Host when uri port provided' do
+      #       signature = Signer.new(options).sign_request(
+      #         http_method: 'GET',
+      #         url: 'abcd://domain.com:123'
+      #       )
+      #       expect(signature.headers['host']).to eq('domain.com:123')
+      #     end
+      #   end
+
+      #   it 'sets the X-Amz-Date header' do
+      #     now = Time.now
+      #     allow(Time).to receive(:now).and_return(now)
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com:123'
+      #     )
+      #     expect(signature.headers['x-amz-date']).to eq(now.utc.strftime('%Y%m%dT%H%M%SZ'))
+      #   end
+
+      #   it 'uses the X-Amz-Date header of the request if present' do
+      #     now = Time.now.utc.strftime('%Y%m%dT%H%M%SZ')
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com',
+      #       headers: {
+      #         'X-Amz-Date' => now
+      #       }
+      #     )
+      #     expect(signature.headers['x-amz-date']).to eq(now)
+      #   end
+
+      #   it "populates the 'X-Amz-Security-Token' header with session token" do
+      #     credentials[:session_token] = 'token'
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com'
+      #     )
+      #     expect(signature.headers['x-amz-security-token']).to eq('token')
+      #   end
+
+      #   it "omits 'X-Amz-Security-Token' header when session token is nil" do
+      #     credentials.delete(:session_token)
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com'
+      #     )
+      #     expect(signature.headers['x-amz-security-token']).to be(nil)
+      #   end
+
+      #   it 'adds the X-Amz-Content-Sha256 header by default' do
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com',
+      #       body: 'abc'
+      #     )
+      #     expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
+      #   end
+
+      #   it 'adds the X-Amz-Content-Sha256 header if :apply_checksum_header is true' do
+      #     options[:apply_checksum_header] = true
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com',
+      #       body: 'abc'
+      #     )
+      #     expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
+      #   end
+
+      #   it 'can omit the X-Amz-Content-Sha256 header if :apply_checksum_header is false' do
+      #     options[:apply_checksum_header] = false
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com',
+      #       body: 'abc'
+      #     )
+      #     expect(signature.headers['x-amz-content-sha256']).to be(nil)
+      #   end
+
+      #   it 'computes the checksum of files without loading them into memory' do
+      #     body = Tempfile.new('tempfile')
+      #     body.write('abc')
+      #     body.flush
+      #     expect(body).not_to receive(:read)
+      #     expect(body).not_to receive(:rewind)
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'POST',
+      #       url: 'https://domain.com',
+      #       body: body
+      #     )
+      #     expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
+      #     body.unlink
+      #   end
+
+      #   it 'reads non-file IO objects into  memory to compute checksusm' do
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com',
+      #       body: StringIO.new('abc')
+      #     )
+      #     expect(signature.content_sha256).to eq(Digest::SHA256.hexdigest('abc'))
+      #   end
+
+      #   it 'does not read the body if X-Amz-Content-Sha256 if already present' do
+      #     body = StringIO.new('body')
+      #     expect(body).to_not receive(:read)
+      #     expect(body).to_not receive(:rewind)
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com',
+      #       headers: {
+      #         'X-Amz-Content-Sha256' => 'hexdigest'
+      #       },
+      #       body: body
+      #     )
+      #     expect(signature.headers['x-amz-content-sha256']).to eq('hexdigest')
+      #   end
+
+      #   it "populates the 'Authorization' header" do
+      #     headers = {}
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com',
+      #       headers: headers
+      #     )
+      #     # applied to the signature headers, not the request
+      #     expect(headers['authorization']).to be(nil)
+      #     expect(signature.headers['authorization']).to_not be(nil)
+      #   end
+
+      #   it 'signs the request' do
+      #     options[:unsigned_headers] = ['content-length']
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'https://domain.com',
+      #       headers: {
+      #         'Foo' => 'foo',
+      #         'Bar' => 'bar  bar',
+      #         'Bar2' => '"bar bar"',
+      #         'Content-Length' => '9',
+      #         'X-Amz-Date' => '20120101T112233Z'
+      #       },
+      #       body: StringIO.new('http-body')
+      #     )
+      #     expect(signature.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=4bae5054b2e035212a0eb42339a957809a8c9428e628fd4b92e5a295d0fa6e5b')
+      #   end
+
+      #   it 'escapes path for the canonical request by default' do
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com/foo%bar'
+      #     )
+      #     expect(signature.canonical_request.lines.to_a[1]).to eq "/foo%25bar\n"
+      #   end
+
+      #   it 'escapes path for the canonical request if :uri_escape_path is true' do
+      #     options[:uri_escape_path] = true
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com/foo%bar'
+      #     )
+      #     expect(signature.canonical_request.lines.to_a[1]).to eq "/foo%25bar\n"
+      #   end
+
+      #   it 'does not escape path for the canonical request if :uri_escape_path is false' do
+      #     options[:uri_escape_path] = false
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com/foo%bar'
+      #     )
+      #     expect(signature.canonical_request.lines.to_a[1]).to eq "/foo%bar\n"
+      #   end
+
+      #   it 'can sign with s3session tokens' do
+      #     options[:signing_algorithm] = :'sigv4-s3express'
+      #     options[:credentials_provider] = StaticCredentialsProvider.new(
+      #       access_key_id: 's3-akid',
+      #       secret_access_key: 's3-secret',
+      #       session_token: 's3-token'
+      #     )
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'GET',
+      #       url: 'https://domain.com'
+      #     )
+      #     expect(signature.headers['x-amz-s3session-token']).to eq('s3-token')
+      #   end
+      # end
+
+      # context ':canonical_request' do
+      #   it 'lower-cases and sort all header keys except authorization' do
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com',
+      #       headers: {
+      #         'Xyz' => '1',
+      #         'Abc' => '2',
+      #         'Mno' => '3',
+      #         'Authorization' => '4',
+      #         'authorization' => '5',
+      #         'X-Amz-Date' => '20161024T184027Z'
+      #       }
+      #     )
+      #     expect(signature.canonical_request).to eq(<<~EOF.strip)
+      #       PUT
+      #       /
+
+      #       abc:2
+      #       host:domain.com
+      #       mno:3
+      #       x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #       x-amz-date:20161024T184027Z
+      #       xyz:1
+
+      #       abc;host;mno;x-amz-content-sha256;x-amz-date;xyz
+      #       e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #     EOF
+      #   end
+
+      #   it 'can ignore configured headers' do
+      #     # case insenstive
+      #     options[:unsigned_headers] = %w[cache-control User-Agent]
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com',
+      #       headers: {
+      #         'Abc' => '2',
+      #         'Cache-Control' => '4',
+      #         'User-Agent' => '5',
+      #         'X-Amz-Date' => '20161024T184027Z'
+      #       }
+      #     )
+      #     expect(signature.canonical_request).to eq(<<~EOF.strip)
+      #       PUT
+      #       /
+
+      #       abc:2
+      #       host:domain.com
+      #       x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #       x-amz-date:20161024T184027Z
+
+      #       abc;host;x-amz-content-sha256;x-amz-date
+      #       e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #     EOF
+      #   end
+
+      #   it 'lower-cases and sorts header by key except authorization' do
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com',
+      #       headers: {
+      #         'Abc' => '1',
+      #         'Mno' => '2',
+      #         'Xyz' => '3',
+      #         'Authorization' => '4',
+      #         'authorization' => '5',
+      #         'X-Amz-Date' => '20160101T112233Z'
+      #       },
+      #       body: ''
+      #     )
+      #     expect(signature.canonical_request).to eq(<<~EOS.strip)
+      #       PUT
+      #       /
+
+      #       abc:1
+      #       host:domain.com
+      #       mno:2
+      #       x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #       x-amz-date:20160101T112233Z
+      #       xyz:3
+
+      #       abc;host;mno;x-amz-content-sha256;x-amz-date;xyz
+      #       e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #     EOS
+      #   end
+
+      #   it 'prunes expanded whitespace in header values' do
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com',
+      #       headers: {
+      #         'Abc' => 'a  b  c', # double spaces between letters
+      #         'X-Amz-Date' => '20160101T112233Z'
+      #       }
+      #       # defaults body to the empty string
+      #     )
+      #     expect(signature.canonical_request).to eq(<<~EOF.strip)
+      #       PUT
+      #       /
+
+      #       abc:a b c
+      #       host:domain.com
+      #       x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #       x-amz-date:20160101T112233Z
+
+      #       abc;host;x-amz-content-sha256;x-amz-date
+      #       e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #     EOF
+      #   end
+
+      #   it 'normalizes valueless-querystring keys with a trailing =' do
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com?other=&test&x-amz-header=foo',
+      #       headers: {
+      #         'X-Amz-Date' => '20160101T112233Z'
+      #       }
+      #     )
+      #     expect(signature.canonical_request).to eq(<<~EOF.strip)
+      #       PUT
+      #       /
+      #       other=&test=&x-amz-header=foo
+      #       host:domain.com
+      #       x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #       x-amz-date:20160101T112233Z
+
+      #       host;x-amz-content-sha256;x-amz-date
+      #       e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #     EOF
+      #   end
+
+      #   it 'sorts the query parameters' do
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com?foo=&bar=&baz=',
+      #       headers: {
+      #         'X-Amz-Date' => '20160101T112233Z'
+      #       }
+      #     )
+      #     expect(signature.canonical_request).to eq(<<~EOF.strip)
+      #       PUT
+      #       /
+      #       bar=&baz=&foo=
+      #       host:domain.com
+      #       x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #       x-amz-date:20160101T112233Z
+
+      #       host;x-amz-content-sha256;x-amz-date
+      #       e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      #     EOF
+      #   end
+
+      #   it 'sorts by name, params with same name are ordered by value' do
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com?q.options=abc&q=xyz&q=mno',
+      #       headers: {
+      #         'X-Amz-Date' => '20160101T112233Z'
+      #       }
+      #     )
+      #     expect(signature.canonical_request).to include('q=mno&q=xyz&q.options=abc')
+      #   end
+
+      #   it 'uses the X-Amz-Content-Sha256 header when present' do
+      #     signature = Signer.new(options).sign_request(
+      #       http_method: 'PUT',
+      #       url: 'http://domain.com',
+      #       headers: {
+      #         'X-Amz-Date' => '20160101T112233Z',
+      #         'X-Amz-Content-Sha256' => 'CHECKSUM'
+      #       }
+      #     )
+      #     expect(signature.canonical_request).to eq(<<~EOF.strip)
+      #       PUT
+      #       /
+
+      #       host:domain.com
+      #       x-amz-content-sha256:CHECKSUM
+      #       x-amz-date:20160101T112233Z
+
+      #       host;x-amz-content-sha256;x-amz-date
+      #       CHECKSUM
+      #     EOF
+      #   end
+      # end
+
+      # describe '#presign_url' do
+      #   let(:now) { Time.now }
+
+      #   let(:credentials) do
+      #     {
+      #       access_key_id: 'akid',
+      #       secret_access_key: 'secret',
+      #       session_token: nil,
+      #       expiration: expiration
+      #     }
+      #   end
+
+      #   let(:signer_options) do
+      #     {
+      #       service: 'SERVICE',
+      #       region: 'REGION',
+      #       credentials_provider: double(credentials: double(credentials), expiration: expiration)
+      #     }
+      #   end
+
+      #   let(:presign_options) do
+      #     {
+      #       http_method: 'GET',
+      #       url: 'https://example.com',
+      #       expires_in: expires_in,
+      #       time: now
+      #     }
+      #   end
+
+      #   let(:expires_in) { 60 }
+
+      #   let(:signer) { Signer.new(signer_options) }
+
+      #   context 'expiration is nil' do
+      #     let(:expiration) { nil }
+
+      #     it 'creates a presigned url with the provided expires_at' do
+      #       url = signer.presign_url(presign_options)
+      #       expect(url.to_s).to include('X-Amz-Expires=60')
+      #     end
+      #   end
+
+      #   context 'expiration is after expires_at' do
+      #     let(:expiration) { now + 3600 }
+
+      #     it 'creates a presigned url with the provided expires_at' do
+      #       url = signer.presign_url(presign_options)
+      #       expect(url.to_s).to include('X-Amz-Expires=60')
+      #     end
+      #   end
+
+      #   context 'expiration is before expires_at' do
+      #     let(:expiration) { now + 10 }
+
+      #     it 'creates a presigned url that expires at the credential expiration time' do
+      #       url = signer.presign_url(presign_options)
+      #       expect(url.to_s).to include('X-Amz-Expires=10')
+      #     end
+      #   end
+
+      #   context 'expired credentials (static stability)' do
+      #     let(:expiration) { now - 10 }
+
+      #     it 'creates a presigned url with the provided expires_at' do
+      #       url = signer.presign_url(presign_options)
+      #       expect(url.to_s).to include('X-Amz-Expires=60')
+      #     end
+      #   end
+      # end
     end
   end
 end

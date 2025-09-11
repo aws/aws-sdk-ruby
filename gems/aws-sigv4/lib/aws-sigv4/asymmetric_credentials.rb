@@ -42,7 +42,8 @@ module Aws
           pk_b = public_key.to_octet_string(:uncompressed).unpack('C*') # 0x04 byte followed by 2 32-byte integers
           pk_x = be_bytes_to_num(pk_b[1, 32])
           pk_y = be_bytes_to_num(pk_b[33, 32])
-          [ec, { ec: ec, public_key: public_key, pk_x: pk_x, pk_y: pk_y, d: d }] # TODO: change to hash or struct
+
+          { ec: ec, public_key: public_key, pk_x: pk_x, pk_y: pk_y, d: d }
         end
 
         private

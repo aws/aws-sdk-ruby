@@ -12,7 +12,7 @@ module Aws
         @signature = options[:signature]
       end
 
-      # @return [Hash<String,String>] A hash of headers that should be applied to the HTTP request.
+      # @return [Hash<String, String>] A hash of headers that should be applied to the HTTP request.
       #   Header keys are lower cased strings and may include the following:
       #
       #   * 'host'
@@ -21,19 +21,19 @@ module Aws
       #   * 'x-amz-content-sha256'
       #   * 'authorization'
       #
-      attr_accessor :headers
+      attr_reader :headers
 
       # @return [String] For debugging purposes.
-      attr_accessor :canonical_request
+      attr_reader :canonical_request
 
       # @return [String] For debugging purposes.
-      attr_accessor :string_to_sign
+      attr_reader :string_to_sign
 
       # @return [String] For debugging purposes.
-      attr_accessor :content_sha256
+      attr_reader :content_sha256
 
       # @return [String] For debugging purposes.
-      attr_accessor :signature
+      attr_reader :signature
     end
   end
 end

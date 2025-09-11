@@ -11,19 +11,25 @@ module Aws
         Dir.glob(File.expand_path('aws-signing-test-suite/v4/*', __dir__)).each do |path|
           describe(File.basename(path)) do
             let(:context) { JSON.load_file(File.join(path, 'context.json')) }
+
+            let(:credentials) do
+              Credentials.new(
+                access_key_id: context.dig('credentials', 'access_key_id'),
+                secret_access_key: context.dig('credentials', 'secret_access_key'),
+                session_token: context.dig('credentials', 'token')
+              )
+            end
+
             let(:signer) do
               Signer.new(
-                credentials: StaticCredentials.new(
-                  access_key_id: context.dig('credentials', 'access_key_id'),
-                  secret_access_key: context.dig('credentials', 'secret_access_key'),
-                  session_token: context.dig('credentials', 'token')
-                ),
+                credentials: credentials,
                 uri_escape_path: false, # already escaped when parsing the raw requests
                 normalize_path: context['normalize'],
                 region: context['region'],
                 service: context['service'],
                 apply_checksum_header: context['sign_body'],
-                omit_session_token: context['omit_session_token']
+                omit_session_token: context['omit_session_token'],
+                signing_algorithm: 'sigv4'
               )
             end
 
@@ -95,11 +101,6 @@ module Aws
                 expect(computed).to eq(expected)
               end
 
-              # One test modification was made to post-sts-header-after/query-signed-request.
-              # The X-Amz-Security-Token was removed from the expected request - the context config
-              # says to omit session token but it is present, and likely a mistake.
-              # The original version can be found at:
-              #   https://github.com/awslabs/aws-c-auth/blob/main/tests/aws-signing-test-suite/v4/post-sts-header-after/query-signed-request.txt
               it 'computes the signed request' do
                 raw_request = File.read(File.join(path, 'query-signed-request.txt'), encoding: 'utf-8')
                 expected = SpecHelper.parse_request(raw_request)
@@ -108,6 +109,7 @@ module Aws
                 SpecHelper.debug("COMPUTED SIGNED REQUEST: |#{computed.url}|")
                 actual_query = SpecHelper.split_query_to_params(URI.parse(computed.url).query)
                 expected_query = SpecHelper.split_query_to_params(URI.parse(expected[:url]).query)
+                expect(actual_query.keys.sort).to eq(expected_query.keys.sort)
                 expect(actual_query).to eq(expected_query)
                 expected_headers = SpecHelper.downcase_headers(expected[:headers])
                 expect(computed.headers).to eq(expected_headers)

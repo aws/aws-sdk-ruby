@@ -6,9 +6,9 @@ module Aws
     class Credentials
       # @option options [String] :access_key_id
       # @option options [String] :secret_access_key
-      # @option options [String] :session_token
-      # @option options [String] :account_id
-      # @option options [Time] :expiration
+      # @option options [String, nil] :session_token (nil)
+      # @option options [String, nil] :account_id (nil)
+      # @option options [Time, nil] :expiration (nil)
       def initialize(options = {})
         @access_key_id = options.fetch(:access_key_id)
         @secret_access_key = options.fetch(:secret_access_key)
@@ -32,10 +32,11 @@ module Aws
       # @return [Time, nil]
       attr_reader :expiration
 
-      # @return [Boolean] Returns `true` if the access key id and secret access key are both set.
-      def set?
-        !access_key_id.nil? && !access_key_id.empty? &&
-          !secret_access_key.nil? && !secret_access_key.empty?
+      # @api private
+      def inspect
+        super
+          .gsub(/@secret_access_key=\S+/, '@secret_access_key=[FILTERED]')
+          .gsub(/@session_token=\S+/, '@session_token=[FILTERED]')
       end
     end
   end
