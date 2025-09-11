@@ -6,13 +6,9 @@ gem 'rake', require: false
 
 gem 'aws-partitions', path: 'gems/aws-partitions'
 gem 'aws-sdk-core', path: 'gems/aws-sdk-core'
-<<<<<<< HEAD
-gem 'aws-sigv4', path: 'gems/aws-sigv4'
-=======
 gem 'aws-sdk-sso', path: 'gems/aws-sdk-sso'
 gem 'aws-sdk-ssooidc', path: 'gems/aws-sdk-ssooidc'
-gem 'aws-sigv4'
->>>>>>> version-4
+gem 'aws-sigv4', path: 'gems/aws-sigv4'
 gem 'base64'
 gem 'logger'
 gem 'pry'
