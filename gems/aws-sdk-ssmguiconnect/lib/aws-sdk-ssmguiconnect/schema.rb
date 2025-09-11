@@ -111,7 +111,6 @@ module Aws::SSMGuiConnect
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/UpdateConnectionRecordingPreferences", "method" => "POST"}, "smithy.api#idempotent" => {}, "smithy.test#smokeTests" => [{"id" => "UpdateConnectionRecordingPreferencesSuccess", "params" => {"ConnectionRecordingPreferences" => {"RecordingDestinations" => {"S3Buckets" => [{"BucketOwner" => "111122223333", "BucketName" => "test-bucket"}]}, "KMSKeyArn" => "arn:aws:kms:us-east-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"}}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
       end)
-
     end
 
     class << self

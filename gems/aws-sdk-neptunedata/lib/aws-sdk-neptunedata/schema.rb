@@ -1737,7 +1737,6 @@ module Aws::Neptunedata
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ml/modeltransform", "code" => 200}}
       end)
-
     end
 
     class << self

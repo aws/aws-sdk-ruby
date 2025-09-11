@@ -45,7 +45,8 @@ module Aws::MarketplaceEntitlementService
       :customer_aws_account_id,
       :value,
       :expiration_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +73,8 @@ module Aws::MarketplaceEntitlementService
       :double_value,
       :boolean_value,
       :string_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +106,8 @@ module Aws::MarketplaceEntitlementService
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +125,8 @@ module Aws::MarketplaceEntitlementService
     class GetEntitlementsResult < Struct.new(
       :entitlements,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +136,8 @@ module Aws::MarketplaceEntitlementService
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +146,8 @@ module Aws::MarketplaceEntitlementService
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +156,8 @@ module Aws::MarketplaceEntitlementService
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

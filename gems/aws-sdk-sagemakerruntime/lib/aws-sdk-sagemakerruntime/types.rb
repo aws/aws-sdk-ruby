@@ -12,7 +12,8 @@ module Aws::SageMakerRuntime
     #   @return [String]
     class InternalDependencyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::SageMakerRuntime
     #   @return [String]
     class InternalFailure < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +32,8 @@ module Aws::SageMakerRuntime
     #   @return [String]
     class InternalStreamFailure < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +87,8 @@ module Aws::SageMakerRuntime
       :input_location,
       :request_ttl_seconds,
       :invocation_timeout_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +108,8 @@ module Aws::SageMakerRuntime
       :inference_id,
       :output_location,
       :failure_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +207,8 @@ module Aws::SageMakerRuntime
       :enable_explanations,
       :inference_component_name,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +258,8 @@ module Aws::SageMakerRuntime
       :custom_attributes,
       :new_session_id,
       :closed_session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +337,8 @@ module Aws::SageMakerRuntime
       :inference_id,
       :inference_component_name,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,7 +375,8 @@ module Aws::SageMakerRuntime
       :content_type,
       :invoked_production_variant,
       :custom_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +398,8 @@ module Aws::SageMakerRuntime
       :original_status_code,
       :original_message,
       :log_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -400,7 +410,8 @@ module Aws::SageMakerRuntime
     #   @return [String]
     class ModelNotReadyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +448,8 @@ module Aws::SageMakerRuntime
     class ModelStreamError < Struct.new(
       :message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +461,8 @@ module Aws::SageMakerRuntime
     #   @return [String]
     class PayloadPart < Struct.new(
       :bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +496,8 @@ module Aws::SageMakerRuntime
       :model_stream_error,
       :internal_stream_failure,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PayloadPart < ResponseStream; end
@@ -497,7 +511,8 @@ module Aws::SageMakerRuntime
     #   @return [String]
     class ServiceUnavailable < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +521,8 @@ module Aws::SageMakerRuntime
     #   @return [String]
     class ValidationError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

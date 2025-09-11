@@ -73,7 +73,8 @@ module Aws::CloudHSMV2
       :tag_list,
       :hsm_type,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +89,8 @@ module Aws::CloudHSMV2
     class BackupRetentionPolicy < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +118,8 @@ module Aws::CloudHSMV2
       :aws_hardware_certificate,
       :manufacturer_hardware_certificate,
       :cluster_certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +129,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class CloudHsmAccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +140,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class CloudHsmInternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +150,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class CloudHsmInvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +160,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class CloudHsmResourceLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +171,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class CloudHsmResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +181,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class CloudHsmServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +191,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class CloudHsmTagException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -266,7 +276,8 @@ module Aws::CloudHSMV2
       :certificates,
       :tag_list,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +294,8 @@ module Aws::CloudHSMV2
       :destination_region,
       :backup_id,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +309,8 @@ module Aws::CloudHSMV2
     #   @return [Types::DestinationBackup]
     class CopyBackupToRegionResponse < Struct.new(
       :destination_backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +359,8 @@ module Aws::CloudHSMV2
       :network_type,
       :tag_list,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +369,8 @@ module Aws::CloudHSMV2
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +390,8 @@ module Aws::CloudHSMV2
       :cluster_id,
       :availability_zone,
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +400,8 @@ module Aws::CloudHSMV2
     #   @return [Types::Hsm]
     class CreateHsmResponse < Struct.new(
       :hsm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +410,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class DeleteBackupRequest < Struct.new(
       :backup_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +420,8 @@ module Aws::CloudHSMV2
     #   @return [Types::Backup]
     class DeleteBackupResponse < Struct.new(
       :backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +431,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -421,7 +441,8 @@ module Aws::CloudHSMV2
     #   @return [Types::Cluster]
     class DeleteClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -445,7 +466,8 @@ module Aws::CloudHSMV2
       :hsm_id,
       :eni_id,
       :eni_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +476,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class DeleteHsmResponse < Struct.new(
       :hsm_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -463,7 +486,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -476,7 +500,8 @@ module Aws::CloudHSMV2
     class DeleteResourcePolicyResponse < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,7 +548,8 @@ module Aws::CloudHSMV2
       :filters,
       :shared,
       :sort_ascending,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +564,8 @@ module Aws::CloudHSMV2
     class DescribeBackupsResponse < Struct.new(
       :backups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +590,8 @@ module Aws::CloudHSMV2
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +606,8 @@ module Aws::CloudHSMV2
     class DescribeClustersResponse < Struct.new(
       :clusters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,7 +629,8 @@ module Aws::CloudHSMV2
       :source_region,
       :source_backup,
       :source_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -609,7 +639,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +649,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +697,8 @@ module Aws::CloudHSMV2
       :hsm_type,
       :state,
       :state_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +720,8 @@ module Aws::CloudHSMV2
       :cluster_id,
       :signed_cert,
       :trust_anchor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +734,8 @@ module Aws::CloudHSMV2
     class InitializeClusterResponse < Struct.new(
       :state,
       :state_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +755,8 @@ module Aws::CloudHSMV2
       :resource_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -734,7 +770,8 @@ module Aws::CloudHSMV2
     class ListTagsResponse < Struct.new(
       :tag_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +785,8 @@ module Aws::CloudHSMV2
     class ModifyBackupAttributesRequest < Struct.new(
       :backup_id,
       :never_expires,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +800,8 @@ module Aws::CloudHSMV2
     #   @return [Types::Backup]
     class ModifyBackupAttributesResponse < Struct.new(
       :backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +819,8 @@ module Aws::CloudHSMV2
       :hsm_type,
       :backup_retention_policy,
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -789,7 +829,8 @@ module Aws::CloudHSMV2
     #   @return [Types::Cluster]
     class ModifyClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +844,8 @@ module Aws::CloudHSMV2
     class PutResourcePolicyRequest < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +858,8 @@ module Aws::CloudHSMV2
     class PutResourcePolicyResponse < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +868,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     class RestoreBackupRequest < Struct.new(
       :backup_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +878,8 @@ module Aws::CloudHSMV2
     #   @return [Types::Backup]
     class RestoreBackupResponse < Struct.new(
       :backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +893,8 @@ module Aws::CloudHSMV2
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,12 +908,14 @@ module Aws::CloudHSMV2
     class TagResourceRequest < Struct.new(
       :resource_id,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,12 +930,14 @@ module Aws::CloudHSMV2
     class UntagResourceRequest < Struct.new(
       :resource_id,
       :tag_key_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

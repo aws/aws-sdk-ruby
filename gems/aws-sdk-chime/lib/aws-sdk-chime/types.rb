@@ -14,7 +14,8 @@ module Aws::Chime
     class AccessDeniedException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +59,8 @@ module Aws::Chime
       :supported_licenses,
       :account_status,
       :signin_delegate_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +77,8 @@ module Aws::Chime
     class AccountSettings < Struct.new(
       :disable_remote_control,
       :enable_dial_out,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +92,8 @@ module Aws::Chime
     class AlexaForBusinessMetadata < Struct.new(
       :is_alexa_for_business_enabled,
       :alexa_for_business_room_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,12 +110,14 @@ module Aws::Chime
       :account_id,
       :user_id,
       :e164_phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociatePhoneNumberWithUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,12 +130,14 @@ module Aws::Chime
     class AssociateSigninDelegateGroupsWithAccountRequest < Struct.new(
       :account_id,
       :signin_delegate_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateSigninDelegateGroupsWithAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +149,8 @@ module Aws::Chime
     class BadRequestException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +167,8 @@ module Aws::Chime
       :account_id,
       :room_id,
       :membership_item_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -167,7 +177,8 @@ module Aws::Chime
     #   @return [Array<Types::MemberError>]
     class BatchCreateRoomMembershipResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +187,8 @@ module Aws::Chime
     #   @return [Array<String>]
     class BatchDeletePhoneNumberRequest < Struct.new(
       :phone_number_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +197,8 @@ module Aws::Chime
     #   @return [Array<Types::PhoneNumberError>]
     class BatchDeletePhoneNumberResponse < Struct.new(
       :phone_number_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +211,8 @@ module Aws::Chime
     class BatchSuspendUserRequest < Struct.new(
       :account_id,
       :user_id_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +222,8 @@ module Aws::Chime
     #   @return [Array<Types::UserError>]
     class BatchSuspendUserResponse < Struct.new(
       :user_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +236,8 @@ module Aws::Chime
     class BatchUnsuspendUserRequest < Struct.new(
       :account_id,
       :user_id_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +247,8 @@ module Aws::Chime
     #   @return [Array<Types::UserError>]
     class BatchUnsuspendUserResponse < Struct.new(
       :user_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +257,8 @@ module Aws::Chime
     #   @return [Array<Types::UpdatePhoneNumberRequestItem>]
     class BatchUpdatePhoneNumberRequest < Struct.new(
       :update_phone_number_request_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +267,8 @@ module Aws::Chime
     #   @return [Array<Types::PhoneNumberError>]
     class BatchUpdatePhoneNumberResponse < Struct.new(
       :phone_number_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +281,8 @@ module Aws::Chime
     class BatchUpdateUserRequest < Struct.new(
       :account_id,
       :update_user_request_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +292,8 @@ module Aws::Chime
     #   @return [Array<Types::UserError>]
     class BatchUpdateUserResponse < Struct.new(
       :user_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +335,8 @@ module Aws::Chime
       :updated_timestamp,
       :bot_email,
       :security_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +347,8 @@ module Aws::Chime
     #   @return [String]
     class BusinessCallingSettings < Struct.new(
       :cdr_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +361,8 @@ module Aws::Chime
     class ConflictException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +372,8 @@ module Aws::Chime
     #   @return [Integer]
     class ConversationRetentionSettings < Struct.new(
       :retention_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -357,7 +382,8 @@ module Aws::Chime
     #   @return [String]
     class CreateAccountRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +392,8 @@ module Aws::Chime
     #   @return [Types::Account]
     class CreateAccountResponse < Struct.new(
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -383,7 +410,8 @@ module Aws::Chime
       :account_id,
       :display_name,
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +420,8 @@ module Aws::Chime
     #   @return [Types::Bot]
     class CreateBotResponse < Struct.new(
       :bot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +442,8 @@ module Aws::Chime
       :from_phone_number,
       :to_phone_number,
       :join_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +452,8 @@ module Aws::Chime
     #   @return [String]
     class CreateMeetingDialOutResponse < Struct.new(
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +466,8 @@ module Aws::Chime
     class CreatePhoneNumberOrderRequest < Struct.new(
       :product_type,
       :e164_phone_numbers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +476,8 @@ module Aws::Chime
     #   @return [Types::PhoneNumberOrder]
     class CreatePhoneNumberOrderResponse < Struct.new(
       :phone_number_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -465,7 +498,8 @@ module Aws::Chime
       :room_id,
       :member_id,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +508,8 @@ module Aws::Chime
     #   @return [Types::RoomMembership]
     class CreateRoomMembershipResponse < Struct.new(
       :room_membership,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,7 +526,8 @@ module Aws::Chime
       :account_id,
       :name,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +536,8 @@ module Aws::Chime
     #   @return [Types::Room]
     class CreateRoomResponse < Struct.new(
       :room,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +558,8 @@ module Aws::Chime
       :username,
       :email,
       :user_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -530,7 +568,8 @@ module Aws::Chime
     #   @return [Types::User]
     class CreateUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,12 +578,14 @@ module Aws::Chime
     #   @return [String]
     class DeleteAccountRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +598,8 @@ module Aws::Chime
     class DeleteEventsConfigurationRequest < Struct.new(
       :account_id,
       :bot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -566,7 +608,8 @@ module Aws::Chime
     #   @return [String]
     class DeletePhoneNumberRequest < Struct.new(
       :phone_number_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +626,8 @@ module Aws::Chime
       :account_id,
       :room_id,
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,7 +640,8 @@ module Aws::Chime
     class DeleteRoomRequest < Struct.new(
       :account_id,
       :room_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -609,12 +654,14 @@ module Aws::Chime
     class DisassociatePhoneNumberFromUserRequest < Struct.new(
       :account_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociatePhoneNumberFromUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,12 +674,14 @@ module Aws::Chime
     class DisassociateSigninDelegateGroupsFromAccountRequest < Struct.new(
       :account_id,
       :group_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateSigninDelegateGroupsFromAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +699,8 @@ module Aws::Chime
       :bot_id,
       :outbound_events_https_endpoint,
       :lambda_function_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +712,8 @@ module Aws::Chime
     class ForbiddenException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +722,8 @@ module Aws::Chime
     #   @return [String]
     class GetAccountRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +732,8 @@ module Aws::Chime
     #   @return [Types::Account]
     class GetAccountResponse < Struct.new(
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -689,7 +742,8 @@ module Aws::Chime
     #   @return [String]
     class GetAccountSettingsRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,7 +752,8 @@ module Aws::Chime
     #   @return [Types::AccountSettings]
     class GetAccountSettingsResponse < Struct.new(
       :account_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -711,7 +766,8 @@ module Aws::Chime
     class GetBotRequest < Struct.new(
       :account_id,
       :bot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +776,8 @@ module Aws::Chime
     #   @return [Types::Bot]
     class GetBotResponse < Struct.new(
       :bot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -733,7 +790,8 @@ module Aws::Chime
     class GetEventsConfigurationRequest < Struct.new(
       :account_id,
       :bot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -742,7 +800,8 @@ module Aws::Chime
     #   @return [Types::EventsConfiguration]
     class GetEventsConfigurationResponse < Struct.new(
       :events_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +814,8 @@ module Aws::Chime
     class GetGlobalSettingsResponse < Struct.new(
       :business_calling,
       :voice_connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -764,7 +824,8 @@ module Aws::Chime
     #   @return [String]
     class GetPhoneNumberOrderRequest < Struct.new(
       :phone_number_order_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +834,8 @@ module Aws::Chime
     #   @return [Types::PhoneNumberOrder]
     class GetPhoneNumberOrderResponse < Struct.new(
       :phone_number_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +844,8 @@ module Aws::Chime
     #   @return [String]
     class GetPhoneNumberRequest < Struct.new(
       :phone_number_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +854,8 @@ module Aws::Chime
     #   @return [Types::PhoneNumber]
     class GetPhoneNumberResponse < Struct.new(
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +868,8 @@ module Aws::Chime
     class GetPhoneNumberSettingsResponse < Struct.new(
       :calling_name,
       :calling_name_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +878,8 @@ module Aws::Chime
     #   @return [String]
     class GetRetentionSettingsRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -826,7 +892,8 @@ module Aws::Chime
     class GetRetentionSettingsResponse < Struct.new(
       :retention_settings,
       :initiate_deletion_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -839,7 +906,8 @@ module Aws::Chime
     class GetRoomRequest < Struct.new(
       :account_id,
       :room_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +916,8 @@ module Aws::Chime
     #   @return [Types::Room]
     class GetRoomResponse < Struct.new(
       :room,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +930,8 @@ module Aws::Chime
     class GetUserRequest < Struct.new(
       :account_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +940,8 @@ module Aws::Chime
     #   @return [Types::User]
     class GetUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +954,8 @@ module Aws::Chime
     class GetUserSettingsRequest < Struct.new(
       :account_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +964,8 @@ module Aws::Chime
     #   @return [Types::UserSettings]
     class GetUserSettingsResponse < Struct.new(
       :user_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,7 +988,8 @@ module Aws::Chime
       :status,
       :email_address,
       :email_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -932,7 +1006,8 @@ module Aws::Chime
       :account_id,
       :user_email_list,
       :user_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -941,7 +1016,8 @@ module Aws::Chime
     #   @return [Array<Types::Invite>]
     class InviteUsersResponse < Struct.new(
       :invites,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1038,8 @@ module Aws::Chime
       :user_email,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1052,8 @@ module Aws::Chime
     class ListAccountsResponse < Struct.new(
       :accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -992,7 +1070,8 @@ module Aws::Chime
       :account_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1084,8 @@ module Aws::Chime
     class ListBotsResponse < Struct.new(
       :bots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1098,8 @@ module Aws::Chime
     class ListPhoneNumberOrdersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,7 +1112,8 @@ module Aws::Chime
     class ListPhoneNumberOrdersResponse < Struct.new(
       :phone_number_orders,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1142,8 @@ module Aws::Chime
       :filter_value,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1156,8 @@ module Aws::Chime
     class ListPhoneNumbersResponse < Struct.new(
       :phone_numbers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1178,8 @@ module Aws::Chime
       :room_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1107,7 +1192,8 @@ module Aws::Chime
     class ListRoomMembershipsResponse < Struct.new(
       :room_memberships,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1214,8 @@ module Aws::Chime
       :member_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,7 +1228,8 @@ module Aws::Chime
     class ListRoomsResponse < Struct.new(
       :rooms,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1150,7 +1238,8 @@ module Aws::Chime
     #   @return [String]
     class ListSupportedPhoneNumberCountriesRequest < Struct.new(
       :product_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1248,8 @@ module Aws::Chime
     #   @return [Array<Types::PhoneNumberCountry>]
     class ListSupportedPhoneNumberCountriesResponse < Struct.new(
       :phone_number_countries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1184,7 +1274,8 @@ module Aws::Chime
       :user_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1197,7 +1288,8 @@ module Aws::Chime
     class ListUsersResponse < Struct.new(
       :users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,12 +1302,14 @@ module Aws::Chime
     class LogoutUserRequest < Struct.new(
       :account_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class LogoutUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1241,7 +1335,8 @@ module Aws::Chime
       :email,
       :full_name,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1259,7 +1354,8 @@ module Aws::Chime
       :member_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1369,8 @@ module Aws::Chime
     class MembershipItem < Struct.new(
       :member_id,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1285,7 +1382,8 @@ module Aws::Chime
     class NotFoundException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1299,7 +1397,8 @@ module Aws::Chime
     class OrderedPhoneNumber < Struct.new(
       :e164_phone_number,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1358,7 +1457,8 @@ module Aws::Chime
       :created_timestamp,
       :updated_timestamp,
       :deletion_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1378,7 +1478,8 @@ module Aws::Chime
       :value,
       :name,
       :associated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1409,7 +1510,8 @@ module Aws::Chime
       :outbound_sms,
       :inbound_mms,
       :outbound_mms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1525,8 @@ module Aws::Chime
     class PhoneNumberCountry < Struct.new(
       :country_code,
       :supported_phone_number_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1442,7 +1545,8 @@ module Aws::Chime
       :phone_number_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1473,7 +1577,8 @@ module Aws::Chime
       :ordered_phone_numbers,
       :created_timestamp,
       :updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1494,7 +1599,8 @@ module Aws::Chime
       :bot_id,
       :outbound_events_https_endpoint,
       :lambda_function_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,7 +1610,8 @@ module Aws::Chime
     #   @return [Types::EventsConfiguration]
     class PutEventsConfigurationResponse < Struct.new(
       :events_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,7 +1624,8 @@ module Aws::Chime
     class PutRetentionSettingsRequest < Struct.new(
       :account_id,
       :retention_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1638,8 @@ module Aws::Chime
     class PutRetentionSettingsResponse < Struct.new(
       :retention_settings,
       :initiate_deletion_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1547,12 +1656,14 @@ module Aws::Chime
       :account_id,
       :conversation_id,
       :message_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RedactConversationMessageResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1569,12 +1680,14 @@ module Aws::Chime
       :account_id,
       :room_id,
       :message_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RedactRoomMessageResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1700,8 @@ module Aws::Chime
     class RegenerateSecurityTokenRequest < Struct.new(
       :account_id,
       :bot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1596,7 +1710,8 @@ module Aws::Chime
     #   @return [Types::Bot]
     class RegenerateSecurityTokenResponse < Struct.new(
       :bot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1609,7 +1724,8 @@ module Aws::Chime
     class ResetPersonalPINRequest < Struct.new(
       :account_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1618,7 +1734,8 @@ module Aws::Chime
     #   @return [Types::User]
     class ResetPersonalPINResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1630,7 +1747,8 @@ module Aws::Chime
     class ResourceLimitExceededException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1757,8 @@ module Aws::Chime
     #   @return [String]
     class RestorePhoneNumberRequest < Struct.new(
       :phone_number_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1767,8 @@ module Aws::Chime
     #   @return [Types::PhoneNumber]
     class RestorePhoneNumberResponse < Struct.new(
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1782,8 @@ module Aws::Chime
     class RetentionSettings < Struct.new(
       :room_retention_settings,
       :conversation_retention_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1692,7 +1813,8 @@ module Aws::Chime
       :created_by,
       :created_timestamp,
       :updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1840,8 @@ module Aws::Chime
       :role,
       :invited_by,
       :updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1728,7 +1851,8 @@ module Aws::Chime
     #   @return [Integer]
     class RoomRetentionSettings < Struct.new(
       :retention_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1765,7 +1889,8 @@ module Aws::Chime
       :phone_number_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,7 +1903,8 @@ module Aws::Chime
     class SearchAvailablePhoneNumbersResponse < Struct.new(
       :e164_phone_numbers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1790,7 +1916,8 @@ module Aws::Chime
     class ServiceFailureException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1802,7 +1929,8 @@ module Aws::Chime
     class ServiceUnavailableException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1812,7 +1940,8 @@ module Aws::Chime
     #   @return [String]
     class SigninDelegateGroup < Struct.new(
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1831,7 +1960,8 @@ module Aws::Chime
       :inbound_calling,
       :outbound_calling,
       :sms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1843,7 +1973,8 @@ module Aws::Chime
     class ThrottledClientException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1855,7 +1986,8 @@ module Aws::Chime
     class UnauthorizedClientException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1999,8 @@ module Aws::Chime
     class UnprocessableEntityException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1884,7 +2017,8 @@ module Aws::Chime
       :account_id,
       :name,
       :default_license,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1893,7 +2027,8 @@ module Aws::Chime
     #   @return [Types::Account]
     class UpdateAccountResponse < Struct.new(
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,12 +2041,14 @@ module Aws::Chime
     class UpdateAccountSettingsRequest < Struct.new(
       :account_id,
       :account_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateAccountSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1928,7 +2065,8 @@ module Aws::Chime
       :account_id,
       :bot_id,
       :disabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1937,7 +2075,8 @@ module Aws::Chime
     #   @return [Types::Bot]
     class UpdateBotResponse < Struct.new(
       :bot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1950,7 +2089,8 @@ module Aws::Chime
     class UpdateGlobalSettingsRequest < Struct.new(
       :business_calling,
       :voice_connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1967,7 +2107,8 @@ module Aws::Chime
       :phone_number_id,
       :product_type,
       :calling_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2127,8 @@ module Aws::Chime
       :phone_number_id,
       :product_type,
       :calling_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,7 +2137,8 @@ module Aws::Chime
     #   @return [Types::PhoneNumber]
     class UpdatePhoneNumberResponse < Struct.new(
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2004,7 +2147,8 @@ module Aws::Chime
     #   @return [String]
     class UpdatePhoneNumberSettingsRequest < Struct.new(
       :calling_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2025,7 +2169,8 @@ module Aws::Chime
       :room_id,
       :member_id,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2034,7 +2179,8 @@ module Aws::Chime
     #   @return [Types::RoomMembership]
     class UpdateRoomMembershipResponse < Struct.new(
       :room_membership,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2051,7 +2197,8 @@ module Aws::Chime
       :account_id,
       :room_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2060,7 +2207,8 @@ module Aws::Chime
     #   @return [Types::Room]
     class UpdateRoomResponse < Struct.new(
       :room,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2086,7 +2234,8 @@ module Aws::Chime
       :license_type,
       :user_type,
       :alexa_for_business_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2109,7 +2258,8 @@ module Aws::Chime
       :license_type,
       :user_type,
       :alexa_for_business_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2118,7 +2268,8 @@ module Aws::Chime
     #   @return [Types::User]
     class UpdateUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2135,7 +2286,8 @@ module Aws::Chime
       :account_id,
       :user_id,
       :user_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2193,7 +2345,8 @@ module Aws::Chime
       :invited_on,
       :alexa_for_business_metadata,
       :personal_pin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2212,7 +2365,8 @@ module Aws::Chime
       :user_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2223,7 +2377,8 @@ module Aws::Chime
     #   @return [Types::TelephonySettings]
     class UserSettings < Struct.new(
       :telephony,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2234,7 +2389,8 @@ module Aws::Chime
     #   @return [String]
     class VoiceConnectorSettings < Struct.new(
       :cdr_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

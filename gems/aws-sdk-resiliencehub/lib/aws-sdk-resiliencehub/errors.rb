@@ -42,7 +42,7 @@ module Aws::Resiliencehub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Resiliencehub::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::Resiliencehub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Resiliencehub::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::Resiliencehub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Resiliencehub::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::Resiliencehub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Resiliencehub::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::Resiliencehub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Resiliencehub::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -132,7 +132,7 @@ module Aws::Resiliencehub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Resiliencehub::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -150,7 +150,7 @@ module Aws::Resiliencehub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Resiliencehub::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

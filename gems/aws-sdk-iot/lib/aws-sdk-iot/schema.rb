@@ -8450,7 +8450,6 @@ module Aws::IoT
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/security-profile-behaviors/validate", "code" => 200}}
       end)
-
     end
 
     class << self

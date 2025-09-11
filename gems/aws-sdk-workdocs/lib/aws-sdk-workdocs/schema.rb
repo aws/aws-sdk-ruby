@@ -1596,7 +1596,6 @@ module Aws::WorkDocs
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/api/v1/users/{UserId}", "code" => 200}}
       end)
-
     end
 
     class << self

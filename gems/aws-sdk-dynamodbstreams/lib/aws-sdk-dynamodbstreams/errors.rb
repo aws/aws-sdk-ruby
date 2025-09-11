@@ -40,7 +40,7 @@ module Aws::DynamoDBStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DynamoDBStreams::Types::ExpiredIteratorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The provided iterator exceeds the maximum age allowed.</p>
@@ -54,7 +54,7 @@ module Aws::DynamoDBStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DynamoDBStreams::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The server encountered an internal error trying to fulfill the request.</p>
@@ -81,7 +81,7 @@ module Aws::DynamoDBStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DynamoDBStreams::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Too many operations for a given subscriber.</p>
@@ -97,7 +97,7 @@ module Aws::DynamoDBStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DynamoDBStreams::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The resource which is being requested does not exist.</p>
@@ -122,7 +122,7 @@ module Aws::DynamoDBStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DynamoDBStreams::Types::TrimmedDataAccessException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>"The data you are trying to access has been trimmed.</p>

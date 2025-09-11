@@ -17,7 +17,8 @@ module Aws::Forecastquery
     class DataPoint < Struct.new(
       :timestamp,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42,7 +43,8 @@ module Aws::Forecastquery
     #   @return [Hash<String, Array<Types::DataPoint>>]
     class Forecast < Struct.new(
       :predictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51,7 +53,8 @@ module Aws::Forecastquery
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +63,8 @@ module Aws::Forecastquery
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -69,7 +73,8 @@ module Aws::Forecastquery
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +111,8 @@ module Aws::Forecastquery
       :end_date,
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +121,8 @@ module Aws::Forecastquery
     #   @return [Types::Forecast]
     class QueryForecastResponse < Struct.new(
       :forecast,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +157,8 @@ module Aws::Forecastquery
       :end_date,
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -159,7 +167,8 @@ module Aws::Forecastquery
     #   @return [Types::Forecast]
     class QueryWhatIfForecastResponse < Struct.new(
       :forecast,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +177,8 @@ module Aws::Forecastquery
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +188,8 @@ module Aws::Forecastquery
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

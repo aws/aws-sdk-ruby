@@ -50,7 +50,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -63,7 +63,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message returned by this <code>BadRequestException</code> error.</p>
@@ -77,7 +77,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::DatabaseErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::DatabaseNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::DatabaseResumingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::DatabaseUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -127,7 +127,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message returned by this <code>ForbiddenException</code> error.</p>
@@ -141,7 +141,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::HttpEndpointNotEnabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -154,7 +154,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -163,7 +163,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::InvalidResourceStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -176,7 +176,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::InvalidSecretException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -189,7 +189,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message returned by this <code>NotFoundException</code> error.</p>
@@ -214,7 +214,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::SecretsErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -228,7 +228,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::ServiceUnavailableError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -237,7 +237,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::StatementTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message returned by this <code>StatementTimeoutException</code> error.</p>
@@ -256,7 +256,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::TransactionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -280,7 +280,7 @@ module Aws::RDSData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::UnsupportedResultException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -41,7 +41,7 @@ module Aws::MachineLearning
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MachineLearning::Types::IdempotentParameterMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::MachineLearning
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MachineLearning::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::MachineLearning
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MachineLearning::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::MachineLearning
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MachineLearning::Types::InvalidTagException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::MachineLearning
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MachineLearning::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -122,7 +122,7 @@ module Aws::MachineLearning
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MachineLearning::Types::PredictorNotMountedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::MachineLearning
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MachineLearning::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::MachineLearning
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MachineLearning::Types::TagLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

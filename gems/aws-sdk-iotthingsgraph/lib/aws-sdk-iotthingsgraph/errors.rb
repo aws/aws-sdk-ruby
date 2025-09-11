@@ -40,7 +40,7 @@ module Aws::IoTThingsGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTThingsGraph::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::IoTThingsGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTThingsGraph::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::IoTThingsGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTThingsGraph::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::IoTThingsGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTThingsGraph::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::IoTThingsGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTThingsGraph::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::IoTThingsGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTThingsGraph::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::IoTThingsGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTThingsGraph::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

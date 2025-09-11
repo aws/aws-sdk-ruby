@@ -11,7 +11,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class AccountChannelLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +32,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class AccountStreamLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +68,8 @@ module Aws::KinesisVideo
       :creation_time,
       :single_master_configuration,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -83,7 +87,8 @@ module Aws::KinesisVideo
     class ChannelNameCondition < Struct.new(
       :comparison_operator,
       :comparison_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +98,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class ClientLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +122,8 @@ module Aws::KinesisVideo
       :channel_type,
       :single_master_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +132,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class CreateSignalingChannelOutput < Struct.new(
       :channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +184,8 @@ module Aws::KinesisVideo
       :kms_key_id,
       :data_retention_in_hours,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +194,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class CreateStreamOutput < Struct.new(
       :stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,12 +208,14 @@ module Aws::KinesisVideo
     class DeleteEdgeConfigurationInput < Struct.new(
       :stream_name,
       :stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEdgeConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,12 +231,14 @@ module Aws::KinesisVideo
     class DeleteSignalingChannelInput < Struct.new(
       :channel_arn,
       :current_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSignalingChannelOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,12 +255,14 @@ module Aws::KinesisVideo
     class DeleteStreamInput < Struct.new(
       :stream_arn,
       :current_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStreamOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +287,8 @@ module Aws::KinesisVideo
       :edge_retention_in_hours,
       :local_size_config,
       :delete_after_upload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -286,7 +303,8 @@ module Aws::KinesisVideo
     class DescribeEdgeConfigurationInput < Struct.new(
       :stream_name,
       :stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +343,8 @@ module Aws::KinesisVideo
       :failed_status_details,
       :edge_config,
       :edge_agent_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +357,8 @@ module Aws::KinesisVideo
     class DescribeImageGenerationConfigurationInput < Struct.new(
       :stream_name,
       :stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +367,8 @@ module Aws::KinesisVideo
     #   @return [Types::ImageGenerationConfiguration]
     class DescribeImageGenerationConfigurationOutput < Struct.new(
       :image_generation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +389,8 @@ module Aws::KinesisVideo
       :stream_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +403,8 @@ module Aws::KinesisVideo
     class DescribeMappedResourceConfigurationOutput < Struct.new(
       :mapped_resource_configuration_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +417,8 @@ module Aws::KinesisVideo
     class DescribeMediaStorageConfigurationInput < Struct.new(
       :channel_name,
       :channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -403,7 +427,8 @@ module Aws::KinesisVideo
     #   @return [Types::MediaStorageConfiguration]
     class DescribeMediaStorageConfigurationOutput < Struct.new(
       :media_storage_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +441,8 @@ module Aws::KinesisVideo
     class DescribeNotificationConfigurationInput < Struct.new(
       :stream_name,
       :stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +451,8 @@ module Aws::KinesisVideo
     #   @return [Types::NotificationConfiguration]
     class DescribeNotificationConfigurationOutput < Struct.new(
       :notification_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +465,8 @@ module Aws::KinesisVideo
     class DescribeSignalingChannelInput < Struct.new(
       :channel_name,
       :channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +476,8 @@ module Aws::KinesisVideo
     #   @return [Types::ChannelInfo]
     class DescribeSignalingChannelOutput < Struct.new(
       :channel_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +490,8 @@ module Aws::KinesisVideo
     class DescribeStreamInput < Struct.new(
       :stream_name,
       :stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,7 +500,8 @@ module Aws::KinesisVideo
     #   @return [Types::StreamInfo]
     class DescribeStreamOutput < Struct.new(
       :stream_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -480,7 +511,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class DeviceStreamLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +526,8 @@ module Aws::KinesisVideo
     class EdgeAgentStatus < Struct.new(
       :last_recorder_status,
       :last_uploader_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +554,8 @@ module Aws::KinesisVideo
       :recorder_config,
       :uploader_config,
       :deletion_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -541,7 +575,8 @@ module Aws::KinesisVideo
       :stream_name,
       :stream_arn,
       :api_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +586,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class GetDataEndpointOutput < Struct.new(
       :data_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -566,7 +602,8 @@ module Aws::KinesisVideo
     class GetSignalingChannelEndpointInput < Struct.new(
       :channel_arn,
       :single_master_channel_endpoint_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +612,8 @@ module Aws::KinesisVideo
     #   @return [Array<Types::ResourceEndpointListItem>]
     class GetSignalingChannelEndpointOutput < Struct.new(
       :resource_endpoint_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -623,7 +661,8 @@ module Aws::KinesisVideo
       :format_config,
       :width_pixels,
       :height_pixels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -637,7 +676,8 @@ module Aws::KinesisVideo
     class ImageGenerationDestinationConfig < Struct.new(
       :uri,
       :destination_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +686,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class InvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -655,7 +696,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class InvalidDeviceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +706,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class InvalidResourceFormatException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +729,8 @@ module Aws::KinesisVideo
       :last_collected_time,
       :last_updated_time,
       :recorder_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +752,8 @@ module Aws::KinesisVideo
       :last_collected_time,
       :last_updated_time,
       :uploader_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +789,8 @@ module Aws::KinesisVideo
       :sync_status,
       :failed_status_details,
       :edge_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +808,8 @@ module Aws::KinesisVideo
       :hub_device_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +822,8 @@ module Aws::KinesisVideo
     class ListEdgeAgentConfigurationsOutput < Struct.new(
       :edge_configs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +842,8 @@ module Aws::KinesisVideo
       :max_results,
       :next_token,
       :channel_name_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +857,8 @@ module Aws::KinesisVideo
     class ListSignalingChannelsOutput < Struct.new(
       :channel_info_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +879,8 @@ module Aws::KinesisVideo
       :max_results,
       :next_token,
       :stream_name_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +894,8 @@ module Aws::KinesisVideo
     class ListStreamsOutput < Struct.new(
       :stream_info_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +911,8 @@ module Aws::KinesisVideo
     class ListTagsForResourceInput < Struct.new(
       :next_token,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,7 +927,8 @@ module Aws::KinesisVideo
     class ListTagsForResourceOutput < Struct.new(
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +948,8 @@ module Aws::KinesisVideo
       :next_token,
       :stream_arn,
       :stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +964,8 @@ module Aws::KinesisVideo
     class ListTagsForStreamOutput < Struct.new(
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -926,7 +982,8 @@ module Aws::KinesisVideo
     class LocalSizeConfig < Struct.new(
       :max_local_media_size_in_mb,
       :strategy_on_full_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +997,8 @@ module Aws::KinesisVideo
     class MappedResourceConfigurationListItem < Struct.new(
       :type,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,7 +1018,8 @@ module Aws::KinesisVideo
     class MediaSourceConfig < Struct.new(
       :media_uri_secret_arn,
       :media_uri_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1045,8 @@ module Aws::KinesisVideo
     class MediaStorageConfiguration < Struct.new(
       :stream_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1055,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class NoDataRetentionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1065,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class NotAuthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1080,8 @@ module Aws::KinesisVideo
     class NotificationConfiguration < Struct.new(
       :status,
       :destination_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1028,7 +1091,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class NotificationDestinationConfig < Struct.new(
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1113,8 @@ module Aws::KinesisVideo
     class RecorderConfig < Struct.new(
       :media_source_config,
       :schedule_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1067,7 +1132,8 @@ module Aws::KinesisVideo
     class ResourceEndpointListItem < Struct.new(
       :protocol,
       :resource_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1159,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1102,7 +1169,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1129,7 +1197,8 @@ module Aws::KinesisVideo
     class ScheduleConfig < Struct.new(
       :schedule_expression,
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1221,8 @@ module Aws::KinesisVideo
     class SingleMasterChannelEndpointConfiguration < Struct.new(
       :protocols,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1234,8 @@ module Aws::KinesisVideo
     #   @return [Integer]
     class SingleMasterConfiguration < Struct.new(
       :message_ttl_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,7 +1254,8 @@ module Aws::KinesisVideo
       :stream_name,
       :stream_arn,
       :edge_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1292,8 @@ module Aws::KinesisVideo
       :sync_status,
       :failed_status_details,
       :edge_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1230,7 +1303,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class StreamEdgeConfigurationNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1347,8 @@ module Aws::KinesisVideo
       :status,
       :creation_time,
       :data_retention_in_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1366,8 @@ module Aws::KinesisVideo
     class StreamNameCondition < Struct.new(
       :comparison_operator,
       :comparison_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1305,7 +1381,8 @@ module Aws::KinesisVideo
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,12 +1397,14 @@ module Aws::KinesisVideo
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,12 +1423,14 @@ module Aws::KinesisVideo
       :stream_arn,
       :stream_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagStreamOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1440,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class TagsPerResourceExceededLimitException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,12 +1455,14 @@ module Aws::KinesisVideo
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_key_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1396,12 +1480,14 @@ module Aws::KinesisVideo
       :stream_arn,
       :stream_name,
       :tag_key_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagStreamOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1430,12 +1516,14 @@ module Aws::KinesisVideo
       :current_version,
       :operation,
       :data_retention_change_in_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDataRetentionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1453,12 +1541,14 @@ module Aws::KinesisVideo
       :stream_name,
       :stream_arn,
       :image_generation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateImageGenerationConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1471,12 +1561,14 @@ module Aws::KinesisVideo
     class UpdateMediaStorageConfigurationInput < Struct.new(
       :channel_arn,
       :media_storage_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateMediaStorageConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,12 +1585,14 @@ module Aws::KinesisVideo
       :stream_name,
       :stream_arn,
       :notification_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNotificationConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,12 +1611,14 @@ module Aws::KinesisVideo
       :channel_arn,
       :current_version,
       :single_master_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateSignalingChannelOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1560,12 +1656,14 @@ module Aws::KinesisVideo
       :current_version,
       :device_name,
       :media_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateStreamOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1582,7 +1680,8 @@ module Aws::KinesisVideo
     #   @return [Types::ScheduleConfig]
     class UploaderConfig < Struct.new(
       :schedule_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1593,7 +1692,8 @@ module Aws::KinesisVideo
     #   @return [String]
     class VersionMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

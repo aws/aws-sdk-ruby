@@ -11,7 +11,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::WorkSpacesWeb
     class AssociateBrowserSettingsRequest < Struct.new(
       :portal_arn,
       :browser_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +39,8 @@ module Aws::WorkSpacesWeb
     class AssociateBrowserSettingsResponse < Struct.new(
       :portal_arn,
       :browser_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,7 +53,8 @@ module Aws::WorkSpacesWeb
     class AssociateDataProtectionSettingsRequest < Struct.new(
       :portal_arn,
       :data_protection_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -63,7 +67,8 @@ module Aws::WorkSpacesWeb
     class AssociateDataProtectionSettingsResponse < Struct.new(
       :portal_arn,
       :data_protection_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +81,8 @@ module Aws::WorkSpacesWeb
     class AssociateIpAccessSettingsRequest < Struct.new(
       :portal_arn,
       :ip_access_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +95,8 @@ module Aws::WorkSpacesWeb
     class AssociateIpAccessSettingsResponse < Struct.new(
       :portal_arn,
       :ip_access_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +109,8 @@ module Aws::WorkSpacesWeb
     class AssociateNetworkSettingsRequest < Struct.new(
       :portal_arn,
       :network_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +123,8 @@ module Aws::WorkSpacesWeb
     class AssociateNetworkSettingsResponse < Struct.new(
       :portal_arn,
       :network_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +137,8 @@ module Aws::WorkSpacesWeb
     class AssociateSessionLoggerRequest < Struct.new(
       :portal_arn,
       :session_logger_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +151,8 @@ module Aws::WorkSpacesWeb
     class AssociateSessionLoggerResponse < Struct.new(
       :portal_arn,
       :session_logger_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +165,8 @@ module Aws::WorkSpacesWeb
     class AssociateTrustStoreRequest < Struct.new(
       :portal_arn,
       :trust_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -167,7 +179,8 @@ module Aws::WorkSpacesWeb
     class AssociateTrustStoreResponse < Struct.new(
       :portal_arn,
       :trust_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +193,8 @@ module Aws::WorkSpacesWeb
     class AssociateUserAccessLoggingSettingsRequest < Struct.new(
       :portal_arn,
       :user_access_logging_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,7 +207,8 @@ module Aws::WorkSpacesWeb
     class AssociateUserAccessLoggingSettingsResponse < Struct.new(
       :portal_arn,
       :user_access_logging_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +221,8 @@ module Aws::WorkSpacesWeb
     class AssociateUserSettingsRequest < Struct.new(
       :portal_arn,
       :user_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +235,8 @@ module Aws::WorkSpacesWeb
     class AssociateUserSettingsResponse < Struct.new(
       :portal_arn,
       :user_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +266,8 @@ module Aws::WorkSpacesWeb
       :browser_policy,
       :customer_managed_key,
       :additional_encryption_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -259,7 +277,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class BrowserSettingsSummary < Struct.new(
       :browser_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +308,8 @@ module Aws::WorkSpacesWeb
       :not_valid_before,
       :not_valid_after,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,7 +335,8 @@ module Aws::WorkSpacesWeb
       :issuer,
       :not_valid_before,
       :not_valid_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +353,8 @@ module Aws::WorkSpacesWeb
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +372,8 @@ module Aws::WorkSpacesWeb
       :domain,
       :name,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +391,8 @@ module Aws::WorkSpacesWeb
     class CookieSynchronizationConfiguration < Struct.new(
       :allowlist,
       :blocklist,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -399,7 +423,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :browser_policy,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +433,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class CreateBrowserSettingsResponse < Struct.new(
       :browser_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +472,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :inline_redaction_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +482,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class CreateDataProtectionSettingsResponse < Struct.new(
       :data_protection_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +684,8 @@ module Aws::WorkSpacesWeb
       :identity_provider_details,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +694,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class CreateIdentityProviderResponse < Struct.new(
       :identity_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +733,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :ip_rules,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +743,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class CreateIpAccessSettingsResponse < Struct.new(
       :ip_access_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +776,8 @@ module Aws::WorkSpacesWeb
       :security_group_ids,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -753,7 +786,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class CreateNetworkSettingsResponse < Struct.new(
       :network_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -806,7 +840,8 @@ module Aws::WorkSpacesWeb
       :authentication_type,
       :instance_type,
       :max_concurrent_sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +855,8 @@ module Aws::WorkSpacesWeb
     class CreatePortalResponse < Struct.new(
       :portal_arn,
       :portal_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -853,7 +889,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +899,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class CreateSessionLoggerResponse < Struct.new(
       :session_logger_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +922,8 @@ module Aws::WorkSpacesWeb
       :certificate_list,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +932,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class CreateTrustStoreResponse < Struct.new(
       :trust_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,7 +955,8 @@ module Aws::WorkSpacesWeb
       :kinesis_stream_arn,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +965,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class CreateUserAccessLoggingSettingsResponse < Struct.new(
       :user_access_logging_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1041,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :deep_link_allowed,
       :toolbar_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1008,7 +1051,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class CreateUserSettingsResponse < Struct.new(
       :user_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1074,8 @@ module Aws::WorkSpacesWeb
       :pattern_regex,
       :pattern_description,
       :keyword_regex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1070,7 +1115,8 @@ module Aws::WorkSpacesWeb
       :creation_date,
       :customer_managed_key,
       :additional_encryption_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1092,7 +1138,8 @@ module Aws::WorkSpacesWeb
       :display_name,
       :description,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1101,12 +1148,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DeleteBrowserSettingsRequest < Struct.new(
       :browser_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteBrowserSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,12 +1164,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DeleteDataProtectionSettingsRequest < Struct.new(
       :data_protection_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataProtectionSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1129,12 +1180,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DeleteIdentityProviderRequest < Struct.new(
       :identity_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIdentityProviderResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1143,12 +1196,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DeleteIpAccessSettingsRequest < Struct.new(
       :ip_access_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIpAccessSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1157,12 +1212,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DeleteNetworkSettingsRequest < Struct.new(
       :network_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteNetworkSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1171,12 +1228,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DeletePortalRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePortalResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,12 +1244,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DeleteSessionLoggerRequest < Struct.new(
       :session_logger_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSessionLoggerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,12 +1260,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DeleteTrustStoreRequest < Struct.new(
       :trust_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTrustStoreResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1213,12 +1276,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DeleteUserAccessLoggingSettingsRequest < Struct.new(
       :user_access_logging_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUserAccessLoggingSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1227,12 +1292,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DeleteUserSettingsRequest < Struct.new(
       :user_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUserSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1241,12 +1308,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DisassociateBrowserSettingsRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateBrowserSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,12 +1324,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DisassociateDataProtectionSettingsRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateDataProtectionSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1269,12 +1340,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DisassociateIpAccessSettingsRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateIpAccessSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,12 +1356,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DisassociateNetworkSettingsRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateNetworkSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1297,12 +1372,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DisassociateSessionLoggerRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateSessionLoggerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,12 +1388,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DisassociateTrustStoreRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateTrustStoreResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1325,12 +1404,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DisassociateUserAccessLoggingSettingsRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateUserAccessLoggingSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,12 +1420,14 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class DisassociateUserSettingsRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateUserSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1442,8 @@ module Aws::WorkSpacesWeb
       :all,
       :include,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class All < EventFilter; end
@@ -1376,12 +1460,14 @@ module Aws::WorkSpacesWeb
     class ExpireSessionRequest < Struct.new(
       :portal_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ExpireSessionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1476,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetBrowserSettingsRequest < Struct.new(
       :browser_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1486,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::BrowserSettings]
     class GetBrowserSettingsResponse < Struct.new(
       :browser_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1408,7 +1496,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetDataProtectionSettingsRequest < Struct.new(
       :data_protection_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1417,7 +1506,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::DataProtectionSettings]
     class GetDataProtectionSettingsResponse < Struct.new(
       :data_protection_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,7 +1516,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetIdentityProviderRequest < Struct.new(
       :identity_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1526,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::IdentityProvider]
     class GetIdentityProviderResponse < Struct.new(
       :identity_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1444,7 +1536,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetIpAccessSettingsRequest < Struct.new(
       :ip_access_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1453,7 +1546,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::IpAccessSettings]
     class GetIpAccessSettingsResponse < Struct.new(
       :ip_access_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1462,7 +1556,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetNetworkSettingsRequest < Struct.new(
       :network_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1471,7 +1566,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::NetworkSettings]
     class GetNetworkSettingsResponse < Struct.new(
       :network_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1480,7 +1576,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetPortalRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1489,7 +1586,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::Portal]
     class GetPortalResponse < Struct.new(
       :portal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1498,7 +1596,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetPortalServiceProviderMetadataRequest < Struct.new(
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1511,7 +1610,8 @@ module Aws::WorkSpacesWeb
     class GetPortalServiceProviderMetadataResponse < Struct.new(
       :portal_arn,
       :service_provider_saml_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1520,7 +1620,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetSessionLoggerRequest < Struct.new(
       :session_logger_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1529,7 +1630,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::SessionLogger]
     class GetSessionLoggerResponse < Struct.new(
       :session_logger,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1542,7 +1644,8 @@ module Aws::WorkSpacesWeb
     class GetSessionRequest < Struct.new(
       :portal_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1551,7 +1654,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::Session]
     class GetSessionResponse < Struct.new(
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,7 +1668,8 @@ module Aws::WorkSpacesWeb
     class GetTrustStoreCertificateRequest < Struct.new(
       :trust_store_arn,
       :thumbprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1682,8 @@ module Aws::WorkSpacesWeb
     class GetTrustStoreCertificateResponse < Struct.new(
       :trust_store_arn,
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1692,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetTrustStoreRequest < Struct.new(
       :trust_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1595,7 +1702,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::TrustStore]
     class GetTrustStoreResponse < Struct.new(
       :trust_store,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1604,7 +1712,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetUserAccessLoggingSettingsRequest < Struct.new(
       :user_access_logging_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1613,7 +1722,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::UserAccessLoggingSettings]
     class GetUserAccessLoggingSettingsResponse < Struct.new(
       :user_access_logging_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1622,7 +1732,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class GetUserSettingsRequest < Struct.new(
       :user_settings_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1631,7 +1742,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::UserSettings]
     class GetUserSettingsResponse < Struct.new(
       :user_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1820,7 +1932,8 @@ module Aws::WorkSpacesWeb
       :identity_provider_name,
       :identity_provider_type,
       :identity_provider_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1838,7 +1951,8 @@ module Aws::WorkSpacesWeb
       :identity_provider_arn,
       :identity_provider_name,
       :identity_provider_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1981,8 @@ module Aws::WorkSpacesWeb
       :global_enforced_urls,
       :global_exempt_urls,
       :global_confidence_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +2018,8 @@ module Aws::WorkSpacesWeb
       :enforced_urls,
       :exempt_urls,
       :confidence_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1916,7 +2032,8 @@ module Aws::WorkSpacesWeb
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1961,7 +2078,8 @@ module Aws::WorkSpacesWeb
       :creation_date,
       :customer_managed_key,
       :additional_encryption_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2101,8 @@ module Aws::WorkSpacesWeb
       :display_name,
       :description,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1997,7 +2116,8 @@ module Aws::WorkSpacesWeb
     class IpRule < Struct.new(
       :ip_range,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2011,7 +2131,8 @@ module Aws::WorkSpacesWeb
     class ListBrowserSettingsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2025,7 +2146,8 @@ module Aws::WorkSpacesWeb
     class ListBrowserSettingsResponse < Struct.new(
       :browser_settings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2039,7 +2161,8 @@ module Aws::WorkSpacesWeb
     class ListDataProtectionSettingsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2053,7 +2176,8 @@ module Aws::WorkSpacesWeb
     class ListDataProtectionSettingsResponse < Struct.new(
       :data_protection_settings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2071,7 +2195,8 @@ module Aws::WorkSpacesWeb
       :next_token,
       :max_results,
       :portal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2085,7 +2210,8 @@ module Aws::WorkSpacesWeb
     class ListIdentityProvidersResponse < Struct.new(
       :next_token,
       :identity_providers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2225,8 @@ module Aws::WorkSpacesWeb
     class ListIpAccessSettingsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2113,7 +2240,8 @@ module Aws::WorkSpacesWeb
     class ListIpAccessSettingsResponse < Struct.new(
       :ip_access_settings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2127,7 +2255,8 @@ module Aws::WorkSpacesWeb
     class ListNetworkSettingsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2141,7 +2270,8 @@ module Aws::WorkSpacesWeb
     class ListNetworkSettingsResponse < Struct.new(
       :network_settings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2285,8 @@ module Aws::WorkSpacesWeb
     class ListPortalsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2169,7 +2300,8 @@ module Aws::WorkSpacesWeb
     class ListPortalsResponse < Struct.new(
       :portals,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2182,7 +2314,8 @@ module Aws::WorkSpacesWeb
     class ListSessionLoggersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2195,7 +2328,8 @@ module Aws::WorkSpacesWeb
     class ListSessionLoggersResponse < Struct.new(
       :session_loggers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2229,7 +2363,8 @@ module Aws::WorkSpacesWeb
       :status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2243,7 +2378,8 @@ module Aws::WorkSpacesWeb
     class ListSessionsResponse < Struct.new(
       :sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2252,7 +2388,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2261,7 +2398,8 @@ module Aws::WorkSpacesWeb
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2279,7 +2417,8 @@ module Aws::WorkSpacesWeb
       :trust_store_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2297,7 +2436,8 @@ module Aws::WorkSpacesWeb
       :certificate_list,
       :trust_store_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2311,7 +2451,8 @@ module Aws::WorkSpacesWeb
     class ListTrustStoresRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2325,7 +2466,8 @@ module Aws::WorkSpacesWeb
     class ListTrustStoresResponse < Struct.new(
       :trust_stores,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2339,7 +2481,8 @@ module Aws::WorkSpacesWeb
     class ListUserAccessLoggingSettingsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2353,7 +2496,8 @@ module Aws::WorkSpacesWeb
     class ListUserAccessLoggingSettingsResponse < Struct.new(
       :user_access_logging_settings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2367,7 +2511,8 @@ module Aws::WorkSpacesWeb
     class ListUserSettingsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2381,7 +2526,8 @@ module Aws::WorkSpacesWeb
     class ListUserSettingsResponse < Struct.new(
       :user_settings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2391,7 +2537,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::S3LogConfiguration]
     class LogConfiguration < Struct.new(
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2421,7 +2568,8 @@ module Aws::WorkSpacesWeb
       :vpc_id,
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2435,7 +2583,8 @@ module Aws::WorkSpacesWeb
     class NetworkSettingsSummary < Struct.new(
       :network_settings_arn,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2537,7 +2686,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :instance_type,
       :max_concurrent_sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2627,7 +2777,8 @@ module Aws::WorkSpacesWeb
       :ip_access_settings_arn,
       :instance_type,
       :max_concurrent_sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2641,7 +2792,8 @@ module Aws::WorkSpacesWeb
     class RedactionPlaceHolder < Struct.new(
       :redaction_place_holder_type,
       :redaction_place_holder_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2658,7 +2810,8 @@ module Aws::WorkSpacesWeb
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2684,7 +2837,8 @@ module Aws::WorkSpacesWeb
       :bucket_owner,
       :log_file_format,
       :folder_structure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2709,7 +2863,8 @@ module Aws::WorkSpacesWeb
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2743,7 +2898,8 @@ module Aws::WorkSpacesWeb
       :status,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2781,7 +2937,8 @@ module Aws::WorkSpacesWeb
       :associated_portal_arns,
       :display_name,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2803,7 +2960,8 @@ module Aws::WorkSpacesWeb
       :log_configuration,
       :display_name,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2833,7 +2991,8 @@ module Aws::WorkSpacesWeb
       :status,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2848,7 +3007,8 @@ module Aws::WorkSpacesWeb
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2870,12 +3030,14 @@ module Aws::WorkSpacesWeb
       :resource_arn,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2896,7 +3058,8 @@ module Aws::WorkSpacesWeb
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2914,7 +3077,8 @@ module Aws::WorkSpacesWeb
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2936,7 +3100,8 @@ module Aws::WorkSpacesWeb
       :visual_mode,
       :hidden_toolbar_items,
       :max_display_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2954,7 +3119,8 @@ module Aws::WorkSpacesWeb
     class TrustStore < Struct.new(
       :associated_portal_arns,
       :trust_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2964,7 +3130,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class TrustStoreSummary < Struct.new(
       :trust_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2977,12 +3144,14 @@ module Aws::WorkSpacesWeb
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3005,7 +3174,8 @@ module Aws::WorkSpacesWeb
       :browser_settings_arn,
       :browser_policy,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3014,7 +3184,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::BrowserSettings]
     class UpdateBrowserSettingsResponse < Struct.new(
       :browser_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3044,7 +3215,8 @@ module Aws::WorkSpacesWeb
       :display_name,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3053,7 +3225,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::DataProtectionSettings]
     class UpdateDataProtectionSettingsResponse < Struct.new(
       :data_protection_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3250,7 +3423,8 @@ module Aws::WorkSpacesWeb
       :identity_provider_type,
       :identity_provider_details,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3259,7 +3433,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::IdentityProvider]
     class UpdateIdentityProviderResponse < Struct.new(
       :identity_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3289,7 +3464,8 @@ module Aws::WorkSpacesWeb
       :description,
       :ip_rules,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3298,7 +3474,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::IpAccessSettings]
     class UpdateIpAccessSettingsResponse < Struct.new(
       :ip_access_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3330,7 +3507,8 @@ module Aws::WorkSpacesWeb
       :subnet_ids,
       :security_group_ids,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3339,7 +3517,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::NetworkSettings]
     class UpdateNetworkSettingsResponse < Struct.new(
       :network_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3375,7 +3554,8 @@ module Aws::WorkSpacesWeb
       :authentication_type,
       :instance_type,
       :max_concurrent_sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3384,7 +3564,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::Portal]
     class UpdatePortalResponse < Struct.new(
       :portal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3405,7 +3586,8 @@ module Aws::WorkSpacesWeb
       :event_filter,
       :log_configuration,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3414,7 +3596,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::SessionLogger]
     class UpdateSessionLoggerResponse < Struct.new(
       :session_logger,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3440,7 +3623,8 @@ module Aws::WorkSpacesWeb
       :certificates_to_add,
       :certificates_to_delete,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3449,7 +3633,8 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     class UpdateTrustStoreResponse < Struct.new(
       :trust_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3471,7 +3656,8 @@ module Aws::WorkSpacesWeb
       :user_access_logging_settings_arn,
       :kinesis_stream_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3480,7 +3666,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::UserAccessLoggingSettings]
     class UpdateUserAccessLoggingSettingsResponse < Struct.new(
       :user_access_logging_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3547,7 +3734,8 @@ module Aws::WorkSpacesWeb
       :cookie_synchronization_configuration,
       :deep_link_allowed,
       :toolbar_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3556,7 +3744,8 @@ module Aws::WorkSpacesWeb
     #   @return [Types::UserSettings]
     class UpdateUserSettingsResponse < Struct.new(
       :user_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3575,7 +3764,8 @@ module Aws::WorkSpacesWeb
       :user_access_logging_settings_arn,
       :associated_portal_arns,
       :kinesis_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3589,7 +3779,8 @@ module Aws::WorkSpacesWeb
     class UserAccessLoggingSettingsSummary < Struct.new(
       :user_access_logging_settings_arn,
       :kinesis_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3662,7 +3853,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :deep_link_allowed,
       :toolbar_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3726,7 +3918,8 @@ module Aws::WorkSpacesWeb
       :cookie_synchronization_configuration,
       :deep_link_allowed,
       :toolbar_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3749,7 +3942,8 @@ module Aws::WorkSpacesWeb
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3763,7 +3957,8 @@ module Aws::WorkSpacesWeb
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

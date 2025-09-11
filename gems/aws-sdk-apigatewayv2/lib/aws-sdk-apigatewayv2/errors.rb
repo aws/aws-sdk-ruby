@@ -38,7 +38,7 @@ module Aws::ApiGatewayV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApiGatewayV2::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -51,7 +51,7 @@ module Aws::ApiGatewayV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApiGatewayV2::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Describes the error encountered.</p>
@@ -65,7 +65,7 @@ module Aws::ApiGatewayV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApiGatewayV2::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Describes the error encountered.</p>
@@ -79,7 +79,7 @@ module Aws::ApiGatewayV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApiGatewayV2::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Describes the error encountered.</p>
@@ -98,7 +98,7 @@ module Aws::ApiGatewayV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApiGatewayV2::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The limit type.</p>

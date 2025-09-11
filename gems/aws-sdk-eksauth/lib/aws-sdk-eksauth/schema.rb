@@ -87,7 +87,6 @@ module Aws::EKSAuth
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/clusters/{clusterName}/assume-role-for-pod-identity"}}
       end)
-
     end
 
     class << self

@@ -4809,7 +4809,6 @@ module Aws::MediaConvert
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/2017-08-29/queues/{Name}", "code" => 200}}
       end)
-
     end
 
     class << self

@@ -671,7 +671,6 @@ module Aws::EMRServerless
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/applications/{applicationId}"}}
       end)
-
     end
 
     class << self

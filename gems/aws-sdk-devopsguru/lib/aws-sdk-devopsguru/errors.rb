@@ -43,7 +43,7 @@ module Aws::DevOpsGuru
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DevOpsGuru::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::DevOpsGuru
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DevOpsGuru::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::DevOpsGuru
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DevOpsGuru::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::DevOpsGuru
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DevOpsGuru::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::DevOpsGuru
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DevOpsGuru::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -134,7 +134,7 @@ module Aws::DevOpsGuru
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DevOpsGuru::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -164,7 +164,7 @@ module Aws::DevOpsGuru
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DevOpsGuru::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> A message that describes the validation exception. </p>

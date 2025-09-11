@@ -42,7 +42,8 @@ module Aws::MediaStore
       :name,
       :status,
       :access_logging_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,7 +53,8 @@ module Aws::MediaStore
     #   @return [String]
     class ContainerInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +63,8 @@ module Aws::MediaStore
     #   @return [String]
     class ContainerNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -70,7 +73,8 @@ module Aws::MediaStore
     #   @return [String]
     class CorsPolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +118,8 @@ module Aws::MediaStore
       :allowed_headers,
       :max_age_seconds,
       :expose_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -137,7 +142,8 @@ module Aws::MediaStore
     class CreateContainerInput < Struct.new(
       :container_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +163,8 @@ module Aws::MediaStore
     #   @return [Types::Container]
     class CreateContainerOutput < Struct.new(
       :container,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -166,12 +173,14 @@ module Aws::MediaStore
     #   @return [String]
     class DeleteContainerInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,12 +189,14 @@ module Aws::MediaStore
     #   @return [String]
     class DeleteContainerPolicyInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,12 +205,14 @@ module Aws::MediaStore
     #   @return [String]
     class DeleteCorsPolicyInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCorsPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,12 +221,14 @@ module Aws::MediaStore
     #   @return [String]
     class DeleteLifecyclePolicyInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLifecyclePolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -222,12 +237,14 @@ module Aws::MediaStore
     #   @return [String]
     class DeleteMetricPolicyInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMetricPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +253,8 @@ module Aws::MediaStore
     #   @return [String]
     class DescribeContainerInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +263,8 @@ module Aws::MediaStore
     #   @return [Types::Container]
     class DescribeContainerOutput < Struct.new(
       :container,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +273,8 @@ module Aws::MediaStore
     #   @return [String]
     class GetContainerPolicyInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +283,8 @@ module Aws::MediaStore
     #   @return [String]
     class GetContainerPolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +293,8 @@ module Aws::MediaStore
     #   @return [String]
     class GetCorsPolicyInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -281,7 +303,8 @@ module Aws::MediaStore
     #   @return [Array<Types::CorsRule>]
     class GetCorsPolicyOutput < Struct.new(
       :cors_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -290,7 +313,8 @@ module Aws::MediaStore
     #   @return [String]
     class GetLifecyclePolicyInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +323,8 @@ module Aws::MediaStore
     #   @return [String]
     class GetLifecyclePolicyOutput < Struct.new(
       :lifecycle_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +333,8 @@ module Aws::MediaStore
     #   @return [String]
     class GetMetricPolicyInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +343,8 @@ module Aws::MediaStore
     #   @return [Types::MetricPolicy]
     class GetMetricPolicyOutput < Struct.new(
       :metric_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +353,8 @@ module Aws::MediaStore
     #   @return [String]
     class InternalServerError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +363,8 @@ module Aws::MediaStore
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +380,8 @@ module Aws::MediaStore
     class ListContainersInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,7 +397,8 @@ module Aws::MediaStore
     class ListContainersOutput < Struct.new(
       :containers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +407,8 @@ module Aws::MediaStore
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +417,8 @@ module Aws::MediaStore
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -400,7 +433,8 @@ module Aws::MediaStore
     class MetricPolicy < Struct.new(
       :container_level_metrics,
       :metric_policy_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +448,8 @@ module Aws::MediaStore
     class MetricPolicyRule < Struct.new(
       :object_group,
       :object_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +458,8 @@ module Aws::MediaStore
     #   @return [String]
     class PolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -445,12 +481,14 @@ module Aws::MediaStore
     class PutContainerPolicyInput < Struct.new(
       :container_name,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutContainerPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -463,12 +501,14 @@ module Aws::MediaStore
     class PutCorsPolicyInput < Struct.new(
       :container_name,
       :cors_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutCorsPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -481,12 +521,14 @@ module Aws::MediaStore
     class PutLifecyclePolicyInput < Struct.new(
       :container_name,
       :lifecycle_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutLifecyclePolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -507,12 +549,14 @@ module Aws::MediaStore
     class PutMetricPolicyInput < Struct.new(
       :container_name,
       :metric_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutMetricPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,12 +565,14 @@ module Aws::MediaStore
     #   @return [String]
     class StartAccessLoggingInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartAccessLoggingOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,12 +581,14 @@ module Aws::MediaStore
     #   @return [String]
     class StopAccessLoggingInput < Struct.new(
       :container_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopAccessLoggingOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -559,7 +607,8 @@ module Aws::MediaStore
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,12 +624,14 @@ module Aws::MediaStore
     class TagResourceInput < Struct.new(
       :resource,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,12 +646,14 @@ module Aws::MediaStore
     class UntagResourceInput < Struct.new(
       :resource,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -42,7 +42,7 @@ module Aws::SecurityLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityLake::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::SecurityLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityLake::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::SecurityLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityLake::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::SecurityLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityLake::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -117,7 +117,7 @@ module Aws::SecurityLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityLake::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::SecurityLake
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityLake::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

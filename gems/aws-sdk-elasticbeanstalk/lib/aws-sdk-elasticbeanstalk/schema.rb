@@ -1614,7 +1614,6 @@ module Aws::ElasticBeanstalk
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyBucketsException)
         operation.traits = {}
       end)
-
     end
 
     class << self

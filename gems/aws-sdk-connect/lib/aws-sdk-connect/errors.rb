@@ -59,7 +59,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -72,7 +72,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ConditionalOperationFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ContactFlowNotPublishedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ContactNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message.</p>
@@ -127,7 +127,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::DestinationNotAllowedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message about the outbound calls.</p>
@@ -141,7 +141,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::DuplicateResourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -154,7 +154,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::IdempotencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message.</p>
@@ -181,7 +181,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::InvalidContactFlowException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The problems with the flow. Please fix before trying again.</p>
@@ -195,7 +195,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::InvalidContactFlowModuleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def problems
@@ -208,7 +208,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message about the parameters.</p>
@@ -222,7 +222,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message about the request.</p>
@@ -240,7 +240,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message about the limit.</p>
@@ -255,7 +255,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::MaximumResultReturnedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -268,7 +268,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::OutboundContactNotPermittedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message about the contact.</p>
@@ -284,7 +284,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::OutputTypeNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -297,7 +297,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::PropertyValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -314,7 +314,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ResourceConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -330,7 +330,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -353,7 +353,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message about the resource.</p>
@@ -367,7 +367,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ResourceNotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -380,7 +380,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -397,7 +397,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -410,7 +410,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -423,7 +423,7 @@ module Aws::Connect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::UserNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

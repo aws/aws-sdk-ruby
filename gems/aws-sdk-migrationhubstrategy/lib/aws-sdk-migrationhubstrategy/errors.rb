@@ -43,7 +43,7 @@ module Aws::MigrationHubStrategy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubStrategy::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::MigrationHubStrategy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubStrategy::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::MigrationHubStrategy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubStrategy::Types::DependencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::MigrationHubStrategy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubStrategy::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::MigrationHubStrategy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubStrategy::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::MigrationHubStrategy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubStrategy::Types::ServiceLinkedRoleLockClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::MigrationHubStrategy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubStrategy::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -136,7 +136,7 @@ module Aws::MigrationHubStrategy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubStrategy::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::MigrationHubStrategy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MigrationHubStrategy::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

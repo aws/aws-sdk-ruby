@@ -60,7 +60,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ClusterQuotaForCustomerExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::InsufficientClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::InvalidARNFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::InvalidClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -141,7 +141,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::InvalidParameterCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -154,7 +154,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::InvalidParameterGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -180,7 +180,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::InvalidSubnet] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -193,7 +193,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::InvalidVPCNetworkStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -206,7 +206,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::NodeNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -220,7 +220,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::NodeQuotaForClusterExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -234,7 +234,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::NodeQuotaForCustomerExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -247,7 +247,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ParameterGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -260,7 +260,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -273,7 +273,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ParameterGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -286,7 +286,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ServiceLinkedRoleNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -301,7 +301,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -310,7 +310,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::SubnetGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -323,7 +323,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::SubnetGroupInUseFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -337,7 +337,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::SubnetGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -351,7 +351,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::SubnetGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -364,7 +364,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::SubnetInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -378,7 +378,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::SubnetQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -391,7 +391,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::TagNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -404,7 +404,7 @@ module Aws::DAX
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::TagQuotaPerResourceExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

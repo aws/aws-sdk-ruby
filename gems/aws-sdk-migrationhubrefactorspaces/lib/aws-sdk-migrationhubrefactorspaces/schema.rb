@@ -895,7 +895,6 @@ module Aws::MigrationHubRefactorSpaces
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}/routes/{RouteIdentifier}", "code" => 200}}
       end)
-
     end
 
     class << self

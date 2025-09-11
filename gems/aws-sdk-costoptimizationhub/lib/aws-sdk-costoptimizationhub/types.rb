@@ -11,7 +11,8 @@ module Aws::CostOptimizationHub
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33,7 +34,8 @@ module Aws::CostOptimizationHub
       :status,
       :last_updated_timestamp,
       :created_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +49,8 @@ module Aws::CostOptimizationHub
     class AuroraDbClusterStorage < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +60,8 @@ module Aws::CostOptimizationHub
     #   @return [String]
     class AuroraDbClusterStorageConfiguration < Struct.new(
       :storage_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +75,8 @@ module Aws::CostOptimizationHub
     class BlockStoragePerformanceConfiguration < Struct.new(
       :iops,
       :throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +98,8 @@ module Aws::CostOptimizationHub
       :memory_size_in_mb,
       :architecture,
       :platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +113,8 @@ module Aws::CostOptimizationHub
     class ComputeSavingsPlans < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,7 +136,8 @@ module Aws::CostOptimizationHub
       :term,
       :payment_option,
       :hourly_commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,7 +147,8 @@ module Aws::CostOptimizationHub
     #   @return [String]
     class DbInstanceConfiguration < Struct.new(
       :db_instance_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -153,7 +162,8 @@ module Aws::CostOptimizationHub
     class DynamoDbReservedCapacity < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -195,7 +205,8 @@ module Aws::CostOptimizationHub
       :monthly_recurring_cost,
       :number_of_capacity_units_to_purchase,
       :capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +220,8 @@ module Aws::CostOptimizationHub
     class EbsVolume < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +239,8 @@ module Aws::CostOptimizationHub
       :storage,
       :performance,
       :attachment_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +254,8 @@ module Aws::CostOptimizationHub
     class Ec2AutoScalingGroup < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +277,8 @@ module Aws::CostOptimizationHub
       :mixed_instances,
       :type,
       :allocation_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,7 +292,8 @@ module Aws::CostOptimizationHub
     class Ec2Instance < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +303,8 @@ module Aws::CostOptimizationHub
     #   @return [Types::InstanceConfiguration]
     class Ec2InstanceConfiguration < Struct.new(
       :instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +318,8 @@ module Aws::CostOptimizationHub
     class Ec2InstanceSavingsPlans < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -331,7 +349,8 @@ module Aws::CostOptimizationHub
       :hourly_commitment,
       :instance_family,
       :savings_plans_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +364,8 @@ module Aws::CostOptimizationHub
     class Ec2ReservedInstances < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +435,8 @@ module Aws::CostOptimizationHub
       :platform,
       :tenancy,
       :size_flex_eligible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -429,7 +450,8 @@ module Aws::CostOptimizationHub
     class EcsService < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +461,8 @@ module Aws::CostOptimizationHub
     #   @return [Types::ComputeConfiguration]
     class EcsServiceConfiguration < Struct.new(
       :compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +476,8 @@ module Aws::CostOptimizationHub
     class ElastiCacheReservedInstances < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -511,7 +535,8 @@ module Aws::CostOptimizationHub
       :instance_type,
       :current_generation,
       :size_flex_eligible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +554,8 @@ module Aws::CostOptimizationHub
       :savings_plans_discount,
       :reserved_instances_discount,
       :other_discount,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,12 +605,14 @@ module Aws::CostOptimizationHub
       :resource_ids,
       :resource_arns,
       :recommendation_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetPreferencesRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +629,8 @@ module Aws::CostOptimizationHub
       :savings_estimation_mode,
       :member_account_discount_visibility,
       :preferred_commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +639,8 @@ module Aws::CostOptimizationHub
     #   @return [String]
     class GetRecommendationRequest < Struct.new(
       :recommendation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -707,7 +737,8 @@ module Aws::CostOptimizationHub
       :current_resource_details,
       :recommended_resource_details,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +748,8 @@ module Aws::CostOptimizationHub
     #   @return [String]
     class InstanceConfiguration < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +758,8 @@ module Aws::CostOptimizationHub
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +773,8 @@ module Aws::CostOptimizationHub
     class LambdaFunction < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -750,7 +784,8 @@ module Aws::CostOptimizationHub
     #   @return [Types::ComputeConfiguration]
     class LambdaFunctionConfiguration < Struct.new(
       :compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +806,8 @@ module Aws::CostOptimizationHub
       :account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,7 +824,8 @@ module Aws::CostOptimizationHub
       :items,
       :include_member_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +850,8 @@ module Aws::CostOptimizationHub
       :max_results,
       :metrics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +880,8 @@ module Aws::CostOptimizationHub
       :currency_code,
       :metrics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -867,7 +906,8 @@ module Aws::CostOptimizationHub
       :include_all_recommendations,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -880,7 +920,8 @@ module Aws::CostOptimizationHub
     class ListRecommendationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +935,8 @@ module Aws::CostOptimizationHub
     class MemoryDbReservedInstances < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +994,8 @@ module Aws::CostOptimizationHub
       :instance_family,
       :size_flex_eligible,
       :current_generation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1005,8 @@ module Aws::CostOptimizationHub
     #   @return [String]
     class MixedInstanceConfiguration < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -976,7 +1020,8 @@ module Aws::CostOptimizationHub
     class OpenSearchReservedInstances < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1075,8 @@ module Aws::CostOptimizationHub
       :instance_type,
       :current_generation,
       :size_flex_eligible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1044,7 +1090,8 @@ module Aws::CostOptimizationHub
     class OrderBy < Struct.new(
       :dimension,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1058,7 +1105,8 @@ module Aws::CostOptimizationHub
     class PreferredCommitment < Struct.new(
       :term,
       :payment_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1120,8 @@ module Aws::CostOptimizationHub
     class RdsDbInstance < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1131,8 @@ module Aws::CostOptimizationHub
     #   @return [Types::DbInstanceConfiguration]
     class RdsDbInstanceConfiguration < Struct.new(
       :instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1146,8 @@ module Aws::CostOptimizationHub
     class RdsDbInstanceStorage < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1118,7 +1169,8 @@ module Aws::CostOptimizationHub
       :allocated_storage_in_gb,
       :iops,
       :storage_throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1132,7 +1184,8 @@ module Aws::CostOptimizationHub
     class RdsReservedInstances < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1206,7 +1259,8 @@ module Aws::CostOptimizationHub
       :database_edition,
       :database_engine,
       :deployment_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1296,7 +1350,8 @@ module Aws::CostOptimizationHub
       :recommendation_lookback_period_in_days,
       :source,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1369,8 @@ module Aws::CostOptimizationHub
       :group,
       :estimated_monthly_savings,
       :recommendation_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1328,7 +1384,8 @@ module Aws::CostOptimizationHub
     class RedshiftReservedInstances < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1386,7 +1443,8 @@ module Aws::CostOptimizationHub
       :instance_type,
       :size_flex_eligible,
       :current_generation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1396,7 +1454,8 @@ module Aws::CostOptimizationHub
     #   @return [Types::ReservedInstancesPricing]
     class ReservedInstancesCostCalculation < Struct.new(
       :pricing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1418,7 +1477,8 @@ module Aws::CostOptimizationHub
       :monthly_reservation_eligible_cost,
       :savings_percentage,
       :estimated_monthly_amortized_reservation_cost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1492,8 @@ module Aws::CostOptimizationHub
     class ResourceCostCalculation < Struct.new(
       :usages,
       :pricing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1511,7 +1572,8 @@ module Aws::CostOptimizationHub
       :dynamo_db_reserved_capacity,
       :memory_db_reserved_instances,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class LambdaFunction < ResourceDetails; end
@@ -1544,7 +1606,8 @@ module Aws::CostOptimizationHub
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1629,8 @@ module Aws::CostOptimizationHub
       :estimated_net_unused_amortized_commitments,
       :estimated_discounts,
       :estimated_cost_after_discounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1580,7 +1644,8 @@ module Aws::CostOptimizationHub
     class SageMakerSavingsPlans < Struct.new(
       :configuration,
       :cost_calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1602,7 +1667,8 @@ module Aws::CostOptimizationHub
       :term,
       :payment_option,
       :hourly_commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1612,7 +1678,8 @@ module Aws::CostOptimizationHub
     #   @return [Types::SavingsPlansPricing]
     class SavingsPlansCostCalculation < Struct.new(
       :pricing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1634,7 +1701,8 @@ module Aws::CostOptimizationHub
       :estimated_monthly_commitment,
       :savings_percentage,
       :estimated_on_demand_cost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1716,8 @@ module Aws::CostOptimizationHub
     class StorageConfiguration < Struct.new(
       :type,
       :size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1658,7 +1727,8 @@ module Aws::CostOptimizationHub
     #   @return [String]
     class SummaryMetricsResult < Struct.new(
       :savings_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1672,7 +1742,8 @@ module Aws::CostOptimizationHub
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1681,7 +1752,8 @@ module Aws::CostOptimizationHub
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1766,8 @@ module Aws::CostOptimizationHub
     class UpdateEnrollmentStatusRequest < Struct.new(
       :status,
       :include_member_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1703,7 +1776,8 @@ module Aws::CostOptimizationHub
     #   @return [String]
     class UpdateEnrollmentStatusResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1720,7 +1794,8 @@ module Aws::CostOptimizationHub
       :savings_estimation_mode,
       :member_account_discount_visibility,
       :preferred_commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1737,7 +1812,8 @@ module Aws::CostOptimizationHub
       :savings_estimation_mode,
       :member_account_discount_visibility,
       :preferred_commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1763,7 +1839,8 @@ module Aws::CostOptimizationHub
       :operation,
       :product_code,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1780,7 +1857,8 @@ module Aws::CostOptimizationHub
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1794,7 +1872,8 @@ module Aws::CostOptimizationHub
     class ValidationExceptionDetail < Struct.new(
       :field_name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

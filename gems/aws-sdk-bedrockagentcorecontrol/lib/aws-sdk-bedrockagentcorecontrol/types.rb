@@ -11,7 +11,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +46,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :last_updated_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +58,8 @@ module Aws::BedrockAgentCoreControl
     class AgentArtifact < Struct.new(
       :container_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ContainerConfiguration < AgentArtifact; end
@@ -105,7 +108,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +131,8 @@ module Aws::BedrockAgentCoreControl
       :credential_provider_arn,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +147,8 @@ module Aws::BedrockAgentCoreControl
       :s3,
       :inline_payload,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < ApiSchemaConfiguration; end
@@ -157,7 +163,8 @@ module Aws::BedrockAgentCoreControl
     class AuthorizerConfiguration < Struct.new(
       :custom_jwt_authorizer,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomJWTAuthorizer < AuthorizerConfiguration; end
@@ -170,7 +177,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class BrowserNetworkConfiguration < Struct.new(
       :network_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -209,7 +217,8 @@ module Aws::BedrockAgentCoreControl
       :status,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +228,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class CodeInterpreterNetworkConfiguration < Struct.new(
       :network_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -258,7 +268,8 @@ module Aws::BedrockAgentCoreControl
       :status,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +278,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +288,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +300,8 @@ module Aws::BedrockAgentCoreControl
     class ConsolidationConfiguration < Struct.new(
       :custom_consolidation_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomConsolidationConfiguration < ConsolidationConfiguration; end
@@ -300,7 +314,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class ContainerConfiguration < Struct.new(
       :container_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +340,8 @@ module Aws::BedrockAgentCoreControl
       :agent_runtime_version,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +366,8 @@ module Aws::BedrockAgentCoreControl
       :agent_runtime_arn,
       :status,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -391,7 +408,8 @@ module Aws::BedrockAgentCoreControl
       :client_token,
       :environment_variables,
       :authorizer_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +438,8 @@ module Aws::BedrockAgentCoreControl
       :agent_runtime_version,
       :created_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -433,7 +452,8 @@ module Aws::BedrockAgentCoreControl
     class CreateApiKeyCredentialProviderRequest < Struct.new(
       :name,
       :api_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -450,7 +470,8 @@ module Aws::BedrockAgentCoreControl
       :api_key_secret_arn,
       :name,
       :credential_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +500,8 @@ module Aws::BedrockAgentCoreControl
       :network_configuration,
       :recording,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +522,8 @@ module Aws::BedrockAgentCoreControl
       :browser_arn,
       :created_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +548,8 @@ module Aws::BedrockAgentCoreControl
       :execution_role_arn,
       :network_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +570,8 @@ module Aws::BedrockAgentCoreControl
       :code_interpreter_arn,
       :created_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -591,7 +616,8 @@ module Aws::BedrockAgentCoreControl
       :authorizer_configuration,
       :kms_key_arn,
       :exception_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +690,8 @@ module Aws::BedrockAgentCoreControl
       :kms_key_arn,
       :workload_identity_details,
       :exception_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -693,7 +720,8 @@ module Aws::BedrockAgentCoreControl
       :client_token,
       :target_configuration,
       :credential_provider_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +766,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :target_configuration,
       :credential_provider_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +800,8 @@ module Aws::BedrockAgentCoreControl
       :memory_execution_role_arn,
       :event_expiry_duration,
       :memory_strategies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +810,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::Memory]
     class CreateMemoryOutput < Struct.new(
       :memory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,7 +828,8 @@ module Aws::BedrockAgentCoreControl
       :name,
       :credential_provider_vendor,
       :oauth2_provider_config_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +846,8 @@ module Aws::BedrockAgentCoreControl
       :client_secret_arn,
       :name,
       :credential_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -827,7 +860,8 @@ module Aws::BedrockAgentCoreControl
     class CreateWorkloadIdentityRequest < Struct.new(
       :name,
       :allowed_resource_oauth2_return_urls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +878,8 @@ module Aws::BedrockAgentCoreControl
       :name,
       :workload_identity_arn,
       :allowed_resource_oauth2_return_urls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +894,8 @@ module Aws::BedrockAgentCoreControl
       :oauth_credential_provider,
       :api_key_credential_provider,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OauthCredentialProvider < CredentialProvider; end
@@ -877,7 +913,8 @@ module Aws::BedrockAgentCoreControl
     class CredentialProviderConfiguration < Struct.new(
       :credential_provider_type,
       :credential_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -896,7 +933,8 @@ module Aws::BedrockAgentCoreControl
       :summary_override,
       :user_preference_override,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SemanticOverride < CustomConfigurationInput; end
@@ -920,7 +958,8 @@ module Aws::BedrockAgentCoreControl
       :summary_consolidation_override,
       :user_preference_consolidation_override,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SemanticConsolidationOverride < CustomConsolidationConfiguration; end
@@ -944,7 +983,8 @@ module Aws::BedrockAgentCoreControl
       :summary_consolidation_override,
       :user_preference_consolidation_override,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SemanticConsolidationOverride < CustomConsolidationConfigurationInput; end
@@ -964,7 +1004,8 @@ module Aws::BedrockAgentCoreControl
       :semantic_extraction_override,
       :user_preference_extraction_override,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SemanticExtractionOverride < CustomExtractionConfiguration; end
@@ -983,7 +1024,8 @@ module Aws::BedrockAgentCoreControl
       :semantic_extraction_override,
       :user_preference_extraction_override,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SemanticExtractionOverride < CustomExtractionConfigurationInput; end
@@ -1005,7 +1047,8 @@ module Aws::BedrockAgentCoreControl
       :discovery_url,
       :allowed_audience,
       :allowed_clients,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1027,7 +1070,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :namespaces,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1045,7 +1089,8 @@ module Aws::BedrockAgentCoreControl
       :oauth_discovery,
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1055,7 +1100,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::Oauth2Discovery]
     class CustomOauth2ProviderConfigOutput < Struct.new(
       :oauth_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1110,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class DecryptionFailure < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1128,8 @@ module Aws::BedrockAgentCoreControl
       :agent_runtime_id,
       :endpoint_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1138,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class DeleteAgentRuntimeEndpointResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1099,7 +1148,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class DeleteAgentRuntimeRequest < Struct.new(
       :agent_runtime_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1158,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class DeleteAgentRuntimeResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1117,12 +1168,14 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class DeleteApiKeyCredentialProviderRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApiKeyCredentialProviderResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1135,7 +1188,8 @@ module Aws::BedrockAgentCoreControl
     class DeleteBrowserRequest < Struct.new(
       :browser_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1206,8 @@ module Aws::BedrockAgentCoreControl
       :browser_id,
       :status,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1220,8 @@ module Aws::BedrockAgentCoreControl
     class DeleteCodeInterpreterRequest < Struct.new(
       :code_interpreter_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1182,7 +1238,8 @@ module Aws::BedrockAgentCoreControl
       :code_interpreter_id,
       :status,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,7 +1248,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class DeleteGatewayRequest < Struct.new(
       :gateway_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1208,7 +1266,8 @@ module Aws::BedrockAgentCoreControl
       :gateway_id,
       :status,
       :status_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1221,7 +1280,8 @@ module Aws::BedrockAgentCoreControl
     class DeleteGatewayTargetRequest < Struct.new(
       :gateway_identifier,
       :target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1302,8 @@ module Aws::BedrockAgentCoreControl
       :target_id,
       :status,
       :status_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1316,8 @@ module Aws::BedrockAgentCoreControl
     class DeleteMemoryInput < Struct.new(
       :client_token,
       :memory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1268,7 +1330,8 @@ module Aws::BedrockAgentCoreControl
     class DeleteMemoryOutput < Struct.new(
       :memory_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1278,7 +1341,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class DeleteMemoryStrategyInput < Struct.new(
       :memory_strategy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1287,12 +1351,14 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class DeleteOauth2CredentialProviderRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteOauth2CredentialProviderResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,12 +1367,14 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class DeleteWorkloadIdentityRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkloadIdentityResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1315,7 +1383,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class EncryptionFailure < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1326,7 +1395,8 @@ module Aws::BedrockAgentCoreControl
     class ExtractionConfiguration < Struct.new(
       :custom_extraction_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomExtractionConfiguration < ExtractionConfiguration; end
@@ -1351,7 +1421,8 @@ module Aws::BedrockAgentCoreControl
       :credential_parameter_name,
       :credential_prefix,
       :credential_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1433,8 @@ module Aws::BedrockAgentCoreControl
     class GatewayProtocolConfiguration < Struct.new(
       :mcp,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Mcp < GatewayProtocolConfiguration; end
@@ -1403,7 +1475,8 @@ module Aws::BedrockAgentCoreControl
       :updated_at,
       :authorizer_type,
       :protocol_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1416,7 +1489,8 @@ module Aws::BedrockAgentCoreControl
     class GetAgentRuntimeEndpointRequest < Struct.new(
       :agent_runtime_id,
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1539,8 @@ module Aws::BedrockAgentCoreControl
       :failure_reason,
       :name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1553,8 @@ module Aws::BedrockAgentCoreControl
     class GetAgentRuntimeRequest < Struct.new(
       :agent_runtime_id,
       :agent_runtime_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1619,8 @@ module Aws::BedrockAgentCoreControl
       :environment_variables,
       :authorizer_configuration,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1552,7 +1629,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class GetApiKeyCredentialProviderRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1655,8 @@ module Aws::BedrockAgentCoreControl
       :credential_provider_arn,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1665,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class GetBrowserRequest < Struct.new(
       :browser_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1631,7 +1711,8 @@ module Aws::BedrockAgentCoreControl
       :status,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1640,7 +1721,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class GetCodeInterpreterRequest < Struct.new(
       :code_interpreter_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1681,7 +1763,8 @@ module Aws::BedrockAgentCoreControl
       :status,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1690,7 +1773,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class GetGatewayRequest < Struct.new(
       :gateway_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1763,7 +1847,8 @@ module Aws::BedrockAgentCoreControl
       :kms_key_arn,
       :workload_identity_details,
       :exception_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1776,7 +1861,8 @@ module Aws::BedrockAgentCoreControl
     class GetGatewayTargetRequest < Struct.new(
       :gateway_identifier,
       :target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1821,7 +1907,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :target_configuration,
       :credential_provider_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1830,7 +1917,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class GetMemoryInput < Struct.new(
       :memory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,7 +1927,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::Memory]
     class GetMemoryOutput < Struct.new(
       :memory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1848,7 +1937,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class GetOauth2CredentialProviderRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1881,7 +1971,8 @@ module Aws::BedrockAgentCoreControl
       :oauth2_provider_config_output,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1890,7 +1981,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class GetTokenVaultRequest < Struct.new(
       :token_vault_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1907,7 +1999,8 @@ module Aws::BedrockAgentCoreControl
       :token_vault_id,
       :kms_configuration,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1916,7 +2009,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class GetWorkloadIdentityRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1941,7 +2035,8 @@ module Aws::BedrockAgentCoreControl
       :allowed_resource_oauth2_return_urls,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2050,8 @@ module Aws::BedrockAgentCoreControl
     class GithubOauth2ProviderConfigInput < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1965,7 +2061,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::Oauth2Discovery]
     class GithubOauth2ProviderConfigOutput < Struct.new(
       :oauth_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1979,7 +2076,8 @@ module Aws::BedrockAgentCoreControl
     class GoogleOauth2ProviderConfigInput < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2087,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::Oauth2Discovery]
     class GoogleOauth2ProviderConfigOutput < Struct.new(
       :oauth_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1998,7 +2097,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2012,7 +2112,8 @@ module Aws::BedrockAgentCoreControl
     class KmsConfiguration < Struct.new(
       :key_type,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2029,7 +2130,8 @@ module Aws::BedrockAgentCoreControl
       :agent_runtime_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2042,7 +2144,8 @@ module Aws::BedrockAgentCoreControl
     class ListAgentRuntimeEndpointsResponse < Struct.new(
       :runtime_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2162,8 @@ module Aws::BedrockAgentCoreControl
       :agent_runtime_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2072,7 +2176,8 @@ module Aws::BedrockAgentCoreControl
     class ListAgentRuntimeVersionsResponse < Struct.new(
       :agent_runtimes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2085,7 +2190,8 @@ module Aws::BedrockAgentCoreControl
     class ListAgentRuntimesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2098,7 +2204,8 @@ module Aws::BedrockAgentCoreControl
     class ListAgentRuntimesResponse < Struct.new(
       :agent_runtimes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2111,7 +2218,8 @@ module Aws::BedrockAgentCoreControl
     class ListApiKeyCredentialProvidersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2124,7 +2232,8 @@ module Aws::BedrockAgentCoreControl
     class ListApiKeyCredentialProvidersResponse < Struct.new(
       :credential_providers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2141,7 +2250,8 @@ module Aws::BedrockAgentCoreControl
       :max_results,
       :next_token,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2154,7 +2264,8 @@ module Aws::BedrockAgentCoreControl
     class ListBrowsersResponse < Struct.new(
       :browser_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2171,7 +2282,8 @@ module Aws::BedrockAgentCoreControl
       :max_results,
       :next_token,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2184,7 +2296,8 @@ module Aws::BedrockAgentCoreControl
     class ListCodeInterpretersResponse < Struct.new(
       :code_interpreter_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2201,7 +2314,8 @@ module Aws::BedrockAgentCoreControl
       :gateway_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2214,7 +2328,8 @@ module Aws::BedrockAgentCoreControl
     class ListGatewayTargetsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2227,7 +2342,8 @@ module Aws::BedrockAgentCoreControl
     class ListGatewaysRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2240,7 +2356,8 @@ module Aws::BedrockAgentCoreControl
     class ListGatewaysResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2253,7 +2370,8 @@ module Aws::BedrockAgentCoreControl
     class ListMemoriesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2266,7 +2384,8 @@ module Aws::BedrockAgentCoreControl
     class ListMemoriesOutput < Struct.new(
       :memories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2279,7 +2398,8 @@ module Aws::BedrockAgentCoreControl
     class ListOauth2CredentialProvidersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2292,7 +2412,8 @@ module Aws::BedrockAgentCoreControl
     class ListOauth2CredentialProvidersResponse < Struct.new(
       :credential_providers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2305,7 +2426,8 @@ module Aws::BedrockAgentCoreControl
     class ListWorkloadIdentitiesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2318,7 +2440,8 @@ module Aws::BedrockAgentCoreControl
     class ListWorkloadIdentitiesResponse < Struct.new(
       :workload_identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2336,7 +2459,8 @@ module Aws::BedrockAgentCoreControl
       :supported_versions,
       :instructions,
       :search_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,7 +2474,8 @@ module Aws::BedrockAgentCoreControl
     class McpLambdaTargetConfiguration < Struct.new(
       :lambda_arn,
       :tool_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2369,7 +2494,8 @@ module Aws::BedrockAgentCoreControl
       :smithy_model,
       :lambda,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OpenApiSchema < McpTargetConfiguration; end
@@ -2428,7 +2554,8 @@ module Aws::BedrockAgentCoreControl
       :created_at,
       :updated_at,
       :strategies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2470,7 +2597,8 @@ module Aws::BedrockAgentCoreControl
       :created_at,
       :updated_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2493,7 +2621,8 @@ module Aws::BedrockAgentCoreControl
       :user_preference_memory_strategy,
       :custom_memory_strategy,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SemanticMemoryStrategy < MemoryStrategyInput; end
@@ -2525,7 +2654,8 @@ module Aws::BedrockAgentCoreControl
       :status,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2539,7 +2669,8 @@ module Aws::BedrockAgentCoreControl
     class MicrosoftOauth2ProviderConfigInput < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2549,7 +2680,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::Oauth2Discovery]
     class MicrosoftOauth2ProviderConfigOutput < Struct.new(
       :oauth_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2560,7 +2692,8 @@ module Aws::BedrockAgentCoreControl
     class ModifyConsolidationConfiguration < Struct.new(
       :custom_consolidation_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomConsolidationConfiguration < ModifyConsolidationConfiguration; end
@@ -2574,7 +2707,8 @@ module Aws::BedrockAgentCoreControl
     class ModifyExtractionConfiguration < Struct.new(
       :custom_extraction_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomExtractionConfiguration < ModifyExtractionConfiguration; end
@@ -2595,7 +2729,8 @@ module Aws::BedrockAgentCoreControl
       :add_memory_strategies,
       :modify_memory_strategies,
       :delete_memory_strategies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2617,7 +2752,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :namespaces,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2631,7 +2767,8 @@ module Aws::BedrockAgentCoreControl
     class ModifyStrategyConfiguration < Struct.new(
       :extraction,
       :consolidation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2641,7 +2778,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class NetworkConfiguration < Struct.new(
       :network_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2659,7 +2797,8 @@ module Aws::BedrockAgentCoreControl
       :provider_arn,
       :scopes,
       :custom_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2681,7 +2820,8 @@ module Aws::BedrockAgentCoreControl
       :authorization_endpoint,
       :token_endpoint,
       :response_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2707,7 +2847,8 @@ module Aws::BedrockAgentCoreControl
       :credential_provider_arn,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2722,7 +2863,8 @@ module Aws::BedrockAgentCoreControl
       :discovery_url,
       :authorization_server_metadata,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DiscoveryUrl < Oauth2Discovery; end
@@ -2757,7 +2899,8 @@ module Aws::BedrockAgentCoreControl
       :salesforce_oauth2_provider_config,
       :microsoft_oauth2_provider_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomOauth2ProviderConfig < Oauth2ProviderConfigInput; end
@@ -2796,7 +2939,8 @@ module Aws::BedrockAgentCoreControl
       :salesforce_oauth2_provider_config,
       :microsoft_oauth2_provider_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomOauth2ProviderConfig < Oauth2ProviderConfigOutput; end
@@ -2814,7 +2958,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class ProtocolConfiguration < Struct.new(
       :server_protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2828,7 +2973,8 @@ module Aws::BedrockAgentCoreControl
     class RecordingConfig < Struct.new(
       :enabled,
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2842,7 +2988,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2851,7 +2998,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2865,7 +3013,8 @@ module Aws::BedrockAgentCoreControl
     class S3Configuration < Struct.new(
       :uri,
       :bucket_owner_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2879,7 +3028,8 @@ module Aws::BedrockAgentCoreControl
     class S3Location < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2893,7 +3043,8 @@ module Aws::BedrockAgentCoreControl
     class SalesforceOauth2ProviderConfigInput < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2903,7 +3054,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::Oauth2Discovery]
     class SalesforceOauth2ProviderConfigOutput < Struct.new(
       :oauth_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2929,7 +3081,8 @@ module Aws::BedrockAgentCoreControl
       :required,
       :items,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2939,7 +3092,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class Secret < Struct.new(
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2953,7 +3107,8 @@ module Aws::BedrockAgentCoreControl
     class SemanticConsolidationOverride < Struct.new(
       :append_to_prompt,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2967,7 +3122,8 @@ module Aws::BedrockAgentCoreControl
     class SemanticExtractionOverride < Struct.new(
       :append_to_prompt,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2985,7 +3141,8 @@ module Aws::BedrockAgentCoreControl
       :name,
       :description,
       :namespaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2999,7 +3156,8 @@ module Aws::BedrockAgentCoreControl
     class SemanticOverrideConfigurationInput < Struct.new(
       :extraction,
       :consolidation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3013,7 +3171,8 @@ module Aws::BedrockAgentCoreControl
     class SemanticOverrideConsolidationConfigurationInput < Struct.new(
       :append_to_prompt,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3027,7 +3186,8 @@ module Aws::BedrockAgentCoreControl
     class SemanticOverrideExtractionConfigurationInput < Struct.new(
       :append_to_prompt,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3036,7 +3196,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class ServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3045,7 +3206,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3058,7 +3220,8 @@ module Aws::BedrockAgentCoreControl
     class SetTokenVaultCMKRequest < Struct.new(
       :token_vault_id,
       :kms_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3075,7 +3238,8 @@ module Aws::BedrockAgentCoreControl
       :token_vault_id,
       :kms_configuration,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3089,7 +3253,8 @@ module Aws::BedrockAgentCoreControl
     class SlackOauth2ProviderConfigInput < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3099,7 +3264,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::Oauth2Discovery]
     class SlackOauth2ProviderConfigOutput < Struct.new(
       :oauth_discovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3117,7 +3283,8 @@ module Aws::BedrockAgentCoreControl
       :type,
       :extraction,
       :consolidation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3131,7 +3298,8 @@ module Aws::BedrockAgentCoreControl
     class SummaryConsolidationOverride < Struct.new(
       :append_to_prompt,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3149,7 +3317,8 @@ module Aws::BedrockAgentCoreControl
       :name,
       :description,
       :namespaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3159,7 +3328,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::SummaryOverrideConsolidationConfigurationInput]
     class SummaryOverrideConfigurationInput < Struct.new(
       :consolidation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3173,7 +3343,8 @@ module Aws::BedrockAgentCoreControl
     class SummaryOverrideConsolidationConfigurationInput < Struct.new(
       :append_to_prompt,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3184,7 +3355,8 @@ module Aws::BedrockAgentCoreControl
     class TargetConfiguration < Struct.new(
       :mcp,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Mcp < TargetConfiguration; end
@@ -3217,7 +3389,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3226,7 +3399,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class ThrottledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3235,7 +3409,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3257,7 +3432,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :input_schema,
       :output_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3272,7 +3448,8 @@ module Aws::BedrockAgentCoreControl
       :s3,
       :inline_payload,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < ToolSchema; end
@@ -3285,7 +3462,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3310,7 +3488,8 @@ module Aws::BedrockAgentCoreControl
       :agent_runtime_version,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3343,7 +3522,8 @@ module Aws::BedrockAgentCoreControl
       :status,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3384,7 +3564,8 @@ module Aws::BedrockAgentCoreControl
       :client_token,
       :environment_variables,
       :authorizer_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3417,7 +3598,8 @@ module Aws::BedrockAgentCoreControl
       :created_at,
       :last_updated_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3430,7 +3612,8 @@ module Aws::BedrockAgentCoreControl
     class UpdateApiKeyCredentialProviderRequest < Struct.new(
       :name,
       :api_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3455,7 +3638,8 @@ module Aws::BedrockAgentCoreControl
       :credential_provider_arn,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3500,7 +3684,8 @@ module Aws::BedrockAgentCoreControl
       :authorizer_configuration,
       :kms_key_arn,
       :exception_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3573,7 +3758,8 @@ module Aws::BedrockAgentCoreControl
       :kms_key_arn,
       :workload_identity_details,
       :exception_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3602,7 +3788,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :target_configuration,
       :credential_provider_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3647,7 +3834,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :target_configuration,
       :credential_provider_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3676,7 +3864,8 @@ module Aws::BedrockAgentCoreControl
       :event_expiry_duration,
       :memory_execution_role_arn,
       :memory_strategies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3685,7 +3874,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::Memory]
     class UpdateMemoryOutput < Struct.new(
       :memory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3702,7 +3892,8 @@ module Aws::BedrockAgentCoreControl
       :name,
       :credential_provider_vendor,
       :oauth2_provider_config_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3735,7 +3926,8 @@ module Aws::BedrockAgentCoreControl
       :oauth2_provider_config_output,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3748,7 +3940,8 @@ module Aws::BedrockAgentCoreControl
     class UpdateWorkloadIdentityRequest < Struct.new(
       :name,
       :allowed_resource_oauth2_return_urls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3773,7 +3966,8 @@ module Aws::BedrockAgentCoreControl
       :allowed_resource_oauth2_return_urls,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3787,7 +3981,8 @@ module Aws::BedrockAgentCoreControl
     class UserPreferenceConsolidationOverride < Struct.new(
       :append_to_prompt,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3801,7 +3996,8 @@ module Aws::BedrockAgentCoreControl
     class UserPreferenceExtractionOverride < Struct.new(
       :append_to_prompt,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3819,7 +4015,8 @@ module Aws::BedrockAgentCoreControl
       :name,
       :description,
       :namespaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3833,7 +4030,8 @@ module Aws::BedrockAgentCoreControl
     class UserPreferenceOverrideConfigurationInput < Struct.new(
       :extraction,
       :consolidation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3847,7 +4045,8 @@ module Aws::BedrockAgentCoreControl
     class UserPreferenceOverrideConsolidationConfigurationInput < Struct.new(
       :append_to_prompt,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3861,7 +4060,8 @@ module Aws::BedrockAgentCoreControl
     class UserPreferenceOverrideExtractionConfigurationInput < Struct.new(
       :append_to_prompt,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3876,7 +4076,8 @@ module Aws::BedrockAgentCoreControl
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3890,7 +4091,8 @@ module Aws::BedrockAgentCoreControl
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3900,7 +4102,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     class WorkloadIdentityDetails < Struct.new(
       :workload_identity_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3914,7 +4117,8 @@ module Aws::BedrockAgentCoreControl
     class WorkloadIdentityType < Struct.new(
       :name,
       :workload_identity_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

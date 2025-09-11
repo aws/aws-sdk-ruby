@@ -38,7 +38,7 @@ module Aws::SageMakerFeatureStoreRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerFeatureStoreRuntime::Types::AccessForbidden] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::SageMakerFeatureStoreRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerFeatureStoreRuntime::Types::InternalFailure] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::SageMakerFeatureStoreRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerFeatureStoreRuntime::Types::ResourceNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::SageMakerFeatureStoreRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerFeatureStoreRuntime::Types::ServiceUnavailable] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::SageMakerFeatureStoreRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerFeatureStoreRuntime::Types::ValidationError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

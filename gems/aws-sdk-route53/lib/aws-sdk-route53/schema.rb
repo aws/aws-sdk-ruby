@@ -2196,7 +2196,6 @@ module Aws::Route53
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2013-04-01/trafficpolicyinstance/{Id}", "code" => 200}}
       end)
-
     end
 
     class << self

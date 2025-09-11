@@ -67,7 +67,8 @@ module Aws::ChimeSDKMeetings
       :attendee_id,
       :join_token,
       :capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +114,8 @@ module Aws::ChimeSDKMeetings
       :audio,
       :video,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +129,8 @@ module Aws::ChimeSDKMeetings
     #   @return [Integer]
     class AttendeeFeatures < Struct.new(
       :max_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,7 +140,8 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     class AttendeeIdItem < Struct.new(
       :attendee_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +151,8 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     class AudioFeatures < Struct.new(
       :echo_reduction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +168,8 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +182,8 @@ module Aws::ChimeSDKMeetings
     class BatchCreateAttendeeRequest < Struct.new(
       :meeting_id,
       :attendees,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +196,8 @@ module Aws::ChimeSDKMeetings
     class BatchCreateAttendeeResponse < Struct.new(
       :attendees,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +214,8 @@ module Aws::ChimeSDKMeetings
       :meeting_id,
       :excluded_attendee_ids,
       :capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -222,7 +231,8 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +250,8 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     class ContentFeatures < Struct.new(
       :max_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +273,8 @@ module Aws::ChimeSDKMeetings
       :external_user_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -312,7 +324,8 @@ module Aws::ChimeSDKMeetings
       :meeting_id,
       :external_user_id,
       :capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +343,8 @@ module Aws::ChimeSDKMeetings
     class CreateAttendeeRequestItem < Struct.new(
       :external_user_id,
       :capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +353,8 @@ module Aws::ChimeSDKMeetings
     #   @return [Types::Attendee]
     class CreateAttendeeResponse < Struct.new(
       :attendee,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -443,7 +458,8 @@ module Aws::ChimeSDKMeetings
       :primary_meeting_id,
       :tenant_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +469,8 @@ module Aws::ChimeSDKMeetings
     #   @return [Types::Meeting]
     class CreateMeetingResponse < Struct.new(
       :meeting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +541,8 @@ module Aws::ChimeSDKMeetings
       :primary_meeting_id,
       :tenant_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +560,8 @@ module Aws::ChimeSDKMeetings
       :meeting,
       :attendees,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +574,8 @@ module Aws::ChimeSDKMeetings
     class DeleteAttendeeRequest < Struct.new(
       :meeting_id,
       :attendee_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +584,8 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     class DeleteMeetingRequest < Struct.new(
       :meeting_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +615,8 @@ module Aws::ChimeSDKMeetings
       :vocabulary_name,
       :region,
       :content_identification_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +736,8 @@ module Aws::ChimeSDKMeetings
       :preferred_language,
       :vocabulary_names,
       :vocabulary_filter_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -736,7 +759,8 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +773,8 @@ module Aws::ChimeSDKMeetings
     class GetAttendeeRequest < Struct.new(
       :meeting_id,
       :attendee_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +783,8 @@ module Aws::ChimeSDKMeetings
     #   @return [Types::Attendee]
     class GetAttendeeResponse < Struct.new(
       :attendee,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +793,8 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     class GetMeetingRequest < Struct.new(
       :meeting_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -776,7 +803,8 @@ module Aws::ChimeSDKMeetings
     #   @return [Types::Meeting]
     class GetMeetingResponse < Struct.new(
       :meeting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +820,8 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,7 +838,8 @@ module Aws::ChimeSDKMeetings
       :meeting_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +852,8 @@ module Aws::ChimeSDKMeetings
     class ListAttendeesResponse < Struct.new(
       :attendees,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +862,8 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +872,8 @@ module Aws::ChimeSDKMeetings
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -898,7 +931,8 @@ module Aws::ChimeSDKMeetings
       :screen_viewing_url,
       :screen_sharing_url,
       :event_ingestion_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,7 +984,8 @@ module Aws::ChimeSDKMeetings
       :primary_meeting_id,
       :tenant_ids,
       :meeting_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -972,7 +1007,8 @@ module Aws::ChimeSDKMeetings
       :video,
       :content,
       :attendee,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1024,8 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1006,7 +1043,8 @@ module Aws::ChimeSDKMeetings
       :lambda_function_arn,
       :sns_topic_arn,
       :sqs_queue_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1026,7 +1064,8 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1081,8 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1062,7 +1102,8 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1076,7 +1117,8 @@ module Aws::ChimeSDKMeetings
     class StartMeetingTranscriptionRequest < Struct.new(
       :meeting_id,
       :transcription_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1127,8 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     class StopMeetingTranscriptionRequest < Struct.new(
       :meeting_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1099,7 +1142,8 @@ module Aws::ChimeSDKMeetings
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,12 +1156,14 @@ module Aws::ChimeSDKMeetings
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1179,8 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1200,8 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1167,7 +1215,8 @@ module Aws::ChimeSDKMeetings
     class TranscriptionConfiguration < Struct.new(
       :engine_transcribe_settings,
       :engine_transcribe_medical_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,7 +1232,8 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1249,8 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,12 +1263,14 @@ module Aws::ChimeSDKMeetings
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1234,7 +1287,8 @@ module Aws::ChimeSDKMeetings
       :meeting_id,
       :attendee_id,
       :capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1297,8 @@ module Aws::ChimeSDKMeetings
     #   @return [Types::Attendee]
     class UpdateAttendeeCapabilitiesResponse < Struct.new(
       :attendee,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1316,8 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     class VideoFeatures < Struct.new(
       :max_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

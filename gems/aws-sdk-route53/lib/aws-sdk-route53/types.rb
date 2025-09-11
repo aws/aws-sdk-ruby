@@ -47,7 +47,8 @@ module Aws::Route53
     class AccountLimit < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +63,8 @@ module Aws::Route53
     class ActivateKeySigningKeyRequest < Struct.new(
       :hosted_zone_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +74,8 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     class ActivateKeySigningKeyResponse < Struct.new(
       :change_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +110,8 @@ module Aws::Route53
     class AlarmIdentifier < Struct.new(
       :region,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +536,8 @@ module Aws::Route53
       :hosted_zone_id,
       :dns_name,
       :evaluate_target_health,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -561,7 +566,8 @@ module Aws::Route53
       :hosted_zone_id,
       :vpc,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +578,8 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     class AssociateVPCWithHostedZoneResponse < Struct.new(
       :change_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +618,8 @@ module Aws::Route53
     class Change < Struct.new(
       :action,
       :resource_record_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +635,8 @@ module Aws::Route53
     class ChangeBatch < Struct.new(
       :comment,
       :changes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +671,8 @@ module Aws::Route53
       :id,
       :collection_version,
       :changes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -673,7 +683,8 @@ module Aws::Route53
     #   @return [String]
     class ChangeCidrCollectionResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +711,8 @@ module Aws::Route53
       :status,
       :submitted_at,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -716,7 +728,8 @@ module Aws::Route53
     class ChangeResourceRecordSetsRequest < Struct.new(
       :hosted_zone_id,
       :change_batch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +742,8 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     class ChangeResourceRecordSetsResponse < Struct.new(
       :change_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -764,13 +778,15 @@ module Aws::Route53
       :resource_id,
       :add_tags,
       :remove_tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Empty response for the request.</p>
     class ChangeTagsForResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -779,7 +795,8 @@ module Aws::Route53
     #   @return [String]
     class CidrBlockInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +810,8 @@ module Aws::Route53
     class CidrBlockSummary < Struct.new(
       :cidr_block,
       :location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +838,8 @@ module Aws::Route53
       :id,
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +848,8 @@ module Aws::Route53
     #   @return [String]
     class CidrCollectionAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +867,8 @@ module Aws::Route53
       :location_name,
       :action,
       :cidr_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +877,8 @@ module Aws::Route53
     #   @return [String]
     class CidrCollectionInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +888,8 @@ module Aws::Route53
     #   @return [String]
     class CidrCollectionVersionMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +906,8 @@ module Aws::Route53
     class CidrRoutingConfig < Struct.new(
       :collection_id,
       :location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +957,8 @@ module Aws::Route53
       :namespace,
       :statistic,
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +984,8 @@ module Aws::Route53
       :id,
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +996,8 @@ module Aws::Route53
     #   @return [String]
     class ConcurrentModification < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1030,8 @@ module Aws::Route53
     #   @return [String]
     class ConflictingDomainExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1044,8 @@ module Aws::Route53
     #   @return [String]
     class ConflictingTypes < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1063,8 @@ module Aws::Route53
     class Coordinates < Struct.new(
       :latitude,
       :longitude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1080,8 @@ module Aws::Route53
     class CreateCidrCollectionRequest < Struct.new(
       :name,
       :caller_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1063,7 +1094,8 @@ module Aws::Route53
     class CreateCidrCollectionResponse < Struct.new(
       :collection,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1137,8 @@ module Aws::Route53
     class CreateHealthCheckRequest < Struct.new(
       :caller_reference,
       :health_check_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1152,8 @@ module Aws::Route53
     class CreateHealthCheckResponse < Struct.new(
       :health_check,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1180,7 +1214,8 @@ module Aws::Route53
       :caller_reference,
       :hosted_zone_config,
       :delegation_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1208,7 +1243,8 @@ module Aws::Route53
       :delegation_set,
       :vpc,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1316,8 @@ module Aws::Route53
       :key_management_service_arn,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1298,7 +1335,8 @@ module Aws::Route53
       :change_info,
       :key_signing_key,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1317,7 +1355,8 @@ module Aws::Route53
     class CreateQueryLoggingConfigRequest < Struct.new(
       :hosted_zone_id,
       :cloud_watch_logs_log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1371,8 @@ module Aws::Route53
     class CreateQueryLoggingConfigResponse < Struct.new(
       :query_logging_config,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1351,7 +1391,8 @@ module Aws::Route53
     class CreateReusableDelegationSetRequest < Struct.new(
       :caller_reference,
       :hosted_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1405,8 @@ module Aws::Route53
     class CreateReusableDelegationSetResponse < Struct.new(
       :delegation_set,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1397,7 +1439,8 @@ module Aws::Route53
       :ttl,
       :traffic_policy_id,
       :traffic_policy_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1412,7 +1455,8 @@ module Aws::Route53
     class CreateTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1431,7 +1475,8 @@ module Aws::Route53
       :name,
       :document,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1446,7 +1491,8 @@ module Aws::Route53
     class CreateTrafficPolicyResponse < Struct.new(
       :traffic_policy,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1468,7 +1514,8 @@ module Aws::Route53
       :id,
       :document,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1484,7 +1531,8 @@ module Aws::Route53
     class CreateTrafficPolicyVersionResponse < Struct.new(
       :traffic_policy,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1502,7 +1550,8 @@ module Aws::Route53
     class CreateVPCAssociationAuthorizationRequest < Struct.new(
       :hosted_zone_id,
       :vpc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,7 +1566,8 @@ module Aws::Route53
     class CreateVPCAssociationAuthorizationResponse < Struct.new(
       :hosted_zone_id,
       :vpc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1576,8 @@ module Aws::Route53
     #   @return [String]
     class DNSSECNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1571,7 +1622,8 @@ module Aws::Route53
     class DNSSECStatus < Struct.new(
       :serve_signature,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,7 +1636,8 @@ module Aws::Route53
     class DeactivateKeySigningKeyRequest < Struct.new(
       :hosted_zone_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1594,7 +1647,8 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     class DeactivateKeySigningKeyResponse < Struct.new(
       :change_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,7 +1669,8 @@ module Aws::Route53
       :id,
       :caller_reference,
       :name_servers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1681,8 @@ module Aws::Route53
     #   @return [String]
     class DelegationSetAlreadyCreated < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,7 +1692,8 @@ module Aws::Route53
     #   @return [String]
     class DelegationSetAlreadyReusable < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1647,7 +1704,8 @@ module Aws::Route53
     #   @return [String]
     class DelegationSetInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,7 +1718,8 @@ module Aws::Route53
     #   @return [String]
     class DelegationSetNotAvailable < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1729,8 @@ module Aws::Route53
     #   @return [String]
     class DelegationSetNotReusable < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1679,12 +1739,14 @@ module Aws::Route53
     #   @return [String]
     class DeleteCidrCollectionRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCidrCollectionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,13 +1756,15 @@ module Aws::Route53
     #   @return [String]
     class DeleteHealthCheckRequest < Struct.new(
       :health_check_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element.</p>
     class DeleteHealthCheckResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1774,8 @@ module Aws::Route53
     #   @return [String]
     class DeleteHostedZoneRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1722,7 +1787,8 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     class DeleteHostedZoneResponse < Struct.new(
       :change_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1735,7 +1801,8 @@ module Aws::Route53
     class DeleteKeySigningKeyRequest < Struct.new(
       :hosted_zone_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1812,8 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     class DeleteKeySigningKeyResponse < Struct.new(
       :change_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1754,12 +1822,14 @@ module Aws::Route53
     #   @return [String]
     class DeleteQueryLoggingConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteQueryLoggingConfigResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1769,13 +1839,15 @@ module Aws::Route53
     #   @return [String]
     class DeleteReusableDelegationSetRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element.</p>
     class DeleteReusableDelegationSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1790,13 +1862,15 @@ module Aws::Route53
     #   @return [String]
     class DeleteTrafficPolicyInstanceRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element.</p>
     class DeleteTrafficPolicyInstanceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,13 +1884,15 @@ module Aws::Route53
     class DeleteTrafficPolicyRequest < Struct.new(
       :id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element.</p>
     class DeleteTrafficPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1833,13 +1909,15 @@ module Aws::Route53
     class DeleteVPCAssociationAuthorizationRequest < Struct.new(
       :hosted_zone_id,
       :vpc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Empty response for the request.</p>
     class DeleteVPCAssociationAuthorizationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1856,7 +1934,8 @@ module Aws::Route53
     class Dimension < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1865,7 +1944,8 @@ module Aws::Route53
     #   @return [String]
     class DisableHostedZoneDNSSECRequest < Struct.new(
       :hosted_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1875,7 +1955,8 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     class DisableHostedZoneDNSSECResponse < Struct.new(
       :change_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1896,7 +1977,8 @@ module Aws::Route53
       :hosted_zone_id,
       :vpc,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1908,7 +1990,8 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     class DisassociateVPCFromHostedZoneResponse < Struct.new(
       :change_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +2000,8 @@ module Aws::Route53
     #   @return [String]
     class EnableHostedZoneDNSSECRequest < Struct.new(
       :hosted_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +2011,8 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     class EnableHostedZoneDNSSECResponse < Struct.new(
       :change_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2072,8 @@ module Aws::Route53
       :continent_code,
       :country_code,
       :subdivision_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2023,7 +2109,8 @@ module Aws::Route53
       :country_name,
       :subdivision_code,
       :subdivision_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2070,7 +2157,8 @@ module Aws::Route53
       :local_zone_group,
       :coordinates,
       :bias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2111,7 +2199,8 @@ module Aws::Route53
     #   @return [String]
     class GetAccountLimitRequest < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2131,7 +2220,8 @@ module Aws::Route53
     class GetAccountLimitResponse < Struct.new(
       :limit,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2148,7 +2238,8 @@ module Aws::Route53
     #   @return [String]
     class GetChangeRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2158,13 +2249,15 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     class GetChangeResponse < Struct.new(
       :change_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Empty request.</p>
     class GetCheckerIpRangesRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2175,7 +2268,8 @@ module Aws::Route53
     #   @return [Array<String>]
     class GetCheckerIpRangesResponse < Struct.new(
       :checker_ip_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2184,7 +2278,8 @@ module Aws::Route53
     #   @return [String]
     class GetDNSSECRequest < Struct.new(
       :hosted_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2197,7 +2292,8 @@ module Aws::Route53
     class GetDNSSECResponse < Struct.new(
       :status,
       :key_signing_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2254,7 +2350,8 @@ module Aws::Route53
       :continent_code,
       :country_code,
       :subdivision_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2266,13 +2363,15 @@ module Aws::Route53
     #   @return [Types::GeoLocationDetails]
     class GetGeoLocationResponse < Struct.new(
       :geo_location_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A request for the number of health checks that are associated with the current Amazon Web Services account.</p>
     class GetHealthCheckCountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2283,7 +2382,8 @@ module Aws::Route53
     #   @return [Integer]
     class GetHealthCheckCountResponse < Struct.new(
       :health_check_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2301,7 +2401,8 @@ module Aws::Route53
     #   @return [String]
     class GetHealthCheckLastFailureReasonRequest < Struct.new(
       :health_check_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2313,7 +2414,8 @@ module Aws::Route53
     #   @return [Array<Types::HealthCheckObservation>]
     class GetHealthCheckLastFailureReasonResponse < Struct.new(
       :health_check_observations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2325,7 +2427,8 @@ module Aws::Route53
     #   @return [String]
     class GetHealthCheckRequest < Struct.new(
       :health_check_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2337,7 +2440,8 @@ module Aws::Route53
     #   @return [Types::HealthCheck]
     class GetHealthCheckResponse < Struct.new(
       :health_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2355,7 +2459,8 @@ module Aws::Route53
     #   @return [String]
     class GetHealthCheckStatusRequest < Struct.new(
       :health_check_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2368,14 +2473,16 @@ module Aws::Route53
     #   @return [Array<Types::HealthCheckObservation>]
     class GetHealthCheckStatusResponse < Struct.new(
       :health_check_observations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A request to retrieve a count of all the hosted zones that are associated with the
     # 			current Amazon Web Services account.</p>
     class GetHostedZoneCountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2387,7 +2494,8 @@ module Aws::Route53
     #   @return [Integer]
     class GetHostedZoneCountResponse < Struct.new(
       :hosted_zone_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2523,8 @@ module Aws::Route53
     class GetHostedZoneLimitRequest < Struct.new(
       :type,
       :hosted_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2435,7 +2544,8 @@ module Aws::Route53
     class GetHostedZoneLimitResponse < Struct.new(
       :limit,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2450,7 +2560,8 @@ module Aws::Route53
     #   @return [String]
     class GetHostedZoneRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2472,7 +2583,8 @@ module Aws::Route53
       :hosted_zone,
       :delegation_set,
       :vp_cs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2482,7 +2594,8 @@ module Aws::Route53
     #   @return [String]
     class GetQueryLoggingConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2492,7 +2605,8 @@ module Aws::Route53
     #   @return [Types::QueryLoggingConfig]
     class GetQueryLoggingConfigResponse < Struct.new(
       :query_logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2508,7 +2622,8 @@ module Aws::Route53
     class GetReusableDelegationSetLimitRequest < Struct.new(
       :type,
       :delegation_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2524,7 +2639,8 @@ module Aws::Route53
     class GetReusableDelegationSetLimitResponse < Struct.new(
       :limit,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2540,7 +2656,8 @@ module Aws::Route53
     #   @return [String]
     class GetReusableDelegationSetRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2551,14 +2668,16 @@ module Aws::Route53
     #   @return [Types::DelegationSet]
     class GetReusableDelegationSetResponse < Struct.new(
       :delegation_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Request to get the number of traffic policy instances that are associated with the
     # 			current Amazon Web Services account.</p>
     class GetTrafficPolicyInstanceCountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2569,7 +2688,8 @@ module Aws::Route53
     #   @return [Integer]
     class GetTrafficPolicyInstanceCountResponse < Struct.new(
       :traffic_policy_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2579,7 +2699,8 @@ module Aws::Route53
     #   @return [String]
     class GetTrafficPolicyInstanceRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2590,7 +2711,8 @@ module Aws::Route53
     #   @return [Types::TrafficPolicyInstance]
     class GetTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2605,7 +2727,8 @@ module Aws::Route53
     class GetTrafficPolicyRequest < Struct.new(
       :id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2615,7 +2738,8 @@ module Aws::Route53
     #   @return [Types::TrafficPolicy]
     class GetTrafficPolicyResponse < Struct.new(
       :traffic_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2653,7 +2777,8 @@ module Aws::Route53
       :health_check_config,
       :health_check_version,
       :cloud_watch_alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2676,7 +2801,8 @@ module Aws::Route53
     #   @return [String]
     class HealthCheckAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3071,7 +3197,8 @@ module Aws::Route53
       :alarm_identifier,
       :insufficient_data_health_status,
       :routing_control_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3082,7 +3209,8 @@ module Aws::Route53
     #   @return [String]
     class HealthCheckInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3104,7 +3232,8 @@ module Aws::Route53
       :region,
       :ip_address,
       :status_report,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3114,7 +3243,8 @@ module Aws::Route53
     #   @return [String]
     class HealthCheckVersionMismatch < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3154,7 +3284,8 @@ module Aws::Route53
       :config,
       :resource_record_set_count,
       :linked_service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3166,7 +3297,8 @@ module Aws::Route53
     #   @return [String]
     class HostedZoneAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3182,7 +3314,8 @@ module Aws::Route53
     class HostedZoneConfig < Struct.new(
       :comment,
       :private_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3215,7 +3348,8 @@ module Aws::Route53
     class HostedZoneLimit < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3225,7 +3359,8 @@ module Aws::Route53
     #   @return [String]
     class HostedZoneNotEmpty < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3235,7 +3370,8 @@ module Aws::Route53
     #   @return [String]
     class HostedZoneNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3245,7 +3381,8 @@ module Aws::Route53
     #   @return [String]
     class HostedZoneNotPrivate < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3270,7 +3407,8 @@ module Aws::Route53
     class HostedZoneOwner < Struct.new(
       :owning_account,
       :owning_service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3280,7 +3418,8 @@ module Aws::Route53
     #   @return [String]
     class HostedZonePartiallyDelegated < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3305,7 +3444,8 @@ module Aws::Route53
       :hosted_zone_id,
       :name,
       :owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3315,7 +3455,8 @@ module Aws::Route53
     #   @return [String]
     class IncompatibleVersion < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3348,7 +3489,8 @@ module Aws::Route53
     #   @return [String]
     class InsufficientCloudWatchLogsResourcePolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3358,7 +3500,8 @@ module Aws::Route53
     #   @return [String]
     class InvalidArgument < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3372,7 +3515,8 @@ module Aws::Route53
     class InvalidChangeBatch < Struct.new(
       :messages,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3382,7 +3526,8 @@ module Aws::Route53
     #   @return [String]
     class InvalidDomainName < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3392,7 +3537,8 @@ module Aws::Route53
     #   @return [String]
     class InvalidInput < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3402,7 +3548,8 @@ module Aws::Route53
     #   @return [String]
     class InvalidKMSArn < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3411,7 +3558,8 @@ module Aws::Route53
     #   @return [String]
     class InvalidKeySigningKeyName < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3421,7 +3569,8 @@ module Aws::Route53
     #   @return [String]
     class InvalidKeySigningKeyStatus < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3431,7 +3580,8 @@ module Aws::Route53
     #   @return [String]
     class InvalidPaginationToken < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3441,7 +3591,8 @@ module Aws::Route53
     #   @return [String]
     class InvalidSigningStatus < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3452,7 +3603,8 @@ module Aws::Route53
     #   @return [String]
     class InvalidTrafficPolicyDocument < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3463,7 +3615,8 @@ module Aws::Route53
     #   @return [String]
     class InvalidVPCId < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3622,7 +3775,8 @@ module Aws::Route53
       :status_message,
       :created_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3639,7 +3793,8 @@ module Aws::Route53
     #   @return [String]
     class KeySigningKeyAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3648,7 +3803,8 @@ module Aws::Route53
     #   @return [String]
     class KeySigningKeyInParentDSRecord < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3659,7 +3815,8 @@ module Aws::Route53
     #   @return [String]
     class KeySigningKeyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3668,7 +3825,8 @@ module Aws::Route53
     #   @return [String]
     class KeySigningKeyWithActiveStatusNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3680,7 +3838,8 @@ module Aws::Route53
     #   @return [String]
     class LastVPCAssociation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3692,7 +3851,8 @@ module Aws::Route53
     #   @return [String]
     class LimitsExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3713,7 +3873,8 @@ module Aws::Route53
     class LinkedService < Struct.new(
       :service_principal,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3735,7 +3896,8 @@ module Aws::Route53
       :location_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3750,7 +3912,8 @@ module Aws::Route53
     class ListCidrBlocksResponse < Struct.new(
       :next_token,
       :cidr_blocks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3765,7 +3928,8 @@ module Aws::Route53
     class ListCidrCollectionsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3780,7 +3944,8 @@ module Aws::Route53
     class ListCidrCollectionsResponse < Struct.new(
       :next_token,
       :cidr_collections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3799,7 +3964,8 @@ module Aws::Route53
       :collection_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3814,7 +3980,8 @@ module Aws::Route53
     class ListCidrLocationsResponse < Struct.new(
       :next_token,
       :cidr_locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3858,7 +4025,8 @@ module Aws::Route53
       :start_country_code,
       :start_subdivision_code,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3904,7 +4072,8 @@ module Aws::Route53
       :next_country_code,
       :next_subdivision_code,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3934,7 +4103,8 @@ module Aws::Route53
     class ListHealthChecksRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3971,7 +4141,8 @@ module Aws::Route53
       :is_truncated,
       :next_marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4013,7 +4184,8 @@ module Aws::Route53
       :dns_name,
       :hosted_zone_id,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4064,7 +4236,8 @@ module Aws::Route53
       :next_dns_name,
       :next_hosted_zone_id,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4103,7 +4276,8 @@ module Aws::Route53
       :vpc_region,
       :max_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4125,7 +4299,8 @@ module Aws::Route53
       :hosted_zone_summaries,
       :max_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4163,7 +4338,8 @@ module Aws::Route53
       :max_items,
       :delegation_set_id,
       :hosted_zone_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4199,7 +4375,8 @@ module Aws::Route53
       :is_truncated,
       :next_marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4234,7 +4411,8 @@ module Aws::Route53
       :hosted_zone_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4254,7 +4432,8 @@ module Aws::Route53
     class ListQueryLoggingConfigsResponse < Struct.new(
       :query_logging_configs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4341,7 +4520,8 @@ module Aws::Route53
       :start_record_type,
       :start_record_identifier,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4381,7 +4561,8 @@ module Aws::Route53
       :next_record_type,
       :next_record_identifier,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4410,7 +4591,8 @@ module Aws::Route53
     class ListReusableDelegationSetsRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4445,7 +4627,8 @@ module Aws::Route53
       :is_truncated,
       :next_marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4473,7 +4656,8 @@ module Aws::Route53
     class ListTagsForResourceRequest < Struct.new(
       :resource_type,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4485,7 +4669,8 @@ module Aws::Route53
     #   @return [Types::ResourceTagSet]
     class ListTagsForResourceResponse < Struct.new(
       :resource_tag_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4509,7 +4694,8 @@ module Aws::Route53
     class ListTagsForResourcesRequest < Struct.new(
       :resource_type,
       :resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4520,7 +4706,8 @@ module Aws::Route53
     #   @return [Array<Types::ResourceTagSet>]
     class ListTagsForResourcesResponse < Struct.new(
       :resource_tag_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4547,7 +4734,8 @@ module Aws::Route53
     class ListTrafficPoliciesRequest < Struct.new(
       :traffic_policy_id_marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4577,7 +4765,8 @@ module Aws::Route53
       :is_truncated,
       :traffic_policy_id_marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4627,7 +4816,8 @@ module Aws::Route53
       :traffic_policy_instance_name_marker,
       :traffic_policy_instance_type_marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4666,7 +4856,8 @@ module Aws::Route53
       :traffic_policy_instance_type_marker,
       :is_truncated,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4738,7 +4929,8 @@ module Aws::Route53
       :traffic_policy_instance_name_marker,
       :traffic_policy_instance_type_marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4783,7 +4975,8 @@ module Aws::Route53
       :traffic_policy_instance_type_marker,
       :is_truncated,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4841,7 +5034,8 @@ module Aws::Route53
       :traffic_policy_instance_name_marker,
       :traffic_policy_instance_type_marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4887,7 +5081,8 @@ module Aws::Route53
       :traffic_policy_instance_type_marker,
       :is_truncated,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4924,7 +5119,8 @@ module Aws::Route53
       :id,
       :traffic_policy_version_marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4958,7 +5154,8 @@ module Aws::Route53
       :is_truncated,
       :traffic_policy_version_marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4991,7 +5188,8 @@ module Aws::Route53
       :hosted_zone_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5014,7 +5212,8 @@ module Aws::Route53
       :hosted_zone_id,
       :next_token,
       :vp_cs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5024,7 +5223,8 @@ module Aws::Route53
     #   @return [String]
     class LocationSummary < Struct.new(
       :location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5033,7 +5233,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchChange < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5042,7 +5243,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchCidrCollectionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5051,7 +5253,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchCidrLocationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5060,7 +5263,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchCloudWatchLogsLogGroup < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5070,7 +5274,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchDelegationSet < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5082,7 +5287,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchGeoLocation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5092,7 +5298,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchHealthCheck < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5102,7 +5309,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchHostedZone < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5111,7 +5319,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchKeySigningKey < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5120,7 +5329,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchQueryLoggingConfig < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5130,7 +5340,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchTrafficPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5140,7 +5351,8 @@ module Aws::Route53
     #   @return [String]
     class NoSuchTrafficPolicyInstance < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5151,7 +5363,8 @@ module Aws::Route53
     #   @return [String]
     class NotAuthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5164,7 +5377,8 @@ module Aws::Route53
     #   @return [String]
     class PriorRequestNotComplete < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5175,7 +5389,8 @@ module Aws::Route53
     #   @return [String]
     class PublicZoneVPCAssociation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5195,7 +5410,8 @@ module Aws::Route53
       :id,
       :hosted_zone_id,
       :cloud_watch_logs_log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5205,7 +5421,8 @@ module Aws::Route53
     #   @return [String]
     class QueryLoggingConfigAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5229,7 +5446,8 @@ module Aws::Route53
     #   @return [String]
     class ResourceRecord < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5822,7 +6040,8 @@ module Aws::Route53
       :traffic_policy_instance_id,
       :cidr_routing_config,
       :geo_proximity_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5848,7 +6067,8 @@ module Aws::Route53
       :resource_type,
       :resource_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5866,7 +6086,8 @@ module Aws::Route53
     class ReusableDelegationSetLimit < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5884,7 +6105,8 @@ module Aws::Route53
     class StatusReport < Struct.new(
       :status,
       :checked_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5937,7 +6159,8 @@ module Aws::Route53
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5995,7 +6218,8 @@ module Aws::Route53
       :resolver_ip,
       :edns0_client_subnet_ip,
       :edns0_client_subnet_mask,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6031,7 +6255,8 @@ module Aws::Route53
       :record_data,
       :response_code,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6040,7 +6265,8 @@ module Aws::Route53
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6056,7 +6282,8 @@ module Aws::Route53
     #   @return [String]
     class TooManyHealthChecks < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6075,7 +6302,8 @@ module Aws::Route53
     #   @return [String]
     class TooManyHostedZones < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6085,7 +6313,8 @@ module Aws::Route53
     #   @return [String]
     class TooManyKeySigningKeys < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6101,7 +6330,8 @@ module Aws::Route53
     #   @return [String]
     class TooManyTrafficPolicies < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6117,7 +6347,8 @@ module Aws::Route53
     #   @return [String]
     class TooManyTrafficPolicyInstances < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6132,7 +6363,8 @@ module Aws::Route53
     #   @return [String]
     class TooManyTrafficPolicyVersionsForCurrentPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6146,7 +6378,8 @@ module Aws::Route53
     #   @return [String]
     class TooManyVPCAssociationAuthorizations < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6181,7 +6414,8 @@ module Aws::Route53
       :type,
       :document,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6191,7 +6425,8 @@ module Aws::Route53
     #   @return [String]
     class TrafficPolicyAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6202,7 +6437,8 @@ module Aws::Route53
     #   @return [String]
     class TrafficPolicyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6272,7 +6508,8 @@ module Aws::Route53
       :traffic_policy_id,
       :traffic_policy_version,
       :traffic_policy_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6282,7 +6519,8 @@ module Aws::Route53
     #   @return [String]
     class TrafficPolicyInstanceAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6310,7 +6548,8 @@ module Aws::Route53
       :type,
       :latest_version,
       :traffic_policy_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6675,7 +6914,8 @@ module Aws::Route53
       :alarm_identifier,
       :insufficient_data_health_status,
       :reset_elements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6687,7 +6927,8 @@ module Aws::Route53
     #   @return [Types::HealthCheck]
     class UpdateHealthCheckResponse < Struct.new(
       :health_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6703,7 +6944,8 @@ module Aws::Route53
     class UpdateHostedZoneCommentRequest < Struct.new(
       :id,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6715,7 +6957,8 @@ module Aws::Route53
     #   @return [Types::HostedZone]
     class UpdateHostedZoneCommentResponse < Struct.new(
       :hosted_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6736,7 +6979,8 @@ module Aws::Route53
       :id,
       :version,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6746,7 +6990,8 @@ module Aws::Route53
     #   @return [Types::TrafficPolicy]
     class UpdateTrafficPolicyCommentResponse < Struct.new(
       :traffic_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6772,7 +7017,8 @@ module Aws::Route53
       :ttl,
       :traffic_policy_id,
       :traffic_policy_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6783,7 +7029,8 @@ module Aws::Route53
     #   @return [Types::TrafficPolicyInstance]
     class UpdateTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6801,7 +7048,8 @@ module Aws::Route53
     class VPC < Struct.new(
       :vpc_region,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6812,7 +7060,8 @@ module Aws::Route53
     #   @return [String]
     class VPCAssociationAuthorizationNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6822,7 +7071,8 @@ module Aws::Route53
     #   @return [String]
     class VPCAssociationNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

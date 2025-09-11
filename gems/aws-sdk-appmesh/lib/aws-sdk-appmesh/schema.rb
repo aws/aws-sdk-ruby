@@ -1808,7 +1808,6 @@ module Aws::AppMesh
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

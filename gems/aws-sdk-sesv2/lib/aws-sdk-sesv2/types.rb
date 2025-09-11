@@ -48,7 +48,8 @@ module Aws::SESv2
       :use_case_description,
       :additional_contact_email_addresses,
       :review_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +59,8 @@ module Aws::SESv2
     #   @return [String]
     class AccountSuspendedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +69,8 @@ module Aws::SESv2
     #   @return [String]
     class AlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +81,8 @@ module Aws::SESv2
     #   @return [String]
     class ArchivingOptions < Struct.new(
       :archive_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +127,8 @@ module Aws::SESv2
       :content_id,
       :content_transfer_encoding,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +137,8 @@ module Aws::SESv2
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +233,8 @@ module Aws::SESv2
       :dimensions,
       :start_date,
       :end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -237,7 +244,8 @@ module Aws::SESv2
     #   @return [Array<Types::BatchGetMetricDataQuery>]
     class BatchGetMetricDataRequest < Struct.new(
       :queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +259,8 @@ module Aws::SESv2
     class BatchGetMetricDataResponse < Struct.new(
       :results,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +280,8 @@ module Aws::SESv2
       :rbl_name,
       :listing_time,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +299,8 @@ module Aws::SESv2
     class Body < Struct.new(
       :text,
       :html,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -312,7 +323,8 @@ module Aws::SESv2
       :bounce_type,
       :bounce_sub_type,
       :diagnostic_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +335,8 @@ module Aws::SESv2
     #   @return [Types::Template]
     class BulkEmailContent < Struct.new(
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +398,8 @@ module Aws::SESv2
       :replacement_tags,
       :replacement_email_content,
       :replacement_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +480,8 @@ module Aws::SESv2
       :status,
       :error,
       :message_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -476,14 +491,16 @@ module Aws::SESv2
     #   @return [String]
     class CancelExportJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CancelExportJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +512,8 @@ module Aws::SESv2
     #   @return [Array<Types::CloudWatchDimensionConfiguration>]
     class CloudWatchDestination < Struct.new(
       :dimension_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +557,8 @@ module Aws::SESv2
       :dimension_name,
       :dimension_value_source,
       :default_dimension_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -559,7 +578,8 @@ module Aws::SESv2
     class Complaint < Struct.new(
       :complaint_sub_type,
       :complaint_feedback_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +588,8 @@ module Aws::SESv2
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -577,7 +598,8 @@ module Aws::SESv2
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +626,8 @@ module Aws::SESv2
       :topic_default_preferences,
       :unsubscribe_all,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -624,7 +647,8 @@ module Aws::SESv2
     class ContactList < Struct.new(
       :contact_list_name,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -648,7 +672,8 @@ module Aws::SESv2
     class ContactListDestination < Struct.new(
       :contact_list_name,
       :contact_list_import_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +691,8 @@ module Aws::SESv2
     class Content < Struct.new(
       :data,
       :charset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,14 +710,16 @@ module Aws::SESv2
       :configuration_set_name,
       :event_destination_name,
       :event_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateConfigurationSetEventDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -742,14 +770,16 @@ module Aws::SESv2
       :suppression_options,
       :vdm_options,
       :archiving_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateConfigurationSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,12 +801,14 @@ module Aws::SESv2
       :topics,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateContactListResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,12 +834,14 @@ module Aws::SESv2
       :topic_preferences,
       :unsubscribe_all,
       :attributes_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,14 +876,16 @@ module Aws::SESv2
       :template_content,
       :success_redirection_url,
       :failure_redirection_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class CreateCustomVerificationEmailTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,14 +904,16 @@ module Aws::SESv2
       :pool_name,
       :tags,
       :scaling_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateDedicatedIpPoolResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -905,7 +943,8 @@ module Aws::SESv2
       :from_email_address,
       :content,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +961,8 @@ module Aws::SESv2
     class CreateDeliverabilityTestReportResponse < Struct.new(
       :report_id,
       :deliverability_test_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -946,14 +986,16 @@ module Aws::SESv2
       :email_identity,
       :policy_name,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateEmailIdentityPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1025,8 @@ module Aws::SESv2
       :tags,
       :dkim_signing_attributes,
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1006,7 +1049,8 @@ module Aws::SESv2
       :identity_type,
       :verified_for_sending_status,
       :dkim_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1027,14 +1071,16 @@ module Aws::SESv2
     class CreateEmailTemplateRequest < Struct.new(
       :template_name,
       :template_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class CreateEmailTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1095,8 @@ module Aws::SESv2
     class CreateExportJobRequest < Struct.new(
       :export_data_source,
       :export_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1107,8 @@ module Aws::SESv2
     #   @return [String]
     class CreateExportJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1123,8 @@ module Aws::SESv2
     class CreateImportJobRequest < Struct.new(
       :import_destination,
       :import_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1135,8 @@ module Aws::SESv2
     #   @return [String]
     class CreateImportJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1104,7 +1154,8 @@ module Aws::SESv2
       :endpoint_name,
       :details,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1137,7 +1188,8 @@ module Aws::SESv2
     class CreateMultiRegionEndpointResponse < Struct.new(
       :status,
       :endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1157,7 +1209,8 @@ module Aws::SESv2
     class CreateTenantRequest < Struct.new(
       :tenant_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1174,14 +1227,16 @@ module Aws::SESv2
     class CreateTenantResourceAssociationRequest < Struct.new(
       :tenant_name,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class CreateTenantResourceAssociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,7 +1266,8 @@ module Aws::SESv2
       :created_timestamp,
       :tags,
       :sending_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1295,8 @@ module Aws::SESv2
       :template_subject,
       :success_redirection_url,
       :failure_redirection_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1317,8 @@ module Aws::SESv2
       :start_date,
       :volume_statistics,
       :domain_isp_placements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,7 +1342,8 @@ module Aws::SESv2
     #   @return [String]
     class DashboardAttributes < Struct.new(
       :engagement_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1308,7 +1367,8 @@ module Aws::SESv2
     #   @return [String]
     class DashboardOptions < Struct.new(
       :engagement_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1363,7 +1423,8 @@ module Aws::SESv2
       :warmup_status,
       :warmup_percentage,
       :pool_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1450,8 @@ module Aws::SESv2
     class DedicatedIpPool < Struct.new(
       :pool_name,
       :scaling_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1404,14 +1466,16 @@ module Aws::SESv2
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteConfigurationSetEventDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1421,14 +1485,16 @@ module Aws::SESv2
     #   @return [String]
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteConfigurationSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1437,12 +1503,14 @@ module Aws::SESv2
     #   @return [String]
     class DeleteContactListRequest < Struct.new(
       :contact_list_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContactListResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1455,12 +1523,14 @@ module Aws::SESv2
     class DeleteContactRequest < Struct.new(
       :contact_list_name,
       :email_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,14 +1540,16 @@ module Aws::SESv2
     #   @return [String]
     class DeleteCustomVerificationEmailTemplateRequest < Struct.new(
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class DeleteCustomVerificationEmailTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1487,14 +1559,16 @@ module Aws::SESv2
     #   @return [String]
     class DeleteDedicatedIpPoolRequest < Struct.new(
       :pool_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteDedicatedIpPoolResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,14 +1586,16 @@ module Aws::SESv2
     class DeleteEmailIdentityPolicyRequest < Struct.new(
       :email_identity,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteEmailIdentityPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,14 +1607,16 @@ module Aws::SESv2
     #   @return [String]
     class DeleteEmailIdentityRequest < Struct.new(
       :email_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteEmailIdentityResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,14 +1627,16 @@ module Aws::SESv2
     #   @return [String]
     class DeleteEmailTemplateRequest < Struct.new(
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class DeleteEmailTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1646,8 @@ module Aws::SESv2
     #   @return [String]
     class DeleteMultiRegionEndpointRequest < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1595,7 +1676,8 @@ module Aws::SESv2
     #   @return [String]
     class DeleteMultiRegionEndpointResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,14 +1688,16 @@ module Aws::SESv2
     #   @return [String]
     class DeleteSuppressedDestinationRequest < Struct.new(
       :email_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteSuppressedDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1623,7 +1707,8 @@ module Aws::SESv2
     #   @return [String]
     class DeleteTenantRequest < Struct.new(
       :tenant_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1637,21 +1722,24 @@ module Aws::SESv2
     class DeleteTenantResourceAssociationRequest < Struct.new(
       :tenant_name,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class DeleteTenantResourceAssociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class DeleteTenantResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1684,7 +1772,8 @@ module Aws::SESv2
       :from_email_address,
       :create_date,
       :deliverability_test_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1708,7 +1797,8 @@ module Aws::SESv2
       :tls_policy,
       :sending_pool_name,
       :max_delivery_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1737,7 +1827,8 @@ module Aws::SESv2
       :to_addresses,
       :cc_addresses,
       :bcc_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1747,7 +1838,8 @@ module Aws::SESv2
     #   @return [Array<Types::RouteDetails>]
     class Details < Struct.new(
       :routes_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2007,7 +2099,8 @@ module Aws::SESv2
       :next_signing_key_length,
       :current_signing_key_length,
       :last_key_generation_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2232,7 +2325,8 @@ module Aws::SESv2
       :domain_signing_private_key,
       :next_signing_key_length,
       :domain_signing_attributes_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2310,7 +2404,8 @@ module Aws::SESv2
       :read_delete_rate,
       :projected_volume,
       :esps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2334,7 +2429,8 @@ module Aws::SESv2
       :domain,
       :subscription_start_date,
       :inbox_placement_tracking_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2365,7 +2461,8 @@ module Aws::SESv2
       :spam_raw_count,
       :inbox_percentage,
       :spam_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2418,7 +2515,8 @@ module Aws::SESv2
       :simple,
       :raw,
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2437,7 +2535,8 @@ module Aws::SESv2
       :destination,
       :isp,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2457,7 +2556,8 @@ module Aws::SESv2
       :subject,
       :text,
       :html,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2471,7 +2571,8 @@ module Aws::SESv2
     class EmailTemplateMetadata < Struct.new(
       :template_name,
       :created_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2482,7 +2583,8 @@ module Aws::SESv2
     #   @return [String]
     class EventBridgeDestination < Struct.new(
       :event_bus_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2602,7 +2704,8 @@ module Aws::SESv2
       :sns_destination,
       :event_bridge_destination,
       :pinpoint_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2656,7 +2759,8 @@ module Aws::SESv2
       :sns_destination,
       :event_bridge_destination,
       :pinpoint_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2678,7 +2782,8 @@ module Aws::SESv2
     class EventDetails < Struct.new(
       :bounce,
       :complaint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2693,7 +2798,8 @@ module Aws::SESv2
     class ExportDataSource < Struct.new(
       :metrics_data_source,
       :message_insights_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2717,7 +2823,8 @@ module Aws::SESv2
     class ExportDestination < Struct.new(
       :data_format,
       :s3_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2743,7 +2850,8 @@ module Aws::SESv2
       :job_status,
       :created_timestamp,
       :completed_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2833,7 +2941,8 @@ module Aws::SESv2
     class ExportMetric < Struct.new(
       :name,
       :aggregation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2848,7 +2957,8 @@ module Aws::SESv2
     class ExportStatistics < Struct.new(
       :processed_records_count,
       :exported_records_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2862,14 +2972,16 @@ module Aws::SESv2
     class FailureInfo < Struct.new(
       :failed_records_s3_url,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A request to obtain information about the email-sending capabilities of your Amazon SES
     #             account.</p>
     class GetAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2941,7 +3053,8 @@ module Aws::SESv2
       :suppression_attributes,
       :details,
       :vdm_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2961,7 +3074,8 @@ module Aws::SESv2
     #   @return [Array<String>]
     class GetBlacklistReportsRequest < Struct.new(
       :blacklist_item_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2972,7 +3086,8 @@ module Aws::SESv2
     #   @return [Hash<String, Array<Types::BlacklistEntry>>]
     class GetBlacklistReportsResponse < Struct.new(
       :blacklist_report,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2983,7 +3098,8 @@ module Aws::SESv2
     #   @return [String]
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2994,7 +3110,8 @@ module Aws::SESv2
     #   @return [Array<Types::EventDestination>]
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
       :event_destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3004,7 +3121,8 @@ module Aws::SESv2
     #   @return [String]
     class GetConfigurationSetRequest < Struct.new(
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3054,7 +3172,8 @@ module Aws::SESv2
       :suppression_options,
       :vdm_options,
       :archiving_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3063,7 +3182,8 @@ module Aws::SESv2
     #   @return [String]
     class GetContactListRequest < Struct.new(
       :contact_list_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3093,7 +3213,8 @@ module Aws::SESv2
       :created_timestamp,
       :last_updated_timestamp,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3106,7 +3227,8 @@ module Aws::SESv2
     class GetContactRequest < Struct.new(
       :contact_list_name,
       :email_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3144,7 +3266,8 @@ module Aws::SESv2
       :attributes_data,
       :created_timestamp,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3160,7 +3283,8 @@ module Aws::SESv2
     #   @return [String]
     class GetCustomVerificationEmailTemplateRequest < Struct.new(
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3192,7 +3316,8 @@ module Aws::SESv2
       :template_content,
       :success_redirection_url,
       :failure_redirection_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3202,7 +3327,8 @@ module Aws::SESv2
     #   @return [String]
     class GetDedicatedIpPoolRequest < Struct.new(
       :pool_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3212,7 +3338,8 @@ module Aws::SESv2
     #   @return [Types::DedicatedIpPool]
     class GetDedicatedIpPoolResponse < Struct.new(
       :dedicated_ip_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3223,7 +3350,8 @@ module Aws::SESv2
     #   @return [String]
     class GetDedicatedIpRequest < Struct.new(
       :ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3233,7 +3361,8 @@ module Aws::SESv2
     #   @return [Types::DedicatedIp]
     class GetDedicatedIpResponse < Struct.new(
       :dedicated_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3255,7 +3384,8 @@ module Aws::SESv2
       :pool_name,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3272,7 +3402,8 @@ module Aws::SESv2
     class GetDedicatedIpsResponse < Struct.new(
       :dedicated_ips,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3283,7 +3414,8 @@ module Aws::SESv2
     #             to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more
     #             information about the features and cost of a Deliverability dashboard subscription, see <a href="http://aws.amazon.com/pinpoint/pricing/">Amazon Pinpoint Pricing</a>.</p>
     class GetDeliverabilityDashboardOptionsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3319,7 +3451,8 @@ module Aws::SESv2
       :account_status,
       :active_subscribed_domains,
       :pending_expiration_subscribed_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3334,7 +3467,8 @@ module Aws::SESv2
     #   @return [String]
     class GetDeliverabilityTestReportRequest < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3365,7 +3499,8 @@ module Aws::SESv2
       :isp_placements,
       :message,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3379,7 +3514,8 @@ module Aws::SESv2
     #   @return [String]
     class GetDomainDeliverabilityCampaignRequest < Struct.new(
       :campaign_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3391,7 +3527,8 @@ module Aws::SESv2
     #   @return [Types::DomainDeliverabilityCampaign]
     class GetDomainDeliverabilityCampaignResponse < Struct.new(
       :domain_deliverability_campaign,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3412,7 +3549,8 @@ module Aws::SESv2
       :domain,
       :start_date,
       :end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3431,7 +3569,8 @@ module Aws::SESv2
     class GetDomainStatisticsReportResponse < Struct.new(
       :overall_volume,
       :daily_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3441,7 +3580,8 @@ module Aws::SESv2
     #   @return [String]
     class GetEmailIdentityPoliciesRequest < Struct.new(
       :email_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3451,7 +3591,8 @@ module Aws::SESv2
     #   @return [Hash<String, String>]
     class GetEmailIdentityPoliciesResponse < Struct.new(
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3461,7 +3602,8 @@ module Aws::SESv2
     #   @return [String]
     class GetEmailIdentityRequest < Struct.new(
       :email_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3546,7 +3688,8 @@ module Aws::SESv2
       :configuration_set_name,
       :verification_status,
       :verification_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3563,7 +3706,8 @@ module Aws::SESv2
     #   @return [String]
     class GetEmailTemplateRequest < Struct.new(
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3578,7 +3722,8 @@ module Aws::SESv2
     class GetEmailTemplateResponse < Struct.new(
       :template_name,
       :template_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3589,7 +3734,8 @@ module Aws::SESv2
     #   @return [String]
     class GetExportJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3632,7 +3778,8 @@ module Aws::SESv2
       :completed_timestamp,
       :failure_info,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3643,7 +3790,8 @@ module Aws::SESv2
     #   @return [String]
     class GetImportJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3687,7 +3835,8 @@ module Aws::SESv2
       :completed_timestamp,
       :processed_records_count,
       :failed_records_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3700,7 +3849,8 @@ module Aws::SESv2
     #   @return [String]
     class GetMessageInsightsRequest < Struct.new(
       :message_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3729,7 +3879,8 @@ module Aws::SESv2
       :subject,
       :email_tags,
       :insights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3739,7 +3890,8 @@ module Aws::SESv2
     #   @return [String]
     class GetMultiRegionEndpointRequest < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3788,7 +3940,8 @@ module Aws::SESv2
       :status,
       :created_timestamp,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3803,7 +3956,8 @@ module Aws::SESv2
     class GetReputationEntityRequest < Struct.new(
       :reputation_entity_reference,
       :reputation_entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3814,7 +3968,8 @@ module Aws::SESv2
     #   @return [Types::ReputationEntity]
     class GetReputationEntityResponse < Struct.new(
       :reputation_entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3825,7 +3980,8 @@ module Aws::SESv2
     #   @return [String]
     class GetSuppressedDestinationRequest < Struct.new(
       :email_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3835,7 +3991,8 @@ module Aws::SESv2
     #   @return [Types::SuppressedDestination]
     class GetSuppressedDestinationResponse < Struct.new(
       :suppressed_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3845,7 +4002,8 @@ module Aws::SESv2
     #   @return [String]
     class GetTenantRequest < Struct.new(
       :tenant_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3855,7 +4013,8 @@ module Aws::SESv2
     #   @return [Types::Tenant]
     class GetTenantResponse < Struct.new(
       :tenant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3879,7 +4038,8 @@ module Aws::SESv2
     #   @return [String]
     class GuardianAttributes < Struct.new(
       :optimized_shared_delivery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3903,7 +4063,8 @@ module Aws::SESv2
     #   @return [String]
     class GuardianOptions < Struct.new(
       :optimized_shared_delivery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3956,7 +4117,8 @@ module Aws::SESv2
       :identity_name,
       :sending_enabled,
       :verification_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3976,7 +4138,8 @@ module Aws::SESv2
     class ImportDataSource < Struct.new(
       :s3_url,
       :data_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3991,7 +4154,8 @@ module Aws::SESv2
     class ImportDestination < Struct.new(
       :suppression_list_destination,
       :contact_list_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4041,7 +4205,8 @@ module Aws::SESv2
       :created_timestamp,
       :processed_records_count,
       :failed_records_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4058,7 +4223,8 @@ module Aws::SESv2
     class InboxPlacementTrackingOption < Struct.new(
       :global,
       :tracked_isps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4122,7 +4288,8 @@ module Aws::SESv2
       :timestamp,
       :type,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4131,7 +4298,8 @@ module Aws::SESv2
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4140,7 +4308,8 @@ module Aws::SESv2
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4155,7 +4324,8 @@ module Aws::SESv2
     class IspPlacement < Struct.new(
       :isp_name,
       :placement_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4172,7 +4342,8 @@ module Aws::SESv2
     class KinesisFirehoseDestination < Struct.new(
       :iam_role_arn,
       :delivery_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4181,7 +4352,8 @@ module Aws::SESv2
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4200,7 +4372,8 @@ module Aws::SESv2
     class ListConfigurationSetsRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4218,7 +4391,8 @@ module Aws::SESv2
     class ListConfigurationSetsResponse < Struct.new(
       :configuration_sets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4238,7 +4412,8 @@ module Aws::SESv2
     class ListContactListsRequest < Struct.new(
       :page_size,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4253,7 +4428,8 @@ module Aws::SESv2
     class ListContactListsResponse < Struct.new(
       :contact_lists,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4268,7 +4444,8 @@ module Aws::SESv2
     class ListContactsFilter < Struct.new(
       :filtered_status,
       :topic_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4296,7 +4473,8 @@ module Aws::SESv2
       :filter,
       :page_size,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4311,7 +4489,8 @@ module Aws::SESv2
     class ListContactsResponse < Struct.new(
       :contacts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4333,7 +4512,8 @@ module Aws::SESv2
     class ListCustomVerificationEmailTemplatesRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4350,7 +4530,8 @@ module Aws::SESv2
     class ListCustomVerificationEmailTemplatesResponse < Struct.new(
       :custom_verification_email_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4368,7 +4549,8 @@ module Aws::SESv2
     class ListDedicatedIpPoolsRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4385,7 +4567,8 @@ module Aws::SESv2
     class ListDedicatedIpPoolsResponse < Struct.new(
       :dedicated_ip_pools,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4405,7 +4588,8 @@ module Aws::SESv2
     class ListDeliverabilityTestReportsRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4422,7 +4606,8 @@ module Aws::SESv2
     class ListDeliverabilityTestReportsResponse < Struct.new(
       :deliverability_test_reports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4459,7 +4644,8 @@ module Aws::SESv2
       :subscribed_domain,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4478,7 +4664,8 @@ module Aws::SESv2
     class ListDomainDeliverabilityCampaignsResponse < Struct.new(
       :domain_deliverability_campaigns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4499,7 +4686,8 @@ module Aws::SESv2
     class ListEmailIdentitiesRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4518,7 +4706,8 @@ module Aws::SESv2
     class ListEmailIdentitiesResponse < Struct.new(
       :email_identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4538,7 +4727,8 @@ module Aws::SESv2
     class ListEmailTemplatesRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4555,7 +4745,8 @@ module Aws::SESv2
     class ListEmailTemplatesResponse < Struct.new(
       :templates_metadata,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4583,7 +4774,8 @@ module Aws::SESv2
       :page_size,
       :export_source_type,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4600,7 +4792,8 @@ module Aws::SESv2
     class ListExportJobsResponse < Struct.new(
       :export_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4626,7 +4819,8 @@ module Aws::SESv2
       :import_destination_type,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4643,7 +4837,8 @@ module Aws::SESv2
     class ListImportJobsResponse < Struct.new(
       :import_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4658,7 +4853,8 @@ module Aws::SESv2
     class ListManagementOptions < Struct.new(
       :contact_list_name,
       :topic_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4679,7 +4875,8 @@ module Aws::SESv2
     class ListMultiRegionEndpointsRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4695,7 +4892,8 @@ module Aws::SESv2
     class ListMultiRegionEndpointsResponse < Struct.new(
       :multi_region_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4722,7 +4920,8 @@ module Aws::SESv2
       :filter,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4739,7 +4938,8 @@ module Aws::SESv2
     class ListRecommendationsResponse < Struct.new(
       :recommendations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4763,7 +4963,8 @@ module Aws::SESv2
       :filter,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4779,7 +4980,8 @@ module Aws::SESv2
     class ListReputationEntitiesResponse < Struct.new(
       :reputation_entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4799,7 +5001,8 @@ module Aws::SESv2
       :resource_arn,
       :page_size,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4814,7 +5017,8 @@ module Aws::SESv2
     class ListResourceTenantsResponse < Struct.new(
       :resource_tenants,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4848,7 +5052,8 @@ module Aws::SESv2
       :end_date,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4866,7 +5071,8 @@ module Aws::SESv2
     class ListSuppressedDestinationsResponse < Struct.new(
       :suppressed_destination_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4876,7 +5082,8 @@ module Aws::SESv2
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4887,7 +5094,8 @@ module Aws::SESv2
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4912,7 +5120,8 @@ module Aws::SESv2
       :filter,
       :page_size,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4927,7 +5136,8 @@ module Aws::SESv2
     class ListTenantResourcesResponse < Struct.new(
       :tenant_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4943,7 +5153,8 @@ module Aws::SESv2
     class ListTenantsRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4958,7 +5169,8 @@ module Aws::SESv2
     class ListTenantsResponse < Struct.new(
       :tenants,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5006,7 +5218,8 @@ module Aws::SESv2
       :mail_from_domain,
       :mail_from_domain_status,
       :behavior_on_mx_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5015,7 +5228,8 @@ module Aws::SESv2
     #   @return [String]
     class MailFromDomainNotVerifiedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5041,7 +5255,8 @@ module Aws::SESv2
       :body,
       :headers,
       :attachments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5073,7 +5288,8 @@ module Aws::SESv2
     class MessageHeader < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5099,7 +5315,8 @@ module Aws::SESv2
       :include,
       :exclude,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5149,7 +5366,8 @@ module Aws::SESv2
       :isp,
       :last_delivery_event,
       :last_engagement_event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5158,7 +5376,8 @@ module Aws::SESv2
     #   @return [String]
     class MessageRejected < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5194,7 +5413,8 @@ module Aws::SESv2
     class MessageTag < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5223,7 +5443,8 @@ module Aws::SESv2
       :id,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5241,7 +5462,8 @@ module Aws::SESv2
       :id,
       :timestamps,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5269,7 +5491,8 @@ module Aws::SESv2
       :metrics,
       :start_date,
       :end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5317,7 +5540,8 @@ module Aws::SESv2
       :regions,
       :created_timestamp,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5326,7 +5550,8 @@ module Aws::SESv2
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5348,7 +5573,8 @@ module Aws::SESv2
       :volume_statistics,
       :read_rate_percent,
       :domain_isp_placements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5361,7 +5587,8 @@ module Aws::SESv2
     #   @return [String]
     class PinpointDestination < Struct.new(
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5391,7 +5618,8 @@ module Aws::SESv2
       :missing_percentage,
       :spf_percentage,
       :dkim_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5404,14 +5632,16 @@ module Aws::SESv2
     #   @return [Boolean]
     class PutAccountDedicatedIpWarmupAttributesRequest < Struct.new(
       :auto_warmup_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountDedicatedIpWarmupAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5451,14 +5681,16 @@ module Aws::SESv2
       :use_case_description,
       :additional_contact_email_addresses,
       :production_access_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountDetailsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5473,14 +5705,16 @@ module Aws::SESv2
     #   @return [Boolean]
     class PutAccountSendingAttributesRequest < Struct.new(
       :sending_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountSendingAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5506,14 +5740,16 @@ module Aws::SESv2
     #   @return [Array<String>]
     class PutAccountSuppressionAttributesRequest < Struct.new(
       :suppressed_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountSuppressionAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5523,12 +5759,14 @@ module Aws::SESv2
     #   @return [Types::VdmAttributes]
     class PutAccountVdmAttributesRequest < Struct.new(
       :vdm_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutAccountVdmAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5543,14 +5781,16 @@ module Aws::SESv2
     class PutConfigurationSetArchivingOptionsRequest < Struct.new(
       :configuration_set_name,
       :archive_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetArchivingOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5578,14 +5818,16 @@ module Aws::SESv2
       :tls_policy,
       :sending_pool_name,
       :max_delivery_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetDeliveryOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5602,14 +5844,16 @@ module Aws::SESv2
     class PutConfigurationSetReputationOptionsRequest < Struct.new(
       :configuration_set_name,
       :reputation_metrics_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetReputationOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5625,14 +5869,16 @@ module Aws::SESv2
     class PutConfigurationSetSendingOptionsRequest < Struct.new(
       :configuration_set_name,
       :sending_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetSendingOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5664,14 +5910,16 @@ module Aws::SESv2
     class PutConfigurationSetSuppressionOptionsRequest < Struct.new(
       :configuration_set_name,
       :suppressed_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetSuppressionOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5694,14 +5942,16 @@ module Aws::SESv2
       :configuration_set_name,
       :custom_redirect_domain,
       :https_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetTrackingOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5715,14 +5965,16 @@ module Aws::SESv2
     class PutConfigurationSetVdmOptionsRequest < Struct.new(
       :configuration_set_name,
       :vdm_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetVdmOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5738,14 +5990,16 @@ module Aws::SESv2
     class PutDedicatedIpInPoolRequest < Struct.new(
       :ip,
       :destination_pool_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpInPoolResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5762,14 +6016,16 @@ module Aws::SESv2
     class PutDedicatedIpPoolScalingAttributesRequest < Struct.new(
       :pool_name,
       :scaling_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpPoolScalingAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5785,14 +6041,16 @@ module Aws::SESv2
     class PutDedicatedIpWarmupAttributesRequest < Struct.new(
       :ip,
       :warmup_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpWarmupAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5813,13 +6071,15 @@ module Aws::SESv2
     class PutDeliverabilityDashboardOptionRequest < Struct.new(
       :dashboard_enabled,
       :subscribed_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A response that indicates whether the Deliverability dashboard is enabled.</p>
     class PutDeliverabilityDashboardOptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5833,14 +6093,16 @@ module Aws::SESv2
     class PutEmailIdentityConfigurationSetAttributesRequest < Struct.new(
       :email_identity,
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class PutEmailIdentityConfigurationSetAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5858,14 +6120,16 @@ module Aws::SESv2
     class PutEmailIdentityDkimAttributesRequest < Struct.new(
       :email_identity,
       :signing_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityDkimAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5898,7 +6162,8 @@ module Aws::SESv2
       :email_identity,
       :signing_attributes_origin,
       :signing_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5959,7 +6224,8 @@ module Aws::SESv2
     class PutEmailIdentityDkimSigningAttributesResponse < Struct.new(
       :dkim_status,
       :dkim_tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5981,14 +6247,16 @@ module Aws::SESv2
     class PutEmailIdentityFeedbackAttributesRequest < Struct.new(
       :email_identity,
       :email_forwarding_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityFeedbackAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6027,14 +6295,16 @@ module Aws::SESv2
       :email_identity,
       :mail_from_domain,
       :behavior_on_mx_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityMailFromAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6050,14 +6320,16 @@ module Aws::SESv2
     class PutSuppressedDestinationRequest < Struct.new(
       :email_address,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutSuppressedDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6096,7 +6368,8 @@ module Aws::SESv2
     #   @return [String]
     class RawMessage < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6135,7 +6408,8 @@ module Aws::SESv2
       :created_timestamp,
       :last_updated_timestamp,
       :impact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6148,7 +6422,8 @@ module Aws::SESv2
     #   @return [Types::ReplacementTemplate]
     class ReplacementEmailContent < Struct.new(
       :replacement_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6161,7 +6436,8 @@ module Aws::SESv2
     #   @return [String]
     class ReplacementTemplate < Struct.new(
       :replacement_template_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6209,7 +6485,8 @@ module Aws::SESv2
       :aws_ses_managed_status,
       :sending_status_aggregate,
       :reputation_impact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6228,7 +6505,8 @@ module Aws::SESv2
     class ReputationOptions < Struct.new(
       :reputation_metrics_enabled,
       :last_fresh_start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6255,7 +6533,8 @@ module Aws::SESv2
       :tenant_id,
       :resource_arn,
       :associated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6292,7 +6571,8 @@ module Aws::SESv2
     class ReviewDetails < Struct.new(
       :status,
       :case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6302,7 +6582,8 @@ module Aws::SESv2
     #   @return [String]
     class Route < Struct.new(
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6312,7 +6593,8 @@ module Aws::SESv2
     #   @return [String]
     class RouteDetails < Struct.new(
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6331,7 +6613,8 @@ module Aws::SESv2
       :primary_name_server,
       :admin_email,
       :serial_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6420,7 +6703,8 @@ module Aws::SESv2
       :configuration_set_name,
       :endpoint_id,
       :tenant_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6431,7 +6715,8 @@ module Aws::SESv2
     #   @return [Array<Types::BulkEmailEntryResult>]
     class SendBulkEmailResponse < Struct.new(
       :bulk_email_entry_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6451,7 +6736,8 @@ module Aws::SESv2
       :email_address,
       :template_name,
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6462,7 +6748,8 @@ module Aws::SESv2
     #   @return [String]
     class SendCustomVerificationEmailResponse < Struct.new(
       :message_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6554,7 +6841,8 @@ module Aws::SESv2
       :endpoint_id,
       :tenant_name,
       :list_management_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6571,7 +6859,8 @@ module Aws::SESv2
     #   @return [String]
     class SendEmailResponse < Struct.new(
       :message_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6595,7 +6884,8 @@ module Aws::SESv2
       :max24_hour_send,
       :max_send_rate,
       :sent_last24_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6614,7 +6904,8 @@ module Aws::SESv2
     #   @return [Boolean]
     class SendingOptions < Struct.new(
       :sending_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6629,7 +6920,8 @@ module Aws::SESv2
     #   @return [String]
     class SendingPausedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6641,7 +6933,8 @@ module Aws::SESv2
     #   @return [String]
     class SnsDestination < Struct.new(
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6675,7 +6968,8 @@ module Aws::SESv2
       :status,
       :cause,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6700,7 +6994,8 @@ module Aws::SESv2
       :reason,
       :last_update_time,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6717,7 +7012,8 @@ module Aws::SESv2
     class SuppressedDestinationAttributes < Struct.new(
       :message_id,
       :feedback_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6736,7 +7032,8 @@ module Aws::SESv2
       :email_address,
       :reason,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6763,7 +7060,8 @@ module Aws::SESv2
     #   @return [Array<String>]
     class SuppressionAttributes < Struct.new(
       :suppressed_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6782,7 +7080,8 @@ module Aws::SESv2
     #   @return [String]
     class SuppressionListDestination < Struct.new(
       :suppression_list_import_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6809,7 +7108,8 @@ module Aws::SESv2
     #   @return [Array<String>]
     class SuppressionOptions < Struct.new(
       :suppressed_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6859,7 +7159,8 @@ module Aws::SESv2
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6876,12 +7177,14 @@ module Aws::SESv2
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6925,7 +7228,8 @@ module Aws::SESv2
       :template_data,
       :headers,
       :attachments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6955,7 +7259,8 @@ module Aws::SESv2
       :created_timestamp,
       :tags,
       :sending_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6977,7 +7282,8 @@ module Aws::SESv2
       :tenant_id,
       :tenant_arn,
       :created_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6992,7 +7298,8 @@ module Aws::SESv2
     class TenantResource < Struct.new(
       :resource_type,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7009,7 +7316,8 @@ module Aws::SESv2
     class TestRenderEmailTemplateRequest < Struct.new(
       :template_name,
       :template_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7021,7 +7329,8 @@ module Aws::SESv2
     #   @return [String]
     class TestRenderEmailTemplateResponse < Struct.new(
       :rendered_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7030,7 +7339,8 @@ module Aws::SESv2
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7054,7 +7364,8 @@ module Aws::SESv2
       :display_name,
       :description,
       :default_subscription_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7069,7 +7380,8 @@ module Aws::SESv2
     class TopicFilter < Struct.new(
       :topic_name,
       :use_default_if_preference_unavailable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7089,7 +7401,8 @@ module Aws::SESv2
     class TopicPreference < Struct.new(
       :topic_name,
       :subscription_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7109,7 +7422,8 @@ module Aws::SESv2
     class TrackingOptions < Struct.new(
       :custom_redirect_domain,
       :https_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7129,12 +7443,14 @@ module Aws::SESv2
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7154,14 +7470,16 @@ module Aws::SESv2
       :configuration_set_name,
       :event_destination_name,
       :event_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class UpdateConfigurationSetEventDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7179,12 +7497,14 @@ module Aws::SESv2
       :contact_list_name,
       :topics,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactListResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7210,12 +7530,14 @@ module Aws::SESv2
       :topic_preferences,
       :unsubscribe_all,
       :attributes_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7250,14 +7572,16 @@ module Aws::SESv2
       :template_content,
       :success_redirection_url,
       :failure_redirection_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class UpdateCustomVerificationEmailTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7281,14 +7605,16 @@ module Aws::SESv2
       :email_identity,
       :policy_name,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class UpdateEmailIdentityPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7304,14 +7630,16 @@ module Aws::SESv2
     class UpdateEmailTemplateRequest < Struct.new(
       :template_name,
       :template_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class UpdateEmailTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7344,13 +7672,15 @@ module Aws::SESv2
       :reputation_entity_type,
       :reputation_entity_reference,
       :sending_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>
     class UpdateReputationEntityCustomerManagedStatusResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7370,13 +7700,15 @@ module Aws::SESv2
       :reputation_entity_type,
       :reputation_entity_reference,
       :reputation_entity_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>
     class UpdateReputationEntityPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7406,7 +7738,8 @@ module Aws::SESv2
       :vdm_enabled,
       :dashboard_attributes,
       :guardian_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7423,7 +7756,8 @@ module Aws::SESv2
     class VdmOptions < Struct.new(
       :dashboard_options,
       :guardian_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7513,7 +7847,8 @@ module Aws::SESv2
       :last_success_timestamp,
       :error_type,
       :soa_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7539,7 +7874,8 @@ module Aws::SESv2
       :spam_raw_count,
       :projected_inbox,
       :projected_spam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -1509,7 +1509,6 @@ module Aws::SFN
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {}
       end)
-
     end
 
     class << self

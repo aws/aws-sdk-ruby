@@ -308,7 +308,6 @@ module Aws::DSQL
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to modify the deletion protection status of a given cluster."}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/cluster/{identifier}"}}
       end)
-
     end
 
     class << self

@@ -22,7 +22,8 @@ module Aws::ResourceGroupsTaggingAPI
       :noncompliant_keys,
       :keys_with_noncompliant_values,
       :compliance_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,12 +62,14 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     class ConstraintViolationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeReportCreationInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +112,8 @@ module Aws::ResourceGroupsTaggingAPI
       :s3_location,
       :start_date,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -159,7 +164,8 @@ module Aws::ResourceGroupsTaggingAPI
       :status_code,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -235,7 +241,8 @@ module Aws::ResourceGroupsTaggingAPI
       :group_by,
       :max_results,
       :pagination_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +257,8 @@ module Aws::ResourceGroupsTaggingAPI
     class GetComplianceSummaryOutput < Struct.new(
       :summary_list,
       :pagination_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +400,8 @@ module Aws::ResourceGroupsTaggingAPI
       :include_compliance_details,
       :exclude_compliant_resources,
       :resource_arn_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +417,8 @@ module Aws::ResourceGroupsTaggingAPI
     class GetResourcesOutput < Struct.new(
       :pagination_token,
       :resource_tag_mapping_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +429,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     class GetTagKeysInput < Struct.new(
       :pagination_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +445,8 @@ module Aws::ResourceGroupsTaggingAPI
     class GetTagKeysOutput < Struct.new(
       :pagination_token,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -450,7 +462,8 @@ module Aws::ResourceGroupsTaggingAPI
     class GetTagValuesInput < Struct.new(
       :pagination_token,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +479,8 @@ module Aws::ResourceGroupsTaggingAPI
     class GetTagValuesOutput < Struct.new(
       :pagination_token,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -476,7 +490,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +520,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +531,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     class PaginationTokenExpiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +552,8 @@ module Aws::ResourceGroupsTaggingAPI
       :resource_arn,
       :tags,
       :compliance_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -549,12 +567,14 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     class StartReportCreationInput < Struct.new(
       :s3_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartReportCreationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +605,8 @@ module Aws::ResourceGroupsTaggingAPI
       :region,
       :resource_type,
       :non_compliant_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -608,7 +629,8 @@ module Aws::ResourceGroupsTaggingAPI
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -625,7 +647,8 @@ module Aws::ResourceGroupsTaggingAPI
     class TagFilter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +666,8 @@ module Aws::ResourceGroupsTaggingAPI
     class TagResourcesInput < Struct.new(
       :resource_arn_list,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -655,7 +679,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [Hash<String, Types::FailureInfo>]
     class TagResourcesOutput < Struct.new(
       :failed_resources_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +689,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     class ThrottledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +708,8 @@ module Aws::ResourceGroupsTaggingAPI
     class UntagResourcesInput < Struct.new(
       :resource_arn_list,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +721,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [Hash<String, Types::FailureInfo>]
     class UntagResourcesOutput < Struct.new(
       :failed_resources_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

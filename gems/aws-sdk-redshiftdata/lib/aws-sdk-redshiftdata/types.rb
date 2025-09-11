@@ -11,7 +11,8 @@ module Aws::RedshiftData
     #   @return [String]
     class ActiveSessionsExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::RedshiftData
     #   @return [String]
     class ActiveStatementsExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33,7 +35,8 @@ module Aws::RedshiftData
     class BatchExecuteStatementException < Struct.new(
       :message,
       :statement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +93,8 @@ module Aws::RedshiftData
       :session_keep_alive_seconds,
       :session_id,
       :result_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +136,8 @@ module Aws::RedshiftData
       :secret_arn,
       :workgroup_name,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +147,8 @@ module Aws::RedshiftData
     #   @return [String]
     class CancelStatementRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +157,8 @@ module Aws::RedshiftData
     #   @return [Boolean]
     class CancelStatementResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +216,8 @@ module Aws::RedshiftData
       :type_name,
       :length,
       :column_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -229,7 +237,8 @@ module Aws::RedshiftData
     #   @return [String]
     class DatabaseConnectionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +250,8 @@ module Aws::RedshiftData
     #   @return [String]
     class DescribeStatementRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +368,8 @@ module Aws::RedshiftData
       :workgroup_name,
       :session_id,
       :result_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -415,7 +426,8 @@ module Aws::RedshiftData
       :next_token,
       :max_results,
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +444,8 @@ module Aws::RedshiftData
       :table_name,
       :column_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +459,8 @@ module Aws::RedshiftData
     class ExecuteStatementException < Struct.new(
       :message,
       :statement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +517,8 @@ module Aws::RedshiftData
       :session_keep_alive_seconds,
       :session_id,
       :result_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +559,8 @@ module Aws::RedshiftData
       :secret_arn,
       :workgroup_name,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +591,8 @@ module Aws::RedshiftData
       :string_value,
       :blob_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IsNull < Field; end
@@ -599,7 +616,8 @@ module Aws::RedshiftData
     class GetStatementResultRequest < Struct.new(
       :id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -621,7 +639,8 @@ module Aws::RedshiftData
       :column_metadata,
       :total_num_rows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -642,7 +661,8 @@ module Aws::RedshiftData
     class GetStatementResultV2Request < Struct.new(
       :id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +688,8 @@ module Aws::RedshiftData
       :total_num_rows,
       :result_format,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -683,7 +704,8 @@ module Aws::RedshiftData
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +739,8 @@ module Aws::RedshiftData
       :next_token,
       :max_results,
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +753,8 @@ module Aws::RedshiftData
     class ListDatabasesResponse < Struct.new(
       :databases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +799,8 @@ module Aws::RedshiftData
       :next_token,
       :max_results,
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,7 +813,8 @@ module Aws::RedshiftData
     class ListSchemasResponse < Struct.new(
       :schemas,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +882,8 @@ module Aws::RedshiftData
       :database,
       :cluster_identifier,
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +896,8 @@ module Aws::RedshiftData
     class ListStatementsResponse < Struct.new(
       :statements,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +952,8 @@ module Aws::RedshiftData
       :next_token,
       :max_results,
       :workgroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +966,8 @@ module Aws::RedshiftData
     class ListTablesResponse < Struct.new(
       :tables,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,7 +978,8 @@ module Aws::RedshiftData
     class QueryRecords < Struct.new(
       :csv_records,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CSVRecords < QueryRecords; end
@@ -960,7 +991,8 @@ module Aws::RedshiftData
     #   @return [String]
     class QueryTimeoutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,7 +1006,8 @@ module Aws::RedshiftData
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1024,8 @@ module Aws::RedshiftData
     class SqlParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1081,8 @@ module Aws::RedshiftData
       :is_batch_statement,
       :result_format,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1138,8 @@ module Aws::RedshiftData
       :result_size,
       :redshift_query_id,
       :has_result_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1130,7 +1166,8 @@ module Aws::RedshiftData
       :name,
       :type,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1177,8 @@ module Aws::RedshiftData
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

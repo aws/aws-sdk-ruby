@@ -432,7 +432,6 @@ module Aws::ManagedBlockchainQuery
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to retrieve a multiple transactions on a blockchain", "smithy.api#http" => {"uri" => "/list-transactions", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTransactions.new
       end)
-
     end
 
     class << self

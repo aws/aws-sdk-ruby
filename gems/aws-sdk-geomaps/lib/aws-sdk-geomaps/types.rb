@@ -11,7 +11,8 @@ module Aws::GeoMaps
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::GeoMaps
     class GetGlyphsRequest < Struct.new(
       :font_stack,
       :font_unicode_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +47,8 @@ module Aws::GeoMaps
       :content_type,
       :cache_control,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +69,8 @@ module Aws::GeoMaps
       :style,
       :color_scheme,
       :variant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -87,7 +91,8 @@ module Aws::GeoMaps
       :content_type,
       :cache_control,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +177,8 @@ module Aws::GeoMaps
       :style,
       :width,
       :zoom,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -197,7 +203,8 @@ module Aws::GeoMaps
       :cache_control,
       :e_tag,
       :pricing_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +225,8 @@ module Aws::GeoMaps
       :color_scheme,
       :political_view,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +247,8 @@ module Aws::GeoMaps
       :content_type,
       :cache_control,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +273,8 @@ module Aws::GeoMaps
       :x,
       :y,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +299,8 @@ module Aws::GeoMaps
       :cache_control,
       :e_tag,
       :pricing_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +309,8 @@ module Aws::GeoMaps
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +319,8 @@ module Aws::GeoMaps
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +329,8 @@ module Aws::GeoMaps
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +347,8 @@ module Aws::GeoMaps
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +362,8 @@ module Aws::GeoMaps
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -40,7 +40,7 @@ module Aws::S3Tables
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Tables::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::S3Tables
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Tables::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::S3Tables
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Tables::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::S3Tables
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Tables::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::S3Tables
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Tables::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::S3Tables
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Tables::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::S3Tables
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Tables::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

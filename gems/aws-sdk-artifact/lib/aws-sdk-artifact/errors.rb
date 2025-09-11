@@ -40,7 +40,7 @@ module Aws::Artifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Artifact::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::Artifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Artifact::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::Artifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Artifact::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::Artifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Artifact::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::Artifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Artifact::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -154,7 +154,7 @@ module Aws::Artifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Artifact::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::Artifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Artifact::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

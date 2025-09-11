@@ -12,7 +12,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23,7 +24,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class AssociateDefaultViewOperationInput < Struct.new(
       :view_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33,7 +35,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class AssociateDefaultViewOperationOutput < Struct.new(
       :view_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +51,8 @@ module Aws::ResourceExplorer2
     class BatchGetViewError < Struct.new(
       :view_arn,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +61,8 @@ module Aws::ResourceExplorer2
     #   @return [Array<String>]
     class BatchGetViewOperationInput < Struct.new(
       :view_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +77,8 @@ module Aws::ResourceExplorer2
     class BatchGetViewOperationOutput < Struct.new(
       :views,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -87,7 +93,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +110,8 @@ module Aws::ResourceExplorer2
     class CreateIndexOperationInput < Struct.new(
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,7 +137,8 @@ module Aws::ResourceExplorer2
       :arn,
       :state,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +187,8 @@ module Aws::ResourceExplorer2
       :scope,
       :filters,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +197,8 @@ module Aws::ResourceExplorer2
     #   @return [Types::View]
     class CreateViewOperationOutput < Struct.new(
       :view,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +207,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class DeleteIndexOperationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +229,8 @@ module Aws::ResourceExplorer2
       :arn,
       :state,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +239,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class DeleteViewOperationInput < Struct.new(
       :view_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +249,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class DeleteViewOperationOutput < Struct.new(
       :view_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +260,8 @@ module Aws::ResourceExplorer2
     #   @return [Types::OrgConfiguration]
     class GetAccountLevelServiceConfigurationOutput < Struct.new(
       :org_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -255,7 +271,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class GetDefaultViewOperationOutput < Struct.new(
       :view_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -300,7 +317,8 @@ module Aws::ResourceExplorer2
       :created_at,
       :last_updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +327,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class GetManagedViewInput < Struct.new(
       :managed_view_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +337,8 @@ module Aws::ResourceExplorer2
     #   @return [Types::ManagedView]
     class GetManagedViewOutput < Struct.new(
       :managed_view,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +347,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class GetViewOperationInput < Struct.new(
       :view_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +361,8 @@ module Aws::ResourceExplorer2
     class GetViewOperationOutput < Struct.new(
       :view,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +382,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class IncludedProperty < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -400,7 +423,8 @@ module Aws::ResourceExplorer2
       :region,
       :arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +434,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +467,8 @@ module Aws::ResourceExplorer2
       :account_id_list,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +486,8 @@ module Aws::ResourceExplorer2
     class ListIndexesForMembersOutput < Struct.new(
       :indexes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +525,8 @@ module Aws::ResourceExplorer2
       :regions,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +543,8 @@ module Aws::ResourceExplorer2
     class ListIndexesOperationOutput < Struct.new(
       :indexes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +576,8 @@ module Aws::ResourceExplorer2
       :max_results,
       :next_token,
       :service_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +594,8 @@ module Aws::ResourceExplorer2
     class ListManagedViewsOutput < Struct.new(
       :next_token,
       :managed_views,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +651,8 @@ module Aws::ResourceExplorer2
       :max_results,
       :view_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +673,8 @@ module Aws::ResourceExplorer2
       :resources,
       :next_token,
       :view_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +701,8 @@ module Aws::ResourceExplorer2
     class ListSupportedResourceTypesOperationInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +719,8 @@ module Aws::ResourceExplorer2
     class ListSupportedResourceTypesOperationOutput < Struct.new(
       :resource_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +729,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +740,8 @@ module Aws::ResourceExplorer2
     #   @return [Hash<String, String>]
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +768,8 @@ module Aws::ResourceExplorer2
     class ListViewsOperationInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +787,8 @@ module Aws::ResourceExplorer2
     class ListViewsOperationOutput < Struct.new(
       :views,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -800,7 +839,8 @@ module Aws::ResourceExplorer2
       :filters,
       :resource_policy,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,7 +878,8 @@ module Aws::ResourceExplorer2
       :region,
       :arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -853,7 +894,8 @@ module Aws::ResourceExplorer2
     class OrgConfiguration < Struct.new(
       :aws_service_access_status,
       :service_linked_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -891,7 +933,8 @@ module Aws::ResourceExplorer2
       :service,
       :last_reported_at,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +966,8 @@ module Aws::ResourceExplorer2
     class ResourceCount < Struct.new(
       :total_resources,
       :complete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +977,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +998,8 @@ module Aws::ResourceExplorer2
       :name,
       :last_reported_at,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1014,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class SearchFilter < Struct.new(
       :filter_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1017,7 +1064,8 @@ module Aws::ResourceExplorer2
       :max_results,
       :view_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1090,8 @@ module Aws::ResourceExplorer2
       :next_token,
       :view_arn,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,7 +1108,8 @@ module Aws::ResourceExplorer2
       :message,
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1074,7 +1124,8 @@ module Aws::ResourceExplorer2
     class SupportedResourceType < Struct.new(
       :service,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1089,12 +1140,14 @@ module Aws::ResourceExplorer2
     class TagResourceOperationInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1158,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1168,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1129,12 +1184,14 @@ module Aws::ResourceExplorer2
     class UntagResourceOperationInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1206,8 @@ module Aws::ResourceExplorer2
     class UpdateIndexTypeOperationInput < Struct.new(
       :arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1171,7 +1229,8 @@ module Aws::ResourceExplorer2
       :type,
       :state,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,7 +1262,8 @@ module Aws::ResourceExplorer2
       :view_arn,
       :included_properties,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1272,8 @@ module Aws::ResourceExplorer2
     #   @return [Types::View]
     class UpdateViewOperationOutput < Struct.new(
       :view,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1287,8 @@ module Aws::ResourceExplorer2
     class ValidationException < Struct.new(
       :message,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1240,7 +1302,8 @@ module Aws::ResourceExplorer2
     class ValidationExceptionField < Struct.new(
       :name,
       :validation_issue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1344,8 @@ module Aws::ResourceExplorer2
       :scope,
       :included_properties,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

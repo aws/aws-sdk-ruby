@@ -789,7 +789,6 @@ module Aws::PaymentCryptographyData
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationFailedException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/pindata/verify", "code" => 200}}
       end)
-
     end
 
     class << self

@@ -2809,7 +2809,6 @@ module Aws::CloudWatchLogs
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         operation.traits = {}
       end)
-
     end
 
     class << self

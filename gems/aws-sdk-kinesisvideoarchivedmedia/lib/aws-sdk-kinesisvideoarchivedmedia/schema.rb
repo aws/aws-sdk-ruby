@@ -321,7 +321,6 @@ module Aws::KinesisVideoArchivedMedia
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/listFragments", "code" => 200}}
         operation[:paginator] = Paginators::ListFragments.new
       end)
-
     end
 
     class << self

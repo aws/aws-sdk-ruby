@@ -101,7 +101,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::AuthorizationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -116,7 +116,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::CertificateNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -130,7 +130,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -144,7 +144,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterEndpointAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -158,7 +158,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterEndpointNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -172,7 +172,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterEndpointQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -187,7 +187,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -203,7 +203,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -217,7 +217,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -231,7 +231,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterRoleAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -245,7 +245,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterRoleNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -259,7 +259,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterRoleQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -273,7 +273,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterSnapshotAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -289,7 +289,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBClusterSnapshotNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -303,7 +303,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBInstanceAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -318,7 +318,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBInstanceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -332,7 +332,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBParameterGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -348,7 +348,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -362,7 +362,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBParameterGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -378,7 +378,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBSecurityGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -393,7 +393,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBSnapshotAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -408,7 +408,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBSnapshotNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -423,7 +423,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBSubnetGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -438,7 +438,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBSubnetGroupDoesNotCoverEnoughAZs] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -454,7 +454,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBSubnetGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -468,7 +468,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBSubnetGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -482,7 +482,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBSubnetQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -496,7 +496,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DBUpgradeDependencyFailureFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -511,7 +511,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::DomainNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -525,7 +525,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::EventSubscriptionQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -539,7 +539,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::GlobalClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -553,7 +553,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::GlobalClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -567,7 +567,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::GlobalClusterQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -581,7 +581,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InstanceQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -595,7 +595,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InsufficientDBClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -609,7 +609,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InsufficientDBInstanceCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -625,7 +625,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InsufficientStorageClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -639,7 +639,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidDBClusterEndpointStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -653,7 +653,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidDBClusterSnapshotStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -667,7 +667,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidDBClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -681,7 +681,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidDBInstanceStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -696,7 +696,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidDBParameterGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -710,7 +710,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidDBSecurityGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -724,7 +724,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidDBSnapshotStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -738,7 +738,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidDBSubnetGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -752,7 +752,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidDBSubnetStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -766,7 +766,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidEventSubscriptionStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -780,7 +780,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidGlobalClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -794,7 +794,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidRestoreFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -809,7 +809,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidSubnet] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -824,7 +824,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::InvalidVPCNetworkStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -838,7 +838,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::KMSKeyNotAccessibleFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -852,7 +852,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::OptionGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -866,7 +866,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::ProvisionedIopsNotAvailableInAZFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -880,7 +880,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::ResourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -894,7 +894,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::SNSInvalidTopicFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -908,7 +908,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::SNSNoAuthorizationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -922,7 +922,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::SNSTopicArnNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -936,7 +936,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::SharedSnapshotQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -950,7 +950,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::SnapshotQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -964,7 +964,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::SourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -978,7 +978,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::StorageQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -993,7 +993,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::StorageTypeNotSupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -1007,7 +1007,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::SubnetAlreadyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -1021,7 +1021,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::SubscriptionAlreadyExistFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -1035,7 +1035,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::SubscriptionCategoryNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>
@@ -1049,7 +1049,7 @@ module Aws::Neptune
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::SubscriptionNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the details of the problem.</p>

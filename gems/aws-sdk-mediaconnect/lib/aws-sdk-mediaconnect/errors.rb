@@ -45,7 +45,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::AddFlowOutputs420Exception] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -88,7 +88,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::CreateBridge420Exception] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::CreateFlow420Exception] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::CreateGateway420Exception] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -127,7 +127,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::GrantFlowEntitlements420Exception] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -170,7 +170,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -183,7 +183,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -200,7 +200,7 @@ module Aws::MediaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

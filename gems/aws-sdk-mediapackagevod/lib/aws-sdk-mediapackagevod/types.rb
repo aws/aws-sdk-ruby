@@ -40,7 +40,8 @@ module Aws::MediaPackageVod
       :source_arn,
       :source_role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +55,8 @@ module Aws::MediaPackageVod
     class Authorization < Struct.new(
       :cdn_identifier_secret,
       :secrets_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +70,8 @@ module Aws::MediaPackageVod
     class CmafEncryption < Struct.new(
       :constant_initialization_vector,
       :speke_key_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -91,7 +94,8 @@ module Aws::MediaPackageVod
       :hls_manifests,
       :include_encoder_configuration_in_segments,
       :segment_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,7 +109,8 @@ module Aws::MediaPackageVod
     class ConfigureLogsRequest < Struct.new(
       :egress_access_logs,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -138,7 +143,8 @@ module Aws::MediaPackageVod
       :egress_access_logs,
       :id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +174,8 @@ module Aws::MediaPackageVod
       :source_arn,
       :source_role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +216,8 @@ module Aws::MediaPackageVod
       :source_arn,
       :source_role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -243,7 +251,8 @@ module Aws::MediaPackageVod
       :mss_package,
       :packaging_group_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +293,8 @@ module Aws::MediaPackageVod
       :mss_package,
       :packaging_group_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +316,8 @@ module Aws::MediaPackageVod
       :egress_access_logs,
       :id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +350,8 @@ module Aws::MediaPackageVod
       :egress_access_logs,
       :id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -349,7 +361,8 @@ module Aws::MediaPackageVod
     #   @return [Types::SpekeKeyProvider]
     class DashEncryption < Struct.new(
       :speke_key_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +392,8 @@ module Aws::MediaPackageVod
       :profile,
       :scte_markers_source,
       :stream_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +431,8 @@ module Aws::MediaPackageVod
       :period_triggers,
       :segment_duration_seconds,
       :segment_template_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,12 +441,14 @@ module Aws::MediaPackageVod
     #   @return [String]
     class DeleteAssetRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAssetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,12 +457,14 @@ module Aws::MediaPackageVod
     #   @return [String]
     class DeletePackagingConfigurationRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePackagingConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,12 +473,14 @@ module Aws::MediaPackageVod
     #   @return [String]
     class DeletePackagingGroupRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePackagingGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +489,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class DescribeAssetRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +531,8 @@ module Aws::MediaPackageVod
       :source_arn,
       :source_role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +541,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class DescribePackagingConfigurationRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -559,7 +583,8 @@ module Aws::MediaPackageVod
       :mss_package,
       :packaging_group_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +593,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class DescribePackagingGroupRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,7 +631,8 @@ module Aws::MediaPackageVod
       :egress_access_logs,
       :id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +642,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class EgressAccessLogs < Struct.new(
       :log_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +661,8 @@ module Aws::MediaPackageVod
       :packaging_configuration_id,
       :status,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +681,8 @@ module Aws::MediaPackageVod
     class EncryptionContractConfiguration < Struct.new(
       :preset_speke20_audio,
       :preset_speke20_video,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +691,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +711,8 @@ module Aws::MediaPackageVod
       :constant_initialization_vector,
       :encryption_method,
       :speke_key_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +755,8 @@ module Aws::MediaPackageVod
       :program_date_time_interval_seconds,
       :repeat_ext_x_key,
       :stream_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -750,7 +783,8 @@ module Aws::MediaPackageVod
       :include_dvb_subtitles,
       :segment_duration_seconds,
       :use_audio_rendition_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +793,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class InternalServerErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -776,7 +811,8 @@ module Aws::MediaPackageVod
       :max_results,
       :next_token,
       :packaging_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -789,7 +825,8 @@ module Aws::MediaPackageVod
     class ListAssetsResponse < Struct.new(
       :assets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -806,7 +843,8 @@ module Aws::MediaPackageVod
       :max_results,
       :next_token,
       :packaging_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +857,8 @@ module Aws::MediaPackageVod
     class ListPackagingConfigurationsResponse < Struct.new(
       :next_token,
       :packaging_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +871,8 @@ module Aws::MediaPackageVod
     class ListPackagingGroupsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +885,8 @@ module Aws::MediaPackageVod
     class ListPackagingGroupsResponse < Struct.new(
       :next_token,
       :packaging_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -854,7 +895,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -863,7 +905,8 @@ module Aws::MediaPackageVod
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +916,8 @@ module Aws::MediaPackageVod
     #   @return [Types::SpekeKeyProvider]
     class MssEncryption < Struct.new(
       :speke_key_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +931,8 @@ module Aws::MediaPackageVod
     class MssManifest < Struct.new(
       :manifest_name,
       :stream_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -905,7 +950,8 @@ module Aws::MediaPackageVod
       :encryption,
       :mss_manifests,
       :segment_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +960,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +1003,8 @@ module Aws::MediaPackageVod
       :mss_package,
       :packaging_group_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -994,7 +1042,8 @@ module Aws::MediaPackageVod
       :egress_access_logs,
       :id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1052,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,7 +1081,8 @@ module Aws::MediaPackageVod
       :role_arn,
       :system_ids,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1100,8 @@ module Aws::MediaPackageVod
       :max_video_bits_per_second,
       :min_video_bits_per_second,
       :stream_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1062,7 +1114,8 @@ module Aws::MediaPackageVod
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1071,7 +1124,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1134,8 @@ module Aws::MediaPackageVod
     #   @return [String]
     class UnprocessableEntityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1148,8 @@ module Aws::MediaPackageVod
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1107,7 +1163,8 @@ module Aws::MediaPackageVod
     class UpdatePackagingGroupRequest < Struct.new(
       :authorization,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1144,7 +1201,8 @@ module Aws::MediaPackageVod
       :egress_access_logs,
       :id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -41,7 +41,7 @@ module Aws::SSMContacts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMContacts::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::SSMContacts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMContacts::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::SSMContacts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMContacts::Types::DataEncryptionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::SSMContacts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMContacts::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::SSMContacts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMContacts::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -136,7 +136,7 @@ module Aws::SSMContacts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMContacts::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -169,7 +169,7 @@ module Aws::SSMContacts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMContacts::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::SSMContacts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMContacts::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

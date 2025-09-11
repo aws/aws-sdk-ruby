@@ -170,7 +170,6 @@ module Aws::SageMakerFeatureStoreRuntime
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationError)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/FeatureGroup/{FeatureGroupName}", "code" => 200}}
       end)
-
     end
 
     class << self

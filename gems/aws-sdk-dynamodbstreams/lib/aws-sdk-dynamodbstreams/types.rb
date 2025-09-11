@@ -84,7 +84,8 @@ module Aws::DynamoDBStreams
       :null,
       :bool,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S < AttributeValue; end
@@ -120,7 +121,8 @@ module Aws::DynamoDBStreams
       :limit,
       :exclusive_start_shard_id,
       :shard_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +132,8 @@ module Aws::DynamoDBStreams
     #   @return [Types::StreamDescription]
     class DescribeStreamOutput < Struct.new(
       :stream_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +145,8 @@ module Aws::DynamoDBStreams
     #   @return [String]
     class ExpiredIteratorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +160,8 @@ module Aws::DynamoDBStreams
     class GetRecordsInput < Struct.new(
       :shard_iterator,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +177,8 @@ module Aws::DynamoDBStreams
     class GetRecordsOutput < Struct.new(
       :records,
       :next_shard_iterator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +224,8 @@ module Aws::DynamoDBStreams
       :shard_id,
       :shard_iterator_type,
       :sequence_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +235,8 @@ module Aws::DynamoDBStreams
     #   @return [String]
     class GetShardIteratorOutput < Struct.new(
       :shard_iterator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -243,7 +251,8 @@ module Aws::DynamoDBStreams
     class Identity < Struct.new(
       :principal_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +262,8 @@ module Aws::DynamoDBStreams
     #   @return [String]
     class InternalServerError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +307,8 @@ module Aws::DynamoDBStreams
     class KeySchemaElement < Struct.new(
       :attribute_name,
       :key_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +331,8 @@ module Aws::DynamoDBStreams
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +352,8 @@ module Aws::DynamoDBStreams
       :table_name,
       :limit,
       :exclusive_start_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +372,8 @@ module Aws::DynamoDBStreams
     class ListStreamsOutput < Struct.new(
       :streams,
       :last_evaluated_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +434,8 @@ module Aws::DynamoDBStreams
       :aws_region,
       :dynamodb,
       :user_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +447,8 @@ module Aws::DynamoDBStreams
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +462,8 @@ module Aws::DynamoDBStreams
     class SequenceNumberRange < Struct.new(
       :starting_sequence_number,
       :ending_sequence_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +481,8 @@ module Aws::DynamoDBStreams
       :shard_id,
       :sequence_number_range,
       :parent_shard_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +501,8 @@ module Aws::DynamoDBStreams
     class ShardFilter < Struct.new(
       :type,
       :shard_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +535,8 @@ module Aws::DynamoDBStreams
       :stream_arn,
       :table_name,
       :stream_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +634,8 @@ module Aws::DynamoDBStreams
       :key_schema,
       :shards,
       :last_evaluated_shard_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +687,8 @@ module Aws::DynamoDBStreams
       :sequence_number,
       :size_bytes,
       :stream_view_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +709,8 @@ module Aws::DynamoDBStreams
     #   @return [String]
     class TrimmedDataAccessException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

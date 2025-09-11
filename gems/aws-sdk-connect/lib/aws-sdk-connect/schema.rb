@@ -9935,7 +9935,6 @@ module Aws::Connect
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/views/{InstanceId}/{ViewId}/metadata", "code" => 200}}
       end)
-
     end
 
     class << self

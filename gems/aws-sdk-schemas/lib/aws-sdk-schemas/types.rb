@@ -15,7 +15,8 @@ module Aws::Schemas
     class BadRequestException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28,7 +29,8 @@ module Aws::Schemas
     class ConflictException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +51,8 @@ module Aws::Schemas
       :source_arn,
       :cross_account,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +85,8 @@ module Aws::Schemas
       :state,
       :cross_account,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -99,7 +103,8 @@ module Aws::Schemas
       :description,
       :registry_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +125,8 @@ module Aws::Schemas
       :registry_arn,
       :registry_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +155,8 @@ module Aws::Schemas
       :schema_name,
       :tags,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +193,8 @@ module Aws::Schemas
       :tags,
       :type,
       :version_created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -195,7 +203,8 @@ module Aws::Schemas
     #   @return [String]
     class DeleteDiscovererRequest < Struct.new(
       :discoverer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -204,7 +213,8 @@ module Aws::Schemas
     #   @return [String]
     class DeleteRegistryRequest < Struct.new(
       :registry_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +223,8 @@ module Aws::Schemas
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
       :registry_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +237,8 @@ module Aws::Schemas
     class DeleteSchemaRequest < Struct.new(
       :registry_name,
       :schema_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -243,7 +255,8 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +277,8 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +299,8 @@ module Aws::Schemas
       :last_modified,
       :schema_version,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +309,8 @@ module Aws::Schemas
     #   @return [String]
     class DescribeDiscovererRequest < Struct.new(
       :discoverer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +343,8 @@ module Aws::Schemas
       :state,
       :cross_account,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -336,7 +353,8 @@ module Aws::Schemas
     #   @return [String]
     class DescribeRegistryRequest < Struct.new(
       :registry_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -357,7 +375,8 @@ module Aws::Schemas
       :registry_arn,
       :registry_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +393,8 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +435,8 @@ module Aws::Schemas
       :tags,
       :type,
       :version_created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +465,8 @@ module Aws::Schemas
       :state,
       :cross_account,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +486,8 @@ module Aws::Schemas
       :schema_name,
       :schema_version,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +507,8 @@ module Aws::Schemas
       :schema_name,
       :schema_version,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +521,8 @@ module Aws::Schemas
     class ForbiddenException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +543,8 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +552,8 @@ module Aws::Schemas
     #   @return [String]
     class GetCodeBindingSourceResponse < Struct.new(
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +566,8 @@ module Aws::Schemas
     class GetDiscoveredSchemaRequest < Struct.new(
       :events,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +576,8 @@ module Aws::Schemas
     #   @return [String]
     class GetDiscoveredSchemaResponse < Struct.new(
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +586,8 @@ module Aws::Schemas
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
       :registry_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -570,7 +600,8 @@ module Aws::Schemas
     class GetResourcePolicyResponse < Struct.new(
       :policy,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +614,8 @@ module Aws::Schemas
     class GoneException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,7 +628,8 @@ module Aws::Schemas
     class InternalServerErrorException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +649,8 @@ module Aws::Schemas
       :limit,
       :next_token,
       :source_arn_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +663,8 @@ module Aws::Schemas
     class ListDiscoverersResponse < Struct.new(
       :discoverers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -649,7 +684,8 @@ module Aws::Schemas
       :next_token,
       :registry_name_prefix,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +698,8 @@ module Aws::Schemas
     class ListRegistriesResponse < Struct.new(
       :next_token,
       :registries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +719,8 @@ module Aws::Schemas
       :next_token,
       :registry_name,
       :schema_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +733,8 @@ module Aws::Schemas
     class ListSchemaVersionsResponse < Struct.new(
       :next_token,
       :schema_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -715,7 +754,8 @@ module Aws::Schemas
       :next_token,
       :registry_name,
       :schema_name_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +768,8 @@ module Aws::Schemas
     class ListSchemasResponse < Struct.new(
       :next_token,
       :schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,7 +778,8 @@ module Aws::Schemas
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +788,8 @@ module Aws::Schemas
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +802,8 @@ module Aws::Schemas
     class NotFoundException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +816,8 @@ module Aws::Schemas
     class PreconditionFailedException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +838,8 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +860,8 @@ module Aws::Schemas
       :last_modified,
       :schema_version,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +879,8 @@ module Aws::Schemas
       :policy,
       :registry_name,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +893,8 @@ module Aws::Schemas
     class PutResourcePolicyResponse < Struct.new(
       :policy,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +911,8 @@ module Aws::Schemas
       :registry_arn,
       :registry_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +938,8 @@ module Aws::Schemas
       :schema_name,
       :tags,
       :version_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +960,8 @@ module Aws::Schemas
       :schema_name,
       :schema_version,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +982,8 @@ module Aws::Schemas
       :schema_arn,
       :schema_name,
       :schema_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +1000,8 @@ module Aws::Schemas
       :created_date,
       :schema_version,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1021,8 @@ module Aws::Schemas
       :limit,
       :next_token,
       :registry_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1035,8 @@ module Aws::Schemas
     class SearchSchemasResponse < Struct.new(
       :next_token,
       :schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,7 +1049,8 @@ module Aws::Schemas
     class ServiceUnavailableException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1059,8 @@ module Aws::Schemas
     #   @return [String]
     class StartDiscovererRequest < Struct.new(
       :discoverer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1015,7 +1073,8 @@ module Aws::Schemas
     class StartDiscovererResponse < Struct.new(
       :discoverer_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1024,7 +1083,8 @@ module Aws::Schemas
     #   @return [String]
     class StopDiscovererRequest < Struct.new(
       :discoverer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1097,8 @@ module Aws::Schemas
     class StopDiscovererResponse < Struct.new(
       :discoverer_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1112,8 @@ module Aws::Schemas
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1126,8 @@ module Aws::Schemas
     class TooManyRequestsException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1077,7 +1140,8 @@ module Aws::Schemas
     class UnauthorizedException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1154,8 @@ module Aws::Schemas
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1107,7 +1172,8 @@ module Aws::Schemas
       :description,
       :discoverer_id,
       :cross_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1206,8 @@ module Aws::Schemas
       :state,
       :cross_account,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1221,8 @@ module Aws::Schemas
     class UpdateRegistryRequest < Struct.new(
       :description,
       :registry_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,7 +1243,8 @@ module Aws::Schemas
       :registry_arn,
       :registry_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,7 +1273,8 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1241,7 +1311,8 @@ module Aws::Schemas
       :tags,
       :type,
       :version_created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

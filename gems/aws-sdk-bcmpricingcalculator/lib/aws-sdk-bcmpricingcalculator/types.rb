@@ -11,7 +11,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::BCMPricingCalculator
     class AddReservedInstanceAction < Struct.new(
       :reserved_instances_offering_id,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +41,8 @@ module Aws::BCMPricingCalculator
     class AddSavingsPlanAction < Struct.new(
       :savings_plan_offering_id,
       :commitment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +64,8 @@ module Aws::BCMPricingCalculator
       :group,
       :usage_account_id,
       :commitment_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +83,8 @@ module Aws::BCMPricingCalculator
       :key,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,7 +110,8 @@ module Aws::BCMPricingCalculator
       :group,
       :usage_account_id,
       :commitment_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +128,8 @@ module Aws::BCMPricingCalculator
       :bill_scenario_id,
       :commitment_modifications,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +142,8 @@ module Aws::BCMPricingCalculator
     class BatchCreateBillScenarioCommitmentModificationResponse < Struct.new(
       :items,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +185,8 @@ module Aws::BCMPricingCalculator
       :usage_account_id,
       :amounts,
       :historical_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -195,7 +204,8 @@ module Aws::BCMPricingCalculator
       :key,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +255,8 @@ module Aws::BCMPricingCalculator
       :quantities,
       :historical_usage,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +273,8 @@ module Aws::BCMPricingCalculator
       :bill_scenario_id,
       :usage_modifications,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -275,7 +287,8 @@ module Aws::BCMPricingCalculator
     class BatchCreateBillScenarioUsageModificationResponse < Struct.new(
       :items,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,7 +326,8 @@ module Aws::BCMPricingCalculator
       :usage_account_id,
       :amount,
       :historical_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -331,7 +345,8 @@ module Aws::BCMPricingCalculator
       :key,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +404,8 @@ module Aws::BCMPricingCalculator
       :status,
       :historical_usage,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -406,7 +422,8 @@ module Aws::BCMPricingCalculator
       :workload_estimate_id,
       :usage,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +436,8 @@ module Aws::BCMPricingCalculator
     class BatchCreateWorkloadEstimateUsageResponse < Struct.new(
       :items,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +455,8 @@ module Aws::BCMPricingCalculator
       :id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -450,7 +469,8 @@ module Aws::BCMPricingCalculator
     class BatchDeleteBillScenarioCommitmentModificationRequest < Struct.new(
       :bill_scenario_id,
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +479,8 @@ module Aws::BCMPricingCalculator
     #   @return [Array<Types::BatchDeleteBillScenarioCommitmentModificationError>]
     class BatchDeleteBillScenarioCommitmentModificationResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -477,7 +498,8 @@ module Aws::BCMPricingCalculator
       :id,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +512,8 @@ module Aws::BCMPricingCalculator
     class BatchDeleteBillScenarioUsageModificationRequest < Struct.new(
       :bill_scenario_id,
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +522,8 @@ module Aws::BCMPricingCalculator
     #   @return [Array<Types::BatchDeleteBillScenarioUsageModificationError>]
     class BatchDeleteBillScenarioUsageModificationResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +541,8 @@ module Aws::BCMPricingCalculator
       :id,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -530,7 +555,8 @@ module Aws::BCMPricingCalculator
     class BatchDeleteWorkloadEstimateUsageRequest < Struct.new(
       :workload_estimate_id,
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +565,8 @@ module Aws::BCMPricingCalculator
     #   @return [Array<Types::BatchDeleteWorkloadEstimateUsageError>]
     class BatchDeleteWorkloadEstimateUsageResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -553,7 +580,8 @@ module Aws::BCMPricingCalculator
     class BatchUpdateBillScenarioCommitmentModificationEntry < Struct.new(
       :id,
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +599,8 @@ module Aws::BCMPricingCalculator
       :id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +613,8 @@ module Aws::BCMPricingCalculator
     class BatchUpdateBillScenarioCommitmentModificationRequest < Struct.new(
       :bill_scenario_id,
       :commitment_modifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +627,8 @@ module Aws::BCMPricingCalculator
     class BatchUpdateBillScenarioCommitmentModificationResponse < Struct.new(
       :items,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +646,8 @@ module Aws::BCMPricingCalculator
       :id,
       :group,
       :amounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +665,8 @@ module Aws::BCMPricingCalculator
       :id,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +679,8 @@ module Aws::BCMPricingCalculator
     class BatchUpdateBillScenarioUsageModificationRequest < Struct.new(
       :bill_scenario_id,
       :usage_modifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -659,7 +693,8 @@ module Aws::BCMPricingCalculator
     class BatchUpdateBillScenarioUsageModificationResponse < Struct.new(
       :items,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +712,8 @@ module Aws::BCMPricingCalculator
       :id,
       :group,
       :amount,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +731,8 @@ module Aws::BCMPricingCalculator
       :id,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +745,8 @@ module Aws::BCMPricingCalculator
     class BatchUpdateWorkloadEstimateUsageRequest < Struct.new(
       :workload_estimate_id,
       :usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +759,8 @@ module Aws::BCMPricingCalculator
     class BatchUpdateWorkloadEstimateUsageResponse < Struct.new(
       :items,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -763,7 +802,8 @@ module Aws::BCMPricingCalculator
       :payment_option,
       :upfront_payment,
       :monthly_payment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +817,8 @@ module Aws::BCMPricingCalculator
     class BillEstimateCostSummary < Struct.new(
       :total_cost_difference,
       :service_cost_differences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -799,7 +840,8 @@ module Aws::BCMPricingCalculator
       :group,
       :usage_account_id,
       :commitment_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +887,8 @@ module Aws::BCMPricingCalculator
       :usage_account_id,
       :quantities,
       :historical_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +954,8 @@ module Aws::BCMPricingCalculator
       :historical_usage_quantity,
       :historical_cost,
       :savings_plan_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -941,7 +985,8 @@ module Aws::BCMPricingCalculator
       :bill_interval,
       :created_at,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -955,7 +1000,8 @@ module Aws::BCMPricingCalculator
     class BillInterval < Struct.new(
       :start,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -978,7 +1024,8 @@ module Aws::BCMPricingCalculator
       :negate_reserved_instance_action,
       :negate_savings_plan_action,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AddReservedInstanceAction < BillScenarioCommitmentModificationAction; end
@@ -1006,7 +1053,8 @@ module Aws::BCMPricingCalculator
       :usage_account_id,
       :group,
       :commitment_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1088,8 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1135,8 @@ module Aws::BCMPricingCalculator
       :usage_account_id,
       :quantities,
       :historical_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1153,8 @@ module Aws::BCMPricingCalculator
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1117,7 +1168,8 @@ module Aws::BCMPricingCalculator
     class CostAmount < Struct.new(
       :amount,
       :currency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1131,7 +1183,8 @@ module Aws::BCMPricingCalculator
     class CostDifference < Struct.new(
       :historical_cost,
       :estimated_cost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1205,8 @@ module Aws::BCMPricingCalculator
       :name,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1189,7 +1243,8 @@ module Aws::BCMPricingCalculator
       :cost_summary,
       :created_at,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1206,7 +1261,8 @@ module Aws::BCMPricingCalculator
       :name,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1295,8 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1317,8 @@ module Aws::BCMPricingCalculator
       :client_token,
       :rate_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1306,7 +1364,8 @@ module Aws::BCMPricingCalculator
       :total_cost,
       :cost_currency,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1315,7 +1374,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class DataUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,12 +1384,14 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class DeleteBillEstimateRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteBillEstimateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1338,12 +1400,14 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class DeleteBillScenarioRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteBillScenarioResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1352,12 +1416,14 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class DeleteWorkloadEstimateRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkloadEstimateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1387,7 +1453,8 @@ module Aws::BCMPricingCalculator
       :cost_categories,
       :dimensions,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1405,7 +1472,8 @@ module Aws::BCMPricingCalculator
       :key,
       :match_options,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1419,7 +1487,8 @@ module Aws::BCMPricingCalculator
     class FilterTimestamp < Struct.new(
       :after_timestamp,
       :before_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1428,7 +1497,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class GetBillEstimateRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1535,8 @@ module Aws::BCMPricingCalculator
       :cost_summary,
       :created_at,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1545,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class GetBillScenarioRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1507,12 +1579,14 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetPreferencesRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1529,7 +1603,8 @@ module Aws::BCMPricingCalculator
       :management_account_rate_type_selections,
       :member_account_rate_type_selections,
       :standalone_account_rate_type_selections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1538,7 +1613,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class GetWorkloadEstimateRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,7 +1660,8 @@ module Aws::BCMPricingCalculator
       :total_cost,
       :cost_currency,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1618,7 +1695,8 @@ module Aws::BCMPricingCalculator
       :usage_account_id,
       :bill_interval,
       :filter_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1631,7 +1709,8 @@ module Aws::BCMPricingCalculator
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1727,8 @@ module Aws::BCMPricingCalculator
       :bill_estimate_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1661,7 +1741,8 @@ module Aws::BCMPricingCalculator
     class ListBillEstimateCommitmentsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1759,8 @@ module Aws::BCMPricingCalculator
       :bill_estimate_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1691,7 +1773,8 @@ module Aws::BCMPricingCalculator
     class ListBillEstimateInputCommitmentModificationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1712,7 +1795,8 @@ module Aws::BCMPricingCalculator
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1809,8 @@ module Aws::BCMPricingCalculator
     class ListBillEstimateInputUsageModificationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1743,7 +1828,8 @@ module Aws::BCMPricingCalculator
       :name,
       :values,
       :match_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1850,8 @@ module Aws::BCMPricingCalculator
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1777,7 +1864,8 @@ module Aws::BCMPricingCalculator
     class ListBillEstimateLineItemsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1795,7 +1883,8 @@ module Aws::BCMPricingCalculator
       :name,
       :values,
       :match_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1820,7 +1909,8 @@ module Aws::BCMPricingCalculator
       :expires_at_filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1833,7 +1923,8 @@ module Aws::BCMPricingCalculator
     class ListBillEstimatesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1850,7 +1941,8 @@ module Aws::BCMPricingCalculator
       :bill_scenario_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1955,8 @@ module Aws::BCMPricingCalculator
     class ListBillScenarioCommitmentModificationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1884,7 +1977,8 @@ module Aws::BCMPricingCalculator
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1897,7 +1991,8 @@ module Aws::BCMPricingCalculator
     class ListBillScenarioUsageModificationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1915,7 +2010,8 @@ module Aws::BCMPricingCalculator
       :name,
       :values,
       :match_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1940,7 +2036,8 @@ module Aws::BCMPricingCalculator
       :expires_at_filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2050,8 @@ module Aws::BCMPricingCalculator
     class ListBillScenariosResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1962,7 +2060,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1971,7 +2070,8 @@ module Aws::BCMPricingCalculator
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2089,8 @@ module Aws::BCMPricingCalculator
       :name,
       :values,
       :match_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2010,7 +2111,8 @@ module Aws::BCMPricingCalculator
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2023,7 +2125,8 @@ module Aws::BCMPricingCalculator
     class ListWorkloadEstimateUsageResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2041,7 +2144,8 @@ module Aws::BCMPricingCalculator
       :name,
       :values,
       :match_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2066,7 +2170,8 @@ module Aws::BCMPricingCalculator
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2079,7 +2184,8 @@ module Aws::BCMPricingCalculator
     class ListWorkloadEstimatesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2089,7 +2195,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class NegateReservedInstanceAction < Struct.new(
       :reserved_instances_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2206,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     class NegateSavingsPlanAction < Struct.new(
       :savings_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2116,7 +2224,8 @@ module Aws::BCMPricingCalculator
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2141,7 +2250,8 @@ module Aws::BCMPricingCalculator
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2154,12 +2264,14 @@ module Aws::BCMPricingCalculator
     class TagResourceRequest < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2180,7 +2292,8 @@ module Aws::BCMPricingCalculator
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2193,12 +2306,14 @@ module Aws::BCMPricingCalculator
     class UntagResourceRequest < Struct.new(
       :arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2215,7 +2330,8 @@ module Aws::BCMPricingCalculator
       :identifier,
       :name,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2252,7 +2368,8 @@ module Aws::BCMPricingCalculator
       :cost_summary,
       :created_at,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2269,7 +2386,8 @@ module Aws::BCMPricingCalculator
       :identifier,
       :name,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,7 +2420,8 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2319,7 +2438,8 @@ module Aws::BCMPricingCalculator
       :management_account_rate_type_selections,
       :member_account_rate_type_selections,
       :standalone_account_rate_type_selections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2336,7 +2456,8 @@ module Aws::BCMPricingCalculator
       :management_account_rate_type_selections,
       :member_account_rate_type_selections,
       :standalone_account_rate_type_selections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2353,7 +2474,8 @@ module Aws::BCMPricingCalculator
       :identifier,
       :name,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2399,7 +2521,8 @@ module Aws::BCMPricingCalculator
       :total_cost,
       :cost_currency,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2413,7 +2536,8 @@ module Aws::BCMPricingCalculator
     class UsageAmount < Struct.new(
       :start_hour,
       :amount,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2431,7 +2555,8 @@ module Aws::BCMPricingCalculator
       :start_hour,
       :unit,
       :amount,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2445,7 +2570,8 @@ module Aws::BCMPricingCalculator
     class UsageQuantityResult < Struct.new(
       :amount,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2462,7 +2588,8 @@ module Aws::BCMPricingCalculator
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2476,7 +2603,8 @@ module Aws::BCMPricingCalculator
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2522,7 +2650,8 @@ module Aws::BCMPricingCalculator
       :total_cost,
       :cost_currency,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2576,7 +2705,8 @@ module Aws::BCMPricingCalculator
       :currency,
       :status,
       :historical_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2590,7 +2720,8 @@ module Aws::BCMPricingCalculator
     class WorkloadEstimateUsageQuantity < Struct.new(
       :unit,
       :amount,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

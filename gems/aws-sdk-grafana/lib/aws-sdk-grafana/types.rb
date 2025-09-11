@@ -11,7 +11,8 @@ module Aws::Grafana
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +48,8 @@ module Aws::Grafana
       :groups,
       :role,
       :org,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +70,8 @@ module Aws::Grafana
       :workspace_id,
       :license_type,
       :grafana_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +80,8 @@ module Aws::Grafana
     #   @return [Types::WorkspaceDescription]
     class AssociateLicenseOutput < Struct.new(
       :workspace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -100,7 +104,8 @@ module Aws::Grafana
       :providers,
       :saml,
       :aws_sso,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -118,7 +123,8 @@ module Aws::Grafana
     class AuthenticationSummary < Struct.new(
       :providers,
       :saml_configuration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +134,8 @@ module Aws::Grafana
     #   @return [String]
     class AwsSsoAuthentication < Struct.new(
       :sso_client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +153,8 @@ module Aws::Grafana
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +178,8 @@ module Aws::Grafana
       :key_role,
       :seconds_to_live,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -188,7 +197,8 @@ module Aws::Grafana
       :key_name,
       :key,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +321,8 @@ module Aws::Grafana
       :configuration,
       :network_access_control,
       :grafana_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +331,8 @@ module Aws::Grafana
     #   @return [Types::WorkspaceDescription]
     class CreateWorkspaceOutput < Struct.new(
       :workspace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +354,8 @@ module Aws::Grafana
       :name,
       :grafana_role,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +376,8 @@ module Aws::Grafana
       :name,
       :grafana_role,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +399,8 @@ module Aws::Grafana
       :seconds_to_live,
       :service_account_id,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -403,7 +418,8 @@ module Aws::Grafana
       :service_account_token,
       :service_account_id,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +432,8 @@ module Aws::Grafana
     class DeleteWorkspaceApiKeyInput < Struct.new(
       :key_name,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -429,7 +446,8 @@ module Aws::Grafana
     class DeleteWorkspaceApiKeyOutput < Struct.new(
       :key_name,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +456,8 @@ module Aws::Grafana
     #   @return [String]
     class DeleteWorkspaceInput < Struct.new(
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +466,8 @@ module Aws::Grafana
     #   @return [Types::WorkspaceDescription]
     class DeleteWorkspaceOutput < Struct.new(
       :workspace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +480,8 @@ module Aws::Grafana
     class DeleteWorkspaceServiceAccountRequest < Struct.new(
       :service_account_id,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +494,8 @@ module Aws::Grafana
     class DeleteWorkspaceServiceAccountResponse < Struct.new(
       :service_account_id,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +512,8 @@ module Aws::Grafana
       :token_id,
       :service_account_id,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -507,7 +530,8 @@ module Aws::Grafana
       :token_id,
       :service_account_id,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +540,8 @@ module Aws::Grafana
     #   @return [String]
     class DescribeWorkspaceAuthenticationInput < Struct.new(
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +551,8 @@ module Aws::Grafana
     #   @return [Types::AuthenticationDescription]
     class DescribeWorkspaceAuthenticationOutput < Struct.new(
       :authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +561,8 @@ module Aws::Grafana
     #   @return [String]
     class DescribeWorkspaceConfigurationInput < Struct.new(
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +577,8 @@ module Aws::Grafana
     class DescribeWorkspaceConfigurationOutput < Struct.new(
       :configuration,
       :grafana_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -559,7 +587,8 @@ module Aws::Grafana
     #   @return [String]
     class DescribeWorkspaceInput < Struct.new(
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +597,8 @@ module Aws::Grafana
     #   @return [Types::WorkspaceDescription]
     class DescribeWorkspaceOutput < Struct.new(
       :workspace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +611,8 @@ module Aws::Grafana
     class DisassociateLicenseInput < Struct.new(
       :workspace_id,
       :license_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +621,8 @@ module Aws::Grafana
     #   @return [Types::WorkspaceDescription]
     class DisassociateLicenseOutput < Struct.new(
       :workspace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -609,7 +641,8 @@ module Aws::Grafana
       :url,
       :xml,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Url < IdpMetadata; end
@@ -627,7 +660,8 @@ module Aws::Grafana
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -658,7 +692,8 @@ module Aws::Grafana
       :user_id,
       :group_id,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -672,7 +707,8 @@ module Aws::Grafana
     class ListPermissionsOutput < Struct.new(
       :next_token,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -681,7 +717,8 @@ module Aws::Grafana
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +727,8 @@ module Aws::Grafana
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +748,8 @@ module Aws::Grafana
       :max_results,
       :next_token,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -725,7 +764,8 @@ module Aws::Grafana
     class ListVersionsResponse < Struct.new(
       :next_token,
       :grafana_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,7 +787,8 @@ module Aws::Grafana
       :next_token,
       :service_account_id,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +809,8 @@ module Aws::Grafana
       :service_account_tokens,
       :service_account_id,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +828,8 @@ module Aws::Grafana
       :max_results,
       :next_token,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +846,8 @@ module Aws::Grafana
       :next_token,
       :service_accounts,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +861,8 @@ module Aws::Grafana
     class ListWorkspacesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +876,8 @@ module Aws::Grafana
     class ListWorkspacesOutput < Struct.new(
       :workspaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +930,8 @@ module Aws::Grafana
     class NetworkAccessConfiguration < Struct.new(
       :prefix_list_ids,
       :vpce_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +947,8 @@ module Aws::Grafana
     class PermissionEntry < Struct.new(
       :user,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +966,8 @@ module Aws::Grafana
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +986,8 @@ module Aws::Grafana
     class RoleValues < Struct.new(
       :editor,
       :admin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +1001,8 @@ module Aws::Grafana
     class SamlAuthentication < Struct.new(
       :status,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1034,8 @@ module Aws::Grafana
       :role_values,
       :allowed_organizations,
       :login_validity_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1012,7 +1064,8 @@ module Aws::Grafana
       :name,
       :is_disabled,
       :grafana_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1091,8 @@ module Aws::Grafana
       :created_at,
       :expires_at,
       :last_used_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1115,8 @@ module Aws::Grafana
       :id,
       :name,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1087,7 +1142,8 @@ module Aws::Grafana
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1101,12 +1157,14 @@ module Aws::Grafana
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1186,8 @@ module Aws::Grafana
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,12 +1200,14 @@ module Aws::Grafana
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1226,8 @@ module Aws::Grafana
       :code,
       :message,
       :caused_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1184,7 +1246,8 @@ module Aws::Grafana
       :action,
       :role,
       :users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1197,7 +1260,8 @@ module Aws::Grafana
     class UpdatePermissionsInput < Struct.new(
       :update_instruction_batch,
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1206,7 +1270,8 @@ module Aws::Grafana
     #   @return [Array<Types::UpdateError>]
     class UpdatePermissionsOutput < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1293,8 @@ module Aws::Grafana
       :workspace_id,
       :authentication_providers,
       :saml_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1238,7 +1304,8 @@ module Aws::Grafana
     #   @return [Types::AuthenticationDescription]
     class UpdateWorkspaceAuthenticationOutput < Struct.new(
       :authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1262,12 +1329,14 @@ module Aws::Grafana
       :configuration,
       :workspace_id,
       :grafana_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateWorkspaceConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1382,7 +1451,8 @@ module Aws::Grafana
       :remove_vpc_configuration,
       :network_access_control,
       :remove_network_access_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1391,7 +1461,8 @@ module Aws::Grafana
     #   @return [Types::WorkspaceDescription]
     class UpdateWorkspaceOutput < Struct.new(
       :workspace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1408,7 +1479,8 @@ module Aws::Grafana
     class User < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,7 +1498,8 @@ module Aws::Grafana
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1441,7 +1514,8 @@ module Aws::Grafana
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1464,7 +1538,8 @@ module Aws::Grafana
     class VpcConfiguration < Struct.new(
       :security_group_ids,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1617,7 +1692,8 @@ module Aws::Grafana
       :vpc_configuration,
       :network_access_control,
       :grafana_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1682,7 +1758,8 @@ module Aws::Grafana
       :tags,
       :license_type,
       :grafana_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

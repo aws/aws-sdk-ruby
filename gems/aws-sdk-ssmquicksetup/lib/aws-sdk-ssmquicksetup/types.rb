@@ -11,7 +11,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +45,8 @@ module Aws::SSMQuickSetup
       :local_deployment_execution_role_name,
       :local_deployment_administration_role_arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1454,8 @@ module Aws::SSMQuickSetup
       :type_version,
       :local_deployment_execution_role_name,
       :local_deployment_administration_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1475,7 +1478,8 @@ module Aws::SSMQuickSetup
       :type,
       :type_version,
       :first_class_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,7 +1508,8 @@ module Aws::SSMQuickSetup
       :name,
       :status_summaries,
       :configuration_definition_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1551,7 +1556,8 @@ module Aws::SSMQuickSetup
       :created_at,
       :first_class_parameters,
       :status_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1560,7 +1566,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1582,7 +1589,8 @@ module Aws::SSMQuickSetup
       :description,
       :configuration_definitions,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1591,7 +1599,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class CreateConfigurationManagerOutput < Struct.new(
       :manager_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1600,7 +1609,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class DeleteConfigurationManagerInput < Struct.new(
       :manager_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1614,7 +1624,8 @@ module Aws::SSMQuickSetup
     class Filter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1623,7 +1634,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class GetConfigurationInput < Struct.new(
       :configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1632,7 +1644,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class GetConfigurationManagerInput < Struct.new(
       :manager_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1683,8 @@ module Aws::SSMQuickSetup
       :status_summaries,
       :configuration_definitions,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1720,7 +1734,8 @@ module Aws::SSMQuickSetup
       :last_modified_at,
       :status_summaries,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1744,8 @@ module Aws::SSMQuickSetup
     #   @return [Types::ServiceSettings]
     class GetServiceSettingsOutput < Struct.new(
       :service_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1738,7 +1754,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1756,7 +1773,8 @@ module Aws::SSMQuickSetup
       :starting_token,
       :max_items,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1770,7 +1788,8 @@ module Aws::SSMQuickSetup
     class ListConfigurationManagersOutput < Struct.new(
       :configuration_managers_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1815,8 @@ module Aws::SSMQuickSetup
       :filters,
       :manager_arn,
       :configuration_definition_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1830,8 @@ module Aws::SSMQuickSetup
     class ListConfigurationsOutput < Struct.new(
       :configurations_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1819,7 +1840,8 @@ module Aws::SSMQuickSetup
     #   @return [Array<Types::QuickSetupTypeOutput>]
     class ListQuickSetupTypesOutput < Struct.new(
       :quick_setup_type_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1828,7 +1850,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1837,7 +1860,8 @@ module Aws::SSMQuickSetup
     #   @return [Array<Types::TagEntry>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1851,7 +1875,8 @@ module Aws::SSMQuickSetup
     class QuickSetupTypeOutput < Struct.new(
       :type,
       :latest_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1860,7 +1885,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1896,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class ServiceSettings < Struct.new(
       :explorer_enabling_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1899,7 +1926,8 @@ module Aws::SSMQuickSetup
       :status_message,
       :last_updated_at,
       :status_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1914,7 +1942,8 @@ module Aws::SSMQuickSetup
     class TagEntry < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +1956,8 @@ module Aws::SSMQuickSetup
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1936,7 +1966,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +1980,8 @@ module Aws::SSMQuickSetup
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1981,7 +2013,8 @@ module Aws::SSMQuickSetup
       :parameters,
       :local_deployment_execution_role_name,
       :local_deployment_administration_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1998,7 +2031,8 @@ module Aws::SSMQuickSetup
       :manager_arn,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2007,7 +2041,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class UpdateServiceSettingsInput < Struct.new(
       :explorer_enabling_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2017,7 +2052,8 @@ module Aws::SSMQuickSetup
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

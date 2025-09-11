@@ -43,7 +43,7 @@ module Aws::Appflow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Appflow::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::Appflow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Appflow::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::Appflow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Appflow::Types::ConnectorAuthenticationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::Appflow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Appflow::Types::ConnectorServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::Appflow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Appflow::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -111,7 +111,7 @@ module Aws::Appflow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Appflow::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::Appflow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Appflow::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::Appflow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Appflow::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::Appflow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Appflow::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -165,7 +165,7 @@ module Aws::Appflow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Appflow::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

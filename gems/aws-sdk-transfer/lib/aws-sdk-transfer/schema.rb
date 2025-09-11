@@ -2241,7 +2241,6 @@ module Aws::Transfer
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"aws.iam#iamAction" => {"requiredActions" => ["transfer:UpdateWebAppCustomization"]}, "smithy.api#http" => {"method" => "POST", "uri" => "/updateWebAppCustomization"}}
       end)
-
     end
 
     class << self

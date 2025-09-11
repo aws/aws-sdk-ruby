@@ -12,7 +12,8 @@ module Aws::Budgets
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +62,8 @@ module Aws::Budgets
       :approval_model,
       :status,
       :subscribers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +86,8 @@ module Aws::Budgets
       :status,
       :event_type,
       :action_history_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +101,8 @@ module Aws::Budgets
     class ActionHistoryDetails < Struct.new(
       :message,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +116,8 @@ module Aws::Budgets
     class ActionThreshold < Struct.new(
       :action_threshold_value,
       :action_threshold_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -137,7 +142,8 @@ module Aws::Budgets
       :auto_adjust_type,
       :historical_options,
       :last_auto_adjust_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +299,8 @@ module Aws::Budgets
       :metrics,
       :billing_view_arn,
       :health_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +317,8 @@ module Aws::Budgets
     class BudgetNotificationsForAccount < Struct.new(
       :notifications,
       :budget_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +363,8 @@ module Aws::Budgets
       :time_unit,
       :billing_view_arn,
       :budgeted_and_actual_amounts_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +383,8 @@ module Aws::Budgets
       :budgeted_amount,
       :actual_amount,
       :time_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +405,8 @@ module Aws::Budgets
     class CalculatedSpend < Struct.new(
       :actual_spend,
       :forecasted_spend,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +424,8 @@ module Aws::Budgets
       :key,
       :values,
       :match_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +491,8 @@ module Aws::Budgets
       :include_support,
       :include_discount,
       :use_amortized,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +545,8 @@ module Aws::Budgets
       :approval_model,
       :subscribers,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -552,7 +566,8 @@ module Aws::Budgets
       :account_id,
       :budget_name,
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,13 +590,15 @@ module Aws::Budgets
       :budget,
       :notifications_with_subscribers,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> Response of CreateBudget </p>
     class CreateBudgetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,13 +620,15 @@ module Aws::Budgets
       :budget_name,
       :notification,
       :subscribers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> Response of CreateNotification </p>
     class CreateNotificationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,13 +650,15 @@ module Aws::Budgets
       :budget_name,
       :notification,
       :subscriber,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> Response of CreateSubscriber </p>
     class CreateSubscriberResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +668,8 @@ module Aws::Budgets
     #   @return [String]
     class CreationLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +687,8 @@ module Aws::Budgets
       :iam_action_definition,
       :scp_action_definition,
       :ssm_action_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +708,8 @@ module Aws::Budgets
       :account_id,
       :budget_name,
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +727,8 @@ module Aws::Budgets
       :account_id,
       :budget_name,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,13 +742,15 @@ module Aws::Budgets
     class DeleteBudgetRequest < Struct.new(
       :account_id,
       :budget_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> Response of DeleteBudget </p>
     class DeleteBudgetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,13 +768,15 @@ module Aws::Budgets
       :account_id,
       :budget_name,
       :notification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> Response of DeleteNotification </p>
     class DeleteNotificationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,13 +798,15 @@ module Aws::Budgets
       :budget_name,
       :notification,
       :subscriber,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> Response of DeleteSubscriber </p>
     class DeleteSubscriberResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -810,7 +841,8 @@ module Aws::Budgets
       :time_period,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +857,8 @@ module Aws::Budgets
     class DescribeBudgetActionHistoriesResponse < Struct.new(
       :action_histories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +878,8 @@ module Aws::Budgets
       :account_id,
       :budget_name,
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -865,7 +899,8 @@ module Aws::Budgets
       :account_id,
       :budget_name,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +918,8 @@ module Aws::Budgets
       :account_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -898,7 +934,8 @@ module Aws::Budgets
     class DescribeBudgetActionsForAccountResponse < Struct.new(
       :actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -921,7 +958,8 @@ module Aws::Budgets
       :budget_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -936,7 +974,8 @@ module Aws::Budgets
     class DescribeBudgetActionsForBudgetResponse < Struct.new(
       :actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -954,7 +993,8 @@ module Aws::Budgets
       :account_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1007,8 @@ module Aws::Budgets
     class DescribeBudgetNotificationsForAccountResponse < Struct.new(
       :budget_notifications_for_account,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -994,7 +1035,8 @@ module Aws::Budgets
       :time_period,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1008,7 +1050,8 @@ module Aws::Budgets
     class DescribeBudgetPerformanceHistoryResponse < Struct.new(
       :budget_performance_history,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1028,7 +1071,8 @@ module Aws::Budgets
       :account_id,
       :budget_name,
       :show_filter_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1082,8 @@ module Aws::Budgets
     #   @return [Types::Budget]
     class DescribeBudgetResponse < Struct.new(
       :budget,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1109,8 @@ module Aws::Budgets
       :max_results,
       :next_token,
       :show_filter_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1078,7 +1124,8 @@ module Aws::Budgets
     class DescribeBudgetsResponse < Struct.new(
       :budgets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1101,7 +1148,8 @@ module Aws::Budgets
       :budget_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1163,8 @@ module Aws::Budgets
     class DescribeNotificationsForBudgetResponse < Struct.new(
       :notifications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,7 +1190,8 @@ module Aws::Budgets
       :notification,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1205,8 @@ module Aws::Budgets
     class DescribeSubscribersForNotificationResponse < Struct.new(
       :subscribers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1216,8 @@ module Aws::Budgets
     #   @return [String]
     class DuplicateRecordException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,7 +1243,8 @@ module Aws::Budgets
       :budget_name,
       :action_id,
       :execution_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1217,7 +1270,8 @@ module Aws::Budgets
       :budget_name,
       :action_id,
       :execution_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1227,7 +1281,8 @@ module Aws::Budgets
     #   @return [String]
     class ExpiredNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1257,7 +1312,8 @@ module Aws::Budgets
       :dimensions,
       :tags,
       :cost_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1333,8 @@ module Aws::Budgets
       :key,
       :values,
       :match_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1313,7 +1370,8 @@ module Aws::Budgets
       :status,
       :status_reason,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1417,8 @@ module Aws::Budgets
     class HistoricalOptions < Struct.new(
       :budget_adjustment_period,
       :look_back_available_periods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1381,7 +1440,8 @@ module Aws::Budgets
       :roles,
       :groups,
       :users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1391,7 +1451,8 @@ module Aws::Budgets
     #   @return [String]
     class InternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1401,7 +1462,8 @@ module Aws::Budgets
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,7 +1473,8 @@ module Aws::Budgets
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1483,8 @@ module Aws::Budgets
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,7 +1493,8 @@ module Aws::Budgets
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1439,7 +1504,8 @@ module Aws::Budgets
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1500,7 +1566,8 @@ module Aws::Budgets
       :threshold,
       :threshold_type,
       :notification_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1520,7 +1587,8 @@ module Aws::Budgets
     class NotificationWithSubscribers < Struct.new(
       :notification,
       :subscribers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1599,8 @@ module Aws::Budgets
     #   @return [String]
     class ResourceLockedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1545,7 +1614,8 @@ module Aws::Budgets
     class ResourceTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1559,7 +1629,8 @@ module Aws::Budgets
     class ScpActionDefinition < Struct.new(
       :policy_id,
       :target_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1569,7 +1640,8 @@ module Aws::Budgets
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1683,8 @@ module Aws::Budgets
     class Spend < Struct.new(
       :amount,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1629,7 +1702,8 @@ module Aws::Budgets
       :action_sub_type,
       :region,
       :instance_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1658,7 +1732,8 @@ module Aws::Budgets
     class Subscriber < Struct.new(
       :subscription_type,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1671,12 +1746,14 @@ module Aws::Budgets
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1771,8 @@ module Aws::Budgets
       :key,
       :values,
       :match_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1783,8 @@ module Aws::Budgets
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1733,7 +1812,8 @@ module Aws::Budgets
     class TimePeriod < Struct.new(
       :start,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1746,12 +1826,14 @@ module Aws::Budgets
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :resource_tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1799,7 +1881,8 @@ module Aws::Budgets
       :execution_role_arn,
       :approval_model,
       :subscribers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1825,7 +1908,8 @@ module Aws::Budgets
       :budget_name,
       :old_action,
       :new_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,13 +1923,15 @@ module Aws::Budgets
     class UpdateBudgetRequest < Struct.new(
       :account_id,
       :new_budget,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> Response of UpdateBudget </p>
     class UpdateBudgetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,13 +1953,15 @@ module Aws::Budgets
       :budget_name,
       :old_notification,
       :new_notification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> Response of UpdateNotification </p>
     class UpdateNotificationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1899,13 +1987,15 @@ module Aws::Budgets
       :notification,
       :old_subscriber,
       :new_subscriber,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> Response of UpdateSubscriber </p>
     class UpdateSubscriberResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

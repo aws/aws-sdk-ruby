@@ -48,7 +48,8 @@ module Aws::SsmSap
       :last_updated,
       :status_message,
       :associated_application_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +67,8 @@ module Aws::SsmSap
       :database_name,
       :credential_type,
       :secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,7 +94,8 @@ module Aws::SsmSap
       :type,
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +117,8 @@ module Aws::SsmSap
       :ec2_instance_id,
       :ip_addresses,
       :os_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +132,8 @@ module Aws::SsmSap
     class BackintConfig < Struct.new(
       :backint_mode,
       :ensure_no_backup_in_process,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +223,8 @@ module Aws::SsmSap
       :database_connection,
       :last_updated,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +242,8 @@ module Aws::SsmSap
       :component_type,
       :sid,
       :ec2_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +269,8 @@ module Aws::SsmSap
       :component_type,
       :tags,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +292,8 @@ module Aws::SsmSap
       :name,
       :description,
       :applicable_application_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +339,8 @@ module Aws::SsmSap
       :start_time,
       :end_time,
       :rule_status_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +349,8 @@ module Aws::SsmSap
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +404,8 @@ module Aws::SsmSap
       :sql_port,
       :last_updated,
       :connected_component_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +423,8 @@ module Aws::SsmSap
       :database_connection_method,
       :database_arn,
       :connection_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -441,7 +454,8 @@ module Aws::SsmSap
       :database_type,
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +472,8 @@ module Aws::SsmSap
       :action_type,
       :source_resource_arn,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +482,8 @@ module Aws::SsmSap
     #   @return [String]
     class DeleteResourcePermissionOperationOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -476,12 +492,14 @@ module Aws::SsmSap
     #   @return [String]
     class DeregisterApplicationOperationInput < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterApplicationOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +517,8 @@ module Aws::SsmSap
       :name,
       :value,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +535,8 @@ module Aws::SsmSap
       :application_id,
       :application_arn,
       :app_registry_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +549,8 @@ module Aws::SsmSap
     class GetApplicationOperationOutput < Struct.new(
       :application,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +563,8 @@ module Aws::SsmSap
     class GetComponentOperationInput < Struct.new(
       :application_id,
       :component_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +577,8 @@ module Aws::SsmSap
     class GetComponentOperationOutput < Struct.new(
       :component,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +587,8 @@ module Aws::SsmSap
     #   @return [String]
     class GetConfigurationCheckOperationInput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +597,8 @@ module Aws::SsmSap
     #   @return [Types::ConfigurationCheckOperation]
     class GetConfigurationCheckOperationOutput < Struct.new(
       :configuration_check_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +619,8 @@ module Aws::SsmSap
       :component_id,
       :database_id,
       :database_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +633,8 @@ module Aws::SsmSap
     class GetDatabaseOperationOutput < Struct.new(
       :database,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +643,8 @@ module Aws::SsmSap
     #   @return [String]
     class GetOperationOperationInput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -625,7 +653,8 @@ module Aws::SsmSap
     #   @return [Types::Operation]
     class GetOperationOperationOutput < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -638,7 +667,8 @@ module Aws::SsmSap
     class GetResourcePermissionOperationInput < Struct.new(
       :action_type,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +677,8 @@ module Aws::SsmSap
     #   @return [String]
     class GetResourcePermissionOperationOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +708,8 @@ module Aws::SsmSap
       :instance_id,
       :host_role,
       :os_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +718,8 @@ module Aws::SsmSap
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +737,8 @@ module Aws::SsmSap
       :ip_address,
       :primary,
       :allocation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +755,8 @@ module Aws::SsmSap
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -734,7 +769,8 @@ module Aws::SsmSap
     class ListApplicationsOperationOutput < Struct.new(
       :applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -751,7 +787,8 @@ module Aws::SsmSap
       :application_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -764,7 +801,8 @@ module Aws::SsmSap
     class ListComponentsOperationOutput < Struct.new(
       :components,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +815,8 @@ module Aws::SsmSap
     class ListConfigurationCheckDefinitionsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -790,7 +829,8 @@ module Aws::SsmSap
     class ListConfigurationCheckDefinitionsOutput < Struct.new(
       :configuration_checks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +855,8 @@ module Aws::SsmSap
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +869,8 @@ module Aws::SsmSap
     class ListConfigurationCheckOperationsOutput < Struct.new(
       :configuration_check_operations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -849,7 +891,8 @@ module Aws::SsmSap
       :component_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +905,8 @@ module Aws::SsmSap
     class ListDatabasesOperationOutput < Struct.new(
       :databases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +927,8 @@ module Aws::SsmSap
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -896,7 +941,8 @@ module Aws::SsmSap
     class ListOperationEventsOutput < Struct.new(
       :operation_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +963,8 @@ module Aws::SsmSap
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +977,8 @@ module Aws::SsmSap
     class ListOperationsOperationOutput < Struct.new(
       :operations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +995,8 @@ module Aws::SsmSap
       :operation_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,7 +1009,8 @@ module Aws::SsmSap
     class ListSubCheckResultsOutput < Struct.new(
       :sub_check_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +1027,8 @@ module Aws::SsmSap
       :sub_check_result_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1041,8 @@ module Aws::SsmSap
     class ListSubCheckRuleResultsOutput < Struct.new(
       :rule_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1051,8 @@ module Aws::SsmSap
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1008,7 +1061,8 @@ module Aws::SsmSap
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1058,7 +1112,8 @@ module Aws::SsmSap
       :start_time,
       :end_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1139,8 @@ module Aws::SsmSap
       :status,
       :status_message,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1101,7 +1157,8 @@ module Aws::SsmSap
       :action_type,
       :source_resource_arn,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1167,8 @@ module Aws::SsmSap
     #   @return [String]
     class PutResourcePermissionOperationOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1151,7 +1209,8 @@ module Aws::SsmSap
       :credentials,
       :database_arn,
       :components_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1223,8 @@ module Aws::SsmSap
     class RegisterApplicationOperationOutput < Struct.new(
       :application,
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1250,8 @@ module Aws::SsmSap
       :hsr_operation_mode,
       :cluster_status,
       :enqueue_replication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,7 +1265,8 @@ module Aws::SsmSap
     class Resource < Struct.new(
       :resource_arn,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1213,7 +1275,8 @@ module Aws::SsmSap
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1302,8 @@ module Aws::SsmSap
       :status,
       :message,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1329,8 @@ module Aws::SsmSap
       :info,
       :passed,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1274,7 +1339,8 @@ module Aws::SsmSap
     #   @return [String]
     class StartApplicationInput < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,7 +1349,8 @@ module Aws::SsmSap
     #   @return [String]
     class StartApplicationOutput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1292,7 +1359,8 @@ module Aws::SsmSap
     #   @return [String]
     class StartApplicationRefreshInput < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1369,8 @@ module Aws::SsmSap
     #   @return [String]
     class StartApplicationRefreshOutput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1383,8 @@ module Aws::SsmSap
     class StartConfigurationChecksInput < Struct.new(
       :application_id,
       :configuration_check_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1323,7 +1393,8 @@ module Aws::SsmSap
     #   @return [Array<Types::ConfigurationCheckOperation>]
     class StartConfigurationChecksOutput < Struct.new(
       :configuration_check_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,7 +1411,8 @@ module Aws::SsmSap
       :application_id,
       :stop_connected_entity,
       :include_ec2_instance_shutdown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1349,7 +1421,8 @@ module Aws::SsmSap
     #   @return [String]
     class StopApplicationOutput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,7 +1444,8 @@ module Aws::SsmSap
       :name,
       :description,
       :references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1384,12 +1458,14 @@ module Aws::SsmSap
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1474,8 @@ module Aws::SsmSap
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,12 +1488,14 @@ module Aws::SsmSap
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1441,7 +1520,8 @@ module Aws::SsmSap
       :credentials_to_remove,
       :backint,
       :database_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1454,7 +1534,8 @@ module Aws::SsmSap
     class UpdateApplicationSettingsOperationOutput < Struct.new(
       :message,
       :operation_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1463,7 +1544,8 @@ module Aws::SsmSap
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

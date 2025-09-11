@@ -3353,7 +3353,6 @@ module Aws::CleanRooms
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to update protected queries", "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/memberships/{membershipIdentifier}/protectedQueries/{protectedQueryIdentifier}"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

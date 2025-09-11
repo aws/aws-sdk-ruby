@@ -28,7 +28,8 @@ module Aws::Lambda
       :code_size_zipped,
       :concurrent_executions,
       :unreserved_concurrent_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -50,7 +51,8 @@ module Aws::Lambda
     class AccountUsage < Struct.new(
       :total_code_size,
       :function_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -89,7 +91,8 @@ module Aws::Lambda
       :principal,
       :organization_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +105,8 @@ module Aws::Lambda
     class AddLayerVersionPermissionResponse < Struct.new(
       :statement,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +155,8 @@ module Aws::Lambda
       :revision_id,
       :principal_org_id,
       :function_url_auth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +165,8 @@ module Aws::Lambda
     #   @return [String]
     class AddPermissionResponse < Struct.new(
       :statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,7 +196,8 @@ module Aws::Lambda
       :description,
       :routing_config,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +207,8 @@ module Aws::Lambda
     #   @return [Hash<String, Float>]
     class AliasRoutingConfiguration < Struct.new(
       :additional_version_weights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,7 +218,8 @@ module Aws::Lambda
     #   @return [Array<String>]
     class AllowedPublishers < Struct.new(
       :signing_profile_version_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +233,8 @@ module Aws::Lambda
     class AmazonManagedKafkaEventSourceConfig < Struct.new(
       :consumer_group_id,
       :schema_registry_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +264,8 @@ module Aws::Lambda
       :allowed_publishers,
       :code_signing_policies,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -266,7 +277,8 @@ module Aws::Lambda
     class CodeSigningConfigNotFoundException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +288,8 @@ module Aws::Lambda
     #   @return [String]
     class CodeSigningPolicies < Struct.new(
       :untrusted_artifact_on_deployment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +302,8 @@ module Aws::Lambda
     class CodeStorageExceededException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +315,8 @@ module Aws::Lambda
     class CodeVerificationFailedException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +325,8 @@ module Aws::Lambda
     #   @return [Integer]
     class Concurrency < Struct.new(
       :reserved_concurrent_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +356,8 @@ module Aws::Lambda
       :allow_origins,
       :expose_headers,
       :max_age,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -370,7 +387,8 @@ module Aws::Lambda
       :description,
       :routing_config,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +413,8 @@ module Aws::Lambda
       :function_version,
       :description,
       :routing_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +435,8 @@ module Aws::Lambda
       :allowed_publishers,
       :code_signing_policies,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +445,8 @@ module Aws::Lambda
     #   @return [Types::CodeSigningConfig]
     class CreateCodeSigningConfigResponse < Struct.new(
       :code_signing_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -559,7 +580,8 @@ module Aws::Lambda
       :event_source_mapping_arn,
       :metrics_config,
       :provisioned_poller_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -672,7 +694,8 @@ module Aws::Lambda
       :kms_key_arn,
       :metrics_config,
       :provisioned_poller_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +845,8 @@ module Aws::Lambda
       :snap_start,
       :runtime_version_config,
       :logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -928,7 +952,8 @@ module Aws::Lambda
       :ephemeral_storage,
       :snap_start,
       :logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +978,8 @@ module Aws::Lambda
       :auth_type,
       :cors,
       :invoke_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -982,7 +1008,8 @@ module Aws::Lambda
       :cors,
       :creation_time,
       :invoke_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -992,7 +1019,8 @@ module Aws::Lambda
     #   @return [String]
     class DeadLetterConfig < Struct.new(
       :target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1033,8 @@ module Aws::Lambda
     class DeleteAliasRequest < Struct.new(
       :function_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,12 +1043,14 @@ module Aws::Lambda
     #   @return [String]
     class DeleteCodeSigningConfigRequest < Struct.new(
       :code_signing_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCodeSigningConfigResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1184,8 @@ module Aws::Lambda
       :event_source_mapping_arn,
       :metrics_config,
       :provisioned_poller_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1194,8 @@ module Aws::Lambda
     #   @return [String]
     class DeleteEventSourceMappingRequest < Struct.new(
       :uuid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1171,7 +1204,8 @@ module Aws::Lambda
     #   @return [String]
     class DeleteFunctionCodeSigningConfigRequest < Struct.new(
       :function_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1180,7 +1214,8 @@ module Aws::Lambda
     #   @return [String]
     class DeleteFunctionConcurrencyRequest < Struct.new(
       :function_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1193,7 +1228,8 @@ module Aws::Lambda
     class DeleteFunctionEventInvokeConfigRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1206,7 +1242,8 @@ module Aws::Lambda
     class DeleteFunctionRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1219,7 +1256,8 @@ module Aws::Lambda
     class DeleteFunctionUrlConfigRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1232,7 +1270,8 @@ module Aws::Lambda
     class DeleteLayerVersionRequest < Struct.new(
       :layer_name,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,7 +1284,8 @@ module Aws::Lambda
     class DeleteProvisionedConcurrencyConfigRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1259,7 +1299,8 @@ module Aws::Lambda
     class DestinationConfig < Struct.new(
       :on_success,
       :on_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1318,8 @@ module Aws::Lambda
       :database_name,
       :collection_name,
       :full_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1289,7 +1331,8 @@ module Aws::Lambda
     class EC2AccessDeniedException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1344,8 @@ module Aws::Lambda
     class EC2ThrottledException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1316,7 +1360,8 @@ module Aws::Lambda
       :type,
       :message,
       :ec2_error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1328,7 +1373,8 @@ module Aws::Lambda
     class EFSIOException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,7 +1386,8 @@ module Aws::Lambda
     class EFSMountConnectivityException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1352,7 +1399,8 @@ module Aws::Lambda
     class EFSMountFailureException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1412,8 @@ module Aws::Lambda
     class EFSMountTimeoutException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1376,7 +1425,8 @@ module Aws::Lambda
     class ENILimitReachedException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1386,7 +1436,8 @@ module Aws::Lambda
     #   @return [Hash<String, String>]
     class Environment < Struct.new(
       :variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1400,7 +1451,8 @@ module Aws::Lambda
     class EnvironmentError < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1414,7 +1466,8 @@ module Aws::Lambda
     class EnvironmentResponse < Struct.new(
       :variables,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1424,7 +1477,8 @@ module Aws::Lambda
     #   @return [Integer]
     class EphemeralStorage < Struct.new(
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1558,7 +1612,8 @@ module Aws::Lambda
       :event_source_mapping_arn,
       :metrics_config,
       :provisioned_poller_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1623,8 @@ module Aws::Lambda
     #   @return [Array<String>]
     class EventSourceMappingMetricsConfig < Struct.new(
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1582,7 +1638,8 @@ module Aws::Lambda
     class FileSystemConfig < Struct.new(
       :arn,
       :local_mount_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1592,7 +1649,8 @@ module Aws::Lambda
     #   @return [String]
     class Filter < Struct.new(
       :pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1602,7 +1660,8 @@ module Aws::Lambda
     #   @return [Array<Types::Filter>]
     class FilterCriteria < Struct.new(
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1675,8 @@ module Aws::Lambda
     class FilterCriteriaError < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1646,7 +1706,8 @@ module Aws::Lambda
       :s3_object_version,
       :image_uri,
       :source_kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1672,7 +1733,8 @@ module Aws::Lambda
       :image_uri,
       :resolved_image_uri,
       :source_kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1822,7 +1884,8 @@ module Aws::Lambda
       :snap_start,
       :runtime_version_config,
       :logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1852,7 +1915,8 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1886,12 +1950,14 @@ module Aws::Lambda
       :cors,
       :auth_type,
       :invoke_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAccountSettingsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1904,7 +1970,8 @@ module Aws::Lambda
     class GetAccountSettingsResponse < Struct.new(
       :account_limit,
       :account_usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1934,7 +2001,8 @@ module Aws::Lambda
       :description,
       :routing_config,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2015,8 @@ module Aws::Lambda
     class GetAliasRequest < Struct.new(
       :function_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1956,7 +2025,8 @@ module Aws::Lambda
     #   @return [String]
     class GetCodeSigningConfigRequest < Struct.new(
       :code_signing_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1965,7 +2035,8 @@ module Aws::Lambda
     #   @return [Types::CodeSigningConfig]
     class GetCodeSigningConfigResponse < Struct.new(
       :code_signing_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2170,8 @@ module Aws::Lambda
       :event_source_mapping_arn,
       :metrics_config,
       :provisioned_poller_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2108,7 +2180,8 @@ module Aws::Lambda
     #   @return [String]
     class GetEventSourceMappingRequest < Struct.new(
       :uuid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2117,7 +2190,8 @@ module Aws::Lambda
     #   @return [String]
     class GetFunctionCodeSigningConfigRequest < Struct.new(
       :function_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2130,7 +2204,8 @@ module Aws::Lambda
     class GetFunctionCodeSigningConfigResponse < Struct.new(
       :code_signing_config_arn,
       :function_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2139,7 +2214,8 @@ module Aws::Lambda
     #   @return [String]
     class GetFunctionConcurrencyRequest < Struct.new(
       :function_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2148,7 +2224,8 @@ module Aws::Lambda
     #   @return [Integer]
     class GetFunctionConcurrencyResponse < Struct.new(
       :reserved_concurrent_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2298,7 +2375,8 @@ module Aws::Lambda
       :snap_start,
       :runtime_version_config,
       :logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2316,7 +2394,8 @@ module Aws::Lambda
     class GetFunctionConfigurationRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2341,7 +2420,8 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2354,7 +2434,8 @@ module Aws::Lambda
     class GetFunctionEventInvokeConfigRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2363,7 +2444,8 @@ module Aws::Lambda
     #   @return [String]
     class GetFunctionRecursionConfigRequest < Struct.new(
       :function_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2372,7 +2454,8 @@ module Aws::Lambda
     #   @return [String]
     class GetFunctionRecursionConfigResponse < Struct.new(
       :recursive_loop,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2385,7 +2468,8 @@ module Aws::Lambda
     class GetFunctionRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2410,7 +2494,8 @@ module Aws::Lambda
       :tags,
       :tags_error,
       :concurrency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2423,7 +2508,8 @@ module Aws::Lambda
     class GetFunctionUrlConfigRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2456,7 +2542,8 @@ module Aws::Lambda
       :creation_time,
       :last_modified_time,
       :invoke_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2497,7 +2584,8 @@ module Aws::Lambda
       :compatible_runtimes,
       :license_info,
       :compatible_architectures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2511,7 +2599,8 @@ module Aws::Lambda
     #   @return [String]
     class GetLayerVersionByArnRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2552,7 +2641,8 @@ module Aws::Lambda
       :compatible_runtimes,
       :license_info,
       :compatible_architectures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2570,7 +2660,8 @@ module Aws::Lambda
     class GetLayerVersionPolicyRequest < Struct.new(
       :layer_name,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2583,7 +2674,8 @@ module Aws::Lambda
     class GetLayerVersionPolicyResponse < Struct.new(
       :policy,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2596,7 +2688,8 @@ module Aws::Lambda
     class GetLayerVersionRequest < Struct.new(
       :layer_name,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2609,7 +2702,8 @@ module Aws::Lambda
     class GetPolicyRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2622,7 +2716,8 @@ module Aws::Lambda
     class GetPolicyResponse < Struct.new(
       :policy,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2635,7 +2730,8 @@ module Aws::Lambda
     class GetProvisionedConcurrencyConfigRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2664,7 +2760,8 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2677,7 +2774,8 @@ module Aws::Lambda
     class GetRuntimeManagementConfigRequest < Struct.new(
       :function_name,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2694,7 +2792,8 @@ module Aws::Lambda
       :update_runtime_on,
       :runtime_version_arn,
       :function_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2712,7 +2811,8 @@ module Aws::Lambda
       :entry_point,
       :command,
       :working_directory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2726,7 +2826,8 @@ module Aws::Lambda
     class ImageConfigError < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2740,7 +2841,8 @@ module Aws::Lambda
     class ImageConfigResponse < Struct.new(
       :image_config,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2752,7 +2854,8 @@ module Aws::Lambda
     class InvalidCodeSignatureException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2766,7 +2869,8 @@ module Aws::Lambda
     class InvalidParameterValueException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2780,7 +2884,8 @@ module Aws::Lambda
     class InvalidRequestContentException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2792,7 +2897,8 @@ module Aws::Lambda
     class InvalidRuntimeException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2804,7 +2910,8 @@ module Aws::Lambda
     class InvalidSecurityGroupIDException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2816,7 +2923,8 @@ module Aws::Lambda
     class InvalidSubnetIDException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2828,7 +2936,8 @@ module Aws::Lambda
     class InvalidZipFileException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2857,7 +2966,8 @@ module Aws::Lambda
       :client_context,
       :payload,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2882,7 +2992,8 @@ module Aws::Lambda
       :log_result,
       :payload,
       :executed_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2901,7 +3012,8 @@ module Aws::Lambda
     class InvokeAsyncRequest < Struct.new(
       :function_name,
       :invoke_args,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2912,7 +3024,8 @@ module Aws::Lambda
     #   @return [Integer]
     class InvokeAsyncResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2927,7 +3040,8 @@ module Aws::Lambda
     #   @return [String]
     class InvokeResponseStreamUpdate < Struct.new(
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2945,7 +3059,8 @@ module Aws::Lambda
       :error_code,
       :error_details,
       :log_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2974,7 +3089,8 @@ module Aws::Lambda
       :client_context,
       :qualifier,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2995,7 +3111,8 @@ module Aws::Lambda
       :executed_version,
       :event_stream,
       :response_stream_content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3015,7 +3132,8 @@ module Aws::Lambda
       :payload_chunk,
       :invoke_complete,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PayloadChunk < InvokeWithResponseStreamResponseEvent; end
@@ -3031,7 +3149,8 @@ module Aws::Lambda
     class KMSAccessDeniedException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3043,7 +3162,8 @@ module Aws::Lambda
     class KMSDisabledException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3055,7 +3175,8 @@ module Aws::Lambda
     class KMSInvalidStateException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3067,7 +3188,8 @@ module Aws::Lambda
     class KMSNotFoundException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3081,7 +3203,8 @@ module Aws::Lambda
     class KafkaSchemaRegistryAccessConfig < Struct.new(
       :type,
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3103,7 +3226,8 @@ module Aws::Lambda
       :event_record_format,
       :access_configs,
       :schema_validation_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3113,7 +3237,8 @@ module Aws::Lambda
     #   @return [String]
     class KafkaSchemaValidationConfig < Struct.new(
       :attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3135,7 +3260,8 @@ module Aws::Lambda
       :code_size,
       :signing_profile_version_arn,
       :signing_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3162,7 +3288,8 @@ module Aws::Lambda
       :s3_key,
       :s3_object_version,
       :zip_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3188,7 +3315,8 @@ module Aws::Lambda
       :code_size,
       :signing_profile_version_arn,
       :signing_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3227,7 +3355,8 @@ module Aws::Lambda
       :compatible_runtimes,
       :license_info,
       :compatible_architectures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3250,7 +3379,8 @@ module Aws::Lambda
       :layer_name,
       :layer_arn,
       :latest_matching_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3271,7 +3401,8 @@ module Aws::Lambda
       :function_version,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3284,7 +3415,8 @@ module Aws::Lambda
     class ListAliasesResponse < Struct.new(
       :next_marker,
       :aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3297,7 +3429,8 @@ module Aws::Lambda
     class ListCodeSigningConfigsRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3310,7 +3443,8 @@ module Aws::Lambda
     class ListCodeSigningConfigsResponse < Struct.new(
       :next_marker,
       :code_signing_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3331,7 +3465,8 @@ module Aws::Lambda
       :function_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3344,7 +3479,8 @@ module Aws::Lambda
     class ListEventSourceMappingsResponse < Struct.new(
       :next_marker,
       :event_source_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3361,7 +3497,8 @@ module Aws::Lambda
       :function_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3374,7 +3511,8 @@ module Aws::Lambda
     class ListFunctionEventInvokeConfigsResponse < Struct.new(
       :function_event_invoke_configs,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3391,7 +3529,8 @@ module Aws::Lambda
       :function_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3404,7 +3543,8 @@ module Aws::Lambda
     class ListFunctionUrlConfigsResponse < Struct.new(
       :function_url_configs,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3421,7 +3561,8 @@ module Aws::Lambda
       :code_signing_config_arn,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3434,7 +3575,8 @@ module Aws::Lambda
     class ListFunctionsByCodeSigningConfigResponse < Struct.new(
       :next_marker,
       :function_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3455,7 +3597,8 @@ module Aws::Lambda
       :function_version,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3469,7 +3612,8 @@ module Aws::Lambda
     class ListFunctionsResponse < Struct.new(
       :next_marker,
       :functions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3494,7 +3638,8 @@ module Aws::Lambda
       :marker,
       :max_items,
       :compatible_architecture,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3507,7 +3652,8 @@ module Aws::Lambda
     class ListLayerVersionsResponse < Struct.new(
       :next_marker,
       :layer_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3528,7 +3674,8 @@ module Aws::Lambda
       :marker,
       :max_items,
       :compatible_architecture,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3541,7 +3688,8 @@ module Aws::Lambda
     class ListLayersResponse < Struct.new(
       :next_marker,
       :layers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3558,7 +3706,8 @@ module Aws::Lambda
       :function_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3571,7 +3720,8 @@ module Aws::Lambda
     class ListProvisionedConcurrencyConfigsResponse < Struct.new(
       :provisioned_concurrency_configs,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3580,7 +3730,8 @@ module Aws::Lambda
     #   @return [String]
     class ListTagsRequest < Struct.new(
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3589,7 +3740,8 @@ module Aws::Lambda
     #   @return [Hash<String, String>]
     class ListTagsResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3606,7 +3758,8 @@ module Aws::Lambda
       :function_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3619,7 +3772,8 @@ module Aws::Lambda
     class ListVersionsByFunctionResponse < Struct.new(
       :next_marker,
       :versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3641,7 +3795,8 @@ module Aws::Lambda
       :application_log_level,
       :system_log_level,
       :log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3651,7 +3806,8 @@ module Aws::Lambda
     #   @return [String]
     class OnFailure < Struct.new(
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3661,7 +3817,8 @@ module Aws::Lambda
     #   @return [String]
     class OnSuccess < Struct.new(
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3673,7 +3830,8 @@ module Aws::Lambda
     class PolicyLengthExceededException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3687,7 +3845,8 @@ module Aws::Lambda
     class PreconditionFailedException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3721,7 +3880,8 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3733,7 +3893,8 @@ module Aws::Lambda
     class ProvisionedConcurrencyConfigNotFoundException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3747,7 +3908,8 @@ module Aws::Lambda
     class ProvisionedPollerConfig < Struct.new(
       :minimum_pollers,
       :maximum_pollers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3776,7 +3938,8 @@ module Aws::Lambda
       :compatible_runtimes,
       :license_info,
       :compatible_architectures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3817,7 +3980,8 @@ module Aws::Lambda
       :compatible_runtimes,
       :license_info,
       :compatible_architectures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3972,7 +4136,8 @@ module Aws::Lambda
       :snap_start,
       :runtime_version_config,
       :logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3998,7 +4163,8 @@ module Aws::Lambda
       :code_sha256,
       :description,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4011,7 +4177,8 @@ module Aws::Lambda
     class PutFunctionCodeSigningConfigRequest < Struct.new(
       :code_signing_config_arn,
       :function_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4024,7 +4191,8 @@ module Aws::Lambda
     class PutFunctionCodeSigningConfigResponse < Struct.new(
       :code_signing_config_arn,
       :function_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4033,7 +4201,8 @@ module Aws::Lambda
     #   @return [Integer]
     class PutFunctionConcurrencyOutput < Struct.new(
       :reserved_concurrent_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4046,7 +4215,8 @@ module Aws::Lambda
     class PutFunctionConcurrencyRequest < Struct.new(
       :function_name,
       :reserved_concurrent_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4071,7 +4241,8 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4096,7 +4267,8 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4109,7 +4281,8 @@ module Aws::Lambda
     class PutFunctionRecursionConfigRequest < Struct.new(
       :function_name,
       :recursive_loop,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4118,7 +4291,8 @@ module Aws::Lambda
     #   @return [String]
     class PutFunctionRecursionConfigResponse < Struct.new(
       :recursive_loop,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4135,7 +4309,8 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       :provisioned_concurrent_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4164,7 +4339,8 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4185,7 +4361,8 @@ module Aws::Lambda
       :qualifier,
       :update_runtime_on,
       :runtime_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4202,7 +4379,8 @@ module Aws::Lambda
       :update_runtime_on,
       :function_arn,
       :runtime_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4216,7 +4394,8 @@ module Aws::Lambda
     class RecursiveInvocationException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4237,7 +4416,8 @@ module Aws::Lambda
       :version_number,
       :statement_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4258,7 +4438,8 @@ module Aws::Lambda
       :statement_id,
       :qualifier,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4270,7 +4451,8 @@ module Aws::Lambda
     class RequestTooLargeException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4284,7 +4466,8 @@ module Aws::Lambda
     class ResourceConflictException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4296,7 +4479,8 @@ module Aws::Lambda
     class ResourceInUseException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4308,7 +4492,8 @@ module Aws::Lambda
     class ResourceNotFoundException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4322,7 +4507,8 @@ module Aws::Lambda
     class ResourceNotReadyException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4336,7 +4522,8 @@ module Aws::Lambda
     class RuntimeVersionConfig < Struct.new(
       :runtime_version_arn,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4350,7 +4537,8 @@ module Aws::Lambda
     class RuntimeVersionError < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4360,7 +4548,8 @@ module Aws::Lambda
     #   @return [Integer]
     class ScalingConfig < Struct.new(
       :maximum_concurrency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4370,7 +4559,8 @@ module Aws::Lambda
     #   @return [Hash<String, Array<String>>]
     class SelfManagedEventSource < Struct.new(
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4384,7 +4574,8 @@ module Aws::Lambda
     class SelfManagedKafkaEventSourceConfig < Struct.new(
       :consumer_group_id,
       :schema_registry_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4396,7 +4587,8 @@ module Aws::Lambda
     class ServiceException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4406,7 +4598,8 @@ module Aws::Lambda
     #   @return [String]
     class SnapStart < Struct.new(
       :apply_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4418,7 +4611,8 @@ module Aws::Lambda
     class SnapStartException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4430,7 +4624,8 @@ module Aws::Lambda
     class SnapStartNotReadyException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4444,7 +4639,8 @@ module Aws::Lambda
     class SnapStartResponse < Struct.new(
       :apply_on,
       :optimization_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4456,7 +4652,8 @@ module Aws::Lambda
     class SnapStartTimeoutException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4470,7 +4667,8 @@ module Aws::Lambda
     class SourceAccessConfiguration < Struct.new(
       :type,
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4482,7 +4680,8 @@ module Aws::Lambda
     class SubnetIPAddressLimitReachedException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4495,7 +4694,8 @@ module Aws::Lambda
     class TagResourceRequest < Struct.new(
       :resource,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4509,7 +4709,8 @@ module Aws::Lambda
     class TagsError < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4528,7 +4729,8 @@ module Aws::Lambda
       :type,
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4538,7 +4740,8 @@ module Aws::Lambda
     #   @return [String]
     class TracingConfig < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4548,7 +4751,8 @@ module Aws::Lambda
     #   @return [String]
     class TracingConfigResponse < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4560,7 +4764,8 @@ module Aws::Lambda
     class UnsupportedMediaTypeException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4573,7 +4778,8 @@ module Aws::Lambda
     class UntagResourceRequest < Struct.new(
       :resource,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4603,7 +4809,8 @@ module Aws::Lambda
       :description,
       :routing_config,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4632,7 +4839,8 @@ module Aws::Lambda
       :description,
       :routing_config,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4653,7 +4861,8 @@ module Aws::Lambda
       :description,
       :allowed_publishers,
       :code_signing_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4662,7 +4871,8 @@ module Aws::Lambda
     #   @return [Types::CodeSigningConfig]
     class UpdateCodeSigningConfigResponse < Struct.new(
       :code_signing_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4796,7 +5006,8 @@ module Aws::Lambda
       :event_source_mapping_arn,
       :metrics_config,
       :provisioned_poller_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4885,7 +5096,8 @@ module Aws::Lambda
       :kms_key_arn,
       :metrics_config,
       :provisioned_poller_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5035,7 +5247,8 @@ module Aws::Lambda
       :snap_start,
       :runtime_version_config,
       :logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5089,7 +5302,8 @@ module Aws::Lambda
       :revision_id,
       :architectures,
       :source_kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5239,7 +5453,8 @@ module Aws::Lambda
       :snap_start,
       :runtime_version_config,
       :logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5325,7 +5540,8 @@ module Aws::Lambda
       :ephemeral_storage,
       :snap_start,
       :logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5350,7 +5566,8 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5375,7 +5592,8 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5400,7 +5618,8 @@ module Aws::Lambda
       :auth_type,
       :cors,
       :invoke_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5433,7 +5652,8 @@ module Aws::Lambda
       :creation_time,
       :last_modified_time,
       :invoke_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5451,7 +5671,8 @@ module Aws::Lambda
       :subnet_ids,
       :security_group_ids,
       :ipv6_allowed_for_dual_stack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5473,7 +5694,8 @@ module Aws::Lambda
       :security_group_ids,
       :vpc_id,
       :ipv6_allowed_for_dual_stack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -11,7 +11,8 @@ module Aws::HealthLake
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::HealthLake
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +59,8 @@ module Aws::HealthLake
       :client_token,
       :tags,
       :identity_provider_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +81,8 @@ module Aws::HealthLake
       :datastore_arn,
       :datastore_status,
       :datastore_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +106,8 @@ module Aws::HealthLake
       :datastore_status,
       :created_before,
       :created_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +159,8 @@ module Aws::HealthLake
       :preload_data_config,
       :identity_provider_configuration,
       :error_cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +169,8 @@ module Aws::HealthLake
     #   @return [String]
     class DeleteFHIRDatastoreRequest < Struct.new(
       :datastore_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +191,8 @@ module Aws::HealthLake
       :datastore_arn,
       :datastore_status,
       :datastore_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,7 +201,8 @@ module Aws::HealthLake
     #   @return [String]
     class DescribeFHIRDatastoreRequest < Struct.new(
       :datastore_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +211,8 @@ module Aws::HealthLake
     #   @return [Types::DatastoreProperties]
     class DescribeFHIRDatastoreResponse < Struct.new(
       :datastore_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -215,7 +225,8 @@ module Aws::HealthLake
     class DescribeFHIRExportJobRequest < Struct.new(
       :datastore_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +235,8 @@ module Aws::HealthLake
     #   @return [Types::ExportJobProperties]
     class DescribeFHIRExportJobResponse < Struct.new(
       :export_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -237,7 +249,8 @@ module Aws::HealthLake
     class DescribeFHIRImportJobRequest < Struct.new(
       :datastore_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -246,7 +259,8 @@ module Aws::HealthLake
     #   @return [Types::ImportJobProperties]
     class DescribeFHIRImportJobResponse < Struct.new(
       :import_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +275,8 @@ module Aws::HealthLake
     class ErrorCause < Struct.new(
       :error_message,
       :error_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +318,8 @@ module Aws::HealthLake
       :output_data_config,
       :data_access_role_arn,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,7 +383,8 @@ module Aws::HealthLake
       :fine_grained_authorization_enabled,
       :metadata,
       :idp_lambda_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -427,7 +444,8 @@ module Aws::HealthLake
       :data_access_role_arn,
       :message,
       :validation_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +457,8 @@ module Aws::HealthLake
     class InputDataConfig < Struct.new(
       :s3_uri,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3Uri < InputDataConfig; end
@@ -451,7 +470,8 @@ module Aws::HealthLake
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +510,8 @@ module Aws::HealthLake
       :total_number_of_resources_with_customer_error,
       :total_number_of_files_read_with_customer_error,
       :throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +527,8 @@ module Aws::HealthLake
     class KmsEncryptionConfig < Struct.new(
       :cmk_type,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +546,8 @@ module Aws::HealthLake
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +560,8 @@ module Aws::HealthLake
     class ListFHIRDatastoresResponse < Struct.new(
       :datastore_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +595,8 @@ module Aws::HealthLake
       :job_status,
       :submitted_before,
       :submitted_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +609,8 @@ module Aws::HealthLake
     class ListFHIRExportJobsResponse < Struct.new(
       :export_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +644,8 @@ module Aws::HealthLake
       :job_status,
       :submitted_before,
       :submitted_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,7 +658,8 @@ module Aws::HealthLake
     class ListFHIRImportJobsResponse < Struct.new(
       :import_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +668,8 @@ module Aws::HealthLake
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -649,7 +678,8 @@ module Aws::HealthLake
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +690,8 @@ module Aws::HealthLake
     class OutputDataConfig < Struct.new(
       :s3_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3Configuration < OutputDataConfig; end
@@ -673,7 +704,8 @@ module Aws::HealthLake
     #   @return [String]
     class PreloadDataConfig < Struct.new(
       :preload_data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +714,8 @@ module Aws::HealthLake
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,7 +731,8 @@ module Aws::HealthLake
     class S3Configuration < Struct.new(
       :s3_uri,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +744,8 @@ module Aws::HealthLake
     #   @return [Types::KmsEncryptionConfig]
     class SseConfiguration < Struct.new(
       :kms_encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +770,8 @@ module Aws::HealthLake
       :datastore_id,
       :data_access_role_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +788,8 @@ module Aws::HealthLake
       :job_id,
       :job_status,
       :datastore_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +822,8 @@ module Aws::HealthLake
       :data_access_role_arn,
       :client_token,
       :validation_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +840,8 @@ module Aws::HealthLake
       :job_id,
       :job_status,
       :datastore_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +856,8 @@ module Aws::HealthLake
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,12 +870,14 @@ module Aws::HealthLake
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +886,8 @@ module Aws::HealthLake
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,12 +900,14 @@ module Aws::HealthLake
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -871,7 +916,8 @@ module Aws::HealthLake
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

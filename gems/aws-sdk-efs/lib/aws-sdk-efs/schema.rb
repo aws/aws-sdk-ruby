@@ -1034,7 +1034,6 @@ module Aws::EFS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequests)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/2015-02-01/file-systems/{FileSystemId}/protection", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

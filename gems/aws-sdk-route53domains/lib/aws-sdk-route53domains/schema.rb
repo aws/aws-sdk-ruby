@@ -1220,7 +1220,6 @@ module Aws::Route53Domains
         operation.traits = {}
         operation[:paginator] = Paginators::ViewBilling.new
       end)
-
     end
 
     class << self

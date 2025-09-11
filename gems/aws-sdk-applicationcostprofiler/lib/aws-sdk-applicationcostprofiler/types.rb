@@ -11,7 +11,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class DeleteReportDefinitionRequest < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +31,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class DeleteReportDefinitionResult < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +41,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class GetReportDefinitionRequest < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +75,8 @@ module Aws::ApplicationCostProfiler
       :destination_s3_location,
       :created_at,
       :last_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +85,8 @@ module Aws::ApplicationCostProfiler
     #   @return [Types::SourceS3Location]
     class ImportApplicationUsageRequest < Struct.new(
       :source_s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +95,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class ImportApplicationUsageResult < Struct.new(
       :import_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +105,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +119,8 @@ module Aws::ApplicationCostProfiler
     class ListReportDefinitionsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +133,8 @@ module Aws::ApplicationCostProfiler
     class ListReportDefinitionsResult < Struct.new(
       :report_definitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +161,8 @@ module Aws::ApplicationCostProfiler
       :report_frequency,
       :format,
       :destination_s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +171,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class PutReportDefinitionResult < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,7 +206,8 @@ module Aws::ApplicationCostProfiler
       :destination_s3_location,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +222,8 @@ module Aws::ApplicationCostProfiler
     class S3Location < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +232,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +254,8 @@ module Aws::ApplicationCostProfiler
       :bucket,
       :key,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +264,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +291,8 @@ module Aws::ApplicationCostProfiler
       :report_frequency,
       :format,
       :destination_s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +301,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class UpdateReportDefinitionResult < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +311,8 @@ module Aws::ApplicationCostProfiler
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

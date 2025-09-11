@@ -1225,7 +1225,6 @@ module Aws::AmplifyUIBuilder
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceConflictException)
         operation.traits = {"aws.iam#iamAction" => {"requiredActions" => ["amplify:GetApp", "amplifyuibuilder:GetTheme", "amplifyuibuilder:TagResource", "amplifyuibuilder:UntagResource"]}, "smithy.api#http" => {"uri" => "/app/{appId}/environment/{environmentName}/themes/{id}", "method" => "PATCH"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

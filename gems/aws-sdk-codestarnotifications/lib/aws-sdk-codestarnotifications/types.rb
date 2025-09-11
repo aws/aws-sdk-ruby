@@ -12,7 +12,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31,7 +33,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class ConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -81,7 +84,8 @@ module Aws::Codestarnotifications
       :client_request_token,
       :tags,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +94,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class CreateNotificationRuleResult < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -99,7 +104,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class DeleteNotificationRuleRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +114,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class DeleteNotificationRuleResult < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,12 +130,14 @@ module Aws::Codestarnotifications
     class DeleteTargetRequest < Struct.new(
       :target_address,
       :force_unsubscribe_all,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTargetResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,7 +146,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class DescribeNotificationRuleRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +201,8 @@ module Aws::Codestarnotifications
       :created_timestamp,
       :last_modified_timestamp,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -215,7 +226,8 @@ module Aws::Codestarnotifications
       :service_name,
       :event_type_name,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +236,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +248,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +265,8 @@ module Aws::Codestarnotifications
     class ListEventTypesFilter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +285,8 @@ module Aws::Codestarnotifications
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +300,8 @@ module Aws::Codestarnotifications
     class ListEventTypesResult < Struct.new(
       :event_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -300,7 +317,8 @@ module Aws::Codestarnotifications
     class ListNotificationRulesFilter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +341,8 @@ module Aws::Codestarnotifications
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -336,7 +355,8 @@ module Aws::Codestarnotifications
     class ListNotificationRulesResult < Struct.new(
       :next_token,
       :notification_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +365,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -354,7 +375,8 @@ module Aws::Codestarnotifications
     #   @return [Hash<String, String>]
     class ListTagsForResourceResult < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +396,8 @@ module Aws::Codestarnotifications
     class ListTargetsFilter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -397,7 +420,8 @@ module Aws::Codestarnotifications
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +435,8 @@ module Aws::Codestarnotifications
     class ListTargetsResult < Struct.new(
       :targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +450,8 @@ module Aws::Codestarnotifications
     class NotificationRuleSummary < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +461,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +471,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +490,8 @@ module Aws::Codestarnotifications
       :arn,
       :target,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +500,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class SubscribeResult < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +514,8 @@ module Aws::Codestarnotifications
     class TagResourceRequest < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +524,8 @@ module Aws::Codestarnotifications
     #   @return [Hash<String, String>]
     class TagResourceResult < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +547,8 @@ module Aws::Codestarnotifications
     class Target < Struct.new(
       :target_type,
       :target_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -541,7 +574,8 @@ module Aws::Codestarnotifications
       :target_address,
       :target_type,
       :target_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +588,8 @@ module Aws::Codestarnotifications
     class UnsubscribeRequest < Struct.new(
       :arn,
       :target_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +598,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class UnsubscribeResult < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -577,12 +613,14 @@ module Aws::Codestarnotifications
     class UntagResourceRequest < Struct.new(
       :arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,12 +655,14 @@ module Aws::Codestarnotifications
       :event_type_ids,
       :targets,
       :detail_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNotificationRuleResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,7 +671,8 @@ module Aws::Codestarnotifications
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

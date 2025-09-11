@@ -254,7 +254,6 @@ module Aws::KeyspacesStreams
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "ListStreamsSuccess", "params" => {}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
         operation[:paginator] = Paginators::ListStreams.new
       end)
-
     end
 
     class << self

@@ -11,7 +11,8 @@ module Aws::S3Outposts
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::S3Outposts
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +57,8 @@ module Aws::S3Outposts
       :security_group_id,
       :access_type,
       :customer_owned_ipv4_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +67,8 @@ module Aws::S3Outposts
     #   @return [String]
     class CreateEndpointResult < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +81,8 @@ module Aws::S3Outposts
     class DeleteEndpointRequest < Struct.new(
       :endpoint_id,
       :outpost_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +139,8 @@ module Aws::S3Outposts
       :access_type,
       :customer_owned_ipv4_pool,
       :failed_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +154,8 @@ module Aws::S3Outposts
     class FailedReason < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +164,8 @@ module Aws::S3Outposts
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -171,7 +179,8 @@ module Aws::S3Outposts
     class ListEndpointsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +194,8 @@ module Aws::S3Outposts
     class ListEndpointsResult < Struct.new(
       :endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +211,8 @@ module Aws::S3Outposts
     class ListOutpostsWithS3Request < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +236,8 @@ module Aws::S3Outposts
     class ListOutpostsWithS3Result < Struct.new(
       :outposts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -243,7 +255,8 @@ module Aws::S3Outposts
       :next_token,
       :max_results,
       :outpost_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -257,7 +270,8 @@ module Aws::S3Outposts
     class ListSharedEndpointsResult < Struct.new(
       :endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +281,8 @@ module Aws::S3Outposts
     #   @return [String]
     class NetworkInterface < Struct.new(
       :network_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +308,8 @@ module Aws::S3Outposts
       :outpost_id,
       :owner_id,
       :capacity_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -307,7 +323,8 @@ module Aws::S3Outposts
     #   @return [String]
     class OutpostOfflineException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +333,8 @@ module Aws::S3Outposts
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +343,8 @@ module Aws::S3Outposts
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +353,8 @@ module Aws::S3Outposts
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

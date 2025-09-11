@@ -40,7 +40,7 @@ module Aws::AppTest
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppTest::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::AppTest
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppTest::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::AppTest
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppTest::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::AppTest
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppTest::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::AppTest
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppTest::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -154,7 +154,7 @@ module Aws::AppTest
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppTest::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::AppTest
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppTest::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -5322,7 +5322,6 @@ module Aws::CloudFront
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgument)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2020-05-31/verify-dns-configuration", "code" => 200}}
       end)
-
     end
 
     class << self

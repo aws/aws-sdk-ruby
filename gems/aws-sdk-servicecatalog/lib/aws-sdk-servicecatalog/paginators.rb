@@ -11,6 +11,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -19,6 +20,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -34,6 +36,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -42,6 +45,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -57,6 +61,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -65,6 +70,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -80,6 +86,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -88,6 +95,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -103,6 +111,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -111,6 +120,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -126,6 +136,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -134,6 +145,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -149,6 +161,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -157,6 +170,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -172,6 +186,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -180,6 +195,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -195,6 +211,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -203,6 +220,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -218,6 +236,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -226,6 +245,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -241,6 +261,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -249,6 +270,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -264,6 +286,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -272,6 +295,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -287,6 +311,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -295,6 +320,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -310,6 +336,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -318,6 +345,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -333,6 +361,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -341,6 +370,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -356,6 +386,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -364,6 +395,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -379,6 +411,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -387,6 +420,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -402,6 +436,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -410,6 +445,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens
@@ -425,6 +461,7 @@ module Aws::ServiceCatalog
       def next_tokens(data)
         next_token = data.next_page_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = next_token
         tokens
@@ -433,6 +470,7 @@ module Aws::ServiceCatalog
       def prev_tokens(params)
         prev_token = params[:page_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:page_token] = prev_token
         tokens

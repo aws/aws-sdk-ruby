@@ -71,7 +71,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::CodeSigningConfigNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -88,7 +88,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::CodeStorageExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception type.</p>
@@ -106,7 +106,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::CodeVerificationFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -123,7 +123,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::EC2AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -140,7 +140,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::EC2ThrottledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -157,7 +157,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::EC2UnexpectedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -178,7 +178,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::EFSIOException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -195,7 +195,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::EFSMountConnectivityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -212,7 +212,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::EFSMountFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -229,7 +229,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::EFSMountTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -246,7 +246,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::ENILimitReachedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -263,7 +263,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::InvalidCodeSignatureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -280,7 +280,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception type.</p>
@@ -299,7 +299,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::InvalidRequestContentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception type.</p>
@@ -318,7 +318,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::InvalidRuntimeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -335,7 +335,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::InvalidSecurityGroupIDException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -352,7 +352,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::InvalidSubnetIDException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -369,7 +369,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::InvalidZipFileException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -386,7 +386,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::KMSAccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -403,7 +403,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::KMSDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -420,7 +420,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::KMSInvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -437,7 +437,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::KMSNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -454,7 +454,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::PolicyLengthExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -471,7 +471,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::PreconditionFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception type.</p>
@@ -490,7 +490,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::ProvisionedConcurrencyConfigNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -507,7 +507,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::RecursiveInvocationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception type.</p>
@@ -526,7 +526,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::RequestTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -543,7 +543,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::ResourceConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception type.</p>
@@ -562,7 +562,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -579,7 +579,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -596,7 +596,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::ResourceNotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception type.</p>
@@ -615,7 +615,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::ServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -632,7 +632,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::SnapStartException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -649,7 +649,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::SnapStartNotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -666,7 +666,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::SnapStartTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -683,7 +683,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::SubnetIPAddressLimitReachedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -700,7 +700,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The number of seconds the caller should wait before retrying.</p>
@@ -726,7 +726,7 @@ module Aws::Lambda
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lambda::Types::UnsupportedMediaTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type

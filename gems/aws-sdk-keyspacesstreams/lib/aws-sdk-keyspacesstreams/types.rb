@@ -12,7 +12,8 @@ module Aws::KeyspacesStreams
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::KeyspacesStreams
     class GetRecordsInput < Struct.new(
       :shard_iterator,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::KeyspacesStreams
     class GetRecordsOutput < Struct.new(
       :change_records,
       :next_shard_iterator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +62,8 @@ module Aws::KeyspacesStreams
       :shard_id,
       :shard_iterator_type,
       :sequence_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +72,8 @@ module Aws::KeyspacesStreams
     #   @return [String]
     class GetShardIteratorOutput < Struct.new(
       :shard_iterator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +94,8 @@ module Aws::KeyspacesStreams
       :max_results,
       :shard_filter,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +136,8 @@ module Aws::KeyspacesStreams
       :table_name,
       :shards,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +147,8 @@ module Aws::KeyspacesStreams
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +162,8 @@ module Aws::KeyspacesStreams
     class KeyspacesCell < Struct.new(
       :value,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +181,8 @@ module Aws::KeyspacesStreams
       :key,
       :value,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +289,8 @@ module Aws::KeyspacesStreams
       :varint_t,
       :udt_t,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AsciiT < KeyspacesCellValue; end
@@ -320,7 +331,8 @@ module Aws::KeyspacesStreams
     class KeyspacesMetadata < Struct.new(
       :expiration_time,
       :write_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +350,8 @@ module Aws::KeyspacesStreams
       :value_cells,
       :static_cells,
       :row_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +372,8 @@ module Aws::KeyspacesStreams
       :table_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +386,8 @@ module Aws::KeyspacesStreams
     class ListStreamsOutput < Struct.new(
       :streams,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +425,8 @@ module Aws::KeyspacesStreams
       :new_image,
       :old_image,
       :sequence_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +436,8 @@ module Aws::KeyspacesStreams
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +451,8 @@ module Aws::KeyspacesStreams
     class SequenceNumberRange < Struct.new(
       :starting_sequence_number,
       :ending_sequence_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +470,8 @@ module Aws::KeyspacesStreams
       :shard_id,
       :sequence_number_range,
       :parent_shard_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +485,8 @@ module Aws::KeyspacesStreams
     class ShardFilter < Struct.new(
       :type,
       :shard_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +508,8 @@ module Aws::KeyspacesStreams
       :keyspace_name,
       :table_name,
       :stream_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +519,8 @@ module Aws::KeyspacesStreams
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -512,7 +534,8 @@ module Aws::KeyspacesStreams
     class ValidationException < Struct.new(
       :message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

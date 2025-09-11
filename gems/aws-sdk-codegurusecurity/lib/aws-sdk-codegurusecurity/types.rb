@@ -24,7 +24,8 @@ module Aws::CodeGuruSecurity
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,7 +51,8 @@ module Aws::CodeGuruSecurity
       :closed_findings,
       :open_findings,
       :mean_time_to_close,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +74,8 @@ module Aws::CodeGuruSecurity
       :finding_id,
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -81,7 +84,8 @@ module Aws::CodeGuruSecurity
     #   @return [Array<Types::FindingIdentifier>]
     class BatchGetFindingsRequest < Struct.new(
       :finding_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +98,8 @@ module Aws::CodeGuruSecurity
     class BatchGetFindingsResponse < Struct.new(
       :findings,
       :failed_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +113,8 @@ module Aws::CodeGuruSecurity
     class CategoryWithFindingNum < Struct.new(
       :category_name,
       :finding_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +128,8 @@ module Aws::CodeGuruSecurity
     class CodeLine < Struct.new(
       :number,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +151,8 @@ module Aws::CodeGuruSecurity
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +181,8 @@ module Aws::CodeGuruSecurity
       :scan_type,
       :analysis_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +207,8 @@ module Aws::CodeGuruSecurity
       :resource_id,
       :scan_state,
       :scan_name_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +217,8 @@ module Aws::CodeGuruSecurity
     #   @return [String]
     class CreateUploadUrlRequest < Struct.new(
       :scan_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +235,8 @@ module Aws::CodeGuruSecurity
       :s3_url,
       :request_headers,
       :code_artifact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +246,8 @@ module Aws::CodeGuruSecurity
     #   @return [String]
     class EncryptionConfig < Struct.new(
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -260,7 +273,8 @@ module Aws::CodeGuruSecurity
       :start_line,
       :end_line,
       :code_snippet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +344,8 @@ module Aws::CodeGuruSecurity
       :detector_id,
       :detector_name,
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +359,8 @@ module Aws::CodeGuruSecurity
     class FindingIdentifier < Struct.new(
       :scan_name,
       :finding_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -370,12 +386,14 @@ module Aws::CodeGuruSecurity
       :medium,
       :high,
       :critical,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAccountConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +402,8 @@ module Aws::CodeGuruSecurity
     #   @return [Types::EncryptionConfig]
     class GetAccountConfigurationResponse < Struct.new(
       :encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +424,8 @@ module Aws::CodeGuruSecurity
       :next_token,
       :max_results,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +438,8 @@ module Aws::CodeGuruSecurity
     class GetFindingsResponse < Struct.new(
       :findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +448,8 @@ module Aws::CodeGuruSecurity
     #   @return [Time]
     class GetMetricsSummaryRequest < Struct.new(
       :date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -436,7 +458,8 @@ module Aws::CodeGuruSecurity
     #   @return [Types::MetricsSummary]
     class GetMetricsSummaryResponse < Struct.new(
       :metrics_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +472,8 @@ module Aws::CodeGuruSecurity
     class GetScanRequest < Struct.new(
       :scan_name,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +514,8 @@ module Aws::CodeGuruSecurity
       :number_of_revisions,
       :scan_name_arn,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +529,8 @@ module Aws::CodeGuruSecurity
     class InternalServerException < Struct.new(
       :error,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +551,8 @@ module Aws::CodeGuruSecurity
       :max_results,
       :start_date,
       :end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +565,8 @@ module Aws::CodeGuruSecurity
     class ListFindingsMetricsResponse < Struct.new(
       :findings_metrics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +579,8 @@ module Aws::CodeGuruSecurity
     class ListScansRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +593,8 @@ module Aws::CodeGuruSecurity
     class ListScansResponse < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +603,8 @@ module Aws::CodeGuruSecurity
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -582,7 +613,8 @@ module Aws::CodeGuruSecurity
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -608,7 +640,8 @@ module Aws::CodeGuruSecurity
       :categories_with_most_findings,
       :scans_with_most_open_findings,
       :scans_with_most_open_critical_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +655,8 @@ module Aws::CodeGuruSecurity
     class Recommendation < Struct.new(
       :text,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +670,8 @@ module Aws::CodeGuruSecurity
     class Remediation < Struct.new(
       :recommendation,
       :suggested_fixes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +685,8 @@ module Aws::CodeGuruSecurity
     class Resource < Struct.new(
       :id,
       :sub_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +697,8 @@ module Aws::CodeGuruSecurity
     class ResourceId < Struct.new(
       :code_artifact_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CodeArtifactId < ResourceId; end
@@ -686,7 +723,8 @@ module Aws::CodeGuruSecurity
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +738,8 @@ module Aws::CodeGuruSecurity
     class ScanNameWithFindingNum < Struct.new(
       :scan_name,
       :finding_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +769,8 @@ module Aws::CodeGuruSecurity
       :scan_name,
       :run_id,
       :scan_name_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +784,8 @@ module Aws::CodeGuruSecurity
     class SuggestedFix < Struct.new(
       :description,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,12 +798,14 @@ module Aws::CodeGuruSecurity
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +827,8 @@ module Aws::CodeGuruSecurity
       :message,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,12 +841,14 @@ module Aws::CodeGuruSecurity
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,7 +857,8 @@ module Aws::CodeGuruSecurity
     #   @return [Types::EncryptionConfig]
     class UpdateAccountConfigurationRequest < Struct.new(
       :encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +867,8 @@ module Aws::CodeGuruSecurity
     #   @return [Types::EncryptionConfig]
     class UpdateAccountConfigurationResponse < Struct.new(
       :encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +890,8 @@ module Aws::CodeGuruSecurity
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +905,8 @@ module Aws::CodeGuruSecurity
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +934,8 @@ module Aws::CodeGuruSecurity
       :id,
       :file_path,
       :item_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

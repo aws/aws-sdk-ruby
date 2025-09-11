@@ -15,7 +15,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,7 +52,8 @@ module Aws::PcaConnectorScep
       :created_at,
       :updated_at,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +75,8 @@ module Aws::PcaConnectorScep
       :connector_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +98,8 @@ module Aws::PcaConnectorScep
       :connector_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +117,8 @@ module Aws::PcaConnectorScep
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +164,8 @@ module Aws::PcaConnectorScep
       :endpoint,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -204,7 +211,8 @@ module Aws::PcaConnectorScep
       :endpoint,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +229,8 @@ module Aws::PcaConnectorScep
       :connector_arn,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +239,8 @@ module Aws::PcaConnectorScep
     #   @return [Types::Challenge]
     class CreateChallengeResponse < Struct.new(
       :challenge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +263,8 @@ module Aws::PcaConnectorScep
       :mobile_device_management,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +273,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class CreateConnectorResponse < Struct.new(
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +283,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class DeleteChallengeRequest < Struct.new(
       :challenge_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +293,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class DeleteConnectorRequest < Struct.new(
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +303,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class GetChallengeMetadataRequest < Struct.new(
       :challenge_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +313,8 @@ module Aws::PcaConnectorScep
     #   @return [Types::ChallengeMetadata]
     class GetChallengeMetadataResponse < Struct.new(
       :challenge_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +323,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class GetChallengePasswordRequest < Struct.new(
       :challenge_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +333,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class GetChallengePasswordResponse < Struct.new(
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +343,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class GetConnectorRequest < Struct.new(
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +353,8 @@ module Aws::PcaConnectorScep
     #   @return [Types::Connector]
     class GetConnectorResponse < Struct.new(
       :connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +364,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +380,8 @@ module Aws::PcaConnectorScep
     class IntuneConfiguration < Struct.new(
       :azure_application_id,
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -380,7 +402,8 @@ module Aws::PcaConnectorScep
       :max_results,
       :next_token,
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +418,8 @@ module Aws::PcaConnectorScep
     class ListChallengeMetadataResponse < Struct.new(
       :challenges,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +436,8 @@ module Aws::PcaConnectorScep
     class ListConnectorsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +452,8 @@ module Aws::PcaConnectorScep
     class ListConnectorsResponse < Struct.new(
       :connectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -436,7 +462,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -445,7 +472,8 @@ module Aws::PcaConnectorScep
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +485,8 @@ module Aws::PcaConnectorScep
     class MobileDeviceManagement < Struct.new(
       :intune,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Intune < MobileDeviceManagement; end
@@ -478,7 +507,8 @@ module Aws::PcaConnectorScep
       :issuer,
       :subject,
       :audience,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +525,8 @@ module Aws::PcaConnectorScep
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +547,8 @@ module Aws::PcaConnectorScep
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +561,8 @@ module Aws::PcaConnectorScep
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +571,8 @@ module Aws::PcaConnectorScep
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +585,8 @@ module Aws::PcaConnectorScep
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +599,8 @@ module Aws::PcaConnectorScep
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

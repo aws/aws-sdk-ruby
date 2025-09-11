@@ -998,7 +998,6 @@ module Aws::Amp
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "PATCH", "uri" => "/workspaces/{workspaceId}/configuration"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

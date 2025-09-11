@@ -164,7 +164,6 @@ module Aws::MediaStoreData
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
         operation.traits = {"aws.auth#unsignedPayload" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#http" => {"method" => "PUT", "uri" => "/{Path+}", "code" => 200}}
       end)
-
     end
 
     class << self

@@ -6969,7 +6969,6 @@ module Aws::MediaLive
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/prod/sdiSources/{SdiSourceId}", "code" => 200}}
       end)
-
     end
 
     class << self

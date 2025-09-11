@@ -43,7 +43,7 @@ module Aws::QConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::QConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::QConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::PreconditionFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::QConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::RequestTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::QConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -117,7 +117,7 @@ module Aws::QConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::QConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -147,7 +147,7 @@ module Aws::QConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -165,7 +165,7 @@ module Aws::QConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -178,7 +178,7 @@ module Aws::QConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

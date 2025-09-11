@@ -41,7 +41,7 @@ module Aws::Pinpoint
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pinpoint::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that's returned from the API.</p>
@@ -60,7 +60,7 @@ module Aws::Pinpoint
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pinpoint::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that's returned from the API.</p>
@@ -79,7 +79,7 @@ module Aws::Pinpoint
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pinpoint::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that's returned from the API.</p>
@@ -98,7 +98,7 @@ module Aws::Pinpoint
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pinpoint::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that's returned from the API.</p>
@@ -117,7 +117,7 @@ module Aws::Pinpoint
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pinpoint::Types::MethodNotAllowedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that's returned from the API.</p>
@@ -136,7 +136,7 @@ module Aws::Pinpoint
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pinpoint::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that's returned from the API.</p>
@@ -155,7 +155,7 @@ module Aws::Pinpoint
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pinpoint::Types::PayloadTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that's returned from the API.</p>
@@ -174,7 +174,7 @@ module Aws::Pinpoint
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pinpoint::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that's returned from the API.</p>

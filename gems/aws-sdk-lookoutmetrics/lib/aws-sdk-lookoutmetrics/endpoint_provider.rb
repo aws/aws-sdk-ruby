@@ -42,7 +42,6 @@ module Aws::LookoutMetrics
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

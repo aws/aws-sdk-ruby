@@ -11,7 +11,8 @@ module Aws::DataBrew
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23,7 +24,8 @@ module Aws::DataBrew
     #   @return [Array<String>]
     class AllowedStatistics < Struct.new(
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::DataBrew
     class BatchDeleteRecipeVersionRequest < Struct.new(
       :name,
       :recipe_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51,7 +54,8 @@ module Aws::DataBrew
     class BatchDeleteRecipeVersionResponse < Struct.new(
       :name,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +70,8 @@ module Aws::DataBrew
     class ColumnSelector < Struct.new(
       :regex,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +91,8 @@ module Aws::DataBrew
     class ColumnStatisticsConfiguration < Struct.new(
       :selectors,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +117,8 @@ module Aws::DataBrew
       :condition,
       :value,
       :target_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +127,8 @@ module Aws::DataBrew
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +160,8 @@ module Aws::DataBrew
       :input,
       :path_options,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +170,8 @@ module Aws::DataBrew
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -244,7 +254,8 @@ module Aws::DataBrew
       :tags,
       :timeout,
       :job_sample,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +264,8 @@ module Aws::DataBrew
     #   @return [String]
     class CreateProfileJobResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +297,8 @@ module Aws::DataBrew
       :sample,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +307,8 @@ module Aws::DataBrew
     #   @return [String]
     class CreateProjectResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -377,7 +391,8 @@ module Aws::DataBrew
       :role_arn,
       :tags,
       :timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +401,8 @@ module Aws::DataBrew
     #   @return [String]
     class CreateRecipeJobResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -409,7 +425,8 @@ module Aws::DataBrew
       :name,
       :steps,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +435,8 @@ module Aws::DataBrew
     #   @return [String]
     class CreateRecipeResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +464,8 @@ module Aws::DataBrew
       :target_arn,
       :rules,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +474,8 @@ module Aws::DataBrew
     #   @return [String]
     class CreateRulesetResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -480,7 +500,8 @@ module Aws::DataBrew
       :cron_expression,
       :tags,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +510,8 @@ module Aws::DataBrew
     #   @return [String]
     class CreateScheduleResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +527,8 @@ module Aws::DataBrew
     class CsvOptions < Struct.new(
       :delimiter,
       :header_row,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +539,8 @@ module Aws::DataBrew
     #   @return [String]
     class CsvOutputOptions < Struct.new(
       :delimiter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -541,7 +565,8 @@ module Aws::DataBrew
       :database_name,
       :table_name,
       :temp_directory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +601,8 @@ module Aws::DataBrew
       :s3_options,
       :database_options,
       :overwrite,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -606,7 +632,8 @@ module Aws::DataBrew
       :database_table_name,
       :temp_directory,
       :query_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +654,8 @@ module Aws::DataBrew
       :glue_connection_name,
       :database_options,
       :database_output_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +671,8 @@ module Aws::DataBrew
     class DatabaseTableOutputOptions < Struct.new(
       :temp_directory,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +732,8 @@ module Aws::DataBrew
       :path_options,
       :tags,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +761,8 @@ module Aws::DataBrew
       :datetime_options,
       :create_column,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -759,7 +790,8 @@ module Aws::DataBrew
       :format,
       :timezone_offset,
       :locale_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +800,8 @@ module Aws::DataBrew
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +810,8 @@ module Aws::DataBrew
     #   @return [String]
     class DeleteDatasetResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +820,8 @@ module Aws::DataBrew
     #   @return [String]
     class DeleteJobRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -795,7 +830,8 @@ module Aws::DataBrew
     #   @return [String]
     class DeleteJobResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +840,8 @@ module Aws::DataBrew
     #   @return [String]
     class DeleteProjectRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +850,8 @@ module Aws::DataBrew
     #   @return [String]
     class DeleteProjectResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +866,8 @@ module Aws::DataBrew
     class DeleteRecipeVersionRequest < Struct.new(
       :name,
       :recipe_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +880,8 @@ module Aws::DataBrew
     class DeleteRecipeVersionResponse < Struct.new(
       :name,
       :recipe_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,7 +890,8 @@ module Aws::DataBrew
     #   @return [String]
     class DeleteRulesetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +900,8 @@ module Aws::DataBrew
     #   @return [String]
     class DeleteRulesetResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +910,8 @@ module Aws::DataBrew
     #   @return [String]
     class DeleteScheduleRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,7 +920,8 @@ module Aws::DataBrew
     #   @return [String]
     class DeleteScheduleResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +930,8 @@ module Aws::DataBrew
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -944,7 +989,8 @@ module Aws::DataBrew
       :path_options,
       :tags,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +999,8 @@ module Aws::DataBrew
     #   @return [String]
     class DescribeJobRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1132,8 @@ module Aws::DataBrew
       :tags,
       :timeout,
       :job_sample,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1105,7 +1153,8 @@ module Aws::DataBrew
     class DescribeJobRunRequest < Struct.new(
       :name,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1193,7 +1242,8 @@ module Aws::DataBrew
       :started_by,
       :started_on,
       :job_sample,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1208,7 +1258,8 @@ module Aws::DataBrew
     #   @return [String]
     class DescribeProjectRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1285,7 +1336,8 @@ module Aws::DataBrew
       :session_status,
       :opened_by,
       :open_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1299,7 +1351,8 @@ module Aws::DataBrew
     class DescribeRecipeRequest < Struct.new(
       :name,
       :recipe_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1357,7 +1410,8 @@ module Aws::DataBrew
       :tags,
       :resource_arn,
       :recipe_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1366,7 +1420,8 @@ module Aws::DataBrew
     #   @return [String]
     class DescribeRulesetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,7 +1468,8 @@ module Aws::DataBrew
       :last_modified_date,
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1422,7 +1478,8 @@ module Aws::DataBrew
     #   @return [String]
     class DescribeScheduleRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1522,8 @@ module Aws::DataBrew
       :cron_expression,
       :tags,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1601,8 @@ module Aws::DataBrew
     class EntityDetectorConfiguration < Struct.new(
       :entity_types,
       :allowed_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,7 +1623,8 @@ module Aws::DataBrew
       :sheet_names,
       :sheet_indexes,
       :header_row,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1646,8 @@ module Aws::DataBrew
       :max_files,
       :ordered_by,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1605,7 +1666,8 @@ module Aws::DataBrew
     class FilterExpression < Struct.new(
       :expression,
       :values_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1624,7 +1686,8 @@ module Aws::DataBrew
       :json,
       :excel,
       :csv,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1647,7 +1710,8 @@ module Aws::DataBrew
       :data_catalog_input_definition,
       :database_input_definition,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1720,8 @@ module Aws::DataBrew
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1789,7 +1854,8 @@ module Aws::DataBrew
       :tags,
       :job_sample,
       :validation_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1880,7 +1946,8 @@ module Aws::DataBrew
       :started_on,
       :job_sample,
       :validation_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1916,7 +1983,8 @@ module Aws::DataBrew
     class JobSample < Struct.new(
       :mode,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +1995,8 @@ module Aws::DataBrew
     #   @return [Boolean]
     class JsonOptions < Struct.new(
       :multi_line,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1945,7 +2014,8 @@ module Aws::DataBrew
     class ListDatasetsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1959,7 +2029,8 @@ module Aws::DataBrew
     class ListDatasetsResponse < Struct.new(
       :datasets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1976,7 +2047,8 @@ module Aws::DataBrew
       :name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1990,7 +2062,8 @@ module Aws::DataBrew
     class ListJobRunsResponse < Struct.new(
       :job_runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2015,7 +2088,8 @@ module Aws::DataBrew
       :max_results,
       :next_token,
       :project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2029,7 +2103,8 @@ module Aws::DataBrew
     class ListJobsResponse < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2042,7 +2117,8 @@ module Aws::DataBrew
     class ListProjectsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2056,7 +2132,8 @@ module Aws::DataBrew
     class ListProjectsResponse < Struct.new(
       :projects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,7 +2150,8 @@ module Aws::DataBrew
       :max_results,
       :next_token,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2087,7 +2165,8 @@ module Aws::DataBrew
     class ListRecipeVersionsResponse < Struct.new(
       :next_token,
       :recipes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2109,7 +2188,8 @@ module Aws::DataBrew
       :max_results,
       :next_token,
       :recipe_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2123,7 +2203,8 @@ module Aws::DataBrew
     class ListRecipesResponse < Struct.new(
       :recipes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2143,7 +2224,8 @@ module Aws::DataBrew
       :target_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2157,7 +2239,8 @@ module Aws::DataBrew
     class ListRulesetsResponse < Struct.new(
       :rulesets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2174,7 +2257,8 @@ module Aws::DataBrew
       :job_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2188,7 +2272,8 @@ module Aws::DataBrew
     class ListSchedulesResponse < Struct.new(
       :schedules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2198,7 +2283,8 @@ module Aws::DataBrew
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2207,7 +2293,8 @@ module Aws::DataBrew
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2218,7 +2305,8 @@ module Aws::DataBrew
     #   @return [String]
     class Metadata < Struct.new(
       :source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2255,7 +2343,8 @@ module Aws::DataBrew
       :overwrite,
       :format_options,
       :max_output_files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2271,7 +2360,8 @@ module Aws::DataBrew
     #   @return [Types::CsvOutputOptions]
     class OutputFormatOptions < Struct.new(
       :csv,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2291,7 +2381,8 @@ module Aws::DataBrew
       :last_modified_date_condition,
       :files_limit,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2325,7 +2416,8 @@ module Aws::DataBrew
       :profile_columns,
       :column_statistics_configurations,
       :entity_detector_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2389,7 +2481,8 @@ module Aws::DataBrew
       :role_arn,
       :opened_by,
       :open_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2402,7 +2495,8 @@ module Aws::DataBrew
     class PublishRecipeRequest < Struct.new(
       :description,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2411,7 +2505,8 @@ module Aws::DataBrew
     #   @return [String]
     class PublishRecipeResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2486,7 +2581,8 @@ module Aws::DataBrew
       :steps,
       :tags,
       :recipe_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2502,7 +2598,8 @@ module Aws::DataBrew
     class RecipeAction < Struct.new(
       :operation,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2516,7 +2613,8 @@ module Aws::DataBrew
     class RecipeReference < Struct.new(
       :name,
       :recipe_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2534,7 +2632,8 @@ module Aws::DataBrew
     class RecipeStep < Struct.new(
       :action,
       :condition_expressions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2553,7 +2652,8 @@ module Aws::DataBrew
       :error_code,
       :error_message,
       :recipe_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2562,7 +2662,8 @@ module Aws::DataBrew
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2613,7 +2714,8 @@ module Aws::DataBrew
       :substitution_map,
       :threshold,
       :column_selectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2669,7 +2771,8 @@ module Aws::DataBrew
       :rule_count,
       :tags,
       :target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2693,7 +2796,8 @@ module Aws::DataBrew
       :bucket,
       :key,
       :bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2705,7 +2809,8 @@ module Aws::DataBrew
     #   @return [Types::S3Location]
     class S3TableOutputOptions < Struct.new(
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2720,7 +2825,8 @@ module Aws::DataBrew
     class Sample < Struct.new(
       :size,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2768,7 +2874,8 @@ module Aws::DataBrew
       :cron_expression,
       :tags,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2800,7 +2907,8 @@ module Aws::DataBrew
       :step_index,
       :client_session_id,
       :view_frame,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2817,7 +2925,8 @@ module Aws::DataBrew
       :result,
       :name,
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2826,7 +2935,8 @@ module Aws::DataBrew
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2835,7 +2945,8 @@ module Aws::DataBrew
     #   @return [String]
     class StartJobRunRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2844,7 +2955,8 @@ module Aws::DataBrew
     #   @return [String]
     class StartJobRunResponse < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2858,7 +2970,8 @@ module Aws::DataBrew
     class StartProjectSessionRequest < Struct.new(
       :name,
       :assume_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2871,7 +2984,8 @@ module Aws::DataBrew
     class StartProjectSessionResponse < Struct.new(
       :name,
       :client_session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2885,7 +2999,8 @@ module Aws::DataBrew
     class StatisticOverride < Struct.new(
       :statistic,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2902,7 +3017,8 @@ module Aws::DataBrew
     class StatisticsConfiguration < Struct.new(
       :included_statistics,
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2915,7 +3031,8 @@ module Aws::DataBrew
     class StopJobRunRequest < Struct.new(
       :name,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2924,7 +3041,8 @@ module Aws::DataBrew
     #   @return [String]
     class StopJobRunResponse < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2939,12 +3057,14 @@ module Aws::DataBrew
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2966,7 +3086,8 @@ module Aws::DataBrew
       :value,
       :type,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2985,12 +3106,14 @@ module Aws::DataBrew
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3017,7 +3140,8 @@ module Aws::DataBrew
       :format_options,
       :input,
       :path_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3026,7 +3150,8 @@ module Aws::DataBrew
     #   @return [String]
     class UpdateDatasetResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3101,7 +3226,8 @@ module Aws::DataBrew
       :role_arn,
       :timeout,
       :job_sample,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3110,7 +3236,8 @@ module Aws::DataBrew
     #   @return [String]
     class UpdateProfileJobResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3128,7 +3255,8 @@ module Aws::DataBrew
       :sample,
       :role_arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3141,7 +3269,8 @@ module Aws::DataBrew
     class UpdateProjectResponse < Struct.new(
       :last_modified_date,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3206,7 +3335,8 @@ module Aws::DataBrew
       :database_outputs,
       :role_arn,
       :timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3215,7 +3345,8 @@ module Aws::DataBrew
     #   @return [String]
     class UpdateRecipeJobResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3233,7 +3364,8 @@ module Aws::DataBrew
       :description,
       :name,
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3242,7 +3374,8 @@ module Aws::DataBrew
     #   @return [String]
     class UpdateRecipeResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3260,7 +3393,8 @@ module Aws::DataBrew
       :name,
       :description,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3269,7 +3403,8 @@ module Aws::DataBrew
     #   @return [String]
     class UpdateRulesetResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3289,7 +3424,8 @@ module Aws::DataBrew
       :job_names,
       :cron_expression,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3298,7 +3434,8 @@ module Aws::DataBrew
     #   @return [String]
     class UpdateScheduleResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3317,7 +3454,8 @@ module Aws::DataBrew
     class ValidationConfiguration < Struct.new(
       :ruleset_arn,
       :validation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3326,7 +3464,8 @@ module Aws::DataBrew
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3359,7 +3498,8 @@ module Aws::DataBrew
       :start_row_index,
       :row_range,
       :analytics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

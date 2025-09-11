@@ -12,7 +12,8 @@ module Aws::Glue
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,7 +53,8 @@ module Aws::Glue
       :security_configuration,
       :notification_property,
       :crawler_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +76,8 @@ module Aws::Glue
       :inputs,
       :groups,
       :aggs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +93,8 @@ module Aws::Glue
     class AggregateOperation < Struct.new(
       :column,
       :agg_func,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +108,8 @@ module Aws::Glue
     class AllowedValue < Struct.new(
       :description,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +119,8 @@ module Aws::Glue
     #   @return [String]
     class AlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +134,8 @@ module Aws::Glue
     class AmazonRedshiftAdvancedOption < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +245,8 @@ module Aws::Glue
       :table_schema,
       :staging_table,
       :selected_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -257,7 +265,8 @@ module Aws::Glue
     class AmazonRedshiftSource < Struct.new(
       :name,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -275,7 +284,8 @@ module Aws::Glue
       :name,
       :data,
       :inputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +303,8 @@ module Aws::Glue
       :profile_id,
       :statistic_id,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +322,8 @@ module Aws::Glue
       :name,
       :inputs,
       :mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +357,8 @@ module Aws::Glue
       :connection_table,
       :schema_name,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +376,8 @@ module Aws::Glue
       :additional_audit_context,
       :requested_columns,
       :all_columns_requested,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +403,8 @@ module Aws::Glue
       :o_auth2_properties,
       :basic_authentication_properties,
       :custom_authentication_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,7 +422,8 @@ module Aws::Glue
       :authentication_type,
       :secret_arn,
       :o_auth2_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +453,8 @@ module Aws::Glue
       :kms_key_arn,
       :basic_authentication_credentials,
       :custom_authentication_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -451,7 +468,8 @@ module Aws::Glue
     class AuthorizationCodeProperties < Struct.new(
       :authorization_code,
       :redirect_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +484,8 @@ module Aws::Glue
     class AutoDataQuality < Struct.new(
       :is_enabled,
       :evaluation_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -503,7 +522,8 @@ module Aws::Glue
     class BackfillError < Struct.new(
       :code,
       :partitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +537,8 @@ module Aws::Glue
     class BasicAuthenticationCredentials < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +564,8 @@ module Aws::Glue
       :partition_keys,
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -567,7 +589,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partition_input_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +599,8 @@ module Aws::Glue
     #   @return [Array<Types::PartitionError>]
     class BatchCreatePartitionResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +614,8 @@ module Aws::Glue
     class BatchDeleteConnectionRequest < Struct.new(
       :catalog_id,
       :connection_name_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,7 +630,8 @@ module Aws::Glue
     class BatchDeleteConnectionResponse < Struct.new(
       :succeeded,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +655,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partitions_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -638,7 +665,8 @@ module Aws::Glue
     #   @return [Array<Types::PartitionError>]
     class BatchDeletePartitionResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +689,8 @@ module Aws::Glue
       :database_name,
       :tables_to_delete,
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +699,8 @@ module Aws::Glue
     #   @return [Array<Types::TableError>]
     class BatchDeleteTableResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +724,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :version_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +735,8 @@ module Aws::Glue
     #   @return [Array<Types::TableVersionError>]
     class BatchDeleteTableVersionResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +753,8 @@ module Aws::Glue
       :names,
       :include_blueprint,
       :include_parameter_spec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -734,7 +767,8 @@ module Aws::Glue
     class BatchGetBlueprintsResponse < Struct.new(
       :blueprints,
       :missing_blueprints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +778,8 @@ module Aws::Glue
     #   @return [Array<String>]
     class BatchGetCrawlersRequest < Struct.new(
       :crawler_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +792,8 @@ module Aws::Glue
     class BatchGetCrawlersResponse < Struct.new(
       :crawlers,
       :crawlers_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +802,8 @@ module Aws::Glue
     #   @return [Array<String>]
     class BatchGetCustomEntityTypesRequest < Struct.new(
       :names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -779,7 +816,8 @@ module Aws::Glue
     class BatchGetCustomEntityTypesResponse < Struct.new(
       :custom_entity_types,
       :custom_entity_types_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,7 +826,8 @@ module Aws::Glue
     #   @return [Array<String>]
     class BatchGetDataQualityResultRequest < Struct.new(
       :result_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +840,8 @@ module Aws::Glue
     class BatchGetDataQualityResultResponse < Struct.new(
       :results,
       :results_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,7 +851,8 @@ module Aws::Glue
     #   @return [Array<String>]
     class BatchGetDevEndpointsRequest < Struct.new(
       :dev_endpoint_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -824,7 +865,8 @@ module Aws::Glue
     class BatchGetDevEndpointsResponse < Struct.new(
       :dev_endpoints,
       :dev_endpoints_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +876,8 @@ module Aws::Glue
     #   @return [Array<String>]
     class BatchGetJobsRequest < Struct.new(
       :job_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +890,8 @@ module Aws::Glue
     class BatchGetJobsResponse < Struct.new(
       :jobs,
       :jobs_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +913,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partitions_to_get,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +928,8 @@ module Aws::Glue
     class BatchGetPartitionResponse < Struct.new(
       :partitions,
       :unprocessed_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -905,7 +951,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +978,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +988,8 @@ module Aws::Glue
     #   @return [Array<Types::BatchGetTableOptimizerEntry>]
     class BatchGetTableOptimizerRequest < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +1002,8 @@ module Aws::Glue
     class BatchGetTableOptimizerResponse < Struct.new(
       :table_optimizers,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1012,8 @@ module Aws::Glue
     #   @return [Array<String>]
     class BatchGetTriggersRequest < Struct.new(
       :trigger_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1026,8 @@ module Aws::Glue
     class BatchGetTriggersResponse < Struct.new(
       :triggers,
       :triggers_not_found,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1040,8 @@ module Aws::Glue
     class BatchGetWorkflowsRequest < Struct.new(
       :names,
       :include_graph,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1001,7 +1054,8 @@ module Aws::Glue
     class BatchGetWorkflowsResponse < Struct.new(
       :workflows,
       :missing_workflows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1015,7 +1069,8 @@ module Aws::Glue
     class BatchPutDataQualityStatisticAnnotationRequest < Struct.new(
       :inclusion_annotations,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1024,7 +1079,8 @@ module Aws::Glue
     #   @return [Array<Types::AnnotationError>]
     class BatchPutDataQualityStatisticAnnotationResponse < Struct.new(
       :failed_inclusion_annotations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1043,7 +1099,8 @@ module Aws::Glue
       :job_name,
       :job_run_id,
       :error_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1114,8 @@ module Aws::Glue
     class BatchStopJobRunRequest < Struct.new(
       :job_name,
       :job_run_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1130,8 @@ module Aws::Glue
     class BatchStopJobRunResponse < Struct.new(
       :successful_submissions,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1145,8 @@ module Aws::Glue
     class BatchStopJobRunSuccessfulSubmission < Struct.new(
       :job_name,
       :job_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1168,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :table_optimizer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1122,7 +1183,8 @@ module Aws::Glue
     class BatchUpdatePartitionFailureEntry < Struct.new(
       :partition_value_list,
       :error_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1207,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1222,8 @@ module Aws::Glue
     class BatchUpdatePartitionRequestEntry < Struct.new(
       :partition_value_list,
       :partition_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1168,7 +1232,8 @@ module Aws::Glue
     #   @return [Array<Types::BatchUpdatePartitionFailureEntry>]
     class BatchUpdatePartitionResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1186,7 +1251,8 @@ module Aws::Glue
       :maximum_length,
       :average_length,
       :number_of_nulls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1253,7 +1319,8 @@ module Aws::Glue
       :status,
       :error_message,
       :last_active_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1267,7 +1334,8 @@ module Aws::Glue
     class BlueprintDetails < Struct.new(
       :blueprint_name,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1327,7 +1395,8 @@ module Aws::Glue
       :rollback_error_message,
       :parameters,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1345,7 +1414,8 @@ module Aws::Glue
       :number_of_trues,
       :number_of_falses,
       :number_of_nulls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1361,12 +1431,14 @@ module Aws::Glue
     #   @return [String]
     class CancelDataQualityRuleRecommendationRunRequest < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelDataQualityRuleRecommendationRunResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1375,12 +1447,14 @@ module Aws::Glue
     #   @return [String]
     class CancelDataQualityRulesetEvaluationRunRequest < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelDataQualityRulesetEvaluationRunResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1393,7 +1467,8 @@ module Aws::Glue
     class CancelMLTaskRunRequest < Struct.new(
       :transform_id,
       :task_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1410,7 +1485,8 @@ module Aws::Glue
       :transform_id,
       :task_run_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1427,12 +1503,14 @@ module Aws::Glue
       :session_id,
       :id,
       :request_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelStatementResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1528,8 @@ module Aws::Glue
       :supported_authentication_types,
       :supported_data_operations,
       :supported_compute_environments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1589,8 @@ module Aws::Glue
       :create_table_default_permissions,
       :create_database_default_permissions,
       :allow_full_table_external_data_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1536,7 +1616,8 @@ module Aws::Glue
       :table,
       :additional_delta_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,7 +1631,8 @@ module Aws::Glue
     class CatalogEntry < Struct.new(
       :database_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1658,8 @@ module Aws::Glue
       :table,
       :additional_hudi_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1602,7 +1685,8 @@ module Aws::Glue
       :table,
       :additional_iceberg_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,7 +1705,8 @@ module Aws::Glue
       :import_completed,
       :import_time,
       :imported_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1666,7 +1751,8 @@ module Aws::Glue
       :create_table_default_permissions,
       :create_database_default_permissions,
       :allow_full_table_external_data_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1700,7 +1786,8 @@ module Aws::Glue
       :database,
       :streaming_options,
       :data_preview_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1734,7 +1821,8 @@ module Aws::Glue
       :database,
       :streaming_options,
       :data_preview_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1753,7 +1841,8 @@ module Aws::Glue
       :data_lake_access_properties,
       :iceberg_optimization_properties,
       :custom_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1772,7 +1861,8 @@ module Aws::Glue
       :data_lake_access_properties,
       :iceberg_optimization_properties,
       :custom_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1786,7 +1876,8 @@ module Aws::Glue
     class CatalogSchemaChangePolicy < Struct.new(
       :enable_update_catalog,
       :update_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1905,8 @@ module Aws::Glue
       :table,
       :partition_predicate,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,7 +1932,8 @@ module Aws::Glue
       :connection_name,
       :event_queue_arn,
       :dlq_event_queue_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1853,7 +1946,8 @@ module Aws::Glue
     class CheckSchemaVersionValidityInput < Struct.new(
       :data_format,
       :schema_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1866,7 +1960,8 @@ module Aws::Glue
     class CheckSchemaVersionValidityResponse < Struct.new(
       :valid,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1900,7 +1995,8 @@ module Aws::Glue
       :xml_classifier,
       :json_classifier,
       :csv_classifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1914,7 +2010,8 @@ module Aws::Glue
     class CloudWatchEncryption < Struct.new(
       :cloud_watch_encryption_mode,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2238,7 +2335,8 @@ module Aws::Glue
       :s3_excel_source,
       :s3_hyper_direct_target,
       :dynamo_dbelt_connector_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2256,7 +2354,8 @@ module Aws::Glue
       :source,
       :target,
       :target_parameter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2377,8 @@ module Aws::Glue
       :node_type,
       :args,
       :line_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2301,7 +2401,8 @@ module Aws::Glue
       :name,
       :value,
       :param,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2328,7 +2429,8 @@ module Aws::Glue
       :type,
       :comment,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2342,7 +2444,8 @@ module Aws::Glue
     class ColumnError < Struct.new(
       :column_name,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2357,7 +2460,8 @@ module Aws::Glue
     class ColumnImportance < Struct.new(
       :column_name,
       :importance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2371,7 +2475,8 @@ module Aws::Glue
     class ColumnRowFilter < Struct.new(
       :column_name,
       :row_filter_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2393,7 +2498,8 @@ module Aws::Glue
       :column_type,
       :analyzed_time,
       :statistics_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2435,7 +2541,8 @@ module Aws::Glue
       :long_column_statistics_data,
       :string_column_statistics_data,
       :binary_column_statistics_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2449,7 +2556,8 @@ module Aws::Glue
     class ColumnStatisticsError < Struct.new(
       :column_statistics,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2459,7 +2567,8 @@ module Aws::Glue
     #   @return [String]
     class ColumnStatisticsTaskNotRunningException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2541,7 +2650,8 @@ module Aws::Glue
       :end_time,
       :error_message,
       :dpu_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2558,7 +2668,8 @@ module Aws::Glue
     #   @return [String]
     class ColumnStatisticsTaskRunningException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2608,7 +2719,8 @@ module Aws::Glue
       :schedule_type,
       :setting_source,
       :last_execution_attempt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2623,7 +2735,8 @@ module Aws::Glue
     #   @return [String]
     class ColumnStatisticsTaskStoppingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2634,7 +2747,8 @@ module Aws::Glue
     #   @return [Types::IcebergCompactionConfiguration]
     class CompactionConfiguration < Struct.new(
       :iceberg_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2644,7 +2758,8 @@ module Aws::Glue
     #   @return [Types::IcebergCompactionMetrics]
     class CompactionMetrics < Struct.new(
       :iceberg_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2686,7 +2801,8 @@ module Aws::Glue
       :connection_option_name_overrides,
       :connection_properties_required_overrides,
       :physical_connection_properties_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2701,7 +2817,8 @@ module Aws::Glue
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2711,7 +2828,8 @@ module Aws::Glue
     #   @return [String]
     class ConcurrentRunsExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2738,7 +2856,8 @@ module Aws::Glue
       :state,
       :crawler_name,
       :crawl_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2748,7 +2867,8 @@ module Aws::Glue
     #   @return [String]
     class ConditionCheckFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2766,7 +2886,8 @@ module Aws::Glue
       :condition,
       :value,
       :target_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2788,7 +2909,8 @@ module Aws::Glue
       :allowed_values,
       :min_value,
       :max_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2798,7 +2920,8 @@ module Aws::Glue
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2823,7 +2946,8 @@ module Aws::Glue
       :num_false_positives,
       :num_true_negatives,
       :num_false_negatives,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3100,7 +3224,8 @@ module Aws::Glue
       :authentication_configuration,
       :connection_schema_version,
       :compatible_compute_environments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3334,7 +3459,8 @@ module Aws::Glue
       :authentication_configuration,
       :validate_credentials,
       :validate_for_compute_environments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3366,7 +3492,8 @@ module Aws::Glue
     class ConnectionPasswordEncryption < Struct.new(
       :return_connection_password_encrypted,
       :aws_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3411,7 +3538,8 @@ module Aws::Glue
       :capabilities,
       :logo_url,
       :connection_type_variants,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3435,7 +3563,8 @@ module Aws::Glue
       :display_name,
       :description,
       :logo_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3445,7 +3574,8 @@ module Aws::Glue
     #   @return [Array<String>]
     class ConnectionsList < Struct.new(
       :connections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3508,7 +3638,8 @@ module Aws::Glue
       :connection_type,
       :data,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3571,7 +3702,8 @@ module Aws::Glue
       :connection_type,
       :data,
       :inputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3601,7 +3733,8 @@ module Aws::Glue
       :error_message,
       :log_group,
       :log_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3695,7 +3828,8 @@ module Aws::Glue
       :configuration,
       :crawler_security_configuration,
       :lake_formation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3747,7 +3881,8 @@ module Aws::Glue
       :log_stream,
       :message_prefix,
       :dpu_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3790,7 +3925,8 @@ module Aws::Glue
       :tables_created,
       :tables_updated,
       :tables_deleted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3811,7 +3947,8 @@ module Aws::Glue
     #   @return [Array<Types::Crawl>]
     class CrawlerNodeDetails < Struct.new(
       :crawls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3821,7 +3958,8 @@ module Aws::Glue
     #   @return [String]
     class CrawlerNotRunningException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3831,7 +3969,8 @@ module Aws::Glue
     #   @return [String]
     class CrawlerRunningException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3841,7 +3980,8 @@ module Aws::Glue
     #   @return [String]
     class CrawlerStoppingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3879,7 +4019,8 @@ module Aws::Glue
       :delta_targets,
       :iceberg_targets,
       :hudi_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3941,7 +4082,8 @@ module Aws::Glue
       :field_name,
       :filter_operator,
       :field_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3962,7 +4104,8 @@ module Aws::Glue
       :description,
       :blueprint_location,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3971,7 +4114,8 @@ module Aws::Glue
     #   @return [String]
     class CreateBlueprintResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3988,12 +4132,14 @@ module Aws::Glue
       :name,
       :catalog_input,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateCatalogResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4018,12 +4164,14 @@ module Aws::Glue
       :xml_classifier,
       :json_classifier,
       :csv_classifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateClassifierResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4064,12 +4212,14 @@ module Aws::Glue
       :catalog_id,
       :security_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateColumnStatisticsTaskSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4088,7 +4238,8 @@ module Aws::Glue
       :catalog_id,
       :connection_input,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4097,7 +4248,8 @@ module Aws::Glue
     #   @return [String]
     class CreateConnectionResponse < Struct.new(
       :create_connection_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4173,12 +4325,14 @@ module Aws::Glue
       :configuration,
       :crawler_security_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateCrawlerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4224,7 +4378,8 @@ module Aws::Glue
       :custom_datatype_configured,
       :custom_datatypes,
       :serde,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4246,7 +4401,8 @@ module Aws::Glue
       :regex_string,
       :context_words,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4255,7 +4411,8 @@ module Aws::Glue
     #   @return [String]
     class CreateCustomEntityTypeResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4289,7 +4446,8 @@ module Aws::Glue
       :target_table,
       :data_quality_security_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4298,7 +4456,8 @@ module Aws::Glue
     #   @return [String]
     class CreateDataQualityRulesetResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4316,12 +4475,14 @@ module Aws::Glue
       :catalog_id,
       :database_input,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateDatabaseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4424,7 +4585,8 @@ module Aws::Glue
       :security_configuration,
       :tags,
       :arguments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4519,7 +4681,8 @@ module Aws::Glue
       :security_configuration,
       :created_timestamp,
       :arguments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4539,7 +4702,8 @@ module Aws::Glue
     class CreateGlueIdentityCenterConfigurationRequest < Struct.new(
       :instance_arn,
       :scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4549,7 +4713,8 @@ module Aws::Glue
     #   @return [String]
     class CreateGlueIdentityCenterConfigurationResponse < Struct.new(
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4573,7 +4738,8 @@ module Aws::Glue
       :name,
       :grok_pattern,
       :custom_patterns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4600,7 +4766,8 @@ module Aws::Glue
       :partition_spec,
       :write_order,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4641,7 +4808,8 @@ module Aws::Glue
       :additional_encryption_context,
       :tags,
       :integration_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4658,7 +4826,8 @@ module Aws::Glue
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4675,7 +4844,8 @@ module Aws::Glue
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4756,7 +4926,8 @@ module Aws::Glue
       :errors,
       :data_filter,
       :integration_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4780,12 +4951,14 @@ module Aws::Glue
       :table_name,
       :source_table_config,
       :target_table_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateIntegrationTablePropertiesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4988,7 +5161,8 @@ module Aws::Glue
       :execution_class,
       :source_control_details,
       :maintenance_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4997,7 +5171,8 @@ module Aws::Glue
     #   @return [String]
     class CreateJobResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5012,7 +5187,8 @@ module Aws::Glue
     class CreateJsonClassifierRequest < Struct.new(
       :name,
       :json_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5130,7 +5306,8 @@ module Aws::Glue
       :max_retries,
       :tags,
       :transform_encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5139,7 +5316,8 @@ module Aws::Glue
     #   @return [String]
     class CreateMLTransformResponse < Struct.new(
       :transform_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5160,12 +5338,14 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partition_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreatePartitionIndexResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5188,12 +5368,14 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partition_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreatePartitionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5210,7 +5392,8 @@ module Aws::Glue
       :registry_name,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5231,7 +5414,8 @@ module Aws::Glue
       :registry_name,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5298,7 +5482,8 @@ module Aws::Glue
       :description,
       :tags,
       :schema_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5359,7 +5544,8 @@ module Aws::Glue
       :tags,
       :schema_version_id,
       :schema_version_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5376,7 +5562,8 @@ module Aws::Glue
       :dag_nodes,
       :dag_edges,
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5389,7 +5576,8 @@ module Aws::Glue
     class CreateScriptResponse < Struct.new(
       :python_script,
       :scala_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5402,7 +5590,8 @@ module Aws::Glue
     class CreateSecurityConfigurationRequest < Struct.new(
       :name,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5415,7 +5604,8 @@ module Aws::Glue
     class CreateSecurityConfigurationResponse < Struct.new(
       :name,
       :created_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5509,7 +5699,8 @@ module Aws::Glue
       :glue_version,
       :tags,
       :request_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5518,7 +5709,8 @@ module Aws::Glue
     #   @return [Types::Session]
     class CreateSessionResponse < Struct.new(
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5543,12 +5735,14 @@ module Aws::Glue
       :table_name,
       :type,
       :table_optimizer_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateTableOptimizerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5585,12 +5779,14 @@ module Aws::Glue
       :partition_indexes,
       :transaction_id,
       :open_table_format_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateTableResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5643,7 +5839,8 @@ module Aws::Glue
       :start_on_creation,
       :tags,
       :event_batching_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5652,7 +5849,8 @@ module Aws::Glue
     #   @return [String]
     class CreateTriggerResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5673,7 +5871,8 @@ module Aws::Glue
       :description,
       :configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5682,7 +5881,8 @@ module Aws::Glue
     #   @return [String]
     class CreateUsageProfileResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5701,12 +5901,14 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :function_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateUserDefinedFunctionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5732,7 +5934,8 @@ module Aws::Glue
       :default_run_properties,
       :tags,
       :max_concurrent_runs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5741,7 +5944,8 @@ module Aws::Glue
     #   @return [String]
     class CreateWorkflowResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5763,7 +5967,8 @@ module Aws::Glue
       :classification,
       :name,
       :row_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5823,7 +6028,8 @@ module Aws::Glue
       :custom_datatype_configured,
       :custom_datatypes,
       :serde,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5854,7 +6060,8 @@ module Aws::Glue
       :code,
       :class_name,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5873,7 +6080,8 @@ module Aws::Glue
       :name,
       :regex_string,
       :context_words,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5887,7 +6095,8 @@ module Aws::Glue
     class DDBELTCatalogAdditionalOptions < Struct.new(
       :dynamodb_export,
       :dynamodb_unnest_ddb_json,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5934,7 +6143,8 @@ module Aws::Glue
       :dynamodb_s3_prefix,
       :dynamodb_s3_bucket_owner,
       :dynamodb_sts_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5961,7 +6171,8 @@ module Aws::Glue
       :results_s3_prefix,
       :cloud_watch_metrics_enabled,
       :results_publishing_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5971,7 +6182,8 @@ module Aws::Glue
     #   @return [String]
     class DQStopJobOnFailureOptions < Struct.new(
       :stop_job_on_failure_timing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5989,7 +6201,8 @@ module Aws::Glue
     class DataCatalogEncryptionSettings < Struct.new(
       :encryption_at_rest,
       :connection_password_encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6011,7 +6224,8 @@ module Aws::Glue
       :data_transfer_role,
       :kms_key,
       :catalog_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6054,7 +6268,8 @@ module Aws::Glue
       :redshift_database_name,
       :status_message,
       :catalog_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6069,7 +6284,8 @@ module Aws::Glue
     #   @return [String]
     class DataLakePrincipal < Struct.new(
       :data_lake_principal_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6099,7 +6315,8 @@ module Aws::Glue
       :total_rules_processed,
       :total_rules_passed,
       :total_rules_failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6121,7 +6338,8 @@ module Aws::Glue
       :description,
       :evaluation_message,
       :evaluated_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6136,7 +6354,8 @@ module Aws::Glue
     class DataQualityEncryption < Struct.new(
       :data_quality_encryption_mode,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6154,7 +6373,8 @@ module Aws::Glue
       :cloud_watch_metrics_enabled,
       :results_s3_prefix,
       :composite_rule_evaluation_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6196,7 +6416,8 @@ module Aws::Glue
       :connection_name,
       :additional_options,
       :pre_processing_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6218,7 +6439,8 @@ module Aws::Glue
       :expected_value,
       :lower_limit,
       :upper_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6232,7 +6454,8 @@ module Aws::Glue
     class DataQualityObservation < Struct.new(
       :description,
       :metric_based_observation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6298,7 +6521,8 @@ module Aws::Glue
       :analyzer_results,
       :observations,
       :aggregated_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6324,7 +6548,8 @@ module Aws::Glue
       :job_name,
       :job_run_id,
       :started_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6350,7 +6575,8 @@ module Aws::Glue
       :job_run_id,
       :started_after,
       :started_before,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6372,7 +6598,8 @@ module Aws::Glue
       :status,
       :started_on,
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6390,7 +6617,8 @@ module Aws::Glue
       :data_source,
       :started_before,
       :started_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6424,7 +6652,8 @@ module Aws::Glue
       :evaluated_metrics,
       :evaluated_rule,
       :rule_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6446,7 +6675,8 @@ module Aws::Glue
       :status,
       :started_on,
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6464,7 +6694,8 @@ module Aws::Glue
       :data_source,
       :started_before,
       :started_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6498,7 +6729,8 @@ module Aws::Glue
       :last_modified_before,
       :last_modified_after,
       :target_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6532,7 +6764,8 @@ module Aws::Glue
       :target_table,
       :recommendation_run_id,
       :rule_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6550,7 +6783,8 @@ module Aws::Glue
       :table_name,
       :database_name,
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6564,7 +6798,8 @@ module Aws::Glue
     class DataSource < Struct.new(
       :glue_table,
       :data_quality_glue_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6609,7 +6844,8 @@ module Aws::Glue
       :target_database,
       :catalog_id,
       :federated_database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6627,7 +6863,8 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6664,7 +6901,8 @@ module Aws::Glue
       :create_table_default_permissions,
       :target_database,
       :federated_database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6682,7 +6920,8 @@ module Aws::Glue
       :profile_id,
       :statistic_id,
       :inclusion_annotation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6696,7 +6935,8 @@ module Aws::Glue
     class Datatype < Struct.new(
       :id,
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6718,7 +6958,8 @@ module Aws::Glue
       :maximum_value,
       :number_of_nulls,
       :number_of_distinct_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6746,7 +6987,8 @@ module Aws::Glue
       :maximum_value,
       :number_of_nulls,
       :number_of_distinct_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6767,7 +7009,8 @@ module Aws::Glue
     class DecimalNumber < Struct.new(
       :unscaled_value,
       :scale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6781,7 +7024,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteBlueprintRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6790,7 +7034,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteBlueprintResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6799,12 +7044,14 @@ module Aws::Glue
     #   @return [String]
     class DeleteCatalogRequest < Struct.new(
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCatalogResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6813,12 +7060,14 @@ module Aws::Glue
     #   @return [String]
     class DeleteClassifierRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteClassifierResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6844,12 +7093,14 @@ module Aws::Glue
       :table_name,
       :partition_values,
       :column_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteColumnStatisticsForPartitionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6871,12 +7122,14 @@ module Aws::Glue
       :database_name,
       :table_name,
       :column_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteColumnStatisticsForTableResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6889,12 +7142,14 @@ module Aws::Glue
     class DeleteColumnStatisticsTaskSettingsRequest < Struct.new(
       :database_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteColumnStatisticsTaskSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6908,12 +7163,14 @@ module Aws::Glue
     class DeleteConnectionRequest < Struct.new(
       :catalog_id,
       :connection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6922,12 +7179,14 @@ module Aws::Glue
     #   @return [String]
     class DeleteCrawlerRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCrawlerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6936,7 +7195,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteCustomEntityTypeRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6945,7 +7205,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteCustomEntityTypeResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6954,12 +7215,14 @@ module Aws::Glue
     #   @return [String]
     class DeleteDataQualityRulesetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataQualityRulesetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6974,12 +7237,14 @@ module Aws::Glue
     class DeleteDatabaseRequest < Struct.new(
       :catalog_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDatabaseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6988,24 +7253,28 @@ module Aws::Glue
     #   @return [String]
     class DeleteDevEndpointRequest < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDevEndpointResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Request to delete the existing Glue Identity Center configuration.</p>
     class DeleteGlueIdentityCenterConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Response from deleting the Glue Identity Center configuration.</p>
     class DeleteGlueIdentityCenterConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7014,7 +7283,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteIntegrationRequest < Struct.new(
       :integration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7091,7 +7361,8 @@ module Aws::Glue
       :create_time,
       :errors,
       :data_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7104,12 +7375,14 @@ module Aws::Glue
     class DeleteIntegrationTablePropertiesRequest < Struct.new(
       :resource_arn,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIntegrationTablePropertiesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7118,7 +7391,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteJobRequest < Struct.new(
       :job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7127,7 +7401,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteJobResponse < Struct.new(
       :job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7136,7 +7411,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteMLTransformRequest < Struct.new(
       :transform_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7145,7 +7421,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteMLTransformResponse < Struct.new(
       :transform_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7166,12 +7443,14 @@ module Aws::Glue
       :database_name,
       :table_name,
       :index_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePartitionIndexResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7194,12 +7473,14 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partition_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePartitionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7208,7 +7489,8 @@ module Aws::Glue
     #   @return [Types::RegistryId]
     class DeleteRegistryInput < Struct.new(
       :registry_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7225,7 +7507,8 @@ module Aws::Glue
       :registry_name,
       :registry_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7238,12 +7521,14 @@ module Aws::Glue
     class DeleteResourcePolicyRequest < Struct.new(
       :policy_hash_condition,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7252,7 +7537,8 @@ module Aws::Glue
     #   @return [Types::SchemaId]
     class DeleteSchemaInput < Struct.new(
       :schema_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7269,7 +7555,8 @@ module Aws::Glue
       :schema_arn,
       :schema_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7290,7 +7577,8 @@ module Aws::Glue
     class DeleteSchemaVersionsInput < Struct.new(
       :schema_id,
       :versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7299,7 +7587,8 @@ module Aws::Glue
     #   @return [Array<Types::SchemaVersionErrorItem>]
     class DeleteSchemaVersionsResponse < Struct.new(
       :schema_version_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7308,12 +7597,14 @@ module Aws::Glue
     #   @return [String]
     class DeleteSecurityConfigurationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSecurityConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7326,7 +7617,8 @@ module Aws::Glue
     class DeleteSessionRequest < Struct.new(
       :id,
       :request_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7335,7 +7627,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteSessionResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7356,12 +7649,14 @@ module Aws::Glue
       :database_name,
       :table_name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTableOptimizerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7385,12 +7680,14 @@ module Aws::Glue
       :database_name,
       :name,
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTableResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7414,12 +7711,14 @@ module Aws::Glue
       :database_name,
       :table_name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTableVersionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7428,7 +7727,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteTriggerRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7437,7 +7737,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteTriggerResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7446,12 +7747,14 @@ module Aws::Glue
     #   @return [String]
     class DeleteUsageProfileRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUsageProfileResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7469,12 +7772,14 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :function_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUserDefinedFunctionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7483,7 +7788,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteWorkflowRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7492,7 +7798,8 @@ module Aws::Glue
     #   @return [String]
     class DeleteWorkflowResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7514,7 +7821,8 @@ module Aws::Glue
       :connection_name,
       :write_manifest,
       :create_native_delta_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7523,7 +7831,8 @@ module Aws::Glue
     #   @return [String]
     class DescribeConnectionTypeRequest < Struct.new(
       :connection_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7572,7 +7881,8 @@ module Aws::Glue
       :athena_connection_properties,
       :python_connection_properties,
       :spark_connection_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7597,7 +7907,8 @@ module Aws::Glue
       :entity_name,
       :next_token,
       :data_store_api_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7610,7 +7921,8 @@ module Aws::Glue
     class DescribeEntityResponse < Struct.new(
       :fields,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7631,7 +7943,8 @@ module Aws::Glue
       :marker,
       :max_records,
       :target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7644,7 +7957,8 @@ module Aws::Glue
     class DescribeInboundIntegrationsResponse < Struct.new(
       :inbound_integrations,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7665,7 +7979,8 @@ module Aws::Glue
       :marker,
       :max_records,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7678,7 +7993,8 @@ module Aws::Glue
     class DescribeIntegrationsResponse < Struct.new(
       :integrations,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7839,7 +8155,8 @@ module Aws::Glue
       :public_keys,
       :security_configuration,
       :arguments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7870,7 +8187,8 @@ module Aws::Glue
     class DevEndpointCustomLibraries < Struct.new(
       :extra_python_libs_s3_path,
       :extra_jars_s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7904,7 +8222,8 @@ module Aws::Glue
       :connection_type,
       :redshift_tmp_dir,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7930,7 +8249,8 @@ module Aws::Glue
       :window_size,
       :detect_schema,
       :data_preview_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7956,7 +8276,8 @@ module Aws::Glue
       :detect_schema,
       :streaming_options,
       :data_preview_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7978,7 +8299,8 @@ module Aws::Glue
       :update_behavior,
       :table,
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8000,7 +8322,8 @@ module Aws::Glue
       :maximum_value,
       :number_of_nulls,
       :number_of_distinct_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8026,7 +8349,8 @@ module Aws::Glue
       :name,
       :inputs,
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8044,7 +8368,8 @@ module Aws::Glue
       :name,
       :inputs,
       :paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8067,7 +8392,8 @@ module Aws::Glue
       :inputs,
       :null_check_box_list,
       :null_text_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8105,7 +8431,8 @@ module Aws::Glue
       :path,
       :version,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8132,7 +8459,8 @@ module Aws::Glue
       :table,
       :pitr_enabled,
       :additional_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8150,7 +8478,8 @@ module Aws::Glue
       :name,
       :connection_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8170,7 +8499,8 @@ module Aws::Glue
       :path,
       :scan_all,
       :scan_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8185,7 +8515,8 @@ module Aws::Glue
     class Edge < Struct.new(
       :source_id,
       :destination_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8203,7 +8534,8 @@ module Aws::Glue
       :catalog_encryption_mode,
       :sse_aws_kms_key_id,
       :catalog_encryption_service_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8225,7 +8557,8 @@ module Aws::Glue
       :cloud_watch_encryption,
       :job_bookmarks_encryption,
       :data_quality_encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8255,7 +8588,8 @@ module Aws::Glue
       :description,
       :category,
       :custom_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8269,7 +8603,8 @@ module Aws::Glue
     class EntityNotFoundException < Struct.new(
       :message,
       :from_federation_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8283,7 +8618,8 @@ module Aws::Glue
     class ErrorDetail < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8297,7 +8633,8 @@ module Aws::Glue
     class ErrorDetails < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8327,7 +8664,8 @@ module Aws::Glue
       :output,
       :publishing_options,
       :stop_job_on_failure_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8361,7 +8699,8 @@ module Aws::Glue
       :publishing_options,
       :additional_options,
       :stop_job_on_failure_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8375,7 +8714,8 @@ module Aws::Glue
     class EvaluationMetrics < Struct.new(
       :transform_type,
       :find_matches_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8390,7 +8730,8 @@ module Aws::Glue
     class EventBatchingCondition < Struct.new(
       :batch_size,
       :batch_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8412,7 +8753,8 @@ module Aws::Glue
       :column_statistics_task_run_id,
       :execution_timestamp,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8424,7 +8766,8 @@ module Aws::Glue
     #   @return [Integer]
     class ExecutionProperty < Struct.new(
       :max_concurrent_runs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8440,7 +8783,8 @@ module Aws::Glue
     #   @return [String]
     class ExportLabelsTaskRunProperties < Struct.new(
       :output_s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8459,7 +8803,8 @@ module Aws::Glue
       :identifier,
       :connection_name,
       :connection_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8477,7 +8822,8 @@ module Aws::Glue
       :identifier,
       :connection_name,
       :connection_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8491,7 +8837,8 @@ module Aws::Glue
     class FederatedResourceAlreadyExistsException < Struct.new(
       :message,
       :associated_glue_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8513,7 +8860,8 @@ module Aws::Glue
       :database_identifier,
       :connection_name,
       :connection_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8527,7 +8875,8 @@ module Aws::Glue
     class FederationSourceException < Struct.new(
       :federation_source_error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8537,7 +8886,8 @@ module Aws::Glue
     #   @return [String]
     class FederationSourceRetryableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8615,7 +8965,8 @@ module Aws::Glue
       :parent_field,
       :native_data_type,
       :custom_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8637,7 +8988,8 @@ module Aws::Glue
       :inputs,
       :imputed_path,
       :filled_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8659,7 +9011,8 @@ module Aws::Glue
       :inputs,
       :logical_operator,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8677,7 +9030,8 @@ module Aws::Glue
       :operation,
       :negated,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8691,7 +9045,8 @@ module Aws::Glue
     class FilterValue < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8733,7 +9088,8 @@ module Aws::Glue
       :f1,
       :confusion_matrix,
       :column_importances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8769,7 +9125,8 @@ module Aws::Glue
       :precision_recall_tradeoff,
       :accuracy_cost_tradeoff,
       :enforce_provided_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8787,7 +9144,8 @@ module Aws::Glue
       :job_id,
       :job_name,
       :job_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8804,7 +9162,8 @@ module Aws::Glue
       :name,
       :include_blueprint,
       :include_parameter_spec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8813,7 +9172,8 @@ module Aws::Glue
     #   @return [Types::Blueprint]
     class GetBlueprintResponse < Struct.new(
       :blueprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8826,7 +9186,8 @@ module Aws::Glue
     class GetBlueprintRunRequest < Struct.new(
       :blueprint_name,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8835,7 +9196,8 @@ module Aws::Glue
     #   @return [Types::BlueprintRun]
     class GetBlueprintRunResponse < Struct.new(
       :blueprint_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8852,7 +9214,8 @@ module Aws::Glue
       :blueprint_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8865,7 +9228,8 @@ module Aws::Glue
     class GetBlueprintRunsResponse < Struct.new(
       :blueprint_runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8874,7 +9238,8 @@ module Aws::Glue
     #   @return [String]
     class GetCatalogImportStatusRequest < Struct.new(
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8883,7 +9248,8 @@ module Aws::Glue
     #   @return [Types::CatalogImportStatus]
     class GetCatalogImportStatusResponse < Struct.new(
       :import_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8892,7 +9258,8 @@ module Aws::Glue
     #   @return [String]
     class GetCatalogRequest < Struct.new(
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8901,7 +9268,8 @@ module Aws::Glue
     #   @return [Types::Catalog]
     class GetCatalogResponse < Struct.new(
       :catalog,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8927,7 +9295,8 @@ module Aws::Glue
       :max_results,
       :recursive,
       :include_root,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8940,7 +9309,8 @@ module Aws::Glue
     class GetCatalogsResponse < Struct.new(
       :catalog_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8949,7 +9319,8 @@ module Aws::Glue
     #   @return [String]
     class GetClassifierRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8958,7 +9329,8 @@ module Aws::Glue
     #   @return [Types::Classifier]
     class GetClassifierResponse < Struct.new(
       :classifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8971,7 +9343,8 @@ module Aws::Glue
     class GetClassifiersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8985,7 +9358,8 @@ module Aws::Glue
     class GetClassifiersResponse < Struct.new(
       :classifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9011,7 +9385,8 @@ module Aws::Glue
       :table_name,
       :partition_values,
       :column_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9024,7 +9399,8 @@ module Aws::Glue
     class GetColumnStatisticsForPartitionResponse < Struct.new(
       :column_statistics_list,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9046,7 +9422,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :column_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9059,7 +9436,8 @@ module Aws::Glue
     class GetColumnStatisticsForTableResponse < Struct.new(
       :column_statistics_list,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9068,7 +9446,8 @@ module Aws::Glue
     #   @return [String]
     class GetColumnStatisticsTaskRunRequest < Struct.new(
       :column_statistics_task_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9077,7 +9456,8 @@ module Aws::Glue
     #   @return [Types::ColumnStatisticsTaskRun]
     class GetColumnStatisticsTaskRunResponse < Struct.new(
       :column_statistics_task_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9098,7 +9478,8 @@ module Aws::Glue
       :table_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9111,7 +9492,8 @@ module Aws::Glue
     class GetColumnStatisticsTaskRunsResponse < Struct.new(
       :column_statistics_task_runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9124,7 +9506,8 @@ module Aws::Glue
     class GetColumnStatisticsTaskSettingsRequest < Struct.new(
       :database_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9133,7 +9516,8 @@ module Aws::Glue
     #   @return [Types::ColumnStatisticsTaskSettings]
     class GetColumnStatisticsTaskSettingsResponse < Struct.new(
       :column_statistics_task_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9159,7 +9543,8 @@ module Aws::Glue
       :name,
       :hide_password,
       :apply_override_for_compute_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9168,7 +9553,8 @@ module Aws::Glue
     #   @return [Types::Connection]
     class GetConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9188,7 +9574,8 @@ module Aws::Glue
       :match_criteria,
       :connection_type,
       :connection_schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9218,7 +9605,8 @@ module Aws::Glue
       :hide_password,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9232,7 +9620,8 @@ module Aws::Glue
     class GetConnectionsResponse < Struct.new(
       :connection_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9249,7 +9638,8 @@ module Aws::Glue
       :crawler_name_list,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9263,7 +9653,8 @@ module Aws::Glue
     class GetCrawlerMetricsResponse < Struct.new(
       :crawler_metrics_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9272,7 +9663,8 @@ module Aws::Glue
     #   @return [String]
     class GetCrawlerRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9281,7 +9673,8 @@ module Aws::Glue
     #   @return [Types::Crawler]
     class GetCrawlerResponse < Struct.new(
       :crawler,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9294,7 +9687,8 @@ module Aws::Glue
     class GetCrawlersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9308,7 +9702,8 @@ module Aws::Glue
     class GetCrawlersResponse < Struct.new(
       :crawlers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9317,7 +9712,8 @@ module Aws::Glue
     #   @return [String]
     class GetCustomEntityTypeRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9334,7 +9730,8 @@ module Aws::Glue
       :name,
       :regex_string,
       :context_words,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9344,7 +9741,8 @@ module Aws::Glue
     #   @return [String]
     class GetDataCatalogEncryptionSettingsRequest < Struct.new(
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9353,7 +9751,8 @@ module Aws::Glue
     #   @return [Types::DataCatalogEncryptionSettings]
     class GetDataCatalogEncryptionSettingsResponse < Struct.new(
       :data_catalog_encryption_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9366,7 +9765,8 @@ module Aws::Glue
     class GetDataQualityModelRequest < Struct.new(
       :statistic_id,
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9387,7 +9787,8 @@ module Aws::Glue
       :started_on,
       :completed_on,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9400,7 +9801,8 @@ module Aws::Glue
     class GetDataQualityModelResultRequest < Struct.new(
       :statistic_id,
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9414,7 +9816,8 @@ module Aws::Glue
     class GetDataQualityModelResultResponse < Struct.new(
       :completed_on,
       :model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9423,7 +9826,8 @@ module Aws::Glue
     #   @return [String]
     class GetDataQualityResultRequest < Struct.new(
       :result_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9489,7 +9893,8 @@ module Aws::Glue
       :analyzer_results,
       :observations,
       :aggregated_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9498,7 +9903,8 @@ module Aws::Glue
     #   @return [String]
     class GetDataQualityRuleRecommendationRunRequest < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9560,7 +9966,8 @@ module Aws::Glue
       :recommended_ruleset,
       :created_ruleset_name,
       :data_quality_security_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9574,7 +9981,8 @@ module Aws::Glue
     #   @return [String]
     class GetDataQualityRulesetEvaluationRunRequest < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9639,7 +10047,8 @@ module Aws::Glue
       :ruleset_names,
       :result_ids,
       :additional_data_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9653,7 +10062,8 @@ module Aws::Glue
     #   @return [String]
     class GetDataQualityRulesetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9691,7 +10101,8 @@ module Aws::Glue
       :last_modified_on,
       :recommendation_run_id,
       :data_quality_security_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9706,7 +10117,8 @@ module Aws::Glue
     class GetDatabaseRequest < Struct.new(
       :catalog_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9715,7 +10127,8 @@ module Aws::Glue
     #   @return [Types::Database]
     class GetDatabaseResponse < Struct.new(
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9752,7 +10165,8 @@ module Aws::Glue
       :max_results,
       :resource_share_type,
       :attributes_to_get,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9766,7 +10180,8 @@ module Aws::Glue
     class GetDatabasesResponse < Struct.new(
       :database_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9775,7 +10190,8 @@ module Aws::Glue
     #   @return [String]
     class GetDataflowGraphRequest < Struct.new(
       :python_script,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9788,7 +10204,8 @@ module Aws::Glue
     class GetDataflowGraphResponse < Struct.new(
       :dag_nodes,
       :dag_edges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9797,7 +10214,8 @@ module Aws::Glue
     #   @return [String]
     class GetDevEndpointRequest < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9806,7 +10224,8 @@ module Aws::Glue
     #   @return [Types::DevEndpoint]
     class GetDevEndpointResponse < Struct.new(
       :dev_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9819,7 +10238,8 @@ module Aws::Glue
     class GetDevEndpointsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9833,7 +10253,8 @@ module Aws::Glue
     class GetDevEndpointsResponse < Struct.new(
       :dev_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9878,7 +10299,8 @@ module Aws::Glue
       :limit,
       :order_by,
       :selected_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9891,13 +10313,15 @@ module Aws::Glue
     class GetEntityRecordsResponse < Struct.new(
       :records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Request to retrieve the Glue Identity Center configuration.</p>
     class GetGlueIdentityCenterConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9915,7 +10339,8 @@ module Aws::Glue
       :application_arn,
       :instance_arn,
       :scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9924,7 +10349,8 @@ module Aws::Glue
     #   @return [String]
     class GetIntegrationResourcePropertyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9941,7 +10367,8 @@ module Aws::Glue
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9957,7 +10384,8 @@ module Aws::Glue
     class GetIntegrationTablePropertiesRequest < Struct.new(
       :resource_arn,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9981,7 +10409,8 @@ module Aws::Glue
       :table_name,
       :source_table_config,
       :target_table_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9994,7 +10423,8 @@ module Aws::Glue
     class GetJobBookmarkRequest < Struct.new(
       :job_name,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10003,7 +10433,8 @@ module Aws::Glue
     #   @return [Types::JobBookmarkEntry]
     class GetJobBookmarkResponse < Struct.new(
       :job_bookmark_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10012,7 +10443,8 @@ module Aws::Glue
     #   @return [String]
     class GetJobRequest < Struct.new(
       :job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10021,7 +10453,8 @@ module Aws::Glue
     #   @return [Types::Job]
     class GetJobResponse < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10038,7 +10471,8 @@ module Aws::Glue
       :job_name,
       :run_id,
       :predecessors_included,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10047,7 +10481,8 @@ module Aws::Glue
     #   @return [Types::JobRun]
     class GetJobRunResponse < Struct.new(
       :job_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10064,7 +10499,8 @@ module Aws::Glue
       :job_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10077,7 +10513,8 @@ module Aws::Glue
     class GetJobRunsResponse < Struct.new(
       :job_runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10090,7 +10527,8 @@ module Aws::Glue
     class GetJobsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10103,7 +10541,8 @@ module Aws::Glue
     class GetJobsResponse < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10116,7 +10555,8 @@ module Aws::Glue
     class GetMLTaskRunRequest < Struct.new(
       :transform_id,
       :task_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10161,7 +10601,8 @@ module Aws::Glue
       :last_modified_on,
       :completed_on,
       :execution_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10191,7 +10632,8 @@ module Aws::Glue
       :max_results,
       :filter,
       :sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10204,7 +10646,8 @@ module Aws::Glue
     class GetMLTaskRunsResponse < Struct.new(
       :task_runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10214,7 +10657,8 @@ module Aws::Glue
     #   @return [String]
     class GetMLTransformRequest < Struct.new(
       :transform_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10313,7 +10757,8 @@ module Aws::Glue
       :timeout,
       :max_retries,
       :transform_encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10339,7 +10784,8 @@ module Aws::Glue
       :max_results,
       :filter,
       :sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10352,7 +10798,8 @@ module Aws::Glue
     class GetMLTransformsResponse < Struct.new(
       :transforms,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10369,7 +10816,8 @@ module Aws::Glue
       :source,
       :sinks,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10378,7 +10826,8 @@ module Aws::Glue
     #   @return [Array<Types::MappingEntry>]
     class GetMappingResponse < Struct.new(
       :mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10399,7 +10848,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10412,7 +10862,8 @@ module Aws::Glue
     class GetPartitionIndexesResponse < Struct.new(
       :partition_index_descriptor_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10434,7 +10885,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partition_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10444,7 +10896,8 @@ module Aws::Glue
     #   @return [Types::Partition]
     class GetPartitionResponse < Struct.new(
       :partition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10595,7 +11048,8 @@ module Aws::Glue
       :exclude_column_schema,
       :transaction_id,
       :query_as_of_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10609,7 +11063,8 @@ module Aws::Glue
     class GetPartitionsResponse < Struct.new(
       :partitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10648,7 +11103,8 @@ module Aws::Glue
       :location,
       :language,
       :additional_plan_options_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10661,7 +11117,8 @@ module Aws::Glue
     class GetPlanResponse < Struct.new(
       :python_script,
       :scala_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10670,7 +11127,8 @@ module Aws::Glue
     #   @return [Types::RegistryId]
     class GetRegistryInput < Struct.new(
       :registry_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10699,7 +11157,8 @@ module Aws::Glue
       :status,
       :created_time,
       :updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10712,7 +11171,8 @@ module Aws::Glue
     class GetResourcePoliciesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10725,7 +11185,8 @@ module Aws::Glue
     class GetResourcePoliciesResponse < Struct.new(
       :get_resource_policies_response_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10737,7 +11198,8 @@ module Aws::Glue
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10758,7 +11220,8 @@ module Aws::Glue
       :policy_hash,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10779,7 +11242,8 @@ module Aws::Glue
     class GetSchemaByDefinitionInput < Struct.new(
       :schema_id,
       :schema_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10804,7 +11268,8 @@ module Aws::Glue
       :data_format,
       :status,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10821,7 +11286,8 @@ module Aws::Glue
     #   @return [Types::SchemaId]
     class GetSchemaInput < Struct.new(
       :schema_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10878,7 +11344,8 @@ module Aws::Glue
       :schema_status,
       :created_time,
       :updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10903,7 +11370,8 @@ module Aws::Glue
       :schema_id,
       :schema_version_id,
       :schema_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10936,7 +11404,8 @@ module Aws::Glue
       :version_number,
       :status,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10965,7 +11434,8 @@ module Aws::Glue
       :first_schema_version_number,
       :second_schema_version_number,
       :schema_diff_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10974,7 +11444,8 @@ module Aws::Glue
     #   @return [String]
     class GetSchemaVersionsDiffResponse < Struct.new(
       :diff,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10983,7 +11454,8 @@ module Aws::Glue
     #   @return [String]
     class GetSecurityConfigurationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10992,7 +11464,8 @@ module Aws::Glue
     #   @return [Types::SecurityConfiguration]
     class GetSecurityConfigurationResponse < Struct.new(
       :security_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11005,7 +11478,8 @@ module Aws::Glue
     class GetSecurityConfigurationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11019,7 +11493,8 @@ module Aws::Glue
     class GetSecurityConfigurationsResponse < Struct.new(
       :security_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11032,7 +11507,8 @@ module Aws::Glue
     class GetSessionRequest < Struct.new(
       :id,
       :request_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11041,7 +11517,8 @@ module Aws::Glue
     #   @return [Types::Session]
     class GetSessionResponse < Struct.new(
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11058,7 +11535,8 @@ module Aws::Glue
       :session_id,
       :id,
       :request_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11067,7 +11545,8 @@ module Aws::Glue
     #   @return [Types::Statement]
     class GetStatementResponse < Struct.new(
       :statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11088,7 +11567,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11109,7 +11589,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :table_optimizer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11141,7 +11622,8 @@ module Aws::Glue
       :transaction_id,
       :query_as_of_time,
       :include_status_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11150,7 +11632,8 @@ module Aws::Glue
     #   @return [Types::Table]
     class GetTableResponse < Struct.new(
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11174,7 +11657,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11183,7 +11667,8 @@ module Aws::Glue
     #   @return [Types::TableVersion]
     class GetTableVersionResponse < Struct.new(
       :table_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11211,7 +11696,8 @@ module Aws::Glue
       :table_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11226,7 +11712,8 @@ module Aws::Glue
     class GetTableVersionsResponse < Struct.new(
       :table_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11281,7 +11768,8 @@ module Aws::Glue
       :query_as_of_time,
       :include_status_details,
       :attributes_to_get,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11294,7 +11782,8 @@ module Aws::Glue
     class GetTablesResponse < Struct.new(
       :table_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11303,7 +11792,8 @@ module Aws::Glue
     #   @return [String]
     class GetTagsRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11312,7 +11802,8 @@ module Aws::Glue
     #   @return [Hash<String, String>]
     class GetTagsResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11321,7 +11812,8 @@ module Aws::Glue
     #   @return [String]
     class GetTriggerRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11330,7 +11822,8 @@ module Aws::Glue
     #   @return [Types::Trigger]
     class GetTriggerResponse < Struct.new(
       :trigger,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11348,7 +11841,8 @@ module Aws::Glue
       :next_token,
       :dependent_job_name,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11362,7 +11856,8 @@ module Aws::Glue
     class GetTriggersResponse < Struct.new(
       :triggers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11399,7 +11894,8 @@ module Aws::Glue
       :audit_context,
       :supported_permission_types,
       :query_session_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11417,7 +11913,8 @@ module Aws::Glue
       :partition,
       :authorized_columns,
       :is_registered_with_lake_formation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11572,7 +12069,8 @@ module Aws::Glue
       :segment,
       :max_results,
       :query_session_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11586,7 +12084,8 @@ module Aws::Glue
     class GetUnfilteredPartitionsMetadataResponse < Struct.new(
       :unfiltered_partitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11655,7 +12154,8 @@ module Aws::Glue
       :supported_dialect,
       :permissions,
       :query_session_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11701,7 +12201,8 @@ module Aws::Glue
       :is_protected,
       :permissions,
       :row_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11717,7 +12218,8 @@ module Aws::Glue
     #   @return [String]
     class GetUsageProfileRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11742,7 +12244,8 @@ module Aws::Glue
       :configuration,
       :created_on,
       :last_modified_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11760,7 +12263,8 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :function_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11769,7 +12273,8 @@ module Aws::Glue
     #   @return [Types::UserDefinedFunction]
     class GetUserDefinedFunctionResponse < Struct.new(
       :user_defined_function,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11797,7 +12302,8 @@ module Aws::Glue
       :pattern,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11811,7 +12317,8 @@ module Aws::Glue
     class GetUserDefinedFunctionsResponse < Struct.new(
       :user_defined_functions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11824,7 +12331,8 @@ module Aws::Glue
     class GetWorkflowRequest < Struct.new(
       :name,
       :include_graph,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11833,7 +12341,8 @@ module Aws::Glue
     #   @return [Types::Workflow]
     class GetWorkflowResponse < Struct.new(
       :workflow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11846,7 +12355,8 @@ module Aws::Glue
     class GetWorkflowRunPropertiesRequest < Struct.new(
       :name,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11855,7 +12365,8 @@ module Aws::Glue
     #   @return [Hash<String, String>]
     class GetWorkflowRunPropertiesResponse < Struct.new(
       :run_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11872,7 +12383,8 @@ module Aws::Glue
       :name,
       :run_id,
       :include_graph,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11881,7 +12393,8 @@ module Aws::Glue
     #   @return [Types::WorkflowRun]
     class GetWorkflowRunResponse < Struct.new(
       :run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11902,7 +12415,8 @@ module Aws::Glue
       :include_graph,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11915,7 +12429,8 @@ module Aws::Glue
     class GetWorkflowRunsResponse < Struct.new(
       :runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11925,7 +12440,8 @@ module Aws::Glue
     #   @return [String]
     class GlueEncryptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11947,7 +12463,8 @@ module Aws::Glue
       :policy_hash,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11957,7 +12474,8 @@ module Aws::Glue
     #   @return [Array<Types::GlueStudioSchemaColumn>]
     class GlueSchema < Struct.new(
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11975,7 +12493,8 @@ module Aws::Glue
       :name,
       :type,
       :glue_studio_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12011,7 +12530,8 @@ module Aws::Glue
       :catalog_id,
       :connection_name,
       :additional_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12037,7 +12557,8 @@ module Aws::Glue
       :table,
       :partition_predicate,
       :additional_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12067,7 +12588,8 @@ module Aws::Glue
       :table,
       :database,
       :schema_change_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12104,7 +12626,8 @@ module Aws::Glue
       :version,
       :grok_pattern,
       :custom_patterns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12127,7 +12650,8 @@ module Aws::Glue
       :group_name,
       :filters,
       :logical_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12151,7 +12675,8 @@ module Aws::Glue
       :connection_name,
       :exclusions,
       :maximum_traversal_depth,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12192,7 +12717,8 @@ module Aws::Glue
       :strategy,
       :min_input_files,
       :delete_file_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12218,7 +12744,8 @@ module Aws::Glue
       :dpu_hours,
       :number_of_dpus,
       :job_duration_in_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12246,7 +12773,8 @@ module Aws::Glue
       :metadata_operation,
       :version,
       :create_iceberg_table_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12268,7 +12796,8 @@ module Aws::Glue
       :compaction,
       :retention,
       :orphan_file_deletion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12295,7 +12824,8 @@ module Aws::Glue
       :retention,
       :orphan_file_deletion,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12313,7 +12843,8 @@ module Aws::Glue
       :orphan_file_retention_period_in_days,
       :location,
       :run_rate_in_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12335,7 +12866,8 @@ module Aws::Glue
       :dpu_hours,
       :number_of_dpus,
       :job_duration_in_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12366,7 +12898,8 @@ module Aws::Glue
       :transform,
       :name,
       :field_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12386,7 +12919,8 @@ module Aws::Glue
     class IcebergPartitionSpec < Struct.new(
       :fields,
       :spec_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12413,7 +12947,8 @@ module Aws::Glue
       :number_of_snapshots_to_retain,
       :clean_expired_files,
       :run_rate_in_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12443,7 +12978,8 @@ module Aws::Glue
       :dpu_hours,
       :number_of_dpus,
       :job_duration_in_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12475,7 +13011,8 @@ module Aws::Glue
       :identifier_field_ids,
       :type,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12502,7 +13039,8 @@ module Aws::Glue
       :transform,
       :direction,
       :null_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12522,7 +13060,8 @@ module Aws::Glue
     class IcebergSortOrder < Struct.new(
       :order_id,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12553,7 +13092,8 @@ module Aws::Glue
       :type,
       :required,
       :doc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12586,7 +13126,8 @@ module Aws::Glue
       :sort_order,
       :location,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12609,7 +13150,8 @@ module Aws::Glue
       :connection_name,
       :exclusions,
       :maximum_traversal_depth,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12619,7 +13161,8 @@ module Aws::Glue
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12629,7 +13172,8 @@ module Aws::Glue
     #   @return [String]
     class IllegalBlueprintStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12639,7 +13183,8 @@ module Aws::Glue
     #   @return [String]
     class IllegalSessionStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12649,7 +13194,8 @@ module Aws::Glue
     #   @return [String]
     class IllegalWorkflowStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12658,12 +13204,14 @@ module Aws::Glue
     #   @return [String]
     class ImportCatalogToGlueRequest < Struct.new(
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ImportCatalogToGlueResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12678,7 +13226,8 @@ module Aws::Glue
     class ImportLabelsTaskRunProperties < Struct.new(
       :input_s3_path,
       :replace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12740,7 +13289,8 @@ module Aws::Glue
       :create_time,
       :integration_config,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12821,7 +13371,8 @@ module Aws::Glue
       :integration_config,
       :errors,
       :data_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12845,7 +13396,8 @@ module Aws::Glue
       :refresh_interval,
       :source_properties,
       :continuous_sync,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12855,7 +13407,8 @@ module Aws::Glue
     #   @return [String]
     class IntegrationConflictOperationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12869,7 +13422,8 @@ module Aws::Glue
     class IntegrationError < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12883,7 +13437,8 @@ module Aws::Glue
     class IntegrationFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12893,7 +13448,8 @@ module Aws::Glue
     #   @return [String]
     class IntegrationNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12972,7 +13528,8 @@ module Aws::Glue
       :field_name,
       :function_spec,
       :conversion_spec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12982,7 +13539,8 @@ module Aws::Glue
     #   @return [String]
     class IntegrationQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12992,7 +13550,8 @@ module Aws::Glue
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13002,7 +13561,8 @@ module Aws::Glue
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13016,7 +13576,8 @@ module Aws::Glue
     class InvalidInputException < Struct.new(
       :message,
       :from_federation_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13026,7 +13587,8 @@ module Aws::Glue
     #   @return [String]
     class InvalidIntegrationStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13036,7 +13598,8 @@ module Aws::Glue
     #   @return [String]
     class InvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13078,7 +13641,8 @@ module Aws::Glue
       :job_bookmark_keys,
       :job_bookmark_keys_sort_order,
       :data_type_mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13116,7 +13680,8 @@ module Aws::Glue
       :connection_table,
       :query,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13154,7 +13719,8 @@ module Aws::Glue
       :connection_type,
       :additional_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13178,7 +13744,8 @@ module Aws::Glue
       :path,
       :exclusions,
       :enable_additional_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13407,7 +13974,8 @@ module Aws::Glue
       :source_control_details,
       :maintenance_window,
       :profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13447,7 +14015,8 @@ module Aws::Glue
       :previous_run_id,
       :run_id,
       :job_bookmark,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13468,7 +14037,8 @@ module Aws::Glue
     class JobBookmarksEncryption < Struct.new(
       :job_bookmarks_encryption_mode,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13497,7 +14067,8 @@ module Aws::Glue
       :script_location,
       :python_version,
       :runtime,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13507,7 +14078,8 @@ module Aws::Glue
     #   @return [Array<Types::JobRun>]
     class JobNodeDetails < Struct.new(
       :job_runs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13736,7 +14308,8 @@ module Aws::Glue
       :profile_name,
       :state_detail,
       :execution_role_session_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13924,7 +14497,8 @@ module Aws::Glue
       :execution_class,
       :source_control_details,
       :maintenance_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13952,7 +14526,8 @@ module Aws::Glue
       :inputs,
       :join_type,
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13966,7 +14541,8 @@ module Aws::Glue
     class JoinColumn < Struct.new(
       :from,
       :keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13993,7 +14569,8 @@ module Aws::Glue
       :last_updated,
       :version,
       :json_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14008,7 +14585,8 @@ module Aws::Glue
     #   @return [String]
     class KMSKeyNotAccessibleFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14093,7 +14671,8 @@ module Aws::Glue
       :add_record_timestamp,
       :emit_consumer_lag_metrics,
       :starting_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14107,7 +14686,8 @@ module Aws::Glue
     class KeySchemaElement < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14203,7 +14783,8 @@ module Aws::Glue
       :emit_consumer_lag_metrics,
       :starting_timestamp,
       :fanout_consumer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14214,7 +14795,8 @@ module Aws::Glue
     #   @return [String]
     class LabelingSetGenerationTaskRunProperties < Struct.new(
       :output_s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14228,7 +14810,8 @@ module Aws::Glue
     class LakeFormationConfiguration < Struct.new(
       :use_lake_formation_credentials,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14254,7 +14837,8 @@ module Aws::Glue
       :parameter_spec,
       :blueprint_location,
       :blueprint_service_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14284,7 +14868,8 @@ module Aws::Glue
       :log_stream,
       :message_prefix,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14302,7 +14887,8 @@ module Aws::Glue
     #   @return [String]
     class LineageConfiguration < Struct.new(
       :crawler_lineage_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14319,7 +14905,8 @@ module Aws::Glue
       :next_token,
       :max_results,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14332,7 +14919,8 @@ module Aws::Glue
     class ListBlueprintsResponse < Struct.new(
       :blueprints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14345,7 +14933,8 @@ module Aws::Glue
     class ListColumnStatisticsTaskRunsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14358,7 +14947,8 @@ module Aws::Glue
     class ListColumnStatisticsTaskRunsResponse < Struct.new(
       :column_statistics_task_run_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14371,7 +14961,8 @@ module Aws::Glue
     class ListConnectionTypesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14384,7 +14975,8 @@ module Aws::Glue
     class ListConnectionTypesResponse < Struct.new(
       :connection_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14401,7 +14993,8 @@ module Aws::Glue
       :max_results,
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14415,7 +15008,8 @@ module Aws::Glue
     class ListCrawlersResponse < Struct.new(
       :crawler_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14436,7 +15030,8 @@ module Aws::Glue
       :max_results,
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14449,7 +15044,8 @@ module Aws::Glue
     class ListCrawlsResponse < Struct.new(
       :crawls,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14466,7 +15062,8 @@ module Aws::Glue
       :next_token,
       :max_results,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14479,7 +15076,8 @@ module Aws::Glue
     class ListCustomEntityTypesResponse < Struct.new(
       :custom_entity_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14496,7 +15094,8 @@ module Aws::Glue
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14509,7 +15108,8 @@ module Aws::Glue
     class ListDataQualityResultsResponse < Struct.new(
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14526,7 +15126,8 @@ module Aws::Glue
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14539,7 +15140,8 @@ module Aws::Glue
     class ListDataQualityRuleRecommendationRunsResponse < Struct.new(
       :runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14556,7 +15158,8 @@ module Aws::Glue
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14569,7 +15172,8 @@ module Aws::Glue
     class ListDataQualityRulesetEvaluationRunsResponse < Struct.new(
       :runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14590,7 +15194,8 @@ module Aws::Glue
       :max_results,
       :filter,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14603,7 +15208,8 @@ module Aws::Glue
     class ListDataQualityRulesetsResponse < Struct.new(
       :rulesets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14628,7 +15234,8 @@ module Aws::Glue
       :timestamp_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14641,7 +15248,8 @@ module Aws::Glue
     class ListDataQualityStatisticAnnotationsResponse < Struct.new(
       :annotations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14666,7 +15274,8 @@ module Aws::Glue
       :timestamp_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14679,7 +15288,8 @@ module Aws::Glue
     class ListDataQualityStatisticsResponse < Struct.new(
       :statistics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14696,7 +15306,8 @@ module Aws::Glue
       :next_token,
       :max_results,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14711,7 +15322,8 @@ module Aws::Glue
     class ListDevEndpointsResponse < Struct.new(
       :dev_endpoint_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14736,7 +15348,8 @@ module Aws::Glue
       :parent_entity_name,
       :next_token,
       :data_store_api_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14749,7 +15362,8 @@ module Aws::Glue
     class ListEntitiesResponse < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14766,7 +15380,8 @@ module Aws::Glue
       :next_token,
       :max_results,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14780,7 +15395,8 @@ module Aws::Glue
     class ListJobsResponse < Struct.new(
       :job_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14805,7 +15421,8 @@ module Aws::Glue
       :filter,
       :sort,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14820,7 +15437,8 @@ module Aws::Glue
     class ListMLTransformsResponse < Struct.new(
       :transform_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14833,7 +15451,8 @@ module Aws::Glue
     class ListRegistriesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14846,7 +15465,8 @@ module Aws::Glue
     class ListRegistriesResponse < Struct.new(
       :registries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14871,7 +15491,8 @@ module Aws::Glue
       :schema_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14884,7 +15505,8 @@ module Aws::Glue
     class ListSchemaVersionsResponse < Struct.new(
       :schemas,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14901,7 +15523,8 @@ module Aws::Glue
       :registry_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14914,7 +15537,8 @@ module Aws::Glue
     class ListSchemasResponse < Struct.new(
       :schemas,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14935,7 +15559,8 @@ module Aws::Glue
       :max_results,
       :tags,
       :request_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14952,7 +15577,8 @@ module Aws::Glue
       :ids,
       :sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14969,7 +15595,8 @@ module Aws::Glue
       :session_id,
       :request_origin,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14982,7 +15609,8 @@ module Aws::Glue
     class ListStatementsResponse < Struct.new(
       :statements,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15011,7 +15639,8 @@ module Aws::Glue
       :type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15036,7 +15665,8 @@ module Aws::Glue
       :table_name,
       :next_token,
       :table_optimizer_runs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15058,7 +15688,8 @@ module Aws::Glue
       :dependent_job_name,
       :max_results,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15072,7 +15703,8 @@ module Aws::Glue
     class ListTriggersResponse < Struct.new(
       :trigger_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15085,7 +15717,8 @@ module Aws::Glue
     class ListUsageProfilesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15098,7 +15731,8 @@ module Aws::Glue
     class ListUsageProfilesResponse < Struct.new(
       :profiles,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15111,7 +15745,8 @@ module Aws::Glue
     class ListWorkflowsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15124,7 +15759,8 @@ module Aws::Glue
     class ListWorkflowsResponse < Struct.new(
       :workflows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15142,7 +15778,8 @@ module Aws::Glue
       :jdbc,
       :s3,
       :dynamo_db,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15164,7 +15801,8 @@ module Aws::Glue
       :maximum_value,
       :number_of_nulls,
       :number_of_distinct_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15319,7 +15957,8 @@ module Aws::Glue
       :timeout,
       :max_retries,
       :transform_encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15334,7 +15973,8 @@ module Aws::Glue
     #   @return [String]
     class MLTransformNotReadyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15356,7 +15996,8 @@ module Aws::Glue
     class MLUserDataEncryption < Struct.new(
       :ml_user_data_encryption_mode,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15416,7 +16057,8 @@ module Aws::Glue
       :to_type,
       :dropped,
       :children,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15446,7 +16088,8 @@ module Aws::Glue
       :target_table,
       :target_path,
       :target_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15468,7 +16111,8 @@ module Aws::Glue
       :inputs,
       :source,
       :primary_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15486,7 +16130,8 @@ module Aws::Glue
       :metadata_value,
       :created_time,
       :other_metadata_value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15500,7 +16145,8 @@ module Aws::Glue
     class MetadataKeyValuePair < Struct.new(
       :metadata_key,
       :metadata_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15522,7 +16168,8 @@ module Aws::Glue
       :statistic_id,
       :metric_values,
       :new_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15540,7 +16187,8 @@ module Aws::Glue
       :name,
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15562,7 +16210,8 @@ module Aws::Glue
       :inputs,
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15587,7 +16236,8 @@ module Aws::Glue
       :data_filter,
       :integration_config,
       :integration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15668,7 +16318,8 @@ module Aws::Glue
       :errors,
       :data_filter,
       :integration_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15687,7 +16338,8 @@ module Aws::Glue
       :connection_name,
       :path,
       :scan_all,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15705,7 +16357,8 @@ module Aws::Glue
       :name,
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15727,7 +16380,8 @@ module Aws::Glue
       :inputs,
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15737,7 +16391,8 @@ module Aws::Glue
     #   @return [String]
     class NoScheduleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15767,7 +16422,8 @@ module Aws::Glue
       :trigger_details,
       :job_details,
       :crawler_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15778,7 +16434,8 @@ module Aws::Glue
     #   @return [Integer]
     class NotificationProperty < Struct.new(
       :notify_delay_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15796,7 +16453,8 @@ module Aws::Glue
       :is_empty,
       :is_null_string,
       :is_neg_one,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15810,7 +16468,8 @@ module Aws::Glue
     class NullValueField < Struct.new(
       :value,
       :datatype,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15824,7 +16483,8 @@ module Aws::Glue
     class OAuth2ClientApplication < Struct.new(
       :user_managed_client_application_client_id,
       :aws_managed_client_application_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15846,7 +16506,8 @@ module Aws::Glue
       :access_token,
       :refresh_token,
       :jwt_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15868,7 +16529,8 @@ module Aws::Glue
       :o_auth2_client_application,
       :token_url,
       :token_url_parameters_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15898,7 +16560,8 @@ module Aws::Glue
       :token_url_parameters_map,
       :authorization_code_properties,
       :o_auth2_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15908,7 +16571,8 @@ module Aws::Glue
     #   @return [Types::IcebergInput]
     class OpenTableFormatInput < Struct.new(
       :iceberg_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15918,7 +16582,8 @@ module Aws::Glue
     #   @return [String]
     class OperationNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15928,7 +16593,8 @@ module Aws::Glue
     #   @return [String]
     class OperationTimeoutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15946,7 +16612,8 @@ module Aws::Glue
       :value,
       :label,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15964,7 +16631,8 @@ module Aws::Glue
       :name,
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15986,7 +16654,8 @@ module Aws::Glue
       :inputs,
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16001,7 +16670,8 @@ module Aws::Glue
     class Order < Struct.new(
       :column,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -16016,7 +16686,8 @@ module Aws::Glue
     #   @return [Types::IcebergOrphanFileDeletionConfiguration]
     class OrphanFileDeletionConfiguration < Struct.new(
       :iceberg_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16026,7 +16697,8 @@ module Aws::Glue
     #   @return [Types::IcebergOrphanFileDeletionMetrics]
     class OrphanFileDeletionMetrics < Struct.new(
       :iceberg_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16040,7 +16712,8 @@ module Aws::Glue
     class OtherMetadataValueListItem < Struct.new(
       :metadata_value,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16111,7 +16784,8 @@ module Aws::Glue
       :num_right_chars_to_exclude,
       :detection_parameters,
       :detection_sensitivity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16155,7 +16829,8 @@ module Aws::Glue
       :parameters,
       :last_analyzed_time,
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16169,7 +16844,8 @@ module Aws::Glue
     class PartitionError < Struct.new(
       :partition_values,
       :error_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16183,7 +16859,8 @@ module Aws::Glue
     class PartitionIndex < Struct.new(
       :keys,
       :index_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16220,7 +16897,8 @@ module Aws::Glue
       :keys,
       :index_status,
       :backfill_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16248,7 +16926,8 @@ module Aws::Glue
       :storage_descriptor,
       :parameters,
       :last_analyzed_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16258,7 +16937,8 @@ module Aws::Glue
     #   @return [Array<String>]
     class PartitionValueList < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16269,7 +16949,8 @@ module Aws::Glue
     #   @return [String]
     class PermissionTypeMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16287,7 +16968,8 @@ module Aws::Glue
       :subnet_id,
       :security_group_id_list,
       :availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16305,7 +16987,8 @@ module Aws::Glue
       :name,
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16327,7 +17010,8 @@ module Aws::Glue
       :inputs,
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16342,7 +17026,8 @@ module Aws::Glue
     class Predecessor < Struct.new(
       :job_name,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16357,7 +17042,8 @@ module Aws::Glue
     class Predicate < Struct.new(
       :logical,
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16371,7 +17057,8 @@ module Aws::Glue
     class PrincipalPermissions < Struct.new(
       :principal,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16385,7 +17072,8 @@ module Aws::Glue
     class ProfileConfiguration < Struct.new(
       :session_configuration,
       :job_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16419,7 +17107,8 @@ module Aws::Glue
       :property_types,
       :allowed_values,
       :data_operation_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -16442,7 +17131,8 @@ module Aws::Glue
       :key,
       :value,
       :comparator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16456,12 +17146,14 @@ module Aws::Glue
     class PutDataCatalogEncryptionSettingsRequest < Struct.new(
       :catalog_id,
       :data_catalog_encryption_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutDataCatalogEncryptionSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16474,13 +17166,15 @@ module Aws::Glue
     class PutDataQualityProfileAnnotationRequest < Struct.new(
       :profile_id,
       :inclusion_annotation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Left blank.</p>
     class PutDataQualityProfileAnnotationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16521,7 +17215,8 @@ module Aws::Glue
       :policy_hash_condition,
       :policy_exists_condition,
       :enable_hybrid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16532,7 +17227,8 @@ module Aws::Glue
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
       :policy_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16553,7 +17249,8 @@ module Aws::Glue
       :schema_version_number,
       :schema_version_id,
       :metadata_key_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16590,7 +17287,8 @@ module Aws::Glue
       :schema_version_id,
       :metadata_key,
       :metadata_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -16613,12 +17311,14 @@ module Aws::Glue
       :name,
       :run_id,
       :run_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutWorkflowRunPropertiesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16647,7 +17347,8 @@ module Aws::Glue
       :metadata_list,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16664,7 +17365,8 @@ module Aws::Glue
       :metadata_info_map,
       :schema_version_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16690,7 +17392,8 @@ module Aws::Glue
       :cluster_id,
       :query_authorization_id,
       :additional_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16712,7 +17415,8 @@ module Aws::Glue
       :inputs,
       :recipe_reference,
       :recipe_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16726,7 +17430,8 @@ module Aws::Glue
     class RecipeAction < Struct.new(
       :operation,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16740,7 +17445,8 @@ module Aws::Glue
     class RecipeReference < Struct.new(
       :recipe_arn,
       :recipe_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16754,7 +17460,8 @@ module Aws::Glue
     class RecipeStep < Struct.new(
       :action,
       :condition_expressions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16767,7 +17474,8 @@ module Aws::Glue
     #   @return [String]
     class RecrawlPolicy < Struct.new(
       :recrawl_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16793,7 +17501,8 @@ module Aws::Glue
       :table,
       :redshift_tmp_dir,
       :tmp_dir_iam_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16827,7 +17536,8 @@ module Aws::Glue
       :redshift_tmp_dir,
       :tmp_dir_iam_role,
       :upsert_redshift_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16848,7 +17558,8 @@ module Aws::Glue
     class RegisterSchemaVersionInput < Struct.new(
       :schema_id,
       :schema_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16865,7 +17576,8 @@ module Aws::Glue
       :schema_version_id,
       :version_number,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16879,7 +17591,8 @@ module Aws::Glue
     class RegistryId < Struct.new(
       :registry_name,
       :registry_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16909,7 +17622,8 @@ module Aws::Glue
       :status,
       :created_time,
       :updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16927,7 +17641,8 @@ module Aws::Glue
       :name,
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16948,7 +17663,8 @@ module Aws::Glue
       :schema_version_number,
       :schema_version_id,
       :metadata_key_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16985,7 +17701,8 @@ module Aws::Glue
       :schema_version_id,
       :metadata_key,
       :metadata_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17012,7 +17729,8 @@ module Aws::Glue
       :inputs,
       :source_path,
       :target_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17025,7 +17743,8 @@ module Aws::Glue
     class ResetJobBookmarkRequest < Struct.new(
       :job_name,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17034,7 +17753,8 @@ module Aws::Glue
     #   @return [Types::JobBookmarkEntry]
     class ResetJobBookmarkResponse < Struct.new(
       :job_bookmark_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17044,7 +17764,8 @@ module Aws::Glue
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17054,7 +17775,8 @@ module Aws::Glue
     #   @return [String]
     class ResourceNotReadyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17064,7 +17786,8 @@ module Aws::Glue
     #   @return [String]
     class ResourceNumberLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17078,7 +17801,8 @@ module Aws::Glue
     class ResourceUri < Struct.new(
       :resource_type,
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17095,7 +17819,8 @@ module Aws::Glue
       :name,
       :run_id,
       :node_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17108,7 +17833,8 @@ module Aws::Glue
     class ResumeWorkflowRunResponse < Struct.new(
       :run_id,
       :node_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17118,7 +17844,8 @@ module Aws::Glue
     #   @return [Types::IcebergRetentionConfiguration]
     class RetentionConfiguration < Struct.new(
       :iceberg_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17128,7 +17855,8 @@ module Aws::Glue
     #   @return [Types::IcebergRetentionMetrics]
     class RetentionMetrics < Struct.new(
       :iceberg_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17146,7 +17874,8 @@ module Aws::Glue
       :name,
       :inputs,
       :group_filters_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17160,7 +17889,8 @@ module Aws::Glue
     class RunIdentifier < Struct.new(
       :run_id,
       :job_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17183,7 +17913,8 @@ module Aws::Glue
       :number_of_files_compacted,
       :number_of_dpus,
       :job_duration_in_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17200,7 +17931,8 @@ module Aws::Glue
       :session_id,
       :code,
       :request_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17209,7 +17941,8 @@ module Aws::Glue
     #   @return [Integer]
     class RunStatementResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17240,7 +17973,8 @@ module Aws::Glue
       :table,
       :additional_delta_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17266,7 +18000,8 @@ module Aws::Glue
       :table,
       :additional_hudi_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17292,7 +18027,8 @@ module Aws::Glue
       :table,
       :additional_iceberg_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17318,7 +18054,8 @@ module Aws::Glue
       :table,
       :partition_predicate,
       :additional_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17353,7 +18090,8 @@ module Aws::Glue
       :database,
       :schema_change_policy,
       :auto_data_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17435,7 +18173,8 @@ module Aws::Glue
       :skip_first,
       :optimize_performance,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17483,7 +18222,8 @@ module Aws::Glue
       :schema_change_policy,
       :auto_data_quality,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17530,7 +18270,8 @@ module Aws::Glue
       :additional_options,
       :schema_change_policy,
       :auto_data_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17556,7 +18297,8 @@ module Aws::Glue
       :additional_delta_options,
       :additional_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17578,7 +18320,8 @@ module Aws::Glue
       :bounded_files,
       :enable_sample_path,
       :sample_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17625,7 +18368,8 @@ module Aws::Glue
       :schema_change_policy,
       :auto_data_quality,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17639,7 +18383,8 @@ module Aws::Glue
     class S3Encryption < Struct.new(
       :s3_encryption_mode,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17697,7 +18442,8 @@ module Aws::Glue
       :number_rows,
       :skip_footer,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17736,7 +18482,8 @@ module Aws::Glue
       :number_target_partitions,
       :schema_change_policy,
       :auto_data_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17779,7 +18526,8 @@ module Aws::Glue
       :schema_change_policy,
       :auto_data_quality,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17826,7 +18574,8 @@ module Aws::Glue
       :additional_options,
       :schema_change_policy,
       :auto_data_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17852,7 +18601,8 @@ module Aws::Glue
       :additional_hudi_options,
       :additional_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17894,7 +18644,8 @@ module Aws::Glue
       :schema_change_policy,
       :auto_data_quality,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17932,7 +18683,8 @@ module Aws::Glue
       :additional_options,
       :schema_change_policy,
       :auto_data_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17983,7 +18735,8 @@ module Aws::Glue
       :compression,
       :number_target_partitions,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18041,7 +18794,8 @@ module Aws::Glue
       :json_path,
       :multiline,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18091,7 +18845,8 @@ module Aws::Glue
       :max_files_in_band,
       :additional_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18105,7 +18860,8 @@ module Aws::Glue
     class S3SourceAdditionalOptions < Struct.new(
       :bounded_size,
       :bounded_files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18136,7 +18892,8 @@ module Aws::Glue
       :sample_size,
       :event_queue_arn,
       :dlq_event_queue_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18152,7 +18909,8 @@ module Aws::Glue
     class Schedule < Struct.new(
       :schedule_expression,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18162,7 +18920,8 @@ module Aws::Glue
     #   @return [String]
     class SchedulerNotRunningException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18172,7 +18931,8 @@ module Aws::Glue
     #   @return [String]
     class SchedulerRunningException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18182,7 +18942,8 @@ module Aws::Glue
     #   @return [String]
     class SchedulerTransitioningException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18196,7 +18957,8 @@ module Aws::Glue
     class SchemaChangePolicy < Struct.new(
       :update_behavior,
       :delete_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18211,7 +18973,8 @@ module Aws::Glue
     class SchemaColumn < Struct.new(
       :name,
       :data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18229,7 +18992,8 @@ module Aws::Glue
       :schema_arn,
       :schema_name,
       :registry_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18263,7 +19027,8 @@ module Aws::Glue
       :schema_status,
       :created_time,
       :updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18281,7 +19046,8 @@ module Aws::Glue
       :schema_id,
       :schema_version_id,
       :schema_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18295,7 +19061,8 @@ module Aws::Glue
     class SchemaVersionErrorItem < Struct.new(
       :version_number,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18321,7 +19088,8 @@ module Aws::Glue
       :version_number,
       :status,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18335,7 +19103,8 @@ module Aws::Glue
     class SchemaVersionNumber < Struct.new(
       :latest_version,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18389,7 +19158,8 @@ module Aws::Glue
       :max_results,
       :resource_share_type,
       :include_status_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18402,7 +19172,8 @@ module Aws::Glue
     class SearchTablesResponse < Struct.new(
       :next_token,
       :table_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18420,7 +19191,8 @@ module Aws::Glue
       :name,
       :created_time_stamp,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18436,7 +19208,8 @@ module Aws::Glue
     class Segment < Struct.new(
       :segment_number,
       :total_segments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18459,7 +19232,8 @@ module Aws::Glue
       :name,
       :inputs,
       :paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18478,7 +19252,8 @@ module Aws::Glue
       :name,
       :inputs,
       :index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18503,7 +19278,8 @@ module Aws::Glue
       :name,
       :serialization_library,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18591,7 +19367,8 @@ module Aws::Glue
       :dpu_seconds,
       :idle_timeout,
       :profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18610,7 +19387,8 @@ module Aws::Glue
     class SessionCommand < Struct.new(
       :name,
       :python_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18630,7 +19408,8 @@ module Aws::Glue
       :skewed_column_names,
       :skewed_column_values,
       :skewed_column_value_location_maps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18736,7 +19515,8 @@ module Aws::Glue
       :selected_columns,
       :auto_pushdown,
       :table_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18760,7 +19540,8 @@ module Aws::Glue
       :name,
       :data,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18778,7 +19559,8 @@ module Aws::Glue
       :name,
       :data,
       :inputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18792,7 +19574,8 @@ module Aws::Glue
     class SortCriterion < Struct.new(
       :field_name,
       :sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18830,7 +19613,8 @@ module Aws::Glue
       :last_commit_id,
       :auth_strategy,
       :auth_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18840,7 +19624,8 @@ module Aws::Glue
     #   @return [String]
     class SourceProcessingProperties < Struct.new(
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18863,7 +19648,8 @@ module Aws::Glue
       :filter_predicate,
       :primary_key,
       :record_update_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18893,7 +19679,8 @@ module Aws::Glue
       :connection_type,
       :additional_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18927,7 +19714,8 @@ module Aws::Glue
       :connection_type,
       :additional_options,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18958,7 +19746,8 @@ module Aws::Glue
       :sql_query,
       :sql_aliases,
       :output_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18984,7 +19773,8 @@ module Aws::Glue
       :path,
       :topk,
       :prob,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19002,7 +19792,8 @@ module Aws::Glue
       :name,
       :inputs,
       :paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19016,7 +19807,8 @@ module Aws::Glue
     class SqlAlias < Struct.new(
       :from,
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19033,7 +19825,8 @@ module Aws::Glue
       :blueprint_name,
       :parameters,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19042,7 +19835,8 @@ module Aws::Glue
     #   @return [String]
     class StartBlueprintRunResponse < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19075,7 +19869,8 @@ module Aws::Glue
       :sample_size,
       :catalog_id,
       :security_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19084,7 +19879,8 @@ module Aws::Glue
     #   @return [String]
     class StartColumnStatisticsTaskRunResponse < Struct.new(
       :column_statistics_task_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19097,12 +19893,14 @@ module Aws::Glue
     class StartColumnStatisticsTaskRunScheduleRequest < Struct.new(
       :database_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartColumnStatisticsTaskRunScheduleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19111,12 +19909,14 @@ module Aws::Glue
     #   @return [String]
     class StartCrawlerRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartCrawlerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19125,12 +19925,14 @@ module Aws::Glue
     #   @return [String]
     class StartCrawlerScheduleRequest < Struct.new(
       :crawler_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartCrawlerScheduleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19164,7 +19966,8 @@ module Aws::Glue
       :created_ruleset_name,
       :data_quality_security_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19173,7 +19976,8 @@ module Aws::Glue
     #   @return [String]
     class StartDataQualityRuleRecommendationRunResponse < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19210,7 +20014,8 @@ module Aws::Glue
       :additional_run_options,
       :ruleset_names,
       :additional_data_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19219,7 +20024,8 @@ module Aws::Glue
     #   @return [String]
     class StartDataQualityRulesetEvaluationRunResponse < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19232,7 +20038,8 @@ module Aws::Glue
     class StartExportLabelsTaskRunRequest < Struct.new(
       :transform_id,
       :output_s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19241,7 +20048,8 @@ module Aws::Glue
     #   @return [String]
     class StartExportLabelsTaskRunResponse < Struct.new(
       :task_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19259,7 +20067,8 @@ module Aws::Glue
       :transform_id,
       :input_s3_path,
       :replace_all_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19268,7 +20077,8 @@ module Aws::Glue
     #   @return [String]
     class StartImportLabelsTaskRunResponse < Struct.new(
       :task_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19396,7 +20206,8 @@ module Aws::Glue
       :number_of_workers,
       :execution_class,
       :execution_role_session_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19405,7 +20216,8 @@ module Aws::Glue
     #   @return [String]
     class StartJobRunResponse < Struct.new(
       :job_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19414,7 +20226,8 @@ module Aws::Glue
     #   @return [String]
     class StartMLEvaluationTaskRunRequest < Struct.new(
       :transform_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19423,7 +20236,8 @@ module Aws::Glue
     #   @return [String]
     class StartMLEvaluationTaskRunResponse < Struct.new(
       :task_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19437,7 +20251,8 @@ module Aws::Glue
     class StartMLLabelingSetGenerationTaskRunRequest < Struct.new(
       :transform_id,
       :output_s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19446,7 +20261,8 @@ module Aws::Glue
     #   @return [String]
     class StartMLLabelingSetGenerationTaskRunResponse < Struct.new(
       :task_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19455,7 +20271,8 @@ module Aws::Glue
     #   @return [String]
     class StartTriggerRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19464,7 +20281,8 @@ module Aws::Glue
     #   @return [String]
     class StartTriggerResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19478,7 +20296,8 @@ module Aws::Glue
     class StartWorkflowRunRequest < Struct.new(
       :name,
       :run_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19487,7 +20306,8 @@ module Aws::Glue
     #   @return [String]
     class StartWorkflowRunResponse < Struct.new(
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19503,7 +20323,8 @@ module Aws::Glue
     class StartingEventBatchCondition < Struct.new(
       :batch_size,
       :batch_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19537,7 +20358,8 @@ module Aws::Glue
       :progress,
       :started_on,
       :completed_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19575,7 +20397,8 @@ module Aws::Glue
       :error_name,
       :error_value,
       :traceback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19590,7 +20413,8 @@ module Aws::Glue
     #   @return [String]
     class StatementOutputData < Struct.new(
       :text_plain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19612,7 +20436,8 @@ module Aws::Glue
       :statistic_id,
       :statistic_recorded_on,
       :inclusion_annotation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19642,7 +20467,8 @@ module Aws::Glue
       :actual_value,
       :date,
       :inclusion_annotation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19693,7 +20519,8 @@ module Aws::Glue
       :statistic_properties,
       :recorded_on,
       :inclusion_annotation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19712,7 +20539,8 @@ module Aws::Glue
     class StatusDetails < Struct.new(
       :requested_change,
       :view_validations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19725,12 +20553,14 @@ module Aws::Glue
     class StopColumnStatisticsTaskRunRequest < Struct.new(
       :database_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopColumnStatisticsTaskRunResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19743,12 +20573,14 @@ module Aws::Glue
     class StopColumnStatisticsTaskRunScheduleRequest < Struct.new(
       :database_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopColumnStatisticsTaskRunScheduleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19757,12 +20589,14 @@ module Aws::Glue
     #   @return [String]
     class StopCrawlerRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopCrawlerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19771,12 +20605,14 @@ module Aws::Glue
     #   @return [String]
     class StopCrawlerScheduleRequest < Struct.new(
       :crawler_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopCrawlerScheduleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19789,7 +20625,8 @@ module Aws::Glue
     class StopSessionRequest < Struct.new(
       :id,
       :request_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19798,7 +20635,8 @@ module Aws::Glue
     #   @return [String]
     class StopSessionResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19807,7 +20645,8 @@ module Aws::Glue
     #   @return [String]
     class StopTriggerRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19816,7 +20655,8 @@ module Aws::Glue
     #   @return [String]
     class StopTriggerResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19829,12 +20669,14 @@ module Aws::Glue
     class StopWorkflowRunRequest < Struct.new(
       :name,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopWorkflowRunResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19906,7 +20748,8 @@ module Aws::Glue
       :skewed_info,
       :stored_as_sub_directories,
       :schema_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19927,7 +20770,8 @@ module Aws::Glue
     class StreamingDataPreviewOptions < Struct.new(
       :polling_time,
       :record_polling_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19949,7 +20793,8 @@ module Aws::Glue
       :average_length,
       :number_of_nulls,
       :number_of_distinct_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19971,7 +20816,8 @@ module Aws::Glue
     class SupportedDialect < Struct.new(
       :dialect,
       :dialect_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20100,7 +20946,8 @@ module Aws::Glue
       :view_definition,
       :is_multi_dialect_view,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -20120,7 +20967,8 @@ module Aws::Glue
     class TableError < Struct.new(
       :table_name,
       :error_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20142,7 +20990,8 @@ module Aws::Glue
       :database_name,
       :name,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20229,7 +21078,8 @@ module Aws::Glue
       :parameters,
       :target_table,
       :view_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -20273,7 +21123,8 @@ module Aws::Glue
       :configuration,
       :last_run,
       :configuration_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20305,7 +21156,8 @@ module Aws::Glue
       :compaction_configuration,
       :retention_configuration,
       :orphan_file_deletion_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20373,7 +21225,8 @@ module Aws::Glue
       :compaction_strategy,
       :retention_metrics,
       :orphan_file_deletion_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20385,7 +21238,8 @@ module Aws::Glue
     class TableOptimizerVpcConfiguration < Struct.new(
       :glue_connection_name,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class GlueConnectionName < TableOptimizerVpcConfiguration; end
@@ -20426,7 +21280,8 @@ module Aws::Glue
       :state,
       :error,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20440,7 +21295,8 @@ module Aws::Glue
     class TableVersion < Struct.new(
       :table,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20458,7 +21314,8 @@ module Aws::Glue
       :table_name,
       :version_id,
       :error_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20475,7 +21332,8 @@ module Aws::Glue
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20489,12 +21347,14 @@ module Aws::Glue
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags_to_add,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20516,7 +21376,8 @@ module Aws::Glue
       :kms_arn,
       :connection_name,
       :event_bus_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20526,7 +21387,8 @@ module Aws::Glue
     #   @return [String]
     class TargetRedshiftCatalog < Struct.new(
       :catalog_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20536,7 +21398,8 @@ module Aws::Glue
     #   @return [String]
     class TargetResourceNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20554,7 +21417,8 @@ module Aws::Glue
       :unnest_spec,
       :partition_spec,
       :target_table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20600,7 +21464,8 @@ module Aws::Glue
       :last_modified_on,
       :completed_on,
       :execution_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -20628,7 +21493,8 @@ module Aws::Glue
       :status,
       :started_before,
       :started_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20654,7 +21520,8 @@ module Aws::Glue
       :export_labels_task_run_properties,
       :labeling_set_generation_task_run_properties,
       :find_matches_task_run_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20671,7 +21538,8 @@ module Aws::Glue
     class TaskRunSortCriteria < Struct.new(
       :column,
       :sort_direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20702,7 +21570,8 @@ module Aws::Glue
       :connection_type,
       :connection_properties,
       :authentication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20719,12 +21588,14 @@ module Aws::Glue
       :connection_name,
       :catalog_id,
       :test_connection_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TestConnectionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20734,7 +21605,8 @@ module Aws::Glue
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20748,7 +21620,8 @@ module Aws::Glue
     class TimestampFilter < Struct.new(
       :recorded_before,
       :recorded_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20762,7 +21635,8 @@ module Aws::Glue
     class TimestampedInclusionAnnotation < Struct.new(
       :value,
       :last_modified_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20796,7 +21670,8 @@ module Aws::Glue
       :value,
       :list_type,
       :is_optional,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20811,7 +21686,8 @@ module Aws::Glue
     class TransformEncryption < Struct.new(
       :ml_user_data_encryption,
       :task_run_security_configuration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20857,7 +21733,8 @@ module Aws::Glue
       :last_modified_before,
       :last_modified_after,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20873,7 +21750,8 @@ module Aws::Glue
     class TransformParameters < Struct.new(
       :transform_type,
       :find_matches_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20889,7 +21767,8 @@ module Aws::Glue
     class TransformSortCriteria < Struct.new(
       :column,
       :sort_direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20939,7 +21818,8 @@ module Aws::Glue
       :actions,
       :predicate,
       :event_batching_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20949,7 +21829,8 @@ module Aws::Glue
     #   @return [Types::Trigger]
     class TriggerNodeDetails < Struct.new(
       :trigger,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20984,7 +21865,8 @@ module Aws::Glue
       :actions,
       :predicate,
       :event_batching_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21002,7 +21884,8 @@ module Aws::Glue
       :partition,
       :authorized_columns,
       :is_registered_with_lake_formation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -21027,7 +21910,8 @@ module Aws::Glue
       :name,
       :inputs,
       :union_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21040,12 +21924,14 @@ module Aws::Glue
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tags_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21062,7 +21948,8 @@ module Aws::Glue
       :name,
       :description,
       :blueprint_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21071,7 +21958,8 @@ module Aws::Glue
     #   @return [String]
     class UpdateBlueprintResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21084,12 +21972,14 @@ module Aws::Glue
     class UpdateCatalogRequest < Struct.new(
       :catalog_id,
       :catalog_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateCatalogResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21110,12 +22000,14 @@ module Aws::Glue
       :xml_classifier,
       :json_classifier,
       :csv_classifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateClassifierResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21141,7 +22033,8 @@ module Aws::Glue
       :table_name,
       :partition_values,
       :column_statistics_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21150,7 +22043,8 @@ module Aws::Glue
     #   @return [Array<Types::ColumnStatisticsError>]
     class UpdateColumnStatisticsForPartitionResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21172,7 +22066,8 @@ module Aws::Glue
       :database_name,
       :table_name,
       :column_statistics_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21181,7 +22076,8 @@ module Aws::Glue
     #   @return [Array<Types::ColumnStatisticsError>]
     class UpdateColumnStatisticsForTableResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21218,12 +22114,14 @@ module Aws::Glue
       :sample_size,
       :catalog_id,
       :security_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateColumnStatisticsTaskSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21242,12 +22140,14 @@ module Aws::Glue
       :catalog_id,
       :name,
       :connection_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateConnectionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21318,12 +22218,14 @@ module Aws::Glue
       :lake_formation_configuration,
       :configuration,
       :crawler_security_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateCrawlerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21338,12 +22240,14 @@ module Aws::Glue
     class UpdateCrawlerScheduleRequest < Struct.new(
       :crawler_name,
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateCrawlerScheduleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21390,7 +22294,8 @@ module Aws::Glue
       :custom_datatype_configured,
       :custom_datatypes,
       :serde,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21407,7 +22312,8 @@ module Aws::Glue
       :name,
       :description,
       :ruleset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21424,7 +22330,8 @@ module Aws::Glue
       :name,
       :description,
       :ruleset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21444,12 +22351,14 @@ module Aws::Glue
       :catalog_id,
       :name,
       :database_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDatabaseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21499,12 +22408,14 @@ module Aws::Glue
       :update_etl_libraries,
       :delete_arguments,
       :add_arguments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDevEndpointResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21514,13 +22425,15 @@ module Aws::Glue
     #   @return [Array<String>]
     class UpdateGlueIdentityCenterConfigurationRequest < Struct.new(
       :scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Response from updating an existing Glue Identity Center configuration.</p>
     class UpdateGlueIdentityCenterConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21544,7 +22457,8 @@ module Aws::Glue
       :classification,
       :grok_pattern,
       :custom_patterns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21558,7 +22472,8 @@ module Aws::Glue
     #   @return [Types::UpdateIcebergTableInput]
     class UpdateIcebergInput < Struct.new(
       :update_iceberg_table_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21570,7 +22485,8 @@ module Aws::Glue
     #   @return [Array<Types::IcebergTableUpdate>]
     class UpdateIcebergTableInput < Struct.new(
       :updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21587,7 +22503,8 @@ module Aws::Glue
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21604,7 +22521,8 @@ module Aws::Glue
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21625,12 +22543,14 @@ module Aws::Glue
       :table_name,
       :source_table_config,
       :target_table_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateIntegrationTablePropertiesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21676,7 +22596,8 @@ module Aws::Glue
       :commit_id,
       :auth_strategy,
       :auth_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21685,7 +22606,8 @@ module Aws::Glue
     #   @return [String]
     class UpdateJobFromSourceControlResponse < Struct.new(
       :job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21698,7 +22620,8 @@ module Aws::Glue
     class UpdateJobRequest < Struct.new(
       :job_name,
       :job_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21707,7 +22630,8 @@ module Aws::Glue
     #   @return [String]
     class UpdateJobResponse < Struct.new(
       :job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21722,7 +22646,8 @@ module Aws::Glue
     class UpdateJsonClassifierRequest < Struct.new(
       :name,
       :json_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21788,7 +22713,8 @@ module Aws::Glue
       :number_of_workers,
       :timeout,
       :max_retries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21797,7 +22723,8 @@ module Aws::Glue
     #   @return [String]
     class UpdateMLTransformResponse < Struct.new(
       :transform_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21810,7 +22737,8 @@ module Aws::Glue
     #   @return [Types::UpdateIcebergInput]
     class UpdateOpenTableFormatInput < Struct.new(
       :update_iceberg_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21838,12 +22766,14 @@ module Aws::Glue
       :table_name,
       :partition_value_list,
       :partition_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdatePartitionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21856,7 +22786,8 @@ module Aws::Glue
     class UpdateRegistryInput < Struct.new(
       :registry_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21869,7 +22800,8 @@ module Aws::Glue
     class UpdateRegistryResponse < Struct.new(
       :registry_name,
       :registry_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21898,7 +22830,8 @@ module Aws::Glue
       :schema_version_number,
       :compatibility,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21915,7 +22848,8 @@ module Aws::Glue
       :schema_arn,
       :schema_name,
       :registry_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21961,7 +22895,8 @@ module Aws::Glue
       :commit_id,
       :auth_strategy,
       :auth_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21970,7 +22905,8 @@ module Aws::Glue
     #   @return [String]
     class UpdateSourceControlFromJobResponse < Struct.new(
       :job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21995,12 +22931,14 @@ module Aws::Glue
       :table_name,
       :type,
       :table_optimizer_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTableOptimizerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22052,12 +22990,14 @@ module Aws::Glue
       :view_update_action,
       :force,
       :update_open_table_format_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTableResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22070,7 +23010,8 @@ module Aws::Glue
     class UpdateTriggerRequest < Struct.new(
       :name,
       :trigger_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22079,7 +23020,8 @@ module Aws::Glue
     #   @return [Types::Trigger]
     class UpdateTriggerResponse < Struct.new(
       :trigger,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22096,7 +23038,8 @@ module Aws::Glue
       :name,
       :description,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22105,7 +23048,8 @@ module Aws::Glue
     #   @return [String]
     class UpdateUsageProfileResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22129,12 +23073,14 @@ module Aws::Glue
       :database_name,
       :function_name,
       :function_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateUserDefinedFunctionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22156,7 +23102,8 @@ module Aws::Glue
       :description,
       :default_run_properties,
       :max_concurrent_runs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22165,7 +23112,8 @@ module Aws::Glue
     #   @return [String]
     class UpdateWorkflowResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22187,7 +23135,8 @@ module Aws::Glue
       :name,
       :classification,
       :row_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22205,7 +23154,8 @@ module Aws::Glue
       :table_location,
       :connection_name,
       :upsert_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22227,7 +23177,8 @@ module Aws::Glue
       :description,
       :created_on,
       :last_modified_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22266,7 +23217,8 @@ module Aws::Glue
       :create_time,
       :resource_uris,
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22292,7 +23244,8 @@ module Aws::Glue
       :owner_name,
       :owner_type,
       :resource_uris,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22302,7 +23255,8 @@ module Aws::Glue
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22312,7 +23266,8 @@ module Aws::Glue
     #   @return [String]
     class VersionMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22334,7 +23289,8 @@ module Aws::Glue
       :definer,
       :sub_objects,
       :representations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22356,7 +23312,8 @@ module Aws::Glue
       :definer,
       :representations,
       :sub_objects,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22392,7 +23349,8 @@ module Aws::Glue
       :view_expanded_text,
       :validation_connection,
       :is_stale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22418,7 +23376,8 @@ module Aws::Glue
       :view_original_text,
       :validation_connection,
       :view_expanded_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22448,7 +23407,8 @@ module Aws::Glue
       :update_time,
       :state,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22495,7 +23455,8 @@ module Aws::Glue
       :graph,
       :max_concurrent_runs,
       :blueprint_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22510,7 +23471,8 @@ module Aws::Glue
     class WorkflowGraph < Struct.new(
       :nodes,
       :edges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22561,7 +23523,8 @@ module Aws::Glue
       :statistics,
       :graph,
       :starting_event_batch_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22599,7 +23562,8 @@ module Aws::Glue
       :running_actions,
       :errored_actions,
       :waiting_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -22645,7 +23609,8 @@ module Aws::Glue
       :last_updated,
       :version,
       :row_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

@@ -40,7 +40,7 @@ module Aws::TimestreamInfluxDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamInfluxDB::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::TimestreamInfluxDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamInfluxDB::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::TimestreamInfluxDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamInfluxDB::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::TimestreamInfluxDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamInfluxDB::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::TimestreamInfluxDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamInfluxDB::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::TimestreamInfluxDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamInfluxDB::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::TimestreamInfluxDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamInfluxDB::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

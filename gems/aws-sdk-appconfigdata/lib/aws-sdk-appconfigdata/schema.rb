@@ -94,7 +94,6 @@ module Aws::AppConfigData
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/configurationsessions", "code" => 201}}
       end)
-
     end
 
     class << self

@@ -42,7 +42,7 @@ module Aws::RoboMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RoboMaker::Types::ConcurrentDeploymentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::RoboMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RoboMaker::Types::IdempotentParameterMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::RoboMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RoboMaker::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::RoboMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RoboMaker::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::RoboMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RoboMaker::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -110,7 +110,7 @@ module Aws::RoboMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RoboMaker::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::RoboMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RoboMaker::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -136,7 +136,7 @@ module Aws::RoboMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RoboMaker::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::RoboMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RoboMaker::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

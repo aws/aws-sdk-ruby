@@ -462,7 +462,6 @@ module Aws::RedshiftData
         operation.traits = {"smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTables.new
       end)
-
     end
 
     class << self

@@ -45,7 +45,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::ArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Any additional information about the exception.</p>
@@ -59,7 +59,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::CannotDeleteException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -72,7 +72,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::IdempotencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Any additional information about the exception.</p>
@@ -87,7 +87,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::InvalidOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Any additional information about the exception.</p>
@@ -129,7 +129,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::NotEligibleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The HTTP response code of a Not Eligible exception.</p>
@@ -143,7 +143,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Any additional information about the exception.</p>
@@ -157,7 +157,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::ServiceAccountException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Any additional information about the exception.</p>
@@ -171,7 +171,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::TagOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -189,7 +189,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::TagPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -207,7 +207,7 @@ module Aws::DeviceFarm
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DeviceFarm::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

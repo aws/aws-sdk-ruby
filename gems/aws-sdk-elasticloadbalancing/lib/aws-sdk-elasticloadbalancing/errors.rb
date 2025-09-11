@@ -55,7 +55,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::AccessPointNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::CertificateNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::DependencyThrottleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::DuplicateAccessPointNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::DuplicateListenerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -122,7 +122,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::DuplicatePolicyNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::DuplicateTagKeysException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -148,7 +148,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::InvalidConfigurationRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -161,7 +161,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::InvalidEndPointException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -174,7 +174,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::InvalidSchemeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -187,7 +187,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::InvalidSecurityGroupException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -200,7 +200,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::InvalidSubnetException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -213,7 +213,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::ListenerNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -226,7 +226,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::LoadBalancerAttributeNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -239,7 +239,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::OperationNotPermittedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -252,7 +252,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::PolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -265,7 +265,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::PolicyTypeNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -278,7 +278,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::SubnetNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -291,7 +291,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::TooManyAccessPointsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -304,7 +304,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::TooManyPoliciesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -317,7 +317,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -330,7 +330,7 @@ module Aws::ElasticLoadBalancing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticLoadBalancing::Types::UnsupportedProtocolException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

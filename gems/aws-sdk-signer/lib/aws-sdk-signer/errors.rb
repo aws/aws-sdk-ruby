@@ -43,7 +43,7 @@ module Aws::Signer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -61,7 +61,7 @@ module Aws::Signer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::Signer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::Signer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::InternalServiceErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::Signer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::Signer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::Signer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::ServiceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -164,7 +164,7 @@ module Aws::Signer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -182,7 +182,7 @@ module Aws::Signer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -199,7 +199,7 @@ module Aws::Signer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

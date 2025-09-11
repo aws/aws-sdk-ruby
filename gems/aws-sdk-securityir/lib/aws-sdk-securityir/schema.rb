@@ -872,7 +872,6 @@ module Aws::SecurityIR
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#iamAction" => {"name" => "UpdateResolverType", "documentation" => "Grants permission to update case resolver type"}, "smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateResolverType.html"}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/v1/cases/{caseId}/update-resolver-type"}}
       end)
-
     end
 
     class << self

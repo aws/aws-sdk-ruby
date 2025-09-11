@@ -11,7 +11,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +36,8 @@ module Aws::MedicalImaging
     class CopyDestinationImageSet < Struct.new(
       :image_set_id,
       :latest_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +71,8 @@ module Aws::MedicalImaging
       :created_at,
       :updated_at,
       :image_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +86,8 @@ module Aws::MedicalImaging
     class CopyImageSetInformation < Struct.new(
       :source_image_set,
       :destination_image_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +112,8 @@ module Aws::MedicalImaging
       :copy_image_set_information,
       :force,
       :promote_to_primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +130,8 @@ module Aws::MedicalImaging
       :datastore_id,
       :source_image_set_properties,
       :destination_image_set_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -138,7 +145,8 @@ module Aws::MedicalImaging
     class CopySourceImageSetInformation < Struct.new(
       :latest_version_id,
       :dicom_copies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +180,8 @@ module Aws::MedicalImaging
       :created_at,
       :updated_at,
       :image_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,7 +202,8 @@ module Aws::MedicalImaging
       :client_token,
       :tags,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +216,8 @@ module Aws::MedicalImaging
     class CreateDatastoreResponse < Struct.new(
       :datastore_id,
       :datastore_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +263,8 @@ module Aws::MedicalImaging
       :input_s3_uri,
       :output_s3_uri,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -290,7 +302,8 @@ module Aws::MedicalImaging
       :ended_at,
       :submitted_at,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +317,8 @@ module Aws::MedicalImaging
     class DICOMStudyDateAndTime < Struct.new(
       :dicom_study_date,
       :dicom_study_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +388,8 @@ module Aws::MedicalImaging
       :dicom_series_number,
       :dicom_study_date,
       :dicom_study_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -394,7 +409,8 @@ module Aws::MedicalImaging
     class DICOMUpdates < Struct.new(
       :removable_attributes,
       :updatable_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -428,7 +444,8 @@ module Aws::MedicalImaging
       :datastore_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +475,8 @@ module Aws::MedicalImaging
       :datastore_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +485,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class DeleteDatastoreRequest < Struct.new(
       :datastore_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -480,7 +499,8 @@ module Aws::MedicalImaging
     class DeleteDatastoreResponse < Struct.new(
       :datastore_id,
       :datastore_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +513,8 @@ module Aws::MedicalImaging
     class DeleteImageSetRequest < Struct.new(
       :datastore_id,
       :image_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +535,8 @@ module Aws::MedicalImaging
       :image_set_id,
       :image_set_state,
       :image_set_workflow_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +549,8 @@ module Aws::MedicalImaging
     class GetDICOMImportJobRequest < Struct.new(
       :datastore_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -536,7 +559,8 @@ module Aws::MedicalImaging
     #   @return [Types::DICOMImportJobProperties]
     class GetDICOMImportJobResponse < Struct.new(
       :job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +569,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class GetDatastoreRequest < Struct.new(
       :datastore_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +579,8 @@ module Aws::MedicalImaging
     #   @return [Types::DatastoreProperties]
     class GetDatastoreResponse < Struct.new(
       :datastore_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +597,8 @@ module Aws::MedicalImaging
       :datastore_id,
       :image_set_id,
       :image_frame_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +611,8 @@ module Aws::MedicalImaging
     class GetImageFrameResponse < Struct.new(
       :image_frame_blob,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +629,8 @@ module Aws::MedicalImaging
       :datastore_id,
       :image_set_id,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +647,8 @@ module Aws::MedicalImaging
       :image_set_metadata_blob,
       :content_type,
       :content_encoding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +665,8 @@ module Aws::MedicalImaging
       :datastore_id,
       :image_set_id,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +719,8 @@ module Aws::MedicalImaging
       :image_set_arn,
       :overrides,
       :is_primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,7 +730,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class ImageFrameInformation < Struct.new(
       :image_frame_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +777,8 @@ module Aws::MedicalImaging
       :message,
       :overrides,
       :is_primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +808,8 @@ module Aws::MedicalImaging
       :updated_at,
       :dicom_tags,
       :is_primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +818,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +840,8 @@ module Aws::MedicalImaging
       :job_status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +854,8 @@ module Aws::MedicalImaging
     class ListDICOMImportJobsResponse < Struct.new(
       :job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +872,8 @@ module Aws::MedicalImaging
       :datastore_status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +886,8 @@ module Aws::MedicalImaging
     class ListDatastoresResponse < Struct.new(
       :datastore_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +908,8 @@ module Aws::MedicalImaging
       :image_set_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +922,8 @@ module Aws::MedicalImaging
     class ListImageSetVersionsResponse < Struct.new(
       :image_set_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +932,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -899,7 +942,8 @@ module Aws::MedicalImaging
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +953,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class MetadataCopies < Struct.new(
       :copiable_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +969,8 @@ module Aws::MedicalImaging
       :dicom_updates,
       :revert_to_version_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DICOMUpdates < MetadataUpdates; end
@@ -938,7 +984,8 @@ module Aws::MedicalImaging
     #   @return [Boolean]
     class Overrides < Struct.new(
       :forced,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +994,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1038,8 @@ module Aws::MedicalImaging
       :dicom_study_date_and_time,
       :is_primary,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DICOMPatientId < SearchByAttributeValue; end
@@ -1016,7 +1065,8 @@ module Aws::MedicalImaging
     class SearchCriteria < Struct.new(
       :filters,
       :sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1080,8 @@ module Aws::MedicalImaging
     class SearchFilter < Struct.new(
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1102,8 @@ module Aws::MedicalImaging
       :search_criteria,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1120,8 @@ module Aws::MedicalImaging
       :image_sets_metadata_summaries,
       :sort,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1077,7 +1130,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1091,7 +1145,8 @@ module Aws::MedicalImaging
     class Sort < Struct.new(
       :sort_order,
       :sort_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1179,8 @@ module Aws::MedicalImaging
       :input_s3_uri,
       :output_s3_uri,
       :input_owner_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1201,8 @@ module Aws::MedicalImaging
       :job_id,
       :job_status,
       :submitted_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,12 +1215,14 @@ module Aws::MedicalImaging
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1172,7 +1231,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,12 +1245,14 @@ module Aws::MedicalImaging
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1277,8 @@ module Aws::MedicalImaging
       :latest_version_id,
       :force,
       :update_image_set_metadata_updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1252,7 +1315,8 @@ module Aws::MedicalImaging
       :created_at,
       :updated_at,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1325,8 @@ module Aws::MedicalImaging
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

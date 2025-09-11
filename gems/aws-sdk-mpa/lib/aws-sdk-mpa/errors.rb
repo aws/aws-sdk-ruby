@@ -42,7 +42,7 @@ module Aws::MPA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MPA::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for the <code>AccessDeniedException</code> error.</p>
@@ -56,7 +56,7 @@ module Aws::MPA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MPA::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for the <code>ConflictException</code> error.</p>
@@ -70,7 +70,7 @@ module Aws::MPA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MPA::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for the <code>InternalServerException</code> error.</p>
@@ -88,7 +88,7 @@ module Aws::MPA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MPA::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for the <code>InvalidParameterException</code> error.</p>
@@ -102,7 +102,7 @@ module Aws::MPA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MPA::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for the <code>ResourceNotFoundException</code> error.</p>
@@ -116,7 +116,7 @@ module Aws::MPA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MPA::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for the <code>ServiceQuotaExceededException</code> error.</p>
@@ -130,7 +130,7 @@ module Aws::MPA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MPA::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for the <code>ThrottlingException</code> error.</p>
@@ -144,7 +144,7 @@ module Aws::MPA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MPA::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for the <code>TooManyTagsException</code> error.</p>
@@ -163,7 +163,7 @@ module Aws::MPA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MPA::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message for the <code>ValidationException</code> error.</p>

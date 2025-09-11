@@ -291,7 +291,6 @@ module Aws::ResourceGroupsTaggingAPI
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledException)
         operation.traits = {}
       end)
-
     end
 
     class << self

@@ -43,7 +43,7 @@ module Aws::IoTFleetWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetWise::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::IoTFleetWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetWise::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::IoTFleetWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetWise::Types::DecoderManifestValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The request couldn't be completed because of invalid signals in the request.</p>
@@ -105,7 +105,7 @@ module Aws::IoTFleetWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetWise::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -124,7 +124,7 @@ module Aws::IoTFleetWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetWise::Types::InvalidNodeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The specified node type isn't valid.</p>
@@ -148,7 +148,7 @@ module Aws::IoTFleetWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetWise::Types::InvalidSignalsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -166,7 +166,7 @@ module Aws::IoTFleetWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetWise::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -189,7 +189,7 @@ module Aws::IoTFleetWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetWise::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -212,7 +212,7 @@ module Aws::IoTFleetWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetWise::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -240,7 +240,7 @@ module Aws::IoTFleetWise
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTFleetWise::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

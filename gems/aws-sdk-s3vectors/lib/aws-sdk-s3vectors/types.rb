@@ -11,7 +11,8 @@ module Aws::S3Vectors
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::S3Vectors
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53,12 +55,14 @@ module Aws::S3Vectors
       :dimension,
       :distance_metric,
       :metadata_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateIndexOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,12 +75,14 @@ module Aws::S3Vectors
     class CreateVectorBucketInput < Struct.new(
       :vector_bucket_name,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateVectorBucketOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,12 +99,14 @@ module Aws::S3Vectors
       :vector_bucket_name,
       :index_name,
       :index_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIndexOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,12 +119,14 @@ module Aws::S3Vectors
     class DeleteVectorBucketInput < Struct.new(
       :vector_bucket_name,
       :vector_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteVectorBucketOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,12 +139,14 @@ module Aws::S3Vectors
     class DeleteVectorBucketPolicyInput < Struct.new(
       :vector_bucket_name,
       :vector_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteVectorBucketPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,12 +167,14 @@ module Aws::S3Vectors
       :index_name,
       :index_arn,
       :keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteVectorsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +188,8 @@ module Aws::S3Vectors
     class EncryptionConfiguration < Struct.new(
       :sse_type,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -196,7 +211,8 @@ module Aws::S3Vectors
       :vector_bucket_name,
       :index_name,
       :index_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +221,8 @@ module Aws::S3Vectors
     #   @return [Types::Index]
     class GetIndexOutput < Struct.new(
       :index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +240,8 @@ module Aws::S3Vectors
       :key,
       :data,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +254,8 @@ module Aws::S3Vectors
     class GetVectorBucketInput < Struct.new(
       :vector_bucket_name,
       :vector_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +264,8 @@ module Aws::S3Vectors
     #   @return [Types::VectorBucket]
     class GetVectorBucketOutput < Struct.new(
       :vector_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +278,8 @@ module Aws::S3Vectors
     class GetVectorBucketPolicyInput < Struct.new(
       :vector_bucket_name,
       :vector_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +288,8 @@ module Aws::S3Vectors
     #   @return [String]
     class GetVectorBucketPolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +318,8 @@ module Aws::S3Vectors
       :keys,
       :return_data,
       :return_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -305,7 +328,8 @@ module Aws::S3Vectors
     #   @return [Array<Types::GetOutputVector>]
     class GetVectorsOutput < Struct.new(
       :vectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,7 +367,8 @@ module Aws::S3Vectors
       :dimension,
       :distance_metric,
       :metadata_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +390,8 @@ module Aws::S3Vectors
       :index_name,
       :index_arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +400,8 @@ module Aws::S3Vectors
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -383,7 +410,8 @@ module Aws::S3Vectors
     #   @return [String]
     class KmsDisabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +420,8 @@ module Aws::S3Vectors
     #   @return [String]
     class KmsInvalidKeyUsageException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +430,8 @@ module Aws::S3Vectors
     #   @return [String]
     class KmsInvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +440,8 @@ module Aws::S3Vectors
     #   @return [String]
     class KmsNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +466,8 @@ module Aws::S3Vectors
       :max_results,
       :next_token,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +480,8 @@ module Aws::S3Vectors
     class ListIndexesOutput < Struct.new(
       :next_token,
       :indexes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +499,8 @@ module Aws::S3Vectors
       :key,
       :data,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +517,8 @@ module Aws::S3Vectors
       :max_results,
       :next_token,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +531,8 @@ module Aws::S3Vectors
     class ListVectorBucketsOutput < Struct.new(
       :next_token,
       :vector_buckets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +573,8 @@ module Aws::S3Vectors
       :segment_index,
       :return_data,
       :return_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +587,8 @@ module Aws::S3Vectors
     class ListVectorsOutput < Struct.new(
       :next_token,
       :vectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +598,8 @@ module Aws::S3Vectors
     #   @return [Array<String>]
     class MetadataConfiguration < Struct.new(
       :non_filterable_metadata_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +608,8 @@ module Aws::S3Vectors
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -587,7 +627,8 @@ module Aws::S3Vectors
       :key,
       :data,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -609,12 +650,14 @@ module Aws::S3Vectors
       :vector_bucket_name,
       :vector_bucket_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutVectorBucketPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,12 +678,14 @@ module Aws::S3Vectors
       :index_name,
       :index_arn,
       :vectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutVectorsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +707,8 @@ module Aws::S3Vectors
       :data,
       :metadata,
       :distance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -699,7 +745,8 @@ module Aws::S3Vectors
       :filter,
       :return_metadata,
       :return_distance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +755,8 @@ module Aws::S3Vectors
     #   @return [Array<Types::QueryOutputVector>]
     class QueryVectorsOutput < Struct.new(
       :vectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +765,8 @@ module Aws::S3Vectors
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +775,8 @@ module Aws::S3Vectors
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +785,8 @@ module Aws::S3Vectors
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +799,8 @@ module Aws::S3Vectors
     class ValidationException < Struct.new(
       :message,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +814,8 @@ module Aws::S3Vectors
     class ValidationExceptionField < Struct.new(
       :path,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +837,8 @@ module Aws::S3Vectors
       :vector_bucket_arn,
       :creation_time,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +856,8 @@ module Aws::S3Vectors
       :vector_bucket_name,
       :vector_bucket_arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +868,8 @@ module Aws::S3Vectors
     class VectorData < Struct.new(
       :float32,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Float32 < VectorData; end

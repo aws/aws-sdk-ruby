@@ -42,7 +42,7 @@ module Aws::ConnectCampaignsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConnectCampaignsV2::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -59,7 +59,7 @@ module Aws::ConnectCampaignsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConnectCampaignsV2::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::ConnectCampaignsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConnectCampaignsV2::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::ConnectCampaignsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConnectCampaignsV2::Types::InvalidCampaignStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def state
@@ -118,7 +118,7 @@ module Aws::ConnectCampaignsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConnectCampaignsV2::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::ConnectCampaignsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConnectCampaignsV2::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::ConnectCampaignsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConnectCampaignsV2::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -169,7 +169,7 @@ module Aws::ConnectCampaignsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConnectCampaignsV2::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::ConnectCampaignsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ConnectCampaignsV2::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

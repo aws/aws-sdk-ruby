@@ -76,7 +76,6 @@ module Aws::KinesisVideoMedia
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/getMedia", "code" => 200}}
       end)
-
     end
 
     class << self

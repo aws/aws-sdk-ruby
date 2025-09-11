@@ -2146,7 +2146,6 @@ module Aws::IoTFleetWise
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/vehicles/{vehicleName}", "code" => 204}}
       end)
-
     end
 
     class << self

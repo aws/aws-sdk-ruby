@@ -22,7 +22,8 @@ module Aws::ConfigService
       :account_ids,
       :all_aws_regions,
       :aws_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -55,7 +56,8 @@ module Aws::ConfigService
       :compliance,
       :account_id,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -81,7 +83,8 @@ module Aws::ConfigService
       :compliance,
       :account_id,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +101,8 @@ module Aws::ConfigService
     class AggregateComplianceCount < Struct.new(
       :group_name,
       :compliance_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +128,8 @@ module Aws::ConfigService
       :compliant_rule_count,
       :non_compliant_rule_count,
       :total_rule_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -145,7 +150,8 @@ module Aws::ConfigService
     class AggregateConformancePackComplianceCount < Struct.new(
       :compliant_conformance_pack_count,
       :non_compliant_conformance_pack_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -173,7 +179,8 @@ module Aws::ConfigService
       :compliance_type,
       :account_id,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +194,8 @@ module Aws::ConfigService
     class AggregateConformancePackComplianceSummary < Struct.new(
       :compliance_summary,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +209,8 @@ module Aws::ConfigService
     class AggregateConformancePackComplianceSummaryFilters < Struct.new(
       :account_id,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +254,8 @@ module Aws::ConfigService
       :annotation,
       :account_id,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +281,8 @@ module Aws::ConfigService
       :resource_id,
       :resource_type,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -322,7 +333,8 @@ module Aws::ConfigService
       :last_update_time,
       :last_error_code,
       :last_error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +360,8 @@ module Aws::ConfigService
       :authorized_account_id,
       :authorized_aws_region,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +375,8 @@ module Aws::ConfigService
     class AggregatorFilterResourceType < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +390,8 @@ module Aws::ConfigService
     class AggregatorFilterServicePrincipal < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -390,7 +405,8 @@ module Aws::ConfigService
     class AggregatorFilters < Struct.new(
       :resource_type,
       :service_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -403,7 +419,8 @@ module Aws::ConfigService
     class AssociateResourceTypesRequest < Struct.new(
       :configuration_recorder_arn,
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +433,8 @@ module Aws::ConfigService
     #   @return [Types::ConfigurationRecorder]
     class AssociateResourceTypesResponse < Struct.new(
       :configuration_recorder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +537,8 @@ module Aws::ConfigService
       :supplementary_configuration,
       :recording_frequency,
       :configuration_item_delivery_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +551,8 @@ module Aws::ConfigService
     class BatchGetAggregateResourceConfigRequest < Struct.new(
       :configuration_aggregator_name,
       :resource_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +565,8 @@ module Aws::ConfigService
     class BatchGetAggregateResourceConfigResponse < Struct.new(
       :base_configuration_items,
       :unprocessed_resource_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +577,8 @@ module Aws::ConfigService
     #   @return [Array<Types::ResourceKey>]
     class BatchGetResourceConfigRequest < Struct.new(
       :resource_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +598,8 @@ module Aws::ConfigService
     class BatchGetResourceConfigResponse < Struct.new(
       :base_configuration_items,
       :unprocessed_resource_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +630,8 @@ module Aws::ConfigService
     class Compliance < Struct.new(
       :compliance_type,
       :compliance_contributor_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +648,8 @@ module Aws::ConfigService
     class ComplianceByConfigRule < Struct.new(
       :config_rule_name,
       :compliance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +671,8 @@ module Aws::ConfigService
       :resource_type,
       :resource_id,
       :compliance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -663,7 +689,8 @@ module Aws::ConfigService
     class ComplianceContributorCount < Struct.new(
       :capped_count,
       :cap_exceeded,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -693,7 +720,8 @@ module Aws::ConfigService
       :compliant_resource_count,
       :non_compliant_resource_count,
       :compliance_summary_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +738,8 @@ module Aws::ConfigService
     class ComplianceSummaryByResourceType < Struct.new(
       :resource_type,
       :compliance_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -743,7 +772,8 @@ module Aws::ConfigService
       :last_attempt_time,
       :last_successful_time,
       :next_delivery_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -865,7 +895,8 @@ module Aws::ConfigService
       :config_rule_state,
       :created_by,
       :evaluation_modes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +925,8 @@ module Aws::ConfigService
       :compliance_type,
       :account_id,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +941,8 @@ module Aws::ConfigService
     class ConfigRuleComplianceSummaryFilters < Struct.new(
       :account_id,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1001,7 +1034,8 @@ module Aws::ConfigService
       :last_debug_log_delivery_status,
       :last_debug_log_delivery_status_reason,
       :last_debug_log_delivery_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1068,7 +1102,8 @@ module Aws::ConfigService
     #   @return [String]
     class ConfigSnapshotDeliveryProperties < Struct.new(
       :delivery_frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1095,7 +1130,8 @@ module Aws::ConfigService
       :last_error_code,
       :last_error_message,
       :last_status_change_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1174,8 @@ module Aws::ConfigService
       :last_updated_time,
       :created_by,
       :aggregator_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1272,7 +1309,8 @@ module Aws::ConfigService
       :supplementary_configuration,
       :recording_frequency,
       :configuration_item_delivery_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1383,7 +1421,8 @@ module Aws::ConfigService
       :recording_mode,
       :recording_scope,
       :service_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1401,7 +1440,8 @@ module Aws::ConfigService
     class ConfigurationRecorderFilter < Struct.new(
       :filter_name,
       :filter_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1489,8 @@ module Aws::ConfigService
       :last_error_message,
       :last_status_change_time,
       :service_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1476,7 +1517,8 @@ module Aws::ConfigService
       :name,
       :service_principal,
       :recording_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1498,7 +1540,8 @@ module Aws::ConfigService
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1556,8 @@ module Aws::ConfigService
     class ConformancePackComplianceFilters < Struct.new(
       :config_rule_names,
       :compliance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1533,7 +1577,8 @@ module Aws::ConfigService
       :score,
       :conformance_pack_name,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1544,7 +1589,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     class ConformancePackComplianceScoresFilters < Struct.new(
       :conformance_pack_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1558,7 +1604,8 @@ module Aws::ConfigService
     class ConformancePackComplianceSummary < Struct.new(
       :conformance_pack_name,
       :conformance_pack_compliance_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,7 +1653,8 @@ module Aws::ConfigService
       :last_update_requested_time,
       :created_by,
       :template_ssm_document_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1632,7 +1680,8 @@ module Aws::ConfigService
       :compliance_type,
       :resource_type,
       :resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1658,7 +1707,8 @@ module Aws::ConfigService
       :config_rule_invoked_time,
       :result_recorded_time,
       :annotation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1673,7 +1723,8 @@ module Aws::ConfigService
     class ConformancePackInputParameter < Struct.new(
       :parameter_name,
       :parameter_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1692,7 +1743,8 @@ module Aws::ConfigService
       :config_rule_name,
       :compliance_type,
       :controls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1748,7 +1800,8 @@ module Aws::ConfigService
       :conformance_pack_status_reason,
       :last_update_requested_time,
       :last_update_completed_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1758,7 +1811,8 @@ module Aws::ConfigService
     #   @return [String]
     class ConformancePackTemplateValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1780,7 +1834,8 @@ module Aws::ConfigService
       :policy_runtime,
       :policy_text,
       :enable_debug_log_delivery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1799,7 +1854,8 @@ module Aws::ConfigService
     class DeleteAggregationAuthorizationRequest < Struct.new(
       :authorized_account_id,
       :authorized_aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1866,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteConfigRuleRequest < Struct.new(
       :config_rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1819,7 +1876,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteConfigurationAggregatorRequest < Struct.new(
       :configuration_aggregator_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1831,7 +1889,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,7 +1899,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteConformancePackRequest < Struct.new(
       :conformance_pack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1852,7 +1912,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteDeliveryChannelRequest < Struct.new(
       :delivery_channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,14 +1924,16 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteEvaluationResultsRequest < Struct.new(
       :config_rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output when you delete the evaluation results for the
     # 			specified Config rule.</p>
     class DeleteEvaluationResultsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1879,7 +1942,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteOrganizationConfigRuleRequest < Struct.new(
       :organization_config_rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1952,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteOrganizationConformancePackRequest < Struct.new(
       :organization_conformance_pack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1902,7 +1967,8 @@ module Aws::ConfigService
     class DeletePendingAggregationRequestRequest < Struct.new(
       :requester_account_id,
       :requester_aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1915,12 +1981,14 @@ module Aws::ConfigService
     class DeleteRemediationConfigurationRequest < Struct.new(
       :config_rule_name,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRemediationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1933,7 +2001,8 @@ module Aws::ConfigService
     class DeleteRemediationExceptionsRequest < Struct.new(
       :config_rule_name,
       :resource_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1942,7 +2011,8 @@ module Aws::ConfigService
     #   @return [Array<Types::FailedDeleteRemediationExceptionsBatch>]
     class DeleteRemediationExceptionsResponse < Struct.new(
       :failed_batches,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2025,8 @@ module Aws::ConfigService
     class DeleteResourceConfigRequest < Struct.new(
       :resource_type,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1964,7 +2035,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteRetentionConfigurationRequest < Struct.new(
       :retention_configuration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1973,7 +2045,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteServiceLinkedConfigurationRecorderRequest < Struct.new(
       :service_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2059,8 @@ module Aws::ConfigService
     class DeleteServiceLinkedConfigurationRecorderResponse < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,12 +2069,14 @@ module Aws::ConfigService
     #   @return [String]
     class DeleteStoredQueryRequest < Struct.new(
       :query_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStoredQueryResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2012,7 +2088,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeliverConfigSnapshotRequest < Struct.new(
       :delivery_channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2023,7 +2100,8 @@ module Aws::ConfigService
     #   @return [String]
     class DeliverConfigSnapshotResponse < Struct.new(
       :config_snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2071,7 +2149,8 @@ module Aws::ConfigService
       :s3_kms_key_arn,
       :sns_topic_arn,
       :config_snapshot_delivery_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2178,8 @@ module Aws::ConfigService
       :config_snapshot_delivery_info,
       :config_history_delivery_info,
       :config_stream_delivery_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2125,7 +2205,8 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2140,7 +2221,8 @@ module Aws::ConfigService
     class DescribeAggregateComplianceByConfigRulesResponse < Struct.new(
       :aggregate_compliance_by_config_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2161,7 +2243,8 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2174,7 +2257,8 @@ module Aws::ConfigService
     class DescribeAggregateComplianceByConformancePacksResponse < Struct.new(
       :aggregate_compliance_by_conformance_packs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2190,7 +2274,8 @@ module Aws::ConfigService
     class DescribeAggregationAuthorizationsRequest < Struct.new(
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2205,7 +2290,8 @@ module Aws::ConfigService
     class DescribeAggregationAuthorizationsResponse < Struct.new(
       :aggregation_authorizations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2226,7 +2312,8 @@ module Aws::ConfigService
       :config_rule_names,
       :compliance_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2329,8 @@ module Aws::ConfigService
     class DescribeComplianceByConfigRuleResponse < Struct.new(
       :compliance_by_config_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2277,7 +2365,8 @@ module Aws::ConfigService
       :compliance_types,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2293,7 +2382,8 @@ module Aws::ConfigService
     class DescribeComplianceByResourceResponse < Struct.new(
       :compliance_by_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2322,7 +2412,8 @@ module Aws::ConfigService
       :config_rule_names,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2337,7 +2428,8 @@ module Aws::ConfigService
     class DescribeConfigRuleEvaluationStatusResponse < Struct.new(
       :config_rules_evaluation_status,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,7 +2442,8 @@ module Aws::ConfigService
     #   @return [String]
     class DescribeConfigRulesFilters < Struct.new(
       :evaluation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2468,8 @@ module Aws::ConfigService
       :config_rule_names,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2390,7 +2484,8 @@ module Aws::ConfigService
     class DescribeConfigRulesResponse < Struct.new(
       :config_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2523,8 @@ module Aws::ConfigService
       :update_status,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2443,7 +2539,8 @@ module Aws::ConfigService
     class DescribeConfigurationAggregatorSourcesStatusResponse < Struct.new(
       :aggregated_source_status_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,7 +2560,8 @@ module Aws::ConfigService
       :configuration_aggregator_names,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2477,7 +2575,8 @@ module Aws::ConfigService
     class DescribeConfigurationAggregatorsResponse < Struct.new(
       :configuration_aggregators,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2501,7 +2600,8 @@ module Aws::ConfigService
       :configuration_recorder_names,
       :service_principal,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2513,7 +2613,8 @@ module Aws::ConfigService
     #   @return [Array<Types::ConfigurationRecorderStatus>]
     class DescribeConfigurationRecorderStatusResponse < Struct.new(
       :configuration_recorders_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2534,7 +2635,8 @@ module Aws::ConfigService
       :configuration_recorder_names,
       :service_principal,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2545,7 +2647,8 @@ module Aws::ConfigService
     #   @return [Array<Types::ConfigurationRecorder>]
     class DescribeConfigurationRecordersResponse < Struct.new(
       :configuration_recorders,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2566,7 +2669,8 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2583,7 +2687,8 @@ module Aws::ConfigService
       :conformance_pack_name,
       :conformance_pack_rule_compliance_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2600,7 +2705,8 @@ module Aws::ConfigService
       :conformance_pack_names,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2613,7 +2719,8 @@ module Aws::ConfigService
     class DescribeConformancePackStatusResponse < Struct.new(
       :conformance_pack_status_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2630,7 +2737,8 @@ module Aws::ConfigService
       :conformance_pack_names,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2643,7 +2751,8 @@ module Aws::ConfigService
     class DescribeConformancePacksResponse < Struct.new(
       :conformance_pack_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2654,7 +2763,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     class DescribeDeliveryChannelStatusRequest < Struct.new(
       :delivery_channel_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2775,8 @@ module Aws::ConfigService
     #   @return [Array<Types::DeliveryChannelStatus>]
     class DescribeDeliveryChannelStatusResponse < Struct.new(
       :delivery_channels_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2676,7 +2787,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     class DescribeDeliveryChannelsRequest < Struct.new(
       :delivery_channel_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2688,7 +2800,8 @@ module Aws::ConfigService
     #   @return [Array<Types::DeliveryChannel>]
     class DescribeDeliveryChannelsResponse < Struct.new(
       :delivery_channels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2705,7 +2818,8 @@ module Aws::ConfigService
       :organization_config_rule_names,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2718,7 +2832,8 @@ module Aws::ConfigService
     class DescribeOrganizationConfigRuleStatusesResponse < Struct.new(
       :organization_config_rule_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2735,7 +2850,8 @@ module Aws::ConfigService
       :organization_config_rule_names,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2748,7 +2864,8 @@ module Aws::ConfigService
     class DescribeOrganizationConfigRulesResponse < Struct.new(
       :organization_config_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2767,7 +2884,8 @@ module Aws::ConfigService
       :organization_conformance_pack_names,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2780,7 +2898,8 @@ module Aws::ConfigService
     class DescribeOrganizationConformancePackStatusesResponse < Struct.new(
       :organization_conformance_pack_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2799,7 +2918,8 @@ module Aws::ConfigService
       :organization_conformance_pack_names,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2813,7 +2933,8 @@ module Aws::ConfigService
     class DescribeOrganizationConformancePacksResponse < Struct.new(
       :organization_conformance_packs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2829,7 +2950,8 @@ module Aws::ConfigService
     class DescribePendingAggregationRequestsRequest < Struct.new(
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2843,7 +2965,8 @@ module Aws::ConfigService
     class DescribePendingAggregationRequestsResponse < Struct.new(
       :pending_aggregation_requests,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2852,7 +2975,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     class DescribeRemediationConfigurationsRequest < Struct.new(
       :config_rule_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2861,7 +2985,8 @@ module Aws::ConfigService
     #   @return [Array<Types::RemediationConfiguration>]
     class DescribeRemediationConfigurationsResponse < Struct.new(
       :remediation_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2882,7 +3007,8 @@ module Aws::ConfigService
       :resource_keys,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2895,7 +3021,8 @@ module Aws::ConfigService
     class DescribeRemediationExceptionsResponse < Struct.new(
       :remediation_exceptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2916,7 +3043,8 @@ module Aws::ConfigService
       :resource_keys,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2929,7 +3057,8 @@ module Aws::ConfigService
     class DescribeRemediationExecutionStatusResponse < Struct.new(
       :remediation_execution_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2950,7 +3079,8 @@ module Aws::ConfigService
     class DescribeRetentionConfigurationsRequest < Struct.new(
       :retention_configuration_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2965,7 +3095,8 @@ module Aws::ConfigService
     class DescribeRetentionConfigurationsResponse < Struct.new(
       :retention_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2978,7 +3109,8 @@ module Aws::ConfigService
     class DisassociateResourceTypesRequest < Struct.new(
       :configuration_recorder_arn,
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2991,7 +3123,8 @@ module Aws::ConfigService
     #   @return [Types::ConfigurationRecorder]
     class DisassociateResourceTypesResponse < Struct.new(
       :configuration_recorder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3034,7 +3167,8 @@ module Aws::ConfigService
       :compliance_type,
       :annotation,
       :ordering_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3045,7 +3179,8 @@ module Aws::ConfigService
     #   @return [String]
     class EvaluationContext < Struct.new(
       :evaluation_context_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3055,7 +3190,8 @@ module Aws::ConfigService
     #   @return [String]
     class EvaluationModeConfiguration < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3097,7 +3233,8 @@ module Aws::ConfigService
       :config_rule_invoked_time,
       :annotation,
       :result_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3119,7 +3256,8 @@ module Aws::ConfigService
       :evaluation_result_qualifier,
       :ordering_timestamp,
       :resource_evaluation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3144,7 +3282,8 @@ module Aws::ConfigService
       :resource_type,
       :resource_id,
       :evaluation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3158,7 +3297,8 @@ module Aws::ConfigService
     class EvaluationStatus < Struct.new(
       :status,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3189,7 +3329,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     class ExclusionByResourceTypes < Struct.new(
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3199,7 +3340,8 @@ module Aws::ConfigService
     #   @return [Types::SsmControls]
     class ExecutionControls < Struct.new(
       :ssm_controls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3225,7 +3367,8 @@ module Aws::ConfigService
       :compliance_type,
       :annotation,
       :ordering_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3239,7 +3382,8 @@ module Aws::ConfigService
     class FailedDeleteRemediationExceptionsBatch < Struct.new(
       :failure_message,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3253,7 +3397,8 @@ module Aws::ConfigService
     class FailedRemediationBatch < Struct.new(
       :failure_message,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3267,7 +3412,8 @@ module Aws::ConfigService
     class FailedRemediationExceptionBatch < Struct.new(
       :failure_message,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3277,7 +3423,8 @@ module Aws::ConfigService
     #   @return [String]
     class FieldInfo < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3322,7 +3469,8 @@ module Aws::ConfigService
       :compliance_type,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3336,7 +3484,8 @@ module Aws::ConfigService
     class GetAggregateComplianceDetailsByConfigRuleResponse < Struct.new(
       :aggregate_evaluation_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3365,7 +3514,8 @@ module Aws::ConfigService
       :group_by_key,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3383,7 +3533,8 @@ module Aws::ConfigService
       :group_by_key,
       :aggregate_compliance_counts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3408,7 +3559,8 @@ module Aws::ConfigService
       :group_by_key,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3425,7 +3577,8 @@ module Aws::ConfigService
       :aggregate_conformance_pack_compliance_summaries,
       :group_by_key,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3450,7 +3603,8 @@ module Aws::ConfigService
       :group_by_key,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3471,7 +3625,8 @@ module Aws::ConfigService
       :group_by_key,
       :grouped_resource_counts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3489,7 +3644,8 @@ module Aws::ConfigService
     class GetAggregateResourceConfigRequest < Struct.new(
       :configuration_aggregator_name,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3498,7 +3654,8 @@ module Aws::ConfigService
     #   @return [Types::ConfigurationItem]
     class GetAggregateResourceConfigResponse < Struct.new(
       :configuration_item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3527,7 +3684,8 @@ module Aws::ConfigService
       :compliance_types,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3543,7 +3701,8 @@ module Aws::ConfigService
     class GetComplianceDetailsByConfigRuleResponse < Struct.new(
       :evaluation_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3578,7 +3737,8 @@ module Aws::ConfigService
       :compliance_types,
       :next_token,
       :resource_evaluation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3593,7 +3753,8 @@ module Aws::ConfigService
     class GetComplianceDetailsByResourceResponse < Struct.new(
       :evaluation_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3605,7 +3766,8 @@ module Aws::ConfigService
     #   @return [Types::ComplianceSummary]
     class GetComplianceSummaryByConfigRuleResponse < Struct.new(
       :compliance_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3621,7 +3783,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     class GetComplianceSummaryByResourceTypeRequest < Struct.new(
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3634,7 +3797,8 @@ module Aws::ConfigService
     #   @return [Array<Types::ComplianceSummaryByResourceType>]
     class GetComplianceSummaryByResourceTypeResponse < Struct.new(
       :compliance_summaries_by_resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3655,7 +3819,8 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3672,7 +3837,8 @@ module Aws::ConfigService
       :conformance_pack_name,
       :conformance_pack_rule_evaluation_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3689,7 +3855,8 @@ module Aws::ConfigService
       :conformance_pack_names,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3702,7 +3869,8 @@ module Aws::ConfigService
     class GetConformancePackComplianceSummaryResponse < Struct.new(
       :conformance_pack_compliance_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3711,7 +3879,8 @@ module Aws::ConfigService
     #   @return [String]
     class GetCustomRulePolicyRequest < Struct.new(
       :config_rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3720,7 +3889,8 @@ module Aws::ConfigService
     #   @return [String]
     class GetCustomRulePolicyResponse < Struct.new(
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3754,7 +3924,8 @@ module Aws::ConfigService
       :resource_types,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3798,7 +3969,8 @@ module Aws::ConfigService
       :total_discovered_resources,
       :resource_counts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3824,7 +3996,8 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3837,7 +4010,8 @@ module Aws::ConfigService
     class GetOrganizationConfigRuleDetailedStatusResponse < Struct.new(
       :organization_config_rule_detailed_status,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3859,7 +4033,8 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3872,7 +4047,8 @@ module Aws::ConfigService
     class GetOrganizationConformancePackDetailedStatusResponse < Struct.new(
       :organization_conformance_pack_detailed_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3881,7 +4057,8 @@ module Aws::ConfigService
     #   @return [String]
     class GetOrganizationCustomRulePolicyRequest < Struct.new(
       :organization_config_rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3890,7 +4067,8 @@ module Aws::ConfigService
     #   @return [String]
     class GetOrganizationCustomRulePolicyResponse < Struct.new(
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3936,7 +4114,8 @@ module Aws::ConfigService
       :chronological_order,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3953,7 +4132,8 @@ module Aws::ConfigService
     class GetResourceConfigHistoryResponse < Struct.new(
       :configuration_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3962,7 +4142,8 @@ module Aws::ConfigService
     #   @return [String]
     class GetResourceEvaluationSummaryRequest < Struct.new(
       :resource_evaluation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3995,7 +4176,8 @@ module Aws::ConfigService
       :compliance,
       :evaluation_context,
       :resource_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4004,7 +4186,8 @@ module Aws::ConfigService
     #   @return [String]
     class GetStoredQueryRequest < Struct.new(
       :query_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4013,7 +4196,8 @@ module Aws::ConfigService
     #   @return [Types::StoredQuery]
     class GetStoredQueryResponse < Struct.new(
       :stored_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4027,7 +4211,8 @@ module Aws::ConfigService
     class GroupedResourceCount < Struct.new(
       :group_name,
       :resource_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4041,7 +4226,8 @@ module Aws::ConfigService
     #   @return [String]
     class IdempotentParameterMismatch < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4052,7 +4238,8 @@ module Aws::ConfigService
     #   @return [String]
     class InsufficientDeliveryPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4087,7 +4274,8 @@ module Aws::ConfigService
     #   @return [String]
     class InsufficientPermissionsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4097,7 +4285,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidConfigurationRecorderNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4107,7 +4296,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidDeliveryChannelNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4117,7 +4307,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidExpressionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4127,7 +4318,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidLimitException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4139,7 +4331,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4150,7 +4343,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4183,7 +4377,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidRecordingGroupException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4193,7 +4388,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidResultTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4203,7 +4399,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidRoleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4213,7 +4410,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidS3KeyPrefixException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4223,7 +4421,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidS3KmsKeyArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4233,7 +4432,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidSNSTopicARNException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4244,7 +4444,8 @@ module Aws::ConfigService
     #   @return [String]
     class InvalidTimeRangeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4254,7 +4455,8 @@ module Aws::ConfigService
     #   @return [String]
     class LastDeliveryChannelDeleteFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4271,7 +4473,8 @@ module Aws::ConfigService
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4296,7 +4499,8 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4309,7 +4513,8 @@ module Aws::ConfigService
     class ListAggregateDiscoveredResourcesResponse < Struct.new(
       :resource_identifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4326,7 +4531,8 @@ module Aws::ConfigService
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4339,7 +4545,8 @@ module Aws::ConfigService
     class ListConfigurationRecordersResponse < Struct.new(
       :configuration_recorder_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4368,7 +4575,8 @@ module Aws::ConfigService
       :sort_by,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4381,7 +4589,8 @@ module Aws::ConfigService
     class ListConformancePackComplianceScoresResponse < Struct.new(
       :next_token,
       :conformance_pack_compliance_scores,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4421,7 +4630,8 @@ module Aws::ConfigService
       :limit,
       :include_deleted_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4437,7 +4647,8 @@ module Aws::ConfigService
     class ListDiscoveredResourcesResponse < Struct.new(
       :resource_identifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4455,7 +4666,8 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4468,7 +4680,8 @@ module Aws::ConfigService
     class ListResourceEvaluationsResponse < Struct.new(
       :resource_evaluations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4481,7 +4694,8 @@ module Aws::ConfigService
     class ListStoredQueriesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4496,7 +4710,8 @@ module Aws::ConfigService
     class ListStoredQueriesResponse < Struct.new(
       :stored_query_metadata,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4555,7 +4770,8 @@ module Aws::ConfigService
       :resource_arn,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4568,7 +4784,8 @@ module Aws::ConfigService
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4580,7 +4797,8 @@ module Aws::ConfigService
     #   @return [String]
     class MaxActiveResourcesExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4592,7 +4810,8 @@ module Aws::ConfigService
     #   @return [String]
     class MaxNumberOfConfigRulesExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4603,7 +4822,8 @@ module Aws::ConfigService
     #   @return [String]
     class MaxNumberOfConfigurationRecordersExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4615,7 +4835,8 @@ module Aws::ConfigService
     #   @return [String]
     class MaxNumberOfConformancePacksExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4626,7 +4847,8 @@ module Aws::ConfigService
     #   @return [String]
     class MaxNumberOfDeliveryChannelsExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4638,7 +4860,8 @@ module Aws::ConfigService
     #   @return [String]
     class MaxNumberOfOrganizationConfigRulesExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4650,7 +4873,8 @@ module Aws::ConfigService
     #   @return [String]
     class MaxNumberOfOrganizationConformancePacksExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4660,7 +4884,8 @@ module Aws::ConfigService
     #   @return [String]
     class MaxNumberOfRetentionConfigurationsExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4733,7 +4958,8 @@ module Aws::ConfigService
       :error_code,
       :error_message,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4744,7 +4970,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoAvailableConfigurationRecorderException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4755,7 +4982,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoAvailableDeliveryChannelException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4765,7 +4993,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoAvailableOrganizationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4775,7 +5004,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoRunningConfigurationRecorderException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4785,7 +5015,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchBucketException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4795,7 +5026,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchConfigRuleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4805,7 +5037,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchConfigRuleInConformancePackException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4815,7 +5048,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchConfigurationAggregatorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4826,7 +5060,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchConfigurationRecorderException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4836,7 +5071,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchConformancePackException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4847,7 +5083,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchDeliveryChannelException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4857,7 +5094,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchOrganizationConfigRuleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4868,7 +5106,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchOrganizationConformancePackException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4878,7 +5117,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchRemediationConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4888,7 +5128,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchRemediationExceptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4898,7 +5139,8 @@ module Aws::ConfigService
     #   @return [String]
     class NoSuchRetentionConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4926,7 +5168,8 @@ module Aws::ConfigService
     #   @return [String]
     class OrganizationAccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4947,7 +5190,8 @@ module Aws::ConfigService
       :role_arn,
       :aws_regions,
       :all_aws_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4962,7 +5206,8 @@ module Aws::ConfigService
     #   @return [String]
     class OrganizationAllFeaturesNotEnabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4999,7 +5244,8 @@ module Aws::ConfigService
       :excluded_accounts,
       :last_update_time,
       :organization_custom_policy_rule_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5067,7 +5313,8 @@ module Aws::ConfigService
       :error_code,
       :error_message,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5107,7 +5354,8 @@ module Aws::ConfigService
       :conformance_pack_input_parameters,
       :excluded_accounts,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5184,7 +5432,8 @@ module Aws::ConfigService
       :error_code,
       :error_message,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5258,7 +5507,8 @@ module Aws::ConfigService
       :error_code,
       :error_message,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5268,7 +5518,8 @@ module Aws::ConfigService
     #   @return [String]
     class OrganizationConformancePackTemplateValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5338,7 +5589,8 @@ module Aws::ConfigService
       :policy_runtime,
       :policy_text,
       :debug_log_delivery_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5403,7 +5655,8 @@ module Aws::ConfigService
       :tag_value_scope,
       :policy_runtime,
       :debug_log_delivery_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5469,7 +5722,8 @@ module Aws::ConfigService
       :resource_id_scope,
       :tag_key_scope,
       :tag_value_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5516,7 +5770,8 @@ module Aws::ConfigService
       :resource_id_scope,
       :tag_key_scope,
       :tag_value_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5573,7 +5828,8 @@ module Aws::ConfigService
     class OrganizationResourceDetailedStatusFilters < Struct.new(
       :account_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5583,7 +5839,8 @@ module Aws::ConfigService
     #   @return [String]
     class OversizedConfigurationItemException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5600,7 +5857,8 @@ module Aws::ConfigService
     class PendingAggregationRequest < Struct.new(
       :requester_account_id,
       :requester_aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5617,7 +5875,8 @@ module Aws::ConfigService
       :authorized_account_id,
       :authorized_aws_region,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5628,7 +5887,8 @@ module Aws::ConfigService
     #   @return [Types::AggregationAuthorization]
     class PutAggregationAuthorizationResponse < Struct.new(
       :aggregation_authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5641,7 +5901,8 @@ module Aws::ConfigService
     class PutConfigRuleRequest < Struct.new(
       :config_rule,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5668,7 +5929,8 @@ module Aws::ConfigService
       :organization_aggregation_source,
       :tags,
       :aggregator_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5677,7 +5939,8 @@ module Aws::ConfigService
     #   @return [Types::ConfigurationAggregator]
     class PutConfigurationAggregatorResponse < Struct.new(
       :configuration_aggregator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5692,7 +5955,8 @@ module Aws::ConfigService
     class PutConfigurationRecorderRequest < Struct.new(
       :configuration_recorder,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5738,7 +6002,8 @@ module Aws::ConfigService
       :delivery_s3_key_prefix,
       :conformance_pack_input_parameters,
       :template_ssm_document_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5747,7 +6012,8 @@ module Aws::ConfigService
     #   @return [String]
     class PutConformancePackResponse < Struct.new(
       :conformance_pack_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5759,7 +6025,8 @@ module Aws::ConfigService
     #   @return [Types::DeliveryChannel]
     class PutDeliveryChannelRequest < Struct.new(
       :delivery_channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5790,7 +6057,8 @@ module Aws::ConfigService
       :evaluations,
       :result_token,
       :test_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5801,7 +6069,8 @@ module Aws::ConfigService
     #   @return [Array<Types::Evaluation>]
     class PutEvaluationsResponse < Struct.new(
       :failed_evaluations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5814,12 +6083,14 @@ module Aws::ConfigService
     class PutExternalEvaluationRequest < Struct.new(
       :config_rule_name,
       :external_evaluation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutExternalEvaluationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5850,7 +6121,8 @@ module Aws::ConfigService
       :organization_custom_rule_metadata,
       :excluded_accounts,
       :organization_custom_policy_rule_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5859,7 +6131,8 @@ module Aws::ConfigService
     #   @return [String]
     class PutOrganizationConfigRuleResponse < Struct.new(
       :organization_config_rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5904,7 +6177,8 @@ module Aws::ConfigService
       :delivery_s3_key_prefix,
       :conformance_pack_input_parameters,
       :excluded_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5913,7 +6187,8 @@ module Aws::ConfigService
     #   @return [String]
     class PutOrganizationConformancePackResponse < Struct.new(
       :organization_conformance_pack_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5922,7 +6197,8 @@ module Aws::ConfigService
     #   @return [Array<Types::RemediationConfiguration>]
     class PutRemediationConfigurationsRequest < Struct.new(
       :remediation_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5931,7 +6207,8 @@ module Aws::ConfigService
     #   @return [Array<Types::FailedRemediationBatch>]
     class PutRemediationConfigurationsResponse < Struct.new(
       :failed_batches,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5952,7 +6229,8 @@ module Aws::ConfigService
       :resource_keys,
       :message,
       :expiration_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5961,7 +6239,8 @@ module Aws::ConfigService
     #   @return [Array<Types::FailedRemediationExceptionBatch>]
     class PutRemediationExceptionsResponse < Struct.new(
       :failed_batches,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6000,7 +6279,8 @@ module Aws::ConfigService
       :resource_name,
       :configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6014,7 +6294,8 @@ module Aws::ConfigService
     #   @return [Integer]
     class PutRetentionConfigurationRequest < Struct.new(
       :retention_period_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6023,7 +6304,8 @@ module Aws::ConfigService
     #   @return [Types::RetentionConfiguration]
     class PutRetentionConfigurationResponse < Struct.new(
       :retention_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6036,7 +6318,8 @@ module Aws::ConfigService
     class PutServiceLinkedConfigurationRecorderRequest < Struct.new(
       :service_principal,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6050,7 +6333,8 @@ module Aws::ConfigService
     class PutServiceLinkedConfigurationRecorderResponse < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6068,7 +6352,8 @@ module Aws::ConfigService
     class PutStoredQueryRequest < Struct.new(
       :stored_query,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6078,7 +6363,8 @@ module Aws::ConfigService
     #   @return [String]
     class PutStoredQueryResponse < Struct.new(
       :query_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6088,7 +6374,8 @@ module Aws::ConfigService
     #   @return [Array<Types::FieldInfo>]
     class QueryInfo < Struct.new(
       :select_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6278,7 +6565,8 @@ module Aws::ConfigService
       :resource_types,
       :exclusion_by_resource_types,
       :recording_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6336,7 +6624,8 @@ module Aws::ConfigService
     class RecordingMode < Struct.new(
       :recording_frequency,
       :recording_mode_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6388,7 +6677,8 @@ module Aws::ConfigService
       :description,
       :resource_types,
       :recording_frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6470,7 +6760,8 @@ module Aws::ConfigService
     #   @return [String]
     class RecordingStrategy < Struct.new(
       :use_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6495,7 +6786,8 @@ module Aws::ConfigService
       :resource_id,
       :resource_name,
       :relationship_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6561,7 +6853,8 @@ module Aws::ConfigService
       :retry_attempt_seconds,
       :arn,
       :created_by_service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6592,7 +6885,8 @@ module Aws::ConfigService
       :resource_id,
       :message,
       :expiration_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6606,7 +6900,8 @@ module Aws::ConfigService
     class RemediationExceptionResourceKey < Struct.new(
       :resource_type,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6633,7 +6928,8 @@ module Aws::ConfigService
       :step_details,
       :invocation_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6659,7 +6955,8 @@ module Aws::ConfigService
       :error_message,
       :start_time,
       :stop_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6669,7 +6966,8 @@ module Aws::ConfigService
     #   @return [String]
     class RemediationInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6683,7 +6981,8 @@ module Aws::ConfigService
     class RemediationParameterValue < Struct.new(
       :resource_value,
       :static_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6692,7 +6991,8 @@ module Aws::ConfigService
     #   @return [String]
     class ResourceConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6708,7 +7008,8 @@ module Aws::ConfigService
     class ResourceCount < Struct.new(
       :resource_type,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6731,7 +7032,8 @@ module Aws::ConfigService
       :resource_type,
       :account_id,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6760,7 +7062,8 @@ module Aws::ConfigService
       :resource_type,
       :resource_configuration,
       :resource_configuration_schema_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6778,7 +7081,8 @@ module Aws::ConfigService
       :resource_evaluation_id,
       :evaluation_mode,
       :evaluation_start_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6799,7 +7103,8 @@ module Aws::ConfigService
       :evaluation_mode,
       :time_window,
       :evaluation_context_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6821,7 +7126,8 @@ module Aws::ConfigService
       :resource_id,
       :resource_name,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6845,7 +7151,8 @@ module Aws::ConfigService
       :resource_id,
       :resource_name,
       :resource_deletion_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6878,7 +7185,8 @@ module Aws::ConfigService
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6893,7 +7201,8 @@ module Aws::ConfigService
     class ResourceKey < Struct.new(
       :resource_type,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6904,7 +7213,8 @@ module Aws::ConfigService
     #   @return [String]
     class ResourceNotDiscoveredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6914,7 +7224,8 @@ module Aws::ConfigService
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6924,7 +7235,8 @@ module Aws::ConfigService
     #   @return [String]
     class ResourceValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6941,7 +7253,8 @@ module Aws::ConfigService
     class RetentionConfiguration < Struct.new(
       :name,
       :retention_period_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6979,7 +7292,8 @@ module Aws::ConfigService
       :tag_key,
       :tag_value,
       :compliance_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7004,7 +7318,8 @@ module Aws::ConfigService
       :limit,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7021,7 +7336,8 @@ module Aws::ConfigService
       :results,
       :query_info,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7038,7 +7354,8 @@ module Aws::ConfigService
       :expression,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7055,7 +7372,8 @@ module Aws::ConfigService
       :results,
       :query_info,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7088,7 +7406,8 @@ module Aws::ConfigService
       :source_identifier,
       :source_details,
       :custom_policy_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7161,7 +7480,8 @@ module Aws::ConfigService
       :event_source,
       :message_type,
       :maximum_execution_frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7177,7 +7497,8 @@ module Aws::ConfigService
     class SsmControls < Struct.new(
       :concurrent_execution_rate_percentage,
       :error_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7188,13 +7509,15 @@ module Aws::ConfigService
     #   @return [Array<String>]
     class StartConfigRulesEvaluationRequest < Struct.new(
       :config_rule_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output when you start the evaluation for the specified Config rule.</p>
     class StartConfigRulesEvaluationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7205,7 +7528,8 @@ module Aws::ConfigService
     #   @return [String]
     class StartConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7218,7 +7542,8 @@ module Aws::ConfigService
     class StartRemediationExecutionRequest < Struct.new(
       :config_rule_name,
       :resource_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7231,7 +7556,8 @@ module Aws::ConfigService
     class StartRemediationExecutionResponse < Struct.new(
       :failure_message,
       :failed_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7268,7 +7594,8 @@ module Aws::ConfigService
       :evaluation_mode,
       :evaluation_timeout,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7278,7 +7605,8 @@ module Aws::ConfigService
     #   @return [String]
     class StartResourceEvaluationResponse < Struct.new(
       :resource_evaluation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7288,7 +7616,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     class StaticValue < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7345,7 +7674,8 @@ module Aws::ConfigService
     class StatusDetailFilters < Struct.new(
       :account_id,
       :member_account_rule_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7355,7 +7685,8 @@ module Aws::ConfigService
     #   @return [String]
     class StopConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7388,7 +7719,8 @@ module Aws::ConfigService
       :query_name,
       :description,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7410,7 +7742,8 @@ module Aws::ConfigService
       :query_arn,
       :query_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7426,7 +7759,8 @@ module Aws::ConfigService
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7481,7 +7815,8 @@ module Aws::ConfigService
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7501,7 +7836,8 @@ module Aws::ConfigService
     class TemplateSSMDocumentDetails < Struct.new(
       :document_name,
       :document_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7515,7 +7851,8 @@ module Aws::ConfigService
     class TimeWindow < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7528,7 +7865,8 @@ module Aws::ConfigService
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7546,7 +7884,8 @@ module Aws::ConfigService
     #   @return [String]
     class UnmodifiableEntityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7601,7 +7940,8 @@ module Aws::ConfigService
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7644,7 +7984,8 @@ module Aws::ConfigService
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

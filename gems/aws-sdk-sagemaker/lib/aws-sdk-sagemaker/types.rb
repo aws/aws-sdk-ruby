@@ -20,7 +20,8 @@ module Aws::SageMaker
       :source_uri,
       :source_type,
       :source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +55,8 @@ module Aws::SageMaker
       :status,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +73,8 @@ module Aws::SageMaker
       :source_arn,
       :destination_arn,
       :association_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +87,8 @@ module Aws::SageMaker
     class AddAssociationResponse < Struct.new(
       :source_arn,
       :destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +102,8 @@ module Aws::SageMaker
     class AddClusterNodeSpecification < Struct.new(
       :instance_group_name,
       :increment_target_count_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +116,8 @@ module Aws::SageMaker
     class AddTagsInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +126,8 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     class AddTagsOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +137,8 @@ module Aws::SageMaker
     #   @return [Array<String>]
     class AdditionalEnis < Struct.new(
       :efa_enis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +172,8 @@ module Aws::SageMaker
       :supported_realtime_inference_instance_types,
       :supported_content_types,
       :supported_response_mime_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +187,8 @@ module Aws::SageMaker
     class AdditionalModelDataSource < Struct.new(
       :channel_name,
       :s3_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +210,8 @@ module Aws::SageMaker
       :s3_uri,
       :compression_type,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +225,8 @@ module Aws::SageMaker
     class AgentVersion < Struct.new(
       :version,
       :agent_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +236,8 @@ module Aws::SageMaker
     #   @return [String]
     class Alarm < Struct.new(
       :alarm_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +247,8 @@ module Aws::SageMaker
     #   @return [String]
     class AlarmDetails < Struct.new(
       :alarm_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +286,8 @@ module Aws::SageMaker
       :container_entrypoint,
       :container_arguments,
       :training_image_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -286,7 +301,8 @@ module Aws::SageMaker
     class AlgorithmStatusDetails < Struct.new(
       :validation_statuses,
       :image_scan_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +320,8 @@ module Aws::SageMaker
       :name,
       :status,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +347,8 @@ module Aws::SageMaker
       :algorithm_description,
       :creation_time,
       :algorithm_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +366,8 @@ module Aws::SageMaker
       :profile_name,
       :training_job_definition,
       :transform_job_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +381,8 @@ module Aws::SageMaker
     class AlgorithmValidationSpecification < Struct.new(
       :validation_role,
       :validation_profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +396,8 @@ module Aws::SageMaker
     class AmazonQSettings < Struct.new(
       :status,
       :q_profile_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +407,8 @@ module Aws::SageMaker
     #   @return [String]
     class AnnotationConsolidationConfig < Struct.new(
       :annotation_consolidation_lambda_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +446,8 @@ module Aws::SageMaker
       :status,
       :creation_time,
       :resource_spec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +481,8 @@ module Aws::SageMaker
       :kernel_gateway_image_config,
       :jupyter_lab_app_image_config,
       :code_editor_app_image_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +492,8 @@ module Aws::SageMaker
     #   @return [Types::IdleSettings]
     class AppLifecycleManagement < Struct.new(
       :idle_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -486,7 +511,8 @@ module Aws::SageMaker
       :image_uri,
       :container_entrypoint,
       :container_arguments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +526,8 @@ module Aws::SageMaker
     class ArtifactSource < Struct.new(
       :source_uri,
       :source_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +541,8 @@ module Aws::SageMaker
     class ArtifactSourceType < Struct.new(
       :source_id_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +572,8 @@ module Aws::SageMaker
       :artifact_type,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +586,8 @@ module Aws::SageMaker
     class AssociateTrialComponentRequest < Struct.new(
       :trial_component_name,
       :trial_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -570,7 +600,8 @@ module Aws::SageMaker
     class AssociateTrialComponentResponse < Struct.new(
       :trial_component_arn,
       :trial_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +643,8 @@ module Aws::SageMaker
       :destination_name,
       :creation_time,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +654,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class AsyncInferenceClientConfig < Struct.new(
       :max_concurrent_invocations_per_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +669,8 @@ module Aws::SageMaker
     class AsyncInferenceConfig < Struct.new(
       :client_config,
       :output_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +688,8 @@ module Aws::SageMaker
       :success_topic,
       :error_topic,
       :include_inference_response_in,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -676,7 +711,8 @@ module Aws::SageMaker
       :s3_output_path,
       :notification_config,
       :s3_failure_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +750,8 @@ module Aws::SageMaker
       :kms_key_id,
       :output_format,
       :output_compression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +768,8 @@ module Aws::SageMaker
       :cluster_arn,
       :node_id,
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +798,8 @@ module Aws::SageMaker
       :attach_time,
       :status,
       :device_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +813,8 @@ module Aws::SageMaker
     class AuthorizedUrl < Struct.new(
       :url,
       :local_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +824,8 @@ module Aws::SageMaker
     #   @return [Array<String>]
     class AutoMLAlgorithmConfig < Struct.new(
       :auto_ml_algorithms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,7 +879,8 @@ module Aws::SageMaker
       :failure_reason,
       :candidate_properties,
       :inference_container_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -852,7 +894,8 @@ module Aws::SageMaker
     class AutoMLCandidateGenerationConfig < Struct.new(
       :feature_specification_s3_uri,
       :algorithms_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +913,8 @@ module Aws::SageMaker
       :candidate_step_type,
       :candidate_step_arn,
       :candidate_step_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +944,8 @@ module Aws::SageMaker
       :content_type,
       :channel_type,
       :sample_weight_attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +955,8 @@ module Aws::SageMaker
     #   @return [Types::EmrServerlessComputeConfig]
     class AutoMLComputeConfig < Struct.new(
       :emr_serverless_compute_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +974,8 @@ module Aws::SageMaker
       :image,
       :model_data_url,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,7 +985,8 @@ module Aws::SageMaker
     #   @return [Types::AutoMLS3DataSource]
     class AutoMLDataSource < Struct.new(
       :s3_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,7 +996,8 @@ module Aws::SageMaker
     #   @return [Float]
     class AutoMLDataSplitConfig < Struct.new(
       :validation_fraction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1011,8 @@ module Aws::SageMaker
     class AutoMLJobArtifacts < Struct.new(
       :candidate_definition_notebook_location,
       :data_exploration_notebook_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1034,8 @@ module Aws::SageMaker
       :content_type,
       :compression_type,
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1053,8 @@ module Aws::SageMaker
       :max_candidates,
       :max_runtime_per_training_job_in_seconds,
       :max_auto_ml_job_runtime_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1028,7 +1080,8 @@ module Aws::SageMaker
       :candidate_generation_config,
       :data_split_config,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1091,8 @@ module Aws::SageMaker
     #   @return [String]
     class AutoMLJobObjective < Struct.new(
       :metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1102,8 @@ module Aws::SageMaker
     #   @return [String]
     class AutoMLJobStepMetadata < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1145,8 @@ module Aws::SageMaker
       :last_modified_time,
       :failure_reason,
       :partial_failure_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1104,7 +1160,8 @@ module Aws::SageMaker
     class AutoMLOutputDataConfig < Struct.new(
       :kms_key_id,
       :s3_output_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1171,8 @@ module Aws::SageMaker
     #   @return [String]
     class AutoMLPartialFailureReason < Struct.new(
       :partial_failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,7 +1199,8 @@ module Aws::SageMaker
       :tabular_job_config,
       :text_generation_job_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ImageClassificationJobConfig < AutoMLProblemTypeConfig; end
@@ -1163,7 +1222,8 @@ module Aws::SageMaker
       :tabular_resolved_attributes,
       :text_generation_resolved_attributes,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TabularResolvedAttributes < AutoMLProblemTypeResolvedAttributes; end
@@ -1185,7 +1245,8 @@ module Aws::SageMaker
       :auto_ml_job_objective,
       :completion_criteria,
       :auto_ml_problem_type_resolved_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1260,8 @@ module Aws::SageMaker
     class AutoMLS3DataSource < Struct.new(
       :s3_data_type,
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1217,7 +1279,8 @@ module Aws::SageMaker
       :volume_kms_key_id,
       :enable_inter_container_traffic_encryption,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1231,7 +1294,8 @@ module Aws::SageMaker
     class AutoParameter < Struct.new(
       :name,
       :value_hint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1241,7 +1305,8 @@ module Aws::SageMaker
     #   @return [Array<Types::Alarm>]
     class AutoRollbackConfig < Struct.new(
       :alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1251,7 +1316,8 @@ module Aws::SageMaker
     #   @return [String]
     class Autotune < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1339,8 @@ module Aws::SageMaker
       :error_code,
       :failed_count,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1357,8 @@ module Aws::SageMaker
       :cluster_name,
       :client_token,
       :nodes_to_add,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1303,7 +1371,8 @@ module Aws::SageMaker
     class BatchAddClusterNodesResponse < Struct.new(
       :successful,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1321,7 +1390,8 @@ module Aws::SageMaker
       :destination_s3_uri,
       :kms_key_id,
       :generate_inference_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1409,8 @@ module Aws::SageMaker
       :code,
       :message,
       :node_logical_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1357,7 +1428,8 @@ module Aws::SageMaker
       :code,
       :message,
       :node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1446,8 @@ module Aws::SageMaker
       :cluster_name,
       :node_ids,
       :node_logical_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1395,7 +1468,8 @@ module Aws::SageMaker
       :successful,
       :failed_node_logical_ids,
       :successful_node_logical_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1409,7 +1483,8 @@ module Aws::SageMaker
     class BatchDescribeModelPackageError < Struct.new(
       :error_code,
       :error_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1418,7 +1493,8 @@ module Aws::SageMaker
     #   @return [Array<String>]
     class BatchDescribeModelPackageInput < Struct.new(
       :model_package_arn_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1431,7 +1507,8 @@ module Aws::SageMaker
     class BatchDescribeModelPackageOutput < Struct.new(
       :model_package_summaries,
       :batch_describe_model_package_error_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1469,7 +1546,8 @@ module Aws::SageMaker
       :inference_specification,
       :model_package_status,
       :model_approval_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,7 +1601,8 @@ module Aws::SageMaker
       :start_time_offset,
       :end_time_offset,
       :exclude_features_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1533,7 +1612,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class BestObjectiveNotImproving < Struct.new(
       :max_number_of_training_jobs_not_improving,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1551,7 +1631,8 @@ module Aws::SageMaker
       :report,
       :pre_training_report,
       :post_training_report,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1569,7 +1650,8 @@ module Aws::SageMaker
       :traffic_routing_configuration,
       :termination_wait_in_seconds,
       :maximum_execution_timeout_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1579,7 +1661,8 @@ module Aws::SageMaker
     #   @return [String]
     class CacheHitResult < Struct.new(
       :source_pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1597,7 +1680,8 @@ module Aws::SageMaker
       :callback_token,
       :sqs_queue_url,
       :output_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,7 +1699,8 @@ module Aws::SageMaker
       :explainability,
       :model_insights,
       :backtest_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1710,8 @@ module Aws::SageMaker
     #   @return [Array<Types::AutoMLAlgorithmConfig>]
     class CandidateGenerationConfig < Struct.new(
       :algorithms_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1725,8 @@ module Aws::SageMaker
     class CandidateProperties < Struct.new(
       :candidate_artifact_locations,
       :candidate_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1677,7 +1764,8 @@ module Aws::SageMaker
       :kendra_settings,
       :generative_ai_settings,
       :emr_serverless_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1691,7 +1779,8 @@ module Aws::SageMaker
     class CapacityReservation < Struct.new(
       :arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1794,8 @@ module Aws::SageMaker
     class CapacitySize < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1719,7 +1809,8 @@ module Aws::SageMaker
     class CapacitySizeConfig < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1733,7 +1824,8 @@ module Aws::SageMaker
     class CaptureContentTypeHeader < Struct.new(
       :csv_content_types,
       :json_content_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1743,7 +1835,8 @@ module Aws::SageMaker
     #   @return [String]
     class CaptureOption < Struct.new(
       :capture_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1757,7 +1850,8 @@ module Aws::SageMaker
     class CategoricalParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1771,7 +1865,8 @@ module Aws::SageMaker
     class CategoricalParameterRange < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1781,7 +1876,8 @@ module Aws::SageMaker
     #   @return [Array<String>]
     class CategoricalParameterRangeSpecification < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1803,7 +1899,8 @@ module Aws::SageMaker
       :template_url,
       :role_arn,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1817,7 +1914,8 @@ module Aws::SageMaker
     class CfnStackCreateParameter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1835,7 +1933,8 @@ module Aws::SageMaker
       :name,
       :id,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1948,8 @@ module Aws::SageMaker
     class CfnStackParameter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1963,8 @@ module Aws::SageMaker
     class CfnStackUpdateParameter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1889,7 +1990,8 @@ module Aws::SageMaker
       :role_arn,
       :parameters,
       :stack_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1907,7 +2009,8 @@ module Aws::SageMaker
       :template_name,
       :template_url,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1941,7 +2044,8 @@ module Aws::SageMaker
       :record_wrapper_type,
       :input_mode,
       :shuffle_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1971,7 +2075,8 @@ module Aws::SageMaker
       :supported_content_types,
       :supported_compression_types,
       :supported_input_modes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1985,7 +2090,8 @@ module Aws::SageMaker
     class CheckpointConfig < Struct.new(
       :s3_uri,
       :local_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2023,7 +2129,8 @@ module Aws::SageMaker
       :check_job_arn,
       :skip_check,
       :register_new_baseline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2041,7 +2148,8 @@ module Aws::SageMaker
       :enable_explanations,
       :inference_config,
       :shap_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2091,7 +2199,8 @@ module Aws::SageMaker
       :label_headers,
       :feature_headers,
       :feature_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2109,7 +2218,8 @@ module Aws::SageMaker
       :mime_type,
       :shap_baseline,
       :shap_baseline_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2135,7 +2245,8 @@ module Aws::SageMaker
       :use_logit,
       :seed,
       :text_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2149,7 +2260,8 @@ module Aws::SageMaker
     class ClarifyTextConfig < Struct.new(
       :language,
       :granularity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2163,7 +2275,8 @@ module Aws::SageMaker
     class ClusterAutoScalingConfig < Struct.new(
       :mode,
       :auto_scaler_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2185,7 +2298,8 @@ module Aws::SageMaker
       :auto_scaler_type,
       :status,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2203,7 +2317,8 @@ module Aws::SageMaker
       :volume_size_in_gb,
       :volume_kms_key_id,
       :root_volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2245,7 +2360,8 @@ module Aws::SageMaker
       :event_time,
       :event_details,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2283,7 +2399,8 @@ module Aws::SageMaker
       :resource_type,
       :event_time,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2353,7 +2470,8 @@ module Aws::SageMaker
       :scheduled_update_config,
       :current_image_id,
       :desired_image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2407,7 +2525,8 @@ module Aws::SageMaker
       :override_vpc_config,
       :scheduled_update_config,
       :image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2421,7 +2540,8 @@ module Aws::SageMaker
     class ClusterInstancePlacement < Struct.new(
       :availability_zone,
       :availability_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2435,7 +2555,8 @@ module Aws::SageMaker
     class ClusterInstanceStatusDetails < Struct.new(
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2446,7 +2567,8 @@ module Aws::SageMaker
     class ClusterInstanceStorageConfig < Struct.new(
       :ebs_volume_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EbsVolumeConfig < ClusterInstanceStorageConfig; end
@@ -2463,7 +2585,8 @@ module Aws::SageMaker
     class ClusterLifeCycleConfig < Struct.new(
       :source_s3_uri,
       :on_create,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2481,7 +2604,8 @@ module Aws::SageMaker
       :failure_message,
       :eks_role_access_entries,
       :slr_access_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2559,7 +2683,8 @@ module Aws::SageMaker
       :current_image_id,
       :desired_image_id,
       :ultra_server_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2597,7 +2722,8 @@ module Aws::SageMaker
       :last_software_update_time,
       :instance_status,
       :ultra_server_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2607,7 +2733,8 @@ module Aws::SageMaker
     #   @return [Types::ClusterOrchestratorEksConfig]
     class ClusterOrchestrator < Struct.new(
       :eks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2617,7 +2744,8 @@ module Aws::SageMaker
     #   @return [String]
     class ClusterOrchestratorEksConfig < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2679,7 +2807,8 @@ module Aws::SageMaker
       :override_vpc_config,
       :scheduled_update_config,
       :environment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2729,7 +2858,8 @@ module Aws::SageMaker
       :override_vpc_config,
       :scheduled_update_config,
       :environment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2767,7 +2897,8 @@ module Aws::SageMaker
       :last_modified_time,
       :status,
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2793,7 +2924,8 @@ module Aws::SageMaker
       :creation_time,
       :cluster_status,
       :training_plan_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2939,8 @@ module Aws::SageMaker
     class ClusterTieredStorageConfig < Struct.new(
       :mode,
       :instance_memory_allocation_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2821,7 +2954,8 @@ module Aws::SageMaker
     class CodeEditorAppImageConfig < Struct.new(
       :file_system_config,
       :container_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2847,7 +2981,8 @@ module Aws::SageMaker
       :lifecycle_config_arns,
       :app_lifecycle_management,
       :built_in_lifecycle_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2857,7 +2992,8 @@ module Aws::SageMaker
     #   @return [String]
     class CodeRepository < Struct.new(
       :repository_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2883,7 +3019,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :git_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2897,7 +3034,8 @@ module Aws::SageMaker
     class CognitoConfig < Struct.new(
       :user_pool,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2915,7 +3053,8 @@ module Aws::SageMaker
       :user_pool,
       :user_group,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2926,7 +3065,8 @@ module Aws::SageMaker
     class CollectionConfig < Struct.new(
       :vector_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class VectorConfig < CollectionConfig; end
@@ -2943,7 +3083,8 @@ module Aws::SageMaker
     class CollectionConfiguration < Struct.new(
       :collection_name,
       :collection_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2993,7 +3134,8 @@ module Aws::SageMaker
       :compilation_target_platform_accelerator,
       :last_modified_time,
       :compilation_job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3011,7 +3153,8 @@ module Aws::SageMaker
       :compute_quota_resources,
       :resource_sharing_config,
       :preempt_team_tasks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3037,7 +3180,8 @@ module Aws::SageMaker
       :accelerators,
       :v_cpu,
       :memory_in_gi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3087,7 +3231,8 @@ module Aws::SageMaker
       :activation_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3101,7 +3246,8 @@ module Aws::SageMaker
     class ComputeQuotaTarget < Struct.new(
       :team_name,
       :fair_share_weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3111,7 +3257,8 @@ module Aws::SageMaker
     #   @return [String]
     class ConditionStepMetadata < Struct.new(
       :outcome,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3120,7 +3267,8 @@ module Aws::SageMaker
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3138,7 +3286,8 @@ module Aws::SageMaker
       :container_arguments,
       :container_entrypoint,
       :container_environment_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3188,7 +3337,8 @@ module Aws::SageMaker
       :model_package_name,
       :inference_specification_name,
       :multi_model_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3206,7 +3356,8 @@ module Aws::SageMaker
       :source_uri,
       :source_type,
       :source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3236,7 +3387,8 @@ module Aws::SageMaker
       :context_type,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3258,7 +3410,8 @@ module Aws::SageMaker
       :min_value,
       :max_value,
       :scaling_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3272,7 +3425,8 @@ module Aws::SageMaker
     class ContinuousParameterRangeSpecification < Struct.new(
       :min_value,
       :max_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3282,7 +3436,8 @@ module Aws::SageMaker
     #   @return [String]
     class ConvergenceDetected < Struct.new(
       :complete_on_convergence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3319,7 +3474,8 @@ module Aws::SageMaker
       :properties,
       :metadata_properties,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3328,7 +3484,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateActionResponse < Struct.new(
       :action_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3361,7 +3518,8 @@ module Aws::SageMaker
       :validation_specification,
       :certify_for_marketplace,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3370,7 +3528,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateAlgorithmOutput < Struct.new(
       :algorithm_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3395,7 +3554,8 @@ module Aws::SageMaker
       :kernel_gateway_image_config,
       :jupyter_lab_app_image_config,
       :code_editor_app_image_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3404,7 +3564,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateAppImageConfigResponse < Struct.new(
       :app_image_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3441,7 +3602,8 @@ module Aws::SageMaker
       :tags,
       :resource_spec,
       :recovery_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3450,7 +3612,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateAppResponse < Struct.new(
       :app_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3479,7 +3642,8 @@ module Aws::SageMaker
       :properties,
       :metadata_properties,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3488,7 +3652,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateArtifactResponse < Struct.new(
       :artifact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3533,7 +3698,8 @@ module Aws::SageMaker
       :generate_candidate_definitions_only,
       :tags,
       :model_deploy_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3542,7 +3708,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateAutoMLJobResponse < Struct.new(
       :auto_ml_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3591,7 +3758,8 @@ module Aws::SageMaker
       :model_deploy_config,
       :data_split_config,
       :auto_ml_compute_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3600,7 +3768,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateAutoMLJobV2Response < Struct.new(
       :auto_ml_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3649,7 +3818,8 @@ module Aws::SageMaker
       :node_provisioning_mode,
       :cluster_role,
       :auto_scaling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3658,7 +3828,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateClusterResponse < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3683,7 +3854,8 @@ module Aws::SageMaker
       :scheduler_config,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3696,7 +3868,8 @@ module Aws::SageMaker
     class CreateClusterSchedulerConfigResponse < Struct.new(
       :cluster_scheduler_config_arn,
       :cluster_scheduler_config_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3713,7 +3886,8 @@ module Aws::SageMaker
       :code_repository_name,
       :git_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3722,7 +3896,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateCodeRepositoryOutput < Struct.new(
       :code_repository_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3759,7 +3934,8 @@ module Aws::SageMaker
       :vpc_config,
       :stopping_condition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3768,7 +3944,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateCompilationJobResponse < Struct.new(
       :compilation_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3801,7 +3978,8 @@ module Aws::SageMaker
       :compute_quota_target,
       :activation_state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3814,7 +3992,8 @@ module Aws::SageMaker
     class CreateComputeQuotaResponse < Struct.new(
       :compute_quota_arn,
       :compute_quota_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3843,7 +4022,8 @@ module Aws::SageMaker
       :description,
       :properties,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3852,7 +4032,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateContextResponse < Struct.new(
       :context_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3897,7 +4078,8 @@ module Aws::SageMaker
       :role_arn,
       :stopping_condition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3906,7 +4088,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateDataQualityJobDefinitionResponse < Struct.new(
       :job_definition_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3935,7 +4118,8 @@ module Aws::SageMaker
       :output_config,
       :tags,
       :enable_iot_role_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3994,7 +4178,8 @@ module Aws::SageMaker
       :app_security_group_management,
       :tag_propagation,
       :default_space_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4011,7 +4196,8 @@ module Aws::SageMaker
       :domain_arn,
       :domain_id,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4036,7 +4222,8 @@ module Aws::SageMaker
       :device_fleet_name,
       :stages,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4045,7 +4232,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateEdgeDeploymentPlanResponse < Struct.new(
       :edge_deployment_plan_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4058,7 +4246,8 @@ module Aws::SageMaker
     class CreateEdgeDeploymentStageRequest < Struct.new(
       :edge_deployment_plan_name,
       :stages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4095,7 +4284,8 @@ module Aws::SageMaker
       :output_config,
       :resource_key,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4144,7 +4334,8 @@ module Aws::SageMaker
       :execution_role_arn,
       :vpc_config,
       :enable_network_isolation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4153,7 +4344,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateEndpointConfigOutput < Struct.new(
       :endpoint_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4174,7 +4366,8 @@ module Aws::SageMaker
       :endpoint_config_name,
       :deployment_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4183,7 +4376,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateEndpointOutput < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4204,7 +4398,8 @@ module Aws::SageMaker
       :display_name,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4213,7 +4408,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateExperimentResponse < Struct.new(
       :experiment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4258,7 +4454,8 @@ module Aws::SageMaker
       :role_arn,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4267,7 +4464,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateFeatureGroupResponse < Struct.new(
       :feature_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4300,7 +4498,8 @@ module Aws::SageMaker
       :output_config,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4309,7 +4508,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateFlowDefinitionResponse < Struct.new(
       :flow_definition_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4342,7 +4542,8 @@ module Aws::SageMaker
       :access_config,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4355,7 +4556,8 @@ module Aws::SageMaker
     class CreateHubContentPresignedUrlsResponse < Struct.new(
       :authorized_url_configs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4380,7 +4582,8 @@ module Aws::SageMaker
       :hub_content_name,
       :min_version,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4393,7 +4596,8 @@ module Aws::SageMaker
     class CreateHubContentReferenceResponse < Struct.new(
       :hub_arn,
       :hub_content_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4422,7 +4626,8 @@ module Aws::SageMaker
       :hub_search_keywords,
       :s3_storage_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4431,7 +4636,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateHubResponse < Struct.new(
       :hub_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4448,7 +4654,8 @@ module Aws::SageMaker
       :human_task_ui_name,
       :ui_template,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4457,7 +4664,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateHumanTaskUiResponse < Struct.new(
       :human_task_ui_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4490,7 +4698,8 @@ module Aws::SageMaker
       :warm_start_config,
       :tags,
       :autotune,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4499,7 +4708,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateHyperParameterTuningJobResponse < Struct.new(
       :hyper_parameter_tuning_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4524,7 +4734,8 @@ module Aws::SageMaker
       :image_name,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4533,7 +4744,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateImageResponse < Struct.new(
       :image_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4582,7 +4794,8 @@ module Aws::SageMaker
       :processor,
       :horovod,
       :release_notes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4591,7 +4804,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateImageVersionResponse < Struct.new(
       :image_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4620,7 +4834,8 @@ module Aws::SageMaker
       :specification,
       :runtime_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4629,7 +4844,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateInferenceComponentOutput < Struct.new(
       :inference_component_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4678,7 +4894,8 @@ module Aws::SageMaker
       :shadow_mode_config,
       :kms_key,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4687,7 +4904,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4724,7 +4942,8 @@ module Aws::SageMaker
       :stopping_conditions,
       :output_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4733,7 +4952,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateInferenceRecommendationsJobResponse < Struct.new(
       :job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4778,7 +4998,8 @@ module Aws::SageMaker
       :labeling_job_algorithms_config,
       :human_task_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4787,7 +5008,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateLabelingJobResponse < Struct.new(
       :labeling_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4824,7 +5046,8 @@ module Aws::SageMaker
       :automatic_model_registration,
       :weekly_maintenance_window_start,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4833,7 +5056,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateMlflowTrackingServerResponse < Struct.new(
       :tracking_server_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4878,7 +5102,8 @@ module Aws::SageMaker
       :role_arn,
       :stopping_condition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4887,7 +5112,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateModelBiasJobDefinitionResponse < Struct.new(
       :job_definition_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4908,7 +5134,8 @@ module Aws::SageMaker
       :model_card_version,
       :model_card_export_job_name,
       :output_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4917,7 +5144,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateModelCardExportJobResponse < Struct.new(
       :model_card_export_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4942,7 +5170,8 @@ module Aws::SageMaker
       :content,
       :model_card_status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4951,7 +5180,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateModelCardResponse < Struct.new(
       :model_card_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4996,7 +5226,8 @@ module Aws::SageMaker
       :role_arn,
       :stopping_condition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5005,7 +5236,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateModelExplainabilityJobDefinitionResponse < Struct.new(
       :job_definition_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5042,7 +5274,8 @@ module Aws::SageMaker
       :tags,
       :vpc_config,
       :enable_network_isolation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5051,7 +5284,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateModelOutput < Struct.new(
       :model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5068,7 +5302,8 @@ module Aws::SageMaker
       :model_package_group_name,
       :model_package_group_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5077,7 +5312,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateModelPackageGroupOutput < Struct.new(
       :model_package_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5174,7 +5410,8 @@ module Aws::SageMaker
       :security_config,
       :model_card,
       :model_life_cycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5183,7 +5420,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateModelPackageOutput < Struct.new(
       :model_package_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5228,7 +5466,8 @@ module Aws::SageMaker
       :role_arn,
       :stopping_condition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5237,7 +5476,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateModelQualityJobDefinitionResponse < Struct.new(
       :job_definition_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5254,7 +5494,8 @@ module Aws::SageMaker
       :monitoring_schedule_name,
       :monitoring_schedule_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5263,7 +5504,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateMonitoringScheduleResponse < Struct.new(
       :monitoring_schedule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5336,7 +5578,8 @@ module Aws::SageMaker
       :root_access,
       :platform_identifier,
       :instance_metadata_service_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5357,7 +5600,8 @@ module Aws::SageMaker
       :on_create,
       :on_start,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5366,7 +5610,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateNotebookInstanceLifecycleConfigOutput < Struct.new(
       :notebook_instance_lifecycle_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5375,7 +5620,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateNotebookInstanceOutput < Struct.new(
       :notebook_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5420,7 +5666,8 @@ module Aws::SageMaker
       :stopping_condition,
       :tags,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5429,7 +5676,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateOptimizationJobResponse < Struct.new(
       :optimization_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5446,7 +5694,8 @@ module Aws::SageMaker
       :arn,
       :expires_in_seconds,
       :session_expiration_duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5455,7 +5704,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreatePartnerAppPresignedUrlResponse < Struct.new(
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5504,7 +5754,8 @@ module Aws::SageMaker
       :enable_iam_session_based_identity,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5513,7 +5764,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreatePartnerAppResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5554,7 +5806,8 @@ module Aws::SageMaker
       :role_arn,
       :tags,
       :parallelism_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5563,7 +5816,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreatePipelineResponse < Struct.new(
       :pipeline_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5592,7 +5846,8 @@ module Aws::SageMaker
       :expires_in_seconds,
       :space_name,
       :landing_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5601,7 +5856,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreatePresignedDomainUrlResponse < Struct.new(
       :authorized_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5618,7 +5874,8 @@ module Aws::SageMaker
       :tracking_server_name,
       :expires_in_seconds,
       :session_expiration_duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5627,7 +5884,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreatePresignedMlflowTrackingServerUrlResponse < Struct.new(
       :authorized_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5640,7 +5898,8 @@ module Aws::SageMaker
     class CreatePresignedNotebookInstanceUrlInput < Struct.new(
       :notebook_instance_name,
       :session_expiration_duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5649,7 +5908,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreatePresignedNotebookInstanceUrlOutput < Struct.new(
       :authorized_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5698,7 +5958,8 @@ module Aws::SageMaker
       :role_arn,
       :tags,
       :experiment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5707,7 +5968,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateProcessingJobResponse < Struct.new(
       :processing_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5732,7 +5994,8 @@ module Aws::SageMaker
       :service_catalog_provisioning_details,
       :tags,
       :template_providers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5745,7 +6008,8 @@ module Aws::SageMaker
     class CreateProjectOutput < Struct.new(
       :project_arn,
       :project_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5778,7 +6042,8 @@ module Aws::SageMaker
       :ownership_settings,
       :space_sharing_settings,
       :space_display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5787,7 +6052,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateSpaceResponse < Struct.new(
       :space_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5808,7 +6074,8 @@ module Aws::SageMaker
       :studio_lifecycle_config_content,
       :studio_lifecycle_config_app_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5817,7 +6084,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateStudioLifecycleConfigResponse < Struct.new(
       :studio_lifecycle_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5827,7 +6095,8 @@ module Aws::SageMaker
     #   @return [Types::CfnCreateTemplateProvider]
     class CreateTemplateProvider < Struct.new(
       :cfn_template_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5932,7 +6201,8 @@ module Aws::SageMaker
       :remote_debug_config,
       :infra_check_config,
       :session_chaining_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5941,7 +6211,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateTrainingJobResponse < Struct.new(
       :training_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5962,7 +6233,8 @@ module Aws::SageMaker
       :training_plan_offering_id,
       :spare_instance_count_per_ultra_server,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5971,7 +6243,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateTrainingPlanResponse < Struct.new(
       :training_plan_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6032,7 +6305,8 @@ module Aws::SageMaker
       :data_processing,
       :tags,
       :experiment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6041,7 +6315,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateTransformJobResponse < Struct.new(
       :transform_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6086,7 +6361,8 @@ module Aws::SageMaker
       :output_artifacts,
       :metadata_properties,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6095,7 +6371,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateTrialComponentResponse < Struct.new(
       :trial_component_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6120,7 +6397,8 @@ module Aws::SageMaker
       :experiment_name,
       :metadata_properties,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6129,7 +6407,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateTrialResponse < Struct.new(
       :trial_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6158,7 +6437,8 @@ module Aws::SageMaker
       :single_sign_on_user_value,
       :tags,
       :user_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6167,7 +6447,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateUserProfileResponse < Struct.new(
       :user_profile_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6200,7 +6481,8 @@ module Aws::SageMaker
       :tags,
       :workforce_vpc_config,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6209,7 +6491,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateWorkforceResponse < Struct.new(
       :workforce_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6242,7 +6525,8 @@ module Aws::SageMaker
       :notification_configuration,
       :worker_access_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6251,7 +6535,8 @@ module Aws::SageMaker
     #   @return [String]
     class CreateWorkteamResponse < Struct.new(
       :workteam_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6270,7 +6555,8 @@ module Aws::SageMaker
       :f_sx_lustre_file_system,
       :s3_file_system,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EFSFileSystem < CustomFileSystem; end
@@ -6294,7 +6580,8 @@ module Aws::SageMaker
       :f_sx_lustre_file_system_config,
       :s3_file_system_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EFSFileSystemConfig < CustomFileSystemConfig; end
@@ -6317,7 +6604,8 @@ module Aws::SageMaker
       :image_name,
       :image_version_number,
       :app_image_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6331,7 +6619,8 @@ module Aws::SageMaker
     class CustomPosixUserConfig < Struct.new(
       :uid,
       :gid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6349,7 +6638,8 @@ module Aws::SageMaker
       :metric_name,
       :namespace,
       :statistic,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6379,7 +6669,8 @@ module Aws::SageMaker
       :kms_key_id,
       :capture_options,
       :capture_content_type_header,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6405,7 +6696,8 @@ module Aws::SageMaker
       :current_sampling_percentage,
       :destination_s3_uri,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6423,7 +6715,8 @@ module Aws::SageMaker
       :table_name,
       :catalog,
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6441,7 +6734,8 @@ module Aws::SageMaker
       :input_filter,
       :output_filter,
       :join_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6471,7 +6765,8 @@ module Aws::SageMaker
       :record_preprocessor_source_uri,
       :post_analytics_processor_source_uri,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6489,7 +6784,8 @@ module Aws::SageMaker
       :baselining_job_name,
       :constraints_resource,
       :statistics_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6503,7 +6799,8 @@ module Aws::SageMaker
     class DataQualityJobInput < Struct.new(
       :endpoint_input,
       :batch_transform_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6517,7 +6814,8 @@ module Aws::SageMaker
     class DataSource < Struct.new(
       :s3_data_source,
       :file_system_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6543,7 +6841,8 @@ module Aws::SageMaker
       :local_path,
       :data_distribution_type,
       :input_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6565,7 +6864,8 @@ module Aws::SageMaker
       :s3_output_path,
       :hook_parameters,
       :collection_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6599,7 +6899,8 @@ module Aws::SageMaker
       :instance_type,
       :volume_size_in_gb,
       :rule_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6625,7 +6926,8 @@ module Aws::SageMaker
       :rule_evaluation_status,
       :status_details,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6639,7 +6941,8 @@ module Aws::SageMaker
     class DefaultEbsStorageSettings < Struct.new(
       :default_ebs_volume_size_in_gb,
       :maximum_ebs_volume_size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6677,7 +6980,8 @@ module Aws::SageMaker
       :space_storage_settings,
       :custom_posix_user_config,
       :custom_file_system_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6687,7 +6991,8 @@ module Aws::SageMaker
     #   @return [Types::DefaultEbsStorageSettings]
     class DefaultSpaceStorageSettings < Struct.new(
       :default_ebs_storage_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6696,7 +7001,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteActionRequest < Struct.new(
       :action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6705,7 +7011,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteActionResponse < Struct.new(
       :action_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6714,7 +7021,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteAlgorithmInput < Struct.new(
       :algorithm_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6723,7 +7031,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteAppImageConfigRequest < Struct.new(
       :app_image_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6748,7 +7057,8 @@ module Aws::SageMaker
       :space_name,
       :app_type,
       :app_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6761,7 +7071,8 @@ module Aws::SageMaker
     class DeleteArtifactRequest < Struct.new(
       :artifact_arn,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6770,7 +7081,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteArtifactResponse < Struct.new(
       :artifact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6783,7 +7095,8 @@ module Aws::SageMaker
     class DeleteAssociationRequest < Struct.new(
       :source_arn,
       :destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6796,7 +7109,8 @@ module Aws::SageMaker
     class DeleteAssociationResponse < Struct.new(
       :source_arn,
       :destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6805,7 +7119,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6814,7 +7129,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteClusterResponse < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6823,7 +7139,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteClusterSchedulerConfigRequest < Struct.new(
       :cluster_scheduler_config_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6832,7 +7149,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteCodeRepositoryInput < Struct.new(
       :code_repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6841,7 +7159,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteCompilationJobRequest < Struct.new(
       :compilation_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6850,7 +7169,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteComputeQuotaRequest < Struct.new(
       :compute_quota_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6859,7 +7179,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteContextRequest < Struct.new(
       :context_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6868,7 +7189,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteContextResponse < Struct.new(
       :context_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6877,7 +7199,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteDataQualityJobDefinitionRequest < Struct.new(
       :job_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6886,7 +7209,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteDeviceFleetRequest < Struct.new(
       :device_fleet_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6899,7 +7223,8 @@ module Aws::SageMaker
     class DeleteDomainRequest < Struct.new(
       :domain_id,
       :retention_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6908,7 +7233,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteEdgeDeploymentPlanRequest < Struct.new(
       :edge_deployment_plan_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6921,7 +7247,8 @@ module Aws::SageMaker
     class DeleteEdgeDeploymentStageRequest < Struct.new(
       :edge_deployment_plan_name,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6930,7 +7257,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteEndpointConfigInput < Struct.new(
       :endpoint_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6939,7 +7267,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteEndpointInput < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6948,7 +7277,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteExperimentRequest < Struct.new(
       :experiment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6957,7 +7287,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteExperimentResponse < Struct.new(
       :experiment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6966,7 +7297,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteFeatureGroupRequest < Struct.new(
       :feature_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6975,12 +7307,14 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteFlowDefinitionRequest < Struct.new(
       :flow_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFlowDefinitionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6997,7 +7331,8 @@ module Aws::SageMaker
       :hub_name,
       :hub_content_type,
       :hub_content_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7018,7 +7353,8 @@ module Aws::SageMaker
       :hub_content_type,
       :hub_content_name,
       :hub_content_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7027,7 +7363,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteHubRequest < Struct.new(
       :hub_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7036,12 +7373,14 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteHumanTaskUiRequest < Struct.new(
       :human_task_ui_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteHumanTaskUiResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7050,7 +7389,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteHyperParameterTuningJobRequest < Struct.new(
       :hyper_parameter_tuning_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7059,12 +7399,14 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteImageRequest < Struct.new(
       :image_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteImageResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7081,12 +7423,14 @@ module Aws::SageMaker
       :image_name,
       :version,
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteImageVersionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7095,7 +7439,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteInferenceComponentInput < Struct.new(
       :inference_component_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7104,7 +7449,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteInferenceExperimentRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7113,7 +7459,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7122,7 +7469,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteMlflowTrackingServerRequest < Struct.new(
       :tracking_server_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7131,7 +7479,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteMlflowTrackingServerResponse < Struct.new(
       :tracking_server_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7140,7 +7489,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteModelBiasJobDefinitionRequest < Struct.new(
       :job_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7149,7 +7499,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteModelCardRequest < Struct.new(
       :model_card_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7158,7 +7509,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteModelExplainabilityJobDefinitionRequest < Struct.new(
       :job_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7167,7 +7519,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteModelInput < Struct.new(
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7176,7 +7529,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteModelPackageGroupInput < Struct.new(
       :model_package_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7185,7 +7539,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteModelPackageGroupPolicyInput < Struct.new(
       :model_package_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7194,7 +7549,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteModelPackageInput < Struct.new(
       :model_package_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7203,7 +7559,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteModelQualityJobDefinitionRequest < Struct.new(
       :job_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7212,7 +7569,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7221,7 +7579,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7230,7 +7589,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteNotebookInstanceLifecycleConfigInput < Struct.new(
       :notebook_instance_lifecycle_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7239,7 +7599,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteOptimizationJobRequest < Struct.new(
       :optimization_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7252,7 +7613,8 @@ module Aws::SageMaker
     class DeletePartnerAppRequest < Struct.new(
       :arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7261,7 +7623,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeletePartnerAppResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7274,7 +7637,8 @@ module Aws::SageMaker
     class DeletePipelineRequest < Struct.new(
       :pipeline_name,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7283,7 +7647,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeletePipelineResponse < Struct.new(
       :pipeline_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7292,7 +7657,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteProjectInput < Struct.new(
       :project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7305,7 +7671,8 @@ module Aws::SageMaker
     class DeleteSpaceRequest < Struct.new(
       :domain_id,
       :space_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7314,7 +7681,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteStudioLifecycleConfigRequest < Struct.new(
       :studio_lifecycle_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7327,12 +7695,14 @@ module Aws::SageMaker
     class DeleteTagsInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTagsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7341,7 +7711,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteTrialComponentRequest < Struct.new(
       :trial_component_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7350,7 +7721,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteTrialComponentResponse < Struct.new(
       :trial_component_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7359,7 +7731,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteTrialRequest < Struct.new(
       :trial_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7368,7 +7741,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteTrialResponse < Struct.new(
       :trial_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7381,7 +7755,8 @@ module Aws::SageMaker
     class DeleteUserProfileRequest < Struct.new(
       :domain_id,
       :user_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7390,12 +7765,14 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteWorkforceRequest < Struct.new(
       :workforce_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkforceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7404,7 +7781,8 @@ module Aws::SageMaker
     #   @return [String]
     class DeleteWorkteamRequest < Struct.new(
       :workteam_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7413,7 +7791,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     class DeleteWorkteamResponse < Struct.new(
       :success,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7431,7 +7810,8 @@ module Aws::SageMaker
       :specified_image,
       :resolved_image,
       :resolution_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7449,7 +7829,8 @@ module Aws::SageMaker
       :blue_green_update_policy,
       :rolling_update_policy,
       :auto_rollback_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7467,7 +7848,8 @@ module Aws::SageMaker
       :rolling_update_policy,
       :wait_interval_in_seconds,
       :auto_rollback_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7481,7 +7863,8 @@ module Aws::SageMaker
     class DeploymentRecommendation < Struct.new(
       :recommendation_status,
       :real_time_inference_recommendations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7499,7 +7882,8 @@ module Aws::SageMaker
       :stage_name,
       :device_selection_config,
       :deployment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7521,7 +7905,8 @@ module Aws::SageMaker
       :device_selection_config,
       :deployment_config,
       :deployment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7534,7 +7919,8 @@ module Aws::SageMaker
     class DeregisterDevicesRequest < Struct.new(
       :device_fleet_name,
       :device_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7544,7 +7930,8 @@ module Aws::SageMaker
     #   @return [String]
     class DerivedInformation < Struct.new(
       :derived_data_input_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7553,7 +7940,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeActionRequest < Struct.new(
       :action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7610,7 +7998,8 @@ module Aws::SageMaker
       :last_modified_by,
       :metadata_properties,
       :lineage_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7619,7 +8008,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeAlgorithmInput < Struct.new(
       :algorithm_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7668,7 +8058,8 @@ module Aws::SageMaker
       :algorithm_status_details,
       :product_id,
       :certify_for_marketplace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7677,7 +8068,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeAppImageConfigRequest < Struct.new(
       :app_image_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7710,7 +8102,8 @@ module Aws::SageMaker
       :kernel_gateway_image_config,
       :jupyter_lab_app_image_config,
       :code_editor_app_image_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7735,7 +8128,8 @@ module Aws::SageMaker
       :space_name,
       :app_type,
       :app_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7800,7 +8194,8 @@ module Aws::SageMaker
       :failure_reason,
       :resource_spec,
       :built_in_lifecycle_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7809,7 +8204,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeArtifactRequest < Struct.new(
       :artifact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7858,7 +8254,8 @@ module Aws::SageMaker
       :last_modified_by,
       :metadata_properties,
       :lineage_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7867,7 +8264,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeAutoMLJobRequest < Struct.new(
       :auto_ml_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7956,7 +8354,8 @@ module Aws::SageMaker
       :resolved_attributes,
       :model_deploy_config,
       :model_deploy_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7965,7 +8364,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeAutoMLJobV2Request < Struct.new(
       :auto_ml_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8062,7 +8462,8 @@ module Aws::SageMaker
       :data_split_config,
       :security_config,
       :auto_ml_compute_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8075,7 +8476,8 @@ module Aws::SageMaker
     class DescribeClusterEventRequest < Struct.new(
       :event_id,
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8084,7 +8486,8 @@ module Aws::SageMaker
     #   @return [Types::ClusterEventDetail]
     class DescribeClusterEventResponse < Struct.new(
       :event_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8101,7 +8504,8 @@ module Aws::SageMaker
       :cluster_name,
       :node_id,
       :node_logical_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8110,7 +8514,8 @@ module Aws::SageMaker
     #   @return [Types::ClusterNodeDetails]
     class DescribeClusterNodeResponse < Struct.new(
       :node_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8119,7 +8524,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8180,7 +8586,8 @@ module Aws::SageMaker
       :node_provisioning_mode,
       :cluster_role,
       :auto_scaling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8193,7 +8600,8 @@ module Aws::SageMaker
     class DescribeClusterSchedulerConfigRequest < Struct.new(
       :cluster_scheduler_config_id,
       :cluster_scheduler_config_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8250,7 +8658,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8259,7 +8668,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeCodeRepositoryInput < Struct.new(
       :code_repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8284,7 +8694,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :git_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8293,7 +8704,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeCompilationJobRequest < Struct.new(
       :compilation_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8370,7 +8782,8 @@ module Aws::SageMaker
       :output_config,
       :vpc_config,
       :derived_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8383,7 +8796,8 @@ module Aws::SageMaker
     class DescribeComputeQuotaRequest < Struct.new(
       :compute_quota_id,
       :compute_quota_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8448,7 +8862,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8457,7 +8872,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeContextRequest < Struct.new(
       :context_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8506,7 +8922,8 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       :lineage_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8515,7 +8932,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeDataQualityJobDefinitionRequest < Struct.new(
       :job_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8564,7 +8982,8 @@ module Aws::SageMaker
       :network_config,
       :role_arn,
       :stopping_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8573,7 +8992,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeDeviceFleetRequest < Struct.new(
       :device_fleet_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8610,7 +9030,8 @@ module Aws::SageMaker
       :last_modified_time,
       :role_arn,
       :iot_role_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8627,7 +9048,8 @@ module Aws::SageMaker
       :next_token,
       :device_name,
       :device_fleet_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8676,7 +9098,8 @@ module Aws::SageMaker
       :max_models,
       :next_token,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8685,7 +9108,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeDomainRequest < Struct.new(
       :domain_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8784,7 +9208,8 @@ module Aws::SageMaker
       :app_security_group_management,
       :tag_propagation,
       :default_space_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8801,7 +9226,8 @@ module Aws::SageMaker
       :edge_deployment_plan_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8850,7 +9276,8 @@ module Aws::SageMaker
       :next_token,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8859,7 +9286,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeEdgePackagingJobRequest < Struct.new(
       :edge_packaging_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8924,7 +9352,8 @@ module Aws::SageMaker
       :model_artifact,
       :model_signature,
       :preset_deployment_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8933,7 +9362,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeEndpointConfigInput < Struct.new(
       :endpoint_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8986,7 +9416,8 @@ module Aws::SageMaker
       :execution_role_arn,
       :vpc_config,
       :enable_network_isolation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8995,7 +9426,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeEndpointInput < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9056,7 +9488,8 @@ module Aws::SageMaker
       :pending_deployment_summary,
       :explainer_config,
       :shadow_production_variants,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9065,7 +9498,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeExperimentRequest < Struct.new(
       :experiment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9106,7 +9540,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9119,7 +9554,8 @@ module Aws::SageMaker
     class DescribeFeatureGroupRequest < Struct.new(
       :feature_group_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9196,7 +9632,8 @@ module Aws::SageMaker
       :description,
       :next_token,
       :online_store_total_size_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9209,7 +9646,8 @@ module Aws::SageMaker
     class DescribeFeatureMetadataRequest < Struct.new(
       :feature_group_name,
       :feature_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9246,7 +9684,8 @@ module Aws::SageMaker
       :last_modified_time,
       :description,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9255,7 +9694,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeFlowDefinitionRequest < Struct.new(
       :flow_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9300,7 +9740,8 @@ module Aws::SageMaker
       :output_config,
       :role_arn,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9321,7 +9762,8 @@ module Aws::SageMaker
       :hub_content_type,
       :hub_content_name,
       :hub_content_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9406,7 +9848,8 @@ module Aws::SageMaker
       :failure_reason,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9415,7 +9858,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeHubRequest < Struct.new(
       :hub_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9460,7 +9904,8 @@ module Aws::SageMaker
       :failure_reason,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9469,7 +9914,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeHumanTaskUiRequest < Struct.new(
       :human_task_ui_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9494,7 +9940,8 @@ module Aws::SageMaker
       :human_task_ui_status,
       :creation_time,
       :ui_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9503,7 +9950,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeHyperParameterTuningJobRequest < Struct.new(
       :hyper_parameter_tuning_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9580,7 +10028,8 @@ module Aws::SageMaker
       :failure_reason,
       :tuning_job_completion_details,
       :consumed_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9589,7 +10038,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeImageRequest < Struct.new(
       :image_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9630,7 +10080,8 @@ module Aws::SageMaker
       :image_status,
       :last_modified_time,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9647,7 +10098,8 @@ module Aws::SageMaker
       :image_name,
       :version,
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9716,7 +10168,8 @@ module Aws::SageMaker
       :processor,
       :horovod,
       :release_notes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9725,7 +10178,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeInferenceComponentInput < Struct.new(
       :inference_component_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9778,7 +10232,8 @@ module Aws::SageMaker
       :last_modified_time,
       :inference_component_status,
       :last_deployment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9787,7 +10242,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeInferenceExperimentRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9856,7 +10312,8 @@ module Aws::SageMaker
       :data_storage_config,
       :shadow_mode_config,
       :kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9865,7 +10322,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeInferenceRecommendationsJobRequest < Struct.new(
       :job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9926,7 +10384,8 @@ module Aws::SageMaker
       :stopping_conditions,
       :inference_recommendations,
       :endpoint_performances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9935,7 +10394,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeLabelingJobRequest < Struct.new(
       :labeling_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10012,7 +10472,8 @@ module Aws::SageMaker
       :human_task_config,
       :tags,
       :labeling_job_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10021,7 +10482,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeLineageGroupRequest < Struct.new(
       :lineage_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10058,7 +10520,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10067,7 +10530,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeMlflowTrackingServerRequest < Struct.new(
       :tracking_server_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10136,7 +10600,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10145,7 +10610,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeModelBiasJobDefinitionRequest < Struct.new(
       :job_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10194,7 +10660,8 @@ module Aws::SageMaker
       :network_config,
       :role_arn,
       :stopping_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10203,7 +10670,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeModelCardExportJobRequest < Struct.new(
       :model_card_export_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10248,7 +10716,8 @@ module Aws::SageMaker
       :last_modified_at,
       :failure_reason,
       :export_artifacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10261,7 +10730,8 @@ module Aws::SageMaker
     class DescribeModelCardRequest < Struct.new(
       :model_card_name,
       :model_card_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10310,7 +10780,8 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       :model_card_processing_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10319,7 +10790,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeModelExplainabilityJobDefinitionRequest < Struct.new(
       :job_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10368,7 +10840,8 @@ module Aws::SageMaker
       :network_config,
       :role_arn,
       :stopping_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10377,7 +10850,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeModelInput < Struct.new(
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10422,7 +10896,8 @@ module Aws::SageMaker
       :model_arn,
       :enable_network_isolation,
       :deployment_recommendation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10431,7 +10906,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeModelPackageGroupInput < Struct.new(
       :model_package_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10460,7 +10936,8 @@ module Aws::SageMaker
       :creation_time,
       :created_by,
       :model_package_group_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10469,7 +10946,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeModelPackageInput < Struct.new(
       :model_package_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10594,7 +11072,8 @@ module Aws::SageMaker
       :security_config,
       :model_card,
       :model_life_cycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10603,7 +11082,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeModelQualityJobDefinitionRequest < Struct.new(
       :job_definition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10652,7 +11132,8 @@ module Aws::SageMaker
       :network_config,
       :role_arn,
       :stopping_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10661,7 +11142,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10706,7 +11188,8 @@ module Aws::SageMaker
       :monitoring_schedule_config,
       :endpoint_name,
       :last_monitoring_execution_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10715,7 +11198,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10724,7 +11208,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeNotebookInstanceLifecycleConfigInput < Struct.new(
       :notebook_instance_lifecycle_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10753,7 +11238,8 @@ module Aws::SageMaker
       :on_start,
       :last_modified_time,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10850,7 +11336,8 @@ module Aws::SageMaker
       :root_access,
       :platform_identifier,
       :instance_metadata_service_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10859,7 +11346,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeOptimizationJobRequest < Struct.new(
       :optimization_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10932,7 +11420,8 @@ module Aws::SageMaker
       :role_arn,
       :stopping_condition,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10941,7 +11430,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribePartnerAppRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11010,7 +11500,8 @@ module Aws::SageMaker
       :auth_type,
       :enable_iam_session_based_identity,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11019,7 +11510,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribePipelineDefinitionForExecutionRequest < Struct.new(
       :pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11032,7 +11524,8 @@ module Aws::SageMaker
     class DescribePipelineDefinitionForExecutionResponse < Struct.new(
       :pipeline_definition,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11041,7 +11534,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribePipelineExecutionRequest < Struct.new(
       :pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11102,7 +11596,8 @@ module Aws::SageMaker
       :parallelism_configuration,
       :selective_execution_config,
       :pipeline_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11115,7 +11610,8 @@ module Aws::SageMaker
     class DescribePipelineRequest < Struct.new(
       :pipeline_name,
       :pipeline_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11180,7 +11676,8 @@ module Aws::SageMaker
       :parallelism_configuration,
       :pipeline_version_display_name,
       :pipeline_version_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11189,7 +11686,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeProcessingJobRequest < Struct.new(
       :processing_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11278,7 +11776,8 @@ module Aws::SageMaker
       :monitoring_schedule_arn,
       :auto_ml_job_arn,
       :training_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11287,7 +11786,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeProjectInput < Struct.new(
       :project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11340,7 +11840,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :last_modified_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11349,7 +11850,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeReservedCapacityRequest < Struct.new(
       :reserved_capacity_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11406,7 +11908,8 @@ module Aws::SageMaker
       :available_instance_count,
       :in_use_instance_count,
       :ultra_server_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11419,7 +11922,8 @@ module Aws::SageMaker
     class DescribeSpaceRequest < Struct.new(
       :domain_id,
       :space_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11476,7 +11980,8 @@ module Aws::SageMaker
       :space_sharing_settings,
       :space_display_name,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11485,7 +11990,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeStudioLifecycleConfigRequest < Struct.new(
       :studio_lifecycle_config_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11514,7 +12020,8 @@ module Aws::SageMaker
       :last_modified_time,
       :studio_lifecycle_config_content,
       :studio_lifecycle_config_app_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11523,7 +12030,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeSubscribedWorkteamRequest < Struct.new(
       :workteam_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11532,7 +12040,8 @@ module Aws::SageMaker
     #   @return [Types::SubscribedWorkteam]
     class DescribeSubscribedWorkteamResponse < Struct.new(
       :subscribed_workteam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11541,7 +12050,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeTrainingJobRequest < Struct.new(
       :training_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11718,7 +12228,8 @@ module Aws::SageMaker
       :retry_strategy,
       :remote_debug_config,
       :infra_check_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11727,7 +12238,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeTrainingPlanRequest < Struct.new(
       :training_plan_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11804,7 +12316,8 @@ module Aws::SageMaker
       :total_ultra_server_count,
       :target_resources,
       :reserved_capacity_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11813,7 +12326,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeTransformJobRequest < Struct.new(
       :transform_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11902,7 +12416,8 @@ module Aws::SageMaker
       :auto_ml_job_arn,
       :data_processing,
       :experiment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11911,7 +12426,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeTrialComponentRequest < Struct.new(
       :trial_component_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11988,7 +12504,8 @@ module Aws::SageMaker
       :metrics,
       :lineage_group_arn,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11997,7 +12514,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeTrialRequest < Struct.new(
       :trial_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12042,7 +12560,8 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       :metadata_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12055,7 +12574,8 @@ module Aws::SageMaker
     class DescribeUserProfileRequest < Struct.new(
       :domain_id,
       :user_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12104,7 +12624,8 @@ module Aws::SageMaker
       :single_sign_on_user_identifier,
       :single_sign_on_user_value,
       :user_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12113,7 +12634,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeWorkforceRequest < Struct.new(
       :workforce_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12122,7 +12644,8 @@ module Aws::SageMaker
     #   @return [Types::Workforce]
     class DescribeWorkforceResponse < Struct.new(
       :workforce,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12131,7 +12654,8 @@ module Aws::SageMaker
     #   @return [String]
     class DescribeWorkteamRequest < Struct.new(
       :workteam_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12140,7 +12664,8 @@ module Aws::SageMaker
     #   @return [Types::Workteam]
     class DescribeWorkteamResponse < Struct.new(
       :workteam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12162,7 +12687,8 @@ module Aws::SageMaker
       :desired_weight,
       :desired_instance_count,
       :serverless_update_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12179,7 +12705,8 @@ module Aws::SageMaker
       :cluster_arn,
       :node_id,
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12208,7 +12735,8 @@ module Aws::SageMaker
       :attach_time,
       :status,
       :device_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12226,7 +12754,8 @@ module Aws::SageMaker
       :device_name,
       :description,
       :iot_thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12276,7 +12805,8 @@ module Aws::SageMaker
       :device_deployment_status_message,
       :description,
       :deployment_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12298,7 +12828,8 @@ module Aws::SageMaker
       :device_fleet_name,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12320,7 +12851,8 @@ module Aws::SageMaker
       :percentage,
       :device_names,
       :device_name_contains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12334,7 +12866,8 @@ module Aws::SageMaker
     class DeviceStats < Struct.new(
       :connected_device_count,
       :registered_device_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12376,7 +12909,8 @@ module Aws::SageMaker
       :latest_heartbeat,
       :models,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12386,17 +12920,20 @@ module Aws::SageMaker
     #   @return [String]
     class DirectDeploySettings < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSagemakerServicecatalogPortfolioInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSagemakerServicecatalogPortfolioOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12409,7 +12946,8 @@ module Aws::SageMaker
     class DisassociateTrialComponentRequest < Struct.new(
       :trial_component_name,
       :trial_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12422,7 +12960,8 @@ module Aws::SageMaker
     class DisassociateTrialComponentResponse < Struct.new(
       :trial_component_arn,
       :trial_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12440,7 +12979,8 @@ module Aws::SageMaker
       :enable_docker_access,
       :vpc_only_trusted_accounts,
       :rootless_docker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12474,7 +13014,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12508,7 +13049,8 @@ module Aws::SageMaker
       :docker_settings,
       :amazon_q_settings,
       :unified_studio_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12542,7 +13084,8 @@ module Aws::SageMaker
       :docker_settings,
       :amazon_q_settings,
       :unified_studio_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12564,7 +13107,8 @@ module Aws::SageMaker
       :explainability,
       :model_quality,
       :model_data_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12582,7 +13126,8 @@ module Aws::SageMaker
       :config_file,
       :pre_training_constraints,
       :post_training_constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12596,7 +13141,8 @@ module Aws::SageMaker
     class DriftCheckExplainability < Struct.new(
       :constraints,
       :config_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12610,7 +13156,8 @@ module Aws::SageMaker
     class DriftCheckModelDataQuality < Struct.new(
       :statistics,
       :constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12624,7 +13171,8 @@ module Aws::SageMaker
     class DriftCheckModelQuality < Struct.new(
       :statistics,
       :constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12650,7 +13198,8 @@ module Aws::SageMaker
       :scale_in_cooldown,
       :scale_out_cooldown,
       :scaling_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12660,7 +13209,8 @@ module Aws::SageMaker
     #   @return [String]
     class EFSFileSystem < Struct.new(
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12674,7 +13224,8 @@ module Aws::SageMaker
     class EFSFileSystemConfig < Struct.new(
       :file_system_id,
       :file_system_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12696,7 +13247,8 @@ module Aws::SageMaker
       :step_id,
       :step_name,
       :log_file_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12706,7 +13258,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class EbsStorageSettings < Struct.new(
       :ebs_volume_size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12728,7 +13281,8 @@ module Aws::SageMaker
       :total_instance_count,
       :available_instance_count,
       :used_by_current_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12746,7 +13300,8 @@ module Aws::SageMaker
       :source_arn,
       :destination_arn,
       :association_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12756,7 +13311,8 @@ module Aws::SageMaker
     #   @return [String]
     class EdgeDeploymentConfig < Struct.new(
       :failure_handling_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12770,7 +13326,8 @@ module Aws::SageMaker
     class EdgeDeploymentModelConfig < Struct.new(
       :model_handle,
       :edge_packaging_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12808,7 +13365,8 @@ module Aws::SageMaker
       :edge_deployment_failed,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12838,7 +13396,8 @@ module Aws::SageMaker
       :edge_deployment_failed_in_stage,
       :edge_deployment_status_message,
       :edge_deployment_stage_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12860,7 +13419,8 @@ module Aws::SageMaker
       :model_version,
       :latest_sample_time,
       :latest_inference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12890,7 +13450,8 @@ module Aws::SageMaker
       :connected_device_count,
       :active_device_count,
       :sampling_device_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12904,7 +13465,8 @@ module Aws::SageMaker
     class EdgeModelSummary < Struct.new(
       :model_name,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12926,7 +13488,8 @@ module Aws::SageMaker
       :kms_key_id,
       :preset_deployment_type,
       :preset_deployment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12964,7 +13527,8 @@ module Aws::SageMaker
       :model_version,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12986,7 +13550,8 @@ module Aws::SageMaker
       :artifact,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12996,7 +13561,8 @@ module Aws::SageMaker
     #   @return [String]
     class EmrServerlessComputeConfig < Struct.new(
       :execution_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13010,7 +13576,8 @@ module Aws::SageMaker
     class EmrServerlessSettings < Struct.new(
       :execution_role_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13024,17 +13591,20 @@ module Aws::SageMaker
     class EmrSettings < Struct.new(
       :assumable_role_arns,
       :execution_role_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableSagemakerServicecatalogPortfolioInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableSagemakerServicecatalogPortfolioOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13088,7 +13658,8 @@ module Aws::SageMaker
       :monitoring_schedules,
       :tags,
       :shadow_production_variants,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13098,7 +13669,8 @@ module Aws::SageMaker
     #   @return [String]
     class EndpointConfigStepMetadata < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13116,7 +13688,8 @@ module Aws::SageMaker
       :endpoint_config_name,
       :endpoint_config_arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13126,7 +13699,8 @@ module Aws::SageMaker
     #   @return [String]
     class EndpointInfo < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13176,7 +13750,8 @@ module Aws::SageMaker
       :start_time_offset,
       :end_time_offset,
       :exclude_features_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13198,7 +13773,8 @@ module Aws::SageMaker
       :serverless_config,
       :inference_specification_name,
       :environment_parameter_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13220,7 +13796,8 @@ module Aws::SageMaker
       :endpoint_config_name,
       :endpoint_status,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13246,7 +13823,8 @@ module Aws::SageMaker
       :instance_type,
       :initial_instance_count,
       :serverless_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13260,7 +13838,8 @@ module Aws::SageMaker
     class EndpointPerformance < Struct.new(
       :metrics,
       :endpoint_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13270,7 +13849,8 @@ module Aws::SageMaker
     #   @return [String]
     class EndpointStepMetadata < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13296,7 +13876,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :endpoint_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13306,7 +13887,8 @@ module Aws::SageMaker
     #   @return [Types::FSxLustreConfig]
     class EnvironmentConfig < Struct.new(
       :f_sx_lustre_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13320,7 +13902,8 @@ module Aws::SageMaker
     class EnvironmentConfigDetails < Struct.new(
       :f_sx_lustre_config,
       :s3_output_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13338,7 +13921,8 @@ module Aws::SageMaker
       :key,
       :value_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13348,7 +13932,8 @@ module Aws::SageMaker
     #   @return [Array<Types::CategoricalParameter>]
     class EnvironmentParameterRanges < Struct.new(
       :categorical_parameter_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13362,7 +13947,8 @@ module Aws::SageMaker
     class ErrorInfo < Struct.new(
       :code,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13372,7 +13958,8 @@ module Aws::SageMaker
     #   @return [Types::EventMetadata]
     class EventDetails < Struct.new(
       :event_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13395,7 +13982,8 @@ module Aws::SageMaker
       :instance_group_scaling,
       :instance,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Cluster < EventMetadata; end
@@ -13447,7 +14035,8 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13469,7 +14058,8 @@ module Aws::SageMaker
       :trial_name,
       :trial_component_display_name,
       :run_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13483,7 +14073,8 @@ module Aws::SageMaker
     class ExperimentSource < Struct.new(
       :source_arn,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13513,7 +14104,8 @@ module Aws::SageMaker
       :experiment_source,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13523,7 +14115,8 @@ module Aws::SageMaker
     #   @return [Types::MetricsSource]
     class Explainability < Struct.new(
       :report,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13533,7 +14126,8 @@ module Aws::SageMaker
     #   @return [Types::ClarifyExplainerConfig]
     class ExplainerConfig < Struct.new(
       :clarify_explainer_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13547,7 +14141,8 @@ module Aws::SageMaker
     class FSxLustreConfig < Struct.new(
       :size_in_gi_b,
       :per_unit_storage_throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13557,7 +14152,8 @@ module Aws::SageMaker
     #   @return [String]
     class FSxLustreFileSystem < Struct.new(
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13571,7 +14167,8 @@ module Aws::SageMaker
     class FSxLustreFileSystemConfig < Struct.new(
       :file_system_id,
       :file_system_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13581,7 +14178,8 @@ module Aws::SageMaker
     #   @return [String]
     class FailStepMetadata < Struct.new(
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13603,7 +14201,8 @@ module Aws::SageMaker
       :feature_type,
       :collection_type,
       :collection_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13673,7 +14272,8 @@ module Aws::SageMaker
       :failure_reason,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13699,7 +14299,8 @@ module Aws::SageMaker
       :creation_time,
       :feature_group_status,
       :offline_store_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13737,7 +14338,8 @@ module Aws::SageMaker
       :last_modified_time,
       :description,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13751,7 +14353,8 @@ module Aws::SageMaker
     class FeatureParameter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13769,7 +14372,8 @@ module Aws::SageMaker
       :content_type,
       :content_digest,
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13787,7 +14391,8 @@ module Aws::SageMaker
       :mount_path,
       :default_uid,
       :default_gid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13809,7 +14414,8 @@ module Aws::SageMaker
       :file_system_access_mode,
       :file_system_type,
       :directory_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13827,7 +14433,8 @@ module Aws::SageMaker
       :name,
       :operator,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13849,7 +14456,8 @@ module Aws::SageMaker
       :metric_name,
       :value,
       :standard_metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13867,7 +14475,8 @@ module Aws::SageMaker
       :type,
       :metric_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13881,7 +14490,8 @@ module Aws::SageMaker
     class FlowDefinitionOutputConfig < Struct.new(
       :s3_output_path,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13907,7 +14517,8 @@ module Aws::SageMaker
       :flow_definition_status,
       :creation_time,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13917,7 +14528,8 @@ module Aws::SageMaker
     #   @return [String]
     class GenerativeAiSettings < Struct.new(
       :amazon_bedrock_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13926,7 +14538,8 @@ module Aws::SageMaker
     #   @return [String]
     class GetDeviceFleetReportRequest < Struct.new(
       :device_fleet_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13963,7 +14576,8 @@ module Aws::SageMaker
       :device_stats,
       :agent_versions,
       :model_stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13972,7 +14586,8 @@ module Aws::SageMaker
     #   @return [String]
     class GetLineageGroupPolicyRequest < Struct.new(
       :lineage_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13985,7 +14600,8 @@ module Aws::SageMaker
     class GetLineageGroupPolicyResponse < Struct.new(
       :lineage_group_arn,
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13994,7 +14610,8 @@ module Aws::SageMaker
     #   @return [String]
     class GetModelPackageGroupPolicyInput < Struct.new(
       :model_package_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14003,12 +14620,14 @@ module Aws::SageMaker
     #   @return [String]
     class GetModelPackageGroupPolicyOutput < Struct.new(
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetSagemakerServicecatalogPortfolioStatusInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14017,7 +14636,8 @@ module Aws::SageMaker
     #   @return [String]
     class GetSagemakerServicecatalogPortfolioStatusOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14042,7 +14662,8 @@ module Aws::SageMaker
       :endpoint_name,
       :target_cpu_utilization_per_core,
       :scaling_policy_objective,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14075,7 +14696,8 @@ module Aws::SageMaker
       :scaling_policy_objective,
       :metric,
       :dynamic_scaling_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14088,7 +14710,8 @@ module Aws::SageMaker
     class GetSearchSuggestionsRequest < Struct.new(
       :resource,
       :suggestion_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14097,7 +14720,8 @@ module Aws::SageMaker
     #   @return [Array<Types::PropertyNameSuggestion>]
     class GetSearchSuggestionsResponse < Struct.new(
       :property_name_suggestions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14115,7 +14739,8 @@ module Aws::SageMaker
       :repository_url,
       :branch,
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14125,7 +14750,8 @@ module Aws::SageMaker
     #   @return [String]
     class GitConfigForUpdate < Struct.new(
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14139,7 +14765,8 @@ module Aws::SageMaker
     class HiddenSageMakerImage < Struct.new(
       :sage_maker_image_name,
       :version_aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14149,7 +14776,8 @@ module Aws::SageMaker
     #   @return [String]
     class HolidayConfigAttributes < Struct.new(
       :country_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14159,7 +14787,8 @@ module Aws::SageMaker
     #   @return [String]
     class HubAccessConfig < Struct.new(
       :hub_content_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14173,7 +14802,8 @@ module Aws::SageMaker
     class HubContentDependency < Struct.new(
       :dependency_origin_path,
       :dependency_copy_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14231,7 +14861,8 @@ module Aws::SageMaker
       :hub_content_status,
       :creation_time,
       :original_creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14269,7 +14900,8 @@ module Aws::SageMaker
       :hub_status,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14279,7 +14911,8 @@ module Aws::SageMaker
     #   @return [String]
     class HubS3StorageConfig < Struct.new(
       :s3_output_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14289,7 +14922,8 @@ module Aws::SageMaker
     #   @return [String]
     class HumanLoopActivationConditionsConfig < Struct.new(
       :human_loop_activation_conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14299,7 +14933,8 @@ module Aws::SageMaker
     #   @return [Types::HumanLoopActivationConditionsConfig]
     class HumanLoopActivationConfig < Struct.new(
       :human_loop_activation_conditions_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14341,7 +14976,8 @@ module Aws::SageMaker
       :task_time_limit_in_seconds,
       :task_keywords,
       :public_workforce_task_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14351,7 +14987,8 @@ module Aws::SageMaker
     #   @return [String]
     class HumanLoopRequestSource < Struct.new(
       :aws_managed_human_loop_request_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14405,7 +15042,8 @@ module Aws::SageMaker
       :max_concurrent_task_count,
       :annotation_consolidation_config,
       :public_workforce_task_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14423,7 +15061,8 @@ module Aws::SageMaker
       :human_task_ui_name,
       :human_task_ui_arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14445,7 +15084,8 @@ module Aws::SageMaker
       :training_input_mode,
       :algorithm_name,
       :metric_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14479,7 +15119,8 @@ module Aws::SageMaker
       :is_tunable,
       :is_required,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14557,7 +15198,8 @@ module Aws::SageMaker
       :checkpoint_config,
       :retry_strategy,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14611,7 +15253,8 @@ module Aws::SageMaker
       :failure_reason,
       :final_hyper_parameter_tuning_job_objective_metric,
       :objective_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14629,7 +15272,8 @@ module Aws::SageMaker
       :instance_type,
       :instance_count,
       :volume_size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14643,7 +15287,8 @@ module Aws::SageMaker
     class HyperParameterTuningJobCompletionDetails < Struct.new(
       :number_of_training_jobs_objective_not_improving,
       :convergence_detected_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14681,7 +15326,8 @@ module Aws::SageMaker
       :training_job_early_stopping_type,
       :tuning_job_completion_criteria,
       :random_seed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14691,7 +15337,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class HyperParameterTuningJobConsumedResources < Struct.new(
       :runtime_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14705,7 +15352,8 @@ module Aws::SageMaker
     class HyperParameterTuningJobObjective < Struct.new(
       :type,
       :metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14783,7 +15431,8 @@ module Aws::SageMaker
       :tuning_job_completion_details,
       :consumed_resources,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14793,7 +15442,8 @@ module Aws::SageMaker
     #   @return [Types::HyperbandStrategyConfig]
     class HyperParameterTuningJobStrategyConfig < Struct.new(
       :hyperband_strategy_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14839,7 +15489,8 @@ module Aws::SageMaker
       :training_job_status_counters,
       :objective_status_counters,
       :resource_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14853,7 +15504,8 @@ module Aws::SageMaker
     class HyperParameterTuningJobWarmStartConfig < Struct.new(
       :parent_hyper_parameter_tuning_jobs,
       :warm_start_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14883,7 +15535,8 @@ module Aws::SageMaker
       :volume_kms_key_id,
       :allocation_strategy,
       :instance_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14897,7 +15550,8 @@ module Aws::SageMaker
     class HyperbandStrategyConfig < Struct.new(
       :min_resource,
       :max_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14915,7 +15569,8 @@ module Aws::SageMaker
       :arn,
       :principal_id,
       :source_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14929,7 +15584,8 @@ module Aws::SageMaker
     class IamPolicyConstraints < Struct.new(
       :source_ip,
       :vpc_source_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14947,7 +15603,8 @@ module Aws::SageMaker
       :data_source_name,
       :status,
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14969,7 +15626,8 @@ module Aws::SageMaker
       :idle_timeout_in_minutes,
       :min_idle_timeout_in_minutes,
       :max_idle_timeout_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15007,7 +15665,8 @@ module Aws::SageMaker
       :image_name,
       :image_status,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15017,7 +15676,8 @@ module Aws::SageMaker
     #   @return [Types::AutoMLJobCompletionCriteria]
     class ImageClassificationJobConfig < Struct.new(
       :completion_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15031,7 +15691,8 @@ module Aws::SageMaker
     class ImageConfig < Struct.new(
       :repository_access_mode,
       :repository_auth_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15065,7 +15726,8 @@ module Aws::SageMaker
       :image_version_status,
       :last_modified_time,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15118,7 +15780,8 @@ module Aws::SageMaker
       :support_status,
       :hub_content_search_keywords,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15131,7 +15794,8 @@ module Aws::SageMaker
     class ImportHubContentResponse < Struct.new(
       :hub_arn,
       :hub_content_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15145,7 +15809,8 @@ module Aws::SageMaker
     class InferenceComponentCapacitySize < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15167,7 +15832,8 @@ module Aws::SageMaker
       :number_of_accelerator_devices_required,
       :min_memory_required_in_mb,
       :max_memory_required_in_mb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15185,7 +15851,8 @@ module Aws::SageMaker
       :image,
       :artifact_url,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15203,7 +15870,8 @@ module Aws::SageMaker
       :deployed_image,
       :artifact_url,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15217,7 +15885,8 @@ module Aws::SageMaker
     class InferenceComponentDeploymentConfig < Struct.new(
       :rolling_update_policy,
       :auto_rollback_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15239,7 +15908,8 @@ module Aws::SageMaker
       :wait_interval_in_seconds,
       :maximum_execution_timeout_in_seconds,
       :rollback_maximum_batch_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15249,7 +15919,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class InferenceComponentRuntimeConfig < Struct.new(
       :copy_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15263,7 +15934,8 @@ module Aws::SageMaker
     class InferenceComponentRuntimeConfigSummary < Struct.new(
       :desired_copy_count,
       :current_copy_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15289,7 +15961,8 @@ module Aws::SageMaker
       :startup_parameters,
       :compute_resource_requirements,
       :base_inference_component_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15315,7 +15988,8 @@ module Aws::SageMaker
       :startup_parameters,
       :compute_resource_requirements,
       :base_inference_component_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15329,7 +16003,8 @@ module Aws::SageMaker
     class InferenceComponentStartupParameters < Struct.new(
       :model_data_download_timeout_in_seconds,
       :container_startup_health_check_timeout_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15367,7 +16042,8 @@ module Aws::SageMaker
       :variant_name,
       :inference_component_status,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15377,7 +16053,8 @@ module Aws::SageMaker
     #   @return [String]
     class InferenceExecutionConfig < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15395,7 +16072,8 @@ module Aws::SageMaker
       :destination,
       :kms_key,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15409,7 +16087,8 @@ module Aws::SageMaker
     class InferenceExperimentSchedule < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15455,7 +16134,8 @@ module Aws::SageMaker
       :completion_time,
       :last_modified_time,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15465,7 +16145,8 @@ module Aws::SageMaker
     #   @return [String]
     class InferenceHubAccessConfig < Struct.new(
       :hub_content_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15479,7 +16160,8 @@ module Aws::SageMaker
     class InferenceMetrics < Struct.new(
       :max_invocations,
       :model_latency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15509,7 +16191,8 @@ module Aws::SageMaker
       :model_configuration,
       :invocation_end_time,
       :invocation_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15567,7 +16250,8 @@ module Aws::SageMaker
       :model_name,
       :sample_payload_url,
       :model_package_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15589,7 +16273,8 @@ module Aws::SageMaker
       :job_name,
       :status,
       :inference_benchmark,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15615,7 +16300,8 @@ module Aws::SageMaker
       :supported_realtime_inference_instance_types,
       :supported_content_types,
       :supported_response_mime_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15625,7 +16311,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     class InfraCheckConfig < Struct.new(
       :enable_infra_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15647,7 +16334,8 @@ module Aws::SageMaker
       :data_input_config,
       :framework,
       :framework_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15665,7 +16353,8 @@ module Aws::SageMaker
       :instance_type,
       :instance_count,
       :instance_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15695,7 +16384,8 @@ module Aws::SageMaker
       :subnet_id,
       :security_group_ids,
       :ami_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15713,7 +16403,8 @@ module Aws::SageMaker
       :instance_count,
       :target_count,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15743,7 +16434,8 @@ module Aws::SageMaker
       :failure_message,
       :lcs_execution_state,
       :node_logical_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15753,7 +16445,8 @@ module Aws::SageMaker
     #   @return [String]
     class InstanceMetadataServiceConfiguration < Struct.new(
       :minimum_instance_metadata_service_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15767,7 +16460,8 @@ module Aws::SageMaker
     class InstancePlacementConfig < Struct.new(
       :enable_multiple_jobs,
       :placement_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15789,7 +16483,8 @@ module Aws::SageMaker
       :min_value,
       :max_value,
       :scaling_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15803,7 +16498,8 @@ module Aws::SageMaker
     class IntegerParameterRangeSpecification < Struct.new(
       :min_value,
       :max_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15817,7 +16513,8 @@ module Aws::SageMaker
     class JupyterLabAppImageConfig < Struct.new(
       :file_system_config,
       :container_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15851,7 +16548,8 @@ module Aws::SageMaker
       :app_lifecycle_management,
       :emr_settings,
       :built_in_lifecycle_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15869,7 +16567,8 @@ module Aws::SageMaker
       :default_resource_spec,
       :lifecycle_config_arns,
       :code_repositories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15879,7 +16578,8 @@ module Aws::SageMaker
     #   @return [String]
     class KendraSettings < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15897,7 +16597,8 @@ module Aws::SageMaker
       :default_resource_spec,
       :custom_images,
       :lifecycle_config_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15911,7 +16612,8 @@ module Aws::SageMaker
     class KernelGatewayImageConfig < Struct.new(
       :kernel_specs,
       :file_system_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15925,7 +16627,8 @@ module Aws::SageMaker
     class KernelSpec < Struct.new(
       :name,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15951,7 +16654,8 @@ module Aws::SageMaker
       :machine_labeled,
       :failed_non_retryable_error,
       :unlabeled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15969,7 +16673,8 @@ module Aws::SageMaker
       :human_labeled,
       :pending_human,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15987,7 +16692,8 @@ module Aws::SageMaker
       :labeling_job_algorithm_specification_arn,
       :initial_active_learning_model_arn,
       :labeling_job_resource_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15997,7 +16703,8 @@ module Aws::SageMaker
     #   @return [Array<String>]
     class LabelingJobDataAttributes < Struct.new(
       :content_classifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16011,7 +16718,8 @@ module Aws::SageMaker
     class LabelingJobDataSource < Struct.new(
       :s3_data_source,
       :sns_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16041,7 +16749,8 @@ module Aws::SageMaker
       :creation_time,
       :label_counters,
       :number_of_human_workers_per_data_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16055,7 +16764,8 @@ module Aws::SageMaker
     class LabelingJobInputConfig < Struct.new(
       :data_source,
       :data_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16069,7 +16779,8 @@ module Aws::SageMaker
     class LabelingJobOutput < Struct.new(
       :output_dataset_s3_uri,
       :final_active_learning_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16087,7 +16798,8 @@ module Aws::SageMaker
       :s3_output_path,
       :kms_key_id,
       :sns_topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16101,7 +16813,8 @@ module Aws::SageMaker
     class LabelingJobResourceConfig < Struct.new(
       :volume_kms_key_id,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16111,7 +16824,8 @@ module Aws::SageMaker
     #   @return [String]
     class LabelingJobS3DataSource < Struct.new(
       :manifest_s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16121,7 +16835,8 @@ module Aws::SageMaker
     #   @return [String]
     class LabelingJobSnsDataSource < Struct.new(
       :sns_topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16135,7 +16850,8 @@ module Aws::SageMaker
     class LabelingJobStoppingConditions < Struct.new(
       :max_human_labeled_object_count,
       :max_percentage_of_input_dataset_labeled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16189,7 +16905,8 @@ module Aws::SageMaker
       :failure_reason,
       :labeling_job_output,
       :input_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16203,7 +16920,8 @@ module Aws::SageMaker
     class LambdaStepMetadata < Struct.new(
       :arn,
       :output_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16217,7 +16935,8 @@ module Aws::SageMaker
     class LastUpdateStatus < Struct.new(
       :status,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16243,7 +16962,8 @@ module Aws::SageMaker
       :display_name,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16280,7 +17000,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16293,7 +17014,8 @@ module Aws::SageMaker
     class ListActionsResponse < Struct.new(
       :action_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16326,7 +17048,8 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16339,7 +17062,8 @@ module Aws::SageMaker
     class ListAlgorithmsOutput < Struct.new(
       :algorithm_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16364,7 +17088,8 @@ module Aws::SageMaker
       :version,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16377,7 +17102,8 @@ module Aws::SageMaker
     class ListAliasesResponse < Struct.new(
       :sage_maker_image_version_aliases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16418,7 +17144,8 @@ module Aws::SageMaker
       :modified_time_after,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16431,7 +17158,8 @@ module Aws::SageMaker
     class ListAppImageConfigsResponse < Struct.new(
       :next_token,
       :app_image_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16464,7 +17192,8 @@ module Aws::SageMaker
       :domain_id_equals,
       :user_profile_name_equals,
       :space_name_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16477,7 +17206,8 @@ module Aws::SageMaker
     class ListAppsResponse < Struct.new(
       :apps,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16514,7 +17244,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16527,7 +17258,8 @@ module Aws::SageMaker
     class ListArtifactsResponse < Struct.new(
       :artifact_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16576,7 +17308,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16589,7 +17322,8 @@ module Aws::SageMaker
     class ListAssociationsResponse < Struct.new(
       :association_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16634,7 +17368,8 @@ module Aws::SageMaker
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16647,7 +17382,8 @@ module Aws::SageMaker
     class ListAutoMLJobsResponse < Struct.new(
       :auto_ml_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16680,7 +17416,8 @@ module Aws::SageMaker
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16693,7 +17430,8 @@ module Aws::SageMaker
     class ListCandidatesForAutoMLJobResponse < Struct.new(
       :candidates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16738,7 +17476,8 @@ module Aws::SageMaker
       :resource_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16751,7 +17490,8 @@ module Aws::SageMaker
     class ListClusterEventsResponse < Struct.new(
       :next_token,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16792,7 +17532,8 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :include_node_logical_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16805,7 +17546,8 @@ module Aws::SageMaker
     class ListClusterNodesResponse < Struct.new(
       :next_token,
       :cluster_node_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16846,7 +17588,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16859,7 +17602,8 @@ module Aws::SageMaker
     class ListClusterSchedulerConfigsResponse < Struct.new(
       :cluster_scheduler_config_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16896,7 +17640,8 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :training_plan_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16909,7 +17654,8 @@ module Aws::SageMaker
     class ListClustersResponse < Struct.new(
       :next_token,
       :cluster_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16950,7 +17696,8 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16963,7 +17710,8 @@ module Aws::SageMaker
     class ListCodeRepositoriesOutput < Struct.new(
       :code_repository_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17008,7 +17756,8 @@ module Aws::SageMaker
       :status_equals,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17021,7 +17770,8 @@ module Aws::SageMaker
     class ListCompilationJobsResponse < Struct.new(
       :compilation_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17062,7 +17812,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17075,7 +17826,8 @@ module Aws::SageMaker
     class ListComputeQuotasResponse < Struct.new(
       :compute_quota_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17112,7 +17864,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17125,7 +17878,8 @@ module Aws::SageMaker
     class ListContextsResponse < Struct.new(
       :context_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17162,7 +17916,8 @@ module Aws::SageMaker
       :name_contains,
       :creation_time_before,
       :creation_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17175,7 +17930,8 @@ module Aws::SageMaker
     class ListDataQualityJobDefinitionsResponse < Struct.new(
       :job_definition_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17216,7 +17972,8 @@ module Aws::SageMaker
       :name_contains,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17229,7 +17986,8 @@ module Aws::SageMaker
     class ListDeviceFleetsResponse < Struct.new(
       :device_fleet_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17254,7 +18012,8 @@ module Aws::SageMaker
       :latest_heartbeat_after,
       :model_name,
       :device_fleet_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17267,7 +18026,8 @@ module Aws::SageMaker
     class ListDevicesResponse < Struct.new(
       :device_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17280,7 +18040,8 @@ module Aws::SageMaker
     class ListDomainsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17293,7 +18054,8 @@ module Aws::SageMaker
     class ListDomainsResponse < Struct.new(
       :domains,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17338,7 +18100,8 @@ module Aws::SageMaker
       :device_fleet_name_contains,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17351,7 +18114,8 @@ module Aws::SageMaker
     class ListEdgeDeploymentPlansResponse < Struct.new(
       :edge_deployment_plan_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17400,7 +18164,8 @@ module Aws::SageMaker
       :status_equals,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17413,7 +18178,8 @@ module Aws::SageMaker
     class ListEdgePackagingJobsResponse < Struct.new(
       :edge_packaging_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17446,7 +18212,8 @@ module Aws::SageMaker
       :name_contains,
       :creation_time_before,
       :creation_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17459,7 +18226,8 @@ module Aws::SageMaker
     class ListEndpointConfigsOutput < Struct.new(
       :endpoint_configs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17504,7 +18272,8 @@ module Aws::SageMaker
       :last_modified_time_before,
       :last_modified_time_after,
       :status_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17517,7 +18286,8 @@ module Aws::SageMaker
     class ListEndpointsOutput < Struct.new(
       :endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17546,7 +18316,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17559,7 +18330,8 @@ module Aws::SageMaker
     class ListExperimentsResponse < Struct.new(
       :experiment_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17600,7 +18372,8 @@ module Aws::SageMaker
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17613,7 +18386,8 @@ module Aws::SageMaker
     class ListFeatureGroupsResponse < Struct.new(
       :feature_group_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17638,7 +18412,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17651,7 +18426,8 @@ module Aws::SageMaker
     class ListFlowDefinitionsResponse < Struct.new(
       :flow_definition_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17700,7 +18476,8 @@ module Aws::SageMaker
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17713,7 +18490,8 @@ module Aws::SageMaker
     class ListHubContentVersionsResponse < Struct.new(
       :hub_content_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17758,7 +18536,8 @@ module Aws::SageMaker
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17771,7 +18550,8 @@ module Aws::SageMaker
     class ListHubContentsResponse < Struct.new(
       :hub_content_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17812,7 +18592,8 @@ module Aws::SageMaker
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17825,7 +18606,8 @@ module Aws::SageMaker
     class ListHubsResponse < Struct.new(
       :hub_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17850,7 +18632,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17863,7 +18646,8 @@ module Aws::SageMaker
     class ListHumanTaskUisResponse < Struct.new(
       :human_task_ui_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17908,7 +18692,8 @@ module Aws::SageMaker
       :last_modified_time_after,
       :last_modified_time_before,
       :status_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17921,7 +18706,8 @@ module Aws::SageMaker
     class ListHyperParameterTuningJobsResponse < Struct.new(
       :hyper_parameter_tuning_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17962,7 +18748,8 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17975,7 +18762,8 @@ module Aws::SageMaker
     class ListImageVersionsResponse < Struct.new(
       :image_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18016,7 +18804,8 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18029,7 +18818,8 @@ module Aws::SageMaker
     class ListImagesResponse < Struct.new(
       :images,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18082,7 +18872,8 @@ module Aws::SageMaker
       :status_equals,
       :endpoint_name_equals,
       :variant_name_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18095,7 +18886,8 @@ module Aws::SageMaker
     class ListInferenceComponentsOutput < Struct.new(
       :inference_components,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18144,7 +18936,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18157,7 +18950,8 @@ module Aws::SageMaker
     class ListInferenceExperimentsResponse < Struct.new(
       :inference_experiments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18182,7 +18976,8 @@ module Aws::SageMaker
       :step_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18195,7 +18990,8 @@ module Aws::SageMaker
     class ListInferenceRecommendationsJobStepsResponse < Struct.new(
       :steps,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18248,7 +19044,8 @@ module Aws::SageMaker
       :max_results,
       :model_name_equals,
       :model_package_version_arn_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18261,7 +19058,8 @@ module Aws::SageMaker
     class ListInferenceRecommendationsJobsResponse < Struct.new(
       :inference_recommendations_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18298,7 +19096,8 @@ module Aws::SageMaker
       :job_reference_code_contains,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18311,7 +19110,8 @@ module Aws::SageMaker
     class ListLabelingJobsForWorkteamResponse < Struct.new(
       :labeling_job_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18356,7 +19156,8 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :status_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18369,7 +19170,8 @@ module Aws::SageMaker
     class ListLabelingJobsResponse < Struct.new(
       :labeling_job_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18398,7 +19200,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18411,7 +19214,8 @@ module Aws::SageMaker
     class ListLineageGroupsResponse < Struct.new(
       :lineage_group_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18448,7 +19252,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18461,7 +19266,8 @@ module Aws::SageMaker
     class ListMlflowTrackingServersResponse < Struct.new(
       :tracking_server_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18498,7 +19304,8 @@ module Aws::SageMaker
       :name_contains,
       :creation_time_before,
       :creation_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18511,7 +19318,8 @@ module Aws::SageMaker
     class ListModelBiasJobDefinitionsResponse < Struct.new(
       :job_definition_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18556,7 +19364,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18569,7 +19378,8 @@ module Aws::SageMaker
     class ListModelCardExportJobsResponse < Struct.new(
       :model_card_export_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18606,7 +19416,8 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18619,7 +19430,8 @@ module Aws::SageMaker
     class ListModelCardVersionsResponse < Struct.new(
       :model_card_version_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18656,7 +19468,8 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18669,7 +19482,8 @@ module Aws::SageMaker
     class ListModelCardsResponse < Struct.new(
       :model_card_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18706,7 +19520,8 @@ module Aws::SageMaker
       :name_contains,
       :creation_time_before,
       :creation_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18719,7 +19534,8 @@ module Aws::SageMaker
     class ListModelExplainabilityJobDefinitionsResponse < Struct.new(
       :job_definition_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18736,7 +19552,8 @@ module Aws::SageMaker
       :search_expression,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18749,7 +19566,8 @@ module Aws::SageMaker
     class ListModelMetadataResponse < Struct.new(
       :model_metadata_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18786,7 +19604,8 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :cross_account_filter_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18799,7 +19618,8 @@ module Aws::SageMaker
     class ListModelPackageGroupsOutput < Struct.new(
       :model_package_group_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18844,7 +19664,8 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18857,7 +19678,8 @@ module Aws::SageMaker
     class ListModelPackagesOutput < Struct.new(
       :model_package_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18894,7 +19716,8 @@ module Aws::SageMaker
       :name_contains,
       :creation_time_before,
       :creation_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18907,7 +19730,8 @@ module Aws::SageMaker
     class ListModelQualityJobDefinitionsResponse < Struct.new(
       :job_definition_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18940,7 +19764,8 @@ module Aws::SageMaker
       :name_contains,
       :creation_time_before,
       :creation_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18953,7 +19778,8 @@ module Aws::SageMaker
     class ListModelsOutput < Struct.new(
       :models,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18994,7 +19820,8 @@ module Aws::SageMaker
       :creation_time_before,
       :creation_time_after,
       :status_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19007,7 +19834,8 @@ module Aws::SageMaker
     class ListMonitoringAlertHistoryResponse < Struct.new(
       :monitoring_alert_history,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19024,7 +19852,8 @@ module Aws::SageMaker
       :monitoring_schedule_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19037,7 +19866,8 @@ module Aws::SageMaker
     class ListMonitoringAlertsResponse < Struct.new(
       :monitoring_alert_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19102,7 +19932,8 @@ module Aws::SageMaker
       :status_equals,
       :monitoring_job_definition_name,
       :monitoring_type_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19115,7 +19946,8 @@ module Aws::SageMaker
     class ListMonitoringExecutionsResponse < Struct.new(
       :monitoring_execution_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19172,7 +20004,8 @@ module Aws::SageMaker
       :status_equals,
       :monitoring_job_definition_name,
       :monitoring_type_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19185,7 +20018,8 @@ module Aws::SageMaker
     class ListMonitoringSchedulesResponse < Struct.new(
       :monitoring_schedule_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19226,7 +20060,8 @@ module Aws::SageMaker
       :creation_time_after,
       :last_modified_time_before,
       :last_modified_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19239,7 +20074,8 @@ module Aws::SageMaker
     class ListNotebookInstanceLifecycleConfigsOutput < Struct.new(
       :next_token,
       :notebook_instance_lifecycle_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19296,7 +20132,8 @@ module Aws::SageMaker
       :notebook_instance_lifecycle_config_name_contains,
       :default_code_repository_contains,
       :additional_code_repository_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19309,7 +20146,8 @@ module Aws::SageMaker
     class ListNotebookInstancesOutput < Struct.new(
       :next_token,
       :notebook_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19358,7 +20196,8 @@ module Aws::SageMaker
       :status_equals,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19371,7 +20210,8 @@ module Aws::SageMaker
     class ListOptimizationJobsResponse < Struct.new(
       :optimization_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19384,7 +20224,8 @@ module Aws::SageMaker
     class ListPartnerAppsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19397,7 +20238,8 @@ module Aws::SageMaker
     class ListPartnerAppsResponse < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19418,7 +20260,8 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19431,7 +20274,8 @@ module Aws::SageMaker
     class ListPipelineExecutionStepsResponse < Struct.new(
       :pipeline_execution_steps,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19464,7 +20308,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19477,7 +20322,8 @@ module Aws::SageMaker
     class ListPipelineExecutionsResponse < Struct.new(
       :pipeline_execution_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19494,7 +20340,8 @@ module Aws::SageMaker
       :pipeline_execution_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19507,7 +20354,8 @@ module Aws::SageMaker
     class ListPipelineParametersForExecutionResponse < Struct.new(
       :pipeline_parameters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19536,7 +20384,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19549,7 +20398,8 @@ module Aws::SageMaker
     class ListPipelineVersionsResponse < Struct.new(
       :pipeline_version_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19582,7 +20432,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19595,7 +20446,8 @@ module Aws::SageMaker
     class ListPipelinesResponse < Struct.new(
       :pipeline_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19640,7 +20492,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19653,7 +20506,8 @@ module Aws::SageMaker
     class ListProcessingJobsResponse < Struct.new(
       :processing_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19686,7 +20540,8 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19699,7 +20554,8 @@ module Aws::SageMaker
     class ListProjectsOutput < Struct.new(
       :project_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19732,7 +20588,8 @@ module Aws::SageMaker
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19745,7 +20602,8 @@ module Aws::SageMaker
     class ListResourceCatalogsResponse < Struct.new(
       :resource_catalogs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19774,7 +20632,8 @@ module Aws::SageMaker
       :sort_by,
       :domain_id_equals,
       :space_name_contains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19787,7 +20646,8 @@ module Aws::SageMaker
     class ListSpacesResponse < Struct.new(
       :spaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19812,7 +20672,8 @@ module Aws::SageMaker
       :edge_deployment_plan_name,
       :exclude_devices_deployed_in_other_stage,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19825,7 +20686,8 @@ module Aws::SageMaker
     class ListStageDevicesResponse < Struct.new(
       :device_deployment_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19870,7 +20732,8 @@ module Aws::SageMaker
       :modified_time_after,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19883,7 +20746,8 @@ module Aws::SageMaker
     class ListStudioLifecycleConfigsResponse < Struct.new(
       :next_token,
       :studio_lifecycle_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19900,7 +20764,8 @@ module Aws::SageMaker
       :name_contains,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19913,7 +20778,8 @@ module Aws::SageMaker
     class ListSubscribedWorkteamsResponse < Struct.new(
       :subscribed_workteams,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19930,7 +20796,8 @@ module Aws::SageMaker
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19943,7 +20810,8 @@ module Aws::SageMaker
     class ListTagsOutput < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19972,7 +20840,8 @@ module Aws::SageMaker
       :status_equals,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19985,7 +20854,8 @@ module Aws::SageMaker
     class ListTrainingJobsForHyperParameterTuningJobResponse < Struct.new(
       :training_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20038,7 +20908,8 @@ module Aws::SageMaker
       :sort_order,
       :warm_pool_status_equals,
       :training_plan_arn_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20051,7 +20922,8 @@ module Aws::SageMaker
     class ListTrainingJobsResponse < Struct.new(
       :training_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20084,7 +20956,8 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20097,7 +20970,8 @@ module Aws::SageMaker
     class ListTrainingPlansResponse < Struct.new(
       :next_token,
       :training_plan_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20142,7 +21016,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20155,7 +21030,8 @@ module Aws::SageMaker
     class ListTransformJobsResponse < Struct.new(
       :transform_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20196,7 +21072,8 @@ module Aws::SageMaker
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20209,7 +21086,8 @@ module Aws::SageMaker
     class ListTrialComponentsResponse < Struct.new(
       :trial_component_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20246,7 +21124,8 @@ module Aws::SageMaker
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20259,7 +21138,8 @@ module Aws::SageMaker
     class ListTrialsResponse < Struct.new(
       :trial_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20276,7 +21156,8 @@ module Aws::SageMaker
       :reserved_capacity_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20289,7 +21170,8 @@ module Aws::SageMaker
     class ListUltraServersByReservedCapacityResponse < Struct.new(
       :next_token,
       :ultra_servers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20318,7 +21200,8 @@ module Aws::SageMaker
       :sort_by,
       :domain_id_equals,
       :user_profile_name_contains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20331,7 +21214,8 @@ module Aws::SageMaker
     class ListUserProfilesResponse < Struct.new(
       :user_profiles,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20356,7 +21240,8 @@ module Aws::SageMaker
       :name_contains,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20369,7 +21254,8 @@ module Aws::SageMaker
     class ListWorkforcesResponse < Struct.new(
       :workforces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20394,7 +21280,8 @@ module Aws::SageMaker
       :name_contains,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20407,7 +21294,8 @@ module Aws::SageMaker
     class ListWorkteamsResponse < Struct.new(
       :workteams,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20421,7 +21309,8 @@ module Aws::SageMaker
     class MemberDefinition < Struct.new(
       :cognito_member_definition,
       :oidc_member_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20443,7 +21332,8 @@ module Aws::SageMaker
       :repository,
       :generated_by,
       :project_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20461,7 +21351,8 @@ module Aws::SageMaker
       :metric_name,
       :value,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20483,7 +21374,8 @@ module Aws::SageMaker
       :standard_metric_name,
       :value,
       :set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20497,7 +21389,8 @@ module Aws::SageMaker
     class MetricDefinition < Struct.new(
       :name,
       :regex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20512,7 +21405,8 @@ module Aws::SageMaker
       :predefined,
       :customized,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Predefined < MetricSpecification; end
@@ -20534,7 +21428,8 @@ module Aws::SageMaker
       :content_type,
       :content_digest,
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20584,7 +21479,8 @@ module Aws::SageMaker
       :enable_network_isolation,
       :tags,
       :deployment_recommendation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20594,7 +21490,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     class ModelAccessConfig < Struct.new(
       :accept_eula,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20604,7 +21501,8 @@ module Aws::SageMaker
     #   @return [String]
     class ModelArtifacts < Struct.new(
       :s3_model_artifacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20622,7 +21520,8 @@ module Aws::SageMaker
       :image_uri,
       :config_uri,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20636,7 +21535,8 @@ module Aws::SageMaker
     class ModelBiasBaselineConfig < Struct.new(
       :baselining_job_name,
       :constraints_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20654,7 +21554,8 @@ module Aws::SageMaker
       :endpoint_input,
       :batch_transform_input,
       :ground_truth_s3_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20716,7 +21617,8 @@ module Aws::SageMaker
       :model_id,
       :risk_rating,
       :model_package_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20726,7 +21628,8 @@ module Aws::SageMaker
     #   @return [String]
     class ModelCardExportArtifacts < Struct.new(
       :s3_export_artifacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20760,7 +21663,8 @@ module Aws::SageMaker
       :model_card_version,
       :created_at,
       :last_modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20770,7 +21674,8 @@ module Aws::SageMaker
     #   @return [String]
     class ModelCardExportOutputConfig < Struct.new(
       :s3_output_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20780,7 +21685,8 @@ module Aws::SageMaker
     #   @return [String]
     class ModelCardSecurityConfig < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20806,7 +21712,8 @@ module Aws::SageMaker
       :model_card_status,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20836,7 +21743,8 @@ module Aws::SageMaker
       :model_card_version,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20850,7 +21758,8 @@ module Aws::SageMaker
     class ModelClientConfig < Struct.new(
       :invocations_timeout_in_seconds,
       :invocations_max_retries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20864,7 +21773,8 @@ module Aws::SageMaker
     class ModelCompilationConfig < Struct.new(
       :image,
       :override_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20882,7 +21792,8 @@ module Aws::SageMaker
       :inference_specification_name,
       :environment_parameters,
       :compilation_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20908,7 +21819,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :endpoint_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20918,7 +21830,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     class ModelDashboardIndicatorAction < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20944,7 +21857,8 @@ module Aws::SageMaker
       :last_batch_transform_job,
       :monitoring_schedules,
       :model_card,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20998,7 +21912,8 @@ module Aws::SageMaker
       :tags,
       :model_id,
       :risk_rating,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21052,7 +21967,8 @@ module Aws::SageMaker
       :monitoring_alert_summaries,
       :last_monitoring_execution_summary,
       :batch_transform_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21066,7 +21982,8 @@ module Aws::SageMaker
     class ModelDataQuality < Struct.new(
       :statistics,
       :constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21076,7 +21993,8 @@ module Aws::SageMaker
     #   @return [Types::S3ModelDataSource]
     class ModelDataSource < Struct.new(
       :s3_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21090,7 +22008,8 @@ module Aws::SageMaker
     class ModelDeployConfig < Struct.new(
       :auto_generate_endpoint_name,
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21100,7 +22019,8 @@ module Aws::SageMaker
     #   @return [String]
     class ModelDeployResult < Struct.new(
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21110,7 +22030,8 @@ module Aws::SageMaker
     #   @return [String]
     class ModelDigests < Struct.new(
       :artifact_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21128,7 +22049,8 @@ module Aws::SageMaker
       :image_uri,
       :config_uri,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21142,7 +22064,8 @@ module Aws::SageMaker
     class ModelExplainabilityBaselineConfig < Struct.new(
       :baselining_job_name,
       :constraints_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21156,7 +22079,8 @@ module Aws::SageMaker
     class ModelExplainabilityJobInput < Struct.new(
       :endpoint_input,
       :batch_transform_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21170,7 +22094,8 @@ module Aws::SageMaker
     class ModelInfrastructureConfig < Struct.new(
       :infrastructure_type,
       :real_time_inference_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21180,7 +22105,8 @@ module Aws::SageMaker
     #   @return [String]
     class ModelInput < Struct.new(
       :data_input_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21194,7 +22120,8 @@ module Aws::SageMaker
     class ModelLatencyThreshold < Struct.new(
       :percentile,
       :value_in_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21212,7 +22139,8 @@ module Aws::SageMaker
       :stage,
       :stage_status,
       :stage_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21226,7 +22154,8 @@ module Aws::SageMaker
     class ModelMetadataFilter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21236,7 +22165,8 @@ module Aws::SageMaker
     #   @return [Array<Types::ModelMetadataFilter>]
     class ModelMetadataSearchExpression < Struct.new(
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21262,7 +22192,8 @@ module Aws::SageMaker
       :task,
       :model,
       :framework_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21284,7 +22215,8 @@ module Aws::SageMaker
       :model_data_quality,
       :bias,
       :explainability,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21414,7 +22346,8 @@ module Aws::SageMaker
       :customer_metadata_properties,
       :drift_check_baselines,
       :skip_model_validation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21472,7 +22405,8 @@ module Aws::SageMaker
       :nearest_model_name,
       :additional_s3_data_source,
       :model_data_e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21506,7 +22440,8 @@ module Aws::SageMaker
       :created_by,
       :model_package_group_status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21532,7 +22467,8 @@ module Aws::SageMaker
       :model_package_group_description,
       :creation_time,
       :model_package_group_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21546,7 +22482,8 @@ module Aws::SageMaker
     class ModelPackageModelCard < Struct.new(
       :model_card_content,
       :model_card_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21556,7 +22493,8 @@ module Aws::SageMaker
     #   @return [String]
     class ModelPackageSecurityConfig < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21570,7 +22508,8 @@ module Aws::SageMaker
     class ModelPackageStatusDetails < Struct.new(
       :validation_statuses,
       :image_scan_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21588,7 +22527,8 @@ module Aws::SageMaker
       :name,
       :status,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21630,7 +22570,8 @@ module Aws::SageMaker
       :model_package_status,
       :model_approval_status,
       :model_life_cycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21644,7 +22585,8 @@ module Aws::SageMaker
     class ModelPackageValidationProfile < Struct.new(
       :profile_name,
       :transform_job_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21658,7 +22600,8 @@ module Aws::SageMaker
     class ModelPackageValidationSpecification < Struct.new(
       :validation_role,
       :validation_profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21672,7 +22615,8 @@ module Aws::SageMaker
     class ModelQuality < Struct.new(
       :statistics,
       :constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21706,7 +22650,8 @@ module Aws::SageMaker
       :post_analytics_processor_source_uri,
       :problem_type,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21720,7 +22665,8 @@ module Aws::SageMaker
     class ModelQualityBaselineConfig < Struct.new(
       :baselining_job_name,
       :constraints_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21738,7 +22684,8 @@ module Aws::SageMaker
       :endpoint_input,
       :batch_transform_input,
       :ground_truth_s3_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21752,7 +22699,8 @@ module Aws::SageMaker
     class ModelQuantizationConfig < Struct.new(
       :image,
       :override_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21766,7 +22714,8 @@ module Aws::SageMaker
     class ModelRegisterSettings < Struct.new(
       :status,
       :cross_account_model_register_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21780,7 +22729,8 @@ module Aws::SageMaker
     class ModelShardingConfig < Struct.new(
       :image,
       :override_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21790,7 +22740,8 @@ module Aws::SageMaker
     #   @return [String]
     class ModelStepMetadata < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21808,7 +22759,8 @@ module Aws::SageMaker
       :model_name,
       :model_arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21826,7 +22778,8 @@ module Aws::SageMaker
       :model_name,
       :variant_name,
       :infrastructure_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21848,7 +22801,8 @@ module Aws::SageMaker
       :variant_name,
       :infrastructure_config,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21858,7 +22812,8 @@ module Aws::SageMaker
     #   @return [Types::ModelDashboardIndicatorAction]
     class MonitoringAlertActions < Struct.new(
       :model_dashboard_indicator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21880,7 +22835,8 @@ module Aws::SageMaker
       :monitoring_alert_name,
       :creation_time,
       :alert_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21914,7 +22870,8 @@ module Aws::SageMaker
       :datapoints_to_alert,
       :evaluation_period,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21940,7 +22897,8 @@ module Aws::SageMaker
       :container_arguments,
       :record_preprocessor_source_uri,
       :post_analytics_processor_source_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21958,7 +22916,8 @@ module Aws::SageMaker
       :baselining_job_name,
       :constraints_resource,
       :statistics_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21980,7 +22939,8 @@ module Aws::SageMaker
       :instance_type,
       :volume_size_in_gb,
       :volume_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21990,7 +22950,8 @@ module Aws::SageMaker
     #   @return [String]
     class MonitoringConstraintsResource < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22000,7 +22961,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     class MonitoringCsvDatasetFormat < Struct.new(
       :header,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22018,7 +22980,8 @@ module Aws::SageMaker
       :csv,
       :json,
       :parquet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22064,7 +23027,8 @@ module Aws::SageMaker
       :failure_reason,
       :monitoring_job_definition_name,
       :monitoring_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22074,7 +23038,8 @@ module Aws::SageMaker
     #   @return [String]
     class MonitoringGroundTruthS3Input < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22088,7 +23053,8 @@ module Aws::SageMaker
     class MonitoringInput < Struct.new(
       :endpoint_input,
       :batch_transform_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22130,7 +23096,8 @@ module Aws::SageMaker
       :environment,
       :network_config,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22152,7 +23119,8 @@ module Aws::SageMaker
       :monitoring_job_definition_arn,
       :creation_time,
       :endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22162,7 +23130,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     class MonitoringJsonDatasetFormat < Struct.new(
       :line,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22180,7 +23149,8 @@ module Aws::SageMaker
       :enable_inter_container_traffic_encryption,
       :enable_network_isolation,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22190,7 +23160,8 @@ module Aws::SageMaker
     #   @return [Types::MonitoringS3Output]
     class MonitoringOutput < Struct.new(
       :s3_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22204,13 +23175,15 @@ module Aws::SageMaker
     class MonitoringOutputConfig < Struct.new(
       :monitoring_outputs,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the Parquet dataset format used when running a monitoring job.</p>
     class MonitoringParquetDatasetFormat < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22220,7 +23193,8 @@ module Aws::SageMaker
     #   @return [Types::MonitoringClusterConfig]
     class MonitoringResources < Struct.new(
       :cluster_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22238,7 +23212,8 @@ module Aws::SageMaker
       :s3_uri,
       :local_path,
       :s3_upload_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22288,7 +23263,8 @@ module Aws::SageMaker
       :endpoint_name,
       :last_monitoring_execution_summary,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22310,7 +23286,8 @@ module Aws::SageMaker
       :monitoring_job_definition,
       :monitoring_job_definition_name,
       :monitoring_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22348,7 +23325,8 @@ module Aws::SageMaker
       :endpoint_name,
       :monitoring_job_definition_name,
       :monitoring_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22358,7 +23336,8 @@ module Aws::SageMaker
     #   @return [String]
     class MonitoringStatisticsResource < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22368,7 +23347,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class MonitoringStoppingCondition < Struct.new(
       :max_runtime_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22378,7 +23358,8 @@ module Aws::SageMaker
     #   @return [String]
     class MultiModelConfig < Struct.new(
       :model_cache_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22392,7 +23373,8 @@ module Aws::SageMaker
     class NeoVpcConfig < Struct.new(
       :security_group_ids,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22406,7 +23388,8 @@ module Aws::SageMaker
     class NestedFilters < Struct.new(
       :nested_property_name,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22424,7 +23407,8 @@ module Aws::SageMaker
       :enable_inter_container_traffic_encryption,
       :enable_network_isolation,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22442,7 +23426,8 @@ module Aws::SageMaker
       :node_logical_id,
       :instance_group_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22464,7 +23449,8 @@ module Aws::SageMaker
       :notebook_instance_lifecycle_config_arn,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22474,7 +23460,8 @@ module Aws::SageMaker
     #   @return [String]
     class NotebookInstanceLifecycleHook < Struct.new(
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22520,7 +23507,8 @@ module Aws::SageMaker
       :notebook_instance_lifecycle_config_name,
       :default_code_repository,
       :additional_code_repositories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22530,7 +23518,8 @@ module Aws::SageMaker
     #   @return [String]
     class NotificationConfiguration < Struct.new(
       :notification_topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22548,7 +23537,8 @@ module Aws::SageMaker
       :succeeded,
       :pending,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22570,7 +23560,8 @@ module Aws::SageMaker
       :disable_glue_table_creation,
       :data_catalog_config,
       :table_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22584,7 +23575,8 @@ module Aws::SageMaker
     class OfflineStoreStatus < Struct.new(
       :status,
       :blocked_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22630,7 +23622,8 @@ module Aws::SageMaker
       :jwks_uri,
       :scope,
       :authentication_request_extra_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22672,7 +23665,8 @@ module Aws::SageMaker
       :jwks_uri,
       :scope,
       :authentication_request_extra_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22682,7 +23676,8 @@ module Aws::SageMaker
     #   @return [Array<String>]
     class OidcMemberDefinition < Struct.new(
       :groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22704,7 +23699,8 @@ module Aws::SageMaker
       :enable_online_store,
       :ttl_duration,
       :storage_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22714,7 +23710,8 @@ module Aws::SageMaker
     #   @return [Types::TtlDuration]
     class OnlineStoreConfigUpdate < Struct.new(
       :ttl_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22724,7 +23721,8 @@ module Aws::SageMaker
     #   @return [String]
     class OnlineStoreSecurityConfig < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22743,7 +23741,8 @@ module Aws::SageMaker
       :model_compilation_config,
       :model_sharding_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ModelQuantizationConfig < OptimizationConfig; end
@@ -22758,7 +23757,8 @@ module Aws::SageMaker
     #   @return [Types::OptimizationJobModelSourceS3]
     class OptimizationJobModelSource < Struct.new(
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22772,7 +23772,8 @@ module Aws::SageMaker
     class OptimizationJobModelSourceS3 < Struct.new(
       :s3_uri,
       :model_access_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22786,7 +23787,8 @@ module Aws::SageMaker
     class OptimizationJobOutputConfig < Struct.new(
       :kms_key_id,
       :s3_output_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22828,7 +23830,8 @@ module Aws::SageMaker
       :last_modified_time,
       :deployment_instance_type,
       :optimization_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22838,7 +23841,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     class OptimizationModelAccessConfig < Struct.new(
       :accept_eula,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22848,7 +23852,8 @@ module Aws::SageMaker
     #   @return [String]
     class OptimizationOutput < Struct.new(
       :recommended_inference_image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22862,7 +23867,8 @@ module Aws::SageMaker
     class OptimizationVpcConfig < Struct.new(
       :security_group_ids,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22888,7 +23894,8 @@ module Aws::SageMaker
       :target_platform,
       :compiler_options,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22906,7 +23913,8 @@ module Aws::SageMaker
       :kms_key_id,
       :s3_output_path,
       :compression_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22920,7 +23928,8 @@ module Aws::SageMaker
     class OutputParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22930,7 +23939,8 @@ module Aws::SageMaker
     #   @return [String]
     class OwnershipSettings < Struct.new(
       :owner_user_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22940,7 +23950,8 @@ module Aws::SageMaker
     #   @return [String]
     class OwnershipSettingsSummary < Struct.new(
       :owner_user_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22950,7 +23961,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class ParallelismConfiguration < Struct.new(
       :max_parallel_execution_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22964,7 +23976,8 @@ module Aws::SageMaker
     class Parameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22982,7 +23995,8 @@ module Aws::SageMaker
       :integer_parameter_range_specification,
       :continuous_parameter_range_specification,
       :categorical_parameter_range_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23004,7 +24018,8 @@ module Aws::SageMaker
       :continuous_parameter_ranges,
       :categorical_parameter_ranges,
       :auto_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23018,7 +24033,8 @@ module Aws::SageMaker
     class Parent < Struct.new(
       :trial_name,
       :experiment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23028,7 +24044,8 @@ module Aws::SageMaker
     #   @return [String]
     class ParentHyperParameterTuningJob < Struct.new(
       :hyper_parameter_tuning_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23042,7 +24059,8 @@ module Aws::SageMaker
     class PartnerAppConfig < Struct.new(
       :admin_users,
       :arguments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23052,7 +24070,8 @@ module Aws::SageMaker
     #   @return [String]
     class PartnerAppMaintenanceConfig < Struct.new(
       :maintenance_window_start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23078,7 +24097,8 @@ module Aws::SageMaker
       :type,
       :status,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23100,7 +24120,8 @@ module Aws::SageMaker
       :production_variants,
       :start_time,
       :shadow_production_variants,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23158,7 +24179,8 @@ module Aws::SageMaker
       :desired_serverless_config,
       :managed_instance_scaling,
       :routing_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23176,7 +24198,8 @@ module Aws::SageMaker
       :initial_number_of_users,
       :spawn_rate,
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23234,7 +24257,8 @@ module Aws::SageMaker
       :last_modified_by,
       :parallelism_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23252,7 +24276,8 @@ module Aws::SageMaker
       :bucket,
       :object_key,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23322,7 +24347,8 @@ module Aws::SageMaker
       :pipeline_parameters,
       :pipeline_version_id,
       :pipeline_version_display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23372,7 +24398,8 @@ module Aws::SageMaker
       :metadata,
       :attempt_count,
       :selective_execution_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23442,7 +24469,8 @@ module Aws::SageMaker
       :auto_ml_job,
       :endpoint,
       :endpoint_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23472,7 +24500,8 @@ module Aws::SageMaker
       :pipeline_execution_description,
       :pipeline_execution_display_name,
       :pipeline_execution_failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23486,7 +24515,8 @@ module Aws::SageMaker
     class PipelineExperimentConfig < Struct.new(
       :experiment_name,
       :trial_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23524,7 +24554,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :last_execution_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23574,7 +24605,8 @@ module Aws::SageMaker
       :last_executed_pipeline_execution_arn,
       :last_executed_pipeline_execution_display_name,
       :last_executed_pipeline_execution_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23604,7 +24636,8 @@ module Aws::SageMaker
       :pipeline_version_description,
       :pipeline_version_display_name,
       :last_execution_pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23618,7 +24651,8 @@ module Aws::SageMaker
     class PlacementSpecification < Struct.new(
       :ultra_server_id,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23628,7 +24662,8 @@ module Aws::SageMaker
     #   @return [String]
     class PredefinedMetricSpecification < Struct.new(
       :predefined_metric_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23642,7 +24677,8 @@ module Aws::SageMaker
     class PresignedUrlAccessConfig < Struct.new(
       :accept_eula,
       :expected_s3_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23656,7 +24692,8 @@ module Aws::SageMaker
     class PriorityClass < Struct.new(
       :name,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23678,7 +24715,8 @@ module Aws::SageMaker
       :instance_type,
       :volume_size_in_gb,
       :volume_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23688,7 +24726,8 @@ module Aws::SageMaker
     #   @return [String]
     class ProcessingFeatureStoreOutput < Struct.new(
       :feature_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23710,7 +24749,8 @@ module Aws::SageMaker
       :app_managed,
       :s3_input,
       :dataset_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23804,7 +24844,8 @@ module Aws::SageMaker
       :auto_ml_job_arn,
       :training_job_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23814,7 +24855,8 @@ module Aws::SageMaker
     #   @return [String]
     class ProcessingJobStepMetadata < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23852,7 +24894,8 @@ module Aws::SageMaker
       :processing_job_status,
       :failure_reason,
       :exit_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23874,7 +24917,8 @@ module Aws::SageMaker
       :s3_output,
       :feature_store_output,
       :app_managed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23888,7 +24932,8 @@ module Aws::SageMaker
     class ProcessingOutputConfig < Struct.new(
       :outputs,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23898,7 +24943,8 @@ module Aws::SageMaker
     #   @return [Types::ProcessingClusterConfig]
     class ProcessingResources < Struct.new(
       :cluster_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23928,7 +24974,8 @@ module Aws::SageMaker
       :s3_input_mode,
       :s3_data_distribution_type,
       :s3_compression_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23946,7 +24993,8 @@ module Aws::SageMaker
       :s3_uri,
       :local_path,
       :s3_upload_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23956,7 +25004,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class ProcessingStoppingCondition < Struct.new(
       :max_runtime_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24026,7 +25075,8 @@ module Aws::SageMaker
       :routing_config,
       :inference_ami_version,
       :capacity_reservation_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24040,7 +25090,8 @@ module Aws::SageMaker
     class ProductionVariantCapacityReservationConfig < Struct.new(
       :capacity_reservation_preference,
       :ml_reservation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24070,7 +25121,8 @@ module Aws::SageMaker
       :available_instance_count,
       :used_by_current_endpoint,
       :ec2_capacity_reservations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24084,7 +25136,8 @@ module Aws::SageMaker
     class ProductionVariantCoreDumpConfig < Struct.new(
       :destination_s3_uri,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24102,7 +25155,8 @@ module Aws::SageMaker
       :status,
       :min_instance_count,
       :max_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24112,7 +25166,8 @@ module Aws::SageMaker
     #   @return [String]
     class ProductionVariantRoutingConfig < Struct.new(
       :routing_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24130,7 +25185,8 @@ module Aws::SageMaker
       :memory_size_in_mb,
       :max_concurrency,
       :provisioned_concurrency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24144,7 +25200,8 @@ module Aws::SageMaker
     class ProductionVariantServerlessUpdateConfig < Struct.new(
       :max_concurrency,
       :provisioned_concurrency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24162,7 +25219,8 @@ module Aws::SageMaker
       :status,
       :status_message,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24216,7 +25274,8 @@ module Aws::SageMaker
       :managed_instance_scaling,
       :routing_config,
       :capacity_reservation_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24238,7 +25297,8 @@ module Aws::SageMaker
       :profiling_interval_in_milliseconds,
       :profiling_parameters,
       :disable_profiler,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24260,7 +25320,8 @@ module Aws::SageMaker
       :profiling_interval_in_milliseconds,
       :profiling_parameters,
       :disable_profiler,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24294,7 +25355,8 @@ module Aws::SageMaker
       :instance_type,
       :volume_size_in_gb,
       :rule_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24320,7 +25382,8 @@ module Aws::SageMaker
       :rule_evaluation_status,
       :status_details,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24378,7 +25441,8 @@ module Aws::SageMaker
       :tags,
       :last_modified_time,
       :last_modified_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24408,7 +25472,8 @@ module Aws::SageMaker
       :project_id,
       :creation_time,
       :project_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24418,7 +25483,8 @@ module Aws::SageMaker
     #   @return [String]
     class PropertyNameQuery < Struct.new(
       :property_name_hint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24428,7 +25494,8 @@ module Aws::SageMaker
     #   @return [String]
     class PropertyNameSuggestion < Struct.new(
       :property_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24442,7 +25509,8 @@ module Aws::SageMaker
     class ProvisioningParameter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24452,7 +25520,8 @@ module Aws::SageMaker
     #   @return [Types::USD]
     class PublicWorkforceTaskPrice < Struct.new(
       :amount_in_usd,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24465,7 +25534,8 @@ module Aws::SageMaker
     class PutModelPackageGroupPolicyInput < Struct.new(
       :model_package_group_name,
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24474,7 +25544,8 @@ module Aws::SageMaker
     #   @return [String]
     class PutModelPackageGroupPolicyOutput < Struct.new(
       :model_package_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24520,7 +25591,8 @@ module Aws::SageMaker
       :check_job_arn,
       :skip_check,
       :register_new_baseline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24554,7 +25626,8 @@ module Aws::SageMaker
       :modified_before,
       :modified_after,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24587,7 +25660,8 @@ module Aws::SageMaker
       :max_depth,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24604,7 +25678,8 @@ module Aws::SageMaker
       :vertices,
       :edges,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24618,7 +25693,8 @@ module Aws::SageMaker
     class RSessionAppSettings < Struct.new(
       :default_resource_spec,
       :custom_images,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24632,7 +25708,8 @@ module Aws::SageMaker
     class RStudioServerProAppSettings < Struct.new(
       :access_status,
       :user_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24654,7 +25731,8 @@ module Aws::SageMaker
       :r_studio_connect_url,
       :r_studio_package_manager_url,
       :default_resource_spec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24676,7 +25754,8 @@ module Aws::SageMaker
       :default_resource_spec,
       :r_studio_connect_url,
       :r_studio_package_manager_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24690,7 +25769,8 @@ module Aws::SageMaker
     class RealTimeInferenceConfig < Struct.new(
       :instance_type,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24708,7 +25788,8 @@ module Aws::SageMaker
       :recommendation_id,
       :instance_type,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24718,7 +25799,8 @@ module Aws::SageMaker
     #   @return [String]
     class RecommendationJobCompiledOutputConfig < Struct.new(
       :s3_output_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24764,7 +25846,8 @@ module Aws::SageMaker
       :supported_endpoint_type,
       :data_input_config,
       :supported_response_mime_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24798,7 +25881,8 @@ module Aws::SageMaker
       :failure_reason,
       :invocation_end_time,
       :invocation_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24844,7 +25928,8 @@ module Aws::SageMaker
       :container_config,
       :endpoints,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24858,7 +25943,8 @@ module Aws::SageMaker
     class RecommendationJobOutputConfig < Struct.new(
       :kms_key_id,
       :compiled_output_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24872,7 +25958,8 @@ module Aws::SageMaker
     class RecommendationJobPayloadConfig < Struct.new(
       :sample_payload_url,
       :supported_content_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24886,7 +25973,8 @@ module Aws::SageMaker
     class RecommendationJobResourceLimit < Struct.new(
       :max_number_of_tests,
       :max_parallel_of_tests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24904,7 +25992,8 @@ module Aws::SageMaker
       :max_invocations,
       :model_latency_thresholds,
       :flat_invocations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24918,7 +26007,8 @@ module Aws::SageMaker
     class RecommendationJobVpcConfig < Struct.new(
       :security_group_ids,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24952,7 +26042,8 @@ module Aws::SageMaker
       :cpu_utilization,
       :memory_utilization,
       :model_setup_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24994,7 +26085,8 @@ module Aws::SageMaker
       :kms_key_id,
       :output_format,
       :output_compression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25011,7 +26103,8 @@ module Aws::SageMaker
       :device_fleet_name,
       :devices,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25021,7 +26114,8 @@ module Aws::SageMaker
     #   @return [String]
     class RegisterModelStepMetadata < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25031,7 +26125,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     class RemoteDebugConfig < Struct.new(
       :enable_remote_debug,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25041,7 +26136,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     class RemoteDebugConfigForUpdate < Struct.new(
       :enable_remote_debug,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25062,7 +26158,8 @@ module Aws::SageMaker
       :task,
       :role_arn,
       :human_task_ui_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25075,7 +26172,8 @@ module Aws::SageMaker
     class RenderUiTemplateResponse < Struct.new(
       :rendered_content,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25085,7 +26183,8 @@ module Aws::SageMaker
     #   @return [String]
     class RenderableTask < Struct.new(
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25099,7 +26198,8 @@ module Aws::SageMaker
     class RenderingError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25109,7 +26209,8 @@ module Aws::SageMaker
     #   @return [String]
     class RepositoryAuthConfig < Struct.new(
       :repository_credentials_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25155,7 +26256,8 @@ module Aws::SageMaker
       :duration_minutes,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25209,7 +26311,8 @@ module Aws::SageMaker
       :duration_minutes,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25227,7 +26330,8 @@ module Aws::SageMaker
       :auto_ml_job_objective,
       :problem_type,
       :completion_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25249,7 +26353,8 @@ module Aws::SageMaker
       :resource_catalog_name,
       :description,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25287,7 +26392,8 @@ module Aws::SageMaker
       :instance_groups,
       :training_plan_arn,
       :instance_placement_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25297,7 +26403,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class ResourceConfigForUpdate < Struct.new(
       :keep_alive_period_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25306,7 +26413,8 @@ module Aws::SageMaker
     #   @return [String]
     class ResourceInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25315,7 +26423,8 @@ module Aws::SageMaker
     #   @return [String]
     class ResourceLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25333,7 +26442,8 @@ module Aws::SageMaker
       :max_number_of_training_jobs,
       :max_parallel_training_jobs,
       :max_runtime_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25342,7 +26452,8 @@ module Aws::SageMaker
     #   @return [String]
     class ResourceNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25356,7 +26467,8 @@ module Aws::SageMaker
     class ResourceSharingConfig < Struct.new(
       :strategy,
       :borrow_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25382,7 +26494,8 @@ module Aws::SageMaker
       :sage_maker_image_version_alias,
       :instance_type,
       :lifecycle_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25392,7 +26505,8 @@ module Aws::SageMaker
     #   @return [String]
     class RetentionPolicy < Struct.new(
       :home_efs_file_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25409,7 +26523,8 @@ module Aws::SageMaker
       :pipeline_execution_arn,
       :client_request_token,
       :parallelism_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25418,7 +26533,8 @@ module Aws::SageMaker
     #   @return [String]
     class RetryPipelineExecutionResponse < Struct.new(
       :pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25428,7 +26544,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class RetryStrategy < Struct.new(
       :maximum_retry_attempts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25442,7 +26559,8 @@ module Aws::SageMaker
     class RollingDeploymentPolicy < Struct.new(
       :maximum_batch_size,
       :rollback_maximum_batch_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25464,7 +26582,8 @@ module Aws::SageMaker
       :wait_interval_in_seconds,
       :maximum_execution_timeout_in_seconds,
       :rollback_maximum_batch_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25498,7 +26617,8 @@ module Aws::SageMaker
       :instance_group_names,
       :model_access_config,
       :hub_access_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25508,7 +26628,8 @@ module Aws::SageMaker
     #   @return [String]
     class S3FileSystem < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25522,7 +26643,8 @@ module Aws::SageMaker
     class S3FileSystemConfig < Struct.new(
       :mount_path,
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25560,7 +26682,8 @@ module Aws::SageMaker
       :manifest_s3_uri,
       :e_tag,
       :manifest_etag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25570,7 +26693,8 @@ module Aws::SageMaker
     #   @return [Types::IamPolicyConstraints]
     class S3Presign < Struct.new(
       :iam_policy_constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25588,7 +26712,8 @@ module Aws::SageMaker
       :s3_uri,
       :kms_key_id,
       :resolved_output_s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25599,7 +26724,8 @@ module Aws::SageMaker
     class ScalingPolicy < Struct.new(
       :target_tracking,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TargetTracking < ScalingPolicy; end
@@ -25616,7 +26742,8 @@ module Aws::SageMaker
     class ScalingPolicyMetric < Struct.new(
       :invocations_per_instance,
       :model_latency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25630,7 +26757,8 @@ module Aws::SageMaker
     class ScalingPolicyObjective < Struct.new(
       :min_invocations_per_minute,
       :max_invocations_per_minute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25648,7 +26776,8 @@ module Aws::SageMaker
       :schedule_expression,
       :data_analysis_start_time,
       :data_analysis_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25662,7 +26791,8 @@ module Aws::SageMaker
     class ScheduledUpdateConfig < Struct.new(
       :schedule_expression,
       :deployment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25676,7 +26806,8 @@ module Aws::SageMaker
     class SchedulerConfig < Struct.new(
       :priority_classes,
       :fair_share,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25698,7 +26829,8 @@ module Aws::SageMaker
       :nested_filters,
       :sub_expressions,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25768,7 +26900,8 @@ module Aws::SageMaker
       :hyper_parameter_tuning_job,
       :model_card,
       :model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25805,7 +26938,8 @@ module Aws::SageMaker
       :max_results,
       :cross_account_filter_option,
       :visibility_conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25822,7 +26956,8 @@ module Aws::SageMaker
       :results,
       :next_token,
       :total_hits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25859,7 +26994,8 @@ module Aws::SageMaker
       :end_time_before,
       :duration_hours,
       :target_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25868,7 +27004,8 @@ module Aws::SageMaker
     #   @return [Array<Types::TrainingPlanOffering>]
     class SearchTrainingPlanOfferingsResponse < Struct.new(
       :training_plan_offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25890,7 +27027,8 @@ module Aws::SageMaker
       :start_time,
       :end_time,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25900,7 +27038,8 @@ module Aws::SageMaker
     #   @return [String]
     class SelectedStep < Struct.new(
       :step_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25914,7 +27053,8 @@ module Aws::SageMaker
     class SelectiveExecutionConfig < Struct.new(
       :source_pipeline_execution_arn,
       :selected_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25924,7 +27064,8 @@ module Aws::SageMaker
     #   @return [String]
     class SelectiveExecutionResult < Struct.new(
       :source_pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25941,7 +27082,8 @@ module Aws::SageMaker
       :callback_token,
       :failure_reason,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25950,7 +27092,8 @@ module Aws::SageMaker
     #   @return [String]
     class SendPipelineExecutionStepFailureResponse < Struct.new(
       :pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25967,7 +27110,8 @@ module Aws::SageMaker
       :callback_token,
       :output_parameters,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25976,7 +27120,8 @@ module Aws::SageMaker
     #   @return [String]
     class SendPipelineExecutionStepSuccessResponse < Struct.new(
       :pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25990,7 +27135,8 @@ module Aws::SageMaker
     class ServiceCatalogProvisionedProductDetails < Struct.new(
       :provisioned_product_id,
       :provisioned_product_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26012,7 +27158,8 @@ module Aws::SageMaker
       :provisioning_artifact_id,
       :path_id,
       :provisioning_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26026,7 +27173,8 @@ module Aws::SageMaker
     class ServiceCatalogProvisioningUpdateDetails < Struct.new(
       :provisioning_artifact_id,
       :provisioning_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26036,7 +27184,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     class SessionChainingConfig < Struct.new(
       :enable_session_tag_chaining,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26050,7 +27199,8 @@ module Aws::SageMaker
     class ShadowModeConfig < Struct.new(
       :source_model_variant_name,
       :shadow_model_variants,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26064,7 +27214,8 @@ module Aws::SageMaker
     class ShadowModelVariantConfig < Struct.new(
       :shadow_model_variant_name,
       :sampling_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26082,7 +27233,8 @@ module Aws::SageMaker
       :notebook_output_option,
       :s3_output_path,
       :s3_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26092,7 +27244,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class ShuffleConfig < Struct.new(
       :seed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26114,7 +27267,8 @@ module Aws::SageMaker
       :model_data_source,
       :model_data_e_tag,
       :algorithm_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26124,7 +27278,8 @@ module Aws::SageMaker
     #   @return [Array<Types::SourceAlgorithm>]
     class SourceAlgorithmSpecification < Struct.new(
       :source_algorithms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26134,7 +27289,8 @@ module Aws::SageMaker
     #   @return [Array<String>]
     class SourceIpConfig < Struct.new(
       :cidrs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26144,7 +27300,8 @@ module Aws::SageMaker
     #   @return [Types::SpaceIdleSettings]
     class SpaceAppLifecycleManagement < Struct.new(
       :idle_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26158,7 +27315,8 @@ module Aws::SageMaker
     class SpaceCodeEditorAppSettings < Struct.new(
       :default_resource_spec,
       :app_lifecycle_management,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26200,7 +27358,8 @@ module Aws::SageMaker
       :space_sharing_settings_summary,
       :ownership_settings_summary,
       :space_display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26210,7 +27369,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class SpaceIdleSettings < Struct.new(
       :idle_timeout_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26228,7 +27388,8 @@ module Aws::SageMaker
       :default_resource_spec,
       :code_repositories,
       :app_lifecycle_management,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26270,7 +27431,8 @@ module Aws::SageMaker
       :space_managed_resources,
       :custom_file_systems,
       :remote_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26288,7 +27450,8 @@ module Aws::SageMaker
       :app_type,
       :remote_access,
       :space_storage_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26298,7 +27461,8 @@ module Aws::SageMaker
     #   @return [String]
     class SpaceSharingSettings < Struct.new(
       :sharing_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26308,7 +27472,8 @@ module Aws::SageMaker
     #   @return [String]
     class SpaceSharingSettingsSummary < Struct.new(
       :sharing_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26318,7 +27483,8 @@ module Aws::SageMaker
     #   @return [Types::EbsStorageSettings]
     class SpaceStorageSettings < Struct.new(
       :ebs_storage_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26336,7 +27502,8 @@ module Aws::SageMaker
       :duration_in_seconds,
       :number_of_steps,
       :users_per_step,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26349,7 +27516,8 @@ module Aws::SageMaker
     class StartEdgeDeploymentStageRequest < Struct.new(
       :edge_deployment_plan_name,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26358,7 +27526,8 @@ module Aws::SageMaker
     #   @return [String]
     class StartInferenceExperimentRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26367,7 +27536,8 @@ module Aws::SageMaker
     #   @return [String]
     class StartInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26376,7 +27546,8 @@ module Aws::SageMaker
     #   @return [String]
     class StartMlflowTrackingServerRequest < Struct.new(
       :tracking_server_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26385,7 +27556,8 @@ module Aws::SageMaker
     #   @return [String]
     class StartMlflowTrackingServerResponse < Struct.new(
       :tracking_server_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26394,7 +27566,8 @@ module Aws::SageMaker
     #   @return [String]
     class StartMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26403,7 +27576,8 @@ module Aws::SageMaker
     #   @return [String]
     class StartNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26440,7 +27614,8 @@ module Aws::SageMaker
       :parallelism_configuration,
       :selective_execution_config,
       :pipeline_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26449,7 +27624,8 @@ module Aws::SageMaker
     #   @return [String]
     class StartPipelineExecutionResponse < Struct.new(
       :pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26458,7 +27634,8 @@ module Aws::SageMaker
     #   @return [String]
     class StartSessionRequest < Struct.new(
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26475,7 +27652,8 @@ module Aws::SageMaker
       :session_id,
       :stream_url,
       :token_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26484,7 +27662,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopAutoMLJobRequest < Struct.new(
       :auto_ml_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26493,7 +27672,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopCompilationJobRequest < Struct.new(
       :compilation_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26506,7 +27686,8 @@ module Aws::SageMaker
     class StopEdgeDeploymentStageRequest < Struct.new(
       :edge_deployment_plan_name,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26515,7 +27696,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopEdgePackagingJobRequest < Struct.new(
       :edge_packaging_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26524,7 +27706,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopHyperParameterTuningJobRequest < Struct.new(
       :hyper_parameter_tuning_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26549,7 +27732,8 @@ module Aws::SageMaker
       :desired_model_variants,
       :desired_state,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26558,7 +27742,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26567,7 +27752,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopInferenceRecommendationsJobRequest < Struct.new(
       :job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26576,7 +27762,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopLabelingJobRequest < Struct.new(
       :labeling_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26585,7 +27772,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopMlflowTrackingServerRequest < Struct.new(
       :tracking_server_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26594,7 +27782,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopMlflowTrackingServerResponse < Struct.new(
       :tracking_server_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26603,7 +27792,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26612,7 +27802,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26621,7 +27812,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopOptimizationJobRequest < Struct.new(
       :optimization_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26634,7 +27826,8 @@ module Aws::SageMaker
     class StopPipelineExecutionRequest < Struct.new(
       :pipeline_execution_arn,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26643,7 +27836,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopPipelineExecutionResponse < Struct.new(
       :pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26652,7 +27846,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopProcessingJobRequest < Struct.new(
       :processing_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26661,7 +27856,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopTrainingJobRequest < Struct.new(
       :training_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26670,7 +27866,8 @@ module Aws::SageMaker
     #   @return [String]
     class StopTransformJobRequest < Struct.new(
       :transform_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26688,7 +27885,8 @@ module Aws::SageMaker
       :max_runtime_in_seconds,
       :max_wait_time_in_seconds,
       :max_pending_time_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26714,7 +27912,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :studio_lifecycle_config_app_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26736,7 +27935,8 @@ module Aws::SageMaker
       :hidden_app_types,
       :hidden_instance_types,
       :hidden_sage_maker_image_version_aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26762,7 +27962,8 @@ module Aws::SageMaker
       :seller_name,
       :marketplace_description,
       :listing_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26772,7 +27973,8 @@ module Aws::SageMaker
     #   @return [Types::PropertyNameQuery]
     class SuggestionQuery < Struct.new(
       :property_name_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26810,7 +28012,8 @@ module Aws::SageMaker
       :problem_type,
       :target_attribute_name,
       :sample_weight_attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26820,7 +28023,8 @@ module Aws::SageMaker
     #   @return [String]
     class TabularResolvedAttributes < Struct.new(
       :problem_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26834,7 +28038,8 @@ module Aws::SageMaker
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26852,7 +28057,8 @@ module Aws::SageMaker
       :os,
       :arch,
       :accelerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26866,7 +28072,8 @@ module Aws::SageMaker
     class TargetTrackingScalingPolicyConfiguration < Struct.new(
       :metric_specification,
       :target_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26876,7 +28083,8 @@ module Aws::SageMaker
     #   @return [Types::CfnTemplateProviderDetail]
     class TemplateProviderDetail < Struct.new(
       :cfn_template_provider_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26886,7 +28094,8 @@ module Aws::SageMaker
     #   @return [Types::ResourceSpec]
     class TensorBoardAppSettings < Struct.new(
       :default_resource_spec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26900,7 +28109,8 @@ module Aws::SageMaker
     class TensorBoardOutputConfig < Struct.new(
       :local_path,
       :s3_output_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26918,7 +28128,8 @@ module Aws::SageMaker
       :completion_criteria,
       :content_column,
       :target_label_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26940,7 +28151,8 @@ module Aws::SageMaker
       :base_model_name,
       :text_generation_hyper_parameters,
       :model_access_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26950,7 +28162,8 @@ module Aws::SageMaker
     #   @return [String]
     class TextGenerationResolvedAttributes < Struct.new(
       :base_model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26968,7 +28181,8 @@ module Aws::SageMaker
       :throughput_mode,
       :provisioned_read_capacity_units,
       :provisioned_write_capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26986,7 +28200,8 @@ module Aws::SageMaker
       :throughput_mode,
       :provisioned_read_capacity_units,
       :provisioned_write_capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27004,7 +28219,8 @@ module Aws::SageMaker
       :throughput_mode,
       :provisioned_read_capacity_units,
       :provisioned_write_capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27026,7 +28242,8 @@ module Aws::SageMaker
       :timestamp_attribute_name,
       :item_identifier_attribute_name,
       :grouping_attribute_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27068,7 +28285,8 @@ module Aws::SageMaker
       :time_series_config,
       :holiday_config,
       :candidate_generation_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27082,7 +28300,8 @@ module Aws::SageMaker
     class TimeSeriesForecastingSettings < Struct.new(
       :status,
       :amazon_forecast_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27096,7 +28315,8 @@ module Aws::SageMaker
     class TimeSeriesTransformations < Struct.new(
       :filling,
       :aggregation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27110,7 +28330,8 @@ module Aws::SageMaker
     class TotalHits < Struct.new(
       :value,
       :relation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27144,7 +28365,8 @@ module Aws::SageMaker
       :tracking_server_status,
       :is_active,
       :mlflow_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27162,7 +28384,8 @@ module Aws::SageMaker
       :traffic_type,
       :phases,
       :stairs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27184,7 +28407,8 @@ module Aws::SageMaker
       :wait_interval_in_seconds,
       :canary_size,
       :linear_step_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27198,7 +28422,8 @@ module Aws::SageMaker
     class TrainingImageConfig < Struct.new(
       :training_repository_access_mode,
       :training_repository_auth_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27356,7 +28581,8 @@ module Aws::SageMaker
       :environment,
       :retry_strategy,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27386,7 +28612,8 @@ module Aws::SageMaker
       :output_data_config,
       :resource_config,
       :stopping_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27412,7 +28639,8 @@ module Aws::SageMaker
       :retryable_error,
       :non_retryable_error,
       :stopped,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27422,7 +28650,8 @@ module Aws::SageMaker
     #   @return [String]
     class TrainingJobStepMetadata < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27464,7 +28693,8 @@ module Aws::SageMaker
       :secondary_status,
       :warm_pool_status,
       :training_plan_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27478,7 +28708,8 @@ module Aws::SageMaker
     class TrainingPlanFilter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27520,7 +28751,8 @@ module Aws::SageMaker
       :upfront_fee,
       :currency_code,
       :reserved_capacity_offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27590,7 +28822,8 @@ module Aws::SageMaker
       :total_ultra_server_count,
       :target_resources,
       :reserved_capacity_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27600,7 +28833,8 @@ module Aws::SageMaker
     #   @return [String]
     class TrainingRepositoryAuthConfig < Struct.new(
       :training_repository_credentials_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27642,7 +28876,8 @@ module Aws::SageMaker
       :training_channels,
       :supported_tuning_job_objective_metrics,
       :additional_s3_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27652,7 +28887,8 @@ module Aws::SageMaker
     #   @return [Types::TransformS3DataSource]
     class TransformDataSource < Struct.new(
       :s3_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27674,7 +28910,8 @@ module Aws::SageMaker
       :content_type,
       :compression_type,
       :split_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27768,7 +29005,8 @@ module Aws::SageMaker
       :data_processing,
       :experiment_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27802,7 +29040,8 @@ module Aws::SageMaker
       :transform_input,
       :transform_output,
       :transform_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27812,7 +29051,8 @@ module Aws::SageMaker
     #   @return [String]
     class TransformJobStepMetadata < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27846,7 +29086,8 @@ module Aws::SageMaker
       :last_modified_time,
       :transform_job_status,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27868,7 +29109,8 @@ module Aws::SageMaker
       :accept,
       :assemble_with,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27890,7 +29132,8 @@ module Aws::SageMaker
       :instance_count,
       :volume_kms_key_id,
       :transform_ami_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27904,7 +29147,8 @@ module Aws::SageMaker
     class TransformS3DataSource < Struct.new(
       :s3_data_type,
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27958,7 +29202,8 @@ module Aws::SageMaker
       :metadata_properties,
       :tags,
       :trial_component_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28048,7 +29293,8 @@ module Aws::SageMaker
       :tags,
       :parents,
       :run_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28062,7 +29308,8 @@ module Aws::SageMaker
     class TrialComponentArtifact < Struct.new(
       :media_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28104,7 +29351,8 @@ module Aws::SageMaker
       :count,
       :avg,
       :std_dev,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28119,7 +29367,8 @@ module Aws::SageMaker
       :string_value,
       :number_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringValue < TrialComponentParameterValue; end
@@ -28149,7 +29398,8 @@ module Aws::SageMaker
       :trial_component_source,
       :creation_time,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28163,7 +29413,8 @@ module Aws::SageMaker
     class TrialComponentSource < Struct.new(
       :source_arn,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28185,7 +29436,8 @@ module Aws::SageMaker
       :training_job,
       :processing_job,
       :transform_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28199,7 +29451,8 @@ module Aws::SageMaker
     class TrialComponentStatus < Struct.new(
       :primary_status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28249,7 +29502,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28263,7 +29517,8 @@ module Aws::SageMaker
     class TrialSource < Struct.new(
       :source_arn,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28293,7 +29548,8 @@ module Aws::SageMaker
       :trial_source,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28303,7 +29559,8 @@ module Aws::SageMaker
     #   @return [String]
     class TrustedIdentityPropagationSettings < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28317,7 +29574,8 @@ module Aws::SageMaker
     class TtlDuration < Struct.new(
       :unit,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28335,7 +29593,8 @@ module Aws::SageMaker
       :target_objective_metric_value,
       :best_objective_not_improving,
       :convergence_detected,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28345,7 +29604,8 @@ module Aws::SageMaker
     #   @return [String]
     class TuningJobStepMetaData < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28363,7 +29623,8 @@ module Aws::SageMaker
       :dollars,
       :cents,
       :tenth_fractions_of_a_cent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28377,7 +29638,8 @@ module Aws::SageMaker
     class UiConfig < Struct.new(
       :ui_template_s3_uri,
       :human_task_ui_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28387,7 +29649,8 @@ module Aws::SageMaker
     #   @return [String]
     class UiTemplate < Struct.new(
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28401,7 +29664,8 @@ module Aws::SageMaker
     class UiTemplateInfo < Struct.new(
       :url,
       :content_sha256,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28451,7 +29715,8 @@ module Aws::SageMaker
       :available_spare_instance_count,
       :unhealthy_instance_count,
       :health_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28461,7 +29726,8 @@ module Aws::SageMaker
     #   @return [String]
     class UltraServerInfo < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28487,7 +29753,8 @@ module Aws::SageMaker
       :ultra_server_count,
       :available_spare_instance_count,
       :unhealthy_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28525,7 +29792,8 @@ module Aws::SageMaker
       :environment_id,
       :project_s3_path,
       :single_sign_on_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28550,7 +29818,8 @@ module Aws::SageMaker
       :status,
       :properties,
       :properties_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28559,7 +29828,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateActionResponse < Struct.new(
       :action_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28580,7 +29850,8 @@ module Aws::SageMaker
       :kernel_gateway_image_config,
       :jupyter_lab_app_image_config,
       :code_editor_app_image_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28589,7 +29860,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateAppImageConfigResponse < Struct.new(
       :app_image_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28610,7 +29882,8 @@ module Aws::SageMaker
       :artifact_name,
       :properties,
       :properties_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28619,7 +29892,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateArtifactResponse < Struct.new(
       :artifact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28656,7 +29930,8 @@ module Aws::SageMaker
       :instance_groups_to_delete,
       :cluster_role,
       :auto_scaling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28665,7 +29940,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateClusterResponse < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28686,7 +29962,8 @@ module Aws::SageMaker
       :target_version,
       :scheduler_config,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28699,7 +29976,8 @@ module Aws::SageMaker
     class UpdateClusterSchedulerConfigResponse < Struct.new(
       :cluster_scheduler_config_arn,
       :cluster_scheduler_config_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28709,7 +29987,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateClusterSoftwareInstanceGroupSpecification < Struct.new(
       :instance_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28730,7 +30009,8 @@ module Aws::SageMaker
       :instance_groups,
       :deployment_config,
       :image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28739,7 +30019,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateClusterSoftwareResponse < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28752,7 +30033,8 @@ module Aws::SageMaker
     class UpdateCodeRepositoryInput < Struct.new(
       :code_repository_name,
       :git_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28761,7 +30043,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateCodeRepositoryOutput < Struct.new(
       :code_repository_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28790,7 +30073,8 @@ module Aws::SageMaker
       :compute_quota_target,
       :activation_state,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28803,7 +30087,8 @@ module Aws::SageMaker
     class UpdateComputeQuotaResponse < Struct.new(
       :compute_quota_arn,
       :compute_quota_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28824,7 +30109,8 @@ module Aws::SageMaker
       :description,
       :properties,
       :properties_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28833,7 +30119,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateContextResponse < Struct.new(
       :context_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28858,7 +30145,8 @@ module Aws::SageMaker
       :description,
       :output_config,
       :enable_iot_role_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28871,7 +30159,8 @@ module Aws::SageMaker
     class UpdateDevicesRequest < Struct.new(
       :device_fleet_name,
       :devices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28908,7 +30197,8 @@ module Aws::SageMaker
       :subnet_ids,
       :app_network_access_type,
       :tag_propagation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28917,7 +30207,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateDomainResponse < Struct.new(
       :domain_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28946,7 +30237,8 @@ module Aws::SageMaker
       :exclude_retained_variant_properties,
       :deployment_config,
       :retain_deployment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28955,7 +30247,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateEndpointOutput < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28968,7 +30261,8 @@ module Aws::SageMaker
     class UpdateEndpointWeightsAndCapacitiesInput < Struct.new(
       :endpoint_name,
       :desired_weights_and_capacities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28977,7 +30271,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateEndpointWeightsAndCapacitiesOutput < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28994,7 +30289,8 @@ module Aws::SageMaker
       :experiment_name,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29003,7 +30299,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateExperimentResponse < Struct.new(
       :experiment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29024,7 +30321,8 @@ module Aws::SageMaker
       :feature_additions,
       :online_store_config,
       :throughput_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29033,7 +30331,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateFeatureGroupResponse < Struct.new(
       :feature_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29058,7 +30357,8 @@ module Aws::SageMaker
       :description,
       :parameter_additions,
       :parameter_removals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29079,7 +30379,8 @@ module Aws::SageMaker
       :hub_content_name,
       :hub_content_type,
       :min_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29092,7 +30393,8 @@ module Aws::SageMaker
     class UpdateHubContentReferenceResponse < Struct.new(
       :hub_arn,
       :hub_content_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29133,7 +30435,8 @@ module Aws::SageMaker
       :hub_content_markdown,
       :hub_content_search_keywords,
       :support_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29146,7 +30449,8 @@ module Aws::SageMaker
     class UpdateHubContentResponse < Struct.new(
       :hub_arn,
       :hub_content_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29167,7 +30471,8 @@ module Aws::SageMaker
       :hub_description,
       :hub_display_name,
       :hub_search_keywords,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29176,7 +30481,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateHubResponse < Struct.new(
       :hub_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29201,7 +30507,8 @@ module Aws::SageMaker
       :display_name,
       :image_name,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29210,7 +30517,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateImageResponse < Struct.new(
       :image_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29263,7 +30571,8 @@ module Aws::SageMaker
       :processor,
       :horovod,
       :release_notes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29272,7 +30581,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateImageVersionResponse < Struct.new(
       :image_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29293,7 +30603,8 @@ module Aws::SageMaker
       :specification,
       :runtime_config,
       :deployment_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29302,7 +30613,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateInferenceComponentOutput < Struct.new(
       :inference_component_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29315,7 +30627,8 @@ module Aws::SageMaker
     class UpdateInferenceComponentRuntimeConfigInput < Struct.new(
       :inference_component_name,
       :desired_runtime_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29324,7 +30637,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateInferenceComponentRuntimeConfigOutput < Struct.new(
       :inference_component_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29353,7 +30667,8 @@ module Aws::SageMaker
       :model_variants,
       :data_storage_config,
       :shadow_mode_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29362,7 +30677,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29387,7 +30703,8 @@ module Aws::SageMaker
       :tracking_server_size,
       :automatic_model_registration,
       :weekly_maintenance_window_start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29396,7 +30713,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateMlflowTrackingServerResponse < Struct.new(
       :tracking_server_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29413,7 +30731,8 @@ module Aws::SageMaker
       :model_card_name,
       :content,
       :model_card_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29422,7 +30741,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateModelCardResponse < Struct.new(
       :model_card_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29471,7 +30791,8 @@ module Aws::SageMaker
       :model_card,
       :model_life_cycle,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29480,7 +30801,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateModelPackageOutput < Struct.new(
       :model_package_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29501,7 +30823,8 @@ module Aws::SageMaker
       :monitoring_alert_name,
       :datapoints_to_alert,
       :evaluation_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29514,7 +30837,8 @@ module Aws::SageMaker
     class UpdateMonitoringAlertResponse < Struct.new(
       :monitoring_schedule_arn,
       :monitoring_alert_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29527,7 +30851,8 @@ module Aws::SageMaker
     class UpdateMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name,
       :monitoring_schedule_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29536,7 +30861,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateMonitoringScheduleResponse < Struct.new(
       :monitoring_schedule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29601,7 +30927,8 @@ module Aws::SageMaker
       :disassociate_additional_code_repositories,
       :root_access,
       :instance_metadata_service_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29618,17 +30945,20 @@ module Aws::SageMaker
       :notebook_instance_lifecycle_config_name,
       :on_create,
       :on_start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNotebookInstanceLifecycleConfigOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNotebookInstanceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29661,7 +30991,8 @@ module Aws::SageMaker
       :enable_iam_session_based_identity,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29670,7 +31001,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdatePartnerAppResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29691,7 +31023,8 @@ module Aws::SageMaker
       :pipeline_execution_description,
       :pipeline_execution_display_name,
       :parallelism_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29700,7 +31033,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdatePipelineExecutionResponse < Struct.new(
       :pipeline_execution_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29733,7 +31067,8 @@ module Aws::SageMaker
       :pipeline_description,
       :role_arn,
       :parallelism_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29746,7 +31081,8 @@ module Aws::SageMaker
     class UpdatePipelineResponse < Struct.new(
       :pipeline_arn,
       :pipeline_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29767,7 +31103,8 @@ module Aws::SageMaker
       :pipeline_version_id,
       :pipeline_version_display_name,
       :pipeline_version_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29780,7 +31117,8 @@ module Aws::SageMaker
     class UpdatePipelineVersionResponse < Struct.new(
       :pipeline_arn,
       :pipeline_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29805,7 +31143,8 @@ module Aws::SageMaker
       :service_catalog_provisioning_update_details,
       :tags,
       :template_providers_to_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29814,7 +31153,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateProjectOutput < Struct.new(
       :project_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29835,7 +31175,8 @@ module Aws::SageMaker
       :space_name,
       :space_settings,
       :space_display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29844,7 +31185,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateSpaceResponse < Struct.new(
       :space_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29854,7 +31196,8 @@ module Aws::SageMaker
     #   @return [Types::CfnUpdateTemplateProvider]
     class UpdateTemplateProvider < Struct.new(
       :cfn_template_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29879,7 +31222,8 @@ module Aws::SageMaker
       :profiler_rule_configurations,
       :resource_config,
       :remote_debug_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29888,7 +31232,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateTrainingJobResponse < Struct.new(
       :training_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29937,7 +31282,8 @@ module Aws::SageMaker
       :input_artifacts_to_remove,
       :output_artifacts,
       :output_artifacts_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29946,7 +31292,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateTrialComponentResponse < Struct.new(
       :trial_component_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29959,7 +31306,8 @@ module Aws::SageMaker
     class UpdateTrialRequest < Struct.new(
       :trial_name,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29968,7 +31316,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateTrialResponse < Struct.new(
       :trial_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29985,7 +31334,8 @@ module Aws::SageMaker
       :domain_id,
       :user_profile_name,
       :user_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29994,7 +31344,8 @@ module Aws::SageMaker
     #   @return [String]
     class UpdateUserProfileResponse < Struct.new(
       :user_profile_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30019,7 +31370,8 @@ module Aws::SageMaker
       :oidc_config,
       :workforce_vpc_config,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30028,7 +31380,8 @@ module Aws::SageMaker
     #   @return [Types::Workforce]
     class UpdateWorkforceResponse < Struct.new(
       :workforce,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30053,7 +31406,8 @@ module Aws::SageMaker
       :description,
       :notification_configuration,
       :worker_access_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30062,7 +31416,8 @@ module Aws::SageMaker
     #   @return [Types::Workteam]
     class UpdateWorkteamResponse < Struct.new(
       :workteam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30084,7 +31439,8 @@ module Aws::SageMaker
       :user_profile_name,
       :domain_id,
       :iam_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30110,7 +31466,8 @@ module Aws::SageMaker
       :status,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30188,7 +31545,8 @@ module Aws::SageMaker
       :custom_file_system_configs,
       :studio_web_portal_settings,
       :auto_mount_home_efs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30198,7 +31556,8 @@ module Aws::SageMaker
     #   @return [String]
     class VariantProperty < Struct.new(
       :variant_property_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30208,7 +31567,8 @@ module Aws::SageMaker
     #   @return [Integer]
     class VectorConfig < Struct.new(
       :dimension,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30226,7 +31586,8 @@ module Aws::SageMaker
       :arn,
       :type,
       :lineage_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30240,7 +31601,8 @@ module Aws::SageMaker
     class VisibilityConditions < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30254,7 +31616,8 @@ module Aws::SageMaker
     class VpcConfig < Struct.new(
       :security_group_ids,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30272,7 +31635,8 @@ module Aws::SageMaker
       :status,
       :resource_retained_billable_time_in_seconds,
       :reused_by_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30282,7 +31646,8 @@ module Aws::SageMaker
     #   @return [Types::S3Presign]
     class WorkerAccessConfiguration < Struct.new(
       :s3_presign,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30336,7 +31701,8 @@ module Aws::SageMaker
       :status,
       :failure_reason,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30354,7 +31720,8 @@ module Aws::SageMaker
       :vpc_id,
       :security_group_ids,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30376,7 +31743,8 @@ module Aws::SageMaker
       :security_group_ids,
       :subnets,
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30390,7 +31758,8 @@ module Aws::SageMaker
     class WorkspaceSettings < Struct.new(
       :s3_artifact_path,
       :s3_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30440,7 +31809,8 @@ module Aws::SageMaker
       :last_updated_date,
       :notification_configuration,
       :worker_access_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -45,7 +45,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::DecryptionFailure] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::EncryptionFailure] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::InternalServiceError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -127,7 +127,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::MalformedPolicyDocumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -166,7 +166,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::PreconditionNotMetException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -179,7 +179,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::PublicPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -192,7 +192,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::ResourceExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -205,7 +205,7 @@ module Aws::SecretsManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecretsManager::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

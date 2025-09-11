@@ -24,7 +24,8 @@ module Aws::DirectConnect
       :proposal_id,
       :associated_gateway_owner_account,
       :override_allowed_prefixes_to_direct_connect_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33,7 +34,8 @@ module Aws::DirectConnect
     #   @return [Types::DirectConnectGatewayAssociation]
     class AcceptDirectConnectGatewayAssociationProposalResult < Struct.new(
       :direct_connect_gateway_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +174,8 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -205,7 +208,8 @@ module Aws::DirectConnect
       :owner_account,
       :interconnect_id,
       :vlan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +348,8 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -381,7 +386,8 @@ module Aws::DirectConnect
       :connection_name,
       :vlan,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -566,7 +572,8 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -589,7 +596,8 @@ module Aws::DirectConnect
       :connection_id,
       :owner_account,
       :new_private_virtual_interface_allocation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +782,8 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -797,7 +806,8 @@ module Aws::DirectConnect
       :connection_id,
       :owner_account,
       :new_public_virtual_interface_allocation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +824,8 @@ module Aws::DirectConnect
       :connection_id,
       :owner_account,
       :new_transit_virtual_interface_allocation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +834,8 @@ module Aws::DirectConnect
     #   @return [Types::VirtualInterface]
     class AllocateTransitVirtualInterfaceResult < Struct.new(
       :virtual_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +974,8 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -980,7 +993,8 @@ module Aws::DirectConnect
     class AssociateConnectionWithLagRequest < Struct.new(
       :connection_id,
       :lag_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1133,8 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1137,7 +1152,8 @@ module Aws::DirectConnect
     class AssociateHostedConnectionRequest < Struct.new(
       :connection_id,
       :parent_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1167,7 +1183,8 @@ module Aws::DirectConnect
       :secret_arn,
       :ckn,
       :cak,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1180,7 +1197,8 @@ module Aws::DirectConnect
     class AssociateMacSecKeyResponse < Struct.new(
       :connection_id,
       :mac_sec_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1365,7 +1383,8 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1384,7 +1403,8 @@ module Aws::DirectConnect
     class AssociateVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1422,8 @@ module Aws::DirectConnect
       :id,
       :owner_account,
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1424,7 +1445,8 @@ module Aws::DirectConnect
       :type,
       :owner_account,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1540,7 +1562,8 @@ module Aws::DirectConnect
       :bgp_status,
       :aws_device_v2,
       :aws_logical_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1554,7 +1577,8 @@ module Aws::DirectConnect
     #   @return [String]
     class ConfirmConnectionRequest < Struct.new(
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1625,8 @@ module Aws::DirectConnect
     #   @return [String]
     class ConfirmConnectionResponse < Struct.new(
       :connection_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1614,7 +1639,8 @@ module Aws::DirectConnect
     #   @return [String]
     class ConfirmCustomerAgreementRequest < Struct.new(
       :agreement_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1651,8 @@ module Aws::DirectConnect
     #   @return [String]
     class ConfirmCustomerAgreementResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1669,8 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :virtual_gateway_id,
       :direct_connect_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1693,7 +1721,8 @@ module Aws::DirectConnect
     #   @return [String]
     class ConfirmPrivateVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1702,7 +1731,8 @@ module Aws::DirectConnect
     #   @return [String]
     class ConfirmPublicVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1753,7 +1783,8 @@ module Aws::DirectConnect
     #   @return [String]
     class ConfirmPublicVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1766,7 +1797,8 @@ module Aws::DirectConnect
     class ConfirmTransitVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
       :direct_connect_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1817,7 +1849,8 @@ module Aws::DirectConnect
     #   @return [String]
     class ConfirmTransitVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1956,7 +1989,8 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1974,7 +2008,8 @@ module Aws::DirectConnect
     class CreateBGPPeerRequest < Struct.new(
       :virtual_interface_id,
       :new_bgp_peer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2018,8 @@ module Aws::DirectConnect
     #   @return [Types::VirtualInterface]
     class CreateBGPPeerResponse < Struct.new(
       :virtual_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2122,7 +2158,8 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2161,7 +2198,8 @@ module Aws::DirectConnect
       :tags,
       :provider_name,
       :request_mac_sec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2186,7 +2224,8 @@ module Aws::DirectConnect
       :gateway_id,
       :add_allowed_prefixes_to_direct_connect_gateway,
       :remove_allowed_prefixes_to_direct_connect_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2195,7 +2234,8 @@ module Aws::DirectConnect
     #   @return [Types::DirectConnectGatewayAssociationProposal]
     class CreateDirectConnectGatewayAssociationProposalResult < Struct.new(
       :direct_connect_gateway_association_proposal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2218,7 +2258,8 @@ module Aws::DirectConnect
       :gateway_id,
       :add_allowed_prefixes_to_direct_connect_gateway,
       :virtual_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2227,7 +2268,8 @@ module Aws::DirectConnect
     #   @return [Types::DirectConnectGatewayAssociation]
     class CreateDirectConnectGatewayAssociationResult < Struct.new(
       :direct_connect_gateway_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2288,8 @@ module Aws::DirectConnect
       :direct_connect_gateway_name,
       :tags,
       :amazon_side_asn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2255,7 +2298,8 @@ module Aws::DirectConnect
     #   @return [Types::DirectConnectGateway]
     class CreateDirectConnectGatewayResult < Struct.new(
       :direct_connect_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2371,7 +2415,8 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2404,7 +2449,8 @@ module Aws::DirectConnect
       :tags,
       :provider_name,
       :request_mac_sec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2530,7 +2576,8 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :encryption_mode,
       :mac_sec_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2584,7 +2631,8 @@ module Aws::DirectConnect
       :child_connection_tags,
       :provider_name,
       :request_mac_sec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2769,7 +2817,8 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2788,7 +2837,8 @@ module Aws::DirectConnect
     class CreatePrivateVirtualInterfaceRequest < Struct.new(
       :connection_id,
       :new_private_virtual_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2973,7 +3023,8 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2992,7 +3043,8 @@ module Aws::DirectConnect
     class CreatePublicVirtualInterfaceRequest < Struct.new(
       :connection_id,
       :new_public_virtual_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3005,7 +3057,8 @@ module Aws::DirectConnect
     class CreateTransitVirtualInterfaceRequest < Struct.new(
       :connection_id,
       :new_transit_virtual_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3014,7 +3067,8 @@ module Aws::DirectConnect
     #   @return [Types::VirtualInterface]
     class CreateTransitVirtualInterfaceResult < Struct.new(
       :virtual_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3029,7 +3083,8 @@ module Aws::DirectConnect
     class CustomerAgreement < Struct.new(
       :agreement_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3082,7 +3137,8 @@ module Aws::DirectConnect
       :asn_long,
       :customer_address,
       :bgp_peer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3091,7 +3147,8 @@ module Aws::DirectConnect
     #   @return [Types::VirtualInterface]
     class DeleteBGPPeerResponse < Struct.new(
       :virtual_interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3230,7 +3287,8 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3244,7 +3302,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
       :connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3253,7 +3312,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DeleteDirectConnectGatewayAssociationProposalRequest < Struct.new(
       :proposal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3262,7 +3322,8 @@ module Aws::DirectConnect
     #   @return [Types::DirectConnectGatewayAssociationProposal]
     class DeleteDirectConnectGatewayAssociationProposalResult < Struct.new(
       :direct_connect_gateway_association_proposal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3279,7 +3340,8 @@ module Aws::DirectConnect
       :association_id,
       :direct_connect_gateway_id,
       :virtual_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3288,7 +3350,8 @@ module Aws::DirectConnect
     #   @return [Types::DirectConnectGatewayAssociation]
     class DeleteDirectConnectGatewayAssociationResult < Struct.new(
       :direct_connect_gateway_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3297,7 +3360,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DeleteDirectConnectGatewayRequest < Struct.new(
       :direct_connect_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3306,7 +3370,8 @@ module Aws::DirectConnect
     #   @return [Types::DirectConnectGateway]
     class DeleteDirectConnectGatewayResult < Struct.new(
       :direct_connect_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3315,7 +3380,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DeleteInterconnectRequest < Struct.new(
       :interconnect_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3355,7 +3421,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DeleteInterconnectResponse < Struct.new(
       :interconnect_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3481,7 +3548,8 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :encryption_mode,
       :mac_sec_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3497,7 +3565,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DeleteLagRequest < Struct.new(
       :lag_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3506,7 +3575,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DeleteVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3557,7 +3627,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DeleteVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3575,7 +3646,8 @@ module Aws::DirectConnect
       :connection_id,
       :provider_name,
       :loa_content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3584,7 +3656,8 @@ module Aws::DirectConnect
     #   @return [Types::Loa]
     class DescribeConnectionLoaResponse < Struct.new(
       :loa,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3597,7 +3670,8 @@ module Aws::DirectConnect
     class DescribeConnectionsOnInterconnectOutput < Struct.new(
       :connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3606,7 +3680,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DescribeConnectionsOnInterconnectRequest < Struct.new(
       :interconnect_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3619,7 +3694,8 @@ module Aws::DirectConnect
     class DescribeConnectionsOutput < Struct.new(
       :connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3639,7 +3715,8 @@ module Aws::DirectConnect
       :connection_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3663,7 +3740,8 @@ module Aws::DirectConnect
     class DescribeCustomerMetadataResponse < Struct.new(
       :agreements,
       :nni_partner_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3691,7 +3769,8 @@ module Aws::DirectConnect
       :associated_gateway_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3704,7 +3783,8 @@ module Aws::DirectConnect
     class DescribeDirectConnectGatewayAssociationProposalsResult < Struct.new(
       :direct_connect_gateway_association_proposals,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3736,7 +3816,8 @@ module Aws::DirectConnect
       :max_results,
       :next_token,
       :virtual_gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3749,7 +3830,8 @@ module Aws::DirectConnect
     class DescribeDirectConnectGatewayAssociationsResult < Struct.new(
       :direct_connect_gateway_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3773,7 +3855,8 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3786,7 +3869,8 @@ module Aws::DirectConnect
     class DescribeDirectConnectGatewayAttachmentsResult < Struct.new(
       :direct_connect_gateway_attachments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3806,7 +3890,8 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3819,7 +3904,8 @@ module Aws::DirectConnect
     class DescribeDirectConnectGatewaysResult < Struct.new(
       :direct_connect_gateways,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3832,7 +3918,8 @@ module Aws::DirectConnect
     class DescribeHostedConnectionsOutput < Struct.new(
       :connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3852,7 +3939,8 @@ module Aws::DirectConnect
       :connection_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3869,7 +3957,8 @@ module Aws::DirectConnect
       :interconnect_id,
       :provider_name,
       :loa_content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3878,7 +3967,8 @@ module Aws::DirectConnect
     #   @return [Types::Loa]
     class DescribeInterconnectLoaResponse < Struct.new(
       :loa,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3891,7 +3981,8 @@ module Aws::DirectConnect
     class DescribeInterconnectsOutput < Struct.new(
       :interconnects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3911,7 +4002,8 @@ module Aws::DirectConnect
       :interconnect_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3924,7 +4016,8 @@ module Aws::DirectConnect
     class DescribeLagsOutput < Struct.new(
       :lags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3944,7 +4037,8 @@ module Aws::DirectConnect
       :lag_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3958,7 +4052,8 @@ module Aws::DirectConnect
     class DescribeLoaOutput < Struct.new(
       :loa_content,
       :loa_content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3976,7 +4071,8 @@ module Aws::DirectConnect
       :connection_id,
       :provider_name,
       :loa_content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3985,7 +4081,8 @@ module Aws::DirectConnect
     #   @return [Array<Types::Location>]
     class DescribeLocationsOutput < Struct.new(
       :locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3999,7 +4096,8 @@ module Aws::DirectConnect
     class DescribeRouterConfigurationRequest < Struct.new(
       :virtual_interface_id,
       :router_type_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4020,7 +4118,8 @@ module Aws::DirectConnect
       :router,
       :virtual_interface_id,
       :virtual_interface_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4029,7 +4128,8 @@ module Aws::DirectConnect
     #   @return [Array<String>]
     class DescribeTagsRequest < Struct.new(
       :resource_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4038,7 +4138,8 @@ module Aws::DirectConnect
     #   @return [Array<Types::ResourceTag>]
     class DescribeTagsResponse < Struct.new(
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4047,7 +4148,8 @@ module Aws::DirectConnect
     #   @return [Array<Types::VirtualGateway>]
     class DescribeVirtualGatewaysOutput < Struct.new(
       :virtual_gateways,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4060,7 +4162,8 @@ module Aws::DirectConnect
     class DescribeVirtualInterfacesOutput < Struct.new(
       :virtual_interfaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4084,7 +4187,8 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4093,7 +4197,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DirectConnectClientException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4145,7 +4250,8 @@ module Aws::DirectConnect
       :direct_connect_gateway_state,
       :state_change_error,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4218,7 +4324,8 @@ module Aws::DirectConnect
       :virtual_gateway_id,
       :virtual_gateway_region,
       :virtual_gateway_owner_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4266,7 +4373,8 @@ module Aws::DirectConnect
       :associated_gateway,
       :existing_allowed_prefixes_to_direct_connect_gateway,
       :requested_allowed_prefixes_to_direct_connect_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4318,7 +4426,8 @@ module Aws::DirectConnect
       :attachment_state,
       :attachment_type,
       :state_change_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4327,7 +4436,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DirectConnectServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4466,7 +4576,8 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4484,7 +4595,8 @@ module Aws::DirectConnect
     class DisassociateConnectionFromLagRequest < Struct.new(
       :connection_id,
       :lag_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4499,7 +4611,8 @@ module Aws::DirectConnect
     class DisassociateMacSecKeyRequest < Struct.new(
       :connection_id,
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4512,7 +4625,8 @@ module Aws::DirectConnect
     class DisassociateMacSecKeyResponse < Struct.new(
       :connection_id,
       :mac_sec_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4521,7 +4635,8 @@ module Aws::DirectConnect
     #   @return [String]
     class DuplicateTagKeysException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4637,7 +4752,8 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4763,7 +4879,8 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :encryption_mode,
       :mac_sec_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4802,7 +4919,8 @@ module Aws::DirectConnect
       :status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4815,7 +4933,8 @@ module Aws::DirectConnect
     class ListVirtualInterfaceTestHistoryResponse < Struct.new(
       :virtual_interface_test_history,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4829,7 +4948,8 @@ module Aws::DirectConnect
     class Loa < Struct.new(
       :loa_content,
       :loa_content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4859,7 +4979,8 @@ module Aws::DirectConnect
       :available_port_speeds,
       :available_providers,
       :available_mac_sec_port_speeds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4900,7 +5021,8 @@ module Aws::DirectConnect
       :ckn,
       :state,
       :start_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4930,7 +5052,8 @@ module Aws::DirectConnect
       :address_family,
       :amazon_address,
       :customer_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5022,7 +5145,8 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :tags,
       :enable_site_link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5103,7 +5227,8 @@ module Aws::DirectConnect
       :address_family,
       :customer_address,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5183,7 +5308,8 @@ module Aws::DirectConnect
       :address_family,
       :route_filter_prefixes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5264,7 +5390,8 @@ module Aws::DirectConnect
       :address_family,
       :route_filter_prefixes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5352,7 +5479,8 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :tags,
       :enable_site_link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5433,7 +5561,8 @@ module Aws::DirectConnect
       :customer_address,
       :address_family,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5453,7 +5582,8 @@ module Aws::DirectConnect
     class ResourceTag < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5464,7 +5594,8 @@ module Aws::DirectConnect
     #   @return [String]
     class RouteFilterPrefix < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5494,7 +5625,8 @@ module Aws::DirectConnect
       :xslt_template_name,
       :xslt_template_name_for_mac_sec,
       :router_type_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5513,7 +5645,8 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :bgp_peers,
       :test_duration_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5522,7 +5655,8 @@ module Aws::DirectConnect
     #   @return [Types::VirtualInterfaceTestHistory]
     class StartBgpFailoverTestResponse < Struct.new(
       :virtual_interface_test,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5531,7 +5665,8 @@ module Aws::DirectConnect
     #   @return [String]
     class StopBgpFailoverTestRequest < Struct.new(
       :virtual_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5540,7 +5675,8 @@ module Aws::DirectConnect
     #   @return [Types::VirtualInterfaceTestHistory]
     class StopBgpFailoverTestResponse < Struct.new(
       :virtual_interface_test,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5554,7 +5690,8 @@ module Aws::DirectConnect
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5567,12 +5704,14 @@ module Aws::DirectConnect
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5581,7 +5720,8 @@ module Aws::DirectConnect
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5594,12 +5734,14 @@ module Aws::DirectConnect
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5738,7 +5880,8 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5762,7 +5905,8 @@ module Aws::DirectConnect
       :connection_id,
       :connection_name,
       :encryption_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5779,7 +5923,8 @@ module Aws::DirectConnect
       :association_id,
       :add_allowed_prefixes_to_direct_connect_gateway,
       :remove_allowed_prefixes_to_direct_connect_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5788,7 +5933,8 @@ module Aws::DirectConnect
     #   @return [Types::DirectConnectGatewayAssociation]
     class UpdateDirectConnectGatewayAssociationResult < Struct.new(
       :direct_connect_gateway_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5801,7 +5947,8 @@ module Aws::DirectConnect
     class UpdateDirectConnectGatewayRequest < Struct.new(
       :direct_connect_gateway_id,
       :new_direct_connect_gateway_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5810,7 +5957,8 @@ module Aws::DirectConnect
     #   @return [Types::DirectConnectGateway]
     class UpdateDirectConnectGatewayResponse < Struct.new(
       :direct_connect_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5936,7 +6084,8 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :encryption_mode,
       :mac_sec_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5965,7 +6114,8 @@ module Aws::DirectConnect
       :lag_name,
       :minimum_links,
       :encryption_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6150,7 +6300,8 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6177,7 +6328,8 @@ module Aws::DirectConnect
       :mtu,
       :enable_site_link,
       :virtual_interface_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6209,7 +6361,8 @@ module Aws::DirectConnect
     class VirtualGateway < Struct.new(
       :virtual_gateway_id,
       :virtual_gateway_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6394,7 +6547,8 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6438,7 +6592,8 @@ module Aws::DirectConnect
       :test_duration_in_minutes,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

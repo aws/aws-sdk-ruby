@@ -1220,7 +1220,6 @@ module Aws::NeptuneGraph
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/graphs/{graphIdentifier}"}, "smithy.rules#staticContextParams" => {"ApiType" => {"value" => "ControlPlane"}}}
       end)
-
     end
 
     class << self

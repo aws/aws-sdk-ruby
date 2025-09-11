@@ -645,7 +645,6 @@ module Aws::BedrockDataAutomation
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/data-automation-projects/{projectArn}/"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

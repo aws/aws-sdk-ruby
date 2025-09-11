@@ -1903,7 +1903,6 @@ module Aws::Location
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#endpoint" => {"hostPrefix" => "tracking."}, "smithy.api#http" => {"uri" => "/tracking/v0/trackers/{TrackerName}/positions/verify", "method" => "POST"}}
       end)
-
     end
 
     class << self

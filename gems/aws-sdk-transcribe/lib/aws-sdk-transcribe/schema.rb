@@ -1528,7 +1528,6 @@ module Aws::Transcribe
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/vocabularyFilters/{VocabularyFilterName}", "code" => 200}}
       end)
-
     end
 
     class << self

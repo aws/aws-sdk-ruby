@@ -3777,7 +3777,6 @@ module Aws::DatabaseMigrationService
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         operation.traits = {}
       end)
-
     end
 
     class << self

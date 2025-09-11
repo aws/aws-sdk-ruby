@@ -16,7 +16,8 @@ module Aws::SSOAdmin
     class AccessControlAttribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26,7 +27,8 @@ module Aws::SSOAdmin
     #   @return [Array<String>]
     class AccessControlAttributeValue < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +37,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +60,8 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :principal_type,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +83,8 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :principal_id,
       :principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +126,8 @@ module Aws::SSOAdmin
       :principal_type,
       :principal_id,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,7 +145,8 @@ module Aws::SSOAdmin
       :status,
       :request_id,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +188,8 @@ module Aws::SSOAdmin
       :portal_options,
       :description,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +207,8 @@ module Aws::SSOAdmin
       :application_arn,
       :principal_id,
       :principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +226,8 @@ module Aws::SSOAdmin
       :application_arn,
       :principal_id,
       :principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +249,8 @@ module Aws::SSOAdmin
       :federation_protocol,
       :display_data,
       :resource_server_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,12 +267,14 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       :customer_managed_policy_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AttachCustomerManagedPolicyReferenceToPermissionSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,12 +291,14 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       :managed_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AttachManagedPolicyToPermissionSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +312,8 @@ module Aws::SSOAdmin
     class AttachedManagedPolicy < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +324,8 @@ module Aws::SSOAdmin
     class AuthenticationMethod < Struct.new(
       :iam,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Iam < AuthenticationMethod; end
@@ -325,7 +342,8 @@ module Aws::SSOAdmin
     class AuthenticationMethodItem < Struct.new(
       :authentication_method_type,
       :authentication_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +353,8 @@ module Aws::SSOAdmin
     #   @return [Array<String>]
     class AuthorizationCodeGrant < Struct.new(
       :redirect_uris,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -349,7 +368,8 @@ module Aws::SSOAdmin
     class AuthorizedTokenIssuer < Struct.new(
       :trusted_token_issuer_arn,
       :authorized_audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +378,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -387,7 +408,8 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :principal_type,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +418,8 @@ module Aws::SSOAdmin
     #   @return [Types::AccountAssignmentOperationStatus]
     class CreateAccountAssignmentResponse < Struct.new(
       :account_assignment_creation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,12 +436,14 @@ module Aws::SSOAdmin
       :application_arn,
       :principal_id,
       :principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateApplicationAssignmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +480,8 @@ module Aws::SSOAdmin
       :tags,
       :status,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +490,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class CreateApplicationResponse < Struct.new(
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -477,12 +504,14 @@ module Aws::SSOAdmin
     class CreateInstanceAccessControlAttributeConfigurationRequest < Struct.new(
       :instance_arn,
       :instance_access_control_attribute_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateInstanceAccessControlAttributeConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +528,8 @@ module Aws::SSOAdmin
       :name,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +538,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class CreateInstanceResponse < Struct.new(
       :instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +568,8 @@ module Aws::SSOAdmin
       :session_duration,
       :relay_state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +578,8 @@ module Aws::SSOAdmin
     #   @return [Types::PermissionSet]
     class CreatePermissionSetResponse < Struct.new(
       :permission_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +608,8 @@ module Aws::SSOAdmin
       :trusted_token_issuer_configuration,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +618,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class CreateTrustedTokenIssuerResponse < Struct.new(
       :trusted_token_issuer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +633,8 @@ module Aws::SSOAdmin
     class CustomerManagedPolicyReference < Struct.new(
       :name,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +663,8 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :principal_type,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +673,8 @@ module Aws::SSOAdmin
     #   @return [Types::AccountAssignmentOperationStatus]
     class DeleteAccountAssignmentResponse < Struct.new(
       :account_assignment_deletion_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -649,7 +687,8 @@ module Aws::SSOAdmin
     class DeleteApplicationAccessScopeRequest < Struct.new(
       :application_arn,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,12 +705,14 @@ module Aws::SSOAdmin
       :application_arn,
       :principal_id,
       :principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationAssignmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +725,8 @@ module Aws::SSOAdmin
     class DeleteApplicationAuthenticationMethodRequest < Struct.new(
       :application_arn,
       :authentication_method_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +739,8 @@ module Aws::SSOAdmin
     class DeleteApplicationGrantRequest < Struct.new(
       :application_arn,
       :grant_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,12 +749,14 @@ module Aws::SSOAdmin
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -724,12 +769,14 @@ module Aws::SSOAdmin
     class DeleteInlinePolicyFromPermissionSetRequest < Struct.new(
       :instance_arn,
       :permission_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteInlinePolicyFromPermissionSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,12 +785,14 @@ module Aws::SSOAdmin
     #   @return [String]
     class DeleteInstanceAccessControlAttributeConfigurationRequest < Struct.new(
       :instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteInstanceAccessControlAttributeConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,12 +801,14 @@ module Aws::SSOAdmin
     #   @return [String]
     class DeleteInstanceRequest < Struct.new(
       :instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteInstanceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,12 +821,14 @@ module Aws::SSOAdmin
     class DeletePermissionSetRequest < Struct.new(
       :instance_arn,
       :permission_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePermissionSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,12 +841,14 @@ module Aws::SSOAdmin
     class DeletePermissionsBoundaryFromPermissionSetRequest < Struct.new(
       :instance_arn,
       :permission_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePermissionsBoundaryFromPermissionSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,12 +857,14 @@ module Aws::SSOAdmin
     #   @return [String]
     class DeleteTrustedTokenIssuerRequest < Struct.new(
       :trusted_token_issuer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTrustedTokenIssuerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +877,8 @@ module Aws::SSOAdmin
     class DescribeAccountAssignmentCreationStatusRequest < Struct.new(
       :instance_arn,
       :account_assignment_creation_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +887,8 @@ module Aws::SSOAdmin
     #   @return [Types::AccountAssignmentOperationStatus]
     class DescribeAccountAssignmentCreationStatusResponse < Struct.new(
       :account_assignment_creation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +901,8 @@ module Aws::SSOAdmin
     class DescribeAccountAssignmentDeletionStatusRequest < Struct.new(
       :instance_arn,
       :account_assignment_deletion_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +911,8 @@ module Aws::SSOAdmin
     #   @return [Types::AccountAssignmentOperationStatus]
     class DescribeAccountAssignmentDeletionStatusResponse < Struct.new(
       :account_assignment_deletion_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +929,8 @@ module Aws::SSOAdmin
       :application_arn,
       :principal_id,
       :principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -885,7 +947,8 @@ module Aws::SSOAdmin
       :principal_type,
       :principal_id,
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +957,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class DescribeApplicationProviderRequest < Struct.new(
       :application_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,7 +979,8 @@ module Aws::SSOAdmin
       :federation_protocol,
       :display_data,
       :resource_server_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +989,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class DescribeApplicationRequest < Struct.new(
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -965,7 +1031,8 @@ module Aws::SSOAdmin
       :portal_options,
       :description,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,7 +1041,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class DescribeInstanceAccessControlAttributeConfigurationRequest < Struct.new(
       :instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1059,8 @@ module Aws::SSOAdmin
       :status,
       :status_reason,
       :instance_access_control_attribute_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1069,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class DescribeInstanceRequest < Struct.new(
       :instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1029,7 +1099,8 @@ module Aws::SSOAdmin
       :name,
       :created_date,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1113,8 @@ module Aws::SSOAdmin
     class DescribePermissionSetProvisioningStatusRequest < Struct.new(
       :instance_arn,
       :provision_permission_set_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1123,8 @@ module Aws::SSOAdmin
     #   @return [Types::PermissionSetProvisioningStatus]
     class DescribePermissionSetProvisioningStatusResponse < Struct.new(
       :permission_set_provisioning_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1137,8 @@ module Aws::SSOAdmin
     class DescribePermissionSetRequest < Struct.new(
       :instance_arn,
       :permission_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1147,8 @@ module Aws::SSOAdmin
     #   @return [Types::PermissionSet]
     class DescribePermissionSetResponse < Struct.new(
       :permission_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1157,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class DescribeTrustedTokenIssuerRequest < Struct.new(
       :trusted_token_issuer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1179,8 @@ module Aws::SSOAdmin
       :name,
       :trusted_token_issuer_type,
       :trusted_token_issuer_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,12 +1197,14 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       :customer_managed_policy_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DetachCustomerManagedPolicyReferenceFromPermissionSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1142,12 +1221,14 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       :managed_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DetachManagedPolicyFromPermissionSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1246,8 @@ module Aws::SSOAdmin
       :display_name,
       :icon_url,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1178,7 +1260,8 @@ module Aws::SSOAdmin
     class GetApplicationAccessScopeRequest < Struct.new(
       :application_arn,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,7 +1274,8 @@ module Aws::SSOAdmin
     class GetApplicationAccessScopeResponse < Struct.new(
       :scope,
       :authorized_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1200,7 +1284,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class GetApplicationAssignmentConfigurationRequest < Struct.new(
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1209,7 +1294,8 @@ module Aws::SSOAdmin
     #   @return [Boolean]
     class GetApplicationAssignmentConfigurationResponse < Struct.new(
       :assignment_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1227,7 +1313,8 @@ module Aws::SSOAdmin
     class GetApplicationAuthenticationMethodRequest < Struct.new(
       :application_arn,
       :authentication_method_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1236,7 +1323,8 @@ module Aws::SSOAdmin
     #   @return [Types::AuthenticationMethod]
     class GetApplicationAuthenticationMethodResponse < Struct.new(
       :authentication_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,7 +1337,8 @@ module Aws::SSOAdmin
     class GetApplicationGrantRequest < Struct.new(
       :application_arn,
       :grant_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1258,7 +1347,8 @@ module Aws::SSOAdmin
     #   @return [Types::Grant]
     class GetApplicationGrantResponse < Struct.new(
       :grant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1267,7 +1357,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class GetApplicationSessionConfigurationRequest < Struct.new(
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1276,7 +1367,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class GetApplicationSessionConfigurationResponse < Struct.new(
       :user_background_session_application_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1289,7 +1381,8 @@ module Aws::SSOAdmin
     class GetInlinePolicyForPermissionSetRequest < Struct.new(
       :instance_arn,
       :permission_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1298,7 +1391,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class GetInlinePolicyForPermissionSetResponse < Struct.new(
       :inline_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,7 +1405,8 @@ module Aws::SSOAdmin
     class GetPermissionsBoundaryForPermissionSetRequest < Struct.new(
       :instance_arn,
       :permission_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1415,8 @@ module Aws::SSOAdmin
     #   @return [Types::PermissionsBoundary]
     class GetPermissionsBoundaryForPermissionSetResponse < Struct.new(
       :permissions_boundary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1343,7 +1439,8 @@ module Aws::SSOAdmin
       :refresh_token,
       :token_exchange,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AuthorizationCode < Grant; end
@@ -1363,7 +1460,8 @@ module Aws::SSOAdmin
     class GrantItem < Struct.new(
       :grant_type,
       :grant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1471,8 @@ module Aws::SSOAdmin
     #   @return [JSON]
     class IamAuthenticationMethod < Struct.new(
       :actor_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1383,7 +1482,8 @@ module Aws::SSOAdmin
     #   @return [Array<Types::AccessControlAttribute>]
     class InstanceAccessControlAttributeConfiguration < Struct.new(
       :access_control_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,7 +1513,8 @@ module Aws::SSOAdmin
       :name,
       :created_date,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1422,7 +1523,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1534,8 @@ module Aws::SSOAdmin
     #   @return [Array<Types::AuthorizedTokenIssuer>]
     class JwtBearerGrant < Struct.new(
       :authorized_token_issuers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1453,7 +1556,8 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1466,7 +1570,8 @@ module Aws::SSOAdmin
     class ListAccountAssignmentCreationStatusResponse < Struct.new(
       :account_assignments_creation_status,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1487,7 +1592,8 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1500,7 +1606,8 @@ module Aws::SSOAdmin
     class ListAccountAssignmentDeletionStatusResponse < Struct.new(
       :account_assignments_deletion_status,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1617,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class ListAccountAssignmentsFilter < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1539,7 +1647,8 @@ module Aws::SSOAdmin
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1552,7 +1661,8 @@ module Aws::SSOAdmin
     class ListAccountAssignmentsForPrincipalResponse < Struct.new(
       :account_assignments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1687,8 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1590,7 +1701,8 @@ module Aws::SSOAdmin
     class ListAccountAssignmentsResponse < Struct.new(
       :account_assignments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,7 +1727,8 @@ module Aws::SSOAdmin
       :provisioning_status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1628,7 +1741,8 @@ module Aws::SSOAdmin
     class ListAccountsForProvisionedPermissionSetResponse < Struct.new(
       :account_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1645,7 +1759,8 @@ module Aws::SSOAdmin
       :application_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1658,7 +1773,8 @@ module Aws::SSOAdmin
     class ListApplicationAccessScopesResponse < Struct.new(
       :scopes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1668,7 +1784,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class ListApplicationAssignmentsFilter < Struct.new(
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1697,7 +1814,8 @@ module Aws::SSOAdmin
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1828,8 @@ module Aws::SSOAdmin
     class ListApplicationAssignmentsForPrincipalResponse < Struct.new(
       :application_assignments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1727,7 +1846,8 @@ module Aws::SSOAdmin
       :application_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1740,7 +1860,8 @@ module Aws::SSOAdmin
     class ListApplicationAssignmentsResponse < Struct.new(
       :application_assignments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1753,7 +1874,8 @@ module Aws::SSOAdmin
     class ListApplicationAuthenticationMethodsRequest < Struct.new(
       :application_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1766,7 +1888,8 @@ module Aws::SSOAdmin
     class ListApplicationAuthenticationMethodsResponse < Struct.new(
       :authentication_methods,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1779,7 +1902,8 @@ module Aws::SSOAdmin
     class ListApplicationGrantsRequest < Struct.new(
       :application_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1916,8 @@ module Aws::SSOAdmin
     class ListApplicationGrantsResponse < Struct.new(
       :grants,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,7 +1930,8 @@ module Aws::SSOAdmin
     class ListApplicationProvidersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1818,7 +1944,8 @@ module Aws::SSOAdmin
     class ListApplicationProvidersResponse < Struct.new(
       :application_providers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1832,7 +1959,8 @@ module Aws::SSOAdmin
     class ListApplicationsFilter < Struct.new(
       :application_account,
       :application_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1853,7 +1981,8 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1866,7 +1995,8 @@ module Aws::SSOAdmin
     class ListApplicationsResponse < Struct.new(
       :applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1887,7 +2017,8 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1900,7 +2031,8 @@ module Aws::SSOAdmin
     class ListCustomerManagedPolicyReferencesInPermissionSetResponse < Struct.new(
       :customer_managed_policy_references,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1913,7 +2045,8 @@ module Aws::SSOAdmin
     class ListInstancesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1926,7 +2059,8 @@ module Aws::SSOAdmin
     class ListInstancesResponse < Struct.new(
       :instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2081,8 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1960,7 +2095,8 @@ module Aws::SSOAdmin
     class ListManagedPoliciesInPermissionSetResponse < Struct.new(
       :attached_managed_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1981,7 +2117,8 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1994,7 +2131,8 @@ module Aws::SSOAdmin
     class ListPermissionSetProvisioningStatusResponse < Struct.new(
       :permission_sets_provisioning_status,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2019,7 +2157,8 @@ module Aws::SSOAdmin
       :provisioning_status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2032,7 +2171,8 @@ module Aws::SSOAdmin
     class ListPermissionSetsProvisionedToAccountResponse < Struct.new(
       :next_token,
       :permission_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2049,7 +2189,8 @@ module Aws::SSOAdmin
       :instance_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2062,7 +2203,8 @@ module Aws::SSOAdmin
     class ListPermissionSetsResponse < Struct.new(
       :permission_sets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2079,7 +2221,8 @@ module Aws::SSOAdmin
       :instance_arn,
       :resource_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2092,7 +2235,8 @@ module Aws::SSOAdmin
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2109,7 +2253,8 @@ module Aws::SSOAdmin
       :instance_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2122,7 +2267,8 @@ module Aws::SSOAdmin
     class ListTrustedTokenIssuersResponse < Struct.new(
       :trusted_token_issuers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2144,7 +2290,8 @@ module Aws::SSOAdmin
       :claim_attribute_path,
       :identity_store_attribute_path,
       :jwks_retrieval_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2162,7 +2309,8 @@ module Aws::SSOAdmin
       :claim_attribute_path,
       :identity_store_attribute_path,
       :jwks_retrieval_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2172,7 +2320,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class OperationStatusFilter < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2202,7 +2351,8 @@ module Aws::SSOAdmin
       :created_date,
       :session_duration,
       :relay_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2232,7 +2382,8 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :failure_reason,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2250,7 +2401,8 @@ module Aws::SSOAdmin
       :status,
       :request_id,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2264,7 +2416,8 @@ module Aws::SSOAdmin
     class PermissionsBoundary < Struct.new(
       :customer_managed_policy_reference,
       :managed_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2431,8 @@ module Aws::SSOAdmin
     class PortalOptions < Struct.new(
       :sign_in_options,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2304,7 +2458,8 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :target_id,
       :target_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2313,7 +2468,8 @@ module Aws::SSOAdmin
     #   @return [Types::PermissionSetProvisioningStatus]
     class ProvisionPermissionSetResponse < Struct.new(
       :permission_set_provisioning_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2330,7 +2486,8 @@ module Aws::SSOAdmin
       :scope,
       :authorized_targets,
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2343,12 +2500,14 @@ module Aws::SSOAdmin
     class PutApplicationAssignmentConfigurationRequest < Struct.new(
       :application_arn,
       :assignment_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutApplicationAssignmentConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2365,7 +2524,8 @@ module Aws::SSOAdmin
       :application_arn,
       :authentication_method_type,
       :authentication_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2382,7 +2542,8 @@ module Aws::SSOAdmin
       :application_arn,
       :grant_type,
       :grant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2395,12 +2556,14 @@ module Aws::SSOAdmin
     class PutApplicationSessionConfigurationRequest < Struct.new(
       :application_arn,
       :user_background_session_application_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutApplicationSessionConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2417,12 +2580,14 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       :inline_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutInlinePolicyToPermissionSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,18 +2604,21 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       :permissions_boundary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutPermissionsBoundaryToPermissionSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Refresh Token Grant. For more, see <a href="https://datatracker.ietf.org/doc/html/rfc6749#section-1.5">RFC 6749</a>.</p>
     class RefreshTokenGrant < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2459,7 +2627,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2469,7 +2638,8 @@ module Aws::SSOAdmin
     #   @return [Hash<String, Types::ResourceServerScopeDetails>]
     class ResourceServerConfig < Struct.new(
       :scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2483,7 +2653,8 @@ module Aws::SSOAdmin
     class ResourceServerScopeDetails < Struct.new(
       :long_description,
       :detailed_title,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2497,7 +2668,8 @@ module Aws::SSOAdmin
     class ScopeDetails < Struct.new(
       :scope,
       :authorized_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2506,7 +2678,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2520,7 +2693,8 @@ module Aws::SSOAdmin
     class SignInOptions < Struct.new(
       :origin,
       :application_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2534,7 +2708,8 @@ module Aws::SSOAdmin
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2551,12 +2726,14 @@ module Aws::SSOAdmin
       :instance_arn,
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2565,13 +2742,15 @@ module Aws::SSOAdmin
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Token Exchange Grant. For more information, see <a href="https://datatracker.ietf.org/doc/html/rfc8693">RFC 8693</a>.</p>
     class TokenExchangeGrant < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2582,7 +2761,8 @@ module Aws::SSOAdmin
     class TrustedTokenIssuerConfiguration < Struct.new(
       :oidc_jwt_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OidcJwtConfiguration < TrustedTokenIssuerConfiguration; end
@@ -2603,7 +2783,8 @@ module Aws::SSOAdmin
       :trusted_token_issuer_arn,
       :name,
       :trusted_token_issuer_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2614,7 +2795,8 @@ module Aws::SSOAdmin
     class TrustedTokenIssuerUpdateConfiguration < Struct.new(
       :oidc_jwt_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OidcJwtConfiguration < TrustedTokenIssuerUpdateConfiguration; end
@@ -2634,12 +2816,14 @@ module Aws::SSOAdmin
       :instance_arn,
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2649,7 +2833,8 @@ module Aws::SSOAdmin
     #   @return [Types::SignInOptions]
     class UpdateApplicationPortalOptions < Struct.new(
       :sign_in_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2674,12 +2859,14 @@ module Aws::SSOAdmin
       :description,
       :status,
       :portal_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2692,12 +2879,14 @@ module Aws::SSOAdmin
     class UpdateInstanceAccessControlAttributeConfigurationRequest < Struct.new(
       :instance_arn,
       :instance_access_control_attribute_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateInstanceAccessControlAttributeConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2710,12 +2899,14 @@ module Aws::SSOAdmin
     class UpdateInstanceRequest < Struct.new(
       :name,
       :instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateInstanceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2740,12 +2931,14 @@ module Aws::SSOAdmin
       :description,
       :session_duration,
       :relay_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdatePermissionSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2762,12 +2955,14 @@ module Aws::SSOAdmin
       :trusted_token_issuer_arn,
       :name,
       :trusted_token_issuer_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTrustedTokenIssuerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2776,7 +2971,8 @@ module Aws::SSOAdmin
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

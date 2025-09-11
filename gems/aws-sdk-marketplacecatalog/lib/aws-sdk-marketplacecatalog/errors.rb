@@ -42,7 +42,7 @@ module Aws::MarketplaceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceCatalog::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::MarketplaceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceCatalog::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::MarketplaceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceCatalog::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::MarketplaceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceCatalog::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::MarketplaceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceCatalog::Types::ResourceNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::MarketplaceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceCatalog::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::MarketplaceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceCatalog::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::MarketplaceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceCatalog::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

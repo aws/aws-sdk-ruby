@@ -18,7 +18,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Types::TagQueryConfiguration]
     class AppRegistryConfiguration < Struct.new(
       :tag_query_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +60,8 @@ module Aws::ServiceCatalogAppRegistry
       :last_update_time,
       :tags,
       :application_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +91,8 @@ module Aws::ServiceCatalogAppRegistry
       :description,
       :creation_time,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +124,8 @@ module Aws::ServiceCatalogAppRegistry
       :error_message,
       :resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +146,8 @@ module Aws::ServiceCatalogAppRegistry
     class AssociateAttributeGroupRequest < Struct.new(
       :application,
       :attribute_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +160,8 @@ module Aws::ServiceCatalogAppRegistry
     class AssociateAttributeGroupResponse < Struct.new(
       :application_arn,
       :attribute_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +187,8 @@ module Aws::ServiceCatalogAppRegistry
       :resource_type,
       :resource,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +207,8 @@ module Aws::ServiceCatalogAppRegistry
       :application_arn,
       :resource_arn,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +242,8 @@ module Aws::ServiceCatalogAppRegistry
       :creation_time,
       :last_update_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +276,8 @@ module Aws::ServiceCatalogAppRegistry
       :arn,
       :name,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +311,8 @@ module Aws::ServiceCatalogAppRegistry
       :creation_time,
       :last_update_time,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +322,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +347,8 @@ module Aws::ServiceCatalogAppRegistry
       :description,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +357,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Types::Application]
     class CreateApplicationResponse < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +386,8 @@ module Aws::ServiceCatalogAppRegistry
       :attributes,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +396,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Types::AttributeGroup]
     class CreateAttributeGroupResponse < Struct.new(
       :attribute_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +409,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +419,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Types::ApplicationSummary]
     class DeleteApplicationResponse < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +434,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class DeleteAttributeGroupRequest < Struct.new(
       :attribute_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +444,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Types::AttributeGroupSummary]
     class DeleteAttributeGroupResponse < Struct.new(
       :attribute_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +466,8 @@ module Aws::ServiceCatalogAppRegistry
     class DisassociateAttributeGroupRequest < Struct.new(
       :application,
       :attribute_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +480,8 @@ module Aws::ServiceCatalogAppRegistry
     class DisassociateAttributeGroupResponse < Struct.new(
       :application_arn,
       :attribute_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -476,7 +498,8 @@ module Aws::ServiceCatalogAppRegistry
       :application,
       :resource_type,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +512,8 @@ module Aws::ServiceCatalogAppRegistry
     class DisassociateResourceResponse < Struct.new(
       :application_arn,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +525,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class GetApplicationRequest < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +580,8 @@ module Aws::ServiceCatalogAppRegistry
       :tags,
       :integrations,
       :application_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -599,7 +625,8 @@ module Aws::ServiceCatalogAppRegistry
       :next_token,
       :resource_tag_status,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +647,8 @@ module Aws::ServiceCatalogAppRegistry
       :resource,
       :options,
       :application_tag_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +662,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class GetAttributeGroupRequest < Struct.new(
       :attribute_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -675,7 +704,8 @@ module Aws::ServiceCatalogAppRegistry
       :last_update_time,
       :tags,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +717,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Types::AppRegistryConfiguration]
     class GetConfigurationResponse < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +732,8 @@ module Aws::ServiceCatalogAppRegistry
     class Integrations < Struct.new(
       :resource_group,
       :application_tag_resource_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +742,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +756,8 @@ module Aws::ServiceCatalogAppRegistry
     class ListApplicationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -736,7 +770,8 @@ module Aws::ServiceCatalogAppRegistry
     class ListApplicationsResponse < Struct.new(
       :applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -753,7 +788,8 @@ module Aws::ServiceCatalogAppRegistry
       :application,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +802,8 @@ module Aws::ServiceCatalogAppRegistry
     class ListAssociatedAttributeGroupsResponse < Struct.new(
       :attribute_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +823,8 @@ module Aws::ServiceCatalogAppRegistry
       :application,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -799,7 +837,8 @@ module Aws::ServiceCatalogAppRegistry
     class ListAssociatedResourcesResponse < Struct.new(
       :resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +855,8 @@ module Aws::ServiceCatalogAppRegistry
       :application,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +869,8 @@ module Aws::ServiceCatalogAppRegistry
     class ListAttributeGroupsForApplicationResponse < Struct.new(
       :attribute_groups_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +883,8 @@ module Aws::ServiceCatalogAppRegistry
     class ListAttributeGroupsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +897,8 @@ module Aws::ServiceCatalogAppRegistry
     class ListAttributeGroupsResponse < Struct.new(
       :attribute_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +907,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +917,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -885,7 +930,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Types::AppRegistryConfiguration]
     class PutConfigurationRequest < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +954,8 @@ module Aws::ServiceCatalogAppRegistry
       :arn,
       :association_time,
       :integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +970,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class ResourceDetails < Struct.new(
       :tag_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +1001,8 @@ module Aws::ServiceCatalogAppRegistry
       :state,
       :arn,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1037,8 @@ module Aws::ServiceCatalogAppRegistry
       :resource_type,
       :resource_details,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,7 +1048,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Types::ResourceGroup]
     class ResourceIntegrations < Struct.new(
       :resource_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1007,7 +1058,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1091,8 @@ module Aws::ServiceCatalogAppRegistry
       :error_message,
       :status,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1104,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1118,8 @@ module Aws::ServiceCatalogAppRegistry
     class SyncResourceRequest < Struct.new(
       :resource_type,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1136,8 @@ module Aws::ServiceCatalogAppRegistry
       :application_arn,
       :resource_arn,
       :action_taken,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1102,7 +1158,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class TagQueryConfiguration < Struct.new(
       :tag_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,12 +1172,14 @@ module Aws::ServiceCatalogAppRegistry
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1197,8 @@ module Aws::ServiceCatalogAppRegistry
     class ThrottlingException < Struct.new(
       :message,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1151,12 +1211,14 @@ module Aws::ServiceCatalogAppRegistry
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1180,7 +1242,8 @@ module Aws::ServiceCatalogAppRegistry
       :application,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1189,7 +1252,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Types::Application]
     class UpdateApplicationResponse < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1282,8 @@ module Aws::ServiceCatalogAppRegistry
       :name,
       :description,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1227,7 +1292,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [Types::AttributeGroup]
     class UpdateAttributeGroupResponse < Struct.new(
       :attribute_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1236,7 +1302,8 @@ module Aws::ServiceCatalogAppRegistry
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

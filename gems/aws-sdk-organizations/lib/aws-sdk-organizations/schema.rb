@@ -1796,7 +1796,6 @@ module Aws::Organizations
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
         operation.traits = {}
       end)
-
     end
 
     class << self

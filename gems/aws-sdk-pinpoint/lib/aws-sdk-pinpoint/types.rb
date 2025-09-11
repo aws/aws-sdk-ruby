@@ -20,7 +20,8 @@ module Aws::Pinpoint
       :client_id,
       :client_secret,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +67,8 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +138,8 @@ module Aws::Pinpoint
       :substitutions,
       :title,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +177,8 @@ module Aws::Pinpoint
       :team_id,
       :token_key,
       :token_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +232,8 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +311,8 @@ module Aws::Pinpoint
       :time_to_live,
       :title,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +346,8 @@ module Aws::Pinpoint
       :sound,
       :title,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +385,8 @@ module Aws::Pinpoint
       :team_id,
       :token_key,
       :token_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +440,8 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,7 +479,8 @@ module Aws::Pinpoint
       :team_id,
       :token_key,
       :token_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +534,8 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,7 +573,8 @@ module Aws::Pinpoint
       :team_id,
       :token_key,
       :token_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +628,8 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -630,7 +643,8 @@ module Aws::Pinpoint
     class ActivitiesResponse < Struct.new(
       :item,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +694,8 @@ module Aws::Pinpoint
       :sms,
       :wait,
       :contact_center,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -742,7 +757,8 @@ module Aws::Pinpoint
       :total_endpoint_count,
       :treatment_id,
       :execution_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +788,8 @@ module Aws::Pinpoint
       :raw_content,
       :substitutions,
       :title_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +831,8 @@ module Aws::Pinpoint
       :sound,
       :title,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +862,8 @@ module Aws::Pinpoint
       :kpi_result,
       :next_token,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +889,8 @@ module Aws::Pinpoint
       :name,
       :tags,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +908,8 @@ module Aws::Pinpoint
       :daily_cap,
       :timeframe_cap,
       :total_cap,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +939,8 @@ module Aws::Pinpoint
       :limits,
       :quiet_time,
       :journey_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -932,7 +954,8 @@ module Aws::Pinpoint
     class ApplicationsResponse < Struct.new(
       :item,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -946,7 +969,8 @@ module Aws::Pinpoint
     class AttributeDimension < Struct.new(
       :attribute_type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +988,8 @@ module Aws::Pinpoint
       :application_id,
       :attribute_type,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -978,7 +1003,8 @@ module Aws::Pinpoint
     class BadRequestException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -996,7 +1022,8 @@ module Aws::Pinpoint
       :api_key,
       :enabled,
       :secret_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1046,7 +1073,8 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1136,8 @@ module Aws::Pinpoint
       :time_to_live,
       :title,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1118,7 +1147,8 @@ module Aws::Pinpoint
     #   @return [Array<Types::ResultRow>]
     class BaseKpiResult < Struct.new(
       :rows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1158,8 @@ module Aws::Pinpoint
     #   @return [String]
     class CampaignCustomMessage < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1193,8 @@ module Aws::Pinpoint
       :kpi_result,
       :next_token,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1188,7 +1220,8 @@ module Aws::Pinpoint
       :headers,
       :html_body,
       :title,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1202,7 +1235,8 @@ module Aws::Pinpoint
     class CampaignEventFilter < Struct.new(
       :dimensions,
       :filter_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1254,8 @@ module Aws::Pinpoint
       :lambda_function_name,
       :mode,
       :web_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1277,8 @@ module Aws::Pinpoint
       :content,
       :custom_config,
       :layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1268,7 +1304,8 @@ module Aws::Pinpoint
       :messages_per_second,
       :total,
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1411,8 @@ module Aws::Pinpoint
       :treatment_name,
       :version,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1404,7 +1442,8 @@ module Aws::Pinpoint
       :sender_id,
       :entity_id,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1414,7 +1453,8 @@ module Aws::Pinpoint
     #   @return [String]
     class CampaignState < Struct.new(
       :campaign_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1428,7 +1468,8 @@ module Aws::Pinpoint
     class CampaignsResponse < Struct.new(
       :item,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1511,8 @@ module Aws::Pinpoint
       :last_modified_by,
       :last_modified_date,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1480,7 +1522,8 @@ module Aws::Pinpoint
     #   @return [Hash<String, Types::ChannelResponse>]
     class ChannelsResponse < Struct.new(
       :channels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1506,7 +1549,8 @@ module Aws::Pinpoint
       :push,
       :voice,
       :custom,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1524,7 +1568,8 @@ module Aws::Pinpoint
       :name,
       :start_date_time,
       :end_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1538,7 +1583,8 @@ module Aws::Pinpoint
     class Condition < Struct.new(
       :conditions,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1560,7 +1606,8 @@ module Aws::Pinpoint
       :evaluation_wait_time,
       :false_activity,
       :true_activity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1574,7 +1621,8 @@ module Aws::Pinpoint
     class ConflictException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1583,7 +1631,8 @@ module Aws::Pinpoint
     #   @return [String]
     class ContactCenterActivity < Struct.new(
       :next_activity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1592,7 +1641,8 @@ module Aws::Pinpoint
     #   @return [Types::CreateApplicationRequest]
     class CreateAppRequest < Struct.new(
       :create_application_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1651,8 @@ module Aws::Pinpoint
     #   @return [Types::ApplicationResponse]
     class CreateAppResponse < Struct.new(
       :application_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,7 +1666,8 @@ module Aws::Pinpoint
     class CreateApplicationRequest < Struct.new(
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1628,7 +1680,8 @@ module Aws::Pinpoint
     class CreateCampaignRequest < Struct.new(
       :application_id,
       :write_campaign_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1637,7 +1690,8 @@ module Aws::Pinpoint
     #   @return [Types::CampaignResponse]
     class CreateCampaignResponse < Struct.new(
       :campaign_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1704,8 @@ module Aws::Pinpoint
     class CreateEmailTemplateRequest < Struct.new(
       :email_template_request,
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1659,7 +1714,8 @@ module Aws::Pinpoint
     #   @return [Types::CreateTemplateMessageBody]
     class CreateEmailTemplateResponse < Struct.new(
       :create_template_message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1672,7 +1728,8 @@ module Aws::Pinpoint
     class CreateExportJobRequest < Struct.new(
       :application_id,
       :export_job_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1681,7 +1738,8 @@ module Aws::Pinpoint
     #   @return [Types::ExportJobResponse]
     class CreateExportJobResponse < Struct.new(
       :export_job_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1752,8 @@ module Aws::Pinpoint
     class CreateImportJobRequest < Struct.new(
       :application_id,
       :import_job_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1703,7 +1762,8 @@ module Aws::Pinpoint
     #   @return [Types::ImportJobResponse]
     class CreateImportJobResponse < Struct.new(
       :import_job_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1776,8 @@ module Aws::Pinpoint
     class CreateInAppTemplateRequest < Struct.new(
       :in_app_template_request,
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1786,8 @@ module Aws::Pinpoint
     #   @return [Types::TemplateCreateMessageBody]
     class CreateInAppTemplateResponse < Struct.new(
       :template_create_message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1738,7 +1800,8 @@ module Aws::Pinpoint
     class CreateJourneyRequest < Struct.new(
       :application_id,
       :write_journey_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1747,7 +1810,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyResponse]
     class CreateJourneyResponse < Struct.new(
       :journey_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1760,7 +1824,8 @@ module Aws::Pinpoint
     class CreatePushTemplateRequest < Struct.new(
       :push_notification_template_request,
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1769,7 +1834,8 @@ module Aws::Pinpoint
     #   @return [Types::CreateTemplateMessageBody]
     class CreatePushTemplateResponse < Struct.new(
       :create_template_message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,7 +1844,8 @@ module Aws::Pinpoint
     #   @return [Types::CreateRecommenderConfigurationShape]
     class CreateRecommenderConfigurationRequest < Struct.new(
       :create_recommender_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1787,7 +1854,8 @@ module Aws::Pinpoint
     #   @return [Types::RecommenderConfigurationResponse]
     class CreateRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1829,7 +1897,8 @@ module Aws::Pinpoint
       :recommendation_transformer_uri,
       :recommendations_display_name,
       :recommendations_per_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1842,7 +1911,8 @@ module Aws::Pinpoint
     class CreateSegmentRequest < Struct.new(
       :application_id,
       :write_segment_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1851,7 +1921,8 @@ module Aws::Pinpoint
     #   @return [Types::SegmentResponse]
     class CreateSegmentResponse < Struct.new(
       :segment_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1864,7 +1935,8 @@ module Aws::Pinpoint
     class CreateSmsTemplateRequest < Struct.new(
       :sms_template_request,
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1873,7 +1945,8 @@ module Aws::Pinpoint
     #   @return [Types::CreateTemplateMessageBody]
     class CreateSmsTemplateResponse < Struct.new(
       :create_template_message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1891,7 +1964,8 @@ module Aws::Pinpoint
       :arn,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1904,7 +1978,8 @@ module Aws::Pinpoint
     class CreateVoiceTemplateRequest < Struct.new(
       :template_name,
       :voice_template_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1913,7 +1988,8 @@ module Aws::Pinpoint
     #   @return [Types::CreateTemplateMessageBody]
     class CreateVoiceTemplateResponse < Struct.new(
       :create_template_message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +2003,8 @@ module Aws::Pinpoint
     class CustomDeliveryConfiguration < Struct.new(
       :delivery_uri,
       :endpoint_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2034,8 @@ module Aws::Pinpoint
       :next_activity,
       :template_name,
       :template_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2065,8 @@ module Aws::Pinpoint
       :link,
       :text,
       :text_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2001,7 +2080,8 @@ module Aws::Pinpoint
     class DefaultMessage < Struct.new(
       :body,
       :substitutions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2035,7 +2115,8 @@ module Aws::Pinpoint
       :substitutions,
       :title,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2061,7 +2142,8 @@ module Aws::Pinpoint
       :sound,
       :title,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2070,7 +2152,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteAdmChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2079,7 +2162,8 @@ module Aws::Pinpoint
     #   @return [Types::ADMChannelResponse]
     class DeleteAdmChannelResponse < Struct.new(
       :adm_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2088,7 +2172,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteApnsChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2097,7 +2182,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSChannelResponse]
     class DeleteApnsChannelResponse < Struct.new(
       :apns_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2106,7 +2192,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteApnsSandboxChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2115,7 +2202,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSSandboxChannelResponse]
     class DeleteApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2124,7 +2212,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteApnsVoipChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2133,7 +2222,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSVoipChannelResponse]
     class DeleteApnsVoipChannelResponse < Struct.new(
       :apns_voip_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2142,7 +2232,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteApnsVoipSandboxChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2151,7 +2242,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSVoipSandboxChannelResponse]
     class DeleteApnsVoipSandboxChannelResponse < Struct.new(
       :apns_voip_sandbox_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2160,7 +2252,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteAppRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2169,7 +2262,8 @@ module Aws::Pinpoint
     #   @return [Types::ApplicationResponse]
     class DeleteAppResponse < Struct.new(
       :application_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2272,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteBaiduChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2187,7 +2282,8 @@ module Aws::Pinpoint
     #   @return [Types::BaiduChannelResponse]
     class DeleteBaiduChannelResponse < Struct.new(
       :baidu_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2200,7 +2296,8 @@ module Aws::Pinpoint
     class DeleteCampaignRequest < Struct.new(
       :application_id,
       :campaign_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2209,7 +2306,8 @@ module Aws::Pinpoint
     #   @return [Types::CampaignResponse]
     class DeleteCampaignResponse < Struct.new(
       :campaign_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2218,7 +2316,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteEmailChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2227,7 +2326,8 @@ module Aws::Pinpoint
     #   @return [Types::EmailChannelResponse]
     class DeleteEmailChannelResponse < Struct.new(
       :email_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2240,7 +2340,8 @@ module Aws::Pinpoint
     class DeleteEmailTemplateRequest < Struct.new(
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2249,7 +2350,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class DeleteEmailTemplateResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2262,7 +2364,8 @@ module Aws::Pinpoint
     class DeleteEndpointRequest < Struct.new(
       :application_id,
       :endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2271,7 +2374,8 @@ module Aws::Pinpoint
     #   @return [Types::EndpointResponse]
     class DeleteEndpointResponse < Struct.new(
       :endpoint_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2280,7 +2384,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteEventStreamRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2289,7 +2394,8 @@ module Aws::Pinpoint
     #   @return [Types::EventStream]
     class DeleteEventStreamResponse < Struct.new(
       :event_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2298,7 +2404,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteGcmChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2307,7 +2414,8 @@ module Aws::Pinpoint
     #   @return [Types::GCMChannelResponse]
     class DeleteGcmChannelResponse < Struct.new(
       :gcm_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2320,7 +2428,8 @@ module Aws::Pinpoint
     class DeleteInAppTemplateRequest < Struct.new(
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2329,7 +2438,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class DeleteInAppTemplateResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2342,7 +2452,8 @@ module Aws::Pinpoint
     class DeleteJourneyRequest < Struct.new(
       :application_id,
       :journey_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2351,7 +2462,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyResponse]
     class DeleteJourneyResponse < Struct.new(
       :journey_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2364,7 +2476,8 @@ module Aws::Pinpoint
     class DeletePushTemplateRequest < Struct.new(
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2373,7 +2486,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class DeletePushTemplateResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2382,7 +2496,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteRecommenderConfigurationRequest < Struct.new(
       :recommender_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2391,7 +2506,8 @@ module Aws::Pinpoint
     #   @return [Types::RecommenderConfigurationResponse]
     class DeleteRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2404,7 +2520,8 @@ module Aws::Pinpoint
     class DeleteSegmentRequest < Struct.new(
       :application_id,
       :segment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2413,7 +2530,8 @@ module Aws::Pinpoint
     #   @return [Types::SegmentResponse]
     class DeleteSegmentResponse < Struct.new(
       :segment_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2422,7 +2540,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteSmsChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2431,7 +2550,8 @@ module Aws::Pinpoint
     #   @return [Types::SMSChannelResponse]
     class DeleteSmsChannelResponse < Struct.new(
       :sms_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2444,7 +2564,8 @@ module Aws::Pinpoint
     class DeleteSmsTemplateRequest < Struct.new(
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2453,7 +2574,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class DeleteSmsTemplateResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2466,7 +2588,8 @@ module Aws::Pinpoint
     class DeleteUserEndpointsRequest < Struct.new(
       :application_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2475,7 +2598,8 @@ module Aws::Pinpoint
     #   @return [Types::EndpointsResponse]
     class DeleteUserEndpointsResponse < Struct.new(
       :endpoints_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2484,7 +2608,8 @@ module Aws::Pinpoint
     #   @return [String]
     class DeleteVoiceChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2493,7 +2618,8 @@ module Aws::Pinpoint
     #   @return [Types::VoiceChannelResponse]
     class DeleteVoiceChannelResponse < Struct.new(
       :voice_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2506,7 +2632,8 @@ module Aws::Pinpoint
     class DeleteVoiceTemplateRequest < Struct.new(
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2515,7 +2642,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class DeleteVoiceTemplateResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2557,7 +2685,8 @@ module Aws::Pinpoint
       :gcm_message,
       :sms_message,
       :voice_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2587,7 +2716,8 @@ module Aws::Pinpoint
       :identity,
       :role_arn,
       :orchestration_sending_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2657,7 +2787,8 @@ module Aws::Pinpoint
       :role_arn,
       :orchestration_sending_role_arn,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2691,7 +2822,8 @@ module Aws::Pinpoint
       :reply_to_addresses,
       :simple_email,
       :substitutions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2713,7 +2845,8 @@ module Aws::Pinpoint
       :next_activity,
       :template_name,
       :template_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2751,7 +2884,8 @@ module Aws::Pinpoint
       :tags,
       :template_description,
       :text_part,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2813,7 +2947,8 @@ module Aws::Pinpoint
       :template_type,
       :text_part,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2867,7 +3002,8 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2877,7 +3013,8 @@ module Aws::Pinpoint
     #   @return [Array<Types::EndpointBatchItem>]
     class EndpointBatchRequest < Struct.new(
       :item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2915,7 +3052,8 @@ module Aws::Pinpoint
       :platform,
       :platform_version,
       :timezone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2929,7 +3067,8 @@ module Aws::Pinpoint
     class EndpointItemResponse < Struct.new(
       :message,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2959,7 +3098,8 @@ module Aws::Pinpoint
       :longitude,
       :postal_code,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2989,7 +3129,8 @@ module Aws::Pinpoint
       :status_code,
       :status_message,
       :updated_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3039,7 +3180,8 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3105,7 +3247,8 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3131,7 +3274,8 @@ module Aws::Pinpoint
       :raw_content,
       :substitutions,
       :title_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3145,7 +3289,8 @@ module Aws::Pinpoint
     class EndpointUser < Struct.new(
       :user_attributes,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3155,7 +3300,8 @@ module Aws::Pinpoint
     #   @return [Array<Types::EndpointResponse>]
     class EndpointsResponse < Struct.new(
       :item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3201,7 +3347,8 @@ module Aws::Pinpoint
       :sdk_name,
       :session,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3215,7 +3362,8 @@ module Aws::Pinpoint
     class EventCondition < Struct.new(
       :dimensions,
       :message_activity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3233,7 +3381,8 @@ module Aws::Pinpoint
       :attributes,
       :event_type,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3247,7 +3396,8 @@ module Aws::Pinpoint
     class EventFilter < Struct.new(
       :dimensions,
       :filter_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3261,7 +3411,8 @@ module Aws::Pinpoint
     class EventItemResponse < Struct.new(
       :message,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3274,7 +3425,8 @@ module Aws::Pinpoint
     class EventStartCondition < Struct.new(
       :event_filter,
       :segment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3306,7 +3458,8 @@ module Aws::Pinpoint
       :last_modified_date,
       :last_updated_by,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3320,7 +3473,8 @@ module Aws::Pinpoint
     class EventsBatch < Struct.new(
       :endpoint,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3330,7 +3484,8 @@ module Aws::Pinpoint
     #   @return [Hash<String, Types::EventsBatch>]
     class EventsRequest < Struct.new(
       :batch_item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3340,7 +3495,8 @@ module Aws::Pinpoint
     #   @return [Hash<String, Types::ItemResponse>]
     class EventsResponse < Struct.new(
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3362,7 +3518,8 @@ module Aws::Pinpoint
       :s3_url_prefix,
       :segment_id,
       :segment_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3384,7 +3541,8 @@ module Aws::Pinpoint
       :s3_url_prefix,
       :segment_id,
       :segment_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3442,7 +3600,8 @@ module Aws::Pinpoint
       :total_pieces,
       :total_processed,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3456,7 +3615,8 @@ module Aws::Pinpoint
     class ExportJobsResponse < Struct.new(
       :item,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3470,7 +3630,8 @@ module Aws::Pinpoint
     class ForbiddenException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3492,7 +3653,8 @@ module Aws::Pinpoint
       :default_authentication_method,
       :enabled,
       :service_json,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3550,7 +3712,8 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3628,7 +3791,8 @@ module Aws::Pinpoint
       :time_to_live,
       :title,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3642,7 +3806,8 @@ module Aws::Pinpoint
     class GPSCoordinates < Struct.new(
       :latitude,
       :longitude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3656,7 +3821,8 @@ module Aws::Pinpoint
     class GPSPointDimension < Struct.new(
       :coordinates,
       :range_in_kilometers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3665,7 +3831,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetAdmChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3674,7 +3841,8 @@ module Aws::Pinpoint
     #   @return [Types::ADMChannelResponse]
     class GetAdmChannelResponse < Struct.new(
       :adm_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3683,7 +3851,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetApnsChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3692,7 +3861,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSChannelResponse]
     class GetApnsChannelResponse < Struct.new(
       :apns_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3701,7 +3871,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetApnsSandboxChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3710,7 +3881,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSSandboxChannelResponse]
     class GetApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3719,7 +3891,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetApnsVoipChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3728,7 +3901,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSVoipChannelResponse]
     class GetApnsVoipChannelResponse < Struct.new(
       :apns_voip_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3737,7 +3911,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetApnsVoipSandboxChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3746,7 +3921,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSVoipSandboxChannelResponse]
     class GetApnsVoipSandboxChannelResponse < Struct.new(
       :apns_voip_sandbox_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3755,7 +3931,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetAppRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3764,7 +3941,8 @@ module Aws::Pinpoint
     #   @return [Types::ApplicationResponse]
     class GetAppResponse < Struct.new(
       :application_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3793,7 +3971,8 @@ module Aws::Pinpoint
       :next_token,
       :page_size,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3802,7 +3981,8 @@ module Aws::Pinpoint
     #   @return [Types::ApplicationDateRangeKpiResponse]
     class GetApplicationDateRangeKpiResponse < Struct.new(
       :application_date_range_kpi_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3811,7 +3991,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetApplicationSettingsRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3820,7 +4001,8 @@ module Aws::Pinpoint
     #   @return [Types::ApplicationSettingsResource]
     class GetApplicationSettingsResponse < Struct.new(
       :application_settings_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3833,7 +4015,8 @@ module Aws::Pinpoint
     class GetAppsRequest < Struct.new(
       :page_size,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3842,7 +4025,8 @@ module Aws::Pinpoint
     #   @return [Types::ApplicationsResponse]
     class GetAppsResponse < Struct.new(
       :applications_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3851,7 +4035,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetBaiduChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3860,7 +4045,8 @@ module Aws::Pinpoint
     #   @return [Types::BaiduChannelResponse]
     class GetBaiduChannelResponse < Struct.new(
       :baidu_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3881,7 +4067,8 @@ module Aws::Pinpoint
       :campaign_id,
       :page_size,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3890,7 +4077,8 @@ module Aws::Pinpoint
     #   @return [Types::ActivitiesResponse]
     class GetCampaignActivitiesResponse < Struct.new(
       :activities_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3923,7 +4111,8 @@ module Aws::Pinpoint
       :next_token,
       :page_size,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3932,7 +4121,8 @@ module Aws::Pinpoint
     #   @return [Types::CampaignDateRangeKpiResponse]
     class GetCampaignDateRangeKpiResponse < Struct.new(
       :campaign_date_range_kpi_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3945,7 +4135,8 @@ module Aws::Pinpoint
     class GetCampaignRequest < Struct.new(
       :application_id,
       :campaign_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3954,7 +4145,8 @@ module Aws::Pinpoint
     #   @return [Types::CampaignResponse]
     class GetCampaignResponse < Struct.new(
       :campaign_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3971,7 +4163,8 @@ module Aws::Pinpoint
       :application_id,
       :campaign_id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3980,7 +4173,8 @@ module Aws::Pinpoint
     #   @return [Types::CampaignResponse]
     class GetCampaignVersionResponse < Struct.new(
       :campaign_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4001,7 +4195,8 @@ module Aws::Pinpoint
       :campaign_id,
       :page_size,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4010,7 +4205,8 @@ module Aws::Pinpoint
     #   @return [Types::CampaignsResponse]
     class GetCampaignVersionsResponse < Struct.new(
       :campaigns_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4027,7 +4223,8 @@ module Aws::Pinpoint
       :application_id,
       :page_size,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4036,7 +4233,8 @@ module Aws::Pinpoint
     #   @return [Types::CampaignsResponse]
     class GetCampaignsResponse < Struct.new(
       :campaigns_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4045,7 +4243,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetChannelsRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4054,7 +4253,8 @@ module Aws::Pinpoint
     #   @return [Types::ChannelsResponse]
     class GetChannelsResponse < Struct.new(
       :channels_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4063,7 +4263,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetEmailChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4072,7 +4273,8 @@ module Aws::Pinpoint
     #   @return [Types::EmailChannelResponse]
     class GetEmailChannelResponse < Struct.new(
       :email_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4085,7 +4287,8 @@ module Aws::Pinpoint
     class GetEmailTemplateRequest < Struct.new(
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4094,7 +4297,8 @@ module Aws::Pinpoint
     #   @return [Types::EmailTemplateResponse]
     class GetEmailTemplateResponse < Struct.new(
       :email_template_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4107,7 +4311,8 @@ module Aws::Pinpoint
     class GetEndpointRequest < Struct.new(
       :application_id,
       :endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4116,7 +4321,8 @@ module Aws::Pinpoint
     #   @return [Types::EndpointResponse]
     class GetEndpointResponse < Struct.new(
       :endpoint_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4125,7 +4331,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetEventStreamRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4134,7 +4341,8 @@ module Aws::Pinpoint
     #   @return [Types::EventStream]
     class GetEventStreamResponse < Struct.new(
       :event_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4147,7 +4355,8 @@ module Aws::Pinpoint
     class GetExportJobRequest < Struct.new(
       :application_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4156,7 +4365,8 @@ module Aws::Pinpoint
     #   @return [Types::ExportJobResponse]
     class GetExportJobResponse < Struct.new(
       :export_job_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4173,7 +4383,8 @@ module Aws::Pinpoint
       :application_id,
       :page_size,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4182,7 +4393,8 @@ module Aws::Pinpoint
     #   @return [Types::ExportJobsResponse]
     class GetExportJobsResponse < Struct.new(
       :export_jobs_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4191,7 +4403,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetGcmChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4200,7 +4413,8 @@ module Aws::Pinpoint
     #   @return [Types::GCMChannelResponse]
     class GetGcmChannelResponse < Struct.new(
       :gcm_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4213,7 +4427,8 @@ module Aws::Pinpoint
     class GetImportJobRequest < Struct.new(
       :application_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4222,7 +4437,8 @@ module Aws::Pinpoint
     #   @return [Types::ImportJobResponse]
     class GetImportJobResponse < Struct.new(
       :import_job_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4239,7 +4455,8 @@ module Aws::Pinpoint
       :application_id,
       :page_size,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4248,7 +4465,8 @@ module Aws::Pinpoint
     #   @return [Types::ImportJobsResponse]
     class GetImportJobsResponse < Struct.new(
       :import_jobs_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4261,7 +4479,8 @@ module Aws::Pinpoint
     class GetInAppMessagesRequest < Struct.new(
       :application_id,
       :endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4270,7 +4489,8 @@ module Aws::Pinpoint
     #   @return [Types::InAppMessagesResponse]
     class GetInAppMessagesResponse < Struct.new(
       :in_app_messages_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4283,7 +4503,8 @@ module Aws::Pinpoint
     class GetInAppTemplateRequest < Struct.new(
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4292,7 +4513,8 @@ module Aws::Pinpoint
     #   @return [Types::InAppTemplateResponse]
     class GetInAppTemplateResponse < Struct.new(
       :in_app_template_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4325,7 +4547,8 @@ module Aws::Pinpoint
       :next_token,
       :page_size,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4334,7 +4557,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyDateRangeKpiResponse]
     class GetJourneyDateRangeKpiResponse < Struct.new(
       :journey_date_range_kpi_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4359,7 +4583,8 @@ module Aws::Pinpoint
       :journey_id,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4368,7 +4593,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyExecutionActivityMetricsResponse]
     class GetJourneyExecutionActivityMetricsResponse < Struct.new(
       :journey_execution_activity_metrics_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4389,7 +4615,8 @@ module Aws::Pinpoint
       :journey_id,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4398,7 +4625,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyExecutionMetricsResponse]
     class GetJourneyExecutionMetricsResponse < Struct.new(
       :journey_execution_metrics_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4411,7 +4639,8 @@ module Aws::Pinpoint
     class GetJourneyRequest < Struct.new(
       :application_id,
       :journey_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4420,7 +4649,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyResponse]
     class GetJourneyResponse < Struct.new(
       :journey_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4449,7 +4679,8 @@ module Aws::Pinpoint
       :next_token,
       :page_size,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4458,7 +4689,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyRunExecutionActivityMetricsResponse]
     class GetJourneyRunExecutionActivityMetricsResponse < Struct.new(
       :journey_run_execution_activity_metrics_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4483,7 +4715,8 @@ module Aws::Pinpoint
       :next_token,
       :page_size,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4492,7 +4725,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyRunExecutionMetricsResponse]
     class GetJourneyRunExecutionMetricsResponse < Struct.new(
       :journey_run_execution_metrics_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4513,7 +4747,8 @@ module Aws::Pinpoint
       :journey_id,
       :page_size,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4522,7 +4757,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyRunsResponse]
     class GetJourneyRunsResponse < Struct.new(
       :journey_runs_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4535,7 +4771,8 @@ module Aws::Pinpoint
     class GetPushTemplateRequest < Struct.new(
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4544,7 +4781,8 @@ module Aws::Pinpoint
     #   @return [Types::PushNotificationTemplateResponse]
     class GetPushTemplateResponse < Struct.new(
       :push_notification_template_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4553,7 +4791,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetRecommenderConfigurationRequest < Struct.new(
       :recommender_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4562,7 +4801,8 @@ module Aws::Pinpoint
     #   @return [Types::RecommenderConfigurationResponse]
     class GetRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4575,7 +4815,8 @@ module Aws::Pinpoint
     class GetRecommenderConfigurationsRequest < Struct.new(
       :page_size,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4584,7 +4825,8 @@ module Aws::Pinpoint
     #   @return [Types::ListRecommenderConfigurationsResponse]
     class GetRecommenderConfigurationsResponse < Struct.new(
       :list_recommender_configurations_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4605,7 +4847,8 @@ module Aws::Pinpoint
       :page_size,
       :segment_id,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4614,7 +4857,8 @@ module Aws::Pinpoint
     #   @return [Types::ExportJobsResponse]
     class GetSegmentExportJobsResponse < Struct.new(
       :export_jobs_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4635,7 +4879,8 @@ module Aws::Pinpoint
       :page_size,
       :segment_id,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4644,7 +4889,8 @@ module Aws::Pinpoint
     #   @return [Types::ImportJobsResponse]
     class GetSegmentImportJobsResponse < Struct.new(
       :import_jobs_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4657,7 +4903,8 @@ module Aws::Pinpoint
     class GetSegmentRequest < Struct.new(
       :application_id,
       :segment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4666,7 +4913,8 @@ module Aws::Pinpoint
     #   @return [Types::SegmentResponse]
     class GetSegmentResponse < Struct.new(
       :segment_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4683,7 +4931,8 @@ module Aws::Pinpoint
       :application_id,
       :segment_id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4692,7 +4941,8 @@ module Aws::Pinpoint
     #   @return [Types::SegmentResponse]
     class GetSegmentVersionResponse < Struct.new(
       :segment_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4713,7 +4963,8 @@ module Aws::Pinpoint
       :page_size,
       :segment_id,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4722,7 +4973,8 @@ module Aws::Pinpoint
     #   @return [Types::SegmentsResponse]
     class GetSegmentVersionsResponse < Struct.new(
       :segments_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4739,7 +4991,8 @@ module Aws::Pinpoint
       :application_id,
       :page_size,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4748,7 +5001,8 @@ module Aws::Pinpoint
     #   @return [Types::SegmentsResponse]
     class GetSegmentsResponse < Struct.new(
       :segments_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4757,7 +5011,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetSmsChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4766,7 +5021,8 @@ module Aws::Pinpoint
     #   @return [Types::SMSChannelResponse]
     class GetSmsChannelResponse < Struct.new(
       :sms_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4779,7 +5035,8 @@ module Aws::Pinpoint
     class GetSmsTemplateRequest < Struct.new(
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4788,7 +5045,8 @@ module Aws::Pinpoint
     #   @return [Types::SMSTemplateResponse]
     class GetSmsTemplateResponse < Struct.new(
       :sms_template_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4801,7 +5059,8 @@ module Aws::Pinpoint
     class GetUserEndpointsRequest < Struct.new(
       :application_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4810,7 +5069,8 @@ module Aws::Pinpoint
     #   @return [Types::EndpointsResponse]
     class GetUserEndpointsResponse < Struct.new(
       :endpoints_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4819,7 +5079,8 @@ module Aws::Pinpoint
     #   @return [String]
     class GetVoiceChannelRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4828,7 +5089,8 @@ module Aws::Pinpoint
     #   @return [Types::VoiceChannelResponse]
     class GetVoiceChannelResponse < Struct.new(
       :voice_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4841,7 +5103,8 @@ module Aws::Pinpoint
     class GetVoiceTemplateRequest < Struct.new(
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4850,7 +5113,8 @@ module Aws::Pinpoint
     #   @return [Types::VoiceTemplateResponse]
     class GetVoiceTemplateResponse < Struct.new(
       :voice_template_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4864,7 +5128,8 @@ module Aws::Pinpoint
     class HoldoutActivity < Struct.new(
       :next_activity,
       :percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4902,7 +5167,8 @@ module Aws::Pinpoint
       :s3_url,
       :segment_id,
       :segment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4940,7 +5206,8 @@ module Aws::Pinpoint
       :s3_url,
       :segment_id,
       :segment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4998,7 +5265,8 @@ module Aws::Pinpoint
       :total_pieces,
       :total_processed,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5012,7 +5280,8 @@ module Aws::Pinpoint
     class ImportJobsResponse < Struct.new(
       :item,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5030,7 +5299,8 @@ module Aws::Pinpoint
       :end_date,
       :event_filter,
       :quiet_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5048,7 +5318,8 @@ module Aws::Pinpoint
       :content,
       :custom_config,
       :layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5066,7 +5337,8 @@ module Aws::Pinpoint
       :alignment,
       :body,
       :text_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5088,7 +5360,8 @@ module Aws::Pinpoint
       :default_config,
       :ios,
       :web,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5126,7 +5399,8 @@ module Aws::Pinpoint
       :session_cap,
       :total_cap,
       :treatment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5156,7 +5430,8 @@ module Aws::Pinpoint
       :image_url,
       :primary_btn,
       :secondary_btn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5174,7 +5449,8 @@ module Aws::Pinpoint
       :alignment,
       :header,
       :text_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5184,7 +5460,8 @@ module Aws::Pinpoint
     #   @return [Array<Types::InAppMessageCampaign>]
     class InAppMessagesResponse < Struct.new(
       :in_app_message_campaigns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5210,7 +5487,8 @@ module Aws::Pinpoint
       :layout,
       :tags,
       :template_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5260,7 +5538,8 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5274,7 +5553,8 @@ module Aws::Pinpoint
     class InternalServerErrorException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5288,7 +5568,8 @@ module Aws::Pinpoint
     class ItemResponse < Struct.new(
       :endpoint_item_response,
       :events_item_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5302,7 +5583,8 @@ module Aws::Pinpoint
     class JourneyChannelSettings < Struct.new(
       :connect_campaign_arn,
       :connect_campaign_execution_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5312,7 +5594,8 @@ module Aws::Pinpoint
     #   @return [String]
     class JourneyCustomMessage < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5346,7 +5629,8 @@ module Aws::Pinpoint
       :kpi_result,
       :next_token,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5356,7 +5640,8 @@ module Aws::Pinpoint
     #   @return [String]
     class JourneyEmailMessage < Struct.new(
       :from_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5386,7 +5671,8 @@ module Aws::Pinpoint
       :journey_id,
       :last_evaluated_time,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5408,7 +5694,8 @@ module Aws::Pinpoint
       :journey_id,
       :last_evaluated_time,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5438,7 +5725,8 @@ module Aws::Pinpoint
       :endpoint_reentry_interval,
       :timeframe_cap,
       :total_cap,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5448,7 +5736,8 @@ module Aws::Pinpoint
     #   @return [String]
     class JourneyPushMessage < Struct.new(
       :time_to_live,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5542,7 +5831,8 @@ module Aws::Pinpoint
       :open_hours,
       :closed_days,
       :timezone_estimation_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5576,7 +5866,8 @@ module Aws::Pinpoint
       :last_evaluated_time,
       :metrics,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5602,7 +5893,8 @@ module Aws::Pinpoint
       :last_evaluated_time,
       :metrics,
       :run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5624,7 +5916,8 @@ module Aws::Pinpoint
       :last_update_time,
       :run_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5638,7 +5931,8 @@ module Aws::Pinpoint
     class JourneyRunsResponse < Struct.new(
       :item,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5664,7 +5958,8 @@ module Aws::Pinpoint
       :sender_id,
       :entity_id,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5687,7 +5982,8 @@ module Aws::Pinpoint
       :end_time,
       :start_time,
       :timezone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5697,7 +5993,8 @@ module Aws::Pinpoint
     #   @return [String]
     class JourneyStateRequest < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5711,7 +6008,8 @@ module Aws::Pinpoint
     class JourneyTimeframeCap < Struct.new(
       :cap,
       :days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5725,7 +6023,8 @@ module Aws::Pinpoint
     class JourneysResponse < Struct.new(
       :item,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5742,7 +6041,8 @@ module Aws::Pinpoint
       :application_id,
       :page_size,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5751,7 +6051,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneysResponse]
     class ListJourneysResponse < Struct.new(
       :journeys_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5765,7 +6066,8 @@ module Aws::Pinpoint
     class ListRecommenderConfigurationsResponse < Struct.new(
       :item,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5774,7 +6076,8 @@ module Aws::Pinpoint
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5783,7 +6086,8 @@ module Aws::Pinpoint
     #   @return [Types::TagsModel]
     class ListTagsForResourceResponse < Struct.new(
       :tags_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5804,7 +6108,8 @@ module Aws::Pinpoint
       :page_size,
       :template_name,
       :template_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5813,7 +6118,8 @@ module Aws::Pinpoint
     #   @return [Types::TemplateVersionsResponse]
     class ListTemplateVersionsResponse < Struct.new(
       :template_versions_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5834,7 +6140,8 @@ module Aws::Pinpoint
       :page_size,
       :prefix,
       :template_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5843,7 +6150,8 @@ module Aws::Pinpoint
     #   @return [Types::TemplatesResponse]
     class ListTemplatesResponse < Struct.new(
       :templates_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5897,7 +6205,8 @@ module Aws::Pinpoint
       :time_to_live,
       :title,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5911,7 +6220,8 @@ module Aws::Pinpoint
     class MessageBody < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5953,7 +6263,8 @@ module Aws::Pinpoint
       :gcm_message,
       :sms_message,
       :in_app_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5967,7 +6278,8 @@ module Aws::Pinpoint
     class MessageHeader < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5997,7 +6309,8 @@ module Aws::Pinpoint
       :message_configuration,
       :template_configuration,
       :trace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6019,7 +6332,8 @@ module Aws::Pinpoint
       :endpoint_result,
       :request_id,
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6045,7 +6359,8 @@ module Aws::Pinpoint
       :status_code,
       :status_message,
       :updated_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6059,7 +6374,8 @@ module Aws::Pinpoint
     class MethodNotAllowedException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6073,7 +6389,8 @@ module Aws::Pinpoint
     class MetricDimension < Struct.new(
       :comparison_operator,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6087,7 +6404,8 @@ module Aws::Pinpoint
     class MultiConditionalBranch < Struct.new(
       :condition,
       :next_activity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6105,7 +6423,8 @@ module Aws::Pinpoint
       :branches,
       :default_activity,
       :evaluation_wait_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6119,7 +6438,8 @@ module Aws::Pinpoint
     class NotFoundException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6133,7 +6453,8 @@ module Aws::Pinpoint
     class NumberValidateRequest < Struct.new(
       :iso_country_code,
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6196,7 +6517,8 @@ module Aws::Pinpoint
       :phone_type_code,
       :timezone,
       :zip_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6222,7 +6544,8 @@ module Aws::Pinpoint
       :push,
       :voice,
       :custom,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6236,7 +6559,8 @@ module Aws::Pinpoint
     class OpenHoursRule < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6250,7 +6574,8 @@ module Aws::Pinpoint
     class OverrideButtonConfiguration < Struct.new(
       :button_action,
       :link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6264,7 +6589,8 @@ module Aws::Pinpoint
     class PayloadTooLargeException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6273,7 +6599,8 @@ module Aws::Pinpoint
     #   @return [Types::NumberValidateRequest]
     class PhoneNumberValidateRequest < Struct.new(
       :number_validate_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6282,7 +6609,8 @@ module Aws::Pinpoint
     #   @return [Types::NumberValidateResponse]
     class PhoneNumberValidateResponse < Struct.new(
       :number_validate_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6332,7 +6660,8 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6354,7 +6683,8 @@ module Aws::Pinpoint
       :next_activity,
       :template_name,
       :template_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6396,7 +6726,8 @@ module Aws::Pinpoint
       :recommender_id,
       :tags,
       :template_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6462,7 +6793,8 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6475,7 +6807,8 @@ module Aws::Pinpoint
     class PutEventStreamRequest < Struct.new(
       :application_id,
       :write_event_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6484,7 +6817,8 @@ module Aws::Pinpoint
     #   @return [Types::EventStream]
     class PutEventStreamResponse < Struct.new(
       :event_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6497,7 +6831,8 @@ module Aws::Pinpoint
     class PutEventsRequest < Struct.new(
       :application_id,
       :events_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6506,7 +6841,8 @@ module Aws::Pinpoint
     #   @return [Types::EventsResponse]
     class PutEventsResponse < Struct.new(
       :events_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6520,7 +6856,8 @@ module Aws::Pinpoint
     class QuietTime < Struct.new(
       :end,
       :start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6530,7 +6867,8 @@ module Aws::Pinpoint
     #   @return [Array<Types::RandomSplitEntry>]
     class RandomSplitActivity < Struct.new(
       :branches,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6544,7 +6882,8 @@ module Aws::Pinpoint
     class RandomSplitEntry < Struct.new(
       :next_activity,
       :percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6554,7 +6893,8 @@ module Aws::Pinpoint
     #   @return [String]
     class RawEmail < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6568,7 +6908,8 @@ module Aws::Pinpoint
     class RecencyDimension < Struct.new(
       :duration,
       :recency_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6622,7 +6963,8 @@ module Aws::Pinpoint
       :recommendation_transformer_uri,
       :recommendations_display_name,
       :recommendations_per_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6639,7 +6981,8 @@ module Aws::Pinpoint
       :application_id,
       :attribute_type,
       :update_attributes_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6648,7 +6991,8 @@ module Aws::Pinpoint
     #   @return [Types::AttributesResource]
     class RemoveAttributesResponse < Struct.new(
       :attributes_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6662,7 +7006,8 @@ module Aws::Pinpoint
     class ResultRow < Struct.new(
       :grouped_bys,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6680,7 +7025,8 @@ module Aws::Pinpoint
       :key,
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6698,7 +7044,8 @@ module Aws::Pinpoint
       :enabled,
       :sender_id,
       :short_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6760,7 +7107,8 @@ module Aws::Pinpoint
       :short_code,
       :transactional_messages_per_second,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6802,7 +7150,8 @@ module Aws::Pinpoint
       :substitutions,
       :entity_id,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6824,7 +7173,8 @@ module Aws::Pinpoint
       :next_activity,
       :template_name,
       :template_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6850,7 +7200,8 @@ module Aws::Pinpoint
       :recommender_id,
       :tags,
       :template_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6900,7 +7251,8 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6937,7 +7289,8 @@ module Aws::Pinpoint
       :quiet_time,
       :start_time,
       :timezone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6947,7 +7300,8 @@ module Aws::Pinpoint
     #   @return [Types::RecencyDimension]
     class SegmentBehaviors < Struct.new(
       :recency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6957,7 +7311,8 @@ module Aws::Pinpoint
     #   @return [String]
     class SegmentCondition < Struct.new(
       :segment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6987,7 +7342,8 @@ module Aws::Pinpoint
       :make,
       :model,
       :platform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7017,7 +7373,8 @@ module Aws::Pinpoint
       :location,
       :metrics,
       :user_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7039,7 +7396,8 @@ module Aws::Pinpoint
       :source_segments,
       :source_type,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7053,7 +7411,8 @@ module Aws::Pinpoint
     class SegmentGroupList < Struct.new(
       :groups,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7083,7 +7442,8 @@ module Aws::Pinpoint
       :role_arn,
       :s3_url,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7097,7 +7457,8 @@ module Aws::Pinpoint
     class SegmentLocation < Struct.new(
       :country,
       :gps_point,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7111,7 +7472,8 @@ module Aws::Pinpoint
     class SegmentReference < Struct.new(
       :id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7165,7 +7527,8 @@ module Aws::Pinpoint
       :segment_type,
       :tags,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7179,7 +7542,8 @@ module Aws::Pinpoint
     class SegmentsResponse < Struct.new(
       :item,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7192,7 +7556,8 @@ module Aws::Pinpoint
     class SendMessagesRequest < Struct.new(
       :application_id,
       :message_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7201,7 +7566,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageResponse]
     class SendMessagesResponse < Struct.new(
       :message_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7214,7 +7580,8 @@ module Aws::Pinpoint
     class SendOTPMessageRequest < Struct.new(
       :application_id,
       :send_otp_message_request_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7264,7 +7631,8 @@ module Aws::Pinpoint
       :reference_id,
       :template_id,
       :validity_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7273,7 +7641,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageResponse]
     class SendOTPMessageResponse < Struct.new(
       :message_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7299,7 +7668,8 @@ module Aws::Pinpoint
       :template_configuration,
       :trace_id,
       :users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7317,7 +7687,8 @@ module Aws::Pinpoint
       :application_id,
       :request_id,
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7330,7 +7701,8 @@ module Aws::Pinpoint
     class SendUsersMessagesRequest < Struct.new(
       :application_id,
       :send_users_message_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7339,7 +7711,8 @@ module Aws::Pinpoint
     #   @return [Types::SendUsersMessageResponse]
     class SendUsersMessagesResponse < Struct.new(
       :send_users_message_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7361,7 +7734,8 @@ module Aws::Pinpoint
       :id,
       :start_timestamp,
       :stop_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7375,7 +7749,8 @@ module Aws::Pinpoint
     class SetDimension < Struct.new(
       :dimension_type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7393,7 +7768,8 @@ module Aws::Pinpoint
       :event_condition,
       :segment_condition,
       :segment_dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7415,7 +7791,8 @@ module Aws::Pinpoint
       :subject,
       :text_part,
       :headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7429,7 +7806,8 @@ module Aws::Pinpoint
     class SimpleEmailPart < Struct.new(
       :charset,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7447,7 +7825,8 @@ module Aws::Pinpoint
       :description,
       :event_start_condition,
       :segment_start_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7460,7 +7839,8 @@ module Aws::Pinpoint
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7470,7 +7850,8 @@ module Aws::Pinpoint
     #   @return [Hash<String, String>]
     class TagsModel < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7484,7 +7865,8 @@ module Aws::Pinpoint
     class Template < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7494,7 +7876,8 @@ module Aws::Pinpoint
     #   @return [String]
     class TemplateActiveVersionRequest < Struct.new(
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7520,7 +7903,8 @@ module Aws::Pinpoint
       :sms_template,
       :voice_template,
       :in_app_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7538,7 +7922,8 @@ module Aws::Pinpoint
       :arn,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7580,7 +7965,8 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7614,7 +8000,8 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7636,7 +8023,8 @@ module Aws::Pinpoint
       :message,
       :next_token,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7650,7 +8038,8 @@ module Aws::Pinpoint
     class TemplatesResponse < Struct.new(
       :item,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7664,7 +8053,8 @@ module Aws::Pinpoint
     class TooManyRequestsException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7706,7 +8096,8 @@ module Aws::Pinpoint
       :template_configuration,
       :treatment_description,
       :treatment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7719,7 +8110,8 @@ module Aws::Pinpoint
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7732,7 +8124,8 @@ module Aws::Pinpoint
     class UpdateAdmChannelRequest < Struct.new(
       :adm_channel_request,
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7741,7 +8134,8 @@ module Aws::Pinpoint
     #   @return [Types::ADMChannelResponse]
     class UpdateAdmChannelResponse < Struct.new(
       :adm_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7754,7 +8148,8 @@ module Aws::Pinpoint
     class UpdateApnsChannelRequest < Struct.new(
       :apns_channel_request,
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7763,7 +8158,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSChannelResponse]
     class UpdateApnsChannelResponse < Struct.new(
       :apns_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7776,7 +8172,8 @@ module Aws::Pinpoint
     class UpdateApnsSandboxChannelRequest < Struct.new(
       :apns_sandbox_channel_request,
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7785,7 +8182,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSSandboxChannelResponse]
     class UpdateApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7798,7 +8196,8 @@ module Aws::Pinpoint
     class UpdateApnsVoipChannelRequest < Struct.new(
       :apns_voip_channel_request,
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7807,7 +8206,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSVoipChannelResponse]
     class UpdateApnsVoipChannelResponse < Struct.new(
       :apns_voip_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7820,7 +8220,8 @@ module Aws::Pinpoint
     class UpdateApnsVoipSandboxChannelRequest < Struct.new(
       :apns_voip_sandbox_channel_request,
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7829,7 +8230,8 @@ module Aws::Pinpoint
     #   @return [Types::APNSVoipSandboxChannelResponse]
     class UpdateApnsVoipSandboxChannelResponse < Struct.new(
       :apns_voip_sandbox_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7842,7 +8244,8 @@ module Aws::Pinpoint
     class UpdateApplicationSettingsRequest < Struct.new(
       :application_id,
       :write_application_settings_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7851,7 +8254,8 @@ module Aws::Pinpoint
     #   @return [Types::ApplicationSettingsResource]
     class UpdateApplicationSettingsResponse < Struct.new(
       :application_settings_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7861,7 +8265,8 @@ module Aws::Pinpoint
     #   @return [Array<String>]
     class UpdateAttributesRequest < Struct.new(
       :blacklist,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7874,7 +8279,8 @@ module Aws::Pinpoint
     class UpdateBaiduChannelRequest < Struct.new(
       :application_id,
       :baidu_channel_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7883,7 +8289,8 @@ module Aws::Pinpoint
     #   @return [Types::BaiduChannelResponse]
     class UpdateBaiduChannelResponse < Struct.new(
       :baidu_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7900,7 +8307,8 @@ module Aws::Pinpoint
       :application_id,
       :campaign_id,
       :write_campaign_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7909,7 +8317,8 @@ module Aws::Pinpoint
     #   @return [Types::CampaignResponse]
     class UpdateCampaignResponse < Struct.new(
       :campaign_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7922,7 +8331,8 @@ module Aws::Pinpoint
     class UpdateEmailChannelRequest < Struct.new(
       :application_id,
       :email_channel_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7931,7 +8341,8 @@ module Aws::Pinpoint
     #   @return [Types::EmailChannelResponse]
     class UpdateEmailChannelResponse < Struct.new(
       :email_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7952,7 +8363,8 @@ module Aws::Pinpoint
       :email_template_request,
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7961,7 +8373,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class UpdateEmailTemplateResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7978,7 +8391,8 @@ module Aws::Pinpoint
       :application_id,
       :endpoint_id,
       :endpoint_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7987,7 +8401,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class UpdateEndpointResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8000,7 +8415,8 @@ module Aws::Pinpoint
     class UpdateEndpointsBatchRequest < Struct.new(
       :application_id,
       :endpoint_batch_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8009,7 +8425,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class UpdateEndpointsBatchResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8022,7 +8439,8 @@ module Aws::Pinpoint
     class UpdateGcmChannelRequest < Struct.new(
       :application_id,
       :gcm_channel_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8031,7 +8449,8 @@ module Aws::Pinpoint
     #   @return [Types::GCMChannelResponse]
     class UpdateGcmChannelResponse < Struct.new(
       :gcm_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8052,7 +8471,8 @@ module Aws::Pinpoint
       :in_app_template_request,
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8061,7 +8481,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class UpdateInAppTemplateResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8078,7 +8499,8 @@ module Aws::Pinpoint
       :application_id,
       :journey_id,
       :write_journey_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8087,7 +8509,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyResponse]
     class UpdateJourneyResponse < Struct.new(
       :journey_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8104,7 +8527,8 @@ module Aws::Pinpoint
       :application_id,
       :journey_id,
       :journey_state_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8113,7 +8537,8 @@ module Aws::Pinpoint
     #   @return [Types::JourneyResponse]
     class UpdateJourneyStateResponse < Struct.new(
       :journey_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8134,7 +8559,8 @@ module Aws::Pinpoint
       :push_notification_template_request,
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8143,7 +8569,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class UpdatePushTemplateResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8156,7 +8583,8 @@ module Aws::Pinpoint
     class UpdateRecommenderConfigurationRequest < Struct.new(
       :recommender_id,
       :update_recommender_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8165,7 +8593,8 @@ module Aws::Pinpoint
     #   @return [Types::RecommenderConfigurationResponse]
     class UpdateRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8207,7 +8636,8 @@ module Aws::Pinpoint
       :recommendation_transformer_uri,
       :recommendations_display_name,
       :recommendations_per_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8224,7 +8654,8 @@ module Aws::Pinpoint
       :application_id,
       :segment_id,
       :write_segment_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8233,7 +8664,8 @@ module Aws::Pinpoint
     #   @return [Types::SegmentResponse]
     class UpdateSegmentResponse < Struct.new(
       :segment_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8246,7 +8678,8 @@ module Aws::Pinpoint
     class UpdateSmsChannelRequest < Struct.new(
       :application_id,
       :sms_channel_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8255,7 +8688,8 @@ module Aws::Pinpoint
     #   @return [Types::SMSChannelResponse]
     class UpdateSmsChannelResponse < Struct.new(
       :sms_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8276,7 +8710,8 @@ module Aws::Pinpoint
       :sms_template_request,
       :template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8285,7 +8720,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class UpdateSmsTemplateResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8302,7 +8738,8 @@ module Aws::Pinpoint
       :template_active_version_request,
       :template_name,
       :template_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8311,7 +8748,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class UpdateTemplateActiveVersionResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8324,7 +8762,8 @@ module Aws::Pinpoint
     class UpdateVoiceChannelRequest < Struct.new(
       :application_id,
       :voice_channel_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8333,7 +8772,8 @@ module Aws::Pinpoint
     #   @return [Types::VoiceChannelResponse]
     class UpdateVoiceChannelResponse < Struct.new(
       :voice_channel_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8354,7 +8794,8 @@ module Aws::Pinpoint
       :template_name,
       :version,
       :voice_template_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8363,7 +8804,8 @@ module Aws::Pinpoint
     #   @return [Types::MessageBody]
     class UpdateVoiceTemplateResponse < Struct.new(
       :message_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8373,7 +8815,8 @@ module Aws::Pinpoint
     #   @return [Boolean]
     class VerificationResponse < Struct.new(
       :valid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8386,7 +8829,8 @@ module Aws::Pinpoint
     class VerifyOTPMessageRequest < Struct.new(
       :application_id,
       :verify_otp_message_request_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8404,7 +8848,8 @@ module Aws::Pinpoint
       :destination_identity,
       :otp,
       :reference_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8413,7 +8858,8 @@ module Aws::Pinpoint
     #   @return [Types::VerificationResponse]
     class VerifyOTPMessageResponse < Struct.new(
       :verification_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8423,7 +8869,8 @@ module Aws::Pinpoint
     #   @return [Boolean]
     class VoiceChannelRequest < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8469,7 +8916,8 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8495,7 +8943,8 @@ module Aws::Pinpoint
       :origination_number,
       :substitutions,
       :voice_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8525,7 +8974,8 @@ module Aws::Pinpoint
       :tags,
       :template_description,
       :voice_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8579,7 +9029,8 @@ module Aws::Pinpoint
       :template_type,
       :version,
       :voice_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8593,7 +9044,8 @@ module Aws::Pinpoint
     class WaitActivity < Struct.new(
       :next_activity,
       :wait_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8607,7 +9059,8 @@ module Aws::Pinpoint
     class WaitTime < Struct.new(
       :wait_for,
       :wait_until,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8636,7 +9089,8 @@ module Aws::Pinpoint
       :limits,
       :quiet_time,
       :journey_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8710,7 +9164,8 @@ module Aws::Pinpoint
       :treatment_description,
       :treatment_name,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8726,7 +9181,8 @@ module Aws::Pinpoint
     class WriteEventStream < Struct.new(
       :destination_stream_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8808,7 +9264,8 @@ module Aws::Pinpoint
       :open_hours,
       :closed_days,
       :timezone_estimation_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8830,7 +9287,8 @@ module Aws::Pinpoint
       :name,
       :segment_groups,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8864,7 +9322,8 @@ module Aws::Pinpoint
       :template_configuration,
       :treatment_description,
       :treatment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -40,7 +40,7 @@ module Aws::LicenseManagerUserSubscriptions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManagerUserSubscriptions::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::LicenseManagerUserSubscriptions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManagerUserSubscriptions::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::LicenseManagerUserSubscriptions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManagerUserSubscriptions::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::LicenseManagerUserSubscriptions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManagerUserSubscriptions::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::LicenseManagerUserSubscriptions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManagerUserSubscriptions::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::LicenseManagerUserSubscriptions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManagerUserSubscriptions::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::LicenseManagerUserSubscriptions
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManagerUserSubscriptions::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

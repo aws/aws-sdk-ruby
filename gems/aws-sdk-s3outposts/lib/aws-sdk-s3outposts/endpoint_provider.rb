@@ -42,7 +42,6 @@ module Aws::S3Outposts
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

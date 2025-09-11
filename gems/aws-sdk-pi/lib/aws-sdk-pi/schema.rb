@@ -517,7 +517,6 @@ module Aws::PI
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
         operation.traits = {}
       end)
-
     end
 
     class << self

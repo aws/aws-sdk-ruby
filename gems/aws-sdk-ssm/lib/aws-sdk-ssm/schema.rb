@@ -6391,7 +6391,6 @@ module Aws::SSM
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyUpdates)
         operation.traits = {}
       end)
-
     end
 
     class << self

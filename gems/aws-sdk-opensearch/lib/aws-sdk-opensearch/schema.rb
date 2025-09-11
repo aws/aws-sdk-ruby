@@ -3049,7 +3049,6 @@ module Aws::OpenSearch
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/upgradeDomain", "code" => 200}}
       end)
-
     end
 
     class << self

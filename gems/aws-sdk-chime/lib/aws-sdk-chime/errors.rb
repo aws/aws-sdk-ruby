@@ -44,7 +44,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -61,7 +61,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -79,7 +79,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -96,7 +96,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -113,7 +113,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -130,7 +130,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -147,7 +147,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::ServiceFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -164,7 +164,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -181,7 +181,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::ThrottledClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -198,7 +198,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::UnauthorizedClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -215,7 +215,7 @@ module Aws::Chime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chime::Types::UnprocessableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code

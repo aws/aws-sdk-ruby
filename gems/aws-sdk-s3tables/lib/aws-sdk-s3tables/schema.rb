@@ -821,7 +821,6 @@ module Aws::S3Tables
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"uri" => "/tables/{tableBucketARN}/{namespace}/{name}/metadata-location", "method" => "PUT"}}
       end)
-
     end
 
     class << self

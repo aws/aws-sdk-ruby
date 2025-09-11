@@ -1464,7 +1464,6 @@ module Aws::LexModelBuildingService
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 204}}
       end)
-
     end
 
     class << self

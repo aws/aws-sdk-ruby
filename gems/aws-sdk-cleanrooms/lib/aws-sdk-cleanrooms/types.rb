@@ -15,7 +15,8 @@ module Aws::CleanRooms
     class AccessDeniedException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::CleanRooms
     class AggregateColumn < Struct.new(
       :column_names,
       :function,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +49,8 @@ module Aws::CleanRooms
       :column_name,
       :minimum,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +69,8 @@ module Aws::CleanRooms
       :name,
       :type,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +108,8 @@ module Aws::CleanRooms
       :policy,
       :collaboration_policy,
       :consolidated_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +147,8 @@ module Aws::CleanRooms
       :scalar_functions,
       :output_constraints,
       :additional_analyses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +174,8 @@ module Aws::CleanRooms
       :additional_analyses,
       :disallowed_output_columns,
       :differential_privacy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +193,8 @@ module Aws::CleanRooms
       :join_columns,
       :query_constraints,
       :dimension_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +216,8 @@ module Aws::CleanRooms
       :allowed_join_operators,
       :list_columns,
       :additional_analyses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +228,8 @@ module Aws::CleanRooms
     class AnalysisRulePolicy < Struct.new(
       :v1,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class V1 < AnalysisRulePolicy; end
@@ -245,7 +255,8 @@ module Aws::CleanRooms
       :custom,
       :id_mapping_table,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class List < AnalysisRulePolicyV1; end
@@ -261,7 +272,8 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     class AnalysisSchema < Struct.new(
       :referenced_tables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +288,8 @@ module Aws::CleanRooms
       :text,
       :artifacts,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Text < AnalysisSource; end
@@ -291,7 +304,8 @@ module Aws::CleanRooms
     class AnalysisSourceMetadata < Struct.new(
       :artifacts,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Artifacts < AnalysisSourceMetadata; end
@@ -368,7 +382,8 @@ module Aws::CleanRooms
       :analysis_parameters,
       :validations,
       :error_message_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +393,8 @@ module Aws::CleanRooms
     #   @return [Types::S3Location]
     class AnalysisTemplateArtifact < Struct.new(
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +408,8 @@ module Aws::CleanRooms
     class AnalysisTemplateArtifactMetadata < Struct.new(
       :entry_point_hash,
       :additional_artifact_hashes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +427,8 @@ module Aws::CleanRooms
       :entry_point,
       :additional_artifacts,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +474,8 @@ module Aws::CleanRooms
       :collaboration_arn,
       :collaboration_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +493,8 @@ module Aws::CleanRooms
       :type,
       :status,
       :reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +504,8 @@ module Aws::CleanRooms
     #   @return [String]
     class AnalysisTemplateValidationStatusReason < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +527,8 @@ module Aws::CleanRooms
       :output_location,
       :database_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +546,8 @@ module Aws::CleanRooms
       :arn,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +560,8 @@ module Aws::CleanRooms
     class BatchGetCollaborationAnalysisTemplateOperationInput < Struct.new(
       :collaboration_identifier,
       :analysis_template_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +574,8 @@ module Aws::CleanRooms
     class BatchGetCollaborationAnalysisTemplateOperationOutput < Struct.new(
       :collaboration_analysis_templates,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +597,8 @@ module Aws::CleanRooms
       :type,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +611,8 @@ module Aws::CleanRooms
     class BatchGetSchemaAnalysisRuleInput < Struct.new(
       :collaboration_identifier,
       :schema_analysis_rule_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +625,8 @@ module Aws::CleanRooms
     class BatchGetSchemaAnalysisRuleOutput < Struct.new(
       :analysis_rules,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +644,8 @@ module Aws::CleanRooms
       :name,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +658,8 @@ module Aws::CleanRooms
     class BatchGetSchemaOperationInput < Struct.new(
       :collaboration_identifier,
       :names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +672,8 @@ module Aws::CleanRooms
     class BatchGetSchemaOperationOutput < Struct.new(
       :schemas,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +683,8 @@ module Aws::CleanRooms
     #   @return [Float]
     class BilledJobResourceUtilization < Struct.new(
       :units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +694,8 @@ module Aws::CleanRooms
     #   @return [Float]
     class BilledResourceUtilization < Struct.new(
       :units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +713,8 @@ module Aws::CleanRooms
       :specification_type,
       :specification,
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +728,8 @@ module Aws::CleanRooms
     class ChangeInput < Struct.new(
       :specification_type,
       :specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,7 +740,8 @@ module Aws::CleanRooms
     class ChangeSpecification < Struct.new(
       :member,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Member < ChangeSpecification; end
@@ -778,7 +814,8 @@ module Aws::CleanRooms
       :job_log_status,
       :analytics_engine,
       :auto_approved_change_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +885,8 @@ module Aws::CleanRooms
       :analysis_parameters,
       :validations,
       :error_message_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +928,8 @@ module Aws::CleanRooms
       :collaboration_id,
       :creator_account_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +963,8 @@ module Aws::CleanRooms
       :status,
       :is_auto_approved,
       :changes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -958,7 +998,8 @@ module Aws::CleanRooms
       :status,
       :is_auto_approved,
       :changes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1045,8 @@ module Aws::CleanRooms
       :creator_account_id,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1046,7 +1088,8 @@ module Aws::CleanRooms
       :collaboration_id,
       :creator_account_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1143,8 @@ module Aws::CleanRooms
       :input_reference_config,
       :input_reference_properties,
       :id_mapping_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1150,7 +1194,8 @@ module Aws::CleanRooms
       :name,
       :description,
       :input_reference_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1196,7 +1241,8 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       :budget,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1288,8 @@ module Aws::CleanRooms
       :privacy_budget_type,
       :auto_refresh,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1327,8 @@ module Aws::CleanRooms
       :privacy_budget_type,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1330,7 +1378,8 @@ module Aws::CleanRooms
       :membership_id,
       :membership_arn,
       :analytics_engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1393,8 @@ module Aws::CleanRooms
     class Column < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1355,7 +1405,8 @@ module Aws::CleanRooms
     class ComputeConfiguration < Struct.new(
       :worker,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Worker < ComputeConfiguration; end
@@ -1369,7 +1420,8 @@ module Aws::CleanRooms
     class ConfigurationDetails < Struct.new(
       :direct_analysis_configuration_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DirectAnalysisConfigurationDetails < ConfigurationDetails; end
@@ -1426,7 +1478,8 @@ module Aws::CleanRooms
       :description,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1529,8 @@ module Aws::CleanRooms
       :name,
       :configured_audience_model_arn,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1580,8 @@ module Aws::CleanRooms
       :analysis_method,
       :allowed_columns,
       :selected_analysis_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1556,7 +1611,8 @@ module Aws::CleanRooms
       :type,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1567,7 +1623,8 @@ module Aws::CleanRooms
     class ConfiguredTableAnalysisRulePolicy < Struct.new(
       :v1,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class V1 < ConfiguredTableAnalysisRulePolicy; end
@@ -1589,7 +1646,8 @@ module Aws::CleanRooms
       :aggregation,
       :custom,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class List < ConfiguredTableAnalysisRulePolicyV1; end
@@ -1648,7 +1706,8 @@ module Aws::CleanRooms
       :analysis_rule_types,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1682,7 +1741,8 @@ module Aws::CleanRooms
       :type,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1696,7 +1756,8 @@ module Aws::CleanRooms
     class ConfiguredTableAssociationAnalysisRuleAggregation < Struct.new(
       :allowed_result_receivers,
       :allowed_additional_analyses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1771,8 @@ module Aws::CleanRooms
     class ConfiguredTableAssociationAnalysisRuleCustom < Struct.new(
       :allowed_result_receivers,
       :allowed_additional_analyses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1724,7 +1786,8 @@ module Aws::CleanRooms
     class ConfiguredTableAssociationAnalysisRuleList < Struct.new(
       :allowed_result_receivers,
       :allowed_additional_analyses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1735,7 +1798,8 @@ module Aws::CleanRooms
     class ConfiguredTableAssociationAnalysisRulePolicy < Struct.new(
       :v1,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class V1 < ConfiguredTableAssociationAnalysisRulePolicy; end
@@ -1757,7 +1821,8 @@ module Aws::CleanRooms
       :aggregation,
       :custom,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class List < ConfiguredTableAssociationAnalysisRulePolicyV1; end
@@ -1804,7 +1869,8 @@ module Aws::CleanRooms
       :id,
       :arn,
       :analysis_rule_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1842,7 +1908,8 @@ module Aws::CleanRooms
       :analysis_rule_types,
       :analysis_method,
       :selected_analysis_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1930,8 @@ module Aws::CleanRooms
       :resource_id,
       :resource_type,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1874,7 +1942,8 @@ module Aws::CleanRooms
     class ConsolidatedPolicy < Struct.new(
       :v1,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class V1 < ConsolidatedPolicy; end
@@ -1923,7 +1992,8 @@ module Aws::CleanRooms
       :additional_analyses,
       :allowed_result_receivers,
       :allowed_additional_analyses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2027,8 @@ module Aws::CleanRooms
       :differential_privacy,
       :allowed_result_receivers,
       :allowed_additional_analyses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2058,8 @@ module Aws::CleanRooms
       :additional_analyses,
       :allowed_result_receivers,
       :allowed_additional_analyses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2006,7 +2078,8 @@ module Aws::CleanRooms
       :aggregation,
       :custom,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class List < ConsolidatedPolicyV1; end
@@ -2052,7 +2125,8 @@ module Aws::CleanRooms
       :analysis_parameters,
       :schema,
       :error_message_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2061,7 +2135,8 @@ module Aws::CleanRooms
     #   @return [Types::AnalysisTemplate]
     class CreateAnalysisTemplateOperationOutput < Struct.new(
       :analysis_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2149,8 @@ module Aws::CleanRooms
     class CreateCollaborationChangeRequestInput < Struct.new(
       :collaboration_identifier,
       :changes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2083,7 +2159,8 @@ module Aws::CleanRooms
     #   @return [Types::CollaborationChangeRequest]
     class CreateCollaborationChangeRequestOutput < Struct.new(
       :collaboration_change_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2140,7 +2217,8 @@ module Aws::CleanRooms
       :creator_payment_configuration,
       :analytics_engine,
       :auto_approved_change_request_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2149,7 +2227,8 @@ module Aws::CleanRooms
     #   @return [Types::Collaboration]
     class CreateCollaborationOperationOutput < Struct.new(
       :collaboration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2257,8 @@ module Aws::CleanRooms
       :manage_resource_policies,
       :tags,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2187,7 +2267,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredAudienceModelAssociation]
     class CreateConfiguredAudienceModelAssociationOutput < Struct.new(
       :configured_audience_model_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2204,7 +2285,8 @@ module Aws::CleanRooms
       :configured_table_identifier,
       :analysis_rule_type,
       :analysis_rule_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2213,7 +2295,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTableAnalysisRule]
     class CreateConfiguredTableAnalysisRuleOperationOutput < Struct.new(
       :analysis_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2234,7 +2317,8 @@ module Aws::CleanRooms
       :configured_table_association_identifier,
       :analysis_rule_type,
       :analysis_rule_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2243,7 +2327,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTableAssociationAnalysisRule]
     class CreateConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
       :analysis_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2272,7 +2357,8 @@ module Aws::CleanRooms
       :configured_table_identifier,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2281,7 +2367,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTableAssociation]
     class CreateConfiguredTableAssociationOperationOutput < Struct.new(
       :configured_table_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2314,7 +2401,8 @@ module Aws::CleanRooms
       :analysis_method,
       :selected_analysis_methods,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2323,7 +2411,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTable]
     class CreateConfiguredTableOperationOutput < Struct.new(
       :configured_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2352,7 +2441,8 @@ module Aws::CleanRooms
       :input_reference_config,
       :tags,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2361,7 +2451,8 @@ module Aws::CleanRooms
     #   @return [Types::IdMappingTable]
     class CreateIdMappingTableOutput < Struct.new(
       :id_mapping_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2390,7 +2481,8 @@ module Aws::CleanRooms
       :name,
       :description,
       :id_mapping_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2399,7 +2491,8 @@ module Aws::CleanRooms
     #   @return [Types::IdNamespaceAssociation]
     class CreateIdNamespaceAssociationOutput < Struct.new(
       :id_namespace_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2432,7 +2525,8 @@ module Aws::CleanRooms
       :default_result_configuration,
       :default_job_result_configuration,
       :payment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2441,7 +2535,8 @@ module Aws::CleanRooms
     #   @return [Types::Membership]
     class CreateMembershipOperationOutput < Struct.new(
       :membership,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2466,7 +2561,8 @@ module Aws::CleanRooms
       :privacy_budget_type,
       :parameters,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2475,7 +2571,8 @@ module Aws::CleanRooms
     #   @return [Types::PrivacyBudgetTemplate]
     class CreatePrivacyBudgetTemplateOutput < Struct.new(
       :privacy_budget_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2497,7 +2594,8 @@ module Aws::CleanRooms
       :allow_duplicates,
       :allow_joins_on_columns_with_different_names,
       :preserve_nulls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2510,12 +2608,14 @@ module Aws::CleanRooms
     class DeleteAnalysisTemplateOperationInput < Struct.new(
       :membership_identifier,
       :analysis_template_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAnalysisTemplateOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2524,12 +2624,14 @@ module Aws::CleanRooms
     #   @return [String]
     class DeleteCollaborationOperationInput < Struct.new(
       :collaboration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCollaborationOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2542,12 +2644,14 @@ module Aws::CleanRooms
     class DeleteConfiguredAudienceModelAssociationInput < Struct.new(
       :configured_audience_model_association_identifier,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConfiguredAudienceModelAssociationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2560,13 +2664,15 @@ module Aws::CleanRooms
     class DeleteConfiguredTableAnalysisRuleOperationInput < Struct.new(
       :configured_table_identifier,
       :analysis_rule_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An empty response that indicates a successful delete.</p>
     class DeleteConfiguredTableAnalysisRuleOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2583,12 +2689,14 @@ module Aws::CleanRooms
       :membership_identifier,
       :configured_table_association_identifier,
       :analysis_rule_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2601,12 +2709,14 @@ module Aws::CleanRooms
     class DeleteConfiguredTableAssociationOperationInput < Struct.new(
       :configured_table_association_identifier,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConfiguredTableAssociationOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2615,13 +2725,15 @@ module Aws::CleanRooms
     #   @return [String]
     class DeleteConfiguredTableOperationInput < Struct.new(
       :configured_table_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The empty output for a successful deletion.</p>
     class DeleteConfiguredTableOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2634,12 +2746,14 @@ module Aws::CleanRooms
     class DeleteIdMappingTableInput < Struct.new(
       :id_mapping_table_identifier,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIdMappingTableOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2652,12 +2766,14 @@ module Aws::CleanRooms
     class DeleteIdNamespaceAssociationInput < Struct.new(
       :id_namespace_association_identifier,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIdNamespaceAssociationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2670,12 +2786,14 @@ module Aws::CleanRooms
     class DeleteMemberOperationInput < Struct.new(
       :collaboration_identifier,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMemberOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2684,12 +2802,14 @@ module Aws::CleanRooms
     #   @return [String]
     class DeleteMembershipOperationInput < Struct.new(
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMembershipOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2702,12 +2822,14 @@ module Aws::CleanRooms
     class DeletePrivacyBudgetTemplateInput < Struct.new(
       :membership_identifier,
       :privacy_budget_template_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePrivacyBudgetTemplateOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2717,7 +2839,8 @@ module Aws::CleanRooms
     #   @return [String]
     class DifferentialPrivacyColumn < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2727,7 +2850,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::DifferentialPrivacyColumn>]
     class DifferentialPrivacyConfiguration < Struct.new(
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2737,7 +2861,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::DifferentialPrivacySensitivityParameters>]
     class DifferentialPrivacyParameters < Struct.new(
       :sensitivity_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2751,7 +2876,8 @@ module Aws::CleanRooms
     class DifferentialPrivacyPreviewAggregation < Struct.new(
       :type,
       :max_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2765,7 +2891,8 @@ module Aws::CleanRooms
     class DifferentialPrivacyPreviewParametersInput < Struct.new(
       :epsilon,
       :users_noise_per_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2779,7 +2906,8 @@ module Aws::CleanRooms
     class DifferentialPrivacyPrivacyBudget < Struct.new(
       :aggregations,
       :epsilon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2797,7 +2925,8 @@ module Aws::CleanRooms
       :type,
       :max_count,
       :remaining_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2936,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::DifferentialPrivacyPreviewAggregation>]
     class DifferentialPrivacyPrivacyImpact < Struct.new(
       :aggregations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2833,7 +2963,8 @@ module Aws::CleanRooms
       :user_contribution_limit,
       :min_column_value,
       :max_column_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2847,7 +2978,8 @@ module Aws::CleanRooms
     class DifferentialPrivacyTemplateParametersInput < Struct.new(
       :epsilon,
       :users_noise_per_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2861,7 +2993,8 @@ module Aws::CleanRooms
     class DifferentialPrivacyTemplateParametersOutput < Struct.new(
       :epsilon,
       :users_noise_per_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2875,7 +3008,8 @@ module Aws::CleanRooms
     class DifferentialPrivacyTemplateUpdateParameters < Struct.new(
       :epsilon,
       :users_noise_per_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2885,7 +3019,8 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     class DirectAnalysisConfigurationDetails < Struct.new(
       :receiver_account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2895,7 +3030,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ErrorMessageConfiguration < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2908,7 +3044,8 @@ module Aws::CleanRooms
     class GetAnalysisTemplateOperationInput < Struct.new(
       :membership_identifier,
       :analysis_template_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2917,7 +3054,8 @@ module Aws::CleanRooms
     #   @return [Types::AnalysisTemplate]
     class GetAnalysisTemplateOperationOutput < Struct.new(
       :analysis_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2930,7 +3068,8 @@ module Aws::CleanRooms
     class GetCollaborationAnalysisTemplateOperationInput < Struct.new(
       :collaboration_identifier,
       :analysis_template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2939,7 +3078,8 @@ module Aws::CleanRooms
     #   @return [Types::CollaborationAnalysisTemplate]
     class GetCollaborationAnalysisTemplateOperationOutput < Struct.new(
       :collaboration_analysis_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2952,7 +3092,8 @@ module Aws::CleanRooms
     class GetCollaborationChangeRequestInput < Struct.new(
       :collaboration_identifier,
       :change_request_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2961,7 +3102,8 @@ module Aws::CleanRooms
     #   @return [Types::CollaborationChangeRequest]
     class GetCollaborationChangeRequestOutput < Struct.new(
       :collaboration_change_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2974,7 +3116,8 @@ module Aws::CleanRooms
     class GetCollaborationConfiguredAudienceModelAssociationInput < Struct.new(
       :collaboration_identifier,
       :configured_audience_model_association_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2983,7 +3126,8 @@ module Aws::CleanRooms
     #   @return [Types::CollaborationConfiguredAudienceModelAssociation]
     class GetCollaborationConfiguredAudienceModelAssociationOutput < Struct.new(
       :collaboration_configured_audience_model_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2996,7 +3140,8 @@ module Aws::CleanRooms
     class GetCollaborationIdNamespaceAssociationInput < Struct.new(
       :collaboration_identifier,
       :id_namespace_association_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3005,7 +3150,8 @@ module Aws::CleanRooms
     #   @return [Types::CollaborationIdNamespaceAssociation]
     class GetCollaborationIdNamespaceAssociationOutput < Struct.new(
       :collaboration_id_namespace_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3014,7 +3160,8 @@ module Aws::CleanRooms
     #   @return [String]
     class GetCollaborationOperationInput < Struct.new(
       :collaboration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3023,7 +3170,8 @@ module Aws::CleanRooms
     #   @return [Types::Collaboration]
     class GetCollaborationOperationOutput < Struct.new(
       :collaboration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3036,7 +3184,8 @@ module Aws::CleanRooms
     class GetCollaborationPrivacyBudgetTemplateInput < Struct.new(
       :collaboration_identifier,
       :privacy_budget_template_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3045,7 +3194,8 @@ module Aws::CleanRooms
     #   @return [Types::CollaborationPrivacyBudgetTemplate]
     class GetCollaborationPrivacyBudgetTemplateOutput < Struct.new(
       :collaboration_privacy_budget_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3058,7 +3208,8 @@ module Aws::CleanRooms
     class GetConfiguredAudienceModelAssociationInput < Struct.new(
       :configured_audience_model_association_identifier,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3067,7 +3218,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredAudienceModelAssociation]
     class GetConfiguredAudienceModelAssociationOutput < Struct.new(
       :configured_audience_model_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3080,7 +3232,8 @@ module Aws::CleanRooms
     class GetConfiguredTableAnalysisRuleOperationInput < Struct.new(
       :configured_table_identifier,
       :analysis_rule_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3089,7 +3242,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTableAnalysisRule]
     class GetConfiguredTableAnalysisRuleOperationOutput < Struct.new(
       :analysis_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3106,7 +3260,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :configured_table_association_identifier,
       :analysis_rule_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3115,7 +3270,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTableAssociationAnalysisRule]
     class GetConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
       :analysis_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3128,7 +3284,8 @@ module Aws::CleanRooms
     class GetConfiguredTableAssociationOperationInput < Struct.new(
       :configured_table_association_identifier,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3137,7 +3294,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTableAssociation]
     class GetConfiguredTableAssociationOperationOutput < Struct.new(
       :configured_table_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3146,7 +3304,8 @@ module Aws::CleanRooms
     #   @return [String]
     class GetConfiguredTableOperationInput < Struct.new(
       :configured_table_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3155,7 +3314,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTable]
     class GetConfiguredTableOperationOutput < Struct.new(
       :configured_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3168,7 +3328,8 @@ module Aws::CleanRooms
     class GetIdMappingTableInput < Struct.new(
       :id_mapping_table_identifier,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3177,7 +3338,8 @@ module Aws::CleanRooms
     #   @return [Types::IdMappingTable]
     class GetIdMappingTableOutput < Struct.new(
       :id_mapping_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3190,7 +3352,8 @@ module Aws::CleanRooms
     class GetIdNamespaceAssociationInput < Struct.new(
       :id_namespace_association_identifier,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3199,7 +3362,8 @@ module Aws::CleanRooms
     #   @return [Types::IdNamespaceAssociation]
     class GetIdNamespaceAssociationOutput < Struct.new(
       :id_namespace_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3208,7 +3372,8 @@ module Aws::CleanRooms
     #   @return [String]
     class GetMembershipOperationInput < Struct.new(
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3217,7 +3382,8 @@ module Aws::CleanRooms
     #   @return [Types::Membership]
     class GetMembershipOperationOutput < Struct.new(
       :membership,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3230,7 +3396,8 @@ module Aws::CleanRooms
     class GetPrivacyBudgetTemplateInput < Struct.new(
       :membership_identifier,
       :privacy_budget_template_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3239,7 +3406,8 @@ module Aws::CleanRooms
     #   @return [Types::PrivacyBudgetTemplate]
     class GetPrivacyBudgetTemplateOutput < Struct.new(
       :privacy_budget_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3252,7 +3420,8 @@ module Aws::CleanRooms
     class GetProtectedJobInput < Struct.new(
       :membership_identifier,
       :protected_job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3261,7 +3430,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedJob]
     class GetProtectedJobOutput < Struct.new(
       :protected_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3274,7 +3444,8 @@ module Aws::CleanRooms
     class GetProtectedQueryOperationInput < Struct.new(
       :membership_identifier,
       :protected_query_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3283,7 +3454,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedQuery]
     class GetProtectedQueryOperationOutput < Struct.new(
       :protected_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3300,7 +3472,8 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3309,7 +3482,8 @@ module Aws::CleanRooms
     #   @return [Types::AnalysisRule]
     class GetSchemaAnalysisRuleOperationOutput < Struct.new(
       :analysis_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3322,7 +3496,8 @@ module Aws::CleanRooms
     class GetSchemaOperationInput < Struct.new(
       :collaboration_identifier,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3331,7 +3506,8 @@ module Aws::CleanRooms
     #   @return [Types::Schema]
     class GetSchemaOperationOutput < Struct.new(
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3345,7 +3521,8 @@ module Aws::CleanRooms
     class GlueTableReference < Struct.new(
       :table_name,
       :database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3355,7 +3532,8 @@ module Aws::CleanRooms
     #   @return [String]
     class Hash < Struct.new(
       :sha256,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3365,7 +3543,8 @@ module Aws::CleanRooms
     #   @return [Boolean]
     class IdMappingConfig < Struct.new(
       :allow_use_as_dimension_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3428,7 +3607,8 @@ module Aws::CleanRooms
       :update_time,
       :input_reference_properties,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3442,7 +3622,8 @@ module Aws::CleanRooms
     class IdMappingTableInputReferenceConfig < Struct.new(
       :input_reference_arn,
       :manage_resource_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3452,7 +3633,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::IdMappingTableInputSource>]
     class IdMappingTableInputReferenceProperties < Struct.new(
       :id_mapping_table_input_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3466,7 +3648,8 @@ module Aws::CleanRooms
     class IdMappingTableInputSource < Struct.new(
       :id_namespace_association_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3476,7 +3659,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::IdMappingTableInputSource>]
     class IdMappingTableSchemaTypeProperties < Struct.new(
       :id_mapping_table_input_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3526,7 +3710,8 @@ module Aws::CleanRooms
       :description,
       :input_reference_config,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3584,7 +3769,8 @@ module Aws::CleanRooms
       :input_reference_config,
       :input_reference_properties,
       :id_mapping_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3598,7 +3784,8 @@ module Aws::CleanRooms
     class IdNamespaceAssociationInputReferenceConfig < Struct.new(
       :input_reference_arn,
       :manage_resource_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3612,7 +3799,8 @@ module Aws::CleanRooms
     class IdNamespaceAssociationInputReferenceProperties < Struct.new(
       :id_namespace_type,
       :id_mapping_workflows_supported,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3622,7 +3810,8 @@ module Aws::CleanRooms
     #   @return [String]
     class IdNamespaceAssociationInputReferencePropertiesSummary < Struct.new(
       :id_namespace_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3676,7 +3865,8 @@ module Aws::CleanRooms
       :name,
       :description,
       :input_reference_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3685,7 +3875,8 @@ module Aws::CleanRooms
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3695,7 +3886,8 @@ module Aws::CleanRooms
     #   @return [Boolean]
     class JobComputePaymentConfig < Struct.new(
       :is_responsible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3712,7 +3904,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3725,7 +3918,8 @@ module Aws::CleanRooms
     class ListAnalysisTemplatesOperationOutput < Struct.new(
       :next_token,
       :analysis_template_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3742,7 +3936,8 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3755,7 +3950,8 @@ module Aws::CleanRooms
     class ListCollaborationAnalysisTemplatesOperationOutput < Struct.new(
       :next_token,
       :collaboration_analysis_template_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3776,7 +3972,8 @@ module Aws::CleanRooms
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3789,7 +3986,8 @@ module Aws::CleanRooms
     class ListCollaborationChangeRequestsOutput < Struct.new(
       :collaboration_change_request_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3806,7 +4004,8 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3819,7 +4018,8 @@ module Aws::CleanRooms
     class ListCollaborationConfiguredAudienceModelAssociationsOutput < Struct.new(
       :collaboration_configured_audience_model_association_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3836,7 +4036,8 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3849,7 +4050,8 @@ module Aws::CleanRooms
     class ListCollaborationIdNamespaceAssociationsOutput < Struct.new(
       :next_token,
       :collaboration_id_namespace_association_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3866,7 +4068,8 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3879,7 +4082,8 @@ module Aws::CleanRooms
     class ListCollaborationPrivacyBudgetTemplatesOutput < Struct.new(
       :next_token,
       :collaboration_privacy_budget_template_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3900,7 +4104,8 @@ module Aws::CleanRooms
       :privacy_budget_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3913,7 +4118,8 @@ module Aws::CleanRooms
     class ListCollaborationPrivacyBudgetsOutput < Struct.new(
       :collaboration_privacy_budget_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3930,7 +4136,8 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       :member_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3943,7 +4150,8 @@ module Aws::CleanRooms
     class ListCollaborationsOperationOutput < Struct.new(
       :next_token,
       :collaboration_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3960,7 +4168,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3973,7 +4182,8 @@ module Aws::CleanRooms
     class ListConfiguredAudienceModelAssociationsOutput < Struct.new(
       :configured_audience_model_association_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3990,7 +4200,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4003,7 +4214,8 @@ module Aws::CleanRooms
     class ListConfiguredTableAssociationsOperationOutput < Struct.new(
       :configured_table_association_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4016,7 +4228,8 @@ module Aws::CleanRooms
     class ListConfiguredTablesOperationInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4029,7 +4242,8 @@ module Aws::CleanRooms
     class ListConfiguredTablesOperationOutput < Struct.new(
       :configured_table_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4046,7 +4260,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4059,7 +4274,8 @@ module Aws::CleanRooms
     class ListIdMappingTablesOutput < Struct.new(
       :id_mapping_table_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4076,7 +4292,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4089,7 +4306,8 @@ module Aws::CleanRooms
     class ListIdNamespaceAssociationsOutput < Struct.new(
       :next_token,
       :id_namespace_association_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4106,7 +4324,8 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4119,7 +4338,8 @@ module Aws::CleanRooms
     class ListMembersOperationOutput < Struct.new(
       :next_token,
       :member_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4136,7 +4356,8 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4149,7 +4370,8 @@ module Aws::CleanRooms
     class ListMembershipsOperationOutput < Struct.new(
       :next_token,
       :membership_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4166,7 +4388,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4179,7 +4402,8 @@ module Aws::CleanRooms
     class ListPrivacyBudgetTemplatesOutput < Struct.new(
       :next_token,
       :privacy_budget_template_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4200,7 +4424,8 @@ module Aws::CleanRooms
       :privacy_budget_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4213,7 +4438,8 @@ module Aws::CleanRooms
     class ListPrivacyBudgetsOutput < Struct.new(
       :privacy_budget_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4234,7 +4460,8 @@ module Aws::CleanRooms
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4247,7 +4474,8 @@ module Aws::CleanRooms
     class ListProtectedJobsOutput < Struct.new(
       :next_token,
       :protected_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4268,7 +4496,8 @@ module Aws::CleanRooms
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4281,7 +4510,8 @@ module Aws::CleanRooms
     class ListProtectedQueriesOperationOutput < Struct.new(
       :next_token,
       :protected_queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4302,7 +4532,8 @@ module Aws::CleanRooms
       :schema_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4315,7 +4546,8 @@ module Aws::CleanRooms
     class ListSchemasOperationOutput < Struct.new(
       :schema_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4324,7 +4556,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4333,7 +4566,8 @@ module Aws::CleanRooms
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4343,7 +4577,8 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     class MLMemberAbilities < Struct.new(
       :custom_ml_member_abilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4357,7 +4592,8 @@ module Aws::CleanRooms
     class MLPaymentConfig < Struct.new(
       :model_training,
       :model_inference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4375,7 +4611,8 @@ module Aws::CleanRooms
       :account_id,
       :member_abilities,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4401,7 +4638,8 @@ module Aws::CleanRooms
       :ml_member_abilities,
       :display_name,
       :payment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4447,7 +4685,8 @@ module Aws::CleanRooms
       :membership_id,
       :membership_arn,
       :payment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4521,7 +4760,8 @@ module Aws::CleanRooms
       :default_result_configuration,
       :default_job_result_configuration,
       :payment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4531,7 +4771,8 @@ module Aws::CleanRooms
     #   @return [Boolean]
     class MembershipJobComputePaymentConfig < Struct.new(
       :is_responsible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4545,7 +4786,8 @@ module Aws::CleanRooms
     class MembershipMLPaymentConfig < Struct.new(
       :model_training,
       :model_inference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4555,7 +4797,8 @@ module Aws::CleanRooms
     #   @return [Boolean]
     class MembershipModelInferencePaymentConfig < Struct.new(
       :is_responsible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4565,7 +4808,8 @@ module Aws::CleanRooms
     #   @return [Boolean]
     class MembershipModelTrainingPaymentConfig < Struct.new(
       :is_responsible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4583,7 +4827,8 @@ module Aws::CleanRooms
       :query_compute,
       :machine_learning,
       :job_compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4594,7 +4839,8 @@ module Aws::CleanRooms
     class MembershipProtectedJobOutputConfiguration < Struct.new(
       :s3,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < MembershipProtectedJobOutputConfiguration; end
@@ -4611,7 +4857,8 @@ module Aws::CleanRooms
     class MembershipProtectedJobResultConfiguration < Struct.new(
       :output_configuration,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4622,7 +4869,8 @@ module Aws::CleanRooms
     class MembershipProtectedQueryOutputConfiguration < Struct.new(
       :s3,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < MembershipProtectedQueryOutputConfiguration; end
@@ -4639,7 +4887,8 @@ module Aws::CleanRooms
     class MembershipProtectedQueryResultConfiguration < Struct.new(
       :output_configuration,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4649,7 +4898,8 @@ module Aws::CleanRooms
     #   @return [Boolean]
     class MembershipQueryComputePaymentConfig < Struct.new(
       :is_responsible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4707,7 +4957,8 @@ module Aws::CleanRooms
       :member_abilities,
       :ml_member_abilities,
       :payment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4717,7 +4968,8 @@ module Aws::CleanRooms
     #   @return [Boolean]
     class ModelInferencePaymentConfig < Struct.new(
       :is_responsible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4727,7 +4979,8 @@ module Aws::CleanRooms
     #   @return [Boolean]
     class ModelTrainingPaymentConfig < Struct.new(
       :is_responsible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4745,7 +4998,8 @@ module Aws::CleanRooms
       :query_compute,
       :machine_learning,
       :job_compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4758,7 +5012,8 @@ module Aws::CleanRooms
     class PopulateIdMappingTableInput < Struct.new(
       :id_mapping_table_identifier,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4767,7 +5022,8 @@ module Aws::CleanRooms
     #   @return [String]
     class PopulateIdMappingTableOutput < Struct.new(
       :id_mapping_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4780,7 +5036,8 @@ module Aws::CleanRooms
     class PreviewPrivacyImpactInput < Struct.new(
       :membership_identifier,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4789,7 +5046,8 @@ module Aws::CleanRooms
     #   @return [Types::PrivacyImpact]
     class PreviewPrivacyImpactOutput < Struct.new(
       :privacy_impact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4800,7 +5058,8 @@ module Aws::CleanRooms
     class PreviewPrivacyImpactParametersInput < Struct.new(
       :differential_privacy,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PreviewPrivacyImpactParametersInput; end
@@ -4814,7 +5073,8 @@ module Aws::CleanRooms
     class PrivacyBudget < Struct.new(
       :differential_privacy,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudget; end
@@ -4867,7 +5127,8 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       :budget,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4917,7 +5178,8 @@ module Aws::CleanRooms
       :privacy_budget_type,
       :auto_refresh,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4928,7 +5190,8 @@ module Aws::CleanRooms
     class PrivacyBudgetTemplateParametersInput < Struct.new(
       :differential_privacy,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersInput; end
@@ -4942,7 +5205,8 @@ module Aws::CleanRooms
     class PrivacyBudgetTemplateParametersOutput < Struct.new(
       :differential_privacy,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersOutput; end
@@ -4987,7 +5251,8 @@ module Aws::CleanRooms
       :privacy_budget_type,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4998,7 +5263,8 @@ module Aws::CleanRooms
     class PrivacyBudgetTemplateUpdateParameters < Struct.new(
       :differential_privacy,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateUpdateParameters; end
@@ -5012,7 +5278,8 @@ module Aws::CleanRooms
     class PrivacyImpact < Struct.new(
       :differential_privacy,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyImpact; end
@@ -5065,7 +5332,8 @@ module Aws::CleanRooms
       :result,
       :error,
       :compute_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5076,7 +5344,8 @@ module Aws::CleanRooms
     class ProtectedJobComputeConfiguration < Struct.new(
       :worker,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Worker < ProtectedJobComputeConfiguration; end
@@ -5090,7 +5359,8 @@ module Aws::CleanRooms
     class ProtectedJobConfigurationDetails < Struct.new(
       :direct_analysis_configuration_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DirectAnalysisConfigurationDetails < ProtectedJobConfigurationDetails; end
@@ -5103,7 +5373,8 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     class ProtectedJobDirectAnalysisConfigurationDetails < Struct.new(
       :receiver_account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5117,7 +5388,8 @@ module Aws::CleanRooms
     class ProtectedJobError < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5127,7 +5399,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ProtectedJobMemberOutputConfigurationInput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5137,7 +5410,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ProtectedJobMemberOutputConfigurationOutput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5152,7 +5426,8 @@ module Aws::CleanRooms
       :s3,
       :member_list,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < ProtectedJobOutput; end
@@ -5167,7 +5442,8 @@ module Aws::CleanRooms
     class ProtectedJobOutputConfigurationInput < Struct.new(
       :member,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Member < ProtectedJobOutputConfigurationInput; end
@@ -5185,7 +5461,8 @@ module Aws::CleanRooms
       :s3,
       :member,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < ProtectedJobOutputConfigurationOutput; end
@@ -5199,7 +5476,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ProtectedJobParameters < Struct.new(
       :analysis_template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5213,7 +5491,8 @@ module Aws::CleanRooms
     class ProtectedJobReceiverConfiguration < Struct.new(
       :analysis_type,
       :configuration_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5223,7 +5502,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedJobOutput]
     class ProtectedJobResult < Struct.new(
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5233,7 +5513,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedJobOutputConfigurationInput]
     class ProtectedJobResultConfigurationInput < Struct.new(
       :output_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5243,7 +5524,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedJobOutputConfigurationOutput]
     class ProtectedJobResultConfigurationOutput < Struct.new(
       :output_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5253,7 +5535,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ProtectedJobS3Output < Struct.new(
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5267,7 +5550,8 @@ module Aws::CleanRooms
     class ProtectedJobS3OutputConfigurationInput < Struct.new(
       :bucket,
       :key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5281,7 +5565,8 @@ module Aws::CleanRooms
     class ProtectedJobS3OutputConfigurationOutput < Struct.new(
       :bucket,
       :key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5291,7 +5576,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ProtectedJobSingleMemberOutput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5305,7 +5591,8 @@ module Aws::CleanRooms
     class ProtectedJobStatistics < Struct.new(
       :total_duration_in_millis,
       :billed_resource_utilization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5335,7 +5622,8 @@ module Aws::CleanRooms
       :create_time,
       :status,
       :receiver_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5354,7 +5642,8 @@ module Aws::CleanRooms
     class ProtectedJobWorkerComputeConfiguration < Struct.new(
       :type,
       :number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5408,7 +5697,8 @@ module Aws::CleanRooms
       :error,
       :differential_privacy,
       :compute_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5422,7 +5712,8 @@ module Aws::CleanRooms
     class ProtectedQueryDistributeOutput < Struct.new(
       :s3,
       :member_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5432,7 +5723,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::ProtectedQueryDistributeOutputConfigurationLocation>]
     class ProtectedQueryDistributeOutputConfiguration < Struct.new(
       :locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5447,7 +5739,8 @@ module Aws::CleanRooms
       :s3,
       :member,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < ProtectedQueryDistributeOutputConfigurationLocation; end
@@ -5465,7 +5758,8 @@ module Aws::CleanRooms
     class ProtectedQueryError < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5475,7 +5769,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ProtectedQueryMemberOutputConfiguration < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5494,7 +5789,8 @@ module Aws::CleanRooms
       :member_list,
       :distribute,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < ProtectedQueryOutput; end
@@ -5518,7 +5814,8 @@ module Aws::CleanRooms
       :member,
       :distribute,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < ProtectedQueryOutputConfiguration; end
@@ -5533,7 +5830,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedQueryOutput]
     class ProtectedQueryResult < Struct.new(
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5543,7 +5841,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedQueryOutputConfiguration]
     class ProtectedQueryResultConfiguration < Struct.new(
       :output_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5553,7 +5852,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ProtectedQueryS3Output < Struct.new(
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5575,7 +5875,8 @@ module Aws::CleanRooms
       :bucket,
       :key_prefix,
       :single_file_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5594,7 +5895,8 @@ module Aws::CleanRooms
       :query_string,
       :analysis_template_arn,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5604,7 +5906,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ProtectedQuerySingleMemberOutput < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5618,7 +5921,8 @@ module Aws::CleanRooms
     class ProtectedQueryStatistics < Struct.new(
       :total_duration_in_millis,
       :billed_resource_utilization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5648,7 +5952,8 @@ module Aws::CleanRooms
       :create_time,
       :status,
       :receiver_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5663,7 +5968,8 @@ module Aws::CleanRooms
     #   @return [Boolean]
     class QueryComputePaymentConfig < Struct.new(
       :is_responsible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5674,7 +5980,8 @@ module Aws::CleanRooms
     class QueryConstraint < Struct.new(
       :require_overlap,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RequireOverlap < QueryConstraint; end
@@ -5687,7 +5994,8 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     class QueryConstraintRequireOverlap < Struct.new(
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5701,7 +6009,8 @@ module Aws::CleanRooms
     class ReceiverConfiguration < Struct.new(
       :analysis_type,
       :configuration_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5718,7 +6027,8 @@ module Aws::CleanRooms
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5732,7 +6042,8 @@ module Aws::CleanRooms
     class S3Location < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5798,7 +6109,8 @@ module Aws::CleanRooms
       :type,
       :schema_status_details,
       :schema_type_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5817,7 +6129,8 @@ module Aws::CleanRooms
     class SchemaAnalysisRuleRequest < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5843,7 +6156,8 @@ module Aws::CleanRooms
       :analysis_rule_type,
       :configurations,
       :analysis_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5862,7 +6176,8 @@ module Aws::CleanRooms
     class SchemaStatusReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5908,7 +6223,8 @@ module Aws::CleanRooms
       :analysis_rule_types,
       :analysis_method,
       :selected_analysis_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5919,7 +6235,8 @@ module Aws::CleanRooms
     class SchemaTypeProperties < Struct.new(
       :id_mapping_table,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IdMappingTable < SchemaTypeProperties; end
@@ -5939,7 +6256,8 @@ module Aws::CleanRooms
       :message,
       :quota_name,
       :quota_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5969,7 +6287,8 @@ module Aws::CleanRooms
       :table_name,
       :schema_name,
       :table_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5980,7 +6299,8 @@ module Aws::CleanRooms
     class SnowflakeTableSchema < Struct.new(
       :v1,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class V1 < SnowflakeTableSchema; end
@@ -5997,7 +6317,8 @@ module Aws::CleanRooms
     class SnowflakeTableSchemaV1 < Struct.new(
       :column_name,
       :column_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6022,7 +6343,8 @@ module Aws::CleanRooms
       :job_parameters,
       :result_configuration,
       :compute_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6031,7 +6353,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedJob]
     class StartProtectedJobOutput < Struct.new(
       :protected_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6056,7 +6379,8 @@ module Aws::CleanRooms
       :sql_parameters,
       :result_configuration,
       :compute_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6065,7 +6389,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedQuery]
     class StartProtectedQueryOperationOutput < Struct.new(
       :protected_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6084,7 +6409,8 @@ module Aws::CleanRooms
       :snowflake,
       :athena,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Glue < TableReference; end
@@ -6102,12 +6428,14 @@ module Aws::CleanRooms
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6116,7 +6444,8 @@ module Aws::CleanRooms
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6129,12 +6458,14 @@ module Aws::CleanRooms
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6151,7 +6482,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :analysis_template_identifier,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6160,7 +6492,8 @@ module Aws::CleanRooms
     #   @return [Types::AnalysisTemplate]
     class UpdateAnalysisTemplateOperationOutput < Struct.new(
       :analysis_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6181,7 +6514,8 @@ module Aws::CleanRooms
       :name,
       :description,
       :analytics_engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6190,7 +6524,8 @@ module Aws::CleanRooms
     #   @return [Types::Collaboration]
     class UpdateCollaborationOperationOutput < Struct.new(
       :collaboration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6211,7 +6546,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :description,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6220,7 +6556,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredAudienceModelAssociation]
     class UpdateConfiguredAudienceModelAssociationOutput < Struct.new(
       :configured_audience_model_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6237,7 +6574,8 @@ module Aws::CleanRooms
       :configured_table_identifier,
       :analysis_rule_type,
       :analysis_rule_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6246,7 +6584,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTableAnalysisRule]
     class UpdateConfiguredTableAnalysisRuleOperationOutput < Struct.new(
       :analysis_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6267,7 +6606,8 @@ module Aws::CleanRooms
       :configured_table_association_identifier,
       :analysis_rule_type,
       :analysis_rule_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6276,7 +6616,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTableAssociationAnalysisRule]
     class UpdateConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
       :analysis_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6297,7 +6638,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :description,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6306,7 +6648,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTableAssociation]
     class UpdateConfiguredTableAssociationOperationOutput < Struct.new(
       :configured_table_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6339,7 +6682,8 @@ module Aws::CleanRooms
       :allowed_columns,
       :analysis_method,
       :selected_analysis_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6348,7 +6692,8 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTable]
     class UpdateConfiguredTableOperationOutput < Struct.new(
       :configured_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6369,7 +6714,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :description,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6378,7 +6724,8 @@ module Aws::CleanRooms
     #   @return [Types::IdMappingTable]
     class UpdateIdMappingTableOutput < Struct.new(
       :id_mapping_table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6403,7 +6750,8 @@ module Aws::CleanRooms
       :name,
       :description,
       :id_mapping_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6412,7 +6760,8 @@ module Aws::CleanRooms
     #   @return [Types::IdNamespaceAssociation]
     class UpdateIdNamespaceAssociationOutput < Struct.new(
       :id_namespace_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6437,7 +6786,8 @@ module Aws::CleanRooms
       :job_log_status,
       :default_result_configuration,
       :default_job_result_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6446,7 +6796,8 @@ module Aws::CleanRooms
     #   @return [Types::Membership]
     class UpdateMembershipOperationOutput < Struct.new(
       :membership,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6467,7 +6818,8 @@ module Aws::CleanRooms
       :privacy_budget_template_identifier,
       :privacy_budget_type,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6476,7 +6828,8 @@ module Aws::CleanRooms
     #   @return [Types::PrivacyBudgetTemplate]
     class UpdatePrivacyBudgetTemplateOutput < Struct.new(
       :privacy_budget_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6493,7 +6846,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :protected_job_identifier,
       :target_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6502,7 +6856,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedJob]
     class UpdateProtectedJobOutput < Struct.new(
       :protected_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6519,7 +6874,8 @@ module Aws::CleanRooms
       :membership_identifier,
       :protected_query_identifier,
       :target_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6528,7 +6884,8 @@ module Aws::CleanRooms
     #   @return [Types::ProtectedQuery]
     class UpdateProtectedQueryOperationOutput < Struct.new(
       :protected_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6545,7 +6902,8 @@ module Aws::CleanRooms
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6559,7 +6917,8 @@ module Aws::CleanRooms
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6573,7 +6932,8 @@ module Aws::CleanRooms
     class WorkerComputeConfiguration < Struct.new(
       :type,
       :number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

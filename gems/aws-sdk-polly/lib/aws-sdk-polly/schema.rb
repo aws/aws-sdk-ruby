@@ -518,7 +518,6 @@ module Aws::Polly
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextLengthExceededException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/speech", "code" => 200}}
       end)
-
     end
 
     class << self

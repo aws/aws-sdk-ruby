@@ -42,7 +42,7 @@ module Aws::TimestreamWrite
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamWrite::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::TimestreamWrite
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamWrite::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::TimestreamWrite
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamWrite::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::TimestreamWrite
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamWrite::Types::InvalidEndpointException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::TimestreamWrite
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamWrite::Types::RejectedRecordsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::TimestreamWrite
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamWrite::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::TimestreamWrite
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamWrite::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -173,7 +173,7 @@ module Aws::TimestreamWrite
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamWrite::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -186,7 +186,7 @@ module Aws::TimestreamWrite
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamWrite::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

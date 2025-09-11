@@ -27,7 +27,8 @@ module Aws::Pipes
       :subnets,
       :security_groups,
       :assign_public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::Pipes
     #   @return [Integer]
     class BatchArrayProperties < Struct.new(
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -73,7 +75,8 @@ module Aws::Pipes
       :environment,
       :instance_type,
       :resource_requirements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -95,7 +98,8 @@ module Aws::Pipes
     class BatchEnvironmentVariable < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +114,8 @@ module Aws::Pipes
     class BatchJobDependency < Struct.new(
       :job_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +303,8 @@ module Aws::Pipes
     class BatchResourceRequirement < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +317,8 @@ module Aws::Pipes
     #   @return [Integer]
     class BatchRetryStrategy < Struct.new(
       :attempts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +340,8 @@ module Aws::Pipes
       :capacity_provider,
       :weight,
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -349,7 +357,8 @@ module Aws::Pipes
     #   @return [String]
     class CloudwatchLogsLogDestination < Struct.new(
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +368,8 @@ module Aws::Pipes
     #   @return [String]
     class CloudwatchLogsLogDestinationParameters < Struct.new(
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +386,8 @@ module Aws::Pipes
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +451,8 @@ module Aws::Pipes
       :tags,
       :log_configuration,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +481,8 @@ module Aws::Pipes
       :current_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +495,8 @@ module Aws::Pipes
     #   @return [String]
     class DeadLetterConfig < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,7 +505,8 @@ module Aws::Pipes
     #   @return [String]
     class DeletePipeRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +535,8 @@ module Aws::Pipes
       :current_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +545,8 @@ module Aws::Pipes
     #   @return [String]
     class DescribePipeRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -609,7 +626,8 @@ module Aws::Pipes
       :last_modified_time,
       :log_configuration,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +650,8 @@ module Aws::Pipes
       :dimension_value,
       :dimension_value_type,
       :dimension_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +703,8 @@ module Aws::Pipes
       :memory_reservation,
       :name,
       :resource_requirements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -722,7 +742,8 @@ module Aws::Pipes
     class EcsEnvironmentFile < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +762,8 @@ module Aws::Pipes
     class EcsEnvironmentVariable < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -761,7 +783,8 @@ module Aws::Pipes
     #   @return [Integer]
     class EcsEphemeralStorage < Struct.new(
       :size_in_gi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +803,8 @@ module Aws::Pipes
     class EcsInferenceAcceleratorOverride < Struct.new(
       :device_name,
       :device_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +831,8 @@ module Aws::Pipes
     class EcsResourceRequirement < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +884,8 @@ module Aws::Pipes
       :inference_accelerator_overrides,
       :memory,
       :task_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +896,8 @@ module Aws::Pipes
     #   @return [String]
     class Filter < Struct.new(
       :pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +910,8 @@ module Aws::Pipes
     #   @return [Array<Types::Filter>]
     class FilterCriteria < Struct.new(
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +921,8 @@ module Aws::Pipes
     #   @return [String]
     class FirehoseLogDestination < Struct.new(
       :delivery_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +933,8 @@ module Aws::Pipes
     #   @return [String]
     class FirehoseLogDestinationParameters < Struct.new(
       :delivery_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +948,8 @@ module Aws::Pipes
     class InternalException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -955,7 +986,8 @@ module Aws::Pipes
       :target_prefix,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1002,8 @@ module Aws::Pipes
     class ListPipesResponse < Struct.new(
       :pipes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -979,7 +1012,8 @@ module Aws::Pipes
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1022,8 @@ module Aws::Pipes
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1034,8 @@ module Aws::Pipes
     class MQBrokerAccessCredentials < Struct.new(
       :basic_auth,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class BasicAuth < MQBrokerAccessCredentials; end
@@ -1017,7 +1053,8 @@ module Aws::Pipes
       :sasl_scram512_auth,
       :client_certificate_tls_auth,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SaslScram512Auth < MSKAccessCredentials; end
@@ -1040,7 +1077,8 @@ module Aws::Pipes
       :measure_value,
       :measure_value_type,
       :multi_measure_attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1058,7 +1096,8 @@ module Aws::Pipes
     class MultiMeasureMapping < Struct.new(
       :multi_measure_name,
       :multi_measure_attribute_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1071,7 +1110,8 @@ module Aws::Pipes
     #   @return [Types::AwsVpcConfiguration]
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1120,8 @@ module Aws::Pipes
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1168,8 @@ module Aws::Pipes
       :source,
       :target,
       :enrichment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1150,7 +1192,8 @@ module Aws::Pipes
       :path_parameter_values,
       :header_parameters,
       :query_string_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1216,8 @@ module Aws::Pipes
     class PipeEnrichmentParameters < Struct.new(
       :input_template,
       :http_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,7 +1248,8 @@ module Aws::Pipes
       :cloudwatch_logs_log_destination,
       :level,
       :include_execution_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1254,7 +1299,8 @@ module Aws::Pipes
       :cloudwatch_logs_log_destination,
       :level,
       :include_execution_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1276,7 +1322,8 @@ module Aws::Pipes
       :queue_name,
       :batch_size,
       :maximum_batching_window_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1317,7 +1364,8 @@ module Aws::Pipes
       :maximum_retry_attempts,
       :parallelization_factor,
       :starting_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1363,7 +1411,8 @@ module Aws::Pipes
       :parallelization_factor,
       :starting_position,
       :starting_position_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1393,7 +1442,8 @@ module Aws::Pipes
       :maximum_batching_window_in_seconds,
       :consumer_group_id,
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1438,7 +1488,8 @@ module Aws::Pipes
       :rabbit_mq_broker_parameters,
       :managed_streaming_kafka_parameters,
       :self_managed_kafka_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1464,7 +1515,8 @@ module Aws::Pipes
       :virtual_host,
       :batch_size,
       :maximum_batching_window_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1562,8 @@ module Aws::Pipes
       :credentials,
       :server_root_ca_certificate,
       :vpc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1524,7 +1577,8 @@ module Aws::Pipes
     class PipeSourceSqsQueueParameters < Struct.new(
       :batch_size,
       :maximum_batching_window_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1572,7 +1626,8 @@ module Aws::Pipes
       :container_overrides,
       :depends_on,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1642,8 @@ module Aws::Pipes
     class PipeTargetCloudWatchLogsParameters < Struct.new(
       :log_stream_name,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1741,8 @@ module Aws::Pipes
       :reference_id,
       :overrides,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1721,7 +1778,8 @@ module Aws::Pipes
       :source,
       :resources,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1742,7 +1800,8 @@ module Aws::Pipes
       :path_parameter_values,
       :header_parameters,
       :query_string_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1757,7 +1816,8 @@ module Aws::Pipes
     #   @return [String]
     class PipeTargetKinesisStreamParameters < Struct.new(
       :partition_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1787,7 +1847,8 @@ module Aws::Pipes
     #   @return [String]
     class PipeTargetLambdaFunctionParameters < Struct.new(
       :invocation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1852,7 +1913,8 @@ module Aws::Pipes
       :event_bridge_event_bus_parameters,
       :cloud_watch_logs_parameters,
       :timestream_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1887,7 +1949,8 @@ module Aws::Pipes
       :statement_name,
       :with_event,
       :sqls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1903,7 +1966,8 @@ module Aws::Pipes
     #   @return [Array<Types::SageMakerPipelineParameter>]
     class PipeTargetSageMakerPipelineParameters < Struct.new(
       :pipeline_parameter_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1918,7 +1982,8 @@ module Aws::Pipes
     class PipeTargetSqsQueueParameters < Struct.new(
       :message_group_id,
       :message_deduplication_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1950,7 +2015,8 @@ module Aws::Pipes
     #   @return [String]
     class PipeTargetStateMachineParameters < Struct.new(
       :invocation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2010,7 +2076,8 @@ module Aws::Pipes
       :dimension_mappings,
       :single_measure_mappings,
       :multi_measure_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2030,7 +2097,8 @@ module Aws::Pipes
     class PlacementConstraint < Struct.new(
       :type,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2055,7 +2123,8 @@ module Aws::Pipes
     class PlacementStrategy < Struct.new(
       :type,
       :field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2081,7 +2150,8 @@ module Aws::Pipes
       :prefix,
       :bucket_owner,
       :output_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2111,7 +2181,8 @@ module Aws::Pipes
       :bucket_owner,
       :output_format,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2128,7 +2199,8 @@ module Aws::Pipes
     class SageMakerPipelineParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2151,7 +2223,8 @@ module Aws::Pipes
       :sasl_scram256_auth,
       :client_certificate_tls_auth,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class BasicAuth < SelfManagedKafkaAccessConfigurationCredentials; end
@@ -2174,7 +2247,8 @@ module Aws::Pipes
     class SelfManagedKafkaAccessConfigurationVpc < Struct.new(
       :subnets,
       :security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2199,7 +2273,8 @@ module Aws::Pipes
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2220,7 +2295,8 @@ module Aws::Pipes
       :measure_value,
       :measure_value_type,
       :measure_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2229,7 +2305,8 @@ module Aws::Pipes
     #   @return [String]
     class StartPipeRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2258,7 +2335,8 @@ module Aws::Pipes
       :current_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2267,7 +2345,8 @@ module Aws::Pipes
     #   @return [String]
     class StopPipeRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2296,7 +2375,8 @@ module Aws::Pipes
       :current_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2312,7 +2392,8 @@ module Aws::Pipes
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2325,12 +2406,14 @@ module Aws::Pipes
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2352,7 +2435,8 @@ module Aws::Pipes
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2365,12 +2449,14 @@ module Aws::Pipes
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2427,7 +2513,8 @@ module Aws::Pipes
       :role_arn,
       :log_configuration,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2456,7 +2543,8 @@ module Aws::Pipes
       :current_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2474,7 +2562,8 @@ module Aws::Pipes
       :credentials,
       :batch_size,
       :maximum_batching_window_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2600,8 @@ module Aws::Pipes
       :maximum_record_age_in_seconds,
       :maximum_retry_attempts,
       :parallelization_factor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2548,7 +2638,8 @@ module Aws::Pipes
       :maximum_record_age_in_seconds,
       :maximum_retry_attempts,
       :parallelization_factor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2566,7 +2657,8 @@ module Aws::Pipes
       :batch_size,
       :credentials,
       :maximum_batching_window_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2611,7 +2703,8 @@ module Aws::Pipes
       :rabbit_mq_broker_parameters,
       :managed_streaming_kafka_parameters,
       :self_managed_kafka_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2629,7 +2722,8 @@ module Aws::Pipes
       :credentials,
       :batch_size,
       :maximum_batching_window_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2659,7 +2753,8 @@ module Aws::Pipes
       :credentials,
       :server_root_ca_certificate,
       :vpc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2673,7 +2768,8 @@ module Aws::Pipes
     class UpdatePipeSourceSqsQueueParameters < Struct.new(
       :batch_size,
       :maximum_batching_window_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2687,7 +2783,8 @@ module Aws::Pipes
     class ValidationException < Struct.new(
       :message,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2701,7 +2798,8 @@ module Aws::Pipes
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

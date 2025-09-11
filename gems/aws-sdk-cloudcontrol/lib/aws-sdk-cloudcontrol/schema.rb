@@ -366,7 +366,6 @@ module Aws::CloudControl
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedActionException)
         operation.traits = {}
       end)
-
     end
 
     class << self

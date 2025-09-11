@@ -11,7 +11,8 @@ module Aws::Ivschat
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::Ivschat
     #   @return [String]
     class CloudWatchLogsDestinationConfiguration < Struct.new(
       :log_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::Ivschat
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -69,7 +72,8 @@ module Aws::Ivschat
       :capabilities,
       :session_duration_in_minutes,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +93,8 @@ module Aws::Ivschat
       :token,
       :token_expiration_time,
       :session_expiration_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +116,8 @@ module Aws::Ivschat
       :name,
       :destination_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +162,8 @@ module Aws::Ivschat
       :destination_configuration,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,7 +197,8 @@ module Aws::Ivschat
       :message_review_handler,
       :tags,
       :logging_configuration_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +249,8 @@ module Aws::Ivschat
       :message_review_handler,
       :tags,
       :logging_configuration_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +259,8 @@ module Aws::Ivschat
     #   @return [String]
     class DeleteLoggingConfigurationInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +280,8 @@ module Aws::Ivschat
       :room_identifier,
       :id,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +290,8 @@ module Aws::Ivschat
     #   @return [String]
     class DeleteMessageOutput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +300,8 @@ module Aws::Ivschat
     #   @return [String]
     class DeleteRoomInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +324,8 @@ module Aws::Ivschat
       :cloud_watch_logs,
       :firehose,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3 < DestinationConfiguration; end
@@ -334,12 +348,14 @@ module Aws::Ivschat
       :room_identifier,
       :user_id,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisconnectUserOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +366,8 @@ module Aws::Ivschat
     #   @return [String]
     class FirehoseDestinationConfiguration < Struct.new(
       :delivery_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +376,8 @@ module Aws::Ivschat
     #   @return [String]
     class GetLoggingConfigurationInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +423,8 @@ module Aws::Ivschat
       :destination_configuration,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +434,8 @@ module Aws::Ivschat
     #   @return [String]
     class GetRoomInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +487,8 @@ module Aws::Ivschat
       :message_review_handler,
       :tags,
       :logging_configuration_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -476,7 +497,8 @@ module Aws::Ivschat
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +512,8 @@ module Aws::Ivschat
     class ListLoggingConfigurationsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +529,8 @@ module Aws::Ivschat
     class ListLoggingConfigurationsOutput < Struct.new(
       :logging_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +556,8 @@ module Aws::Ivschat
       :max_results,
       :message_review_handler_uri,
       :logging_configuration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +571,8 @@ module Aws::Ivschat
     class ListRoomsOutput < Struct.new(
       :rooms,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +581,8 @@ module Aws::Ivschat
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -565,7 +592,8 @@ module Aws::Ivschat
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +638,8 @@ module Aws::Ivschat
       :destination_configuration,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -630,7 +659,8 @@ module Aws::Ivschat
     class MessageReviewHandler < Struct.new(
       :uri,
       :fallback_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -639,7 +669,8 @@ module Aws::Ivschat
     #   @return [String]
     class PendingVerification < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +687,8 @@ module Aws::Ivschat
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -699,7 +731,8 @@ module Aws::Ivschat
       :update_time,
       :tags,
       :logging_configuration_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +742,8 @@ module Aws::Ivschat
     #   @return [String]
     class S3DestinationConfiguration < Struct.new(
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +762,8 @@ module Aws::Ivschat
       :room_identifier,
       :event_name,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +773,8 @@ module Aws::Ivschat
     #   @return [String]
     class SendEventOutput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +795,8 @@ module Aws::Ivschat
       :resource_id,
       :resource_type,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -779,12 +816,14 @@ module Aws::Ivschat
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +844,8 @@ module Aws::Ivschat
       :resource_id,
       :resource_type,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -825,12 +865,14 @@ module Aws::Ivschat
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,7 +892,8 @@ module Aws::Ivschat
       :identifier,
       :name,
       :destination_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -896,7 +939,8 @@ module Aws::Ivschat
       :destination_configuration,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +974,8 @@ module Aws::Ivschat
       :maximum_message_length,
       :message_review_handler,
       :logging_configuration_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -982,7 +1027,8 @@ module Aws::Ivschat
       :message_review_handler,
       :tags,
       :logging_configuration_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1045,8 @@ module Aws::Ivschat
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1013,7 +1060,8 @@ module Aws::Ivschat
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -26,7 +26,8 @@ module Aws::CloudTrailData
       :id,
       :event_data,
       :event_data_checksum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,7 +41,8 @@ module Aws::CloudTrailData
     class AuditEventResultEntry < Struct.new(
       :id,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +51,8 @@ module Aws::CloudTrailData
     #   @return [String]
     class ChannelInsufficientPermission < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +61,8 @@ module Aws::CloudTrailData
     #   @return [String]
     class ChannelNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +71,8 @@ module Aws::CloudTrailData
     #   @return [String]
     class ChannelUnsupportedSchema < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +81,8 @@ module Aws::CloudTrailData
     #   @return [String]
     class DuplicatedAuditEventId < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +92,8 @@ module Aws::CloudTrailData
     #   @return [String]
     class InvalidChannelARN < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +113,8 @@ module Aws::CloudTrailData
       :audit_events,
       :channel_arn,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +130,8 @@ module Aws::CloudTrailData
     class PutAuditEventsOutput < Struct.new(
       :successful,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +151,8 @@ module Aws::CloudTrailData
       :id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +161,8 @@ module Aws::CloudTrailData
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

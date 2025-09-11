@@ -37,7 +37,8 @@ module Aws::Savingsplans
       :purchase_time,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +47,8 @@ module Aws::Savingsplans
     #   @return [String]
     class CreateSavingsPlanResponse < Struct.new(
       :savings_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,12 +57,14 @@ module Aws::Savingsplans
     #   @return [String]
     class DeleteQueuedSavingsPlanRequest < Struct.new(
       :savings_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteQueuedSavingsPlanResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +86,8 @@ module Aws::Savingsplans
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -100,7 +105,8 @@ module Aws::Savingsplans
       :savings_plan_id,
       :search_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +153,8 @@ module Aws::Savingsplans
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +168,8 @@ module Aws::Savingsplans
     class DescribeSavingsPlansOfferingRatesResponse < Struct.new(
       :search_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +228,8 @@ module Aws::Savingsplans
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +243,8 @@ module Aws::Savingsplans
     class DescribeSavingsPlansOfferingsResponse < Struct.new(
       :search_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +274,8 @@ module Aws::Savingsplans
       :max_results,
       :states,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +289,8 @@ module Aws::Savingsplans
     class DescribeSavingsPlansResponse < Struct.new(
       :savings_plans,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +299,8 @@ module Aws::Savingsplans
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +309,8 @@ module Aws::Savingsplans
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -305,7 +319,8 @@ module Aws::Savingsplans
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +350,8 @@ module Aws::Savingsplans
       :duration_seconds,
       :currency,
       :plan_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -349,7 +365,8 @@ module Aws::Savingsplans
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +380,8 @@ module Aws::Savingsplans
     class ReturnSavingsPlanRequest < Struct.new(
       :savings_plan_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +390,8 @@ module Aws::Savingsplans
     #   @return [String]
     class ReturnSavingsPlanResponse < Struct.new(
       :savings_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +474,8 @@ module Aws::Savingsplans
       :term_duration_in_seconds,
       :tags,
       :returnable_until,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -474,7 +494,8 @@ module Aws::Savingsplans
     class SavingsPlanFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +546,8 @@ module Aws::Savingsplans
       :usage_type,
       :operation,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -544,7 +566,8 @@ module Aws::Savingsplans
     class SavingsPlanOfferingFilterElement < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -558,7 +581,8 @@ module Aws::Savingsplans
     class SavingsPlanOfferingProperty < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +621,8 @@ module Aws::Savingsplans
       :usage_type,
       :operation,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +636,8 @@ module Aws::Savingsplans
     class SavingsPlanOfferingRateFilterElement < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -625,7 +651,8 @@ module Aws::Savingsplans
     class SavingsPlanOfferingRateProperty < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +691,8 @@ module Aws::Savingsplans
       :usage_type,
       :operation,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +706,8 @@ module Aws::Savingsplans
     class SavingsPlanRateFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +721,8 @@ module Aws::Savingsplans
     class SavingsPlanRateProperty < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +731,8 @@ module Aws::Savingsplans
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,12 +745,14 @@ module Aws::Savingsplans
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,12 +765,14 @@ module Aws::Savingsplans
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +781,8 @@ module Aws::Savingsplans
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

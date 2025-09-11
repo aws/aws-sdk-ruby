@@ -42,7 +42,6 @@ module Aws::Artifact
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

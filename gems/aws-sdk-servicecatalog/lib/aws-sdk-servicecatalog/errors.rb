@@ -41,7 +41,7 @@ module Aws::ServiceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalog::Types::DuplicateResourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::ServiceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalog::Types::InvalidParametersException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::ServiceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalog::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::ServiceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalog::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::ServiceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalog::Types::OperationNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::ServiceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalog::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::ServiceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalog::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -136,7 +136,7 @@ module Aws::ServiceCatalog
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceCatalog::Types::TagOptionNotMigratedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

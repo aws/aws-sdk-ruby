@@ -37,7 +37,7 @@ module Aws::ApiGatewayManagementApi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApiGatewayManagementApi::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -46,7 +46,7 @@ module Aws::ApiGatewayManagementApi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApiGatewayManagementApi::Types::GoneException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -55,7 +55,7 @@ module Aws::ApiGatewayManagementApi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApiGatewayManagementApi::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -64,7 +64,7 @@ module Aws::ApiGatewayManagementApi
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApiGatewayManagementApi::Types::PayloadTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

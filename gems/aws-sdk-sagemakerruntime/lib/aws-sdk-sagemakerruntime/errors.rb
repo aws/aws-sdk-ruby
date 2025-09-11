@@ -42,7 +42,7 @@ module Aws::SageMakerRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerRuntime::Types::InternalDependencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::SageMakerRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerRuntime::Types::InternalFailure] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::SageMakerRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerRuntime::Types::InternalStreamFailure] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::SageMakerRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerRuntime::Types::ModelError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::SageMakerRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerRuntime::Types::ModelNotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::SageMakerRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerRuntime::Types::ModelStreamError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::SageMakerRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerRuntime::Types::ServiceUnavailable] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -180,7 +180,7 @@ module Aws::SageMakerRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerRuntime::Types::ValidationError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -48,7 +48,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::AccountChannelLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::AccountStreamLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -89,7 +89,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::ClientLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -103,7 +103,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::DeviceStreamLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::InvalidArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::InvalidDeviceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::InvalidResourceFormatException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -155,7 +155,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::NoDataRetentionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -168,7 +168,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::NotAuthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -211,7 +211,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -225,7 +225,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::StreamEdgeConfigurationNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -239,7 +239,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::TagsPerResourceExceededLimitException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -254,7 +254,7 @@ module Aws::KinesisVideo
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideo::Types::VersionMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

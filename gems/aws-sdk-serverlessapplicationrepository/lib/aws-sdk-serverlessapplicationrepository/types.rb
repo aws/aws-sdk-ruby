@@ -16,7 +16,8 @@ module Aws::ServerlessApplicationRepository
     class ApplicationDependencySummary < Struct.new(
       :application_id,
       :semantic_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +40,8 @@ module Aws::ServerlessApplicationRepository
       :principal_org_i_ds,
       :principals,
       :statement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +79,8 @@ module Aws::ServerlessApplicationRepository
       :labels,
       :name,
       :spdx_license_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -91,7 +94,8 @@ module Aws::ServerlessApplicationRepository
     class BadRequestException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,7 +109,8 @@ module Aws::ServerlessApplicationRepository
     class ConflictException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +180,8 @@ module Aws::ServerlessApplicationRepository
       :spdx_license_id,
       :template_body,
       :template_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +238,8 @@ module Aws::ServerlessApplicationRepository
       :spdx_license_id,
       :verified_author_url,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +268,8 @@ module Aws::ServerlessApplicationRepository
       :source_code_url,
       :template_body,
       :template_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +335,8 @@ module Aws::ServerlessApplicationRepository
       :source_code_archive_url,
       :source_code_url,
       :template_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +425,8 @@ module Aws::ServerlessApplicationRepository
       :stack_name,
       :tags,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +449,8 @@ module Aws::ServerlessApplicationRepository
       :change_set_id,
       :semantic_version,
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +465,8 @@ module Aws::ServerlessApplicationRepository
     class CreateCloudFormationTemplateRequest < Struct.new(
       :application_id,
       :semantic_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -492,7 +504,8 @@ module Aws::ServerlessApplicationRepository
       :status,
       :template_id,
       :template_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +514,8 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +529,8 @@ module Aws::ServerlessApplicationRepository
     class ForbiddenException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +539,8 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     class GetApplicationPolicyRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -533,7 +549,8 @@ module Aws::ServerlessApplicationRepository
     #   @return [Array<Types::ApplicationPolicyStatement>]
     class GetApplicationPolicyResponse < Struct.new(
       :statements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +563,8 @@ module Aws::ServerlessApplicationRepository
     class GetApplicationRequest < Struct.new(
       :application_id,
       :semantic_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +621,8 @@ module Aws::ServerlessApplicationRepository
       :spdx_license_id,
       :verified_author_url,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +635,8 @@ module Aws::ServerlessApplicationRepository
     class GetCloudFormationTemplateRequest < Struct.new(
       :application_id,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +674,8 @@ module Aws::ServerlessApplicationRepository
       :status,
       :template_id,
       :template_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +689,8 @@ module Aws::ServerlessApplicationRepository
     class InternalServerErrorException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -689,7 +711,8 @@ module Aws::ServerlessApplicationRepository
       :max_items,
       :next_token,
       :semantic_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +725,8 @@ module Aws::ServerlessApplicationRepository
     class ListApplicationDependenciesResponse < Struct.new(
       :dependencies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +743,8 @@ module Aws::ServerlessApplicationRepository
       :application_id,
       :max_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,7 +757,8 @@ module Aws::ServerlessApplicationRepository
     class ListApplicationVersionsResponse < Struct.new(
       :next_token,
       :versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +771,8 @@ module Aws::ServerlessApplicationRepository
     class ListApplicationsRequest < Struct.new(
       :max_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +785,8 @@ module Aws::ServerlessApplicationRepository
     class ListApplicationsResponse < Struct.new(
       :applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +800,8 @@ module Aws::ServerlessApplicationRepository
     class NotFoundException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +876,8 @@ module Aws::ServerlessApplicationRepository
       :no_echo,
       :referenced_by_resources,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +892,8 @@ module Aws::ServerlessApplicationRepository
     class ParameterValue < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +906,8 @@ module Aws::ServerlessApplicationRepository
     class PutApplicationPolicyRequest < Struct.new(
       :application_id,
       :statements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +916,8 @@ module Aws::ServerlessApplicationRepository
     #   @return [Array<Types::ApplicationPolicyStatement>]
     class PutApplicationPolicyResponse < Struct.new(
       :statements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -901,7 +934,8 @@ module Aws::ServerlessApplicationRepository
     class RollbackConfiguration < Struct.new(
       :monitoring_time_in_minutes,
       :rollback_triggers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +952,8 @@ module Aws::ServerlessApplicationRepository
     class RollbackTrigger < Struct.new(
       :arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +972,8 @@ module Aws::ServerlessApplicationRepository
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +987,8 @@ module Aws::ServerlessApplicationRepository
     class TooManyRequestsException < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +1001,8 @@ module Aws::ServerlessApplicationRepository
     class UnshareApplicationRequest < Struct.new(
       :application_id,
       :organization_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -997,7 +1035,8 @@ module Aws::ServerlessApplicationRepository
       :labels,
       :readme_body,
       :readme_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1054,7 +1093,8 @@ module Aws::ServerlessApplicationRepository
       :spdx_license_id,
       :verified_author_url,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1161,8 @@ module Aws::ServerlessApplicationRepository
       :source_code_archive_url,
       :source_code_url,
       :template_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1186,8 @@ module Aws::ServerlessApplicationRepository
       :creation_time,
       :semantic_version,
       :source_code_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

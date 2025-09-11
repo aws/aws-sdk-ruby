@@ -13,10 +13,8 @@ module Aws::Fis
     :operation_name,
     keyword_init: true
   ) do
-
     # @api private
     def self.create(context)
-      # TODO: support more properties
       new(operation_name: context.operation_name)
     end
   end

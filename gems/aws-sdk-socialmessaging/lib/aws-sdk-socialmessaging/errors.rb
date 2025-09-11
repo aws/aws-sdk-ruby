@@ -42,7 +42,7 @@ module Aws::SocialMessaging
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SocialMessaging::Types::AccessDeniedByMetaException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::SocialMessaging
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SocialMessaging::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::SocialMessaging
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SocialMessaging::Types::DependencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::SocialMessaging
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SocialMessaging::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -103,7 +103,7 @@ module Aws::SocialMessaging
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SocialMessaging::Types::InvalidParametersException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::SocialMessaging
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SocialMessaging::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::SocialMessaging
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SocialMessaging::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::SocialMessaging
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SocialMessaging::Types::ThrottledRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::SocialMessaging
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SocialMessaging::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

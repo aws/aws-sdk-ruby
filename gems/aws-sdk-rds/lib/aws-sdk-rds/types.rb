@@ -13,7 +13,8 @@ module Aws::RDS
     #   @return [Array<Types::AccountQuota>]
     class AccountAttributesMessage < Struct.new(
       :account_quotas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +141,8 @@ module Aws::RDS
       :account_quota_name,
       :used,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -159,7 +161,8 @@ module Aws::RDS
       :db_cluster_identifier,
       :role_arn,
       :feature_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +181,8 @@ module Aws::RDS
       :db_instance_identifier,
       :role_arn,
       :feature_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +220,8 @@ module Aws::RDS
     class AddSourceIdentifierToSubscriptionMessage < Struct.new(
       :subscription_name,
       :source_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +230,8 @@ module Aws::RDS
     #   @return [Types::EventSubscription]
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,7 +248,8 @@ module Aws::RDS
     class AddTagsToResourceMessage < Struct.new(
       :resource_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,7 +320,8 @@ module Aws::RDS
       :resource_identifier,
       :apply_action,
       :opt_in_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -322,7 +330,8 @@ module Aws::RDS
     #   @return [Types::ResourcePendingMaintenanceActions]
     class ApplyPendingMaintenanceActionResult < Struct.new(
       :resource_pending_maintenance_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +341,8 @@ module Aws::RDS
     #   @return [String]
     class AuthorizationAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +354,8 @@ module Aws::RDS
     #   @return [String]
     class AuthorizationNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +364,8 @@ module Aws::RDS
     #   @return [String]
     class AuthorizationQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -388,7 +400,8 @@ module Aws::RDS
       :ec2_security_group_name,
       :ec2_security_group_id,
       :ec2_security_group_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -399,7 +412,8 @@ module Aws::RDS
     #   @return [Types::DBSecurityGroup]
     class AuthorizeDBSecurityGroupIngressResult < Struct.new(
       :db_security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +425,8 @@ module Aws::RDS
     #   @return [String]
     class AvailabilityZone < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +449,8 @@ module Aws::RDS
       :name,
       :default_value,
       :allowed_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +509,8 @@ module Aws::RDS
       :backtrack_to,
       :force,
       :use_earliest_time_on_point_in_time_unavailable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +559,8 @@ module Aws::RDS
       :backtracked_from,
       :backtrack_request_creation_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -552,7 +570,8 @@ module Aws::RDS
     #   @return [String]
     class BackupPolicyNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +666,8 @@ module Aws::RDS
       :create_time,
       :delete_time,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +676,8 @@ module Aws::RDS
     #   @return [String]
     class BlueGreenDeploymentAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +687,8 @@ module Aws::RDS
     #   @return [String]
     class BlueGreenDeploymentNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +726,8 @@ module Aws::RDS
     class BlueGreenDeploymentTask < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +736,8 @@ module Aws::RDS
     #   @return [String]
     class CancelExportTaskMessage < Struct.new(
       :export_task_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +868,8 @@ module Aws::RDS
       :failure_cause,
       :warning_message,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +913,8 @@ module Aws::RDS
       :certificate_arn,
       :customer_override,
       :customer_override_valid_till,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +933,8 @@ module Aws::RDS
     class CertificateDetails < Struct.new(
       :ca_identifier,
       :valid_till,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +958,8 @@ module Aws::RDS
       :default_certificate_for_new_launches,
       :certificates,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +970,8 @@ module Aws::RDS
     #   @return [String]
     class CertificateNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +985,8 @@ module Aws::RDS
     class CharacterSet < Struct.new(
       :character_set_name,
       :character_set_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1044,8 @@ module Aws::RDS
     class CloudwatchLogsExportConfiguration < Struct.new(
       :enable_log_types,
       :disable_log_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1103,8 @@ module Aws::RDS
       :iops,
       :storage_type,
       :certificate_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1142,7 +1174,8 @@ module Aws::RDS
       :connection_borrow_timeout,
       :session_pinning_filters,
       :init_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,7 +1218,8 @@ module Aws::RDS
       :connection_borrow_timeout,
       :session_pinning_filters,
       :init_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1233,8 @@ module Aws::RDS
     class ContextAttribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1251,7 +1286,8 @@ module Aws::RDS
       :target_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1297,8 @@ module Aws::RDS
     #   @return [Types::DBClusterParameterGroup]
     class CopyDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1385,7 +1422,8 @@ module Aws::RDS
       :pre_signed_url,
       :copy_tags,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1396,7 +1434,8 @@ module Aws::RDS
     #   @return [Types::DBClusterSnapshot]
     class CopyDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1488,8 @@ module Aws::RDS
       :target_db_parameter_group_identifier,
       :target_db_parameter_group_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1459,7 +1499,8 @@ module Aws::RDS
     #   @return [Types::DBParameterGroup]
     class CopyDBParameterGroupResult < Struct.new(
       :db_parameter_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1680,8 @@ module Aws::RDS
       :copy_option_group,
       :snapshot_availability_zone,
       :snapshot_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1692,8 @@ module Aws::RDS
     #   @return [Types::DBSnapshot]
     class CopyDBSnapshotResult < Struct.new(
       :db_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,7 +1742,8 @@ module Aws::RDS
       :target_option_group_identifier,
       :target_option_group_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1708,7 +1752,8 @@ module Aws::RDS
     #   @return [Types::OptionGroup]
     class CopyOptionGroupResult < Struct.new(
       :option_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1793,7 +1838,8 @@ module Aws::RDS
       :target_storage_type,
       :target_allocated_storage,
       :target_storage_throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1807,7 +1853,8 @@ module Aws::RDS
     #   @return [Types::BlueGreenDeployment]
     class CreateBlueGreenDeploymentResponse < Struct.new(
       :blue_green_deployment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1816,7 +1863,8 @@ module Aws::RDS
     #   @return [String]
     class CreateCustomDBEngineVersionFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1939,7 +1987,8 @@ module Aws::RDS
       :tags,
       :source_custom_db_engine_version_identifier,
       :use_aws_provided_latest_image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2123,7 +2172,8 @@ module Aws::RDS
       :supports_local_write_forwarding,
       :supports_integrations,
       :serverless_v2_features_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2205,8 @@ module Aws::RDS
       :static_members,
       :excluded_members,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2231,7 +2282,8 @@ module Aws::RDS
       :static_members,
       :excluded_members,
       :db_cluster_endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3041,7 +3093,8 @@ module Aws::RDS
       :ca_certificate_identifier,
       :engine_lifecycle_support,
       :master_user_authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3127,7 +3180,8 @@ module Aws::RDS
       :db_parameter_group_family,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3137,7 +3191,8 @@ module Aws::RDS
     #   @return [Types::DBClusterParameterGroup]
     class CreateDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3163,7 +3218,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class CreateDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3203,7 +3259,8 @@ module Aws::RDS
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3214,7 +3271,8 @@ module Aws::RDS
     #   @return [Types::DBClusterSnapshot]
     class CreateDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4550,7 +4608,8 @@ module Aws::RDS
       :multi_tenant,
       :engine_lifecycle_support,
       :master_user_authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5185,7 +5244,8 @@ module Aws::RDS
       :dedicated_log_volume,
       :upgrade_storage_config,
       :ca_certificate_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5199,7 +5259,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class CreateDBInstanceReadReplicaResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5213,7 +5274,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class CreateDBInstanceResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5334,7 +5396,8 @@ module Aws::RDS
       :db_parameter_group_family,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5344,7 +5407,8 @@ module Aws::RDS
     #   @return [Types::DBParameterGroup]
     class CreateDBParameterGroupResult < Struct.new(
       :db_parameter_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5412,7 +5476,8 @@ module Aws::RDS
       :target_role,
       :tags,
       :endpoint_network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5423,7 +5488,8 @@ module Aws::RDS
     #   @return [Types::DBProxyEndpoint]
     class CreateDBProxyEndpointResponse < Struct.new(
       :db_proxy_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5534,7 +5600,8 @@ module Aws::RDS
       :tags,
       :endpoint_network_type,
       :target_connection_network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5543,7 +5610,8 @@ module Aws::RDS
     #   @return [Types::DBProxy]
     class CreateDBProxyResponse < Struct.new(
       :db_proxy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5578,7 +5646,8 @@ module Aws::RDS
       :db_security_group_name,
       :db_security_group_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5589,7 +5658,8 @@ module Aws::RDS
     #   @return [Types::DBSecurityGroup]
     class CreateDBSecurityGroupResult < Struct.new(
       :db_security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5662,7 +5732,8 @@ module Aws::RDS
       :min_acu,
       :publicly_accessible,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5736,7 +5807,8 @@ module Aws::RDS
       :endpoint,
       :db_shard_group_arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5781,7 +5853,8 @@ module Aws::RDS
       :db_snapshot_identifier,
       :db_instance_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5792,7 +5865,8 @@ module Aws::RDS
     #   @return [Types::DBSnapshot]
     class CreateDBSnapshotResult < Struct.new(
       :db_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5828,7 +5902,8 @@ module Aws::RDS
       :db_subnet_group_description,
       :subnet_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5839,7 +5914,8 @@ module Aws::RDS
     #   @return [Types::DBSubnetGroup]
     class CreateDBSubnetGroupResult < Struct.new(
       :db_subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5925,7 +6001,8 @@ module Aws::RDS
       :source_ids,
       :enabled,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5934,7 +6011,8 @@ module Aws::RDS
     #   @return [Types::EventSubscription]
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6038,7 +6116,8 @@ module Aws::RDS
       :database_name,
       :storage_encrypted,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6047,7 +6126,8 @@ module Aws::RDS
     #   @return [Types::GlobalCluster]
     class CreateGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6099,7 +6179,8 @@ module Aws::RDS
       :tags,
       :data_filter,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6163,7 +6244,8 @@ module Aws::RDS
       :errors,
       :data_filter,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6271,7 +6353,8 @@ module Aws::RDS
       :major_engine_version,
       :option_group_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6280,7 +6363,8 @@ module Aws::RDS
     #   @return [Types::OptionGroup]
     class CreateOptionGroupResult < Struct.new(
       :option_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6379,7 +6463,8 @@ module Aws::RDS
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6389,7 +6474,8 @@ module Aws::RDS
     #   @return [Types::TenantDatabase]
     class CreateTenantDatabaseResult < Struct.new(
       :tenant_database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6400,7 +6486,8 @@ module Aws::RDS
     #   @return [String]
     class CustomAvailabilityZoneNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6414,7 +6501,8 @@ module Aws::RDS
     class CustomDBEngineVersionAMI < Struct.new(
       :image_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6423,7 +6511,8 @@ module Aws::RDS
     #   @return [String]
     class CustomDBEngineVersionAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6432,7 +6521,8 @@ module Aws::RDS
     #   @return [String]
     class CustomDBEngineVersionNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6441,7 +6531,8 @@ module Aws::RDS
     #   @return [String]
     class CustomDBEngineVersionQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6915,7 +7006,8 @@ module Aws::RDS
       :cluster_scalability_type,
       :certificate_details,
       :engine_lifecycle_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6924,7 +7016,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7049,7 +7142,8 @@ module Aws::RDS
       :iops,
       :aws_backup_recovery_point_arn,
       :storage_throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7063,7 +7157,8 @@ module Aws::RDS
     class DBClusterAutomatedBackupMessage < Struct.new(
       :marker,
       :db_cluster_automated_backups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7072,7 +7167,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterAutomatedBackupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7082,7 +7178,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterAutomatedBackupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7131,7 +7228,8 @@ module Aws::RDS
       :backtracked_from,
       :backtrack_request_creation_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7145,7 +7243,8 @@ module Aws::RDS
     class DBClusterBacktrackMessage < Struct.new(
       :marker,
       :db_cluster_backtracks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7155,7 +7254,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterBacktrackNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7231,7 +7331,8 @@ module Aws::RDS
       :static_members,
       :excluded_members,
       :db_cluster_endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7240,7 +7341,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterEndpointAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7258,7 +7360,8 @@ module Aws::RDS
     class DBClusterEndpointMessage < Struct.new(
       :marker,
       :db_cluster_endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7267,7 +7370,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterEndpointNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7276,7 +7380,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterEndpointQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7301,7 +7406,8 @@ module Aws::RDS
       :is_cluster_writer,
       :db_cluster_parameter_group_status,
       :promotion_tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7315,7 +7421,8 @@ module Aws::RDS
     class DBClusterMessage < Struct.new(
       :marker,
       :db_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7325,7 +7432,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7339,7 +7447,8 @@ module Aws::RDS
     class DBClusterOptionGroupStatus < Struct.new(
       :db_cluster_option_group_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7362,7 +7471,8 @@ module Aws::RDS
       :db_parameter_group_family,
       :description,
       :db_cluster_parameter_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7373,7 +7483,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterParameterGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7391,7 +7502,8 @@ module Aws::RDS
     class DBClusterParameterGroupsMessage < Struct.new(
       :marker,
       :db_cluster_parameter_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7401,7 +7513,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7437,7 +7550,8 @@ module Aws::RDS
       :role_arn,
       :status,
       :feature_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7446,7 +7560,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterRoleAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7455,7 +7570,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterRoleNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7464,7 +7580,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterRoleQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7601,7 +7718,8 @@ module Aws::RDS
       :storage_type,
       :db_cluster_resource_id,
       :storage_throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7610,7 +7728,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterSnapshotAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7635,7 +7754,8 @@ module Aws::RDS
     class DBClusterSnapshotAttribute < Struct.new(
       :attribute_name,
       :attribute_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7653,7 +7773,8 @@ module Aws::RDS
     class DBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7671,7 +7792,8 @@ module Aws::RDS
     class DBClusterSnapshotMessage < Struct.new(
       :marker,
       :db_cluster_snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7681,7 +7803,8 @@ module Aws::RDS
     #   @return [String]
     class DBClusterSnapshotNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7703,7 +7826,8 @@ module Aws::RDS
       :normal,
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7887,7 +8011,8 @@ module Aws::RDS
       :supports_local_write_forwarding,
       :supports_integrations,
       :serverless_v2_features_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7904,7 +8029,8 @@ module Aws::RDS
     class DBEngineVersionMessage < Struct.new(
       :marker,
       :db_engine_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8407,7 +8533,8 @@ module Aws::RDS
       :is_storage_config_upgrade_available,
       :multi_tenant,
       :engine_lifecycle_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8416,7 +8543,8 @@ module Aws::RDS
     #   @return [String]
     class DBInstanceAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8572,7 +8700,8 @@ module Aws::RDS
       :aws_backup_recovery_point_arn,
       :dedicated_log_volume,
       :multi_tenant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8589,7 +8718,8 @@ module Aws::RDS
     class DBInstanceAutomatedBackupMessage < Struct.new(
       :marker,
       :db_instance_automated_backups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8598,7 +8728,8 @@ module Aws::RDS
     #   @return [String]
     class DBInstanceAutomatedBackupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8609,7 +8740,8 @@ module Aws::RDS
     #   @return [String]
     class DBInstanceAutomatedBackupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8619,7 +8751,8 @@ module Aws::RDS
     #   @return [String]
     class DBInstanceAutomatedBackupsReplication < Struct.new(
       :db_instance_automated_backups_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8636,7 +8769,8 @@ module Aws::RDS
     class DBInstanceMessage < Struct.new(
       :marker,
       :db_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8646,7 +8780,8 @@ module Aws::RDS
     #   @return [String]
     class DBInstanceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8655,7 +8790,8 @@ module Aws::RDS
     #   @return [String]
     class DBInstanceNotReadyFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8692,7 +8828,8 @@ module Aws::RDS
       :role_arn,
       :feature_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8701,7 +8838,8 @@ module Aws::RDS
     #   @return [String]
     class DBInstanceRoleAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8711,7 +8849,8 @@ module Aws::RDS
     #   @return [String]
     class DBInstanceRoleNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8720,7 +8859,8 @@ module Aws::RDS
     #   @return [String]
     class DBInstanceRoleQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8744,7 +8884,8 @@ module Aws::RDS
       :normal,
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8754,7 +8895,8 @@ module Aws::RDS
     #   @return [String]
     class DBLogFileNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8774,7 +8916,8 @@ module Aws::RDS
       :engine,
       :major_engine_version,
       :supported_engine_lifecycles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8797,7 +8940,8 @@ module Aws::RDS
       :db_parameter_group_family,
       :description,
       :db_parameter_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8806,7 +8950,8 @@ module Aws::RDS
     #   @return [String]
     class DBParameterGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8817,7 +8962,8 @@ module Aws::RDS
     #   @return [String]
     class DBParameterGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8827,7 +8973,8 @@ module Aws::RDS
     #   @return [String]
     class DBParameterGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8901,7 +9048,8 @@ module Aws::RDS
     class DBParameterGroupStatus < Struct.new(
       :db_parameter_group_name,
       :parameter_apply_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8918,7 +9066,8 @@ module Aws::RDS
     class DBParameterGroupsMessage < Struct.new(
       :marker,
       :db_parameter_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9034,7 +9183,8 @@ module Aws::RDS
       :updated_date,
       :endpoint_network_type,
       :target_connection_network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9043,7 +9193,8 @@ module Aws::RDS
     #   @return [String]
     class DBProxyAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9123,7 +9274,8 @@ module Aws::RDS
       :target_role,
       :is_default,
       :endpoint_network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9132,7 +9284,8 @@ module Aws::RDS
     #   @return [String]
     class DBProxyEndpointAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9141,7 +9294,8 @@ module Aws::RDS
     #   @return [String]
     class DBProxyEndpointNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9150,7 +9304,8 @@ module Aws::RDS
     #   @return [String]
     class DBProxyEndpointQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9159,7 +9314,8 @@ module Aws::RDS
     #   @return [String]
     class DBProxyNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9168,7 +9324,8 @@ module Aws::RDS
     #   @return [String]
     class DBProxyQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9209,7 +9366,8 @@ module Aws::RDS
       :type,
       :role,
       :target_health,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9218,7 +9376,8 @@ module Aws::RDS
     #   @return [String]
     class DBProxyTargetAlreadyRegisteredFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9262,7 +9421,8 @@ module Aws::RDS
       :connection_pool_config,
       :created_date,
       :updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9271,7 +9431,8 @@ module Aws::RDS
     #   @return [String]
     class DBProxyTargetGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9280,7 +9441,8 @@ module Aws::RDS
     #   @return [String]
     class DBProxyTargetNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9442,7 +9604,8 @@ module Aws::RDS
       :additional_info,
       :links,
       :issue_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9451,7 +9614,8 @@ module Aws::RDS
     #   @return [Types::DBRecommendation]
     class DBRecommendationMessage < Struct.new(
       :db_recommendation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9466,7 +9630,8 @@ module Aws::RDS
     class DBRecommendationsMessage < Struct.new(
       :db_recommendations,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9502,7 +9667,8 @@ module Aws::RDS
       :ec2_security_groups,
       :ip_ranges,
       :db_security_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9512,7 +9678,8 @@ module Aws::RDS
     #   @return [String]
     class DBSecurityGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9548,7 +9715,8 @@ module Aws::RDS
     class DBSecurityGroupMembership < Struct.new(
       :db_security_group_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9565,7 +9733,8 @@ module Aws::RDS
     class DBSecurityGroupMessage < Struct.new(
       :marker,
       :db_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9575,7 +9744,8 @@ module Aws::RDS
     #   @return [String]
     class DBSecurityGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9584,7 +9754,8 @@ module Aws::RDS
     #   @return [String]
     class DBSecurityGroupNotSupportedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9594,7 +9765,8 @@ module Aws::RDS
     #   @return [String]
     class DBSecurityGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9668,7 +9840,8 @@ module Aws::RDS
       :endpoint,
       :db_shard_group_arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9677,7 +9850,8 @@ module Aws::RDS
     #   @return [String]
     class DBShardGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9686,7 +9860,8 @@ module Aws::RDS
     #   @return [String]
     class DBShardGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9862,7 +10037,8 @@ module Aws::RDS
       :dedicated_log_volume,
       :multi_tenant,
       :snapshot_availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9872,7 +10048,8 @@ module Aws::RDS
     #   @return [String]
     class DBSnapshotAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9897,7 +10074,8 @@ module Aws::RDS
     class DBSnapshotAttribute < Struct.new(
       :attribute_name,
       :attribute_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9915,7 +10093,8 @@ module Aws::RDS
     class DBSnapshotAttributesResult < Struct.new(
       :db_snapshot_identifier,
       :db_snapshot_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9932,7 +10111,8 @@ module Aws::RDS
     class DBSnapshotMessage < Struct.new(
       :marker,
       :db_snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9942,7 +10122,8 @@ module Aws::RDS
     #   @return [String]
     class DBSnapshotNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10006,7 +10187,8 @@ module Aws::RDS
       :db_snapshot_tenant_database_arn,
       :nchar_character_set_name,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10015,7 +10197,8 @@ module Aws::RDS
     #   @return [String]
     class DBSnapshotTenantDatabaseNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10030,7 +10213,8 @@ module Aws::RDS
     class DBSnapshotTenantDatabasesMessage < Struct.new(
       :marker,
       :db_snapshot_tenant_databases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10087,7 +10271,8 @@ module Aws::RDS
       :subnets,
       :db_subnet_group_arn,
       :supported_network_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10097,7 +10282,8 @@ module Aws::RDS
     #   @return [String]
     class DBSubnetGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10106,7 +10292,8 @@ module Aws::RDS
     #   @return [String]
     class DBSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10123,7 +10310,8 @@ module Aws::RDS
     class DBSubnetGroupMessage < Struct.new(
       :marker,
       :db_subnet_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10133,7 +10321,8 @@ module Aws::RDS
     #   @return [String]
     class DBSubnetGroupNotAllowedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10143,7 +10332,8 @@ module Aws::RDS
     #   @return [String]
     class DBSubnetGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10153,7 +10343,8 @@ module Aws::RDS
     #   @return [String]
     class DBSubnetGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10163,7 +10354,8 @@ module Aws::RDS
     #   @return [String]
     class DBSubnetQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10173,7 +10365,8 @@ module Aws::RDS
     #   @return [String]
     class DBUpgradeDependencyFailureFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10196,7 +10389,8 @@ module Aws::RDS
     class DeleteBlueGreenDeploymentRequest < Struct.new(
       :blue_green_deployment_identifier,
       :delete_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10210,7 +10404,8 @@ module Aws::RDS
     #   @return [Types::BlueGreenDeployment]
     class DeleteBlueGreenDeploymentResponse < Struct.new(
       :blue_green_deployment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10247,7 +10442,8 @@ module Aws::RDS
     class DeleteCustomDBEngineVersionMessage < Struct.new(
       :engine,
       :engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10431,7 +10627,8 @@ module Aws::RDS
       :supports_local_write_forwarding,
       :supports_integrations,
       :serverless_v2_features_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10440,7 +10637,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBClusterAutomatedBackupMessage < Struct.new(
       :db_cluster_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10450,7 +10648,8 @@ module Aws::RDS
     #   @return [Types::DBClusterAutomatedBackup]
     class DeleteDBClusterAutomatedBackupResult < Struct.new(
       :db_cluster_automated_backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10459,7 +10658,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBClusterEndpointMessage < Struct.new(
       :db_cluster_endpoint_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10535,7 +10735,8 @@ module Aws::RDS
       :static_members,
       :excluded_members,
       :db_cluster_endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10592,7 +10793,8 @@ module Aws::RDS
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
       :delete_automated_backups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10614,7 +10816,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10640,7 +10843,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class DeleteDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10651,7 +10855,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBClusterSnapshotMessage < Struct.new(
       :db_cluster_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10662,7 +10867,8 @@ module Aws::RDS
     #   @return [Types::DBClusterSnapshot]
     class DeleteDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10678,7 +10884,8 @@ module Aws::RDS
     class DeleteDBInstanceAutomatedBackupMessage < Struct.new(
       :dbi_resource_id,
       :db_instance_automated_backups_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10688,7 +10895,8 @@ module Aws::RDS
     #   @return [Types::DBInstanceAutomatedBackup]
     class DeleteDBInstanceAutomatedBackupResult < Struct.new(
       :db_instance_automated_backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10748,7 +10956,8 @@ module Aws::RDS
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
       :delete_automated_backups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10762,7 +10971,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class DeleteDBInstanceResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10784,7 +10994,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10793,7 +11004,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBProxyEndpointRequest < Struct.new(
       :db_proxy_endpoint_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10802,7 +11014,8 @@ module Aws::RDS
     #   @return [Types::DBProxyEndpoint]
     class DeleteDBProxyEndpointResponse < Struct.new(
       :db_proxy_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10811,7 +11024,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBProxyRequest < Struct.new(
       :db_proxy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10820,7 +11034,8 @@ module Aws::RDS
     #   @return [Types::DBProxy]
     class DeleteDBProxyResponse < Struct.new(
       :db_proxy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10848,7 +11063,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBSecurityGroupMessage < Struct.new(
       :db_security_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10857,7 +11073,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBShardGroupMessage < Struct.new(
       :db_shard_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10931,7 +11148,8 @@ module Aws::RDS
       :endpoint,
       :db_shard_group_arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10942,7 +11160,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBSnapshotMessage < Struct.new(
       :db_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10953,7 +11172,8 @@ module Aws::RDS
     #   @return [Types::DBSnapshot]
     class DeleteDBSnapshotResult < Struct.new(
       :db_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10969,7 +11189,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10979,7 +11200,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10988,7 +11210,8 @@ module Aws::RDS
     #   @return [Types::EventSubscription]
     class DeleteEventSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10997,7 +11220,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11006,7 +11230,8 @@ module Aws::RDS
     #   @return [Types::GlobalCluster]
     class DeleteGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11015,7 +11240,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteIntegrationMessage < Struct.new(
       :integration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11079,7 +11305,8 @@ module Aws::RDS
       :errors,
       :data_filter,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11092,7 +11319,8 @@ module Aws::RDS
     #   @return [String]
     class DeleteOptionGroupMessage < Struct.new(
       :option_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11126,7 +11354,8 @@ module Aws::RDS
       :tenant_db_name,
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11136,7 +11365,8 @@ module Aws::RDS
     #   @return [Types::TenantDatabase]
     class DeleteTenantDatabaseResult < Struct.new(
       :tenant_database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11157,18 +11387,21 @@ module Aws::RDS
       :target_group_name,
       :db_instance_identifiers,
       :db_cluster_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterDBProxyTargetsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class DescribeAccountAttributesMessage < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11240,7 +11473,8 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11254,7 +11488,8 @@ module Aws::RDS
     class DescribeBlueGreenDeploymentsResponse < Struct.new(
       :blue_green_deployments,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11290,7 +11525,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11344,7 +11580,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11441,7 +11678,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11481,7 +11719,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11517,7 +11756,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11576,7 +11816,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11594,7 +11835,8 @@ module Aws::RDS
     class DescribeDBClusterParametersOutput < Struct.new(
       :parameters,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11604,7 +11846,8 @@ module Aws::RDS
     #   @return [String]
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
       :db_cluster_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11617,7 +11860,8 @@ module Aws::RDS
     #   @return [Types::DBClusterSnapshotAttributesResult]
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_attributes_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11741,7 +11985,8 @@ module Aws::RDS
       :include_shared,
       :include_public,
       :db_cluster_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11816,7 +12061,8 @@ module Aws::RDS
       :max_records,
       :marker,
       :include_shared,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12055,7 +12301,8 @@ module Aws::RDS
       :list_supported_character_sets,
       :list_supported_timezones,
       :include_all,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12126,7 +12373,8 @@ module Aws::RDS
       :max_records,
       :marker,
       :db_instance_automated_backups_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12194,7 +12442,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12212,7 +12461,8 @@ module Aws::RDS
       :log_file_name,
       :last_written,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12252,7 +12502,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12266,7 +12517,8 @@ module Aws::RDS
     class DescribeDBLogFilesResponse < Struct.new(
       :describe_db_log_files,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12387,7 +12639,8 @@ module Aws::RDS
       :major_engine_version,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12402,7 +12655,8 @@ module Aws::RDS
     class DescribeDBMajorEngineVersionsResponse < Struct.new(
       :db_major_engine_versions,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12439,7 +12693,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12483,7 +12738,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12500,7 +12756,8 @@ module Aws::RDS
     class DescribeDBParametersOutput < Struct.new(
       :parameters,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12529,7 +12786,8 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12544,7 +12802,8 @@ module Aws::RDS
     class DescribeDBProxiesResponse < Struct.new(
       :db_proxies,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12579,7 +12838,8 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12594,7 +12854,8 @@ module Aws::RDS
     class DescribeDBProxyEndpointsResponse < Struct.new(
       :db_proxy_endpoints,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12626,7 +12887,8 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12641,7 +12903,8 @@ module Aws::RDS
     class DescribeDBProxyTargetGroupsResponse < Struct.new(
       :target_groups,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12673,7 +12936,8 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12688,7 +12952,8 @@ module Aws::RDS
     class DescribeDBProxyTargetsResponse < Struct.new(
       :targets,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12870,7 +13135,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12901,7 +13167,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12933,7 +13200,8 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12946,7 +13214,8 @@ module Aws::RDS
     class DescribeDBShardGroupsResponse < Struct.new(
       :db_shard_groups,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12956,7 +13225,8 @@ module Aws::RDS
     #   @return [String]
     class DescribeDBSnapshotAttributesMessage < Struct.new(
       :db_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12969,7 +13239,8 @@ module Aws::RDS
     #   @return [Types::DBSnapshotAttributesResult]
     class DescribeDBSnapshotAttributesResult < Struct.new(
       :db_snapshot_attributes_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13087,7 +13358,8 @@ module Aws::RDS
       :max_records,
       :marker,
       :dbi_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13225,7 +13497,8 @@ module Aws::RDS
       :include_shared,
       :include_public,
       :dbi_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13255,7 +13528,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13285,7 +13559,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13294,7 +13569,8 @@ module Aws::RDS
     #   @return [Types::EngineDefaults]
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
       :engine_defaults,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13573,7 +13849,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13582,7 +13859,8 @@ module Aws::RDS
     #   @return [Types::EngineDefaults]
     class DescribeEngineDefaultParametersResult < Struct.new(
       :engine_defaults,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13598,7 +13876,8 @@ module Aws::RDS
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13629,7 +13908,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13719,7 +13999,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13807,7 +14088,8 @@ module Aws::RDS
       :marker,
       :max_records,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13842,7 +14124,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13869,7 +14152,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13883,7 +14167,8 @@ module Aws::RDS
     class DescribeIntegrationsResponse < Struct.new(
       :marker,
       :integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13985,7 +14270,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14091,7 +14377,8 @@ module Aws::RDS
       :max_records,
       :engine_name,
       :major_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14108,7 +14395,8 @@ module Aws::RDS
     class DescribeOptionGroupsOutput < Struct.new(
       :option_groups_list,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14263,7 +14551,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14309,7 +14598,8 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14373,7 +14663,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14431,7 +14722,8 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14465,7 +14757,8 @@ module Aws::RDS
       :max_records,
       :marker,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14519,7 +14812,8 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14529,7 +14823,8 @@ module Aws::RDS
     #   @return [String]
     class DescribeValidDBInstanceModificationsMessage < Struct.new(
       :db_instance_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14542,7 +14837,8 @@ module Aws::RDS
     #   @return [Types::ValidDBInstanceModificationsMessage]
     class DescribeValidDBInstanceModificationsResult < Struct.new(
       :valid_db_instance_modifications_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14551,7 +14847,8 @@ module Aws::RDS
     #   @return [String]
     class DisableHttpEndpointRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14564,7 +14861,8 @@ module Aws::RDS
     class DisableHttpEndpointResponse < Struct.new(
       :resource_arn,
       :http_endpoint_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14578,7 +14876,8 @@ module Aws::RDS
     class DocLink < Struct.new(
       :text,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14612,7 +14911,8 @@ module Aws::RDS
       :ou,
       :auth_secret_arn,
       :dns_ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14622,7 +14922,8 @@ module Aws::RDS
     #   @return [String]
     class DomainNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14636,7 +14937,8 @@ module Aws::RDS
     class DoubleRange < Struct.new(
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14688,7 +14990,8 @@ module Aws::RDS
       :log_file_name,
       :marker,
       :number_of_lines,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14706,7 +15009,8 @@ module Aws::RDS
       :log_file_data,
       :marker,
       :additional_data_pending,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14746,7 +15050,8 @@ module Aws::RDS
       :ec2_security_group_name,
       :ec2_security_group_id,
       :ec2_security_group_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14755,7 +15060,8 @@ module Aws::RDS
     #   @return [String]
     class Ec2ImagePropertiesNotSupportedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14764,7 +15070,8 @@ module Aws::RDS
     #   @return [String]
     class EnableHttpEndpointRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14777,7 +15084,8 @@ module Aws::RDS
     class EnableHttpEndpointResponse < Struct.new(
       :resource_arn,
       :http_endpoint_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14815,7 +15123,8 @@ module Aws::RDS
       :address,
       :port,
       :hosted_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14837,7 +15146,8 @@ module Aws::RDS
       :db_parameter_group_family,
       :marker,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14867,7 +15177,8 @@ module Aws::RDS
       :event_categories,
       :date,
       :source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14882,7 +15193,8 @@ module Aws::RDS
     class EventCategoriesMap < Struct.new(
       :source_type,
       :event_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14892,7 +15204,8 @@ module Aws::RDS
     #   @return [Array<Types::EventCategoriesMap>]
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14941,7 +15254,8 @@ module Aws::RDS
       :event_categories_list,
       :enabled,
       :event_subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14950,7 +15264,8 @@ module Aws::RDS
     #   @return [String]
     class EventSubscriptionQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14968,7 +15283,8 @@ module Aws::RDS
     class EventSubscriptionsMessage < Struct.new(
       :marker,
       :event_subscriptions_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14986,7 +15302,8 @@ module Aws::RDS
     class EventsMessage < Struct.new(
       :marker,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15117,7 +15434,8 @@ module Aws::RDS
       :failure_cause,
       :warning_message,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15126,7 +15444,8 @@ module Aws::RDS
     #   @return [String]
     class ExportTaskAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15135,7 +15454,8 @@ module Aws::RDS
     #   @return [String]
     class ExportTaskNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15150,7 +15470,8 @@ module Aws::RDS
     class ExportTasksMessage < Struct.new(
       :marker,
       :export_tasks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15173,7 +15494,8 @@ module Aws::RDS
     class FailoverDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :target_db_instance_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15199,7 +15521,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class FailoverDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15242,7 +15565,8 @@ module Aws::RDS
       :target_db_cluster_identifier,
       :allow_data_loss,
       :switchover,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15251,7 +15575,8 @@ module Aws::RDS
     #   @return [Types::GlobalCluster]
     class FailoverGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15296,7 +15621,8 @@ module Aws::RDS
       :from_db_cluster_arn,
       :to_db_cluster_arn,
       :is_data_loss_allowed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15354,7 +15680,8 @@ module Aws::RDS
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15427,7 +15754,8 @@ module Aws::RDS
       :endpoint,
       :failover_state,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15437,7 +15765,8 @@ module Aws::RDS
     #   @return [String]
     class GlobalClusterAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15467,7 +15796,8 @@ module Aws::RDS
       :is_writer,
       :global_write_forwarding_status,
       :synchronization_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15476,7 +15806,8 @@ module Aws::RDS
     #   @return [String]
     class GlobalClusterNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15485,7 +15816,8 @@ module Aws::RDS
     #   @return [String]
     class GlobalClusterQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15500,7 +15832,8 @@ module Aws::RDS
     class GlobalClustersMessage < Struct.new(
       :marker,
       :global_clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15514,7 +15847,8 @@ module Aws::RDS
     class IPRange < Struct.new(
       :status,
       :cidrip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15523,7 +15857,8 @@ module Aws::RDS
     #   @return [String]
     class IamRoleMissingPermissionsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15532,7 +15867,8 @@ module Aws::RDS
     #   @return [String]
     class IamRoleNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15542,7 +15878,8 @@ module Aws::RDS
     #   @return [String]
     class InstanceQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15553,7 +15890,8 @@ module Aws::RDS
     #   @return [String]
     class InsufficientAvailableIPsInSubnetFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15562,7 +15900,8 @@ module Aws::RDS
     #   @return [String]
     class InsufficientDBClusterCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15572,7 +15911,8 @@ module Aws::RDS
     #   @return [String]
     class InsufficientDBInstanceCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15583,7 +15923,8 @@ module Aws::RDS
     #   @return [String]
     class InsufficientStorageClusterCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15647,7 +15988,8 @@ module Aws::RDS
       :errors,
       :data_filter,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15656,7 +15998,8 @@ module Aws::RDS
     #   @return [String]
     class IntegrationAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15667,7 +16010,8 @@ module Aws::RDS
     #   @return [String]
     class IntegrationConflictOperationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15681,7 +16025,8 @@ module Aws::RDS
     class IntegrationError < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15690,7 +16035,8 @@ module Aws::RDS
     #   @return [String]
     class IntegrationNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15699,7 +16045,8 @@ module Aws::RDS
     #   @return [String]
     class IntegrationQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15709,7 +16056,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidBlueGreenDeploymentStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15718,7 +16066,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidCustomDBEngineVersionStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15728,7 +16077,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBClusterAutomatedBackupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15740,7 +16090,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBClusterCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15749,7 +16100,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBClusterEndpointStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15758,7 +16110,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBClusterSnapshotStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15767,7 +16120,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBClusterStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15777,7 +16131,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBInstanceAutomatedBackupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15786,7 +16141,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBInstanceStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15797,7 +16153,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBParameterGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15806,7 +16163,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBProxyEndpointStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15815,7 +16173,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBProxyStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15824,7 +16183,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBSecurityGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15833,7 +16193,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBShardGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15842,7 +16203,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBSnapshotStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15852,7 +16214,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBSubnetGroupFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15861,7 +16224,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBSubnetGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15870,7 +16234,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidDBSubnetStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15879,7 +16244,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidEventSubscriptionStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15888,7 +16254,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidExportOnlyFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15897,7 +16264,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidExportSourceStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15906,7 +16274,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidExportTaskStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15915,7 +16284,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidGlobalClusterStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15924,7 +16294,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidIntegrationStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15933,7 +16304,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidOptionGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15942,7 +16314,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidResourceStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15951,7 +16324,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidRestoreFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15961,7 +16335,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidS3BucketFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15970,7 +16345,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidSubnet < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15980,7 +16356,8 @@ module Aws::RDS
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15990,7 +16367,8 @@ module Aws::RDS
     #   @return [Types::PerformanceIssueDetails]
     class IssueDetails < Struct.new(
       :performance_issue_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15999,7 +16377,8 @@ module Aws::RDS
     #   @return [String]
     class KMSKeyNotAccessibleFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16013,7 +16392,8 @@ module Aws::RDS
     class LimitlessDatabase < Struct.new(
       :status,
       :min_required_acu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16030,7 +16410,8 @@ module Aws::RDS
     class ListTagsForResourceMessage < Struct.new(
       :resource_name,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16078,7 +16459,8 @@ module Aws::RDS
       :secret_arn,
       :secret_status,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16087,7 +16469,8 @@ module Aws::RDS
     #   @return [String]
     class MaxDBShardGroupLimitReached < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16109,7 +16492,8 @@ module Aws::RDS
       :references,
       :statistics_details,
       :metric_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16119,7 +16503,8 @@ module Aws::RDS
     #   @return [Types::PerformanceInsightsMetricQuery]
     class MetricQuery < Struct.new(
       :performance_insights_metric_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16133,7 +16518,8 @@ module Aws::RDS
     class MetricReference < Struct.new(
       :name,
       :reference_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16147,7 +16533,8 @@ module Aws::RDS
     class MinimumEngineVersionPerAllowedValue < Struct.new(
       :allowed_value,
       :minimum_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16162,7 +16549,8 @@ module Aws::RDS
     class ModifyActivityStreamRequest < Struct.new(
       :resource_arn,
       :audit_policy_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16191,7 +16579,8 @@ module Aws::RDS
       :mode,
       :engine_native_audit_fields_included,
       :policy_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16208,7 +16597,8 @@ module Aws::RDS
     class ModifyCertificatesMessage < Struct.new(
       :certificate_identifier,
       :remove_customer_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16222,7 +16612,8 @@ module Aws::RDS
     #   @return [Types::Certificate]
     class ModifyCertificatesResult < Struct.new(
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16266,7 +16657,8 @@ module Aws::RDS
       :capacity,
       :seconds_before_timeout,
       :timeout_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16293,7 +16685,8 @@ module Aws::RDS
       :current_capacity,
       :seconds_before_timeout,
       :timeout_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16354,7 +16747,8 @@ module Aws::RDS
       :engine_version,
       :description,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16538,7 +16932,8 @@ module Aws::RDS
       :supports_local_write_forwarding,
       :supports_integrations,
       :serverless_v2_features_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16561,7 +16956,8 @@ module Aws::RDS
       :endpoint_type,
       :static_members,
       :excluded_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16637,7 +17033,8 @@ module Aws::RDS
       :static_members,
       :excluded_members,
       :db_cluster_endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17242,7 +17639,8 @@ module Aws::RDS
       :enable_limitless_database,
       :ca_certificate_identifier,
       :master_user_authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17266,7 +17664,8 @@ module Aws::RDS
     class ModifyDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17291,7 +17690,8 @@ module Aws::RDS
     #   @return [String]
     class ModifyDBClusterParameterGroupOutput < Struct.new(
       :db_cluster_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17317,7 +17717,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class ModifyDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17356,7 +17757,8 @@ module Aws::RDS
       :attribute_name,
       :values_to_add,
       :values_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17369,7 +17771,8 @@ module Aws::RDS
     #   @return [Types::DBClusterSnapshotAttributesResult]
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
       :db_cluster_snapshot_attributes_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18414,7 +18817,8 @@ module Aws::RDS
       :dedicated_log_volume,
       :multi_tenant,
       :master_user_authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18428,7 +18832,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class ModifyDBInstanceResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18462,7 +18867,8 @@ module Aws::RDS
     class ModifyDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18473,7 +18879,8 @@ module Aws::RDS
     #   @return [String]
     class ModifyDBParameterGroupOutput < Struct.new(
       :db_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18494,7 +18901,8 @@ module Aws::RDS
       :db_proxy_endpoint_name,
       :new_db_proxy_endpoint_name,
       :vpc_security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18503,7 +18911,8 @@ module Aws::RDS
     #   @return [Types::DBProxyEndpoint]
     class ModifyDBProxyEndpointResponse < Struct.new(
       :db_proxy_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18547,7 +18956,8 @@ module Aws::RDS
       :debug_logging,
       :role_arn,
       :security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18556,7 +18966,8 @@ module Aws::RDS
     #   @return [Types::DBProxy]
     class ModifyDBProxyResponse < Struct.new(
       :db_proxy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18578,7 +18989,8 @@ module Aws::RDS
       :db_proxy_name,
       :connection_pool_config,
       :new_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18587,7 +18999,8 @@ module Aws::RDS
     #   @return [Types::DBProxyTargetGroup]
     class ModifyDBProxyTargetGroupResponse < Struct.new(
       :db_proxy_target_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18617,7 +19030,8 @@ module Aws::RDS
       :locale,
       :status,
       :recommended_action_updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18649,7 +19063,8 @@ module Aws::RDS
       :max_acu,
       :min_acu,
       :compute_redundancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18723,7 +19138,8 @@ module Aws::RDS
       :endpoint,
       :db_shard_group_arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18762,7 +19178,8 @@ module Aws::RDS
       :attribute_name,
       :values_to_add,
       :values_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18775,7 +19192,8 @@ module Aws::RDS
     #   @return [Types::DBSnapshotAttributesResult]
     class ModifyDBSnapshotAttributeResult < Struct.new(
       :db_snapshot_attributes_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18854,7 +19272,8 @@ module Aws::RDS
       :db_snapshot_identifier,
       :engine_version,
       :option_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18865,7 +19284,8 @@ module Aws::RDS
     #   @return [Types::DBSnapshot]
     class ModifyDBSnapshotResult < Struct.new(
       :db_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18887,7 +19307,8 @@ module Aws::RDS
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18898,7 +19319,8 @@ module Aws::RDS
     #   @return [Types::DBSubnetGroup]
     class ModifyDBSubnetGroupResult < Struct.new(
       :db_subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18929,7 +19351,8 @@ module Aws::RDS
       :source_type,
       :event_categories,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18938,7 +19361,8 @@ module Aws::RDS
     #   @return [Types::EventSubscription]
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19000,7 +19424,8 @@ module Aws::RDS
       :deletion_protection,
       :engine_version,
       :allow_major_version_upgrade,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19009,7 +19434,8 @@ module Aws::RDS
     #   @return [Types::GlobalCluster]
     class ModifyGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19032,7 +19458,8 @@ module Aws::RDS
       :integration_name,
       :data_filter,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19096,7 +19523,8 @@ module Aws::RDS
       :errors,
       :data_filter,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19119,7 +19547,8 @@ module Aws::RDS
       :options_to_include,
       :options_to_remove,
       :apply_immediately,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19128,7 +19557,8 @@ module Aws::RDS
     #   @return [Types::OptionGroup]
     class ModifyOptionGroupResult < Struct.new(
       :option_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19272,7 +19702,8 @@ module Aws::RDS
       :manage_master_user_password,
       :rotate_master_user_password,
       :master_user_secret_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19282,7 +19713,8 @@ module Aws::RDS
     #   @return [Types::TenantDatabase]
     class ModifyTenantDatabaseResult < Struct.new(
       :tenant_database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19291,7 +19723,8 @@ module Aws::RDS
     #   @return [String]
     class NetworkTypeNotSupported < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19333,7 +19766,8 @@ module Aws::RDS
       :option_settings,
       :db_security_group_memberships,
       :vpc_security_group_memberships,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19363,7 +19797,8 @@ module Aws::RDS
       :db_security_group_memberships,
       :vpc_security_group_memberships,
       :option_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19419,7 +19854,8 @@ module Aws::RDS
       :source_option_group,
       :source_account_id,
       :copy_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19428,7 +19864,8 @@ module Aws::RDS
     #   @return [String]
     class OptionGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19450,7 +19887,8 @@ module Aws::RDS
     class OptionGroupMembership < Struct.new(
       :option_group_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19459,7 +19897,8 @@ module Aws::RDS
     #   @return [String]
     class OptionGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19537,7 +19976,8 @@ module Aws::RDS
       :option_group_option_settings,
       :option_group_option_versions,
       :copyable_cross_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19575,7 +20015,8 @@ module Aws::RDS
       :is_modifiable,
       :is_required,
       :minimum_engine_version_per_allowed_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19592,7 +20033,8 @@ module Aws::RDS
     class OptionGroupOptionsMessage < Struct.new(
       :option_group_options,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19601,7 +20043,8 @@ module Aws::RDS
     #   @return [String]
     class OptionGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19643,7 +20086,8 @@ module Aws::RDS
       :allowed_values,
       :is_modifiable,
       :is_collection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19658,7 +20102,8 @@ module Aws::RDS
     class OptionVersion < Struct.new(
       :version,
       :is_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19828,7 +20273,8 @@ module Aws::RDS
       :max_storage_throughput_per_iops,
       :supports_dedicated_log_volume,
       :supports_http_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19846,7 +20292,8 @@ module Aws::RDS
     class OrderableDBInstanceOptionsMessage < Struct.new(
       :orderable_db_instance_options,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19859,7 +20306,8 @@ module Aws::RDS
     #   @return [String]
     class Outpost < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19914,7 +20362,8 @@ module Aws::RDS
       :minimum_engine_version,
       :apply_method,
       :supported_engine_modes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19928,7 +20377,8 @@ module Aws::RDS
     class PendingCloudwatchLogsExports < Struct.new(
       :log_types_to_enable,
       :log_types_to_disable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20000,7 +20450,8 @@ module Aws::RDS
       :opt_in_status,
       :current_apply_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20018,7 +20469,8 @@ module Aws::RDS
     class PendingMaintenanceActionsMessage < Struct.new(
       :pending_maintenance_actions,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20127,7 +20579,8 @@ module Aws::RDS
       :engine,
       :dedicated_log_volume,
       :multi_tenant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20166,7 +20619,8 @@ module Aws::RDS
       :dimensions,
       :group,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20213,7 +20667,8 @@ module Aws::RDS
     class PerformanceInsightsMetricQuery < Struct.new(
       :group_by,
       :metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20235,7 +20690,8 @@ module Aws::RDS
       :end_time,
       :metrics,
       :analysis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20247,7 +20703,8 @@ module Aws::RDS
     #   @return [String]
     class PointInTimeRestoreNotEnabledFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20331,7 +20788,8 @@ module Aws::RDS
     class ProcessorFeature < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20350,7 +20808,8 @@ module Aws::RDS
     #   @return [String]
     class PromoteReadReplicaDBClusterMessage < Struct.new(
       :db_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20376,7 +20835,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class PromoteReadReplicaDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20435,7 +20895,8 @@ module Aws::RDS
       :db_instance_identifier,
       :backup_retention_period,
       :preferred_backup_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20449,7 +20910,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class PromoteReadReplicaResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20458,7 +20920,8 @@ module Aws::RDS
     #   @return [String]
     class ProvisionedIopsNotAvailableInAZFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20488,7 +20951,8 @@ module Aws::RDS
       :reserved_db_instance_id,
       :db_instance_count,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20499,7 +20963,8 @@ module Aws::RDS
     #   @return [Types::ReservedDBInstance]
     class PurchaseReservedDBInstancesOfferingResult < Struct.new(
       :reserved_db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20523,7 +20988,8 @@ module Aws::RDS
       :from,
       :to,
       :step,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20541,7 +21007,8 @@ module Aws::RDS
       :interconnect_subnet_id,
       :transit_gateway_multicast_domain_id,
       :replica_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20556,7 +21023,8 @@ module Aws::RDS
     #   @return [String]
     class RebootDBClusterMessage < Struct.new(
       :db_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20582,7 +21050,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class RebootDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20603,7 +21072,8 @@ module Aws::RDS
     class RebootDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :force_failover,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20617,7 +21087,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class RebootDBInstanceResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20626,7 +21097,8 @@ module Aws::RDS
     #   @return [String]
     class RebootDBShardGroupMessage < Struct.new(
       :db_shard_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20700,7 +21172,8 @@ module Aws::RDS
       :endpoint,
       :db_shard_group_arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20779,7 +21252,8 @@ module Aws::RDS
       :status,
       :issue_details,
       :context_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20793,7 +21267,8 @@ module Aws::RDS
     class RecommendedActionParameter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20819,7 +21294,8 @@ module Aws::RDS
     class RecommendedActionUpdate < Struct.new(
       :action_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20834,7 +21310,8 @@ module Aws::RDS
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20844,7 +21321,8 @@ module Aws::RDS
     #   @return [Types::ScalarReferenceDetails]
     class ReferenceDetails < Struct.new(
       :scalar_reference_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20865,7 +21343,8 @@ module Aws::RDS
       :target_group_name,
       :db_instance_identifiers,
       :db_cluster_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20874,7 +21353,8 @@ module Aws::RDS
     #   @return [Array<Types::DBProxyTarget>]
     class RegisterDBProxyTargetsResponse < Struct.new(
       :db_proxy_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20887,7 +21367,8 @@ module Aws::RDS
     class RemoveFromGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
       :db_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20896,7 +21377,8 @@ module Aws::RDS
     #   @return [Types::GlobalCluster]
     class RemoveFromGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20915,7 +21397,8 @@ module Aws::RDS
       :db_cluster_identifier,
       :role_arn,
       :feature_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20934,7 +21417,8 @@ module Aws::RDS
       :db_instance_identifier,
       :role_arn,
       :feature_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20949,7 +21433,8 @@ module Aws::RDS
     class RemoveSourceIdentifierFromSubscriptionMessage < Struct.new(
       :subscription_name,
       :source_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20958,7 +21443,8 @@ module Aws::RDS
     #   @return [Types::EventSubscription]
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20976,7 +21462,8 @@ module Aws::RDS
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21051,7 +21538,8 @@ module Aws::RDS
       :recurring_charges,
       :reserved_db_instance_arn,
       :lease_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21060,7 +21548,8 @@ module Aws::RDS
     #   @return [String]
     class ReservedDBInstanceAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21077,7 +21566,8 @@ module Aws::RDS
     class ReservedDBInstanceMessage < Struct.new(
       :marker,
       :reserved_db_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21086,7 +21576,8 @@ module Aws::RDS
     #   @return [String]
     class ReservedDBInstanceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21095,7 +21586,8 @@ module Aws::RDS
     #   @return [String]
     class ReservedDBInstanceQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21141,7 +21633,8 @@ module Aws::RDS
       :offering_type,
       :multi_az,
       :recurring_charges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21158,7 +21651,8 @@ module Aws::RDS
     class ReservedDBInstancesOfferingMessage < Struct.new(
       :marker,
       :reserved_db_instances_offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21167,7 +21661,8 @@ module Aws::RDS
     #   @return [String]
     class ReservedDBInstancesOfferingNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21188,7 +21683,8 @@ module Aws::RDS
       :db_cluster_parameter_group_name,
       :reset_all_parameters,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21213,7 +21709,8 @@ module Aws::RDS
     #   @return [String]
     class ResetDBClusterParameterGroupOutput < Struct.new(
       :db_cluster_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21263,7 +21760,8 @@ module Aws::RDS
       :db_parameter_group_name,
       :reset_all_parameters,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21274,7 +21772,8 @@ module Aws::RDS
     #   @return [String]
     class ResetDBParameterGroupOutput < Struct.new(
       :db_parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21283,7 +21782,8 @@ module Aws::RDS
     #   @return [String]
     class ResourceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21297,7 +21797,8 @@ module Aws::RDS
     class ResourcePendingMaintenanceActions < Struct.new(
       :resource_identifier,
       :pending_maintenance_action_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21671,7 +22172,8 @@ module Aws::RDS
       :master_user_secret_kms_key_id,
       :storage_type,
       :engine_lifecycle_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21697,7 +22199,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class RestoreDBClusterFromS3Result < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22132,7 +22635,8 @@ module Aws::RDS
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
       :engine_lifecycle_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22158,7 +22662,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class RestoreDBClusterFromSnapshotResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22583,7 +23088,8 @@ module Aws::RDS
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
       :engine_lifecycle_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22609,7 +23115,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class RestoreDBClusterToPointInTimeResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23184,7 +23691,8 @@ module Aws::RDS
       :engine_lifecycle_support,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23198,7 +23706,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class RestoreDBInstanceFromDBSnapshotResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23719,7 +24228,8 @@ module Aws::RDS
       :dedicated_log_volume,
       :ca_certificate_identifier,
       :engine_lifecycle_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23733,7 +24243,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class RestoreDBInstanceFromS3Result < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24364,7 +24875,8 @@ module Aws::RDS
       :engine_lifecycle_support,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24378,7 +24890,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class RestoreDBInstanceToPointInTimeResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24392,7 +24905,8 @@ module Aws::RDS
     class RestoreWindow < Struct.new(
       :earliest_time,
       :latest_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24429,7 +24943,8 @@ module Aws::RDS
       :ec2_security_group_name,
       :ec2_security_group_id,
       :ec2_security_group_owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24440,7 +24955,8 @@ module Aws::RDS
     #   @return [Types::DBSecurityGroup]
     class RevokeDBSecurityGroupIngressResult < Struct.new(
       :db_security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24449,7 +24965,8 @@ module Aws::RDS
     #   @return [String]
     class SNSInvalidTopicFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24458,7 +24975,8 @@ module Aws::RDS
     #   @return [String]
     class SNSNoAuthorizationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24467,7 +24985,8 @@ module Aws::RDS
     #   @return [String]
     class SNSTopicArnNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24477,7 +24996,8 @@ module Aws::RDS
     #   @return [Float]
     class ScalarReferenceDetails < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24533,7 +25053,8 @@ module Aws::RDS
       :seconds_until_auto_pause,
       :timeout_action,
       :seconds_before_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24576,7 +25097,8 @@ module Aws::RDS
       :seconds_until_auto_pause,
       :timeout_action,
       :seconds_before_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24599,7 +25121,8 @@ module Aws::RDS
     class ServerlessV2FeaturesSupport < Struct.new(
       :min_capacity,
       :max_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24628,7 +25151,8 @@ module Aws::RDS
       :min_capacity,
       :max_capacity,
       :seconds_until_auto_pause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24662,7 +25186,8 @@ module Aws::RDS
       :min_capacity,
       :max_capacity,
       :seconds_until_auto_pause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24671,7 +25196,8 @@ module Aws::RDS
     #   @return [String]
     class SharedSnapshotQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24681,7 +25207,8 @@ module Aws::RDS
     #   @return [String]
     class SnapshotQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24690,7 +25217,8 @@ module Aws::RDS
     #   @return [String]
     class SourceClusterNotSupportedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24699,7 +25227,8 @@ module Aws::RDS
     #   @return [String]
     class SourceDatabaseNotSupportedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24708,7 +25237,8 @@ module Aws::RDS
     #   @return [String]
     class SourceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24730,7 +25260,8 @@ module Aws::RDS
       :endpoint,
       :status,
       :supports_db_instance_automated_backups_replication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24748,7 +25279,8 @@ module Aws::RDS
     class SourceRegionMessage < Struct.new(
       :marker,
       :source_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24779,7 +25311,8 @@ module Aws::RDS
       :kms_key_id,
       :apply_immediately,
       :engine_native_audit_fields_included,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24809,7 +25342,8 @@ module Aws::RDS
       :mode,
       :apply_immediately,
       :engine_native_audit_fields_included,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24819,7 +25353,8 @@ module Aws::RDS
     #   @return [String]
     class StartDBClusterMessage < Struct.new(
       :db_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24845,7 +25380,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class StartDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24887,7 +25423,8 @@ module Aws::RDS
       :backup_retention_period,
       :kms_key_id,
       :pre_signed_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24897,7 +25434,8 @@ module Aws::RDS
     #   @return [Types::DBInstanceAutomatedBackup]
     class StartDBInstanceAutomatedBackupsReplicationResult < Struct.new(
       :db_instance_automated_backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24906,7 +25444,8 @@ module Aws::RDS
     #   @return [String]
     class StartDBInstanceMessage < Struct.new(
       :db_instance_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24920,7 +25459,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class StartDBInstanceResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25026,7 +25566,8 @@ module Aws::RDS
       :kms_key_id,
       :s3_prefix,
       :export_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25157,7 +25698,8 @@ module Aws::RDS
       :failure_cause,
       :warning_message,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25172,7 +25714,8 @@ module Aws::RDS
     class StopActivityStreamRequest < Struct.new(
       :resource_arn,
       :apply_immediately,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25190,7 +25733,8 @@ module Aws::RDS
       :kms_key_id,
       :kinesis_stream_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25200,7 +25744,8 @@ module Aws::RDS
     #   @return [String]
     class StopDBClusterMessage < Struct.new(
       :db_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25226,7 +25771,8 @@ module Aws::RDS
     #   @return [Types::DBCluster]
     class StopDBClusterResult < Struct.new(
       :db_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25237,7 +25783,8 @@ module Aws::RDS
     #   @return [String]
     class StopDBInstanceAutomatedBackupsReplicationMessage < Struct.new(
       :source_db_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25247,7 +25794,8 @@ module Aws::RDS
     #   @return [Types::DBInstanceAutomatedBackup]
     class StopDBInstanceAutomatedBackupsReplicationResult < Struct.new(
       :db_instance_automated_backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25260,7 +25808,8 @@ module Aws::RDS
     class StopDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :db_snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25274,7 +25823,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class StopDBInstanceResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25284,7 +25834,8 @@ module Aws::RDS
     #   @return [String]
     class StorageQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25294,7 +25845,8 @@ module Aws::RDS
     #   @return [String]
     class StorageTypeNotAvailableFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25303,7 +25855,8 @@ module Aws::RDS
     #   @return [String]
     class StorageTypeNotSupportedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25330,7 +25883,8 @@ module Aws::RDS
       :subnet_availability_zone,
       :subnet_outpost,
       :subnet_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25339,7 +25893,8 @@ module Aws::RDS
     #   @return [String]
     class SubnetAlreadyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25348,7 +25903,8 @@ module Aws::RDS
     #   @return [String]
     class SubscriptionAlreadyExistFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25357,7 +25913,8 @@ module Aws::RDS
     #   @return [String]
     class SubscriptionCategoryNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25366,7 +25923,8 @@ module Aws::RDS
     #   @return [String]
     class SubscriptionNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25408,7 +25966,8 @@ module Aws::RDS
       :lifecycle_support_name,
       :lifecycle_support_start_date,
       :lifecycle_support_end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25430,7 +25989,8 @@ module Aws::RDS
     class SwitchoverBlueGreenDeploymentRequest < Struct.new(
       :blue_green_deployment_identifier,
       :switchover_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25444,7 +26004,8 @@ module Aws::RDS
     #   @return [Types::BlueGreenDeployment]
     class SwitchoverBlueGreenDeploymentResponse < Struct.new(
       :blue_green_deployment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25502,7 +26063,8 @@ module Aws::RDS
       :source_member,
       :target_member,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25522,7 +26084,8 @@ module Aws::RDS
     class SwitchoverGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
       :target_db_cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25531,7 +26094,8 @@ module Aws::RDS
     #   @return [Types::GlobalCluster]
     class SwitchoverGlobalClusterResult < Struct.new(
       :global_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25546,7 +26110,8 @@ module Aws::RDS
     #   @return [String]
     class SwitchoverReadReplicaMessage < Struct.new(
       :db_instance_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25560,7 +26125,8 @@ module Aws::RDS
     #   @return [Types::DBInstance]
     class SwitchoverReadReplicaResult < Struct.new(
       :db_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25578,7 +26144,8 @@ module Aws::RDS
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25588,7 +26155,8 @@ module Aws::RDS
     #   @return [Array<Types::Tag>]
     class TagListMessage < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25611,7 +26179,8 @@ module Aws::RDS
       :state,
       :reason,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25682,7 +26251,8 @@ module Aws::RDS
       :pending_modified_values,
       :master_user_secret,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25692,7 +26262,8 @@ module Aws::RDS
     #   @return [String]
     class TenantDatabaseAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25701,7 +26272,8 @@ module Aws::RDS
     #   @return [String]
     class TenantDatabaseNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25716,7 +26288,8 @@ module Aws::RDS
     class TenantDatabasePendingModifiedValues < Struct.new(
       :master_user_password,
       :tenant_db_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25726,7 +26299,8 @@ module Aws::RDS
     #   @return [String]
     class TenantDatabaseQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25743,7 +26317,8 @@ module Aws::RDS
     class TenantDatabasesMessage < Struct.new(
       :marker,
       :tenant_databases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25760,7 +26335,8 @@ module Aws::RDS
     #   @return [String]
     class Timezone < Struct.new(
       :timezone_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25769,7 +26345,8 @@ module Aws::RDS
     #   @return [String]
     class UnsupportedDBEngineVersionFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25827,7 +26404,8 @@ module Aws::RDS
       :supports_limitless_database,
       :supports_local_write_forwarding,
       :supports_integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25873,7 +26451,8 @@ module Aws::RDS
       :secret_arn,
       :iam_auth,
       :client_password_auth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25904,7 +26483,8 @@ module Aws::RDS
       :secret_arn,
       :iam_auth,
       :client_password_auth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25926,7 +26506,8 @@ module Aws::RDS
       :storage,
       :valid_processor_features,
       :supports_dedicated_log_volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25969,7 +26550,8 @@ module Aws::RDS
       :supports_storage_autoscaling,
       :provisioned_storage_throughput,
       :storage_throughput_to_iops_ratio,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25984,7 +26566,8 @@ module Aws::RDS
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

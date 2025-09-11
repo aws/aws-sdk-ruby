@@ -20,7 +20,8 @@ module Aws::SSO
       :account_id,
       :account_name,
       :email_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::SSO
       :role_name,
       :account_id,
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +49,8 @@ module Aws::SSO
     #   @return [Types::RoleCredentials]
     class GetRoleCredentialsResponse < Struct.new(
       :role_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +60,8 @@ module Aws::SSO
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +83,8 @@ module Aws::SSO
       :max_results,
       :access_token,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +98,8 @@ module Aws::SSO
     class ListAccountRolesResponse < Struct.new(
       :next_token,
       :role_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +118,8 @@ module Aws::SSO
       :next_token,
       :max_results,
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +133,8 @@ module Aws::SSO
     class ListAccountsResponse < Struct.new(
       :next_token,
       :account_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +144,8 @@ module Aws::SSO
     #   @return [String]
     class LogoutRequest < Struct.new(
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +154,8 @@ module Aws::SSO
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -171,7 +181,8 @@ module Aws::SSO
       :secret_access_key,
       :session_token,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -190,7 +201,8 @@ module Aws::SSO
     class RoleInfo < Struct.new(
       :role_name,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +212,8 @@ module Aws::SSO
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,7 +223,8 @@ module Aws::SSO
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

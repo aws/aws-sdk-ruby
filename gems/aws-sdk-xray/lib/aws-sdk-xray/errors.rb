@@ -44,7 +44,7 @@ module Aws::XRay
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::XRay::Types::InvalidPolicyRevisionIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::XRay
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::XRay::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::XRay
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::XRay::Types::LockoutPreventionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::XRay
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::XRay::Types::MalformedPolicyDocumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::XRay
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::XRay::Types::PolicyCountLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::XRay
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::XRay::Types::PolicySizeLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::XRay
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::XRay::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::XRay
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::XRay::Types::RuleLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::XRay
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::XRay::Types::ThrottledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -166,7 +166,7 @@ module Aws::XRay
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::XRay::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

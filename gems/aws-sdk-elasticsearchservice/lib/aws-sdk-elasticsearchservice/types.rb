@@ -12,7 +12,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class AcceptInboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::ElasticsearchService
     #   @return [Types::InboundCrossClusterSearchConnection]
     class AcceptInboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +34,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +50,8 @@ module Aws::ElasticsearchService
     class AccessPoliciesStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +65,8 @@ module Aws::ElasticsearchService
     class AddTagsRequest < Struct.new(
       :arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +117,8 @@ module Aws::ElasticsearchService
     class AdditionalLimit < Struct.new(
       :limit_name,
       :limit_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +138,8 @@ module Aws::ElasticsearchService
     class AdvancedOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +165,8 @@ module Aws::ElasticsearchService
       :saml_options,
       :anonymous_auth_disable_date,
       :anonymous_auth_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +192,8 @@ module Aws::ElasticsearchService
       :master_user_options,
       :saml_options,
       :anonymous_auth_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +207,8 @@ module Aws::ElasticsearchService
     class AdvancedSecurityOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +228,8 @@ module Aws::ElasticsearchService
     class AssociatePackageRequest < Struct.new(
       :package_id,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +245,8 @@ module Aws::ElasticsearchService
     #   @return [Types::DomainPackageDetails]
     class AssociatePackageResponse < Struct.new(
       :domain_package_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +261,8 @@ module Aws::ElasticsearchService
     class AuthorizeVpcEndpointAccessRequest < Struct.new(
       :domain_name,
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +274,8 @@ module Aws::ElasticsearchService
     #   @return [Types::AuthorizedPrincipal]
     class AuthorizeVpcEndpointAccessResponse < Struct.new(
       :authorized_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +290,8 @@ module Aws::ElasticsearchService
     class AuthorizedPrincipal < Struct.new(
       :principal_type,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -290,7 +305,8 @@ module Aws::ElasticsearchService
     class AutoTune < Struct.new(
       :auto_tune_type,
       :auto_tune_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -300,7 +316,8 @@ module Aws::ElasticsearchService
     #   @return [Types::ScheduledAutoTuneDetails]
     class AutoTuneDetails < Struct.new(
       :scheduled_auto_tune_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +335,8 @@ module Aws::ElasticsearchService
       :start_at,
       :duration,
       :cron_expression_for_recurrence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -336,7 +354,8 @@ module Aws::ElasticsearchService
       :desired_state,
       :rollback_on_disable,
       :maintenance_schedules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +369,8 @@ module Aws::ElasticsearchService
     class AutoTuneOptionsInput < Struct.new(
       :desired_state,
       :maintenance_schedules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +384,8 @@ module Aws::ElasticsearchService
     class AutoTuneOptionsOutput < Struct.new(
       :state,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +399,8 @@ module Aws::ElasticsearchService
     class AutoTuneOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +430,8 @@ module Aws::ElasticsearchService
       :state,
       :error_message,
       :pending_deletion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -423,7 +446,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class BaseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +461,8 @@ module Aws::ElasticsearchService
     class CancelDomainConfigChangeRequest < Struct.new(
       :domain_name,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +480,8 @@ module Aws::ElasticsearchService
       :dry_run,
       :cancelled_change_ids,
       :cancelled_change_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -465,7 +491,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class CancelElasticsearchServiceSoftwareUpdateRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +502,8 @@ module Aws::ElasticsearchService
     #   @return [Types::ServiceSoftwareOptions]
     class CancelElasticsearchServiceSoftwareUpdateResponse < Struct.new(
       :service_software_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +521,8 @@ module Aws::ElasticsearchService
       :property_name,
       :cancelled_value,
       :active_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,7 +552,8 @@ module Aws::ElasticsearchService
       :start_time,
       :last_updated_time,
       :initiated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +575,8 @@ module Aws::ElasticsearchService
       :status,
       :description,
       :last_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -591,7 +622,8 @@ module Aws::ElasticsearchService
       :config_change_status,
       :last_updated_time,
       :initiated_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -618,7 +650,8 @@ module Aws::ElasticsearchService
       :user_pool_id,
       :identity_pool_id,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +665,8 @@ module Aws::ElasticsearchService
     class CognitoOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +676,8 @@ module Aws::ElasticsearchService
     #   @return [Boolean]
     class ColdStorageOptions < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -667,7 +702,8 @@ module Aws::ElasticsearchService
     class CompatibleVersionsMap < Struct.new(
       :source_version,
       :target_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +713,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +785,8 @@ module Aws::ElasticsearchService
       :advanced_security_options,
       :auto_tune_options,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +796,8 @@ module Aws::ElasticsearchService
     #   @return [Types::ElasticsearchDomainStatus]
     class CreateElasticsearchDomainResponse < Struct.new(
       :domain_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -776,7 +815,8 @@ module Aws::ElasticsearchService
       :source_domain_info,
       :destination_domain_info,
       :connection_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +842,8 @@ module Aws::ElasticsearchService
       :connection_alias,
       :connection_status,
       :cross_cluster_search_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +871,8 @@ module Aws::ElasticsearchService
       :package_type,
       :package_description,
       :package_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -846,7 +888,8 @@ module Aws::ElasticsearchService
     #   @return [Types::PackageDetails]
     class CreatePackageResponse < Struct.new(
       :package_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +907,8 @@ module Aws::ElasticsearchService
       :domain_arn,
       :vpc_options,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,7 +918,8 @@ module Aws::ElasticsearchService
     #   @return [Types::VpcEndpoint]
     class CreateVpcEndpointResponse < Struct.new(
       :vpc_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +929,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class DeleteElasticsearchDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +940,8 @@ module Aws::ElasticsearchService
     #   @return [Types::ElasticsearchDomainStatus]
     class DeleteElasticsearchDomainResponse < Struct.new(
       :domain_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +951,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class DeleteInboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +962,8 @@ module Aws::ElasticsearchService
     #   @return [Types::InboundCrossClusterSearchConnection]
     class DeleteInboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +973,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class DeleteOutboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -934,7 +984,8 @@ module Aws::ElasticsearchService
     #   @return [Types::OutboundCrossClusterSearchConnection]
     class DeleteOutboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,7 +1001,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class DeletePackageRequest < Struct.new(
       :package_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -966,7 +1018,8 @@ module Aws::ElasticsearchService
     #   @return [Types::PackageDetails]
     class DeletePackageResponse < Struct.new(
       :package_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -976,7 +1029,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class DeleteVpcEndpointRequest < Struct.new(
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -987,7 +1041,8 @@ module Aws::ElasticsearchService
     #   @return [Types::VpcEndpointSummary]
     class DeleteVpcEndpointResponse < Struct.new(
       :vpc_endpoint_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1060,8 @@ module Aws::ElasticsearchService
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1019,7 +1075,8 @@ module Aws::ElasticsearchService
     class DescribeDomainAutoTunesResponse < Struct.new(
       :auto_tunes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1094,8 @@ module Aws::ElasticsearchService
     class DescribeDomainChangeProgressRequest < Struct.new(
       :domain_name,
       :change_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1108,8 @@ module Aws::ElasticsearchService
     #   @return [Types::ChangeProgressStatusDetails]
     class DescribeDomainChangeProgressResponse < Struct.new(
       :change_progress_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1119,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class DescribeElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1070,7 +1130,8 @@ module Aws::ElasticsearchService
     #   @return [Types::ElasticsearchDomainConfig]
     class DescribeElasticsearchDomainConfigResponse < Struct.new(
       :domain_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1141,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class DescribeElasticsearchDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1152,8 @@ module Aws::ElasticsearchService
     #   @return [Types::ElasticsearchDomainStatus]
     class DescribeElasticsearchDomainResponse < Struct.new(
       :domain_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1163,8 @@ module Aws::ElasticsearchService
     #   @return [Array<String>]
     class DescribeElasticsearchDomainsRequest < Struct.new(
       :domain_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1174,8 @@ module Aws::ElasticsearchService
     #   @return [Array<Types::ElasticsearchDomainStatus>]
     class DescribeElasticsearchDomainsResponse < Struct.new(
       :domain_status_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1219,8 @@ module Aws::ElasticsearchService
       :domain_name,
       :instance_type,
       :elasticsearch_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1245,8 @@ module Aws::ElasticsearchService
     #   @return [Hash<String, Types::Limits>]
     class DescribeElasticsearchInstanceTypeLimitsResponse < Struct.new(
       :limits_by_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1207,7 +1274,8 @@ module Aws::ElasticsearchService
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1222,7 +1290,8 @@ module Aws::ElasticsearchService
     class DescribeInboundCrossClusterSearchConnectionsResponse < Struct.new(
       :cross_cluster_search_connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1250,7 +1319,8 @@ module Aws::ElasticsearchService
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1335,8 @@ module Aws::ElasticsearchService
     class DescribeOutboundCrossClusterSearchConnectionsResponse < Struct.new(
       :cross_cluster_search_connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1350,8 @@ module Aws::ElasticsearchService
     class DescribePackagesFilter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1303,7 +1375,8 @@ module Aws::ElasticsearchService
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1322,7 +1395,8 @@ module Aws::ElasticsearchService
     class DescribePackagesResponse < Struct.new(
       :package_details_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1341,7 +1415,8 @@ module Aws::ElasticsearchService
       :reserved_elasticsearch_instance_offering_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1355,7 +1430,8 @@ module Aws::ElasticsearchService
     class DescribeReservedElasticsearchInstanceOfferingsResponse < Struct.new(
       :next_token,
       :reserved_elasticsearch_instance_offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1450,8 @@ module Aws::ElasticsearchService
       :reserved_elasticsearch_instance_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1388,7 +1465,8 @@ module Aws::ElasticsearchService
     class DescribeReservedElasticsearchInstancesResponse < Struct.new(
       :next_token,
       :reserved_elasticsearch_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1476,8 @@ module Aws::ElasticsearchService
     #   @return [Array<String>]
     class DescribeVpcEndpointsRequest < Struct.new(
       :vpc_endpoint_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,7 +1492,8 @@ module Aws::ElasticsearchService
     class DescribeVpcEndpointsResponse < Struct.new(
       :vpc_endpoints,
       :vpc_endpoint_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1503,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class DisabledOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1443,7 +1524,8 @@ module Aws::ElasticsearchService
     class DissociatePackageRequest < Struct.new(
       :package_id,
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1459,7 +1541,8 @@ module Aws::ElasticsearchService
     #   @return [Types::DomainPackageDetails]
     class DissociatePackageResponse < Struct.new(
       :domain_package_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1492,7 +1575,8 @@ module Aws::ElasticsearchService
       :custom_endpoint_enabled,
       :custom_endpoint,
       :custom_endpoint_certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1506,7 +1590,8 @@ module Aws::ElasticsearchService
     class DomainEndpointOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1519,7 +1604,8 @@ module Aws::ElasticsearchService
     class DomainInfo < Struct.new(
       :domain_name,
       :engine_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1534,7 +1620,8 @@ module Aws::ElasticsearchService
       :owner_id,
       :domain_name,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1662,8 @@ module Aws::ElasticsearchService
       :package_version,
       :reference_path,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1595,7 +1683,8 @@ module Aws::ElasticsearchService
     class DryRunResults < Struct.new(
       :deployment_type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1609,7 +1698,8 @@ module Aws::ElasticsearchService
     class Duration < Struct.new(
       :value,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1725,8 @@ module Aws::ElasticsearchService
       :volume_size,
       :iops,
       :throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1649,7 +1740,8 @@ module Aws::ElasticsearchService
     class EBSOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,7 +1791,8 @@ module Aws::ElasticsearchService
       :warm_type,
       :warm_count,
       :cold_storage_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1713,7 +1806,8 @@ module Aws::ElasticsearchService
     class ElasticsearchClusterConfigStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1783,7 +1877,8 @@ module Aws::ElasticsearchService
       :auto_tune_options,
       :change_progress_details,
       :modifying_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1896,7 +1991,8 @@ module Aws::ElasticsearchService
       :change_progress_details,
       :domain_processing_status,
       :modifying_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1910,7 +2006,8 @@ module Aws::ElasticsearchService
     class ElasticsearchVersionStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1924,7 +2021,8 @@ module Aws::ElasticsearchService
     class EncryptionAtRestOptions < Struct.new(
       :enabled,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1938,7 +2036,8 @@ module Aws::ElasticsearchService
     class EncryptionAtRestOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +2048,8 @@ module Aws::ElasticsearchService
     class ErrorDetails < Struct.new(
       :error_type,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1972,7 +2072,8 @@ module Aws::ElasticsearchService
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1988,7 +2089,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class GetCompatibleElasticsearchVersionsRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2010,7 +2112,8 @@ module Aws::ElasticsearchService
     #   @return [Array<Types::CompatibleVersionsMap>]
     class GetCompatibleElasticsearchVersionsResponse < Struct.new(
       :compatible_elasticsearch_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2034,7 +2137,8 @@ module Aws::ElasticsearchService
       :package_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2056,7 +2160,8 @@ module Aws::ElasticsearchService
       :package_id,
       :package_version_history_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2085,7 +2190,8 @@ module Aws::ElasticsearchService
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2115,7 +2221,8 @@ module Aws::ElasticsearchService
     class GetUpgradeHistoryResponse < Struct.new(
       :upgrade_histories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2131,7 +2238,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class GetUpgradeStatusRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2174,7 +2282,8 @@ module Aws::ElasticsearchService
       :upgrade_step,
       :step_status,
       :upgrade_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2196,7 +2305,8 @@ module Aws::ElasticsearchService
       :destination_domain_info,
       :cross_cluster_search_connection_id,
       :connection_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2218,7 +2328,8 @@ module Aws::ElasticsearchService
     class InboundCrossClusterSearchConnectionStatus < Struct.new(
       :status_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2239,7 +2350,8 @@ module Aws::ElasticsearchService
     class InstanceCountLimits < Struct.new(
       :minimum_instance_count,
       :maximum_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2259,7 +2371,8 @@ module Aws::ElasticsearchService
     #   @return [Types::InstanceCountLimits]
     class InstanceLimits < Struct.new(
       :instance_count_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2269,7 +2382,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class InternalException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2279,7 +2393,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2289,7 +2404,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class InvalidTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2299,7 +2415,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2340,7 +2457,8 @@ module Aws::ElasticsearchService
       :storage_types,
       :instance_limits,
       :additional_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,7 +2468,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class ListDomainNamesRequest < Struct.new(
       :engine_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2360,7 +2479,8 @@ module Aws::ElasticsearchService
     #   @return [Array<Types::DomainInfo>]
     class ListDomainNamesResponse < Struct.new(
       :domain_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2384,7 +2504,8 @@ module Aws::ElasticsearchService
       :package_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2403,7 +2524,8 @@ module Aws::ElasticsearchService
     class ListDomainsForPackageResponse < Struct.new(
       :domain_package_details_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2440,7 +2562,8 @@ module Aws::ElasticsearchService
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2469,7 +2592,8 @@ module Aws::ElasticsearchService
     class ListElasticsearchInstanceTypesResponse < Struct.new(
       :elasticsearch_instance_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2635,8 @@ module Aws::ElasticsearchService
     class ListElasticsearchVersionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2535,7 +2660,8 @@ module Aws::ElasticsearchService
     class ListElasticsearchVersionsResponse < Struct.new(
       :elasticsearch_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2559,7 +2685,8 @@ module Aws::ElasticsearchService
       :domain_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2579,7 +2706,8 @@ module Aws::ElasticsearchService
     class ListPackagesForDomainResponse < Struct.new(
       :domain_package_details_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2589,7 +2717,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class ListTagsRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2599,7 +2728,8 @@ module Aws::ElasticsearchService
     #   @return [Array<Types::Tag>]
     class ListTagsResponse < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2614,7 +2744,8 @@ module Aws::ElasticsearchService
     class ListVpcEndpointAccessRequest < Struct.new(
       :domain_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2629,7 +2760,8 @@ module Aws::ElasticsearchService
     class ListVpcEndpointAccessResponse < Struct.new(
       :authorized_principal_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2643,7 +2775,8 @@ module Aws::ElasticsearchService
     class ListVpcEndpointsForDomainRequest < Struct.new(
       :domain_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2657,7 +2790,8 @@ module Aws::ElasticsearchService
     class ListVpcEndpointsForDomainResponse < Struct.new(
       :vpc_endpoint_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2667,7 +2801,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class ListVpcEndpointsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2681,7 +2816,8 @@ module Aws::ElasticsearchService
     class ListVpcEndpointsResponse < Struct.new(
       :vpc_endpoint_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2701,7 +2837,8 @@ module Aws::ElasticsearchService
     class LogPublishingOption < Struct.new(
       :cloud_watch_logs_log_group_arn,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2715,7 +2852,8 @@ module Aws::ElasticsearchService
     class LogPublishingOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2733,7 +2871,8 @@ module Aws::ElasticsearchService
       :master_user_arn,
       :master_user_name,
       :master_user_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2759,7 +2898,8 @@ module Aws::ElasticsearchService
       :active_value,
       :pending_value,
       :value_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2769,7 +2909,8 @@ module Aws::ElasticsearchService
     #   @return [Boolean]
     class NodeToNodeEncryptionOptions < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2783,7 +2924,8 @@ module Aws::ElasticsearchService
     class NodeToNodeEncryptionOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2809,7 +2951,8 @@ module Aws::ElasticsearchService
       :update_version,
       :state,
       :pending_deletion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2840,7 +2983,8 @@ module Aws::ElasticsearchService
       :cross_cluster_search_connection_id,
       :connection_alias,
       :connection_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +3008,8 @@ module Aws::ElasticsearchService
     class OutboundCrossClusterSearchConnectionStatus < Struct.new(
       :status_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2904,7 +3049,8 @@ module Aws::ElasticsearchService
       :last_updated_at,
       :available_package_version,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2918,7 +3064,8 @@ module Aws::ElasticsearchService
     class PackageSource < Struct.new(
       :s3_bucket_name,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2936,7 +3083,8 @@ module Aws::ElasticsearchService
       :package_version,
       :commit_message,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2954,7 +3102,8 @@ module Aws::ElasticsearchService
       :reserved_elasticsearch_instance_offering_id,
       :reservation_name,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2968,7 +3117,8 @@ module Aws::ElasticsearchService
     class PurchaseReservedElasticsearchInstanceOfferingResponse < Struct.new(
       :reserved_elasticsearch_instance_id,
       :reservation_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2982,7 +3132,8 @@ module Aws::ElasticsearchService
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2992,7 +3143,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class RejectInboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3002,7 +3154,8 @@ module Aws::ElasticsearchService
     #   @return [Types::InboundCrossClusterSearchConnection]
     class RejectInboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3016,7 +3169,8 @@ module Aws::ElasticsearchService
     class RemoveTagsRequest < Struct.new(
       :arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3074,7 +3228,8 @@ module Aws::ElasticsearchService
       :state,
       :payment_option,
       :recurring_charges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3118,7 +3273,8 @@ module Aws::ElasticsearchService
       :currency_code,
       :payment_option,
       :recurring_charges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3133,7 +3289,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3143,7 +3300,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3158,13 +3316,15 @@ module Aws::ElasticsearchService
     class RevokeVpcEndpointAccessRequest < Struct.new(
       :domain_name,
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Container for response parameters to the <code><a>RevokeVpcEndpointAccess</a></code> operation. The response body for this operation is empty.</p>
     class RevokeVpcEndpointAccessResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3178,7 +3338,8 @@ module Aws::ElasticsearchService
     class SAMLIdp < Struct.new(
       :metadata_content,
       :entity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3212,7 +3373,8 @@ module Aws::ElasticsearchService
       :subject_key,
       :roles_key,
       :session_timeout_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3238,7 +3400,8 @@ module Aws::ElasticsearchService
       :subject_key,
       :roles_key,
       :session_timeout_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3260,7 +3423,8 @@ module Aws::ElasticsearchService
       :action_type,
       :action,
       :severity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3298,7 +3462,8 @@ module Aws::ElasticsearchService
       :description,
       :automated_update_date,
       :optional_deployment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3308,7 +3473,8 @@ module Aws::ElasticsearchService
     #   @return [Integer]
     class SnapshotOptions < Struct.new(
       :automated_snapshot_start_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3322,7 +3488,8 @@ module Aws::ElasticsearchService
     class SnapshotOptionsStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3332,7 +3499,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class StartElasticsearchServiceSoftwareUpdateRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3342,7 +3510,8 @@ module Aws::ElasticsearchService
     #   @return [Types::ServiceSoftwareOptions]
     class StartElasticsearchServiceSoftwareUpdateResponse < Struct.new(
       :service_software_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3382,7 +3551,8 @@ module Aws::ElasticsearchService
       :storage_type_name,
       :storage_sub_type_name,
       :storage_type_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3424,7 +3594,8 @@ module Aws::ElasticsearchService
     class StorageTypeLimit < Struct.new(
       :limit_name,
       :limit_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3439,7 +3610,8 @@ module Aws::ElasticsearchService
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3510,7 +3682,8 @@ module Aws::ElasticsearchService
       :encryption_at_rest_options,
       :auto_tune_options,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3524,7 +3697,8 @@ module Aws::ElasticsearchService
     class UpdateElasticsearchDomainConfigResponse < Struct.new(
       :domain_config,
       :dry_run_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3552,7 +3726,8 @@ module Aws::ElasticsearchService
       :package_source,
       :package_description,
       :commit_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3568,7 +3743,8 @@ module Aws::ElasticsearchService
     #   @return [Types::PackageDetails]
     class UpdatePackageResponse < Struct.new(
       :package_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3582,7 +3758,8 @@ module Aws::ElasticsearchService
     class UpdateVpcEndpointRequest < Struct.new(
       :vpc_endpoint_id,
       :vpc_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3592,7 +3769,8 @@ module Aws::ElasticsearchService
     #   @return [Types::VpcEndpoint]
     class UpdateVpcEndpointResponse < Struct.new(
       :vpc_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3619,7 +3797,8 @@ module Aws::ElasticsearchService
       :domain_name,
       :target_version,
       :perform_check_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3650,7 +3829,8 @@ module Aws::ElasticsearchService
       :target_version,
       :perform_check_only,
       :change_progress_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3686,7 +3866,8 @@ module Aws::ElasticsearchService
       :start_timestamp,
       :upgrade_status,
       :steps_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3723,7 +3904,8 @@ module Aws::ElasticsearchService
       :upgrade_step_status,
       :issues,
       :progress_percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3745,7 +3927,8 @@ module Aws::ElasticsearchService
       :subnet_ids,
       :availability_zones,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3759,7 +3942,8 @@ module Aws::ElasticsearchService
     class VPCDerivedInfoStatus < Struct.new(
       :options,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3773,7 +3957,8 @@ module Aws::ElasticsearchService
     class VPCOptions < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3783,7 +3968,8 @@ module Aws::ElasticsearchService
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3815,7 +4001,8 @@ module Aws::ElasticsearchService
       :vpc_options,
       :status,
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3834,7 +4021,8 @@ module Aws::ElasticsearchService
       :vpc_endpoint_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3856,7 +4044,8 @@ module Aws::ElasticsearchService
       :vpc_endpoint_owner,
       :domain_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3866,7 +4055,8 @@ module Aws::ElasticsearchService
     #   @return [Integer]
     class ZoneAwarenessConfig < Struct.new(
       :availability_zone_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

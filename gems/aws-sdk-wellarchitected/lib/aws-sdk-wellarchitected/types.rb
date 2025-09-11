@@ -12,7 +12,8 @@ module Aws::WellArchitected
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +35,8 @@ module Aws::WellArchitected
       :issue_management_type,
       :jira_project_key,
       :integration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +66,8 @@ module Aws::WellArchitected
       :subdomain,
       :jira_project_key,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +82,8 @@ module Aws::WellArchitected
     class AdditionalResources < Struct.new(
       :type,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +158,8 @@ module Aws::WellArchitected
       :notes,
       :reason,
       :jira_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +211,8 @@ module Aws::WellArchitected
       :reason,
       :question_type,
       :jira_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +227,8 @@ module Aws::WellArchitected
     class AssociateLensesInput < Struct.new(
       :workload_id,
       :lens_aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +241,8 @@ module Aws::WellArchitected
     class AssociateProfilesInput < Struct.new(
       :workload_id,
       :profile_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +256,8 @@ module Aws::WellArchitected
     class BestPractice < Struct.new(
       :choice_id,
       :choice_title,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +316,8 @@ module Aws::WellArchitected
       :flagged_resources,
       :reason,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +368,8 @@ module Aws::WellArchitected
       :choice_id,
       :status,
       :account_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +403,8 @@ module Aws::WellArchitected
       :helpful_resource,
       :improvement_plan,
       :additional_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +426,8 @@ module Aws::WellArchitected
       :status,
       :reason,
       :notes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +445,8 @@ module Aws::WellArchitected
       :choice_id,
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +460,8 @@ module Aws::WellArchitected
     class ChoiceContent < Struct.new(
       :display_text,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +481,8 @@ module Aws::WellArchitected
       :choice_id,
       :display_text,
       :improvement_plan_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +500,8 @@ module Aws::WellArchitected
       :status,
       :reason,
       :notes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -502,7 +519,8 @@ module Aws::WellArchitected
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +560,8 @@ module Aws::WellArchitected
       :updated_at,
       :lenses,
       :lenses_applied_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +595,8 @@ module Aws::WellArchitected
       :lens_alias,
       :shared_with,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +605,8 @@ module Aws::WellArchitected
     #   @return [String]
     class CreateLensShareOutput < Struct.new(
       :share_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +643,8 @@ module Aws::WellArchitected
       :lens_version,
       :is_major_version,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +657,8 @@ module Aws::WellArchitected
     class CreateLensVersionOutput < Struct.new(
       :lens_arn,
       :lens_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -663,7 +686,8 @@ module Aws::WellArchitected
       :workload_id,
       :milestone_name,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +702,8 @@ module Aws::WellArchitected
     class CreateMilestoneOutput < Struct.new(
       :workload_id,
       :milestone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +737,8 @@ module Aws::WellArchitected
       :profile_questions,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -725,7 +751,8 @@ module Aws::WellArchitected
     class CreateProfileOutput < Struct.new(
       :profile_arn,
       :profile_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +779,8 @@ module Aws::WellArchitected
       :profile_arn,
       :shared_with,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +793,8 @@ module Aws::WellArchitected
     class CreateProfileShareOutput < Struct.new(
       :share_id,
       :profile_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +833,8 @@ module Aws::WellArchitected
       :notes,
       :tags,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +843,8 @@ module Aws::WellArchitected
     #   @return [String]
     class CreateReviewTemplateOutput < Struct.new(
       :template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +871,8 @@ module Aws::WellArchitected
       :template_arn,
       :shared_with,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -853,7 +885,8 @@ module Aws::WellArchitected
     class CreateTemplateShareOutput < Struct.new(
       :template_arn,
       :share_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1127,8 @@ module Aws::WellArchitected
       :profile_arns,
       :review_template_arns,
       :jira_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1142,8 @@ module Aws::WellArchitected
     class CreateWorkloadOutput < Struct.new(
       :workload_id,
       :workload_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1175,8 @@ module Aws::WellArchitected
       :shared_with,
       :permission_type,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1190,8 @@ module Aws::WellArchitected
     class CreateWorkloadShareOutput < Struct.new(
       :workload_id,
       :share_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1224,8 @@ module Aws::WellArchitected
       :lens_alias,
       :client_request_token,
       :lens_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1258,8 @@ module Aws::WellArchitected
       :share_id,
       :lens_alias,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1281,8 @@ module Aws::WellArchitected
     class DeleteProfileInput < Struct.new(
       :profile_arn,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1268,7 +1308,8 @@ module Aws::WellArchitected
       :share_id,
       :profile_arn,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1331,8 @@ module Aws::WellArchitected
     class DeleteReviewTemplateInput < Struct.new(
       :template_arn,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1316,7 +1358,8 @@ module Aws::WellArchitected
       :share_id,
       :template_arn,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1382,8 @@ module Aws::WellArchitected
     class DeleteWorkloadInput < Struct.new(
       :workload_id,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1366,7 +1410,8 @@ module Aws::WellArchitected
       :share_id,
       :workload_id,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1381,7 +1426,8 @@ module Aws::WellArchitected
     class DisassociateLensesInput < Struct.new(
       :workload_id,
       :lens_aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1394,7 +1440,8 @@ module Aws::WellArchitected
     class DisassociateProfilesInput < Struct.new(
       :workload_id,
       :profile_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1414,7 +1461,8 @@ module Aws::WellArchitected
     class ExportLensInput < Struct.new(
       :lens_alias,
       :lens_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1471,8 @@ module Aws::WellArchitected
     #   @return [String]
     class ExportLensOutput < Struct.new(
       :lens_json,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1453,7 +1502,8 @@ module Aws::WellArchitected
       :lens_alias,
       :question_id,
       :milestone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1487,7 +1537,8 @@ module Aws::WellArchitected
       :lens_alias,
       :lens_arn,
       :answer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1561,8 @@ module Aws::WellArchitected
       :include_shared_resources,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1583,8 @@ module Aws::WellArchitected
       :metrics,
       :next_token,
       :base64_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1548,7 +1601,8 @@ module Aws::WellArchitected
       :organization_sharing_status,
       :discovery_integration_status,
       :jira_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1622,8 @@ module Aws::WellArchitected
     class GetLensInput < Struct.new(
       :lens_alias,
       :lens_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1632,8 @@ module Aws::WellArchitected
     #   @return [Types::Lens]
     class GetLensOutput < Struct.new(
       :lens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1603,7 +1659,8 @@ module Aws::WellArchitected
       :workload_id,
       :lens_alias,
       :milestone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1622,7 +1679,8 @@ module Aws::WellArchitected
       :workload_id,
       :milestone_number,
       :lens_review,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1706,8 @@ module Aws::WellArchitected
       :workload_id,
       :lens_alias,
       :milestone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1667,7 +1726,8 @@ module Aws::WellArchitected
       :workload_id,
       :milestone_number,
       :lens_review_report,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1691,7 +1751,8 @@ module Aws::WellArchitected
       :lens_alias,
       :base_lens_version,
       :target_lens_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1727,7 +1788,8 @@ module Aws::WellArchitected
       :target_lens_version,
       :latest_lens_version,
       :version_differences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1742,7 +1804,8 @@ module Aws::WellArchitected
     class GetMilestoneInput < Struct.new(
       :workload_id,
       :milestone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1756,7 +1819,8 @@ module Aws::WellArchitected
     class GetMilestoneOutput < Struct.new(
       :workload_id,
       :milestone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1769,7 +1833,8 @@ module Aws::WellArchitected
     class GetProfileInput < Struct.new(
       :profile_arn,
       :profile_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,12 +1843,14 @@ module Aws::WellArchitected
     #   @return [Types::Profile]
     class GetProfileOutput < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetProfileTemplateInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1859,8 @@ module Aws::WellArchitected
     #   @return [Types::ProfileTemplate]
     class GetProfileTemplateOutput < Struct.new(
       :profile_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1816,7 +1884,8 @@ module Aws::WellArchitected
       :template_arn,
       :lens_alias,
       :question_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,7 +1909,8 @@ module Aws::WellArchitected
       :template_arn,
       :lens_alias,
       :answer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1919,8 @@ module Aws::WellArchitected
     #   @return [String]
     class GetReviewTemplateInput < Struct.new(
       :template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1940,8 @@ module Aws::WellArchitected
     class GetReviewTemplateLensReviewInput < Struct.new(
       :template_arn,
       :lens_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1882,7 +1954,8 @@ module Aws::WellArchitected
     class GetReviewTemplateLensReviewOutput < Struct.new(
       :template_arn,
       :lens_review,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1891,7 +1964,8 @@ module Aws::WellArchitected
     #   @return [Types::ReviewTemplate]
     class GetReviewTemplateOutput < Struct.new(
       :review_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1901,7 +1975,8 @@ module Aws::WellArchitected
     #   @return [String]
     class GetWorkloadInput < Struct.new(
       :workload_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1911,7 +1986,8 @@ module Aws::WellArchitected
     #   @return [Types::Workload]
     class GetWorkloadOutput < Struct.new(
       :workload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1948,7 +2024,8 @@ module Aws::WellArchitected
       :json_string,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1961,7 +2038,8 @@ module Aws::WellArchitected
     class ImportLensOutput < Struct.new(
       :lens_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1998,7 +2076,8 @@ module Aws::WellArchitected
       :improvement_plan_url,
       :improvement_plans,
       :jira_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2008,7 +2087,8 @@ module Aws::WellArchitected
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2102,8 @@ module Aws::WellArchitected
     class JiraConfiguration < Struct.new(
       :jira_issue_url,
       :last_synced_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2032,7 +2113,8 @@ module Aws::WellArchitected
     #   @return [Array<Types::SelectedPillar>]
     class JiraSelectedQuestionConfiguration < Struct.new(
       :selected_pillars,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2066,7 +2148,8 @@ module Aws::WellArchitected
       :owner,
       :share_invitation_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2084,7 +2167,8 @@ module Aws::WellArchitected
       :lens_arn,
       :pillars,
       :risk_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2150,7 +2234,8 @@ module Aws::WellArchitected
       :next_token,
       :profiles,
       :prioritized_risk_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2263,8 @@ module Aws::WellArchitected
       :lens_alias,
       :lens_arn,
       :base64_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2227,7 +2313,8 @@ module Aws::WellArchitected
       :risk_counts,
       :profiles,
       :prioritized_risk_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2250,7 +2337,8 @@ module Aws::WellArchitected
       :shared_with,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2303,7 +2391,8 @@ module Aws::WellArchitected
       :lens_version,
       :owner,
       :lens_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2353,7 +2442,8 @@ module Aws::WellArchitected
       :latest_lens_version,
       :resource_arn,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2396,7 +2486,8 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       :question_priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2434,7 +2525,8 @@ module Aws::WellArchitected
       :lens_arn,
       :answer_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2468,7 +2560,8 @@ module Aws::WellArchitected
       :pillar_id,
       :question_id,
       :choice_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2481,7 +2574,8 @@ module Aws::WellArchitected
     class ListCheckDetailsOutput < Struct.new(
       :check_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2515,7 +2609,8 @@ module Aws::WellArchitected
       :pillar_id,
       :question_id,
       :choice_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2528,7 +2623,8 @@ module Aws::WellArchitected
     class ListCheckSummariesOutput < Struct.new(
       :check_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2571,7 +2667,8 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       :question_priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2609,7 +2706,8 @@ module Aws::WellArchitected
       :lens_arn,
       :improvement_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2632,7 +2730,8 @@ module Aws::WellArchitected
       :milestone_number,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2655,7 +2754,8 @@ module Aws::WellArchitected
       :milestone_number,
       :lens_review_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2687,7 +2787,8 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2700,7 +2801,8 @@ module Aws::WellArchitected
     class ListLensSharesOutput < Struct.new(
       :lens_share_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2726,7 +2828,8 @@ module Aws::WellArchitected
       :lens_type,
       :lens_status,
       :lens_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2740,7 +2843,8 @@ module Aws::WellArchitected
     class ListLensesOutput < Struct.new(
       :lens_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2758,7 +2862,8 @@ module Aws::WellArchitected
       :workload_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2776,7 +2881,8 @@ module Aws::WellArchitected
       :workload_id,
       :milestone_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2800,7 +2906,8 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2813,7 +2920,8 @@ module Aws::WellArchitected
     class ListNotificationsOutput < Struct.new(
       :notification_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2830,7 +2938,8 @@ module Aws::WellArchitected
       :workload_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2843,7 +2952,8 @@ module Aws::WellArchitected
     class ListProfileNotificationsOutput < Struct.new(
       :notification_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2868,7 +2978,8 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2881,7 +2992,8 @@ module Aws::WellArchitected
     class ListProfileSharesOutput < Struct.new(
       :profile_share_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2903,7 +3015,8 @@ module Aws::WellArchitected
       :profile_owner_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2916,7 +3029,8 @@ module Aws::WellArchitected
     class ListProfilesOutput < Struct.new(
       :profile_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2949,7 +3063,8 @@ module Aws::WellArchitected
       :pillar_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2977,7 +3092,8 @@ module Aws::WellArchitected
       :lens_alias,
       :answer_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2990,7 +3106,8 @@ module Aws::WellArchitected
     class ListReviewTemplatesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3003,7 +3120,8 @@ module Aws::WellArchitected
     class ListReviewTemplatesOutput < Struct.new(
       :review_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3040,7 +3158,8 @@ module Aws::WellArchitected
       :max_results,
       :profile_name_prefix,
       :template_name_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3054,7 +3173,8 @@ module Aws::WellArchitected
     class ListShareInvitationsOutput < Struct.new(
       :share_invitation_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3063,7 +3183,8 @@ module Aws::WellArchitected
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :workload_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3072,7 +3193,8 @@ module Aws::WellArchitected
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3098,7 +3220,8 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3115,7 +3238,8 @@ module Aws::WellArchitected
       :template_arn,
       :template_share_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3141,7 +3265,8 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3159,7 +3284,8 @@ module Aws::WellArchitected
       :workload_id,
       :workload_share_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3178,7 +3304,8 @@ module Aws::WellArchitected
       :workload_name_prefix,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3192,7 +3319,8 @@ module Aws::WellArchitected
     class ListWorkloadsOutput < Struct.new(
       :workload_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3216,7 +3344,8 @@ module Aws::WellArchitected
       :milestone_name,
       :recorded_at,
       :workload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3240,7 +3369,8 @@ module Aws::WellArchitected
       :milestone_name,
       :recorded_at,
       :workload_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3254,7 +3384,8 @@ module Aws::WellArchitected
     class NotificationSummary < Struct.new(
       :type,
       :lens_upgrade_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3277,7 +3408,8 @@ module Aws::WellArchitected
       :pillar_name,
       :difference_status,
       :question_differences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3296,7 +3428,8 @@ module Aws::WellArchitected
       :pillar_id,
       :risk_counts,
       :questions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3324,7 +3457,8 @@ module Aws::WellArchitected
       :notes,
       :risk_counts,
       :prioritized_risk_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3370,7 +3504,8 @@ module Aws::WellArchitected
       :updated_at,
       :share_invitation_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3388,7 +3523,8 @@ module Aws::WellArchitected
       :choice_id,
       :choice_title,
       :choice_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3424,7 +3560,8 @@ module Aws::WellArchitected
       :profile_name,
       :workload_id,
       :workload_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3458,7 +3595,8 @@ module Aws::WellArchitected
       :selected_choice_ids,
       :min_selected_choices,
       :max_selected_choices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3472,7 +3610,8 @@ module Aws::WellArchitected
     class ProfileQuestionUpdate < Struct.new(
       :question_id,
       :selected_choice_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3495,7 +3634,8 @@ module Aws::WellArchitected
       :shared_with,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3529,7 +3669,8 @@ module Aws::WellArchitected
       :owner,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3551,7 +3692,8 @@ module Aws::WellArchitected
       :template_questions,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3569,7 +3711,8 @@ module Aws::WellArchitected
       :choice_id,
       :choice_title,
       :choice_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3599,7 +3742,8 @@ module Aws::WellArchitected
       :question_choices,
       :min_selected_choices,
       :max_selected_choices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3617,7 +3761,8 @@ module Aws::WellArchitected
       :question_id,
       :question_title,
       :difference_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3635,7 +3780,8 @@ module Aws::WellArchitected
       :question_id,
       :risk,
       :best_practices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3653,7 +3799,8 @@ module Aws::WellArchitected
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3704,7 +3851,8 @@ module Aws::WellArchitected
       :tags,
       :update_status,
       :share_invitation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3777,7 +3925,8 @@ module Aws::WellArchitected
       :answer_status,
       :notes,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3825,7 +3974,8 @@ module Aws::WellArchitected
       :answer_status,
       :reason,
       :question_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3879,7 +4029,8 @@ module Aws::WellArchitected
       :notes,
       :question_counts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3903,7 +4054,8 @@ module Aws::WellArchitected
       :pillar_name,
       :notes,
       :question_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3937,7 +4089,8 @@ module Aws::WellArchitected
       :template_arn,
       :template_name,
       :update_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3952,7 +4105,8 @@ module Aws::WellArchitected
     class SelectedPillar < Struct.new(
       :pillar_id,
       :selected_question_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3978,7 +4132,8 @@ module Aws::WellArchitected
       :resource_type,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4019,7 +4174,8 @@ module Aws::WellArchitected
       :lens_arn,
       :profile_arn,
       :template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4080,7 +4236,8 @@ module Aws::WellArchitected
       :profile_arn,
       :template_name,
       :template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4093,12 +4250,14 @@ module Aws::WellArchitected
     class TagResourceInput < Struct.new(
       :workload_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4121,7 +4280,8 @@ module Aws::WellArchitected
       :shared_with,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4139,7 +4299,8 @@ module Aws::WellArchitected
       :message,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4153,12 +4314,14 @@ module Aws::WellArchitected
     class UntagResourceInput < Struct.new(
       :workload_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4206,7 +4369,8 @@ module Aws::WellArchitected
       :notes,
       :is_applicable,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4235,7 +4399,8 @@ module Aws::WellArchitected
       :lens_alias,
       :lens_arn,
       :answer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4252,7 +4417,8 @@ module Aws::WellArchitected
       :organization_sharing_status,
       :discovery_integration_status,
       :jira_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4278,7 +4444,8 @@ module Aws::WellArchitected
       :workload_id,
       :client_request_token,
       :integrating_service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4313,7 +4480,8 @@ module Aws::WellArchitected
       :lens_notes,
       :pillar_notes,
       :jira_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4327,7 +4495,8 @@ module Aws::WellArchitected
     class UpdateLensReviewOutput < Struct.new(
       :workload_id,
       :lens_review,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4344,7 +4513,8 @@ module Aws::WellArchitected
       :profile_arn,
       :profile_description,
       :profile_questions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4353,7 +4523,8 @@ module Aws::WellArchitected
     #   @return [Types::Profile]
     class UpdateProfileOutput < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4399,7 +4570,8 @@ module Aws::WellArchitected
       :notes,
       :is_applicable,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4423,7 +4595,8 @@ module Aws::WellArchitected
       :template_arn,
       :lens_alias,
       :answer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4453,7 +4626,8 @@ module Aws::WellArchitected
       :notes,
       :lenses_to_associate,
       :lenses_to_disassociate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4483,7 +4657,8 @@ module Aws::WellArchitected
       :lens_alias,
       :lens_notes,
       :pillar_notes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4496,7 +4671,8 @@ module Aws::WellArchitected
     class UpdateReviewTemplateLensReviewOutput < Struct.new(
       :template_arn,
       :lens_review,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4505,7 +4681,8 @@ module Aws::WellArchitected
     #   @return [Types::ReviewTemplate]
     class UpdateReviewTemplateOutput < Struct.new(
       :review_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4519,7 +4696,8 @@ module Aws::WellArchitected
     class UpdateShareInvitationInput < Struct.new(
       :share_invitation_id,
       :share_invitation_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4528,7 +4706,8 @@ module Aws::WellArchitected
     #   @return [Types::ShareInvitation]
     class UpdateShareInvitationOutput < Struct.new(
       :share_invitation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4754,7 +4933,8 @@ module Aws::WellArchitected
       :discovery_config,
       :applications,
       :jira_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4764,7 +4944,8 @@ module Aws::WellArchitected
     #   @return [Types::Workload]
     class UpdateWorkloadOutput < Struct.new(
       :workload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4782,7 +4963,8 @@ module Aws::WellArchitected
       :share_id,
       :workload_id,
       :permission_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4796,7 +4978,8 @@ module Aws::WellArchitected
     class UpdateWorkloadShareOutput < Struct.new(
       :workload_id,
       :workload_share,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4834,7 +5017,8 @@ module Aws::WellArchitected
       :lens_alias,
       :milestone_name,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4865,7 +5049,8 @@ module Aws::WellArchitected
       :profile_arn,
       :milestone_name,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4898,7 +5083,8 @@ module Aws::WellArchitected
       :template_arn,
       :lens_alias,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4916,7 +5102,8 @@ module Aws::WellArchitected
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4930,7 +5117,8 @@ module Aws::WellArchitected
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4940,7 +5128,8 @@ module Aws::WellArchitected
     #   @return [Array<Types::PillarDifference>]
     class VersionDifferences < Struct.new(
       :pillar_differences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5208,7 +5397,8 @@ module Aws::WellArchitected
       :profiles,
       :prioritized_risk_counts,
       :jira_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5223,7 +5413,8 @@ module Aws::WellArchitected
     class WorkloadDiscoveryConfig < Struct.new(
       :trusted_advisor_integration_status,
       :workload_resource_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5241,7 +5432,8 @@ module Aws::WellArchitected
       :issue_management_status,
       :issue_management_type,
       :jira_project_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5263,7 +5455,8 @@ module Aws::WellArchitected
       :issue_management_type,
       :jira_project_key,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5277,7 +5470,8 @@ module Aws::WellArchitected
     class WorkloadProfile < Struct.new(
       :profile_arn,
       :profile_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5314,7 +5508,8 @@ module Aws::WellArchitected
       :status,
       :workload_name,
       :workload_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5341,7 +5536,8 @@ module Aws::WellArchitected
       :permission_type,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5391,7 +5587,8 @@ module Aws::WellArchitected
       :improvement_status,
       :profiles,
       :prioritized_risk_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

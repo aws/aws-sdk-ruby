@@ -55,7 +55,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::DirectoryInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::DirectoryServiceAuthenticationFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::DirectoryUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::EmailAddressInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::EntityAlreadyRegisteredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::EntityNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::EntityStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::InvalidConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -166,7 +166,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::InvalidCustomSesConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -179,7 +179,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -193,7 +193,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::InvalidPasswordException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -206,7 +206,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -219,7 +219,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::MailDomainInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -232,7 +232,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::MailDomainNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -246,7 +246,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::MailDomainStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -259,7 +259,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::NameAvailabilityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -273,7 +273,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::OrganizationNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -287,7 +287,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::OrganizationStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -300,7 +300,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::ReservedNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -313,7 +313,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -326,7 +326,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -339,7 +339,7 @@ module Aws::WorkMail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMail::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

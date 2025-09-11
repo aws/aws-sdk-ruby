@@ -12,7 +12,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class CancelExportTaskInput < Struct.new(
       :task_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +64,8 @@ module Aws::NeptuneGraph
       :kms_key_identifier,
       :parquet_type,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +74,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class CancelImportTaskInput < Struct.new(
       :task_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +108,8 @@ module Aws::NeptuneGraph
       :parquet_type,
       :role_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -117,7 +122,8 @@ module Aws::NeptuneGraph
     class CancelQueryInput < Struct.new(
       :graph_identifier,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +137,8 @@ module Aws::NeptuneGraph
     class ConflictException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +175,8 @@ module Aws::NeptuneGraph
       :replica_count,
       :deletion_protection,
       :provisioned_memory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +241,8 @@ module Aws::NeptuneGraph
       :source_snapshot_id,
       :deletion_protection,
       :build_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +259,8 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :snapshot_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +293,8 @@ module Aws::NeptuneGraph
       :snapshot_create_time,
       :status,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -352,7 +363,8 @@ module Aws::NeptuneGraph
       :parquet_type,
       :blank_node_handling,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +401,8 @@ module Aws::NeptuneGraph
       :role_arn,
       :status,
       :import_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +423,8 @@ module Aws::NeptuneGraph
       :vpc_id,
       :subnet_ids,
       :vpc_security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +445,8 @@ module Aws::NeptuneGraph
       :subnet_ids,
       :status,
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +459,8 @@ module Aws::NeptuneGraph
     class DeleteGraphInput < Struct.new(
       :graph_identifier,
       :skip_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +525,8 @@ module Aws::NeptuneGraph
       :source_snapshot_id,
       :deletion_protection,
       :build_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +535,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class DeleteGraphSnapshotInput < Struct.new(
       :snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +569,8 @@ module Aws::NeptuneGraph
       :snapshot_create_time,
       :status,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +583,8 @@ module Aws::NeptuneGraph
     class DeletePrivateGraphEndpointInput < Struct.new(
       :graph_identifier,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +605,8 @@ module Aws::NeptuneGraph
       :subnet_ids,
       :status,
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +620,8 @@ module Aws::NeptuneGraph
     class EdgeStructure < Struct.new(
       :count,
       :edge_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +654,8 @@ module Aws::NeptuneGraph
       :plan_cache,
       :explain_mode,
       :query_timeout_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +664,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class ExecuteQueryOutput < Struct.new(
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -655,7 +679,8 @@ module Aws::NeptuneGraph
     class ExportFilter < Struct.new(
       :vertex_filter,
       :edge_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +690,8 @@ module Aws::NeptuneGraph
     #   @return [Hash<String, Types::ExportFilterPropertyAttributes>]
     class ExportFilterElement < Struct.new(
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +709,8 @@ module Aws::NeptuneGraph
       :output_type,
       :source_property_name,
       :multi_value_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -714,7 +741,8 @@ module Aws::NeptuneGraph
       :progress_percentage,
       :num_vertices_written,
       :num_edges_written,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +784,8 @@ module Aws::NeptuneGraph
       :kms_key_identifier,
       :parquet_type,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +794,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class GetExportTaskInput < Struct.new(
       :task_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +844,8 @@ module Aws::NeptuneGraph
       :status_reason,
       :export_task_details,
       :export_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +854,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class GetGraphInput < Struct.new(
       :graph_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +920,8 @@ module Aws::NeptuneGraph
       :source_snapshot_id,
       :deletion_protection,
       :build_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -897,7 +930,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class GetGraphSnapshotInput < Struct.new(
       :snapshot_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +964,8 @@ module Aws::NeptuneGraph
       :snapshot_create_time,
       :status,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -943,7 +978,8 @@ module Aws::NeptuneGraph
     class GetGraphSummaryInput < Struct.new(
       :graph_identifier,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,7 +996,8 @@ module Aws::NeptuneGraph
       :version,
       :last_statistics_computation_time,
       :graph_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -969,7 +1006,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class GetImportTaskInput < Struct.new(
       :task_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1056,8 @@ module Aws::NeptuneGraph
       :import_task_details,
       :attempt_number,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,7 +1070,8 @@ module Aws::NeptuneGraph
     class GetPrivateGraphEndpointInput < Struct.new(
       :graph_identifier,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1092,8 @@ module Aws::NeptuneGraph
       :subnet_ids,
       :status,
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1106,8 @@ module Aws::NeptuneGraph
     class GetQueryInput < Struct.new(
       :graph_identifier,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1132,8 @@ module Aws::NeptuneGraph
       :waited,
       :elapsed,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1195,8 @@ module Aws::NeptuneGraph
       :total_edge_property_values,
       :node_structures,
       :edge_structures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1186,7 +1230,8 @@ module Aws::NeptuneGraph
       :snapshot_create_time,
       :status,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1232,7 +1277,8 @@ module Aws::NeptuneGraph
       :replica_count,
       :kms_key_identifier,
       :deletion_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1289,8 @@ module Aws::NeptuneGraph
     class ImportOptions < Struct.new(
       :neptune,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Neptune < ImportOptions; end
@@ -1284,7 +1331,8 @@ module Aws::NeptuneGraph
       :error_details,
       :statement_count,
       :dictionary_entry_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1318,7 +1366,8 @@ module Aws::NeptuneGraph
       :parquet_type,
       :role_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1328,7 +1377,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1345,7 +1395,8 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1358,7 +1409,8 @@ module Aws::NeptuneGraph
     class ListExportTasksOutput < Struct.new(
       :tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1375,7 +1427,8 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1388,7 +1441,8 @@ module Aws::NeptuneGraph
     class ListGraphSnapshotsOutput < Struct.new(
       :graph_snapshots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1401,7 +1455,8 @@ module Aws::NeptuneGraph
     class ListGraphsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1414,7 +1469,8 @@ module Aws::NeptuneGraph
     class ListGraphsOutput < Struct.new(
       :graphs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1427,7 +1483,8 @@ module Aws::NeptuneGraph
     class ListImportTasksInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1497,8 @@ module Aws::NeptuneGraph
     class ListImportTasksOutput < Struct.new(
       :tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1457,7 +1515,8 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1529,8 @@ module Aws::NeptuneGraph
     class ListPrivateGraphEndpointsOutput < Struct.new(
       :private_graph_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1487,7 +1547,8 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :max_results,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1496,7 +1557,8 @@ module Aws::NeptuneGraph
     #   @return [Array<Types::QuerySummary>]
     class ListQueriesOutput < Struct.new(
       :queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1567,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1514,7 +1577,8 @@ module Aws::NeptuneGraph
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1536,7 +1600,8 @@ module Aws::NeptuneGraph
       :s3_export_kms_key_id,
       :preserve_default_vertex_labels,
       :preserve_edge_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1619,8 @@ module Aws::NeptuneGraph
       :count,
       :node_properties,
       :distinct_outgoing_edge_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1642,8 @@ module Aws::NeptuneGraph
       :subnet_ids,
       :status,
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1602,7 +1669,8 @@ module Aws::NeptuneGraph
       :waited,
       :elapsed,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,7 +1683,8 @@ module Aws::NeptuneGraph
     class ResetGraphInput < Struct.new(
       :graph_identifier,
       :skip_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1749,8 @@ module Aws::NeptuneGraph
       :source_snapshot_id,
       :deletion_protection,
       :build_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1690,7 +1760,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1794,8 @@ module Aws::NeptuneGraph
       :tags,
       :replica_count,
       :public_connectivity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1788,7 +1860,8 @@ module Aws::NeptuneGraph
       :source_snapshot_id,
       :deletion_protection,
       :build_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1813,7 +1886,8 @@ module Aws::NeptuneGraph
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1850,7 +1924,8 @@ module Aws::NeptuneGraph
       :parquet_type,
       :export_filter,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1895,7 +1970,8 @@ module Aws::NeptuneGraph
       :parquet_type,
       :status_reason,
       :export_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1904,7 +1980,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class StartGraphInput < Struct.new(
       :graph_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1969,7 +2046,8 @@ module Aws::NeptuneGraph
       :source_snapshot_id,
       :deletion_protection,
       :build_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2006,7 +2084,8 @@ module Aws::NeptuneGraph
       :blank_node_handling,
       :graph_identifier,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2043,7 +2122,8 @@ module Aws::NeptuneGraph
       :role_arn,
       :status,
       :import_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2052,7 +2132,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class StopGraphInput < Struct.new(
       :graph_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2117,7 +2198,8 @@ module Aws::NeptuneGraph
       :source_snapshot_id,
       :deletion_protection,
       :build_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2130,12 +2212,14 @@ module Aws::NeptuneGraph
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2145,7 +2229,8 @@ module Aws::NeptuneGraph
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2158,7 +2243,8 @@ module Aws::NeptuneGraph
     class UnprocessableException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2171,12 +2257,14 @@ module Aws::NeptuneGraph
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2197,7 +2285,8 @@ module Aws::NeptuneGraph
       :public_connectivity,
       :provisioned_memory,
       :deletion_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2262,7 +2351,8 @@ module Aws::NeptuneGraph
       :source_snapshot_id,
       :deletion_protection,
       :build_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2276,7 +2366,8 @@ module Aws::NeptuneGraph
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2286,7 +2377,8 @@ module Aws::NeptuneGraph
     #   @return [Integer]
     class VectorSearchConfiguration < Struct.new(
       :dimension,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

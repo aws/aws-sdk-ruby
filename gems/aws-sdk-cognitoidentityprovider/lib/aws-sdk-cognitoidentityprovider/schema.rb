@@ -4001,7 +4001,6 @@ module Aws::CognitoIdentityProvider
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
-
     end
 
     class << self

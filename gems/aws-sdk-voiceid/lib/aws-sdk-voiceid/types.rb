@@ -12,7 +12,8 @@ module Aws::VoiceID
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::VoiceID
       :domain_id,
       :watchlist_id,
       :fraudster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::VoiceID
     #   @return [Types::Fraudster]
     class AssociateFraudsterOutput < Struct.new(
       :fraudster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +51,8 @@ module Aws::VoiceID
     #   @return [Integer]
     class AuthenticationConfiguration < Struct.new(
       :acceptance_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -99,7 +103,8 @@ module Aws::VoiceID
       :decision,
       :score,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +150,8 @@ module Aws::VoiceID
     class ConflictException < Struct.new(
       :message,
       :conflict_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +181,8 @@ module Aws::VoiceID
       :server_side_encryption_configuration,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +191,8 @@ module Aws::VoiceID
     #   @return [Types::Domain]
     class CreateDomainOutput < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +216,8 @@ module Aws::VoiceID
       :name,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +226,8 @@ module Aws::VoiceID
     #   @return [Types::Watchlist]
     class CreateWatchlistOutput < Struct.new(
       :watchlist,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +236,8 @@ module Aws::VoiceID
     #   @return [String]
     class DeleteDomainInput < Struct.new(
       :domain_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +250,8 @@ module Aws::VoiceID
     class DeleteFraudsterInput < Struct.new(
       :domain_id,
       :fraudster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +264,8 @@ module Aws::VoiceID
     class DeleteSpeakerInput < Struct.new(
       :domain_id,
       :speaker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +278,8 @@ module Aws::VoiceID
     class DeleteWatchlistInput < Struct.new(
       :domain_id,
       :watchlist_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +288,8 @@ module Aws::VoiceID
     #   @return [String]
     class DescribeDomainInput < Struct.new(
       :domain_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +298,8 @@ module Aws::VoiceID
     #   @return [Types::Domain]
     class DescribeDomainOutput < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +312,8 @@ module Aws::VoiceID
     class DescribeFraudsterInput < Struct.new(
       :domain_id,
       :fraudster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -305,7 +322,8 @@ module Aws::VoiceID
     #   @return [Types::Fraudster]
     class DescribeFraudsterOutput < Struct.new(
       :fraudster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +336,8 @@ module Aws::VoiceID
     class DescribeFraudsterRegistrationJobInput < Struct.new(
       :domain_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +346,8 @@ module Aws::VoiceID
     #   @return [Types::FraudsterRegistrationJob]
     class DescribeFraudsterRegistrationJobOutput < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +360,8 @@ module Aws::VoiceID
     class DescribeSpeakerEnrollmentJobInput < Struct.new(
       :domain_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -349,7 +370,8 @@ module Aws::VoiceID
     #   @return [Types::SpeakerEnrollmentJob]
     class DescribeSpeakerEnrollmentJobOutput < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +384,8 @@ module Aws::VoiceID
     class DescribeSpeakerInput < Struct.new(
       :domain_id,
       :speaker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +394,8 @@ module Aws::VoiceID
     #   @return [Types::Speaker]
     class DescribeSpeakerOutput < Struct.new(
       :speaker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +408,8 @@ module Aws::VoiceID
     class DescribeWatchlistInput < Struct.new(
       :domain_id,
       :watchlist_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +418,8 @@ module Aws::VoiceID
     #   @return [Types::Watchlist]
     class DescribeWatchlistOutput < Struct.new(
       :watchlist,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +436,8 @@ module Aws::VoiceID
       :domain_id,
       :watchlist_id,
       :fraudster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +446,8 @@ module Aws::VoiceID
     #   @return [Types::Fraudster]
     class DisassociateFraudsterOutput < Struct.new(
       :fraudster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +496,8 @@ module Aws::VoiceID
       :updated_at,
       :server_side_encryption_update_details,
       :watchlist_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +546,8 @@ module Aws::VoiceID
       :updated_at,
       :server_side_encryption_update_details,
       :watchlist_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +565,8 @@ module Aws::VoiceID
     class EnrollmentConfig < Struct.new(
       :existing_enrollment_action,
       :fraud_detection_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -559,7 +590,8 @@ module Aws::VoiceID
       :fraud_detection_action,
       :risk_threshold,
       :watchlist_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +605,8 @@ module Aws::VoiceID
     class EvaluateSessionInput < Struct.new(
       :domain_id,
       :session_name_or_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +645,8 @@ module Aws::VoiceID
       :streaming_status,
       :authentication_result,
       :fraud_detection_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +660,8 @@ module Aws::VoiceID
     class FailureDetails < Struct.new(
       :status_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +679,8 @@ module Aws::VoiceID
     class FraudDetectionConfiguration < Struct.new(
       :risk_threshold,
       :watchlist_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +726,8 @@ module Aws::VoiceID
       :decision,
       :reasons,
       :risk_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,7 +742,8 @@ module Aws::VoiceID
     class FraudRiskDetails < Struct.new(
       :known_fraudster_risk,
       :voice_spoofing_risk,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +765,8 @@ module Aws::VoiceID
       :generated_fraudster_id,
       :created_at,
       :watchlist_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +831,8 @@ module Aws::VoiceID
       :ended_at,
       :failure_details,
       :job_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +875,8 @@ module Aws::VoiceID
       :ended_at,
       :failure_details,
       :job_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,7 +899,8 @@ module Aws::VoiceID
       :generated_fraudster_id,
       :created_at,
       :watchlist_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +911,8 @@ module Aws::VoiceID
     #   @return [String]
     class InputDataConfig < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -878,7 +921,8 @@ module Aws::VoiceID
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +933,8 @@ module Aws::VoiceID
     #   @return [Integer]
     class JobProgress < Struct.new(
       :percent_complete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +951,8 @@ module Aws::VoiceID
     class KnownFraudsterRisk < Struct.new(
       :risk_score,
       :generated_fraudster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +969,8 @@ module Aws::VoiceID
     class ListDomainsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +986,8 @@ module Aws::VoiceID
     class ListDomainsOutput < Struct.new(
       :domain_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +1012,8 @@ module Aws::VoiceID
       :job_status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1029,8 @@ module Aws::VoiceID
     class ListFraudsterRegistrationJobsOutput < Struct.new(
       :job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1006,7 +1056,8 @@ module Aws::VoiceID
       :watchlist_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1024,7 +1075,8 @@ module Aws::VoiceID
     class ListFraudstersOutput < Struct.new(
       :fraudster_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1101,8 @@ module Aws::VoiceID
       :job_status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1118,8 @@ module Aws::VoiceID
     class ListSpeakerEnrollmentJobsOutput < Struct.new(
       :job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1140,8 @@ module Aws::VoiceID
       :domain_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1158,8 @@ module Aws::VoiceID
     class ListSpeakersOutput < Struct.new(
       :speaker_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1113,7 +1169,8 @@ module Aws::VoiceID
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1122,7 +1179,8 @@ module Aws::VoiceID
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1203,8 @@ module Aws::VoiceID
       :domain_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1222,8 @@ module Aws::VoiceID
     class ListWatchlistsOutput < Struct.new(
       :watchlist_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1176,7 +1236,8 @@ module Aws::VoiceID
     class OptOutSpeakerInput < Struct.new(
       :domain_id,
       :speaker_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,7 +1246,8 @@ module Aws::VoiceID
     #   @return [Types::Speaker]
     class OptOutSpeakerOutput < Struct.new(
       :speaker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1205,7 +1267,8 @@ module Aws::VoiceID
     class OutputDataConfig < Struct.new(
       :s3_uri,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1291,8 @@ module Aws::VoiceID
       :duplicate_registration_action,
       :fraudster_similarity_threshold,
       :watchlist_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1244,7 +1308,8 @@ module Aws::VoiceID
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1256,7 +1321,8 @@ module Aws::VoiceID
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1282,7 +1348,8 @@ module Aws::VoiceID
       :old_kms_key_id,
       :update_status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1358,8 @@ module Aws::VoiceID
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1326,7 +1394,8 @@ module Aws::VoiceID
       :created_at,
       :updated_at,
       :last_accessed_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1459,8 @@ module Aws::VoiceID
       :ended_at,
       :failure_details,
       :job_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1433,7 +1503,8 @@ module Aws::VoiceID
       :ended_at,
       :failure_details,
       :job_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1468,7 +1539,8 @@ module Aws::VoiceID
       :created_at,
       :updated_at,
       :last_accessed_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1514,7 +1586,8 @@ module Aws::VoiceID
       :registration_config,
       :input_data_config,
       :output_data_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,7 +1596,8 @@ module Aws::VoiceID
     #   @return [Types::FraudsterRegistrationJob]
     class StartFraudsterRegistrationJobOutput < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1567,7 +1641,8 @@ module Aws::VoiceID
       :enrollment_config,
       :input_data_config,
       :output_data_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1651,8 @@ module Aws::VoiceID
     #   @return [Types::SpeakerEnrollmentJob]
     class StartSpeakerEnrollmentJobOutput < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1593,7 +1669,8 @@ module Aws::VoiceID
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,12 +1683,14 @@ module Aws::VoiceID
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1623,7 +1702,8 @@ module Aws::VoiceID
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1637,12 +1717,14 @@ module Aws::VoiceID
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1669,7 +1751,8 @@ module Aws::VoiceID
       :name,
       :description,
       :server_side_encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1761,8 @@ module Aws::VoiceID
     #   @return [Types::Domain]
     class UpdateDomainOutput < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,7 +1783,8 @@ module Aws::VoiceID
       :watchlist_id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1708,7 +1793,8 @@ module Aws::VoiceID
     #   @return [Types::Watchlist]
     class UpdateWatchlistOutput < Struct.new(
       :watchlist,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1804,8 @@ module Aws::VoiceID
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1728,7 +1815,8 @@ module Aws::VoiceID
     #   @return [Integer]
     class VoiceSpoofingRisk < Struct.new(
       :risk_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1762,7 +1850,8 @@ module Aws::VoiceID
       :default_watchlist,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1777,7 +1866,8 @@ module Aws::VoiceID
     #   @return [String]
     class WatchlistDetails < Struct.new(
       :default_watchlist_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1811,7 +1901,8 @@ module Aws::VoiceID
       :default_watchlist,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

@@ -11,7 +11,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +44,8 @@ module Aws::IoTSiteWise
       :permission,
       :creation_date,
       :last_update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +63,8 @@ module Aws::IoTSiteWise
       :action_definition_id,
       :action_name,
       :action_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +74,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ActionPayload < Struct.new(
       :string_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +98,8 @@ module Aws::IoTSiteWise
       :action_definition_id,
       :target_resource,
       :resolve_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +118,8 @@ module Aws::IoTSiteWise
       :timestamp,
       :quality,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +149,8 @@ module Aws::IoTSiteWise
       :minimum,
       :sum,
       :standard_deviation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +169,8 @@ module Aws::IoTSiteWise
     class Alarms < Struct.new(
       :alarm_role_arn,
       :notification_lambda_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +182,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class AssetBindingValueFilter < Struct.new(
       :asset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +215,8 @@ module Aws::IoTSiteWise
       :properties,
       :id,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +230,8 @@ module Aws::IoTSiteWise
     class AssetCompositeModelPathSegment < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -266,7 +277,8 @@ module Aws::IoTSiteWise
       :type,
       :description,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +296,8 @@ module Aws::IoTSiteWise
       :asset_id,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -305,7 +318,8 @@ module Aws::IoTSiteWise
       :id,
       :external_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +334,8 @@ module Aws::IoTSiteWise
     class AssetHierarchyInfo < Struct.new(
       :parent_asset_id,
       :child_asset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +348,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class AssetModelBindingValueFilter < Struct.new(
       :asset_model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +381,8 @@ module Aws::IoTSiteWise
       :properties,
       :id,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -400,7 +417,8 @@ module Aws::IoTSiteWise
       :description,
       :type,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +432,8 @@ module Aws::IoTSiteWise
     class AssetModelCompositeModelPathSegment < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +463,8 @@ module Aws::IoTSiteWise
       :type,
       :description,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +509,8 @@ module Aws::IoTSiteWise
       :external_id,
       :name,
       :child_asset_model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +538,8 @@ module Aws::IoTSiteWise
       :external_id,
       :name,
       :child_asset_model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +597,8 @@ module Aws::IoTSiteWise
       :unit,
       :type,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -589,7 +612,8 @@ module Aws::IoTSiteWise
     class AssetModelPropertyBindingValue < Struct.new(
       :asset_model_id,
       :property_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +631,8 @@ module Aws::IoTSiteWise
     class AssetModelPropertyBindingValueFilter < Struct.new(
       :asset_model_id,
       :property_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -653,7 +678,8 @@ module Aws::IoTSiteWise
       :data_type_spec,
       :unit,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -667,7 +693,8 @@ module Aws::IoTSiteWise
     class AssetModelPropertyPathSegment < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +745,8 @@ module Aws::IoTSiteWise
       :asset_model_composite_model_id,
       :path,
       :interface_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -733,7 +761,8 @@ module Aws::IoTSiteWise
     class AssetModelStatus < Struct.new(
       :state,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +823,8 @@ module Aws::IoTSiteWise
       :last_update_date,
       :status,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +870,8 @@ module Aws::IoTSiteWise
       :data_type_spec,
       :unit,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +888,8 @@ module Aws::IoTSiteWise
     class AssetPropertyBindingValue < Struct.new(
       :asset_id,
       :property_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +907,8 @@ module Aws::IoTSiteWise
     class AssetPropertyBindingValueFilter < Struct.new(
       :asset_id,
       :property_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +922,8 @@ module Aws::IoTSiteWise
     class AssetPropertyPathSegment < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +961,8 @@ module Aws::IoTSiteWise
       :notification,
       :asset_composite_model_id,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -945,7 +980,8 @@ module Aws::IoTSiteWise
       :value,
       :timestamp,
       :quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1006,8 @@ module Aws::IoTSiteWise
     class AssetRelationshipSummary < Struct.new(
       :hierarchy_info,
       :relationship_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1023,8 @@ module Aws::IoTSiteWise
     class AssetStatus < Struct.new(
       :state,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,7 +1073,8 @@ module Aws::IoTSiteWise
       :status,
       :hierarchies,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1100,8 @@ module Aws::IoTSiteWise
       :hierarchy_id,
       :child_asset_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1124,8 @@ module Aws::IoTSiteWise
       :asset_id,
       :property_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1174,8 @@ module Aws::IoTSiteWise
       :status,
       :hierarchies,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1189,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class Attribute < Struct.new(
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1207,8 @@ module Aws::IoTSiteWise
       :project_id,
       :asset_ids,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1217,8 @@ module Aws::IoTSiteWise
     #   @return [Array<Types::AssetErrorDetails>]
     class BatchAssociateProjectAssetsResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1235,8 @@ module Aws::IoTSiteWise
       :project_id,
       :asset_ids,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1245,8 @@ module Aws::IoTSiteWise
     #   @return [Array<Types::AssetErrorDetails>]
     class BatchDisassociateProjectAssetsResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1308,8 @@ module Aws::IoTSiteWise
       :end_date,
       :qualities,
       :time_ordering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1328,8 @@ module Aws::IoTSiteWise
       :error_code,
       :error_message,
       :entry_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1295,7 +1344,8 @@ module Aws::IoTSiteWise
     class BatchGetAssetPropertyAggregatesErrorInfo < Struct.new(
       :error_code,
       :error_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1323,7 +1373,8 @@ module Aws::IoTSiteWise
       :entries,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1399,8 @@ module Aws::IoTSiteWise
       :success_entries,
       :skipped_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1366,7 +1418,8 @@ module Aws::IoTSiteWise
       :entry_id,
       :completion_status,
       :error_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1381,7 +1434,8 @@ module Aws::IoTSiteWise
     class BatchGetAssetPropertyAggregatesSuccessEntry < Struct.new(
       :entry_id,
       :aggregated_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1416,7 +1470,8 @@ module Aws::IoTSiteWise
       :asset_id,
       :property_id,
       :property_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1490,8 @@ module Aws::IoTSiteWise
       :error_code,
       :error_message,
       :entry_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1505,8 @@ module Aws::IoTSiteWise
     class BatchGetAssetPropertyValueErrorInfo < Struct.new(
       :error_code,
       :error_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1560,8 @@ module Aws::IoTSiteWise
       :end_date,
       :qualities,
       :time_ordering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1522,7 +1580,8 @@ module Aws::IoTSiteWise
       :error_code,
       :error_message,
       :entry_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1536,7 +1595,8 @@ module Aws::IoTSiteWise
     class BatchGetAssetPropertyValueHistoryErrorInfo < Struct.new(
       :error_code,
       :error_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,7 +1624,8 @@ module Aws::IoTSiteWise
       :entries,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1650,8 @@ module Aws::IoTSiteWise
       :success_entries,
       :skipped_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1607,7 +1669,8 @@ module Aws::IoTSiteWise
       :entry_id,
       :completion_status,
       :error_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,7 +1684,8 @@ module Aws::IoTSiteWise
     class BatchGetAssetPropertyValueHistorySuccessEntry < Struct.new(
       :entry_id,
       :asset_property_value_history,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1699,8 @@ module Aws::IoTSiteWise
     class BatchGetAssetPropertyValueRequest < Struct.new(
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,7 +1725,8 @@ module Aws::IoTSiteWise
       :success_entries,
       :skipped_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1744,8 @@ module Aws::IoTSiteWise
       :entry_id,
       :completion_status,
       :error_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1692,7 +1759,8 @@ module Aws::IoTSiteWise
     class BatchGetAssetPropertyValueSuccessEntry < Struct.new(
       :entry_id,
       :asset_property_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1778,8 @@ module Aws::IoTSiteWise
       :error_code,
       :error_message,
       :timestamps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1794,8 @@ module Aws::IoTSiteWise
     class BatchPutAssetPropertyErrorEntry < Struct.new(
       :entry_id,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1741,7 +1811,8 @@ module Aws::IoTSiteWise
     class BatchPutAssetPropertyValueRequest < Struct.new(
       :enable_partial_entry_processing,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1751,7 +1822,8 @@ module Aws::IoTSiteWise
     #   @return [Array<Types::BatchPutAssetPropertyErrorEntry>]
     class BatchPutAssetPropertyValueResponse < Struct.new(
       :error_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1766,7 +1838,8 @@ module Aws::IoTSiteWise
     class Citation < Struct.new(
       :reference,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1780,7 +1853,8 @@ module Aws::IoTSiteWise
     class ColumnInfo < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1790,7 +1864,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ColumnType < Struct.new(
       :scalar_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1816,7 +1891,8 @@ module Aws::IoTSiteWise
       :asset_property,
       :id,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1829,7 +1905,8 @@ module Aws::IoTSiteWise
     #   @return [Array<Types::CompositionRelationshipItem>]
     class CompositionDetails < Struct.new(
       :composition_relationship,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,7 +1917,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class CompositionRelationshipItem < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1859,7 +1937,8 @@ module Aws::IoTSiteWise
       :asset_model_id,
       :asset_model_composite_model_id,
       :asset_model_composite_model_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1875,7 +1954,8 @@ module Aws::IoTSiteWise
     class ComputationModelAnomalyDetectionConfiguration < Struct.new(
       :input_properties,
       :result_property,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1885,7 +1965,8 @@ module Aws::IoTSiteWise
     #   @return [Types::ComputationModelAnomalyDetectionConfiguration]
     class ComputationModelConfiguration < Struct.new(
       :anomaly_detection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +1984,8 @@ module Aws::IoTSiteWise
     class ComputationModelDataBindingUsageSummary < Struct.new(
       :computation_model_ids,
       :matched_data_binding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1922,7 +2004,8 @@ module Aws::IoTSiteWise
       :asset_model_property,
       :asset_property,
       :list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1932,7 +2015,8 @@ module Aws::IoTSiteWise
     #   @return [Types::ResolveTo]
     class ComputationModelResolveToResourceSummary < Struct.new(
       :resolve_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1946,7 +2030,8 @@ module Aws::IoTSiteWise
     class ComputationModelStatus < Struct.new(
       :state,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1991,7 +2076,8 @@ module Aws::IoTSiteWise
       :last_update_date,
       :status,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2005,7 +2091,8 @@ module Aws::IoTSiteWise
     class ConfigurationErrorDetails < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2019,7 +2106,8 @@ module Aws::IoTSiteWise
     class ConfigurationStatus < Struct.new(
       :state,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2037,7 +2125,8 @@ module Aws::IoTSiteWise
       :message,
       :resource_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2047,7 +2136,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class Content < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2164,8 @@ module Aws::IoTSiteWise
       :access_policy_permission,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2090,7 +2181,8 @@ module Aws::IoTSiteWise
     class CreateAccessPolicyResponse < Struct.new(
       :access_policy_id,
       :access_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2161,7 +2253,8 @@ module Aws::IoTSiteWise
       :if_match,
       :if_none_match,
       :match_for_version_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2180,7 +2273,8 @@ module Aws::IoTSiteWise
       :asset_model_composite_model_id,
       :asset_model_composite_model_path,
       :asset_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2256,7 +2350,8 @@ module Aws::IoTSiteWise
       :asset_model_composite_models,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2277,7 +2372,8 @@ module Aws::IoTSiteWise
       :asset_model_id,
       :asset_model_arn,
       :asset_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2315,7 +2411,8 @@ module Aws::IoTSiteWise
       :client_token,
       :tags,
       :asset_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2337,7 +2434,8 @@ module Aws::IoTSiteWise
       :asset_id,
       :asset_arn,
       :asset_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2371,7 +2469,8 @@ module Aws::IoTSiteWise
       :job_configuration,
       :adaptive_ingestion,
       :delete_files_after_import,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2416,7 +2515,8 @@ module Aws::IoTSiteWise
       :job_id,
       :job_name,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2448,7 +2548,8 @@ module Aws::IoTSiteWise
       :computation_model_data_binding,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2469,7 +2570,8 @@ module Aws::IoTSiteWise
       :computation_model_id,
       :computation_model_arn,
       :computation_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2512,7 +2614,8 @@ module Aws::IoTSiteWise
       :dashboard_definition,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2528,7 +2631,8 @@ module Aws::IoTSiteWise
     class CreateDashboardResponse < Struct.new(
       :dashboard_id,
       :dashboard_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2559,7 +2663,8 @@ module Aws::IoTSiteWise
       :dataset_source,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2579,7 +2684,8 @@ module Aws::IoTSiteWise
       :dataset_id,
       :dataset_arn,
       :dataset_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2612,7 +2718,8 @@ module Aws::IoTSiteWise
       :gateway_platform,
       :gateway_version,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2628,7 +2735,8 @@ module Aws::IoTSiteWise
     class CreateGatewayResponse < Struct.new(
       :gateway_id,
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2712,7 +2820,8 @@ module Aws::IoTSiteWise
       :alarms,
       :portal_type,
       :portal_type_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2743,7 +2852,8 @@ module Aws::IoTSiteWise
       :portal_start_url,
       :portal_status,
       :sso_application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2770,7 +2880,8 @@ module Aws::IoTSiteWise
       :project_description,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2786,7 +2897,8 @@ module Aws::IoTSiteWise
     class CreateProjectResponse < Struct.new(
       :project_id,
       :project_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2796,7 +2908,8 @@ module Aws::IoTSiteWise
     #   @return [Array<String>]
     class Csv < Struct.new(
       :column_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2812,7 +2925,8 @@ module Aws::IoTSiteWise
     class CustomerManagedS3Storage < Struct.new(
       :s3_resource_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2838,7 +2952,8 @@ module Aws::IoTSiteWise
       :description,
       :creation_date,
       :last_update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2853,7 +2968,8 @@ module Aws::IoTSiteWise
     class DataBindingValue < Struct.new(
       :asset_model_property,
       :asset_property,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2881,7 +2997,8 @@ module Aws::IoTSiteWise
       :asset_model,
       :asset_property,
       :asset_model_property,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2896,7 +3013,8 @@ module Aws::IoTSiteWise
     class DataSetReference < Struct.new(
       :dataset_arn,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2914,7 +3032,8 @@ module Aws::IoTSiteWise
       :source_type,
       :source_format,
       :source_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2929,7 +3048,8 @@ module Aws::IoTSiteWise
     class DatasetStatus < Struct.new(
       :state,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2965,7 +3085,8 @@ module Aws::IoTSiteWise
       :creation_date,
       :last_update_date,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2988,7 +3109,8 @@ module Aws::IoTSiteWise
       :array_value,
       :row_value,
       :null_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3001,12 +3123,14 @@ module Aws::IoTSiteWise
     class DeleteAccessPolicyRequest < Struct.new(
       :access_policy_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3040,7 +3164,8 @@ module Aws::IoTSiteWise
       :if_match,
       :if_none_match,
       :match_for_version_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3050,7 +3175,8 @@ module Aws::IoTSiteWise
     #   @return [Types::AssetModelStatus]
     class DeleteAssetModelCompositeModelResponse < Struct.new(
       :asset_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3070,7 +3196,8 @@ module Aws::IoTSiteWise
       :asset_model_id,
       :interface_asset_model_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3094,7 +3221,8 @@ module Aws::IoTSiteWise
       :interface_asset_model_id,
       :asset_model_arn,
       :asset_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3125,7 +3253,8 @@ module Aws::IoTSiteWise
       :if_match,
       :if_none_match,
       :match_for_version_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3135,7 +3264,8 @@ module Aws::IoTSiteWise
     #   @return [Types::AssetModelStatus]
     class DeleteAssetModelResponse < Struct.new(
       :asset_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3149,7 +3279,8 @@ module Aws::IoTSiteWise
     class DeleteAssetRequest < Struct.new(
       :asset_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3159,7 +3290,8 @@ module Aws::IoTSiteWise
     #   @return [Types::AssetStatus]
     class DeleteAssetResponse < Struct.new(
       :asset_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3172,7 +3304,8 @@ module Aws::IoTSiteWise
     class DeleteComputationModelRequest < Struct.new(
       :computation_model_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3182,7 +3315,8 @@ module Aws::IoTSiteWise
     #   @return [Types::ComputationModelStatus]
     class DeleteComputationModelResponse < Struct.new(
       :computation_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3195,12 +3329,14 @@ module Aws::IoTSiteWise
     class DeleteDashboardRequest < Struct.new(
       :dashboard_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDashboardResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3213,7 +3349,8 @@ module Aws::IoTSiteWise
     class DeleteDatasetRequest < Struct.new(
       :dataset_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3223,7 +3360,8 @@ module Aws::IoTSiteWise
     #   @return [Types::DatasetStatus]
     class DeleteDatasetResponse < Struct.new(
       :dataset_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3232,7 +3370,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DeleteGatewayRequest < Struct.new(
       :gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3245,7 +3384,8 @@ module Aws::IoTSiteWise
     class DeletePortalRequest < Struct.new(
       :portal_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3255,7 +3395,8 @@ module Aws::IoTSiteWise
     #   @return [Types::PortalStatus]
     class DeletePortalResponse < Struct.new(
       :portal_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3268,12 +3409,14 @@ module Aws::IoTSiteWise
     class DeleteProjectRequest < Struct.new(
       :project_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3296,7 +3439,8 @@ module Aws::IoTSiteWise
       :asset_id,
       :property_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3305,7 +3449,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DescribeAccessPolicyRequest < Struct.new(
       :access_policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3344,7 +3489,8 @@ module Aws::IoTSiteWise
       :access_policy_permission,
       :access_policy_creation_date,
       :access_policy_last_update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3353,7 +3499,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DescribeActionRequest < Struct.new(
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3382,7 +3529,8 @@ module Aws::IoTSiteWise
       :action_payload,
       :execution_time,
       :resolve_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3397,7 +3545,8 @@ module Aws::IoTSiteWise
     class DescribeAssetCompositeModelRequest < Struct.new(
       :asset_id,
       :asset_composite_model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3448,7 +3597,8 @@ module Aws::IoTSiteWise
       :asset_composite_model_properties,
       :asset_composite_model_summaries,
       :action_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3469,7 +3619,8 @@ module Aws::IoTSiteWise
       :asset_model_id,
       :asset_model_composite_model_id,
       :asset_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3523,7 +3674,8 @@ module Aws::IoTSiteWise
       :composition_details,
       :asset_model_composite_model_summaries,
       :action_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3538,7 +3690,8 @@ module Aws::IoTSiteWise
     class DescribeAssetModelInterfaceRelationshipRequest < Struct.new(
       :asset_model_id,
       :interface_asset_model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3561,7 +3714,8 @@ module Aws::IoTSiteWise
       :interface_asset_model_id,
       :property_mappings,
       :hierarchy_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3581,7 +3735,8 @@ module Aws::IoTSiteWise
       :asset_model_id,
       :exclude_properties,
       :asset_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3679,7 +3834,8 @@ module Aws::IoTSiteWise
       :asset_model_version,
       :interface_details,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3694,7 +3850,8 @@ module Aws::IoTSiteWise
     class DescribeAssetPropertyRequest < Struct.new(
       :asset_id,
       :property_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3727,7 +3884,8 @@ module Aws::IoTSiteWise
       :asset_model_id,
       :asset_property,
       :composite_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3741,7 +3899,8 @@ module Aws::IoTSiteWise
     class DescribeAssetRequest < Struct.new(
       :asset_id,
       :exclude_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3803,7 +3962,8 @@ module Aws::IoTSiteWise
       :asset_status,
       :asset_description,
       :asset_composite_model_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3812,7 +3972,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DescribeBulkImportJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3890,7 +4051,8 @@ module Aws::IoTSiteWise
       :job_last_update_date,
       :adaptive_ingestion,
       :delete_files_after_import,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3907,7 +4069,8 @@ module Aws::IoTSiteWise
       :computation_model_id,
       :resolve_to_resource_type,
       :resolve_to_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3924,7 +4087,8 @@ module Aws::IoTSiteWise
       :computation_model_id,
       :resolve_to,
       :computation_model_execution_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3933,7 +4097,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DescribeComputationModelRequest < Struct.new(
       :computation_model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3987,7 +4152,8 @@ module Aws::IoTSiteWise
       :computation_model_status,
       :computation_model_version,
       :action_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3996,7 +4162,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DescribeDashboardRequest < Struct.new(
       :dashboard_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4037,7 +4204,8 @@ module Aws::IoTSiteWise
       :dashboard_definition,
       :dashboard_creation_date,
       :dashboard_last_update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4046,7 +4214,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4090,12 +4259,14 @@ module Aws::IoTSiteWise
       :dataset_creation_date,
       :dataset_last_update_date,
       :dataset_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeDefaultEncryptionConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4115,7 +4286,8 @@ module Aws::IoTSiteWise
       :encryption_type,
       :kms_key_arn,
       :configuration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4124,7 +4296,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DescribeExecutionRequest < Struct.new(
       :execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4187,7 +4360,8 @@ module Aws::IoTSiteWise
       :execution_result,
       :execution_details,
       :execution_entity_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4203,7 +4377,8 @@ module Aws::IoTSiteWise
     class DescribeGatewayCapabilityConfigurationRequest < Struct.new(
       :gateway_id,
       :capability_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4247,7 +4422,8 @@ module Aws::IoTSiteWise
       :capability_namespace,
       :capability_configuration,
       :capability_sync_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4256,7 +4432,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DescribeGatewayRequest < Struct.new(
       :gateway_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4299,12 +4476,14 @@ module Aws::IoTSiteWise
       :gateway_capability_summaries,
       :creation_date,
       :last_update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeLoggingOptionsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4313,7 +4492,8 @@ module Aws::IoTSiteWise
     #   @return [Types::LoggingOptions]
     class DescribeLoggingOptionsResponse < Struct.new(
       :logging_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4322,7 +4502,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DescribePortalRequest < Struct.new(
       :portal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4403,7 +4584,8 @@ module Aws::IoTSiteWise
       :alarms,
       :portal_type,
       :portal_type_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4412,7 +4594,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class DescribeProjectRequest < Struct.new(
       :project_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4448,12 +4631,14 @@ module Aws::IoTSiteWise
       :project_description,
       :project_creation_date,
       :project_last_update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeStorageConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4524,7 +4709,8 @@ module Aws::IoTSiteWise
       :warm_tier,
       :warm_tier_retention_period,
       :disallow_ingest_null_na_n,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4543,7 +4729,8 @@ module Aws::IoTSiteWise
       :alias,
       :asset_id,
       :property_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4592,7 +4779,8 @@ module Aws::IoTSiteWise
       :time_series_creation_date,
       :time_series_last_update_date,
       :time_series_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4606,7 +4794,8 @@ module Aws::IoTSiteWise
     class DetailedError < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4634,7 +4823,8 @@ module Aws::IoTSiteWise
       :hierarchy_id,
       :child_asset_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4657,7 +4847,8 @@ module Aws::IoTSiteWise
       :asset_id,
       :property_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4675,7 +4866,8 @@ module Aws::IoTSiteWise
       :code,
       :message,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4693,7 +4885,8 @@ module Aws::IoTSiteWise
     class ErrorReportLocation < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4718,7 +4911,8 @@ module Aws::IoTSiteWise
       :action_payload,
       :client_token,
       :resolve_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4727,7 +4921,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ExecuteActionResponse < Struct.new(
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4759,7 +4954,8 @@ module Aws::IoTSiteWise
       :next_token,
       :max_results,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4776,7 +4972,8 @@ module Aws::IoTSiteWise
       :columns,
       :rows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4786,7 +4983,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ExecutionStatus < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4829,7 +5027,8 @@ module Aws::IoTSiteWise
       :execution_end_time,
       :execution_status,
       :execution_entity_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4843,7 +5042,8 @@ module Aws::IoTSiteWise
     class ExpressionVariable < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4863,7 +5063,8 @@ module Aws::IoTSiteWise
       :bucket,
       :key,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4877,7 +5078,8 @@ module Aws::IoTSiteWise
     class FileFormat < Struct.new(
       :csv,
       :parquet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4887,7 +5089,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ForwardingConfig < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4926,7 +5129,8 @@ module Aws::IoTSiteWise
     class GatewayCapabilitySummary < Struct.new(
       :capability_namespace,
       :capability_sync_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4952,7 +5156,8 @@ module Aws::IoTSiteWise
       :greengrass,
       :greengrass_v2,
       :siemens_ie,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4997,7 +5202,8 @@ module Aws::IoTSiteWise
       :gateway_capability_summaries,
       :creation_date,
       :last_update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5061,7 +5267,8 @@ module Aws::IoTSiteWise
       :time_ordering,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5074,7 +5281,8 @@ module Aws::IoTSiteWise
     class GetAssetPropertyAggregatesResponse < Struct.new(
       :aggregated_values,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5130,7 +5338,8 @@ module Aws::IoTSiteWise
       :time_ordering,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5143,7 +5352,8 @@ module Aws::IoTSiteWise
     class GetAssetPropertyValueHistoryResponse < Struct.new(
       :asset_property_value_history,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5163,7 +5373,8 @@ module Aws::IoTSiteWise
       :asset_id,
       :property_id,
       :property_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5172,7 +5383,8 @@ module Aws::IoTSiteWise
     #   @return [Types::AssetPropertyValue]
     class GetAssetPropertyValueResponse < Struct.new(
       :property_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5285,7 +5497,8 @@ module Aws::IoTSiteWise
       :max_results,
       :type,
       :interval_window_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5298,7 +5511,8 @@ module Aws::IoTSiteWise
     class GetInterpolatedAssetPropertyValuesResponse < Struct.new(
       :interpolated_asset_property_values,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5313,7 +5527,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class Greengrass < Struct.new(
       :group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5335,7 +5550,8 @@ module Aws::IoTSiteWise
     class GreengrassV2 < Struct.new(
       :core_device_thing_name,
       :core_device_operating_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5345,7 +5561,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class GroupIdentity < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5360,7 +5577,8 @@ module Aws::IoTSiteWise
     class HierarchyMapping < Struct.new(
       :asset_model_hierarchy_id,
       :interface_asset_model_hierarchy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5372,7 +5590,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class IAMRoleIdentity < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5388,7 +5607,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class IAMUserIdentity < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5414,7 +5634,8 @@ module Aws::IoTSiteWise
       :group,
       :iam_user,
       :iam_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5436,7 +5657,8 @@ module Aws::IoTSiteWise
     class Image < Struct.new(
       :id,
       :file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5451,7 +5673,8 @@ module Aws::IoTSiteWise
     class ImageFile < Struct.new(
       :data,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5466,7 +5689,8 @@ module Aws::IoTSiteWise
     class ImageLocation < Struct.new(
       :id,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5477,7 +5701,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class InterfaceRelationship < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5489,7 +5714,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class InterfaceRelationshipSummary < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5504,7 +5730,8 @@ module Aws::IoTSiteWise
     class InterfaceSummary < Struct.new(
       :interface_asset_model_id,
       :interface_asset_model_property_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5513,7 +5740,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class InternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5527,7 +5755,8 @@ module Aws::IoTSiteWise
     class InterpolatedAssetPropertyValue < Struct.new(
       :timestamp,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5537,7 +5766,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5551,7 +5781,8 @@ module Aws::IoTSiteWise
     class InvocationOutput < Struct.new(
       :message,
       :citations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5570,7 +5801,8 @@ module Aws::IoTSiteWise
       :conversation_id,
       :message,
       :enable_trace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5583,7 +5815,8 @@ module Aws::IoTSiteWise
     class InvokeAssistantResponse < Struct.new(
       :body,
       :conversation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5593,7 +5826,8 @@ module Aws::IoTSiteWise
     #   @return [Types::FileFormat]
     class JobConfiguration < Struct.new(
       :file_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5639,7 +5873,8 @@ module Aws::IoTSiteWise
       :id,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5653,7 +5888,8 @@ module Aws::IoTSiteWise
     class KendraSourceDetail < Struct.new(
       :knowledge_base_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5665,7 +5901,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5705,7 +5942,8 @@ module Aws::IoTSiteWise
       :iam_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5718,7 +5956,8 @@ module Aws::IoTSiteWise
     class ListAccessPoliciesResponse < Struct.new(
       :access_policy_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5747,7 +5986,8 @@ module Aws::IoTSiteWise
       :max_results,
       :resolve_to_resource_type,
       :resolve_to_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5760,7 +6000,8 @@ module Aws::IoTSiteWise
     class ListActionsResponse < Struct.new(
       :action_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5785,7 +6026,8 @@ module Aws::IoTSiteWise
       :next_token,
       :max_results,
       :asset_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5798,7 +6040,8 @@ module Aws::IoTSiteWise
     class ListAssetModelCompositeModelsResponse < Struct.new(
       :asset_model_composite_model_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5841,7 +6084,8 @@ module Aws::IoTSiteWise
       :max_results,
       :filter,
       :asset_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5854,7 +6098,8 @@ module Aws::IoTSiteWise
     class ListAssetModelPropertiesResponse < Struct.new(
       :asset_model_property_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5897,7 +6142,8 @@ module Aws::IoTSiteWise
       :next_token,
       :max_results,
       :asset_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5910,7 +6156,8 @@ module Aws::IoTSiteWise
     class ListAssetModelsResponse < Struct.new(
       :asset_model_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5947,7 +6194,8 @@ module Aws::IoTSiteWise
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5960,7 +6208,8 @@ module Aws::IoTSiteWise
     class ListAssetPropertiesResponse < Struct.new(
       :asset_property_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5991,7 +6240,8 @@ module Aws::IoTSiteWise
       :traversal_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6004,7 +6254,8 @@ module Aws::IoTSiteWise
     class ListAssetRelationshipsResponse < Struct.new(
       :asset_relationship_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6043,7 +6294,8 @@ module Aws::IoTSiteWise
       :max_results,
       :asset_model_id,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6056,7 +6308,8 @@ module Aws::IoTSiteWise
     class ListAssetsResponse < Struct.new(
       :asset_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6101,7 +6354,8 @@ module Aws::IoTSiteWise
       :traversal_direction,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6114,7 +6368,8 @@ module Aws::IoTSiteWise
     class ListAssociatedAssetsResponse < Struct.new(
       :asset_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6131,7 +6386,8 @@ module Aws::IoTSiteWise
       :next_token,
       :max_results,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6144,7 +6400,8 @@ module Aws::IoTSiteWise
     class ListBulkImportJobsResponse < Struct.new(
       :job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6163,7 +6420,8 @@ module Aws::IoTSiteWise
       :asset_model_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6176,7 +6434,8 @@ module Aws::IoTSiteWise
     class ListCompositionRelationshipsResponse < Struct.new(
       :composition_relationship_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6195,7 +6454,8 @@ module Aws::IoTSiteWise
       :data_binding_value_filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6210,7 +6470,8 @@ module Aws::IoTSiteWise
     class ListComputationModelDataBindingUsagesResponse < Struct.new(
       :data_binding_usage_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6227,7 +6488,8 @@ module Aws::IoTSiteWise
       :computation_model_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6242,7 +6504,8 @@ module Aws::IoTSiteWise
     class ListComputationModelResolveToResourcesResponse < Struct.new(
       :computation_model_resolve_to_resource_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6260,7 +6523,8 @@ module Aws::IoTSiteWise
       :computation_model_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6273,7 +6537,8 @@ module Aws::IoTSiteWise
     class ListComputationModelsResponse < Struct.new(
       :computation_model_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6291,7 +6556,8 @@ module Aws::IoTSiteWise
       :project_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6304,7 +6570,8 @@ module Aws::IoTSiteWise
     class ListDashboardsResponse < Struct.new(
       :dashboard_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6321,7 +6588,8 @@ module Aws::IoTSiteWise
       :source_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6334,7 +6602,8 @@ module Aws::IoTSiteWise
     class ListDatasetsResponse < Struct.new(
       :dataset_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6367,7 +6636,8 @@ module Aws::IoTSiteWise
       :next_token,
       :max_results,
       :action_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6380,7 +6650,8 @@ module Aws::IoTSiteWise
     class ListExecutionsResponse < Struct.new(
       :execution_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6394,7 +6665,8 @@ module Aws::IoTSiteWise
     class ListGatewaysRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6407,7 +6679,8 @@ module Aws::IoTSiteWise
     class ListGatewaysResponse < Struct.new(
       :gateway_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6425,7 +6698,8 @@ module Aws::IoTSiteWise
       :interface_asset_model_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6438,7 +6712,8 @@ module Aws::IoTSiteWise
     class ListInterfaceRelationshipsResponse < Struct.new(
       :interface_relationship_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6452,7 +6727,8 @@ module Aws::IoTSiteWise
     class ListPortalsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6465,7 +6741,8 @@ module Aws::IoTSiteWise
     class ListPortalsResponse < Struct.new(
       :portal_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6483,7 +6760,8 @@ module Aws::IoTSiteWise
       :project_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6496,7 +6774,8 @@ module Aws::IoTSiteWise
     class ListProjectAssetsResponse < Struct.new(
       :asset_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6514,7 +6793,8 @@ module Aws::IoTSiteWise
       :portal_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6527,7 +6807,8 @@ module Aws::IoTSiteWise
     class ListProjectsResponse < Struct.new(
       :project_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6536,7 +6817,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6547,7 +6829,8 @@ module Aws::IoTSiteWise
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6586,7 +6869,8 @@ module Aws::IoTSiteWise
       :asset_id,
       :alias_prefix,
       :time_series_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6599,7 +6883,8 @@ module Aws::IoTSiteWise
     class ListTimeSeriesResponse < Struct.new(
       :time_series_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6609,7 +6894,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class Location < Struct.new(
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6619,7 +6905,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class LoggingOptions < Struct.new(
       :level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6629,7 +6916,8 @@ module Aws::IoTSiteWise
     #   @return [Types::DataBindingValue]
     class MatchedDataBinding < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6642,7 +6930,8 @@ module Aws::IoTSiteWise
     #   @return [Types::MeasurementProcessingConfig]
     class Measurement < Struct.new(
       :processing_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6654,7 +6943,8 @@ module Aws::IoTSiteWise
     #   @return [Types::ForwardingConfig]
     class MeasurementProcessingConfig < Struct.new(
       :forwarding_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6690,7 +6980,8 @@ module Aws::IoTSiteWise
       :variables,
       :window,
       :processing_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6708,7 +6999,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class MetricProcessingConfig < Struct.new(
       :compute_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6719,7 +7011,8 @@ module Aws::IoTSiteWise
     #   @return [Types::TumblingWindow]
     class MetricWindow < Struct.new(
       :tumbling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6733,7 +7026,8 @@ module Aws::IoTSiteWise
     class MonitorErrorDetails < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6743,13 +7037,15 @@ module Aws::IoTSiteWise
     #   @return [Types::CustomerManagedS3Storage]
     class MultiLayerStorage < Struct.new(
       :customer_managed_s3_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A parquet file.</p>
     class Parquet < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6759,7 +7055,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class PortalResource < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6773,7 +7070,8 @@ module Aws::IoTSiteWise
     class PortalStatus < Struct.new(
       :state,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6819,7 +7117,8 @@ module Aws::IoTSiteWise
       :role_arn,
       :status,
       :portal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6830,7 +7129,8 @@ module Aws::IoTSiteWise
     #   @return [Array<String>]
     class PortalTypeEntry < Struct.new(
       :portal_tools,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6848,7 +7148,8 @@ module Aws::IoTSiteWise
       :message,
       :resource_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6858,7 +7159,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ProjectResource < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6884,7 +7186,8 @@ module Aws::IoTSiteWise
       :description,
       :creation_date,
       :last_update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6929,7 +7232,8 @@ module Aws::IoTSiteWise
       :unit,
       :type,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6944,7 +7248,8 @@ module Aws::IoTSiteWise
     class PropertyMapping < Struct.new(
       :asset_model_property_id,
       :interface_asset_model_property_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6966,7 +7271,8 @@ module Aws::IoTSiteWise
       :match_by_property_name,
       :create_missing_property,
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6987,7 +7293,8 @@ module Aws::IoTSiteWise
     class PropertyNotification < Struct.new(
       :topic,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7016,7 +7323,8 @@ module Aws::IoTSiteWise
       :measurement,
       :transform,
       :metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7026,7 +7334,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class PropertyValueNullValue < Struct.new(
       :value_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7052,7 +7361,8 @@ module Aws::IoTSiteWise
       :interface_asset_model_id,
       :property_mapping_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7076,7 +7386,8 @@ module Aws::IoTSiteWise
       :interface_asset_model_id,
       :asset_model_arn,
       :asset_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7109,7 +7420,8 @@ module Aws::IoTSiteWise
       :property_id,
       :property_alias,
       :property_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7123,7 +7435,8 @@ module Aws::IoTSiteWise
     class PutDefaultEncryptionConfigurationRequest < Struct.new(
       :encryption_type,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7143,7 +7456,8 @@ module Aws::IoTSiteWise
       :encryption_type,
       :kms_key_arn,
       :configuration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7152,12 +7466,14 @@ module Aws::IoTSiteWise
     #   @return [Types::LoggingOptions]
     class PutLoggingOptionsRequest < Struct.new(
       :logging_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutLoggingOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7221,7 +7537,8 @@ module Aws::IoTSiteWise
       :warm_tier,
       :warm_tier_retention_period,
       :disallow_ingest_null_na_n,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7288,7 +7605,8 @@ module Aws::IoTSiteWise
       :warm_tier,
       :warm_tier_retention_period,
       :disallow_ingest_null_na_n,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7297,7 +7615,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class QueryTimeoutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7307,7 +7626,8 @@ module Aws::IoTSiteWise
     #   @return [Types::DataSetReference]
     class Reference < Struct.new(
       :dataset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7317,7 +7637,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ResolveTo < Struct.new(
       :asset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7331,7 +7652,8 @@ module Aws::IoTSiteWise
     class Resource < Struct.new(
       :portal,
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7348,7 +7670,8 @@ module Aws::IoTSiteWise
       :message,
       :resource_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7357,7 +7680,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7408,7 +7732,8 @@ module Aws::IoTSiteWise
       :resource_not_found_exception,
       :throttling_exception,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Trace < ResponseStream; end
@@ -7441,7 +7766,8 @@ module Aws::IoTSiteWise
     class RetentionPeriod < Struct.new(
       :number_of_days,
       :unlimited,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7451,7 +7777,8 @@ module Aws::IoTSiteWise
     #   @return [Array<Types::Datum>]
     class Row < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7460,7 +7787,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7471,7 +7799,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class SiemensIE < Struct.new(
       :iot_core_thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7486,7 +7815,8 @@ module Aws::IoTSiteWise
     class Source < Struct.new(
       :arn,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7496,7 +7826,8 @@ module Aws::IoTSiteWise
     #   @return [Types::KendraSourceDetail]
     class SourceDetail < Struct.new(
       :kendra,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7511,12 +7842,14 @@ module Aws::IoTSiteWise
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7531,7 +7864,8 @@ module Aws::IoTSiteWise
     class TargetResource < Struct.new(
       :asset_id,
       :computation_model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7543,7 +7877,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7558,7 +7893,8 @@ module Aws::IoTSiteWise
     class TimeInNanos < Struct.new(
       :time_in_seconds,
       :offset_in_nanos,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7608,7 +7944,8 @@ module Aws::IoTSiteWise
       :time_series_creation_date,
       :time_series_last_update_date,
       :time_series_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7623,7 +7960,8 @@ module Aws::IoTSiteWise
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7633,7 +7971,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class Trace < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7661,7 +8000,8 @@ module Aws::IoTSiteWise
       :expression,
       :variables,
       :processing_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7677,7 +8017,8 @@ module Aws::IoTSiteWise
     class TransformProcessingConfig < Struct.new(
       :compute_location,
       :forwarding_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7765,7 +8106,8 @@ module Aws::IoTSiteWise
     class TumblingWindow < Struct.new(
       :interval,
       :offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7774,7 +8116,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7787,12 +8130,14 @@ module Aws::IoTSiteWise
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7817,12 +8162,14 @@ module Aws::IoTSiteWise
       :access_policy_resource,
       :access_policy_permission,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateAccessPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7877,7 +8224,8 @@ module Aws::IoTSiteWise
       :if_match,
       :if_none_match,
       :match_for_version_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7891,7 +8239,8 @@ module Aws::IoTSiteWise
     class UpdateAssetModelCompositeModelResponse < Struct.new(
       :asset_model_composite_model_path,
       :asset_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7962,7 +8311,8 @@ module Aws::IoTSiteWise
       :if_match,
       :if_none_match,
       :match_for_version_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7972,7 +8322,8 @@ module Aws::IoTSiteWise
     #   @return [Types::AssetModelStatus]
     class UpdateAssetModelResponse < Struct.new(
       :asset_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8012,7 +8363,8 @@ module Aws::IoTSiteWise
       :property_notification_state,
       :client_token,
       :property_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8039,7 +8391,8 @@ module Aws::IoTSiteWise
       :asset_name,
       :client_token,
       :asset_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8049,7 +8402,8 @@ module Aws::IoTSiteWise
     #   @return [Types::AssetStatus]
     class UpdateAssetResponse < Struct.new(
       :asset_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8080,7 +8434,8 @@ module Aws::IoTSiteWise
       :computation_model_configuration,
       :computation_model_data_binding,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8090,7 +8445,8 @@ module Aws::IoTSiteWise
     #   @return [Types::ComputationModelStatus]
     class UpdateComputationModelResponse < Struct.new(
       :computation_model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8127,12 +8483,14 @@ module Aws::IoTSiteWise
       :dashboard_description,
       :dashboard_definition,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDashboardResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8157,7 +8515,8 @@ module Aws::IoTSiteWise
       :dataset_description,
       :dataset_source,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8177,7 +8536,8 @@ module Aws::IoTSiteWise
       :dataset_id,
       :dataset_arn,
       :dataset_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8198,7 +8558,8 @@ module Aws::IoTSiteWise
       :gateway_id,
       :capability_namespace,
       :capability_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8235,7 +8596,8 @@ module Aws::IoTSiteWise
     class UpdateGatewayCapabilityConfigurationResponse < Struct.new(
       :capability_namespace,
       :capability_sync_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8248,7 +8610,8 @@ module Aws::IoTSiteWise
     class UpdateGatewayRequest < Struct.new(
       :gateway_id,
       :gateway_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8309,7 +8672,8 @@ module Aws::IoTSiteWise
       :alarms,
       :portal_type,
       :portal_type_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8319,7 +8683,8 @@ module Aws::IoTSiteWise
     #   @return [Types::PortalStatus]
     class UpdatePortalResponse < Struct.new(
       :portal_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8340,12 +8705,14 @@ module Aws::IoTSiteWise
       :project_name,
       :project_description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateProjectResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8355,7 +8722,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class UserIdentity < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8364,7 +8732,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8390,7 +8759,8 @@ module Aws::IoTSiteWise
       :property_id,
       :hierarchy_id,
       :property_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8418,7 +8788,8 @@ module Aws::IoTSiteWise
       :double_value,
       :boolean_value,
       :null_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8432,7 +8803,8 @@ module Aws::IoTSiteWise
     class WarmTierRetentionPeriod < Struct.new(
       :number_of_days,
       :unlimited,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

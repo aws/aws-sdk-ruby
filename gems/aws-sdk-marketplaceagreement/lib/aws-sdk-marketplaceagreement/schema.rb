@@ -336,7 +336,6 @@ module Aws::MarketplaceAgreement
         operation.traits = {}
         operation[:paginator] = Paginators::SearchAgreements.new
       end)
-
     end
 
     class << self

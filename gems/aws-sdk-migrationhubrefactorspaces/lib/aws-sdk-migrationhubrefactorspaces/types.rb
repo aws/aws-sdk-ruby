@@ -11,7 +11,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +47,8 @@ module Aws::MigrationHubRefactorSpaces
       :nlb_name,
       :endpoint_type,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +69,8 @@ module Aws::MigrationHubRefactorSpaces
     class ApiGatewayProxyInput < Struct.new(
       :endpoint_type,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +105,8 @@ module Aws::MigrationHubRefactorSpaces
       :nlb_name,
       :endpoint_type,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,7 +169,8 @@ module Aws::MigrationHubRefactorSpaces
       :error,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +187,8 @@ module Aws::MigrationHubRefactorSpaces
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +223,8 @@ module Aws::MigrationHubRefactorSpaces
       :api_gateway_proxy,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -281,7 +288,8 @@ module Aws::MigrationHubRefactorSpaces
       :tags,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +315,8 @@ module Aws::MigrationHubRefactorSpaces
       :network_fabric_type,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -352,7 +361,8 @@ module Aws::MigrationHubRefactorSpaces
       :tags,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +404,8 @@ module Aws::MigrationHubRefactorSpaces
       :uri_path_route,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +466,8 @@ module Aws::MigrationHubRefactorSpaces
       :tags,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +516,8 @@ module Aws::MigrationHubRefactorSpaces
       :lambda_endpoint,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +586,8 @@ module Aws::MigrationHubRefactorSpaces
       :tags,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +598,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class DefaultRouteInput < Struct.new(
       :activation_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +612,8 @@ module Aws::MigrationHubRefactorSpaces
     class DeleteApplicationInput < Struct.new(
       :environment_identifier,
       :application_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +642,8 @@ module Aws::MigrationHubRefactorSpaces
       :environment_id,
       :state,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +652,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class DeleteEnvironmentInput < Struct.new(
       :environment_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +678,8 @@ module Aws::MigrationHubRefactorSpaces
       :environment_id,
       :state,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,12 +688,14 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class DeleteResourcePolicyInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +712,8 @@ module Aws::MigrationHubRefactorSpaces
       :environment_identifier,
       :application_identifier,
       :route_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +742,8 @@ module Aws::MigrationHubRefactorSpaces
       :application_id,
       :state,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -742,7 +765,8 @@ module Aws::MigrationHubRefactorSpaces
       :environment_identifier,
       :application_identifier,
       :service_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +799,8 @@ module Aws::MigrationHubRefactorSpaces
       :application_id,
       :state,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +855,8 @@ module Aws::MigrationHubRefactorSpaces
       :error,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -865,7 +891,8 @@ module Aws::MigrationHubRefactorSpaces
       :vpc_name,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,7 +922,8 @@ module Aws::MigrationHubRefactorSpaces
       :resource_identifier,
       :resource_type,
       :additional_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +936,8 @@ module Aws::MigrationHubRefactorSpaces
     class GetApplicationInput < Struct.new(
       :environment_identifier,
       :application_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +999,8 @@ module Aws::MigrationHubRefactorSpaces
       :error,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -979,7 +1009,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class GetEnvironmentInput < Struct.new(
       :environment_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1032,7 +1063,8 @@ module Aws::MigrationHubRefactorSpaces
       :error,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1041,7 +1073,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class GetResourcePolicyInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1083,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class GetResourcePolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1067,7 +1101,8 @@ module Aws::MigrationHubRefactorSpaces
       :environment_identifier,
       :application_identifier,
       :route_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1190,8 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       :append_source_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1172,7 +1208,8 @@ module Aws::MigrationHubRefactorSpaces
       :environment_identifier,
       :application_identifier,
       :service_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,7 +1286,8 @@ module Aws::MigrationHubRefactorSpaces
       :error,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1258,7 +1296,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1267,7 +1306,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class InvalidResourcePolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1317,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class LambdaEndpointConfig < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1287,7 +1328,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class LambdaEndpointInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1297,7 +1339,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class LambdaEndpointSummary < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1315,7 +1358,8 @@ module Aws::MigrationHubRefactorSpaces
       :environment_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1328,7 +1372,8 @@ module Aws::MigrationHubRefactorSpaces
     class ListApplicationsOutput < Struct.new(
       :application_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1346,7 +1391,8 @@ module Aws::MigrationHubRefactorSpaces
       :environment_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1405,8 @@ module Aws::MigrationHubRefactorSpaces
     class ListEnvironmentVpcsOutput < Struct.new(
       :environment_vpc_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1420,8 @@ module Aws::MigrationHubRefactorSpaces
     class ListEnvironmentsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1386,7 +1434,8 @@ module Aws::MigrationHubRefactorSpaces
     class ListEnvironmentsOutput < Struct.new(
       :environment_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1408,7 +1457,8 @@ module Aws::MigrationHubRefactorSpaces
       :application_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1421,7 +1471,8 @@ module Aws::MigrationHubRefactorSpaces
     class ListRoutesOutput < Struct.new(
       :route_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1443,7 +1494,8 @@ module Aws::MigrationHubRefactorSpaces
       :application_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1456,7 +1508,8 @@ module Aws::MigrationHubRefactorSpaces
     class ListServicesOutput < Struct.new(
       :service_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1518,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1528,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1488,12 +1543,14 @@ module Aws::MigrationHubRefactorSpaces
     class PutResourcePolicyInput < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutResourcePolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1567,8 @@ module Aws::MigrationHubRefactorSpaces
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1592,7 +1650,8 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       :append_source_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1619,7 +1678,8 @@ module Aws::MigrationHubRefactorSpaces
       :resource_type,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1693,7 +1753,8 @@ module Aws::MigrationHubRefactorSpaces
       :error,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1706,12 +1767,14 @@ module Aws::MigrationHubRefactorSpaces
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1734,7 +1797,8 @@ module Aws::MigrationHubRefactorSpaces
       :quota_code,
       :service_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1752,12 +1816,14 @@ module Aws::MigrationHubRefactorSpaces
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1779,7 +1845,8 @@ module Aws::MigrationHubRefactorSpaces
       :application_identifier,
       :route_identifier,
       :activation_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1881,8 @@ module Aws::MigrationHubRefactorSpaces
       :application_id,
       :state,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1846,7 +1914,8 @@ module Aws::MigrationHubRefactorSpaces
       :methods,
       :include_child_paths,
       :append_source_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1860,7 +1929,8 @@ module Aws::MigrationHubRefactorSpaces
     class UrlEndpointConfig < Struct.new(
       :url,
       :health_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1879,7 +1949,8 @@ module Aws::MigrationHubRefactorSpaces
     class UrlEndpointInput < Struct.new(
       :url,
       :health_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1898,7 +1969,8 @@ module Aws::MigrationHubRefactorSpaces
     class UrlEndpointSummary < Struct.new(
       :url,
       :health_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1908,7 +1980,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

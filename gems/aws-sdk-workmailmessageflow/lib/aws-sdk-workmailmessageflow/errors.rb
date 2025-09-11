@@ -53,7 +53,7 @@ module Aws::WorkMailMessageFlow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMailMessageFlow::Types::InvalidContentLocation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::WorkMailMessageFlow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMailMessageFlow::Types::MessageFrozen] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::WorkMailMessageFlow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMailMessageFlow::Types::MessageRejected] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::WorkMailMessageFlow
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkMailMessageFlow::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

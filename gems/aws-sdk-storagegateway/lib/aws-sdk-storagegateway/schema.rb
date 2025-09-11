@@ -2445,7 +2445,6 @@ module Aws::StorageGateway
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         operation.traits = {}
       end)
-
     end
 
     class << self

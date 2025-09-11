@@ -43,7 +43,7 @@ module Aws::Glacier
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glacier::Types::InsufficientCapacityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -64,7 +64,7 @@ module Aws::Glacier
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glacier::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Client</p>
@@ -88,7 +88,7 @@ module Aws::Glacier
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glacier::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Client</p>
@@ -112,7 +112,7 @@ module Aws::Glacier
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glacier::Types::MissingParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Client.</p>
@@ -137,7 +137,7 @@ module Aws::Glacier
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glacier::Types::PolicyEnforcedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Client</p>
@@ -162,7 +162,7 @@ module Aws::Glacier
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glacier::Types::RequestTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Client</p>
@@ -188,7 +188,7 @@ module Aws::Glacier
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glacier::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Client</p>
@@ -213,7 +213,7 @@ module Aws::Glacier
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glacier::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Server</p>

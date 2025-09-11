@@ -14,7 +14,8 @@ module Aws::Drs
     class AccessDeniedException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::Drs
     #   @return [String]
     class Account < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +39,8 @@ module Aws::Drs
     class AssociateSourceNetworkStackRequest < Struct.new(
       :source_network_id,
       :cfn_stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +49,8 @@ module Aws::Drs
     #   @return [Types::Job]
     class AssociateSourceNetworkStackResponse < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +64,8 @@ module Aws::Drs
     class CPU < Struct.new(
       :cores,
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -85,7 +90,8 @@ module Aws::Drs
       :code,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +121,8 @@ module Aws::Drs
       :data_timestamp,
       :volume_to_volume_size,
       :volume_to_product_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +135,8 @@ module Aws::Drs
     class CreateExtendedSourceServerInput < Struct.new(
       :source_server_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,7 +145,8 @@ module Aws::Drs
     #   @return [Types::SourceServer]
     class CreateExtendedSourceServerOutput < Struct.new(
       :source_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +187,8 @@ module Aws::Drs
       :export_bucket_arn,
       :post_launch_enabled,
       :launch_into_source_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +197,8 @@ module Aws::Drs
     #   @return [Types::LaunchConfigurationTemplate]
     class CreateLaunchConfigurationTemplateOutput < Struct.new(
       :launch_configuration_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +263,8 @@ module Aws::Drs
       :pit_policy,
       :tags,
       :auto_replicate_new_disks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +337,8 @@ module Aws::Drs
       :tags,
       :pit_policy,
       :auto_replicate_new_disks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -351,7 +364,8 @@ module Aws::Drs
       :origin_account_id,
       :origin_region,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +374,8 @@ module Aws::Drs
     #   @return [String]
     class CreateSourceNetworkResponse < Struct.new(
       :source_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +389,8 @@ module Aws::Drs
     class DataReplicationError < Struct.new(
       :error,
       :raw_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +428,8 @@ module Aws::Drs
       :data_replication_error,
       :staging_availability_zone,
       :staging_outpost_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +459,8 @@ module Aws::Drs
       :rescanned_storage_bytes,
       :backlogged_storage_bytes,
       :volume_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -468,7 +486,8 @@ module Aws::Drs
       :start_date_time,
       :next_attempt_date_time,
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +501,8 @@ module Aws::Drs
     class DataReplicationInitiationStep < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,12 +511,14 @@ module Aws::Drs
     #   @return [String]
     class DeleteJobInput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteJobOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,12 +531,14 @@ module Aws::Drs
     class DeleteLaunchActionRequest < Struct.new(
       :resource_id,
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLaunchActionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,12 +547,14 @@ module Aws::Drs
     #   @return [String]
     class DeleteLaunchConfigurationTemplateInput < Struct.new(
       :launch_configuration_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLaunchConfigurationTemplateOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +563,8 @@ module Aws::Drs
     #   @return [String]
     class DeleteRecoveryInstanceInput < Struct.new(
       :recovery_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,12 +573,14 @@ module Aws::Drs
     #   @return [String]
     class DeleteReplicationConfigurationTemplateInput < Struct.new(
       :replication_configuration_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteReplicationConfigurationTemplateOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,12 +589,14 @@ module Aws::Drs
     #   @return [String]
     class DeleteSourceNetworkRequest < Struct.new(
       :source_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSourceNetworkResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,12 +605,14 @@ module Aws::Drs
     #   @return [String]
     class DeleteSourceServerInput < Struct.new(
       :source_server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSourceServerOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,7 +629,8 @@ module Aws::Drs
       :job_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -609,7 +643,8 @@ module Aws::Drs
     class DescribeJobLogItemsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +661,8 @@ module Aws::Drs
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -639,7 +675,8 @@ module Aws::Drs
     class DescribeJobsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -657,7 +694,8 @@ module Aws::Drs
       :job_i_ds,
       :from_date,
       :to_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +712,8 @@ module Aws::Drs
       :launch_configuration_template_i_ds,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +726,8 @@ module Aws::Drs
     class DescribeLaunchConfigurationTemplatesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +744,8 @@ module Aws::Drs
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +758,8 @@ module Aws::Drs
     class DescribeRecoveryInstancesOutput < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +773,8 @@ module Aws::Drs
     class DescribeRecoveryInstancesRequestFilters < Struct.new(
       :recovery_instance_i_ds,
       :source_server_i_ds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +799,8 @@ module Aws::Drs
       :order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +813,8 @@ module Aws::Drs
     class DescribeRecoverySnapshotsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +828,8 @@ module Aws::Drs
     class DescribeRecoverySnapshotsRequestFilters < Struct.new(
       :from_date_time,
       :to_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -800,7 +846,8 @@ module Aws::Drs
       :replication_configuration_template_i_ds,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +860,8 @@ module Aws::Drs
     class DescribeReplicationConfigurationTemplatesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +878,8 @@ module Aws::Drs
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +897,8 @@ module Aws::Drs
       :source_network_i_ds,
       :origin_account_id,
       :origin_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +911,8 @@ module Aws::Drs
     class DescribeSourceNetworksResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -878,7 +929,8 @@ module Aws::Drs
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -891,7 +943,8 @@ module Aws::Drs
     class DescribeSourceServersOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +962,8 @@ module Aws::Drs
       :source_server_i_ds,
       :hardware_id,
       :staging_account_i_ds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +972,8 @@ module Aws::Drs
     #   @return [String]
     class DisconnectRecoveryInstanceInput < Struct.new(
       :recovery_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +982,8 @@ module Aws::Drs
     #   @return [String]
     class DisconnectSourceServerInput < Struct.new(
       :source_server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1044,8 @@ module Aws::Drs
       :reversed_direction_source_server_arn,
       :source_network_id,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1059,8 @@ module Aws::Drs
     class Disk < Struct.new(
       :device_name,
       :bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1018,7 +1076,8 @@ module Aws::Drs
     class EventResourceData < Struct.new(
       :source_network_data,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SourceNetworkData < EventResourceData; end
@@ -1030,7 +1089,8 @@ module Aws::Drs
     #   @return [String]
     class ExportSourceNetworkCfnTemplateRequest < Struct.new(
       :source_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1099,8 @@ module Aws::Drs
     #   @return [String]
     class ExportSourceNetworkCfnTemplateResponse < Struct.new(
       :s3_destination_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1109,8 @@ module Aws::Drs
     #   @return [String]
     class GetFailbackReplicationConfigurationInput < Struct.new(
       :recovery_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1069,7 +1131,8 @@ module Aws::Drs
       :name,
       :bandwidth_throttling,
       :use_private_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1083,7 +1146,8 @@ module Aws::Drs
     #   @return [String]
     class GetLaunchConfigurationInput < Struct.new(
       :source_server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1192,8 @@ module Aws::Drs
       :licensing,
       :post_launch_enabled,
       :launch_into_instance_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1137,7 +1202,8 @@ module Aws::Drs
     #   @return [String]
     class GetReplicationConfigurationInput < Struct.new(
       :source_server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,7 +1276,8 @@ module Aws::Drs
       :staging_area_tags,
       :pit_policy,
       :auto_replicate_new_disks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1237,17 +1304,20 @@ module Aws::Drs
       :hostname,
       :vm_ware_uuid,
       :aws_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1330,8 @@ module Aws::Drs
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1311,7 +1382,8 @@ module Aws::Drs
       :participating_servers,
       :tags,
       :participating_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1401,8 @@ module Aws::Drs
       :log_date_time,
       :event,
       :event_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1432,8 @@ module Aws::Drs
       :raw_error,
       :conversion_properties,
       :event_resource_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1409,7 +1483,8 @@ module Aws::Drs
       :parameters,
       :description,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1498,8 @@ module Aws::Drs
     class LaunchActionParameter < Struct.new(
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1521,8 @@ module Aws::Drs
       :run_id,
       :status,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1455,7 +1532,8 @@ module Aws::Drs
     #   @return [Array<String>]
     class LaunchActionsRequestFilters < Struct.new(
       :action_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1469,7 +1547,8 @@ module Aws::Drs
     class LaunchActionsStatus < Struct.new(
       :ssm_agent_discovery_datetime,
       :runs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1519,7 +1598,8 @@ module Aws::Drs
       :export_bucket_arn,
       :post_launch_enabled,
       :launch_into_source_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1529,7 +1609,8 @@ module Aws::Drs
     #   @return [String]
     class LaunchIntoInstanceProperties < Struct.new(
       :launch_into_ec2_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1539,7 +1620,8 @@ module Aws::Drs
     #   @return [Boolean]
     class Licensing < Struct.new(
       :os_byol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1565,7 +1647,8 @@ module Aws::Drs
       :elapsed_replication_duration,
       :last_seen_by_service_date_time,
       :last_launch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1579,7 +1662,8 @@ module Aws::Drs
     class LifeCycleLastLaunch < Struct.new(
       :initiated,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1597,7 +1681,8 @@ module Aws::Drs
       :api_call_date_time,
       :job_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1614,7 +1699,8 @@ module Aws::Drs
       :staging_account_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1627,7 +1713,8 @@ module Aws::Drs
     class ListExtensibleSourceServersOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1735,8 @@ module Aws::Drs
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1661,7 +1749,8 @@ module Aws::Drs
     class ListLaunchActionsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1674,7 +1763,8 @@ module Aws::Drs
     class ListStagingAccountsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1687,7 +1777,8 @@ module Aws::Drs
     class ListStagingAccountsOutput < Struct.new(
       :accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1696,7 +1787,8 @@ module Aws::Drs
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1797,8 @@ module Aws::Drs
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1816,8 @@ module Aws::Drs
       :mac_address,
       :ips,
       :is_primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1733,7 +1827,8 @@ module Aws::Drs
     #   @return [String]
     class OS < Struct.new(
       :full_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1759,7 +1854,8 @@ module Aws::Drs
       :interval,
       :retention_duration,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1778,7 +1874,8 @@ module Aws::Drs
     class ParticipatingResource < Struct.new(
       :participating_resource_id,
       :launch_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1789,7 +1886,8 @@ module Aws::Drs
     class ParticipatingResourceID < Struct.new(
       :source_network_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SourceNetworkID < ParticipatingResourceID; end
@@ -1814,7 +1912,8 @@ module Aws::Drs
       :recovery_instance_id,
       :launch_status,
       :launch_actions_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1828,7 +1927,8 @@ module Aws::Drs
     class ProductCode < Struct.new(
       :product_code_id,
       :product_code_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1877,7 +1977,8 @@ module Aws::Drs
       :category,
       :parameters,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1930,7 +2031,8 @@ module Aws::Drs
       :parameters,
       :description,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2000,7 +2102,8 @@ module Aws::Drs
       :origin_availability_zone,
       :agent_version,
       :source_outpost_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2014,7 +2117,8 @@ module Aws::Drs
     class RecoveryInstanceDataReplicationError < Struct.new(
       :error,
       :raw_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2052,7 +2156,8 @@ module Aws::Drs
       :data_replication_error,
       :staging_availability_zone,
       :staging_outpost_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2078,7 +2183,8 @@ module Aws::Drs
       :replicated_storage_bytes,
       :rescanned_storage_bytes,
       :backlogged_storage_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2100,7 +2206,8 @@ module Aws::Drs
     class RecoveryInstanceDataReplicationInitiation < Struct.new(
       :start_date_time,
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2114,7 +2221,8 @@ module Aws::Drs
     class RecoveryInstanceDataReplicationInitiationStep < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2132,7 +2240,8 @@ module Aws::Drs
       :internal_device_name,
       :bytes,
       :ebs_volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2183,7 +2292,8 @@ module Aws::Drs
       :first_byte_date_time,
       :elapsed_replication_duration,
       :failback_launch_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2217,7 +2327,8 @@ module Aws::Drs
       :cpus,
       :ram_bytes,
       :os,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2240,7 +2351,8 @@ module Aws::Drs
       :api_call_date_time,
       :job_id,
       :last_recovery_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2266,7 +2378,8 @@ module Aws::Drs
       :expected_timestamp,
       :timestamp,
       :ebs_snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2296,7 +2409,8 @@ module Aws::Drs
       :iops,
       :throughput,
       :optimized_staging_disk_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2375,7 +2489,8 @@ module Aws::Drs
       :tags,
       :pit_policy,
       :auto_replicate_new_disks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2400,7 +2515,8 @@ module Aws::Drs
       :code,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2411,7 +2527,8 @@ module Aws::Drs
     #   @return [String]
     class RetryDataReplicationInput < Struct.new(
       :source_server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2472,7 +2589,8 @@ module Aws::Drs
       :reversed_direction_source_server_arn,
       :source_network_id,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2481,7 +2599,8 @@ module Aws::Drs
     #   @return [String]
     class ReverseReplicationInput < Struct.new(
       :recovery_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2490,7 +2609,8 @@ module Aws::Drs
     #   @return [String]
     class ReverseReplicationOutput < Struct.new(
       :reversed_direction_source_server_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2518,7 +2638,8 @@ module Aws::Drs
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2540,7 +2661,8 @@ module Aws::Drs
       :origin_region,
       :origin_availability_zone,
       :source_outpost_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2594,7 +2716,8 @@ module Aws::Drs
       :source_account_id,
       :last_recovery,
       :launched_vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2616,7 +2739,8 @@ module Aws::Drs
       :source_vpc,
       :target_vpc,
       :stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2658,7 +2782,8 @@ module Aws::Drs
       :ram_bytes,
       :os,
       :supports_nitro_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2724,7 +2849,8 @@ module Aws::Drs
       :reversed_direction_source_server_arn,
       :source_network_id,
       :agent_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2749,7 +2875,8 @@ module Aws::Drs
       :staging_account_id,
       :staging_source_server_arn,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2767,7 +2894,8 @@ module Aws::Drs
       :hostname,
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2780,7 +2908,8 @@ module Aws::Drs
     class StartFailbackLaunchInput < Struct.new(
       :recovery_instance_i_ds,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2789,7 +2918,8 @@ module Aws::Drs
     #   @return [Types::Job]
     class StartFailbackLaunchOutput < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2806,7 +2936,8 @@ module Aws::Drs
       :source_servers,
       :is_drill,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2815,7 +2946,8 @@ module Aws::Drs
     #   @return [Types::Job]
     class StartRecoveryOutput < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2829,7 +2961,8 @@ module Aws::Drs
     class StartRecoveryRequestSourceServer < Struct.new(
       :source_server_id,
       :recovery_snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2838,7 +2971,8 @@ module Aws::Drs
     #   @return [String]
     class StartReplicationInput < Struct.new(
       :source_server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2847,7 +2981,8 @@ module Aws::Drs
     #   @return [Types::SourceServer]
     class StartReplicationOutput < Struct.new(
       :source_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +2999,8 @@ module Aws::Drs
       :source_networks,
       :deploy_as_new,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2878,7 +3014,8 @@ module Aws::Drs
     class StartSourceNetworkRecoveryRequestNetworkEntry < Struct.new(
       :source_network_id,
       :cfn_stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2887,7 +3024,8 @@ module Aws::Drs
     #   @return [Types::Job]
     class StartSourceNetworkRecoveryResponse < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2896,7 +3034,8 @@ module Aws::Drs
     #   @return [String]
     class StartSourceNetworkReplicationRequest < Struct.new(
       :source_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2905,7 +3044,8 @@ module Aws::Drs
     #   @return [Types::SourceNetwork]
     class StartSourceNetworkReplicationResponse < Struct.new(
       :source_network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2914,7 +3054,8 @@ module Aws::Drs
     #   @return [String]
     class StopFailbackInput < Struct.new(
       :recovery_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2923,7 +3064,8 @@ module Aws::Drs
     #   @return [String]
     class StopReplicationInput < Struct.new(
       :source_server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2932,7 +3074,8 @@ module Aws::Drs
     #   @return [Types::SourceServer]
     class StopReplicationOutput < Struct.new(
       :source_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2941,7 +3084,8 @@ module Aws::Drs
     #   @return [String]
     class StopSourceNetworkReplicationRequest < Struct.new(
       :source_network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2950,7 +3094,8 @@ module Aws::Drs
     #   @return [Types::SourceNetwork]
     class StopSourceNetworkReplicationResponse < Struct.new(
       :source_network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2963,7 +3108,8 @@ module Aws::Drs
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2972,7 +3118,8 @@ module Aws::Drs
     #   @return [Array<String>]
     class TerminateRecoveryInstancesInput < Struct.new(
       :recovery_instance_i_ds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2981,7 +3128,8 @@ module Aws::Drs
     #   @return [Types::Job]
     class TerminateRecoveryInstancesOutput < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3002,7 +3150,8 @@ module Aws::Drs
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3014,7 +3163,8 @@ module Aws::Drs
     class UninitializedAccountException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3027,7 +3177,8 @@ module Aws::Drs
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3048,7 +3199,8 @@ module Aws::Drs
       :name,
       :bandwidth_throttling,
       :use_private_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3089,7 +3241,8 @@ module Aws::Drs
       :licensing,
       :post_launch_enabled,
       :launch_into_instance_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3134,7 +3287,8 @@ module Aws::Drs
       :licensing,
       :post_launch_enabled,
       :launch_into_instance_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3175,7 +3329,8 @@ module Aws::Drs
       :export_bucket_arn,
       :post_launch_enabled,
       :launch_into_source_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3184,7 +3339,8 @@ module Aws::Drs
     #   @return [Types::LaunchConfigurationTemplate]
     class UpdateLaunchConfigurationTemplateOutput < Struct.new(
       :launch_configuration_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3257,7 +3413,8 @@ module Aws::Drs
       :staging_area_tags,
       :pit_policy,
       :auto_replicate_new_disks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3330,7 +3487,8 @@ module Aws::Drs
       :staging_area_tags,
       :pit_policy,
       :auto_replicate_new_disks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3404,7 +3562,8 @@ module Aws::Drs
       :staging_area_tags,
       :pit_policy,
       :auto_replicate_new_disks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3477,7 +3636,8 @@ module Aws::Drs
       :tags,
       :pit_policy,
       :auto_replicate_new_disks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3502,7 +3662,8 @@ module Aws::Drs
       :code,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3516,7 +3677,8 @@ module Aws::Drs
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

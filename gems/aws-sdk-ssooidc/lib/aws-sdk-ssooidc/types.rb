@@ -17,7 +17,8 @@ module Aws::SSOOIDC
     class AccessDeniedException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +35,8 @@ module Aws::SSOOIDC
     class AuthorizationPendingException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +49,8 @@ module Aws::SSOOIDC
     #   @return [String]
     class AwsAdditionalDetails < Struct.new(
       :identity_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -109,7 +112,8 @@ module Aws::SSOOIDC
       :scope,
       :redirect_uri,
       :code_verifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +148,8 @@ module Aws::SSOOIDC
       :expires_in,
       :refresh_token,
       :id_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -237,7 +242,8 @@ module Aws::SSOOIDC
       :subject_token_type,
       :requested_token_type,
       :code_verifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +294,8 @@ module Aws::SSOOIDC
       :issued_token_type,
       :scope,
       :aws_additional_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -308,7 +315,8 @@ module Aws::SSOOIDC
     class ExpiredTokenException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +332,8 @@ module Aws::SSOOIDC
     class InternalServerException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +351,8 @@ module Aws::SSOOIDC
     class InvalidClientException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +369,8 @@ module Aws::SSOOIDC
     class InvalidClientMetadataException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +386,8 @@ module Aws::SSOOIDC
     class InvalidGrantException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +404,8 @@ module Aws::SSOOIDC
     class InvalidRedirectUriException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -409,7 +422,8 @@ module Aws::SSOOIDC
     class InvalidRequestException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +448,8 @@ module Aws::SSOOIDC
       :error_description,
       :endpoint,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +464,8 @@ module Aws::SSOOIDC
     class InvalidScopeException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +512,8 @@ module Aws::SSOOIDC
       :grant_types,
       :issuer_url,
       :entitled_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +546,8 @@ module Aws::SSOOIDC
       :client_secret_expires_at,
       :authorization_endpoint,
       :token_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -551,7 +569,8 @@ module Aws::SSOOIDC
     class SlowDownException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +591,8 @@ module Aws::SSOOIDC
       :client_id,
       :client_secret,
       :start_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,7 +625,8 @@ module Aws::SSOOIDC
       :verification_uri_complete,
       :expires_in,
       :interval,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -628,7 +649,8 @@ module Aws::SSOOIDC
     class UnauthorizedClientException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +666,8 @@ module Aws::SSOOIDC
     class UnsupportedGrantTypeException < Struct.new(
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

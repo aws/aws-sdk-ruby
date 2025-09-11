@@ -2102,7 +2102,6 @@ module Aws::CostExplorer
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         operation.traits = {}
       end)
-
     end
 
     class << self

@@ -1133,7 +1133,6 @@ module Aws::SMS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
         operation.traits = {}
       end)
-
     end
 
     class << self

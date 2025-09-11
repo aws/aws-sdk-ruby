@@ -40,7 +40,7 @@ module Aws::EntityResolution
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EntityResolution::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::EntityResolution
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EntityResolution::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::EntityResolution
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EntityResolution::Types::ExceedsLimitException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -89,7 +89,7 @@ module Aws::EntityResolution
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EntityResolution::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::EntityResolution
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EntityResolution::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::EntityResolution
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EntityResolution::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::EntityResolution
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EntityResolution::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

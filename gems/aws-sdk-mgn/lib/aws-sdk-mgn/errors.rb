@@ -41,7 +41,7 @@ module Aws::Mgn
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mgn::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::Mgn
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mgn::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::Mgn
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mgn::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::Mgn
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mgn::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::Mgn
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mgn::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -177,7 +177,7 @@ module Aws::Mgn
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mgn::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -205,7 +205,7 @@ module Aws::Mgn
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mgn::Types::UninitializedAccountException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -222,7 +222,7 @@ module Aws::Mgn
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mgn::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

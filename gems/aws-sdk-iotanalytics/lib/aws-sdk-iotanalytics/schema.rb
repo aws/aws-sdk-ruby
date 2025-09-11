@@ -1219,7 +1219,6 @@ module Aws::IoTAnalytics
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/pipelines/{pipelineName}", "code" => 200}}
       end)
-
     end
 
     class << self

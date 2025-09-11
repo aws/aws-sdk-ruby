@@ -40,7 +40,7 @@ module Aws::AmplifyUIBuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyUIBuilder::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::AmplifyUIBuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyUIBuilder::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::AmplifyUIBuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyUIBuilder::Types::ResourceConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::AmplifyUIBuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyUIBuilder::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::AmplifyUIBuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyUIBuilder::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::AmplifyUIBuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyUIBuilder::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::AmplifyUIBuilder
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyUIBuilder::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

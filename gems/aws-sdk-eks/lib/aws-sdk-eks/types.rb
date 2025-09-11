@@ -17,7 +17,8 @@ module Aws::EKS
     class AccessConfigResponse < Struct.new(
       :bootstrap_cluster_creator_admin_permissions,
       :authentication_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +31,8 @@ module Aws::EKS
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +92,8 @@ module Aws::EKS
       :tags,
       :username,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +115,8 @@ module Aws::EKS
     class AccessPolicy < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +132,8 @@ module Aws::EKS
     class AccessScope < Struct.new(
       :type,
       :namespaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +210,8 @@ module Aws::EKS
       :configuration_values,
       :pod_identity_associations,
       :namespace_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +226,8 @@ module Aws::EKS
     class AddonCompatibilityDetail < Struct.new(
       :name,
       :compatible_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +237,8 @@ module Aws::EKS
     #   @return [Array<Types::AddonIssue>]
     class AddonHealth < Struct.new(
       :issues,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +273,8 @@ module Aws::EKS
       :owner,
       :marketplace_information,
       :default_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +292,8 @@ module Aws::EKS
       :code,
       :message,
       :resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +303,8 @@ module Aws::EKS
     #   @return [String]
     class AddonNamespaceConfigRequest < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +314,8 @@ module Aws::EKS
     #   @return [String]
     class AddonNamespaceConfigResponse < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +333,8 @@ module Aws::EKS
     class AddonPodIdentityAssociations < Struct.new(
       :service_account,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +348,8 @@ module Aws::EKS
     class AddonPodIdentityConfiguration < Struct.new(
       :service_account,
       :recommended_managed_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +380,8 @@ module Aws::EKS
       :compatibilities,
       :requires_configuration,
       :requires_iam_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -396,7 +411,8 @@ module Aws::EKS
       :principal_arn,
       :policy_arn,
       :access_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +430,8 @@ module Aws::EKS
       :cluster_name,
       :principal_arn,
       :associated_access_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +449,8 @@ module Aws::EKS
       :cluster_name,
       :encryption_config,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -441,7 +459,8 @@ module Aws::EKS
     #   @return [Types::Update]
     class AssociateEncryptionConfigResponse < Struct.new(
       :update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -465,7 +484,8 @@ module Aws::EKS
       :oidc,
       :tags,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +498,8 @@ module Aws::EKS
     class AssociateIdentityProviderConfigResponse < Struct.new(
       :update,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +522,8 @@ module Aws::EKS
       :access_scope,
       :associated_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -511,7 +533,8 @@ module Aws::EKS
     #   @return [String]
     class AutoScalingGroup < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,7 +546,8 @@ module Aws::EKS
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +563,8 @@ module Aws::EKS
     #   @return [Boolean]
     class BlockStorage < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -552,7 +577,8 @@ module Aws::EKS
     #   @return [String]
     class Certificate < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -582,7 +608,8 @@ module Aws::EKS
       :addon_name,
       :subscription_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,7 +627,8 @@ module Aws::EKS
       :user_agent,
       :number_of_requests_last30_days,
       :last_request_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -752,7 +780,8 @@ module Aws::EKS
       :compute_config,
       :storage_config,
       :deletion_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +791,8 @@ module Aws::EKS
     #   @return [Array<Types::ClusterIssue>]
     class ClusterHealth < Struct.new(
       :issues,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +810,8 @@ module Aws::EKS
       :code,
       :message,
       :resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +861,8 @@ module Aws::EKS
       :status,
       :version_status,
       :kubernetes_patch_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -853,7 +885,8 @@ module Aws::EKS
       :cluster_version,
       :platform_versions,
       :default_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -885,7 +918,8 @@ module Aws::EKS
       :enabled,
       :node_pools,
       :node_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +942,8 @@ module Aws::EKS
       :enabled,
       :node_pools,
       :node_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +958,8 @@ module Aws::EKS
     class ConnectorConfigRequest < Struct.new(
       :role_arn,
       :provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +987,8 @@ module Aws::EKS
       :activation_expiry,
       :provider,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +1001,8 @@ module Aws::EKS
     #   @return [String]
     class ControlPlanePlacementRequest < Struct.new(
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1013,8 @@ module Aws::EKS
     #   @return [String]
     class ControlPlanePlacementResponse < Struct.new(
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -994,7 +1033,8 @@ module Aws::EKS
     class CreateAccessConfigRequest < Struct.new(
       :bootstrap_cluster_creator_admin_permissions,
       :authentication_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1122,8 @@ module Aws::EKS
       :client_request_token,
       :username,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1095,7 +1136,8 @@ module Aws::EKS
     #   @return [Types::AccessEntry]
     class CreateAccessEntryResponse < Struct.new(
       :access_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1229,8 @@ module Aws::EKS
       :configuration_values,
       :pod_identity_associations,
       :namespace_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1197,7 +1240,8 @@ module Aws::EKS
     #   @return [Types::Addon]
     class CreateAddonResponse < Struct.new(
       :addon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1378,8 @@ module Aws::EKS
       :compute_config,
       :storage_config,
       :deletion_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1343,7 +1388,8 @@ module Aws::EKS
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1435,8 @@ module Aws::EKS
       :auto_renew,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1445,8 @@ module Aws::EKS
     #   @return [Types::EksAnywhereSubscription]
     class CreateEksAnywhereSubscriptionResponse < Struct.new(
       :subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1443,7 +1491,8 @@ module Aws::EKS
       :selectors,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1501,8 @@ module Aws::EKS
     #   @return [Types::FargateProfile]
     class CreateFargateProfileResponse < Struct.new(
       :fargate_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1595,7 +1645,8 @@ module Aws::EKS
       :capacity_type,
       :version,
       :release_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1604,7 +1655,8 @@ module Aws::EKS
     #   @return [Types::Nodegroup]
     class CreateNodegroupResponse < Struct.new(
       :nodegroup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1704,7 +1756,8 @@ module Aws::EKS
       :tags,
       :disable_session_tags,
       :target_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1715,7 +1768,8 @@ module Aws::EKS
     #   @return [Types::PodIdentityAssociation]
     class CreatePodIdentityAssociationResponse < Struct.new(
       :association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1728,12 +1782,14 @@ module Aws::EKS
     class DeleteAccessEntryRequest < Struct.new(
       :cluster_name,
       :principal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessEntryResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1754,7 +1810,8 @@ module Aws::EKS
       :cluster_name,
       :addon_name,
       :preserve,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1821,8 @@ module Aws::EKS
     #   @return [Types::Addon]
     class DeleteAddonResponse < Struct.new(
       :addon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1773,7 +1831,8 @@ module Aws::EKS
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1782,7 +1841,8 @@ module Aws::EKS
     #   @return [Types::Cluster]
     class DeleteClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1791,7 +1851,8 @@ module Aws::EKS
     #   @return [String]
     class DeleteEksAnywhereSubscriptionRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1800,7 +1861,8 @@ module Aws::EKS
     #   @return [Types::EksAnywhereSubscription]
     class DeleteEksAnywhereSubscriptionResponse < Struct.new(
       :subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1813,7 +1875,8 @@ module Aws::EKS
     class DeleteFargateProfileRequest < Struct.new(
       :cluster_name,
       :fargate_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1822,7 +1885,8 @@ module Aws::EKS
     #   @return [Types::FargateProfile]
     class DeleteFargateProfileResponse < Struct.new(
       :fargate_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1835,7 +1899,8 @@ module Aws::EKS
     class DeleteNodegroupRequest < Struct.new(
       :cluster_name,
       :nodegroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1844,7 +1909,8 @@ module Aws::EKS
     #   @return [Types::Nodegroup]
     class DeleteNodegroupResponse < Struct.new(
       :nodegroup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1857,7 +1923,8 @@ module Aws::EKS
     class DeletePodIdentityAssociationRequest < Struct.new(
       :cluster_name,
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1866,7 +1933,8 @@ module Aws::EKS
     #   @return [Types::PodIdentityAssociation]
     class DeletePodIdentityAssociationResponse < Struct.new(
       :association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1895,7 +1963,8 @@ module Aws::EKS
       :stop_serving_version,
       :start_serving_replacement_version,
       :client_stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1904,7 +1973,8 @@ module Aws::EKS
     #   @return [String]
     class DeregisterClusterRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1913,7 +1983,8 @@ module Aws::EKS
     #   @return [Types::Cluster]
     class DeregisterClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1926,7 +1997,8 @@ module Aws::EKS
     class DescribeAccessEntryRequest < Struct.new(
       :cluster_name,
       :principal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1935,7 +2007,8 @@ module Aws::EKS
     #   @return [Types::AccessEntry]
     class DescribeAccessEntryResponse < Struct.new(
       :access_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1951,7 +2024,8 @@ module Aws::EKS
     class DescribeAddonConfigurationRequest < Struct.new(
       :addon_name,
       :addon_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1976,7 +2050,8 @@ module Aws::EKS
       :addon_version,
       :configuration_schema,
       :pod_identity_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1991,7 +2066,8 @@ module Aws::EKS
     class DescribeAddonRequest < Struct.new(
       :cluster_name,
       :addon_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2001,7 +2077,8 @@ module Aws::EKS
     #   @return [Types::Addon]
     class DescribeAddonResponse < Struct.new(
       :addon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2051,7 +2128,8 @@ module Aws::EKS
       :types,
       :publishers,
       :owners,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,7 +2151,8 @@ module Aws::EKS
     class DescribeAddonVersionsResponse < Struct.new(
       :addons,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2082,7 +2161,8 @@ module Aws::EKS
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2091,7 +2171,8 @@ module Aws::EKS
     #   @return [Types::Cluster]
     class DescribeClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2135,7 +2216,8 @@ module Aws::EKS
       :cluster_versions,
       :status,
       :version_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2148,7 +2230,8 @@ module Aws::EKS
     class DescribeClusterVersionsResponse < Struct.new(
       :next_token,
       :cluster_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2157,7 +2240,8 @@ module Aws::EKS
     #   @return [String]
     class DescribeEksAnywhereSubscriptionRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2166,7 +2250,8 @@ module Aws::EKS
     #   @return [Types::EksAnywhereSubscription]
     class DescribeEksAnywhereSubscriptionResponse < Struct.new(
       :subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2179,7 +2264,8 @@ module Aws::EKS
     class DescribeFargateProfileRequest < Struct.new(
       :cluster_name,
       :fargate_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2188,7 +2274,8 @@ module Aws::EKS
     #   @return [Types::FargateProfile]
     class DescribeFargateProfileResponse < Struct.new(
       :fargate_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2201,7 +2288,8 @@ module Aws::EKS
     class DescribeIdentityProviderConfigRequest < Struct.new(
       :cluster_name,
       :identity_provider_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2211,7 +2299,8 @@ module Aws::EKS
     #   @return [Types::IdentityProviderConfigResponse]
     class DescribeIdentityProviderConfigResponse < Struct.new(
       :identity_provider_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2224,7 +2313,8 @@ module Aws::EKS
     class DescribeInsightRequest < Struct.new(
       :cluster_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2233,7 +2323,8 @@ module Aws::EKS
     #   @return [Types::Insight]
     class DescribeInsightResponse < Struct.new(
       :insight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2333,8 @@ module Aws::EKS
     #   @return [String]
     class DescribeInsightsRefreshRequest < Struct.new(
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2355,8 @@ module Aws::EKS
       :status,
       :started_at,
       :ended_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2276,7 +2369,8 @@ module Aws::EKS
     class DescribeNodegroupRequest < Struct.new(
       :cluster_name,
       :nodegroup_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2285,7 +2379,8 @@ module Aws::EKS
     #   @return [Types::Nodegroup]
     class DescribeNodegroupResponse < Struct.new(
       :nodegroup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2298,7 +2393,8 @@ module Aws::EKS
     class DescribePodIdentityAssociationRequest < Struct.new(
       :cluster_name,
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2307,7 +2403,8 @@ module Aws::EKS
     #   @return [Types::PodIdentityAssociation]
     class DescribePodIdentityAssociationResponse < Struct.new(
       :association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2332,7 +2429,8 @@ module Aws::EKS
       :update_id,
       :nodegroup_name,
       :addon_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2341,7 +2439,8 @@ module Aws::EKS
     #   @return [Types::Update]
     class DescribeUpdateResponse < Struct.new(
       :update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2359,12 +2458,14 @@ module Aws::EKS
       :cluster_name,
       :principal_arn,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateAccessPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2382,7 +2483,8 @@ module Aws::EKS
       :cluster_name,
       :identity_provider_config,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2391,7 +2493,8 @@ module Aws::EKS
     #   @return [Types::Update]
     class DisassociateIdentityProviderConfigResponse < Struct.new(
       :update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2458,7 +2561,8 @@ module Aws::EKS
       :license_arns,
       :licenses,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2481,7 +2585,8 @@ module Aws::EKS
     class EksAnywhereSubscriptionTerm < Struct.new(
       :duration,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2500,7 +2605,8 @@ module Aws::EKS
     #   @return [Boolean]
     class ElasticLoadBalancing < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2515,7 +2621,8 @@ module Aws::EKS
     class EncryptionConfig < Struct.new(
       :resources,
       :provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2571,7 +2678,8 @@ module Aws::EKS
       :error_code,
       :error_message,
       :resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2622,7 +2730,8 @@ module Aws::EKS
       :status,
       :tags,
       :health,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2633,7 +2742,8 @@ module Aws::EKS
     #   @return [Array<Types::FargateProfileIssue>]
     class FargateProfileHealth < Struct.new(
       :issues,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2651,7 +2761,8 @@ module Aws::EKS
       :code,
       :message,
       :resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2666,7 +2777,8 @@ module Aws::EKS
     class FargateProfileSelector < Struct.new(
       :namespace,
       :labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2677,7 +2789,8 @@ module Aws::EKS
     #   @return [Types::OIDC]
     class Identity < Struct.new(
       :oidc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2692,7 +2805,8 @@ module Aws::EKS
     class IdentityProviderConfig < Struct.new(
       :type,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2702,7 +2816,8 @@ module Aws::EKS
     #   @return [Types::OidcIdentityProviderConfig]
     class IdentityProviderConfigResponse < Struct.new(
       :oidc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2760,7 +2875,8 @@ module Aws::EKS
       :additional_info,
       :resources,
       :category_specific_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2776,7 +2892,8 @@ module Aws::EKS
     class InsightCategorySpecificSummary < Struct.new(
       :deprecation_details,
       :addon_compatibility_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2794,7 +2911,8 @@ module Aws::EKS
       :insight_status,
       :kubernetes_resource_uri,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2808,7 +2926,8 @@ module Aws::EKS
     class InsightStatus < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2848,7 +2967,8 @@ module Aws::EKS
       :last_transition_time,
       :description,
       :insight_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2879,7 +2999,8 @@ module Aws::EKS
       :categories,
       :kubernetes_versions,
       :statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2912,7 +3033,8 @@ module Aws::EKS
       :addon_name,
       :subscription_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2940,7 +3062,8 @@ module Aws::EKS
       :addon_name,
       :subscription_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2959,7 +3082,8 @@ module Aws::EKS
     class InvalidStateException < Struct.new(
       :cluster_name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3081,7 +3205,8 @@ module Aws::EKS
       :code,
       :message,
       :resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3137,7 +3262,8 @@ module Aws::EKS
       :service_ipv4_cidr,
       :ip_family,
       :elastic_load_balancing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3176,7 +3302,8 @@ module Aws::EKS
       :service_ipv6_cidr,
       :ip_family,
       :elastic_load_balancing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3218,7 +3345,8 @@ module Aws::EKS
       :name,
       :version,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3232,7 +3360,8 @@ module Aws::EKS
     class License < Struct.new(
       :id,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3267,7 +3396,8 @@ module Aws::EKS
       :associated_policy_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3286,7 +3416,8 @@ module Aws::EKS
     class ListAccessEntriesResponse < Struct.new(
       :access_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3311,7 +3442,8 @@ module Aws::EKS
     class ListAccessPoliciesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3332,7 +3464,8 @@ module Aws::EKS
     class ListAccessPoliciesResponse < Struct.new(
       :access_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3361,7 +3494,8 @@ module Aws::EKS
       :cluster_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3382,7 +3516,8 @@ module Aws::EKS
     class ListAddonsResponse < Struct.new(
       :addons,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3415,7 +3550,8 @@ module Aws::EKS
       :principal_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3442,7 +3578,8 @@ module Aws::EKS
       :principal_arn,
       :next_token,
       :associated_access_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3474,7 +3611,8 @@ module Aws::EKS
       :max_results,
       :next_token,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3493,7 +3631,8 @@ module Aws::EKS
     class ListClustersResponse < Struct.new(
       :clusters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3519,7 +3658,8 @@ module Aws::EKS
       :max_results,
       :next_token,
       :include_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3536,7 +3676,8 @@ module Aws::EKS
     class ListEksAnywhereSubscriptionsResponse < Struct.new(
       :subscriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3565,7 +3706,8 @@ module Aws::EKS
       :cluster_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3584,7 +3726,8 @@ module Aws::EKS
     class ListFargateProfilesResponse < Struct.new(
       :fargate_profile_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3613,7 +3756,8 @@ module Aws::EKS
       :cluster_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3635,7 +3779,8 @@ module Aws::EKS
     class ListIdentityProviderConfigsResponse < Struct.new(
       :identity_provider_configs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3669,7 +3814,8 @@ module Aws::EKS
       :filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3686,7 +3832,8 @@ module Aws::EKS
     class ListInsightsResponse < Struct.new(
       :insights,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3715,7 +3862,8 @@ module Aws::EKS
       :cluster_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3734,7 +3882,8 @@ module Aws::EKS
     class ListNodegroupsResponse < Struct.new(
       :nodegroups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3775,7 +3924,8 @@ module Aws::EKS
       :service_account,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3818,7 +3968,8 @@ module Aws::EKS
     class ListPodIdentityAssociationsResponse < Struct.new(
       :associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3827,7 +3978,8 @@ module Aws::EKS
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3836,7 +3988,8 @@ module Aws::EKS
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3873,7 +4026,8 @@ module Aws::EKS
       :addon_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3892,7 +4046,8 @@ module Aws::EKS
     class ListUpdatesResponse < Struct.new(
       :update_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3909,7 +4064,8 @@ module Aws::EKS
     class LogSetup < Struct.new(
       :types,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3919,7 +4075,8 @@ module Aws::EKS
     #   @return [Array<Types::LogSetup>]
     class Logging < Struct.new(
       :cluster_logging,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3933,7 +4090,8 @@ module Aws::EKS
     class MarketplaceInformation < Struct.new(
       :product_id,
       :product_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3944,7 +4102,8 @@ module Aws::EKS
     #   @return [Boolean]
     class NodeRepairConfig < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4073,7 +4232,8 @@ module Aws::EKS
       :node_repair_config,
       :launch_template,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4083,7 +4243,8 @@ module Aws::EKS
     #   @return [Array<Types::Issue>]
     class NodegroupHealth < Struct.new(
       :issues,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4099,7 +4260,8 @@ module Aws::EKS
     class NodegroupResources < Struct.new(
       :auto_scaling_groups,
       :remote_access_security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4142,7 +4304,8 @@ module Aws::EKS
       :min_size,
       :max_size,
       :desired_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4179,7 +4342,8 @@ module Aws::EKS
       :max_unavailable,
       :max_unavailable_percentage,
       :update_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4191,7 +4355,8 @@ module Aws::EKS
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4202,7 +4367,8 @@ module Aws::EKS
     #   @return [String]
     class OIDC < Struct.new(
       :issuer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4268,7 +4434,8 @@ module Aws::EKS
       :required_claims,
       :tags,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4330,7 +4497,8 @@ module Aws::EKS
       :groups_claim,
       :groups_prefix,
       :required_claims,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4360,7 +4528,8 @@ module Aws::EKS
       :outpost_arns,
       :control_plane_instance_type,
       :control_plane_placement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4383,7 +4552,8 @@ module Aws::EKS
       :outpost_arns,
       :control_plane_instance_type,
       :control_plane_placement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4496,7 +4666,8 @@ module Aws::EKS
       :disable_session_tags,
       :target_role_arn,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4550,7 +4721,8 @@ module Aws::EKS
       :association_arn,
       :association_id,
       :owner_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4565,7 +4737,8 @@ module Aws::EKS
     #   @return [String]
     class Provider < Struct.new(
       :key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4590,7 +4763,8 @@ module Aws::EKS
       :connector_config,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4599,7 +4773,8 @@ module Aws::EKS
     #   @return [Types::Cluster]
     class RegisterClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4622,7 +4797,8 @@ module Aws::EKS
     class RemoteAccessConfig < Struct.new(
       :ec2_ssh_key,
       :source_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4689,7 +4865,8 @@ module Aws::EKS
     class RemoteNetworkConfigRequest < Struct.new(
       :remote_node_networks,
       :remote_pod_networks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4705,7 +4882,8 @@ module Aws::EKS
     class RemoteNetworkConfigResponse < Struct.new(
       :remote_node_networks,
       :remote_pod_networks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4783,7 +4961,8 @@ module Aws::EKS
     #   @return [Array<String>]
     class RemoteNodeNetwork < Struct.new(
       :cidrs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4827,7 +5006,8 @@ module Aws::EKS
     #   @return [Array<String>]
     class RemotePodNetwork < Struct.new(
       :cidrs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4849,7 +5029,8 @@ module Aws::EKS
       :nodegroup_name,
       :addon_name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4871,7 +5052,8 @@ module Aws::EKS
       :nodegroup_name,
       :subscription_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4904,7 +5086,8 @@ module Aws::EKS
       :addon_name,
       :subscription_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4916,7 +5099,8 @@ module Aws::EKS
     #   @return [String]
     class ResourcePropagationDelayException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4942,7 +5126,8 @@ module Aws::EKS
       :addon_name,
       :subscription_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4952,7 +5137,8 @@ module Aws::EKS
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4961,7 +5147,8 @@ module Aws::EKS
     #   @return [String]
     class StartInsightsRefreshRequest < Struct.new(
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4974,7 +5161,8 @@ module Aws::EKS
     class StartInsightsRefreshResponse < Struct.new(
       :message,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4986,7 +5174,8 @@ module Aws::EKS
     #   @return [Types::BlockStorage]
     class StorageConfigRequest < Struct.new(
       :block_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4998,7 +5187,8 @@ module Aws::EKS
     #   @return [Types::BlockStorage]
     class StorageConfigResponse < Struct.new(
       :block_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5013,12 +5203,14 @@ module Aws::EKS
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5038,7 +5230,8 @@ module Aws::EKS
       :key,
       :value,
       :effect,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5052,7 +5245,8 @@ module Aws::EKS
     class ThrottlingException < Struct.new(
       :cluster_name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5079,7 +5273,8 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :valid_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5092,12 +5287,14 @@ module Aws::EKS
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5127,7 +5324,8 @@ module Aws::EKS
       :params,
       :created_at,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5137,7 +5335,8 @@ module Aws::EKS
     #   @return [String]
     class UpdateAccessConfigRequest < Struct.new(
       :authentication_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5184,7 +5383,8 @@ module Aws::EKS
       :kubernetes_groups,
       :client_request_token,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5193,7 +5393,8 @@ module Aws::EKS
     #   @return [Types::AccessEntry]
     class UpdateAccessEntryResponse < Struct.new(
       :access_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5270,7 +5471,8 @@ module Aws::EKS
       :client_request_token,
       :configuration_values,
       :pod_identity_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5279,7 +5481,8 @@ module Aws::EKS
     #   @return [Types::Update]
     class UpdateAddonResponse < Struct.new(
       :update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5366,7 +5569,8 @@ module Aws::EKS
       :storage_config,
       :remote_network_config,
       :deletion_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5375,7 +5579,8 @@ module Aws::EKS
     #   @return [Types::Update]
     class UpdateClusterConfigResponse < Struct.new(
       :update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5398,7 +5603,8 @@ module Aws::EKS
       :version,
       :client_request_token,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5407,7 +5613,8 @@ module Aws::EKS
     #   @return [Types::Update]
     class UpdateClusterVersionResponse < Struct.new(
       :update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5424,7 +5631,8 @@ module Aws::EKS
       :id,
       :auto_renew,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5433,7 +5641,8 @@ module Aws::EKS
     #   @return [Types::EksAnywhereSubscription]
     class UpdateEksAnywhereSubscriptionResponse < Struct.new(
       :subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5448,7 +5657,8 @@ module Aws::EKS
     class UpdateLabelsPayload < Struct.new(
       :add_or_update_labels,
       :remove_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5489,7 +5699,8 @@ module Aws::EKS
       :update_config,
       :node_repair_config,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5498,7 +5709,8 @@ module Aws::EKS
     #   @return [Types::Update]
     class UpdateNodegroupConfigResponse < Struct.new(
       :update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5550,7 +5762,8 @@ module Aws::EKS
       :launch_template,
       :force,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5559,7 +5772,8 @@ module Aws::EKS
     #   @return [Types::Update]
     class UpdateNodegroupVersionResponse < Struct.new(
       :update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5573,7 +5787,8 @@ module Aws::EKS
     class UpdateParam < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5625,7 +5840,8 @@ module Aws::EKS
       :client_request_token,
       :disable_session_tags,
       :target_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5634,7 +5850,8 @@ module Aws::EKS
     #   @return [Types::PodIdentityAssociation]
     class UpdatePodIdentityAssociationResponse < Struct.new(
       :association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5650,7 +5867,8 @@ module Aws::EKS
     class UpdateTaintsPayload < Struct.new(
       :add_or_update_taints,
       :remove_taints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5671,7 +5889,8 @@ module Aws::EKS
     #   @return [String]
     class UpgradePolicyRequest < Struct.new(
       :support_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5690,7 +5909,8 @@ module Aws::EKS
     #   @return [String]
     class UpgradePolicyResponse < Struct.new(
       :support_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5754,7 +5974,8 @@ module Aws::EKS
       :endpoint_public_access,
       :endpoint_private_access,
       :public_access_cidrs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5811,7 +6032,8 @@ module Aws::EKS
       :endpoint_public_access,
       :endpoint_private_access,
       :public_access_cidrs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5827,7 +6049,8 @@ module Aws::EKS
     #   @return [Boolean]
     class ZonalShiftConfigRequest < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5837,7 +6060,8 @@ module Aws::EKS
     #   @return [Boolean]
     class ZonalShiftConfigResponse < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

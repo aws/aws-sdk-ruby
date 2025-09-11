@@ -948,7 +948,6 @@ module Aws::ManagedBlockchain
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/networks/{NetworkId}/proposals/{ProposalId}/votes", "code" => 200}}
       end)
-
     end
 
     class << self

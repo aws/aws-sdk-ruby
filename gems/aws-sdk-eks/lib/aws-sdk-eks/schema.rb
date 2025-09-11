@@ -2294,7 +2294,6 @@ module Aws::EKS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/clusters/{clusterName}/pod-identity-associations/{associationId}", "code" => 200}}
       end)
-
     end
 
     class << self

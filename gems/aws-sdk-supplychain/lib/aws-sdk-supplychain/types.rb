@@ -11,7 +11,8 @@ module Aws::SupplyChain
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +38,8 @@ module Aws::SupplyChain
       :status,
       :s3uri,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +48,8 @@ module Aws::SupplyChain
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +67,8 @@ module Aws::SupplyChain
       :instance_id,
       :s3uri,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +78,8 @@ module Aws::SupplyChain
     #   @return [String]
     class CreateBillOfMaterialsImportJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +109,8 @@ module Aws::SupplyChain
       :transformation,
       :target,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -118,7 +124,8 @@ module Aws::SupplyChain
     class CreateDataIntegrationFlowResponse < Struct.new(
       :instance_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +169,8 @@ module Aws::SupplyChain
       :description,
       :partition_spec,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +180,8 @@ module Aws::SupplyChain
     #   @return [Types::DataLakeDataset]
     class CreateDataLakeDatasetResponse < Struct.new(
       :dataset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -195,7 +204,8 @@ module Aws::SupplyChain
       :name,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +215,8 @@ module Aws::SupplyChain
     #   @return [Types::DataLakeNamespace]
     class CreateDataLakeNamespaceResponse < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +246,8 @@ module Aws::SupplyChain
       :web_app_dns_domain,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +257,8 @@ module Aws::SupplyChain
     #   @return [Types::Instance]
     class CreateInstanceResponse < Struct.new(
       :instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -275,7 +288,8 @@ module Aws::SupplyChain
       :event_group_id,
       :event_timestamp,
       :dataset_target_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +303,8 @@ module Aws::SupplyChain
     class DataIntegrationEventDatasetLoadExecutionDetails < Struct.new(
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +318,8 @@ module Aws::SupplyChain
     class DataIntegrationEventDatasetTargetConfiguration < Struct.new(
       :dataset_identifier,
       :operation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +351,8 @@ module Aws::SupplyChain
       :dataset_identifier,
       :operation_type,
       :dataset_load_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -369,7 +386,8 @@ module Aws::SupplyChain
       :target,
       :created_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +416,8 @@ module Aws::SupplyChain
       :load_type,
       :dedupe_records,
       :dedupe_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +427,8 @@ module Aws::SupplyChain
     #   @return [String]
     class DataIntegrationFlowDatasetSource < Struct.new(
       :dataset_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +442,8 @@ module Aws::SupplyChain
     class DataIntegrationFlowDatasetSourceConfiguration < Struct.new(
       :dataset_identifier,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -436,7 +457,8 @@ module Aws::SupplyChain
     class DataIntegrationFlowDatasetTargetConfiguration < Struct.new(
       :dataset_identifier,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +478,8 @@ module Aws::SupplyChain
     class DataIntegrationFlowDedupeStrategy < Struct.new(
       :type,
       :field_priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +521,8 @@ module Aws::SupplyChain
       :start_time,
       :end_time,
       :output_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +532,8 @@ module Aws::SupplyChain
     #   @return [String]
     class DataIntegrationFlowExecutionOutputMetadata < Struct.new(
       :diagnostic_reports_root_s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +551,8 @@ module Aws::SupplyChain
       :source_type,
       :s3_source,
       :dataset_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +566,8 @@ module Aws::SupplyChain
     class DataIntegrationFlowFieldPriorityDedupeField < Struct.new(
       :name,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +577,8 @@ module Aws::SupplyChain
     #   @return [Array<Types::DataIntegrationFlowFieldPriorityDedupeField>]
     class DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration < Struct.new(
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +588,8 @@ module Aws::SupplyChain
     #   @return [String]
     class DataIntegrationFlowS3Options < Struct.new(
       :file_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +603,8 @@ module Aws::SupplyChain
     class DataIntegrationFlowS3Source < Struct.new(
       :bucket_name,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -592,7 +622,8 @@ module Aws::SupplyChain
       :bucket_name,
       :prefix,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +641,8 @@ module Aws::SupplyChain
       :bucket_name,
       :prefix,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +652,8 @@ module Aws::SupplyChain
     #   @return [String]
     class DataIntegrationFlowSQLTransformationConfiguration < Struct.new(
       :query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +675,8 @@ module Aws::SupplyChain
       :source_name,
       :s3_source,
       :dataset_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +694,8 @@ module Aws::SupplyChain
       :target_type,
       :s3_target,
       :dataset_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +709,8 @@ module Aws::SupplyChain
     class DataIntegrationFlowTransformation < Struct.new(
       :transformation_type,
       :sql_transformation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +762,8 @@ module Aws::SupplyChain
       :partition_spec,
       :created_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +777,8 @@ module Aws::SupplyChain
     class DataLakeDatasetPartitionField < Struct.new(
       :name,
       :transform,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +810,8 @@ module Aws::SupplyChain
     #   @return [String]
     class DataLakeDatasetPartitionFieldTransform < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +821,8 @@ module Aws::SupplyChain
     #   @return [Array<Types::DataLakeDatasetPartitionField>]
     class DataLakeDatasetPartitionSpec < Struct.new(
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +832,8 @@ module Aws::SupplyChain
     #   @return [String]
     class DataLakeDatasetPrimaryKeyField < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,7 +852,8 @@ module Aws::SupplyChain
       :name,
       :fields,
       :primary_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +871,8 @@ module Aws::SupplyChain
       :name,
       :type,
       :is_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +902,8 @@ module Aws::SupplyChain
       :description,
       :created_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +917,8 @@ module Aws::SupplyChain
     class DeleteDataIntegrationFlowRequest < Struct.new(
       :instance_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +932,8 @@ module Aws::SupplyChain
     class DeleteDataIntegrationFlowResponse < Struct.new(
       :instance_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,7 +961,8 @@ module Aws::SupplyChain
       :instance_id,
       :namespace,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +980,8 @@ module Aws::SupplyChain
       :instance_id,
       :namespace,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +995,8 @@ module Aws::SupplyChain
     class DeleteDataLakeNamespaceRequest < Struct.new(
       :instance_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -961,7 +1010,8 @@ module Aws::SupplyChain
     class DeleteDataLakeNamespaceResponse < Struct.new(
       :instance_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -971,7 +1021,8 @@ module Aws::SupplyChain
     #   @return [String]
     class DeleteInstanceRequest < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +1032,8 @@ module Aws::SupplyChain
     #   @return [Types::Instance]
     class DeleteInstanceResponse < Struct.new(
       :instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1047,8 @@ module Aws::SupplyChain
     class GetBillOfMaterialsImportJobRequest < Struct.new(
       :instance_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1058,8 @@ module Aws::SupplyChain
     #   @return [Types::BillOfMaterialsImportJob]
     class GetBillOfMaterialsImportJobResponse < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1019,7 +1073,8 @@ module Aws::SupplyChain
     class GetDataIntegrationEventRequest < Struct.new(
       :instance_id,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1029,7 +1084,8 @@ module Aws::SupplyChain
     #   @return [Types::DataIntegrationEvent]
     class GetDataIntegrationEventResponse < Struct.new(
       :event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1103,8 @@ module Aws::SupplyChain
       :instance_id,
       :flow_name,
       :execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1114,8 @@ module Aws::SupplyChain
     #   @return [Types::DataIntegrationFlowExecution]
     class GetDataIntegrationFlowExecutionResponse < Struct.new(
       :flow_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1071,7 +1129,8 @@ module Aws::SupplyChain
     class GetDataIntegrationFlowRequest < Struct.new(
       :instance_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1140,8 @@ module Aws::SupplyChain
     #   @return [Types::DataIntegrationFlow]
     class GetDataIntegrationFlowResponse < Struct.new(
       :flow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1109,7 +1169,8 @@ module Aws::SupplyChain
       :instance_id,
       :namespace,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1180,8 @@ module Aws::SupplyChain
     #   @return [Types::DataLakeDataset]
     class GetDataLakeDatasetResponse < Struct.new(
       :dataset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1143,7 +1205,8 @@ module Aws::SupplyChain
     class GetDataLakeNamespaceRequest < Struct.new(
       :instance_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1216,8 @@ module Aws::SupplyChain
     #   @return [Types::DataLakeNamespace]
     class GetDataLakeNamespaceResponse < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1227,8 @@ module Aws::SupplyChain
     #   @return [String]
     class GetInstanceRequest < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1238,8 @@ module Aws::SupplyChain
     #   @return [Types::Instance]
     class GetInstanceResponse < Struct.new(
       :instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1223,7 +1289,8 @@ module Aws::SupplyChain
       :instance_description,
       :kms_key_arn,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1232,7 +1299,8 @@ module Aws::SupplyChain
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1254,7 +1322,8 @@ module Aws::SupplyChain
       :event_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1268,7 +1337,8 @@ module Aws::SupplyChain
     class ListDataIntegrationEventsResponse < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1360,8 @@ module Aws::SupplyChain
       :flow_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1375,8 @@ module Aws::SupplyChain
     class ListDataIntegrationFlowExecutionsResponse < Struct.new(
       :flow_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1322,7 +1394,8 @@ module Aws::SupplyChain
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1336,7 +1409,8 @@ module Aws::SupplyChain
     class ListDataIntegrationFlowsResponse < Struct.new(
       :flows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1442,8 @@ module Aws::SupplyChain
       :namespace,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1382,7 +1457,8 @@ module Aws::SupplyChain
     class ListDataLakeDatasetsResponse < Struct.new(
       :datasets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1400,7 +1476,8 @@ module Aws::SupplyChain
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1414,7 +1491,8 @@ module Aws::SupplyChain
     class ListDataLakeNamespacesResponse < Struct.new(
       :namespaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1436,7 +1514,8 @@ module Aws::SupplyChain
       :max_results,
       :instance_name_filter,
       :instance_state_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1529,8 @@ module Aws::SupplyChain
     class ListInstancesResponse < Struct.new(
       :instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1540,8 @@ module Aws::SupplyChain
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1551,8 @@ module Aws::SupplyChain
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1479,7 +1561,8 @@ module Aws::SupplyChain
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1580,7 +1663,8 @@ module Aws::SupplyChain
       :event_timestamp,
       :client_token,
       :dataset_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1590,7 +1674,8 @@ module Aws::SupplyChain
     #   @return [String]
     class SendDataIntegrationEventResponse < Struct.new(
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1684,8 @@ module Aws::SupplyChain
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1613,13 +1699,15 @@ module Aws::SupplyChain
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for TagResource.</p>
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1628,7 +1716,8 @@ module Aws::SupplyChain
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,13 +1731,15 @@ module Aws::SupplyChain
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of UntagResource.</p>
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1674,7 +1765,8 @@ module Aws::SupplyChain
       :sources,
       :transformation,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1684,7 +1776,8 @@ module Aws::SupplyChain
     #   @return [Types::DataIntegrationFlow]
     class UpdateDataIntegrationFlowResponse < Struct.new(
       :flow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1809,8 @@ module Aws::SupplyChain
       :namespace,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1726,7 +1820,8 @@ module Aws::SupplyChain
     #   @return [Types::DataLakeDataset]
     class UpdateDataLakeDatasetResponse < Struct.new(
       :dataset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1840,8 @@ module Aws::SupplyChain
       :instance_id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1755,7 +1851,8 @@ module Aws::SupplyChain
     #   @return [Types::DataLakeNamespace]
     class UpdateDataLakeNamespaceResponse < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1773,7 +1870,8 @@ module Aws::SupplyChain
       :instance_id,
       :instance_name,
       :instance_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1783,7 +1881,8 @@ module Aws::SupplyChain
     #   @return [Types::Instance]
     class UpdateInstanceResponse < Struct.new(
       :instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1891,8 @@ module Aws::SupplyChain
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

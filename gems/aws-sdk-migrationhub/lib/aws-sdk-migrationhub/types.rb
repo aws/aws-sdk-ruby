@@ -11,7 +11,8 @@ module Aws::MigrationHub
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31,7 +32,8 @@ module Aws::MigrationHub
       :application_id,
       :application_status,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,12 +58,14 @@ module Aws::MigrationHub
       :migration_task_name,
       :created_artifact,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateCreatedArtifactResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,12 +89,14 @@ module Aws::MigrationHub
       :migration_task_name,
       :discovered_resource,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateDiscoveredResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,12 +126,14 @@ module Aws::MigrationHub
       :migration_task_name,
       :source_resource,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateSourceResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,12 +149,14 @@ module Aws::MigrationHub
     class CreateProgressUpdateStreamRequest < Struct.new(
       :progress_update_stream_name,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateProgressUpdateStreamResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +172,8 @@ module Aws::MigrationHub
     class CreatedArtifact < Struct.new(
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,12 +189,14 @@ module Aws::MigrationHub
     class DeleteProgressUpdateStreamRequest < Struct.new(
       :progress_update_stream_name,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProgressUpdateStreamResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,7 +206,8 @@ module Aws::MigrationHub
     #   @return [String]
     class DescribeApplicationStateRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +220,8 @@ module Aws::MigrationHub
     class DescribeApplicationStateResult < Struct.new(
       :application_status,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +236,8 @@ module Aws::MigrationHub
     class DescribeMigrationTaskRequest < Struct.new(
       :progress_update_stream,
       :migration_task_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +246,8 @@ module Aws::MigrationHub
     #   @return [Types::MigrationTask]
     class DescribeMigrationTaskResult < Struct.new(
       :migration_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -255,12 +272,14 @@ module Aws::MigrationHub
       :migration_task_name,
       :created_artifact_name,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateCreatedArtifactResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,12 +304,14 @@ module Aws::MigrationHub
       :migration_task_name,
       :configuration_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateDiscoveredResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,12 +341,14 @@ module Aws::MigrationHub
       :migration_task_name,
       :source_resource_name,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateSourceResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +364,8 @@ module Aws::MigrationHub
     class DiscoveredResource < Struct.new(
       :configuration_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +375,8 @@ module Aws::MigrationHub
     #   @return [String]
     class DryRunOperation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +385,8 @@ module Aws::MigrationHub
     #   @return [String]
     class HomeRegionNotSetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -380,12 +406,14 @@ module Aws::MigrationHub
       :progress_update_stream,
       :migration_task_name,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ImportMigrationTaskResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +423,8 @@ module Aws::MigrationHub
     #   @return [String]
     class InternalServerError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +434,8 @@ module Aws::MigrationHub
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +455,8 @@ module Aws::MigrationHub
       :application_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +471,8 @@ module Aws::MigrationHub
     class ListApplicationStatesResult < Struct.new(
       :application_state_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -465,7 +497,8 @@ module Aws::MigrationHub
       :migration_task_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -480,7 +513,8 @@ module Aws::MigrationHub
     class ListCreatedArtifactsResult < Struct.new(
       :next_token,
       :created_artifact_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +539,8 @@ module Aws::MigrationHub
       :migration_task_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +554,8 @@ module Aws::MigrationHub
     class ListDiscoveredResourcesResult < Struct.new(
       :next_token,
       :discovered_resource_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -553,7 +589,8 @@ module Aws::MigrationHub
       :migration_task_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +608,8 @@ module Aws::MigrationHub
     class ListMigrationTaskUpdatesResult < Struct.new(
       :next_token,
       :migration_task_update_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +628,8 @@ module Aws::MigrationHub
       :next_token,
       :max_results,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +645,8 @@ module Aws::MigrationHub
     class ListMigrationTasksResult < Struct.new(
       :next_token,
       :migration_task_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -621,7 +661,8 @@ module Aws::MigrationHub
     class ListProgressUpdateStreamsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +677,8 @@ module Aws::MigrationHub
     class ListProgressUpdateStreamsResult < Struct.new(
       :progress_update_stream_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +712,8 @@ module Aws::MigrationHub
       :migration_task_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +731,8 @@ module Aws::MigrationHub
     class ListSourceResourcesResult < Struct.new(
       :next_token,
       :source_resource_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +761,8 @@ module Aws::MigrationHub
       :task,
       :update_date_time,
       :resource_attribute_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +797,8 @@ module Aws::MigrationHub
       :progress_percent,
       :status_detail,
       :update_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +816,8 @@ module Aws::MigrationHub
       :update_date_time,
       :update_type,
       :migration_task_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,12 +840,14 @@ module Aws::MigrationHub
       :status,
       :update_date_time,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class NotifyApplicationStateResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,12 +881,14 @@ module Aws::MigrationHub
       :update_date_time,
       :next_update_seconds,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class NotifyMigrationTaskStateResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +899,8 @@ module Aws::MigrationHub
     #   @return [String]
     class PolicyErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +913,8 @@ module Aws::MigrationHub
     #   @return [String]
     class ProgressUpdateStreamSummary < Struct.new(
       :progress_update_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,12 +964,14 @@ module Aws::MigrationHub
       :migration_task_name,
       :resource_attribute_list,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutResourceAttributesResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +1019,8 @@ module Aws::MigrationHub
     class ResourceAttribute < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1031,8 @@ module Aws::MigrationHub
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1042,8 @@ module Aws::MigrationHub
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1006,7 +1064,8 @@ module Aws::MigrationHub
       :name,
       :description,
       :status_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1026,7 +1085,8 @@ module Aws::MigrationHub
       :status,
       :status_detail,
       :progress_percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1100,8 @@ module Aws::MigrationHub
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1055,7 +1116,8 @@ module Aws::MigrationHub
     #   @return [String]
     class UnauthorizedOperation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

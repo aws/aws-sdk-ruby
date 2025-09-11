@@ -42,7 +42,7 @@ module Aws::SecurityIR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityIR::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The ID of the resource which lead to the access denial.</p>
@@ -56,7 +56,7 @@ module Aws::SecurityIR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityIR::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>
@@ -80,7 +80,7 @@ module Aws::SecurityIR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityIR::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>
@@ -103,7 +103,7 @@ module Aws::SecurityIR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityIR::Types::InvalidTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>
@@ -121,7 +121,7 @@ module Aws::SecurityIR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityIR::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>
@@ -135,7 +135,7 @@ module Aws::SecurityIR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityIR::Types::SecurityIncidentResponseNotActiveException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>
@@ -149,7 +149,7 @@ module Aws::SecurityIR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityIR::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>
@@ -183,7 +183,7 @@ module Aws::SecurityIR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityIR::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>
@@ -220,7 +220,7 @@ module Aws::SecurityIR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityIR::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception message.</p>

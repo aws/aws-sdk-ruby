@@ -42,7 +42,7 @@ module Aws::KafkaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::KafkaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::KafkaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::KafkaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::KafkaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::KafkaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::KafkaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::KafkaConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

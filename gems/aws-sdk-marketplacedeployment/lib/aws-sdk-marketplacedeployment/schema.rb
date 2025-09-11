@@ -142,7 +142,6 @@ module Aws::MarketplaceDeployment
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to disassociate one or more tags from the specified DeploymentParameter resource", "smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

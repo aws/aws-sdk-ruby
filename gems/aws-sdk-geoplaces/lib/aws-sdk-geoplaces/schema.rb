@@ -785,7 +785,6 @@ module Aws::GeoPlaces
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/suggest", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "SuggestSuccess", "params" => {"QueryText" => "Taj Mahal", "BiasPosition" => [78.0421, 27.1753]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
-
     end
 
     class << self

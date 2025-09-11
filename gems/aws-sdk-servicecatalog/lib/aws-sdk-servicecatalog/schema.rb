@@ -2605,7 +2605,6 @@ module Aws::ServiceCatalog
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
         operation.traits = {}
       end)
-
     end
 
     class << self

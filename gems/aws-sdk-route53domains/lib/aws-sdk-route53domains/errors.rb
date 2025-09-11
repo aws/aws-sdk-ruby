@@ -42,7 +42,7 @@ module Aws::Route53Domains
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Domains::Types::DnssecLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::Route53Domains
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Domains::Types::DomainLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The number of domains has exceeded the allowed threshold for the account.</p>
@@ -69,7 +69,7 @@ module Aws::Route53Domains
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Domains::Types::DuplicateRequest] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>ID of the request operation.</p>
@@ -91,7 +91,7 @@ module Aws::Route53Domains
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Domains::Types::InvalidInput] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The requested item is not acceptable. For example, for an OperationId it might refer
@@ -108,7 +108,7 @@ module Aws::Route53Domains
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Domains::Types::OperationLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The number of operations or jobs running exceeded the allowed threshold for the
@@ -123,7 +123,7 @@ module Aws::Route53Domains
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Domains::Types::TLDRulesViolation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The top-level domain does not support this operation.</p>
@@ -137,7 +137,7 @@ module Aws::Route53Domains
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Domains::Types::UnsupportedTLD] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Amazon Route 53 does not support this top-level domain (TLD).</p>

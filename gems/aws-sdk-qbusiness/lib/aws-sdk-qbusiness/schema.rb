@@ -3376,7 +3376,6 @@ module Aws::QBusiness
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#requiredActions" => ["qbusiness:GetWebExperience", "qbusiness:TagResource", "qbusiness:UntagResource", "qbusiness:ListTagsForResource", "iam:PassRole", "sso:PutApplicationGrant", "sso:UpdateApplication"], "smithy.api#http" => {"uri" => "/applications/{applicationId}/experiences/{webExperienceId}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

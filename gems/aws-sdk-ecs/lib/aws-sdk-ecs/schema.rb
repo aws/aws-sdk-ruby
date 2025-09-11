@@ -2795,7 +2795,6 @@ module Aws::ECS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
         operation.traits = {}
       end)
-
     end
 
     class << self

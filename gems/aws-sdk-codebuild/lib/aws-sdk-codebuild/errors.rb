@@ -39,7 +39,7 @@ module Aws::CodeBuild
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeBuild::Types::AccountLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::CodeBuild
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeBuild::Types::AccountSuspendedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::CodeBuild
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeBuild::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::CodeBuild
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeBuild::Types::OAuthProviderException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::CodeBuild
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeBuild::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::CodeBuild
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeBuild::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

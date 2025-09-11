@@ -11,7 +11,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +89,8 @@ module Aws::GeoRoutes
       :traffic,
       :travel_mode,
       :travel_mode_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +123,8 @@ module Aws::GeoRoutes
       :pricing_bucket,
       :snapped_destination,
       :snapped_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +181,8 @@ module Aws::GeoRoutes
       :traffic,
       :travel_mode,
       :travel_mode_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +203,8 @@ module Aws::GeoRoutes
       :pricing_bucket,
       :route_matrix,
       :routing_boundary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +309,8 @@ module Aws::GeoRoutes
       :travel_mode_options,
       :travel_step_type,
       :waypoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +331,8 @@ module Aws::GeoRoutes
       :notices,
       :pricing_bucket,
       :routes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +347,8 @@ module Aws::GeoRoutes
     class Circle < Struct.new(
       :center,
       :radius,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +363,8 @@ module Aws::GeoRoutes
     class Corridor < Struct.new(
       :line_string,
       :radius,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +373,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +396,8 @@ module Aws::GeoRoutes
       :distance_threshold,
       :geometries,
       :time_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -406,7 +417,8 @@ module Aws::GeoRoutes
     class IsolineAllowOptions < Struct.new(
       :hot,
       :hov,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +432,8 @@ module Aws::GeoRoutes
     class IsolineAvoidanceArea < Struct.new(
       :except,
       :geometry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +459,8 @@ module Aws::GeoRoutes
       :polygon,
       :polyline_corridor,
       :polyline_polygon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +514,8 @@ module Aws::GeoRoutes
       :tunnels,
       :u_turns,
       :zone_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -510,7 +525,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class IsolineAvoidanceZoneCategory < Struct.new(
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +548,8 @@ module Aws::GeoRoutes
       :license_plate,
       :max_speed,
       :occupancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -556,7 +573,8 @@ module Aws::GeoRoutes
       :from_polygon_index,
       :geometry,
       :to_polygon_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -570,7 +588,8 @@ module Aws::GeoRoutes
     class IsolineConnectionGeometry < Struct.new(
       :line_string,
       :polyline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -592,7 +611,8 @@ module Aws::GeoRoutes
       :heading,
       :matching,
       :side_of_street,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -612,7 +632,8 @@ module Aws::GeoRoutes
     class IsolineGranularityOptions < Struct.new(
       :max_points,
       :max_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -640,7 +661,8 @@ module Aws::GeoRoutes
       :on_road_threshold,
       :radius,
       :strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -668,7 +690,8 @@ module Aws::GeoRoutes
       :heading,
       :matching,
       :side_of_street,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -696,7 +719,8 @@ module Aws::GeoRoutes
       :license_plate,
       :max_speed,
       :occupancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -716,7 +740,8 @@ module Aws::GeoRoutes
     class IsolineShapeGeometry < Struct.new(
       :polygon,
       :polyline_polygon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +755,8 @@ module Aws::GeoRoutes
     class IsolineSideOfStreetOptions < Struct.new(
       :position,
       :use_with,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +770,8 @@ module Aws::GeoRoutes
     class IsolineThresholds < Struct.new(
       :distance,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +785,8 @@ module Aws::GeoRoutes
     class IsolineTrafficOptions < Struct.new(
       :flow_event_threshold_override,
       :usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -777,7 +805,8 @@ module Aws::GeoRoutes
     class IsolineTrailerOptions < Struct.new(
       :axle_count,
       :trailer_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -801,7 +830,8 @@ module Aws::GeoRoutes
       :car,
       :scooter,
       :truck,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +913,8 @@ module Aws::GeoRoutes
       :weight_per_axle,
       :weight_per_axle_group,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -910,7 +941,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class IsolineVehicleLicensePlate < Struct.new(
       :last_character,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +956,8 @@ module Aws::GeoRoutes
     class LocalizedString < Struct.new(
       :language,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -989,7 +1022,8 @@ module Aws::GeoRoutes
       :travel_mode,
       :travel_mode_options,
       :waypoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1022,7 +1056,8 @@ module Aws::GeoRoutes
       :optimized_waypoints,
       :pricing_bucket,
       :time_breakdown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1043,7 +1078,8 @@ module Aws::GeoRoutes
     class PolylineCorridor < Struct.new(
       :polyline,
       :radius,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1097,8 @@ module Aws::GeoRoutes
       :code,
       :title,
       :trace_point_indexes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1112,8 @@ module Aws::GeoRoutes
     class RoadSnapSnappedGeometry < Struct.new(
       :line_string,
       :polyline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1131,8 @@ module Aws::GeoRoutes
       :confidence,
       :original_position,
       :snapped_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1154,8 @@ module Aws::GeoRoutes
       :position,
       :speed,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1131,7 +1171,8 @@ module Aws::GeoRoutes
     #   @return [Integer]
     class RoadSnapTrailerOptions < Struct.new(
       :trailer_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,7 +1182,8 @@ module Aws::GeoRoutes
     #   @return [Types::RoadSnapTruckOptions]
     class RoadSnapTravelModeOptions < Struct.new(
       :truck,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,7 +1217,8 @@ module Aws::GeoRoutes
       :trailer,
       :tunnel_restriction_code,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1201,7 +1244,8 @@ module Aws::GeoRoutes
       :legs,
       :major_road_labels,
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1259,8 @@ module Aws::GeoRoutes
     class RouteAllowOptions < Struct.new(
       :hot,
       :hov,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1229,7 +1274,8 @@ module Aws::GeoRoutes
     class RouteAvoidanceArea < Struct.new(
       :except,
       :geometry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1301,8 @@ module Aws::GeoRoutes
       :polygon,
       :polyline_corridor,
       :polyline_polygon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1356,8 @@ module Aws::GeoRoutes
       :tunnels,
       :u_turns,
       :zone_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1367,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class RouteAvoidanceZoneCategory < Struct.new(
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1341,7 +1390,8 @@ module Aws::GeoRoutes
       :license_plate,
       :max_speed,
       :occupancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1369,7 +1419,8 @@ module Aws::GeoRoutes
       :steering_direction,
       :turn_angle,
       :turn_intensity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1384,7 +1435,8 @@ module Aws::GeoRoutes
     #   @return [Array<Types::LocalizedString>]
     class RouteContinueStepDetails < Struct.new(
       :intersection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1414,7 +1466,8 @@ module Aws::GeoRoutes
       :matching,
       :side_of_street,
       :stop_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1431,7 +1484,8 @@ module Aws::GeoRoutes
     #   @return [Array<Types::RouteDriverScheduleInterval>]
     class RouteDriverOptions < Struct.new(
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1499,8 @@ module Aws::GeoRoutes
     class RouteDriverScheduleInterval < Struct.new(
       :drive_duration,
       :rest_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1465,7 +1520,8 @@ module Aws::GeoRoutes
     class RouteEmissionType < Struct.new(
       :co2_emission_class,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1487,7 +1543,8 @@ module Aws::GeoRoutes
       :steering_direction,
       :turn_angle,
       :turn_intensity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1502,7 +1559,8 @@ module Aws::GeoRoutes
     #   @return [Array<String>]
     class RouteExclusionOptions < Struct.new(
       :countries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1528,7 +1586,8 @@ module Aws::GeoRoutes
       :steering_direction,
       :turn_angle,
       :turn_intensity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1552,7 +1611,8 @@ module Aws::GeoRoutes
       :duration,
       :instruction,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1571,7 +1631,8 @@ module Aws::GeoRoutes
     class RouteFerryArrival < Struct.new(
       :place,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1650,8 @@ module Aws::GeoRoutes
       :duration,
       :instruction,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1608,7 +1670,8 @@ module Aws::GeoRoutes
     class RouteFerryDeparture < Struct.new(
       :place,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1654,7 +1717,8 @@ module Aws::GeoRoutes
       :spans,
       :summary,
       :travel_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1668,7 +1732,8 @@ module Aws::GeoRoutes
     class RouteFerryNotice < Struct.new(
       :code,
       :impact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1682,7 +1747,8 @@ module Aws::GeoRoutes
     class RouteFerryOverviewSummary < Struct.new(
       :distance,
       :duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1710,7 +1776,8 @@ module Aws::GeoRoutes
       :original_position,
       :position,
       :waypoint_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1740,7 +1807,8 @@ module Aws::GeoRoutes
       :geometry_offset,
       :names,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1760,7 +1828,8 @@ module Aws::GeoRoutes
     class RouteFerrySummary < Struct.new(
       :overview,
       :travel_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1770,7 +1839,8 @@ module Aws::GeoRoutes
     #   @return [Integer]
     class RouteFerryTravelOnlySummary < Struct.new(
       :duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1801,7 +1871,8 @@ module Aws::GeoRoutes
       :geometry_offset,
       :instruction,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1829,7 +1900,8 @@ module Aws::GeoRoutes
       :steering_direction,
       :turn_angle,
       :turn_intensity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1868,7 +1940,8 @@ module Aws::GeoRoutes
       :travel_mode,
       :type,
       :vehicle_leg_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1882,7 +1955,8 @@ module Aws::GeoRoutes
     class RouteLegGeometry < Struct.new(
       :line_string,
       :polyline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1896,7 +1970,8 @@ module Aws::GeoRoutes
     class RouteMajorRoadLabel < Struct.new(
       :road_name,
       :route_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1918,7 +1993,8 @@ module Aws::GeoRoutes
       :on_road_threshold,
       :radius,
       :strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1939,7 +2015,8 @@ module Aws::GeoRoutes
     class RouteMatrixAllowOptions < Struct.new(
       :hot,
       :hov,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2030,8 @@ module Aws::GeoRoutes
     class RouteMatrixAutoCircle < Struct.new(
       :margin,
       :max_radius,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1969,7 +2047,8 @@ module Aws::GeoRoutes
     #   @return [Types::RouteMatrixAvoidanceAreaGeometry]
     class RouteMatrixAvoidanceArea < Struct.new(
       :geometry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2066,8 @@ module Aws::GeoRoutes
       :bounding_box,
       :polygon,
       :polyline_polygon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2037,7 +2117,8 @@ module Aws::GeoRoutes
       :tunnels,
       :u_turns,
       :zone_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2047,7 +2128,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class RouteMatrixAvoidanceZoneCategory < Struct.new(
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2061,7 +2143,8 @@ module Aws::GeoRoutes
     class RouteMatrixBoundary < Struct.new(
       :geometry,
       :unbounded,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2083,7 +2166,8 @@ module Aws::GeoRoutes
       :circle,
       :bounding_box,
       :polygon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2101,7 +2185,8 @@ module Aws::GeoRoutes
       :license_plate,
       :max_speed,
       :occupancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2121,7 +2206,8 @@ module Aws::GeoRoutes
     class RouteMatrixDestination < Struct.new(
       :options,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2143,7 +2229,8 @@ module Aws::GeoRoutes
       :heading,
       :matching,
       :side_of_street,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2167,7 +2254,8 @@ module Aws::GeoRoutes
       :distance,
       :duration,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2183,7 +2271,8 @@ module Aws::GeoRoutes
     #   @return [Array<String>]
     class RouteMatrixExclusionOptions < Struct.new(
       :countries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2205,7 +2294,8 @@ module Aws::GeoRoutes
       :on_road_threshold,
       :radius,
       :strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2225,7 +2315,8 @@ module Aws::GeoRoutes
     class RouteMatrixOrigin < Struct.new(
       :options,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2247,7 +2338,8 @@ module Aws::GeoRoutes
       :heading,
       :matching,
       :side_of_street,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2271,7 +2363,8 @@ module Aws::GeoRoutes
       :license_plate,
       :max_speed,
       :occupancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2291,7 +2384,8 @@ module Aws::GeoRoutes
     class RouteMatrixSideOfStreetOptions < Struct.new(
       :position,
       :use_with,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2305,7 +2399,8 @@ module Aws::GeoRoutes
     class RouteMatrixTrafficOptions < Struct.new(
       :flow_event_threshold_override,
       :usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2320,7 +2415,8 @@ module Aws::GeoRoutes
     #   @return [Integer]
     class RouteMatrixTrailerOptions < Struct.new(
       :trailer_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2338,7 +2434,8 @@ module Aws::GeoRoutes
       :car,
       :scooter,
       :truck,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2408,7 +2505,8 @@ module Aws::GeoRoutes
       :weight_per_axle,
       :weight_per_axle_group,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2433,7 +2531,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class RouteMatrixVehicleLicensePlate < Struct.new(
       :last_character,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2447,7 +2546,8 @@ module Aws::GeoRoutes
     class RouteNoticeDetailRange < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2465,7 +2565,8 @@ module Aws::GeoRoutes
       :direction,
       :language,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2491,7 +2592,8 @@ module Aws::GeoRoutes
       :heading,
       :matching,
       :side_of_street,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2515,7 +2617,8 @@ module Aws::GeoRoutes
       :original_position,
       :position,
       :waypoint_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2529,7 +2632,8 @@ module Aws::GeoRoutes
     class RoutePassThroughWaypoint < Struct.new(
       :geometry_offset,
       :place,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2543,7 +2647,8 @@ module Aws::GeoRoutes
     class RoutePedestrianArrival < Struct.new(
       :place,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2557,7 +2662,8 @@ module Aws::GeoRoutes
     class RoutePedestrianDeparture < Struct.new(
       :place,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2591,7 +2697,8 @@ module Aws::GeoRoutes
       :spans,
       :summary,
       :travel_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2605,7 +2712,8 @@ module Aws::GeoRoutes
     class RoutePedestrianNotice < Struct.new(
       :code,
       :impact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2615,7 +2723,8 @@ module Aws::GeoRoutes
     #   @return [Float]
     class RoutePedestrianOptions < Struct.new(
       :speed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2634,7 +2743,8 @@ module Aws::GeoRoutes
     class RoutePedestrianOverviewSummary < Struct.new(
       :distance,
       :duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2666,7 +2776,8 @@ module Aws::GeoRoutes
       :position,
       :side_of_street,
       :waypoint_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2732,7 +2843,8 @@ module Aws::GeoRoutes
       :route_numbers,
       :speed_limit,
       :typical_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2754,7 +2866,8 @@ module Aws::GeoRoutes
     class RoutePedestrianSummary < Struct.new(
       :overview,
       :travel_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2764,7 +2877,8 @@ module Aws::GeoRoutes
     #   @return [Integer]
     class RoutePedestrianTravelOnlySummary < Struct.new(
       :duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2835,7 +2949,8 @@ module Aws::GeoRoutes
       :signpost,
       :turn_step_details,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2863,7 +2978,8 @@ module Aws::GeoRoutes
       :steering_direction,
       :turn_angle,
       :turn_intensity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2882,7 +2998,8 @@ module Aws::GeoRoutes
     class RouteResponseNotice < Struct.new(
       :code,
       :impact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2904,7 +3021,8 @@ module Aws::GeoRoutes
       :route_number,
       :towards,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2926,7 +3044,8 @@ module Aws::GeoRoutes
       :steering_direction,
       :turn_angle,
       :turn_intensity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2953,7 +3072,8 @@ module Aws::GeoRoutes
       :relative_exit,
       :roundabout_angle,
       :steering_direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2981,7 +3101,8 @@ module Aws::GeoRoutes
       :steering_direction,
       :turn_angle,
       :turn_intensity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3008,7 +3129,8 @@ module Aws::GeoRoutes
       :license_plate,
       :max_speed,
       :occupancy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3028,7 +3150,8 @@ module Aws::GeoRoutes
     class RouteSideOfStreetOptions < Struct.new(
       :position,
       :use_with,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3038,7 +3161,8 @@ module Aws::GeoRoutes
     #   @return [Array<Types::RouteSignpostLabel>]
     class RouteSignpost < Struct.new(
       :labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3052,7 +3176,8 @@ module Aws::GeoRoutes
     class RouteSignpostLabel < Struct.new(
       :route_number,
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3070,7 +3195,8 @@ module Aws::GeoRoutes
       :best_case_speed,
       :turn_duration,
       :typical_speed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3091,7 +3217,8 @@ module Aws::GeoRoutes
     class RouteSpanSpeedLimitDetails < Struct.new(
       :max_speed,
       :unlimited,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3114,7 +3241,8 @@ module Aws::GeoRoutes
       :distance,
       :duration,
       :tolls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3142,7 +3270,8 @@ module Aws::GeoRoutes
       :payment_sites,
       :rates,
       :systems,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3168,7 +3297,8 @@ module Aws::GeoRoutes
       :currency,
       :emission_type,
       :vehicle_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3194,7 +3324,8 @@ module Aws::GeoRoutes
       :transfer_count,
       :trip_count,
       :validity_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3208,7 +3339,8 @@ module Aws::GeoRoutes
     class RouteTollPassValidityPeriod < Struct.new(
       :period,
       :period_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3222,7 +3354,8 @@ module Aws::GeoRoutes
     class RouteTollPaymentSite < Struct.new(
       :name,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3252,7 +3385,8 @@ module Aws::GeoRoutes
       :range,
       :range_value,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3283,7 +3417,8 @@ module Aws::GeoRoutes
       :range,
       :range_value,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3297,7 +3432,8 @@ module Aws::GeoRoutes
     class RouteTollPriceValueRange < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3335,7 +3471,8 @@ module Aws::GeoRoutes
       :pass,
       :payment_methods,
       :transponders,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3345,7 +3482,8 @@ module Aws::GeoRoutes
     #   @return [Types::RouteTollPriceSummary]
     class RouteTollSummary < Struct.new(
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3355,7 +3493,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class RouteTollSystem < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3369,7 +3508,8 @@ module Aws::GeoRoutes
     class RouteTrafficOptions < Struct.new(
       :flow_event_threshold_override,
       :usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3388,7 +3528,8 @@ module Aws::GeoRoutes
     class RouteTrailerOptions < Struct.new(
       :axle_count,
       :trailer_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3404,7 +3545,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class RouteTransponder < Struct.new(
       :system_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3426,7 +3568,8 @@ module Aws::GeoRoutes
       :pedestrian,
       :scooter,
       :truck,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3508,7 +3651,8 @@ module Aws::GeoRoutes
       :weight_per_axle,
       :weight_per_axle_group,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3546,7 +3690,8 @@ module Aws::GeoRoutes
       :steering_direction,
       :turn_angle,
       :turn_intensity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3573,7 +3718,8 @@ module Aws::GeoRoutes
       :steering_direction,
       :turn_angle,
       :turn_intensity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3592,7 +3738,8 @@ module Aws::GeoRoutes
     class RouteVehicleArrival < Struct.new(
       :place,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3606,7 +3753,8 @@ module Aws::GeoRoutes
     class RouteVehicleDeparture < Struct.new(
       :place,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3632,7 +3780,8 @@ module Aws::GeoRoutes
       :severity,
       :start_time,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3686,7 +3835,8 @@ module Aws::GeoRoutes
       :travel_steps,
       :truck_road_types,
       :zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3696,7 +3846,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class RouteVehicleLicensePlate < Struct.new(
       :last_character,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3714,7 +3865,8 @@ module Aws::GeoRoutes
       :code,
       :details,
       :impact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3728,7 +3880,8 @@ module Aws::GeoRoutes
     class RouteVehicleNoticeDetail < Struct.new(
       :title,
       :violated_constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3750,7 +3903,8 @@ module Aws::GeoRoutes
       :distance,
       :duration,
       :typical_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3784,7 +3938,8 @@ module Aws::GeoRoutes
       :position,
       :side_of_street,
       :waypoint_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3882,7 +4037,8 @@ module Aws::GeoRoutes
       :truck_road_types,
       :typical_duration,
       :zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3904,7 +4060,8 @@ module Aws::GeoRoutes
     class RouteVehicleSummary < Struct.new(
       :overview,
       :travel_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3922,7 +4079,8 @@ module Aws::GeoRoutes
       :best_case_duration,
       :duration,
       :typical_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4015,7 +4173,8 @@ module Aws::GeoRoutes
       :turn_step_details,
       :type,
       :u_turn_step_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4103,7 +4262,8 @@ module Aws::GeoRoutes
       :truck_road_type,
       :truck_type,
       :tunnel_restriction_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4151,7 +4311,8 @@ module Aws::GeoRoutes
       :position,
       :side_of_street,
       :stop_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4172,7 +4333,8 @@ module Aws::GeoRoutes
     class RouteWeightConstraint < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4191,7 +4353,8 @@ module Aws::GeoRoutes
     class RouteZone < Struct.new(
       :category,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4220,7 +4383,8 @@ module Aws::GeoRoutes
       :trace_points,
       :travel_mode,
       :travel_mode_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4245,7 +4409,8 @@ module Aws::GeoRoutes
       :snapped_geometry,
       :snapped_geometry_format,
       :snapped_trace_points,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4254,7 +4419,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4271,7 +4437,8 @@ module Aws::GeoRoutes
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4285,7 +4452,8 @@ module Aws::GeoRoutes
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4299,7 +4467,8 @@ module Aws::GeoRoutes
     class WaypointOptimizationAccessHours < Struct.new(
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4313,7 +4482,8 @@ module Aws::GeoRoutes
     class WaypointOptimizationAccessHoursEntry < Struct.new(
       :day_of_week,
       :time_of_day,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4323,7 +4493,8 @@ module Aws::GeoRoutes
     #   @return [Types::WaypointOptimizationAvoidanceAreaGeometry]
     class WaypointOptimizationAvoidanceArea < Struct.new(
       :geometry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4333,7 +4504,8 @@ module Aws::GeoRoutes
     #   @return [Array<Float>]
     class WaypointOptimizationAvoidanceAreaGeometry < Struct.new(
       :bounding_box,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4371,7 +4543,8 @@ module Aws::GeoRoutes
       :toll_roads,
       :tunnels,
       :u_turns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4385,7 +4558,8 @@ module Aws::GeoRoutes
     class WaypointOptimizationClusteringOptions < Struct.new(
       :algorithm,
       :driving_distance_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4415,7 +4589,8 @@ module Aws::GeoRoutes
       :to,
       :travel_duration,
       :wait_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4453,7 +4628,8 @@ module Aws::GeoRoutes
       :id,
       :service_duration,
       :side_of_street,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4477,7 +4653,8 @@ module Aws::GeoRoutes
       :rest_cycles,
       :rest_profile,
       :treat_service_time_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4487,7 +4664,8 @@ module Aws::GeoRoutes
     #   @return [Integer]
     class WaypointOptimizationDrivingDistanceOptions < Struct.new(
       :driving_distance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4502,7 +4680,8 @@ module Aws::GeoRoutes
     #   @return [Array<String>]
     class WaypointOptimizationExclusionOptions < Struct.new(
       :countries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4516,7 +4695,8 @@ module Aws::GeoRoutes
     class WaypointOptimizationFailedConstraint < Struct.new(
       :constraint,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4534,7 +4714,8 @@ module Aws::GeoRoutes
       :failed_constraints,
       :id,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4560,7 +4741,8 @@ module Aws::GeoRoutes
       :departure_time,
       :id,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4570,7 +4752,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class WaypointOptimizationOriginOptions < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4580,7 +4763,8 @@ module Aws::GeoRoutes
     #   @return [Float]
     class WaypointOptimizationPedestrianOptions < Struct.new(
       :speed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4599,7 +4783,8 @@ module Aws::GeoRoutes
     class WaypointOptimizationRestCycleDurations < Struct.new(
       :rest_duration,
       :work_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4619,7 +4804,8 @@ module Aws::GeoRoutes
     class WaypointOptimizationRestCycles < Struct.new(
       :long_cycle,
       :short_cycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4629,7 +4815,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class WaypointOptimizationRestProfile < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4643,7 +4830,8 @@ module Aws::GeoRoutes
     class WaypointOptimizationSideOfStreetOptions < Struct.new(
       :position,
       :use_with,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4665,7 +4853,8 @@ module Aws::GeoRoutes
       :service_duration,
       :travel_duration,
       :wait_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4683,7 +4872,8 @@ module Aws::GeoRoutes
     #   @return [String]
     class WaypointOptimizationTrafficOptions < Struct.new(
       :usage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4693,7 +4883,8 @@ module Aws::GeoRoutes
     #   @return [Integer]
     class WaypointOptimizationTrailerOptions < Struct.new(
       :trailer_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4707,7 +4898,8 @@ module Aws::GeoRoutes
     class WaypointOptimizationTravelModeOptions < Struct.new(
       :pedestrian,
       :truck,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4749,7 +4941,8 @@ module Aws::GeoRoutes
       :tunnel_restriction_code,
       :weight_per_axle,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4796,7 +4989,8 @@ module Aws::GeoRoutes
       :position,
       :service_duration,
       :side_of_street,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4828,7 +5022,8 @@ module Aws::GeoRoutes
       :triple,
       :quad,
       :quint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

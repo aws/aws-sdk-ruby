@@ -11,7 +11,8 @@ module Aws::SSM
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26,7 +27,8 @@ module Aws::SSM
     class AccountSharingInfo < Struct.new(
       :account_id,
       :shared_document_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +76,8 @@ module Aws::SSM
       :expired,
       :created_date,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -136,12 +139,14 @@ module Aws::SSM
       :resource_type,
       :resource_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddTagsToResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +156,8 @@ module Aws::SSM
     #   @return [String]
     class Alarm < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,7 +175,8 @@ module Aws::SSM
     class AlarmConfiguration < Struct.new(
       :ignore_poll_alarm_failure,
       :alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -188,7 +195,8 @@ module Aws::SSM
     class AlarmStateInformation < Struct.new(
       :name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +206,8 @@ module Aws::SSM
     #   @return [String]
     class AlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +235,8 @@ module Aws::SSM
       :association_type,
       :resource_type,
       :resource_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,13 +245,15 @@ module Aws::SSM
     #   @return [String]
     class AssociateOpsItemRelatedItemResponse < Struct.new(
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>You must disassociate a document from all managed nodes before you can delete it.</p>
     class AssociatedInstances < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,13 +327,15 @@ module Aws::SSM
       :schedule_offset,
       :duration,
       :target_maps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The specified association already exists.</p>
     class AssociationAlreadyExists < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -480,7 +494,8 @@ module Aws::SSM
       :target_maps,
       :alarm_configuration,
       :triggered_alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -494,7 +509,8 @@ module Aws::SSM
     #   @return [String]
     class AssociationDoesNotExist < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -541,7 +557,8 @@ module Aws::SSM
       :resource_count_by_status,
       :alarm_configuration,
       :triggered_alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +567,8 @@ module Aws::SSM
     #   @return [String]
     class AssociationExecutionDoesNotExist < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +586,8 @@ module Aws::SSM
       :key,
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +629,8 @@ module Aws::SSM
       :detailed_status,
       :last_execution_date,
       :output_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +644,8 @@ module Aws::SSM
     class AssociationExecutionTargetsFilter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,13 +663,15 @@ module Aws::SSM
     class AssociationFilter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>You can have at most 2,000 active associations.</p>
     class AssociationLimitExceeded < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +691,8 @@ module Aws::SSM
       :status,
       :detailed_status,
       :association_status_aggregated_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +714,8 @@ module Aws::SSM
       :name,
       :message,
       :additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +839,8 @@ module Aws::SSM
       :schedule_offset,
       :duration,
       :target_maps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -829,7 +855,8 @@ module Aws::SSM
     #   @return [String]
     class AssociationVersionLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +882,8 @@ module Aws::SSM
       :hash,
       :hash_type,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -870,7 +898,8 @@ module Aws::SSM
     #   @return [String]
     class AttachmentInformation < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +952,8 @@ module Aws::SSM
       :key,
       :values,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +963,8 @@ module Aws::SSM
     #   @return [String]
     class AutomationDefinitionNotApprovedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +973,8 @@ module Aws::SSM
     #   @return [String]
     class AutomationDefinitionNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +983,8 @@ module Aws::SSM
     #   @return [String]
     class AutomationDefinitionVersionNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1109,7 +1142,8 @@ module Aws::SSM
       :association_id,
       :change_request_name,
       :variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1129,7 +1163,8 @@ module Aws::SSM
     class AutomationExecutionFilter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1166,7 +1201,8 @@ module Aws::SSM
       :target_maps,
       :target_locations,
       :target_locations_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1176,7 +1212,8 @@ module Aws::SSM
     #   @return [String]
     class AutomationExecutionLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1318,7 +1355,8 @@ module Aws::SSM
       :ops_item_id,
       :association_id,
       :change_request_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1328,7 +1366,8 @@ module Aws::SSM
     #   @return [String]
     class AutomationExecutionNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,7 +1410,8 @@ module Aws::SSM
       :regions,
       :target_previews,
       :total_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1386,7 +1426,8 @@ module Aws::SSM
     #   @return [String]
     class AutomationStepNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1448,7 +1489,8 @@ module Aws::SSM
       :approved_patches_enable_non_security,
       :sources,
       :available_security_updates_compliance_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1468,14 +1510,16 @@ module Aws::SSM
     class CancelCommandRequest < Struct.new(
       :command_id,
       :instance_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Whether or not the command was successfully canceled. There is no guarantee that a request
     #    can be canceled.</p>
     class CancelCommandResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1484,7 +1528,8 @@ module Aws::SSM
     #   @return [String]
     class CancelMaintenanceWindowExecutionRequest < Struct.new(
       :window_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,7 +1538,8 @@ module Aws::SSM
     #   @return [String]
     class CancelMaintenanceWindowExecutionResult < Struct.new(
       :window_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1559,8 @@ module Aws::SSM
     class CloudWatchOutputConfig < Struct.new(
       :cloud_watch_log_group_name,
       :cloud_watch_output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1698,7 +1745,8 @@ module Aws::SSM
       :timeout_seconds,
       :alarm_configuration,
       :triggered_alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1900,7 +1948,8 @@ module Aws::SSM
     class CommandFilter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2038,7 +2087,8 @@ module Aws::SSM
       :service_role,
       :notification_config,
       :cloud_watch_output_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2173,7 +2223,8 @@ module Aws::SSM
       :output_s3_region,
       :output_s3_bucket_name,
       :output_s3_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2208,7 +2259,8 @@ module Aws::SSM
       :execution_time,
       :execution_id,
       :execution_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2268,7 +2320,8 @@ module Aws::SSM
       :severity,
       :execution_summary,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2298,7 +2351,8 @@ module Aws::SSM
       :severity,
       :status,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2317,7 +2371,8 @@ module Aws::SSM
       :key,
       :values,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2336,7 +2391,8 @@ module Aws::SSM
       :compliance_type,
       :compliant_summary,
       :non_compliant_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2346,7 +2402,8 @@ module Aws::SSM
     #   @return [String]
     class ComplianceTypeCountLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2361,7 +2418,8 @@ module Aws::SSM
     class CompliantSummary < Struct.new(
       :compliant_count,
       :severity_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2441,7 +2499,8 @@ module Aws::SSM
       :expiration_date,
       :tags,
       :registration_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2456,7 +2515,8 @@ module Aws::SSM
     class CreateActivationResult < Struct.new(
       :activation_id,
       :activation_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2465,7 +2525,8 @@ module Aws::SSM
     #   @return [Array<Types::CreateAssociationBatchRequestEntry>]
     class CreateAssociationBatchRequest < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2632,7 +2693,8 @@ module Aws::SSM
       :duration,
       :target_maps,
       :alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2650,7 +2712,8 @@ module Aws::SSM
     class CreateAssociationBatchResult < Struct.new(
       :successful,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2846,7 +2909,8 @@ module Aws::SSM
       :target_maps,
       :tags,
       :alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2855,7 +2919,8 @@ module Aws::SSM
     #   @return [Types::AssociationDescription]
     class CreateAssociationResult < Struct.new(
       :association_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2999,7 +3064,8 @@ module Aws::SSM
       :document_format,
       :target_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3008,7 +3074,8 @@ module Aws::SSM
     #   @return [Types::DocumentDescription]
     class CreateDocumentResult < Struct.new(
       :document_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3110,7 +3177,8 @@ module Aws::SSM
       :allow_unassociated_targets,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3119,7 +3187,8 @@ module Aws::SSM
     #   @return [String]
     class CreateMaintenanceWindowResult < Struct.new(
       :window_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3255,7 +3324,8 @@ module Aws::SSM
       :planned_start_time,
       :planned_end_time,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3268,7 +3338,8 @@ module Aws::SSM
     class CreateOpsItemResponse < Struct.new(
       :ops_item_id,
       :ops_item_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3301,7 +3372,8 @@ module Aws::SSM
       :resource_id,
       :metadata,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3310,7 +3382,8 @@ module Aws::SSM
     #   @return [String]
     class CreateOpsMetadataResult < Struct.new(
       :ops_metadata_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3440,7 +3513,8 @@ module Aws::SSM
       :available_security_updates_compliance_status,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3449,7 +3523,8 @@ module Aws::SSM
     #   @return [String]
     class CreatePatchBaselineResult < Struct.new(
       :baseline_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3477,12 +3552,14 @@ module Aws::SSM
       :s3_destination,
       :sync_type,
       :sync_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateResourceDataSyncResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3505,7 +3582,8 @@ module Aws::SSM
       :secret_access_key,
       :session_token,
       :expiration_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3515,7 +3593,8 @@ module Aws::SSM
     #   @return [String]
     class CustomSchemaCountLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3524,12 +3603,14 @@ module Aws::SSM
     #   @return [String]
     class DeleteActivationRequest < Struct.new(
       :activation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteActivationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3557,12 +3638,14 @@ module Aws::SSM
       :name,
       :instance_id,
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAssociationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3588,12 +3671,14 @@ module Aws::SSM
       :document_version,
       :version_name,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDocumentResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3625,7 +3710,8 @@ module Aws::SSM
       :schema_delete_option,
       :dry_run,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3644,7 +3730,8 @@ module Aws::SSM
       :deletion_id,
       :type_name,
       :deletion_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3653,7 +3740,8 @@ module Aws::SSM
     #   @return [String]
     class DeleteMaintenanceWindowRequest < Struct.new(
       :window_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3662,7 +3750,8 @@ module Aws::SSM
     #   @return [String]
     class DeleteMaintenanceWindowResult < Struct.new(
       :window_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3671,12 +3760,14 @@ module Aws::SSM
     #   @return [String]
     class DeleteOpsItemRequest < Struct.new(
       :ops_item_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteOpsItemResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3685,12 +3776,14 @@ module Aws::SSM
     #   @return [String]
     class DeleteOpsMetadataRequest < Struct.new(
       :ops_metadata_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteOpsMetadataResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3703,12 +3796,14 @@ module Aws::SSM
     #   @return [String]
     class DeleteParameterRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteParameterResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3722,7 +3817,8 @@ module Aws::SSM
     #   @return [Array<String>]
     class DeleteParametersRequest < Struct.new(
       :names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3735,7 +3831,8 @@ module Aws::SSM
     class DeleteParametersResult < Struct.new(
       :deleted_parameters,
       :invalid_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3744,7 +3841,8 @@ module Aws::SSM
     #   @return [String]
     class DeletePatchBaselineRequest < Struct.new(
       :baseline_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3753,7 +3851,8 @@ module Aws::SSM
     #   @return [String]
     class DeletePatchBaselineResult < Struct.new(
       :baseline_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3766,12 +3865,14 @@ module Aws::SSM
     class DeleteResourceDataSyncRequest < Struct.new(
       :sync_name,
       :sync_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourceDataSyncResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3789,12 +3890,14 @@ module Aws::SSM
       :resource_arn,
       :policy_id,
       :policy_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3804,12 +3907,14 @@ module Aws::SSM
     #   @return [String]
     class DeregisterManagedInstanceRequest < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterManagedInstanceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3822,7 +3927,8 @@ module Aws::SSM
     class DeregisterPatchBaselineForPatchGroupRequest < Struct.new(
       :baseline_id,
       :patch_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3835,7 +3941,8 @@ module Aws::SSM
     class DeregisterPatchBaselineForPatchGroupResult < Struct.new(
       :baseline_id,
       :patch_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3854,7 +3961,8 @@ module Aws::SSM
       :window_id,
       :window_target_id,
       :safe,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3867,7 +3975,8 @@ module Aws::SSM
     class DeregisterTargetFromMaintenanceWindowResult < Struct.new(
       :window_id,
       :window_target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3880,7 +3989,8 @@ module Aws::SSM
     class DeregisterTaskFromMaintenanceWindowRequest < Struct.new(
       :window_id,
       :window_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3893,7 +4003,8 @@ module Aws::SSM
     class DeregisterTaskFromMaintenanceWindowResult < Struct.new(
       :window_id,
       :window_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3907,7 +4018,8 @@ module Aws::SSM
     class DescribeActivationsFilter < Struct.new(
       :filter_key,
       :filter_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3925,7 +4037,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3939,7 +4052,8 @@ module Aws::SSM
     class DescribeActivationsResult < Struct.new(
       :activation_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3968,7 +4082,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3982,7 +4097,8 @@ module Aws::SSM
     class DescribeAssociationExecutionTargetsResult < Struct.new(
       :association_execution_targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4007,7 +4123,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4021,7 +4138,8 @@ module Aws::SSM
     class DescribeAssociationExecutionsResult < Struct.new(
       :association_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4045,7 +4163,8 @@ module Aws::SSM
       :instance_id,
       :association_id,
       :association_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4054,7 +4173,8 @@ module Aws::SSM
     #   @return [Types::AssociationDescription]
     class DescribeAssociationResult < Struct.new(
       :association_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4073,7 +4193,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4088,7 +4209,8 @@ module Aws::SSM
     class DescribeAutomationExecutionsResult < Struct.new(
       :automation_execution_metadata_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4116,7 +4238,8 @@ module Aws::SSM
       :next_token,
       :max_results,
       :reverse_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4130,7 +4253,8 @@ module Aws::SSM
     class DescribeAutomationStepExecutionsResult < Struct.new(
       :step_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4329,7 +4453,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4343,7 +4468,8 @@ module Aws::SSM
     class DescribeAvailablePatchesResult < Struct.new(
       :patches,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4367,7 +4493,8 @@ module Aws::SSM
       :permission_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4387,7 +4514,8 @@ module Aws::SSM
       :account_ids,
       :account_sharing_info_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4411,7 +4539,8 @@ module Aws::SSM
       :name,
       :document_version,
       :version_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4420,7 +4549,8 @@ module Aws::SSM
     #   @return [Types::DocumentDescription]
     class DescribeDocumentResult < Struct.new(
       :document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4439,7 +4569,8 @@ module Aws::SSM
       :instance_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4453,7 +4584,8 @@ module Aws::SSM
     class DescribeEffectiveInstanceAssociationsResult < Struct.new(
       :associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4471,7 +4603,8 @@ module Aws::SSM
       :baseline_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4485,7 +4618,8 @@ module Aws::SSM
     class DescribeEffectivePatchesForPatchBaselineResult < Struct.new(
       :effective_patches,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4504,7 +4638,8 @@ module Aws::SSM
       :instance_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4518,7 +4653,8 @@ module Aws::SSM
     class DescribeInstanceAssociationsStatusResult < Struct.new(
       :instance_association_status_infos,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4551,7 +4687,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4565,7 +4702,8 @@ module Aws::SSM
     class DescribeInstanceInformationResult < Struct.new(
       :instance_information_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4599,7 +4737,8 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4613,7 +4752,8 @@ module Aws::SSM
     class DescribeInstancePatchStatesForPatchGroupResult < Struct.new(
       :instance_patch_states,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4631,7 +4771,8 @@ module Aws::SSM
       :instance_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4645,7 +4786,8 @@ module Aws::SSM
     class DescribeInstancePatchStatesResult < Struct.new(
       :instance_patch_states,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4709,7 +4851,8 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4746,7 +4889,8 @@ module Aws::SSM
     class DescribeInstancePatchesResult < Struct.new(
       :patches,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4768,7 +4912,8 @@ module Aws::SSM
       :filters_with_operator,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4782,7 +4927,8 @@ module Aws::SSM
     class DescribeInstancePropertiesResult < Struct.new(
       :instance_properties,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4801,7 +4947,8 @@ module Aws::SSM
       :deletion_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4815,7 +4962,8 @@ module Aws::SSM
     class DescribeInventoryDeletionsResult < Struct.new(
       :inventory_deletions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4845,7 +4993,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4859,7 +5008,8 @@ module Aws::SSM
     class DescribeMaintenanceWindowExecutionTaskInvocationsResult < Struct.new(
       :window_execution_task_invocation_identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4885,7 +5035,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4899,7 +5050,8 @@ module Aws::SSM
     class DescribeMaintenanceWindowExecutionTasksResult < Struct.new(
       :window_execution_task_identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4933,7 +5085,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4947,7 +5100,8 @@ module Aws::SSM
     class DescribeMaintenanceWindowExecutionsResult < Struct.new(
       :window_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4980,7 +5134,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4994,7 +5149,8 @@ module Aws::SSM
     class DescribeMaintenanceWindowScheduleResult < Struct.new(
       :scheduled_window_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5019,7 +5175,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5033,7 +5190,8 @@ module Aws::SSM
     class DescribeMaintenanceWindowTargetsResult < Struct.new(
       :targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5058,7 +5216,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5072,7 +5231,8 @@ module Aws::SSM
     class DescribeMaintenanceWindowTasksResult < Struct.new(
       :tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5096,7 +5256,8 @@ module Aws::SSM
       :resource_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5110,7 +5271,8 @@ module Aws::SSM
     class DescribeMaintenanceWindowsForTargetResult < Struct.new(
       :window_identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5131,7 +5293,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5145,7 +5308,8 @@ module Aws::SSM
     class DescribeMaintenanceWindowsResult < Struct.new(
       :window_identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5226,7 +5390,8 @@ module Aws::SSM
       :ops_item_filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5240,7 +5405,8 @@ module Aws::SSM
     class DescribeOpsItemsResponse < Struct.new(
       :next_token,
       :ops_item_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5277,7 +5443,8 @@ module Aws::SSM
       :max_results,
       :next_token,
       :shared,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5290,7 +5457,8 @@ module Aws::SSM
     class DescribeParametersResult < Struct.new(
       :parameters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5338,7 +5506,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5352,7 +5521,8 @@ module Aws::SSM
     class DescribePatchBaselinesResult < Struct.new(
       :baseline_identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5361,7 +5531,8 @@ module Aws::SSM
     #   @return [String]
     class DescribePatchGroupStateRequest < Struct.new(
       :patch_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5442,7 +5613,8 @@ module Aws::SSM
       :instances_with_security_non_compliant_patches,
       :instances_with_other_non_compliant_patches,
       :instances_with_available_security_updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5497,7 +5669,8 @@ module Aws::SSM
       :max_results,
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5523,7 +5696,8 @@ module Aws::SSM
     class DescribePatchGroupsResult < Struct.new(
       :mappings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5551,7 +5725,8 @@ module Aws::SSM
       :patch_set,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5564,7 +5739,8 @@ module Aws::SSM
     class DescribePatchPropertiesResult < Struct.new(
       :properties,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5587,7 +5763,8 @@ module Aws::SSM
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5601,7 +5778,8 @@ module Aws::SSM
     class DescribeSessionsResponse < Struct.new(
       :sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5616,12 +5794,14 @@ module Aws::SSM
     class DisassociateOpsItemRelatedItemRequest < Struct.new(
       :ops_item_id,
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateOpsItemRelatedItemResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5630,7 +5810,8 @@ module Aws::SSM
     #   @return [String]
     class DocumentAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5648,7 +5829,8 @@ module Aws::SSM
       :name,
       :default_version,
       :default_version_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5788,7 +5970,8 @@ module Aws::SSM
       :review_status,
       :category,
       :category_enum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5802,7 +5985,8 @@ module Aws::SSM
     class DocumentFilter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5875,7 +6059,8 @@ module Aws::SSM
       :requires,
       :review_status,
       :author,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6007,7 +6192,8 @@ module Aws::SSM
     class DocumentKeyValuesFilter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6016,7 +6202,8 @@ module Aws::SSM
     #   @return [String]
     class DocumentLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6026,7 +6213,8 @@ module Aws::SSM
     #   @return [Array<Types::DocumentReviewerResponseSource>]
     class DocumentMetadataResponseInfo < Struct.new(
       :reviewer_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6051,7 +6239,8 @@ module Aws::SSM
       :type,
       :description,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6065,7 +6254,8 @@ module Aws::SSM
     #   @return [String]
     class DocumentPermissionLimit < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6089,7 +6279,8 @@ module Aws::SSM
       :version,
       :require_type,
       :version_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6105,7 +6296,8 @@ module Aws::SSM
     class DocumentReviewCommentSource < Struct.new(
       :type,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6136,7 +6328,8 @@ module Aws::SSM
       :review_status,
       :comment,
       :reviewer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6150,7 +6343,8 @@ module Aws::SSM
     class DocumentReviews < Struct.new(
       :action,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6201,7 +6395,8 @@ module Aws::SSM
       :status,
       :status_information,
       :review_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6216,7 +6411,8 @@ module Aws::SSM
     #   @return [String]
     class DocumentVersionLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6228,7 +6424,8 @@ module Aws::SSM
     #   @return [String]
     class DoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6238,7 +6435,8 @@ module Aws::SSM
     #   @return [String]
     class DuplicateDocumentContent < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6248,13 +6446,15 @@ module Aws::SSM
     #   @return [String]
     class DuplicateDocumentVersionName < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>You can't specify a managed node ID in more than one association.</p>
     class DuplicateInstanceId < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6275,7 +6475,8 @@ module Aws::SSM
     class EffectivePatch < Struct.new(
       :patch,
       :patch_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6287,7 +6488,8 @@ module Aws::SSM
     class ExecutionInputs < Struct.new(
       :automation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Automation < ExecutionInputs; end
@@ -6301,7 +6503,8 @@ module Aws::SSM
     class ExecutionPreview < Struct.new(
       :automation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Automation < ExecutionPreview; end
@@ -6322,7 +6525,8 @@ module Aws::SSM
       :entry,
       :message,
       :fault,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6342,7 +6546,8 @@ module Aws::SSM
       :failure_stage,
       :failure_type,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6352,7 +6557,8 @@ module Aws::SSM
     #   @return [String]
     class FeatureNotAvailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6361,7 +6567,8 @@ module Aws::SSM
     #   @return [String]
     class GetAccessTokenRequest < Struct.new(
       :access_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6375,7 +6582,8 @@ module Aws::SSM
     class GetAccessTokenResponse < Struct.new(
       :credentials,
       :access_request_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6386,7 +6594,8 @@ module Aws::SSM
     #   @return [String]
     class GetAutomationExecutionRequest < Struct.new(
       :automation_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6395,7 +6604,8 @@ module Aws::SSM
     #   @return [Types::AutomationExecution]
     class GetAutomationExecutionResult < Struct.new(
       :automation_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6410,7 +6620,8 @@ module Aws::SSM
     class GetCalendarStateRequest < Struct.new(
       :calendar_names,
       :at_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6434,7 +6645,8 @@ module Aws::SSM
       :state,
       :at_time,
       :next_transition_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6462,7 +6674,8 @@ module Aws::SSM
       :command_id,
       :instance_id,
       :plugin_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6611,7 +6824,8 @@ module Aws::SSM
       :standard_error_content,
       :standard_error_url,
       :cloud_watch_output_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6625,7 +6839,8 @@ module Aws::SSM
     #   @return [String]
     class GetConnectionStatusRequest < Struct.new(
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6638,7 +6853,8 @@ module Aws::SSM
     class GetConnectionStatusResponse < Struct.new(
       :target,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6647,7 +6863,8 @@ module Aws::SSM
     #   @return [String]
     class GetDefaultPatchBaselineRequest < Struct.new(
       :operating_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6660,7 +6877,8 @@ module Aws::SSM
     class GetDefaultPatchBaselineResult < Struct.new(
       :baseline_id,
       :operating_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6678,7 +6896,8 @@ module Aws::SSM
       :instance_id,
       :snapshot_id,
       :baseline_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6701,7 +6920,8 @@ module Aws::SSM
       :snapshot_id,
       :snapshot_download_url,
       :product,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6725,7 +6945,8 @@ module Aws::SSM
       :version_name,
       :document_version,
       :document_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6794,7 +7015,8 @@ module Aws::SSM
       :requires,
       :attachments_content,
       :review_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6803,7 +7025,8 @@ module Aws::SSM
     #   @return [String]
     class GetExecutionPreviewRequest < Struct.new(
       :execution_preview_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6828,7 +7051,8 @@ module Aws::SSM
       :status,
       :status_message,
       :execution_preview,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6858,7 +7082,8 @@ module Aws::SSM
       :result_attributes,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6872,7 +7097,8 @@ module Aws::SSM
     class GetInventoryResult < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6902,7 +7128,8 @@ module Aws::SSM
       :max_results,
       :aggregator,
       :sub_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6916,7 +7143,8 @@ module Aws::SSM
     class GetInventorySchemaResult < Struct.new(
       :schemas,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6925,7 +7153,8 @@ module Aws::SSM
     #   @return [String]
     class GetMaintenanceWindowExecutionRequest < Struct.new(
       :window_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6954,7 +7183,8 @@ module Aws::SSM
       :status_details,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6971,7 +7201,8 @@ module Aws::SSM
       :window_execution_id,
       :task_id,
       :invocation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7026,7 +7257,8 @@ module Aws::SSM
       :end_time,
       :owner_information,
       :window_target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7040,7 +7272,8 @@ module Aws::SSM
     class GetMaintenanceWindowExecutionTaskRequest < Struct.new(
       :window_execution_id,
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7126,7 +7359,8 @@ module Aws::SSM
       :end_time,
       :alarm_configuration,
       :triggered_alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7140,7 +7374,8 @@ module Aws::SSM
     #   @return [String]
     class GetMaintenanceWindowRequest < Struct.new(
       :window_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7214,7 +7449,8 @@ module Aws::SSM
       :enabled,
       :created_date,
       :modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7234,7 +7470,8 @@ module Aws::SSM
     class GetMaintenanceWindowTaskRequest < Struct.new(
       :window_id,
       :window_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7348,7 +7585,8 @@ module Aws::SSM
       :description,
       :cutoff_behavior,
       :alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7366,7 +7604,8 @@ module Aws::SSM
     class GetOpsItemRequest < Struct.new(
       :ops_item_id,
       :ops_item_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7375,7 +7614,8 @@ module Aws::SSM
     #   @return [Types::OpsItem]
     class GetOpsItemResponse < Struct.new(
       :ops_item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7393,7 +7633,8 @@ module Aws::SSM
       :ops_metadata_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7411,7 +7652,8 @@ module Aws::SSM
       :resource_id,
       :metadata,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7441,7 +7683,8 @@ module Aws::SSM
       :result_attributes,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7455,7 +7698,8 @@ module Aws::SSM
     class GetOpsSummaryResult < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7480,7 +7724,8 @@ module Aws::SSM
       :with_decryption,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7494,7 +7739,8 @@ module Aws::SSM
     class GetParameterHistoryResult < Struct.new(
       :parameters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7513,7 +7759,8 @@ module Aws::SSM
     class GetParameterRequest < Struct.new(
       :name,
       :with_decryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7522,7 +7769,8 @@ module Aws::SSM
     #   @return [Types::Parameter]
     class GetParameterResult < Struct.new(
       :parameter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7571,7 +7819,8 @@ module Aws::SSM
       :with_decryption,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7585,7 +7834,8 @@ module Aws::SSM
     class GetParametersByPathResult < Struct.new(
       :parameters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7608,7 +7858,8 @@ module Aws::SSM
     class GetParametersRequest < Struct.new(
       :names,
       :with_decryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7622,7 +7873,8 @@ module Aws::SSM
     class GetParametersResult < Struct.new(
       :parameters,
       :invalid_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7636,7 +7888,8 @@ module Aws::SSM
     class GetPatchBaselineForPatchGroupRequest < Struct.new(
       :patch_group,
       :operating_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7653,7 +7906,8 @@ module Aws::SSM
       :baseline_id,
       :patch_group,
       :operating_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7669,7 +7923,8 @@ module Aws::SSM
     #   @return [String]
     class GetPatchBaselineRequest < Struct.new(
       :baseline_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7747,7 +8002,8 @@ module Aws::SSM
       :description,
       :sources,
       :available_security_updates_compliance_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7770,7 +8026,8 @@ module Aws::SSM
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7784,7 +8041,8 @@ module Aws::SSM
     class GetResourcePoliciesResponse < Struct.new(
       :next_token,
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7812,7 +8070,8 @@ module Aws::SSM
       :policy_id,
       :policy_hash,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7872,7 +8131,8 @@ module Aws::SSM
     #   @return [String]
     class GetServiceSettingRequest < Struct.new(
       :setting_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7882,7 +8142,8 @@ module Aws::SSM
     #   @return [Types::ServiceSetting]
     class GetServiceSettingResult < Struct.new(
       :service_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7894,7 +8155,8 @@ module Aws::SSM
     #   @return [String]
     class HierarchyLevelLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7908,7 +8170,8 @@ module Aws::SSM
     #   @return [String]
     class HierarchyTypeMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7918,7 +8181,8 @@ module Aws::SSM
     #   @return [String]
     class IdempotentParameterMismatch < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7928,7 +8192,8 @@ module Aws::SSM
     #   @return [String]
     class IncompatiblePolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7942,7 +8207,8 @@ module Aws::SSM
     class InstanceAggregatedAssociationOverview < Struct.new(
       :detailed_status,
       :instance_association_status_aggregated_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7964,7 +8230,8 @@ module Aws::SSM
       :instance_id,
       :content,
       :association_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7976,7 +8243,8 @@ module Aws::SSM
     #   @return [Types::S3OutputLocation]
     class InstanceAssociationOutputLocation < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7986,7 +8254,8 @@ module Aws::SSM
     #   @return [Types::S3OutputUrl]
     class InstanceAssociationOutputUrl < Struct.new(
       :s3_output_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8040,7 +8309,8 @@ module Aws::SSM
       :error_code,
       :output_url,
       :association_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8087,7 +8357,8 @@ module Aws::SSM
       :platform_name,
       :platform_version,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8202,7 +8473,8 @@ module Aws::SSM
       :association_overview,
       :source_id,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8225,7 +8497,8 @@ module Aws::SSM
     class InstanceInformationFilter < Struct.new(
       :key,
       :value_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8268,7 +8541,8 @@ module Aws::SSM
     class InstanceInformationStringFilter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8434,7 +8708,8 @@ module Aws::SSM
       :critical_non_compliant_count,
       :security_non_compliant_count,
       :other_non_compliant_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8529,7 +8804,8 @@ module Aws::SSM
       :key,
       :values,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8646,7 +8922,8 @@ module Aws::SSM
       :association_overview,
       :source_id,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8661,7 +8938,8 @@ module Aws::SSM
     class InstancePropertyFilter < Struct.new(
       :key,
       :value_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8679,7 +8957,8 @@ module Aws::SSM
       :key,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8688,7 +8967,8 @@ module Aws::SSM
     #   @return [String]
     class InternalServerError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8698,7 +8978,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidActivation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8708,7 +8989,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidActivationId < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8718,7 +9000,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidAggregatorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8728,7 +9011,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidAllowedPatternException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8737,7 +9021,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidAssociation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8748,7 +9033,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidAssociationVersion < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8759,7 +9045,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidAutomationExecutionParametersException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8768,7 +9055,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidAutomationSignalException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8777,13 +9065,15 @@ module Aws::SSM
     #   @return [String]
     class InvalidAutomationStatusUpdateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The specified command ID isn't valid. Verify the ID and try again.</p>
     class InvalidCommandId < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8793,7 +9083,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidDeleteInventoryParametersException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8803,7 +9094,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidDeletionIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8814,7 +9106,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidDocument < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8824,7 +9117,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidDocumentContent < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8834,7 +9128,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidDocumentOperation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8843,7 +9138,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidDocumentSchemaVersion < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8853,7 +9149,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidDocumentType < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8862,7 +9159,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidDocumentVersion < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8871,13 +9169,15 @@ module Aws::SSM
     #   @return [String]
     class InvalidFilter < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The specified key isn't valid.</p>
     class InvalidFilterKey < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8889,7 +9189,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidFilterOption < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8898,7 +9199,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidFilterValue < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8924,7 +9226,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidInstanceId < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8933,7 +9236,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidInstanceInformationFilterValue < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8942,7 +9246,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidInstancePropertyFilterValue < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8951,7 +9256,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidInventoryGroupException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8961,7 +9267,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidInventoryItemContextException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8970,7 +9277,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidInventoryRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8982,7 +9290,8 @@ module Aws::SSM
     class InvalidItemContentException < Struct.new(
       :type_name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8991,7 +9300,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidKeyId < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9000,7 +9310,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidNextToken < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9010,7 +9321,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidNotificationConfig < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9019,19 +9331,22 @@ module Aws::SSM
     #   @return [String]
     class InvalidOptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 bucket doesn't exist.</p>
     class InvalidOutputFolder < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output location isn't valid or doesn't exist.</p>
     class InvalidOutputLocation < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9041,7 +9356,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidParameters < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9051,13 +9367,15 @@ module Aws::SSM
     #   @return [String]
     class InvalidPermissionType < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The plugin name isn't valid.</p>
     class InvalidPluginName < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9066,7 +9384,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidPolicyAttributeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9076,20 +9395,23 @@ module Aws::SSM
     #   @return [String]
     class InvalidPolicyTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The resource ID isn't valid. Verify that you entered the correct ID and try again.</p>
     class InvalidResourceId < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The resource type isn't valid. For example, if you are attempting to tag an EC2 instance,
     #    the instance must be a registered managed node.</p>
     class InvalidResourceType < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9098,7 +9420,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidResultAttributeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9109,7 +9432,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidRole < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9118,7 +9442,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidSchedule < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9127,7 +9452,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidTag < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9137,7 +9463,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidTarget < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9146,7 +9473,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidTargetMaps < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9155,7 +9483,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidTypeNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9164,7 +9493,8 @@ module Aws::SSM
     #   @return [String]
     class InvalidUpdate < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9183,7 +9513,8 @@ module Aws::SSM
       :expression,
       :aggregators,
       :groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9218,7 +9549,8 @@ module Aws::SSM
       :last_status_message,
       :deletion_summary,
       :last_status_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9237,7 +9569,8 @@ module Aws::SSM
       :total_count,
       :remaining_count,
       :summary_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9261,7 +9594,8 @@ module Aws::SSM
       :version,
       :count,
       :remaining_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9333,7 +9667,8 @@ module Aws::SSM
       :key,
       :values,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9350,7 +9685,8 @@ module Aws::SSM
     class InventoryGroup < Struct.new(
       :name,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9388,7 +9724,8 @@ module Aws::SSM
       :content_hash,
       :content,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9403,7 +9740,8 @@ module Aws::SSM
     class InventoryItemAttribute < Struct.new(
       :name,
       :data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9430,7 +9768,8 @@ module Aws::SSM
       :version,
       :attributes,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9445,7 +9784,8 @@ module Aws::SSM
     class InventoryResultEntity < Struct.new(
       :id,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9474,14 +9814,16 @@ module Aws::SSM
       :capture_time,
       :content_hash,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The command ID and managed node ID you specified didn't match any invocations. Verify the
     #    command ID and the managed node ID and try again. </p>
     class InvocationDoesNotExist < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9493,7 +9835,8 @@ module Aws::SSM
     class ItemContentMismatchException < Struct.new(
       :type_name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9505,7 +9848,8 @@ module Aws::SSM
     class ItemSizeLimitExceededException < Struct.new(
       :type_name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9527,7 +9871,8 @@ module Aws::SSM
       :name,
       :parameter_version,
       :labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9542,7 +9887,8 @@ module Aws::SSM
     class LabelParameterVersionResult < Struct.new(
       :invalid_labels,
       :parameter_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9565,7 +9911,8 @@ module Aws::SSM
       :association_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9579,7 +9926,8 @@ module Aws::SSM
     class ListAssociationVersionsResult < Struct.new(
       :association_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9604,7 +9952,8 @@ module Aws::SSM
       :association_filter_list,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9618,7 +9967,8 @@ module Aws::SSM
     class ListAssociationsResult < Struct.new(
       :associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9651,7 +10001,8 @@ module Aws::SSM
       :next_token,
       :filters,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9665,7 +10016,8 @@ module Aws::SSM
     class ListCommandInvocationsResult < Struct.new(
       :command_invocations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9698,7 +10050,8 @@ module Aws::SSM
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9712,7 +10065,8 @@ module Aws::SSM
     class ListCommandsResult < Struct.new(
       :commands,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9741,7 +10095,8 @@ module Aws::SSM
       :resource_types,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9755,7 +10110,8 @@ module Aws::SSM
     class ListComplianceItemsResult < Struct.new(
       :compliance_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9775,7 +10131,8 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9791,7 +10148,8 @@ module Aws::SSM
     class ListComplianceSummariesResult < Struct.new(
       :compliance_summary_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9819,7 +10177,8 @@ module Aws::SSM
       :metadata,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9846,7 +10205,8 @@ module Aws::SSM
       :author,
       :metadata,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9865,7 +10225,8 @@ module Aws::SSM
       :name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9879,7 +10240,8 @@ module Aws::SSM
     class ListDocumentVersionsResult < Struct.new(
       :document_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9912,7 +10274,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9926,7 +10289,8 @@ module Aws::SSM
     class ListDocumentsResult < Struct.new(
       :document_identifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9953,7 +10317,8 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9983,7 +10348,8 @@ module Aws::SSM
       :capture_time,
       :entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10009,7 +10375,8 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10023,7 +10390,8 @@ module Aws::SSM
     class ListNodesResult < Struct.new(
       :nodes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10056,7 +10424,8 @@ module Aws::SSM
       :aggregators,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10071,7 +10440,8 @@ module Aws::SSM
     class ListNodesSummaryResult < Struct.new(
       :summary,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10089,7 +10459,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10103,7 +10474,8 @@ module Aws::SSM
     class ListOpsItemEventsResponse < Struct.new(
       :next_token,
       :summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10126,7 +10498,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10140,7 +10513,8 @@ module Aws::SSM
     class ListOpsItemRelatedItemsResponse < Struct.new(
       :next_token,
       :summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10158,7 +10532,8 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10172,7 +10547,8 @@ module Aws::SSM
     class ListOpsMetadataResult < Struct.new(
       :ops_metadata_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10190,7 +10566,8 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10206,7 +10583,8 @@ module Aws::SSM
     class ListResourceComplianceSummariesResult < Struct.new(
       :resource_compliance_summary_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10226,7 +10604,8 @@ module Aws::SSM
       :sync_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10240,7 +10619,8 @@ module Aws::SSM
     class ListResourceDataSyncResult < Struct.new(
       :resource_data_sync_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10253,7 +10633,8 @@ module Aws::SSM
     class ListTagsForResourceRequest < Struct.new(
       :resource_type,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10262,7 +10643,8 @@ module Aws::SSM
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResult < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10288,7 +10670,8 @@ module Aws::SSM
       :s3_bucket_name,
       :s3_key_prefix,
       :s3_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10317,7 +10700,8 @@ module Aws::SSM
     class MaintenanceWindowAutomationParameters < Struct.new(
       :document_version,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10347,7 +10731,8 @@ module Aws::SSM
       :status_details,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10395,7 +10780,8 @@ module Aws::SSM
       :task_type,
       :alarm_configuration,
       :triggered_alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10455,7 +10841,8 @@ module Aws::SSM
       :end_time,
       :owner_information,
       :window_target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10503,7 +10890,8 @@ module Aws::SSM
     class MaintenanceWindowFilter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10563,7 +10951,8 @@ module Aws::SSM
       :end_date,
       :start_date,
       :next_execution_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10583,7 +10972,8 @@ module Aws::SSM
     class MaintenanceWindowIdentityForTarget < Struct.new(
       :window_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10621,7 +11011,8 @@ module Aws::SSM
       :client_context,
       :qualifier,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10711,7 +11102,8 @@ module Aws::SSM
       :parameters,
       :service_role_arn,
       :timeout_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10740,7 +11132,8 @@ module Aws::SSM
     class MaintenanceWindowStepFunctionsParameters < Struct.new(
       :input,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10782,7 +11175,8 @@ module Aws::SSM
       :owner_information,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10894,7 +11288,8 @@ module Aws::SSM
       :description,
       :cutoff_behavior,
       :alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10921,7 +11316,8 @@ module Aws::SSM
       :automation,
       :step_functions,
       :lambda,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10933,7 +11329,8 @@ module Aws::SSM
     #   @return [Array<String>]
     class MaintenanceWindowTaskParameterValueExpression < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10943,7 +11340,8 @@ module Aws::SSM
     #   @return [String]
     class MalformedResourcePolicyDocumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10952,7 +11350,8 @@ module Aws::SSM
     #   @return [String]
     class MaxDocumentSizeExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10962,7 +11361,8 @@ module Aws::SSM
     #   @return [String]
     class MetadataValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10995,12 +11395,14 @@ module Aws::SSM
       :account_ids_to_add,
       :account_ids_to_remove,
       :shared_document_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ModifyDocumentPermissionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11026,7 +11428,8 @@ module Aws::SSM
       :owner,
       :region,
       :node_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11051,7 +11454,8 @@ module Aws::SSM
       :type_name,
       :attribute_name,
       :aggregators,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11071,7 +11475,8 @@ module Aws::SSM
       :key,
       :values,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11094,7 +11499,8 @@ module Aws::SSM
       :account_id,
       :organizational_unit_id,
       :organizational_unit_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11105,7 +11511,8 @@ module Aws::SSM
     class NodeType < Struct.new(
       :instance,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Instance < NodeType; end
@@ -11123,7 +11530,8 @@ module Aws::SSM
     class NonCompliantSummary < Struct.new(
       :non_compliant_count,
       :severity_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11161,7 +11569,8 @@ module Aws::SSM
       :notification_arn,
       :notification_events,
       :notification_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11194,7 +11603,8 @@ module Aws::SSM
       :values,
       :filters,
       :aggregators,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11208,7 +11618,8 @@ module Aws::SSM
     class OpsEntity < Struct.new(
       :id,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11222,7 +11633,8 @@ module Aws::SSM
     class OpsEntityItem < Struct.new(
       :capture_time,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11240,7 +11652,8 @@ module Aws::SSM
       :key,
       :values,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11397,7 +11810,8 @@ module Aws::SSM
       :planned_start_time,
       :planned_end_time,
       :ops_item_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11408,7 +11822,8 @@ module Aws::SSM
     #   @return [String]
     class OpsItemAccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11420,7 +11835,8 @@ module Aws::SSM
     class OpsItemAlreadyExistsException < Struct.new(
       :message,
       :ops_item_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11429,7 +11845,8 @@ module Aws::SSM
     #   @return [String]
     class OpsItemConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11444,7 +11861,8 @@ module Aws::SSM
     class OpsItemDataValue < Struct.new(
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11465,7 +11883,8 @@ module Aws::SSM
       :key,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11500,7 +11919,8 @@ module Aws::SSM
       :detail,
       :created_by,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11518,7 +11938,8 @@ module Aws::SSM
       :key,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11529,7 +11950,8 @@ module Aws::SSM
     #   @return [String]
     class OpsItemIdentity < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11542,7 +11964,8 @@ module Aws::SSM
     class OpsItemInvalidParameterException < Struct.new(
       :parameter_names,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11560,7 +11983,8 @@ module Aws::SSM
       :limit,
       :limit_type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11574,7 +11998,8 @@ module Aws::SSM
     #   @return [String]
     class OpsItemNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11585,7 +12010,8 @@ module Aws::SSM
     #   @return [String]
     class OpsItemNotification < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11600,7 +12026,8 @@ module Aws::SSM
       :message,
       :resource_uri,
       :ops_item_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11610,7 +12037,8 @@ module Aws::SSM
     #   @return [String]
     class OpsItemRelatedItemAssociationNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11652,7 +12080,8 @@ module Aws::SSM
       :created_time,
       :last_modified_by,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11672,7 +12101,8 @@ module Aws::SSM
       :key,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11775,7 +12205,8 @@ module Aws::SSM
       :actual_end_time,
       :planned_start_time,
       :planned_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11801,7 +12232,8 @@ module Aws::SSM
       :last_modified_date,
       :last_modified_user,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11810,7 +12242,8 @@ module Aws::SSM
     #   @return [String]
     class OpsMetadataAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11824,7 +12257,8 @@ module Aws::SSM
     class OpsMetadataFilter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11833,7 +12267,8 @@ module Aws::SSM
     #   @return [String]
     class OpsMetadataInvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11843,7 +12278,8 @@ module Aws::SSM
     #   @return [String]
     class OpsMetadataKeyLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11853,7 +12289,8 @@ module Aws::SSM
     #   @return [String]
     class OpsMetadataLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11862,7 +12299,8 @@ module Aws::SSM
     #   @return [String]
     class OpsMetadataNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11872,7 +12310,8 @@ module Aws::SSM
     #   @return [String]
     class OpsMetadataTooManyUpdatesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11884,7 +12323,8 @@ module Aws::SSM
     #   @return [String]
     class OpsResultAttribute < Struct.new(
       :type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11898,7 +12338,8 @@ module Aws::SSM
     class OutputSource < Struct.new(
       :output_source_id,
       :output_source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11954,7 +12395,8 @@ module Aws::SSM
       :last_modified_date,
       :arn,
       :data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11968,7 +12410,8 @@ module Aws::SSM
     #   @return [String]
     class ParameterAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12032,7 +12475,8 @@ module Aws::SSM
       :tier,
       :policies,
       :data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12058,7 +12502,8 @@ module Aws::SSM
       :policy_text,
       :policy_type,
       :policy_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12068,7 +12513,8 @@ module Aws::SSM
     #   @return [String]
     class ParameterLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12092,7 +12538,8 @@ module Aws::SSM
     #   @return [String]
     class ParameterMaxVersionLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12151,7 +12598,8 @@ module Aws::SSM
       :tier,
       :policies,
       :data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12170,7 +12618,8 @@ module Aws::SSM
     #   @return [String]
     class ParameterNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12180,7 +12629,8 @@ module Aws::SSM
     #   @return [String]
     class ParameterPatternMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12215,7 +12665,8 @@ module Aws::SSM
       :key,
       :option,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12224,7 +12675,8 @@ module Aws::SSM
     #   @return [String]
     class ParameterVersionLabelLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12234,7 +12686,8 @@ module Aws::SSM
     #   @return [String]
     class ParameterVersionNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12248,7 +12701,8 @@ module Aws::SSM
     class ParametersFilter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12274,7 +12728,8 @@ module Aws::SSM
       :action,
       :iteration,
       :iterator_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12399,7 +12854,8 @@ module Aws::SSM
       :arch,
       :severity,
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12433,7 +12889,8 @@ module Aws::SSM
       :operating_system,
       :baseline_description,
       :default_baseline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12483,7 +12940,8 @@ module Aws::SSM
       :state,
       :installed_time,
       :cve_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12513,7 +12971,8 @@ module Aws::SSM
     class PatchFilter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12523,7 +12982,8 @@ module Aws::SSM
     #   @return [Array<Types::PatchFilter>]
     class PatchFilterGroup < Struct.new(
       :patch_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12538,7 +12998,8 @@ module Aws::SSM
     class PatchGroupPatchBaselineMapping < Struct.new(
       :patch_group,
       :baseline_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12576,7 +13037,8 @@ module Aws::SSM
     class PatchOrchestratorFilter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12629,7 +13091,8 @@ module Aws::SSM
       :approve_after_days,
       :approve_until_date,
       :enable_non_security,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12645,7 +13108,8 @@ module Aws::SSM
     #   @return [Array<Types::PatchRule>]
     class PatchRuleGroup < Struct.new(
       :patch_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12697,7 +13161,8 @@ module Aws::SSM
       :name,
       :products,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12716,7 +13181,8 @@ module Aws::SSM
       :deployment_status,
       :compliance_level,
       :approval_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12726,7 +13192,8 @@ module Aws::SSM
     #   @return [String]
     class PoliciesLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12758,7 +13225,8 @@ module Aws::SSM
       :failed_steps,
       :cancelled_steps,
       :timed_out_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12818,12 +13286,14 @@ module Aws::SSM
       :items,
       :item_content_hash,
       :upload_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutComplianceItemsResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12836,7 +13306,8 @@ module Aws::SSM
     class PutInventoryRequest < Struct.new(
       :instance_id,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12845,7 +13316,8 @@ module Aws::SSM
     #   @return [String]
     class PutInventoryResult < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13107,7 +13579,8 @@ module Aws::SSM
       :tier,
       :policies,
       :data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13124,7 +13597,8 @@ module Aws::SSM
     class PutParameterResult < Struct.new(
       :version,
       :tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13152,7 +13626,8 @@ module Aws::SSM
       :policy,
       :policy_id,
       :policy_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13166,7 +13641,8 @@ module Aws::SSM
     class PutResourcePolicyResponse < Struct.new(
       :policy_id,
       :policy_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13175,7 +13651,8 @@ module Aws::SSM
     #   @return [String]
     class RegisterDefaultPatchBaselineRequest < Struct.new(
       :baseline_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13184,7 +13661,8 @@ module Aws::SSM
     #   @return [String]
     class RegisterDefaultPatchBaselineResult < Struct.new(
       :baseline_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13197,7 +13675,8 @@ module Aws::SSM
     class RegisterPatchBaselineForPatchGroupRequest < Struct.new(
       :baseline_id,
       :patch_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13210,7 +13689,8 @@ module Aws::SSM
     class RegisterPatchBaselineForPatchGroupResult < Struct.new(
       :baseline_id,
       :patch_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13289,7 +13769,8 @@ module Aws::SSM
       :name,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13298,7 +13779,8 @@ module Aws::SSM
     #   @return [String]
     class RegisterTargetWithMaintenanceWindowResult < Struct.new(
       :window_target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13451,7 +13933,8 @@ module Aws::SSM
       :client_token,
       :cutoff_behavior,
       :alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13460,7 +13943,8 @@ module Aws::SSM
     #   @return [String]
     class RegisterTaskWithMaintenanceWindowResult < Struct.new(
       :window_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13474,7 +13958,8 @@ module Aws::SSM
     class RegistrationMetadataItem < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13486,7 +13971,8 @@ module Aws::SSM
     #   @return [String]
     class RelatedOpsItem < Struct.new(
       :ops_item_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13528,12 +14014,14 @@ module Aws::SSM
       :resource_type,
       :resource_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveTagsFromResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13594,7 +14082,8 @@ module Aws::SSM
     #   @return [String]
     class ResetServiceSettingRequest < Struct.new(
       :setting_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13605,7 +14094,8 @@ module Aws::SSM
     #   @return [Types::ServiceSetting]
     class ResetServiceSettingResult < Struct.new(
       :service_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13620,7 +14110,8 @@ module Aws::SSM
     class ResolvedTargets < Struct.new(
       :parameter_values,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13664,7 +14155,8 @@ module Aws::SSM
       :execution_summary,
       :compliant_summary,
       :non_compliant_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13673,7 +14165,8 @@ module Aws::SSM
     #   @return [String]
     class ResourceDataSyncAlreadyExistsException < Struct.new(
       :sync_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13692,7 +14185,8 @@ module Aws::SSM
     class ResourceDataSyncAwsOrganizationsSource < Struct.new(
       :organization_source_type,
       :organizational_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13702,7 +14196,8 @@ module Aws::SSM
     #   @return [String]
     class ResourceDataSyncConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13711,7 +14206,8 @@ module Aws::SSM
     #   @return [String]
     class ResourceDataSyncCountExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13723,7 +14219,8 @@ module Aws::SSM
     #   @return [String]
     class ResourceDataSyncDestinationDataSharing < Struct.new(
       :destination_data_sharing_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13732,7 +14229,8 @@ module Aws::SSM
     #   @return [String]
     class ResourceDataSyncInvalidConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13782,7 +14280,8 @@ module Aws::SSM
       :last_status,
       :sync_created_time,
       :last_sync_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13797,7 +14296,8 @@ module Aws::SSM
       :sync_name,
       :sync_type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13807,7 +14307,8 @@ module Aws::SSM
     #   @return [String]
     class ResourceDataSyncOrganizationalUnit < Struct.new(
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13838,7 +14339,8 @@ module Aws::SSM
       :region,
       :awskms_key_arn,
       :destination_data_sharing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13871,7 +14373,8 @@ module Aws::SSM
       :source_regions,
       :include_future_regions,
       :enable_all_ops_data_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13938,7 +14441,8 @@ module Aws::SSM
       :include_future_regions,
       :state,
       :enable_all_ops_data_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13954,7 +14458,8 @@ module Aws::SSM
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13966,7 +14471,8 @@ module Aws::SSM
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13975,7 +14481,8 @@ module Aws::SSM
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13986,7 +14493,8 @@ module Aws::SSM
     #   @return [String]
     class ResourcePolicyConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13999,7 +14507,8 @@ module Aws::SSM
     class ResourcePolicyInvalidParameterException < Struct.new(
       :parameter_names,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14016,7 +14525,8 @@ module Aws::SSM
       :limit,
       :limit_type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14030,7 +14540,8 @@ module Aws::SSM
     #   @return [String]
     class ResourcePolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14041,7 +14552,8 @@ module Aws::SSM
     #   @return [String]
     class ResultAttribute < Struct.new(
       :type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14050,7 +14562,8 @@ module Aws::SSM
     #   @return [String]
     class ResumeSessionRequest < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14077,7 +14590,8 @@ module Aws::SSM
       :session_id,
       :token_value,
       :stream_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14095,7 +14609,8 @@ module Aws::SSM
       :reviewed_time,
       :status,
       :reviewer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14150,7 +14665,8 @@ module Aws::SSM
       :max_concurrency,
       :max_errors,
       :target_locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14168,7 +14684,8 @@ module Aws::SSM
       :output_s3_region,
       :output_s3_bucket_name,
       :output_s3_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14179,7 +14696,8 @@ module Aws::SSM
     #   @return [String]
     class S3OutputUrl < Struct.new(
       :output_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14198,7 +14716,8 @@ module Aws::SSM
       :window_id,
       :name,
       :execution_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14232,12 +14751,14 @@ module Aws::SSM
       :automation_execution_id,
       :signal_type,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SendAutomationSignalResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14363,7 +14884,8 @@ module Aws::SSM
       :notification_config,
       :cloud_watch_output_config,
       :alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14373,7 +14895,8 @@ module Aws::SSM
     #   @return [Types::Command]
     class SendCommandResult < Struct.new(
       :command,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14399,7 +14922,8 @@ module Aws::SSM
       :resource_type,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14457,7 +14981,8 @@ module Aws::SSM
       :last_modified_user,
       :arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14467,7 +14992,8 @@ module Aws::SSM
     #   @return [String]
     class ServiceSettingNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14524,7 +15050,8 @@ module Aws::SSM
       :output_url,
       :max_session_duration,
       :access_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14581,7 +15108,8 @@ module Aws::SSM
     class SessionFilter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14595,7 +15123,8 @@ module Aws::SSM
     class SessionManagerOutputUrl < Struct.new(
       :s3_output_url,
       :cloud_watch_output_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14635,7 +15164,8 @@ module Aws::SSM
       :low_count,
       :informational_count,
       :unspecified_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14662,7 +15192,8 @@ module Aws::SSM
       :reason,
       :targets,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14671,7 +15202,8 @@ module Aws::SSM
     #   @return [String]
     class StartAccessRequestResponse < Struct.new(
       :access_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14680,12 +15212,14 @@ module Aws::SSM
     #   @return [Array<String>]
     class StartAssociationsOnceRequest < Struct.new(
       :association_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartAssociationsOnceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14798,7 +15332,8 @@ module Aws::SSM
       :tags,
       :alarm_configuration,
       :target_locations_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14807,7 +15342,8 @@ module Aws::SSM
     #   @return [String]
     class StartAutomationExecutionResult < Struct.new(
       :automation_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14902,7 +15438,8 @@ module Aws::SSM
       :tags,
       :scheduled_end_time,
       :change_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14912,7 +15449,8 @@ module Aws::SSM
     #   @return [String]
     class StartChangeRequestExecutionResult < Struct.new(
       :automation_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14932,7 +15470,8 @@ module Aws::SSM
       :document_name,
       :document_version,
       :execution_inputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14941,7 +15480,8 @@ module Aws::SSM
     #   @return [String]
     class StartExecutionPreviewResponse < Struct.new(
       :execution_preview_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14971,7 +15511,8 @@ module Aws::SSM
       :document_name,
       :reason,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15000,13 +15541,15 @@ module Aws::SSM
       :session_id,
       :token_value,
       :stream_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The updated status is the same as the current status.</p>
     class StatusUnchanged < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15117,7 +15660,8 @@ module Aws::SSM
       :target_location,
       :triggered_alarms,
       :parent_step_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15139,7 +15683,8 @@ module Aws::SSM
     class StepExecutionFilter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15153,12 +15698,14 @@ module Aws::SSM
     class StopAutomationExecutionRequest < Struct.new(
       :automation_execution_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopAutomationExecutionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15167,7 +15714,8 @@ module Aws::SSM
     #   @return [String]
     class SubTypeCountLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15184,7 +15732,8 @@ module Aws::SSM
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15315,7 +15864,8 @@ module Aws::SSM
     class Target < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15325,7 +15875,8 @@ module Aws::SSM
     #   @return [String]
     class TargetInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15388,7 +15939,8 @@ module Aws::SSM
       :targets,
       :targets_max_concurrency,
       :targets_max_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15406,7 +15958,8 @@ module Aws::SSM
     #   @return [String]
     class TargetNotConnected < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15421,7 +15974,8 @@ module Aws::SSM
     class TargetPreview < Struct.new(
       :count,
       :target_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15435,7 +15989,8 @@ module Aws::SSM
     #   @return [String]
     class TerminateSessionRequest < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15444,7 +15999,8 @@ module Aws::SSM
     #   @return [String]
     class TerminateSessionResponse < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15462,14 +16018,16 @@ module Aws::SSM
       :message,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Targets</code> parameter includes too many tags. Remove one or more tags and try
     #    the command again.</p>
     class TooManyTagsError < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15478,7 +16036,8 @@ module Aws::SSM
     #   @return [String]
     class TooManyUpdates < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15487,7 +16046,8 @@ module Aws::SSM
     #   @return [String]
     class TotalSizeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15509,7 +16069,8 @@ module Aws::SSM
       :name,
       :parameter_version,
       :labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15522,7 +16083,8 @@ module Aws::SSM
     class UnlabelParameterVersionResult < Struct.new(
       :removed_labels,
       :invalid_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15531,7 +16093,8 @@ module Aws::SSM
     #   @return [String]
     class UnsupportedCalendarException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15543,7 +16106,8 @@ module Aws::SSM
     #   @return [String]
     class UnsupportedFeatureRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15557,7 +16121,8 @@ module Aws::SSM
     class UnsupportedInventoryItemContextException < Struct.new(
       :type_name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15567,7 +16132,8 @@ module Aws::SSM
     #   @return [String]
     class UnsupportedInventorySchemaVersionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15577,7 +16143,8 @@ module Aws::SSM
     #   @return [String]
     class UnsupportedOperatingSystem < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15586,7 +16153,8 @@ module Aws::SSM
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15595,7 +16163,8 @@ module Aws::SSM
     #   @return [String]
     class UnsupportedParameterType < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15605,7 +16174,8 @@ module Aws::SSM
     #   @return [String]
     class UnsupportedPlatformType < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15797,7 +16367,8 @@ module Aws::SSM
       :duration,
       :target_maps,
       :alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15806,7 +16377,8 @@ module Aws::SSM
     #   @return [Types::AssociationDescription]
     class UpdateAssociationResult < Struct.new(
       :association_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15823,7 +16395,8 @@ module Aws::SSM
       :name,
       :instance_id,
       :association_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15832,7 +16405,8 @@ module Aws::SSM
     #   @return [Types::AssociationDescription]
     class UpdateAssociationStatusResult < Struct.new(
       :association_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15845,7 +16419,8 @@ module Aws::SSM
     class UpdateDocumentDefaultVersionRequest < Struct.new(
       :name,
       :document_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15854,7 +16429,8 @@ module Aws::SSM
     #   @return [Types::DocumentDefaultVersionDescription]
     class UpdateDocumentDefaultVersionResult < Struct.new(
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15871,12 +16447,14 @@ module Aws::SSM
       :name,
       :document_version,
       :document_reviews,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDocumentMetadataResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15925,7 +16503,8 @@ module Aws::SSM
       :document_version,
       :document_format,
       :target_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15934,7 +16513,8 @@ module Aws::SSM
     #   @return [Types::DocumentDescription]
     class UpdateDocumentResult < Struct.new(
       :document_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16013,7 +16593,8 @@ module Aws::SSM
       :allow_unassociated_targets,
       :enabled,
       :replace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16074,7 +16655,8 @@ module Aws::SSM
       :cutoff,
       :allow_unassociated_targets,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -16116,7 +16698,8 @@ module Aws::SSM
       :name,
       :description,
       :replace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16145,7 +16728,8 @@ module Aws::SSM
       :owner_information,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16306,7 +16890,8 @@ module Aws::SSM
       :replace,
       :cutoff_behavior,
       :alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16396,7 +16981,8 @@ module Aws::SSM
       :description,
       :cutoff_behavior,
       :alarm_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -16421,12 +17007,14 @@ module Aws::SSM
     class UpdateManagedInstanceRoleRequest < Struct.new(
       :instance_id,
       :iam_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateManagedInstanceRoleResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16522,12 +17110,14 @@ module Aws::SSM
       :planned_start_time,
       :planned_end_time,
       :ops_item_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateOpsItemResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16544,7 +17134,8 @@ module Aws::SSM
       :ops_metadata_arn,
       :metadata_to_update,
       :keys_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16553,7 +17144,8 @@ module Aws::SSM
     #   @return [String]
     class UpdateOpsMetadataResult < Struct.new(
       :ops_metadata_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16658,7 +17250,8 @@ module Aws::SSM
       :sources,
       :available_security_updates_compliance_status,
       :replace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16732,7 +17325,8 @@ module Aws::SSM
       :description,
       :sources,
       :available_security_updates_compliance_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -16755,12 +17349,14 @@ module Aws::SSM
       :sync_name,
       :sync_type,
       :sync_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceDataSyncResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16871,13 +17467,15 @@ module Aws::SSM
     class UpdateServiceSettingRequest < Struct.new(
       :setting_id,
       :setting_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The result body of the UpdateServiceSetting API operation.</p>
     class UpdateServiceSettingResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16891,7 +17489,8 @@ module Aws::SSM
     class ValidationException < Struct.new(
       :message,
       :reason_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -4881,7 +4881,6 @@ module Aws::LexModelsV2
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/testsets/{testSetId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

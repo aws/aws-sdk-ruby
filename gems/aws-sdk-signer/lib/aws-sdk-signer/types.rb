@@ -14,7 +14,8 @@ module Aws::Signer
     class AccessDeniedException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +65,8 @@ module Aws::Signer
       :principal,
       :revision_id,
       :statement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -73,7 +75,8 @@ module Aws::Signer
     #   @return [String]
     class AddProfilePermissionResponse < Struct.new(
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +89,8 @@ module Aws::Signer
     class BadRequestException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -95,7 +99,8 @@ module Aws::Signer
     #   @return [String]
     class CancelSigningProfileRequest < Struct.new(
       :profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +112,8 @@ module Aws::Signer
     class ConflictException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +122,8 @@ module Aws::Signer
     #   @return [String]
     class DescribeSigningJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +207,8 @@ module Aws::Signer
       :signed_object,
       :job_owner,
       :job_invoker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +219,8 @@ module Aws::Signer
     #   @return [Types::S3Destination]
     class Destination < Struct.new(
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +234,8 @@ module Aws::Signer
     class EncryptionAlgorithmOptions < Struct.new(
       :allowed_values,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -273,7 +283,8 @@ module Aws::Signer
       :profile_version_arn,
       :job_arn,
       :certificate_hashes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +294,8 @@ module Aws::Signer
     #   @return [Array<String>]
     class GetRevocationStatusResponse < Struct.new(
       :revoked_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +304,8 @@ module Aws::Signer
     #   @return [String]
     class GetSigningPlatformRequest < Struct.new(
       :platform_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +348,8 @@ module Aws::Signer
       :signing_image_format,
       :max_size_in_mb,
       :revocation_supported,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -354,7 +368,8 @@ module Aws::Signer
     class GetSigningProfileRequest < Struct.new(
       :profile_name,
       :profile_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +433,8 @@ module Aws::Signer
       :status_reason,
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +448,8 @@ module Aws::Signer
     class HashAlgorithmOptions < Struct.new(
       :allowed_values,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +461,8 @@ module Aws::Signer
     class InternalServiceErrorException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +475,8 @@ module Aws::Signer
     class ListProfilePermissionsRequest < Struct.new(
       :profile_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +497,8 @@ module Aws::Signer
       :policy_size_bytes,
       :permissions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -534,7 +554,8 @@ module Aws::Signer
       :signature_expires_before,
       :signature_expires_after,
       :job_invoker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +568,8 @@ module Aws::Signer
     class ListSigningJobsResponse < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +596,8 @@ module Aws::Signer
       :target,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -587,7 +610,8 @@ module Aws::Signer
     class ListSigningPlatformsResponse < Struct.new(
       :platforms,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,7 +641,8 @@ module Aws::Signer
       :next_token,
       :platform_id,
       :statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +657,8 @@ module Aws::Signer
     class ListSigningProfilesResponse < Struct.new(
       :profiles,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +667,8 @@ module Aws::Signer
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +677,8 @@ module Aws::Signer
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +690,8 @@ module Aws::Signer
     class NotFoundException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +713,8 @@ module Aws::Signer
       :principal,
       :statement_id,
       :profile_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -722,7 +752,8 @@ module Aws::Signer
       :overrides,
       :signing_parameters,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -739,7 +770,8 @@ module Aws::Signer
       :arn,
       :profile_version,
       :profile_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +788,8 @@ module Aws::Signer
       :profile_name,
       :revision_id,
       :statement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +798,8 @@ module Aws::Signer
     #   @return [String]
     class RemoveProfilePermissionResponse < Struct.new(
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +811,8 @@ module Aws::Signer
     class ResourceNotFoundException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +829,8 @@ module Aws::Signer
       :job_id,
       :job_owner,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +853,8 @@ module Aws::Signer
       :profile_version,
       :reason,
       :effective_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +869,8 @@ module Aws::Signer
     class S3Destination < Struct.new(
       :bucket_name,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -846,7 +884,8 @@ module Aws::Signer
     class S3SignedObject < Struct.new(
       :bucket_name,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +903,8 @@ module Aws::Signer
       :bucket_name,
       :key,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -876,7 +916,8 @@ module Aws::Signer
     class ServiceLimitExceededException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -898,7 +939,8 @@ module Aws::Signer
       :profile_owner,
       :payload,
       :payload_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -919,7 +961,8 @@ module Aws::Signer
       :job_owner,
       :metadata,
       :signature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +976,8 @@ module Aws::Signer
     class SignatureValidityPeriod < Struct.new(
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -949,7 +993,8 @@ module Aws::Signer
     #   @return [Types::S3SignedObject]
     class SignedObject < Struct.new(
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -963,7 +1008,8 @@ module Aws::Signer
     class SigningConfiguration < Struct.new(
       :encryption_algorithm_options,
       :hash_algorithm_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1026,8 @@ module Aws::Signer
     class SigningConfigurationOverrides < Struct.new(
       :encryption_algorithm,
       :hash_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -994,7 +1041,8 @@ module Aws::Signer
     class SigningImageFormat < Struct.new(
       :supported_formats,
       :default_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,7 +1107,8 @@ module Aws::Signer
       :signature_expires_at,
       :job_owner,
       :job_invoker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1082,7 +1131,8 @@ module Aws::Signer
       :reason,
       :revoked_at,
       :revoked_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1143,8 @@ module Aws::Signer
     #   @return [String]
     class SigningMaterial < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1137,7 +1188,8 @@ module Aws::Signer
       :signing_image_format,
       :max_size_in_mb,
       :revocation_supported,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1163,7 +1215,8 @@ module Aws::Signer
     class SigningPlatformOverrides < Struct.new(
       :signing_configuration,
       :signing_image_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1214,7 +1267,8 @@ module Aws::Signer
       :status,
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1232,7 +1286,8 @@ module Aws::Signer
       :revocation_effective_from,
       :revoked_at,
       :revoked_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1298,8 @@ module Aws::Signer
     #   @return [Types::S3Source]
     class Source < Struct.new(
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1327,8 @@ module Aws::Signer
       :profile_name,
       :client_request_token,
       :profile_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,7 +1341,8 @@ module Aws::Signer
     class StartSigningJobResponse < Struct.new(
       :job_id,
       :job_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1297,12 +1355,14 @@ module Aws::Signer
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1317,7 +1377,8 @@ module Aws::Signer
     class ThrottlingException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1330,7 +1391,8 @@ module Aws::Signer
     class TooManyRequestsException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1343,12 +1405,14 @@ module Aws::Signer
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,7 +1424,8 @@ module Aws::Signer
     class ValidationException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

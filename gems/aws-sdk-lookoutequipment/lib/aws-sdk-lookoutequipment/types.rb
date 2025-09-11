@@ -12,7 +12,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27,7 +28,8 @@ module Aws::LookoutEquipment
     class CategoricalValues < Struct.new(
       :status,
       :number_of_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +39,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51,7 +54,8 @@ module Aws::LookoutEquipment
     class CountPercent < Struct.new(
       :count,
       :percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -84,7 +88,8 @@ module Aws::LookoutEquipment
       :server_side_kms_key_id,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,7 +106,8 @@ module Aws::LookoutEquipment
       :dataset_name,
       :dataset_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,7 +171,8 @@ module Aws::LookoutEquipment
       :server_side_kms_key_id,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -197,7 +204,8 @@ module Aws::LookoutEquipment
       :inference_scheduler_name,
       :status,
       :model_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +234,8 @@ module Aws::LookoutEquipment
       :fault_codes,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +249,8 @@ module Aws::LookoutEquipment
     class CreateLabelGroupResponse < Struct.new(
       :label_group_name,
       :label_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +297,8 @@ module Aws::LookoutEquipment
       :notes,
       :equipment,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +307,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class CreateLabelResponse < Struct.new(
       :label_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -382,7 +394,8 @@ module Aws::LookoutEquipment
       :tags,
       :off_condition,
       :model_diagnostics_output_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +408,8 @@ module Aws::LookoutEquipment
     class CreateModelResponse < Struct.new(
       :model_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -443,7 +457,8 @@ module Aws::LookoutEquipment
       :lookback_window,
       :promote_mode,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +475,8 @@ module Aws::LookoutEquipment
       :model_name,
       :model_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +504,8 @@ module Aws::LookoutEquipment
       :dataset_arn,
       :ingestion_input_configuration,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +531,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DataPreProcessingConfiguration < Struct.new(
       :target_sampling_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +566,8 @@ module Aws::LookoutEquipment
       :invalid_sensor_data,
       :unsupported_timestamps,
       :duplicate_timestamps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -558,7 +577,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DatasetSchema < Struct.new(
       :inline_data_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +601,8 @@ module Aws::LookoutEquipment
       :dataset_arn,
       :status,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +611,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
       :dataset_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +621,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DeleteInferenceSchedulerRequest < Struct.new(
       :inference_scheduler_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -609,7 +632,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DeleteLabelGroupRequest < Struct.new(
       :label_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +648,8 @@ module Aws::LookoutEquipment
     class DeleteLabelRequest < Struct.new(
       :label_group_name,
       :label_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +658,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DeleteModelRequest < Struct.new(
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +669,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +679,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DeleteRetrainingSchedulerRequest < Struct.new(
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +689,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DescribeDataIngestionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,7 +761,8 @@ module Aws::LookoutEquipment
       :data_start_time,
       :data_end_time,
       :source_dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +771,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
       :dataset_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +844,8 @@ module Aws::LookoutEquipment
       :data_start_time,
       :data_end_time,
       :source_dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +854,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DescribeInferenceSchedulerRequest < Struct.new(
       :inference_scheduler_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +933,8 @@ module Aws::LookoutEquipment
       :role_arn,
       :server_side_kms_key_id,
       :latest_inference_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +943,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DescribeLabelGroupRequest < Struct.new(
       :label_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -935,7 +970,8 @@ module Aws::LookoutEquipment
       :fault_codes,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,7 +984,8 @@ module Aws::LookoutEquipment
     class DescribeLabelRequest < Struct.new(
       :label_group_name,
       :label_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -997,7 +1034,8 @@ module Aws::LookoutEquipment
       :notes,
       :equipment,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1006,7 +1044,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DescribeModelRequest < Struct.new(
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1265,8 @@ module Aws::LookoutEquipment
       :retraining_scheduler_status,
       :model_diagnostics_output_configuration,
       :model_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1279,8 @@ module Aws::LookoutEquipment
     class DescribeModelVersionRequest < Struct.new(
       :model_name,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,7 +1470,8 @@ module Aws::LookoutEquipment
       :model_diagnostics_output_configuration,
       :model_diagnostics_results_object,
       :model_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1439,7 +1481,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DescribeResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1503,8 @@ module Aws::LookoutEquipment
       :resource_policy,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1469,7 +1513,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class DescribeRetrainingSchedulerRequest < Struct.new(
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1515,7 +1560,8 @@ module Aws::LookoutEquipment
       :promote_mode,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1525,7 +1571,8 @@ module Aws::LookoutEquipment
     #   @return [Integer]
     class DuplicateTimestamps < Struct.new(
       :total_number_of_duplicate_timestamps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1601,8 @@ module Aws::LookoutEquipment
       :client_token,
       :server_side_kms_key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1623,8 @@ module Aws::LookoutEquipment
       :dataset_arn,
       :status,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,7 +1685,8 @@ module Aws::LookoutEquipment
       :server_side_kms_key_id,
       :tags,
       :inference_data_import_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1661,7 +1711,8 @@ module Aws::LookoutEquipment
       :model_version_arn,
       :model_version,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1745,8 @@ module Aws::LookoutEquipment
       :event_end_time,
       :diagnostics,
       :event_duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1766,7 +1818,8 @@ module Aws::LookoutEquipment
       :failed_reason,
       :model_version,
       :model_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1788,7 +1841,8 @@ module Aws::LookoutEquipment
       :s3_input_configuration,
       :input_time_zone_offset,
       :inference_input_name_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1804,7 +1858,8 @@ module Aws::LookoutEquipment
     class InferenceInputNameConfiguration < Struct.new(
       :timestamp_format,
       :component_timestamp_delimiter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1820,7 +1875,8 @@ module Aws::LookoutEquipment
     class InferenceOutputConfiguration < Struct.new(
       :s3_output_configuration,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1835,7 +1891,8 @@ module Aws::LookoutEquipment
     class InferenceS3InputConfiguration < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1850,7 +1907,8 @@ module Aws::LookoutEquipment
     class InferenceS3OutputConfiguration < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1901,7 +1959,8 @@ module Aws::LookoutEquipment
       :data_delay_offset_in_minutes,
       :data_upload_frequency,
       :latest_inference_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1921,7 +1980,8 @@ module Aws::LookoutEquipment
       :total_number_of_files,
       :ingested_number_of_files,
       :discarded_files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1933,7 +1993,8 @@ module Aws::LookoutEquipment
     #   @return [Types::IngestionS3InputConfiguration]
     class IngestionInputConfiguration < Struct.new(
       :s3_input_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1959,7 +2020,8 @@ module Aws::LookoutEquipment
       :bucket,
       :prefix,
       :key_pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1976,7 +2038,8 @@ module Aws::LookoutEquipment
     class InsufficientSensorData < Struct.new(
       :missing_complete_sensor_data,
       :sensors_with_short_date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2049,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2001,7 +2065,8 @@ module Aws::LookoutEquipment
     class InvalidSensorData < Struct.new(
       :affected_sensor_count,
       :total_number_of_invalid_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2023,7 +2088,8 @@ module Aws::LookoutEquipment
       :label_group_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2067,7 +2133,8 @@ module Aws::LookoutEquipment
       :fault_code,
       :equipment,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2082,7 +2149,8 @@ module Aws::LookoutEquipment
     class LabelsInputConfiguration < Struct.new(
       :s3_input_configuration,
       :label_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2097,7 +2165,8 @@ module Aws::LookoutEquipment
     class LabelsS3InputConfiguration < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2117,7 +2186,8 @@ module Aws::LookoutEquipment
       :status,
       :number_of_large_timestamp_gaps,
       :max_timestamp_gap_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2139,7 +2209,8 @@ module Aws::LookoutEquipment
       :next_token,
       :max_results,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2154,7 +2225,8 @@ module Aws::LookoutEquipment
     class ListDataIngestionJobsResponse < Struct.new(
       :next_token,
       :data_ingestion_job_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2172,7 +2244,8 @@ module Aws::LookoutEquipment
       :next_token,
       :max_results,
       :dataset_name_begins_with,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2187,7 +2260,8 @@ module Aws::LookoutEquipment
     class ListDatasetsResponse < Struct.new(
       :next_token,
       :dataset_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2215,7 +2289,8 @@ module Aws::LookoutEquipment
       :inference_scheduler_name,
       :interval_start_time,
       :interval_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2231,7 +2306,8 @@ module Aws::LookoutEquipment
     class ListInferenceEventsResponse < Struct.new(
       :next_token,
       :inference_event_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2339,8 @@ module Aws::LookoutEquipment
       :data_start_time_after,
       :data_end_time_before,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2285,7 +2362,8 @@ module Aws::LookoutEquipment
     class ListInferenceExecutionsResponse < Struct.new(
       :next_token,
       :inference_execution_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2312,7 +2390,8 @@ module Aws::LookoutEquipment
       :inference_scheduler_name_begins_with,
       :model_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2327,7 +2406,8 @@ module Aws::LookoutEquipment
     class ListInferenceSchedulersResponse < Struct.new(
       :next_token,
       :inference_scheduler_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2345,7 +2425,8 @@ module Aws::LookoutEquipment
       :label_group_name_begins_with,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2359,7 +2440,8 @@ module Aws::LookoutEquipment
     class ListLabelGroupsResponse < Struct.new(
       :next_token,
       :label_group_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2394,7 +2476,8 @@ module Aws::LookoutEquipment
       :equipment,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2413,7 +2496,8 @@ module Aws::LookoutEquipment
     class ListLabelsResponse < Struct.new(
       :next_token,
       :label_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2458,7 +2542,8 @@ module Aws::LookoutEquipment
       :created_at_start_time,
       :max_model_version,
       :min_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2480,7 +2565,8 @@ module Aws::LookoutEquipment
     class ListModelVersionsResponse < Struct.new(
       :next_token,
       :model_version_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2507,7 +2593,8 @@ module Aws::LookoutEquipment
       :status,
       :model_name_begins_with,
       :dataset_name_begins_with,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2522,7 +2609,8 @@ module Aws::LookoutEquipment
     class ListModelsResponse < Struct.new(
       :next_token,
       :model_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2546,7 +2634,8 @@ module Aws::LookoutEquipment
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2561,7 +2650,8 @@ module Aws::LookoutEquipment
     class ListRetrainingSchedulersResponse < Struct.new(
       :retraining_scheduler_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2585,7 +2675,8 @@ module Aws::LookoutEquipment
       :ingestion_job_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2601,7 +2692,8 @@ module Aws::LookoutEquipment
     class ListSensorStatisticsResponse < Struct.new(
       :sensor_statistics_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2611,7 +2703,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2620,7 +2713,8 @@ module Aws::LookoutEquipment
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2631,7 +2725,8 @@ module Aws::LookoutEquipment
     #   @return [Integer]
     class MissingCompleteSensorData < Struct.new(
       :affected_sensor_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2645,7 +2740,8 @@ module Aws::LookoutEquipment
     class MissingSensorData < Struct.new(
       :affected_sensor_count,
       :total_number_of_missing_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2659,7 +2755,8 @@ module Aws::LookoutEquipment
     class ModelDiagnosticsOutputConfiguration < Struct.new(
       :s3_output_configuration,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2680,7 +2777,8 @@ module Aws::LookoutEquipment
     class ModelDiagnosticsS3OutputConfiguration < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2761,7 +2859,8 @@ module Aws::LookoutEquipment
       :retraining_scheduler_status,
       :model_diagnostics_output_configuration,
       :model_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2809,7 +2908,8 @@ module Aws::LookoutEquipment
       :status,
       :source_type,
       :model_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2824,7 +2924,8 @@ module Aws::LookoutEquipment
     class MonotonicValues < Struct.new(
       :status,
       :monotonicity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2835,7 +2936,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class MultipleOperatingModes < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2858,7 +2960,8 @@ module Aws::LookoutEquipment
       :resource_policy,
       :policy_revision_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2871,7 +2974,8 @@ module Aws::LookoutEquipment
     class PutResourcePolicyResponse < Struct.new(
       :resource_arn,
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2881,7 +2985,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2914,7 +3019,8 @@ module Aws::LookoutEquipment
       :retraining_start_date,
       :retraining_frequency,
       :lookback_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2929,7 +3035,8 @@ module Aws::LookoutEquipment
     class S3Object < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3000,7 +3107,8 @@ module Aws::LookoutEquipment
       :monotonic_values,
       :data_start_time,
       :data_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3015,7 +3123,8 @@ module Aws::LookoutEquipment
     #   @return [Integer]
     class SensorsWithShortDateRange < Struct.new(
       :affected_sensor_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3024,7 +3133,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3048,7 +3158,8 @@ module Aws::LookoutEquipment
       :ingestion_input_configuration,
       :role_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3061,7 +3172,8 @@ module Aws::LookoutEquipment
     class StartDataIngestionJobResponse < Struct.new(
       :job_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3070,7 +3182,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class StartInferenceSchedulerRequest < Struct.new(
       :inference_scheduler_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3096,7 +3209,8 @@ module Aws::LookoutEquipment
       :inference_scheduler_name,
       :inference_scheduler_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3105,7 +3219,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class StartRetrainingSchedulerRequest < Struct.new(
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3122,7 +3237,8 @@ module Aws::LookoutEquipment
       :model_name,
       :model_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3131,7 +3247,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class StopInferenceSchedulerRequest < Struct.new(
       :inference_scheduler_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3158,7 +3275,8 @@ module Aws::LookoutEquipment
       :inference_scheduler_name,
       :inference_scheduler_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3167,7 +3285,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class StopRetrainingSchedulerRequest < Struct.new(
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3184,7 +3303,8 @@ module Aws::LookoutEquipment
       :model_name,
       :model_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3198,7 +3318,8 @@ module Aws::LookoutEquipment
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3213,12 +3334,14 @@ module Aws::LookoutEquipment
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3227,7 +3350,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3237,7 +3361,8 @@ module Aws::LookoutEquipment
     #   @return [Integer]
     class UnsupportedTimestamps < Struct.new(
       :total_number_of_unsupported_timestamps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3251,12 +3376,14 @@ module Aws::LookoutEquipment
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3271,7 +3398,8 @@ module Aws::LookoutEquipment
     class UpdateActiveModelVersionRequest < Struct.new(
       :model_name,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3306,7 +3434,8 @@ module Aws::LookoutEquipment
       :previous_active_version,
       :current_active_version_arn,
       :previous_active_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3348,7 +3477,8 @@ module Aws::LookoutEquipment
       :data_input_configuration,
       :data_output_configuration,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3363,7 +3493,8 @@ module Aws::LookoutEquipment
     class UpdateLabelGroupRequest < Struct.new(
       :label_group_name,
       :fault_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3386,7 +3517,8 @@ module Aws::LookoutEquipment
       :labels_input_configuration,
       :role_arn,
       :model_diagnostics_output_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3429,7 +3561,8 @@ module Aws::LookoutEquipment
       :retraining_frequency,
       :lookback_window,
       :promote_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3439,7 +3572,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

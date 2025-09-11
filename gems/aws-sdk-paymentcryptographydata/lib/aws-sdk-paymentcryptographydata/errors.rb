@@ -39,7 +39,7 @@ module Aws::PaymentCryptographyData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptographyData::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::PaymentCryptographyData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptographyData::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::PaymentCryptographyData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptographyData::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The resource that is missing.</p>
@@ -79,7 +79,7 @@ module Aws::PaymentCryptographyData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptographyData::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::PaymentCryptographyData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptographyData::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -110,7 +110,7 @@ module Aws::PaymentCryptographyData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptographyData::Types::VerificationFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The reason for the exception.</p>

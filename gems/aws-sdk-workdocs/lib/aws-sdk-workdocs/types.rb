@@ -19,7 +19,8 @@ module Aws::WorkDocs
       :authentication_token,
       :document_id,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::WorkDocs
     class ActivateUserRequest < Struct.new(
       :user_id,
       :authentication_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +43,8 @@ module Aws::WorkDocs
     #   @return [Types::User]
     class ActivateUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +93,8 @@ module Aws::WorkDocs
       :resource_metadata,
       :original_parent,
       :comment_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -116,7 +120,8 @@ module Aws::WorkDocs
       :resource_id,
       :principals,
       :notification_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +130,8 @@ module Aws::WorkDocs
     #   @return [Array<Types::ShareResult>]
     class AddResourcePermissionsResponse < Struct.new(
       :share_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +176,8 @@ module Aws::WorkDocs
       :status,
       :visibility,
       :recipient_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +207,8 @@ module Aws::WorkDocs
       :comment_status,
       :recipient_id,
       :contributor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +217,8 @@ module Aws::WorkDocs
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +227,8 @@ module Aws::WorkDocs
     #   @return [String]
     class ConflictingOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +268,8 @@ module Aws::WorkDocs
       :text,
       :visibility,
       :notify_collaborators,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +278,8 @@ module Aws::WorkDocs
     #   @return [Types::Comment]
     class CreateCommentResponse < Struct.new(
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,12 +301,14 @@ module Aws::WorkDocs
       :resource_id,
       :version_id,
       :custom_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateCustomMetadataResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +325,8 @@ module Aws::WorkDocs
       :authentication_token,
       :name,
       :parent_folder_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +335,8 @@ module Aws::WorkDocs
     #   @return [Types::FolderMetadata]
     class CreateFolderResponse < Struct.new(
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,12 +353,14 @@ module Aws::WorkDocs
       :resource_id,
       :labels,
       :authentication_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateLabelsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +383,8 @@ module Aws::WorkDocs
       :endpoint,
       :protocol,
       :subscription_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +393,8 @@ module Aws::WorkDocs
     #   @return [Types::Subscription]
     class CreateNotificationSubscriptionResponse < Struct.new(
       :subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +435,8 @@ module Aws::WorkDocs
       :time_zone_id,
       :storage_rule,
       :authentication_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +445,8 @@ module Aws::WorkDocs
     #   @return [Types::User]
     class CreateUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +456,8 @@ module Aws::WorkDocs
     #   @return [String]
     class CustomMetadataLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +471,8 @@ module Aws::WorkDocs
     class DateRangeType < Struct.new(
       :start_value,
       :end_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +485,8 @@ module Aws::WorkDocs
     class DeactivateUserRequest < Struct.new(
       :user_id,
       :authentication_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +498,8 @@ module Aws::WorkDocs
     class DeactivatingLastSystemUserException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +520,8 @@ module Aws::WorkDocs
       :document_id,
       :version_id,
       :comment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,12 +548,14 @@ module Aws::WorkDocs
       :version_id,
       :keys,
       :delete_all,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomMetadataResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +568,8 @@ module Aws::WorkDocs
     class DeleteDocumentRequest < Struct.new(
       :authentication_token,
       :document_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +590,8 @@ module Aws::WorkDocs
       :document_id,
       :version_id,
       :delete_prior_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +604,8 @@ module Aws::WorkDocs
     class DeleteFolderContentsRequest < Struct.new(
       :authentication_token,
       :folder_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +618,8 @@ module Aws::WorkDocs
     class DeleteFolderRequest < Struct.new(
       :authentication_token,
       :folder_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,12 +640,14 @@ module Aws::WorkDocs
       :authentication_token,
       :labels,
       :delete_all,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLabelsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -625,7 +660,8 @@ module Aws::WorkDocs
     class DeleteNotificationSubscriptionRequest < Struct.new(
       :subscription_id,
       :organization_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -639,7 +675,8 @@ module Aws::WorkDocs
     class DeleteUserRequest < Struct.new(
       :authentication_token,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -693,7 +730,8 @@ module Aws::WorkDocs
       :include_indirect_activities,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +744,8 @@ module Aws::WorkDocs
     class DescribeActivitiesResponse < Struct.new(
       :user_activities,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,7 +771,8 @@ module Aws::WorkDocs
       :version_id,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +786,8 @@ module Aws::WorkDocs
     class DescribeCommentsResponse < Struct.new(
       :comments,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -778,7 +819,8 @@ module Aws::WorkDocs
       :limit,
       :include,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +834,8 @@ module Aws::WorkDocs
     class DescribeDocumentVersionsResponse < Struct.new(
       :document_versions,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +874,8 @@ module Aws::WorkDocs
       :marker,
       :type,
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -849,7 +893,8 @@ module Aws::WorkDocs
       :folders,
       :documents,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +920,8 @@ module Aws::WorkDocs
       :organization_id,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +935,8 @@ module Aws::WorkDocs
     class DescribeGroupsResponse < Struct.new(
       :groups,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +954,8 @@ module Aws::WorkDocs
       :organization_id,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -921,7 +969,8 @@ module Aws::WorkDocs
     class DescribeNotificationSubscriptionsResponse < Struct.new(
       :subscriptions,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +996,8 @@ module Aws::WorkDocs
       :principal_id,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -961,7 +1011,8 @@ module Aws::WorkDocs
     class DescribeResourcePermissionsResponse < Struct.new(
       :principals,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -979,7 +1030,8 @@ module Aws::WorkDocs
       :authentication_token,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -992,7 +1044,8 @@ module Aws::WorkDocs
     class DescribeRootFoldersResponse < Struct.new(
       :folders,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1056,7 +1109,8 @@ module Aws::WorkDocs
       :marker,
       :limit,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1129,8 @@ module Aws::WorkDocs
       :users,
       :total_number_of_users,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1140,8 @@ module Aws::WorkDocs
     #   @return [String]
     class DocumentLockedForCommentsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1123,7 +1179,8 @@ module Aws::WorkDocs
       :latest_version_metadata,
       :resource_state,
       :labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1181,7 +1238,8 @@ module Aws::WorkDocs
       :creator_id,
       :thumbnail,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,7 +1249,8 @@ module Aws::WorkDocs
     #   @return [String]
     class DraftUploadOutOfSyncException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1200,7 +1259,8 @@ module Aws::WorkDocs
     #   @return [String]
     class EntityAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1213,7 +1273,8 @@ module Aws::WorkDocs
     class EntityNotExistsException < Struct.new(
       :message,
       :entity_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1224,7 +1285,8 @@ module Aws::WorkDocs
     #   @return [String]
     class FailedDependencyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1270,7 +1332,8 @@ module Aws::WorkDocs
       :size_range,
       :created_range,
       :modified_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1321,7 +1384,8 @@ module Aws::WorkDocs
       :labels,
       :size,
       :latest_version_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1330,7 +1394,8 @@ module Aws::WorkDocs
     #   @return [String]
     class GetCurrentUserRequest < Struct.new(
       :authentication_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1404,8 @@ module Aws::WorkDocs
     #   @return [Types::User]
     class GetCurrentUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1365,7 +1431,8 @@ module Aws::WorkDocs
       :limit,
       :fields,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1441,8 @@ module Aws::WorkDocs
     #   @return [Types::ResourcePath]
     class GetDocumentPathResponse < Struct.new(
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1391,7 +1459,8 @@ module Aws::WorkDocs
       :authentication_token,
       :document_id,
       :include_custom_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1404,7 +1473,8 @@ module Aws::WorkDocs
     class GetDocumentResponse < Struct.new(
       :metadata,
       :custom_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1430,7 +1500,8 @@ module Aws::WorkDocs
       :version_id,
       :fields,
       :include_custom_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1443,7 +1514,8 @@ module Aws::WorkDocs
     class GetDocumentVersionResponse < Struct.new(
       :metadata,
       :custom_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1469,7 +1541,8 @@ module Aws::WorkDocs
       :limit,
       :fields,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1551,8 @@ module Aws::WorkDocs
     #   @return [Types::ResourcePath]
     class GetFolderPathResponse < Struct.new(
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1569,8 @@ module Aws::WorkDocs
       :authentication_token,
       :folder_id,
       :include_custom_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1508,7 +1583,8 @@ module Aws::WorkDocs
     class GetFolderResponse < Struct.new(
       :metadata,
       :custom_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1534,7 +1610,8 @@ module Aws::WorkDocs
       :collection_type,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1551,7 +1628,8 @@ module Aws::WorkDocs
       :folders,
       :documents,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1565,7 +1643,8 @@ module Aws::WorkDocs
     class GroupMetadata < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1574,7 +1653,8 @@ module Aws::WorkDocs
     #   @return [String]
     class IllegalUserStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1691,8 @@ module Aws::WorkDocs
       :content_type,
       :document_size_in_bytes,
       :parent_folder_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1624,7 +1705,8 @@ module Aws::WorkDocs
     class InitiateDocumentVersionUploadResponse < Struct.new(
       :metadata,
       :upload_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1633,7 +1715,8 @@ module Aws::WorkDocs
     #   @return [String]
     class InvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1725,8 @@ module Aws::WorkDocs
     #   @return [String]
     class InvalidCommentOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1735,8 @@ module Aws::WorkDocs
     #   @return [String]
     class InvalidOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,7 +1745,8 @@ module Aws::WorkDocs
     #   @return [String]
     class InvalidPasswordException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1669,7 +1755,8 @@ module Aws::WorkDocs
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1683,7 +1770,8 @@ module Aws::WorkDocs
     class LongRangeType < Struct.new(
       :start_value,
       :end_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1698,7 +1786,8 @@ module Aws::WorkDocs
     class NotificationOptions < Struct.new(
       :send_email,
       :email_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1717,7 +1806,8 @@ module Aws::WorkDocs
     class Participants < Struct.new(
       :users,
       :groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1731,7 +1821,8 @@ module Aws::WorkDocs
     class PermissionInfo < Struct.new(
       :role,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1749,7 +1840,8 @@ module Aws::WorkDocs
       :id,
       :type,
       :roles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1758,7 +1850,8 @@ module Aws::WorkDocs
     #   @return [String]
     class ProhibitedStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1771,7 +1864,8 @@ module Aws::WorkDocs
     class RemoveAllResourcePermissionsRequest < Struct.new(
       :authentication_token,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1886,8 @@ module Aws::WorkDocs
       :resource_id,
       :principal_id,
       :principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1801,7 +1896,8 @@ module Aws::WorkDocs
     #   @return [String]
     class RequestedEntityTooLargeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1906,8 @@ module Aws::WorkDocs
     #   @return [String]
     class ResourceAlreadyCheckedOutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1942,8 @@ module Aws::WorkDocs
       :version_id,
       :owner,
       :parent_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1855,7 +1953,8 @@ module Aws::WorkDocs
     #   @return [Array<Types::ResourcePathComponent>]
     class ResourcePath < Struct.new(
       :components,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1968,8 @@ module Aws::WorkDocs
     class ResourcePathComponent < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1899,7 +1999,8 @@ module Aws::WorkDocs
       :folder_metadata,
       :comment_metadata,
       :document_version_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1912,7 +2013,8 @@ module Aws::WorkDocs
     class RestoreDocumentVersionsRequest < Struct.new(
       :authentication_token,
       :document_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1926,7 +2028,8 @@ module Aws::WorkDocs
     class SearchPrincipalType < Struct.new(
       :id,
       :roles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1968,7 +2071,8 @@ module Aws::WorkDocs
       :order_by,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1981,7 +2085,8 @@ module Aws::WorkDocs
     class SearchResourcesResponse < Struct.new(
       :items,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,7 +2100,8 @@ module Aws::WorkDocs
     class SearchSortResult < Struct.new(
       :field,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2004,7 +2110,8 @@ module Aws::WorkDocs
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2129,8 @@ module Aws::WorkDocs
       :id,
       :type,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2052,7 +2160,8 @@ module Aws::WorkDocs
       :status,
       :share_id,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2061,7 +2170,8 @@ module Aws::WorkDocs
     #   @return [String]
     class StorageLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2070,7 +2180,8 @@ module Aws::WorkDocs
     #   @return [String]
     class StorageLimitWillExceedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2084,7 +2195,8 @@ module Aws::WorkDocs
     class StorageRuleType < Struct.new(
       :storage_allocated_in_bytes,
       :storage_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2102,7 +2214,8 @@ module Aws::WorkDocs
       :subscription_id,
       :end_point,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2112,7 +2225,8 @@ module Aws::WorkDocs
     #   @return [String]
     class TooManyLabelsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2122,7 +2236,8 @@ module Aws::WorkDocs
     #   @return [String]
     class TooManySubscriptionsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2134,7 +2249,8 @@ module Aws::WorkDocs
     class UnauthorizedOperationException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2143,7 +2259,8 @@ module Aws::WorkDocs
     #   @return [String]
     class UnauthorizedResourceAccessException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2169,7 +2286,8 @@ module Aws::WorkDocs
       :name,
       :parent_folder_id,
       :resource_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2190,7 +2308,8 @@ module Aws::WorkDocs
       :document_id,
       :version_id,
       :version_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2216,7 +2335,8 @@ module Aws::WorkDocs
       :name,
       :parent_folder_id,
       :resource_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2257,7 +2377,8 @@ module Aws::WorkDocs
       :time_zone_id,
       :locale,
       :grant_poweruser_privileges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2266,7 +2387,8 @@ module Aws::WorkDocs
     #   @return [Types::User]
     class UpdateUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2280,7 +2402,8 @@ module Aws::WorkDocs
     class UploadMetadata < Struct.new(
       :upload_url,
       :signed_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2346,7 +2469,8 @@ module Aws::WorkDocs
       :time_zone_id,
       :locale,
       :storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2372,7 +2496,8 @@ module Aws::WorkDocs
       :given_name,
       :surname,
       :email_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2386,7 +2511,8 @@ module Aws::WorkDocs
     class UserStorageMetadata < Struct.new(
       :storage_utilized_in_bytes,
       :storage_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

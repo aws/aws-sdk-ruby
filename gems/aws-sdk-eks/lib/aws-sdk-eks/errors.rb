@@ -51,7 +51,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>You do not have sufficient access to perform this action.</p>
@@ -66,7 +66,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>This exception is thrown if the request contains a semantic error. The precise meaning
@@ -83,7 +83,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::ClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon EKS cluster associated with the exception.</p>
@@ -120,7 +120,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon EKS cluster associated with the exception.</p>
@@ -162,7 +162,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon EKS cluster associated with the exception.</p>
@@ -203,7 +203,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon EKS cluster associated with the exception.</p>
@@ -222,7 +222,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A service resource associated with the request could not be found. Clients should not
@@ -237,7 +237,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon EKS cluster associated with the exception.</p>
@@ -266,7 +266,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon EKS cluster associated with the exception.</p>
@@ -298,7 +298,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon EKS cluster associated with the exception.</p>
@@ -338,7 +338,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::ResourcePropagationDelayException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Required resources (such as service-linked roles) were created and are still
@@ -353,7 +353,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::ServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon EKS cluster associated with the exception.</p>
@@ -387,7 +387,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The request has failed due to a temporary failure of the server.</p>
@@ -402,7 +402,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon EKS cluster associated with the exception.</p>
@@ -422,7 +422,7 @@ module Aws::EKS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKS::Types::UnsupportedAvailabilityZoneException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>At least one of your specified cluster subnets is in an Availability Zone that does not support

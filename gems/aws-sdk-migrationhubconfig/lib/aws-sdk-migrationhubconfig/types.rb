@@ -11,7 +11,8 @@ module Aws::MigrationHubConfig
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +31,8 @@ module Aws::MigrationHubConfig
       :home_region,
       :target,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,7 +42,8 @@ module Aws::MigrationHubConfig
     #   @return [Types::HomeRegionControl]
     class CreateHomeRegionControlResult < Struct.new(
       :home_region_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,12 +53,14 @@ module Aws::MigrationHubConfig
     #   @return [String]
     class DeleteHomeRegionControlRequest < Struct.new(
       :control_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteHomeRegionControlResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +90,8 @@ module Aws::MigrationHubConfig
       :target,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -100,7 +106,8 @@ module Aws::MigrationHubConfig
     class DescribeHomeRegionControlsResult < Struct.new(
       :home_region_controls,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,12 +117,14 @@ module Aws::MigrationHubConfig
     #   @return [String]
     class DryRunOperation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetHomeRegionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +133,8 @@ module Aws::MigrationHubConfig
     #   @return [String]
     class GetHomeRegionResult < Struct.new(
       :home_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -153,7 +163,8 @@ module Aws::MigrationHubConfig
       :home_region,
       :target,
       :requested_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +174,8 @@ module Aws::MigrationHubConfig
     #   @return [String]
     class InternalServerError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +185,8 @@ module Aws::MigrationHubConfig
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +196,8 @@ module Aws::MigrationHubConfig
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +214,8 @@ module Aws::MigrationHubConfig
     class Target < Struct.new(
       :type,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +228,8 @@ module Aws::MigrationHubConfig
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

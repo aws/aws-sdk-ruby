@@ -40,7 +40,7 @@ module Aws::Grafana
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Grafana::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::Grafana
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Grafana::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -77,7 +77,7 @@ module Aws::Grafana
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Grafana::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -100,7 +100,7 @@ module Aws::Grafana
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Grafana::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The value of a parameter in the request caused an error.</p>
@@ -124,7 +124,7 @@ module Aws::Grafana
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Grafana::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -158,7 +158,7 @@ module Aws::Grafana
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Grafana::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -191,7 +191,7 @@ module Aws::Grafana
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Grafana::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>

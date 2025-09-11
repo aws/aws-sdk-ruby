@@ -43,7 +43,7 @@ module Aws::QBusiness
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QBusiness::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::QBusiness
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QBusiness::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message describing a <code>ConflictException</code>.</p>
@@ -80,7 +80,7 @@ module Aws::QBusiness
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QBusiness::Types::ExternalResourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::QBusiness
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QBusiness::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::QBusiness
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QBusiness::Types::LicenseNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::QBusiness
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QBusiness::Types::MediaTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -132,7 +132,7 @@ module Aws::QBusiness
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QBusiness::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message describing a <code>ResourceNotFoundException</code>.</p>
@@ -156,7 +156,7 @@ module Aws::QBusiness
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QBusiness::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message describing a <code>ServiceQuotaExceededException</code>.</p>
@@ -180,7 +180,7 @@ module Aws::QBusiness
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QBusiness::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -193,7 +193,7 @@ module Aws::QBusiness
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QBusiness::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message describing the <code>ValidationException</code>.</p>

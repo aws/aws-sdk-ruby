@@ -1184,7 +1184,6 @@ module Aws::Panorama
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/devices/{DeviceId}", "code" => 200}}
       end)
-
     end
 
     class << self

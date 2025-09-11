@@ -11,7 +11,8 @@ module Aws::S3Tables
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::S3Tables
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +31,8 @@ module Aws::S3Tables
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42,7 +45,8 @@ module Aws::S3Tables
     class CreateNamespaceRequest < Struct.new(
       :table_bucket_arn,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +59,8 @@ module Aws::S3Tables
     class CreateNamespaceResponse < Struct.new(
       :table_bucket_arn,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +73,8 @@ module Aws::S3Tables
     class CreateTableBucketRequest < Struct.new(
       :name,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +83,8 @@ module Aws::S3Tables
     #   @return [String]
     class CreateTableBucketResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +113,8 @@ module Aws::S3Tables
       :format,
       :metadata,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -119,7 +127,8 @@ module Aws::S3Tables
     class CreateTableResponse < Struct.new(
       :table_arn,
       :version_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +141,8 @@ module Aws::S3Tables
     class DeleteNamespaceRequest < Struct.new(
       :table_bucket_arn,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +151,8 @@ module Aws::S3Tables
     #   @return [String]
     class DeleteTableBucketEncryptionRequest < Struct.new(
       :table_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +161,8 @@ module Aws::S3Tables
     #   @return [String]
     class DeleteTableBucketPolicyRequest < Struct.new(
       :table_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -159,7 +171,8 @@ module Aws::S3Tables
     #   @return [String]
     class DeleteTableBucketRequest < Struct.new(
       :table_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +189,8 @@ module Aws::S3Tables
       :table_bucket_arn,
       :namespace,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -197,7 +211,8 @@ module Aws::S3Tables
       :namespace,
       :name,
       :version_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +226,8 @@ module Aws::S3Tables
     class EncryptionConfiguration < Struct.new(
       :sse_algorithm,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +236,8 @@ module Aws::S3Tables
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +250,8 @@ module Aws::S3Tables
     class GetNamespaceRequest < Struct.new(
       :table_bucket_arn,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +280,8 @@ module Aws::S3Tables
       :owner_account_id,
       :namespace_id,
       :table_bucket_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +290,8 @@ module Aws::S3Tables
     #   @return [String]
     class GetTableBucketEncryptionRequest < Struct.new(
       :table_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +300,8 @@ module Aws::S3Tables
     #   @return [Types::EncryptionConfiguration]
     class GetTableBucketEncryptionResponse < Struct.new(
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +310,8 @@ module Aws::S3Tables
     #   @return [String]
     class GetTableBucketMaintenanceConfigurationRequest < Struct.new(
       :table_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +324,8 @@ module Aws::S3Tables
     class GetTableBucketMaintenanceConfigurationResponse < Struct.new(
       :table_bucket_arn,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +334,8 @@ module Aws::S3Tables
     #   @return [String]
     class GetTableBucketPolicyRequest < Struct.new(
       :table_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +344,8 @@ module Aws::S3Tables
     #   @return [String]
     class GetTableBucketPolicyResponse < Struct.new(
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -329,7 +354,8 @@ module Aws::S3Tables
     #   @return [String]
     class GetTableBucketRequest < Struct.new(
       :table_bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +384,8 @@ module Aws::S3Tables
       :created_at,
       :table_bucket_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +402,8 @@ module Aws::S3Tables
       :table_bucket_arn,
       :namespace,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +412,8 @@ module Aws::S3Tables
     #   @return [Types::EncryptionConfiguration]
     class GetTableEncryptionResponse < Struct.new(
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +430,8 @@ module Aws::S3Tables
       :table_bucket_arn,
       :namespace,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +444,8 @@ module Aws::S3Tables
     class GetTableMaintenanceConfigurationResponse < Struct.new(
       :table_arn,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +462,8 @@ module Aws::S3Tables
       :table_bucket_arn,
       :namespace,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +476,8 @@ module Aws::S3Tables
     class GetTableMaintenanceJobStatusResponse < Struct.new(
       :table_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +494,8 @@ module Aws::S3Tables
       :table_bucket_arn,
       :namespace,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +512,8 @@ module Aws::S3Tables
       :version_token,
       :metadata_location,
       :warehouse_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +530,8 @@ module Aws::S3Tables
       :table_bucket_arn,
       :namespace,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +540,8 @@ module Aws::S3Tables
     #   @return [String]
     class GetTablePolicyResponse < Struct.new(
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +562,8 @@ module Aws::S3Tables
       :namespace,
       :name,
       :table_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +632,8 @@ module Aws::S3Tables
       :owner_account_id,
       :format,
       :table_bucket_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -613,7 +652,8 @@ module Aws::S3Tables
     class IcebergCompactionSettings < Struct.new(
       :target_file_size_mb,
       :strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -623,7 +663,8 @@ module Aws::S3Tables
     #   @return [Types::IcebergSchema]
     class IcebergMetadata < Struct.new(
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +674,8 @@ module Aws::S3Tables
     #   @return [Array<Types::SchemaField>]
     class IcebergSchema < Struct.new(
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +689,8 @@ module Aws::S3Tables
     class IcebergSnapshotManagementSettings < Struct.new(
       :min_snapshots_to_keep,
       :max_snapshot_age_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +704,8 @@ module Aws::S3Tables
     class IcebergUnreferencedFileRemovalSettings < Struct.new(
       :unreferenced_days,
       :non_current_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +714,8 @@ module Aws::S3Tables
     #   @return [String]
     class InternalServerErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +736,8 @@ module Aws::S3Tables
       :prefix,
       :continuation_token,
       :max_namespaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +750,8 @@ module Aws::S3Tables
     class ListNamespacesResponse < Struct.new(
       :namespaces,
       :continuation_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -725,7 +772,8 @@ module Aws::S3Tables
       :continuation_token,
       :max_buckets,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +786,8 @@ module Aws::S3Tables
     class ListTableBucketsResponse < Struct.new(
       :table_buckets,
       :continuation_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -763,7 +812,8 @@ module Aws::S3Tables
       :prefix,
       :continuation_token,
       :max_tables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -776,7 +826,8 @@ module Aws::S3Tables
     class ListTablesResponse < Struct.new(
       :tables,
       :continuation_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -806,7 +857,8 @@ module Aws::S3Tables
       :owner_account_id,
       :namespace_id,
       :table_bucket_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +867,8 @@ module Aws::S3Tables
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +881,8 @@ module Aws::S3Tables
     class PutTableBucketEncryptionRequest < Struct.new(
       :table_bucket_arn,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +899,8 @@ module Aws::S3Tables
       :table_bucket_arn,
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,7 +913,8 @@ module Aws::S3Tables
     class PutTableBucketPolicyRequest < Struct.new(
       :table_bucket_arn,
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +939,8 @@ module Aws::S3Tables
       :name,
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +961,8 @@ module Aws::S3Tables
       :namespace,
       :name,
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +991,8 @@ module Aws::S3Tables
       :new_namespace_name,
       :new_name,
       :version_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +1010,8 @@ module Aws::S3Tables
       :name,
       :type,
       :required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -970,7 +1030,8 @@ module Aws::S3Tables
     class TableBucketMaintenanceConfigurationValue < Struct.new(
       :status,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +1042,8 @@ module Aws::S3Tables
     class TableBucketMaintenanceSettings < Struct.new(
       :iceberg_unreferenced_file_removal,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IcebergUnreferencedFileRemoval < TableBucketMaintenanceSettings; end
@@ -1014,7 +1076,8 @@ module Aws::S3Tables
       :created_at,
       :table_bucket_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1028,7 +1091,8 @@ module Aws::S3Tables
     class TableMaintenanceConfigurationValue < Struct.new(
       :status,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1046,7 +1110,8 @@ module Aws::S3Tables
       :status,
       :last_run_timestamp,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1126,8 @@ module Aws::S3Tables
       :iceberg_compaction,
       :iceberg_snapshot_management,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IcebergCompaction < TableMaintenanceSettings; end
@@ -1076,7 +1142,8 @@ module Aws::S3Tables
     class TableMetadata < Struct.new(
       :iceberg,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Iceberg < TableMetadata; end
@@ -1117,7 +1184,8 @@ module Aws::S3Tables
       :modified_at,
       :namespace_id,
       :table_bucket_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1126,7 +1194,8 @@ module Aws::S3Tables
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1151,7 +1220,8 @@ module Aws::S3Tables
       :name,
       :version_token,
       :metadata_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1176,7 +1246,8 @@ module Aws::S3Tables
       :namespace,
       :version_token,
       :metadata_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

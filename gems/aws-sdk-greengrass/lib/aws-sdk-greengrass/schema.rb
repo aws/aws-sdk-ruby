@@ -1947,7 +1947,6 @@ module Aws::Greengrass
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/greengrass/things/{ThingName}/runtimeconfig", "code" => 200}}
       end)
-
     end
 
     class << self

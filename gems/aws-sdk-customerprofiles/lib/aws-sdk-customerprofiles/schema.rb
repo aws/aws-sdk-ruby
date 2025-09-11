@@ -3243,7 +3243,6 @@ module Aws::CustomerProfiles
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/domains/{DomainName}/profiles", "code" => 200}}
       end)
-
     end
 
     class << self

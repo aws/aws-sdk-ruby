@@ -244,7 +244,6 @@ module Aws::IoTJobsDataPlane
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/things/{thingName}/jobs/{jobId}", "code" => 200}}
       end)
-
     end
 
     class << self

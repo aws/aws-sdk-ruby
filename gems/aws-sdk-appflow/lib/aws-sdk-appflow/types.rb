@@ -11,7 +11,8 @@ module Aws::Appflow
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +31,8 @@ module Aws::Appflow
     class AggregationConfig < Struct.new(
       :aggregation_type,
       :target_file_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,19 +47,22 @@ module Aws::Appflow
     class AmplitudeConnectorProfileCredentials < Struct.new(
       :api_key,
       :secret_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Amplitude. </p>
     class AmplitudeConnectorProfileProperties < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amplitude. </p>
     class AmplitudeMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +72,8 @@ module Aws::Appflow
     #   @return [String]
     class AmplitudeSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -81,7 +87,8 @@ module Aws::Appflow
     class ApiKeyCredentials < Struct.new(
       :api_key,
       :api_secret_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +119,8 @@ module Aws::Appflow
       :description,
       :is_sensitive_field,
       :connector_supplied_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -148,7 +156,8 @@ module Aws::Appflow
       :is_custom_auth_supported,
       :o_auth2_defaults,
       :custom_auth_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -170,7 +179,8 @@ module Aws::Appflow
     class BasicAuthCredentials < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +196,8 @@ module Aws::Appflow
     class CancelFlowExecutionsRequest < Struct.new(
       :flow_name,
       :execution_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +207,8 @@ module Aws::Appflow
     #   @return [Array<String>]
     class CancelFlowExecutionsResponse < Struct.new(
       :invalid_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +218,8 @@ module Aws::Appflow
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -215,7 +228,8 @@ module Aws::Appflow
     #   @return [String]
     class ConnectorAuthenticationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +359,8 @@ module Aws::Appflow
       :registered_by,
       :supported_data_transfer_types,
       :supported_data_transfer_apis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -417,7 +432,8 @@ module Aws::Appflow
       :connector_provisioning_type,
       :connector_modes,
       :supported_data_transfer_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +458,8 @@ module Aws::Appflow
       :name,
       :label,
       :has_nested_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -502,7 +519,8 @@ module Aws::Appflow
       :source_properties,
       :destination_properties,
       :custom_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -603,7 +621,8 @@ module Aws::Appflow
       :honeycode,
       :sapo_data,
       :pardot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +639,8 @@ module Aws::Appflow
     class ConnectorOAuthRequest < Struct.new(
       :auth_code,
       :redirect_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +714,8 @@ module Aws::Appflow
       :sapo_data,
       :custom_connector,
       :pardot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +766,8 @@ module Aws::Appflow
       :created_at,
       :last_updated_at,
       :private_connection_provisioning_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +782,8 @@ module Aws::Appflow
     class ConnectorProfileConfig < Struct.new(
       :connector_profile_properties,
       :connector_profile_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +866,8 @@ module Aws::Appflow
       :sapo_data,
       :custom_connector,
       :pardot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +949,8 @@ module Aws::Appflow
       :sapo_data,
       :custom_connector,
       :pardot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -936,7 +961,8 @@ module Aws::Appflow
     #   @return [Types::LambdaConnectorProvisioningConfig]
     class ConnectorProvisioningConfig < Struct.new(
       :lambda,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -972,7 +998,8 @@ module Aws::Appflow
       :description,
       :scope,
       :connector_supplied_value_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -986,7 +1013,8 @@ module Aws::Appflow
     #   @return [String]
     class ConnectorServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,7 +1063,8 @@ module Aws::Appflow
       :connection_mode,
       :connector_profile_config,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1044,7 +1073,8 @@ module Aws::Appflow
     #   @return [String]
     class CreateConnectorProfileResponse < Struct.new(
       :connector_profile_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1106,7 +1136,8 @@ module Aws::Appflow
       :tags,
       :metadata_catalog_config,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1150,8 @@ module Aws::Appflow
     class CreateFlowResponse < Struct.new(
       :flow_arn,
       :flow_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1165,8 @@ module Aws::Appflow
     class CustomAuthConfig < Struct.new(
       :custom_authentication_type,
       :auth_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1180,8 @@ module Aws::Appflow
     class CustomAuthCredentials < Struct.new(
       :custom_authentication_type,
       :credentials_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1178,7 +1212,8 @@ module Aws::Appflow
       :write_operation_type,
       :id_field_names,
       :custom_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1207,7 +1242,8 @@ module Aws::Appflow
       :oauth2,
       :api_key,
       :custom,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1221,7 +1257,8 @@ module Aws::Appflow
     class CustomConnectorProfileProperties < Struct.new(
       :profile_properties,
       :o_auth2_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1241,7 +1278,8 @@ module Aws::Appflow
       :entity_name,
       :custom_properties,
       :data_transfer_api,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1257,13 +1295,15 @@ module Aws::Appflow
     class CustomerProfilesDestinationProperties < Struct.new(
       :domain_name,
       :object_type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amazon Connect Customer Profiles. </p>
     class CustomerProfilesMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1295,7 +1335,8 @@ module Aws::Appflow
     class DataTransferApi < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1353,8 @@ module Aws::Appflow
     class DatadogConnectorProfileCredentials < Struct.new(
       :api_key,
       :application_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1322,13 +1364,15 @@ module Aws::Appflow
     #   @return [String]
     class DatadogConnectorProfileProperties < Struct.new(
       :instance_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Datadog. </p>
     class DatadogMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1338,7 +1382,8 @@ module Aws::Appflow
     #   @return [String]
     class DatadogSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,12 +1398,14 @@ module Aws::Appflow
     class DeleteConnectorProfileRequest < Struct.new(
       :connector_profile_name,
       :force_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectorProfileResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,12 +1420,14 @@ module Aws::Appflow
     class DeleteFlowRequest < Struct.new(
       :flow_name,
       :force_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFlowResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1400,7 +1449,8 @@ module Aws::Appflow
       :connector_type,
       :connector_profile_name,
       :api_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,7 +1461,8 @@ module Aws::Appflow
     #   @return [Array<Types::ConnectorEntityField>]
     class DescribeConnectorEntityResponse < Struct.new(
       :connector_entity_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1491,8 @@ module Aws::Appflow
       :connector_label,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1454,7 +1506,8 @@ module Aws::Appflow
     class DescribeConnectorProfilesResponse < Struct.new(
       :connector_profile_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1523,8 @@ module Aws::Appflow
     class DescribeConnectorRequest < Struct.new(
       :connector_type,
       :connector_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1479,7 +1533,8 @@ module Aws::Appflow
     #   @return [Types::ConnectorConfiguration]
     class DescribeConnectorResponse < Struct.new(
       :connector_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1497,7 +1552,8 @@ module Aws::Appflow
       :connector_types,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1514,7 +1570,8 @@ module Aws::Appflow
       :connector_configurations,
       :connectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1533,7 +1590,8 @@ module Aws::Appflow
       :flow_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1546,7 +1604,8 @@ module Aws::Appflow
     class DescribeFlowExecutionRecordsResponse < Struct.new(
       :flow_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1556,7 +1615,8 @@ module Aws::Appflow
     #   @return [String]
     class DescribeFlowRequest < Struct.new(
       :flow_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1659,7 +1719,8 @@ module Aws::Appflow
       :metadata_catalog_config,
       :last_run_metadata_catalog_details,
       :schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1717,7 +1778,8 @@ module Aws::Appflow
       :marketo,
       :custom_connector,
       :sapo_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1752,7 +1814,8 @@ module Aws::Appflow
       :is_updatable,
       :is_defaulted_on_create,
       :supported_write_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1785,7 +1848,8 @@ module Aws::Appflow
       :api_version,
       :connector_profile_name,
       :destination_connector_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1795,7 +1859,8 @@ module Aws::Appflow
     #   @return [String]
     class DynatraceConnectorProfileCredentials < Struct.new(
       :api_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,13 +1870,15 @@ module Aws::Appflow
     #   @return [String]
     class DynatraceConnectorProfileProperties < Struct.new(
       :instance_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Dynatrace. </p>
     class DynatraceMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1821,7 +1888,8 @@ module Aws::Appflow
     #   @return [String]
     class DynatraceSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1844,7 +1912,8 @@ module Aws::Appflow
       :fail_on_first_destination_error,
       :bucket_prefix,
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1864,7 +1933,8 @@ module Aws::Appflow
     class ErrorInfo < Struct.new(
       :put_failures_count,
       :execution_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1883,13 +1953,15 @@ module Aws::Appflow
     class EventBridgeDestinationProperties < Struct.new(
       :object,
       :error_handling_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amazon EventBridge. </p>
     class EventBridgeMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1908,7 +1980,8 @@ module Aws::Appflow
       :most_recent_execution_message,
       :most_recent_execution_time,
       :most_recent_execution_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +2022,8 @@ module Aws::Appflow
       :data_pull_start_time,
       :data_pull_end_time,
       :metadata_catalog_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1981,7 +2055,8 @@ module Aws::Appflow
       :records_processed,
       :num_parallel_processes,
       :max_page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2017,7 +2092,8 @@ module Aws::Appflow
       :supported_date_format,
       :field_value_range,
       :field_length_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2088,7 +2164,8 @@ module Aws::Appflow
       :last_updated_by,
       :tags,
       :last_run_execution_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2122,7 +2199,8 @@ module Aws::Appflow
       :role_arn,
       :database_name,
       :table_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2151,13 +2229,15 @@ module Aws::Appflow
       :access_token,
       :refresh_token,
       :o_auth_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required by Google Analytics. </p>
     class GoogleAnalyticsConnectorProfileProperties < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2167,7 +2247,8 @@ module Aws::Appflow
     #   @return [Array<String>]
     class GoogleAnalyticsMetadata < Struct.new(
       :o_auth_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2177,7 +2258,8 @@ module Aws::Appflow
     #   @return [String]
     class GoogleAnalyticsSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2196,13 +2278,15 @@ module Aws::Appflow
       :access_token,
       :refresh_token,
       :o_auth_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific properties required when using Amazon Honeycode. </p>
     class HoneycodeConnectorProfileProperties < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2220,7 +2304,8 @@ module Aws::Appflow
     class HoneycodeDestinationProperties < Struct.new(
       :object,
       :error_handling_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2230,7 +2315,8 @@ module Aws::Appflow
     #   @return [Array<String>]
     class HoneycodeMetadata < Struct.new(
       :o_auth_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2328,8 @@ module Aws::Appflow
     #   @return [String]
     class IncrementalPullConfig < Struct.new(
       :datetime_type_field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2264,7 +2351,8 @@ module Aws::Appflow
       :user_id,
       :secret_access_key,
       :datakey,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2274,13 +2362,15 @@ module Aws::Appflow
     #   @return [String]
     class InforNexusConnectorProfileProperties < Struct.new(
       :instance_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Infor Nexus. </p>
     class InforNexusMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2290,7 +2380,8 @@ module Aws::Appflow
     #   @return [String]
     class InforNexusSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2300,7 +2391,8 @@ module Aws::Appflow
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2311,7 +2403,8 @@ module Aws::Appflow
     #   @return [String]
     class LambdaConnectorProvisioningConfig < Struct.new(
       :lambda_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2348,7 +2441,8 @@ module Aws::Appflow
       :api_version,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2365,7 +2459,8 @@ module Aws::Appflow
     class ListConnectorEntitiesResponse < Struct.new(
       :connector_entity_map,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2379,7 +2474,8 @@ module Aws::Appflow
     class ListConnectorsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2393,7 +2489,8 @@ module Aws::Appflow
     class ListConnectorsResponse < Struct.new(
       :connectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2406,7 +2503,8 @@ module Aws::Appflow
     class ListFlowsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2419,7 +2517,8 @@ module Aws::Appflow
     class ListFlowsResponse < Struct.new(
       :flows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2527,8 @@ module Aws::Appflow
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2437,14 +2537,16 @@ module Aws::Appflow
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Amazon Lookout for Metrics is used as a destination.
     #     </p>
     class LookoutMetricsDestinationProperties < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2468,7 +2570,8 @@ module Aws::Appflow
       :client_secret,
       :access_token,
       :o_auth_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2478,7 +2581,8 @@ module Aws::Appflow
     #   @return [String]
     class MarketoConnectorProfileProperties < Struct.new(
       :instance_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2497,13 +2601,15 @@ module Aws::Appflow
     class MarketoDestinationProperties < Struct.new(
       :object,
       :error_handling_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Marketo. </p>
     class MarketoMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2513,7 +2619,8 @@ module Aws::Appflow
     #   @return [String]
     class MarketoSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2525,7 +2632,8 @@ module Aws::Appflow
     #   @return [Types::GlueDataCatalogConfig]
     class MetadataCatalogConfig < Struct.new(
       :glue_data_catalog,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2562,7 +2670,8 @@ module Aws::Appflow
       :table_name,
       :table_registration_output,
       :partition_registration_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2590,7 +2699,8 @@ module Aws::Appflow
       :access_token,
       :refresh_token,
       :o_auth_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2625,7 +2735,8 @@ module Aws::Appflow
       :is_sensitive_field,
       :connector_supplied_values,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2657,7 +2768,8 @@ module Aws::Appflow
       :auth_code_urls,
       :oauth2_grant_types_supported,
       :oauth2_custom_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2677,7 +2789,8 @@ module Aws::Appflow
       :token_url,
       :o_auth2_grant_type,
       :token_url_custom_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2705,7 +2818,8 @@ module Aws::Appflow
       :access_token,
       :refresh_token,
       :o_auth_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2725,7 +2839,8 @@ module Aws::Appflow
       :token_url,
       :auth_code_url,
       :o_auth_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2749,7 +2864,8 @@ module Aws::Appflow
       :refresh_token,
       :o_auth_request,
       :client_credentials_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2768,7 +2884,8 @@ module Aws::Appflow
       :instance_url,
       :is_sandbox_environment,
       :business_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2779,7 +2896,8 @@ module Aws::Appflow
 
     # <p>The connector metadata specific to Salesforce Pardot.</p>
     class PardotMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2789,7 +2907,8 @@ module Aws::Appflow
     #   @return [String]
     class PardotSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2834,7 +2953,8 @@ module Aws::Appflow
       :prefix_type,
       :prefix_format,
       :path_prefix_hierarchy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2852,7 +2972,8 @@ module Aws::Appflow
       :status,
       :failure_message,
       :failure_cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2866,7 +2987,8 @@ module Aws::Appflow
     class Range < Struct.new(
       :maximum,
       :minimum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2886,7 +3008,8 @@ module Aws::Appflow
     class RedshiftConnectorProfileCredentials < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2934,7 +3057,8 @@ module Aws::Appflow
       :cluster_identifier,
       :workgroup_name,
       :database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2967,13 +3091,15 @@ module Aws::Appflow
       :intermediate_bucket_name,
       :bucket_prefix,
       :error_handling_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amazon Redshift. </p>
     class RedshiftMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3136,8 @@ module Aws::Appflow
       :connector_provisioning_type,
       :connector_provisioning_config,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3019,7 +3146,8 @@ module Aws::Appflow
     #   @return [String]
     class RegisterConnectorResponse < Struct.new(
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3043,7 +3171,8 @@ module Aws::Appflow
       :message,
       :result,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3095,12 +3224,14 @@ module Aws::Appflow
       :connector_entity_name,
       :entities_path,
       :api_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ResetConnectorMetadataCacheResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3110,7 +3241,8 @@ module Aws::Appflow
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3131,7 +3263,8 @@ module Aws::Appflow
       :bucket_name,
       :bucket_prefix,
       :s3_output_format_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3142,13 +3275,15 @@ module Aws::Appflow
     #   @return [String]
     class S3InputFormatConfig < Struct.new(
       :s3_input_file_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amazon S3. </p>
     class S3Metadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3187,7 +3322,8 @@ module Aws::Appflow
       :prefix_config,
       :aggregation_config,
       :preserve_source_data_typing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3208,7 +3344,8 @@ module Aws::Appflow
       :bucket_name,
       :bucket_prefix,
       :s3_input_format_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3222,7 +3359,8 @@ module Aws::Appflow
     class SAPODataConnectorProfileCredentials < Struct.new(
       :basic_auth_credentials,
       :o_auth_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3267,7 +3405,8 @@ module Aws::Appflow
       :private_link_service_name,
       :o_auth_properties,
       :disable_sso,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3307,13 +3446,15 @@ module Aws::Appflow
       :id_field_names,
       :error_handling_config,
       :write_operation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to SAPOData. </p>
     class SAPODataMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3329,7 +3470,8 @@ module Aws::Appflow
     #   @return [Integer]
     class SAPODataPaginationConfig < Struct.new(
       :max_page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3343,7 +3485,8 @@ module Aws::Appflow
     #   @return [Integer]
     class SAPODataParallelismConfig < Struct.new(
       :max_parallelism,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3363,7 +3506,8 @@ module Aws::Appflow
       :object_path,
       :parallelism_config,
       :pagination_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3419,7 +3563,8 @@ module Aws::Appflow
       :client_credentials_arn,
       :o_auth2_grant_type,
       :jwt_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3483,7 +3628,8 @@ module Aws::Appflow
       :instance_url,
       :is_sandbox_environment,
       :use_private_link_for_metadata_and_authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3557,7 +3703,8 @@ module Aws::Appflow
       :error_handling_config,
       :write_operation_type,
       :data_transfer_api,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3598,7 +3745,8 @@ module Aws::Appflow
       :o_auth_scopes,
       :data_transfer_apis,
       :oauth2_grant_types_supported,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3657,7 +3805,8 @@ module Aws::Appflow
       :enable_dynamic_field_update,
       :include_deleted_records,
       :data_transfer_api,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3716,7 +3865,8 @@ module Aws::Appflow
       :schedule_offset,
       :first_execution_from,
       :flow_error_deactivation_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3739,7 +3889,8 @@ module Aws::Appflow
       :username,
       :password,
       :o_auth2_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3749,13 +3900,15 @@ module Aws::Appflow
     #   @return [String]
     class ServiceNowConnectorProfileProperties < Struct.new(
       :instance_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to ServiceNow. </p>
     class ServiceNowMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3765,7 +3918,8 @@ module Aws::Appflow
     #   @return [String]
     class ServiceNowSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3775,7 +3929,8 @@ module Aws::Appflow
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3786,19 +3941,22 @@ module Aws::Appflow
     #   @return [String]
     class SingularConnectorProfileCredentials < Struct.new(
       :api_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Singular. </p>
     class SingularConnectorProfileProperties < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Singular. </p>
     class SingularMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3808,7 +3966,8 @@ module Aws::Appflow
     #   @return [String]
     class SingularSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3832,7 +3991,8 @@ module Aws::Appflow
       :client_secret,
       :access_token,
       :o_auth_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3842,7 +4002,8 @@ module Aws::Appflow
     #   @return [String]
     class SlackConnectorProfileProperties < Struct.new(
       :instance_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3852,7 +4013,8 @@ module Aws::Appflow
     #   @return [Array<String>]
     class SlackMetadata < Struct.new(
       :o_auth_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3862,7 +4024,8 @@ module Aws::Appflow
     #   @return [String]
     class SlackSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3876,7 +4039,8 @@ module Aws::Appflow
     class SnowflakeConnectorProfileCredentials < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3912,7 +4076,8 @@ module Aws::Appflow
       :private_link_service_name,
       :account_name,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3940,7 +4105,8 @@ module Aws::Appflow
       :intermediate_bucket_name,
       :bucket_prefix,
       :error_handling_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3950,7 +4116,8 @@ module Aws::Appflow
     #   @return [Array<String>]
     class SnowflakeMetadata < Struct.new(
       :supported_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4025,7 +4192,8 @@ module Aws::Appflow
       :sapo_data,
       :custom_connector,
       :pardot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4044,7 +4212,8 @@ module Aws::Appflow
       :is_retrievable,
       :is_queryable,
       :is_timestamp_field_for_incremental_queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4082,7 +4251,8 @@ module Aws::Appflow
       :connector_profile_name,
       :source_connector_properties,
       :incremental_pull_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4108,7 +4278,8 @@ module Aws::Appflow
     class StartFlowRequest < Struct.new(
       :flow_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4126,7 +4297,8 @@ module Aws::Appflow
       :flow_arn,
       :flow_status,
       :execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4136,7 +4308,8 @@ module Aws::Appflow
     #   @return [String]
     class StopFlowRequest < Struct.new(
       :flow_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4149,7 +4322,8 @@ module Aws::Appflow
     class StopFlowResponse < Struct.new(
       :flow_arn,
       :flow_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4166,7 +4340,8 @@ module Aws::Appflow
     class SuccessResponseHandlingConfig < Struct.new(
       :bucket_prefix,
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4178,7 +4353,8 @@ module Aws::Appflow
     #   @return [Types::FieldTypeDetails]
     class SupportedFieldTypeDetails < Struct.new(
       :v1,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4191,12 +4367,14 @@ module Aws::Appflow
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4225,7 +4403,8 @@ module Aws::Appflow
       :destination_field,
       :task_type,
       :task_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4235,7 +4414,8 @@ module Aws::Appflow
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4245,19 +4425,22 @@ module Aws::Appflow
     #   @return [String]
     class TrendmicroConnectorProfileCredentials < Struct.new(
       :api_secret_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Trend Micro. </p>
     class TrendmicroConnectorProfileProperties < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Trend Micro. </p>
     class TrendmicroMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4267,7 +4450,8 @@ module Aws::Appflow
     #   @return [String]
     class TrendmicroSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4284,7 +4468,8 @@ module Aws::Appflow
     class TriggerConfig < Struct.new(
       :trigger_type,
       :trigger_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4296,7 +4481,8 @@ module Aws::Appflow
     #   @return [Types::ScheduledTriggerProperties]
     class TriggerProperties < Struct.new(
       :scheduled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4311,12 +4497,14 @@ module Aws::Appflow
     class UnregisterConnectorRequest < Struct.new(
       :connector_label,
       :force_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UnregisterConnectorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4325,7 +4513,8 @@ module Aws::Appflow
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4338,12 +4527,14 @@ module Aws::Appflow
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4374,7 +4565,8 @@ module Aws::Appflow
       :connection_mode,
       :connector_profile_config,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4383,7 +4575,8 @@ module Aws::Appflow
     #   @return [String]
     class UpdateConnectorProfileResponse < Struct.new(
       :connector_profile_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4414,7 +4607,8 @@ module Aws::Appflow
       :description,
       :connector_provisioning_config,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4423,7 +4617,8 @@ module Aws::Appflow
     #   @return [String]
     class UpdateConnectorRegistrationResponse < Struct.new(
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4475,7 +4670,8 @@ module Aws::Appflow
       :tasks,
       :metadata_catalog_config,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4484,7 +4680,8 @@ module Aws::Appflow
     #   @return [String]
     class UpdateFlowResponse < Struct.new(
       :flow_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4504,13 +4701,15 @@ module Aws::Appflow
       :bucket_name,
       :bucket_prefix,
       :s3_output_format_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Upsolver. </p>
     class UpsolverMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4532,7 +4731,8 @@ module Aws::Appflow
       :file_type,
       :prefix_config,
       :aggregation_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4541,7 +4741,8 @@ module Aws::Appflow
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4555,7 +4756,8 @@ module Aws::Appflow
     class VeevaConnectorProfileCredentials < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4565,13 +4767,15 @@ module Aws::Appflow
     #   @return [String]
     class VeevaConnectorProfileProperties < Struct.new(
       :instance_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Veeva. </p>
     class VeevaMetadata < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4597,7 +4801,8 @@ module Aws::Appflow
       :include_source_files,
       :include_renditions,
       :include_all_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4628,7 +4833,8 @@ module Aws::Appflow
       :client_secret,
       :access_token,
       :o_auth_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4638,7 +4844,8 @@ module Aws::Appflow
     #   @return [String]
     class ZendeskConnectorProfileProperties < Struct.new(
       :instance_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4666,7 +4873,8 @@ module Aws::Appflow
       :id_field_names,
       :error_handling_config,
       :write_operation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4676,7 +4884,8 @@ module Aws::Appflow
     #   @return [Array<String>]
     class ZendeskMetadata < Struct.new(
       :o_auth_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4686,7 +4895,8 @@ module Aws::Appflow
     #   @return [String]
     class ZendeskSourceProperties < Struct.new(
       :object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

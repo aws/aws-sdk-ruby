@@ -11,7 +11,8 @@ module Aws::Transfer
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +58,8 @@ module Aws::Transfer
       :mdn_response,
       :basic_auth_secret_id,
       :preserve_content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +68,8 @@ module Aws::Transfer
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +91,8 @@ module Aws::Transfer
       :status_code,
       :failure_code,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +114,8 @@ module Aws::Transfer
       :destination_file_location,
       :overwrite_existing,
       :source_file_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +152,8 @@ module Aws::Transfer
       :role,
       :server_id,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +166,8 @@ module Aws::Transfer
     class CreateAccessResponse < Struct.new(
       :server_id,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +216,8 @@ module Aws::Transfer
       :preserve_filename,
       :enforce_message_signing,
       :custom_directories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +226,8 @@ module Aws::Transfer
     #   @return [String]
     class CreateAgreementResponse < Struct.new(
       :agreement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +260,8 @@ module Aws::Transfer
       :tags,
       :sftp_config,
       :security_policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -260,7 +270,8 @@ module Aws::Transfer
     #   @return [String]
     class CreateConnectorResponse < Struct.new(
       :connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -281,7 +292,8 @@ module Aws::Transfer
       :profile_type,
       :certificate_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -290,7 +302,8 @@ module Aws::Transfer
     #   @return [String]
     class CreateProfileResponse < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,7 +380,8 @@ module Aws::Transfer
       :structured_log_destinations,
       :s3_storage_options,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +390,8 @@ module Aws::Transfer
     #   @return [String]
     class CreateServerResponse < Struct.new(
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -421,7 +436,8 @@ module Aws::Transfer
       :ssh_public_key_body,
       :tags,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +450,8 @@ module Aws::Transfer
     class CreateUserResponse < Struct.new(
       :server_id,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +476,8 @@ module Aws::Transfer
       :web_app_units,
       :tags,
       :web_app_endpoint_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +486,8 @@ module Aws::Transfer
     #   @return [String]
     class CreateWebAppResponse < Struct.new(
       :web_app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +508,8 @@ module Aws::Transfer
       :steps,
       :on_exception_steps,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +518,8 @@ module Aws::Transfer
     #   @return [String]
     class CreateWorkflowResponse < Struct.new(
       :workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +545,8 @@ module Aws::Transfer
       :payload_files_directory,
       :status_files_directory,
       :temporary_files_directory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +568,8 @@ module Aws::Transfer
       :target,
       :timeout_seconds,
       :source_file_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +595,8 @@ module Aws::Transfer
       :source_file_location,
       :overwrite_existing,
       :destination_file_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +609,8 @@ module Aws::Transfer
     class DeleteAccessRequest < Struct.new(
       :server_id,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +623,8 @@ module Aws::Transfer
     class DeleteAgreementRequest < Struct.new(
       :agreement_id,
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +633,8 @@ module Aws::Transfer
     #   @return [String]
     class DeleteCertificateRequest < Struct.new(
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +643,8 @@ module Aws::Transfer
     #   @return [String]
     class DeleteConnectorRequest < Struct.new(
       :connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +657,8 @@ module Aws::Transfer
     class DeleteHostKeyRequest < Struct.new(
       :server_id,
       :host_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -638,7 +667,8 @@ module Aws::Transfer
     #   @return [String]
     class DeleteProfileRequest < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +677,8 @@ module Aws::Transfer
     #   @return [String]
     class DeleteServerRequest < Struct.new(
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +695,8 @@ module Aws::Transfer
       :server_id,
       :ssh_public_key_id,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +710,8 @@ module Aws::Transfer
     class DeleteStepDetails < Struct.new(
       :name,
       :source_file_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +724,8 @@ module Aws::Transfer
     class DeleteUserRequest < Struct.new(
       :server_id,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +734,8 @@ module Aws::Transfer
     #   @return [String]
     class DeleteWebAppCustomizationRequest < Struct.new(
       :web_app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +744,8 @@ module Aws::Transfer
     #   @return [String]
     class DeleteWebAppRequest < Struct.new(
       :web_app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +754,8 @@ module Aws::Transfer
     #   @return [String]
     class DeleteWorkflowRequest < Struct.new(
       :workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +768,8 @@ module Aws::Transfer
     class DescribeAccessRequest < Struct.new(
       :server_id,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +782,8 @@ module Aws::Transfer
     class DescribeAccessResponse < Struct.new(
       :server_id,
       :access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +796,8 @@ module Aws::Transfer
     class DescribeAgreementRequest < Struct.new(
       :agreement_id,
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +806,8 @@ module Aws::Transfer
     #   @return [Types::DescribedAgreement]
     class DescribeAgreementResponse < Struct.new(
       :agreement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +816,8 @@ module Aws::Transfer
     #   @return [String]
     class DescribeCertificateRequest < Struct.new(
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +826,8 @@ module Aws::Transfer
     #   @return [Types::DescribedCertificate]
     class DescribeCertificateResponse < Struct.new(
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +836,8 @@ module Aws::Transfer
     #   @return [String]
     class DescribeConnectorRequest < Struct.new(
       :connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +846,8 @@ module Aws::Transfer
     #   @return [Types::DescribedConnector]
     class DescribeConnectorResponse < Struct.new(
       :connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +860,8 @@ module Aws::Transfer
     class DescribeExecutionRequest < Struct.new(
       :execution_id,
       :workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +874,8 @@ module Aws::Transfer
     class DescribeExecutionResponse < Struct.new(
       :workflow_id,
       :execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +888,8 @@ module Aws::Transfer
     class DescribeHostKeyRequest < Struct.new(
       :server_id,
       :host_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,7 +898,8 @@ module Aws::Transfer
     #   @return [Types::DescribedHostKey]
     class DescribeHostKeyResponse < Struct.new(
       :host_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +908,8 @@ module Aws::Transfer
     #   @return [String]
     class DescribeProfileRequest < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +918,8 @@ module Aws::Transfer
     #   @return [Types::DescribedProfile]
     class DescribeProfileResponse < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,7 +928,8 @@ module Aws::Transfer
     #   @return [String]
     class DescribeSecurityPolicyRequest < Struct.new(
       :security_policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +938,8 @@ module Aws::Transfer
     #   @return [Types::DescribedSecurityPolicy]
     class DescribeSecurityPolicyResponse < Struct.new(
       :security_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,7 +948,8 @@ module Aws::Transfer
     #   @return [String]
     class DescribeServerRequest < Struct.new(
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +958,8 @@ module Aws::Transfer
     #   @return [Types::DescribedServer]
     class DescribeServerResponse < Struct.new(
       :server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +972,8 @@ module Aws::Transfer
     class DescribeUserRequest < Struct.new(
       :server_id,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +986,8 @@ module Aws::Transfer
     class DescribeUserResponse < Struct.new(
       :server_id,
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +996,8 @@ module Aws::Transfer
     #   @return [String]
     class DescribeWebAppCustomizationRequest < Struct.new(
       :web_app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,7 +1006,8 @@ module Aws::Transfer
     #   @return [Types::DescribedWebAppCustomization]
     class DescribeWebAppCustomizationResponse < Struct.new(
       :web_app_customization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -957,7 +1016,8 @@ module Aws::Transfer
     #   @return [String]
     class DescribeWebAppRequest < Struct.new(
       :web_app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -966,7 +1026,8 @@ module Aws::Transfer
     #   @return [Types::DescribedWebApp]
     class DescribeWebAppResponse < Struct.new(
       :web_app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1036,8 @@ module Aws::Transfer
     #   @return [String]
     class DescribeWorkflowRequest < Struct.new(
       :workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1046,8 @@ module Aws::Transfer
     #   @return [Types::DescribedWorkflow]
     class DescribeWorkflowResponse < Struct.new(
       :workflow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1081,8 @@ module Aws::Transfer
       :posix_profile,
       :role,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1076,7 +1140,8 @@ module Aws::Transfer
       :preserve_filename,
       :enforce_message_signing,
       :custom_directories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1203,8 @@ module Aws::Transfer
       :type,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1184,7 +1250,8 @@ module Aws::Transfer
       :sftp_config,
       :service_managed_egress_ip_addresses,
       :security_policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1222,7 +1289,8 @@ module Aws::Transfer
       :posix_profile,
       :status,
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1256,7 +1324,8 @@ module Aws::Transfer
       :type,
       :date_imported,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1274,7 +1343,8 @@ module Aws::Transfer
       :application_arn,
       :instance_arn,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1374,8 @@ module Aws::Transfer
       :as2_id,
       :certificate_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1346,7 +1417,8 @@ module Aws::Transfer
       :ssh_host_key_algorithms,
       :type,
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1444,7 +1516,8 @@ module Aws::Transfer
       :s3_storage_options,
       :as2_service_managed_egress_ip_addresses,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1490,7 +1563,8 @@ module Aws::Transfer
       :ssh_public_keys,
       :tags,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1528,7 +1602,8 @@ module Aws::Transfer
       :web_app_units,
       :tags,
       :web_app_endpoint_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1629,8 @@ module Aws::Transfer
       :title,
       :logo_file,
       :favicon_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1565,7 +1641,8 @@ module Aws::Transfer
     class DescribedWebAppIdentityProviderDetails < Struct.new(
       :identity_center_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IdentityCenterConfig < DescribedWebAppIdentityProviderDetails; end
@@ -1598,7 +1675,8 @@ module Aws::Transfer
       :on_exception_steps,
       :workflow_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1612,7 +1690,8 @@ module Aws::Transfer
     class EfsFileLocation < Struct.new(
       :file_system_id,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,7 +1717,8 @@ module Aws::Transfer
       :vpc_endpoint_id,
       :vpc_id,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1652,7 +1732,8 @@ module Aws::Transfer
     class ExecutionError < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1747,8 @@ module Aws::Transfer
     class ExecutionResults < Struct.new(
       :steps,
       :on_exception_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1684,7 +1766,8 @@ module Aws::Transfer
       :step_type,
       :outputs,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1698,7 +1781,8 @@ module Aws::Transfer
     class FileLocation < Struct.new(
       :s3_file_location,
       :efs_file_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1800,8 @@ module Aws::Transfer
       :entry,
       :target,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1730,7 +1815,8 @@ module Aws::Transfer
     class IdentityCenterConfig < Struct.new(
       :instance_arn,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1756,7 +1842,8 @@ module Aws::Transfer
       :directory_id,
       :function,
       :sftp_authentication_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1793,7 +1880,8 @@ module Aws::Transfer
       :inactive_date,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1802,7 +1890,8 @@ module Aws::Transfer
     #   @return [String]
     class ImportCertificateResponse < Struct.new(
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1823,7 +1912,8 @@ module Aws::Transfer
       :host_key_body,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1836,7 +1926,8 @@ module Aws::Transfer
     class ImportHostKeyResponse < Struct.new(
       :server_id,
       :host_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1853,7 +1944,8 @@ module Aws::Transfer
       :server_id,
       :ssh_public_key_body,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1871,7 +1963,8 @@ module Aws::Transfer
       :server_id,
       :ssh_public_key_id,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1885,7 +1978,8 @@ module Aws::Transfer
     class InputFileLocation < Struct.new(
       :s3_file_location,
       :efs_file_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1894,7 +1988,8 @@ module Aws::Transfer
     #   @return [String]
     class InternalServiceError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +1998,8 @@ module Aws::Transfer
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1912,7 +2008,8 @@ module Aws::Transfer
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1929,7 +2026,8 @@ module Aws::Transfer
       :max_results,
       :next_token,
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1946,7 +2044,8 @@ module Aws::Transfer
       :next_token,
       :server_id,
       :accesses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1963,7 +2062,8 @@ module Aws::Transfer
       :max_results,
       :next_token,
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1976,7 +2076,8 @@ module Aws::Transfer
     class ListAgreementsResponse < Struct.new(
       :next_token,
       :agreements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2090,8 @@ module Aws::Transfer
     class ListCertificatesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2104,8 @@ module Aws::Transfer
     class ListCertificatesResponse < Struct.new(
       :next_token,
       :certificates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2015,7 +2118,8 @@ module Aws::Transfer
     class ListConnectorsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2028,7 +2132,8 @@ module Aws::Transfer
     class ListConnectorsResponse < Struct.new(
       :next_token,
       :connectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2045,7 +2150,8 @@ module Aws::Transfer
       :max_results,
       :next_token,
       :workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2062,7 +2168,8 @@ module Aws::Transfer
       :next_token,
       :workflow_id,
       :executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2083,7 +2190,8 @@ module Aws::Transfer
       :transfer_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2096,7 +2204,8 @@ module Aws::Transfer
     class ListFileTransferResultsResponse < Struct.new(
       :file_transfer_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2113,7 +2222,8 @@ module Aws::Transfer
       :max_results,
       :next_token,
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2130,7 +2240,8 @@ module Aws::Transfer
       :next_token,
       :server_id,
       :host_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2147,7 +2258,8 @@ module Aws::Transfer
       :max_results,
       :next_token,
       :profile_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2160,7 +2272,8 @@ module Aws::Transfer
     class ListProfilesResponse < Struct.new(
       :next_token,
       :profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2173,7 +2286,8 @@ module Aws::Transfer
     class ListSecurityPoliciesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2186,7 +2300,8 @@ module Aws::Transfer
     class ListSecurityPoliciesResponse < Struct.new(
       :next_token,
       :security_policy_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2199,7 +2314,8 @@ module Aws::Transfer
     class ListServersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2212,7 +2328,8 @@ module Aws::Transfer
     class ListServersResponse < Struct.new(
       :next_token,
       :servers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2229,7 +2346,8 @@ module Aws::Transfer
       :arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2364,8 @@ module Aws::Transfer
       :arn,
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2382,8 @@ module Aws::Transfer
       :max_results,
       :next_token,
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2280,7 +2400,8 @@ module Aws::Transfer
       :next_token,
       :server_id,
       :users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2293,7 +2414,8 @@ module Aws::Transfer
     class ListWebAppsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2306,7 +2428,8 @@ module Aws::Transfer
     class ListWebAppsResponse < Struct.new(
       :next_token,
       :web_apps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2319,7 +2442,8 @@ module Aws::Transfer
     class ListWorkflowsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2332,7 +2456,8 @@ module Aws::Transfer
     class ListWorkflowsResponse < Struct.new(
       :next_token,
       :workflows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2354,7 +2479,8 @@ module Aws::Transfer
       :home_directory_type,
       :role,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2388,7 +2514,8 @@ module Aws::Transfer
       :server_id,
       :local_profile_id,
       :partner_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2426,7 +2553,8 @@ module Aws::Transfer
       :inactive_date,
       :type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2444,7 +2572,8 @@ module Aws::Transfer
       :arn,
       :connector_id,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2466,7 +2595,8 @@ module Aws::Transfer
       :initial_file_location,
       :service_metadata,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2496,7 +2626,8 @@ module Aws::Transfer
       :description,
       :type,
       :date_imported,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2518,7 +2649,8 @@ module Aws::Transfer
       :profile_id,
       :as2_id,
       :profile_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2556,7 +2688,8 @@ module Aws::Transfer
       :server_id,
       :state,
       :user_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2586,7 +2719,8 @@ module Aws::Transfer
       :role,
       :ssh_public_key_count,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2608,7 +2742,8 @@ module Aws::Transfer
       :web_app_id,
       :access_endpoint,
       :web_app_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2626,7 +2761,8 @@ module Aws::Transfer
       :workflow_id,
       :description,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2640,7 +2776,8 @@ module Aws::Transfer
     class LoggingConfiguration < Struct.new(
       :logging_role,
       :log_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2658,7 +2795,8 @@ module Aws::Transfer
       :uid,
       :gid,
       :secondary_gids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2680,7 +2818,8 @@ module Aws::Transfer
       :tls_session_resumption_mode,
       :set_stat_option,
       :as2_transports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2695,7 +2834,8 @@ module Aws::Transfer
       :message,
       :resource,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2710,7 +2850,8 @@ module Aws::Transfer
       :message,
       :resource,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2732,7 +2873,8 @@ module Aws::Transfer
       :key,
       :version_id,
       :etag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2746,7 +2888,8 @@ module Aws::Transfer
     class S3InputFileLocation < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2756,7 +2899,8 @@ module Aws::Transfer
     #   @return [String]
     class S3StorageOptions < Struct.new(
       :directory_listing_optimization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2770,7 +2914,8 @@ module Aws::Transfer
     class S3Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2791,12 +2936,14 @@ module Aws::Transfer
       :execution_id,
       :token,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SendWorkflowStepStateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2806,7 +2953,8 @@ module Aws::Transfer
     #   @return [Types::UserDetails]
     class ServiceMetadata < Struct.new(
       :user_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2815,7 +2963,8 @@ module Aws::Transfer
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2833,7 +2982,8 @@ module Aws::Transfer
       :user_secret_id,
       :trusted_host_keys,
       :max_concurrent_connections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2848,7 +2998,8 @@ module Aws::Transfer
     #   @return [String]
     class SftpConnectorConnectionDetails < Struct.new(
       :host_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2866,7 +3017,8 @@ module Aws::Transfer
       :date_imported,
       :ssh_public_key_body,
       :ssh_public_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2887,7 +3039,8 @@ module Aws::Transfer
       :remote_directory_path,
       :max_items,
       :output_directory_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2900,7 +3053,8 @@ module Aws::Transfer
     class StartDirectoryListingResponse < Struct.new(
       :listing_id,
       :output_file_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2925,7 +3079,8 @@ module Aws::Transfer
       :retrieve_file_paths,
       :local_directory_path,
       :remote_directory_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2934,7 +3089,8 @@ module Aws::Transfer
     #   @return [String]
     class StartFileTransferResponse < Struct.new(
       :transfer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2947,7 +3103,8 @@ module Aws::Transfer
     class StartRemoteDeleteRequest < Struct.new(
       :connector_id,
       :delete_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2956,7 +3113,8 @@ module Aws::Transfer
     #   @return [String]
     class StartRemoteDeleteResponse < Struct.new(
       :delete_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2973,7 +3131,8 @@ module Aws::Transfer
       :connector_id,
       :source_path,
       :target_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2982,7 +3141,8 @@ module Aws::Transfer
     #   @return [String]
     class StartRemoteMoveResponse < Struct.new(
       :move_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2991,7 +3151,8 @@ module Aws::Transfer
     #   @return [String]
     class StartServerRequest < Struct.new(
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3000,7 +3161,8 @@ module Aws::Transfer
     #   @return [String]
     class StopServerRequest < Struct.new(
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3014,7 +3176,8 @@ module Aws::Transfer
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3027,7 +3190,8 @@ module Aws::Transfer
     class TagResourceRequest < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3045,7 +3209,8 @@ module Aws::Transfer
       :name,
       :tags,
       :source_file_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3054,7 +3219,8 @@ module Aws::Transfer
     #   @return [String]
     class TestConnectionRequest < Struct.new(
       :connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3075,7 +3241,8 @@ module Aws::Transfer
       :status,
       :status_message,
       :sftp_connection_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3100,7 +3267,8 @@ module Aws::Transfer
       :source_ip,
       :user_name,
       :user_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3121,7 +3289,8 @@ module Aws::Transfer
       :status_code,
       :message,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3135,7 +3304,8 @@ module Aws::Transfer
     #   @return [String]
     class ThrottlingException < Struct.new(
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3148,7 +3318,8 @@ module Aws::Transfer
     class UntagResourceRequest < Struct.new(
       :arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3185,7 +3356,8 @@ module Aws::Transfer
       :role,
       :server_id,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3198,7 +3370,8 @@ module Aws::Transfer
     class UpdateAccessResponse < Struct.new(
       :server_id,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3247,7 +3420,8 @@ module Aws::Transfer
       :preserve_filename,
       :enforce_message_signing,
       :custom_directories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3256,7 +3430,8 @@ module Aws::Transfer
     #   @return [String]
     class UpdateAgreementResponse < Struct.new(
       :agreement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3277,7 +3452,8 @@ module Aws::Transfer
       :active_date,
       :inactive_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3286,7 +3462,8 @@ module Aws::Transfer
     #   @return [String]
     class UpdateCertificateResponse < Struct.new(
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3319,7 +3496,8 @@ module Aws::Transfer
       :logging_role,
       :sftp_config,
       :security_policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3328,7 +3506,8 @@ module Aws::Transfer
     #   @return [String]
     class UpdateConnectorResponse < Struct.new(
       :connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3345,7 +3524,8 @@ module Aws::Transfer
       :server_id,
       :host_key_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3358,7 +3538,8 @@ module Aws::Transfer
     class UpdateHostKeyResponse < Struct.new(
       :server_id,
       :host_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3371,7 +3552,8 @@ module Aws::Transfer
     class UpdateProfileRequest < Struct.new(
       :profile_id,
       :certificate_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3380,7 +3562,8 @@ module Aws::Transfer
     #   @return [String]
     class UpdateProfileResponse < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3449,7 +3632,8 @@ module Aws::Transfer
       :structured_log_destinations,
       :s3_storage_options,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3458,7 +3642,8 @@ module Aws::Transfer
     #   @return [String]
     class UpdateServerResponse < Struct.new(
       :server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3495,7 +3680,8 @@ module Aws::Transfer
       :role,
       :server_id,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3509,7 +3695,8 @@ module Aws::Transfer
     class UpdateUserResponse < Struct.new(
       :server_id,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3530,7 +3717,8 @@ module Aws::Transfer
       :title,
       :logo_file,
       :favicon_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3539,7 +3727,8 @@ module Aws::Transfer
     #   @return [String]
     class UpdateWebAppCustomizationResponse < Struct.new(
       :web_app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3549,7 +3738,8 @@ module Aws::Transfer
     #   @return [String]
     class UpdateWebAppIdentityCenterConfig < Struct.new(
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3560,7 +3750,8 @@ module Aws::Transfer
     class UpdateWebAppIdentityProviderDetails < Struct.new(
       :identity_center_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IdentityCenterConfig < UpdateWebAppIdentityProviderDetails; end
@@ -3584,7 +3775,8 @@ module Aws::Transfer
       :identity_provider_details,
       :access_endpoint,
       :web_app_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3593,7 +3785,8 @@ module Aws::Transfer
     #   @return [String]
     class UpdateWebAppResponse < Struct.new(
       :web_app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3611,7 +3804,8 @@ module Aws::Transfer
       :user_name,
       :server_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3622,7 +3816,8 @@ module Aws::Transfer
     class WebAppIdentityProviderDetails < Struct.new(
       :identity_center_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IdentityCenterConfig < WebAppIdentityProviderDetails; end
@@ -3636,7 +3831,8 @@ module Aws::Transfer
     class WebAppUnits < Struct.new(
       :provisioned,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Provisioned < WebAppUnits; end
@@ -3653,7 +3849,8 @@ module Aws::Transfer
     class WorkflowDetail < Struct.new(
       :workflow_id,
       :execution_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3667,7 +3864,8 @@ module Aws::Transfer
     class WorkflowDetails < Struct.new(
       :on_upload,
       :on_partial_upload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3697,7 +3895,8 @@ module Aws::Transfer
       :delete_step_details,
       :tag_step_details,
       :decrypt_step_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

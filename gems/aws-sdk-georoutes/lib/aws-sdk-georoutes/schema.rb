@@ -1517,7 +1517,6 @@ module Aws::GeoRoutes
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/snap-to-roads", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "SnapToRoadsSuccess", "params" => {"TracePoints" => [{"Position" => [8.53404, 50.16364]}, {"Position" => [8.53379056, 50.16352417]}]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
-
     end
 
     class << self

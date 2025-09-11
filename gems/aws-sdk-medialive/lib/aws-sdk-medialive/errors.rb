@@ -42,7 +42,7 @@ module Aws::MediaLive
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaLive::Types::BadGatewayException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::MediaLive
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaLive::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::MediaLive
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaLive::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::MediaLive
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaLive::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -94,7 +94,7 @@ module Aws::MediaLive
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaLive::Types::GatewayTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -107,7 +107,7 @@ module Aws::MediaLive
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaLive::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::MediaLive
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaLive::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::MediaLive
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaLive::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::MediaLive
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaLive::Types::UnprocessableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # The error message.

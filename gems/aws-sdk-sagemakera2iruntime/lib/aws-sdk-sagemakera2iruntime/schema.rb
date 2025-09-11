@@ -173,7 +173,6 @@ module Aws::SageMakerA2IRuntime
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/human-loops/stop", "code" => 200}}
       end)
-
     end
 
     class << self

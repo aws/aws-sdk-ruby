@@ -11,7 +11,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::RolesAnywhere
     class AttributeMapping < Struct.new(
       :certificate_field,
       :mapping_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +70,8 @@ module Aws::RolesAnywhere
       :enabled,
       :tags,
       :accept_role_session_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +80,8 @@ module Aws::RolesAnywhere
     #   @return [Types::ProfileDetail]
     class CreateProfileOutput < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +106,8 @@ module Aws::RolesAnywhere
       :enabled,
       :tags,
       :notification_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +116,8 @@ module Aws::RolesAnywhere
     #   @return [Types::TrustAnchorDetail]
     class CreateTrustAnchorOutput < Struct.new(
       :trust_anchor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +147,8 @@ module Aws::RolesAnywhere
       :enabled,
       :x509_certificate_data,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,7 +186,8 @@ module Aws::RolesAnywhere
       :trust_anchor_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +204,8 @@ module Aws::RolesAnywhere
       :profile_id,
       :certificate_field,
       :specifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +214,8 @@ module Aws::RolesAnywhere
     #   @return [Types::ProfileDetail]
     class DeleteAttributeMappingResponse < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +224,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class DeleteCrlInput < Struct.new(
       :crl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +234,8 @@ module Aws::RolesAnywhere
     #   @return [Types::CrlDetail]
     class DeleteCrlOutput < Struct.new(
       :crl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +244,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class DeleteProfileInput < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +254,8 @@ module Aws::RolesAnywhere
     #   @return [Types::ProfileDetail]
     class DeleteProfileOutput < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +264,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class DeleteTrustAnchorInput < Struct.new(
       :trust_anchor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -259,7 +274,8 @@ module Aws::RolesAnywhere
     #   @return [Types::TrustAnchorDetail]
     class DeleteTrustAnchorOutput < Struct.new(
       :trust_anchor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +284,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class DisableCrlInput < Struct.new(
       :crl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,7 +294,8 @@ module Aws::RolesAnywhere
     #   @return [Types::CrlDetail]
     class DisableCrlOutput < Struct.new(
       :crl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -286,7 +304,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class DisableProfileInput < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -295,7 +314,8 @@ module Aws::RolesAnywhere
     #   @return [Types::ProfileDetail]
     class DisableProfileOutput < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +324,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class DisableTrustAnchorInput < Struct.new(
       :trust_anchor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,7 +334,8 @@ module Aws::RolesAnywhere
     #   @return [Types::TrustAnchorDetail]
     class DisableTrustAnchorOutput < Struct.new(
       :trust_anchor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -322,7 +344,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class EnableCrlInput < Struct.new(
       :crl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -331,7 +354,8 @@ module Aws::RolesAnywhere
     #   @return [Types::CrlDetail]
     class EnableCrlOutput < Struct.new(
       :crl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +364,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class EnableProfileInput < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -349,7 +374,8 @@ module Aws::RolesAnywhere
     #   @return [Types::ProfileDetail]
     class EnableProfileOutput < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +384,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class EnableTrustAnchorInput < Struct.new(
       :trust_anchor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,7 +394,8 @@ module Aws::RolesAnywhere
     #   @return [Types::TrustAnchorDetail]
     class EnableTrustAnchorOutput < Struct.new(
       :trust_anchor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +404,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class GetCrlInput < Struct.new(
       :crl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +414,8 @@ module Aws::RolesAnywhere
     #   @return [Types::CrlDetail]
     class GetCrlOutput < Struct.new(
       :crl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +424,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class GetProfileInput < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -403,7 +434,8 @@ module Aws::RolesAnywhere
     #   @return [Types::ProfileDetail]
     class GetProfileOutput < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +444,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class GetSubjectInput < Struct.new(
       :subject_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -421,7 +454,8 @@ module Aws::RolesAnywhere
     #   @return [Types::SubjectDetail]
     class GetSubjectOutput < Struct.new(
       :subject,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -430,7 +464,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class GetTrustAnchorInput < Struct.new(
       :trust_anchor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +474,8 @@ module Aws::RolesAnywhere
     #   @return [Types::TrustAnchorDetail]
     class GetTrustAnchorOutput < Struct.new(
       :trust_anchor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +500,8 @@ module Aws::RolesAnywhere
       :enabled,
       :tags,
       :trust_anchor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +510,8 @@ module Aws::RolesAnywhere
     #   @return [Types::CrlDetail]
     class ImportCrlOutput < Struct.new(
       :crl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,7 +529,8 @@ module Aws::RolesAnywhere
       :seen_at,
       :properties,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +543,8 @@ module Aws::RolesAnywhere
     class ListCrlsInput < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +557,8 @@ module Aws::RolesAnywhere
     class ListCrlsOutput < Struct.new(
       :next_token,
       :crls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -530,7 +571,8 @@ module Aws::RolesAnywhere
     class ListProfilesInput < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +585,8 @@ module Aws::RolesAnywhere
     class ListProfilesOutput < Struct.new(
       :next_token,
       :profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +599,8 @@ module Aws::RolesAnywhere
     class ListSubjectsInput < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +613,8 @@ module Aws::RolesAnywhere
     class ListSubjectsOutput < Struct.new(
       :subjects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +623,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -587,7 +633,8 @@ module Aws::RolesAnywhere
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,7 +647,8 @@ module Aws::RolesAnywhere
     class ListTrustAnchorsInput < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -613,7 +661,8 @@ module Aws::RolesAnywhere
     class ListTrustAnchorsOutput < Struct.new(
       :next_token,
       :trust_anchors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -623,7 +672,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class MappingRule < Struct.new(
       :specifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +702,8 @@ module Aws::RolesAnywhere
       :event,
       :threshold,
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +739,8 @@ module Aws::RolesAnywhere
       :threshold,
       :channel,
       :configured_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +756,8 @@ module Aws::RolesAnywhere
     class NotificationSettingKey < Struct.new(
       :event,
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +821,8 @@ module Aws::RolesAnywhere
       :duration_seconds,
       :accept_role_session_name,
       :attribute_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +839,8 @@ module Aws::RolesAnywhere
       :profile_id,
       :certificate_field,
       :mapping_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +849,8 @@ module Aws::RolesAnywhere
     #   @return [Types::ProfileDetail]
     class PutAttributeMappingResponse < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +863,8 @@ module Aws::RolesAnywhere
     class PutNotificationSettingsRequest < Struct.new(
       :trust_anchor_id,
       :notification_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +873,8 @@ module Aws::RolesAnywhere
     #   @return [Types::TrustAnchorDetail]
     class PutNotificationSettingsResponse < Struct.new(
       :trust_anchor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +889,8 @@ module Aws::RolesAnywhere
     class ResetNotificationSettingsRequest < Struct.new(
       :trust_anchor_id,
       :notification_setting_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +899,8 @@ module Aws::RolesAnywhere
     #   @return [Types::TrustAnchorDetail]
     class ResetNotificationSettingsResponse < Struct.new(
       :trust_anchor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -849,7 +909,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -863,7 +924,8 @@ module Aws::RolesAnywhere
     class Source < Struct.new(
       :source_type,
       :source_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +943,8 @@ module Aws::RolesAnywhere
       :x509_certificate_data,
       :acm_pca_arn,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class X509CertificateData < SourceData; end
@@ -927,7 +990,8 @@ module Aws::RolesAnywhere
       :updated_at,
       :credentials,
       :instance_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -961,7 +1025,8 @@ module Aws::RolesAnywhere
       :last_seen_at,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1040,8 @@ module Aws::RolesAnywhere
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,12 +1054,14 @@ module Aws::RolesAnywhere
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1070,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1109,8 @@ module Aws::RolesAnywhere
       :created_at,
       :updated_at,
       :notification_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1053,12 +1123,14 @@ module Aws::RolesAnywhere
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1147,8 @@ module Aws::RolesAnywhere
       :crl_id,
       :name,
       :crl_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1157,8 @@ module Aws::RolesAnywhere
     #   @return [Types::CrlDetail]
     class UpdateCrlOutput < Struct.new(
       :crl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1193,8 @@ module Aws::RolesAnywhere
       :managed_policy_arns,
       :duration_seconds,
       :accept_role_session_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1203,8 @@ module Aws::RolesAnywhere
     #   @return [Types::ProfileDetail]
     class UpdateProfileOutput < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1221,8 @@ module Aws::RolesAnywhere
       :trust_anchor_id,
       :name,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1231,8 @@ module Aws::RolesAnywhere
     #   @return [Types::TrustAnchorDetail]
     class UpdateTrustAnchorOutput < Struct.new(
       :trust_anchor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1241,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

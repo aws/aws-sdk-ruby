@@ -11,7 +11,8 @@ module Aws::EntityResolution
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,7 +41,8 @@ module Aws::EntityResolution
       :action,
       :principal,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +59,8 @@ module Aws::EntityResolution
       :arn,
       :token,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +77,8 @@ module Aws::EntityResolution
       :workflow_name,
       :input_source,
       :unique_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -95,7 +99,8 @@ module Aws::EntityResolution
       :errors,
       :deleted,
       :disconnected_unique_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +109,8 @@ module Aws::EntityResolution
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,7 +143,8 @@ module Aws::EntityResolution
       :id_mapping_techniques,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +177,8 @@ module Aws::EntityResolution
       :output_source_config,
       :id_mapping_techniques,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -208,7 +216,8 @@ module Aws::EntityResolution
       :type,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +262,8 @@ module Aws::EntityResolution
       :created_at,
       :updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -290,7 +300,8 @@ module Aws::EntityResolution
       :incremental_run_config,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +338,8 @@ module Aws::EntityResolution
       :resolution_techniques,
       :incremental_run_config,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +360,8 @@ module Aws::EntityResolution
       :description,
       :mapped_input_fields,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -369,7 +382,8 @@ module Aws::EntityResolution
       :schema_arn,
       :description,
       :mapped_input_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +392,8 @@ module Aws::EntityResolution
     #   @return [String]
     class DeleteIdMappingWorkflowInput < Struct.new(
       :workflow_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -387,7 +402,8 @@ module Aws::EntityResolution
     #   @return [String]
     class DeleteIdMappingWorkflowOutput < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +412,8 @@ module Aws::EntityResolution
     #   @return [String]
     class DeleteIdNamespaceInput < Struct.new(
       :id_namespace_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +422,8 @@ module Aws::EntityResolution
     #   @return [String]
     class DeleteIdNamespaceOutput < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +432,8 @@ module Aws::EntityResolution
     #   @return [String]
     class DeleteMatchingWorkflowInput < Struct.new(
       :workflow_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +442,8 @@ module Aws::EntityResolution
     #   @return [String]
     class DeleteMatchingWorkflowOutput < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -436,7 +456,8 @@ module Aws::EntityResolution
     class DeletePolicyStatementInput < Struct.new(
       :arn,
       :statement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +474,8 @@ module Aws::EntityResolution
       :arn,
       :token,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +484,8 @@ module Aws::EntityResolution
     #   @return [String]
     class DeleteSchemaMappingInput < Struct.new(
       :schema_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +494,8 @@ module Aws::EntityResolution
     #   @return [String]
     class DeleteSchemaMappingOutput < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -485,7 +509,8 @@ module Aws::EntityResolution
     class DeleteUniqueIdError < Struct.new(
       :unique_id,
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +520,8 @@ module Aws::EntityResolution
     #   @return [String]
     class DeletedUniqueId < Struct.new(
       :unique_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +531,8 @@ module Aws::EntityResolution
     #   @return [String]
     class ErrorDetails < Struct.new(
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +549,8 @@ module Aws::EntityResolution
       :message,
       :quota_name,
       :quota_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +568,8 @@ module Aws::EntityResolution
       :input_source_arn,
       :unique_id,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +586,8 @@ module Aws::EntityResolution
       :workflow_name,
       :records,
       :processing_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -570,7 +600,8 @@ module Aws::EntityResolution
     class GenerateMatchIdOutput < Struct.new(
       :match_groups,
       :failed_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +614,8 @@ module Aws::EntityResolution
     class GetIdMappingJobInput < Struct.new(
       :workflow_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +648,8 @@ module Aws::EntityResolution
       :metrics,
       :error_details,
       :output_source_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -625,7 +658,8 @@ module Aws::EntityResolution
     #   @return [String]
     class GetIdMappingWorkflowInput < Struct.new(
       :workflow_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +704,8 @@ module Aws::EntityResolution
       :updated_at,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -684,7 +719,8 @@ module Aws::EntityResolution
     #   @return [String]
     class GetIdNamespaceInput < Struct.new(
       :id_namespace_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +765,8 @@ module Aws::EntityResolution
       :created_at,
       :updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +783,8 @@ module Aws::EntityResolution
       :workflow_name,
       :record,
       :apply_normalization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +797,8 @@ module Aws::EntityResolution
     class GetMatchIdOutput < Struct.new(
       :match_id,
       :match_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +811,8 @@ module Aws::EntityResolution
     class GetMatchingJobInput < Struct.new(
       :workflow_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +845,8 @@ module Aws::EntityResolution
       :metrics,
       :error_details,
       :output_source_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +855,8 @@ module Aws::EntityResolution
     #   @return [String]
     class GetMatchingWorkflowInput < Struct.new(
       :workflow_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -863,7 +905,8 @@ module Aws::EntityResolution
       :incremental_run_config,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,7 +915,8 @@ module Aws::EntityResolution
     #   @return [String]
     class GetPolicyInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +933,8 @@ module Aws::EntityResolution
       :arn,
       :token,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +947,8 @@ module Aws::EntityResolution
     class GetProviderServiceInput < Struct.new(
       :provider_name,
       :provider_service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +1005,8 @@ module Aws::EntityResolution
       :provider_entity_output_definition,
       :provider_intermediate_data_access_configuration,
       :provider_component_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1015,8 @@ module Aws::EntityResolution
     #   @return [String]
     class GetSchemaMappingInput < Struct.new(
       :schema_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1053,8 @@ module Aws::EntityResolution
       :updated_at,
       :tags,
       :has_workflows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1088,8 @@ module Aws::EntityResolution
       :total_mapped_source_records,
       :total_mapped_target_records,
       :unique_records_loaded,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1107,8 @@ module Aws::EntityResolution
       :role_arn,
       :output_s3_path,
       :kms_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,7 +1130,8 @@ module Aws::EntityResolution
       :rule_definition_type,
       :attribute_matching_model,
       :record_matching_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1097,7 +1149,8 @@ module Aws::EntityResolution
       :id_mapping_type,
       :rule_based_properties,
       :provider_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1168,8 @@ module Aws::EntityResolution
       :input_source_arn,
       :schema_name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1129,7 +1183,8 @@ module Aws::EntityResolution
     class IdMappingWorkflowOutputSource < Struct.new(
       :output_s3_path,
       :kms_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1151,7 +1206,8 @@ module Aws::EntityResolution
       :workflow_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1161,7 +1217,8 @@ module Aws::EntityResolution
     #   @return [String]
     class IdNamespaceIdMappingWorkflowMetadata < Struct.new(
       :id_mapping_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1236,8 @@ module Aws::EntityResolution
       :id_mapping_type,
       :rule_based_properties,
       :provider_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1193,7 +1251,8 @@ module Aws::EntityResolution
     class IdNamespaceInputSource < Struct.new(
       :input_source_arn,
       :schema_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1227,7 +1286,8 @@ module Aws::EntityResolution
       :type,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1237,7 +1297,8 @@ module Aws::EntityResolution
     #   @return [String]
     class IncrementalRunConfig < Struct.new(
       :incremental_run_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1316,8 @@ module Aws::EntityResolution
       :input_source_arn,
       :schema_name,
       :apply_normalization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1327,8 @@ module Aws::EntityResolution
     #   @return [String]
     class IntermediateSourceConfiguration < Struct.new(
       :intermediate_s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1274,7 +1337,8 @@ module Aws::EntityResolution
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1296,7 +1360,8 @@ module Aws::EntityResolution
       :total_records_processed,
       :records_not_processed,
       :match_i_ds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1379,8 @@ module Aws::EntityResolution
       :role_arn,
       :output_s3_path,
       :kms_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1336,7 +1402,8 @@ module Aws::EntityResolution
       :status,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1420,8 @@ module Aws::EntityResolution
       :workflow_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1366,7 +1434,8 @@ module Aws::EntityResolution
     class ListIdMappingJobsOutput < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1379,7 +1448,8 @@ module Aws::EntityResolution
     class ListIdMappingWorkflowsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1392,7 +1462,8 @@ module Aws::EntityResolution
     class ListIdMappingWorkflowsOutput < Struct.new(
       :workflow_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1405,7 +1476,8 @@ module Aws::EntityResolution
     class ListIdNamespacesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1418,7 +1490,8 @@ module Aws::EntityResolution
     class ListIdNamespacesOutput < Struct.new(
       :id_namespace_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1508,8 @@ module Aws::EntityResolution
       :workflow_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1448,7 +1522,8 @@ module Aws::EntityResolution
     class ListMatchingJobsOutput < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1461,7 +1536,8 @@ module Aws::EntityResolution
     class ListMatchingWorkflowsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1550,8 @@ module Aws::EntityResolution
     class ListMatchingWorkflowsOutput < Struct.new(
       :workflow_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1491,7 +1568,8 @@ module Aws::EntityResolution
       :next_token,
       :max_results,
       :provider_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,7 +1582,8 @@ module Aws::EntityResolution
     class ListProviderServicesOutput < Struct.new(
       :provider_service_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,7 +1596,8 @@ module Aws::EntityResolution
     class ListSchemaMappingsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1610,8 @@ module Aws::EntityResolution
     class ListSchemaMappingsOutput < Struct.new(
       :schema_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1539,7 +1620,8 @@ module Aws::EntityResolution
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1548,7 +1630,8 @@ module Aws::EntityResolution
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1649,8 @@ module Aws::EntityResolution
       :records,
       :match_id,
       :match_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1580,7 +1664,8 @@ module Aws::EntityResolution
     class MatchedRecord < Struct.new(
       :input_source_arn,
       :record_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,7 +1691,8 @@ module Aws::EntityResolution
       :created_at,
       :updated_at,
       :resolution_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1620,7 +1706,8 @@ module Aws::EntityResolution
     class NamespaceProviderProperties < Struct.new(
       :provider_service_arn,
       :provider_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1729,8 @@ module Aws::EntityResolution
       :rule_definition_types,
       :attribute_matching_model,
       :record_matching_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1744,8 @@ module Aws::EntityResolution
     class OutputAttribute < Struct.new(
       :name,
       :hashed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1767,8 @@ module Aws::EntityResolution
       :kms_arn,
       :output,
       :apply_normalization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1692,7 +1782,8 @@ module Aws::EntityResolution
     class ProviderComponentSchema < Struct.new(
       :schemas,
       :provider_schema_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1703,7 +1794,8 @@ module Aws::EntityResolution
     class ProviderEndpointConfiguration < Struct.new(
       :marketplace_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class MarketplaceConfiguration < ProviderEndpointConfiguration; end
@@ -1724,7 +1816,8 @@ module Aws::EntityResolution
       :description,
       :provider_target_configuration_definition,
       :provider_source_configuration_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1738,7 +1831,8 @@ module Aws::EntityResolution
     class ProviderIntermediateDataAccessConfiguration < Struct.new(
       :aws_account_ids,
       :required_bucket_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1760,7 +1854,8 @@ module Aws::EntityResolution
       :revision_id,
       :asset_id,
       :listing_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,7 +1873,8 @@ module Aws::EntityResolution
       :provider_service_arn,
       :provider_configuration,
       :intermediate_source_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1800,7 +1896,8 @@ module Aws::EntityResolution
       :type,
       :sub_type,
       :hashing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1826,7 +1923,8 @@ module Aws::EntityResolution
       :provider_service_display_name,
       :provider_service_name,
       :provider_service_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1843,7 +1941,8 @@ module Aws::EntityResolution
       :arn,
       :token,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1860,7 +1959,8 @@ module Aws::EntityResolution
       :arn,
       :token,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1878,7 +1978,8 @@ module Aws::EntityResolution
       :input_source_arn,
       :unique_id,
       :record_attribute_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1900,7 +2001,8 @@ module Aws::EntityResolution
       :rule_based_properties,
       :rule_condition_properties,
       :provider_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1909,7 +2011,8 @@ module Aws::EntityResolution
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1923,7 +2026,8 @@ module Aws::EntityResolution
     class Rule < Struct.new(
       :rule_name,
       :matching_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1941,7 +2045,8 @@ module Aws::EntityResolution
       :rules,
       :attribute_matching_model,
       :match_purpose,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2060,8 @@ module Aws::EntityResolution
     class RuleCondition < Struct.new(
       :rule_name,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1965,7 +2071,8 @@ module Aws::EntityResolution
     #   @return [Array<Types::RuleCondition>]
     class RuleConditionProperties < Struct.new(
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,7 +2102,8 @@ module Aws::EntityResolution
       :match_key,
       :sub_type,
       :hashed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2021,7 +2129,8 @@ module Aws::EntityResolution
       :created_at,
       :updated_at,
       :has_workflows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2034,7 +2143,8 @@ module Aws::EntityResolution
     class StartIdMappingJobInput < Struct.new(
       :workflow_name,
       :output_source_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2047,7 +2157,8 @@ module Aws::EntityResolution
     class StartIdMappingJobOutput < Struct.new(
       :job_id,
       :output_source_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2056,7 +2167,8 @@ module Aws::EntityResolution
     #   @return [String]
     class StartMatchingJobInput < Struct.new(
       :workflow_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2065,7 +2177,8 @@ module Aws::EntityResolution
     #   @return [String]
     class StartMatchingJobOutput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2078,12 +2191,14 @@ module Aws::EntityResolution
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2092,7 +2207,8 @@ module Aws::EntityResolution
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2105,12 +2221,14 @@ module Aws::EntityResolution
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2139,7 +2257,8 @@ module Aws::EntityResolution
       :output_source_config,
       :id_mapping_techniques,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2172,7 +2291,8 @@ module Aws::EntityResolution
       :output_source_config,
       :id_mapping_techniques,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2202,7 +2322,8 @@ module Aws::EntityResolution
       :input_source_config,
       :id_mapping_workflow_properties,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2243,7 +2364,8 @@ module Aws::EntityResolution
       :role_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2276,7 +2398,8 @@ module Aws::EntityResolution
       :resolution_techniques,
       :incremental_run_config,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2309,7 +2432,8 @@ module Aws::EntityResolution
       :resolution_techniques,
       :incremental_run_config,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2326,7 +2450,8 @@ module Aws::EntityResolution
       :schema_name,
       :description,
       :mapped_input_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2347,7 +2472,8 @@ module Aws::EntityResolution
       :schema_arn,
       :description,
       :mapped_input_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2356,7 +2482,8 @@ module Aws::EntityResolution
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

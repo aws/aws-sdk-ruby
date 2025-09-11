@@ -15,7 +15,8 @@ module Aws::OAM
     class ConflictException < Struct.new(
       :message,
       :amzn_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,7 +41,8 @@ module Aws::OAM
       :sink_identifier,
       :tags,
       :link_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +79,8 @@ module Aws::OAM
       :sink_arn,
       :tags,
       :link_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +93,8 @@ module Aws::OAM
     class CreateSinkInput < Struct.new(
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +115,8 @@ module Aws::OAM
       :id,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,12 +125,14 @@ module Aws::OAM
     #   @return [String]
     class DeleteLinkInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLinkOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,12 +141,14 @@ module Aws::OAM
     #   @return [String]
     class DeleteSinkInput < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSinkOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +161,8 @@ module Aws::OAM
     class GetLinkInput < Struct.new(
       :identifier,
       :include_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +199,8 @@ module Aws::OAM
       :sink_arn,
       :tags,
       :link_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +213,8 @@ module Aws::OAM
     class GetSinkInput < Struct.new(
       :identifier,
       :include_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +235,8 @@ module Aws::OAM
       :id,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +245,8 @@ module Aws::OAM
     #   @return [String]
     class GetSinkPolicyInput < Struct.new(
       :sink_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +263,8 @@ module Aws::OAM
       :sink_arn,
       :sink_id,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +277,8 @@ module Aws::OAM
     class InternalServiceFault < Struct.new(
       :message,
       :amzn_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -275,7 +291,8 @@ module Aws::OAM
     class InvalidParameterException < Struct.new(
       :message,
       :amzn_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +306,8 @@ module Aws::OAM
     class LinkConfiguration < Struct.new(
       :log_group_configuration,
       :metric_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +324,8 @@ module Aws::OAM
       :max_results,
       :next_token,
       :sink_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +343,8 @@ module Aws::OAM
       :label,
       :link_arn,
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,7 +357,8 @@ module Aws::OAM
     class ListAttachedLinksOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +371,8 @@ module Aws::OAM
     class ListLinksInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +398,8 @@ module Aws::OAM
       :label,
       :resource_types,
       :sink_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +412,8 @@ module Aws::OAM
     class ListLinksOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +426,8 @@ module Aws::OAM
     class ListSinksInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +445,8 @@ module Aws::OAM
       :arn,
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -433,7 +459,8 @@ module Aws::OAM
     class ListSinksOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +469,8 @@ module Aws::OAM
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -451,7 +479,8 @@ module Aws::OAM
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +490,8 @@ module Aws::OAM
     #   @return [String]
     class LogGroupConfiguration < Struct.new(
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +501,8 @@ module Aws::OAM
     #   @return [String]
     class MetricConfiguration < Struct.new(
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +515,8 @@ module Aws::OAM
     class MissingRequiredParameterException < Struct.new(
       :message,
       :amzn_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +529,8 @@ module Aws::OAM
     class PutSinkPolicyInput < Struct.new(
       :sink_identifier,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +547,8 @@ module Aws::OAM
       :sink_arn,
       :sink_id,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +561,8 @@ module Aws::OAM
     class ResourceNotFoundException < Struct.new(
       :message,
       :amzn_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +575,8 @@ module Aws::OAM
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :amzn_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -553,12 +589,14 @@ module Aws::OAM
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -567,7 +605,8 @@ module Aws::OAM
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -580,12 +619,14 @@ module Aws::OAM
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +647,8 @@ module Aws::OAM
       :resource_types,
       :link_configuration,
       :include_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +685,8 @@ module Aws::OAM
       :sink_arn,
       :tags,
       :link_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +695,8 @@ module Aws::OAM
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

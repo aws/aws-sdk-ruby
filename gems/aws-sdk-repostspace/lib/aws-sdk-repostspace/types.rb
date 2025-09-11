@@ -11,7 +11,8 @@ module Aws::Repostspace
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::Repostspace
       :channel_id,
       :accessor_ids,
       :channel_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +47,8 @@ module Aws::Repostspace
     class BatchAddChannelRoleToAccessorsOutput < Struct.new(
       :added_accessor_ids,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +65,8 @@ module Aws::Repostspace
       :space_id,
       :accessor_ids,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +79,8 @@ module Aws::Repostspace
     class BatchAddRoleOutput < Struct.new(
       :added_accessor_ids,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +98,8 @@ module Aws::Repostspace
       :accessor_id,
       :error,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +120,8 @@ module Aws::Repostspace
       :channel_id,
       :accessor_ids,
       :channel_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +134,8 @@ module Aws::Repostspace
     class BatchRemoveChannelRoleFromAccessorsOutput < Struct.new(
       :removed_accessor_ids,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +152,8 @@ module Aws::Repostspace
       :space_id,
       :accessor_ids,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +166,8 @@ module Aws::Repostspace
     class BatchRemoveRoleOutput < Struct.new(
       :removed_accessor_ids,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +209,8 @@ module Aws::Repostspace
       :channel_status,
       :user_count,
       :group_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +227,8 @@ module Aws::Repostspace
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +245,8 @@ module Aws::Repostspace
       :space_id,
       :channel_name,
       :channel_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,7 +255,8 @@ module Aws::Repostspace
     #   @return [String]
     class CreateChannelOutput < Struct.new(
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +293,8 @@ module Aws::Repostspace
       :tags,
       :role_arn,
       :supported_email_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +303,8 @@ module Aws::Repostspace
     #   @return [String]
     class CreateSpaceOutput < Struct.new(
       :space_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +313,8 @@ module Aws::Repostspace
     #   @return [String]
     class DeleteSpaceInput < Struct.new(
       :space_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +327,8 @@ module Aws::Repostspace
     class DeregisterAdminInput < Struct.new(
       :space_id,
       :admin_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +341,8 @@ module Aws::Repostspace
     class GetChannelInput < Struct.new(
       :space_id,
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +379,8 @@ module Aws::Repostspace
       :delete_date_time,
       :channel_roles,
       :channel_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -369,7 +389,8 @@ module Aws::Repostspace
     #   @return [String]
     class GetSpaceInput < Struct.new(
       :space_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +495,8 @@ module Aws::Repostspace
       :user_count,
       :content_size,
       :supported_email_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +509,8 @@ module Aws::Repostspace
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +527,8 @@ module Aws::Repostspace
       :space_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +541,8 @@ module Aws::Repostspace
     class ListChannelsOutput < Struct.new(
       :channels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -530,7 +555,8 @@ module Aws::Repostspace
     class ListSpacesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +569,8 @@ module Aws::Repostspace
     class ListSpacesOutput < Struct.new(
       :spaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -552,7 +579,8 @@ module Aws::Repostspace
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +589,8 @@ module Aws::Repostspace
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +603,8 @@ module Aws::Repostspace
     class RegisterAdminInput < Struct.new(
       :space_id,
       :admin_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -591,7 +621,8 @@ module Aws::Repostspace
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +643,8 @@ module Aws::Repostspace
       :accessor_ids,
       :title,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -637,7 +669,8 @@ module Aws::Repostspace
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -711,7 +744,8 @@ module Aws::Repostspace
       :user_count,
       :content_size,
       :supported_email_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -725,7 +759,8 @@ module Aws::Repostspace
     class SupportedEmailDomainsParameters < Struct.new(
       :enabled,
       :allowed_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -739,7 +774,8 @@ module Aws::Repostspace
     class SupportedEmailDomainsStatus < Struct.new(
       :enabled,
       :allowed_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,12 +788,14 @@ module Aws::Repostspace
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -778,7 +816,8 @@ module Aws::Repostspace
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,12 +830,14 @@ module Aws::Repostspace
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,12 +858,14 @@ module Aws::Repostspace
       :channel_id,
       :channel_name,
       :channel_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateChannelOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +890,8 @@ module Aws::Repostspace
       :tier,
       :role_arn,
       :supported_email_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +908,8 @@ module Aws::Repostspace
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -878,7 +923,8 @@ module Aws::Repostspace
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -518,7 +518,6 @@ module Aws::TrustedAdvisor
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/recommendations/{recommendationIdentifier}/lifecycle", "code" => 200}, "smithy.api#idempotent" => {}, "smithy.api#tags" => []}
       end)
-
     end
 
     class << self

@@ -802,7 +802,6 @@ module Aws::MediaPackage
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/origin_endpoints/{Id}", "code" => 200}}
       end)
-
     end
 
     class << self

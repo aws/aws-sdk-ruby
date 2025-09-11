@@ -1403,7 +1403,6 @@ module Aws::MediaTailor
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVodSourceOutput)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

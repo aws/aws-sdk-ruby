@@ -37,7 +37,7 @@ module Aws::MarketplaceEntitlementService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceEntitlementService::Types::InternalServiceErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -50,7 +50,7 @@ module Aws::MarketplaceEntitlementService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceEntitlementService::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -63,7 +63,7 @@ module Aws::MarketplaceEntitlementService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceEntitlementService::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

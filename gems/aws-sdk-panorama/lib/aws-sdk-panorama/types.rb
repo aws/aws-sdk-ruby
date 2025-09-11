@@ -11,7 +11,8 @@ module Aws::Panorama
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::Panorama
     #   @return [String]
     class AlternateSoftwareMetadata < Struct.new(
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +77,8 @@ module Aws::Panorama
       :arn,
       :tags,
       :runtime_context_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -100,7 +103,8 @@ module Aws::Panorama
       :resource_type,
       :error_id,
       :error_arguments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +118,8 @@ module Aws::Panorama
     class ConflictExceptionErrorArgument < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +156,8 @@ module Aws::Panorama
       :runtime_role_arn,
       :default_runtime_context_device,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +166,8 @@ module Aws::Panorama
     #   @return [String]
     class CreateApplicationInstanceOutput < Struct.new(
       :application_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +184,8 @@ module Aws::Panorama
       :device_ids,
       :device_job_config,
       :job_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +194,8 @@ module Aws::Panorama
     #   @return [Array<Types::Job>]
     class CreateJobForDevicesOutput < Struct.new(
       :jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +228,8 @@ module Aws::Panorama
       :node_description,
       :template_parameters,
       :job_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +238,8 @@ module Aws::Panorama
     #   @return [String]
     class CreateNodeFromTemplateJobOutput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +264,8 @@ module Aws::Panorama
       :output_config,
       :client_token,
       :job_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +274,8 @@ module Aws::Panorama
     #   @return [String]
     class CreatePackageImportJobOutput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -275,7 +288,8 @@ module Aws::Panorama
     class CreatePackageInput < Struct.new(
       :package_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +306,8 @@ module Aws::Panorama
       :package_id,
       :arn,
       :storage_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +316,8 @@ module Aws::Panorama
     #   @return [String]
     class DeleteDeviceInput < Struct.new(
       :device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +326,8 @@ module Aws::Panorama
     #   @return [String]
     class DeleteDeviceOutput < Struct.new(
       :device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,12 +341,14 @@ module Aws::Panorama
     class DeletePackageInput < Struct.new(
       :package_id,
       :force_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePackageOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -354,12 +373,14 @@ module Aws::Panorama
       :package_version,
       :patch_version,
       :updated_latest_patch_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterPackageVersionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +389,8 @@ module Aws::Panorama
     #   @return [String]
     class DescribeApplicationInstanceDetailsInput < Struct.new(
       :application_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +427,8 @@ module Aws::Panorama
       :application_instance_id_to_replace,
       :created_time,
       :application_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +437,8 @@ module Aws::Panorama
     #   @return [String]
     class DescribeApplicationInstanceInput < Struct.new(
       :application_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +503,8 @@ module Aws::Panorama
       :arn,
       :tags,
       :runtime_context_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +513,8 @@ module Aws::Panorama
     #   @return [String]
     class DescribeDeviceInput < Struct.new(
       :device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +523,8 @@ module Aws::Panorama
     #   @return [String]
     class DescribeDeviceJobInput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +565,8 @@ module Aws::Panorama
       :status,
       :created_time,
       :job_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -623,7 +651,8 @@ module Aws::Panorama
       :brand,
       :latest_device_job,
       :device_aggregated_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +661,8 @@ module Aws::Panorama
     #   @return [String]
     class DescribeNodeFromTemplateJobInput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +715,8 @@ module Aws::Panorama
       :template_type,
       :template_parameters,
       :job_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,7 +729,8 @@ module Aws::Panorama
     class DescribeNodeInput < Struct.new(
       :node_id,
       :owner_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +791,8 @@ module Aws::Panorama
       :description,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +801,8 @@ module Aws::Panorama
     #   @return [String]
     class DescribePackageImportJobInput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +851,8 @@ module Aws::Panorama
       :status,
       :status_message,
       :job_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -826,7 +861,8 @@ module Aws::Panorama
     #   @return [String]
     class DescribePackageInput < Struct.new(
       :package_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -863,7 +899,8 @@ module Aws::Panorama
       :write_access_principal_arns,
       :created_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +921,8 @@ module Aws::Panorama
       :package_id,
       :package_version,
       :patch_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +967,8 @@ module Aws::Panorama
       :status,
       :status_description,
       :registered_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -992,7 +1031,8 @@ module Aws::Panorama
       :type,
       :latest_device_job,
       :device_aggregated_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1058,8 @@ module Aws::Panorama
       :job_id,
       :created_time,
       :job_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1028,7 +1069,8 @@ module Aws::Panorama
     #   @return [Types::OTAJobConfig]
     class DeviceJobConfig < Struct.new(
       :ota_job_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1084,8 @@ module Aws::Panorama
     class EthernetPayload < Struct.new(
       :connection_type,
       :static_ip_connection_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1103,8 @@ module Aws::Panorama
       :ip_address,
       :connection_status,
       :hw_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1117,8 @@ module Aws::Panorama
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1092,7 +1137,8 @@ module Aws::Panorama
     class Job < Struct.new(
       :job_id,
       :device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1106,7 +1152,8 @@ module Aws::Panorama
     class JobResourceTags < Struct.new(
       :resource_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1171,8 @@ module Aws::Panorama
       :image_version,
       :status,
       :job_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,7 +1189,8 @@ module Aws::Panorama
       :application_instance_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1203,8 @@ module Aws::Panorama
     class ListApplicationInstanceDependenciesOutput < Struct.new(
       :package_objects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1171,7 +1221,8 @@ module Aws::Panorama
       :application_instance_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1184,7 +1235,8 @@ module Aws::Panorama
     class ListApplicationInstanceNodeInstancesOutput < Struct.new(
       :node_instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1205,7 +1257,8 @@ module Aws::Panorama
       :status_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1271,8 @@ module Aws::Panorama
     class ListApplicationInstancesOutput < Struct.new(
       :application_instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1247,7 +1301,8 @@ module Aws::Panorama
       :sort_order,
       :name_filter,
       :device_aggregated_status_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1319,8 @@ module Aws::Panorama
       :device_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1333,8 @@ module Aws::Panorama
     class ListDevicesJobsOutput < Struct.new(
       :device_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1347,8 @@ module Aws::Panorama
     class ListDevicesOutput < Struct.new(
       :devices,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1303,7 +1361,8 @@ module Aws::Panorama
     class ListNodeFromTemplateJobsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1316,7 +1375,8 @@ module Aws::Panorama
     class ListNodeFromTemplateJobsOutput < Struct.new(
       :node_from_template_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1349,7 +1409,8 @@ module Aws::Panorama
       :patch_version,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1423,8 @@ module Aws::Panorama
     class ListNodesOutput < Struct.new(
       :nodes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1375,7 +1437,8 @@ module Aws::Panorama
     class ListPackageImportJobsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1388,7 +1451,8 @@ module Aws::Panorama
     class ListPackageImportJobsOutput < Struct.new(
       :package_import_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1401,7 +1465,8 @@ module Aws::Panorama
     class ListPackagesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1414,7 +1479,8 @@ module Aws::Panorama
     class ListPackagesOutput < Struct.new(
       :packages,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1489,8 @@ module Aws::Panorama
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1499,8 @@ module Aws::Panorama
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1444,7 +1512,8 @@ module Aws::Panorama
     class ManifestOverridesPayload < Struct.new(
       :payload_data,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PayloadData < ManifestOverridesPayload; end
@@ -1460,7 +1529,8 @@ module Aws::Panorama
     class ManifestPayload < Struct.new(
       :payload_data,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PayloadData < ManifestPayload; end
@@ -1481,7 +1551,8 @@ module Aws::Panorama
       :ethernet0,
       :ethernet1,
       :ntp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1574,8 @@ module Aws::Panorama
       :ethernet1_status,
       :ntp_status,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1625,8 @@ module Aws::Panorama
       :patch_version,
       :description,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1583,7 +1656,8 @@ module Aws::Panorama
       :status_message,
       :created_time,
       :node_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1609,7 +1683,8 @@ module Aws::Panorama
       :type,
       :default_value,
       :max_connections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1648,7 +1723,8 @@ module Aws::Panorama
       :package_patch_version,
       :node_name,
       :current_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1738,8 @@ module Aws::Panorama
     class NodeInterface < Struct.new(
       :inputs,
       :outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1757,8 @@ module Aws::Panorama
       :name,
       :description,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1772,8 @@ module Aws::Panorama
     class NodeSignal < Struct.new(
       :node_instance_id,
       :signal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1784,8 @@ module Aws::Panorama
     #   @return [Array<String>]
     class NtpPayload < Struct.new(
       :ntp_servers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1803,8 @@ module Aws::Panorama
       :connection_status,
       :ip_address,
       :ntp_server_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1737,7 +1818,8 @@ module Aws::Panorama
     class OTAJobConfig < Struct.new(
       :image_version,
       :allow_major_version_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1756,7 +1838,8 @@ module Aws::Panorama
     class OutPutS3Location < Struct.new(
       :bucket_name,
       :object_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1786,7 +1869,8 @@ module Aws::Panorama
       :status_message,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1880,8 @@ module Aws::Panorama
     #   @return [Types::PackageVersionInputConfig]
     class PackageImportJobInputConfig < Struct.new(
       :package_version_input_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1818,7 +1903,8 @@ module Aws::Panorama
       :package_version,
       :patch_version,
       :output_s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1828,7 +1914,8 @@ module Aws::Panorama
     #   @return [Types::PackageVersionOutputConfig]
     class PackageImportJobOutputConfig < Struct.new(
       :package_version_output_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,7 +1941,8 @@ module Aws::Panorama
       :arn,
       :created_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1872,7 +1960,8 @@ module Aws::Panorama
       :name,
       :package_version,
       :patch_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1882,7 +1971,8 @@ module Aws::Panorama
     #   @return [Types::S3Location]
     class PackageVersionInputConfig < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1900,7 +1990,8 @@ module Aws::Panorama
       :package_name,
       :package_version,
       :mark_latest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1926,7 +2017,8 @@ module Aws::Panorama
       :description,
       :tags,
       :networking_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1951,7 +2043,8 @@ module Aws::Panorama
       :status,
       :certificates,
       :iot_thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1976,12 +2069,14 @@ module Aws::Panorama
       :package_version,
       :patch_version,
       :mark_latest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RegisterPackageVersionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1990,12 +2085,14 @@ module Aws::Panorama
     #   @return [String]
     class RemoveApplicationInstanceInput < Struct.new(
       :application_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveApplicationInstanceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2017,7 +2114,8 @@ module Aws::Panorama
       :runtime_context_name,
       :device_reported_status,
       :device_reported_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2034,7 +2132,8 @@ module Aws::Panorama
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2052,7 +2151,8 @@ module Aws::Panorama
       :region,
       :bucket_name,
       :object_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2077,7 +2177,8 @@ module Aws::Panorama
       :resource_type,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2090,7 +2191,8 @@ module Aws::Panorama
     class SignalApplicationInstanceNodeInstancesInput < Struct.new(
       :application_instance_id,
       :node_signals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2201,8 @@ module Aws::Panorama
     #   @return [String]
     class SignalApplicationInstanceNodeInstancesOutput < Struct.new(
       :application_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2224,8 @@ module Aws::Panorama
       :mask,
       :dns,
       :default_gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2147,7 +2251,8 @@ module Aws::Panorama
       :generated_prefix_location,
       :binary_prefix_location,
       :manifest_prefix_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2160,12 +2265,14 @@ module Aws::Panorama
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,12 +2285,14 @@ module Aws::Panorama
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2196,7 +2305,8 @@ module Aws::Panorama
     class UpdateDeviceMetadataInput < Struct.new(
       :device_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2205,7 +2315,8 @@ module Aws::Panorama
     #   @return [String]
     class UpdateDeviceMetadataOutput < Struct.new(
       :device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2230,7 +2341,8 @@ module Aws::Panorama
       :error_id,
       :error_arguments,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2244,7 +2356,8 @@ module Aws::Panorama
     class ValidationExceptionErrorArgument < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2258,7 +2371,8 @@ module Aws::Panorama
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

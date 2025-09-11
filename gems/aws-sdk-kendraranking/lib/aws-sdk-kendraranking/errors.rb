@@ -43,7 +43,7 @@ module Aws::KendraRanking
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KendraRanking::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::KendraRanking
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KendraRanking::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -74,7 +74,7 @@ module Aws::KendraRanking
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KendraRanking::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -89,7 +89,7 @@ module Aws::KendraRanking
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KendraRanking::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::KendraRanking
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KendraRanking::Types::ResourceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::KendraRanking
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KendraRanking::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::KendraRanking
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KendraRanking::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -150,7 +150,7 @@ module Aws::KendraRanking
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KendraRanking::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

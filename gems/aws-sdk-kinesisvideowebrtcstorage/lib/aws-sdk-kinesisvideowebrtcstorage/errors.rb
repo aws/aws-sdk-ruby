@@ -37,7 +37,7 @@ module Aws::KinesisVideoWebRTCStorage
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoWebRTCStorage::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::KinesisVideoWebRTCStorage
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoWebRTCStorage::Types::ClientLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::KinesisVideoWebRTCStorage
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoWebRTCStorage::Types::InvalidArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::KinesisVideoWebRTCStorage
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisVideoWebRTCStorage::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

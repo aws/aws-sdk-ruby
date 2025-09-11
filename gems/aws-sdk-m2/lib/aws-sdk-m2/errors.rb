@@ -42,7 +42,7 @@ module Aws::M2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::M2::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::M2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::M2::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::M2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::M2::Types::ExecutionTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::M2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::M2::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -117,7 +117,7 @@ module Aws::M2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::M2::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::M2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::M2::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -173,7 +173,7 @@ module Aws::M2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::M2::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::M2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::M2::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -226,7 +226,7 @@ module Aws::M2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::M2::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

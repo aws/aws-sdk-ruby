@@ -43,7 +43,7 @@ module Aws::Support
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::AttachmentIdNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An attachment with the specified ID could not be found.</p>
@@ -58,7 +58,7 @@ module Aws::Support
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::AttachmentLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The limit for the number of attachment sets created in a short period of time has been
@@ -74,7 +74,7 @@ module Aws::Support
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::AttachmentSetExpired] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The expiration time of the attachment set has passed. The set expires one hour after
@@ -89,7 +89,7 @@ module Aws::Support
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::AttachmentSetIdNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An attachment set with the specified ID could not be found.</p>
@@ -104,7 +104,7 @@ module Aws::Support
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::AttachmentSetSizeLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A limit for the size of an attachment set has been exceeded. The limits are three
@@ -119,7 +119,7 @@ module Aws::Support
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::CaseCreationLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error message that indicates that you have exceeded the number of cases you can
@@ -134,7 +134,7 @@ module Aws::Support
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::CaseIdNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The requested <code>CaseId</code> could not be located.</p>
@@ -149,7 +149,7 @@ module Aws::Support
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::DescribeAttachmentLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The limit for the number of <a>DescribeAttachment</a> requests in a short
@@ -164,7 +164,7 @@ module Aws::Support
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An internal server error occurred.</p>
@@ -180,7 +180,7 @@ module Aws::Support
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

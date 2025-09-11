@@ -4,7 +4,7 @@
 
 Gem::Specification.new do |spec|
   spec.name        = 'aws-sdk-qconnect'
-  spec.version     = File.read(File.expand_path('../VERSION', __FILE__))
+  spec.version     = File.read(File.expand_path('VERSION', __dir__))
   spec.summary     = 'Generated gem using Smithy'
   spec.authors     = ['Smithy Ruby']
   spec.files       = Dir['VERSION', 'CHANGELOG.md', 'lib/**/*.rb', base: __dir__]

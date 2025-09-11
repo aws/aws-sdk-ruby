@@ -11,7 +11,8 @@ module Aws::SFN
     #   @return [String]
     class ActivityAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::SFN
     #   @return [String]
     class ActivityDoesNotExist < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +36,8 @@ module Aws::SFN
     class ActivityFailedEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +47,8 @@ module Aws::SFN
     #   @return [String]
     class ActivityLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +94,8 @@ module Aws::SFN
       :activity_arn,
       :name,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,7 +110,8 @@ module Aws::SFN
     class ActivityScheduleFailedEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +137,8 @@ module Aws::SFN
       :input_details,
       :timeout_in_seconds,
       :heartbeat_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -148,7 +155,8 @@ module Aws::SFN
     #   @return [String]
     class ActivityStartedEventDetails < Struct.new(
       :worker_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +171,8 @@ module Aws::SFN
     class ActivitySucceededEventDetails < Struct.new(
       :output,
       :output_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +186,8 @@ module Aws::SFN
     class ActivityTimedOutEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +197,8 @@ module Aws::SFN
     #   @return [String]
     class ActivityWorkerLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +209,8 @@ module Aws::SFN
     #   @return [Boolean]
     class AssignedVariablesDetails < Struct.new(
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -217,7 +229,8 @@ module Aws::SFN
     class BillingDetails < Struct.new(
       :billed_memory_used_in_mb,
       :billed_duration_in_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -234,7 +247,8 @@ module Aws::SFN
     #   @return [Boolean]
     class CloudWatchEventsExecutionDataDetails < Struct.new(
       :included,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -251,7 +265,8 @@ module Aws::SFN
     #   @return [String]
     class CloudWatchLogsLogGroup < Struct.new(
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +276,8 @@ module Aws::SFN
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,7 +329,8 @@ module Aws::SFN
       :name,
       :tags,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +343,8 @@ module Aws::SFN
     class CreateActivityOutput < Struct.new(
       :activity_arn,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +366,8 @@ module Aws::SFN
       :description,
       :name,
       :routing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +380,8 @@ module Aws::SFN
     class CreateStateMachineAliasOutput < Struct.new(
       :state_machine_alias_arn,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +466,8 @@ module Aws::SFN
       :publish,
       :version_description,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -463,7 +484,8 @@ module Aws::SFN
       :state_machine_arn,
       :creation_date,
       :state_machine_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,12 +494,14 @@ module Aws::SFN
     #   @return [String]
     class DeleteActivityInput < Struct.new(
       :activity_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteActivityOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -486,12 +510,14 @@ module Aws::SFN
     #   @return [String]
     class DeleteStateMachineAliasInput < Struct.new(
       :state_machine_alias_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStateMachineAliasOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,12 +526,14 @@ module Aws::SFN
     #   @return [String]
     class DeleteStateMachineInput < Struct.new(
       :state_machine_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStateMachineOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,12 +542,14 @@ module Aws::SFN
     #   @return [String]
     class DeleteStateMachineVersionInput < Struct.new(
       :state_machine_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStateMachineVersionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +558,8 @@ module Aws::SFN
     #   @return [String]
     class DescribeActivityInput < Struct.new(
       :activity_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -577,7 +608,8 @@ module Aws::SFN
       :name,
       :creation_date,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +622,8 @@ module Aws::SFN
     class DescribeExecutionInput < Struct.new(
       :execution_arn,
       :included_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +800,8 @@ module Aws::SFN
       :redrive_date,
       :redrive_status,
       :redrive_status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -776,7 +810,8 @@ module Aws::SFN
     #   @return [String]
     class DescribeMapRunInput < Struct.new(
       :map_run_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +864,8 @@ module Aws::SFN
       :execution_counts,
       :redrive_count,
       :redrive_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -845,7 +881,8 @@ module Aws::SFN
     #   @return [String]
     class DescribeStateMachineAliasInput < Struct.new(
       :state_machine_alias_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +912,8 @@ module Aws::SFN
       :routing_configuration,
       :creation_date,
       :update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +926,8 @@ module Aws::SFN
     class DescribeStateMachineForExecutionInput < Struct.new(
       :execution_arn,
       :included_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -944,7 +983,8 @@ module Aws::SFN
       :revision_id,
       :encryption_configuration,
       :variable_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -963,7 +1003,8 @@ module Aws::SFN
     class DescribeStateMachineInput < Struct.new(
       :state_machine_arn,
       :included_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1102,8 @@ module Aws::SFN
       :description,
       :encryption_configuration,
       :variable_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1087,7 +1129,8 @@ module Aws::SFN
       :kms_key_id,
       :kms_data_key_reuse_period_seconds,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1109,7 +1152,8 @@ module Aws::SFN
       :cause,
       :location,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1123,7 +1167,8 @@ module Aws::SFN
     class ExecutionAbortedEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1137,7 +1182,8 @@ module Aws::SFN
     #   @return [String]
     class ExecutionAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1192,8 @@ module Aws::SFN
     #   @return [String]
     class ExecutionDoesNotExist < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1160,7 +1207,8 @@ module Aws::SFN
     class ExecutionFailedEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1170,7 +1218,8 @@ module Aws::SFN
     #   @return [String]
     class ExecutionLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1304,8 @@ module Aws::SFN
       :state_machine_alias_arn,
       :redrive_count,
       :redrive_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1269,7 +1319,8 @@ module Aws::SFN
     #   @return [String]
     class ExecutionNotRedrivable < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1330,8 @@ module Aws::SFN
     #   @return [Integer]
     class ExecutionRedrivenEventDetails < Struct.new(
       :redrive_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1305,7 +1357,8 @@ module Aws::SFN
       :role_arn,
       :state_machine_alias_arn,
       :state_machine_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1372,8 @@ module Aws::SFN
     class ExecutionSucceededEventDetails < Struct.new(
       :output,
       :output_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1333,7 +1387,8 @@ module Aws::SFN
     class ExecutionTimedOutEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1403,8 @@ module Aws::SFN
     class GetActivityTaskInput < Struct.new(
       :activity_arn,
       :worker_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1420,8 @@ module Aws::SFN
     class GetActivityTaskOutput < Struct.new(
       :task_token,
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1393,7 +1450,8 @@ module Aws::SFN
       :reverse_order,
       :next_token,
       :include_execution_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1407,7 +1465,8 @@ module Aws::SFN
     class GetExecutionHistoryOutput < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1580,7 +1639,8 @@ module Aws::SFN
       :map_run_failed_event_details,
       :map_run_redriven_event_details,
       :evaluation_failed_event_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1597,7 +1657,8 @@ module Aws::SFN
     #   @return [Boolean]
     class HistoryEventExecutionDataDetails < Struct.new(
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1649,7 +1710,8 @@ module Aws::SFN
       :request,
       :response,
       :variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1737,8 @@ module Aws::SFN
       :url,
       :headers,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1701,7 +1764,8 @@ module Aws::SFN
       :status_message,
       :headers,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1774,8 @@ module Aws::SFN
     #   @return [String]
     class InvalidArn < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1719,7 +1784,8 @@ module Aws::SFN
     #   @return [String]
     class InvalidDefinition < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1728,7 +1794,8 @@ module Aws::SFN
     #   @return [String]
     class InvalidEncryptionConfiguration < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1737,7 +1804,8 @@ module Aws::SFN
     #   @return [String]
     class InvalidExecutionInput < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1746,7 +1814,8 @@ module Aws::SFN
     #   @return [String]
     class InvalidLoggingConfiguration < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1755,7 +1824,8 @@ module Aws::SFN
     #   @return [String]
     class InvalidName < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1834,8 @@ module Aws::SFN
     #   @return [String]
     class InvalidOutput < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1773,7 +1844,8 @@ module Aws::SFN
     #   @return [String]
     class InvalidToken < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1783,7 +1855,8 @@ module Aws::SFN
     #   @return [String]
     class InvalidTracingConfiguration < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1865,8 @@ module Aws::SFN
     #   @return [String]
     class KmsAccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,7 +1879,8 @@ module Aws::SFN
     class KmsInvalidStateException < Struct.new(
       :kms_key_state,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1889,8 @@ module Aws::SFN
     #   @return [String]
     class KmsThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1828,7 +1904,8 @@ module Aws::SFN
     class LambdaFunctionFailedEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1843,7 +1920,8 @@ module Aws::SFN
     class LambdaFunctionScheduleFailedEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1947,8 @@ module Aws::SFN
       :input_details,
       :timeout_in_seconds,
       :task_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1888,7 +1967,8 @@ module Aws::SFN
     class LambdaFunctionStartFailedEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +1983,8 @@ module Aws::SFN
     class LambdaFunctionSucceededEventDetails < Struct.new(
       :output,
       :output_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +1998,8 @@ module Aws::SFN
     class LambdaFunctionTimedOutEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1933,7 +2015,8 @@ module Aws::SFN
     class ListActivitiesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2030,8 @@ module Aws::SFN
     class ListActivitiesOutput < Struct.new(
       :activities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1991,7 +2075,8 @@ module Aws::SFN
       :next_token,
       :map_run_arn,
       :redrive_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2005,7 +2090,8 @@ module Aws::SFN
     class ListExecutionsOutput < Struct.new(
       :executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2025,7 +2111,8 @@ module Aws::SFN
       :execution_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2039,7 +2126,8 @@ module Aws::SFN
     class ListMapRunsOutput < Struct.new(
       :map_runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2060,7 +2148,8 @@ module Aws::SFN
       :state_machine_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2163,8 @@ module Aws::SFN
     class ListStateMachineAliasesOutput < Struct.new(
       :state_machine_aliases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2094,7 +2184,8 @@ module Aws::SFN
       :state_machine_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2108,7 +2199,8 @@ module Aws::SFN
     class ListStateMachineVersionsOutput < Struct.new(
       :state_machine_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2124,7 +2216,8 @@ module Aws::SFN
     class ListStateMachinesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2137,7 +2230,8 @@ module Aws::SFN
     class ListStateMachinesOutput < Struct.new(
       :state_machines,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2146,7 +2240,8 @@ module Aws::SFN
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2250,8 @@ module Aws::SFN
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2165,7 +2261,8 @@ module Aws::SFN
     #   @return [Types::CloudWatchLogsLogGroup]
     class LogDestination < Struct.new(
       :cloud_watch_logs_log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2186,7 +2283,8 @@ module Aws::SFN
       :level,
       :include_execution_data,
       :destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2205,7 +2303,8 @@ module Aws::SFN
     class MapIterationEventDetails < Struct.new(
       :name,
       :index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2256,7 +2355,8 @@ module Aws::SFN
       :results_written,
       :failures_not_redrivable,
       :pending_redrive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2282,7 +2382,8 @@ module Aws::SFN
     class MapRunFailedEventDetails < Struct.new(
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2328,7 +2429,8 @@ module Aws::SFN
       :results_written,
       :failures_not_redrivable,
       :pending_redrive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2366,7 +2468,8 @@ module Aws::SFN
       :state_machine_arn,
       :start_date,
       :stop_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2380,7 +2483,8 @@ module Aws::SFN
     class MapRunRedrivenEventDetails < Struct.new(
       :map_run_arn,
       :redrive_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2390,7 +2494,8 @@ module Aws::SFN
     #   @return [String]
     class MapRunStartedEventDetails < Struct.new(
       :map_run_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2400,7 +2505,8 @@ module Aws::SFN
     #   @return [Integer]
     class MapStateStartedEventDetails < Struct.new(
       :length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2415,7 +2521,8 @@ module Aws::SFN
     #   @return [String]
     class MissingRequiredParameter < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2441,7 +2548,8 @@ module Aws::SFN
       :state_machine_arn,
       :revision_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2454,7 +2562,8 @@ module Aws::SFN
     class PublishStateMachineVersionOutput < Struct.new(
       :creation_date,
       :state_machine_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2467,7 +2576,8 @@ module Aws::SFN
     class RedriveExecutionInput < Struct.new(
       :execution_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2476,7 +2586,8 @@ module Aws::SFN
     #   @return [Time]
     class RedriveExecutionOutput < Struct.new(
       :redrive_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2488,7 +2599,8 @@ module Aws::SFN
     class ResourceNotFound < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2506,7 +2618,8 @@ module Aws::SFN
     class RoutingConfigurationListItem < Struct.new(
       :state_machine_version_arn,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2530,12 +2643,14 @@ module Aws::SFN
       :task_token,
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SendTaskFailureOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2546,12 +2661,14 @@ module Aws::SFN
     #   @return [String]
     class SendTaskHeartbeatInput < Struct.new(
       :task_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SendTaskHeartbeatOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2566,12 +2683,14 @@ module Aws::SFN
     class SendTaskSuccessInput < Struct.new(
       :task_token,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SendTaskSuccessOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2581,7 +2700,8 @@ module Aws::SFN
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2677,7 +2797,8 @@ module Aws::SFN
       :name,
       :input,
       :trace_header,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2690,7 +2811,8 @@ module Aws::SFN
     class StartExecutionOutput < Struct.new(
       :execution_arn,
       :start_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2730,7 +2852,8 @@ module Aws::SFN
       :input,
       :trace_header,
       :included_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2801,7 +2924,8 @@ module Aws::SFN
       :output_details,
       :trace_header,
       :billing_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2819,7 +2943,8 @@ module Aws::SFN
       :name,
       :input,
       :input_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2873,7 +2998,8 @@ module Aws::SFN
       :output_details,
       :assigned_variables,
       :assigned_variables_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2887,7 +3013,8 @@ module Aws::SFN
     class StateMachineAliasListItem < Struct.new(
       :state_machine_alias_arn,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2897,7 +3024,8 @@ module Aws::SFN
     #   @return [String]
     class StateMachineAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2906,7 +3034,8 @@ module Aws::SFN
     #   @return [String]
     class StateMachineDeleting < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2915,7 +3044,8 @@ module Aws::SFN
     #   @return [String]
     class StateMachineDoesNotExist < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2925,7 +3055,8 @@ module Aws::SFN
     #   @return [String]
     class StateMachineLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2975,7 +3106,8 @@ module Aws::SFN
       :name,
       :type,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2984,7 +3116,8 @@ module Aws::SFN
     #   @return [String]
     class StateMachineTypeNotSupported < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2998,7 +3131,8 @@ module Aws::SFN
     class StateMachineVersionListItem < Struct.new(
       :state_machine_version_arn,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3015,7 +3149,8 @@ module Aws::SFN
       :execution_arn,
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3024,7 +3159,8 @@ module Aws::SFN
     #   @return [Time]
     class StopExecutionOutput < Struct.new(
       :stop_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3044,7 +3180,8 @@ module Aws::SFN
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3058,12 +3195,14 @@ module Aws::SFN
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3073,7 +3212,8 @@ module Aws::SFN
     #   @return [String]
     class TaskCredentials < Struct.new(
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3082,7 +3222,8 @@ module Aws::SFN
     #   @return [String]
     class TaskDoesNotExist < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3104,7 +3245,8 @@ module Aws::SFN
       :resource,
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3139,7 +3281,8 @@ module Aws::SFN
       :timeout_in_seconds,
       :heartbeat_in_seconds,
       :task_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3167,7 +3310,8 @@ module Aws::SFN
       :resource,
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3181,7 +3325,8 @@ module Aws::SFN
     class TaskStartedEventDetails < Struct.new(
       :resource_type,
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3203,7 +3348,8 @@ module Aws::SFN
       :resource,
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3225,7 +3371,8 @@ module Aws::SFN
       :resource,
       :output,
       :output_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3248,7 +3395,8 @@ module Aws::SFN
       :resource,
       :output,
       :output_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3257,7 +3405,8 @@ module Aws::SFN
     #   @return [String]
     class TaskTimedOut < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3279,7 +3428,8 @@ module Aws::SFN
       :resource,
       :error,
       :cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3325,7 +3475,8 @@ module Aws::SFN
       :inspection_level,
       :reveal_secrets,
       :variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3354,7 +3505,8 @@ module Aws::SFN
       :inspection_data,
       :next_state,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3367,7 +3519,8 @@ module Aws::SFN
     class TooManyTags < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3379,7 +3532,8 @@ module Aws::SFN
     #   @return [Boolean]
     class TracingConfiguration < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3397,12 +3551,14 @@ module Aws::SFN
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3423,12 +3579,14 @@ module Aws::SFN
       :max_concurrency,
       :tolerated_failure_percentage,
       :tolerated_failure_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateMapRunOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3446,7 +3604,8 @@ module Aws::SFN
       :state_machine_alias_arn,
       :description,
       :routing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3455,7 +3614,8 @@ module Aws::SFN
     #   @return [Time]
     class UpdateStateMachineAliasOutput < Struct.new(
       :update_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3496,7 +3656,8 @@ module Aws::SFN
       :publish,
       :version_description,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3514,7 +3675,8 @@ module Aws::SFN
       :update_date,
       :revision_id,
       :state_machine_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3629,7 +3791,8 @@ module Aws::SFN
       :code,
       :message,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3652,7 +3815,8 @@ module Aws::SFN
       :type,
       :severity,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3670,7 +3834,8 @@ module Aws::SFN
       :result,
       :diagnostics,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3683,7 +3848,8 @@ module Aws::SFN
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

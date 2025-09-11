@@ -12,7 +12,8 @@ module Aws::MPA
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23,7 +24,8 @@ module Aws::MPA
     class ApprovalStrategy < Struct.new(
       :mof_n,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class MofN < ApprovalStrategy; end
@@ -37,7 +39,8 @@ module Aws::MPA
     class ApprovalStrategyResponse < Struct.new(
       :mof_n,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class MofN < ApprovalStrategyResponse; end
@@ -54,7 +57,8 @@ module Aws::MPA
     class ApprovalTeamRequestApprover < Struct.new(
       :primary_identity_id,
       :primary_identity_source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -63,12 +67,14 @@ module Aws::MPA
     #   @return [String]
     class CancelSessionRequest < Struct.new(
       :session_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelSessionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +84,8 @@ module Aws::MPA
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +118,8 @@ module Aws::MPA
       :policies,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +140,8 @@ module Aws::MPA
       :arn,
       :name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +158,8 @@ module Aws::MPA
       :identity_source_parameters,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -166,7 +176,8 @@ module Aws::MPA
       :identity_source_type,
       :identity_source_arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +186,8 @@ module Aws::MPA
     #   @return [String]
     class DeleteIdentitySourceRequest < Struct.new(
       :identity_source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -188,12 +200,14 @@ module Aws::MPA
     class DeleteInactiveApprovalTeamVersionRequest < Struct.new(
       :arn,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteInactiveApprovalTeamVersionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +225,8 @@ module Aws::MPA
       :field_name,
       :operator,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -220,7 +235,8 @@ module Aws::MPA
     #   @return [String]
     class GetApprovalTeamRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +301,8 @@ module Aws::MPA
       :policies,
       :last_update_time,
       :pending_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +328,8 @@ module Aws::MPA
       :primary_identity_id,
       :primary_identity_source_arn,
       :primary_identity_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +338,8 @@ module Aws::MPA
     #   @return [String]
     class GetIdentitySourceRequest < Struct.new(
       :identity_source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +372,8 @@ module Aws::MPA
       :status,
       :status_code,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +382,8 @@ module Aws::MPA
     #   @return [String]
     class GetPolicyVersionRequest < Struct.new(
       :policy_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +392,8 @@ module Aws::MPA
     #   @return [Types::PolicyVersion]
     class GetPolicyVersionResponse < Struct.new(
       :policy_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -388,7 +410,8 @@ module Aws::MPA
       :resource_arn,
       :policy_name,
       :policy_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +436,8 @@ module Aws::MPA
       :policy_version_arn,
       :policy_name,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +446,8 @@ module Aws::MPA
     #   @return [String]
     class GetSessionRequest < Struct.new(
       :session_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +544,8 @@ module Aws::MPA
       :requester_comment,
       :action_completion_strategy,
       :approver_responses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +571,8 @@ module Aws::MPA
       :identity_id,
       :response,
       :response_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -559,7 +586,8 @@ module Aws::MPA
     class IamIdentityCenter < Struct.new(
       :instance_arn,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -577,7 +605,8 @@ module Aws::MPA
       :instance_arn,
       :approval_portal_url,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,7 +624,8 @@ module Aws::MPA
       :instance_arn,
       :approval_portal_url,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +659,8 @@ module Aws::MPA
       :status,
       :status_code,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -639,7 +670,8 @@ module Aws::MPA
     #   @return [Types::IamIdentityCenter]
     class IdentitySourceParameters < Struct.new(
       :iam_identity_center,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +682,8 @@ module Aws::MPA
     class IdentitySourceParametersForGet < Struct.new(
       :iam_identity_center,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IamIdentityCenter < IdentitySourceParametersForGet; end
@@ -664,7 +697,8 @@ module Aws::MPA
     class IdentitySourceParametersForList < Struct.new(
       :iam_identity_center,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IamIdentityCenter < IdentitySourceParametersForList; end
@@ -677,7 +711,8 @@ module Aws::MPA
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +722,8 @@ module Aws::MPA
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +736,8 @@ module Aws::MPA
     class ListApprovalTeamsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +750,8 @@ module Aws::MPA
     class ListApprovalTeamsResponse < Struct.new(
       :next_token,
       :approval_teams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +793,8 @@ module Aws::MPA
       :status,
       :status_code,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +807,8 @@ module Aws::MPA
     class ListIdentitySourcesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -781,7 +821,8 @@ module Aws::MPA
     class ListIdentitySourcesResponse < Struct.new(
       :next_token,
       :identity_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +835,8 @@ module Aws::MPA
     class ListPoliciesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +849,8 @@ module Aws::MPA
     class ListPoliciesResponse < Struct.new(
       :next_token,
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -824,7 +867,8 @@ module Aws::MPA
       :max_results,
       :next_token,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +881,8 @@ module Aws::MPA
     class ListPolicyVersionsResponse < Struct.new(
       :next_token,
       :policy_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -854,7 +899,8 @@ module Aws::MPA
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -867,7 +913,8 @@ module Aws::MPA
     class ListResourcePoliciesResponse < Struct.new(
       :next_token,
       :resource_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -885,7 +932,8 @@ module Aws::MPA
       :policy_arn,
       :policy_type,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +954,8 @@ module Aws::MPA
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -919,7 +968,8 @@ module Aws::MPA
     class ListSessionsResponse < Struct.new(
       :next_token,
       :sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,7 +1043,8 @@ module Aws::MPA
       :status_code,
       :status_message,
       :action_completion_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1053,8 @@ module Aws::MPA
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1063,8 @@ module Aws::MPA
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1021,7 +1074,8 @@ module Aws::MPA
     #   @return [Integer]
     class MofNApprovalStrategy < Struct.new(
       :min_approvals_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1063,7 +1117,8 @@ module Aws::MPA
       :status_message,
       :approvers,
       :update_initiation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1140,8 @@ module Aws::MPA
       :default_version,
       :policy_type,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1095,7 +1151,8 @@ module Aws::MPA
     #   @return [String]
     class PolicyReference < Struct.new(
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,7 +1198,8 @@ module Aws::MPA
       :creation_time,
       :last_updated_time,
       :document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,7 +1241,8 @@ module Aws::MPA
       :status,
       :creation_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1193,7 +1252,8 @@ module Aws::MPA
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,7 +1263,8 @@ module Aws::MPA
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1216,7 +1277,8 @@ module Aws::MPA
     class StartActiveApprovalTeamDeletionRequest < Struct.new(
       :pending_window_days,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1229,7 +1291,8 @@ module Aws::MPA
     class StartActiveApprovalTeamDeletionResponse < Struct.new(
       :deletion_completion_time,
       :deletion_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,12 +1305,14 @@ module Aws::MPA
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1257,7 +1322,8 @@ module Aws::MPA
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1337,8 @@ module Aws::MPA
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,12 +1351,14 @@ module Aws::MPA
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1310,7 +1379,8 @@ module Aws::MPA
       :approvers,
       :description,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1389,8 @@ module Aws::MPA
     #   @return [String]
     class UpdateApprovalTeamResponse < Struct.new(
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1400,8 @@ module Aws::MPA
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

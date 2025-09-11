@@ -13,7 +13,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class AccessDeniedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::DatabaseMigrationService
       :account_quota_name,
       :used,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -55,13 +57,15 @@ module Aws::DatabaseMigrationService
     class AddTagsToResourceMessage < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class AddTagsToResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,7 +105,8 @@ module Aws::DatabaseMigrationService
       :replication_instance_arn,
       :apply_action,
       :opt_in_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +116,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ResourcePendingMaintenanceActions]
     class ApplyPendingMaintenanceActionResponse < Struct.new(
       :resource_pending_maintenance_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +132,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class AvailabilityZone < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +152,8 @@ module Aws::DatabaseMigrationService
       :database_id,
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +163,8 @@ module Aws::DatabaseMigrationService
     #   @return [Array<Types::StartRecommendationsRequestEntry>]
     class BatchStartRecommendationsRequest < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +173,8 @@ module Aws::DatabaseMigrationService
     #   @return [Array<Types::BatchStartRecommendationsErrorEntry>]
     class BatchStartRecommendationsResponse < Struct.new(
       :error_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +184,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class CancelReplicationTaskAssessmentRunMessage < Struct.new(
       :replication_task_assessment_run_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +196,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationTaskAssessmentRun]
     class CancelReplicationTaskAssessmentRunResponse < Struct.new(
       :replication_task_assessment_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +248,8 @@ module Aws::DatabaseMigrationService
       :valid_to_date,
       :signing_algorithm,
       :key_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -259,7 +272,8 @@ module Aws::DatabaseMigrationService
       :local_collector_s3_access,
       :web_collector_s3_access,
       :web_collector_granted_role_based_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +282,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class CollectorNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -336,7 +351,8 @@ module Aws::DatabaseMigrationService
       :created_date,
       :modified_date,
       :inventory_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +366,8 @@ module Aws::DatabaseMigrationService
     class CollectorShortInfoResponse < Struct.new(
       :collector_referenced_id,
       :collector_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -428,7 +445,8 @@ module Aws::DatabaseMigrationService
       :preferred_maintenance_window,
       :replication_subnet_group_id,
       :vpc_security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +502,8 @@ module Aws::DatabaseMigrationService
       :last_failure_message,
       :endpoint_identifier,
       :replication_instance_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +565,8 @@ module Aws::DatabaseMigrationService
       :number_of_jobs,
       :tags,
       :selection_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +575,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::DataMigration]
     class CreateDataMigrationResponse < Struct.new(
       :data_migration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +607,8 @@ module Aws::DatabaseMigrationService
       :virtual,
       :settings,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,7 +617,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::DataProvider]
     class CreateDataProviderResponse < Struct.new(
       :data_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +866,8 @@ module Aws::DatabaseMigrationService
       :redis_settings,
       :gcp_my_sql_settings,
       :timestream_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -853,7 +877,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::Endpoint]
     class CreateEndpointResponse < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +927,8 @@ module Aws::DatabaseMigrationService
       :source_ids,
       :enabled,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -912,7 +938,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::EventSubscription]
     class CreateEventSubscriptionResponse < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +960,8 @@ module Aws::DatabaseMigrationService
       :description,
       :service_access_role_arn,
       :s3_bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,7 +988,8 @@ module Aws::DatabaseMigrationService
       :description,
       :service_access_role_arn,
       :s3_bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1045,8 @@ module Aws::DatabaseMigrationService
       :description,
       :subnet_group_identifier,
       :vpc_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1025,7 +1055,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::InstanceProfile]
     class CreateInstanceProfileResponse < Struct.new(
       :instance_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1066,7 +1097,8 @@ module Aws::DatabaseMigrationService
       :description,
       :tags,
       :schema_conversion_application_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1107,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::MigrationProject]
     class CreateMigrationProjectResponse < Struct.new(
       :migration_project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1156,7 +1189,8 @@ module Aws::DatabaseMigrationService
       :supplemental_settings,
       :resource_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1167,7 +1201,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationConfig]
     class CreateReplicationConfigResponse < Struct.new(
       :replication_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1339,8 @@ module Aws::DatabaseMigrationService
       :resource_identifier,
       :network_type,
       :kerberos_authentication_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1350,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationInstance]
     class CreateReplicationInstanceResponse < Struct.new(
       :replication_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1343,7 +1380,8 @@ module Aws::DatabaseMigrationService
       :replication_subnet_group_description,
       :subnet_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1391,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationSubnetGroup]
     class CreateReplicationSubnetGroupResponse < Struct.new(
       :replication_subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1462,7 +1501,8 @@ module Aws::DatabaseMigrationService
       :tags,
       :task_data,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1472,7 +1512,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationTask]
     class CreateReplicationTaskResponse < Struct.new(
       :replication_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,7 +1590,8 @@ module Aws::DatabaseMigrationService
       :data_migration_cidr_blocks,
       :last_failure_message,
       :stop_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1571,7 +1613,8 @@ module Aws::DatabaseMigrationService
       :number_of_jobs,
       :cloudwatch_logs_enabled,
       :selection_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1614,7 +1657,8 @@ module Aws::DatabaseMigrationService
       :tables_errored,
       :start_time,
       :stop_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1663,7 +1707,8 @@ module Aws::DatabaseMigrationService
       :engine,
       :virtual,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1730,8 @@ module Aws::DatabaseMigrationService
       :secrets_manager_access_role_arn,
       :data_provider_name,
       :data_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1703,7 +1749,8 @@ module Aws::DatabaseMigrationService
       :data_provider_identifier,
       :secrets_manager_secret_id,
       :secrets_manager_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1750,7 +1797,8 @@ module Aws::DatabaseMigrationService
       :ibm_db2z_os_settings,
       :mongo_db_settings,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RedshiftSettings < DataProviderSettings; end
@@ -1800,7 +1848,8 @@ module Aws::DatabaseMigrationService
       :support_level,
       :os_architecture,
       :tooltip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1835,7 +1884,8 @@ module Aws::DatabaseMigrationService
       :server,
       :software_details,
       :collectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1858,7 +1908,8 @@ module Aws::DatabaseMigrationService
       :database_name,
       :database_ip_address,
       :database_engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1868,7 +1919,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DefaultErrorDetails < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1877,7 +1929,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteCertificateMessage < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1886,7 +1939,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::Certificate]
     class DeleteCertificateResponse < Struct.new(
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1895,7 +1949,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteCollectorRequest < Struct.new(
       :collector_referenced_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1909,7 +1964,8 @@ module Aws::DatabaseMigrationService
     class DeleteConnectionMessage < Struct.new(
       :endpoint_arn,
       :replication_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1919,7 +1975,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::Connection]
     class DeleteConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1928,7 +1985,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteDataMigrationMessage < Struct.new(
       :data_migration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1937,7 +1995,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::DataMigration]
     class DeleteDataMigrationResponse < Struct.new(
       :data_migration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1946,7 +2005,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteDataProviderMessage < Struct.new(
       :data_provider_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2015,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::DataProvider]
     class DeleteDataProviderResponse < Struct.new(
       :data_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1965,7 +2026,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteEndpointMessage < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1975,7 +2037,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::Endpoint]
     class DeleteEndpointResponse < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1985,7 +2048,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,7 +2059,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::EventSubscription]
     class DeleteEventSubscriptionResponse < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2004,7 +2069,8 @@ module Aws::DatabaseMigrationService
     #   @return [Array<String>]
     class DeleteFleetAdvisorDatabasesRequest < Struct.new(
       :database_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2013,7 +2079,8 @@ module Aws::DatabaseMigrationService
     #   @return [Array<String>]
     class DeleteFleetAdvisorDatabasesResponse < Struct.new(
       :database_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2089,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteInstanceProfileMessage < Struct.new(
       :instance_profile_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2031,7 +2099,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::InstanceProfile]
     class DeleteInstanceProfileResponse < Struct.new(
       :instance_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2040,7 +2109,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteMigrationProjectMessage < Struct.new(
       :migration_project_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2049,7 +2119,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::MigrationProject]
     class DeleteMigrationProjectResponse < Struct.new(
       :migration_project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2130,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteReplicationConfigMessage < Struct.new(
       :replication_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2070,7 +2142,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationConfig]
     class DeleteReplicationConfigResponse < Struct.new(
       :replication_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2080,7 +2153,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteReplicationInstanceMessage < Struct.new(
       :replication_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2090,7 +2164,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationInstance]
     class DeleteReplicationInstanceResponse < Struct.new(
       :replication_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,13 +2175,15 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteReplicationSubnetGroupMessage < Struct.new(
       :replication_subnet_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class DeleteReplicationSubnetGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2116,7 +2193,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteReplicationTaskAssessmentRunMessage < Struct.new(
       :replication_task_assessment_run_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2127,7 +2205,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationTaskAssessmentRun]
     class DeleteReplicationTaskAssessmentRunResponse < Struct.new(
       :replication_task_assessment_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2137,7 +2216,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DeleteReplicationTaskMessage < Struct.new(
       :replication_task_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2147,13 +2227,15 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationTask]
     class DeleteReplicationTaskResponse < Struct.new(
       :replication_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class DescribeAccountAttributesMessage < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2260,8 @@ module Aws::DatabaseMigrationService
     class DescribeAccountAttributesResponse < Struct.new(
       :account_quotas,
       :unique_account_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2225,7 +2308,8 @@ module Aws::DatabaseMigrationService
       :migration_type,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2247,7 +2331,8 @@ module Aws::DatabaseMigrationService
     class DescribeApplicableIndividualAssessmentsResponse < Struct.new(
       :individual_assessment_names,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2270,7 +2355,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2284,7 +2370,8 @@ module Aws::DatabaseMigrationService
     class DescribeCertificatesResponse < Struct.new(
       :marker,
       :certificates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2309,7 +2396,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2325,7 +2413,8 @@ module Aws::DatabaseMigrationService
     class DescribeConnectionsResponse < Struct.new(
       :marker,
       :connections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2334,7 +2423,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DescribeConversionConfigurationMessage < Struct.new(
       :migration_project_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2347,7 +2437,8 @@ module Aws::DatabaseMigrationService
     class DescribeConversionConfigurationResponse < Struct.new(
       :migration_project_identifier,
       :conversion_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2380,7 +2471,8 @@ module Aws::DatabaseMigrationService
       :marker,
       :without_settings,
       :without_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2395,7 +2487,8 @@ module Aws::DatabaseMigrationService
     class DescribeDataMigrationsResponse < Struct.new(
       :data_migrations,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2420,7 +2513,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2438,7 +2532,8 @@ module Aws::DatabaseMigrationService
     class DescribeDataProvidersResponse < Struct.new(
       :marker,
       :data_providers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2459,7 +2554,8 @@ module Aws::DatabaseMigrationService
       :engine_name,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2475,7 +2571,8 @@ module Aws::DatabaseMigrationService
     class DescribeEndpointSettingsResponse < Struct.new(
       :marker,
       :endpoint_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2500,7 +2597,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2516,7 +2614,8 @@ module Aws::DatabaseMigrationService
     class DescribeEndpointTypesResponse < Struct.new(
       :marker,
       :supported_endpoint_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2541,7 +2640,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2557,7 +2657,8 @@ module Aws::DatabaseMigrationService
     class DescribeEndpointsResponse < Struct.new(
       :marker,
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2574,7 +2675,8 @@ module Aws::DatabaseMigrationService
     class DescribeEngineVersionsMessage < Struct.new(
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2590,7 +2692,8 @@ module Aws::DatabaseMigrationService
     class DescribeEngineVersionsResponse < Struct.new(
       :engine_versions,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2605,7 +2708,8 @@ module Aws::DatabaseMigrationService
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2615,7 +2719,8 @@ module Aws::DatabaseMigrationService
     #   @return [Array<Types::EventCategoryGroup>]
     class DescribeEventCategoriesResponse < Struct.new(
       :event_category_group_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2645,7 +2750,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2661,7 +2767,8 @@ module Aws::DatabaseMigrationService
     class DescribeEventSubscriptionsResponse < Struct.new(
       :marker,
       :event_subscriptions_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2711,7 +2818,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2727,7 +2835,8 @@ module Aws::DatabaseMigrationService
     class DescribeEventsResponse < Struct.new(
       :marker,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2755,7 +2864,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2773,7 +2883,8 @@ module Aws::DatabaseMigrationService
     class DescribeExtensionPackAssociationsResponse < Struct.new(
       :marker,
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2808,7 +2919,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2825,7 +2937,8 @@ module Aws::DatabaseMigrationService
     class DescribeFleetAdvisorCollectorsResponse < Struct.new(
       :collectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2877,7 +2990,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2894,7 +3008,8 @@ module Aws::DatabaseMigrationService
     class DescribeFleetAdvisorDatabasesResponse < Struct.new(
       :databases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2910,7 +3025,8 @@ module Aws::DatabaseMigrationService
     class DescribeFleetAdvisorLsaAnalysisRequest < Struct.new(
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2926,7 +3042,8 @@ module Aws::DatabaseMigrationService
     class DescribeFleetAdvisorLsaAnalysisResponse < Struct.new(
       :analysis,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2962,7 +3079,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2978,7 +3096,8 @@ module Aws::DatabaseMigrationService
     class DescribeFleetAdvisorSchemaObjectSummaryResponse < Struct.new(
       :fleet_advisor_schema_objects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3046,7 +3165,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3062,7 +3182,8 @@ module Aws::DatabaseMigrationService
     class DescribeFleetAdvisorSchemasResponse < Struct.new(
       :fleet_advisor_schemas,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3087,7 +3208,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3105,7 +3227,8 @@ module Aws::DatabaseMigrationService
     class DescribeInstanceProfilesResponse < Struct.new(
       :marker,
       :instance_profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3133,7 +3256,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3151,7 +3275,8 @@ module Aws::DatabaseMigrationService
     class DescribeMetadataModelAssessmentsResponse < Struct.new(
       :marker,
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3179,7 +3304,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3197,7 +3323,8 @@ module Aws::DatabaseMigrationService
     class DescribeMetadataModelConversionsResponse < Struct.new(
       :marker,
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3225,7 +3352,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3243,7 +3371,8 @@ module Aws::DatabaseMigrationService
     class DescribeMetadataModelExportsAsScriptResponse < Struct.new(
       :marker,
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3271,7 +3400,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3289,7 +3419,8 @@ module Aws::DatabaseMigrationService
     class DescribeMetadataModelExportsToTargetResponse < Struct.new(
       :marker,
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3315,7 +3446,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3333,7 +3465,8 @@ module Aws::DatabaseMigrationService
     class DescribeMetadataModelImportsResponse < Struct.new(
       :marker,
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3369,7 +3502,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3387,7 +3521,8 @@ module Aws::DatabaseMigrationService
     class DescribeMigrationProjectsResponse < Struct.new(
       :marker,
       :migration_projects,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3407,7 +3542,8 @@ module Aws::DatabaseMigrationService
     class DescribeOrderableReplicationInstancesMessage < Struct.new(
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3423,7 +3559,8 @@ module Aws::DatabaseMigrationService
     class DescribeOrderableReplicationInstancesResponse < Struct.new(
       :orderable_replication_instances,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3451,7 +3588,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :marker,
       :max_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3467,7 +3605,8 @@ module Aws::DatabaseMigrationService
     class DescribePendingMaintenanceActionsResponse < Struct.new(
       :pending_maintenance_actions,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3494,7 +3633,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3510,7 +3650,8 @@ module Aws::DatabaseMigrationService
     class DescribeRecommendationLimitationsResponse < Struct.new(
       :next_token,
       :limitations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3538,7 +3679,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3555,7 +3697,8 @@ module Aws::DatabaseMigrationService
     class DescribeRecommendationsResponse < Struct.new(
       :next_token,
       :recommendations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3565,7 +3708,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DescribeRefreshSchemasStatusMessage < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3575,7 +3719,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::RefreshSchemasStatus]
     class DescribeRefreshSchemasStatusResponse < Struct.new(
       :refresh_schemas_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3597,7 +3742,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3614,7 +3760,8 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationConfigsResponse < Struct.new(
       :marker,
       :replication_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3637,7 +3784,8 @@ module Aws::DatabaseMigrationService
       :replication_instance_arn,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3657,7 +3805,8 @@ module Aws::DatabaseMigrationService
       :replication_instance_arn,
       :replication_instance_task_logs,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3683,7 +3832,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3699,7 +3849,8 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationInstancesResponse < Struct.new(
       :marker,
       :replication_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3724,7 +3875,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3740,7 +3892,8 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationSubnetGroupsResponse < Struct.new(
       :marker,
       :replication_subnet_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3766,7 +3919,8 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3787,7 +3941,8 @@ module Aws::DatabaseMigrationService
       :replication_config_arn,
       :marker,
       :replication_table_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3813,7 +3968,8 @@ module Aws::DatabaseMigrationService
       :replication_task_arn,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3833,7 +3989,8 @@ module Aws::DatabaseMigrationService
       :marker,
       :bucket_name,
       :replication_task_assessment_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3860,7 +4017,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3877,7 +4035,8 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationTaskAssessmentRunsResponse < Struct.new(
       :marker,
       :replication_task_assessment_runs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3903,7 +4062,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3920,7 +4080,8 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationTaskIndividualAssessmentsResponse < Struct.new(
       :marker,
       :replication_task_individual_assessments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3952,7 +4113,8 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       :without_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3968,7 +4130,8 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationTasksResponse < Struct.new(
       :marker,
       :replication_tasks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3992,7 +4155,8 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4008,7 +4172,8 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationsResponse < Struct.new(
       :marker,
       :replications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4032,7 +4197,8 @@ module Aws::DatabaseMigrationService
       :endpoint_arn,
       :max_records,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4048,7 +4214,8 @@ module Aws::DatabaseMigrationService
     class DescribeSchemasResponse < Struct.new(
       :marker,
       :schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4079,7 +4246,8 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4099,7 +4267,8 @@ module Aws::DatabaseMigrationService
       :replication_task_arn,
       :table_statistics,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4114,7 +4283,8 @@ module Aws::DatabaseMigrationService
     class DmsTransferSettings < Struct.new(
       :service_access_role_arn,
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4141,7 +4311,8 @@ module Aws::DatabaseMigrationService
       :database_name,
       :ssl_mode,
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4239,7 +4410,8 @@ module Aws::DatabaseMigrationService
       :secrets_manager_secret_id,
       :use_update_look_up,
       :replicate_shard_collections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4251,7 +4423,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class DynamoDbSettings < Struct.new(
       :service_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4287,7 +4460,8 @@ module Aws::DatabaseMigrationService
       :full_load_error_percentage,
       :error_retry_duration,
       :use_new_mapping_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4493,7 +4667,8 @@ module Aws::DatabaseMigrationService
       :redis_settings,
       :gcp_my_sql_settings,
       :timestream_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4538,7 +4713,8 @@ module Aws::DatabaseMigrationService
       :int_value_min,
       :int_value_max,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4579,7 +4755,8 @@ module Aws::DatabaseMigrationService
       :deprecation_date,
       :force_upgrade_date,
       :available_upgrades,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4590,7 +4767,8 @@ module Aws::DatabaseMigrationService
     class ErrorDetails < Struct.new(
       :default_error_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DefaultErrorDetails < ErrorDetails; end
@@ -4622,7 +4800,8 @@ module Aws::DatabaseMigrationService
       :message,
       :event_categories,
       :date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4641,7 +4820,8 @@ module Aws::DatabaseMigrationService
     class EventCategoryGroup < Struct.new(
       :source_type,
       :event_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4693,7 +4873,8 @@ module Aws::DatabaseMigrationService
       :source_ids_list,
       :event_categories_list,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4719,7 +4900,8 @@ module Aws::DatabaseMigrationService
       :selection_rules,
       :file_name,
       :assessment_report_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4732,7 +4914,8 @@ module Aws::DatabaseMigrationService
     class ExportMetadataModelAssessmentResponse < Struct.new(
       :pdf_report,
       :csv_report,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4746,7 +4929,8 @@ module Aws::DatabaseMigrationService
     class ExportMetadataModelAssessmentResultEntry < Struct.new(
       :s3_object_key,
       :object_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4760,7 +4944,8 @@ module Aws::DatabaseMigrationService
     class ExportSqlDetails < Struct.new(
       :s3_object_key,
       :object_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4769,7 +4954,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class FailedDependencyFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4789,7 +4975,8 @@ module Aws::DatabaseMigrationService
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4803,7 +4990,8 @@ module Aws::DatabaseMigrationService
     class FleetAdvisorLsaAnalysisResponse < Struct.new(
       :lsa_analysis_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4852,7 +5040,8 @@ module Aws::DatabaseMigrationService
       :number_of_objects,
       :code_line_count,
       :code_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4961,7 +5150,8 @@ module Aws::DatabaseMigrationService
       :username,
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5044,7 +5234,8 @@ module Aws::DatabaseMigrationService
       :write_buffer_size,
       :max_file_size,
       :keep_csv_files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5079,7 +5270,8 @@ module Aws::DatabaseMigrationService
       :certificate_arn,
       :s3_path,
       :s3_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5114,7 +5306,8 @@ module Aws::DatabaseMigrationService
       :certificate_arn,
       :s3_path,
       :s3_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5141,7 +5334,8 @@ module Aws::DatabaseMigrationService
       :certificate_pem,
       :certificate_wallet,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5150,7 +5344,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::Certificate]
     class ImportCertificateResponse < Struct.new(
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5211,7 +5406,8 @@ module Aws::DatabaseMigrationService
       :instance_profile_creation_time,
       :subnet_group_identifier,
       :vpc_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5221,7 +5417,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class InsufficientResourceCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5230,7 +5427,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class InvalidCertificateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5239,7 +5437,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class InvalidOperationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5249,7 +5448,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class InvalidResourceStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5259,7 +5459,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class InvalidSubnet < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5273,7 +5474,8 @@ module Aws::DatabaseMigrationService
     class InventoryData < Struct.new(
       :number_of_databases,
       :number_of_schemas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5282,7 +5484,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class KMSAccessDeniedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5291,7 +5494,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class KMSDisabledFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5300,7 +5504,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class KMSFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5309,7 +5514,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class KMSInvalidStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5319,7 +5525,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class KMSKeyNotAccessibleFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5328,7 +5535,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class KMSNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5337,7 +5545,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class KMSThrottlingFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5474,7 +5683,8 @@ module Aws::DatabaseMigrationService
       :sasl_mechanism,
       :ssl_endpoint_identification_algorithm,
       :use_large_integer_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5496,7 +5706,8 @@ module Aws::DatabaseMigrationService
       :key_cache_secret_id,
       :key_cache_secret_iam_arn,
       :krb5_file_contents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5569,7 +5780,8 @@ module Aws::DatabaseMigrationService
       :include_null_and_empty,
       :no_hex_prefix,
       :use_large_integer_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5613,7 +5825,8 @@ module Aws::DatabaseMigrationService
       :description,
       :impact,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5632,7 +5845,8 @@ module Aws::DatabaseMigrationService
     class ListTagsForResourceMessage < Struct.new(
       :resource_arn,
       :resource_arn_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5642,7 +5856,8 @@ module Aws::DatabaseMigrationService
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5673,7 +5888,8 @@ module Aws::DatabaseMigrationService
       :certificate_arn,
       :s3_path,
       :s3_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5796,7 +6012,8 @@ module Aws::DatabaseMigrationService
       :tlog_access_mode,
       :force_lob_lookup,
       :authentication_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5831,7 +6048,8 @@ module Aws::DatabaseMigrationService
       :certificate_arn,
       :s3_path,
       :s3_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5879,7 +6097,8 @@ module Aws::DatabaseMigrationService
       :transformation_rules,
       :description,
       :schema_conversion_application_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5892,7 +6111,8 @@ module Aws::DatabaseMigrationService
     class ModifyConversionConfigurationMessage < Struct.new(
       :migration_project_identifier,
       :conversion_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5901,7 +6121,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class ModifyConversionConfigurationResponse < Struct.new(
       :migration_project_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5944,7 +6165,8 @@ module Aws::DatabaseMigrationService
       :target_data_settings,
       :number_of_jobs,
       :selection_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5953,7 +6175,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::DataMigration]
     class ModifyDataMigrationResponse < Struct.new(
       :data_migration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6002,7 +6225,8 @@ module Aws::DatabaseMigrationService
       :virtual,
       :exact_settings,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6011,7 +6235,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::DataProvider]
     class ModifyDataProviderResponse < Struct.new(
       :data_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6254,7 +6479,8 @@ module Aws::DatabaseMigrationService
       :exact_settings,
       :gcp_my_sql_settings,
       :timestream_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6264,7 +6490,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::Endpoint]
     class ModifyEndpointResponse < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6294,7 +6521,8 @@ module Aws::DatabaseMigrationService
       :source_type,
       :event_categories,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6304,7 +6532,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::EventSubscription]
     class ModifyEventSubscriptionResponse < Struct.new(
       :event_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6360,7 +6589,8 @@ module Aws::DatabaseMigrationService
       :description,
       :subnet_group_identifier,
       :vpc_security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6369,7 +6599,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::InstanceProfile]
     class ModifyInstanceProfileResponse < Struct.new(
       :instance_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6410,7 +6641,8 @@ module Aws::DatabaseMigrationService
       :transformation_rules,
       :description,
       :schema_conversion_application_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6419,7 +6651,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::MigrationProject]
     class ModifyMigrationProjectResponse < Struct.new(
       :migration_project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6463,7 +6696,8 @@ module Aws::DatabaseMigrationService
       :compute_config,
       :source_endpoint_arn,
       :target_endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6472,7 +6706,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationConfig]
     class ModifyReplicationConfigResponse < Struct.new(
       :replication_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6573,7 +6808,8 @@ module Aws::DatabaseMigrationService
       :replication_instance_identifier,
       :network_type,
       :kerberos_authentication_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6583,7 +6819,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationInstance]
     class ModifyReplicationInstanceResponse < Struct.new(
       :replication_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6601,7 +6838,8 @@ module Aws::DatabaseMigrationService
       :replication_subnet_group_identifier,
       :replication_subnet_group_description,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6611,7 +6849,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationSubnetGroup]
     class ModifyReplicationSubnetGroupResponse < Struct.new(
       :replication_subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6693,7 +6932,8 @@ module Aws::DatabaseMigrationService
       :cdc_start_position,
       :cdc_stop_position,
       :task_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6703,7 +6943,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationTask]
     class ModifyReplicationTaskResponse < Struct.new(
       :replication_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6744,7 +6985,8 @@ module Aws::DatabaseMigrationService
       :auth_type,
       :auth_source,
       :auth_mechanism,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6863,7 +7105,8 @@ module Aws::DatabaseMigrationService
       :secrets_manager_secret_id,
       :use_update_look_up,
       :replicate_shard_collections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6877,7 +7120,8 @@ module Aws::DatabaseMigrationService
     class MoveReplicationTaskMessage < Struct.new(
       :replication_task_arn,
       :target_replication_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6887,7 +7131,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationTask]
     class MoveReplicationTaskResponse < Struct.new(
       :replication_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7010,7 +7255,8 @@ module Aws::DatabaseMigrationService
       :execute_timeout,
       :service_access_role_arn,
       :authentication_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7041,7 +7287,8 @@ module Aws::DatabaseMigrationService
       :certificate_arn,
       :s3_path,
       :s3_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7090,7 +7337,8 @@ module Aws::DatabaseMigrationService
       :max_file_size,
       :max_retry_count,
       :iam_auth_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7153,7 +7401,8 @@ module Aws::DatabaseMigrationService
       :secrets_manager_security_db_encryption_access_role_arn,
       :s3_path,
       :s3_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7496,7 +7745,8 @@ module Aws::DatabaseMigrationService
       :convert_timestamp_with_zone_to_utc,
       :open_transaction_window,
       :authentication_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7555,7 +7805,8 @@ module Aws::DatabaseMigrationService
       :included_allocated_storage,
       :availability_zones,
       :release_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7606,7 +7857,8 @@ module Aws::DatabaseMigrationService
       :opt_in_status,
       :current_apply_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7789,7 +8041,8 @@ module Aws::DatabaseMigrationService
       :disable_unicode_source_filter,
       :service_access_role_arn,
       :authentication_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7824,7 +8077,8 @@ module Aws::DatabaseMigrationService
       :certificate_arn,
       :s3_path,
       :s3_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7939,7 +8193,8 @@ module Aws::DatabaseMigrationService
       :result_encryption_mode,
       :result_kms_key_arn,
       :result_statistic,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7975,7 +8230,8 @@ module Aws::DatabaseMigrationService
       :is_new_provisioning_available,
       :date_new_provisioning_data_available,
       :reason_for_new_provisioning_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8033,7 +8289,8 @@ module Aws::DatabaseMigrationService
       :storage_iops,
       :deployment_option,
       :engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8050,7 +8307,8 @@ module Aws::DatabaseMigrationService
     class RdsRecommendation < Struct.new(
       :requirements_to_target,
       :target_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8088,7 +8346,8 @@ module Aws::DatabaseMigrationService
       :storage_iops,
       :deployment_option,
       :engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8112,7 +8371,8 @@ module Aws::DatabaseMigrationService
       :replication_instance_arn,
       :force_failover,
       :force_planned_failover,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8121,7 +8381,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationInstance]
     class RebootReplicationInstanceResponse < Struct.new(
       :replication_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8171,7 +8432,8 @@ module Aws::DatabaseMigrationService
       :preferred,
       :settings,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8181,7 +8443,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::RdsRecommendation]
     class RecommendationData < Struct.new(
       :rds_engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8200,7 +8463,8 @@ module Aws::DatabaseMigrationService
     class RecommendationSettings < Struct.new(
       :instance_sizing_type,
       :workload_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8248,7 +8512,8 @@ module Aws::DatabaseMigrationService
       :auth_user_name,
       :auth_password,
       :ssl_ca_certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8279,7 +8544,8 @@ module Aws::DatabaseMigrationService
       :database_name,
       :s3_path,
       :s3_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8503,7 +8769,8 @@ module Aws::DatabaseMigrationService
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
       :map_boolean_as_boolean,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8517,7 +8784,8 @@ module Aws::DatabaseMigrationService
     class RefreshSchemasMessage < Struct.new(
       :endpoint_arn,
       :replication_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8527,7 +8795,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::RefreshSchemasStatus]
     class RefreshSchemasResponse < Struct.new(
       :refresh_schemas_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8554,7 +8823,8 @@ module Aws::DatabaseMigrationService
       :status,
       :last_refresh_date,
       :last_failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8574,7 +8844,8 @@ module Aws::DatabaseMigrationService
       :replication_config_arn,
       :tables_to_reload,
       :reload_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8584,7 +8855,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class ReloadReplicationTablesResponse < Struct.new(
       :replication_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8605,7 +8877,8 @@ module Aws::DatabaseMigrationService
       :replication_task_arn,
       :tables_to_reload,
       :reload_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8614,7 +8887,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class ReloadTablesResponse < Struct.new(
       :replication_task_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8629,13 +8903,15 @@ module Aws::DatabaseMigrationService
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class RemoveTagsFromResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8806,7 +9082,8 @@ module Aws::DatabaseMigrationService
       :replication_update_time,
       :replication_last_stop_time,
       :replication_deprovision_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8860,7 +9137,8 @@ module Aws::DatabaseMigrationService
       :table_mappings,
       :replication_config_create_time,
       :replication_config_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9082,7 +9360,8 @@ module Aws::DatabaseMigrationService
       :dns_name_servers,
       :network_type,
       :kerberos_authentication_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9108,7 +9387,8 @@ module Aws::DatabaseMigrationService
       :replication_task_name,
       :replication_task_arn,
       :replication_instance_task_log_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9151,7 +9431,8 @@ module Aws::DatabaseMigrationService
       :multi_az,
       :engine_version,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9202,7 +9483,8 @@ module Aws::DatabaseMigrationService
       :stop_date,
       :full_load_start_date,
       :full_load_finish_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9245,7 +9527,8 @@ module Aws::DatabaseMigrationService
       :subnet_group_status,
       :subnets,
       :supported_network_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9255,7 +9538,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class ReplicationSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9554,7 +9838,8 @@ module Aws::DatabaseMigrationService
       :replication_task_stats,
       :task_data,
       :target_replication_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9593,7 +9878,8 @@ module Aws::DatabaseMigrationService
       :assessment_results_file,
       :assessment_results,
       :s3_object_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9721,7 +10007,8 @@ module Aws::DatabaseMigrationService
       :assessment_run_name,
       :is_latest_task_assessment_run,
       :result_statistic,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9741,7 +10028,8 @@ module Aws::DatabaseMigrationService
     class ReplicationTaskAssessmentRunProgress < Struct.new(
       :individual_assessment_count,
       :individual_assessment_completed_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9779,7 +10067,8 @@ module Aws::DatabaseMigrationService
       :warning,
       :cancelled,
       :skipped,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9856,7 +10145,8 @@ module Aws::DatabaseMigrationService
       :individual_assessment_name,
       :status,
       :replication_task_individual_assessment_start_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9909,7 +10199,8 @@ module Aws::DatabaseMigrationService
       :stop_date,
       :full_load_start_date,
       :full_load_finish_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9933,7 +10224,8 @@ module Aws::DatabaseMigrationService
     class ResourceAlreadyExistsFault < Struct.new(
       :message,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9943,7 +10235,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class ResourceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9959,7 +10252,8 @@ module Aws::DatabaseMigrationService
     class ResourcePendingMaintenanceActions < Struct.new(
       :resource_identifier,
       :pending_maintenance_action_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9969,7 +10263,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class ResourceQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9982,7 +10277,8 @@ module Aws::DatabaseMigrationService
     class RunFleetAdvisorLsaAnalysisResponse < Struct.new(
       :lsa_analysis_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9991,7 +10287,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class S3AccessDeniedFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10001,7 +10298,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class S3ResourceNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10526,7 +10824,8 @@ module Aws::DatabaseMigrationService
       :add_trailing_padding_character,
       :expected_bucket_owner,
       :glue_catalog_generation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10540,7 +10839,8 @@ module Aws::DatabaseMigrationService
     class SCApplicationAttributes < Struct.new(
       :s3_bucket_path,
       :s3_bucket_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10550,7 +10850,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class SNSInvalidTopicFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10560,7 +10861,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class SNSNoAuthorizationFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10586,7 +10888,8 @@ module Aws::DatabaseMigrationService
       :migration_project_arn,
       :error,
       :export_sql_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10629,7 +10932,8 @@ module Aws::DatabaseMigrationService
       :schema_name,
       :original_schema,
       :similarity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10655,7 +10959,8 @@ module Aws::DatabaseMigrationService
       :database_id,
       :database_name,
       :database_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10673,7 +10978,8 @@ module Aws::DatabaseMigrationService
       :server_id,
       :ip_address,
       :server_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10696,7 +11002,8 @@ module Aws::DatabaseMigrationService
       :cdc_start_time,
       :cdc_stop_time,
       :slot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10711,7 +11018,8 @@ module Aws::DatabaseMigrationService
     class StartDataMigrationMessage < Struct.new(
       :data_migration_identifier,
       :start_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10720,7 +11028,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::DataMigration]
     class StartDataMigrationResponse < Struct.new(
       :data_migration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10729,7 +11038,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StartExtensionPackAssociationMessage < Struct.new(
       :migration_project_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10738,7 +11048,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StartExtensionPackAssociationResponse < Struct.new(
       :request_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10751,7 +11062,8 @@ module Aws::DatabaseMigrationService
     class StartMetadataModelAssessmentMessage < Struct.new(
       :migration_project_identifier,
       :selection_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10760,7 +11072,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StartMetadataModelAssessmentResponse < Struct.new(
       :request_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10773,7 +11086,8 @@ module Aws::DatabaseMigrationService
     class StartMetadataModelConversionMessage < Struct.new(
       :migration_project_identifier,
       :selection_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10782,7 +11096,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StartMetadataModelConversionResponse < Struct.new(
       :request_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10803,7 +11118,8 @@ module Aws::DatabaseMigrationService
       :selection_rules,
       :origin,
       :file_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10812,7 +11128,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StartMetadataModelExportAsScriptResponse < Struct.new(
       :request_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10831,7 +11148,8 @@ module Aws::DatabaseMigrationService
       :migration_project_identifier,
       :selection_rules,
       :overwrite_extension_pack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10840,7 +11158,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StartMetadataModelExportToTargetResponse < Struct.new(
       :request_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10861,7 +11180,8 @@ module Aws::DatabaseMigrationService
       :selection_rules,
       :origin,
       :refresh,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10870,7 +11190,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StartMetadataModelImportResponse < Struct.new(
       :request_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10889,7 +11210,8 @@ module Aws::DatabaseMigrationService
     class StartRecommendationsRequest < Struct.new(
       :database_id,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10904,7 +11226,8 @@ module Aws::DatabaseMigrationService
     class StartRecommendationsRequestEntry < Struct.new(
       :database_id,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10992,7 +11315,8 @@ module Aws::DatabaseMigrationService
       :cdc_start_time,
       :cdc_start_position,
       :cdc_stop_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11002,7 +11326,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::Replication]
     class StartReplicationResponse < Struct.new(
       :replication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11012,7 +11337,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StartReplicationTaskAssessmentMessage < Struct.new(
       :replication_task_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11022,7 +11348,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationTask]
     class StartReplicationTaskAssessmentResponse < Struct.new(
       :replication_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11112,7 +11439,8 @@ module Aws::DatabaseMigrationService
       :include_only,
       :exclude,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11122,7 +11450,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationTaskAssessmentRun]
     class StartReplicationTaskAssessmentRunResponse < Struct.new(
       :replication_task_assessment_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11178,7 +11507,8 @@ module Aws::DatabaseMigrationService
       :cdc_start_time,
       :cdc_start_position,
       :cdc_stop_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11188,7 +11518,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationTask]
     class StartReplicationTaskResponse < Struct.new(
       :replication_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11197,7 +11528,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StopDataMigrationMessage < Struct.new(
       :data_migration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11206,7 +11538,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::DataMigration]
     class StopDataMigrationResponse < Struct.new(
       :data_migration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11216,7 +11549,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StopReplicationMessage < Struct.new(
       :replication_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11225,7 +11559,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::Replication]
     class StopReplicationResponse < Struct.new(
       :replication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11235,7 +11570,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StopReplicationTaskMessage < Struct.new(
       :replication_task_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11245,7 +11581,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ReplicationTask]
     class StopReplicationTaskResponse < Struct.new(
       :replication_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11255,7 +11592,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class StorageQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11275,7 +11613,8 @@ module Aws::DatabaseMigrationService
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11285,7 +11624,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class SubnetAlreadyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11325,7 +11665,8 @@ module Aws::DatabaseMigrationService
       :endpoint_type,
       :replication_instance_engine_minimum_version,
       :engine_display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11379,7 +11720,8 @@ module Aws::DatabaseMigrationService
       :username,
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11571,7 +11913,8 @@ module Aws::DatabaseMigrationService
       :resync_rows_succeeded,
       :resync_rows_failed,
       :resync_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11599,7 +11942,8 @@ module Aws::DatabaseMigrationService
     class TableToReload < Struct.new(
       :schema_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11642,7 +11986,8 @@ module Aws::DatabaseMigrationService
       :key,
       :value,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11654,7 +11999,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class TargetDataSetting < Struct.new(
       :table_preparation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11668,7 +12014,8 @@ module Aws::DatabaseMigrationService
     class TestConnectionMessage < Struct.new(
       :replication_instance_arn,
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11678,7 +12025,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::Connection]
     class TestConnectionResponse < Struct.new(
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11717,7 +12065,8 @@ module Aws::DatabaseMigrationService
       :magnetic_duration,
       :cdc_inserts_and_updates,
       :enable_magnetic_store_writes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11729,7 +12078,8 @@ module Aws::DatabaseMigrationService
     #   @return [Boolean]
     class UpdateSubscriptionsToEventBridgeMessage < Struct.new(
       :force_move,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11740,7 +12090,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class UpdateSubscriptionsToEventBridgeResponse < Struct.new(
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11750,7 +12101,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     class UpgradeDependencyFailureFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11765,7 +12117,8 @@ module Aws::DatabaseMigrationService
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

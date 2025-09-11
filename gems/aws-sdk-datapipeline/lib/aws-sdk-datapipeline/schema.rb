@@ -508,7 +508,6 @@ module Aws::DataPipeline
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
         operation.traits = {}
       end)
-
     end
 
     class << self

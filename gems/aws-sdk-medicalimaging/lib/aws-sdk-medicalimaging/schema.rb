@@ -705,7 +705,6 @@ module Aws::MedicalImaging
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "runtime-"}, "smithy.api#http" => {"uri" => "/datastore/{datastoreId}/imageSet/{imageSetId}/updateImageSetMetadata", "method" => "POST"}}
       end)
-
     end
 
     class << self

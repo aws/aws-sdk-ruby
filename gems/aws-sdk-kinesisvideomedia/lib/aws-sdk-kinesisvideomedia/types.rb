@@ -12,7 +12,8 @@ module Aws::KinesisVideoMedia
     #   @return [String]
     class ClientLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::KinesisVideoMedia
     #   @return [String]
     class ConnectionLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42,7 +44,8 @@ module Aws::KinesisVideoMedia
       :stream_name,
       :stream_arn,
       :start_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +125,8 @@ module Aws::KinesisVideoMedia
     class GetMediaOutput < Struct.new(
       :content_type,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -136,7 +140,8 @@ module Aws::KinesisVideoMedia
     #   @return [String]
     class InvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +153,8 @@ module Aws::KinesisVideoMedia
     #   @return [String]
     class InvalidEndpointException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +164,8 @@ module Aws::KinesisVideoMedia
     #   @return [String]
     class NotAuthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -167,7 +174,8 @@ module Aws::KinesisVideoMedia
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +246,8 @@ module Aws::KinesisVideoMedia
       :after_fragment_number,
       :start_timestamp,
       :continuation_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -18,7 +18,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +36,8 @@ module Aws::Rekognition
     class AgeRange < Struct.new(
       :low,
       :high,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +50,8 @@ module Aws::Rekognition
     #   @return [Types::GroundTruthManifest]
     class Asset < Struct.new(
       :ground_truth_manifest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +80,8 @@ module Aws::Rekognition
       :face_ids,
       :user_match_threshold,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +101,8 @@ module Aws::Rekognition
       :associated_faces,
       :unsuccessful_face_associations,
       :user_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +112,8 @@ module Aws::Rekognition
     #   @return [String]
     class AssociatedFace < Struct.new(
       :face_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +136,8 @@ module Aws::Rekognition
       :duration_millis,
       :sample_rate,
       :number_of_channels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +179,8 @@ module Aws::Rekognition
       :bytes,
       :s3_object,
       :bounding_box,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +195,8 @@ module Aws::Rekognition
     class Beard < Struct.new(
       :value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -223,7 +232,8 @@ module Aws::Rekognition
     class BlackFrame < Struct.new(
       :max_pixel_threshold,
       :min_coverage_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +272,8 @@ module Aws::Rekognition
       :height,
       :left,
       :top,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +307,8 @@ module Aws::Rekognition
       :face,
       :match_confidence,
       :known_gender,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +342,8 @@ module Aws::Rekognition
       :bounding_box,
       :face,
       :known_gender,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +359,8 @@ module Aws::Rekognition
     class CelebrityRecognition < Struct.new(
       :timestamp,
       :celebrity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -365,7 +379,8 @@ module Aws::Rekognition
     class Challenge < Struct.new(
       :type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +394,8 @@ module Aws::Rekognition
     class ChallengePreference < Struct.new(
       :type,
       :versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -397,7 +413,8 @@ module Aws::Rekognition
     class CompareFacesMatch < Struct.new(
       :similarity,
       :face,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +454,8 @@ module Aws::Rekognition
       :target_image,
       :similarity_threshold,
       :quality_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +500,8 @@ module Aws::Rekognition
       :unmatched_faces,
       :source_image_orientation_correction,
       :target_image_orientation_correction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +539,8 @@ module Aws::Rekognition
       :quality,
       :emotions,
       :smile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +557,8 @@ module Aws::Rekognition
     class ComparedSourceImageFace < Struct.new(
       :bounding_box,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +575,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +600,8 @@ module Aws::Rekognition
     class ConnectedHomeSettings < Struct.new(
       :labels,
       :min_confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +621,8 @@ module Aws::Rekognition
     class ConnectedHomeSettingsForUpdate < Struct.new(
       :labels,
       :min_confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +657,8 @@ module Aws::Rekognition
       :end_timestamp_millis,
       :duration_millis,
       :content_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -652,7 +677,8 @@ module Aws::Rekognition
     class ContentType < Struct.new(
       :confidence,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +732,8 @@ module Aws::Rekognition
       :output_config,
       :tags,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -715,7 +742,8 @@ module Aws::Rekognition
     #   @return [String]
     class CopyProjectVersionResponse < Struct.new(
       :project_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +758,8 @@ module Aws::Rekognition
     class CoversBodyPart < Struct.new(
       :confidence,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -748,7 +777,8 @@ module Aws::Rekognition
     class CreateCollectionRequest < Struct.new(
       :collection_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +797,8 @@ module Aws::Rekognition
       :status_code,
       :collection_arn,
       :face_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +829,8 @@ module Aws::Rekognition
       :dataset_type,
       :project_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,7 +841,8 @@ module Aws::Rekognition
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
       :dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +864,8 @@ module Aws::Rekognition
       :kms_key_id,
       :settings,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +891,8 @@ module Aws::Rekognition
       :output_config,
       :audit_images_limit,
       :challenge_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +905,8 @@ module Aws::Rekognition
     #   @return [String]
     class CreateFaceLivenessSessionResponse < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +929,8 @@ module Aws::Rekognition
       :feature,
       :auto_update,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +940,8 @@ module Aws::Rekognition
     #   @return [String]
     class CreateProjectResponse < Struct.new(
       :project_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -973,7 +1011,8 @@ module Aws::Rekognition
       :kms_key_id,
       :version_description,
       :feature_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1023,8 @@ module Aws::Rekognition
     #   @return [String]
     class CreateProjectVersionResponse < Struct.new(
       :project_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1090,8 @@ module Aws::Rekognition
       :kms_key_id,
       :regions_of_interest,
       :data_sharing_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,7 +1100,8 @@ module Aws::Rekognition
     #   @return [String]
     class CreateStreamProcessorResponse < Struct.new(
       :stream_processor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1078,12 +1120,14 @@ module Aws::Rekognition
       :collection_id,
       :user_id,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1104,7 +1148,8 @@ module Aws::Rekognition
       :name,
       :confidence,
       :geometry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1116,7 +1161,8 @@ module Aws::Rekognition
     #   @return [Types::CustomizationFeatureContentModerationConfig]
     class CustomizationFeatureConfig < Struct.new(
       :content_moderation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1126,7 +1172,8 @@ module Aws::Rekognition
     #   @return [Float]
     class CustomizationFeatureContentModerationConfig < Struct.new(
       :confidence_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1148,7 +1195,8 @@ module Aws::Rekognition
     #   @return [String]
     class DatasetChanges < Struct.new(
       :ground_truth,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1196,7 +1244,8 @@ module Aws::Rekognition
       :status_message,
       :status_message_code,
       :dataset_stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1216,7 +1265,8 @@ module Aws::Rekognition
     class DatasetLabelDescription < Struct.new(
       :label_name,
       :label_stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1236,7 +1286,8 @@ module Aws::Rekognition
     class DatasetLabelStats < Struct.new(
       :entry_count,
       :bounding_box_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,7 +1334,8 @@ module Aws::Rekognition
       :status,
       :status_message,
       :status_message_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1361,8 @@ module Aws::Rekognition
     class DatasetSource < Struct.new(
       :ground_truth_manifest,
       :dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1342,7 +1395,8 @@ module Aws::Rekognition
       :total_entries,
       :total_labels,
       :error_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1351,7 +1405,8 @@ module Aws::Rekognition
     #   @return [String]
     class DeleteCollectionRequest < Struct.new(
       :collection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,7 +1415,8 @@ module Aws::Rekognition
     #   @return [Integer]
     class DeleteCollectionResponse < Struct.new(
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,12 +1427,14 @@ module Aws::Rekognition
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
       :dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDatasetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1447,8 @@ module Aws::Rekognition
     class DeleteFacesRequest < Struct.new(
       :collection_id,
       :face_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1461,8 @@ module Aws::Rekognition
     class DeleteFacesResponse < Struct.new(
       :deleted_faces,
       :unsuccessful_face_deletions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1419,12 +1479,14 @@ module Aws::Rekognition
       :project_arn,
       :policy_name,
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1433,7 +1495,8 @@ module Aws::Rekognition
     #   @return [String]
     class DeleteProjectRequest < Struct.new(
       :project_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1442,7 +1505,8 @@ module Aws::Rekognition
     #   @return [String]
     class DeleteProjectResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1516,8 @@ module Aws::Rekognition
     #   @return [String]
     class DeleteProjectVersionRequest < Struct.new(
       :project_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1461,7 +1526,8 @@ module Aws::Rekognition
     #   @return [String]
     class DeleteProjectVersionResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,12 +1536,14 @@ module Aws::Rekognition
     #   @return [String]
     class DeleteStreamProcessorRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStreamProcessorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1494,12 +1562,14 @@ module Aws::Rekognition
       :collection_id,
       :user_id,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1508,7 +1578,8 @@ module Aws::Rekognition
     #   @return [String]
     class DescribeCollectionRequest < Struct.new(
       :collection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1608,8 @@ module Aws::Rekognition
       :collection_arn,
       :creation_timestamp,
       :user_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1548,7 +1620,8 @@ module Aws::Rekognition
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
       :dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1559,7 +1632,8 @@ module Aws::Rekognition
     #   @return [Types::DatasetDescription]
     class DescribeDatasetResponse < Struct.new(
       :dataset_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1663,8 @@ module Aws::Rekognition
       :version_names,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1605,7 +1680,8 @@ module Aws::Rekognition
     class DescribeProjectVersionsResponse < Struct.new(
       :project_version_descriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1632,7 +1708,8 @@ module Aws::Rekognition
       :max_results,
       :project_names,
       :features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1647,7 +1724,8 @@ module Aws::Rekognition
     class DescribeProjectsResponse < Struct.new(
       :project_descriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1734,8 @@ module Aws::Rekognition
     #   @return [String]
     class DescribeStreamProcessorRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1730,7 +1809,8 @@ module Aws::Rekognition
       :kms_key_id,
       :regions_of_interest,
       :data_sharing_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1780,7 +1860,8 @@ module Aws::Rekognition
       :image,
       :max_results,
       :min_confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1789,7 +1870,8 @@ module Aws::Rekognition
     #   @return [Array<Types::CustomLabel>]
     class DetectCustomLabelsResponse < Struct.new(
       :custom_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1817,7 +1899,8 @@ module Aws::Rekognition
     class DetectFacesRequest < Struct.new(
       :image,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1838,7 +1921,8 @@ module Aws::Rekognition
     class DetectFacesResponse < Struct.new(
       :face_details,
       :orientation_correction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,7 +1938,8 @@ module Aws::Rekognition
     class DetectLabelsImageBackground < Struct.new(
       :quality,
       :dominant_colors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1955,8 @@ module Aws::Rekognition
     class DetectLabelsImageForeground < Struct.new(
       :quality,
       :dominant_colors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1899,7 +1985,8 @@ module Aws::Rekognition
       :dominant_colors,
       :foreground,
       :background,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1910,7 +1997,8 @@ module Aws::Rekognition
     #   @return [Integer]
     class DetectLabelsImagePropertiesSettings < Struct.new(
       :max_dominant_colors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1934,7 +2022,8 @@ module Aws::Rekognition
       :brightness,
       :sharpness,
       :contrast,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1975,7 +2064,8 @@ module Aws::Rekognition
       :min_confidence,
       :features,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2005,7 +2095,8 @@ module Aws::Rekognition
       :orientation_correction,
       :label_model_version,
       :image_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2113,8 @@ module Aws::Rekognition
     class DetectLabelsSettings < Struct.new(
       :general_labels,
       :image_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2052,7 +2144,8 @@ module Aws::Rekognition
       :min_confidence,
       :human_loop_config,
       :project_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2082,7 +2175,8 @@ module Aws::Rekognition
       :human_loop_activation_output,
       :project_version,
       :content_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2096,7 +2190,8 @@ module Aws::Rekognition
     class DetectProtectiveEquipmentRequest < Struct.new(
       :image,
       :summarization_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2114,7 +2209,8 @@ module Aws::Rekognition
       :protective_equipment_model_version,
       :persons,
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2132,7 +2228,8 @@ module Aws::Rekognition
     class DetectTextFilters < Struct.new(
       :word_filter,
       :regions_of_interest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2150,7 +2247,8 @@ module Aws::Rekognition
     class DetectTextRequest < Struct.new(
       :image,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2163,7 +2261,8 @@ module Aws::Rekognition
     class DetectTextResponse < Struct.new(
       :text_detections,
       :text_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2185,7 +2284,8 @@ module Aws::Rekognition
       :min_confidence,
       :min_bounding_box_height,
       :min_bounding_box_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2209,7 +2309,8 @@ module Aws::Rekognition
       :user_id,
       :client_request_token,
       :face_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2230,7 +2331,8 @@ module Aws::Rekognition
       :disassociated_faces,
       :unsuccessful_face_disassociations,
       :user_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2240,7 +2342,8 @@ module Aws::Rekognition
     #   @return [String]
     class DisassociatedFace < Struct.new(
       :face_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2254,7 +2357,8 @@ module Aws::Rekognition
     #   @return [String]
     class DistributeDataset < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2265,12 +2369,14 @@ module Aws::Rekognition
     #   @return [Array<Types::DistributeDataset>]
     class DistributeDatasetEntriesRequest < Struct.new(
       :datasets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DistributeDatasetEntriesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2304,7 +2410,8 @@ module Aws::Rekognition
       :css_color,
       :simplified_color,
       :pixel_percent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2322,7 +2429,8 @@ module Aws::Rekognition
     class Emotion < Struct.new(
       :type,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2346,7 +2454,8 @@ module Aws::Rekognition
       :confidence,
       :type,
       :covers_body_part,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2364,7 +2473,8 @@ module Aws::Rekognition
     class EvaluationResult < Struct.new(
       :f1_score,
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2383,7 +2493,8 @@ module Aws::Rekognition
       :yaw,
       :pitch,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2398,7 +2509,8 @@ module Aws::Rekognition
     class EyeOpen < Struct.new(
       :value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2418,7 +2530,8 @@ module Aws::Rekognition
     class Eyeglasses < Struct.new(
       :value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2460,7 +2573,8 @@ module Aws::Rekognition
       :confidence,
       :index_faces_model_version,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2579,7 +2693,8 @@ module Aws::Rekognition
       :confidence,
       :face_occluded,
       :eye_direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2594,7 +2709,8 @@ module Aws::Rekognition
     class FaceDetection < Struct.new(
       :timestamp,
       :face,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2615,7 +2731,8 @@ module Aws::Rekognition
     class FaceMatch < Struct.new(
       :similarity,
       :face,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2640,7 +2757,8 @@ module Aws::Rekognition
     class FaceOccluded < Struct.new(
       :value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2661,7 +2779,8 @@ module Aws::Rekognition
     class FaceRecord < Struct.new(
       :face,
       :face_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2678,7 +2797,8 @@ module Aws::Rekognition
     class FaceSearchSettings < Struct.new(
       :collection_id,
       :face_match_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2705,7 +2825,8 @@ module Aws::Rekognition
     class Gender < Struct.new(
       :value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2729,7 +2850,8 @@ module Aws::Rekognition
       :label_exclusion_filters,
       :label_category_inclusion_filters,
       :label_category_exclusion_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2744,7 +2866,8 @@ module Aws::Rekognition
     class Geometry < Struct.new(
       :bounding_box,
       :polygon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2754,7 +2877,8 @@ module Aws::Rekognition
     #   @return [String]
     class GetCelebrityInfoRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2771,7 +2895,8 @@ module Aws::Rekognition
       :urls,
       :name,
       :known_gender,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2797,7 +2922,8 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2839,7 +2965,8 @@ module Aws::Rekognition
       :job_id,
       :video,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2874,7 +3001,8 @@ module Aws::Rekognition
       :next_token,
       :sort_by,
       :aggregate_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2889,7 +3017,8 @@ module Aws::Rekognition
     class GetContentModerationRequestMetadata < Struct.new(
       :sort_by,
       :aggregate_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2940,7 +3069,8 @@ module Aws::Rekognition
       :video,
       :job_tag,
       :get_request_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2960,7 +3090,8 @@ module Aws::Rekognition
       :job_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3002,7 +3133,8 @@ module Aws::Rekognition
       :job_id,
       :video,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3012,7 +3144,8 @@ module Aws::Rekognition
     #   @return [String]
     class GetFaceLivenessSessionResultsRequest < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3051,7 +3184,8 @@ module Aws::Rekognition
       :reference_image,
       :audit_images,
       :challenge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3076,7 +3210,8 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3123,7 +3258,8 @@ module Aws::Rekognition
       :job_id,
       :video,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3156,7 +3292,8 @@ module Aws::Rekognition
       :next_token,
       :sort_by,
       :aggregate_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3171,7 +3308,8 @@ module Aws::Rekognition
     class GetLabelDetectionRequestMetadata < Struct.new(
       :sort_by,
       :aggregate_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3223,7 +3361,8 @@ module Aws::Rekognition
       :video,
       :job_tag,
       :get_request_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3232,7 +3371,8 @@ module Aws::Rekognition
     #   @return [String]
     class GetMediaAnalysisJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3285,7 +3425,8 @@ module Aws::Rekognition
       :kms_key_id,
       :results,
       :manifest_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3313,7 +3454,8 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3355,7 +3497,8 @@ module Aws::Rekognition
       :job_id,
       :video,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3374,7 +3517,8 @@ module Aws::Rekognition
       :job_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3436,7 +3580,8 @@ module Aws::Rekognition
       :job_id,
       :video,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3455,7 +3600,8 @@ module Aws::Rekognition
       :job_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3502,7 +3648,8 @@ module Aws::Rekognition
       :job_id,
       :video,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3518,7 +3665,8 @@ module Aws::Rekognition
     #   @return [Types::S3Object]
     class GroundTruthManifest < Struct.new(
       :s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3538,7 +3686,8 @@ module Aws::Rekognition
       :human_loop_arn,
       :human_loop_activation_reasons,
       :human_loop_activation_conditions_evaluation_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3559,7 +3708,8 @@ module Aws::Rekognition
       :human_loop_name,
       :flow_definition_arn,
       :data_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3570,7 +3720,8 @@ module Aws::Rekognition
     #   @return [Array<String>]
     class HumanLoopDataAttributes < Struct.new(
       :content_classifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3598,7 +3749,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3615,7 +3767,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3648,7 +3801,8 @@ module Aws::Rekognition
     class Image < Struct.new(
       :bytes,
       :s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3664,7 +3818,8 @@ module Aws::Rekognition
     class ImageQuality < Struct.new(
       :brightness,
       :sharpness,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3683,7 +3838,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3747,7 +3903,8 @@ module Aws::Rekognition
       :detection_attributes,
       :max_faces,
       :quality_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3795,7 +3952,8 @@ module Aws::Rekognition
       :orientation_correction,
       :face_model_version,
       :unindexed_faces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3814,7 +3972,8 @@ module Aws::Rekognition
       :bounding_box,
       :confidence,
       :dominant_colors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3830,7 +3989,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3846,7 +4006,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3862,7 +4023,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3878,7 +4040,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3895,7 +4058,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3911,7 +4075,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3927,7 +4092,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3938,7 +4104,8 @@ module Aws::Rekognition
     #   @return [String]
     class KinesisDataStream < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3949,7 +4116,8 @@ module Aws::Rekognition
     #   @return [String]
     class KinesisVideoStream < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3969,7 +4137,8 @@ module Aws::Rekognition
     class KinesisVideoStreamStartSelector < Struct.new(
       :producer_timestamp,
       :fragment_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3980,7 +4149,8 @@ module Aws::Rekognition
     #   @return [String]
     class KnownGender < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4014,7 +4184,8 @@ module Aws::Rekognition
       :parents,
       :aliases,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4024,7 +4195,8 @@ module Aws::Rekognition
     #   @return [String]
     class LabelAlias < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4034,7 +4206,8 @@ module Aws::Rekognition
     #   @return [String]
     class LabelCategory < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4061,7 +4234,8 @@ module Aws::Rekognition
       :start_timestamp_millis,
       :end_timestamp_millis,
       :duration_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4078,7 +4252,8 @@ module Aws::Rekognition
     #   @return [Types::GeneralLabelsSettings]
     class LabelDetectionSettings < Struct.new(
       :general_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4101,7 +4276,8 @@ module Aws::Rekognition
       :type,
       :x,
       :y,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4121,7 +4297,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4134,7 +4311,8 @@ module Aws::Rekognition
     class ListCollectionsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4155,7 +4333,8 @@ module Aws::Rekognition
       :collection_ids,
       :next_token,
       :face_model_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4203,7 +4382,8 @@ module Aws::Rekognition
       :has_errors,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4220,7 +4400,8 @@ module Aws::Rekognition
     class ListDatasetEntriesResponse < Struct.new(
       :dataset_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4243,7 +4424,8 @@ module Aws::Rekognition
       :dataset_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4260,7 +4442,8 @@ module Aws::Rekognition
     class ListDatasetLabelsResponse < Struct.new(
       :dataset_label_descriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4287,7 +4470,8 @@ module Aws::Rekognition
       :max_results,
       :user_id,
       :face_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4306,7 +4490,8 @@ module Aws::Rekognition
       :faces,
       :next_token,
       :face_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4320,7 +4505,8 @@ module Aws::Rekognition
     class ListMediaAnalysisJobsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4333,7 +4519,8 @@ module Aws::Rekognition
     class ListMediaAnalysisJobsResponse < Struct.new(
       :next_token,
       :media_analysis_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4354,7 +4541,8 @@ module Aws::Rekognition
       :project_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4368,7 +4556,8 @@ module Aws::Rekognition
     class ListProjectPoliciesResponse < Struct.new(
       :project_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4382,7 +4571,8 @@ module Aws::Rekognition
     class ListStreamProcessorsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4396,7 +4586,8 @@ module Aws::Rekognition
     class ListStreamProcessorsResponse < Struct.new(
       :next_token,
       :stream_processors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4406,7 +4597,8 @@ module Aws::Rekognition
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4415,7 +4607,8 @@ module Aws::Rekognition
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4432,7 +4625,8 @@ module Aws::Rekognition
       :collection_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4446,7 +4640,8 @@ module Aws::Rekognition
     class ListUsersResponse < Struct.new(
       :users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4463,7 +4658,8 @@ module Aws::Rekognition
     class LivenessOutputConfig < Struct.new(
       :s3_bucket,
       :s3_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4480,7 +4676,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4494,7 +4691,8 @@ module Aws::Rekognition
     class MatchedUser < Struct.new(
       :user_id,
       :user_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4511,7 +4709,8 @@ module Aws::Rekognition
     class MediaAnalysisDetectModerationLabelsConfig < Struct.new(
       :min_confidence,
       :project_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4526,7 +4725,8 @@ module Aws::Rekognition
     #   @return [Types::S3Object]
     class MediaAnalysisInput < Struct.new(
       :s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4580,7 +4780,8 @@ module Aws::Rekognition
       :kms_key_id,
       :results,
       :manifest_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4594,7 +4795,8 @@ module Aws::Rekognition
     class MediaAnalysisJobFailureDetails < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4609,7 +4811,8 @@ module Aws::Rekognition
     #   @return [Types::S3Object]
     class MediaAnalysisManifestSummary < Struct.new(
       :s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4619,7 +4822,8 @@ module Aws::Rekognition
     #   @return [String]
     class MediaAnalysisModelVersions < Struct.new(
       :moderation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4629,7 +4833,8 @@ module Aws::Rekognition
     #   @return [Types::MediaAnalysisDetectModerationLabelsConfig]
     class MediaAnalysisOperationsConfig < Struct.new(
       :detect_moderation_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4644,7 +4849,8 @@ module Aws::Rekognition
     class MediaAnalysisOutputConfig < Struct.new(
       :s3_bucket,
       :s3_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4663,7 +4869,8 @@ module Aws::Rekognition
     class MediaAnalysisResults < Struct.new(
       :s3_object,
       :model_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4693,7 +4900,8 @@ module Aws::Rekognition
       :name,
       :parent_name,
       :taxonomy_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4708,7 +4916,8 @@ module Aws::Rekognition
     class MouthOpen < Struct.new(
       :value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4728,7 +4937,8 @@ module Aws::Rekognition
     class Mustache < Struct.new(
       :value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4749,7 +4959,8 @@ module Aws::Rekognition
     class NotificationChannel < Struct.new(
       :sns_topic_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4763,7 +4974,8 @@ module Aws::Rekognition
     class OutputConfig < Struct.new(
       :s3_bucket,
       :s3_key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4773,7 +4985,8 @@ module Aws::Rekognition
     #   @return [String]
     class Parent < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4791,7 +5004,8 @@ module Aws::Rekognition
       :index,
       :bounding_box,
       :face,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4814,7 +5028,8 @@ module Aws::Rekognition
     class PersonDetection < Struct.new(
       :timestamp,
       :person,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4842,7 +5057,8 @@ module Aws::Rekognition
       :timestamp,
       :person,
       :face_matches,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4868,7 +5084,8 @@ module Aws::Rekognition
     class Point < Struct.new(
       :x,
       :y,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4886,7 +5103,8 @@ module Aws::Rekognition
       :roll,
       :yaw,
       :pitch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4918,7 +5136,8 @@ module Aws::Rekognition
       :datasets,
       :feature,
       :auto_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4949,7 +5168,8 @@ module Aws::Rekognition
       :policy_document,
       :creation_timestamp,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5035,7 +5255,8 @@ module Aws::Rekognition
       :feature,
       :base_model_version,
       :feature_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5056,7 +5277,8 @@ module Aws::Rekognition
       :name,
       :confidence,
       :equipment_detections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5081,7 +5303,8 @@ module Aws::Rekognition
       :bounding_box,
       :confidence,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5112,7 +5335,8 @@ module Aws::Rekognition
     class ProtectiveEquipmentSummarizationAttributes < Struct.new(
       :min_confidence,
       :required_equipment_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5149,7 +5373,8 @@ module Aws::Rekognition
       :persons_with_required_equipment,
       :persons_without_required_equipment,
       :persons_indeterminate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5166,7 +5391,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5193,7 +5419,8 @@ module Aws::Rekognition
       :policy_name,
       :policy_revision_id,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5202,7 +5429,8 @@ module Aws::Rekognition
     #   @return [String]
     class PutProjectPolicyResponse < Struct.new(
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5215,7 +5443,8 @@ module Aws::Rekognition
     #   @return [Types::Image]
     class RecognizeCelebritiesRequest < Struct.new(
       :image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5253,7 +5482,8 @@ module Aws::Rekognition
       :celebrity_faces,
       :unrecognized_faces,
       :orientation_correction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5273,7 +5503,8 @@ module Aws::Rekognition
     class RegionOfInterest < Struct.new(
       :bounding_box,
       :polygon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5289,7 +5520,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5305,7 +5537,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5321,7 +5554,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5339,7 +5573,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5362,7 +5597,8 @@ module Aws::Rekognition
     class S3Destination < Struct.new(
       :bucket,
       :key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5385,7 +5621,8 @@ module Aws::Rekognition
       :bucket,
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5427,7 +5664,8 @@ module Aws::Rekognition
       :max_faces,
       :face_match_threshold,
       :quality_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5452,7 +5690,8 @@ module Aws::Rekognition
       :searched_face_confidence,
       :face_matches,
       :face_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5476,7 +5715,8 @@ module Aws::Rekognition
       :face_id,
       :max_faces,
       :face_match_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5495,7 +5735,8 @@ module Aws::Rekognition
       :searched_face_id,
       :face_matches,
       :face_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5540,7 +5781,8 @@ module Aws::Rekognition
       :user_match_threshold,
       :max_users,
       :quality_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5568,7 +5810,8 @@ module Aws::Rekognition
       :face_model_version,
       :searched_face,
       :unsearched_faces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5595,7 +5838,8 @@ module Aws::Rekognition
       :face_id,
       :user_match_threshold,
       :max_users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5617,7 +5861,8 @@ module Aws::Rekognition
       :face_model_version,
       :searched_face,
       :searched_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5628,7 +5873,8 @@ module Aws::Rekognition
     #   @return [String]
     class SearchedFace < Struct.new(
       :face_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5663,7 +5909,8 @@ module Aws::Rekognition
     #   @return [Types::FaceDetail]
     class SearchedFaceDetails < Struct.new(
       :face_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5673,7 +5920,8 @@ module Aws::Rekognition
     #   @return [String]
     class SearchedUser < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5743,7 +5991,8 @@ module Aws::Rekognition
       :start_frame_number,
       :end_frame_number,
       :duration_frames,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5764,7 +6013,8 @@ module Aws::Rekognition
     class SegmentTypeInfo < Struct.new(
       :type,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5782,7 +6032,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5798,7 +6049,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5813,7 +6065,8 @@ module Aws::Rekognition
     class ShotSegment < Struct.new(
       :index,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5828,7 +6081,8 @@ module Aws::Rekognition
     class Smile < Struct.new(
       :value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5859,7 +6113,8 @@ module Aws::Rekognition
       :client_request_token,
       :notification_channel,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5869,7 +6124,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartCelebrityRecognitionResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5903,7 +6159,8 @@ module Aws::Rekognition
       :client_request_token,
       :notification_channel,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5913,7 +6170,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartContentModerationResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5947,7 +6205,8 @@ module Aws::Rekognition
       :notification_channel,
       :face_attributes,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5957,7 +6216,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartFaceDetectionResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5990,7 +6250,8 @@ module Aws::Rekognition
       :collection_id,
       :notification_channel,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5999,7 +6260,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartFaceSearchResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6044,7 +6306,8 @@ module Aws::Rekognition
       :job_tag,
       :features,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6054,7 +6317,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartLabelDetectionResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6088,7 +6352,8 @@ module Aws::Rekognition
       :input,
       :output_config,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6097,7 +6362,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartMediaAnalysisJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6123,7 +6389,8 @@ module Aws::Rekognition
       :client_request_token,
       :notification_channel,
       :job_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6133,7 +6400,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartPersonTrackingResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6155,7 +6423,8 @@ module Aws::Rekognition
       :project_version_arn,
       :min_inference_units,
       :max_inference_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6164,7 +6433,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartProjectVersionResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6180,7 +6450,8 @@ module Aws::Rekognition
     class StartSegmentDetectionFilters < Struct.new(
       :technical_cue_filter,
       :shot_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6214,7 +6485,8 @@ module Aws::Rekognition
       :job_tag,
       :filters,
       :segment_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6224,7 +6496,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartSegmentDetectionResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6240,7 +6513,8 @@ module Aws::Rekognition
     #   @return [Float]
     class StartShotDetectionFilter < Struct.new(
       :min_segment_confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6266,7 +6540,8 @@ module Aws::Rekognition
       :name,
       :start_selector,
       :stop_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6277,7 +6552,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartStreamProcessorResponse < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6300,7 +6576,8 @@ module Aws::Rekognition
     class StartTechnicalCueDetectionFilter < Struct.new(
       :min_segment_confidence,
       :black_frame,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6317,7 +6594,8 @@ module Aws::Rekognition
     class StartTextDetectionFilters < Struct.new(
       :word_filter,
       :regions_of_interest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6348,7 +6626,8 @@ module Aws::Rekognition
       :notification_channel,
       :job_tag,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6357,7 +6636,8 @@ module Aws::Rekognition
     #   @return [String]
     class StartTextDetectionResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6367,7 +6647,8 @@ module Aws::Rekognition
     #   @return [String]
     class StopProjectVersionRequest < Struct.new(
       :project_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6376,7 +6657,8 @@ module Aws::Rekognition
     #   @return [String]
     class StopProjectVersionResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6385,12 +6667,14 @@ module Aws::Rekognition
     #   @return [String]
     class StopStreamProcessorRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopStreamProcessorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6403,7 +6687,8 @@ module Aws::Rekognition
     #   @return [Types::KinesisVideoStreamStartSelector]
     class StreamProcessingStartSelector < Struct.new(
       :kvs_stream_start_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6418,7 +6703,8 @@ module Aws::Rekognition
     #   @return [Integer]
     class StreamProcessingStopSelector < Struct.new(
       :max_duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6435,7 +6721,8 @@ module Aws::Rekognition
     class StreamProcessor < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6451,7 +6738,8 @@ module Aws::Rekognition
     #   @return [Boolean]
     class StreamProcessorDataSharingPreference < Struct.new(
       :opt_in,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6466,7 +6754,8 @@ module Aws::Rekognition
     #   @return [Types::KinesisVideoStream]
     class StreamProcessorInput < Struct.new(
       :kinesis_video_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6482,7 +6771,8 @@ module Aws::Rekognition
     #   @return [String]
     class StreamProcessorNotificationChannel < Struct.new(
       :sns_topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6499,7 +6789,8 @@ module Aws::Rekognition
     class StreamProcessorOutput < Struct.new(
       :kinesis_data_stream,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6520,7 +6811,8 @@ module Aws::Rekognition
     class StreamProcessorSettings < Struct.new(
       :face_search,
       :connected_home,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6534,7 +6826,8 @@ module Aws::Rekognition
     #   @return [Types::ConnectedHomeSettingsForUpdate]
     class StreamProcessorSettingsForUpdate < Struct.new(
       :connected_home_for_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6553,7 +6846,8 @@ module Aws::Rekognition
     #   @return [Types::S3Object]
     class Summary < Struct.new(
       :s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6568,7 +6862,8 @@ module Aws::Rekognition
     class Sunglasses < Struct.new(
       :value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6587,12 +6882,14 @@ module Aws::Rekognition
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6606,7 +6903,8 @@ module Aws::Rekognition
     class TechnicalCueSegment < Struct.new(
       :type,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6622,7 +6920,8 @@ module Aws::Rekognition
     class TestingData < Struct.new(
       :assets,
       :auto_create,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6647,7 +6946,8 @@ module Aws::Rekognition
       :input,
       :output,
       :validation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6691,7 +6991,8 @@ module Aws::Rekognition
       :parent_id,
       :confidence,
       :geometry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6707,7 +7008,8 @@ module Aws::Rekognition
     class TextDetectionResult < Struct.new(
       :timestamp,
       :text_detection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6728,7 +7030,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6739,7 +7042,8 @@ module Aws::Rekognition
     #   @return [Array<Types::Asset>]
     class TrainingData < Struct.new(
       :assets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6760,7 +7064,8 @@ module Aws::Rekognition
       :input,
       :output,
       :validation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6799,7 +7104,8 @@ module Aws::Rekognition
     class UnindexedFace < Struct.new(
       :reasons,
       :face_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6839,7 +7145,8 @@ module Aws::Rekognition
     class UnsearchedFace < Struct.new(
       :face_details,
       :reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6863,7 +7170,8 @@ module Aws::Rekognition
       :user_id,
       :confidence,
       :reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6882,7 +7190,8 @@ module Aws::Rekognition
       :face_id,
       :user_id,
       :reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6901,7 +7210,8 @@ module Aws::Rekognition
       :face_id,
       :user_id,
       :reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6915,12 +7225,14 @@ module Aws::Rekognition
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6937,12 +7249,14 @@ module Aws::Rekognition
     class UpdateDatasetEntriesRequest < Struct.new(
       :dataset_arn,
       :changes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDatasetEntriesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6978,12 +7292,14 @@ module Aws::Rekognition
       :regions_of_interest_for_update,
       :data_sharing_preference_for_update,
       :parameters_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateStreamProcessorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6998,7 +7314,8 @@ module Aws::Rekognition
     class User < Struct.new(
       :user_id,
       :user_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7013,7 +7330,8 @@ module Aws::Rekognition
     class UserMatch < Struct.new(
       :similarity,
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7032,7 +7350,8 @@ module Aws::Rekognition
     #   @return [Array<Types::Asset>]
     class ValidationData < Struct.new(
       :assets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7046,7 +7365,8 @@ module Aws::Rekognition
     class Versions < Struct.new(
       :minimum,
       :maximum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7057,7 +7377,8 @@ module Aws::Rekognition
     #   @return [Types::S3Object]
     class Video < Struct.new(
       :s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7094,7 +7415,8 @@ module Aws::Rekognition
       :frame_height,
       :frame_width,
       :color_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7111,7 +7433,8 @@ module Aws::Rekognition
       :message,
       :code,
       :logref,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

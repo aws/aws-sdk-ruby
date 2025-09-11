@@ -20,7 +20,8 @@ module Aws::XRay
       :name,
       :names,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +40,8 @@ module Aws::XRay
       :boolean_value,
       :string_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class NumberValue < AnnotationValue; end
@@ -54,7 +56,8 @@ module Aws::XRay
     #   @return [Types::ServiceId]
     class AnomalousService < Struct.new(
       :service_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +67,8 @@ module Aws::XRay
     #   @return [String]
     class AvailabilityZoneDetail < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +98,8 @@ module Aws::XRay
       :http_code5_xx_count,
       :unknown_host_count,
       :other_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +112,8 @@ module Aws::XRay
     class BatchGetTracesRequest < Struct.new(
       :trace_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +130,8 @@ module Aws::XRay
       :traces,
       :unprocessed_trace_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,12 +142,14 @@ module Aws::XRay
     #   @return [String]
     class CancelTraceRetrievalRequest < Struct.new(
       :retrieval_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelTraceRetrievalResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +207,8 @@ module Aws::XRay
       :filter_expression,
       :insights_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +219,8 @@ module Aws::XRay
     #   @return [Types::Group]
     class CreateGroupResult < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -247,7 +258,8 @@ module Aws::XRay
     class CreateSamplingRuleRequest < Struct.new(
       :sampling_rule,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,7 +268,8 @@ module Aws::XRay
     #   @return [Types::SamplingRuleRecord]
     class CreateSamplingRuleResult < Struct.new(
       :sampling_rule_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -269,12 +282,14 @@ module Aws::XRay
     class DeleteGroupRequest < Struct.new(
       :group_name,
       :group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,12 +304,14 @@ module Aws::XRay
     class DeleteResourcePolicyRequest < Struct.new(
       :policy_name,
       :policy_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +324,8 @@ module Aws::XRay
     class DeleteSamplingRuleRequest < Struct.new(
       :rule_name,
       :rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +334,8 @@ module Aws::XRay
     #   @return [Types::SamplingRuleRecord]
     class DeleteSamplingRuleResult < Struct.new(
       :sampling_rule_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +378,8 @@ module Aws::XRay
       :aliases,
       :edge_type,
       :received_event_age_histogram,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +405,8 @@ module Aws::XRay
       :fault_statistics,
       :total_count,
       :total_response_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -404,7 +425,8 @@ module Aws::XRay
       :key_id,
       :status,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +441,8 @@ module Aws::XRay
     class ErrorRootCause < Struct.new(
       :services,
       :client_impacting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +461,8 @@ module Aws::XRay
       :name,
       :exceptions,
       :remote,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +492,8 @@ module Aws::XRay
       :account_id,
       :entity_path,
       :inferred,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +512,8 @@ module Aws::XRay
       :throttle_count,
       :other_count,
       :total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -502,7 +528,8 @@ module Aws::XRay
     class FaultRootCause < Struct.new(
       :services,
       :client_impacting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +548,8 @@ module Aws::XRay
       :name,
       :exceptions,
       :remote,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +579,8 @@ module Aws::XRay
       :account_id,
       :entity_path,
       :inferred,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -566,7 +595,8 @@ module Aws::XRay
     class FaultStatistics < Struct.new(
       :other_count,
       :total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,12 +611,14 @@ module Aws::XRay
     class ForecastStatistics < Struct.new(
       :fault_count_high,
       :fault_count_low,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetEncryptionConfigRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,7 +627,8 @@ module Aws::XRay
     #   @return [Types::EncryptionConfig]
     class GetEncryptionConfigResult < Struct.new(
       :encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -608,7 +641,8 @@ module Aws::XRay
     class GetGroupRequest < Struct.new(
       :group_name,
       :group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +652,8 @@ module Aws::XRay
     #   @return [Types::Group]
     class GetGroupResult < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +662,8 @@ module Aws::XRay
     #   @return [String]
     class GetGroupsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +676,8 @@ module Aws::XRay
     class GetGroupsResult < Struct.new(
       :groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -653,7 +690,8 @@ module Aws::XRay
     #   @return [String]
     class GetIndexingRulesRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +707,8 @@ module Aws::XRay
     class GetIndexingRulesResult < Struct.new(
       :indexing_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +725,8 @@ module Aws::XRay
       :insight_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +741,8 @@ module Aws::XRay
     class GetInsightEventsResult < Struct.new(
       :insight_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -724,7 +765,8 @@ module Aws::XRay
       :start_time,
       :end_time,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +799,8 @@ module Aws::XRay
       :service_graph_end_time,
       :services,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +809,8 @@ module Aws::XRay
     #   @return [String]
     class GetInsightRequest < Struct.new(
       :insight_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +819,8 @@ module Aws::XRay
     #   @return [Types::Insight]
     class GetInsightResult < Struct.new(
       :insight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,7 +854,8 @@ module Aws::XRay
       :end_time,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -824,7 +870,8 @@ module Aws::XRay
     class GetInsightSummariesResult < Struct.new(
       :insight_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +890,8 @@ module Aws::XRay
     class GetRetrievedTracesGraphRequest < Struct.new(
       :retrieval_token,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +916,8 @@ module Aws::XRay
       :retrieval_status,
       :services,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,7 +926,8 @@ module Aws::XRay
     #   @return [String]
     class GetSamplingRulesRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +940,8 @@ module Aws::XRay
     class GetSamplingRulesResult < Struct.new(
       :sampling_rule_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -899,7 +950,8 @@ module Aws::XRay
     #   @return [String]
     class GetSamplingStatisticSummariesRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -913,7 +965,8 @@ module Aws::XRay
     class GetSamplingStatisticSummariesResult < Struct.new(
       :sampling_statistic_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -926,7 +979,8 @@ module Aws::XRay
     class GetSamplingTargetsRequest < Struct.new(
       :sampling_statistics_documents,
       :sampling_boost_statistics_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +1005,8 @@ module Aws::XRay
       :last_rule_modification,
       :unprocessed_statistics,
       :unprocessed_boost_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -976,7 +1031,8 @@ module Aws::XRay
       :group_name,
       :group_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1060,8 @@ module Aws::XRay
       :services,
       :contains_old_group_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1049,7 +1106,8 @@ module Aws::XRay
       :period,
       :forecast_statistics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1067,7 +1125,8 @@ module Aws::XRay
       :time_series_service_statistics,
       :contains_old_group_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1085,7 +1144,8 @@ module Aws::XRay
     class GetTraceGraphRequest < Struct.new(
       :trace_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1098,12 +1158,14 @@ module Aws::XRay
     class GetTraceGraphResult < Struct.new(
       :services,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetTraceSegmentDestinationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,7 +1182,8 @@ module Aws::XRay
     class GetTraceSegmentDestinationResult < Struct.new(
       :destination,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1157,7 +1220,8 @@ module Aws::XRay
       :sampling_strategy,
       :filter_expression,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1181,7 +1245,8 @@ module Aws::XRay
       :approximate_time,
       :traces_processed_count,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1207,7 +1272,8 @@ module Aws::XRay
       :reference_type,
       :source_trace_id,
       :destination_trace_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1305,8 @@ module Aws::XRay
       :group_arn,
       :filter_expression,
       :insights_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1338,8 @@ module Aws::XRay
       :group_arn,
       :filter_expression,
       :insights_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1286,7 +1354,8 @@ module Aws::XRay
     class HistogramEntry < Struct.new(
       :value,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1318,7 +1387,8 @@ module Aws::XRay
       :http_method,
       :user_agent,
       :client_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1414,8 @@ module Aws::XRay
       :name,
       :modified_at,
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1430,8 @@ module Aws::XRay
     class IndexingRuleValue < Struct.new(
       :probabilistic,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Probabilistic < IndexingRuleValue; end
@@ -1377,7 +1449,8 @@ module Aws::XRay
     class IndexingRuleValueUpdate < Struct.new(
       :probabilistic,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Probabilistic < IndexingRuleValueUpdate; end
@@ -1437,7 +1510,8 @@ module Aws::XRay
       :client_request_impact_statistics,
       :root_cause_service_request_impact_statistics,
       :top_anomalous_services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1466,7 +1540,8 @@ module Aws::XRay
       :client_request_impact_statistics,
       :root_cause_service_request_impact_statistics,
       :top_anomalous_services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1551,8 @@ module Aws::XRay
     #   @return [Integer]
     class InsightImpactGraphEdge < Struct.new(
       :reference_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1524,7 +1600,8 @@ module Aws::XRay
       :names,
       :account_id,
       :edges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,7 +1661,8 @@ module Aws::XRay
       :root_cause_service_request_impact_statistics,
       :top_anomalous_services,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1600,7 +1678,8 @@ module Aws::XRay
     class InsightsConfiguration < Struct.new(
       :insights_enabled,
       :notifications_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1610,7 +1689,8 @@ module Aws::XRay
     #   @return [String]
     class InstanceIdDetail < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1620,7 +1700,8 @@ module Aws::XRay
     #   @return [String]
     class InvalidPolicyRevisionIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1629,7 +1710,8 @@ module Aws::XRay
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,7 +1720,8 @@ module Aws::XRay
     #   @return [String]
     class ListResourcePoliciesRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1734,8 @@ module Aws::XRay
     class ListResourcePoliciesResult < Struct.new(
       :resource_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1676,7 +1760,8 @@ module Aws::XRay
       :retrieval_token,
       :trace_format,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1707,7 +1792,8 @@ module Aws::XRay
       :trace_format,
       :traces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1721,7 +1807,8 @@ module Aws::XRay
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1735,7 +1822,8 @@ module Aws::XRay
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1744,7 +1832,8 @@ module Aws::XRay
     #   @return [String]
     class LockoutPreventionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1753,7 +1842,8 @@ module Aws::XRay
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1762,7 +1852,8 @@ module Aws::XRay
     #   @return [String]
     class PolicyCountLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1771,7 +1862,8 @@ module Aws::XRay
     #   @return [String]
     class PolicySizeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1791,7 +1883,8 @@ module Aws::XRay
     class ProbabilisticRuleValue < Struct.new(
       :desired_sampling_percentage,
       :actual_sampling_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,7 +1898,8 @@ module Aws::XRay
     #   @return [Float]
     class ProbabilisticRuleValueUpdate < Struct.new(
       :desired_sampling_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,7 +1933,8 @@ module Aws::XRay
     class PutEncryptionConfigRequest < Struct.new(
       :key_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1848,7 +1943,8 @@ module Aws::XRay
     #   @return [Types::EncryptionConfig]
     class PutEncryptionConfigResult < Struct.new(
       :encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1878,7 +1974,8 @@ module Aws::XRay
       :policy_document,
       :policy_revision_id,
       :bypass_policy_lockout_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1887,7 +1984,8 @@ module Aws::XRay
     #   @return [Types::ResourcePolicy]
     class PutResourcePolicyResult < Struct.new(
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1908,12 +2006,14 @@ module Aws::XRay
       :ec2_instance_id,
       :hostname,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutTelemetryRecordsResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1923,7 +2023,8 @@ module Aws::XRay
     #   @return [Array<String>]
     class PutTraceSegmentsRequest < Struct.new(
       :trace_segment_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1932,7 +2033,8 @@ module Aws::XRay
     #   @return [Array<Types::UnprocessedTraceSegment>]
     class PutTraceSegmentsResult < Struct.new(
       :unprocessed_trace_segments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1950,7 +2052,8 @@ module Aws::XRay
       :fault_count,
       :ok_count,
       :total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1960,7 +2063,8 @@ module Aws::XRay
     #   @return [String]
     class ResourceARNDetail < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1973,7 +2077,8 @@ module Aws::XRay
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1997,7 +2102,8 @@ module Aws::XRay
       :policy_document,
       :policy_revision_id,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2012,7 +2118,8 @@ module Aws::XRay
     class ResponseTimeRootCause < Struct.new(
       :services,
       :client_impacting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2031,7 +2138,8 @@ module Aws::XRay
       :name,
       :coverage,
       :remote,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2061,7 +2169,8 @@ module Aws::XRay
       :account_id,
       :entity_path,
       :inferred,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2080,7 +2189,8 @@ module Aws::XRay
     class RetrievedService < Struct.new(
       :service,
       :links,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2106,7 +2216,8 @@ module Aws::XRay
       :id,
       :duration,
       :spans,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2120,7 +2231,8 @@ module Aws::XRay
     class RootCauseException < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2129,7 +2241,8 @@ module Aws::XRay
     #   @return [String]
     class RuleLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2144,7 +2257,8 @@ module Aws::XRay
     class SamplingBoost < Struct.new(
       :boost_rate,
       :boost_rate_ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2181,7 +2295,8 @@ module Aws::XRay
       :anomaly_count,
       :total_count,
       :sampled_anomaly_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2204,7 +2319,8 @@ module Aws::XRay
     class SamplingRateBoost < Struct.new(
       :max_rate,
       :cooldown_window_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2277,7 +2393,8 @@ module Aws::XRay
       :version,
       :attributes,
       :sampling_rate_boost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2301,7 +2418,8 @@ module Aws::XRay
       :sampling_rule,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2362,7 +2480,8 @@ module Aws::XRay
       :url_path,
       :attributes,
       :sampling_rate_boost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2388,7 +2507,8 @@ module Aws::XRay
       :request_count,
       :borrow_count,
       :sampled_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2427,7 +2547,8 @@ module Aws::XRay
       :request_count,
       :sampled_count,
       :borrow_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2448,7 +2569,8 @@ module Aws::XRay
     class SamplingStrategy < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2482,7 +2604,8 @@ module Aws::XRay
       :reservoir_quota_ttl,
       :interval,
       :sampling_boost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2506,7 +2629,8 @@ module Aws::XRay
     class Segment < Struct.new(
       :id,
       :document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2585,7 +2709,8 @@ module Aws::XRay
       :summary_statistics,
       :duration_histogram,
       :response_time_histogram,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2607,7 +2732,8 @@ module Aws::XRay
       :names,
       :account_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2633,7 +2759,8 @@ module Aws::XRay
       :fault_statistics,
       :total_count,
       :total_response_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2650,7 +2777,8 @@ module Aws::XRay
     class Span < Struct.new(
       :id,
       :document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2674,7 +2802,8 @@ module Aws::XRay
       :trace_ids,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2685,7 +2814,8 @@ module Aws::XRay
     #   @return [String]
     class StartTraceRetrievalResult < Struct.new(
       :retrieval_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2720,7 +2850,8 @@ module Aws::XRay
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2758,12 +2889,14 @@ module Aws::XRay
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2793,7 +2926,8 @@ module Aws::XRay
       :segments_spillover_count,
       :segments_rejected_count,
       :backend_connection_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2802,7 +2936,8 @@ module Aws::XRay
     #   @return [String]
     class ThrottledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2828,7 +2963,8 @@ module Aws::XRay
       :service_summary_statistics,
       :service_forecast_statistics,
       :response_time_histogram,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2840,7 +2976,8 @@ module Aws::XRay
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +3001,8 @@ module Aws::XRay
       :duration,
       :limit_exceeded,
       :segments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2961,7 +3099,8 @@ module Aws::XRay
       :response_time_root_causes,
       :revision,
       :matched_event_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2980,7 +3119,8 @@ module Aws::XRay
     class TraceUser < Struct.new(
       :user_name,
       :service_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2999,7 +3139,8 @@ module Aws::XRay
       :rule_name,
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3017,7 +3158,8 @@ module Aws::XRay
       :id,
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3030,12 +3172,14 @@ module Aws::XRay
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3066,7 +3210,8 @@ module Aws::XRay
       :group_arn,
       :filter_expression,
       :insights_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3077,7 +3222,8 @@ module Aws::XRay
     #   @return [Types::Group]
     class UpdateGroupResult < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3094,7 +3240,8 @@ module Aws::XRay
     class UpdateIndexingRuleRequest < Struct.new(
       :name,
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3105,7 +3252,8 @@ module Aws::XRay
     #   @return [Types::IndexingRule]
     class UpdateIndexingRuleResult < Struct.new(
       :indexing_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3114,7 +3262,8 @@ module Aws::XRay
     #   @return [Types::SamplingRuleUpdate]
     class UpdateSamplingRuleRequest < Struct.new(
       :sampling_rule_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3123,7 +3272,8 @@ module Aws::XRay
     #   @return [Types::SamplingRuleRecord]
     class UpdateSamplingRuleResult < Struct.new(
       :sampling_rule_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3134,7 +3284,8 @@ module Aws::XRay
     #   @return [String]
     class UpdateTraceSegmentDestinationRequest < Struct.new(
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3151,7 +3302,8 @@ module Aws::XRay
     class UpdateTraceSegmentDestinationResult < Struct.new(
       :destination,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3165,7 +3317,8 @@ module Aws::XRay
     class ValueWithServiceIds < Struct.new(
       :annotation_value,
       :service_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

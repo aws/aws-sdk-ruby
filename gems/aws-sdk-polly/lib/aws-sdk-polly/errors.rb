@@ -56,7 +56,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::EngineNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::InvalidLexiconException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::InvalidS3BucketException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::InvalidS3KeyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::InvalidSampleRateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::InvalidSnsTopicArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::InvalidSsmlException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::InvalidTaskIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -181,7 +181,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::LanguageNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::LexiconNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -212,7 +212,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::LexiconSizeExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -227,7 +227,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::MarksNotSupportedForFormatException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -241,7 +241,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::MaxLexemeLengthExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -255,7 +255,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::MaxLexiconsNumberExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -268,7 +268,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::ServiceFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -282,7 +282,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::SsmlMarksNotSupportedForTextTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -296,7 +296,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::SynthesisTaskNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -315,7 +315,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::TextLengthExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -329,7 +329,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::UnsupportedPlsAlphabetException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -343,7 +343,7 @@ module Aws::Polly
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Polly::Types::UnsupportedPlsLanguageException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

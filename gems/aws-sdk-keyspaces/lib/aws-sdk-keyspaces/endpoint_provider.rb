@@ -45,7 +45,6 @@ module Aws::Keyspaces
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

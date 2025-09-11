@@ -68,7 +68,8 @@ module Aws::ACMPCA
       :pseudonym,
       :generation_qualifier,
       :custom_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +83,8 @@ module Aws::ACMPCA
     class AccessDescription < Struct.new(
       :access_method,
       :access_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -96,7 +98,8 @@ module Aws::ACMPCA
     class AccessMethod < Struct.new(
       :custom_object_identifier,
       :access_method_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +113,8 @@ module Aws::ACMPCA
     class ApiPassthrough < Struct.new(
       :extensions,
       :subject,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +180,8 @@ module Aws::ACMPCA
       :restorable_until,
       :key_storage_security_standard,
       :usage_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +203,8 @@ module Aws::ACMPCA
       :signing_algorithm,
       :subject,
       :csr_extensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +213,8 @@ module Aws::ACMPCA
     #   @return [String]
     class CertificateMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +223,8 @@ module Aws::ACMPCA
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +241,8 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :s3_bucket_name,
       :audit_report_response_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -246,7 +255,8 @@ module Aws::ACMPCA
     class CreateCertificateAuthorityAuditReportResponse < Struct.new(
       :audit_report_id,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +289,8 @@ module Aws::ACMPCA
       :key_storage_security_standard,
       :tags,
       :usage_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +299,8 @@ module Aws::ACMPCA
     #   @return [String]
     class CreateCertificateAuthorityResponse < Struct.new(
       :certificate_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +321,8 @@ module Aws::ACMPCA
       :principal,
       :source_account,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +360,8 @@ module Aws::ACMPCA
       :crl_distribution_point_extension_configuration,
       :crl_type,
       :custom_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -362,7 +376,8 @@ module Aws::ACMPCA
     #   @return [Boolean]
     class CrlDistributionPointExtensionConfiguration < Struct.new(
       :omit_extension,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -381,7 +396,8 @@ module Aws::ACMPCA
     class CsrExtensions < Struct.new(
       :key_usage,
       :subject_information_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +411,8 @@ module Aws::ACMPCA
     class CustomAttribute < Struct.new(
       :object_identifier,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +430,8 @@ module Aws::ACMPCA
       :object_identifier,
       :value,
       :critical,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -431,7 +449,8 @@ module Aws::ACMPCA
     class DeleteCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
       :permanent_deletion_time_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +467,8 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :principal,
       :source_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +477,8 @@ module Aws::ACMPCA
     #   @return [String]
     class DeletePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,7 +491,8 @@ module Aws::ACMPCA
     class DescribeCertificateAuthorityAuditReportRequest < Struct.new(
       :certificate_authority_arn,
       :audit_report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,7 +513,8 @@ module Aws::ACMPCA
       :s3_bucket_name,
       :s3_key,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +523,8 @@ module Aws::ACMPCA
     #   @return [String]
     class DescribeCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +533,8 @@ module Aws::ACMPCA
     #   @return [Types::CertificateAuthority]
     class DescribeCertificateAuthorityResponse < Struct.new(
       :certificate_authority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,7 +548,8 @@ module Aws::ACMPCA
     class EdiPartyName < Struct.new(
       :party_name,
       :name_assigner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +563,8 @@ module Aws::ACMPCA
     class ExtendedKeyUsage < Struct.new(
       :extended_key_usage_type,
       :extended_key_usage_object_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +590,8 @@ module Aws::ACMPCA
       :key_usage,
       :subject_alternative_names,
       :custom_extensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +629,8 @@ module Aws::ACMPCA
       :uniform_resource_identifier,
       :ip_address,
       :registered_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +639,8 @@ module Aws::ACMPCA
     #   @return [String]
     class GetCertificateAuthorityCertificateRequest < Struct.new(
       :certificate_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -623,7 +653,8 @@ module Aws::ACMPCA
     class GetCertificateAuthorityCertificateResponse < Struct.new(
       :certificate,
       :certificate_chain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +663,8 @@ module Aws::ACMPCA
     #   @return [String]
     class GetCertificateAuthorityCsrRequest < Struct.new(
       :certificate_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +673,8 @@ module Aws::ACMPCA
     #   @return [String]
     class GetCertificateAuthorityCsrResponse < Struct.new(
       :csr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +687,8 @@ module Aws::ACMPCA
     class GetCertificateRequest < Struct.new(
       :certificate_authority_arn,
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -667,7 +701,8 @@ module Aws::ACMPCA
     class GetCertificateResponse < Struct.new(
       :certificate,
       :certificate_chain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -676,7 +711,8 @@ module Aws::ACMPCA
     #   @return [String]
     class GetPolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +721,8 @@ module Aws::ACMPCA
     #   @return [String]
     class GetPolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +739,8 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :certificate,
       :certificate_chain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -711,7 +749,8 @@ module Aws::ACMPCA
     #   @return [String]
     class InvalidArgsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +759,8 @@ module Aws::ACMPCA
     #   @return [String]
     class InvalidArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +769,8 @@ module Aws::ACMPCA
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +779,8 @@ module Aws::ACMPCA
     #   @return [String]
     class InvalidPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,7 +789,8 @@ module Aws::ACMPCA
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +799,8 @@ module Aws::ACMPCA
     #   @return [String]
     class InvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +809,8 @@ module Aws::ACMPCA
     #   @return [String]
     class InvalidTagException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +847,8 @@ module Aws::ACMPCA
       :validity,
       :validity_not_before,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,7 +857,8 @@ module Aws::ACMPCA
     #   @return [String]
     class IssueCertificateResponse < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -853,7 +900,8 @@ module Aws::ACMPCA
       :crl_sign,
       :encipher_only,
       :decipher_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -875,7 +923,8 @@ module Aws::ACMPCA
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +941,8 @@ module Aws::ACMPCA
       :max_results,
       :next_token,
       :resource_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -905,7 +955,8 @@ module Aws::ACMPCA
     class ListCertificateAuthoritiesResponse < Struct.new(
       :next_token,
       :certificate_authorities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +973,8 @@ module Aws::ACMPCA
       :max_results,
       :next_token,
       :certificate_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -935,7 +987,8 @@ module Aws::ACMPCA
     class ListPermissionsResponse < Struct.new(
       :next_token,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +1005,8 @@ module Aws::ACMPCA
       :max_results,
       :next_token,
       :certificate_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -965,7 +1019,8 @@ module Aws::ACMPCA
     class ListTagsResponse < Struct.new(
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,7 +1029,8 @@ module Aws::ACMPCA
     #   @return [String]
     class LockoutPreventedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1039,8 @@ module Aws::ACMPCA
     #   @return [String]
     class MalformedCSRException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -992,7 +1049,8 @@ module Aws::ACMPCA
     #   @return [String]
     class MalformedCertificateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1006,7 +1064,8 @@ module Aws::ACMPCA
     class OcspConfiguration < Struct.new(
       :enabled,
       :ocsp_custom_cname,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1025,7 +1084,8 @@ module Aws::ACMPCA
     class OtherName < Struct.new(
       :type_id,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1055,7 +1115,8 @@ module Aws::ACMPCA
       :source_account,
       :actions,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1125,8 @@ module Aws::ACMPCA
     #   @return [String]
     class PermissionAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1078,7 +1140,8 @@ module Aws::ACMPCA
     class PolicyInformation < Struct.new(
       :cert_policy_id,
       :policy_qualifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1092,7 +1155,8 @@ module Aws::ACMPCA
     class PolicyQualifierInfo < Struct.new(
       :policy_qualifier_id,
       :qualifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1169,8 @@ module Aws::ACMPCA
     class PutPolicyRequest < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1180,8 @@ module Aws::ACMPCA
     #   @return [String]
     class Qualifier < Struct.new(
       :cps_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1190,8 @@ module Aws::ACMPCA
     #   @return [String]
     class RequestAlreadyProcessedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1200,8 @@ module Aws::ACMPCA
     #   @return [String]
     class RequestFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1142,7 +1210,8 @@ module Aws::ACMPCA
     #   @return [String]
     class RequestInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1151,7 +1220,8 @@ module Aws::ACMPCA
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1160,7 +1230,8 @@ module Aws::ACMPCA
     #   @return [String]
     class RestoreCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1174,7 +1245,8 @@ module Aws::ACMPCA
     class RevocationConfiguration < Struct.new(
       :crl_configuration,
       :ocsp_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,7 +1263,8 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :certificate_serial,
       :revocation_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1205,7 +1278,8 @@ module Aws::ACMPCA
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1292,8 @@ module Aws::ACMPCA
     class TagCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1227,7 +1302,8 @@ module Aws::ACMPCA
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1240,7 +1316,8 @@ module Aws::ACMPCA
     class UntagCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1257,7 +1334,8 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :revocation_configuration,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1349,8 @@ module Aws::ACMPCA
     class Validity < Struct.new(
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -63,7 +63,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::IdempotentParameterMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::InvalidClientTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::InvalidMaxResultsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -131,7 +131,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::InvalidPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -144,7 +144,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::InvalidResourceTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -158,7 +158,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::InvalidStateTransitionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -172,7 +172,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::MalformedArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -185,7 +185,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::MalformedPolicyTemplateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::MissingRequiredParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -211,7 +211,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::OperationNotPermittedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -225,7 +225,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::PermissionAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -240,7 +240,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::PermissionLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -255,7 +255,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::PermissionVersionsLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -268,7 +268,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::ResourceArnNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -281,7 +281,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::ResourceShareInvitationAlreadyAcceptedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -294,7 +294,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::ResourceShareInvitationAlreadyRejectedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -308,7 +308,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::ResourceShareInvitationArnNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -322,7 +322,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::ResourceShareInvitationExpiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -337,7 +337,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::ResourceShareLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -351,7 +351,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::ServerInternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -364,7 +364,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -378,7 +378,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::TagLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -392,7 +392,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::TagPolicyViolationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -406,7 +406,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -419,7 +419,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::UnknownResourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -433,7 +433,7 @@ module Aws::RAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::UnmatchedPolicyPermissionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -11,7 +11,8 @@ module Aws::SupportApp
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +47,8 @@ module Aws::SupportApp
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,22 +130,26 @@ module Aws::SupportApp
       :notify_on_resolve_case,
       :notify_on_case_severity,
       :channel_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateSlackChannelConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountAliasInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountAliasOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,12 +163,14 @@ module Aws::SupportApp
     class DeleteSlackChannelConfigurationInput < Struct.new(
       :team_id,
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSlackChannelConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,17 +180,20 @@ module Aws::SupportApp
     #   @return [String]
     class DeleteSlackWorkspaceConfigurationInput < Struct.new(
       :team_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSlackWorkspaceConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAccountAliasInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +202,8 @@ module Aws::SupportApp
     #   @return [String]
     class GetAccountAliasOutput < Struct.new(
       :account_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +212,8 @@ module Aws::SupportApp
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +224,8 @@ module Aws::SupportApp
     #   @return [String]
     class ListSlackChannelConfigurationsInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +239,8 @@ module Aws::SupportApp
     class ListSlackChannelConfigurationsOutput < Struct.new(
       :next_token,
       :slack_channel_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +251,8 @@ module Aws::SupportApp
     #   @return [String]
     class ListSlackWorkspaceConfigurationsInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +266,8 @@ module Aws::SupportApp
     class ListSlackWorkspaceConfigurationsOutput < Struct.new(
       :next_token,
       :slack_workspace_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -259,12 +276,14 @@ module Aws::SupportApp
     #   @return [String]
     class PutAccountAliasInput < Struct.new(
       :account_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutAccountAliasOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +293,8 @@ module Aws::SupportApp
     #   @return [String]
     class RegisterSlackWorkspaceForOrganizationInput < Struct.new(
       :team_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +313,8 @@ module Aws::SupportApp
       :team_id,
       :team_name,
       :account_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +324,8 @@ module Aws::SupportApp
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +336,8 @@ module Aws::SupportApp
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -356,7 +379,8 @@ module Aws::SupportApp
       :notify_on_resolve_case,
       :notify_on_case_severity,
       :channel_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +400,8 @@ module Aws::SupportApp
       :team_id,
       :team_name,
       :allow_organization_member_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +483,8 @@ module Aws::SupportApp
       :notify_on_resolve_case,
       :notify_on_case_severity,
       :channel_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +524,8 @@ module Aws::SupportApp
       :notify_on_resolve_case,
       :notify_on_case_severity,
       :channel_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -507,7 +534,8 @@ module Aws::SupportApp
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

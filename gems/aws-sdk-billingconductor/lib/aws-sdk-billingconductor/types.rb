@@ -12,7 +12,8 @@ module Aws::Billingconductor
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +35,8 @@ module Aws::Billingconductor
       :billing_group_arn,
       :account_name,
       :account_email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +51,8 @@ module Aws::Billingconductor
     class AccountGrouping < Struct.new(
       :linked_account_ids,
       :auto_associate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +68,8 @@ module Aws::Billingconductor
     class AssociateAccountsOperationInput < Struct.new(
       :arn,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +79,8 @@ module Aws::Billingconductor
     #   @return [String]
     class AssociateAccountsOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,7 +97,8 @@ module Aws::Billingconductor
     class AssociatePricingRulesOperationInput < Struct.new(
       :arn,
       :pricing_rule_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +109,8 @@ module Aws::Billingconductor
     #   @return [String]
     class AssociatePricingRulesOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -117,7 +124,8 @@ module Aws::Billingconductor
     class AssociateResourceError < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +139,8 @@ module Aws::Billingconductor
     class AssociateResourceResponseElement < Struct.new(
       :arn,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +157,8 @@ module Aws::Billingconductor
     class Attribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,7 +179,8 @@ module Aws::Billingconductor
       :target_arn,
       :resource_arns,
       :billing_period_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +197,8 @@ module Aws::Billingconductor
     class BatchAssociateResourcesToCustomLineItemOperationOutput < Struct.new(
       :successfully_associated_resources,
       :failed_associated_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +219,8 @@ module Aws::Billingconductor
       :target_arn,
       :resource_arns,
       :billing_period_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +237,8 @@ module Aws::Billingconductor
     class BatchDisassociateResourcesFromCustomLineItemOperationOutput < Struct.new(
       :successfully_disassociated_resources,
       :failed_disassociated_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +268,8 @@ module Aws::Billingconductor
       :margin,
       :margin_percentage,
       :currency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +309,8 @@ module Aws::Billingconductor
       :margin_percentage,
       :currency,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +361,8 @@ module Aws::Billingconductor
       :status,
       :status_reason,
       :account_grouping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -366,7 +383,8 @@ module Aws::Billingconductor
     class BillingPeriodRange < Struct.new(
       :inclusive_start_billing_period,
       :exclusive_end_billing_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +394,8 @@ module Aws::Billingconductor
     #   @return [String]
     class ComputationPreference < Struct.new(
       :pricing_plan_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +420,8 @@ module Aws::Billingconductor
       :resource_id,
       :resource_type,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -443,7 +463,8 @@ module Aws::Billingconductor
       :primary_account_id,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +473,8 @@ module Aws::Billingconductor
     #   @return [String]
     class CreateBillingGroupOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +520,8 @@ module Aws::Billingconductor
       :tags,
       :charge_details,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -507,7 +530,8 @@ module Aws::Billingconductor
     #   @return [String]
     class CreateCustomLineItemOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +545,8 @@ module Aws::Billingconductor
     #   @return [Boolean]
     class CreateFreeTierConfig < Struct.new(
       :activated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +575,8 @@ module Aws::Billingconductor
       :description,
       :pricing_rule_arns,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -559,7 +585,8 @@ module Aws::Billingconductor
     #   @return [String]
     class CreatePricingPlanOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +662,8 @@ module Aws::Billingconductor
       :tiering,
       :usage_type,
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +672,8 @@ module Aws::Billingconductor
     #   @return [String]
     class CreatePricingRuleOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -658,7 +687,8 @@ module Aws::Billingconductor
     #   @return [Types::CreateFreeTierConfig]
     class CreateTieringInput < Struct.new(
       :free_tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -672,7 +702,8 @@ module Aws::Billingconductor
     class CustomLineItemBillingPeriodRange < Struct.new(
       :inclusive_start_billing_period,
       :exclusive_end_billing_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +726,8 @@ module Aws::Billingconductor
       :percentage,
       :type,
       :line_item_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,7 +737,8 @@ module Aws::Billingconductor
     #   @return [Float]
     class CustomLineItemFlatChargeDetails < Struct.new(
       :charge_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +788,8 @@ module Aws::Billingconductor
       :last_modified_time,
       :association_size,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -777,7 +811,8 @@ module Aws::Billingconductor
     class CustomLineItemPercentageChargeDetails < Struct.new(
       :percentage_value,
       :associated_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +880,8 @@ module Aws::Billingconductor
       :arn,
       :start_time,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -862,7 +898,8 @@ module Aws::Billingconductor
     #   @return [String]
     class DeleteBillingGroupOperationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -871,7 +908,8 @@ module Aws::Billingconductor
     #   @return [String]
     class DeleteBillingGroupOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +924,8 @@ module Aws::Billingconductor
     class DeleteCustomLineItemOperationInput < Struct.new(
       :arn,
       :billing_period_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,7 +934,8 @@ module Aws::Billingconductor
     #   @return [String]
     class DeleteCustomLineItemOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +944,8 @@ module Aws::Billingconductor
     #   @return [String]
     class DeletePricingPlanOperationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -913,7 +954,8 @@ module Aws::Billingconductor
     #   @return [String]
     class DeletePricingPlanOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +964,8 @@ module Aws::Billingconductor
     #   @return [String]
     class DeletePricingRuleOperationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +974,8 @@ module Aws::Billingconductor
     #   @return [String]
     class DeletePricingRuleOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -946,7 +990,8 @@ module Aws::Billingconductor
     class DisassociateAccountsOperationInput < Struct.new(
       :arn,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +1001,8 @@ module Aws::Billingconductor
     #   @return [String]
     class DisassociateAccountsOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1016,8 @@ module Aws::Billingconductor
     class DisassociatePricingRulesOperationInput < Struct.new(
       :arn,
       :pricing_rule_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1027,8 @@ module Aws::Billingconductor
     #   @return [String]
     class DisassociatePricingRulesOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1043,8 @@ module Aws::Billingconductor
     class DisassociateResourceResponseElement < Struct.new(
       :arn,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1009,7 +1058,8 @@ module Aws::Billingconductor
     #   @return [Boolean]
     class FreeTierConfig < Struct.new(
       :activated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1036,7 +1086,8 @@ module Aws::Billingconductor
       :group_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1100,8 @@ module Aws::Billingconductor
     class GetBillingGroupCostReportOutput < Struct.new(
       :billing_group_cost_report_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1116,8 @@ module Aws::Billingconductor
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1090,7 +1143,8 @@ module Aws::Billingconductor
       :attribute,
       :match_option,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1175,8 @@ module Aws::Billingconductor
       :association,
       :account_id,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1204,8 @@ module Aws::Billingconductor
       :billing_period,
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1220,8 @@ module Aws::Billingconductor
     class ListAccountAssociationsOperationOutput < Struct.new(
       :linked_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1176,7 +1233,8 @@ module Aws::Billingconductor
     #   @return [Boolean]
     class ListBillingGroupAccountGrouping < Struct.new(
       :auto_associate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1186,7 +1244,8 @@ module Aws::Billingconductor
     #   @return [Array<String>]
     class ListBillingGroupCostReportsFilter < Struct.new(
       :billing_group_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,7 +1270,8 @@ module Aws::Billingconductor
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1286,8 @@ module Aws::Billingconductor
     class ListBillingGroupCostReportsOperationOutput < Struct.new(
       :billing_group_cost_reports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1251,7 +1312,8 @@ module Aws::Billingconductor
       :pricing_plan,
       :statuses,
       :auto_associate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1276,7 +1338,8 @@ module Aws::Billingconductor
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1354,8 @@ module Aws::Billingconductor
     class ListBillingGroupsOperationOutput < Struct.new(
       :billing_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1321,7 +1385,8 @@ module Aws::Billingconductor
       :percentage,
       :type,
       :line_item_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1335,7 +1400,8 @@ module Aws::Billingconductor
     #   @return [Float]
     class ListCustomLineItemFlatChargeDetails < Struct.new(
       :charge_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1349,7 +1415,8 @@ module Aws::Billingconductor
     #   @return [Float]
     class ListCustomLineItemPercentageChargeDetails < Struct.new(
       :percentage_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1363,7 +1430,8 @@ module Aws::Billingconductor
     class ListCustomLineItemVersionsBillingPeriodRangeFilter < Struct.new(
       :start_billing_period,
       :end_billing_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1441,8 @@ module Aws::Billingconductor
     #   @return [Types::ListCustomLineItemVersionsBillingPeriodRangeFilter]
     class ListCustomLineItemVersionsFilter < Struct.new(
       :billing_period_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1394,7 +1463,8 @@ module Aws::Billingconductor
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1407,7 +1477,8 @@ module Aws::Billingconductor
     class ListCustomLineItemVersionsOperationOutput < Struct.new(
       :custom_line_item_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,7 +1500,8 @@ module Aws::Billingconductor
       :billing_groups,
       :arns,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1457,7 +1529,8 @@ module Aws::Billingconductor
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1547,8 @@ module Aws::Billingconductor
     class ListCustomLineItemsOperationOutput < Struct.new(
       :custom_line_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1501,7 +1575,8 @@ module Aws::Billingconductor
       :pricing_rule_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1528,7 +1603,8 @@ module Aws::Billingconductor
       :pricing_rule_arn,
       :pricing_plan_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1539,7 +1615,8 @@ module Aws::Billingconductor
     #   @return [Array<String>]
     class ListPricingPlansFilter < Struct.new(
       :arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1563,7 +1640,8 @@ module Aws::Billingconductor
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,7 +1662,8 @@ module Aws::Billingconductor
       :billing_period,
       :pricing_plans,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1610,7 +1689,8 @@ module Aws::Billingconductor
       :pricing_plan_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,7 +1718,8 @@ module Aws::Billingconductor
       :pricing_plan_arn,
       :pricing_rule_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1729,8 @@ module Aws::Billingconductor
     #   @return [Array<String>]
     class ListPricingRulesFilter < Struct.new(
       :arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1676,7 +1758,8 @@ module Aws::Billingconductor
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,7 +1782,8 @@ module Aws::Billingconductor
       :billing_period,
       :pricing_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1713,7 +1797,8 @@ module Aws::Billingconductor
     #   @return [String]
     class ListResourcesAssociatedToCustomLineItemFilter < Struct.new(
       :relationship,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1746,7 +1831,8 @@ module Aws::Billingconductor
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1769,7 +1855,8 @@ module Aws::Billingconductor
       :arn,
       :associated_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1793,7 +1880,8 @@ module Aws::Billingconductor
       :arn,
       :relationship,
       :end_billing_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1804,7 +1892,8 @@ module Aws::Billingconductor
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1815,7 +1904,8 @@ module Aws::Billingconductor
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1935,8 @@ module Aws::Billingconductor
       :size,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1925,7 +2016,8 @@ module Aws::Billingconductor
       :tiering,
       :usage_type,
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1952,7 +2044,8 @@ module Aws::Billingconductor
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1982,7 +2075,8 @@ module Aws::Billingconductor
       :resource_type,
       :limit_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1999,12 +2093,14 @@ module Aws::Billingconductor
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2019,7 +2115,8 @@ module Aws::Billingconductor
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2038,7 +2135,8 @@ module Aws::Billingconductor
     #   @return [Types::FreeTierConfig]
     class Tiering < Struct.new(
       :free_tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2055,12 +2153,14 @@ module Aws::Billingconductor
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2072,7 +2172,8 @@ module Aws::Billingconductor
     #   @return [Boolean]
     class UpdateBillingGroupAccountGrouping < Struct.new(
       :auto_associate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2107,7 +2208,8 @@ module Aws::Billingconductor
       :computation_preference,
       :description,
       :account_grouping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2168,7 +2270,8 @@ module Aws::Billingconductor
       :status,
       :status_reason,
       :account_grouping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2198,7 +2301,8 @@ module Aws::Billingconductor
       :flat,
       :percentage,
       :line_item_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2212,7 +2316,8 @@ module Aws::Billingconductor
     #   @return [Float]
     class UpdateCustomLineItemFlatChargeDetails < Struct.new(
       :charge_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2245,7 +2350,8 @@ module Aws::Billingconductor
       :description,
       :charge_details,
       :billing_period_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2290,7 +2396,8 @@ module Aws::Billingconductor
       :charge_details,
       :last_modified_time,
       :association_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2310,7 +2417,8 @@ module Aws::Billingconductor
     #   @return [Float]
     class UpdateCustomLineItemPercentageChargeDetails < Struct.new(
       :percentage_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2324,7 +2432,8 @@ module Aws::Billingconductor
     #   @return [Boolean]
     class UpdateFreeTierConfig < Struct.new(
       :activated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2342,7 +2451,8 @@ module Aws::Billingconductor
       :arn,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2373,7 +2483,8 @@ module Aws::Billingconductor
       :description,
       :size,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2418,7 +2529,8 @@ module Aws::Billingconductor
       :type,
       :modifier_percentage,
       :tiering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2498,7 +2610,8 @@ module Aws::Billingconductor
       :tiering,
       :usage_type,
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2518,7 +2631,8 @@ module Aws::Billingconductor
     #   @return [Types::UpdateFreeTierConfig]
     class UpdateTieringInput < Struct.new(
       :free_tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2537,7 +2651,8 @@ module Aws::Billingconductor
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2551,7 +2666,8 @@ module Aws::Billingconductor
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

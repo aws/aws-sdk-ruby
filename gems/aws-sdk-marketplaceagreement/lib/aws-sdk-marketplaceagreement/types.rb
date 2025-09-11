@@ -53,7 +53,8 @@ module Aws::MarketplaceAgreement
       :free_trial_pricing_term,
       :fixed_upfront_pricing_term,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class LegalTerm < AcceptedTerm; end
@@ -77,7 +78,8 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     class Acceptor < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +92,8 @@ module Aws::MarketplaceAgreement
     class AccessDeniedException < Struct.new(
       :request_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -138,7 +141,8 @@ module Aws::MarketplaceAgreement
       :proposer,
       :proposal_summary,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +154,8 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     class ByolPricingTerm < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +178,8 @@ module Aws::MarketplaceAgreement
       :currency_code,
       :rate_cards,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,7 +196,8 @@ module Aws::MarketplaceAgreement
     class ConfigurableUpfrontPricingTermConfiguration < Struct.new(
       :selector_value,
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +215,8 @@ module Aws::MarketplaceAgreement
       :selector,
       :constraints,
       :rate_card,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +234,8 @@ module Aws::MarketplaceAgreement
     class Constraints < Struct.new(
       :multiple_dimension_selection,
       :quantity_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +244,8 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     class DescribeAgreementInput < Struct.new(
       :agreement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -336,7 +346,8 @@ module Aws::MarketplaceAgreement
       :estimated_charges,
       :proposal_summary,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -357,7 +368,8 @@ module Aws::MarketplaceAgreement
     class Dimension < Struct.new(
       :dimension_key,
       :dimension_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -406,7 +418,8 @@ module Aws::MarketplaceAgreement
       :type,
       :url,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +451,8 @@ module Aws::MarketplaceAgreement
     class EstimatedCharges < Struct.new(
       :currency_code,
       :agreement_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +468,8 @@ module Aws::MarketplaceAgreement
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +497,8 @@ module Aws::MarketplaceAgreement
       :duration,
       :price,
       :grants,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -502,7 +518,8 @@ module Aws::MarketplaceAgreement
       :type,
       :duration,
       :grants,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +536,8 @@ module Aws::MarketplaceAgreement
       :agreement_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -533,7 +551,8 @@ module Aws::MarketplaceAgreement
     class GetAgreementTermsOutput < Struct.new(
       :accepted_terms,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +566,8 @@ module Aws::MarketplaceAgreement
     class GrantItem < Struct.new(
       :dimension_key,
       :max_quantity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -565,7 +585,8 @@ module Aws::MarketplaceAgreement
     class InternalServerException < Struct.new(
       :request_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +602,8 @@ module Aws::MarketplaceAgreement
     class LegalTerm < Struct.new(
       :type,
       :documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -602,7 +624,8 @@ module Aws::MarketplaceAgreement
       :type,
       :currency_code,
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +639,8 @@ module Aws::MarketplaceAgreement
     class ProposalSummary < Struct.new(
       :resources,
       :offer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +651,8 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     class Proposer < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +666,8 @@ module Aws::MarketplaceAgreement
     class RateCardItem < Struct.new(
       :dimension_key,
       :price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +690,8 @@ module Aws::MarketplaceAgreement
       :currency_code,
       :billing_period,
       :price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +712,8 @@ module Aws::MarketplaceAgreement
     class RenewalTerm < Struct.new(
       :type,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -696,7 +724,8 @@ module Aws::MarketplaceAgreement
     #   @return [Boolean]
     class RenewalTermConfiguration < Struct.new(
       :enable_auto_renew,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -715,7 +744,8 @@ module Aws::MarketplaceAgreement
     class Resource < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -736,7 +766,8 @@ module Aws::MarketplaceAgreement
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -750,7 +781,8 @@ module Aws::MarketplaceAgreement
     class ScheduleItem < Struct.new(
       :charge_date,
       :charge_amount,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +860,8 @@ module Aws::MarketplaceAgreement
       :sort,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +876,8 @@ module Aws::MarketplaceAgreement
     class SearchAgreementsOutput < Struct.new(
       :agreement_view_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,7 +892,8 @@ module Aws::MarketplaceAgreement
     class Selector < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +910,8 @@ module Aws::MarketplaceAgreement
     class Sort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -891,7 +927,8 @@ module Aws::MarketplaceAgreement
     class SupportTerm < Struct.new(
       :type,
       :refund_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +941,8 @@ module Aws::MarketplaceAgreement
     class ThrottlingException < Struct.new(
       :request_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +961,8 @@ module Aws::MarketplaceAgreement
       :type,
       :currency_code,
       :rate_cards,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +972,8 @@ module Aws::MarketplaceAgreement
     #   @return [Array<Types::RateCardItem>]
     class UsageBasedRateCardItem < Struct.new(
       :rate_card,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -954,7 +994,8 @@ module Aws::MarketplaceAgreement
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1009,8 @@ module Aws::MarketplaceAgreement
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -996,7 +1038,8 @@ module Aws::MarketplaceAgreement
       :agreement_duration,
       :agreement_start_date,
       :agreement_end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -54,7 +54,6 @@ module Aws::GreengrassV2
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

@@ -10141,7 +10141,6 @@ module Aws::Glue
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationTimeoutException)
         operation.traits = {}
       end)
-
     end
 
     class << self

@@ -179,7 +179,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::AuthorizationAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -195,7 +195,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::AuthorizationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -208,7 +208,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::AuthorizationQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -221,7 +221,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::BackupPolicyNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -234,7 +234,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::BlueGreenDeploymentAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -248,7 +248,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::BlueGreenDeploymentNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -263,7 +263,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::CertificateNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -276,7 +276,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::CreateCustomDBEngineVersionFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -291,7 +291,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::CustomAvailabilityZoneNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -304,7 +304,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::CustomDBEngineVersionAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -317,7 +317,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::CustomDBEngineVersionNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -330,7 +330,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::CustomDBEngineVersionQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -343,7 +343,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -356,7 +356,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterAutomatedBackupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -370,7 +370,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterAutomatedBackupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -384,7 +384,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterBacktrackNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -397,7 +397,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterEndpointAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -410,7 +410,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterEndpointNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -423,7 +423,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterEndpointQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -437,7 +437,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -452,7 +452,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -466,7 +466,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -479,7 +479,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterRoleAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -492,7 +492,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterRoleNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -505,7 +505,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterRoleQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -518,7 +518,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterSnapshotAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -532,7 +532,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterSnapshotNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -545,7 +545,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -558,7 +558,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceAutomatedBackupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -573,7 +573,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceAutomatedBackupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -587,7 +587,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -600,7 +600,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceNotReadyFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -613,7 +613,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceRoleAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -627,7 +627,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceRoleNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -640,7 +640,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceRoleQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -654,7 +654,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBLogFileNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -667,7 +667,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBParameterGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -682,7 +682,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -696,7 +696,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBParameterGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -709,7 +709,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBProxyAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -722,7 +722,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBProxyEndpointAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -735,7 +735,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBProxyEndpointNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -748,7 +748,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBProxyEndpointQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -761,7 +761,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBProxyNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -774,7 +774,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBProxyQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -787,7 +787,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBProxyTargetAlreadyRegisteredFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -800,7 +800,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBProxyTargetGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -813,7 +813,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBProxyTargetNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -827,7 +827,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSecurityGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -841,7 +841,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSecurityGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -854,7 +854,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSecurityGroupNotSupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -868,7 +868,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSecurityGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -881,7 +881,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBShardGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -894,7 +894,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBShardGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -908,7 +908,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSnapshotAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -922,7 +922,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSnapshotNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -935,7 +935,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSnapshotTenantDatabaseNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -949,7 +949,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -962,7 +962,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetGroupDoesNotCoverEnoughAZs] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -976,7 +976,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetGroupNotAllowedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -990,7 +990,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1004,7 +1004,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1018,7 +1018,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1032,7 +1032,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBUpgradeDependencyFailureFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1046,7 +1046,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DomainNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1059,7 +1059,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::Ec2ImagePropertiesNotSupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1072,7 +1072,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::EventSubscriptionQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1085,7 +1085,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::ExportTaskAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1098,7 +1098,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::ExportTaskNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1112,7 +1112,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::GlobalClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1125,7 +1125,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::GlobalClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1138,7 +1138,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::GlobalClusterQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1151,7 +1151,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::IamRoleMissingPermissionsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1164,7 +1164,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::IamRoleNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1178,7 +1178,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InstanceQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1193,7 +1193,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InsufficientAvailableIPsInSubnetFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1206,7 +1206,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InsufficientDBClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1220,7 +1220,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InsufficientDBInstanceCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1235,7 +1235,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InsufficientStorageClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1248,7 +1248,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::IntegrationAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1263,7 +1263,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::IntegrationConflictOperationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1276,7 +1276,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::IntegrationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1289,7 +1289,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::IntegrationQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1303,7 +1303,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidBlueGreenDeploymentStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1316,7 +1316,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidCustomDBEngineVersionStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1330,7 +1330,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBClusterAutomatedBackupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1346,7 +1346,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1359,7 +1359,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBClusterEndpointStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1372,7 +1372,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBClusterSnapshotStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1385,7 +1385,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1399,7 +1399,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBInstanceAutomatedBackupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1412,7 +1412,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBInstanceStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1427,7 +1427,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBParameterGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1440,7 +1440,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBProxyEndpointStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1453,7 +1453,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBProxyStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1466,7 +1466,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBSecurityGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1479,7 +1479,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBShardGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1492,7 +1492,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBSnapshotStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1506,7 +1506,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBSubnetGroupFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1519,7 +1519,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBSubnetGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1532,7 +1532,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBSubnetStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1545,7 +1545,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidEventSubscriptionStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1558,7 +1558,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidExportOnlyFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1571,7 +1571,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidExportSourceStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1584,7 +1584,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidExportTaskStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1597,7 +1597,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidGlobalClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1610,7 +1610,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidIntegrationStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1623,7 +1623,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidOptionGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1636,7 +1636,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidResourceStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1649,7 +1649,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidRestoreFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1663,7 +1663,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidS3BucketFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1676,7 +1676,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidSubnet] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1690,7 +1690,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidVPCNetworkStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1703,7 +1703,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::KMSKeyNotAccessibleFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1716,7 +1716,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::MaxDBShardGroupLimitReached] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1729,7 +1729,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::NetworkTypeNotSupported] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1742,7 +1742,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::OptionGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1755,7 +1755,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::OptionGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1768,7 +1768,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::OptionGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1784,7 +1784,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::PointInTimeRestoreNotEnabledFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1797,7 +1797,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::ProvisionedIopsNotAvailableInAZFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1810,7 +1810,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::ReservedDBInstanceAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1823,7 +1823,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::ReservedDBInstanceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1836,7 +1836,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::ReservedDBInstanceQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1849,7 +1849,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::ReservedDBInstancesOfferingNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1862,7 +1862,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::ResourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1875,7 +1875,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SNSInvalidTopicFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1888,7 +1888,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SNSNoAuthorizationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1901,7 +1901,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SNSTopicArnNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1914,7 +1914,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SharedSnapshotQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1928,7 +1928,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SnapshotQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1941,7 +1941,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SourceClusterNotSupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1954,7 +1954,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SourceDatabaseNotSupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1967,7 +1967,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1981,7 +1981,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::StorageQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1995,7 +1995,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::StorageTypeNotAvailableFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2008,7 +2008,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::StorageTypeNotSupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2021,7 +2021,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SubnetAlreadyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2034,7 +2034,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SubscriptionAlreadyExistFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2047,7 +2047,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SubscriptionCategoryNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2060,7 +2060,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SubscriptionNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2074,7 +2074,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::TenantDatabaseAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2087,7 +2087,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::TenantDatabaseNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2101,7 +2101,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::TenantDatabaseQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2114,7 +2114,7 @@ module Aws::RDS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::UnsupportedDBEngineVersionFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

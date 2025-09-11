@@ -3639,7 +3639,6 @@ module Aws::IoTWireless
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/wireless-gateways/{Id}", "code" => 204}}
       end)
-
     end
 
     class << self

@@ -6131,7 +6131,6 @@ module Aws::RDS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         operation.traits = {}
       end)
-
     end
 
     class << self

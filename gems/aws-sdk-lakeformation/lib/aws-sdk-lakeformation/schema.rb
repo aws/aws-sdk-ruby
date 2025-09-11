@@ -1808,7 +1808,6 @@ module Aws::LakeFormation
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateTableStorageOptimizer", "code" => 200}}
       end)
-
     end
 
     class << self

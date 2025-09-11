@@ -41,7 +41,7 @@ module Aws::EBS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EBS::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -61,7 +61,7 @@ module Aws::EBS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EBS::Types::ConcurrentLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::EBS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EBS::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -88,7 +88,7 @@ module Aws::EBS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EBS::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -102,7 +102,7 @@ module Aws::EBS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EBS::Types::RequestThrottledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::EBS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EBS::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -138,7 +138,7 @@ module Aws::EBS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EBS::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::EBS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EBS::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

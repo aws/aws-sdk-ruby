@@ -41,7 +41,7 @@ module Aws::DataZone
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataZone::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::DataZone
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataZone::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::DataZone
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataZone::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::DataZone
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataZone::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::DataZone
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataZone::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -110,7 +110,7 @@ module Aws::DataZone
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataZone::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -127,7 +127,7 @@ module Aws::DataZone
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataZone::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::DataZone
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataZone::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -11,7 +11,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class AccessDeniedByMetaException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33,7 +35,8 @@ module Aws::SocialMessaging
     class AssociateWhatsAppBusinessAccountInput < Struct.new(
       :signup_callback,
       :setup_finalization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +49,8 @@ module Aws::SocialMessaging
     class AssociateWhatsAppBusinessAccountOutput < Struct.new(
       :signup_callback_result,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +63,8 @@ module Aws::SocialMessaging
     class CreateWhatsAppMessageTemplateFromLibraryInput < Struct.new(
       :meta_library_template,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +81,8 @@ module Aws::SocialMessaging
       :meta_template_id,
       :template_status,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +95,8 @@ module Aws::SocialMessaging
     class CreateWhatsAppMessageTemplateInput < Struct.new(
       :template_definition,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +109,8 @@ module Aws::SocialMessaging
     class CreateWhatsAppMessageTemplateMediaInput < Struct.new(
       :id,
       :source_s3_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +119,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class CreateWhatsAppMessageTemplateMediaOutput < Struct.new(
       :meta_header_handle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +137,8 @@ module Aws::SocialMessaging
       :meta_template_id,
       :template_status,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +155,8 @@ module Aws::SocialMessaging
     class DeleteWhatsAppMessageMediaInput < Struct.new(
       :media_id,
       :origination_phone_number_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +165,8 @@ module Aws::SocialMessaging
     #   @return [Boolean]
     class DeleteWhatsAppMessageMediaOutput < Struct.new(
       :success,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,12 +187,14 @@ module Aws::SocialMessaging
       :delete_all_languages,
       :id,
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWhatsAppMessageTemplateOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +203,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class DependencyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,12 +215,14 @@ module Aws::SocialMessaging
     #   @return [String]
     class DisassociateWhatsAppBusinessAccountInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateWhatsAppBusinessAccountOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +234,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class GetLinkedWhatsAppBusinessAccountInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +244,8 @@ module Aws::SocialMessaging
     #   @return [Types::LinkedWhatsAppBusinessAccount]
     class GetLinkedWhatsAppBusinessAccountOutput < Struct.new(
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +257,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class GetLinkedWhatsAppBusinessAccountPhoneNumberInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +272,8 @@ module Aws::SocialMessaging
     class GetLinkedWhatsAppBusinessAccountPhoneNumberOutput < Struct.new(
       :phone_number,
       :linked_whats_app_business_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -281,7 +302,8 @@ module Aws::SocialMessaging
       :metadata_only,
       :destination_s3_presigned_url,
       :destination_s3_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +316,8 @@ module Aws::SocialMessaging
     class GetWhatsAppMessageMediaOutput < Struct.new(
       :mime_type,
       :file_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +330,8 @@ module Aws::SocialMessaging
     class GetWhatsAppMessageTemplateInput < Struct.new(
       :meta_template_id,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +340,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class GetWhatsAppMessageTemplateOutput < Struct.new(
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +351,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +361,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class InvalidParametersException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +388,8 @@ module Aws::SocialMessaging
       :add_security_recommendation,
       :add_track_package_link,
       :code_expiration_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -391,7 +419,8 @@ module Aws::SocialMessaging
       :otp_type,
       :zero_tap_terms_accepted,
       :supported_apps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +454,8 @@ module Aws::SocialMessaging
       :otp_type,
       :zero_tap_terms_accepted,
       :supported_apps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +464,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +503,8 @@ module Aws::SocialMessaging
       :waba_name,
       :event_destinations,
       :phone_numbers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +527,8 @@ module Aws::SocialMessaging
       :registration_status,
       :unregistered_whats_app_phone_numbers,
       :waba_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +562,8 @@ module Aws::SocialMessaging
       :link_date,
       :waba_name,
       :event_destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +576,8 @@ module Aws::SocialMessaging
     class ListLinkedWhatsAppBusinessAccountsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +590,8 @@ module Aws::SocialMessaging
     class ListLinkedWhatsAppBusinessAccountsOutput < Struct.new(
       :linked_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +600,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -577,7 +614,8 @@ module Aws::SocialMessaging
     class ListTagsForResourceOutput < Struct.new(
       :status_code,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +632,8 @@ module Aws::SocialMessaging
       :id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +646,8 @@ module Aws::SocialMessaging
     class ListWhatsAppMessageTemplatesOutput < Struct.new(
       :templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -628,7 +668,8 @@ module Aws::SocialMessaging
       :max_results,
       :id,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +682,8 @@ module Aws::SocialMessaging
     class ListWhatsAppTemplateLibraryOutput < Struct.new(
       :meta_library_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +713,8 @@ module Aws::SocialMessaging
       :template_language,
       :library_template_button_inputs,
       :library_template_body_inputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +760,8 @@ module Aws::SocialMessaging
       :template_body,
       :template_buttons,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,7 +781,8 @@ module Aws::SocialMessaging
       :origination_phone_number_id,
       :source_s3_presigned_url,
       :source_s3_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +791,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class PostWhatsAppMessageMediaOutput < Struct.new(
       :media_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -761,12 +807,14 @@ module Aws::SocialMessaging
     class PutWhatsAppBusinessAccountEventDestinationsInput < Struct.new(
       :id,
       :event_destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutWhatsAppBusinessAccountEventDestinationsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +823,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -790,7 +839,8 @@ module Aws::SocialMessaging
     class S3File < Struct.new(
       :bucket_name,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +858,8 @@ module Aws::SocialMessaging
     class S3PresignedUrl < Struct.new(
       :url,
       :headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -833,7 +884,8 @@ module Aws::SocialMessaging
       :origination_phone_number_id,
       :message,
       :meta_api_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +894,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class SendWhatsAppMessageOutput < Struct.new(
       :message_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +909,8 @@ module Aws::SocialMessaging
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +923,8 @@ module Aws::SocialMessaging
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -878,7 +933,8 @@ module Aws::SocialMessaging
     #   @return [Integer]
     class TagResourceOutput < Struct.new(
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +964,8 @@ module Aws::SocialMessaging
       :template_quality_score,
       :template_language,
       :template_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +974,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class ThrottledRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +988,8 @@ module Aws::SocialMessaging
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +998,8 @@ module Aws::SocialMessaging
     #   @return [Integer]
     class UntagResourceOutput < Struct.new(
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,12 +1020,14 @@ module Aws::SocialMessaging
       :meta_template_id,
       :template_category,
       :template_components,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateWhatsAppMessageTemplateOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,7 +1036,8 @@ module Aws::SocialMessaging
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1083,7 +1146,8 @@ module Aws::SocialMessaging
       :two_factor_pin,
       :data_localization_region,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1101,7 +1165,8 @@ module Aws::SocialMessaging
       :id,
       :event_destinations,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1116,7 +1181,8 @@ module Aws::SocialMessaging
     class WhatsAppBusinessAccountEventDestination < Struct.new(
       :event_destination_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1220,8 @@ module Aws::SocialMessaging
       :display_phone_number,
       :quality_rating,
       :data_localization_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1192,7 +1259,8 @@ module Aws::SocialMessaging
       :display_phone_number,
       :quality_rating,
       :data_localization_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1214,7 +1282,8 @@ module Aws::SocialMessaging
       :phone_numbers,
       :phone_number_parent,
       :waba,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1297,8 @@ module Aws::SocialMessaging
     class WhatsAppSignupCallback < Struct.new(
       :access_token,
       :callback_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1312,8 @@ module Aws::SocialMessaging
     class WhatsAppSignupCallbackResult < Struct.new(
       :associate_in_progress_token,
       :linked_accounts_with_incomplete_setup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

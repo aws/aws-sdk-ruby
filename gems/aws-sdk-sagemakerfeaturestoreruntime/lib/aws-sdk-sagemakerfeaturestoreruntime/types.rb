@@ -11,7 +11,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #   @return [String]
     class AccessForbidden < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +38,8 @@ module Aws::SageMakerFeatureStoreRuntime
       :record_identifier_value_as_string,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +60,8 @@ module Aws::SageMakerFeatureStoreRuntime
       :feature_group_name,
       :record_identifiers_value_as_string,
       :feature_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +79,8 @@ module Aws::SageMakerFeatureStoreRuntime
     class BatchGetRecordRequest < Struct.new(
       :identifiers,
       :expiration_time_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +98,8 @@ module Aws::SageMakerFeatureStoreRuntime
       :records,
       :errors,
       :unprocessed_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +121,8 @@ module Aws::SageMakerFeatureStoreRuntime
       :record_identifier_value_as_string,
       :record,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +153,8 @@ module Aws::SageMakerFeatureStoreRuntime
       :event_time,
       :target_stores,
       :deletion_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +179,8 @@ module Aws::SageMakerFeatureStoreRuntime
       :feature_name,
       :value_as_string,
       :value_as_string_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +206,8 @@ module Aws::SageMakerFeatureStoreRuntime
       :record_identifier_value_as_string,
       :feature_names,
       :expiration_time_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +220,8 @@ module Aws::SageMakerFeatureStoreRuntime
     class GetRecordResponse < Struct.new(
       :record,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +231,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #   @return [String]
     class InternalFailure < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +269,8 @@ module Aws::SageMakerFeatureStoreRuntime
       :record,
       :target_stores,
       :ttl_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +279,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #   @return [String]
     class ResourceNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +289,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #   @return [String]
     class ServiceUnavailable < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +308,8 @@ module Aws::SageMakerFeatureStoreRuntime
     class TtlDuration < Struct.new(
       :unit,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +318,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #   @return [String]
     class ValidationError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

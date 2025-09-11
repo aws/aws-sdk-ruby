@@ -116,7 +116,8 @@ module Aws::WAF
       :override_action,
       :type,
       :excluded_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +153,8 @@ module Aws::WAF
       :byte_match_set_id,
       :name,
       :byte_match_tuples,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +180,8 @@ module Aws::WAF
     class ByteMatchSetSummary < Struct.new(
       :byte_match_set_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -203,7 +206,8 @@ module Aws::WAF
     class ByteMatchSetUpdate < Struct.new(
       :action,
       :byte_match_tuple,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +436,8 @@ module Aws::WAF
       :target_string,
       :text_transformation,
       :positional_constraint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +451,8 @@ module Aws::WAF
     class CreateByteMatchSetRequest < Struct.new(
       :name,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +466,8 @@ module Aws::WAF
     class CreateByteMatchSetResponse < Struct.new(
       :byte_match_set,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +480,8 @@ module Aws::WAF
     class CreateGeoMatchSetRequest < Struct.new(
       :name,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +495,8 @@ module Aws::WAF
     class CreateGeoMatchSetResponse < Struct.new(
       :geo_match_set,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +509,8 @@ module Aws::WAF
     class CreateIPSetRequest < Struct.new(
       :name,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +524,8 @@ module Aws::WAF
     class CreateIPSetResponse < Struct.new(
       :ip_set,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +567,8 @@ module Aws::WAF
       :rate_limit,
       :change_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +584,8 @@ module Aws::WAF
     class CreateRateBasedRuleResponse < Struct.new(
       :rule,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +599,8 @@ module Aws::WAF
     class CreateRegexMatchSetRequest < Struct.new(
       :name,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,7 +614,8 @@ module Aws::WAF
     class CreateRegexMatchSetResponse < Struct.new(
       :regex_match_set,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +629,8 @@ module Aws::WAF
     class CreateRegexPatternSetRequest < Struct.new(
       :name,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -628,7 +644,8 @@ module Aws::WAF
     class CreateRegexPatternSetResponse < Struct.new(
       :regex_pattern_set,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,7 +668,8 @@ module Aws::WAF
       :metric_name,
       :change_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +683,8 @@ module Aws::WAF
     class CreateRuleGroupResponse < Struct.new(
       :rule_group,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +707,8 @@ module Aws::WAF
       :metric_name,
       :change_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +722,8 @@ module Aws::WAF
     class CreateRuleResponse < Struct.new(
       :rule,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -716,7 +737,8 @@ module Aws::WAF
     class CreateSizeConstraintSetRequest < Struct.new(
       :name,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +752,8 @@ module Aws::WAF
     class CreateSizeConstraintSetResponse < Struct.new(
       :size_constraint_set,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +768,8 @@ module Aws::WAF
     class CreateSqlInjectionMatchSetRequest < Struct.new(
       :name,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +784,8 @@ module Aws::WAF
     class CreateSqlInjectionMatchSetResponse < Struct.new(
       :sql_injection_match_set,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +817,8 @@ module Aws::WAF
       :web_acl_id,
       :s3_bucket_name,
       :ignore_unsupported_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +827,8 @@ module Aws::WAF
     #   @return [String]
     class CreateWebACLMigrationStackResponse < Struct.new(
       :s3_object_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +856,8 @@ module Aws::WAF
       :default_action,
       :change_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +871,8 @@ module Aws::WAF
     class CreateWebACLResponse < Struct.new(
       :web_acl,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,7 +887,8 @@ module Aws::WAF
     class CreateXssMatchSetRequest < Struct.new(
       :name,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +903,8 @@ module Aws::WAF
     class CreateXssMatchSetResponse < Struct.new(
       :xss_match_set,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +918,8 @@ module Aws::WAF
     class DeleteByteMatchSetRequest < Struct.new(
       :byte_match_set_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -897,7 +929,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteByteMatchSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +944,8 @@ module Aws::WAF
     class DeleteGeoMatchSetRequest < Struct.new(
       :geo_match_set_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -921,7 +955,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteGeoMatchSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -935,7 +970,8 @@ module Aws::WAF
     class DeleteIPSetRequest < Struct.new(
       :ip_set_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -945,7 +981,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteIPSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -954,12 +991,14 @@ module Aws::WAF
     #   @return [String]
     class DeleteLoggingConfigurationRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLoggingConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -969,12 +1008,14 @@ module Aws::WAF
     #   @return [String]
     class DeletePermissionPolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePermissionPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -989,7 +1030,8 @@ module Aws::WAF
     class DeleteRateBasedRuleRequest < Struct.new(
       :rule_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1042,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteRateBasedRuleResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1057,8 @@ module Aws::WAF
     class DeleteRegexMatchSetRequest < Struct.new(
       :regex_match_set_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1024,7 +1068,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteRegexMatchSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1083,8 @@ module Aws::WAF
     class DeleteRegexPatternSetRequest < Struct.new(
       :regex_pattern_set_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1094,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteRegexPatternSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1062,7 +1109,8 @@ module Aws::WAF
     class DeleteRuleGroupRequest < Struct.new(
       :rule_group_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1120,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteRuleGroupResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1135,8 @@ module Aws::WAF
     class DeleteRuleRequest < Struct.new(
       :rule_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1146,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteRuleResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1161,8 @@ module Aws::WAF
     class DeleteSizeConstraintSetRequest < Struct.new(
       :size_constraint_set_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,7 +1172,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteSizeConstraintSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1135,7 +1188,8 @@ module Aws::WAF
     class DeleteSqlInjectionMatchSetRequest < Struct.new(
       :sql_injection_match_set_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1200,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteSqlInjectionMatchSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1160,7 +1215,8 @@ module Aws::WAF
     class DeleteWebACLRequest < Struct.new(
       :web_acl_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1170,7 +1226,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteWebACLResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,7 +1242,8 @@ module Aws::WAF
     class DeleteXssMatchSetRequest < Struct.new(
       :xss_match_set_id,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1196,7 +1254,8 @@ module Aws::WAF
     #   @return [String]
     class DeleteXssMatchSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1216,7 +1275,8 @@ module Aws::WAF
     #   @return [String]
     class ExcludedRule < Struct.new(
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1340,8 @@ module Aws::WAF
     class FieldToMatch < Struct.new(
       :type,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1363,8 @@ module Aws::WAF
     class GeoMatchConstraint < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1393,8 @@ module Aws::WAF
       :geo_match_set_id,
       :name,
       :geo_match_constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1416,8 @@ module Aws::WAF
     class GeoMatchSetSummary < Struct.new(
       :geo_match_set_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1375,7 +1439,8 @@ module Aws::WAF
     class GeoMatchSetUpdate < Struct.new(
       :action,
       :geo_match_constraint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1385,7 +1450,8 @@ module Aws::WAF
     #   @return [String]
     class GetByteMatchSetRequest < Struct.new(
       :byte_match_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1414,12 +1480,14 @@ module Aws::WAF
     #   @return [Types::ByteMatchSet]
     class GetByteMatchSetResponse < Struct.new(
       :byte_match_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetChangeTokenRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,7 +1497,8 @@ module Aws::WAF
     #   @return [String]
     class GetChangeTokenResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1438,7 +1507,8 @@ module Aws::WAF
     #   @return [String]
     class GetChangeTokenStatusRequest < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1447,7 +1517,8 @@ module Aws::WAF
     #   @return [String]
     class GetChangeTokenStatusResponse < Struct.new(
       :change_token_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1457,7 +1528,8 @@ module Aws::WAF
     #   @return [String]
     class GetGeoMatchSetRequest < Struct.new(
       :geo_match_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1466,7 +1538,8 @@ module Aws::WAF
     #   @return [Types::GeoMatchSet]
     class GetGeoMatchSetResponse < Struct.new(
       :geo_match_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1549,8 @@ module Aws::WAF
     #   @return [String]
     class GetIPSetRequest < Struct.new(
       :ip_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1499,7 +1573,8 @@ module Aws::WAF
     #   @return [Types::IPSet]
     class GetIPSetResponse < Struct.new(
       :ip_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1508,7 +1583,8 @@ module Aws::WAF
     #   @return [String]
     class GetLoggingConfigurationRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,7 +1593,8 @@ module Aws::WAF
     #   @return [Types::LoggingConfiguration]
     class GetLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1603,8 @@ module Aws::WAF
     #   @return [String]
     class GetPermissionPolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,7 +1613,8 @@ module Aws::WAF
     #   @return [String]
     class GetPermissionPolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,7 +1628,8 @@ module Aws::WAF
     class GetRateBasedRuleManagedKeysRequest < Struct.new(
       :rule_id,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1562,7 +1642,8 @@ module Aws::WAF
     class GetRateBasedRuleManagedKeysResponse < Struct.new(
       :managed_keys,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1572,7 +1653,8 @@ module Aws::WAF
     #   @return [String]
     class GetRateBasedRuleRequest < Struct.new(
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1582,7 +1664,8 @@ module Aws::WAF
     #   @return [Types::RateBasedRule]
     class GetRateBasedRuleResponse < Struct.new(
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1592,7 +1675,8 @@ module Aws::WAF
     #   @return [String]
     class GetRegexMatchSetRequest < Struct.new(
       :regex_match_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1685,8 @@ module Aws::WAF
     #   @return [Types::RegexMatchSet]
     class GetRegexMatchSetResponse < Struct.new(
       :regex_match_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1696,8 @@ module Aws::WAF
     #   @return [String]
     class GetRegexPatternSetRequest < Struct.new(
       :regex_pattern_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1620,7 +1706,8 @@ module Aws::WAF
     #   @return [Types::RegexPatternSet]
     class GetRegexPatternSetResponse < Struct.new(
       :regex_pattern_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1630,7 +1717,8 @@ module Aws::WAF
     #   @return [String]
     class GetRuleGroupRequest < Struct.new(
       :rule_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1727,8 @@ module Aws::WAF
     #   @return [Types::RuleGroup]
     class GetRuleGroupResponse < Struct.new(
       :rule_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1649,7 +1738,8 @@ module Aws::WAF
     #   @return [String]
     class GetRuleRequest < Struct.new(
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1673,7 +1763,8 @@ module Aws::WAF
     #   @return [Types::Rule]
     class GetRuleResponse < Struct.new(
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1709,7 +1800,8 @@ module Aws::WAF
       :rule_id,
       :time_window,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1730,7 +1822,8 @@ module Aws::WAF
       :sampled_requests,
       :population_size,
       :time_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1745,7 +1838,8 @@ module Aws::WAF
     #   @return [String]
     class GetSizeConstraintSetRequest < Struct.new(
       :size_constraint_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1774,7 +1868,8 @@ module Aws::WAF
     #   @return [Types::SizeConstraintSet]
     class GetSizeConstraintSetResponse < Struct.new(
       :size_constraint_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1785,7 +1880,8 @@ module Aws::WAF
     #   @return [String]
     class GetSqlInjectionMatchSetRequest < Struct.new(
       :sql_injection_match_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1910,8 @@ module Aws::WAF
     #   @return [Types::SqlInjectionMatchSet]
     class GetSqlInjectionMatchSetResponse < Struct.new(
       :sql_injection_match_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1824,7 +1921,8 @@ module Aws::WAF
     #   @return [String]
     class GetWebACLRequest < Struct.new(
       :web_acl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1858,7 +1956,8 @@ module Aws::WAF
     #   @return [Types::WebACL]
     class GetWebACLResponse < Struct.new(
       :web_acl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1968,8 @@ module Aws::WAF
     #   @return [String]
     class GetXssMatchSetRequest < Struct.new(
       :xss_match_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1898,7 +1998,8 @@ module Aws::WAF
     #   @return [Types::XssMatchSet]
     class GetXssMatchSetResponse < Struct.new(
       :xss_match_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1922,7 +2023,8 @@ module Aws::WAF
     class HTTPHeader < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1975,7 +2077,8 @@ module Aws::WAF
       :method,
       :http_version,
       :headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2012,7 +2115,8 @@ module Aws::WAF
       :ip_set_id,
       :name,
       :ip_set_descriptors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2055,7 +2159,8 @@ module Aws::WAF
     class IPSetDescriptor < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2078,7 +2183,8 @@ module Aws::WAF
     class IPSetSummary < Struct.new(
       :ip_set_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2206,8 @@ module Aws::WAF
     class IPSetUpdate < Struct.new(
       :action,
       :ip_set_descriptor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2228,8 @@ module Aws::WAF
       :rule_group_id,
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2134,7 +2242,8 @@ module Aws::WAF
     class ListActivatedRulesInRuleGroupResponse < Struct.new(
       :next_marker,
       :activated_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2152,7 +2261,8 @@ module Aws::WAF
     class ListByteMatchSetsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2168,7 +2278,8 @@ module Aws::WAF
     class ListByteMatchSetsResponse < Struct.new(
       :next_marker,
       :byte_match_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2186,7 +2297,8 @@ module Aws::WAF
     class ListGeoMatchSetsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2202,7 +2314,8 @@ module Aws::WAF
     class ListGeoMatchSetsResponse < Struct.new(
       :next_marker,
       :geo_match_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2220,7 +2333,8 @@ module Aws::WAF
     class ListIPSetsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2235,7 +2349,8 @@ module Aws::WAF
     class ListIPSetsResponse < Struct.new(
       :next_marker,
       :ip_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2251,7 +2366,8 @@ module Aws::WAF
     class ListLoggingConfigurationsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2264,7 +2380,8 @@ module Aws::WAF
     class ListLoggingConfigurationsResponse < Struct.new(
       :logging_configurations,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2285,7 +2402,8 @@ module Aws::WAF
     class ListRateBasedRulesRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,7 +2420,8 @@ module Aws::WAF
     class ListRateBasedRulesResponse < Struct.new(
       :next_marker,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2320,7 +2439,8 @@ module Aws::WAF
     class ListRegexMatchSetsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2336,7 +2456,8 @@ module Aws::WAF
     class ListRegexMatchSetsResponse < Struct.new(
       :next_marker,
       :regex_match_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2354,7 +2475,8 @@ module Aws::WAF
     class ListRegexPatternSetsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2370,7 +2492,8 @@ module Aws::WAF
     class ListRegexPatternSetsResponse < Struct.new(
       :next_marker,
       :regex_pattern_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2386,7 +2509,8 @@ module Aws::WAF
     class ListRuleGroupsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2399,7 +2523,8 @@ module Aws::WAF
     class ListRuleGroupsResponse < Struct.new(
       :next_marker,
       :rule_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2416,7 +2541,8 @@ module Aws::WAF
     class ListRulesRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2431,7 +2557,8 @@ module Aws::WAF
     class ListRulesResponse < Struct.new(
       :next_marker,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2448,7 +2575,8 @@ module Aws::WAF
     class ListSizeConstraintSetsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2464,7 +2592,8 @@ module Aws::WAF
     class ListSizeConstraintSetsResponse < Struct.new(
       :next_marker,
       :size_constraint_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2483,7 +2612,8 @@ module Aws::WAF
     class ListSqlInjectionMatchSetsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2500,7 +2630,8 @@ module Aws::WAF
     class ListSqlInjectionMatchSetsResponse < Struct.new(
       :next_marker,
       :sql_injection_match_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2518,7 +2649,8 @@ module Aws::WAF
     class ListSubscribedRuleGroupsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2534,7 +2666,8 @@ module Aws::WAF
     class ListSubscribedRuleGroupsResponse < Struct.new(
       :next_marker,
       :rule_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2551,7 +2684,8 @@ module Aws::WAF
       :next_marker,
       :limit,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2564,7 +2698,8 @@ module Aws::WAF
     class ListTagsForResourceResponse < Struct.new(
       :next_marker,
       :tag_info_for_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2582,7 +2717,8 @@ module Aws::WAF
     class ListWebACLsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2598,7 +2734,8 @@ module Aws::WAF
     class ListWebACLsResponse < Struct.new(
       :next_marker,
       :web_ac_ls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2617,7 +2754,8 @@ module Aws::WAF
     class ListXssMatchSetsRequest < Struct.new(
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2634,7 +2772,8 @@ module Aws::WAF
     class ListXssMatchSetsResponse < Struct.new(
       :next_marker,
       :xss_match_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2804,8 @@ module Aws::WAF
       :resource_arn,
       :log_destination_configs,
       :redacted_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2701,7 +2841,8 @@ module Aws::WAF
       :negated,
       :type,
       :data_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2717,7 +2858,8 @@ module Aws::WAF
     #   @return [Types::LoggingConfiguration]
     class PutLoggingConfigurationRequest < Struct.new(
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2726,7 +2868,8 @@ module Aws::WAF
     #   @return [Types::LoggingConfiguration]
     class PutLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2739,12 +2882,14 @@ module Aws::WAF
     class PutPermissionPolicyRequest < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutPermissionPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2813,7 +2958,8 @@ module Aws::WAF
       :match_predicates,
       :rate_key,
       :rate_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2861,7 +3007,8 @@ module Aws::WAF
       :regex_match_set_id,
       :name,
       :regex_match_tuples,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2887,7 +3034,8 @@ module Aws::WAF
     class RegexMatchSetSummary < Struct.new(
       :regex_match_set_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2912,7 +3060,8 @@ module Aws::WAF
     class RegexMatchSetUpdate < Struct.new(
       :action,
       :regex_match_tuple,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3045,7 +3194,8 @@ module Aws::WAF
       :field_to_match,
       :text_transformation,
       :regex_pattern_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3074,7 +3224,8 @@ module Aws::WAF
       :regex_pattern_set_id,
       :name,
       :regex_pattern_strings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3100,7 +3251,8 @@ module Aws::WAF
     class RegexPatternSetSummary < Struct.new(
       :regex_pattern_set_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3123,7 +3275,8 @@ module Aws::WAF
     class RegexPatternSetUpdate < Struct.new(
       :action,
       :regex_pattern_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3172,7 +3325,8 @@ module Aws::WAF
       :name,
       :metric_name,
       :predicates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3215,7 +3369,8 @@ module Aws::WAF
       :rule_group_id,
       :name,
       :metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3241,7 +3396,8 @@ module Aws::WAF
     class RuleGroupSummary < Struct.new(
       :rule_group_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3267,7 +3423,8 @@ module Aws::WAF
     class RuleGroupUpdate < Struct.new(
       :action,
       :activated_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3293,7 +3450,8 @@ module Aws::WAF
     class RuleSummary < Struct.new(
       :rule_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3317,7 +3475,8 @@ module Aws::WAF
     class RuleUpdate < Struct.new(
       :action,
       :predicate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3355,7 +3514,8 @@ module Aws::WAF
       :timestamp,
       :action,
       :rule_within_rule_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3512,7 +3672,8 @@ module Aws::WAF
       :text_transformation,
       :comparison_operator,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3551,7 +3712,8 @@ module Aws::WAF
       :size_constraint_set_id,
       :name,
       :size_constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3579,7 +3741,8 @@ module Aws::WAF
     class SizeConstraintSetSummary < Struct.new(
       :size_constraint_set_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3606,7 +3769,8 @@ module Aws::WAF
     class SizeConstraintSetUpdate < Struct.new(
       :action,
       :size_constraint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3641,7 +3805,8 @@ module Aws::WAF
       :sql_injection_match_set_id,
       :name,
       :sql_injection_match_tuples,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3669,7 +3834,8 @@ module Aws::WAF
     class SqlInjectionMatchSetSummary < Struct.new(
       :sql_injection_match_set_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3693,7 +3859,8 @@ module Aws::WAF
     class SqlInjectionMatchSetUpdate < Struct.new(
       :action,
       :sql_injection_match_tuple,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3807,7 +3974,8 @@ module Aws::WAF
     class SqlInjectionMatchTuple < Struct.new(
       :field_to_match,
       :text_transformation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3834,7 +4002,8 @@ module Aws::WAF
       :rule_group_id,
       :name,
       :metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3857,7 +4026,8 @@ module Aws::WAF
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3880,7 +4050,8 @@ module Aws::WAF
     class TagInfoForResource < Struct.new(
       :resource_arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3893,12 +4064,14 @@ module Aws::WAF
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3934,7 +4107,8 @@ module Aws::WAF
     class TimeWindow < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3947,12 +4121,14 @@ module Aws::WAF
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3989,7 +4165,8 @@ module Aws::WAF
       :byte_match_set_id,
       :change_token,
       :updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3999,7 +4176,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateByteMatchSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4031,7 +4209,8 @@ module Aws::WAF
       :geo_match_set_id,
       :change_token,
       :updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4041,7 +4220,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateGeoMatchSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4073,7 +4253,8 @@ module Aws::WAF
       :ip_set_id,
       :change_token,
       :updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4083,7 +4264,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateIPSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4109,7 +4291,8 @@ module Aws::WAF
       :change_token,
       :updates,
       :rate_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4120,7 +4303,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateRateBasedRuleResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4139,7 +4323,8 @@ module Aws::WAF
       :regex_match_set_id,
       :updates,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4149,7 +4334,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateRegexMatchSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4167,7 +4353,8 @@ module Aws::WAF
       :regex_pattern_set_id,
       :updates,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4177,7 +4364,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateRegexPatternSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4199,7 +4387,8 @@ module Aws::WAF
       :rule_group_id,
       :updates,
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4209,7 +4398,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateRuleGroupResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4245,7 +4435,8 @@ module Aws::WAF
       :rule_id,
       :change_token,
       :updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4255,7 +4446,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateRuleResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4292,7 +4484,8 @@ module Aws::WAF
       :size_constraint_set_id,
       :change_token,
       :updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4302,7 +4495,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateSizeConstraintSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4339,7 +4533,8 @@ module Aws::WAF
       :sql_injection_match_set_id,
       :change_token,
       :updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4350,7 +4545,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateSqlInjectionMatchSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4398,7 +4594,8 @@ module Aws::WAF
       :change_token,
       :updates,
       :default_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4408,7 +4605,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateWebACLResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4447,7 +4645,8 @@ module Aws::WAF
       :xss_match_set_id,
       :change_token,
       :updates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4458,7 +4657,8 @@ module Aws::WAF
     #   @return [String]
     class UpdateXssMatchSetResponse < Struct.new(
       :change_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4467,7 +4667,8 @@ module Aws::WAF
     #   @return [String]
     class WAFBadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4476,7 +4677,8 @@ module Aws::WAF
     #   @return [String]
     class WAFDisallowedNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4521,7 +4723,8 @@ module Aws::WAF
       :message,
       :migration_error_type,
       :migration_error_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4530,13 +4733,15 @@ module Aws::WAF
     #   @return [String]
     class WAFInternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
     class WAFInvalidAccountException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4565,7 +4770,8 @@ module Aws::WAF
     #   @return [String]
     class WAFInvalidOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4617,7 +4823,8 @@ module Aws::WAF
       :field,
       :parameter,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4655,7 +4862,8 @@ module Aws::WAF
     #   @return [String]
     class WAFInvalidPermissionPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4664,7 +4872,8 @@ module Aws::WAF
     #   @return [String]
     class WAFInvalidRegexPatternException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4675,7 +4884,8 @@ module Aws::WAF
     #   @return [String]
     class WAFLimitsExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4699,7 +4909,8 @@ module Aws::WAF
     #   @return [String]
     class WAFNonEmptyEntityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4723,7 +4934,8 @@ module Aws::WAF
     #   @return [String]
     class WAFNonexistentContainerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4732,7 +4944,8 @@ module Aws::WAF
     #   @return [String]
     class WAFNonexistentItemException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4749,7 +4962,8 @@ module Aws::WAF
     #   @return [String]
     class WAFReferencedItemException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4758,7 +4972,8 @@ module Aws::WAF
     #   @return [String]
     class WAFServiceLinkedRoleErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4767,7 +4982,8 @@ module Aws::WAF
     #   @return [String]
     class WAFStaleDataException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4776,7 +4992,8 @@ module Aws::WAF
     #   @return [String]
     class WAFSubscriptionNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4785,7 +5002,8 @@ module Aws::WAF
     #   @return [String]
     class WAFTagOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4794,7 +5012,8 @@ module Aws::WAF
     #   @return [String]
     class WAFTagOperationInternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4830,7 +5049,8 @@ module Aws::WAF
     #   @return [String]
     class WafAction < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4849,7 +5069,8 @@ module Aws::WAF
     #   @return [String]
     class WafOverrideAction < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4899,7 +5120,8 @@ module Aws::WAF
       :default_action,
       :rules,
       :web_acl_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4925,7 +5147,8 @@ module Aws::WAF
     class WebACLSummary < Struct.new(
       :web_acl_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4949,7 +5172,8 @@ module Aws::WAF
     class WebACLUpdate < Struct.new(
       :action,
       :activated_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4984,7 +5208,8 @@ module Aws::WAF
       :xss_match_set_id,
       :name,
       :xss_match_tuples,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5012,7 +5237,8 @@ module Aws::WAF
     class XssMatchSetSummary < Struct.new(
       :xss_match_set_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5038,7 +5264,8 @@ module Aws::WAF
     class XssMatchSetUpdate < Struct.new(
       :action,
       :xss_match_tuple,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5152,7 +5379,8 @@ module Aws::WAF
     class XssMatchTuple < Struct.new(
       :field_to_match,
       :text_transformation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

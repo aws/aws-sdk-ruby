@@ -43,7 +43,7 @@ module Aws::Omics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::Omics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::Omics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::Omics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::NotSupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::Omics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::RangeNotSatisfiableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::Omics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::RequestTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::Omics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::Omics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -155,7 +155,7 @@ module Aws::Omics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -176,7 +176,7 @@ module Aws::Omics
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

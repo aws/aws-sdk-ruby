@@ -41,7 +41,7 @@ module Aws::PaymentCryptography
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptography::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::PaymentCryptography
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptography::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::PaymentCryptography
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptography::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::PaymentCryptography
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptography::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The string for the exception.</p>
@@ -94,7 +94,7 @@ module Aws::PaymentCryptography
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptography::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -107,7 +107,7 @@ module Aws::PaymentCryptography
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptography::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::PaymentCryptography
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptography::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::PaymentCryptography
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptography::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

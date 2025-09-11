@@ -7435,7 +7435,6 @@ module Aws::DataZone
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/v2/domains/{domainIdentifier}/user-profiles/{userIdentifier}"}, "smithy.api#tags" => ["Administration"]}
       end)
-
     end
 
     class << self

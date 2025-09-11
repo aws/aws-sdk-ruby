@@ -463,7 +463,6 @@ module Aws::CloudHSM
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
         operation.traits = {"smithy.api#deprecated" => {"message" => "This API is deprecated."}}
       end)
-
     end
 
     class << self

@@ -40,7 +40,7 @@ module Aws::ResourceGroups
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroups::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::ResourceGroups
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroups::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::ResourceGroups
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroups::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::ResourceGroups
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroups::Types::MethodNotAllowedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::ResourceGroups
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroups::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::ResourceGroups
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroups::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::ResourceGroups
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroups::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -45,7 +45,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::AuthException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::EC2InstanceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::EC2InstanceStateInvalidException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::EC2InstanceTypeInvalidException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::EC2InstanceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::InvalidArgsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::SerialConsoleAccessDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -141,7 +141,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::SerialConsoleSessionLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -154,7 +154,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::SerialConsoleSessionUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::SerialConsoleSessionUnsupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -180,7 +180,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::ServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -194,7 +194,7 @@ module Aws::EC2InstanceConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EC2InstanceConnect::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

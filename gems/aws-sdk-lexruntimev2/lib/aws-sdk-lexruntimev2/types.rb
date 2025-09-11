@@ -11,7 +11,8 @@ module Aws::LexRuntimeV2
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +44,8 @@ module Aws::LexRuntimeV2
       :name,
       :time_to_live,
       :context_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +62,8 @@ module Aws::LexRuntimeV2
     class ActiveContextTimeToLive < Struct.new(
       :time_to_live_in_seconds,
       :turns_to_live,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +96,8 @@ module Aws::LexRuntimeV2
       :content_type,
       :event_id,
       :client_timestamp_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -122,7 +126,8 @@ module Aws::LexRuntimeV2
       :audio_chunk,
       :content_type,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +136,8 @@ module Aws::LexRuntimeV2
     #   @return [String]
     class BadGatewayException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +151,8 @@ module Aws::LexRuntimeV2
     class Button < Struct.new(
       :text,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +165,8 @@ module Aws::LexRuntimeV2
     #   @return [Float]
     class ConfidenceScore < Struct.new(
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -257,7 +265,8 @@ module Aws::LexRuntimeV2
       :disable_playback,
       :event_id,
       :client_timestamp_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -272,7 +281,8 @@ module Aws::LexRuntimeV2
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +306,8 @@ module Aws::LexRuntimeV2
       :input_character,
       :event_id,
       :client_timestamp_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -323,7 +334,8 @@ module Aws::LexRuntimeV2
       :bot_alias_id,
       :locale_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +357,8 @@ module Aws::LexRuntimeV2
       :bot_alias_id,
       :locale_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -354,7 +367,8 @@ module Aws::LexRuntimeV2
     #   @return [String]
     class DependencyFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +434,8 @@ module Aws::LexRuntimeV2
       :slot_to_elicit,
       :slot_elicitation_style,
       :sub_slot_to_elicit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +453,8 @@ module Aws::LexRuntimeV2
     class DisconnectionEvent < Struct.new(
       :event_id,
       :client_timestamp_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -457,7 +473,8 @@ module Aws::LexRuntimeV2
     class ElicitSubSlot < Struct.new(
       :name,
       :sub_slot_to_elicit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +496,8 @@ module Aws::LexRuntimeV2
       :bot_alias_id,
       :locale_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -511,7 +529,8 @@ module Aws::LexRuntimeV2
       :messages,
       :interpretations,
       :session_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +544,8 @@ module Aws::LexRuntimeV2
     #   @return [String]
     class HeartbeatEvent < Struct.new(
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +577,8 @@ module Aws::LexRuntimeV2
       :subtitle,
       :image_url,
       :buttons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +628,8 @@ module Aws::LexRuntimeV2
       :slots,
       :state,
       :confirmation_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +672,8 @@ module Aws::LexRuntimeV2
       :session_id,
       :event_id,
       :recognized_bot_member,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -659,7 +682,8 @@ module Aws::LexRuntimeV2
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +715,8 @@ module Aws::LexRuntimeV2
       :sentiment_response,
       :intent,
       :interpretation_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +737,8 @@ module Aws::LexRuntimeV2
       :content,
       :content_type,
       :image_response_card,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +756,8 @@ module Aws::LexRuntimeV2
     class PlaybackCompletionEvent < Struct.new(
       :event_id,
       :client_timestamp_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -762,7 +789,8 @@ module Aws::LexRuntimeV2
       :event_reason,
       :caused_by_event_id,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +843,8 @@ module Aws::LexRuntimeV2
       :session_state,
       :request_attributes,
       :response_content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -853,7 +882,8 @@ module Aws::LexRuntimeV2
       :request_attributes,
       :session_id,
       :audio_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -897,7 +927,8 @@ module Aws::LexRuntimeV2
       :text,
       :session_state,
       :request_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -936,7 +967,8 @@ module Aws::LexRuntimeV2
       :request_attributes,
       :session_id,
       :recognized_bot_member,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1097,8 @@ module Aws::LexRuntimeV2
       :request_content_type,
       :response_content_type,
       :input_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1188,8 @@ module Aws::LexRuntimeV2
       :input_transcript,
       :audio_stream,
       :recognized_bot_member,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1174,7 +1208,8 @@ module Aws::LexRuntimeV2
     class RecognizedBotMember < Struct.new(
       :bot_id,
       :bot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,7 +1218,8 @@ module Aws::LexRuntimeV2
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,7 +1239,8 @@ module Aws::LexRuntimeV2
     class RuntimeHintDetails < Struct.new(
       :runtime_hint_values,
       :sub_slot_hints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1252,8 @@ module Aws::LexRuntimeV2
     #   @return [String]
     class RuntimeHintValue < Struct.new(
       :phrase,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1277,8 @@ module Aws::LexRuntimeV2
     #   @return [Hash<String, Hash<String, Types::RuntimeHintDetails>>]
     class RuntimeHints < Struct.new(
       :slot_hints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1300,8 @@ module Aws::LexRuntimeV2
     class SentimentResponse < Struct.new(
       :sentiment,
       :sentiment_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1287,7 +1327,8 @@ module Aws::LexRuntimeV2
       :negative,
       :neutral,
       :mixed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1331,7 +1372,8 @@ module Aws::LexRuntimeV2
       :session_attributes,
       :originating_request_id,
       :runtime_hints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1358,7 +1400,8 @@ module Aws::LexRuntimeV2
       :shape,
       :values,
       :sub_slots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1393,7 +1436,8 @@ module Aws::LexRuntimeV2
       :session_id,
       :conversation_mode,
       :request_event_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1448,7 +1492,8 @@ module Aws::LexRuntimeV2
       :playback_completion_event,
       :disconnection_event,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ConfigurationEvent < StartConversationRequestEventStream; end
@@ -1466,7 +1511,8 @@ module Aws::LexRuntimeV2
     #   @return [Types::StartConversationResponseEventStream]
     class StartConversationResponse < Struct.new(
       :response_event_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,7 +1595,8 @@ module Aws::LexRuntimeV2
       :dependency_failed_exception,
       :bad_gateway_exception,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PlaybackInterruptionEvent < StartConversationResponseEventStream; end
@@ -1587,7 +1634,8 @@ module Aws::LexRuntimeV2
       :text,
       :event_id,
       :client_timestamp_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1612,7 +1660,8 @@ module Aws::LexRuntimeV2
     class TextResponseEvent < Struct.new(
       :messages,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,7 +1670,8 @@ module Aws::LexRuntimeV2
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1689,8 @@ module Aws::LexRuntimeV2
     class TranscriptEvent < Struct.new(
       :transcript,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1699,8 @@ module Aws::LexRuntimeV2
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1718,8 @@ module Aws::LexRuntimeV2
       :original_value,
       :interpreted_value,
       :resolved_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

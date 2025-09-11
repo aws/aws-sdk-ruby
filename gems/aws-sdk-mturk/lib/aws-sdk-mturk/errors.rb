@@ -35,7 +35,7 @@ module Aws::MTurk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MTurk::Types::RequestError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::MTurk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MTurk::Types::ServiceFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

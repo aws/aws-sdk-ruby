@@ -26,7 +26,8 @@ module Aws::SNS
       :label,
       :aws_account_id,
       :action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +36,8 @@ module Aws::SNS
     #   @return [String]
     class AuthorizationErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +46,8 @@ module Aws::SNS
     #   @return [String]
     class BatchEntryIdsNotDistinctException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53,7 +56,8 @@ module Aws::SNS
     #   @return [String]
     class BatchRequestTooLongException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +79,8 @@ module Aws::SNS
       :code,
       :message,
       :sender_fault,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -90,7 +95,8 @@ module Aws::SNS
     #   @return [String]
     class CheckIfPhoneNumberIsOptedOutInput < Struct.new(
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +118,8 @@ module Aws::SNS
     #   @return [Boolean]
     class CheckIfPhoneNumberIsOptedOutResponse < Struct.new(
       :is_opted_out,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -127,7 +134,8 @@ module Aws::SNS
     #   @return [String]
     class ConcurrentAccessException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +156,8 @@ module Aws::SNS
       :topic_arn,
       :token,
       :authenticate_on_unsubscribe,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +167,8 @@ module Aws::SNS
     #   @return [String]
     class ConfirmSubscriptionResponse < Struct.new(
       :subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +178,8 @@ module Aws::SNS
     #   @return [String]
     class CreateEndpointResponse < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +202,8 @@ module Aws::SNS
       :name,
       :platform,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +214,8 @@ module Aws::SNS
     #   @return [String]
     class CreatePlatformApplicationResponse < Struct.new(
       :platform_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +246,8 @@ module Aws::SNS
       :token,
       :custom_user_data,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,12 +262,14 @@ module Aws::SNS
     class CreateSMSSandboxPhoneNumberInput < Struct.new(
       :phone_number,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateSMSSandboxPhoneNumberResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +522,8 @@ module Aws::SNS
       :attributes,
       :tags,
       :data_protection_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +533,8 @@ module Aws::SNS
     #   @return [String]
     class CreateTopicResponse < Struct.new(
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +545,8 @@ module Aws::SNS
     #   @return [String]
     class DeleteEndpointInput < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +557,8 @@ module Aws::SNS
     #   @return [String]
     class DeletePlatformApplicationInput < Struct.new(
       :platform_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,12 +567,14 @@ module Aws::SNS
     #   @return [String]
     class DeleteSMSSandboxPhoneNumberInput < Struct.new(
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSMSSandboxPhoneNumberResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +583,8 @@ module Aws::SNS
     #   @return [String]
     class DeleteTopicInput < Struct.new(
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -570,7 +593,8 @@ module Aws::SNS
     #   @return [String]
     class EmptyBatchRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +608,8 @@ module Aws::SNS
     class Endpoint < Struct.new(
       :endpoint_arn,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +619,8 @@ module Aws::SNS
     #   @return [String]
     class EndpointDisabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,7 +631,8 @@ module Aws::SNS
     #   @return [String]
     class FilterPolicyLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +643,8 @@ module Aws::SNS
     #   @return [String]
     class GetDataProtectionPolicyInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -625,7 +653,8 @@ module Aws::SNS
     #   @return [String]
     class GetDataProtectionPolicyResponse < Struct.new(
       :data_protection_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +665,8 @@ module Aws::SNS
     #   @return [String]
     class GetEndpointAttributesInput < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -672,7 +702,8 @@ module Aws::SNS
     #   @return [Hash<String, String>]
     class GetEndpointAttributesResponse < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +714,8 @@ module Aws::SNS
     #   @return [String]
     class GetPlatformApplicationAttributesInput < Struct.new(
       :platform_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +777,8 @@ module Aws::SNS
     #   @return [Hash<String, String>]
     class GetPlatformApplicationAttributesResponse < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +791,8 @@ module Aws::SNS
     #   @return [Array<String>]
     class GetSMSAttributesInput < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,12 +802,14 @@ module Aws::SNS
     #   @return [Hash<String, String>]
     class GetSMSAttributesResponse < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetSMSSandboxAccountStatusInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +818,8 @@ module Aws::SNS
     #   @return [Boolean]
     class GetSMSSandboxAccountStatusResult < Struct.new(
       :is_in_sandbox,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -797,7 +834,8 @@ module Aws::SNS
     #   @return [String]
     class GetSubscriptionAttributesInput < Struct.new(
       :subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +938,8 @@ module Aws::SNS
     #   @return [Hash<String, String>]
     class GetSubscriptionAttributesResponse < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +949,8 @@ module Aws::SNS
     #   @return [String]
     class GetTopicAttributesInput < Struct.new(
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1088,8 @@ module Aws::SNS
     #   @return [Hash<String, String>]
     class GetTopicAttributesResponse < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1098,8 @@ module Aws::SNS
     #   @return [String]
     class InternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1066,7 +1108,8 @@ module Aws::SNS
     #   @return [String]
     class InvalidBatchEntryIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1076,7 +1119,8 @@ module Aws::SNS
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1130,8 @@ module Aws::SNS
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1141,8 @@ module Aws::SNS
     #   @return [String]
     class InvalidSecurityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1151,8 @@ module Aws::SNS
     #   @return [String]
     class InvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1162,8 @@ module Aws::SNS
     #   @return [String]
     class KMSAccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1125,7 +1173,8 @@ module Aws::SNS
     #   @return [String]
     class KMSDisabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1185,8 @@ module Aws::SNS
     #   @return [String]
     class KMSInvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1196,8 @@ module Aws::SNS
     #   @return [String]
     class KMSNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1206,8 @@ module Aws::SNS
     #   @return [String]
     class KMSOptInRequired < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1167,7 +1219,8 @@ module Aws::SNS
     #   @return [String]
     class KMSThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1186,7 +1239,8 @@ module Aws::SNS
     class ListEndpointsByPlatformApplicationInput < Struct.new(
       :platform_application_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,7 +1257,8 @@ module Aws::SNS
     class ListEndpointsByPlatformApplicationResponse < Struct.new(
       :endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1216,7 +1271,8 @@ module Aws::SNS
     class ListOriginationNumbersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1231,7 +1287,8 @@ module Aws::SNS
     class ListOriginationNumbersResult < Struct.new(
       :next_token,
       :phone_numbers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1300,8 @@ module Aws::SNS
     #   @return [String]
     class ListPhoneNumbersOptedOutInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1318,8 @@ module Aws::SNS
     class ListPhoneNumbersOptedOutResponse < Struct.new(
       :phone_numbers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1332,8 @@ module Aws::SNS
     #   @return [String]
     class ListPlatformApplicationsInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1351,8 @@ module Aws::SNS
     class ListPlatformApplicationsResponse < Struct.new(
       :platform_applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1305,7 +1366,8 @@ module Aws::SNS
     class ListSMSSandboxPhoneNumbersInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1382,8 @@ module Aws::SNS
     class ListSMSSandboxPhoneNumbersResult < Struct.new(
       :phone_numbers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1397,8 @@ module Aws::SNS
     class ListSubscriptionsByTopicInput < Struct.new(
       :topic_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1349,7 +1413,8 @@ module Aws::SNS
     class ListSubscriptionsByTopicResponse < Struct.new(
       :subscriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1424,8 @@ module Aws::SNS
     #   @return [String]
     class ListSubscriptionsInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1440,8 @@ module Aws::SNS
     class ListSubscriptionsResponse < Struct.new(
       :subscriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1383,7 +1450,8 @@ module Aws::SNS
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1392,7 +1460,8 @@ module Aws::SNS
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1401,7 +1470,8 @@ module Aws::SNS
     #   @return [String]
     class ListTopicsInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1416,7 +1486,8 @@ module Aws::SNS
     class ListTopicsResponse < Struct.new(
       :topics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1447,7 +1518,8 @@ module Aws::SNS
       :data_type,
       :string_value,
       :binary_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1456,7 +1528,8 @@ module Aws::SNS
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1466,13 +1539,15 @@ module Aws::SNS
     #   @return [String]
     class OptInPhoneNumberInput < Struct.new(
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the OptInPhoneNumber action.</p>
     class OptInPhoneNumberResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1482,7 +1557,8 @@ module Aws::SNS
     #   @return [String]
     class OptedOutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,7 +1588,8 @@ module Aws::SNS
       :iso2_country_code,
       :route_type,
       :number_capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1603,8 @@ module Aws::SNS
     class PlatformApplication < Struct.new(
       :platform_application_arn,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1536,7 +1614,8 @@ module Aws::SNS
     #   @return [String]
     class PlatformApplicationDisabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,7 +1629,8 @@ module Aws::SNS
     class PublishBatchInput < Struct.new(
       :topic_arn,
       :publish_batch_request_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1695,7 +1775,8 @@ module Aws::SNS
       :message_attributes,
       :message_deduplication_id,
       :message_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1708,7 +1789,8 @@ module Aws::SNS
     class PublishBatchResponse < Struct.new(
       :successful,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1811,8 @@ module Aws::SNS
       :id,
       :message_id,
       :sequence_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1936,7 +2019,8 @@ module Aws::SNS
       :message_attributes,
       :message_deduplication_id,
       :message_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2039,8 @@ module Aws::SNS
     class PublishResponse < Struct.new(
       :message_id,
       :sequence_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1973,7 +2058,8 @@ module Aws::SNS
     class PutDataProtectionPolicyInput < Struct.new(
       :resource_arn,
       :data_protection_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2073,8 @@ module Aws::SNS
     class RemovePermissionInput < Struct.new(
       :topic_arn,
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1996,7 +2083,8 @@ module Aws::SNS
     #   @return [String]
     class ReplayLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2006,7 +2094,8 @@ module Aws::SNS
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2028,7 +2117,8 @@ module Aws::SNS
     class SMSSandboxPhoneNumber < Struct.new(
       :phone_number,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2064,7 +2154,8 @@ module Aws::SNS
     class SetEndpointAttributesInput < Struct.new(
       :endpoint_arn,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2192,7 +2283,8 @@ module Aws::SNS
     class SetPlatformApplicationAttributesInput < Struct.new(
       :platform_application_arn,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2287,13 +2379,15 @@ module Aws::SNS
     #   @return [Hash<String, String>]
     class SetSMSAttributesInput < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the SetSMSAttributes action.</p>
     class SetSMSAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2469,8 @@ module Aws::SNS
       :subscription_arn,
       :attribute_name,
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2617,7 +2712,8 @@ module Aws::SNS
       :topic_arn,
       :attribute_name,
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2627,7 +2723,8 @@ module Aws::SNS
     #   @return [String]
     class StaleTagException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2847,7 +2944,8 @@ module Aws::SNS
       :endpoint,
       :attributes,
       :return_subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2860,7 +2958,8 @@ module Aws::SNS
     #   @return [String]
     class SubscribeResponse < Struct.new(
       :subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2886,7 +2985,8 @@ module Aws::SNS
       :protocol,
       :endpoint,
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2896,7 +2996,8 @@ module Aws::SNS
     #   @return [String]
     class SubscriptionLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2910,7 +3011,8 @@ module Aws::SNS
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2919,7 +3021,8 @@ module Aws::SNS
     #   @return [String]
     class TagLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2929,7 +3032,8 @@ module Aws::SNS
     #   @return [String]
     class TagPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2943,12 +3047,14 @@ module Aws::SNS
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2958,7 +3064,8 @@ module Aws::SNS
     #   @return [String]
     class ThrottledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2967,7 +3074,8 @@ module Aws::SNS
     #   @return [String]
     class TooManyEntriesInBatchRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2978,7 +3086,8 @@ module Aws::SNS
     #   @return [String]
     class Topic < Struct.new(
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2987,7 +3096,8 @@ module Aws::SNS
     #   @return [String]
     class TopicLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2997,7 +3107,8 @@ module Aws::SNS
     #   @return [String]
     class UnsubscribeInput < Struct.new(
       :subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,12 +3121,14 @@ module Aws::SNS
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3025,7 +3138,8 @@ module Aws::SNS
     #   @return [String]
     class UserErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3034,7 +3148,8 @@ module Aws::SNS
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3047,7 +3162,8 @@ module Aws::SNS
     class VerificationException < Struct.new(
       :message,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3061,13 +3177,15 @@ module Aws::SNS
     class VerifySMSSandboxPhoneNumberInput < Struct.new(
       :phone_number,
       :one_time_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The destination phone number's verification status.</p>
     class VerifySMSSandboxPhoneNumberResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

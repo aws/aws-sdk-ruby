@@ -56,7 +56,6 @@ module Aws::KinesisVideoWebRTCStorage
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/joinStorageSessionAsViewer"}}
       end)
-
     end
 
     class << self

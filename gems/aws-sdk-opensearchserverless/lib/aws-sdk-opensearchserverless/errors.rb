@@ -39,7 +39,7 @@ module Aws::OpenSearchServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::OpenSearchServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::OpenSearchServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::OcuLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Description of the error.
@@ -79,7 +79,7 @@ module Aws::OpenSearchServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::OpenSearchServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # Description of the error.
@@ -126,7 +126,7 @@ module Aws::OpenSearchServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

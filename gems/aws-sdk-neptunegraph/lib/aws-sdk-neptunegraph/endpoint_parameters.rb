@@ -37,7 +37,6 @@ module Aws::NeptuneGraph
     :api_type,
     keyword_init: true
   ) do
-
     def initialize(options = {})
       self.region = options.fetch(:region, nil)
       self.use_fips = options.fetch(:use_fips, false)

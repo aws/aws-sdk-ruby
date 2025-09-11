@@ -45,7 +45,7 @@ module Aws::Route53Profiles
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Profiles::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::Route53Profiles
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Profiles::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::Route53Profiles
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Profiles::Types::InternalServiceErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::Route53Profiles
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Profiles::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::Route53Profiles
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Profiles::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -127,7 +127,7 @@ module Aws::Route53Profiles
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Profiles::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::Route53Profiles
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Profiles::Types::ResourceExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -171,7 +171,7 @@ module Aws::Route53Profiles
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Profiles::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -193,7 +193,7 @@ module Aws::Route53Profiles
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Profiles::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -208,7 +208,7 @@ module Aws::Route53Profiles
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Profiles::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

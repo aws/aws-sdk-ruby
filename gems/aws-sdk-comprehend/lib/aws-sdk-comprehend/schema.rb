@@ -2926,7 +2926,6 @@ module Aws::Comprehend
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {}
       end)
-
     end
 
     class << self

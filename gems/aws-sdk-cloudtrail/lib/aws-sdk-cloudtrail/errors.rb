@@ -121,7 +121,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -136,7 +136,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::AccountHasOngoingImportException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -151,7 +151,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::AccountNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -165,7 +165,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::AccountNotRegisteredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -180,7 +180,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::AccountRegisteredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -195,7 +195,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::CannotDelegateManagementAccountException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -210,7 +210,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ChannelARNInvalidException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -226,7 +226,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ChannelAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -241,7 +241,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ChannelExistsForEDSException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -257,7 +257,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ChannelMaxLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -271,7 +271,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ChannelNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -295,7 +295,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::CloudTrailARNInvalidException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -309,7 +309,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::CloudTrailAccessNotEnabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -325,7 +325,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::CloudTrailInvalidClientTokenIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -339,7 +339,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::CloudWatchLogsDeliveryUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -355,7 +355,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -372,7 +372,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -387,7 +387,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::DelegatedAdminAccountLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -402,7 +402,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::EventDataStoreARNInvalidException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -416,7 +416,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::EventDataStoreAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -433,7 +433,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::EventDataStoreFederationEnabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -448,7 +448,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::EventDataStoreHasOngoingImportException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -462,7 +462,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::EventDataStoreMaxLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -476,7 +476,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::EventDataStoreNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -491,7 +491,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::EventDataStoreTerminationProtectedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -507,7 +507,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::GenerateResponseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -521,7 +521,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ImportNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -535,7 +535,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InactiveEventDataStoreException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -550,7 +550,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InactiveQueryException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -566,7 +566,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InsightNotEnabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -582,7 +582,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InsufficientDependencyServiceAccessPermissionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -601,7 +601,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InsufficientEncryptionPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -615,7 +615,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InsufficientIAMAccessPermissionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -629,7 +629,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InsufficientS3BucketPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -644,7 +644,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InsufficientSnsTopicPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -659,7 +659,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidCloudWatchLogsLogGroupArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -673,7 +673,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidCloudWatchLogsRoleArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -689,7 +689,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidDateRangeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -704,7 +704,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidEventCategoryException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -719,7 +719,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidEventDataStoreCategoryException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -733,7 +733,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidEventDataStoreStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -774,7 +774,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidEventSelectorsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -789,7 +789,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidHomeRegionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -804,7 +804,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidImportSourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -826,7 +826,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidInsightSelectorsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -840,7 +840,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidKmsKeyIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -854,7 +854,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidLookupAttributesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -868,7 +868,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidMaxResultsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -883,7 +883,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -898,7 +898,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidParameterCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -912,7 +912,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -928,7 +928,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidQueryStatementException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -942,7 +942,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidQueryStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -956,7 +956,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidS3BucketNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -970,7 +970,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidS3PrefixException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -984,7 +984,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidSnsTopicNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -998,7 +998,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidSourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1013,7 +1013,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidTagParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1028,7 +1028,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidTimeRangeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1042,7 +1042,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1076,7 +1076,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::InvalidTrailNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1091,7 +1091,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::KmsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1105,7 +1105,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::KmsKeyDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1121,7 +1121,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::KmsKeyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1136,7 +1136,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::MaxConcurrentQueriesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1150,7 +1150,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::MaximumNumberOfTrailsExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1165,7 +1165,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::NoManagementAccountSLRExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1180,7 +1180,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::NotOrganizationManagementAccountException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1196,7 +1196,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::NotOrganizationMasterAccountException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1210,7 +1210,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::OperationNotPermittedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1226,7 +1226,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::OrganizationNotInAllFeaturesModeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1242,7 +1242,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::OrganizationsNotInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1256,7 +1256,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::QueryIdNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1280,7 +1280,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ResourceARNNotValidException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1294,7 +1294,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1310,7 +1310,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ResourcePolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1326,7 +1326,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ResourcePolicyNotValidException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1340,7 +1340,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ResourceTypeNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1354,7 +1354,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::S3BucketDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1371,7 +1371,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1386,7 +1386,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::TagsLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1402,7 +1402,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1416,7 +1416,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::TrailAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1430,7 +1430,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::TrailNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1444,7 +1444,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::TrailNotProvidedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>
@@ -1458,7 +1458,7 @@ module Aws::CloudTrail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudTrail::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Brief description of the exception returned by the request.</p>

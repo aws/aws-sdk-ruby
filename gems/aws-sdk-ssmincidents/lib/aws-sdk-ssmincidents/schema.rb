@@ -1017,7 +1017,6 @@ module Aws::SSMIncidents
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/updateTimelineEvent"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

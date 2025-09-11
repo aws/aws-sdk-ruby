@@ -44,7 +44,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::CreationLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::DuplicateRecordException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::ExpiredNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::InternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -122,7 +122,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::ResourceLockedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -162,7 +162,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -176,7 +176,7 @@ module Aws::Budgets
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

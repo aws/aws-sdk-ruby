@@ -124,7 +124,8 @@ module Aws::StorageGateway
       :tape_drive_type,
       :medium_changer_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +143,8 @@ module Aws::StorageGateway
     #   @return [String]
     class ActivateGatewayOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +160,8 @@ module Aws::StorageGateway
     class AddCacheInput < Struct.new(
       :gateway_arn,
       :disk_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +171,8 @@ module Aws::StorageGateway
     #   @return [String]
     class AddCacheOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +193,8 @@ module Aws::StorageGateway
     class AddTagsToResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +204,8 @@ module Aws::StorageGateway
     #   @return [String]
     class AddTagsToResourceOutput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -215,7 +221,8 @@ module Aws::StorageGateway
     class AddUploadBufferInput < Struct.new(
       :gateway_arn,
       :disk_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +232,8 @@ module Aws::StorageGateway
     #   @return [String]
     class AddUploadBufferOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +257,8 @@ module Aws::StorageGateway
     class AddWorkingStorageInput < Struct.new(
       :gateway_arn,
       :disk_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +270,8 @@ module Aws::StorageGateway
     #   @return [String]
     class AddWorkingStorageOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +299,8 @@ module Aws::StorageGateway
       :tape_arn,
       :pool_id,
       :bypass_governance_retention,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +310,8 @@ module Aws::StorageGateway
     #   @return [String]
     class AssignTapePoolOutput < Struct.new(
       :tape_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +363,8 @@ module Aws::StorageGateway
       :audit_destination_arn,
       :cache_attributes,
       :endpoint_network_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +373,8 @@ module Aws::StorageGateway
     #   @return [String]
     class AssociateFileSystemOutput < Struct.new(
       :file_system_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +412,8 @@ module Aws::StorageGateway
       :volume_arn,
       :network_interface_id,
       :disk_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +428,8 @@ module Aws::StorageGateway
     class AttachVolumeOutput < Struct.new(
       :volume_arn,
       :target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +447,8 @@ module Aws::StorageGateway
     class AutomaticTapeCreationPolicyInfo < Struct.new(
       :automatic_tape_creation_rules,
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +490,8 @@ module Aws::StorageGateway
       :tape_size_in_bytes,
       :minimum_num_tapes,
       :worm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -536,7 +554,8 @@ module Aws::StorageGateway
       :days_of_week,
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +569,8 @@ module Aws::StorageGateway
     #   @return [Integer]
     class CacheAttributes < Struct.new(
       :cache_stale_timeout_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +606,8 @@ module Aws::StorageGateway
     class CacheReportFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -645,7 +666,8 @@ module Aws::StorageGateway
       :exclusion_filters,
       :report_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,7 +754,8 @@ module Aws::StorageGateway
       :volume_used_in_bytes,
       :kms_key,
       :target_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -753,7 +776,8 @@ module Aws::StorageGateway
     class CancelArchivalInput < Struct.new(
       :gateway_arn,
       :tape_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -764,7 +788,8 @@ module Aws::StorageGateway
     #   @return [String]
     class CancelArchivalOutput < Struct.new(
       :tape_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +798,8 @@ module Aws::StorageGateway
     #   @return [String]
     class CancelCacheReportInput < Struct.new(
       :cache_report_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +808,8 @@ module Aws::StorageGateway
     #   @return [String]
     class CancelCacheReportOutput < Struct.new(
       :cache_report_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +825,8 @@ module Aws::StorageGateway
     class CancelRetrievalInput < Struct.new(
       :gateway_arn,
       :tape_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,7 +837,8 @@ module Aws::StorageGateway
     #   @return [String]
     class CancelRetrievalOutput < Struct.new(
       :tape_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +864,8 @@ module Aws::StorageGateway
       :secret_to_authenticate_initiator,
       :initiator_name,
       :secret_to_authenticate_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +939,8 @@ module Aws::StorageGateway
       :kms_encrypted,
       :kms_key,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +954,8 @@ module Aws::StorageGateway
     class CreateCachediSCSIVolumeOutput < Struct.new(
       :volume_arn,
       :target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,7 +1190,8 @@ module Aws::StorageGateway
       :vpc_endpoint_dns_name,
       :bucket_region,
       :audit_destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1168,7 +1201,8 @@ module Aws::StorageGateway
     #   @return [String]
     class CreateNFSFileShareOutput < Struct.new(
       :file_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1474,8 @@ module Aws::StorageGateway
       :vpc_endpoint_dns_name,
       :bucket_region,
       :oplocks_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1485,8 @@ module Aws::StorageGateway
     #   @return [String]
     class CreateSMBFileShareOutput < Struct.new(
       :file_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1514,8 @@ module Aws::StorageGateway
       :volume_arn,
       :snapshot_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1496,7 +1533,8 @@ module Aws::StorageGateway
       :snapshot_id,
       :volume_arn,
       :volume_recovery_point_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1575,8 @@ module Aws::StorageGateway
       :volume_arn,
       :snapshot_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1592,8 @@ module Aws::StorageGateway
     class CreateSnapshotOutput < Struct.new(
       :volume_arn,
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1652,7 +1692,8 @@ module Aws::StorageGateway
       :kms_encrypted,
       :kms_key,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1671,7 +1712,8 @@ module Aws::StorageGateway
       :volume_arn,
       :volume_size_in_bytes,
       :target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1714,7 +1756,8 @@ module Aws::StorageGateway
       :retention_lock_type,
       :retention_lock_time_in_days,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1768,8 @@ module Aws::StorageGateway
     #   @return [String]
     class CreateTapePoolOutput < Struct.new(
       :pool_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1788,7 +1832,8 @@ module Aws::StorageGateway
       :pool_id,
       :worm,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1799,7 +1844,8 @@ module Aws::StorageGateway
     #   @return [String]
     class CreateTapeWithBarcodeOutput < Struct.new(
       :tape_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1876,7 +1922,8 @@ module Aws::StorageGateway
       :pool_id,
       :worm,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1887,7 +1934,8 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     class CreateTapesOutput < Struct.new(
       :tape_ar_ns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1897,7 +1945,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteAutomaticTapeCreationPolicyInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1907,7 +1956,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteAutomaticTapeCreationPolicyOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1932,7 +1982,8 @@ module Aws::StorageGateway
     class DeleteBandwidthRateLimitInput < Struct.new(
       :gateway_arn,
       :bandwidth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1944,7 +1995,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteBandwidthRateLimitOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2005,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteCacheReportInput < Struct.new(
       :cache_report_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1962,7 +2015,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteCacheReportOutput < Struct.new(
       :cache_report_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2043,8 @@ module Aws::StorageGateway
     class DeleteChapCredentialsInput < Struct.new(
       :target_arn,
       :initiator_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2003,7 +2058,8 @@ module Aws::StorageGateway
     class DeleteChapCredentialsOutput < Struct.new(
       :target_arn,
       :initiator_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2078,8 @@ module Aws::StorageGateway
     class DeleteFileShareInput < Struct.new(
       :file_share_arn,
       :force_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2032,7 +2089,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteFileShareOutput < Struct.new(
       :file_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2043,7 +2101,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteGatewayInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2054,7 +2113,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteGatewayOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2063,7 +2123,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteSnapshotScheduleInput < Struct.new(
       :volume_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2072,7 +2133,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteSnapshotScheduleOutput < Struct.new(
       :volume_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2090,7 +2152,8 @@ module Aws::StorageGateway
     class DeleteTapeArchiveInput < Struct.new(
       :tape_arn,
       :bypass_governance_retention,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2101,7 +2164,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteTapeArchiveOutput < Struct.new(
       :tape_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2124,7 +2188,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :tape_arn,
       :bypass_governance_retention,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2134,7 +2199,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteTapeOutput < Struct.new(
       :tape_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2143,7 +2209,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteTapePoolInput < Struct.new(
       :pool_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2152,7 +2219,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteTapePoolOutput < Struct.new(
       :pool_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2164,7 +2232,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteVolumeInput < Struct.new(
       :volume_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2176,7 +2245,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DeleteVolumeOutput < Struct.new(
       :volume_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2186,7 +2256,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeAvailabilityMonitorTestInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2206,7 +2277,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :status,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2217,7 +2289,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeBandwidthRateLimitInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2238,7 +2311,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2248,7 +2322,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeBandwidthRateLimitScheduleInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2262,7 +2337,8 @@ module Aws::StorageGateway
     class DescribeBandwidthRateLimitScheduleOutput < Struct.new(
       :gateway_arn,
       :bandwidth_rate_limit_intervals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2272,7 +2348,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeCacheInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2313,7 +2390,8 @@ module Aws::StorageGateway
       :cache_dirty_percentage,
       :cache_hit_percentage,
       :cache_miss_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2331,7 +2409,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeCacheReportInput < Struct.new(
       :cache_report_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2341,7 +2420,8 @@ module Aws::StorageGateway
     #   @return [Types::CacheReportInfo]
     class DescribeCacheReportOutput < Struct.new(
       :cache_report_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2351,7 +2431,8 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     class DescribeCachediSCSIVolumesInput < Struct.new(
       :volume_ar_ns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2361,7 +2442,8 @@ module Aws::StorageGateway
     #   @return [Array<Types::CachediSCSIVolume>]
     class DescribeCachediSCSIVolumesOutput < Struct.new(
       :cachedi_scsi_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2373,7 +2455,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeChapCredentialsInput < Struct.new(
       :target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2410,7 +2493,8 @@ module Aws::StorageGateway
     #   @return [Array<Types::ChapInfo>]
     class DescribeChapCredentialsOutput < Struct.new(
       :chap_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2420,7 +2504,8 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     class DescribeFileSystemAssociationsInput < Struct.new(
       :file_system_association_arn_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2431,7 +2516,8 @@ module Aws::StorageGateway
     #   @return [Array<Types::FileSystemAssociationInfo>]
     class DescribeFileSystemAssociationsOutput < Struct.new(
       :file_system_association_info_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2442,7 +2528,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeGatewayInformationInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2564,7 +2651,8 @@ module Aws::StorageGateway
       :supported_gateway_capacities,
       :host_environment_id,
       :software_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2575,7 +2663,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeMaintenanceStartTimeInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2660,7 +2749,8 @@ module Aws::StorageGateway
       :day_of_month,
       :timezone,
       :software_update_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2671,7 +2761,8 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     class DescribeNFSFileSharesInput < Struct.new(
       :file_share_arn_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2681,7 +2772,8 @@ module Aws::StorageGateway
     #   @return [Array<Types::NFSFileShareInfo>]
     class DescribeNFSFileSharesOutput < Struct.new(
       :nfs_file_share_info_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2692,7 +2784,8 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     class DescribeSMBFileSharesInput < Struct.new(
       :file_share_arn_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2702,7 +2795,8 @@ module Aws::StorageGateway
     #   @return [Array<Types::SMBFileShareInfo>]
     class DescribeSMBFileSharesOutput < Struct.new(
       :smb_file_share_info_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2712,7 +2806,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeSMBSettingsInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2825,7 +2920,8 @@ module Aws::StorageGateway
       :smb_security_strategy,
       :file_shares_visible,
       :smb_local_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2837,7 +2933,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeSnapshotScheduleInput < Struct.new(
       :volume_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2870,7 +2967,8 @@ module Aws::StorageGateway
       :description,
       :timezone,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2881,7 +2979,8 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     class DescribeStorediSCSIVolumesInput < Struct.new(
       :volume_ar_ns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2972,7 +3071,8 @@ module Aws::StorageGateway
     #   @return [Array<Types::StorediSCSIVolume>]
     class DescribeStorediSCSIVolumesOutput < Struct.new(
       :storedi_scsi_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2993,7 +3093,8 @@ module Aws::StorageGateway
       :tape_ar_ns,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3013,7 +3114,8 @@ module Aws::StorageGateway
     class DescribeTapeArchivesOutput < Struct.new(
       :tape_archives,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3034,7 +3136,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3057,7 +3160,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :tape_recovery_point_infos,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3088,7 +3192,8 @@ module Aws::StorageGateway
       :tape_ar_ns,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3105,7 +3210,8 @@ module Aws::StorageGateway
     class DescribeTapesOutput < Struct.new(
       :tapes,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3115,7 +3221,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeUploadBufferInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3140,7 +3247,8 @@ module Aws::StorageGateway
       :disk_ids,
       :upload_buffer_used_in_bytes,
       :upload_buffer_allocated_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3176,7 +3284,8 @@ module Aws::StorageGateway
       :vtl_device_ar_ns,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3199,7 +3308,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :vtl_devices,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3210,7 +3320,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DescribeWorkingStorageInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3238,7 +3349,8 @@ module Aws::StorageGateway
       :disk_ids,
       :working_storage_used_in_bytes,
       :working_storage_allocated_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3263,7 +3375,8 @@ module Aws::StorageGateway
     class DetachVolumeInput < Struct.new(
       :volume_arn,
       :force_detach,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3273,7 +3386,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DetachVolumeOutput < Struct.new(
       :volume_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3296,7 +3410,8 @@ module Aws::StorageGateway
       :network_interface_id,
       :network_interface_port,
       :chap_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3313,7 +3428,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DisableGatewayInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3323,7 +3439,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DisableGatewayOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3339,7 +3456,8 @@ module Aws::StorageGateway
     class DisassociateFileSystemInput < Struct.new(
       :file_system_association_arn,
       :force_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3348,7 +3466,8 @@ module Aws::StorageGateway
     #   @return [String]
     class DisassociateFileSystemOutput < Struct.new(
       :file_system_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3391,7 +3510,8 @@ module Aws::StorageGateway
       :disk_allocation_type,
       :disk_allocation_resource,
       :disk_attribute_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3411,7 +3531,8 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     class EndpointNetworkConfiguration < Struct.new(
       :ip_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3446,7 +3567,8 @@ module Aws::StorageGateway
     class EvictFilesFailingUploadInput < Struct.new(
       :file_share_arn,
       :force_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3456,7 +3578,8 @@ module Aws::StorageGateway
     #   @return [String]
     class EvictFilesFailingUploadOutput < Struct.new(
       :notification_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3486,7 +3609,8 @@ module Aws::StorageGateway
       :file_share_id,
       :file_share_status,
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3541,7 +3665,8 @@ module Aws::StorageGateway
       :cache_attributes,
       :endpoint_network_configuration,
       :file_system_association_status_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3551,7 +3676,8 @@ module Aws::StorageGateway
     #   @return [String]
     class FileSystemAssociationStatusDetail < Struct.new(
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3578,7 +3704,8 @@ module Aws::StorageGateway
       :file_system_association_arn,
       :file_system_association_status,
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3644,7 +3771,8 @@ module Aws::StorageGateway
       :host_environment_id,
       :deprecation_date,
       :software_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3660,7 +3788,8 @@ module Aws::StorageGateway
     class InternalServerError < Struct.new(
       :message,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3676,7 +3805,8 @@ module Aws::StorageGateway
     class InvalidGatewayRequestException < Struct.new(
       :message,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3725,7 +3855,8 @@ module Aws::StorageGateway
       :timeout_in_seconds,
       :user_name,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3786,7 +3917,8 @@ module Aws::StorageGateway
     class JoinDomainOutput < Struct.new(
       :gateway_arn,
       :active_directory_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3796,7 +3928,8 @@ module Aws::StorageGateway
     #   @return [String]
     class ListAutomaticTapeCreationPoliciesInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3807,7 +3940,8 @@ module Aws::StorageGateway
     #   @return [Array<Types::AutomaticTapeCreationPolicyInfo>]
     class ListAutomaticTapeCreationPoliciesOutput < Struct.new(
       :automatic_tape_creation_policy_infos,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3818,7 +3952,8 @@ module Aws::StorageGateway
     #   @return [String]
     class ListCacheReportsInput < Struct.new(
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3834,7 +3969,8 @@ module Aws::StorageGateway
     class ListCacheReportsOutput < Struct.new(
       :cache_report_list,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3856,7 +3992,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3877,7 +4014,8 @@ module Aws::StorageGateway
       :marker,
       :next_marker,
       :file_share_info_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3898,7 +4036,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3919,7 +4058,8 @@ module Aws::StorageGateway
       :marker,
       :next_marker,
       :file_system_association_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3947,7 +4087,8 @@ module Aws::StorageGateway
     class ListGatewaysInput < Struct.new(
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3961,7 +4102,8 @@ module Aws::StorageGateway
     class ListGatewaysOutput < Struct.new(
       :gateways,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3972,7 +4114,8 @@ module Aws::StorageGateway
     #   @return [String]
     class ListLocalDisksInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3993,7 +4136,8 @@ module Aws::StorageGateway
     class ListLocalDisksOutput < Struct.new(
       :gateway_arn,
       :disks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4013,7 +4157,8 @@ module Aws::StorageGateway
       :resource_arn,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4032,7 +4177,8 @@ module Aws::StorageGateway
       :resource_arn,
       :marker,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4051,7 +4197,8 @@ module Aws::StorageGateway
       :pool_ar_ns,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4068,7 +4215,8 @@ module Aws::StorageGateway
     class ListTapePoolsOutput < Struct.new(
       :pool_infos,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4105,7 +4253,8 @@ module Aws::StorageGateway
       :tape_ar_ns,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4135,7 +4284,8 @@ module Aws::StorageGateway
     class ListTapesOutput < Struct.new(
       :tape_infos,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4146,7 +4296,8 @@ module Aws::StorageGateway
     #   @return [String]
     class ListVolumeInitiatorsInput < Struct.new(
       :volume_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4157,7 +4308,8 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     class ListVolumeInitiatorsOutput < Struct.new(
       :initiators,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4167,7 +4319,8 @@ module Aws::StorageGateway
     #   @return [String]
     class ListVolumeRecoveryPointsInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4181,7 +4334,8 @@ module Aws::StorageGateway
     class ListVolumeRecoveryPointsOutput < Struct.new(
       :gateway_arn,
       :volume_recovery_point_infos,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4214,7 +4368,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4248,7 +4403,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :marker,
       :volume_infos,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4279,7 +4435,8 @@ module Aws::StorageGateway
       :directory_mode,
       :group_id,
       :owner_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4525,7 +4682,8 @@ module Aws::StorageGateway
       :vpc_endpoint_dns_name,
       :bucket_region,
       :audit_destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4555,7 +4713,8 @@ module Aws::StorageGateway
       :ipv4_address,
       :mac_address,
       :ipv6_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4564,7 +4723,8 @@ module Aws::StorageGateway
     #   @return [String]
     class NotifyWhenUploadedInput < Struct.new(
       :file_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4578,7 +4738,8 @@ module Aws::StorageGateway
     class NotifyWhenUploadedOutput < Struct.new(
       :file_share_arn,
       :notification_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4618,7 +4779,8 @@ module Aws::StorageGateway
       :retention_lock_type,
       :retention_lock_time_in_days,
       :pool_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4648,7 +4810,8 @@ module Aws::StorageGateway
       :file_share_arn,
       :folder_list,
       :recursive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4663,7 +4826,8 @@ module Aws::StorageGateway
     class RefreshCacheOutput < Struct.new(
       :file_share_arn,
       :notification_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4678,7 +4842,8 @@ module Aws::StorageGateway
     class RemoveTagsFromResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4688,7 +4853,8 @@ module Aws::StorageGateway
     #   @return [String]
     class RemoveTagsFromResourceOutput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4698,7 +4864,8 @@ module Aws::StorageGateway
     #   @return [String]
     class ResetCacheInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4708,7 +4875,8 @@ module Aws::StorageGateway
     #   @return [String]
     class ResetCacheOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4727,7 +4895,8 @@ module Aws::StorageGateway
     class RetrieveTapeArchiveInput < Struct.new(
       :tape_arn,
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4737,7 +4906,8 @@ module Aws::StorageGateway
     #   @return [String]
     class RetrieveTapeArchiveOutput < Struct.new(
       :tape_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4753,7 +4923,8 @@ module Aws::StorageGateway
     class RetrieveTapeRecoveryPointInput < Struct.new(
       :tape_arn,
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4764,7 +4935,8 @@ module Aws::StorageGateway
     #   @return [String]
     class RetrieveTapeRecoveryPointOutput < Struct.new(
       :tape_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5040,7 +5212,8 @@ module Aws::StorageGateway
       :vpc_endpoint_dns_name,
       :bucket_region,
       :oplocks_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5060,7 +5233,8 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     class SMBLocalGroups < Struct.new(
       :gateway_admins,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5076,7 +5250,8 @@ module Aws::StorageGateway
     class ServiceUnavailableError < Struct.new(
       :message,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5091,7 +5266,8 @@ module Aws::StorageGateway
     class SetLocalConsolePasswordInput < Struct.new(
       :gateway_arn,
       :local_console_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5101,7 +5277,8 @@ module Aws::StorageGateway
     #   @return [String]
     class SetLocalConsolePasswordOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5116,7 +5293,8 @@ module Aws::StorageGateway
     class SetSMBGuestPasswordInput < Struct.new(
       :gateway_arn,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5126,7 +5304,8 @@ module Aws::StorageGateway
     #   @return [String]
     class SetSMBGuestPasswordOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5138,7 +5317,8 @@ module Aws::StorageGateway
     #   @return [String]
     class ShutdownGatewayInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5150,7 +5330,8 @@ module Aws::StorageGateway
     #   @return [String]
     class ShutdownGatewayOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5168,7 +5349,8 @@ module Aws::StorageGateway
     #   @return [String]
     class SoftwareUpdatePreferences < Struct.new(
       :automatic_update_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5178,7 +5360,8 @@ module Aws::StorageGateway
     #   @return [String]
     class StartAvailabilityMonitorTestInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5188,7 +5371,8 @@ module Aws::StorageGateway
     #   @return [String]
     class StartAvailabilityMonitorTestOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5243,7 +5427,8 @@ module Aws::StorageGateway
       :exclusion_filters,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5253,7 +5438,8 @@ module Aws::StorageGateway
     #   @return [String]
     class StartCacheReportOutput < Struct.new(
       :cache_report_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5264,7 +5450,8 @@ module Aws::StorageGateway
     #   @return [String]
     class StartGatewayInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5276,7 +5463,8 @@ module Aws::StorageGateway
     #   @return [String]
     class StartGatewayOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5292,7 +5480,8 @@ module Aws::StorageGateway
     class StorageGatewayError < Struct.new(
       :error_code,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5385,7 +5574,8 @@ module Aws::StorageGateway
       :volume_used_in_bytes,
       :kms_key,
       :target_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5407,7 +5597,8 @@ module Aws::StorageGateway
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5477,7 +5668,8 @@ module Aws::StorageGateway
       :worm,
       :retention_start_date,
       :pool_entry_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5555,7 +5747,8 @@ module Aws::StorageGateway
       :worm,
       :retention_start_date,
       :pool_entry_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5603,7 +5796,8 @@ module Aws::StorageGateway
       :pool_id,
       :retention_start_date,
       :pool_entry_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5628,7 +5822,8 @@ module Aws::StorageGateway
       :tape_recovery_point_time,
       :tape_size_in_bytes,
       :tape_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5643,7 +5838,8 @@ module Aws::StorageGateway
     class UpdateAutomaticTapeCreationPolicyInput < Struct.new(
       :automatic_tape_creation_rules,
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5653,7 +5849,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateAutomaticTapeCreationPolicyOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5684,7 +5881,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5696,7 +5894,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateBandwidthRateLimitOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5711,7 +5910,8 @@ module Aws::StorageGateway
     class UpdateBandwidthRateLimitScheduleInput < Struct.new(
       :gateway_arn,
       :bandwidth_rate_limit_intervals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5721,7 +5921,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateBandwidthRateLimitScheduleOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5775,7 +5976,8 @@ module Aws::StorageGateway
       :secret_to_authenticate_initiator,
       :initiator_name,
       :secret_to_authenticate_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5791,7 +5993,8 @@ module Aws::StorageGateway
     class UpdateChapCredentialsOutput < Struct.new(
       :target_arn,
       :initiator_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5819,7 +6022,8 @@ module Aws::StorageGateway
       :password,
       :audit_destination_arn,
       :cache_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5828,7 +6032,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateFileSystemAssociationOutput < Struct.new(
       :file_system_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5860,7 +6065,8 @@ module Aws::StorageGateway
       :gateway_timezone,
       :cloud_watch_log_group_arn,
       :gateway_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5876,7 +6082,8 @@ module Aws::StorageGateway
     class UpdateGatewayInformationOutput < Struct.new(
       :gateway_arn,
       :gateway_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5887,7 +6094,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateGatewaySoftwareNowInput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5899,7 +6107,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateGatewaySoftwareNowOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5973,7 +6182,8 @@ module Aws::StorageGateway
       :day_of_week,
       :day_of_month,
       :software_update_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5985,7 +6195,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateMaintenanceStartTimeOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6155,7 +6366,8 @@ module Aws::StorageGateway
       :cache_attributes,
       :notification_policy,
       :audit_destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6165,7 +6377,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateNFSFileShareOutput < Struct.new(
       :file_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6363,7 +6576,8 @@ module Aws::StorageGateway
       :cache_attributes,
       :notification_policy,
       :oplocks_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6373,7 +6587,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateSMBFileShareOutput < Struct.new(
       :file_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6387,7 +6602,8 @@ module Aws::StorageGateway
     class UpdateSMBFileShareVisibilityInput < Struct.new(
       :gateway_arn,
       :file_shares_visible,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6397,7 +6613,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateSMBFileShareVisibilityOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6412,7 +6629,8 @@ module Aws::StorageGateway
     class UpdateSMBLocalGroupsInput < Struct.new(
       :gateway_arn,
       :smb_local_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6422,7 +6640,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateSMBLocalGroupsOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6456,7 +6675,8 @@ module Aws::StorageGateway
     class UpdateSMBSecurityStrategyInput < Struct.new(
       :gateway_arn,
       :smb_security_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6466,7 +6686,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateSMBSecurityStrategyOutput < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6524,7 +6745,8 @@ module Aws::StorageGateway
       :recurrence_in_hours,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6536,7 +6758,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateSnapshotScheduleOutput < Struct.new(
       :volume_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6552,7 +6775,8 @@ module Aws::StorageGateway
     class UpdateVTLDeviceTypeInput < Struct.new(
       :vtl_device_arn,
       :device_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6562,7 +6786,8 @@ module Aws::StorageGateway
     #   @return [String]
     class UpdateVTLDeviceTypeOutput < Struct.new(
       :vtl_device_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6589,7 +6814,8 @@ module Aws::StorageGateway
       :vtl_device_vendor,
       :vtl_device_product_identifier,
       :devicei_scsi_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6635,7 +6861,8 @@ module Aws::StorageGateway
       :volume_type,
       :volume_size_in_bytes,
       :volume_attachment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6666,7 +6893,8 @@ module Aws::StorageGateway
       :volume_size_in_bytes,
       :volume_usage_in_bytes,
       :volume_recovery_point_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6698,7 +6926,8 @@ module Aws::StorageGateway
       :network_interface_port,
       :lun_number,
       :chap_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

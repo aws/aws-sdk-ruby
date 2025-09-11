@@ -1822,7 +1822,6 @@ module Aws::Batch
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/updateserviceenvironment", "code" => 200}}
       end)
-
     end
 
     class << self

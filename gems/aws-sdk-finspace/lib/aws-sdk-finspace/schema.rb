@@ -1901,7 +1901,6 @@ module Aws::Finspace
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/kx/environments/{environmentId}/kxvolumes/{volumeName}", "code" => 200}}
       end)
-
     end
 
     class << self

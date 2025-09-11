@@ -29,7 +29,8 @@ module Aws::ChimeSDKIdentity
       :created_timestamp,
       :last_updated_timestamp,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +48,8 @@ module Aws::ChimeSDKIdentity
       :admin,
       :app_instance_arn,
       :created_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +59,8 @@ module Aws::ChimeSDKIdentity
     #   @return [Types::Identity]
     class AppInstanceAdminSummary < Struct.new(
       :admin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -87,7 +90,8 @@ module Aws::ChimeSDKIdentity
       :created_timestamp,
       :last_updated_timestamp,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,7 +109,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_bot_arn,
       :name,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +120,8 @@ module Aws::ChimeSDKIdentity
     #   @return [Types::ChannelRetentionSettings]
     class AppInstanceRetentionSettings < Struct.new(
       :channel_retention_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -133,7 +139,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_arn,
       :name,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +170,8 @@ module Aws::ChimeSDKIdentity
       :created_timestamp,
       :last_updated_timestamp,
       :expiration_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +238,8 @@ module Aws::ChimeSDKIdentity
       :last_updated_timestamp,
       :allow_messages,
       :endpoint_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,7 +270,8 @@ module Aws::ChimeSDKIdentity
       :type,
       :allow_messages,
       :endpoint_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +289,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_user_arn,
       :name,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -291,7 +302,8 @@ module Aws::ChimeSDKIdentity
     class BadRequestException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +313,8 @@ module Aws::ChimeSDKIdentity
     #   @return [Integer]
     class ChannelRetentionSettings < Struct.new(
       :retention_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +324,8 @@ module Aws::ChimeSDKIdentity
     #   @return [Types::LexConfiguration]
     class Configuration < Struct.new(
       :lex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +338,8 @@ module Aws::ChimeSDKIdentity
     class ConflictException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,7 +352,8 @@ module Aws::ChimeSDKIdentity
     class CreateAppInstanceAdminRequest < Struct.new(
       :app_instance_admin_arn,
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +367,8 @@ module Aws::ChimeSDKIdentity
     class CreateAppInstanceAdminResponse < Struct.new(
       :app_instance_admin,
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -380,7 +397,8 @@ module Aws::ChimeSDKIdentity
       :client_request_token,
       :tags,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +407,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class CreateAppInstanceBotResponse < Struct.new(
       :app_instance_bot_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +429,8 @@ module Aws::ChimeSDKIdentity
       :metadata,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +439,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class CreateAppInstanceResponse < Struct.new(
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +473,8 @@ module Aws::ChimeSDKIdentity
       :client_request_token,
       :tags,
       :expiration_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +483,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class CreateAppInstanceUserResponse < Struct.new(
       :app_instance_user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +497,8 @@ module Aws::ChimeSDKIdentity
     class DeleteAppInstanceAdminRequest < Struct.new(
       :app_instance_admin_arn,
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +507,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class DeleteAppInstanceBotRequest < Struct.new(
       :app_instance_bot_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -492,7 +517,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class DeleteAppInstanceRequest < Struct.new(
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +527,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class DeleteAppInstanceUserRequest < Struct.new(
       :app_instance_user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +541,8 @@ module Aws::ChimeSDKIdentity
     class DeregisterAppInstanceUserEndpointRequest < Struct.new(
       :app_instance_user_arn,
       :endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +555,8 @@ module Aws::ChimeSDKIdentity
     class DescribeAppInstanceAdminRequest < Struct.new(
       :app_instance_admin_arn,
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +567,8 @@ module Aws::ChimeSDKIdentity
     #   @return [Types::AppInstanceAdmin]
     class DescribeAppInstanceAdminResponse < Struct.new(
       :app_instance_admin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +577,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class DescribeAppInstanceBotRequest < Struct.new(
       :app_instance_bot_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +587,8 @@ module Aws::ChimeSDKIdentity
     #   @return [Types::AppInstanceBot]
     class DescribeAppInstanceBotResponse < Struct.new(
       :app_instance_bot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -565,7 +597,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class DescribeAppInstanceRequest < Struct.new(
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +608,8 @@ module Aws::ChimeSDKIdentity
     #   @return [Types::AppInstance]
     class DescribeAppInstanceResponse < Struct.new(
       :app_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +622,8 @@ module Aws::ChimeSDKIdentity
     class DescribeAppInstanceUserEndpointRequest < Struct.new(
       :app_instance_user_arn,
       :endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +633,8 @@ module Aws::ChimeSDKIdentity
     #   @return [Types::AppInstanceUserEndpoint]
     class DescribeAppInstanceUserEndpointResponse < Struct.new(
       :app_instance_user_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +643,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class DescribeAppInstanceUserRequest < Struct.new(
       :app_instance_user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +653,8 @@ module Aws::ChimeSDKIdentity
     #   @return [Types::AppInstanceUser]
     class DescribeAppInstanceUserResponse < Struct.new(
       :app_instance_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -630,7 +668,8 @@ module Aws::ChimeSDKIdentity
     class EndpointAttributes < Struct.new(
       :device_token,
       :voip_device_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +703,8 @@ module Aws::ChimeSDKIdentity
     class EndpointState < Struct.new(
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +718,8 @@ module Aws::ChimeSDKIdentity
     class ExpirationSettings < Struct.new(
       :expiration_days,
       :expiration_criterion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +731,8 @@ module Aws::ChimeSDKIdentity
     class ForbiddenException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -699,7 +741,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class GetAppInstanceRetentionSettingsRequest < Struct.new(
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +756,8 @@ module Aws::ChimeSDKIdentity
     class GetAppInstanceRetentionSettingsResponse < Struct.new(
       :app_instance_retention_settings,
       :initiate_deletion_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +771,8 @@ module Aws::ChimeSDKIdentity
     class Identity < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +817,8 @@ module Aws::ChimeSDKIdentity
     class InvokedBy < Struct.new(
       :standard_messages,
       :targeted_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -806,7 +852,8 @@ module Aws::ChimeSDKIdentity
       :lex_bot_alias_arn,
       :locale_id,
       :welcome_intent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -824,7 +871,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +890,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_arn,
       :app_instance_admins,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +908,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -876,7 +926,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_arn,
       :app_instance_bots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +944,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_user_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +958,8 @@ module Aws::ChimeSDKIdentity
     class ListAppInstanceUserEndpointsResponse < Struct.new(
       :app_instance_user_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +976,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +994,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_arn,
       :app_instance_users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -954,7 +1009,8 @@ module Aws::ChimeSDKIdentity
     class ListAppInstancesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1024,8 @@ module Aws::ChimeSDKIdentity
     class ListAppInstancesResponse < Struct.new(
       :app_instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +1034,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1044,8 @@ module Aws::ChimeSDKIdentity
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,7 +1057,8 @@ module Aws::ChimeSDKIdentity
     class NotFoundException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1071,8 @@ module Aws::ChimeSDKIdentity
     class PutAppInstanceRetentionSettingsRequest < Struct.new(
       :app_instance_arn,
       :app_instance_retention_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1024,7 +1085,8 @@ module Aws::ChimeSDKIdentity
     class PutAppInstanceRetentionSettingsResponse < Struct.new(
       :app_instance_retention_settings,
       :initiate_deletion_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1099,8 @@ module Aws::ChimeSDKIdentity
     class PutAppInstanceUserExpirationSettingsRequest < Struct.new(
       :app_instance_user_arn,
       :expiration_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1113,8 @@ module Aws::ChimeSDKIdentity
     class PutAppInstanceUserExpirationSettingsResponse < Struct.new(
       :app_instance_user_arn,
       :expiration_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1099,7 +1163,8 @@ module Aws::ChimeSDKIdentity
       :endpoint_attributes,
       :client_request_token,
       :allow_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1177,8 @@ module Aws::ChimeSDKIdentity
     class RegisterAppInstanceUserEndpointResponse < Struct.new(
       :app_instance_user_arn,
       :endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1190,8 @@ module Aws::ChimeSDKIdentity
     class ResourceLimitExceededException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1203,8 @@ module Aws::ChimeSDKIdentity
     class ServiceFailureException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1148,7 +1216,8 @@ module Aws::ChimeSDKIdentity
     class ServiceUnavailableException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1231,8 @@ module Aws::ChimeSDKIdentity
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,7 +1245,8 @@ module Aws::ChimeSDKIdentity
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1258,8 @@ module Aws::ChimeSDKIdentity
     class ThrottledClientException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1271,8 @@ module Aws::ChimeSDKIdentity
     class UnauthorizedClientException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1285,8 @@ module Aws::ChimeSDKIdentity
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1233,7 +1307,8 @@ module Aws::ChimeSDKIdentity
       :name,
       :metadata,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1317,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class UpdateAppInstanceBotResponse < Struct.new(
       :app_instance_bot_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1259,7 +1335,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_arn,
       :name,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1268,7 +1345,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class UpdateAppInstanceResponse < Struct.new(
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1368,8 @@ module Aws::ChimeSDKIdentity
       :endpoint_id,
       :name,
       :allow_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1303,7 +1382,8 @@ module Aws::ChimeSDKIdentity
     class UpdateAppInstanceUserEndpointResponse < Struct.new(
       :app_instance_user_arn,
       :endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1400,8 @@ module Aws::ChimeSDKIdentity
       :app_instance_user_arn,
       :name,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1410,8 @@ module Aws::ChimeSDKIdentity
     #   @return [String]
     class UpdateAppInstanceUserResponse < Struct.new(
       :app_instance_user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

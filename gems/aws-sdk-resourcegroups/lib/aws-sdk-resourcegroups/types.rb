@@ -20,7 +20,8 @@ module Aws::ResourceGroups
       :group_lifecycle_events_desired_status,
       :group_lifecycle_events_status,
       :group_lifecycle_events_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class CancelTagSyncTaskInput < Struct.new(
       :task_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -96,7 +99,8 @@ module Aws::ResourceGroups
       :criticality,
       :owner,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +124,8 @@ module Aws::ResourceGroups
       :resource_query,
       :tags,
       :group_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +140,8 @@ module Aws::ResourceGroups
     class DeleteGroupInput < Struct.new(
       :group_name,
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +150,8 @@ module Aws::ResourceGroups
     #   @return [Types::Group]
     class DeleteGroupOutput < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +169,8 @@ module Aws::ResourceGroups
       :resource_arn,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -171,7 +179,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +189,8 @@ module Aws::ResourceGroups
     #   @return [Types::AccountSettings]
     class GetAccountSettingsOutput < Struct.new(
       :account_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,7 +200,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class GetGroupConfigurationInput < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +212,8 @@ module Aws::ResourceGroups
     #   @return [Types::GroupConfiguration]
     class GetGroupConfigurationOutput < Struct.new(
       :group_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +228,8 @@ module Aws::ResourceGroups
     class GetGroupInput < Struct.new(
       :group_name,
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +240,8 @@ module Aws::ResourceGroups
     #   @return [Types::Group]
     class GetGroupOutput < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,7 +256,8 @@ module Aws::ResourceGroups
     class GetGroupQueryInput < Struct.new(
       :group_name,
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +268,8 @@ module Aws::ResourceGroups
     #   @return [Types::GroupQuery]
     class GetGroupQueryOutput < Struct.new(
       :group_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +278,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class GetTagSyncTaskInput < Struct.new(
       :task_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +370,8 @@ module Aws::ResourceGroups
       :status,
       :error_message,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +380,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class GetTagsInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +394,8 @@ module Aws::ResourceGroups
     class GetTagsOutput < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -428,7 +448,8 @@ module Aws::ResourceGroups
       :owner,
       :display_name,
       :application_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +477,8 @@ module Aws::ResourceGroups
       :proposed_configuration,
       :status,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -477,7 +499,8 @@ module Aws::ResourceGroups
     class GroupConfigurationItem < Struct.new(
       :type,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +520,8 @@ module Aws::ResourceGroups
     class GroupConfigurationParameter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -513,7 +537,8 @@ module Aws::ResourceGroups
     class GroupFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +570,8 @@ module Aws::ResourceGroups
       :criticality,
       :owner,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,7 +588,8 @@ module Aws::ResourceGroups
     class GroupQuery < Struct.new(
       :group_name,
       :resource_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +602,8 @@ module Aws::ResourceGroups
     class GroupResourcesInput < Struct.new(
       :group,
       :resource_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +627,8 @@ module Aws::ResourceGroups
       :succeeded,
       :failed,
       :pending,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +661,8 @@ module Aws::ResourceGroups
       :error_message,
       :error_code,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +671,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class InternalServerErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +744,8 @@ module Aws::ResourceGroups
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -734,7 +766,8 @@ module Aws::ResourceGroups
     class ListGroupResourcesItem < Struct.new(
       :identifier,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +805,8 @@ module Aws::ResourceGroups
       :resource_identifiers,
       :next_token,
       :query_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +820,8 @@ module Aws::ResourceGroups
     class ListGroupingStatusesFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +848,8 @@ module Aws::ResourceGroups
       :max_results,
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -833,7 +869,8 @@ module Aws::ResourceGroups
       :group,
       :grouping_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -913,7 +950,8 @@ module Aws::ResourceGroups
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -944,7 +982,8 @@ module Aws::ResourceGroups
       :group_identifiers,
       :groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +998,8 @@ module Aws::ResourceGroups
     class ListTagSyncTasksFilter < Struct.new(
       :group_arn,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +1021,8 @@ module Aws::ResourceGroups
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -996,7 +1037,8 @@ module Aws::ResourceGroups
     class ListTagSyncTasksOutput < Struct.new(
       :tag_sync_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1047,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class MethodNotAllowedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1057,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1026,7 +1070,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class PendingResource < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,12 +1093,14 @@ module Aws::ResourceGroups
     class PutGroupConfigurationInput < Struct.new(
       :group,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutGroupConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1115,8 @@ module Aws::ResourceGroups
     class QueryError < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1132,8 @@ module Aws::ResourceGroups
     class ResourceFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1098,7 +1147,8 @@ module Aws::ResourceGroups
     class ResourceIdentifier < Struct.new(
       :resource_arn,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1250,7 +1300,8 @@ module Aws::ResourceGroups
     class ResourceQuery < Struct.new(
       :type,
       :query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1314,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class ResourceStatus < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1343,8 @@ module Aws::ResourceGroups
       :resource_query,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1384,8 @@ module Aws::ResourceGroups
       :resource_identifiers,
       :next_token,
       :query_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1444,8 @@ module Aws::ResourceGroups
       :tag_value,
       :resource_query,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1504,8 @@ module Aws::ResourceGroups
       :tag_value,
       :resource_query,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1463,7 +1519,8 @@ module Aws::ResourceGroups
     class TagInput < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1533,8 @@ module Aws::ResourceGroups
     class TagOutput < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1624,8 @@ module Aws::ResourceGroups
       :status,
       :error_message,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1635,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1646,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1660,8 @@ module Aws::ResourceGroups
     class UngroupResourcesInput < Struct.new(
       :group,
       :resource_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1623,7 +1685,8 @@ module Aws::ResourceGroups
       :succeeded,
       :failed,
       :pending,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1637,7 +1700,8 @@ module Aws::ResourceGroups
     class UntagInput < Struct.new(
       :arn,
       :keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1714,8 @@ module Aws::ResourceGroups
     class UntagOutput < Struct.new(
       :arn,
       :keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,7 +1725,8 @@ module Aws::ResourceGroups
     #   @return [String]
     class UpdateAccountSettingsInput < Struct.new(
       :group_lifecycle_events_desired_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1669,7 +1735,8 @@ module Aws::ResourceGroups
     #   @return [Types::AccountSettings]
     class UpdateAccountSettingsOutput < Struct.new(
       :account_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1703,7 +1770,8 @@ module Aws::ResourceGroups
       :criticality,
       :owner,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1712,7 +1780,8 @@ module Aws::ResourceGroups
     #   @return [Types::Group]
     class UpdateGroupOutput < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1736,7 +1805,8 @@ module Aws::ResourceGroups
       :group_name,
       :group,
       :resource_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1815,8 @@ module Aws::ResourceGroups
     #   @return [Types::GroupQuery]
     class UpdateGroupQueryOutput < Struct.new(
       :group_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

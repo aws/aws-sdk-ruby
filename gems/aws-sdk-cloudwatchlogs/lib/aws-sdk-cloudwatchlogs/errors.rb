@@ -53,7 +53,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::DataAlreadyAcceptedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def expected_sequence_token
@@ -102,7 +102,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::InternalStreamingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::InvalidOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::InvalidSequenceTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def expected_sequence_token
@@ -166,7 +166,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -182,7 +182,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::MalformedQueryException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def query_compile_error
@@ -199,7 +199,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::OperationAbortedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -212,7 +212,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -225,7 +225,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -238,7 +238,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -251,7 +251,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -264,7 +264,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::SessionStreamingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -278,7 +278,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::SessionTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -291,7 +291,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -304,7 +304,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -323,7 +323,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::UnrecognizedClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -336,7 +336,7 @@ module Aws::CloudWatchLogs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

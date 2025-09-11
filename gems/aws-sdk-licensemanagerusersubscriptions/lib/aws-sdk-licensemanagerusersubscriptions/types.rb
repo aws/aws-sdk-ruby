@@ -11,7 +11,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::LicenseManagerUserSubscriptions
       :directory_id,
       :active_directory_settings,
       :active_directory_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +59,8 @@ module Aws::LicenseManagerUserSubscriptions
       :domain_ipv4_list,
       :domain_credentials_provider,
       :domain_network_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +85,8 @@ module Aws::LicenseManagerUserSubscriptions
       :identity_provider,
       :domain,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -91,7 +95,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Types::InstanceUserSummary]
     class AssociateUserResponse < Struct.new(
       :instance_user_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,7 +106,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +129,8 @@ module Aws::LicenseManagerUserSubscriptions
       :identity_provider_arn,
       :license_server_settings,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +143,8 @@ module Aws::LicenseManagerUserSubscriptions
     class CreateLicenseServerEndpointResponse < Struct.new(
       :identity_provider_arn,
       :license_server_endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +157,8 @@ module Aws::LicenseManagerUserSubscriptions
     class CredentialsProvider < Struct.new(
       :secrets_manager_credentials_provider,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SecretsManagerCredentialsProvider < CredentialsProvider; end
@@ -166,7 +175,8 @@ module Aws::LicenseManagerUserSubscriptions
     class DeleteLicenseServerEndpointRequest < Struct.new(
       :license_server_endpoint_arn,
       :server_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +185,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Types::LicenseServerEndpoint]
     class DeleteLicenseServerEndpointResponse < Struct.new(
       :license_server_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -195,7 +206,8 @@ module Aws::LicenseManagerUserSubscriptions
       :identity_provider,
       :product,
       :identity_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -204,7 +216,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Types::IdentityProviderSummary]
     class DeregisterIdentityProviderResponse < Struct.new(
       :identity_provider_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -229,7 +242,8 @@ module Aws::LicenseManagerUserSubscriptions
       :identity_provider,
       :instance_user_arn,
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +252,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Types::InstanceUserSummary]
     class DisassociateUserResponse < Struct.new(
       :instance_user_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +263,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Array<String>]
     class DomainNetworkSettings < Struct.new(
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +284,8 @@ module Aws::LicenseManagerUserSubscriptions
       :attribute,
       :operation,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +297,8 @@ module Aws::LicenseManagerUserSubscriptions
     class IdentityProvider < Struct.new(
       :active_directory_identity_provider,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ActiveDirectoryIdentityProvider < IdentityProvider; end
@@ -316,7 +334,8 @@ module Aws::LicenseManagerUserSubscriptions
       :status,
       :identity_provider_arn,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +361,8 @@ module Aws::LicenseManagerUserSubscriptions
       :products,
       :last_status_check_date,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +405,8 @@ module Aws::LicenseManagerUserSubscriptions
       :domain,
       :association_date,
       :disassociation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +415,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +436,8 @@ module Aws::LicenseManagerUserSubscriptions
       :provisioning_status,
       :health_status,
       :ipv4_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +485,8 @@ module Aws::LicenseManagerUserSubscriptions
       :license_server_endpoint_provisioning_status,
       :license_servers,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -477,7 +501,8 @@ module Aws::LicenseManagerUserSubscriptions
     class LicenseServerSettings < Struct.new(
       :server_type,
       :server_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +528,8 @@ module Aws::LicenseManagerUserSubscriptions
       :max_results,
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +545,8 @@ module Aws::LicenseManagerUserSubscriptions
     class ListIdentityProvidersResponse < Struct.new(
       :identity_provider_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +572,8 @@ module Aws::LicenseManagerUserSubscriptions
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,7 +590,8 @@ module Aws::LicenseManagerUserSubscriptions
     class ListInstancesResponse < Struct.new(
       :instance_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +614,8 @@ module Aws::LicenseManagerUserSubscriptions
       :max_results,
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -602,7 +632,8 @@ module Aws::LicenseManagerUserSubscriptions
     class ListLicenseServerEndpointsResponse < Struct.new(
       :license_server_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +673,8 @@ module Aws::LicenseManagerUserSubscriptions
       :max_results,
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -657,7 +689,8 @@ module Aws::LicenseManagerUserSubscriptions
     class ListProductSubscriptionsResponse < Struct.new(
       :product_user_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +699,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -675,7 +709,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +747,8 @@ module Aws::LicenseManagerUserSubscriptions
       :max_results,
       :filters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +763,8 @@ module Aws::LicenseManagerUserSubscriptions
     class ListUserAssociationsResponse < Struct.new(
       :instance_user_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +806,8 @@ module Aws::LicenseManagerUserSubscriptions
       :domain,
       :subscription_start_date,
       :subscription_end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +818,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Types::CredentialsProvider]
     class RdsSalSettings < Struct.new(
       :rds_sal_credentials_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +844,8 @@ module Aws::LicenseManagerUserSubscriptions
       :product,
       :settings,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +854,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Types::IdentityProviderSummary]
     class RegisterIdentityProviderResponse < Struct.new(
       :identity_provider_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +864,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -833,7 +875,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [String]
     class SecretsManagerCredentialsProvider < Struct.new(
       :secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +886,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [String]
     class ServerEndpoint < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +899,8 @@ module Aws::LicenseManagerUserSubscriptions
     class ServerSettings < Struct.new(
       :rds_sal_settings,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RdsSalSettings < ServerSettings; end
@@ -867,7 +912,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -885,7 +931,8 @@ module Aws::LicenseManagerUserSubscriptions
     class Settings < Struct.new(
       :subnets,
       :security_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +961,8 @@ module Aws::LicenseManagerUserSubscriptions
       :product,
       :domain,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +971,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Types::ProductUserSummary]
     class StartProductSubscriptionResponse < Struct.new(
       :product_user_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +1001,8 @@ module Aws::LicenseManagerUserSubscriptions
       :product,
       :product_user_arn,
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -961,7 +1011,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Types::ProductUserSummary]
     class StopProductSubscriptionResponse < Struct.new(
       :product_user_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,12 +1025,14 @@ module Aws::LicenseManagerUserSubscriptions
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1041,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1001,12 +1055,14 @@ module Aws::LicenseManagerUserSubscriptions
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1098,8 @@ module Aws::LicenseManagerUserSubscriptions
       :product,
       :identity_provider_arn,
       :update_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1108,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [Types::IdentityProviderSummary]
     class UpdateIdentityProviderSettingsResponse < Struct.new(
       :identity_provider_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1130,8 @@ module Aws::LicenseManagerUserSubscriptions
       :add_subnets,
       :remove_subnets,
       :security_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1140,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

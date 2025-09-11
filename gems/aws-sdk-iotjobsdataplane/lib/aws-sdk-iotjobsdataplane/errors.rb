@@ -44,7 +44,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::CertificateValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Additional information about the exception.</p>
@@ -58,7 +58,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -89,7 +89,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -106,7 +106,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::InvalidStateTransitionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -133,7 +133,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -160,7 +160,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::TerminalStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -173,7 +173,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message associated with the exception.</p>
@@ -192,7 +192,7 @@ module Aws::IoTJobsDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTJobsDataPlane::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

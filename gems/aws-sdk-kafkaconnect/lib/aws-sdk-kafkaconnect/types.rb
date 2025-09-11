@@ -17,7 +17,8 @@ module Aws::KafkaConnect
     class ApacheKafkaCluster < Struct.new(
       :bootstrap_servers,
       :vpc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::KafkaConnect
     class ApacheKafkaClusterDescription < Struct.new(
       :bootstrap_servers,
       :vpc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +61,8 @@ module Aws::KafkaConnect
       :min_worker_count,
       :scale_in_policy,
       :scale_out_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -93,7 +96,8 @@ module Aws::KafkaConnect
       :min_worker_count,
       :scale_in_policy,
       :scale_out_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -127,7 +131,8 @@ module Aws::KafkaConnect
       :min_worker_count,
       :scale_in_policy,
       :scale_out_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -144,7 +149,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -159,7 +165,8 @@ module Aws::KafkaConnect
     class Capacity < Struct.new(
       :auto_scaling,
       :provisioned_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +180,8 @@ module Aws::KafkaConnect
     class CapacityDescription < Struct.new(
       :auto_scaling,
       :provisioned_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -188,7 +196,8 @@ module Aws::KafkaConnect
     class CapacityUpdate < Struct.new(
       :auto_scaling,
       :provisioned_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +211,8 @@ module Aws::KafkaConnect
     class CloudWatchLogsLogDelivery < Struct.new(
       :enabled,
       :log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -221,7 +231,8 @@ module Aws::KafkaConnect
     class CloudWatchLogsLogDeliveryDescription < Struct.new(
       :enabled,
       :log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -236,7 +247,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +262,8 @@ module Aws::KafkaConnect
     class ConnectorOperationStep < Struct.new(
       :step_type,
       :step_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +289,8 @@ module Aws::KafkaConnect
       :connector_operation_state,
       :creation_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +359,8 @@ module Aws::KafkaConnect
       :plugins,
       :service_execution_role_arn,
       :worker_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +377,8 @@ module Aws::KafkaConnect
       :connector_arn,
       :connector_name,
       :connector_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +443,8 @@ module Aws::KafkaConnect
       :service_execution_role_arn,
       :worker_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +465,8 @@ module Aws::KafkaConnect
       :custom_plugin_state,
       :name,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -478,7 +496,8 @@ module Aws::KafkaConnect
       :location,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +522,8 @@ module Aws::KafkaConnect
       :name,
       :worker_configuration_arn,
       :worker_configuration_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +544,8 @@ module Aws::KafkaConnect
       :name,
       :properties_file_content,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +559,8 @@ module Aws::KafkaConnect
     class CustomPlugin < Struct.new(
       :custom_plugin_arn,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -557,7 +579,8 @@ module Aws::KafkaConnect
     class CustomPluginDescription < Struct.new(
       :custom_plugin_arn,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -577,7 +600,8 @@ module Aws::KafkaConnect
     class CustomPluginFileDescription < Struct.new(
       :file_md5,
       :file_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -593,7 +617,8 @@ module Aws::KafkaConnect
     #   @return [Types::S3Location]
     class CustomPluginLocation < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +629,8 @@ module Aws::KafkaConnect
     #   @return [Types::S3LocationDescription]
     class CustomPluginLocationDescription < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +660,8 @@ module Aws::KafkaConnect
       :file_description,
       :location,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -669,7 +696,8 @@ module Aws::KafkaConnect
       :description,
       :latest_revision,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +710,8 @@ module Aws::KafkaConnect
     class DeleteConnectorOutput < Struct.new(
       :connector_arn,
       :connector_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +724,8 @@ module Aws::KafkaConnect
     class DeleteConnectorRequest < Struct.new(
       :connector_arn,
       :current_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +738,8 @@ module Aws::KafkaConnect
     class DeleteCustomPluginOutput < Struct.new(
       :custom_plugin_arn,
       :custom_plugin_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +748,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class DeleteCustomPluginRequest < Struct.new(
       :custom_plugin_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +762,8 @@ module Aws::KafkaConnect
     class DeleteWorkerConfigurationOutput < Struct.new(
       :worker_configuration_arn,
       :worker_configuration_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -739,7 +772,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class DeleteWorkerConfigurationRequest < Struct.new(
       :worker_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +782,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class DescribeConnectorOperationRequest < Struct.new(
       :connector_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +836,8 @@ module Aws::KafkaConnect
       :error_info,
       :creation_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -878,7 +914,8 @@ module Aws::KafkaConnect
       :service_execution_role_arn,
       :worker_configuration,
       :state_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +924,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class DescribeConnectorRequest < Struct.new(
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -921,7 +959,8 @@ module Aws::KafkaConnect
       :latest_revision,
       :name,
       :state_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +969,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class DescribeCustomPluginRequest < Struct.new(
       :custom_plugin_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +999,8 @@ module Aws::KafkaConnect
       :name,
       :worker_configuration_arn,
       :worker_configuration_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -969,7 +1010,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class DescribeWorkerConfigurationRequest < Struct.new(
       :worker_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1026,8 @@ module Aws::KafkaConnect
     class FirehoseLogDelivery < Struct.new(
       :delivery_stream,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1005,7 +1048,8 @@ module Aws::KafkaConnect
     class FirehoseLogDeliveryDescription < Struct.new(
       :delivery_stream,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1020,7 +1064,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1075,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class InternalServerErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1086,8 @@ module Aws::KafkaConnect
     #   @return [Types::ApacheKafkaCluster]
     class KafkaCluster < Struct.new(
       :apache_kafka_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1099,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class KafkaClusterClientAuthentication < Struct.new(
       :authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1112,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class KafkaClusterClientAuthenticationDescription < Struct.new(
       :authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1074,7 +1123,8 @@ module Aws::KafkaConnect
     #   @return [Types::ApacheKafkaClusterDescription]
     class KafkaClusterDescription < Struct.new(
       :apache_kafka_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1134,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class KafkaClusterEncryptionInTransit < Struct.new(
       :encryption_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1145,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class KafkaClusterEncryptionInTransitDescription < Struct.new(
       :encryption_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1111,7 +1163,8 @@ module Aws::KafkaConnect
       :connector_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1177,8 @@ module Aws::KafkaConnect
     class ListConnectorOperationsResponse < Struct.new(
       :connector_operations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1139,7 +1193,8 @@ module Aws::KafkaConnect
     class ListConnectorsOutput < Struct.new(
       :connectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,7 +1213,8 @@ module Aws::KafkaConnect
       :connector_name_prefix,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1229,8 @@ module Aws::KafkaConnect
     class ListCustomPluginsOutput < Struct.new(
       :custom_plugins,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1192,7 +1249,8 @@ module Aws::KafkaConnect
       :max_results,
       :next_token,
       :name_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1259,8 @@ module Aws::KafkaConnect
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,7 +1269,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1225,7 +1285,8 @@ module Aws::KafkaConnect
     class ListWorkerConfigurationsOutput < Struct.new(
       :next_token,
       :worker_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1244,7 +1305,8 @@ module Aws::KafkaConnect
       :max_results,
       :next_token,
       :name_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1317,8 @@ module Aws::KafkaConnect
     #   @return [Types::WorkerLogDelivery]
     class LogDelivery < Struct.new(
       :worker_log_delivery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1266,7 +1329,8 @@ module Aws::KafkaConnect
     #   @return [Types::WorkerLogDeliveryDescription]
     class LogDeliveryDescription < Struct.new(
       :worker_log_delivery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1276,7 +1340,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1286,7 +1351,8 @@ module Aws::KafkaConnect
     #   @return [Types::CustomPlugin]
     class Plugin < Struct.new(
       :custom_plugin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1296,7 +1362,8 @@ module Aws::KafkaConnect
     #   @return [Types::CustomPluginDescription]
     class PluginDescription < Struct.new(
       :custom_plugin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,7 +1378,8 @@ module Aws::KafkaConnect
     class ProvisionedCapacity < Struct.new(
       :mcu_count,
       :worker_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1332,7 +1400,8 @@ module Aws::KafkaConnect
     class ProvisionedCapacityDescription < Struct.new(
       :mcu_count,
       :worker_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1353,7 +1422,8 @@ module Aws::KafkaConnect
     class ProvisionedCapacityUpdate < Struct.new(
       :mcu_count,
       :worker_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1377,7 +1447,8 @@ module Aws::KafkaConnect
       :bucket_arn,
       :file_key,
       :object_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1395,7 +1466,8 @@ module Aws::KafkaConnect
       :bucket_arn,
       :file_key,
       :object_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,7 +1485,8 @@ module Aws::KafkaConnect
       :bucket,
       :enabled,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1436,7 +1509,8 @@ module Aws::KafkaConnect
       :bucket,
       :enabled,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1452,7 +1526,8 @@ module Aws::KafkaConnect
     #   @return [Integer]
     class ScaleInPolicy < Struct.new(
       :cpu_utilization_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1468,7 +1543,8 @@ module Aws::KafkaConnect
     #   @return [Integer]
     class ScaleInPolicyDescription < Struct.new(
       :cpu_utilization_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1484,7 +1560,8 @@ module Aws::KafkaConnect
     #   @return [Integer]
     class ScaleInPolicyUpdate < Struct.new(
       :cpu_utilization_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1500,7 +1577,8 @@ module Aws::KafkaConnect
     #   @return [Integer]
     class ScaleOutPolicy < Struct.new(
       :cpu_utilization_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1516,7 +1594,8 @@ module Aws::KafkaConnect
     #   @return [Integer]
     class ScaleOutPolicyDescription < Struct.new(
       :cpu_utilization_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1532,7 +1611,8 @@ module Aws::KafkaConnect
     #   @return [Integer]
     class ScaleOutPolicyUpdate < Struct.new(
       :cpu_utilization_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1547,7 +1627,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1561,12 +1642,14 @@ module Aws::KafkaConnect
     class StateDescription < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1579,7 +1662,8 @@ module Aws::KafkaConnect
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1588,7 +1672,8 @@ module Aws::KafkaConnect
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1598,12 +1683,14 @@ module Aws::KafkaConnect
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1703,8 @@ module Aws::KafkaConnect
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1633,7 +1721,8 @@ module Aws::KafkaConnect
       :connector_arn,
       :connector_state,
       :connector_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1654,7 +1743,8 @@ module Aws::KafkaConnect
       :connector_configuration,
       :connector_arn,
       :current_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1668,7 +1758,8 @@ module Aws::KafkaConnect
     class Vpc < Struct.new(
       :security_groups,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1682,7 +1773,8 @@ module Aws::KafkaConnect
     class VpcDescription < Struct.new(
       :security_groups,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1697,7 +1789,8 @@ module Aws::KafkaConnect
     class WorkerConfiguration < Struct.new(
       :revision,
       :worker_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1716,7 +1809,8 @@ module Aws::KafkaConnect
     class WorkerConfigurationDescription < Struct.new(
       :revision,
       :worker_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1743,7 +1837,8 @@ module Aws::KafkaConnect
       :description,
       :properties_file_content,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1766,7 +1861,8 @@ module Aws::KafkaConnect
       :creation_time,
       :description,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1801,7 +1897,8 @@ module Aws::KafkaConnect
       :name,
       :worker_configuration_arn,
       :worker_configuration_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1820,7 +1917,8 @@ module Aws::KafkaConnect
       :cloud_watch_logs,
       :firehose,
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,7 +1937,8 @@ module Aws::KafkaConnect
       :cloud_watch_logs,
       :firehose,
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1948,8 @@ module Aws::KafkaConnect
     #   @return [Types::CapacityDescription]
     class WorkerSetting < Struct.new(
       :capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

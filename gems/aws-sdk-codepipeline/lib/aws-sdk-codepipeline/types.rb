@@ -24,7 +24,8 @@ module Aws::CodePipeline
       :access_key_id,
       :secret_access_key,
       :session_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +42,8 @@ module Aws::CodePipeline
     class AcknowledgeJobInput < Struct.new(
       :job_id,
       :nonce,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51,7 +53,8 @@ module Aws::CodePipeline
     #   @return [String]
     class AcknowledgeJobOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +75,8 @@ module Aws::CodePipeline
       :job_id,
       :nonce,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +86,8 @@ module Aws::CodePipeline
     #   @return [String]
     class AcknowledgeThirdPartyJobOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,7 +97,8 @@ module Aws::CodePipeline
     #   @return [Hash<String, String>]
     class ActionConfiguration < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,7 +143,8 @@ module Aws::CodePipeline
       :queryable,
       :description,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -160,7 +167,8 @@ module Aws::CodePipeline
     class ActionContext < Struct.new(
       :name,
       :action_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,7 +250,8 @@ module Aws::CodePipeline
       :namespace,
       :timeout_in_minutes,
       :environment_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +311,8 @@ module Aws::CodePipeline
       :percent_complete,
       :error_details,
       :log_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +365,8 @@ module Aws::CodePipeline
       :status,
       :input,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -373,7 +384,8 @@ module Aws::CodePipeline
     class ActionExecutionFilter < Struct.new(
       :pipeline_execution_id,
       :latest_in_pipeline_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +423,8 @@ module Aws::CodePipeline
       :region,
       :input_artifacts,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +433,8 @@ module Aws::CodePipeline
     #   @return [String]
     class ActionExecutionNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +456,8 @@ module Aws::CodePipeline
       :output_artifacts,
       :execution_result,
       :output_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +484,8 @@ module Aws::CodePipeline
       :external_execution_url,
       :error_details,
       :log_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +495,8 @@ module Aws::CodePipeline
     #   @return [String]
     class ActionNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +517,8 @@ module Aws::CodePipeline
       :revision_id,
       :revision_change_id,
       :created,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +546,8 @@ module Aws::CodePipeline
       :latest_execution,
       :entity_url,
       :revision_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +573,8 @@ module Aws::CodePipeline
       :action_configuration_properties,
       :input_artifact_details,
       :output_artifact_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +593,8 @@ module Aws::CodePipeline
     class ActionTypeArtifactDetails < Struct.new(
       :minimum_count,
       :maximum_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -623,7 +644,8 @@ module Aws::CodePipeline
       :permissions,
       :properties,
       :urls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -658,7 +680,8 @@ module Aws::CodePipeline
       :type,
       :policy_statements_template,
       :job_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -711,7 +734,8 @@ module Aws::CodePipeline
       :owner,
       :provider,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +791,8 @@ module Aws::CodePipeline
       :owner,
       :provider,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +802,8 @@ module Aws::CodePipeline
     #   @return [String]
     class ActionTypeNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,7 +814,8 @@ module Aws::CodePipeline
     #   @return [Array<String>]
     class ActionTypePermissions < Struct.new(
       :allowed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -824,7 +851,8 @@ module Aws::CodePipeline
       :no_echo,
       :queryable,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -862,7 +890,8 @@ module Aws::CodePipeline
       :entity_url_template,
       :execution_url_template,
       :revision_url_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +919,8 @@ module Aws::CodePipeline
       :entity_url_template,
       :execution_url_template,
       :revision_url_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +930,8 @@ module Aws::CodePipeline
     #   @return [String]
     class ApprovalAlreadyCompletedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,7 +946,8 @@ module Aws::CodePipeline
     class ApprovalResult < Struct.new(
       :summary,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +969,8 @@ module Aws::CodePipeline
       :name,
       :revision,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +984,8 @@ module Aws::CodePipeline
     class ArtifactDetail < Struct.new(
       :name,
       :s3location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -965,7 +999,8 @@ module Aws::CodePipeline
     class ArtifactDetails < Struct.new(
       :minimum_count,
       :maximum_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -985,7 +1020,8 @@ module Aws::CodePipeline
     class ArtifactLocation < Struct.new(
       :type,
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1022,7 +1058,8 @@ module Aws::CodePipeline
       :revision_summary,
       :created,
       :revision_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1089,8 @@ module Aws::CodePipeline
       :type,
       :location,
       :encryption_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1103,8 @@ module Aws::CodePipeline
     #   @return [Array<Types::Condition>]
     class BeforeEntryConditions < Struct.new(
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,7 +1118,8 @@ module Aws::CodePipeline
     class BlockerDeclaration < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1088,7 +1128,8 @@ module Aws::CodePipeline
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1097,7 +1138,8 @@ module Aws::CodePipeline
     #   @return [String]
     class ConcurrentPipelineExecutionsLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1157,8 @@ module Aws::CodePipeline
     class Condition < Struct.new(
       :result,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1176,8 @@ module Aws::CodePipeline
       :status,
       :summary,
       :last_status_change,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1142,7 +1186,8 @@ module Aws::CodePipeline
     #   @return [String]
     class ConditionNotOverridableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1156,7 +1201,8 @@ module Aws::CodePipeline
     class ConditionState < Struct.new(
       :latest_execution,
       :rule_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1166,7 +1212,8 @@ module Aws::CodePipeline
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1213,7 +1260,8 @@ module Aws::CodePipeline
       :input_artifact_details,
       :output_artifact_details,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1227,7 +1275,8 @@ module Aws::CodePipeline
     class CreateCustomActionTypeOutput < Struct.new(
       :action_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1291,8 @@ module Aws::CodePipeline
     class CreatePipelineInput < Struct.new(
       :pipeline,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1257,7 +1307,8 @@ module Aws::CodePipeline
     class CreatePipelineOutput < Struct.new(
       :pipeline,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1331,8 @@ module Aws::CodePipeline
       :change_identifier,
       :created,
       :revision_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1353,8 @@ module Aws::CodePipeline
       :category,
       :provider,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,7 +1364,8 @@ module Aws::CodePipeline
     #   @return [String]
     class DeletePipelineInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,12 +1374,14 @@ module Aws::CodePipeline
     #   @return [String]
     class DeleteWebhookInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWebhookOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1355,7 +1411,8 @@ module Aws::CodePipeline
       :start_time,
       :end_time,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1381,7 +1438,8 @@ module Aws::CodePipeline
       :start_time,
       :end_time,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1395,7 +1453,8 @@ module Aws::CodePipeline
     class DeployTargetEventContext < Struct.new(
       :ssm_command_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1404,12 +1463,14 @@ module Aws::CodePipeline
     #   @return [String]
     class DeregisterWebhookWithThirdPartyInput < Struct.new(
       :webhook_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterWebhookWithThirdPartyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1438,7 +1499,8 @@ module Aws::CodePipeline
       :stage_name,
       :transition_type,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1451,7 +1513,8 @@ module Aws::CodePipeline
     #   @return [String]
     class DuplicatedStopRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1473,7 +1536,8 @@ module Aws::CodePipeline
       :pipeline_name,
       :stage_name,
       :transition_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1498,7 +1562,8 @@ module Aws::CodePipeline
     class EncryptionKey < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1518,7 +1583,8 @@ module Aws::CodePipeline
       :name,
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1532,7 +1598,8 @@ module Aws::CodePipeline
     class ErrorDetails < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1620,8 @@ module Aws::CodePipeline
       :summary,
       :external_execution_id,
       :percent_complete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1570,7 +1638,8 @@ module Aws::CodePipeline
     class ExecutionTrigger < Struct.new(
       :trigger_type,
       :trigger_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1655,8 @@ module Aws::CodePipeline
     class ExecutorConfiguration < Struct.new(
       :lambda_executor_configuration,
       :job_worker_executor_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1612,7 +1682,8 @@ module Aws::CodePipeline
       :result,
       :retry_configuration,
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1630,7 +1701,8 @@ module Aws::CodePipeline
       :type,
       :message,
       :external_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1691,7 +1763,8 @@ module Aws::CodePipeline
       :owner,
       :provider,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1701,7 +1774,8 @@ module Aws::CodePipeline
     #   @return [Types::ActionTypeDeclaration]
     class GetActionTypeOutput < Struct.new(
       :action_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1711,7 +1785,8 @@ module Aws::CodePipeline
     #   @return [String]
     class GetJobDetailsInput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1800,8 @@ module Aws::CodePipeline
     #   @return [Types::JobDetails]
     class GetJobDetailsOutput < Struct.new(
       :job_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1740,7 +1816,8 @@ module Aws::CodePipeline
     class GetPipelineExecutionInput < Struct.new(
       :pipeline_name,
       :pipeline_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1750,7 +1827,8 @@ module Aws::CodePipeline
     #   @return [Types::PipelineExecution]
     class GetPipelineExecutionOutput < Struct.new(
       :pipeline_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1766,7 +1844,8 @@ module Aws::CodePipeline
     class GetPipelineInput < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1782,7 +1861,8 @@ module Aws::CodePipeline
     class GetPipelineOutput < Struct.new(
       :pipeline,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1872,8 @@ module Aws::CodePipeline
     #   @return [String]
     class GetPipelineStateInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1823,7 +1904,8 @@ module Aws::CodePipeline
       :stage_states,
       :created,
       :updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1838,7 +1920,8 @@ module Aws::CodePipeline
     class GetThirdPartyJobDetailsInput < Struct.new(
       :job_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1932,8 @@ module Aws::CodePipeline
     #   @return [Types::ThirdPartyJobDetails]
     class GetThirdPartyJobDetailsOutput < Struct.new(
       :job_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1866,7 +1950,8 @@ module Aws::CodePipeline
     class GitBranchFilterCriteria < Struct.new(
       :includes,
       :excludes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1896,7 +1981,8 @@ module Aws::CodePipeline
       :source_action_name,
       :push,
       :pull_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1913,7 +1999,8 @@ module Aws::CodePipeline
     class GitFilePathFilterCriteria < Struct.new(
       :includes,
       :excludes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2034,8 @@ module Aws::CodePipeline
       :events,
       :branches,
       :file_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1970,7 +2058,8 @@ module Aws::CodePipeline
       :tags,
       :branches,
       :file_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2076,8 @@ module Aws::CodePipeline
     class GitTagFilterCriteria < Struct.new(
       :includes,
       :excludes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2007,7 +2097,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InputArtifact < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2017,7 +2108,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidActionDeclarationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2027,7 +2119,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidApprovalTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2036,7 +2129,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2046,7 +2140,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidBlockerDeclarationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2056,7 +2151,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidClientTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2066,7 +2162,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidJobException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2076,7 +2173,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidJobStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2087,7 +2185,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2097,7 +2196,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidNonceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2107,7 +2207,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidStageDeclarationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2117,7 +2218,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidStructureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2126,7 +2228,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2136,7 +2239,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidWebhookAuthenticationParametersException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2146,7 +2250,8 @@ module Aws::CodePipeline
     #   @return [String]
     class InvalidWebhookFilterPatternException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2169,7 +2274,8 @@ module Aws::CodePipeline
       :data,
       :nonce,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2217,7 +2323,8 @@ module Aws::CodePipeline
       :artifact_credentials,
       :continuation_token,
       :encryption_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2236,7 +2343,8 @@ module Aws::CodePipeline
       :id,
       :data,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2354,8 @@ module Aws::CodePipeline
     #   @return [String]
     class JobNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2372,8 @@ module Aws::CodePipeline
     class JobWorkerExecutorConfiguration < Struct.new(
       :polling_accounts,
       :polling_service_principals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2274,7 +2384,8 @@ module Aws::CodePipeline
     #   @return [String]
     class LambdaExecutorConfiguration < Struct.new(
       :lambda_function_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,7 +2413,8 @@ module Aws::CodePipeline
     class LatestInPipelineExecutionFilter < Struct.new(
       :pipeline_execution_id,
       :start_time_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2313,7 +2425,8 @@ module Aws::CodePipeline
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2338,7 +2451,8 @@ module Aws::CodePipeline
       :filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2353,7 +2467,8 @@ module Aws::CodePipeline
     class ListActionExecutionsOutput < Struct.new(
       :action_execution_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2372,7 +2487,8 @@ module Aws::CodePipeline
       :action_owner_filter,
       :next_token,
       :region_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2388,7 +2504,8 @@ module Aws::CodePipeline
     class ListActionTypesOutput < Struct.new(
       :action_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2532,8 @@ module Aws::CodePipeline
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2429,7 +2547,8 @@ module Aws::CodePipeline
     class ListDeployActionExecutionTargetsOutput < Struct.new(
       :targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2457,7 +2576,8 @@ module Aws::CodePipeline
       :max_results,
       :filter,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2473,7 +2593,8 @@ module Aws::CodePipeline
     class ListPipelineExecutionsOutput < Struct.new(
       :pipeline_execution_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2490,7 +2611,8 @@ module Aws::CodePipeline
     class ListPipelinesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2506,7 +2628,8 @@ module Aws::CodePipeline
     class ListPipelinesOutput < Struct.new(
       :pipelines,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2532,7 +2655,8 @@ module Aws::CodePipeline
       :filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2547,7 +2671,8 @@ module Aws::CodePipeline
     class ListRuleExecutionsOutput < Struct.new(
       :rule_execution_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2560,7 +2685,8 @@ module Aws::CodePipeline
     class ListRuleTypesInput < Struct.new(
       :rule_owner_filter,
       :region_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2569,7 +2695,8 @@ module Aws::CodePipeline
     #   @return [Array<Types::RuleType>]
     class ListRuleTypesOutput < Struct.new(
       :rule_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2588,7 +2715,8 @@ module Aws::CodePipeline
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2604,7 +2732,8 @@ module Aws::CodePipeline
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2644,7 +2773,8 @@ module Aws::CodePipeline
       :last_triggered,
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2659,7 +2789,8 @@ module Aws::CodePipeline
     class ListWebhooksInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2675,7 +2806,8 @@ module Aws::CodePipeline
     class ListWebhooksOutput < Struct.new(
       :webhooks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2687,7 +2819,8 @@ module Aws::CodePipeline
     #   @return [String]
     class NotLatestPipelineExecutionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2708,7 +2841,8 @@ module Aws::CodePipeline
     class OutputArtifact < Struct.new(
       :name,
       :files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2717,7 +2851,8 @@ module Aws::CodePipeline
     #   @return [String]
     class OutputVariablesSizeExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2739,7 +2874,8 @@ module Aws::CodePipeline
       :stage_name,
       :pipeline_execution_id,
       :condition_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2772,7 +2908,8 @@ module Aws::CodePipeline
       :action,
       :pipeline_arn,
       :pipeline_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +3001,8 @@ module Aws::CodePipeline
       :pipeline_type,
       :variables,
       :triggers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2945,7 +3083,8 @@ module Aws::CodePipeline
       :execution_mode,
       :execution_type,
       :rollback_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2956,7 +3095,8 @@ module Aws::CodePipeline
     #   @return [Types::SucceededInStageFilter]
     class PipelineExecutionFilter < Struct.new(
       :succeeded_in_stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2967,7 +3107,8 @@ module Aws::CodePipeline
     #   @return [String]
     class PipelineExecutionNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2977,7 +3118,8 @@ module Aws::CodePipeline
     #   @return [String]
     class PipelineExecutionNotStoppableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2987,7 +3129,8 @@ module Aws::CodePipeline
     #   @return [String]
     class PipelineExecutionOutdatedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3066,7 +3209,8 @@ module Aws::CodePipeline
       :execution_mode,
       :execution_type,
       :rollback_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3099,7 +3243,8 @@ module Aws::CodePipeline
       :created,
       :updated,
       :polling_disabled_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3109,7 +3254,8 @@ module Aws::CodePipeline
     #   @return [String]
     class PipelineNameInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3119,7 +3265,8 @@ module Aws::CodePipeline
     #   @return [String]
     class PipelineNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3129,7 +3276,8 @@ module Aws::CodePipeline
     #   @return [String]
     class PipelineRollbackMetadata < Struct.new(
       :rollback_target_pipeline_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3181,7 +3329,8 @@ module Aws::CodePipeline
       :execution_mode,
       :created,
       :updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3206,7 +3355,8 @@ module Aws::CodePipeline
     class PipelineTriggerDeclaration < Struct.new(
       :provider_type,
       :git_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3220,7 +3370,8 @@ module Aws::CodePipeline
     class PipelineVariable < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3239,7 +3390,8 @@ module Aws::CodePipeline
       :name,
       :default_value,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3250,7 +3402,8 @@ module Aws::CodePipeline
     #   @return [String]
     class PipelineVersionNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3271,7 +3424,8 @@ module Aws::CodePipeline
       :action_type_id,
       :max_batch_size,
       :query_param,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3281,7 +3435,8 @@ module Aws::CodePipeline
     #   @return [Array<Types::Job>]
     class PollForJobsOutput < Struct.new(
       :jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3295,7 +3450,8 @@ module Aws::CodePipeline
     class PollForThirdPartyJobsInput < Struct.new(
       :action_type_id,
       :max_batch_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3305,7 +3461,8 @@ module Aws::CodePipeline
     #   @return [Array<Types::ThirdPartyJob>]
     class PollForThirdPartyJobsOutput < Struct.new(
       :jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3328,7 +3485,8 @@ module Aws::CodePipeline
       :stage_name,
       :action_name,
       :action_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3343,7 +3501,8 @@ module Aws::CodePipeline
     class PutActionRevisionOutput < Struct.new(
       :new_revision,
       :pipeline_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3382,7 +3541,8 @@ module Aws::CodePipeline
       :action_name,
       :result,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3392,7 +3552,8 @@ module Aws::CodePipeline
     #   @return [Time]
     class PutApprovalResultOutput < Struct.new(
       :approved_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3407,7 +3568,8 @@ module Aws::CodePipeline
     class PutJobFailureResultInput < Struct.new(
       :job_id,
       :failure_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3442,7 +3604,8 @@ module Aws::CodePipeline
       :continuation_token,
       :execution_details,
       :output_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3463,7 +3626,8 @@ module Aws::CodePipeline
       :job_id,
       :client_token,
       :failure_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3497,7 +3661,8 @@ module Aws::CodePipeline
       :current_revision,
       :continuation_token,
       :execution_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3513,7 +3678,8 @@ module Aws::CodePipeline
     class PutWebhookInput < Struct.new(
       :webhook,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3523,7 +3689,8 @@ module Aws::CodePipeline
     #   @return [Types::ListWebhookItem]
     class PutWebhookOutput < Struct.new(
       :webhook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3533,12 +3700,14 @@ module Aws::CodePipeline
     #   @return [String]
     class RegisterWebhookWithThirdPartyInput < Struct.new(
       :webhook_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RegisterWebhookWithThirdPartyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3547,7 +3716,8 @@ module Aws::CodePipeline
     #   @return [String]
     class RequestFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3561,7 +3731,8 @@ module Aws::CodePipeline
     class ResolvedPipelineVariable < Struct.new(
       :name,
       :resolved_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3571,7 +3742,8 @@ module Aws::CodePipeline
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3583,7 +3755,8 @@ module Aws::CodePipeline
     #   @return [String]
     class RetryConfiguration < Struct.new(
       :retry_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3606,7 +3779,8 @@ module Aws::CodePipeline
       :stage_name,
       :pipeline_execution_id,
       :retry_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3616,7 +3790,8 @@ module Aws::CodePipeline
     #   @return [String]
     class RetryStageExecutionOutput < Struct.new(
       :pipeline_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3638,7 +3813,8 @@ module Aws::CodePipeline
       :auto_stage_retry_attempt,
       :manual_stage_retry_attempt,
       :latest_retry_trigger,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3655,7 +3831,8 @@ module Aws::CodePipeline
       :pipeline_name,
       :stage_name,
       :target_pipeline_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3665,7 +3842,8 @@ module Aws::CodePipeline
     #   @return [String]
     class RollbackStageOutput < Struct.new(
       :pipeline_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3706,7 +3884,8 @@ module Aws::CodePipeline
       :queryable,
       :description,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3765,7 +3944,8 @@ module Aws::CodePipeline
       :role_arn,
       :region,
       :timeout_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3809,7 +3989,8 @@ module Aws::CodePipeline
       :external_execution_id,
       :external_execution_url,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3864,7 +4045,8 @@ module Aws::CodePipeline
       :status,
       :input,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3883,7 +4065,8 @@ module Aws::CodePipeline
     class RuleExecutionFilter < Struct.new(
       :pipeline_execution_id,
       :latest_in_pipeline_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3918,7 +4101,8 @@ module Aws::CodePipeline
       :role_arn,
       :region,
       :input_artifacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3928,7 +4112,8 @@ module Aws::CodePipeline
     #   @return [Types::RuleExecutionResult]
     class RuleExecutionOutput < Struct.new(
       :execution_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3951,7 +4136,8 @@ module Aws::CodePipeline
       :external_execution_summary,
       :external_execution_url,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3971,7 +4157,8 @@ module Aws::CodePipeline
       :revision_id,
       :revision_change_id,
       :created,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4004,7 +4191,8 @@ module Aws::CodePipeline
       :latest_execution,
       :entity_url,
       :revision_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4027,7 +4215,8 @@ module Aws::CodePipeline
       :settings,
       :rule_configuration_properties,
       :input_artifact_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4055,7 +4244,8 @@ module Aws::CodePipeline
       :owner,
       :provider,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4085,7 +4275,8 @@ module Aws::CodePipeline
       :entity_url_template,
       :execution_url_template,
       :revision_url_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4100,7 +4291,8 @@ module Aws::CodePipeline
     class S3ArtifactLocation < Struct.new(
       :bucket_name,
       :object_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4114,7 +4306,8 @@ module Aws::CodePipeline
     class S3Location < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4143,7 +4336,8 @@ module Aws::CodePipeline
       :revision_id,
       :revision_summary,
       :revision_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4170,7 +4364,8 @@ module Aws::CodePipeline
       :action_name,
       :revision_type,
       :revision_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4184,7 +4379,8 @@ module Aws::CodePipeline
     class StageConditionState < Struct.new(
       :latest_execution,
       :condition_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4198,7 +4394,8 @@ module Aws::CodePipeline
     class StageConditionsExecution < Struct.new(
       :status,
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4208,7 +4405,8 @@ module Aws::CodePipeline
     #   @return [String]
     class StageContext < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4242,7 +4440,8 @@ module Aws::CodePipeline
       :on_failure,
       :on_success,
       :before_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4266,7 +4465,8 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :status,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4276,7 +4476,8 @@ module Aws::CodePipeline
     #   @return [String]
     class StageNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4288,7 +4489,8 @@ module Aws::CodePipeline
     #   @return [String]
     class StageNotRetryableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4336,7 +4538,8 @@ module Aws::CodePipeline
       :on_success_condition_state,
       :on_failure_condition_state,
       :retry_stage_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4363,7 +4566,8 @@ module Aws::CodePipeline
       :variables,
       :client_request_token,
       :source_revisions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4374,7 +4578,8 @@ module Aws::CodePipeline
     #   @return [String]
     class StartPipelineExecutionOutput < Struct.new(
       :pipeline_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4384,7 +4589,8 @@ module Aws::CodePipeline
     #   @return [String]
     class StopExecutionTrigger < Struct.new(
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4411,7 +4617,8 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :abandon,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4420,7 +4627,8 @@ module Aws::CodePipeline
     #   @return [String]
     class StopPipelineExecutionOutput < Struct.new(
       :pipeline_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4432,7 +4640,8 @@ module Aws::CodePipeline
     #   @return [String]
     class SucceededInStageFilter < Struct.new(
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4445,7 +4654,8 @@ module Aws::CodePipeline
     #   @return [Array<Types::Condition>]
     class SuccessConditions < Struct.new(
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4459,7 +4669,8 @@ module Aws::CodePipeline
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4472,12 +4683,14 @@ module Aws::CodePipeline
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4491,7 +4704,8 @@ module Aws::CodePipeline
     class TargetFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4507,7 +4721,8 @@ module Aws::CodePipeline
     class ThirdPartyJob < Struct.new(
       :client_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4560,7 +4775,8 @@ module Aws::CodePipeline
       :artifact_credentials,
       :continuation_token,
       :encryption_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4580,7 +4796,8 @@ module Aws::CodePipeline
       :id,
       :data,
       :nonce,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4589,7 +4806,8 @@ module Aws::CodePipeline
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4614,7 +4832,8 @@ module Aws::CodePipeline
       :last_changed_by,
       :last_changed_at,
       :disabled_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4630,7 +4849,8 @@ module Aws::CodePipeline
     #   @return [String]
     class UnableToRollbackStageException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4643,12 +4863,14 @@ module Aws::CodePipeline
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4657,7 +4879,8 @@ module Aws::CodePipeline
     #   @return [Types::ActionTypeDeclaration]
     class UpdateActionTypeInput < Struct.new(
       :action_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4667,7 +4890,8 @@ module Aws::CodePipeline
     #   @return [Types::PipelineDeclaration]
     class UpdatePipelineInput < Struct.new(
       :pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4677,7 +4901,8 @@ module Aws::CodePipeline
     #   @return [Types::PipelineDeclaration]
     class UpdatePipelineOutput < Struct.new(
       :pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4687,7 +4912,8 @@ module Aws::CodePipeline
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4716,7 +4942,8 @@ module Aws::CodePipeline
     class WebhookAuthConfiguration < Struct.new(
       :allowed_ip_range,
       :secret_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4781,7 +5008,8 @@ module Aws::CodePipeline
       :filters,
       :authentication,
       :authentication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4807,14 +5035,16 @@ module Aws::CodePipeline
     class WebhookFilterRule < Struct.new(
       :json_path,
       :match_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The specified webhook was entered in an invalid format or cannot be
     #             found.</p>
     class WebhookNotFoundException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -46,7 +46,8 @@ module Aws::MediaLive
       :sample_rate,
       :spec,
       :vbr_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +85,8 @@ module Aws::MediaLive
       :lfe_filter,
       :metadata_control,
       :attenuation_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,13 +96,15 @@ module Aws::MediaLive
     #   @return [String]
     class AcceptInputDeviceTransferRequest < Struct.new(
       :input_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for AcceptInputDeviceTransferResponse
     class AcceptInputDeviceTransferResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +114,8 @@ module Aws::MediaLive
     #   @return [String]
     class AccountConfiguration < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +125,8 @@ module Aws::MediaLive
     #   @return [Types::OutputLocationRef]
     class AdditionalDestinations < Struct.new(
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +136,8 @@ module Aws::MediaLive
     #   @return [Integer]
     class AncillarySourceSettings < Struct.new(
       :source_ancillary_channel_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +151,8 @@ module Aws::MediaLive
     class AnywhereSettings < Struct.new(
       :channel_placement_group_id,
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +162,8 @@ module Aws::MediaLive
     #   @return [Types::ArchiveS3Settings]
     class ArchiveCdnSettings < Struct.new(
       :archive_s3_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +177,8 @@ module Aws::MediaLive
     class ArchiveContainerSettings < Struct.new(
       :m2ts_settings,
       :raw_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +196,8 @@ module Aws::MediaLive
       :archive_cdn_settings,
       :destination,
       :rollover_interval,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -204,7 +215,8 @@ module Aws::MediaLive
       :container_settings,
       :extension,
       :name_modifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,19 +226,22 @@ module Aws::MediaLive
     #   @return [String]
     class ArchiveS3Settings < Struct.new(
       :canned_acl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Arib Destination Settings
     class AribDestinationSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Arib Source Settings
     class AribSourceSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +255,8 @@ module Aws::MediaLive
     class AudioChannelMapping < Struct.new(
       :input_channel_levels,
       :output_channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +290,8 @@ module Aws::MediaLive
       :mp2_settings,
       :pass_through_settings,
       :wav_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +352,8 @@ module Aws::MediaLive
       :stream_name,
       :audio_dash_roles,
       :dvb_dash_accessibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +363,8 @@ module Aws::MediaLive
     #   @return [String]
     class AudioDolbyEDecode < Struct.new(
       :program_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +378,8 @@ module Aws::MediaLive
     class AudioHlsRenditionSelection < Struct.new(
       :group_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -373,7 +393,8 @@ module Aws::MediaLive
     class AudioLanguageSelection < Struct.new(
       :language_code,
       :language_selection_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -391,7 +412,8 @@ module Aws::MediaLive
       :algorithm,
       :algorithm_control,
       :target_lkfs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +449,8 @@ module Aws::MediaLive
       :audio_only_image,
       :audio_track_type,
       :segment_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +460,8 @@ module Aws::MediaLive
     #   @return [Integer]
     class AudioPidSelection < Struct.new(
       :pid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -451,7 +475,8 @@ module Aws::MediaLive
     class AudioSelector < Struct.new(
       :name,
       :selector_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +498,8 @@ module Aws::MediaLive
       :audio_language_selection,
       :audio_pid_selection,
       :audio_track_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +513,8 @@ module Aws::MediaLive
     class AudioSilenceFailoverSettings < Struct.new(
       :audio_selector_name,
       :audio_silence_threshold_msec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +524,8 @@ module Aws::MediaLive
     #   @return [Integer]
     class AudioTrack < Struct.new(
       :track,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -511,7 +539,8 @@ module Aws::MediaLive
     class AudioTrackSelection < Struct.new(
       :tracks,
       :dolby_e_decode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +550,8 @@ module Aws::MediaLive
     #   @return [Types::NielsenWatermarksSettings]
     class AudioWatermarkSettings < Struct.new(
       :nielsen_watermarks_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +573,8 @@ module Aws::MediaLive
       :failover_conditions,
       :input_preference,
       :secondary_input_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -565,7 +596,8 @@ module Aws::MediaLive
       :hdr10_settings,
       :rec601_settings,
       :rec709_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +701,8 @@ module Aws::MediaLive
       :timecode_burnin_settings,
       :bitrate,
       :rate_control_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +716,8 @@ module Aws::MediaLive
     class AvailBlanking < Struct.new(
       :avail_blanking_image,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +734,8 @@ module Aws::MediaLive
     class AvailConfiguration < Struct.new(
       :avail_settings,
       :scte35_segmentation_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +753,8 @@ module Aws::MediaLive
       :esam,
       :scte35_splice_insert,
       :scte35_time_signal_apos,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +764,8 @@ module Aws::MediaLive
     #   @return [String]
     class BadGatewayException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +775,8 @@ module Aws::MediaLive
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +795,8 @@ module Aws::MediaLive
     class BandwidthReductionFilterSettings < Struct.new(
       :post_filter_sharpening,
       :strength,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -779,7 +818,8 @@ module Aws::MediaLive
       :input_ids,
       :input_security_group_ids,
       :multiplex_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +833,8 @@ module Aws::MediaLive
     class BatchDeleteResponse < Struct.new(
       :failed,
       :successful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +856,8 @@ module Aws::MediaLive
       :code,
       :id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +867,8 @@ module Aws::MediaLive
     #   @return [Array<Types::ScheduleAction>]
     class BatchScheduleActionCreateRequest < Struct.new(
       :schedule_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +878,8 @@ module Aws::MediaLive
     #   @return [Array<Types::ScheduleAction>]
     class BatchScheduleActionCreateResult < Struct.new(
       :schedule_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +889,8 @@ module Aws::MediaLive
     #   @return [Array<String>]
     class BatchScheduleActionDeleteRequest < Struct.new(
       :action_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +900,8 @@ module Aws::MediaLive
     #   @return [Array<Types::ScheduleAction>]
     class BatchScheduleActionDeleteResult < Struct.new(
       :schedule_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +915,8 @@ module Aws::MediaLive
     class BatchStartRequest < Struct.new(
       :channel_ids,
       :multiplex_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +930,8 @@ module Aws::MediaLive
     class BatchStartResponse < Struct.new(
       :failed,
       :successful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -897,7 +945,8 @@ module Aws::MediaLive
     class BatchStopRequest < Struct.new(
       :channel_ids,
       :multiplex_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +960,8 @@ module Aws::MediaLive
     class BatchStopResponse < Struct.new(
       :failed,
       :successful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +979,8 @@ module Aws::MediaLive
       :arn,
       :id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +998,8 @@ module Aws::MediaLive
       :channel_id,
       :creates,
       :deletes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -961,7 +1013,8 @@ module Aws::MediaLive
     class BatchUpdateScheduleResponse < Struct.new(
       :creates,
       :deletes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -987,7 +1040,8 @@ module Aws::MediaLive
       :network_end_blackout_image,
       :network_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1119,8 @@ module Aws::MediaLive
       :x_position,
       :y_position,
       :subtitle_rows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,13 +1130,15 @@ module Aws::MediaLive
     #   @return [String]
     class CancelInputDeviceTransferRequest < Struct.new(
       :input_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CancelInputDeviceTransferResponse
     class CancelInputDeviceTransferResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1176,8 @@ module Aws::MediaLive
       :name,
       :caption_dash_roles,
       :dvb_dash_accessibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1177,7 +1235,8 @@ module Aws::MediaLive
       :teletext_destination_settings,
       :ttml_destination_settings,
       :webvtt_destination_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1195,7 +1254,8 @@ module Aws::MediaLive
       :caption_channel,
       :language_code,
       :language_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1286,8 @@ module Aws::MediaLive
       :left_offset,
       :top_offset,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1244,7 +1305,8 @@ module Aws::MediaLive
       :language_code,
       :name,
       :selector_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1278,7 +1340,8 @@ module Aws::MediaLive
       :scte20_source_settings,
       :scte27_source_settings,
       :teletext_source_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1288,7 +1351,8 @@ module Aws::MediaLive
     #   @return [String]
     class CdiInputSpecification < Struct.new(
       :resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1376,7 +1440,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1386,7 +1451,8 @@ module Aws::MediaLive
     #   @return [String]
     class ChannelEgressEndpoint < Struct.new(
       :source_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1396,7 +1462,8 @@ module Aws::MediaLive
     #   @return [String]
     class ChannelEngineVersionRequest < Struct.new(
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1410,7 +1477,8 @@ module Aws::MediaLive
     class ChannelEngineVersionResponse < Struct.new(
       :expiration_date,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1494,7 +1562,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :used_channel_engine_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,13 +1573,15 @@ module Aws::MediaLive
     #   @return [String]
     class ClaimDeviceRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ClaimDeviceResponse
     class ClaimDeviceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1548,7 +1619,8 @@ module Aws::MediaLive
       :name,
       :tags,
       :template_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1622,7 +1694,8 @@ module Aws::MediaLive
       :target_resource_type,
       :threshold,
       :treat_missing_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,7 +1709,8 @@ module Aws::MediaLive
     class ClusterNetworkSettings < Struct.new(
       :default_route,
       :interface_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1724,8 @@ module Aws::MediaLive
     class ClusterNetworkSettingsCreateRequest < Struct.new(
       :default_route,
       :interface_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1664,7 +1739,8 @@ module Aws::MediaLive
     class ClusterNetworkSettingsUpdateRequest < Struct.new(
       :default_route,
       :interface_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1754,8 @@ module Aws::MediaLive
     class CmafIngestCaptionLanguageMapping < Struct.new(
       :caption_channel,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1752,7 +1829,8 @@ module Aws::MediaLive
       :timed_metadata_id3_period,
       :timed_metadata_passthrough,
       :additional_destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1762,7 +1840,8 @@ module Aws::MediaLive
     #   @return [String]
     class CmafIngestOutputSettings < Struct.new(
       :name_modifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1780,7 +1859,8 @@ module Aws::MediaLive
       :input_color_space,
       :output_color_space,
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1790,13 +1870,15 @@ module Aws::MediaLive
     #   @return [Array<Types::ColorCorrection>]
     class ColorCorrectionSettings < Struct.new(
       :global_color_corrections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Passthrough applies no color space conversion to the output
     class ColorSpacePassthroughSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1806,7 +1888,8 @@ module Aws::MediaLive
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1832,7 +1915,8 @@ module Aws::MediaLive
       :nodes,
       :request_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1866,7 +1950,8 @@ module Aws::MediaLive
       :name,
       :nodes,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1942,7 +2027,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1952,7 +2038,8 @@ module Aws::MediaLive
     #   @return [Types::Channel]
     class CreateChannelResponse < Struct.new(
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1974,7 +2061,8 @@ module Aws::MediaLive
       :name,
       :tags,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2008,7 +2096,8 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2070,7 +2159,8 @@ module Aws::MediaLive
       :threshold,
       :treat_missing_data,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2144,7 +2234,8 @@ module Aws::MediaLive
       :target_resource_type,
       :threshold,
       :treat_missing_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2174,7 +2265,8 @@ module Aws::MediaLive
       :network_settings,
       :request_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2212,7 +2304,8 @@ module Aws::MediaLive
       :name,
       :network_settings,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2234,7 +2327,8 @@ module Aws::MediaLive
       :name,
       :tags,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2268,7 +2362,8 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,7 +2397,8 @@ module Aws::MediaLive
       :name,
       :tags,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2348,7 +2444,8 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2427,7 +2524,8 @@ module Aws::MediaLive
       :multicast_settings,
       :smpte2110_receiver_group_settings,
       :sdi_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2437,7 +2535,8 @@ module Aws::MediaLive
     #   @return [Types::Input]
     class CreateInputResponse < Struct.new(
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2451,7 +2550,8 @@ module Aws::MediaLive
     class CreateInputSecurityGroupRequest < Struct.new(
       :tags,
       :whitelist_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2461,7 +2561,8 @@ module Aws::MediaLive
     #   @return [Types::InputSecurityGroup]
     class CreateInputSecurityGroupResponse < Struct.new(
       :security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2484,7 +2585,8 @@ module Aws::MediaLive
       :multiplex_program_settings,
       :program_name,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2494,7 +2596,8 @@ module Aws::MediaLive
     #   @return [Types::MultiplexProgram]
     class CreateMultiplexProgramResponse < Struct.new(
       :multiplex_program,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2521,7 +2624,8 @@ module Aws::MediaLive
       :name,
       :request_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2531,7 +2635,8 @@ module Aws::MediaLive
     #   @return [Types::Multiplex]
     class CreateMultiplexResponse < Struct.new(
       :multiplex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2557,7 +2662,8 @@ module Aws::MediaLive
       :request_id,
       :routes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2591,7 +2697,8 @@ module Aws::MediaLive
       :name,
       :routes,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2621,7 +2728,8 @@ module Aws::MediaLive
       :node_interface_mappings,
       :request_id,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2631,7 +2739,8 @@ module Aws::MediaLive
     #   @return [String]
     class CreateNodeRegistrationScriptResponse < Struct.new(
       :node_registration_script,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2661,7 +2770,8 @@ module Aws::MediaLive
       :request_id,
       :role,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2711,7 +2821,8 @@ module Aws::MediaLive
       :role,
       :state,
       :sdi_source_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2730,7 +2841,8 @@ module Aws::MediaLive
       :input_id,
       :request_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2740,7 +2852,8 @@ module Aws::MediaLive
     #   @return [Types::Input]
     class CreatePartnerInputResponse < Struct.new(
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2766,7 +2879,8 @@ module Aws::MediaLive
       :request_id,
       :tags,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2776,7 +2890,8 @@ module Aws::MediaLive
     #   @return [Types::SdiSource]
     class CreateSdiSourceResponse < Struct.new(
       :sdi_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2810,7 +2925,8 @@ module Aws::MediaLive
       :name,
       :tags,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2888,7 +3004,8 @@ module Aws::MediaLive
       :name,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2902,7 +3019,8 @@ module Aws::MediaLive
     class CreateTagsRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2916,7 +3034,8 @@ module Aws::MediaLive
     class DeleteChannelPlacementGroupRequest < Struct.new(
       :channel_placement_group_id,
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2950,7 +3069,8 @@ module Aws::MediaLive
       :name,
       :nodes,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2960,7 +3080,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteChannelRequest < Struct.new(
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3048,7 +3169,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3058,7 +3180,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteCloudWatchAlarmTemplateGroupRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3068,7 +3191,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteCloudWatchAlarmTemplateRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3078,7 +3202,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3116,7 +3241,8 @@ module Aws::MediaLive
       :name,
       :network_settings,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3126,7 +3252,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteEventBridgeRuleTemplateGroupRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3136,7 +3263,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteEventBridgeRuleTemplateRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3146,13 +3274,15 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteInputRequest < Struct.new(
       :input_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteInputResponse
     class DeleteInputResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3162,13 +3292,15 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteInputSecurityGroupRequest < Struct.new(
       :input_security_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteInputSecurityGroupResponse
     class DeleteInputSecurityGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3182,7 +3314,8 @@ module Aws::MediaLive
     class DeleteMultiplexProgramRequest < Struct.new(
       :multiplex_id,
       :program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3208,7 +3341,8 @@ module Aws::MediaLive
       :packet_identifiers_map,
       :pipeline_details,
       :program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3218,7 +3352,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteMultiplexRequest < Struct.new(
       :multiplex_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3264,7 +3399,8 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3274,7 +3410,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteNetworkRequest < Struct.new(
       :network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3308,7 +3445,8 @@ module Aws::MediaLive
       :name,
       :routes,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3322,7 +3460,8 @@ module Aws::MediaLive
     class DeleteNodeRequest < Struct.new(
       :cluster_id,
       :node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3372,7 +3511,8 @@ module Aws::MediaLive
       :role,
       :state,
       :sdi_source_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3382,7 +3522,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteReservationRequest < Struct.new(
       :reservation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3464,7 +3605,8 @@ module Aws::MediaLive
       :state,
       :tags,
       :usage_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3474,13 +3616,15 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteScheduleRequest < Struct.new(
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteScheduleResponse
     class DeleteScheduleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3490,7 +3634,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteSdiSourceRequest < Struct.new(
       :sdi_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3500,7 +3645,8 @@ module Aws::MediaLive
     #   @return [Types::SdiSource]
     class DeleteSdiSourceResponse < Struct.new(
       :sdi_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3510,7 +3656,8 @@ module Aws::MediaLive
     #   @return [String]
     class DeleteSignalMapRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3524,13 +3671,15 @@ module Aws::MediaLive
     class DeleteTagsRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeAccountConfigurationRequest
     class DescribeAccountConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3540,7 +3689,8 @@ module Aws::MediaLive
     #   @return [Types::AccountConfiguration]
     class DescribeAccountConfigurationResponse < Struct.new(
       :account_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3554,7 +3704,8 @@ module Aws::MediaLive
     class DescribeAnywhereSettings < Struct.new(
       :channel_placement_group_id,
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3568,7 +3719,8 @@ module Aws::MediaLive
     class DescribeChannelPlacementGroupRequest < Struct.new(
       :channel_placement_group_id,
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3602,7 +3754,8 @@ module Aws::MediaLive
       :name,
       :nodes,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3636,7 +3789,8 @@ module Aws::MediaLive
       :name,
       :nodes,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3646,7 +3800,8 @@ module Aws::MediaLive
     #   @return [String]
     class DescribeChannelRequest < Struct.new(
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3734,7 +3889,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3744,7 +3900,8 @@ module Aws::MediaLive
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3782,7 +3939,8 @@ module Aws::MediaLive
       :name,
       :network_settings,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3820,7 +3978,8 @@ module Aws::MediaLive
       :name,
       :network_settings,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3830,7 +3989,8 @@ module Aws::MediaLive
     #   @return [String]
     class DescribeInputDeviceRequest < Struct.new(
       :input_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3900,7 +4060,8 @@ module Aws::MediaLive
       :availability_zone,
       :medialive_input_arns,
       :output_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3914,7 +4075,8 @@ module Aws::MediaLive
     class DescribeInputDeviceThumbnailRequest < Struct.new(
       :input_device_id,
       :accept,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3940,7 +4102,8 @@ module Aws::MediaLive
       :content_length,
       :e_tag,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3955,7 +4118,8 @@ module Aws::MediaLive
     #   @return [String]
     class DescribeInputRequest < Struct.new(
       :input_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4048,7 +4212,8 @@ module Aws::MediaLive
       :multicast_settings,
       :smpte2110_receiver_group_settings,
       :sdi_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4058,7 +4223,8 @@ module Aws::MediaLive
     #   @return [String]
     class DescribeInputSecurityGroupRequest < Struct.new(
       :input_security_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4088,7 +4254,8 @@ module Aws::MediaLive
       :state,
       :tags,
       :whitelist_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4102,7 +4269,8 @@ module Aws::MediaLive
     class DescribeMultiplexProgramRequest < Struct.new(
       :multiplex_id,
       :program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4128,7 +4296,8 @@ module Aws::MediaLive
       :packet_identifiers_map,
       :pipeline_details,
       :program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4138,7 +4307,8 @@ module Aws::MediaLive
     #   @return [String]
     class DescribeMultiplexRequest < Struct.new(
       :multiplex_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4184,7 +4354,8 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4194,7 +4365,8 @@ module Aws::MediaLive
     #   @return [String]
     class DescribeNetworkRequest < Struct.new(
       :network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4228,7 +4400,8 @@ module Aws::MediaLive
       :name,
       :routes,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4262,7 +4435,8 @@ module Aws::MediaLive
       :name,
       :routes,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4276,7 +4450,8 @@ module Aws::MediaLive
     class DescribeNodeRequest < Struct.new(
       :cluster_id,
       :node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4326,7 +4501,8 @@ module Aws::MediaLive
       :role,
       :state,
       :sdi_source_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4380,7 +4556,8 @@ module Aws::MediaLive
       :role,
       :state,
       :sdi_source_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4390,7 +4567,8 @@ module Aws::MediaLive
     #   @return [String]
     class DescribeOfferingRequest < Struct.new(
       :offering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4440,7 +4618,8 @@ module Aws::MediaLive
       :region,
       :resource_specification,
       :usage_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4450,7 +4629,8 @@ module Aws::MediaLive
     #   @return [String]
     class DescribeReservationRequest < Struct.new(
       :reservation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4532,7 +4712,8 @@ module Aws::MediaLive
       :state,
       :tags,
       :usage_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4550,7 +4731,8 @@ module Aws::MediaLive
       :channel_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4564,7 +4746,8 @@ module Aws::MediaLive
     class DescribeScheduleResponse < Struct.new(
       :next_token,
       :schedule_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4574,7 +4757,8 @@ module Aws::MediaLive
     #   @return [String]
     class DescribeSdiSourceRequest < Struct.new(
       :sdi_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4584,7 +4768,8 @@ module Aws::MediaLive
     #   @return [Types::SdiSource]
     class DescribeSdiSourceResponse < Struct.new(
       :sdi_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4602,7 +4787,8 @@ module Aws::MediaLive
       :channel_id,
       :pipeline_id,
       :thumbnail_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4612,13 +4798,15 @@ module Aws::MediaLive
     #   @return [Array<Types::ThumbnailDetail>]
     class DescribeThumbnailsResponse < Struct.new(
       :thumbnail_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Dolby Vision81 Settings
     class DolbyVision81Settings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4636,7 +4824,8 @@ module Aws::MediaLive
       :network_id,
       :network_name,
       :rep_interval,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4658,7 +4847,8 @@ module Aws::MediaLive
       :rep_interval,
       :service_name,
       :service_provider_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4736,7 +4926,8 @@ module Aws::MediaLive
       :x_position,
       :y_position,
       :subtitle_rows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4751,7 +4942,8 @@ module Aws::MediaLive
     class DvbSubSourceSettings < Struct.new(
       :ocr_language,
       :pid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4761,7 +4953,8 @@ module Aws::MediaLive
     #   @return [Integer]
     class DvbTdtSettings < Struct.new(
       :rep_interval,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4795,7 +4988,8 @@ module Aws::MediaLive
       :drc_rf,
       :height_trim,
       :surround_trim,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4881,7 +5075,8 @@ module Aws::MediaLive
       :stereo_downmix,
       :surround_ex_mode,
       :surround_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4911,19 +5106,22 @@ module Aws::MediaLive
       :style_control,
       :default_font_size,
       :default_line_height,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Embedded Destination Settings
     class EmbeddedDestinationSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Embedded Plus Scte20 Destination Settings
     class EmbeddedPlusScte20DestinationSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4945,7 +5143,8 @@ module Aws::MediaLive
       :scte20_detection,
       :source608_channel_number,
       :source608_track_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5007,7 +5206,8 @@ module Aws::MediaLive
       :video_descriptions,
       :thumbnail_configuration,
       :color_correction_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5021,7 +5221,8 @@ module Aws::MediaLive
     class EpochLockingSettings < Struct.new(
       :custom_epoch,
       :jam_sync_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5051,7 +5252,8 @@ module Aws::MediaLive
       :pois_endpoint,
       :username,
       :zone_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5089,7 +5291,8 @@ module Aws::MediaLive
       :name,
       :tags,
       :template_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5135,7 +5338,8 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5145,7 +5349,8 @@ module Aws::MediaLive
     #   @return [String]
     class EventBridgeRuleTemplateTarget < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5155,7 +5360,8 @@ module Aws::MediaLive
     #   @return [Types::FailoverConditionSettings]
     class FailoverCondition < Struct.new(
       :failover_condition_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5173,7 +5379,8 @@ module Aws::MediaLive
       :audio_silence_settings,
       :input_loss_settings,
       :video_black_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5189,7 +5396,8 @@ module Aws::MediaLive
     class FeatureActivations < Struct.new(
       :input_prepare_schedule_actions,
       :output_static_image_overlay_schedule_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5207,7 +5415,8 @@ module Aws::MediaLive
       :column_depth,
       :include_fec,
       :row_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5217,7 +5426,8 @@ module Aws::MediaLive
     #   @return [String]
     class FixedModeScheduleActionStartSettings < Struct.new(
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5235,7 +5445,8 @@ module Aws::MediaLive
       :audio_rendition_sets,
       :nielsen_id3_behavior,
       :timed_metadata_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5249,7 +5460,8 @@ module Aws::MediaLive
     class FollowModeScheduleActionStartSettings < Struct.new(
       :follow_point,
       :reference_action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5259,7 +5471,8 @@ module Aws::MediaLive
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5269,7 +5482,8 @@ module Aws::MediaLive
     #   @return [Types::FrameCaptureS3Settings]
     class FrameCaptureCdnSettings < Struct.new(
       :frame_capture_s3_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5283,13 +5497,15 @@ module Aws::MediaLive
     class FrameCaptureGroupSettings < Struct.new(
       :destination,
       :frame_capture_cdn_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Frame Capture Hls Settings
     class FrameCaptureHlsSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5299,7 +5515,8 @@ module Aws::MediaLive
     #   @return [String]
     class FrameCaptureOutputSettings < Struct.new(
       :name_modifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5309,7 +5526,8 @@ module Aws::MediaLive
     #   @return [String]
     class FrameCaptureS3Settings < Struct.new(
       :canned_acl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5327,7 +5545,8 @@ module Aws::MediaLive
       :capture_interval,
       :capture_interval_units,
       :timecode_burnin_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5337,7 +5556,8 @@ module Aws::MediaLive
     #   @return [String]
     class GatewayTimeoutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5347,7 +5567,8 @@ module Aws::MediaLive
     #   @return [String]
     class GetCloudWatchAlarmTemplateGroupRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5381,7 +5602,8 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5391,7 +5613,8 @@ module Aws::MediaLive
     #   @return [String]
     class GetCloudWatchAlarmTemplateRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5465,7 +5688,8 @@ module Aws::MediaLive
       :target_resource_type,
       :threshold,
       :treat_missing_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5475,7 +5699,8 @@ module Aws::MediaLive
     #   @return [String]
     class GetEventBridgeRuleTemplateGroupRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5509,7 +5734,8 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5519,7 +5745,8 @@ module Aws::MediaLive
     #   @return [String]
     class GetEventBridgeRuleTemplateRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5565,7 +5792,8 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5575,7 +5803,8 @@ module Aws::MediaLive
     #   @return [String]
     class GetSignalMapRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5653,7 +5882,8 @@ module Aws::MediaLive
       :name,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5691,7 +5921,8 @@ module Aws::MediaLive
       :output_timing_source,
       :support_low_framerate_inputs,
       :output_locking_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5709,7 +5940,8 @@ module Aws::MediaLive
       :color_space_passthrough_settings,
       :rec601_settings,
       :rec709_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5723,7 +5955,8 @@ module Aws::MediaLive
     class H264FilterSettings < Struct.new(
       :temporal_filter_settings,
       :bandwidth_reduction_filter_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5940,7 +6173,8 @@ module Aws::MediaLive
       :timecode_insertion,
       :timecode_burnin_settings,
       :min_qp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5966,7 +6200,8 @@ module Aws::MediaLive
       :hdr10_settings,
       :rec601_settings,
       :rec709_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5980,7 +6215,8 @@ module Aws::MediaLive
     class H265FilterSettings < Struct.new(
       :temporal_filter_settings,
       :bandwidth_reduction_filter_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6173,7 +6409,8 @@ module Aws::MediaLive
       :treeblock_size,
       :min_qp,
       :deblocking,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6191,7 +6428,8 @@ module Aws::MediaLive
     class Hdr10Settings < Struct.new(
       :max_cll,
       :max_fall,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6225,7 +6463,8 @@ module Aws::MediaLive
       :restart_delay,
       :salt,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6247,7 +6486,8 @@ module Aws::MediaLive
       :filecache_duration,
       :num_retries,
       :restart_delay,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6273,7 +6513,8 @@ module Aws::MediaLive
       :hls_media_store_settings,
       :hls_s3_settings,
       :hls_webdav_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6486,7 +6727,8 @@ module Aws::MediaLive
       :timed_metadata_id3_period,
       :timestamp_delta_milliseconds,
       :ts_file_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6500,7 +6742,8 @@ module Aws::MediaLive
     class HlsId3SegmentTaggingScheduleActionSettings < Struct.new(
       :tag,
       :id3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6526,7 +6769,8 @@ module Aws::MediaLive
       :retries,
       :retry_interval,
       :scte35_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6552,7 +6796,8 @@ module Aws::MediaLive
       :media_store_storage_class,
       :num_retries,
       :restart_delay,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6575,7 +6820,8 @@ module Aws::MediaLive
       :hls_settings,
       :name_modifier,
       :segment_modifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6585,7 +6831,8 @@ module Aws::MediaLive
     #   @return [String]
     class HlsS3Settings < Struct.new(
       :canned_acl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6607,7 +6854,8 @@ module Aws::MediaLive
       :fmp4_hls_settings,
       :frame_capture_hls_settings,
       :standard_hls_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6617,7 +6865,8 @@ module Aws::MediaLive
     #   @return [String]
     class HlsTimedMetadataScheduleActionSettings < Struct.new(
       :id3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6643,13 +6892,15 @@ module Aws::MediaLive
       :http_transfer_mode,
       :num_retries,
       :restart_delay,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Html Motion Graphics Settings
     class HtmlMotionGraphicsSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6663,13 +6914,15 @@ module Aws::MediaLive
     class Id3SegmentTaggingScheduleActionSettings < Struct.new(
       :id3,
       :tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Settings to configure an action so that it occurs as soon as possible.
     class ImmediateModeScheduleActionStartSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6762,7 +7015,8 @@ module Aws::MediaLive
       :multicast_settings,
       :smpte2110_receiver_group_settings,
       :sdi_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6788,7 +7042,8 @@ module Aws::MediaLive
       :input_id,
       :input_settings,
       :logical_interface_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6802,7 +7057,8 @@ module Aws::MediaLive
     class InputChannelLevel < Struct.new(
       :gain,
       :input_channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6820,7 +7076,8 @@ module Aws::MediaLive
       :input_timecode_source,
       :start_timecode,
       :stop_timecode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6853,7 +7110,8 @@ module Aws::MediaLive
       :vpc,
       :network,
       :network_routes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6878,7 +7136,8 @@ module Aws::MediaLive
       :network,
       :network_routes,
       :static_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6892,7 +7151,8 @@ module Aws::MediaLive
     class InputDestinationRoute < Struct.new(
       :cidr,
       :gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6906,7 +7166,8 @@ module Aws::MediaLive
     class InputDestinationVpc < Struct.new(
       :availability_zone,
       :network_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6920,7 +7181,8 @@ module Aws::MediaLive
     class InputDeviceConfigurableAudioChannelPairConfig < Struct.new(
       :id,
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6954,7 +7216,8 @@ module Aws::MediaLive
       :mediaconnect_settings,
       :audio_channel_pairs,
       :input_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6996,7 +7259,8 @@ module Aws::MediaLive
       :scan_type,
       :width,
       :latency_ms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7018,7 +7282,8 @@ module Aws::MediaLive
       :role_arn,
       :secret_arn,
       :source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7040,7 +7305,8 @@ module Aws::MediaLive
       :role_arn,
       :secret_arn,
       :source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7066,7 +7332,8 @@ module Aws::MediaLive
       :ip_address,
       :ip_scheme,
       :subnet_mask,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7076,7 +7343,8 @@ module Aws::MediaLive
     #   @return [String]
     class InputDeviceRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7086,7 +7354,8 @@ module Aws::MediaLive
     #   @return [String]
     class InputDeviceSettings < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7156,7 +7425,8 @@ module Aws::MediaLive
       :availability_zone,
       :medialive_input_arns,
       :output_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7170,7 +7440,8 @@ module Aws::MediaLive
     class InputDeviceUhdAudioChannelPairConfig < Struct.new(
       :id,
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7228,7 +7499,8 @@ module Aws::MediaLive
       :mediaconnect_settings,
       :audio_channel_pairs,
       :input_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7246,7 +7518,8 @@ module Aws::MediaLive
       :password_param,
       :uri,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7272,7 +7545,8 @@ module Aws::MediaLive
       :input_loss_image_slate,
       :input_loss_image_type,
       :repeat_frame_msec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7282,7 +7556,8 @@ module Aws::MediaLive
     #   @return [Integer]
     class InputLossFailoverSettings < Struct.new(
       :input_loss_threshold_msec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7300,7 +7575,8 @@ module Aws::MediaLive
       :input_attachment_name_reference,
       :input_clipping_settings,
       :url_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7314,7 +7590,8 @@ module Aws::MediaLive
     class InputRequestDestinationRoute < Struct.new(
       :cidr,
       :gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7328,7 +7605,8 @@ module Aws::MediaLive
     class InputSdpLocation < Struct.new(
       :media_index,
       :sdp_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7358,7 +7636,8 @@ module Aws::MediaLive
       :state,
       :tags,
       :whitelist_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7413,7 +7692,8 @@ module Aws::MediaLive
       :smpte2038_data_preference,
       :source_end_behavior,
       :video_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7432,7 +7712,8 @@ module Aws::MediaLive
       :password_param,
       :url,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7451,7 +7732,8 @@ module Aws::MediaLive
       :password_param,
       :url,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7469,7 +7751,8 @@ module Aws::MediaLive
       :codec,
       :maximum_bitrate,
       :resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7487,7 +7770,8 @@ module Aws::MediaLive
       :input_attachment_name_reference,
       :input_clipping_settings,
       :url_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7506,7 +7790,8 @@ module Aws::MediaLive
     class InputVpcRequest < Struct.new(
       :security_group_ids,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7516,7 +7801,8 @@ module Aws::MediaLive
     #   @return [String]
     class InputWhitelistRule < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7526,7 +7812,8 @@ module Aws::MediaLive
     #   @return [String]
     class InputWhitelistRuleCidr < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7540,7 +7827,8 @@ module Aws::MediaLive
     class InterfaceMapping < Struct.new(
       :logical_interface_name,
       :network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7554,7 +7842,8 @@ module Aws::MediaLive
     class InterfaceMappingCreateRequest < Struct.new(
       :logical_interface_name,
       :network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7568,7 +7857,8 @@ module Aws::MediaLive
     class InterfaceMappingUpdateRequest < Struct.new(
       :logical_interface_name,
       :network_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7578,7 +7868,8 @@ module Aws::MediaLive
     #   @return [String]
     class InternalServerErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7588,7 +7879,8 @@ module Aws::MediaLive
     #   @return [String]
     class IpPool < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7598,7 +7890,8 @@ module Aws::MediaLive
     #   @return [String]
     class IpPoolCreateRequest < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7608,7 +7901,8 @@ module Aws::MediaLive
     #   @return [String]
     class IpPoolUpdateRequest < Struct.new(
       :cidr,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7618,7 +7912,8 @@ module Aws::MediaLive
     #   @return [Types::StaticKeySettings]
     class KeyProviderSettings < Struct.new(
       :static_key_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7636,7 +7931,8 @@ module Aws::MediaLive
       :cluster_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7650,7 +7946,8 @@ module Aws::MediaLive
     class ListChannelPlacementGroupsResponse < Struct.new(
       :channel_placement_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7664,7 +7961,8 @@ module Aws::MediaLive
     class ListChannelsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7678,7 +7976,8 @@ module Aws::MediaLive
     class ListChannelsResponse < Struct.new(
       :channels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7700,7 +7999,8 @@ module Aws::MediaLive
       :next_token,
       :scope,
       :signal_map_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7714,7 +8014,8 @@ module Aws::MediaLive
     class ListCloudWatchAlarmTemplateGroupsResponse < Struct.new(
       :cloud_watch_alarm_template_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7740,7 +8041,8 @@ module Aws::MediaLive
       :next_token,
       :scope,
       :signal_map_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7754,7 +8056,8 @@ module Aws::MediaLive
     class ListCloudWatchAlarmTemplatesResponse < Struct.new(
       :cloud_watch_alarm_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7768,7 +8071,8 @@ module Aws::MediaLive
     class ListClustersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7782,7 +8086,8 @@ module Aws::MediaLive
     class ListClustersResponse < Struct.new(
       :clusters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7800,7 +8105,8 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       :signal_map_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7814,7 +8120,8 @@ module Aws::MediaLive
     class ListEventBridgeRuleTemplateGroupsResponse < Struct.new(
       :event_bridge_rule_template_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7836,7 +8143,8 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       :signal_map_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7850,7 +8158,8 @@ module Aws::MediaLive
     class ListEventBridgeRuleTemplatesResponse < Struct.new(
       :event_bridge_rule_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7868,7 +8177,8 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       :transfer_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7882,7 +8192,8 @@ module Aws::MediaLive
     class ListInputDeviceTransfersResponse < Struct.new(
       :input_device_transfers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7896,7 +8207,8 @@ module Aws::MediaLive
     class ListInputDevicesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7910,7 +8222,8 @@ module Aws::MediaLive
     class ListInputDevicesResponse < Struct.new(
       :input_devices,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7924,7 +8237,8 @@ module Aws::MediaLive
     class ListInputSecurityGroupsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7938,7 +8252,8 @@ module Aws::MediaLive
     class ListInputSecurityGroupsResponse < Struct.new(
       :input_security_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7952,7 +8267,8 @@ module Aws::MediaLive
     class ListInputsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7966,7 +8282,8 @@ module Aws::MediaLive
     class ListInputsResponse < Struct.new(
       :inputs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7984,7 +8301,8 @@ module Aws::MediaLive
       :max_results,
       :multiplex_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7998,7 +8316,8 @@ module Aws::MediaLive
     class ListMultiplexProgramsResponse < Struct.new(
       :multiplex_programs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8012,7 +8331,8 @@ module Aws::MediaLive
     class ListMultiplexesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8026,7 +8346,8 @@ module Aws::MediaLive
     class ListMultiplexesResponse < Struct.new(
       :multiplexes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8040,7 +8361,8 @@ module Aws::MediaLive
     class ListNetworksRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8054,7 +8376,8 @@ module Aws::MediaLive
     class ListNetworksResponse < Struct.new(
       :networks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8072,7 +8395,8 @@ module Aws::MediaLive
       :cluster_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8086,7 +8410,8 @@ module Aws::MediaLive
     class ListNodesResponse < Struct.new(
       :next_token,
       :nodes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8140,7 +8465,8 @@ module Aws::MediaLive
       :resource_type,
       :special_feature,
       :video_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8154,7 +8480,8 @@ module Aws::MediaLive
     class ListOfferingsResponse < Struct.new(
       :next_token,
       :offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8200,7 +8527,8 @@ module Aws::MediaLive
       :resource_type,
       :special_feature,
       :video_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8214,7 +8542,8 @@ module Aws::MediaLive
     class ListReservationsResponse < Struct.new(
       :next_token,
       :reservations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8228,7 +8557,8 @@ module Aws::MediaLive
     class ListSdiSourcesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8242,7 +8572,8 @@ module Aws::MediaLive
     class ListSdiSourcesResponse < Struct.new(
       :next_token,
       :sdi_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8264,7 +8595,8 @@ module Aws::MediaLive
       :event_bridge_rule_template_group_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8278,7 +8610,8 @@ module Aws::MediaLive
     class ListSignalMapsResponse < Struct.new(
       :next_token,
       :signal_maps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8288,7 +8621,8 @@ module Aws::MediaLive
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8298,13 +8632,15 @@ module Aws::MediaLive
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListVersionsRequest
     class ListVersionsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8314,7 +8650,8 @@ module Aws::MediaLive
     #   @return [Array<Types::ChannelEngineVersionResponse>]
     class ListVersionsResponse < Struct.new(
       :versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8516,7 +8853,8 @@ module Aws::MediaLive
       :transport_stream_id,
       :video_pid,
       :scte35_preroll_pullup_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8598,7 +8936,8 @@ module Aws::MediaLive
       :video_pid,
       :klv_behavior,
       :klv_data_pids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8612,7 +8951,8 @@ module Aws::MediaLive
     class MaintenanceCreateSettings < Struct.new(
       :maintenance_day,
       :maintenance_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8634,7 +8974,8 @@ module Aws::MediaLive
       :maintenance_deadline,
       :maintenance_scheduled_date,
       :maintenance_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8652,7 +8993,8 @@ module Aws::MediaLive
       :maintenance_day,
       :maintenance_scheduled_date,
       :maintenance_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8662,7 +9004,8 @@ module Aws::MediaLive
     #   @return [String]
     class MediaConnectFlow < Struct.new(
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8672,7 +9015,8 @@ module Aws::MediaLive
     #   @return [String]
     class MediaConnectFlowRequest < Struct.new(
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8682,7 +9026,8 @@ module Aws::MediaLive
     #   @return [Types::OutputLocationRef]
     class MediaPackageGroupSettings < Struct.new(
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8700,13 +9045,15 @@ module Aws::MediaLive
       :channel_id,
       :channel_group,
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Media Package Output Settings
     class MediaPackageOutputSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8724,7 +9071,8 @@ module Aws::MediaLive
       :destinations,
       :name,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8738,7 +9086,8 @@ module Aws::MediaLive
     class MediaResourceNeighbor < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8756,7 +9105,8 @@ module Aws::MediaLive
       :details_uri,
       :error_message,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8778,7 +9128,8 @@ module Aws::MediaLive
       :password_param,
       :url,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8792,13 +9143,15 @@ module Aws::MediaLive
     class MotionGraphicsConfiguration < Struct.new(
       :motion_graphics_insertion,
       :motion_graphics_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Settings to specify the ending of rendering motion graphics into the video stream.
     class MotionGraphicsDeactivateScheduleActionSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8808,7 +9161,8 @@ module Aws::MediaLive
     #   @return [Types::HtmlMotionGraphicsSettings]
     class MotionGraphicsSettings < Struct.new(
       :html_motion_graphics_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8826,7 +9180,8 @@ module Aws::MediaLive
       :bitrate,
       :coding_mode,
       :sample_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8836,7 +9191,8 @@ module Aws::MediaLive
     #   @return [Types::TemporalFilterSettings]
     class Mpeg2FilterSettings < Struct.new(
       :temporal_filter_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8923,7 +9279,8 @@ module Aws::MediaLive
       :subgop_length,
       :timecode_insertion,
       :timecode_burnin_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9017,7 +9374,8 @@ module Aws::MediaLive
       :stream_manifest_behavior,
       :timestamp_offset,
       :timestamp_offset_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9032,7 +9390,8 @@ module Aws::MediaLive
     class MsSmoothOutputSettings < Struct.new(
       :h265_packaging_type,
       :name_modifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9042,7 +9401,8 @@ module Aws::MediaLive
     #   @return [String]
     class MulticastInputSettings < Struct.new(
       :source_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9052,7 +9412,8 @@ module Aws::MediaLive
     #   @return [Array<Types::MulticastSource>]
     class MulticastSettings < Struct.new(
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9062,7 +9423,8 @@ module Aws::MediaLive
     #   @return [Array<Types::MulticastSourceCreateRequest>]
     class MulticastSettingsCreateRequest < Struct.new(
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9072,7 +9434,8 @@ module Aws::MediaLive
     #   @return [Array<Types::MulticastSourceUpdateRequest>]
     class MulticastSettingsUpdateRequest < Struct.new(
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9086,7 +9449,8 @@ module Aws::MediaLive
     class MulticastSource < Struct.new(
       :source_ip,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9100,7 +9464,8 @@ module Aws::MediaLive
     class MulticastSourceCreateRequest < Struct.new(
       :source_ip,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9114,7 +9479,8 @@ module Aws::MediaLive
     class MulticastSourceUpdateRequest < Struct.new(
       :source_ip,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9160,7 +9526,8 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9170,13 +9537,15 @@ module Aws::MediaLive
     #   @return [Types::MultiplexM2tsSettings]
     class MultiplexContainerSettings < Struct.new(
       :multiplex_m2ts_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Multiplex Group Settings
     class MultiplexGroupSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9238,7 +9607,8 @@ module Aws::MediaLive
       :pcr_period,
       :scte35_control,
       :scte35_preroll_pullup_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9248,7 +9618,8 @@ module Aws::MediaLive
     #   @return [String]
     class MultiplexMediaConnectOutputDestinationSettings < Struct.new(
       :entitlement_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9258,7 +9629,8 @@ module Aws::MediaLive
     #   @return [Types::MultiplexMediaConnectOutputDestinationSettings]
     class MultiplexOutputDestination < Struct.new(
       :media_connect_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9272,7 +9644,8 @@ module Aws::MediaLive
     class MultiplexOutputSettings < Struct.new(
       :destination,
       :container_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9298,7 +9671,8 @@ module Aws::MediaLive
       :packet_identifiers_map,
       :pipeline_details,
       :program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9313,7 +9687,8 @@ module Aws::MediaLive
     class MultiplexProgramChannelDestinationSettings < Struct.new(
       :multiplex_id,
       :program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9387,7 +9762,8 @@ module Aws::MediaLive
       :dvb_teletext_pids,
       :ecm_pid,
       :smpte2038_pid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9401,7 +9777,8 @@ module Aws::MediaLive
     class MultiplexProgramPipelineDetail < Struct.new(
       :active_channel_pipeline,
       :pipeline_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9415,7 +9792,8 @@ module Aws::MediaLive
     class MultiplexProgramServiceDescriptor < Struct.new(
       :provider_name,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9437,7 +9815,8 @@ module Aws::MediaLive
       :program_number,
       :service_descriptor,
       :video_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9451,7 +9830,8 @@ module Aws::MediaLive
     class MultiplexProgramSummary < Struct.new(
       :channel_id,
       :program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9473,7 +9853,8 @@ module Aws::MediaLive
       :transport_stream_bitrate,
       :transport_stream_id,
       :transport_stream_reserved_bitrate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9483,7 +9864,8 @@ module Aws::MediaLive
     #   @return [Integer]
     class MultiplexSettingsSummary < Struct.new(
       :transport_stream_bitrate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9501,7 +9883,8 @@ module Aws::MediaLive
       :maximum_bitrate,
       :minimum_bitrate,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9543,7 +9926,8 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9559,7 +9943,8 @@ module Aws::MediaLive
     class MultiplexVideoSettings < Struct.new(
       :constant_bitrate,
       :statmux_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9577,7 +9962,8 @@ module Aws::MediaLive
       :hls_input_settings,
       :server_validation,
       :multicast_input_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9595,7 +9981,8 @@ module Aws::MediaLive
       :cbet_check_digit_string,
       :cbet_stepaside,
       :csid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9609,7 +9996,8 @@ module Aws::MediaLive
     class NielsenConfiguration < Struct.new(
       :distributor_id,
       :nielsen_pcm_to_id3_tagging,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9628,7 +10016,8 @@ module Aws::MediaLive
       :check_digit_string,
       :sid,
       :timezone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9648,7 +10037,8 @@ module Aws::MediaLive
       :nielsen_cbet_settings,
       :nielsen_distribution_type,
       :nielsen_naes_ii_nw_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9666,7 +10056,8 @@ module Aws::MediaLive
       :logical_interface_name,
       :network_interface_mode,
       :physical_interface_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9684,7 +10075,8 @@ module Aws::MediaLive
       :logical_interface_name,
       :network_interface_mode,
       :physical_interface_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9694,7 +10086,8 @@ module Aws::MediaLive
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9744,7 +10137,8 @@ module Aws::MediaLive
       :region,
       :resource_specification,
       :usage_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9770,7 +10164,8 @@ module Aws::MediaLive
       :output_name,
       :output_settings,
       :video_description_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9800,7 +10195,8 @@ module Aws::MediaLive
       :settings,
       :srt_settings,
       :logical_interface_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9822,7 +10218,8 @@ module Aws::MediaLive
       :stream_name,
       :url,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9840,7 +10237,8 @@ module Aws::MediaLive
       :name,
       :output_group_settings,
       :outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9886,7 +10284,8 @@ module Aws::MediaLive
       :udp_group_settings,
       :cmaf_ingest_group_settings,
       :srt_group_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9896,7 +10295,8 @@ module Aws::MediaLive
     #   @return [String]
     class OutputLocationRef < Struct.new(
       :destination_ref_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9910,7 +10310,8 @@ module Aws::MediaLive
     class OutputLockingSettings < Struct.new(
       :epoch_locking_settings,
       :pipeline_locking_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9956,13 +10357,15 @@ module Aws::MediaLive
       :udp_output_settings,
       :cmaf_ingest_output_settings,
       :srt_output_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Pass Through Settings
     class PassThroughSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9972,7 +10375,8 @@ module Aws::MediaLive
     #   @return [Array<Types::PipelinePauseStateSettings>]
     class PauseStateScheduleActionSettings < Struct.new(
       :pipelines,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10002,13 +10406,15 @@ module Aws::MediaLive
       :active_motion_graphics_uri,
       :pipeline_id,
       :channel_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Pipeline Locking Settings
     class PipelineLockingSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10018,7 +10424,8 @@ module Aws::MediaLive
     #   @return [String]
     class PipelinePauseStateSettings < Struct.new(
       :pipeline_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10052,7 +10459,8 @@ module Aws::MediaLive
       :request_id,
       :start,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10062,13 +10470,15 @@ module Aws::MediaLive
     #   @return [Types::Reservation]
     class PurchaseOfferingResponse < Struct.new(
       :reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Raw Settings
     class RawSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10082,25 +10492,29 @@ module Aws::MediaLive
     class RebootInputDeviceRequest < Struct.new(
       :force,
       :input_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for RebootInputDeviceResponse
     class RebootInputDeviceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Rec601 Settings
     class Rec601Settings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Rec709 Settings
     class Rec709Settings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10110,13 +10524,15 @@ module Aws::MediaLive
     #   @return [String]
     class RejectInputDeviceTransferRequest < Struct.new(
       :input_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for RejectInputDeviceTransferResponse
     class RejectInputDeviceTransferResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10135,7 +10551,8 @@ module Aws::MediaLive
       :channel_mappings,
       :channels_in,
       :channels_out,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10149,7 +10566,8 @@ module Aws::MediaLive
     class RenewalSettings < Struct.new(
       :automatic_renewal,
       :renewal_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10231,7 +10649,8 @@ module Aws::MediaLive
       :state,
       :tags,
       :usage_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10269,7 +10688,8 @@ module Aws::MediaLive
       :resource_type,
       :special_feature,
       :video_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10283,7 +10703,8 @@ module Aws::MediaLive
     class RestartChannelPipelinesRequest < Struct.new(
       :channel_id,
       :pipeline_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10375,7 +10796,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10389,7 +10811,8 @@ module Aws::MediaLive
     class Route < Struct.new(
       :cidr,
       :gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10403,7 +10826,8 @@ module Aws::MediaLive
     class RouteCreateRequest < Struct.new(
       :cidr,
       :gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10417,13 +10841,15 @@ module Aws::MediaLive
     class RouteUpdateRequest < Struct.new(
       :cidr,
       :gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Rtmp Caption Info Destination Settings
     class RtmpCaptionInfoDestinationSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10464,7 +10890,8 @@ module Aws::MediaLive
       :input_loss_action,
       :restart_delay,
       :include_filler_nal_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10486,7 +10913,8 @@ module Aws::MediaLive
       :connection_retry_interval,
       :destination,
       :num_retries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10504,7 +10932,8 @@ module Aws::MediaLive
       :action_name,
       :schedule_action_settings,
       :schedule_action_start_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10578,7 +11007,8 @@ module Aws::MediaLive
       :static_image_output_deactivate_settings,
       :id3_segment_tagging_settings,
       :timed_metadata_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10596,13 +11026,15 @@ module Aws::MediaLive
       :fixed_mode_schedule_action_start_settings,
       :follow_mode_schedule_action_start_settings,
       :immediate_mode_schedule_action_start_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Scte20 Plus Embedded Destination Settings
     class Scte20PlusEmbeddedDestinationSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10616,13 +11048,15 @@ module Aws::MediaLive
     class Scte20SourceSettings < Struct.new(
       :convert608_to708,
       :source608_channel_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Scte27 Destination Settings
     class Scte27DestinationSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10641,7 +11075,8 @@ module Aws::MediaLive
     class Scte27SourceSettings < Struct.new(
       :ocr_language,
       :pid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10663,7 +11098,8 @@ module Aws::MediaLive
       :device_restrictions,
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10673,7 +11109,8 @@ module Aws::MediaLive
     #   @return [Types::Scte35DescriptorSettings]
     class Scte35Descriptor < Struct.new(
       :scte35_descriptor_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10683,7 +11120,8 @@ module Aws::MediaLive
     #   @return [Types::Scte35SegmentationDescriptor]
     class Scte35DescriptorSettings < Struct.new(
       :segmentation_descriptor_scte35_descriptor_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10697,7 +11135,8 @@ module Aws::MediaLive
     class Scte35InputScheduleActionSettings < Struct.new(
       :input_attachment_name_reference,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10707,7 +11146,8 @@ module Aws::MediaLive
     #   @return [Integer]
     class Scte35ReturnToNetworkScheduleActionSettings < Struct.new(
       :splice_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10757,7 +11197,8 @@ module Aws::MediaLive
       :segments_expected,
       :sub_segment_num,
       :sub_segments_expected,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10775,7 +11216,8 @@ module Aws::MediaLive
       :ad_avail_offset,
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10789,7 +11231,8 @@ module Aws::MediaLive
     class Scte35SpliceInsertScheduleActionSettings < Struct.new(
       :duration,
       :splice_event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10807,7 +11250,8 @@ module Aws::MediaLive
       :ad_avail_offset,
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10817,7 +11261,8 @@ module Aws::MediaLive
     #   @return [Array<Types::Scte35Descriptor>]
     class Scte35TimeSignalScheduleActionSettings < Struct.new(
       :scte35_descriptors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10851,7 +11296,8 @@ module Aws::MediaLive
       :name,
       :state,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10869,7 +11315,8 @@ module Aws::MediaLive
       :card_number,
       :channel_number,
       :sdi_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10887,7 +11334,8 @@ module Aws::MediaLive
       :card_number,
       :channel_number,
       :sdi_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10921,7 +11369,8 @@ module Aws::MediaLive
       :name,
       :state,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10963,7 +11412,8 @@ module Aws::MediaLive
       :name,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10973,7 +11423,8 @@ module Aws::MediaLive
     #   @return [Types::Smpte2110ReceiverGroupSdpSettings]
     class Smpte2110ReceiverGroup < Struct.new(
       :sdp_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10992,7 +11443,8 @@ module Aws::MediaLive
       :ancillary_sdps,
       :audio_sdps,
       :video_sdp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11002,13 +11454,15 @@ module Aws::MediaLive
     #   @return [Array<Types::Smpte2110ReceiverGroup>]
     class Smpte2110ReceiverGroupSettings < Struct.new(
       :smpte2110_receiver_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Smpte Tt Destination Settings
     class SmpteTtDestinationSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11022,7 +11476,8 @@ module Aws::MediaLive
     class SrtCallerDecryption < Struct.new(
       :algorithm,
       :passphrase_secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11036,7 +11491,8 @@ module Aws::MediaLive
     class SrtCallerDecryptionRequest < Struct.new(
       :algorithm,
       :passphrase_secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11062,7 +11518,8 @@ module Aws::MediaLive
       :srt_listener_address,
       :srt_listener_port,
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11088,7 +11545,8 @@ module Aws::MediaLive
       :srt_listener_address,
       :srt_listener_port,
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11098,7 +11556,8 @@ module Aws::MediaLive
     #   @return [String]
     class SrtGroupSettings < Struct.new(
       :input_loss_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11116,7 +11575,8 @@ module Aws::MediaLive
       :encryption_passphrase_secret_arn,
       :stream_id,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11142,7 +11602,8 @@ module Aws::MediaLive
       :destination,
       :encryption_type,
       :latency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11152,7 +11613,8 @@ module Aws::MediaLive
     #   @return [Array<Types::SrtCallerSource>]
     class SrtSettings < Struct.new(
       :srt_caller_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11162,7 +11624,8 @@ module Aws::MediaLive
     #   @return [Array<Types::SrtCallerSourceRequest>]
     class SrtSettingsRequest < Struct.new(
       :srt_caller_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11176,7 +11639,8 @@ module Aws::MediaLive
     class StandardHlsSettings < Struct.new(
       :audio_rendition_sets,
       :m3u8_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11186,7 +11650,8 @@ module Aws::MediaLive
     #   @return [String]
     class StartChannelRequest < Struct.new(
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11274,7 +11739,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11284,7 +11750,8 @@ module Aws::MediaLive
     #   @return [String]
     class StartDeleteMonitorDeploymentRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11362,7 +11829,8 @@ module Aws::MediaLive
       :name,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11372,13 +11840,15 @@ module Aws::MediaLive
     #   @return [String]
     class StartInputDeviceMaintenanceWindowRequest < Struct.new(
       :input_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartInputDeviceMaintenanceWindowResponse
     class StartInputDeviceMaintenanceWindowResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11388,13 +11858,15 @@ module Aws::MediaLive
     #   @return [String]
     class StartInputDeviceRequest < Struct.new(
       :input_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartInputDeviceResponse
     class StartInputDeviceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11408,7 +11880,8 @@ module Aws::MediaLive
     class StartMonitorDeploymentRequest < Struct.new(
       :dry_run,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11486,7 +11959,8 @@ module Aws::MediaLive
       :name,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11496,7 +11970,8 @@ module Aws::MediaLive
     #   @return [String]
     class StartMultiplexRequest < Struct.new(
       :multiplex_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11542,7 +12017,8 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11552,7 +12028,8 @@ module Aws::MediaLive
     #   @return [String]
     class StartTimecode < Struct.new(
       :timecode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11586,7 +12063,8 @@ module Aws::MediaLive
       :force_rediscovery,
       :identifier,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11664,7 +12142,8 @@ module Aws::MediaLive
       :name,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11710,7 +12189,8 @@ module Aws::MediaLive
       :layer,
       :opacity,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11724,7 +12204,8 @@ module Aws::MediaLive
     class StaticImageDeactivateScheduleActionSettings < Struct.new(
       :fade_out,
       :layer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11774,7 +12255,8 @@ module Aws::MediaLive
       :opacity,
       :output_names,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11792,7 +12274,8 @@ module Aws::MediaLive
       :fade_out,
       :layer,
       :output_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11806,7 +12289,8 @@ module Aws::MediaLive
     class StaticKeySettings < Struct.new(
       :key_provider_server,
       :static_key_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11816,7 +12300,8 @@ module Aws::MediaLive
     #   @return [String]
     class StopChannelRequest < Struct.new(
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11904,7 +12389,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11914,13 +12400,15 @@ module Aws::MediaLive
     #   @return [String]
     class StopInputDeviceRequest < Struct.new(
       :input_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StopInputDeviceResponse
     class StopInputDeviceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11930,7 +12418,8 @@ module Aws::MediaLive
     #   @return [String]
     class StopMultiplexRequest < Struct.new(
       :multiplex_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11976,7 +12465,8 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11990,7 +12480,8 @@ module Aws::MediaLive
     class StopTimecode < Struct.new(
       :last_frame_clipping_behavior,
       :timecode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12004,13 +12495,15 @@ module Aws::MediaLive
     class SuccessfulMonitorDeployment < Struct.new(
       :details_uri,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Teletext Destination Settings
     class TeletextDestinationSettings < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12024,7 +12517,8 @@ module Aws::MediaLive
     class TeletextSourceSettings < Struct.new(
       :output_rectangle,
       :page_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12040,7 +12534,8 @@ module Aws::MediaLive
     class TemporalFilterSettings < Struct.new(
       :post_filter_sharpening,
       :strength,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12062,7 +12557,8 @@ module Aws::MediaLive
       :content_type,
       :thumbnail_type,
       :time_stamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12072,7 +12568,8 @@ module Aws::MediaLive
     #   @return [String]
     class ThumbnailConfiguration < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12086,7 +12583,8 @@ module Aws::MediaLive
     class ThumbnailDetail < Struct.new(
       :pipeline_id,
       :thumbnails,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12104,7 +12602,8 @@ module Aws::MediaLive
       :font_size,
       :position,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12121,7 +12620,8 @@ module Aws::MediaLive
     class TimecodeConfig < Struct.new(
       :source,
       :sync_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12131,7 +12631,8 @@ module Aws::MediaLive
     #   @return [String]
     class TimedMetadataScheduleActionSettings < Struct.new(
       :id3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12141,7 +12642,8 @@ module Aws::MediaLive
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12163,13 +12665,15 @@ module Aws::MediaLive
       :target_customer_id,
       :target_region,
       :transfer_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for TransferInputDeviceResponse
     class TransferInputDeviceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12191,7 +12695,8 @@ module Aws::MediaLive
       :message,
       :target_customer_id,
       :transfer_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12201,7 +12706,8 @@ module Aws::MediaLive
     #   @return [String]
     class TtmlDestinationSettings < Struct.new(
       :style_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12211,7 +12717,8 @@ module Aws::MediaLive
     #   @return [Types::M2tsSettings]
     class UdpContainerSettings < Struct.new(
       :m2ts_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12229,7 +12736,8 @@ module Aws::MediaLive
       :input_loss_action,
       :timed_metadata_id3_frame,
       :timed_metadata_id3_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12251,7 +12759,8 @@ module Aws::MediaLive
       :container_settings,
       :destination,
       :fec_output_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12265,7 +12774,8 @@ module Aws::MediaLive
     class UnprocessableEntityException < Struct.new(
       :message,
       :validation_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12275,7 +12785,8 @@ module Aws::MediaLive
     #   @return [Types::AccountConfiguration]
     class UpdateAccountConfigurationRequest < Struct.new(
       :account_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12285,7 +12796,8 @@ module Aws::MediaLive
     #   @return [Types::AccountConfiguration]
     class UpdateAccountConfigurationResponse < Struct.new(
       :account_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12303,7 +12815,8 @@ module Aws::MediaLive
       :channel_class,
       :channel_id,
       :destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12313,7 +12826,8 @@ module Aws::MediaLive
     #   @return [Types::Channel]
     class UpdateChannelClassResponse < Struct.new(
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12335,7 +12849,8 @@ module Aws::MediaLive
       :cluster_id,
       :name,
       :nodes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12369,7 +12884,8 @@ module Aws::MediaLive
       :name,
       :nodes,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12427,7 +12943,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :dry_run,
       :anywhere_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12437,7 +12954,8 @@ module Aws::MediaLive
     #   @return [Types::Channel]
     class UpdateChannelResponse < Struct.new(
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12451,7 +12969,8 @@ module Aws::MediaLive
     class UpdateCloudWatchAlarmTemplateGroupRequest < Struct.new(
       :description,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12485,7 +13004,8 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12543,7 +13063,8 @@ module Aws::MediaLive
       :target_resource_type,
       :threshold,
       :treat_missing_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12617,7 +13138,8 @@ module Aws::MediaLive
       :target_resource_type,
       :threshold,
       :treat_missing_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12635,7 +13157,8 @@ module Aws::MediaLive
       :cluster_id,
       :name,
       :network_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12669,7 +13192,8 @@ module Aws::MediaLive
       :name,
       :network_settings,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12683,7 +13207,8 @@ module Aws::MediaLive
     class UpdateEventBridgeRuleTemplateGroupRequest < Struct.new(
       :description,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12717,7 +13242,8 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12747,7 +13273,8 @@ module Aws::MediaLive
       :group_identifier,
       :identifier,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12793,7 +13320,8 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12819,7 +13347,8 @@ module Aws::MediaLive
       :name,
       :uhd_device_settings,
       :availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12889,7 +13418,8 @@ module Aws::MediaLive
       :availability_zone,
       :medialive_input_arns,
       :output_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12947,7 +13477,8 @@ module Aws::MediaLive
       :multicast_settings,
       :smpte2110_receiver_group_settings,
       :sdi_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12957,7 +13488,8 @@ module Aws::MediaLive
     #   @return [Types::Input]
     class UpdateInputResponse < Struct.new(
       :input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12978,7 +13510,8 @@ module Aws::MediaLive
       :input_security_group_id,
       :tags,
       :whitelist_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12988,7 +13521,8 @@ module Aws::MediaLive
     #   @return [Types::InputSecurityGroup]
     class UpdateInputSecurityGroupResponse < Struct.new(
       :security_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13006,7 +13540,8 @@ module Aws::MediaLive
       :multiplex_id,
       :multiplex_program_settings,
       :program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13016,7 +13551,8 @@ module Aws::MediaLive
     #   @return [Types::MultiplexProgram]
     class UpdateMultiplexProgramResponse < Struct.new(
       :multiplex_program,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13038,7 +13574,8 @@ module Aws::MediaLive
       :multiplex_settings,
       :name,
       :packet_identifiers_mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13048,7 +13585,8 @@ module Aws::MediaLive
     #   @return [Types::Multiplex]
     class UpdateMultiplexResponse < Struct.new(
       :multiplex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13070,7 +13608,8 @@ module Aws::MediaLive
       :name,
       :network_id,
       :routes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13104,7 +13643,8 @@ module Aws::MediaLive
       :name,
       :routes,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13130,7 +13670,8 @@ module Aws::MediaLive
       :node_id,
       :role,
       :sdi_source_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13180,7 +13721,8 @@ module Aws::MediaLive
       :role,
       :state,
       :sdi_source_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13198,7 +13740,8 @@ module Aws::MediaLive
       :cluster_id,
       :node_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13248,7 +13791,8 @@ module Aws::MediaLive
       :role,
       :state,
       :sdi_source_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13266,7 +13810,8 @@ module Aws::MediaLive
       :name,
       :renewal_settings,
       :reservation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13276,7 +13821,8 @@ module Aws::MediaLive
     #   @return [Types::Reservation]
     class UpdateReservationResponse < Struct.new(
       :reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13298,7 +13844,8 @@ module Aws::MediaLive
       :name,
       :sdi_source_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13308,7 +13855,8 @@ module Aws::MediaLive
     #   @return [Types::SdiSource]
     class UpdateSdiSourceResponse < Struct.new(
       :sdi_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13322,7 +13870,8 @@ module Aws::MediaLive
     class ValidationError < Struct.new(
       :element_path,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13336,7 +13885,8 @@ module Aws::MediaLive
     class VideoBlackFailoverSettings < Struct.new(
       :black_detect_threshold,
       :video_black_threshold_msec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13362,7 +13912,8 @@ module Aws::MediaLive
       :h265_settings,
       :mpeg2_settings,
       :av1_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13399,7 +13950,8 @@ module Aws::MediaLive
       :scaling_behavior,
       :sharpness,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13421,7 +13973,8 @@ module Aws::MediaLive
       :color_space_settings,
       :color_space_usage,
       :selector_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13431,7 +13984,8 @@ module Aws::MediaLive
     #   @return [Types::Hdr10Settings]
     class VideoSelectorColorSpaceSettings < Struct.new(
       :hdr10_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13441,7 +13995,8 @@ module Aws::MediaLive
     #   @return [Integer]
     class VideoSelectorPid < Struct.new(
       :pid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13451,7 +14006,8 @@ module Aws::MediaLive
     #   @return [Integer]
     class VideoSelectorProgramId < Struct.new(
       :program_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13465,7 +14021,8 @@ module Aws::MediaLive
     class VideoSelectorSettings < Struct.new(
       :video_selector_pid,
       :video_selector_program_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13487,7 +14044,8 @@ module Aws::MediaLive
       :public_address_allocation_ids,
       :security_group_ids,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13512,7 +14070,8 @@ module Aws::MediaLive
       :network_interface_ids,
       :security_group_ids,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13530,7 +14089,8 @@ module Aws::MediaLive
       :bit_depth,
       :coding_mode,
       :sample_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13540,7 +14100,8 @@ module Aws::MediaLive
     #   @return [String]
     class WebvttDestinationSettings < Struct.new(
       :style_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

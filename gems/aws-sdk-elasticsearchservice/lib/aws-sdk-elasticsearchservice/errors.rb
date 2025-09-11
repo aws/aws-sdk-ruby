@@ -44,7 +44,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -58,7 +58,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::BaseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -72,7 +72,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -86,7 +86,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::DisabledOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -100,7 +100,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::InternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -114,7 +114,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::InvalidPaginationTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -128,7 +128,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::InvalidTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -142,7 +142,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -156,7 +156,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -170,7 +170,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -184,7 +184,7 @@ module Aws::ElasticsearchService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticsearchService::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>

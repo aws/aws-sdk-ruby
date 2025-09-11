@@ -2467,7 +2467,6 @@ module Aws::BedrockAgentRuntime
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/sessions/{sessionIdentifier}/"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

@@ -12,7 +12,8 @@ module Aws::KinesisVideoSignaling
     #   @return [String]
     class ClientLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +36,8 @@ module Aws::KinesisVideoSignaling
       :client_id,
       :service,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +46,8 @@ module Aws::KinesisVideoSignaling
     #   @return [Array<Types::IceServer>]
     class GetIceServerConfigResponse < Struct.new(
       :ice_server_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +71,8 @@ module Aws::KinesisVideoSignaling
       :username,
       :password,
       :ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +81,8 @@ module Aws::KinesisVideoSignaling
     #   @return [String]
     class InvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +91,8 @@ module Aws::KinesisVideoSignaling
     #   @return [String]
     class InvalidClientException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -95,7 +101,8 @@ module Aws::KinesisVideoSignaling
     #   @return [String]
     class NotAuthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +111,8 @@ module Aws::KinesisVideoSignaling
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +130,8 @@ module Aws::KinesisVideoSignaling
       :channel_arn,
       :sender_client_id,
       :message_payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +140,8 @@ module Aws::KinesisVideoSignaling
     #   @return [String]
     class SendAlexaOfferToMasterResponse < Struct.new(
       :answer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +152,8 @@ module Aws::KinesisVideoSignaling
     #   @return [String]
     class SessionExpiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

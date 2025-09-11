@@ -1295,7 +1295,6 @@ module Aws::M2
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#http" => {"method" => "PATCH", "uri" => "/environments/{environmentId}", "code" => 200}}
       end)
-
     end
 
     class << self

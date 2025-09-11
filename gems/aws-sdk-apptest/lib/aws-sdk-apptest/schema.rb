@@ -1110,7 +1110,6 @@ module Aws::AppTest
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#iamAction" => {"name" => "UpdateTestSuite", "documentation" => "Grants permission to update a test suite"}, "smithy.api#http" => {"method" => "PATCH", "uri" => "/testsuites/{testSuiteId}", "code" => 200}}
       end)
-
     end
 
     class << self

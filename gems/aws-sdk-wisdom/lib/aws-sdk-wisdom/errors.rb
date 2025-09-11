@@ -41,7 +41,7 @@ module Aws::Wisdom
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Wisdom::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::Wisdom
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Wisdom::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::Wisdom
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Wisdom::Types::PreconditionFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::Wisdom
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Wisdom::Types::RequestTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -103,7 +103,7 @@ module Aws::Wisdom
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Wisdom::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -122,7 +122,7 @@ module Aws::Wisdom
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Wisdom::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::Wisdom
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Wisdom::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::Wisdom
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Wisdom::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

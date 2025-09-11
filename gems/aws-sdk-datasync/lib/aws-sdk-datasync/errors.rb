@@ -36,7 +36,7 @@ module Aws::DataSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataSync::Types::InternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::DataSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DataSync::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

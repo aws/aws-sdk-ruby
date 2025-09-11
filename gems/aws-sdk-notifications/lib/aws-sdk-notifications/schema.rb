@@ -1224,7 +1224,6 @@ module Aws::Notifications
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to update a NotificationConfiguration"}, "smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/notification-configurations/{arn}"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

@@ -37,7 +37,7 @@ module Aws::AmplifyBackend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyBackend::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error message to inform that the request failed.</p>
@@ -51,7 +51,7 @@ module Aws::AmplifyBackend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyBackend::Types::GatewayTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error message to inform that the request failed.</p>
@@ -65,7 +65,7 @@ module Aws::AmplifyBackend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyBackend::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error message to inform that the request has failed.</p>
@@ -84,7 +84,7 @@ module Aws::AmplifyBackend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AmplifyBackend::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The type of limit that was exceeded.</p>

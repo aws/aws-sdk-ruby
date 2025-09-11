@@ -12,7 +12,8 @@ module Aws::Batch
     #   @return [Integer]
     class ArrayProperties < Struct.new(
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::Batch
       :status_summary,
       :size,
       :index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +49,8 @@ module Aws::Batch
     class ArrayPropertiesSummary < Struct.new(
       :size,
       :index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -81,7 +84,8 @@ module Aws::Batch
       :reason,
       :log_stream_name,
       :network_interfaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +116,8 @@ module Aws::Batch
       :stopped_at,
       :status_reason,
       :task_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +135,8 @@ module Aws::Batch
       :container_instance_arn,
       :task_arn,
       :containers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -159,7 +165,8 @@ module Aws::Batch
       :reason,
       :log_stream_name,
       :network_interfaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,12 +183,14 @@ module Aws::Batch
     class CancelJobRequest < Struct.new(
       :job_id,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +208,8 @@ module Aws::Batch
     class CapacityLimit < Struct.new(
       :max_capacity,
       :capacity_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,7 +220,8 @@ module Aws::Batch
     #   @return [String]
     class ClientException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +321,8 @@ module Aws::Batch
       :container_orchestration_type,
       :uuid,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,7 +349,8 @@ module Aws::Batch
     class ComputeEnvironmentOrder < Struct.new(
       :order,
       :compute_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +648,8 @@ module Aws::Batch
       :spot_iam_fleet_role,
       :launch_template,
       :ec2_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -971,7 +985,8 @@ module Aws::Batch
       :update_to_latest_image_version,
       :type,
       :image_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +996,8 @@ module Aws::Batch
     #   @return [Array<Types::ConsumableResourceRequirement>]
     class ConsumableResourceProperties < Struct.new(
       :consumable_resource_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1011,8 @@ module Aws::Batch
     class ConsumableResourceRequirement < Struct.new(
       :consumable_resource,
       :quantity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1051,8 @@ module Aws::Batch
       :total_quantity,
       :in_use_quantity,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1241,7 +1259,8 @@ module Aws::Batch
       :runtime_platform,
       :repository_credentials,
       :enable_execute_command,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,7 +1330,8 @@ module Aws::Batch
       :instance_type,
       :environment,
       :resource_requirements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1545,7 +1565,8 @@ module Aws::Batch
       :ephemeral_storage,
       :runtime_platform,
       :repository_credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1560,7 +1581,8 @@ module Aws::Batch
     class ContainerSummary < Struct.new(
       :exit_code,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,7 +1679,8 @@ module Aws::Batch
       :tags,
       :eks_configuration,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1671,7 +1694,8 @@ module Aws::Batch
     class CreateComputeEnvironmentResponse < Struct.new(
       :compute_environment_name,
       :compute_environment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1729,8 @@ module Aws::Batch
       :total_quantity,
       :resource_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1743,8 @@ module Aws::Batch
     class CreateConsumableResourceResponse < Struct.new(
       :consumable_resource_name,
       :consumable_resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1788,7 +1814,8 @@ module Aws::Batch
       :job_queue_type,
       :tags,
       :job_state_time_limit_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1801,7 +1828,8 @@ module Aws::Batch
     class CreateJobQueueResponse < Struct.new(
       :job_queue_name,
       :job_queue_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1823,7 +1851,8 @@ module Aws::Batch
       :name,
       :fairshare_policy,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,7 +1869,8 @@ module Aws::Batch
     class CreateSchedulingPolicyResponse < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1865,7 +1895,8 @@ module Aws::Batch
       :state,
       :capacity_limits,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1878,7 +1909,8 @@ module Aws::Batch
     class CreateServiceEnvironmentResponse < Struct.new(
       :service_environment_name,
       :service_environment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,12 +1920,14 @@ module Aws::Batch
     #   @return [String]
     class DeleteComputeEnvironmentRequest < Struct.new(
       :compute_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteComputeEnvironmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1902,12 +1936,14 @@ module Aws::Batch
     #   @return [String]
     class DeleteConsumableResourceRequest < Struct.new(
       :consumable_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConsumableResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,12 +1953,14 @@ module Aws::Batch
     #   @return [String]
     class DeleteJobQueueRequest < Struct.new(
       :job_queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteJobQueueResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1932,12 +1970,14 @@ module Aws::Batch
     #   @return [String]
     class DeleteSchedulingPolicyRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSchedulingPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1946,12 +1986,14 @@ module Aws::Batch
     #   @return [String]
     class DeleteServiceEnvironmentRequest < Struct.new(
       :service_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceEnvironmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1961,12 +2003,14 @@ module Aws::Batch
     #   @return [String]
     class DeregisterJobDefinitionRequest < Struct.new(
       :job_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterJobDefinitionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2000,7 +2044,8 @@ module Aws::Batch
       :compute_environments,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2017,7 +2062,8 @@ module Aws::Batch
     class DescribeComputeEnvironmentsResponse < Struct.new(
       :compute_environments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2026,7 +2072,8 @@ module Aws::Batch
     #   @return [String]
     class DescribeConsumableResourceRequest < Struct.new(
       :consumable_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2077,7 +2124,8 @@ module Aws::Batch
       :resource_type,
       :created_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2122,7 +2170,8 @@ module Aws::Batch
       :job_definition_name,
       :status,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2139,7 +2188,8 @@ module Aws::Batch
     class DescribeJobDefinitionsResponse < Struct.new(
       :job_definitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2172,7 +2222,8 @@ module Aws::Batch
       :job_queues,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2188,7 +2239,8 @@ module Aws::Batch
     class DescribeJobQueuesResponse < Struct.new(
       :job_queues,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2198,7 +2250,8 @@ module Aws::Batch
     #   @return [Array<String>]
     class DescribeJobsRequest < Struct.new(
       :jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2207,7 +2260,8 @@ module Aws::Batch
     #   @return [Array<Types::JobDetail>]
     class DescribeJobsResponse < Struct.new(
       :jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2217,7 +2271,8 @@ module Aws::Batch
     #   @return [Array<String>]
     class DescribeSchedulingPoliciesRequest < Struct.new(
       :arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2226,7 +2281,8 @@ module Aws::Batch
     #   @return [Array<Types::SchedulingPolicyDetail>]
     class DescribeSchedulingPoliciesResponse < Struct.new(
       :scheduling_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2247,7 +2303,8 @@ module Aws::Batch
       :service_environments,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2260,7 +2317,8 @@ module Aws::Batch
     class DescribeServiceEnvironmentsResponse < Struct.new(
       :service_environments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2269,7 +2327,8 @@ module Aws::Batch
     #   @return [String]
     class DescribeServiceJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,7 +2409,8 @@ module Aws::Batch
       :stopped_at,
       :tags,
       :timeout_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2435,8 @@ module Aws::Batch
       :host_path,
       :container_path,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2400,7 +2461,8 @@ module Aws::Batch
     class EFSAuthorizationConfig < Struct.new(
       :access_point_id,
       :iam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2442,7 +2504,8 @@ module Aws::Batch
       :transit_encryption,
       :transit_encryption_port,
       :authorization_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2576,7 +2639,8 @@ module Aws::Batch
       :image_type,
       :image_id_override,
       :image_kubernetes_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2589,7 +2653,8 @@ module Aws::Batch
     #   @return [Array<Types::EcsTaskProperties>]
     class EcsProperties < Struct.new(
       :task_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2599,7 +2664,8 @@ module Aws::Batch
     #   @return [Array<Types::EcsTaskDetails>]
     class EcsPropertiesDetail < Struct.new(
       :task_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2612,7 +2678,8 @@ module Aws::Batch
     #   @return [Array<Types::TaskPropertiesOverride>]
     class EcsPropertiesOverride < Struct.new(
       :task_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2681,7 +2748,8 @@ module Aws::Batch
       :runtime_platform,
       :volumes,
       :enable_execute_command,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2768,7 +2836,8 @@ module Aws::Batch
       :runtime_platform,
       :volumes,
       :enable_execute_command,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2793,7 +2862,8 @@ module Aws::Batch
       :container_id,
       :exit_code,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2840,7 +2910,8 @@ module Aws::Batch
       :started_at,
       :stopped_at,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2861,7 +2932,8 @@ module Aws::Batch
     class EksConfiguration < Struct.new(
       :eks_cluster_arn,
       :kubernetes_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2940,7 +3012,8 @@ module Aws::Batch
       :resources,
       :volume_mounts,
       :security_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3019,7 +3092,8 @@ module Aws::Batch
       :reason,
       :volume_mounts,
       :security_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3033,7 +3107,8 @@ module Aws::Batch
     class EksContainerEnvironmentVariable < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3079,7 +3154,8 @@ module Aws::Batch
       :args,
       :env,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3164,7 +3240,8 @@ module Aws::Batch
     class EksContainerResourceRequirements < Struct.new(
       :limits,
       :requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3218,7 +3295,8 @@ module Aws::Batch
       :allow_privilege_escalation,
       :read_only_root_filesystem,
       :run_as_non_root,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3243,7 +3321,8 @@ module Aws::Batch
       :mount_path,
       :sub_path,
       :read_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3278,7 +3357,8 @@ module Aws::Batch
     class EksEmptyDir < Struct.new(
       :medium,
       :size_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3290,7 +3370,8 @@ module Aws::Batch
     #   @return [String]
     class EksHostPath < Struct.new(
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3359,7 +3440,8 @@ module Aws::Batch
       :labels,
       :annotations,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3380,7 +3462,8 @@ module Aws::Batch
     class EksPersistentVolumeClaim < Struct.new(
       :claim_name,
       :read_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3454,7 +3537,8 @@ module Aws::Batch
       :volumes,
       :metadata,
       :share_process_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3530,7 +3614,8 @@ module Aws::Batch
       :node_name,
       :metadata,
       :share_process_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3552,7 +3637,8 @@ module Aws::Batch
       :containers,
       :init_containers,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3562,7 +3648,8 @@ module Aws::Batch
     #   @return [Types::EksPodProperties]
     class EksProperties < Struct.new(
       :pod_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3572,7 +3659,8 @@ module Aws::Batch
     #   @return [Types::EksPodPropertiesDetail]
     class EksPropertiesDetail < Struct.new(
       :pod_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3582,7 +3670,8 @@ module Aws::Batch
     #   @return [Types::EksPodPropertiesOverride]
     class EksPropertiesOverride < Struct.new(
       :pod_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3599,7 +3688,8 @@ module Aws::Batch
     class EksSecret < Struct.new(
       :secret_name,
       :optional,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3634,7 +3724,8 @@ module Aws::Batch
       :empty_dir,
       :secret,
       :persistent_volume_claim,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3647,7 +3738,8 @@ module Aws::Batch
     #   @return [Integer]
     class EphemeralStorage < Struct.new(
       :size_in_gi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3684,7 +3776,8 @@ module Aws::Batch
       :on_reason,
       :on_exit_code,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3725,7 +3818,8 @@ module Aws::Batch
       :share_decay_seconds,
       :compute_reservation,
       :share_distribution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3740,7 +3834,8 @@ module Aws::Batch
     #   @return [String]
     class FargatePlatformConfiguration < Struct.new(
       :platform_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3762,7 +3857,8 @@ module Aws::Batch
     class FirelensConfiguration < Struct.new(
       :type,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3776,7 +3872,8 @@ module Aws::Batch
     class FrontOfQueueDetail < Struct.new(
       :jobs,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3790,7 +3887,8 @@ module Aws::Batch
     class FrontOfQueueJobSummary < Struct.new(
       :job_arn,
       :earliest_time_at_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3799,7 +3897,8 @@ module Aws::Batch
     #   @return [String]
     class GetJobQueueSnapshotRequest < Struct.new(
       :job_queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3808,7 +3907,8 @@ module Aws::Batch
     #   @return [Types::FrontOfQueueDetail]
     class GetJobQueueSnapshotResponse < Struct.new(
       :front_of_queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3830,7 +3930,8 @@ module Aws::Batch
     #   @return [String]
     class Host < Struct.new(
       :source_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3843,7 +3944,8 @@ module Aws::Batch
     #   @return [String]
     class ImagePullSecret < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3954,7 +4056,8 @@ module Aws::Batch
       :eks_properties,
       :container_orchestration_type,
       :consumable_resource_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3968,7 +4071,8 @@ module Aws::Batch
     class JobDependency < Struct.new(
       :job_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4144,7 +4248,8 @@ module Aws::Batch
       :is_cancelled,
       :is_terminated,
       :consumable_resource_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4228,7 +4333,8 @@ module Aws::Batch
       :job_queue_type,
       :tags,
       :job_state_time_limit_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4252,7 +4358,8 @@ module Aws::Batch
       :state,
       :max_time_seconds,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4318,7 +4425,8 @@ module Aws::Batch
       :array_properties,
       :node_properties,
       :job_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4333,7 +4441,8 @@ module Aws::Batch
     #   @return [Integer]
     class JobTimeout < Struct.new(
       :attempt_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4349,7 +4458,8 @@ module Aws::Batch
     class KeyValuePair < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4364,7 +4474,8 @@ module Aws::Batch
     class KeyValuesPair < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4374,7 +4485,8 @@ module Aws::Batch
     #   @return [Types::ServiceResourceId]
     class LatestServiceJobAttempt < Struct.new(
       :service_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4434,7 +4546,8 @@ module Aws::Batch
       :version,
       :overrides,
       :userdata_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4516,7 +4629,8 @@ module Aws::Batch
       :version,
       :target_instance_types,
       :userdata_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4619,7 +4733,8 @@ module Aws::Batch
       :tmpfs,
       :max_swap,
       :swappiness,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4661,7 +4776,8 @@ module Aws::Batch
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4677,7 +4793,8 @@ module Aws::Batch
     class ListConsumableResourcesResponse < Struct.new(
       :consumable_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4730,7 +4847,8 @@ module Aws::Batch
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4746,7 +4864,8 @@ module Aws::Batch
     class ListJobsByConsumableResourceResponse < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4834,7 +4953,8 @@ module Aws::Batch
       :started_at,
       :created_at,
       :consumable_resource_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4939,7 +5059,8 @@ module Aws::Batch
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4955,7 +5076,8 @@ module Aws::Batch
     class ListJobsResponse < Struct.new(
       :job_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4984,7 +5106,8 @@ module Aws::Batch
     class ListSchedulingPoliciesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5001,7 +5124,8 @@ module Aws::Batch
     class ListSchedulingPoliciesResponse < Struct.new(
       :scheduling_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5056,7 +5180,8 @@ module Aws::Batch
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5069,7 +5194,8 @@ module Aws::Batch
     class ListServiceJobsResponse < Struct.new(
       :job_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5080,7 +5206,8 @@ module Aws::Batch
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5089,7 +5216,8 @@ module Aws::Batch
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5181,7 +5309,8 @@ module Aws::Batch
       :log_driver,
       :options,
       :secret_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5203,7 +5332,8 @@ module Aws::Batch
       :container_path,
       :read_only,
       :source_volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5218,7 +5348,8 @@ module Aws::Batch
     #   @return [String]
     class NetworkConfiguration < Struct.new(
       :assign_public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5237,7 +5368,8 @@ module Aws::Batch
       :attachment_id,
       :ipv6_address,
       :private_ipv4_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5252,7 +5384,8 @@ module Aws::Batch
     class NodeDetails < Struct.new(
       :node_index,
       :is_main_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5287,7 +5420,8 @@ module Aws::Batch
     class NodeOverrides < Struct.new(
       :num_nodes,
       :node_property_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5310,7 +5444,8 @@ module Aws::Batch
       :num_nodes,
       :main_node,
       :node_range_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5330,7 +5465,8 @@ module Aws::Batch
       :is_main_node,
       :num_nodes,
       :node_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5367,7 +5503,8 @@ module Aws::Batch
       :instance_types,
       :eks_properties_override,
       :consumable_resource_properties_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5410,7 +5547,8 @@ module Aws::Batch
       :ecs_properties,
       :eks_properties,
       :consumable_resource_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5533,7 +5671,8 @@ module Aws::Batch
       :eks_properties,
       :ecs_properties,
       :consumable_resource_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5550,7 +5689,8 @@ module Aws::Batch
       :job_definition_name,
       :job_definition_arn,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5561,7 +5701,8 @@ module Aws::Batch
     #   @return [String]
     class RepositoryCredentials < Struct.new(
       :credentials_parameter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5736,7 +5877,8 @@ module Aws::Batch
     class ResourceRequirement < Struct.new(
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5755,7 +5897,8 @@ module Aws::Batch
     class RetryStrategy < Struct.new(
       :attempts,
       :evaluate_on_exit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5802,7 +5945,8 @@ module Aws::Batch
     class RuntimePlatform < Struct.new(
       :operating_system_family,
       :cpu_architecture,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5828,7 +5972,8 @@ module Aws::Batch
       :arn,
       :fairshare_policy,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5839,7 +5984,8 @@ module Aws::Batch
     #   @return [String]
     class SchedulingPolicyListingDetail < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5872,7 +6018,8 @@ module Aws::Batch
     class Secret < Struct.new(
       :name,
       :value_from,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5881,7 +6028,8 @@ module Aws::Batch
     #   @return [String]
     class ServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5915,7 +6063,8 @@ module Aws::Batch
       :status,
       :capacity_limits,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5929,7 +6078,8 @@ module Aws::Batch
     class ServiceEnvironmentOrder < Struct.new(
       :order,
       :service_environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5951,7 +6101,8 @@ module Aws::Batch
       :started_at,
       :stopped_at,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5965,7 +6116,8 @@ module Aws::Batch
     class ServiceJobEvaluateOnExit < Struct.new(
       :action,
       :on_status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5979,7 +6131,8 @@ module Aws::Batch
     class ServiceJobRetryStrategy < Struct.new(
       :attempts,
       :evaluate_on_exit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6029,7 +6182,8 @@ module Aws::Batch
       :status_reason,
       :started_at,
       :stopped_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6039,7 +6193,8 @@ module Aws::Batch
     #   @return [Integer]
     class ServiceJobTimeout < Struct.new(
       :attempt_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6053,7 +6208,8 @@ module Aws::Batch
     class ServiceResourceId < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6079,7 +6235,8 @@ module Aws::Batch
     class ShareAttributes < Struct.new(
       :share_identifier,
       :weight_factor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6207,7 +6364,8 @@ module Aws::Batch
       :eks_properties_override,
       :ecs_properties_override,
       :consumable_resource_properties_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6224,7 +6382,8 @@ module Aws::Batch
       :job_arn,
       :job_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6271,7 +6430,8 @@ module Aws::Batch
       :timeout_config,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6288,7 +6448,8 @@ module Aws::Batch
       :job_arn,
       :job_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6305,12 +6466,14 @@ module Aws::Batch
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6346,7 +6509,8 @@ module Aws::Batch
     class TaskContainerDependency < Struct.new(
       :container_name,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6589,7 +6753,8 @@ module Aws::Batch
       :reason,
       :log_stream_name,
       :network_interfaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6626,7 +6791,8 @@ module Aws::Batch
       :environment,
       :name,
       :resource_requirements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6850,7 +7016,8 @@ module Aws::Batch
       :secrets,
       :ulimits,
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6860,7 +7027,8 @@ module Aws::Batch
     #   @return [Array<Types::TaskContainerOverrides>]
     class TaskPropertiesOverride < Struct.new(
       :containers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6877,12 +7045,14 @@ module Aws::Batch
     class TerminateJobRequest < Struct.new(
       :job_id,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TerminateJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6895,12 +7065,14 @@ module Aws::Batch
     class TerminateServiceJobRequest < Struct.new(
       :job_id,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TerminateServiceJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6932,7 +7104,8 @@ module Aws::Batch
       :container_path,
       :size,
       :mount_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6957,7 +7130,8 @@ module Aws::Batch
       :hard_limit,
       :name,
       :soft_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6972,12 +7146,14 @@ module Aws::Batch
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7057,7 +7233,8 @@ module Aws::Batch
       :service_role,
       :update_policy,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7071,7 +7248,8 @@ module Aws::Batch
     class UpdateComputeEnvironmentResponse < Struct.new(
       :compute_environment_name,
       :compute_environment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7119,7 +7297,8 @@ module Aws::Batch
       :operation,
       :quantity,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7136,7 +7315,8 @@ module Aws::Batch
       :consumable_resource_name,
       :consumable_resource_arn,
       :total_quantity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7193,7 +7373,8 @@ module Aws::Batch
       :compute_environment_order,
       :service_environment_order,
       :job_state_time_limit_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7206,7 +7387,8 @@ module Aws::Batch
     class UpdateJobQueueResponse < Struct.new(
       :job_queue_name,
       :job_queue_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7224,7 +7406,8 @@ module Aws::Batch
     class UpdatePolicy < Struct.new(
       :terminate_jobs_on_update,
       :job_execution_timeout_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7238,12 +7421,14 @@ module Aws::Batch
     class UpdateSchedulingPolicyRequest < Struct.new(
       :arn,
       :fairshare_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateSchedulingPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7260,7 +7445,8 @@ module Aws::Batch
       :service_environment,
       :state,
       :capacity_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7273,7 +7459,8 @@ module Aws::Batch
     class UpdateServiceEnvironmentResponse < Struct.new(
       :service_environment_name,
       :service_environment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7302,7 +7489,8 @@ module Aws::Batch
       :host,
       :name,
       :efs_volume_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

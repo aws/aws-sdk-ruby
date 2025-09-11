@@ -90,7 +90,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ACLAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -103,7 +103,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ACLNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ACLQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::APICallRateForCustomerExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -155,7 +155,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -168,7 +168,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ClusterQuotaForCustomerExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -181,7 +181,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::DefaultUserRequired] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -194,7 +194,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::DuplicateUserNameFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -207,7 +207,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InsufficientClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -220,7 +220,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidACLStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -233,7 +233,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidARNFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -246,7 +246,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -259,7 +259,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidCredentialsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -272,7 +272,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidKMSKeyFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -285,7 +285,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidMultiRegionClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -298,7 +298,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidNodeStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -311,7 +311,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidParameterCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -324,7 +324,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidParameterGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -337,7 +337,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -350,7 +350,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidSnapshotStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -363,7 +363,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidSubnet] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -376,7 +376,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidUserStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -389,7 +389,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidVPCNetworkStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -402,7 +402,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::MultiRegionClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -415,7 +415,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::MultiRegionClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -428,7 +428,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::MultiRegionParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -441,7 +441,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::NoOperationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -454,7 +454,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::NodeQuotaForClusterExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -467,7 +467,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::NodeQuotaForCustomerExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -480,7 +480,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ParameterGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -493,7 +493,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -506,7 +506,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ParameterGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -519,7 +519,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ReservedNodeAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -532,7 +532,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ReservedNodeNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -545,7 +545,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ReservedNodeQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -560,7 +560,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ReservedNodesOfferingNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -573,7 +573,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ServiceLinkedRoleNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -586,7 +586,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ServiceUpdateNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -599,7 +599,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ShardNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -612,7 +612,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ShardsPerClusterQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -625,7 +625,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SnapshotAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -638,7 +638,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SnapshotNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -651,7 +651,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SnapshotQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -664,7 +664,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -677,7 +677,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetGroupInUseFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -690,7 +690,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -703,7 +703,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -716,7 +716,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -729,7 +729,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetNotAllowedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -742,7 +742,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -755,7 +755,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::TagNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -768,7 +768,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::TagQuotaPerResourceExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -781,7 +781,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::TestFailoverNotAvailableFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -794,7 +794,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::UserAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -807,7 +807,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::UserNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -820,7 +820,7 @@ module Aws::MemoryDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::UserQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

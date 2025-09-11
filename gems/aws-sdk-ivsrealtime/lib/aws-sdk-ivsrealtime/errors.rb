@@ -40,7 +40,7 @@ module Aws::IVSRealTime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p/>
@@ -94,7 +94,7 @@ module Aws::IVSRealTime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p/>
@@ -148,7 +148,7 @@ module Aws::IVSRealTime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p/>
@@ -202,7 +202,7 @@ module Aws::IVSRealTime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::PendingVerification] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p/>
@@ -256,7 +256,7 @@ module Aws::IVSRealTime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p/>
@@ -310,7 +310,7 @@ module Aws::IVSRealTime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p/>
@@ -364,7 +364,7 @@ module Aws::IVSRealTime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p/>

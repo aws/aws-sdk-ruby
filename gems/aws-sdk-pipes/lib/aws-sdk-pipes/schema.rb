@@ -875,7 +875,6 @@ module Aws::Pipes
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to update a pipe", "aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "aws:RequestTag/${TagKey}", "aws:TagKeys"], "smithy.api#http" => {"method" => "PUT", "uri" => "/v1/pipes/{Name}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

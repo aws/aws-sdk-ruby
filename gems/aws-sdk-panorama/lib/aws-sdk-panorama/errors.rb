@@ -39,7 +39,7 @@ module Aws::Panorama
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Panorama::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::Panorama
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Panorama::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::Panorama
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Panorama::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -103,7 +103,7 @@ module Aws::Panorama
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Panorama::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::Panorama
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Panorama::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::Panorama
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Panorama::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

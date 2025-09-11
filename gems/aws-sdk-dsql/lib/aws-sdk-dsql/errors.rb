@@ -40,7 +40,7 @@ module Aws::DSQL
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DSQL::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::DSQL
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DSQL::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::DSQL
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DSQL::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::DSQL
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DSQL::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -122,7 +122,7 @@ module Aws::DSQL
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DSQL::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The service exception for exceeding a quota.</p>
@@ -156,7 +156,7 @@ module Aws::DSQL
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DSQL::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that the request was denied due to request throttling.</p>
@@ -193,7 +193,7 @@ module Aws::DSQL
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DSQL::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -44,7 +44,8 @@ module Aws::IVSRealTime
       :x_frame_options,
       :x_amzn_error_type,
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +85,8 @@ module Aws::IVSRealTime
       :recording_reconnect_window_seconds,
       :hls_configuration,
       :record_participant_replicas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -106,7 +108,8 @@ module Aws::IVSRealTime
     class ChannelDestinationConfiguration < Struct.new(
       :channel_arn,
       :encoder_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +155,8 @@ module Aws::IVSRealTime
       :tags,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +166,8 @@ module Aws::IVSRealTime
     #   @return [Integer]
     class CompositionRecordingHlsConfiguration < Struct.new(
       :target_segment_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -207,7 +212,8 @@ module Aws::IVSRealTime
       :tags,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +234,8 @@ module Aws::IVSRealTime
     class CompositionThumbnailConfiguration < Struct.new(
       :target_interval_seconds,
       :storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +277,8 @@ module Aws::IVSRealTime
       :x_frame_options,
       :x_amzn_error_type,
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +300,8 @@ module Aws::IVSRealTime
       :name,
       :video,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +310,8 @@ module Aws::IVSRealTime
     #   @return [Types::EncoderConfiguration]
     class CreateEncoderConfigurationResponse < Struct.new(
       :encoder_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +352,8 @@ module Aws::IVSRealTime
       :ingest_protocol,
       :insecure_ingest,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +362,8 @@ module Aws::IVSRealTime
     #   @return [Types::IngestConfiguration]
     class CreateIngestConfigurationResponse < Struct.new(
       :ingest_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +396,8 @@ module Aws::IVSRealTime
       :user_id,
       :attributes,
       :capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +406,8 @@ module Aws::IVSRealTime
     #   @return [Types::ParticipantToken]
     class CreateParticipantTokenOutput < Struct.new(
       :participant_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +432,8 @@ module Aws::IVSRealTime
       :participant_token_configurations,
       :tags,
       :auto_participant_recording_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +447,8 @@ module Aws::IVSRealTime
     class CreateStageOutput < Struct.new(
       :stage,
       :participant_tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +469,8 @@ module Aws::IVSRealTime
       :name,
       :s3,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +479,8 @@ module Aws::IVSRealTime
     #   @return [Types::StorageConfiguration]
     class CreateStorageConfigurationResponse < Struct.new(
       :storage_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,12 +489,14 @@ module Aws::IVSRealTime
     #   @return [String]
     class DeleteEncoderConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEncoderConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,12 +509,14 @@ module Aws::IVSRealTime
     class DeleteIngestConfigurationRequest < Struct.new(
       :arn,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIngestConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,12 +525,14 @@ module Aws::IVSRealTime
     #   @return [String]
     class DeletePublicKeyRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePublicKeyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,12 +541,14 @@ module Aws::IVSRealTime
     #   @return [String]
     class DeleteStageInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStageOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -531,12 +557,14 @@ module Aws::IVSRealTime
     #   @return [String]
     class DeleteStorageConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStorageConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +596,8 @@ module Aws::IVSRealTime
       :end_time,
       :configuration,
       :detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +617,8 @@ module Aws::IVSRealTime
       :name,
       :channel,
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +628,8 @@ module Aws::IVSRealTime
     #   @return [Types::S3Detail]
     class DestinationDetail < Struct.new(
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +653,8 @@ module Aws::IVSRealTime
       :state,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,12 +673,14 @@ module Aws::IVSRealTime
       :stage_arn,
       :participant_id,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisconnectParticipantOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -673,7 +707,8 @@ module Aws::IVSRealTime
       :name,
       :video,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +730,8 @@ module Aws::IVSRealTime
       :arn,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +859,8 @@ module Aws::IVSRealTime
       :destination_stage_arn,
       :destination_session_id,
       :replica,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -837,7 +874,8 @@ module Aws::IVSRealTime
     #   @return [String]
     class GetCompositionRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -846,7 +884,8 @@ module Aws::IVSRealTime
     #   @return [Types::Composition]
     class GetCompositionResponse < Struct.new(
       :composition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +894,8 @@ module Aws::IVSRealTime
     #   @return [String]
     class GetEncoderConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +904,8 @@ module Aws::IVSRealTime
     #   @return [Types::EncoderConfiguration]
     class GetEncoderConfigurationResponse < Struct.new(
       :encoder_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +914,8 @@ module Aws::IVSRealTime
     #   @return [String]
     class GetIngestConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,7 +924,8 @@ module Aws::IVSRealTime
     #   @return [Types::IngestConfiguration]
     class GetIngestConfigurationResponse < Struct.new(
       :ingest_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -899,7 +942,8 @@ module Aws::IVSRealTime
       :stage_arn,
       :session_id,
       :participant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +952,8 @@ module Aws::IVSRealTime
     #   @return [Types::Participant]
     class GetParticipantResponse < Struct.new(
       :participant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +962,8 @@ module Aws::IVSRealTime
     #   @return [String]
     class GetPublicKeyRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -926,7 +972,8 @@ module Aws::IVSRealTime
     #   @return [Types::PublicKey]
     class GetPublicKeyResponse < Struct.new(
       :public_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -935,7 +982,8 @@ module Aws::IVSRealTime
     #   @return [String]
     class GetStageInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -944,7 +992,8 @@ module Aws::IVSRealTime
     #   @return [Types::Stage]
     class GetStageOutput < Struct.new(
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -957,7 +1006,8 @@ module Aws::IVSRealTime
     class GetStageSessionRequest < Struct.new(
       :stage_arn,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -966,7 +1016,8 @@ module Aws::IVSRealTime
     #   @return [Types::StageSession]
     class GetStageSessionResponse < Struct.new(
       :stage_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1026,8 @@ module Aws::IVSRealTime
     #   @return [String]
     class GetStorageConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1036,8 @@ module Aws::IVSRealTime
     #   @return [Types::StorageConfiguration]
     class GetStorageConfigurationResponse < Struct.new(
       :storage_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1021,7 +1074,8 @@ module Aws::IVSRealTime
       :video_aspect_ratio,
       :video_fill_mode,
       :grid_gap,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1048,7 +1102,8 @@ module Aws::IVSRealTime
       :public_key_material,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1112,8 @@ module Aws::IVSRealTime
     #   @return [Types::PublicKey]
     class ImportPublicKeyResponse < Struct.new(
       :public_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1118,7 +1174,8 @@ module Aws::IVSRealTime
       :user_id,
       :attributes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,7 +1215,8 @@ module Aws::IVSRealTime
       :participant_id,
       :state,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1200,7 +1258,8 @@ module Aws::IVSRealTime
       :x_frame_options,
       :x_amzn_error_type,
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1214,7 +1273,8 @@ module Aws::IVSRealTime
     class LayoutConfiguration < Struct.new(
       :grid,
       :pip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1237,7 +1297,8 @@ module Aws::IVSRealTime
       :filter_by_encoder_configuration_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1251,7 +1312,8 @@ module Aws::IVSRealTime
     class ListCompositionsResponse < Struct.new(
       :compositions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1327,8 @@ module Aws::IVSRealTime
     class ListEncoderConfigurationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1342,8 @@ module Aws::IVSRealTime
     class ListEncoderConfigurationsResponse < Struct.new(
       :encoder_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1300,7 +1364,8 @@ module Aws::IVSRealTime
       :filter_by_state,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1313,7 +1378,8 @@ module Aws::IVSRealTime
     class ListIngestConfigurationsResponse < Struct.new(
       :ingest_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1405,8 @@ module Aws::IVSRealTime
       :participant_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1420,8 @@ module Aws::IVSRealTime
     class ListParticipantEventsResponse < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1376,7 +1444,8 @@ module Aws::IVSRealTime
       :participant_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1458,8 @@ module Aws::IVSRealTime
     class ListParticipantReplicasResponse < Struct.new(
       :replicas,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1438,7 +1508,8 @@ module Aws::IVSRealTime
       :next_token,
       :max_results,
       :filter_by_recording_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1523,8 @@ module Aws::IVSRealTime
     class ListParticipantsResponse < Struct.new(
       :participants,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1537,8 @@ module Aws::IVSRealTime
     class ListPublicKeysRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1551,8 @@ module Aws::IVSRealTime
     class ListPublicKeysResponse < Struct.new(
       :public_keys,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1496,7 +1570,8 @@ module Aws::IVSRealTime
       :stage_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1585,8 @@ module Aws::IVSRealTime
     class ListStageSessionsResponse < Struct.new(
       :stage_sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1524,7 +1600,8 @@ module Aws::IVSRealTime
     class ListStagesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1538,7 +1615,8 @@ module Aws::IVSRealTime
     class ListStagesOutput < Struct.new(
       :stages,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1631,8 @@ module Aws::IVSRealTime
     class ListStorageConfigurationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1567,7 +1646,8 @@ module Aws::IVSRealTime
     class ListStorageConfigurationsResponse < Struct.new(
       :storage_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1656,8 @@ module Aws::IVSRealTime
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1667,8 @@ module Aws::IVSRealTime
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1688,7 +1770,8 @@ module Aws::IVSRealTime
       :replication_state,
       :source_stage_arn,
       :source_session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1705,7 +1788,8 @@ module Aws::IVSRealTime
     #   @return [Integer]
     class ParticipantRecordingHlsConfiguration < Struct.new(
       :target_segment_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1743,7 +1827,8 @@ module Aws::IVSRealTime
       :destination_stage_arn,
       :destination_session_id,
       :replication_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1793,7 +1878,8 @@ module Aws::IVSRealTime
       :replication_state,
       :source_stage_arn,
       :source_session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1823,7 +1909,8 @@ module Aws::IVSRealTime
       :target_interval_seconds,
       :storage,
       :recording_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1956,8 @@ module Aws::IVSRealTime
       :duration,
       :capabilities,
       :expiration_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1901,7 +1989,8 @@ module Aws::IVSRealTime
       :user_id,
       :attributes,
       :capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1943,7 +2032,8 @@ module Aws::IVSRealTime
       :x_frame_options,
       :x_amzn_error_type,
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2004,7 +2094,8 @@ module Aws::IVSRealTime
       :pip_position,
       :pip_width,
       :pip_height,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2042,7 +2133,8 @@ module Aws::IVSRealTime
       :public_key_material,
       :fingerprint,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2064,7 +2156,8 @@ module Aws::IVSRealTime
       :arn,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2078,7 +2171,8 @@ module Aws::IVSRealTime
     class RecordingConfiguration < Struct.new(
       :hls_configuration,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2120,7 +2214,8 @@ module Aws::IVSRealTime
       :x_frame_options,
       :x_amzn_error_type,
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2148,7 +2243,8 @@ module Aws::IVSRealTime
       :encoder_configuration_arns,
       :recording_configuration,
       :thumbnail_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2158,7 +2254,8 @@ module Aws::IVSRealTime
     #   @return [String]
     class S3Detail < Struct.new(
       :recording_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2170,7 +2267,8 @@ module Aws::IVSRealTime
     #   @return [String]
     class S3StorageConfiguration < Struct.new(
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2212,7 +2310,8 @@ module Aws::IVSRealTime
       :x_frame_options,
       :x_amzn_error_type,
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2345,8 @@ module Aws::IVSRealTime
       :tags,
       :auto_participant_recording_configuration,
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2269,7 +2369,8 @@ module Aws::IVSRealTime
       :whip,
       :rtmp,
       :rtmps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2291,7 +2392,8 @@ module Aws::IVSRealTime
       :session_id,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2310,7 +2412,8 @@ module Aws::IVSRealTime
       :session_id,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2336,7 +2439,8 @@ module Aws::IVSRealTime
       :name,
       :active_session_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2365,7 +2469,8 @@ module Aws::IVSRealTime
       :layout,
       :destinations,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2374,7 +2479,8 @@ module Aws::IVSRealTime
     #   @return [Types::Composition]
     class StartCompositionResponse < Struct.new(
       :composition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2409,7 +2515,8 @@ module Aws::IVSRealTime
       :participant_id,
       :reconnect_window_seconds,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2442,7 +2549,8 @@ module Aws::IVSRealTime
       :strict_transport_security,
       :x_content_type_options,
       :x_frame_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2451,12 +2559,14 @@ module Aws::IVSRealTime
     #   @return [String]
     class StopCompositionRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopCompositionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2476,7 +2586,8 @@ module Aws::IVSRealTime
       :source_stage_arn,
       :destination_stage_arn,
       :participant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2509,7 +2620,8 @@ module Aws::IVSRealTime
       :strict_transport_security,
       :x_content_type_options,
       :x_frame_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2535,7 +2647,8 @@ module Aws::IVSRealTime
       :name,
       :s3,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2561,7 +2674,8 @@ module Aws::IVSRealTime
       :name,
       :s3,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2578,12 +2692,14 @@ module Aws::IVSRealTime
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2600,12 +2716,14 @@ module Aws::IVSRealTime
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2618,7 +2736,8 @@ module Aws::IVSRealTime
     class UpdateIngestConfigurationRequest < Struct.new(
       :arn,
       :stage_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2627,7 +2746,8 @@ module Aws::IVSRealTime
     #   @return [Types::IngestConfiguration]
     class UpdateIngestConfigurationResponse < Struct.new(
       :ingest_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2644,7 +2764,8 @@ module Aws::IVSRealTime
       :arn,
       :name,
       :auto_participant_recording_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2653,7 +2774,8 @@ module Aws::IVSRealTime
     #   @return [Types::Stage]
     class UpdateStageOutput < Struct.new(
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2695,7 +2817,8 @@ module Aws::IVSRealTime
       :x_frame_options,
       :x_amzn_error_type,
       :exception_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2721,7 +2844,8 @@ module Aws::IVSRealTime
       :height,
       :framerate,
       :bitrate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -37,7 +37,7 @@ module Aws::SageMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMaker::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -50,7 +50,7 @@ module Aws::SageMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMaker::Types::ResourceInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -63,7 +63,7 @@ module Aws::SageMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMaker::Types::ResourceLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::SageMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMaker::Types::ResourceNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

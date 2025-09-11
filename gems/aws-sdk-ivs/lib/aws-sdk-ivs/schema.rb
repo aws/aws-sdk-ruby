@@ -1006,7 +1006,6 @@ module Aws::Ivs
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdatePlaybackRestrictionPolicy"}}
       end)
-
     end
 
     class << self

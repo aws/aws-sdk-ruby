@@ -11,7 +11,8 @@ module Aws::QApps
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::QApps
       :app_definition_version,
       :cards,
       :can_edit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +45,8 @@ module Aws::QApps
     class AppDefinitionInput < Struct.new(
       :cards,
       :initial_prompt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +59,8 @@ module Aws::QApps
     class AssociateLibraryItemReviewInput < Struct.new(
       :instance_id,
       :library_item_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -69,7 +73,8 @@ module Aws::QApps
     class AssociateQAppWithUserInput < Struct.new(
       :instance_id,
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +120,8 @@ module Aws::QApps
       :greater_than_or_equals,
       :less_than,
       :less_than_or_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +134,8 @@ module Aws::QApps
     class BatchCreateCategoryInput < Struct.new(
       :instance_id,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +153,8 @@ module Aws::QApps
       :id,
       :title,
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -159,7 +167,8 @@ module Aws::QApps
     class BatchDeleteCategoryInput < Struct.new(
       :instance_id,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +181,8 @@ module Aws::QApps
     class BatchUpdateCategoryInput < Struct.new(
       :instance_id,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +209,8 @@ module Aws::QApps
       :file_upload,
       :form_input,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TextInput < Card; end
@@ -233,7 +244,8 @@ module Aws::QApps
       :file_upload,
       :form_input,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TextInput < CardInput; end
@@ -258,7 +270,8 @@ module Aws::QApps
       :current_state,
       :current_value,
       :submissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +289,8 @@ module Aws::QApps
       :card_id,
       :value,
       :submission_mutation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +312,8 @@ module Aws::QApps
       :title,
       :color,
       :app_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +331,8 @@ module Aws::QApps
       :id,
       :title,
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +349,8 @@ module Aws::QApps
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +367,8 @@ module Aws::QApps
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +382,8 @@ module Aws::QApps
     class ConversationMessage < Struct.new(
       :body,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +404,8 @@ module Aws::QApps
       :app_id,
       :app_version,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +442,8 @@ module Aws::QApps
       :updated_by,
       :rating_count,
       :is_verified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +476,8 @@ module Aws::QApps
       :file_name,
       :scope,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -476,7 +498,8 @@ module Aws::QApps
       :presigned_url,
       :presigned_url_fields,
       :presigned_url_expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +524,8 @@ module Aws::QApps
       :description,
       :app_definition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +578,8 @@ module Aws::QApps
       :updated_at,
       :updated_by,
       :required_capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -567,7 +592,8 @@ module Aws::QApps
     class DeleteLibraryItemInput < Struct.new(
       :instance_id,
       :library_item_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -580,7 +606,8 @@ module Aws::QApps
     class DeleteQAppInput < Struct.new(
       :instance_id,
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -593,7 +620,8 @@ module Aws::QApps
     class DescribeQAppPermissionsInput < Struct.new(
       :instance_id,
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +638,8 @@ module Aws::QApps
       :resource_arn,
       :app_id,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -623,7 +652,8 @@ module Aws::QApps
     class DisassociateLibraryItemReviewInput < Struct.new(
       :instance_id,
       :library_item_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +666,8 @@ module Aws::QApps
     class DisassociateQAppFromUserInput < Struct.new(
       :instance_id,
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +681,8 @@ module Aws::QApps
     class DocumentAttribute < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -673,7 +705,8 @@ module Aws::QApps
       :long_value,
       :date_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringValue < DocumentAttributeValue; end
@@ -692,7 +725,8 @@ module Aws::QApps
     class ExportQAppSessionDataInput < Struct.new(
       :instance_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +743,8 @@ module Aws::QApps
       :csv_file_link,
       :expires_at,
       :session_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -743,7 +778,8 @@ module Aws::QApps
       :filename,
       :file_id,
       :allow_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +809,8 @@ module Aws::QApps
       :filename,
       :file_id,
       :allow_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -808,7 +845,8 @@ module Aws::QApps
       :type,
       :metadata,
       :compute_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +872,8 @@ module Aws::QApps
       :type,
       :metadata,
       :compute_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -849,7 +888,8 @@ module Aws::QApps
     #   @return [JSON]
     class FormInputCardMetadata < Struct.new(
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +906,8 @@ module Aws::QApps
       :instance_id,
       :library_item_id,
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +964,8 @@ module Aws::QApps
       :is_rated_by_user,
       :user_count,
       :is_verified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +982,8 @@ module Aws::QApps
       :instance_id,
       :app_id,
       :app_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -997,7 +1040,8 @@ module Aws::QApps
       :updated_by,
       :required_capabilities,
       :app_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1010,7 +1054,8 @@ module Aws::QApps
     class GetQAppSessionInput < Struct.new(
       :instance_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1023,7 +1068,8 @@ module Aws::QApps
     class GetQAppSessionMetadataInput < Struct.new(
       :instance_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1094,8 @@ module Aws::QApps
       :session_name,
       :sharing_configuration,
       :session_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1132,8 @@ module Aws::QApps
       :status,
       :card_status,
       :user_is_host,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1118,7 +1166,8 @@ module Aws::QApps
       :file_name,
       :scope,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1176,8 @@ module Aws::QApps
     #   @return [String]
     class ImportDocumentOutput < Struct.new(
       :file_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1190,8 @@ module Aws::QApps
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1198,7 +1249,8 @@ module Aws::QApps
       :is_rated_by_user,
       :user_count,
       :is_verified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1207,7 +1259,8 @@ module Aws::QApps
     #   @return [String]
     class ListCategoriesInput < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1216,7 +1269,8 @@ module Aws::QApps
     #   @return [Array<Types::Category>]
     class ListCategoriesOutput < Struct.new(
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1237,7 +1291,8 @@ module Aws::QApps
       :limit,
       :next_token,
       :category_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1250,7 +1305,8 @@ module Aws::QApps
     class ListLibraryItemsOutput < Struct.new(
       :library_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1319,8 @@ module Aws::QApps
     class ListQAppSessionDataInput < Struct.new(
       :instance_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,7 +1341,8 @@ module Aws::QApps
       :session_arn,
       :session_data,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1359,8 @@ module Aws::QApps
       :instance_id,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1373,8 @@ module Aws::QApps
     class ListQAppsOutput < Struct.new(
       :apps,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1323,7 +1383,8 @@ module Aws::QApps
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1393,8 @@ module Aws::QApps
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1346,7 +1408,8 @@ module Aws::QApps
     class PermissionInput < Struct.new(
       :action,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,7 +1423,8 @@ module Aws::QApps
     class PermissionOutput < Struct.new(
       :action,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1378,7 +1442,8 @@ module Aws::QApps
       :title,
       :description,
       :app_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1391,7 +1456,8 @@ module Aws::QApps
     class PredictQAppInput < Struct.new(
       :instance_id,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1406,7 +1472,8 @@ module Aws::QApps
       :conversation,
       :problem_statement,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Conversation < PredictQAppInputOptions; end
@@ -1423,7 +1490,8 @@ module Aws::QApps
     class PredictQAppOutput < Struct.new(
       :app,
       :problem_statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1441,7 +1509,8 @@ module Aws::QApps
       :user_id,
       :user_type,
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1467,7 +1536,8 @@ module Aws::QApps
       :user,
       :submission_id,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1575,8 @@ module Aws::QApps
       :plugin_type,
       :plugin_id,
       :action_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,7 +1606,8 @@ module Aws::QApps
       :prompt,
       :plugin_id,
       :action_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1578,7 +1650,8 @@ module Aws::QApps
       :output_source,
       :attribute_filter,
       :memory_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1608,7 +1681,8 @@ module Aws::QApps
       :prompt,
       :output_source,
       :attribute_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1631,7 +1705,8 @@ module Aws::QApps
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1731,8 @@ module Aws::QApps
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1674,7 +1750,8 @@ module Aws::QApps
       :enabled,
       :accept_responses,
       :reveal_cards,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1703,7 +1780,8 @@ module Aws::QApps
       :initial_values,
       :session_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1794,8 @@ module Aws::QApps
     class StartQAppSessionOutput < Struct.new(
       :session_id,
       :session_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1808,8 @@ module Aws::QApps
     class StopQAppSessionInput < Struct.new(
       :instance_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1747,7 +1827,8 @@ module Aws::QApps
       :value,
       :submission_id,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1761,7 +1842,8 @@ module Aws::QApps
     class SubmissionMutation < Struct.new(
       :submission_id,
       :mutation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1774,12 +1856,14 @@ module Aws::QApps
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1809,7 +1893,8 @@ module Aws::QApps
       :type,
       :placeholder,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1835,7 +1920,8 @@ module Aws::QApps
       :type,
       :placeholder,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1861,7 +1947,8 @@ module Aws::QApps
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1957,8 @@ module Aws::QApps
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1883,12 +1971,14 @@ module Aws::QApps
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1909,7 +1999,8 @@ module Aws::QApps
       :library_item_id,
       :status,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1926,7 +2017,8 @@ module Aws::QApps
       :instance_id,
       :library_item_id,
       :is_verified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2075,8 @@ module Aws::QApps
       :is_rated_by_user,
       :user_count,
       :is_verified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2008,7 +2101,8 @@ module Aws::QApps
       :title,
       :description,
       :app_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2061,7 +2155,8 @@ module Aws::QApps
       :updated_at,
       :updated_by,
       :required_capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2082,7 +2177,8 @@ module Aws::QApps
       :app_id,
       :grant_permissions,
       :revoke_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2195,8 @@ module Aws::QApps
       :resource_arn,
       :app_id,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2116,7 +2213,8 @@ module Aws::QApps
       :instance_id,
       :session_id,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2137,7 +2235,8 @@ module Aws::QApps
       :session_id,
       :session_name,
       :sharing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2158,7 +2257,8 @@ module Aws::QApps
       :session_arn,
       :session_name,
       :sharing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2171,7 +2271,8 @@ module Aws::QApps
     class UpdateQAppSessionOutput < Struct.new(
       :session_id,
       :session_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2181,7 +2282,8 @@ module Aws::QApps
     #   @return [String]
     class User < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2219,7 +2321,8 @@ module Aws::QApps
       :can_edit,
       :status,
       :is_verified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2233,7 +2336,8 @@ module Aws::QApps
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

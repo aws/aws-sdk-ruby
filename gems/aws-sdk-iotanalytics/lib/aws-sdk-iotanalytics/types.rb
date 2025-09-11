@@ -25,7 +25,8 @@ module Aws::IoTAnalytics
       :name,
       :attributes,
       :next,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +45,8 @@ module Aws::IoTAnalytics
       :message_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +86,8 @@ module Aws::IoTAnalytics
     class BatchPutMessageRequest < Struct.new(
       :channel_name,
       :messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +96,8 @@ module Aws::IoTAnalytics
     #   @return [Array<Types::BatchPutMessageErrorEntry>]
     class BatchPutMessageResponse < Struct.new(
       :batch_put_message_error_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,12 +111,14 @@ module Aws::IoTAnalytics
     class CancelPipelineReprocessingRequest < Struct.new(
       :pipeline_name,
       :reprocessing_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelPipelineReprocessingResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +162,8 @@ module Aws::IoTAnalytics
       :creation_time,
       :last_update_time,
       :last_message_arrival_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +181,8 @@ module Aws::IoTAnalytics
       :name,
       :channel_name,
       :next,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +197,8 @@ module Aws::IoTAnalytics
     #   @return [Array<String>]
     class ChannelMessages < Struct.new(
       :s3_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +208,8 @@ module Aws::IoTAnalytics
     #   @return [Types::EstimatedResourceSize]
     class ChannelStatistics < Struct.new(
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +228,8 @@ module Aws::IoTAnalytics
     class ChannelStorage < Struct.new(
       :service_managed_s3,
       :customer_managed_s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +243,8 @@ module Aws::IoTAnalytics
     class ChannelStorageSummary < Struct.new(
       :service_managed_s3,
       :customer_managed_s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +276,8 @@ module Aws::IoTAnalytics
       :creation_time,
       :last_update_time,
       :last_message_arrival_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +292,8 @@ module Aws::IoTAnalytics
     class Column < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +322,8 @@ module Aws::IoTAnalytics
       :execution_role_arn,
       :resource_configuration,
       :variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +348,8 @@ module Aws::IoTAnalytics
       :channel_storage,
       :retention_period,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +366,8 @@ module Aws::IoTAnalytics
       :channel_name,
       :channel_arn,
       :retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +381,8 @@ module Aws::IoTAnalytics
     class CreateDatasetContentRequest < Struct.new(
       :dataset_name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -373,7 +391,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class CreateDatasetContentResponse < Struct.new(
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +441,8 @@ module Aws::IoTAnalytics
       :versioning_configuration,
       :tags,
       :late_data_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +459,8 @@ module Aws::IoTAnalytics
       :dataset_name,
       :dataset_arn,
       :retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +492,8 @@ module Aws::IoTAnalytics
       :tags,
       :file_format_configuration,
       :datastore_partitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +510,8 @@ module Aws::IoTAnalytics
       :datastore_name,
       :datastore_arn,
       :retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +538,8 @@ module Aws::IoTAnalytics
       :pipeline_name,
       :pipeline_activities,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +552,8 @@ module Aws::IoTAnalytics
     class CreatePipelineResponse < Struct.new(
       :pipeline_name,
       :pipeline_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +576,8 @@ module Aws::IoTAnalytics
       :bucket,
       :key_prefix,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +598,8 @@ module Aws::IoTAnalytics
       :bucket,
       :key_prefix,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +617,8 @@ module Aws::IoTAnalytics
       :bucket,
       :key_prefix,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -608,7 +636,8 @@ module Aws::IoTAnalytics
       :bucket,
       :key_prefix,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +695,8 @@ module Aws::IoTAnalytics
       :retention_period,
       :versioning_configuration,
       :late_data_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +718,8 @@ module Aws::IoTAnalytics
       :action_name,
       :query_action,
       :container_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +733,8 @@ module Aws::IoTAnalytics
     class DatasetActionSummary < Struct.new(
       :action_name,
       :action_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -716,7 +748,8 @@ module Aws::IoTAnalytics
     class DatasetContentDeliveryDestination < Struct.new(
       :iot_events_destination_configuration,
       :s3_destination_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +764,8 @@ module Aws::IoTAnalytics
     class DatasetContentDeliveryRule < Struct.new(
       :entry_name,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +780,8 @@ module Aws::IoTAnalytics
     class DatasetContentStatus < Struct.new(
       :state,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +807,8 @@ module Aws::IoTAnalytics
       :creation_time,
       :schedule_time,
       :completion_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +819,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class DatasetContentVersionValue < Struct.new(
       :dataset_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,7 +834,8 @@ module Aws::IoTAnalytics
     class DatasetEntry < Struct.new(
       :entry_name,
       :data_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +867,8 @@ module Aws::IoTAnalytics
       :last_update_time,
       :triggers,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +884,8 @@ module Aws::IoTAnalytics
     class DatasetTrigger < Struct.new(
       :schedule,
       :dataset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +950,8 @@ module Aws::IoTAnalytics
       :last_message_arrival_time,
       :file_format_configuration,
       :datastore_partitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +965,8 @@ module Aws::IoTAnalytics
     class DatastoreActivity < Struct.new(
       :name,
       :datastore_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -934,7 +976,8 @@ module Aws::IoTAnalytics
     #   @return [Types::IotSiteWiseCustomerManagedDatastoreS3Storage]
     class DatastoreIotSiteWiseMultiLayerStorage < Struct.new(
       :customer_managed_s3_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -944,7 +987,8 @@ module Aws::IoTAnalytics
     #   @return [Types::IotSiteWiseCustomerManagedDatastoreS3StorageSummary]
     class DatastoreIotSiteWiseMultiLayerStorageSummary < Struct.new(
       :customer_managed_s3_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +1003,8 @@ module Aws::IoTAnalytics
     class DatastorePartition < Struct.new(
       :attribute_partition,
       :timestamp_partition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -969,7 +1014,8 @@ module Aws::IoTAnalytics
     #   @return [Array<Types::DatastorePartition>]
     class DatastorePartitions < Struct.new(
       :partitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -979,7 +1025,8 @@ module Aws::IoTAnalytics
     #   @return [Types::EstimatedResourceSize]
     class DatastoreStatistics < Struct.new(
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,7 +1045,8 @@ module Aws::IoTAnalytics
       :customer_managed_s3,
       :iot_site_wise_multi_layer_storage,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ServiceManagedS3 < DatastoreStorage; end
@@ -1021,7 +1069,8 @@ module Aws::IoTAnalytics
       :service_managed_s3,
       :customer_managed_s3,
       :iot_site_wise_multi_layer_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1110,8 @@ module Aws::IoTAnalytics
       :last_message_arrival_time,
       :file_format_type,
       :datastore_partitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1070,7 +1120,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class DeleteChannelRequest < Struct.new(
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1136,8 @@ module Aws::IoTAnalytics
     class DeleteDatasetContentRequest < Struct.new(
       :dataset_name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1146,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
       :dataset_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1156,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class DeleteDatastoreRequest < Struct.new(
       :datastore_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1166,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class DeletePipelineRequest < Struct.new(
       :pipeline_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1135,7 +1190,8 @@ module Aws::IoTAnalytics
     class DeltaTime < Struct.new(
       :offset_seconds,
       :time_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,7 +1214,8 @@ module Aws::IoTAnalytics
     #   @return [Integer]
     class DeltaTimeSessionWindowConfiguration < Struct.new(
       :timeout_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1172,7 +1229,8 @@ module Aws::IoTAnalytics
     class DescribeChannelRequest < Struct.new(
       :channel_name,
       :include_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1186,7 +1244,8 @@ module Aws::IoTAnalytics
     class DescribeChannelResponse < Struct.new(
       :channel,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1195,7 +1254,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
       :dataset_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,7 +1264,8 @@ module Aws::IoTAnalytics
     #   @return [Types::Dataset]
     class DescribeDatasetResponse < Struct.new(
       :dataset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1219,7 +1280,8 @@ module Aws::IoTAnalytics
     class DescribeDatastoreRequest < Struct.new(
       :datastore_name,
       :include_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1233,12 +1295,14 @@ module Aws::IoTAnalytics
     class DescribeDatastoreResponse < Struct.new(
       :datastore,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeLoggingOptionsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1247,7 +1311,8 @@ module Aws::IoTAnalytics
     #   @return [Types::LoggingOptions]
     class DescribeLoggingOptionsResponse < Struct.new(
       :logging_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1256,7 +1321,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class DescribePipelineRequest < Struct.new(
       :pipeline_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1331,8 @@ module Aws::IoTAnalytics
     #   @return [Types::Pipeline]
     class DescribePipelineResponse < Struct.new(
       :pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1358,8 @@ module Aws::IoTAnalytics
       :thing_name,
       :role_arn,
       :next,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1318,7 +1386,8 @@ module Aws::IoTAnalytics
       :thing_name,
       :role_arn,
       :next,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1401,8 @@ module Aws::IoTAnalytics
     class EstimatedResourceSize < Struct.new(
       :estimated_size_in_bytes,
       :estimated_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1418,8 @@ module Aws::IoTAnalytics
     class FileFormatConfiguration < Struct.new(
       :json_configuration,
       :parquet_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1438,8 @@ module Aws::IoTAnalytics
       :name,
       :filter,
       :next,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1382,7 +1454,8 @@ module Aws::IoTAnalytics
     class GetDatasetContentRequest < Struct.new(
       :dataset_name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1472,8 @@ module Aws::IoTAnalytics
       :entries,
       :timestamp,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1417,7 +1491,8 @@ module Aws::IoTAnalytics
     class GlueConfiguration < Struct.new(
       :table_name,
       :database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,7 +1501,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class InternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1511,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1527,8 @@ module Aws::IoTAnalytics
     class IotEventsDestinationConfiguration < Struct.new(
       :input_name,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1464,7 +1542,8 @@ module Aws::IoTAnalytics
     class IotSiteWiseCustomerManagedDatastoreS3Storage < Struct.new(
       :bucket,
       :key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,13 +1557,15 @@ module Aws::IoTAnalytics
     class IotSiteWiseCustomerManagedDatastoreS3StorageSummary < Struct.new(
       :bucket,
       :key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration information of the JSON format.</p>
     class JsonConfiguration < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1508,7 +1589,8 @@ module Aws::IoTAnalytics
       :lambda_name,
       :batch_size,
       :next,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,7 +1605,8 @@ module Aws::IoTAnalytics
     class LateDataRule < Struct.new(
       :rule_name,
       :rule_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1533,7 +1616,8 @@ module Aws::IoTAnalytics
     #   @return [Types::DeltaTimeSessionWindowConfiguration]
     class LateDataRuleConfiguration < Struct.new(
       :delta_time_session_window_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1542,7 +1626,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1556,7 +1641,8 @@ module Aws::IoTAnalytics
     class ListChannelsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1570,7 +1656,8 @@ module Aws::IoTAnalytics
     class ListChannelsResponse < Struct.new(
       :channel_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1686,8 @@ module Aws::IoTAnalytics
       :max_results,
       :scheduled_on_or_after,
       :scheduled_before,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1613,7 +1701,8 @@ module Aws::IoTAnalytics
     class ListDatasetContentsResponse < Struct.new(
       :dataset_content_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1627,7 +1716,8 @@ module Aws::IoTAnalytics
     class ListDatasetsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1641,7 +1731,8 @@ module Aws::IoTAnalytics
     class ListDatasetsResponse < Struct.new(
       :dataset_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1655,7 +1746,8 @@ module Aws::IoTAnalytics
     class ListDatastoresRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1669,7 +1761,8 @@ module Aws::IoTAnalytics
     class ListDatastoresResponse < Struct.new(
       :datastore_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1683,7 +1776,8 @@ module Aws::IoTAnalytics
     class ListPipelinesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1697,7 +1791,8 @@ module Aws::IoTAnalytics
     class ListPipelinesResponse < Struct.new(
       :pipeline_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1706,7 +1801,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1715,7 +1811,8 @@ module Aws::IoTAnalytics
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1733,7 +1830,8 @@ module Aws::IoTAnalytics
       :role_arn,
       :level,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1761,7 +1859,8 @@ module Aws::IoTAnalytics
       :attribute,
       :math,
       :next,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,7 +1877,8 @@ module Aws::IoTAnalytics
     class Message < Struct.new(
       :message_id,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1789,7 +1889,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class OutputFileUriValue < Struct.new(
       :file_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1799,7 +1900,8 @@ module Aws::IoTAnalytics
     #   @return [Types::SchemaDefinition]
     class ParquetConfiguration < Struct.new(
       :schema_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1809,7 +1911,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class Partition < Struct.new(
       :attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,7 +1942,8 @@ module Aws::IoTAnalytics
       :reprocessing_summaries,
       :creation_time,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1887,7 +1991,8 @@ module Aws::IoTAnalytics
       :math,
       :device_registry_enrich,
       :device_shadow_enrich,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1909,7 +2014,8 @@ module Aws::IoTAnalytics
       :reprocessing_summaries,
       :creation_time,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1918,7 +2024,8 @@ module Aws::IoTAnalytics
     #   @return [Types::LoggingOptions]
     class PutLoggingOptionsRequest < Struct.new(
       :logging_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1930,7 +2037,8 @@ module Aws::IoTAnalytics
     #   @return [Types::DeltaTime]
     class QueryFilter < Struct.new(
       :delta_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1948,7 +2056,8 @@ module Aws::IoTAnalytics
       :name,
       :attributes,
       :next,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1966,7 +2075,8 @@ module Aws::IoTAnalytics
       :id,
       :status,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2093,8 @@ module Aws::IoTAnalytics
       :message,
       :resource_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2000,7 +2111,8 @@ module Aws::IoTAnalytics
     class ResourceConfiguration < Struct.new(
       :compute_type,
       :volume_size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2009,7 +2121,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2024,7 +2137,8 @@ module Aws::IoTAnalytics
     class RetentionPeriod < Struct.new(
       :unlimited,
       :number_of_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2046,7 +2160,8 @@ module Aws::IoTAnalytics
     class RunPipelineActivityRequest < Struct.new(
       :pipeline_activity,
       :payloads,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2061,7 +2176,8 @@ module Aws::IoTAnalytics
     class RunPipelineActivityResponse < Struct.new(
       :payloads,
       :log_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2110,7 +2226,8 @@ module Aws::IoTAnalytics
       :key,
       :glue_configuration,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2132,7 +2249,8 @@ module Aws::IoTAnalytics
       :max_messages,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2142,7 +2260,8 @@ module Aws::IoTAnalytics
     #   @return [Array<String>]
     class SampleChannelDataResponse < Struct.new(
       :payloads,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2154,7 +2273,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class Schedule < Struct.new(
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2166,7 +2286,8 @@ module Aws::IoTAnalytics
     #   @return [Array<Types::Column>]
     class SchemaDefinition < Struct.new(
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2185,32 +2306,37 @@ module Aws::IoTAnalytics
       :name,
       :attributes,
       :next,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Used to store channel data in an S3 bucket managed by IoT Analytics. You can't change the choice
     #       of S3 storage after the data store is created.</p>
     class ServiceManagedChannelS3Storage < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Used to store channel data in an S3 bucket managed by IoT Analytics.</p>
     class ServiceManagedChannelS3StorageSummary < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Used to store data in an Amazon S3 bucket managed by IoT Analytics. You can't change the choice of Amazon S3 storage after your data store is created.  </p>
     class ServiceManagedDatastoreS3Storage < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the data store that is managed by IoT Analytics.</p>
     class ServiceManagedDatastoreS3StorageSummary < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2219,7 +2345,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2233,7 +2360,8 @@ module Aws::IoTAnalytics
     class SqlQueryDatasetAction < Struct.new(
       :sql_query,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2260,7 +2388,8 @@ module Aws::IoTAnalytics
       :start_time,
       :end_time,
       :channel_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2269,7 +2398,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class StartPipelineReprocessingResponse < Struct.new(
       :reprocessing_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2283,7 +2413,8 @@ module Aws::IoTAnalytics
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2296,12 +2427,14 @@ module Aws::IoTAnalytics
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2310,7 +2443,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2325,7 +2459,8 @@ module Aws::IoTAnalytics
     class TimestampPartition < Struct.new(
       :attribute_name,
       :timestamp_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2337,7 +2472,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     class TriggeringDataset < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,12 +2486,14 @@ module Aws::IoTAnalytics
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2376,7 +2514,8 @@ module Aws::IoTAnalytics
       :channel_name,
       :channel_storage,
       :retention_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2554,8 @@ module Aws::IoTAnalytics
       :retention_period,
       :versioning_configuration,
       :late_data_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,7 +2579,8 @@ module Aws::IoTAnalytics
       :retention_period,
       :datastore_storage,
       :file_format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2462,7 +2603,8 @@ module Aws::IoTAnalytics
     class UpdatePipelineRequest < Struct.new(
       :pipeline_name,
       :pipeline_activities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2490,7 +2632,8 @@ module Aws::IoTAnalytics
       :double_value,
       :dataset_content_version_value,
       :output_file_uri_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2510,7 +2653,8 @@ module Aws::IoTAnalytics
     class VersioningConfiguration < Struct.new(
       :unlimited,
       :max_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

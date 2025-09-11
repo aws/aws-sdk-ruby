@@ -658,7 +658,6 @@ module Aws::RUM
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/rum/latest/developerguide/UpdateRumMetricDefinitions.html"}, "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/rummetrics/{AppMonitorName}/metrics"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

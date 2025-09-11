@@ -45,7 +45,7 @@ module Aws::EKSAuth
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::EKSAuth
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::ExpiredTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::EKSAuth
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::EKSAuth
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::EKSAuth
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::EKSAuth
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::InvalidTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::EKSAuth
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -138,7 +138,7 @@ module Aws::EKSAuth
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::EKSAuth
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

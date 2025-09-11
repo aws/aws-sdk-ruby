@@ -40,7 +40,7 @@ module Aws::BackupSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupSearch::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>User does not have sufficient access to perform this action.</p>
@@ -54,7 +54,7 @@ module Aws::BackupSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupSearch::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -78,7 +78,7 @@ module Aws::BackupSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupSearch::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Unexpected error during processing of request.</p>
@@ -101,7 +101,7 @@ module Aws::BackupSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupSearch::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Request references a resource which does not exist.</p>
@@ -125,7 +125,7 @@ module Aws::BackupSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupSearch::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>This request was not successful due to a service quota exceeding limits.</p>
@@ -159,7 +159,7 @@ module Aws::BackupSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupSearch::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Request was unsuccessful due to request throttling.</p>
@@ -196,7 +196,7 @@ module Aws::BackupSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupSearch::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The input fails to satisfy the constraints specified by an Amazon service.</p>

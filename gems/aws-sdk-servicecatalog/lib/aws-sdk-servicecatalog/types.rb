@@ -46,12 +46,14 @@ module Aws::ServiceCatalog
       :accept_language,
       :portfolio_id,
       :portfolio_share_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AcceptPortfolioShareOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +81,8 @@ module Aws::ServiceCatalog
     class AccessLevelFilter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,12 +95,14 @@ module Aws::ServiceCatalog
     class AssociateBudgetWithResourceInput < Struct.new(
       :budget_name,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateBudgetWithResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,12 +188,14 @@ module Aws::ServiceCatalog
       :portfolio_id,
       :principal_arn,
       :principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociatePrincipalWithPortfolioOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,12 +226,14 @@ module Aws::ServiceCatalog
       :product_id,
       :portfolio_id,
       :source_portfolio_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateProductWithPortfolioOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -259,12 +268,14 @@ module Aws::ServiceCatalog
       :service_action_id,
       :accept_language,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateServiceActionWithProvisioningArtifactOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,12 +288,14 @@ module Aws::ServiceCatalog
     class AssociateTagOptionWithResourceInput < Struct.new(
       :resource_id,
       :tag_option_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateTagOptionWithResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -305,7 +318,8 @@ module Aws::ServiceCatalog
     class BatchAssociateServiceActionWithProvisioningArtifactInput < Struct.new(
       :service_action_associations,
       :accept_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +328,8 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::FailedServiceActionAssociation>]
     class BatchAssociateServiceActionWithProvisioningArtifactOutput < Struct.new(
       :failed_service_action_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,7 +352,8 @@ module Aws::ServiceCatalog
     class BatchDisassociateServiceActionFromProvisioningArtifactInput < Struct.new(
       :service_action_associations,
       :accept_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +362,8 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::FailedServiceActionAssociation>]
     class BatchDisassociateServiceActionFromProvisioningArtifactOutput < Struct.new(
       :failed_service_action_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -356,7 +373,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class BudgetDetail < Struct.new(
       :budget_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +384,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class CloudWatchDashboard < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -390,7 +409,8 @@ module Aws::ServiceCatalog
       :repository,
       :branch,
       :artifact_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +460,8 @@ module Aws::ServiceCatalog
       :owner,
       :product_id,
       :portfolio_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +495,8 @@ module Aws::ServiceCatalog
     class ConstraintSummary < Struct.new(
       :type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +542,8 @@ module Aws::ServiceCatalog
       :source_provisioning_artifact_identifiers,
       :copy_options,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +552,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class CopyProductOutput < Struct.new(
       :copy_product_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,7 +675,8 @@ module Aws::ServiceCatalog
       :type,
       :description,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +693,8 @@ module Aws::ServiceCatalog
       :constraint_detail,
       :constraint_parameters,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +734,8 @@ module Aws::ServiceCatalog
       :provider_name,
       :tags,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +748,8 @@ module Aws::ServiceCatalog
     class CreatePortfolioOutput < Struct.new(
       :portfolio_detail,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +799,8 @@ module Aws::ServiceCatalog
       :organization_node,
       :share_tag_options,
       :share_principals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +809,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class CreatePortfolioShareOutput < Struct.new(
       :portfolio_share_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +894,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_parameters,
       :idempotency_token,
       :source_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +912,8 @@ module Aws::ServiceCatalog
       :product_view_detail,
       :provisioning_artifact_detail,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +979,8 @@ module Aws::ServiceCatalog
       :provisioning_parameters,
       :idempotency_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -972,7 +1005,8 @@ module Aws::ServiceCatalog
       :provision_product_id,
       :provisioned_product_name,
       :provisioning_artifact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1038,8 @@ module Aws::ServiceCatalog
       :product_id,
       :parameters,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,7 +1066,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_detail,
       :info,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1129,8 @@ module Aws::ServiceCatalog
       :description,
       :accept_language,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1102,7 +1139,8 @@ module Aws::ServiceCatalog
     #   @return [Types::ServiceActionDetail]
     class CreateServiceActionOutput < Struct.new(
       :service_action_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1153,8 @@ module Aws::ServiceCatalog
     class CreateTagOptionInput < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1163,8 @@ module Aws::ServiceCatalog
     #   @return [Types::TagOptionDetail]
     class CreateTagOptionOutput < Struct.new(
       :tag_option_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,12 +1187,14 @@ module Aws::ServiceCatalog
     class DeleteConstraintInput < Struct.new(
       :accept_language,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteConstraintOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,12 +1217,14 @@ module Aws::ServiceCatalog
     class DeletePortfolioInput < Struct.new(
       :accept_language,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePortfolioOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,7 +1255,8 @@ module Aws::ServiceCatalog
       :portfolio_id,
       :account_id,
       :organization_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1265,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class DeletePortfolioShareOutput < Struct.new(
       :portfolio_share_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,12 +1289,14 @@ module Aws::ServiceCatalog
     class DeleteProductInput < Struct.new(
       :accept_language,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProductOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1276,12 +1324,14 @@ module Aws::ServiceCatalog
       :accept_language,
       :plan_id,
       :ignore_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProvisionedProductPlanOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1308,12 +1358,14 @@ module Aws::ServiceCatalog
       :accept_language,
       :product_id,
       :provisioning_artifact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProvisioningArtifactOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,12 +1392,14 @@ module Aws::ServiceCatalog
       :id,
       :accept_language,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceActionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1354,12 +1408,14 @@ module Aws::ServiceCatalog
     #   @return [String]
     class DeleteTagOptionInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTagOptionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1382,7 +1438,8 @@ module Aws::ServiceCatalog
     class DescribeConstraintInput < Struct.new(
       :accept_language,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1456,8 @@ module Aws::ServiceCatalog
       :constraint_detail,
       :constraint_parameters,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1422,7 +1480,8 @@ module Aws::ServiceCatalog
     class DescribeCopyProductStatusInput < Struct.new(
       :accept_language,
       :copy_product_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1439,7 +1498,8 @@ module Aws::ServiceCatalog
       :copy_product_status,
       :target_product_id,
       :status_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1462,7 +1522,8 @@ module Aws::ServiceCatalog
     class DescribePortfolioInput < Struct.new(
       :accept_language,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1483,7 +1544,8 @@ module Aws::ServiceCatalog
       :tags,
       :tag_options,
       :budgets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1492,7 +1554,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class DescribePortfolioShareStatusInput < Struct.new(
       :portfolio_share_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,7 +1580,8 @@ module Aws::ServiceCatalog
       :organization_node_value,
       :status,
       :share_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1542,7 +1606,8 @@ module Aws::ServiceCatalog
       :type,
       :page_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1620,8 @@ module Aws::ServiceCatalog
     class DescribePortfolioSharesOutput < Struct.new(
       :next_page_token,
       :portfolio_share_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1591,7 +1657,8 @@ module Aws::ServiceCatalog
       :id,
       :name,
       :source_portfolio_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1683,8 @@ module Aws::ServiceCatalog
       :tags,
       :tag_options,
       :budgets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1643,7 +1711,8 @@ module Aws::ServiceCatalog
       :accept_language,
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1664,7 +1733,8 @@ module Aws::ServiceCatalog
       :provisioning_artifacts,
       :budgets,
       :launch_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1687,7 +1757,8 @@ module Aws::ServiceCatalog
     class DescribeProductViewInput < Struct.new(
       :accept_language,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1700,7 +1771,8 @@ module Aws::ServiceCatalog
     class DescribeProductViewOutput < Struct.new(
       :product_view_summary,
       :provisioning_artifacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1739,7 +1811,8 @@ module Aws::ServiceCatalog
       :accept_language,
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1752,7 +1825,8 @@ module Aws::ServiceCatalog
     class DescribeProvisionedProductOutput < Struct.new(
       :provisioned_product_detail,
       :cloud_watch_dashboards,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1783,7 +1857,8 @@ module Aws::ServiceCatalog
       :plan_id,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1800,7 +1875,8 @@ module Aws::ServiceCatalog
       :provisioned_product_plan_details,
       :resource_changes,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1843,7 +1919,8 @@ module Aws::ServiceCatalog
       :product_name,
       :verbose,
       :include_provisioning_artifact_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1864,7 +1941,8 @@ module Aws::ServiceCatalog
       :info,
       :status,
       :provisioning_artifact_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1909,7 +1987,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_name,
       :path_id,
       :path_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1945,7 +2024,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_preferences,
       :provisioning_artifact_outputs,
       :provisioning_artifact_output_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1977,7 +2057,8 @@ module Aws::ServiceCatalog
       :id,
       :page_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,7 +2076,8 @@ module Aws::ServiceCatalog
       :record_detail,
       :record_outputs,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2104,8 @@ module Aws::ServiceCatalog
       :provisioned_product_id,
       :service_action_id,
       :accept_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2031,7 +2114,8 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::ExecutionParameter>]
     class DescribeServiceActionExecutionParametersOutput < Struct.new(
       :service_action_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2054,7 +2138,8 @@ module Aws::ServiceCatalog
     class DescribeServiceActionInput < Struct.new(
       :id,
       :accept_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2063,7 +2148,8 @@ module Aws::ServiceCatalog
     #   @return [Types::ServiceActionDetail]
     class DescribeServiceActionOutput < Struct.new(
       :service_action_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2072,7 +2158,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class DescribeTagOptionInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2081,17 +2168,20 @@ module Aws::ServiceCatalog
     #   @return [Types::TagOptionDetail]
     class DescribeTagOptionOutput < Struct.new(
       :tag_option_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableAWSOrganizationsAccessInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableAWSOrganizationsAccessOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2104,12 +2194,14 @@ module Aws::ServiceCatalog
     class DisassociateBudgetFromResourceInput < Struct.new(
       :budget_name,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateBudgetFromResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2142,12 +2234,14 @@ module Aws::ServiceCatalog
       :portfolio_id,
       :principal_arn,
       :principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociatePrincipalFromPortfolioOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2174,12 +2268,14 @@ module Aws::ServiceCatalog
       :accept_language,
       :product_id,
       :portfolio_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateProductFromPortfolioOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2214,12 +2310,14 @@ module Aws::ServiceCatalog
       :service_action_id,
       :accept_language,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateServiceActionFromProvisioningArtifactOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2232,12 +2330,14 @@ module Aws::ServiceCatalog
     class DisassociateTagOptionFromResourceInput < Struct.new(
       :resource_id,
       :tag_option_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateTagOptionFromResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,17 +2346,20 @@ module Aws::ServiceCatalog
     #   @return [String]
     class DuplicateResourceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableAWSOrganizationsAccessInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableAWSOrganizationsAccessOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2275,7 +2378,8 @@ module Aws::ServiceCatalog
     #   @return [Types::UniqueTagResourceIdentifier]
     class EngineWorkflowResourceIdentifier < Struct.new(
       :unique_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2303,7 +2407,8 @@ module Aws::ServiceCatalog
       :accept_language,
       :plan_id,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2312,7 +2417,8 @@ module Aws::ServiceCatalog
     #   @return [Types::RecordDetail]
     class ExecuteProvisionedProductPlanOutput < Struct.new(
       :record_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2349,7 +2455,8 @@ module Aws::ServiceCatalog
       :execute_token,
       :accept_language,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2358,7 +2465,8 @@ module Aws::ServiceCatalog
     #   @return [Types::RecordDetail]
     class ExecuteProvisionedProductServiceActionOutput < Struct.new(
       :record_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2376,7 +2484,8 @@ module Aws::ServiceCatalog
       :name,
       :type,
       :default_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2402,12 +2511,14 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAWSOrganizationsAccessStatusInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2416,7 +2527,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class GetAWSOrganizationsAccessStatusOutput < Struct.new(
       :access_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2455,7 +2567,8 @@ module Aws::ServiceCatalog
       :output_keys,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2469,7 +2582,8 @@ module Aws::ServiceCatalog
     class GetProvisionedProductOutputsOutput < Struct.new(
       :outputs,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2625,8 @@ module Aws::ServiceCatalog
       :provisioned_product_name,
       :physical_id,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2520,7 +2635,8 @@ module Aws::ServiceCatalog
     #   @return [Types::RecordDetail]
     class ImportAsProvisionedProductOutput < Struct.new(
       :record_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2529,7 +2645,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class InvalidParametersException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2539,7 +2656,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class InvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2592,7 +2710,8 @@ module Aws::ServiceCatalog
       :last_sync_status_message,
       :last_successful_sync_time,
       :last_successful_sync_provisioning_artifact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2606,7 +2725,8 @@ module Aws::ServiceCatalog
     class LaunchPath < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2628,7 +2748,8 @@ module Aws::ServiceCatalog
       :constraint_summaries,
       :tags,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2638,7 +2759,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2684,7 +2806,8 @@ module Aws::ServiceCatalog
       :page_token,
       :page_size,
       :portfolio_share_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2697,7 +2820,8 @@ module Aws::ServiceCatalog
     class ListAcceptedPortfolioSharesOutput < Struct.new(
       :portfolio_details,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2728,7 +2852,8 @@ module Aws::ServiceCatalog
       :resource_id,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2741,7 +2866,8 @@ module Aws::ServiceCatalog
     class ListBudgetsForResourceOutput < Struct.new(
       :budgets,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2776,7 +2902,8 @@ module Aws::ServiceCatalog
       :product_id,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2789,7 +2916,8 @@ module Aws::ServiceCatalog
     class ListConstraintsForPortfolioOutput < Struct.new(
       :constraint_details,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2820,7 +2948,8 @@ module Aws::ServiceCatalog
       :product_id,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2833,7 +2962,8 @@ module Aws::ServiceCatalog
     class ListLaunchPathsOutput < Struct.new(
       :launch_path_summaries,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2882,7 +3012,8 @@ module Aws::ServiceCatalog
       :organization_node_type,
       :page_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2895,7 +3026,8 @@ module Aws::ServiceCatalog
     class ListOrganizationPortfolioAccessOutput < Struct.new(
       :organization_nodes,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2930,7 +3062,8 @@ module Aws::ServiceCatalog
       :organization_parent_id,
       :page_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2943,7 +3076,8 @@ module Aws::ServiceCatalog
     class ListPortfolioAccessOutput < Struct.new(
       :account_ids,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2974,7 +3108,8 @@ module Aws::ServiceCatalog
       :product_id,
       :page_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2987,7 +3122,8 @@ module Aws::ServiceCatalog
     class ListPortfoliosForProductOutput < Struct.new(
       :portfolio_details,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3014,7 +3150,8 @@ module Aws::ServiceCatalog
       :accept_language,
       :page_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3027,7 +3164,8 @@ module Aws::ServiceCatalog
     class ListPortfoliosOutput < Struct.new(
       :portfolio_details,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3058,7 +3196,8 @@ module Aws::ServiceCatalog
       :portfolio_id,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3071,7 +3210,8 @@ module Aws::ServiceCatalog
     class ListPrincipalsForPortfolioOutput < Struct.new(
       :principals,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3106,7 +3246,8 @@ module Aws::ServiceCatalog
       :page_size,
       :page_token,
       :access_level_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3119,7 +3260,8 @@ module Aws::ServiceCatalog
     class ListProvisionedProductPlansOutput < Struct.new(
       :provisioned_product_plans,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3150,7 +3292,8 @@ module Aws::ServiceCatalog
       :page_size,
       :page_token,
       :accept_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3163,7 +3306,8 @@ module Aws::ServiceCatalog
     class ListProvisioningArtifactsForServiceActionOutput < Struct.new(
       :provisioning_artifact_views,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3186,7 +3330,8 @@ module Aws::ServiceCatalog
     class ListProvisioningArtifactsInput < Struct.new(
       :accept_language,
       :product_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3199,7 +3344,8 @@ module Aws::ServiceCatalog
     class ListProvisioningArtifactsOutput < Struct.new(
       :provisioning_artifact_details,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3234,7 +3380,8 @@ module Aws::ServiceCatalog
       :search_filter,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3247,7 +3394,8 @@ module Aws::ServiceCatalog
     class ListRecordHistoryOutput < Struct.new(
       :record_details,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3271,7 +3419,8 @@ module Aws::ServiceCatalog
     class ListRecordHistorySearchFilter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3304,7 +3453,8 @@ module Aws::ServiceCatalog
       :resource_type,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3317,7 +3467,8 @@ module Aws::ServiceCatalog
     class ListResourcesForTagOptionOutput < Struct.new(
       :resource_details,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3352,7 +3503,8 @@ module Aws::ServiceCatalog
       :page_size,
       :page_token,
       :accept_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3365,7 +3517,8 @@ module Aws::ServiceCatalog
     class ListServiceActionsForProvisioningArtifactOutput < Struct.new(
       :service_action_summaries,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3392,7 +3545,8 @@ module Aws::ServiceCatalog
       :accept_language,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3405,7 +3559,8 @@ module Aws::ServiceCatalog
     class ListServiceActionsOutput < Struct.new(
       :service_action_summaries,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3436,7 +3591,8 @@ module Aws::ServiceCatalog
       :provisioned_product_id,
       :page_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3449,7 +3605,8 @@ module Aws::ServiceCatalog
     class ListStackInstancesForProvisionedProductOutput < Struct.new(
       :stack_instances,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3467,7 +3624,8 @@ module Aws::ServiceCatalog
       :key,
       :value,
       :active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3484,7 +3642,8 @@ module Aws::ServiceCatalog
       :filters,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3497,7 +3656,8 @@ module Aws::ServiceCatalog
     class ListTagOptionsOutput < Struct.new(
       :tag_option_details,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3555,12 +3715,14 @@ module Aws::ServiceCatalog
       :resource_identifier,
       :outputs,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class NotifyProvisionProductEngineWorkflowResultOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3602,12 +3764,14 @@ module Aws::ServiceCatalog
       :status,
       :failure_reason,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class NotifyTerminateProvisionedProductEngineWorkflowResultOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3656,12 +3820,14 @@ module Aws::ServiceCatalog
       :failure_reason,
       :outputs,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class NotifyUpdateProvisionedProductEngineWorkflowResultOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3670,7 +3836,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class OperationNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3684,7 +3851,8 @@ module Aws::ServiceCatalog
     class OrganizationNode < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3725,7 +3893,8 @@ module Aws::ServiceCatalog
       :min_length,
       :max_value,
       :min_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3755,7 +3924,8 @@ module Aws::ServiceCatalog
       :description,
       :created_time,
       :provider_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3786,7 +3956,8 @@ module Aws::ServiceCatalog
       :accepted,
       :share_tag_options,
       :share_principals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3811,7 +3982,8 @@ module Aws::ServiceCatalog
     class Principal < Struct.new(
       :principal_arn,
       :principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3826,7 +3998,8 @@ module Aws::ServiceCatalog
     class ProductViewAggregationValue < Struct.new(
       :value,
       :approximate_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3875,7 +4048,8 @@ module Aws::ServiceCatalog
       :product_arn,
       :created_time,
       :source_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3932,7 +4106,8 @@ module Aws::ServiceCatalog
       :support_email,
       :support_description,
       :support_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4009,7 +4184,8 @@ module Aws::ServiceCatalog
       :tags,
       :notification_arns,
       :provision_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4018,7 +4194,8 @@ module Aws::ServiceCatalog
     #   @return [Types::RecordDetail]
     class ProvisionProductOutput < Struct.new(
       :record_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4175,7 +4352,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_name,
       :user_arn,
       :user_arn_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4312,7 +4490,8 @@ module Aws::ServiceCatalog
       :product_id,
       :provisioning_artifact_id,
       :launch_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4382,7 +4561,8 @@ module Aws::ServiceCatalog
       :provisioning_parameters,
       :tags,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4412,7 +4592,8 @@ module Aws::ServiceCatalog
       :provision_product_name,
       :plan_type,
       :provisioning_artifact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4438,7 +4619,8 @@ module Aws::ServiceCatalog
       :description,
       :created_time,
       :guidance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4500,7 +4682,8 @@ module Aws::ServiceCatalog
       :active,
       :guidance,
       :source_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4514,7 +4697,8 @@ module Aws::ServiceCatalog
     class ProvisioningArtifactOutput < Struct.new(
       :key,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4545,7 +4729,8 @@ module Aws::ServiceCatalog
       :is_no_echo,
       :description,
       :parameter_constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4567,7 +4752,8 @@ module Aws::ServiceCatalog
     class ProvisioningArtifactPreferences < Struct.new(
       :stack_set_accounts,
       :stack_set_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4623,7 +4809,8 @@ module Aws::ServiceCatalog
       :info,
       :type,
       :disable_template_validation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4654,7 +4841,8 @@ module Aws::ServiceCatalog
       :description,
       :created_time,
       :provisioning_artifact_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4668,7 +4856,8 @@ module Aws::ServiceCatalog
     class ProvisioningArtifactView < Struct.new(
       :product_view_summary,
       :provisioning_artifact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4682,7 +4871,8 @@ module Aws::ServiceCatalog
     class ProvisioningParameter < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4740,7 +4930,8 @@ module Aws::ServiceCatalog
       :stack_set_failure_tolerance_percentage,
       :stack_set_max_concurrency_count,
       :stack_set_max_concurrency_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4844,7 +5035,8 @@ module Aws::ServiceCatalog
       :record_errors,
       :record_tags,
       :launch_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4858,7 +5050,8 @@ module Aws::ServiceCatalog
     class RecordError < Struct.new(
       :code,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4877,7 +5070,8 @@ module Aws::ServiceCatalog
       :output_key,
       :output_value,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4891,7 +5085,8 @@ module Aws::ServiceCatalog
     class RecordTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4935,12 +5130,14 @@ module Aws::ServiceCatalog
       :accept_language,
       :portfolio_id,
       :portfolio_share_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RejectPortfolioShareOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4975,7 +5172,8 @@ module Aws::ServiceCatalog
       :replacement,
       :scope,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4994,7 +5192,8 @@ module Aws::ServiceCatalog
       :target,
       :evaluation,
       :causing_entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5020,7 +5219,8 @@ module Aws::ServiceCatalog
       :name,
       :description,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5029,7 +5229,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5038,7 +5239,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5058,7 +5260,8 @@ module Aws::ServiceCatalog
       :attribute,
       :name,
       :requires_recreation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5089,7 +5292,8 @@ module Aws::ServiceCatalog
       :access_level_filter,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5102,7 +5306,8 @@ module Aws::ServiceCatalog
     class ScanProvisionedProductsOutput < Struct.new(
       :provisioned_products,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5150,7 +5355,8 @@ module Aws::ServiceCatalog
       :page_token,
       :page_size,
       :product_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5163,7 +5369,8 @@ module Aws::ServiceCatalog
     class SearchProductsAsAdminOutput < Struct.new(
       :product_view_details,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5203,7 +5410,8 @@ module Aws::ServiceCatalog
       :sort_by,
       :sort_order,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5220,7 +5428,8 @@ module Aws::ServiceCatalog
       :product_view_summaries,
       :product_view_aggregations,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5273,7 +5482,8 @@ module Aws::ServiceCatalog
       :sort_order,
       :page_size,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5290,7 +5500,8 @@ module Aws::ServiceCatalog
       :provisioned_products,
       :total_results_count,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5313,7 +5524,8 @@ module Aws::ServiceCatalog
       :service_action_id,
       :product_id,
       :provisioning_artifact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5327,7 +5539,8 @@ module Aws::ServiceCatalog
     class ServiceActionDetail < Struct.new(
       :service_action_summary,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5349,7 +5562,8 @@ module Aws::ServiceCatalog
       :name,
       :description,
       :definition_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5363,7 +5577,8 @@ module Aws::ServiceCatalog
     class ShareDetails < Struct.new(
       :successful_shares,
       :share_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5381,7 +5596,8 @@ module Aws::ServiceCatalog
       :accounts,
       :message,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5399,7 +5615,8 @@ module Aws::ServiceCatalog
     class SourceConnection < Struct.new(
       :type,
       :connection_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5444,7 +5661,8 @@ module Aws::ServiceCatalog
       :type,
       :connection_parameters,
       :last_sync,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5454,7 +5672,8 @@ module Aws::ServiceCatalog
     #   @return [Types::CodeStarParameters]
     class SourceConnectionParameters < Struct.new(
       :code_star,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5488,7 +5707,8 @@ module Aws::ServiceCatalog
       :account,
       :region,
       :stack_instance_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5503,7 +5723,8 @@ module Aws::ServiceCatalog
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5529,7 +5750,8 @@ module Aws::ServiceCatalog
       :active,
       :id,
       :owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5540,7 +5762,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     class TagOptionNotMigratedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5554,7 +5777,8 @@ module Aws::ServiceCatalog
     class TagOptionSummary < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5602,7 +5826,8 @@ module Aws::ServiceCatalog
       :ignore_errors,
       :accept_language,
       :retain_physical_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5611,7 +5836,8 @@ module Aws::ServiceCatalog
     #   @return [Types::RecordDetail]
     class TerminateProvisionedProductOutput < Struct.new(
       :record_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5637,7 +5863,8 @@ module Aws::ServiceCatalog
     class UniqueTagResourceIdentifier < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5719,7 +5946,8 @@ module Aws::ServiceCatalog
       :id,
       :description,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5736,7 +5964,8 @@ module Aws::ServiceCatalog
       :constraint_detail,
       :constraint_parameters,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5779,7 +6008,8 @@ module Aws::ServiceCatalog
       :provider_name,
       :add_tags,
       :remove_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5792,7 +6022,8 @@ module Aws::ServiceCatalog
     class UpdatePortfolioOutput < Struct.new(
       :portfolio_detail,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5833,7 +6064,8 @@ module Aws::ServiceCatalog
       :organization_node,
       :share_tag_options,
       :share_principals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5848,7 +6080,8 @@ module Aws::ServiceCatalog
     class UpdatePortfolioShareOutput < Struct.new(
       :portfolio_share_token,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5925,7 +6158,8 @@ module Aws::ServiceCatalog
       :add_tags,
       :remove_tags,
       :source_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5938,7 +6172,8 @@ module Aws::ServiceCatalog
     class UpdateProductOutput < Struct.new(
       :product_view_detail,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6007,7 +6242,8 @@ module Aws::ServiceCatalog
       :provisioning_preferences,
       :tags,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6016,7 +6252,8 @@ module Aws::ServiceCatalog
     #   @return [Types::RecordDetail]
     class UpdateProvisionedProductOutput < Struct.new(
       :record_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6066,7 +6303,8 @@ module Aws::ServiceCatalog
       :provisioned_product_id,
       :provisioned_product_properties,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6087,7 +6325,8 @@ module Aws::ServiceCatalog
       :provisioned_product_properties,
       :record_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6135,7 +6374,8 @@ module Aws::ServiceCatalog
       :description,
       :active,
       :guidance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6152,7 +6392,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_detail,
       :info,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6170,7 +6411,8 @@ module Aws::ServiceCatalog
       :key,
       :value,
       :use_previous_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6243,7 +6485,8 @@ module Aws::ServiceCatalog
       :stack_set_max_concurrency_count,
       :stack_set_max_concurrency_percentage,
       :stack_set_operation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6278,7 +6521,8 @@ module Aws::ServiceCatalog
       :definition,
       :description,
       :accept_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6287,7 +6531,8 @@ module Aws::ServiceCatalog
     #   @return [Types::ServiceActionDetail]
     class UpdateServiceActionOutput < Struct.new(
       :service_action_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6304,7 +6549,8 @@ module Aws::ServiceCatalog
       :id,
       :value,
       :active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6313,7 +6559,8 @@ module Aws::ServiceCatalog
     #   @return [Types::TagOptionDetail]
     class UpdateTagOptionOutput < Struct.new(
       :tag_option_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6327,7 +6574,8 @@ module Aws::ServiceCatalog
     class UsageInstruction < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

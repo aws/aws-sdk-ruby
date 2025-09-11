@@ -28,7 +28,8 @@ module Aws::CognitoIdentity
       :provider_name,
       :client_id,
       :server_side_token_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -43,7 +44,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -96,7 +98,8 @@ module Aws::CognitoIdentity
       :cognito_identity_providers,
       :saml_provider_ar_ns,
       :identity_pool_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +150,8 @@ module Aws::CognitoIdentity
       :cognito_identity_providers,
       :saml_provider_ar_ns,
       :identity_pool_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -174,7 +178,8 @@ module Aws::CognitoIdentity
       :secret_key,
       :session_token,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +189,8 @@ module Aws::CognitoIdentity
     #   @return [Array<String>]
     class DeleteIdentitiesInput < Struct.new(
       :identity_ids_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +202,8 @@ module Aws::CognitoIdentity
     #   @return [Array<Types::UnprocessedIdentityId>]
     class DeleteIdentitiesResponse < Struct.new(
       :unprocessed_identity_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +213,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class DeleteIdentityPoolInput < Struct.new(
       :identity_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +224,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class DescribeIdentityInput < Struct.new(
       :identity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +247,8 @@ module Aws::CognitoIdentity
       :logins,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +258,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class DescribeIdentityPoolInput < Struct.new(
       :identity_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -299,7 +310,8 @@ module Aws::CognitoIdentity
       :cognito_identity_providers,
       :saml_provider_ar_ns,
       :identity_pool_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -315,7 +327,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class DeveloperUserAlreadyRegisteredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +339,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class ExternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +369,8 @@ module Aws::CognitoIdentity
       :identity_id,
       :logins,
       :custom_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -370,7 +385,8 @@ module Aws::CognitoIdentity
     class GetCredentialsForIdentityResponse < Struct.new(
       :identity_id,
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +433,8 @@ module Aws::CognitoIdentity
       :account_id,
       :identity_pool_id,
       :logins,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +444,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class GetIdResponse < Struct.new(
       :identity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +455,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class GetIdentityPoolRolesInput < Struct.new(
       :identity_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +479,8 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :roles,
       :role_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +523,8 @@ module Aws::CognitoIdentity
       :logins,
       :principal_tags,
       :token_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +539,8 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenForDeveloperIdentityResponse < Struct.new(
       :identity_id,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +557,8 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenInput < Struct.new(
       :identity_id,
       :logins,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +573,8 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenResponse < Struct.new(
       :identity_id,
       :token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +588,8 @@ module Aws::CognitoIdentity
     class GetPrincipalTagAttributeMapInput < Struct.new(
       :identity_pool_id,
       :identity_provider_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +613,8 @@ module Aws::CognitoIdentity
       :identity_provider_name,
       :use_defaults,
       :principal_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +636,8 @@ module Aws::CognitoIdentity
       :logins,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +651,8 @@ module Aws::CognitoIdentity
     class IdentityPoolShortDescription < Struct.new(
       :identity_pool_id,
       :identity_pool_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +662,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class InternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,7 +680,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class InvalidIdentityPoolConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +691,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +702,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +726,8 @@ module Aws::CognitoIdentity
       :max_results,
       :next_token,
       :hide_disabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +745,8 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +760,8 @@ module Aws::CognitoIdentity
     class ListIdentityPoolsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +775,8 @@ module Aws::CognitoIdentity
     class ListIdentityPoolsResponse < Struct.new(
       :identity_pools,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -750,7 +786,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +796,8 @@ module Aws::CognitoIdentity
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +830,8 @@ module Aws::CognitoIdentity
       :developer_user_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -818,7 +857,8 @@ module Aws::CognitoIdentity
       :identity_id,
       :developer_user_identifier_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +883,8 @@ module Aws::CognitoIdentity
       :match_type,
       :value,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -871,7 +912,8 @@ module Aws::CognitoIdentity
       :destination_user_identifier,
       :developer_provider_name,
       :identity_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,7 +924,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class MergeDeveloperIdentitiesResponse < Struct.new(
       :identity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +935,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class NotAuthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +947,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class ResourceConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +959,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +988,8 @@ module Aws::CognitoIdentity
       :type,
       :ambiguous_role_resolution,
       :rules_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +1000,8 @@ module Aws::CognitoIdentity
     #   @return [Array<Types::MappingRule>]
     class RulesConfigurationType < Struct.new(
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -976,7 +1024,8 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :roles,
       :role_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,7 +1047,8 @@ module Aws::CognitoIdentity
       :identity_provider_name,
       :use_defaults,
       :principal_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1022,7 +1072,8 @@ module Aws::CognitoIdentity
       :identity_provider_name,
       :use_defaults,
       :principal_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,12 +1086,14 @@ module Aws::CognitoIdentity
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1103,8 @@ module Aws::CognitoIdentity
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1126,8 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :developer_provider_name,
       :developer_user_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1091,7 +1146,8 @@ module Aws::CognitoIdentity
       :identity_id,
       :logins,
       :logins_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1106,7 +1162,8 @@ module Aws::CognitoIdentity
     class UnprocessedIdentityId < Struct.new(
       :identity_id,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,12 +1176,14 @@ module Aws::CognitoIdentity
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,7 +1234,8 @@ module Aws::CognitoIdentity
       :cognito_identity_providers,
       :saml_provider_ar_ns,
       :identity_pool_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1286,8 @@ module Aws::CognitoIdentity
       :cognito_identity_providers,
       :saml_provider_ar_ns,
       :identity_pool_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

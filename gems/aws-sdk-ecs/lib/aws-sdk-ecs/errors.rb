@@ -60,7 +60,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -76,7 +76,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::AttributeLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -91,7 +91,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::BlockedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -107,7 +107,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -123,7 +123,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ClusterContainsContainerInstancesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -140,7 +140,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ClusterContainsServicesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -154,7 +154,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ClusterContainsTasksException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -168,7 +168,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ClusterNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -182,7 +182,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The existing task ARNs which are already associated with the
@@ -205,7 +205,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -219,7 +219,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -236,7 +236,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::MissingVersionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -250,7 +250,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::NamespaceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -266,7 +266,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::NoUpdateAvailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -281,7 +281,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::PlatformTaskDefinitionIncompatibilityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -295,7 +295,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::PlatformUnknownException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -309,7 +309,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -323,7 +323,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -337,7 +337,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -351,7 +351,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ServiceDeploymentNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -366,7 +366,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ServiceNotActiveException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -381,7 +381,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ServiceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -410,7 +410,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::TargetNotConnectedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -426,7 +426,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::TargetNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -441,7 +441,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::TaskSetNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -455,7 +455,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::UnsupportedFeatureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>
@@ -473,7 +473,7 @@ module Aws::ECS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::UpdateInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p> Message that describes the cause of the exception.</p>

@@ -11,7 +11,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +50,8 @@ module Aws::Route53RecoveryControlConfig
       :status,
       :wait_period_ms,
       :owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +69,8 @@ module Aws::Route53RecoveryControlConfig
       :name,
       :safety_rule_arn,
       :wait_period_ms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +100,8 @@ module Aws::Route53RecoveryControlConfig
       :status,
       :owner,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +115,8 @@ module Aws::Route53RecoveryControlConfig
     class ClusterEndpoint < Struct.new(
       :endpoint,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +125,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +160,8 @@ module Aws::Route53RecoveryControlConfig
       :routing_control_count,
       :status,
       :owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -176,7 +183,8 @@ module Aws::Route53RecoveryControlConfig
       :cluster_name,
       :tags,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +193,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +216,8 @@ module Aws::Route53RecoveryControlConfig
       :cluster_arn,
       :control_panel_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +226,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Types::ControlPanel]
     class CreateControlPanelResponse < Struct.new(
       :control_panel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +249,8 @@ module Aws::Route53RecoveryControlConfig
       :cluster_arn,
       :control_panel_arn,
       :routing_control_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -247,7 +259,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Types::RoutingControl]
     class CreateRoutingControlResponse < Struct.new(
       :routing_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -269,7 +282,8 @@ module Aws::Route53RecoveryControlConfig
       :client_token,
       :gating_rule,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +296,8 @@ module Aws::Route53RecoveryControlConfig
     class CreateSafetyRuleResponse < Struct.new(
       :assertion_rule,
       :gating_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -291,12 +306,14 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteClusterResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -305,12 +322,14 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class DeleteControlPanelRequest < Struct.new(
       :control_panel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteControlPanelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -319,12 +338,14 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class DeleteRoutingControlRequest < Struct.new(
       :routing_control_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRoutingControlResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,12 +354,14 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class DeleteSafetyRuleRequest < Struct.new(
       :safety_rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSafetyRuleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +370,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -356,7 +380,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Types::Cluster]
     class DescribeClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +390,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class DescribeControlPanelRequest < Struct.new(
       :control_panel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +400,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Types::ControlPanel]
     class DescribeControlPanelResponse < Struct.new(
       :control_panel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -383,7 +410,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class DescribeRoutingControlRequest < Struct.new(
       :routing_control_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +420,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Types::RoutingControl]
     class DescribeRoutingControlResponse < Struct.new(
       :routing_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +430,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class DescribeSafetyRuleRequest < Struct.new(
       :safety_rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +444,8 @@ module Aws::Route53RecoveryControlConfig
     class DescribeSafetyRuleResponse < Struct.new(
       :assertion_rule,
       :gating_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +487,8 @@ module Aws::Route53RecoveryControlConfig
       :target_controls,
       :wait_period_ms,
       :owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +506,8 @@ module Aws::Route53RecoveryControlConfig
       :name,
       :safety_rule_arn,
       :wait_period_ms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +516,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -492,7 +526,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +536,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +554,8 @@ module Aws::Route53RecoveryControlConfig
       :max_results,
       :next_token,
       :routing_control_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -531,7 +568,8 @@ module Aws::Route53RecoveryControlConfig
     class ListAssociatedRoute53HealthChecksResponse < Struct.new(
       :health_check_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +582,8 @@ module Aws::Route53RecoveryControlConfig
     class ListClustersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +596,8 @@ module Aws::Route53RecoveryControlConfig
     class ListClustersResponse < Struct.new(
       :clusters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +614,8 @@ module Aws::Route53RecoveryControlConfig
       :cluster_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -587,7 +628,8 @@ module Aws::Route53RecoveryControlConfig
     class ListControlPanelsResponse < Struct.new(
       :control_panels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +646,8 @@ module Aws::Route53RecoveryControlConfig
       :control_panel_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,7 +660,8 @@ module Aws::Route53RecoveryControlConfig
     class ListRoutingControlsResponse < Struct.new(
       :next_token,
       :routing_controls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +678,8 @@ module Aws::Route53RecoveryControlConfig
       :control_panel_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +692,8 @@ module Aws::Route53RecoveryControlConfig
     class ListSafetyRulesResponse < Struct.new(
       :next_token,
       :safety_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +702,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +712,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +739,8 @@ module Aws::Route53RecoveryControlConfig
       :name,
       :rule_config,
       :wait_period_ms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +770,8 @@ module Aws::Route53RecoveryControlConfig
       :rule_config,
       :target_controls,
       :wait_period_ms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +780,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +807,8 @@ module Aws::Route53RecoveryControlConfig
       :routing_control_arn,
       :status,
       :owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +822,8 @@ module Aws::Route53RecoveryControlConfig
     class Rule < Struct.new(
       :assertion,
       :gating,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,7 +841,8 @@ module Aws::Route53RecoveryControlConfig
       :inverted,
       :threshold,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,7 +851,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,12 +866,14 @@ module Aws::Route53RecoveryControlConfig
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +882,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,12 +896,14 @@ module Aws::Route53RecoveryControlConfig
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +917,8 @@ module Aws::Route53RecoveryControlConfig
     class UpdateClusterRequest < Struct.new(
       :cluster_arn,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +927,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Types::Cluster]
     class UpdateClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -880,7 +942,8 @@ module Aws::Route53RecoveryControlConfig
     class UpdateControlPanelRequest < Struct.new(
       :control_panel_arn,
       :control_panel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +952,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Types::ControlPanel]
     class UpdateControlPanelResponse < Struct.new(
       :control_panel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +967,8 @@ module Aws::Route53RecoveryControlConfig
     class UpdateRoutingControlRequest < Struct.new(
       :routing_control_arn,
       :routing_control_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -912,7 +977,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Types::RoutingControl]
     class UpdateRoutingControlResponse < Struct.new(
       :routing_control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -926,7 +992,8 @@ module Aws::Route53RecoveryControlConfig
     class UpdateSafetyRuleRequest < Struct.new(
       :assertion_rule_update,
       :gating_rule_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +1006,8 @@ module Aws::Route53RecoveryControlConfig
     class UpdateSafetyRuleResponse < Struct.new(
       :assertion_rule,
       :gating_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,7 +1016,8 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -41,7 +41,7 @@ module Aws::TaxSettings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::TaxSettings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::AttachmentUploadException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::TaxSettings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::CaseCreationLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::TaxSettings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::TaxSettings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::TaxSettings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::TaxSettings
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

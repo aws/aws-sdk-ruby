@@ -152,7 +152,8 @@ module Aws::MarketplaceCommerceAnalytics
       :destination_s3_prefix,
       :sns_topic_arn,
       :customer_defined_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +164,8 @@ module Aws::MarketplaceCommerceAnalytics
     #   @return [String]
     class GenerateDataSetResult < Struct.new(
       :data_set_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +175,8 @@ module Aws::MarketplaceCommerceAnalytics
     #   @return [String]
     class MarketplaceCommerceAnalyticsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +230,8 @@ module Aws::MarketplaceCommerceAnalytics
       :destination_s3_prefix,
       :sns_topic_arn,
       :customer_defined_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +244,8 @@ module Aws::MarketplaceCommerceAnalytics
     #   @return [String]
     class StartSupportDataExportResult < Struct.new(
       :data_set_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

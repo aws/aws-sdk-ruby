@@ -12,7 +12,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class ActiveContext < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class AdvancedRecognitionSetting < Struct.new(
       :audio_recognition_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +50,8 @@ module Aws::LexModelsV2
       :error_details,
       :actual_elicited_slot,
       :actual_intent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +61,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class AgentTurnSpecification < Struct.new(
       :agent_prompt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -81,7 +85,8 @@ module Aws::LexModelsV2
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -96,7 +101,8 @@ module Aws::LexModelsV2
     class AggregatedUtterancesSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +147,8 @@ module Aws::LexModelsV2
       :utterance_first_recorded_in_aggregation_duration,
       :utterance_last_recorded_in_aggregation_duration,
       :contains_data_from_deleted_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +162,8 @@ module Aws::LexModelsV2
     class AllowedInputTypes < Struct.new(
       :allow_audio_input,
       :allow_dtmf_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +181,8 @@ module Aws::LexModelsV2
       :name,
       :interval,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +196,8 @@ module Aws::LexModelsV2
     class AnalyticsBinKey < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +361,8 @@ module Aws::LexModelsV2
       :name,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +376,8 @@ module Aws::LexModelsV2
     class AnalyticsIntentGroupByKey < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +387,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class AnalyticsIntentGroupBySpecification < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -429,7 +442,8 @@ module Aws::LexModelsV2
       :name,
       :statistic,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +497,8 @@ module Aws::LexModelsV2
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +524,8 @@ module Aws::LexModelsV2
       :intent_count,
       :intent_level,
       :node_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +543,8 @@ module Aws::LexModelsV2
       :bin_keys,
       :group_by_keys,
       :metrics_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +708,8 @@ module Aws::LexModelsV2
       :name,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,7 +723,8 @@ module Aws::LexModelsV2
     class AnalyticsIntentStageGroupByKey < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -715,7 +734,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class AnalyticsIntentStageGroupBySpecification < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +789,8 @@ module Aws::LexModelsV2
       :name,
       :statistic,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +844,8 @@ module Aws::LexModelsV2
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +863,8 @@ module Aws::LexModelsV2
       :bin_keys,
       :group_by_keys,
       :metrics_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -957,7 +980,8 @@ module Aws::LexModelsV2
       :name,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1157,8 @@ module Aws::LexModelsV2
       :name,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1172,8 @@ module Aws::LexModelsV2
     class AnalyticsSessionGroupByKey < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1157,7 +1183,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class AnalyticsSessionGroupBySpecification < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1219,7 +1246,8 @@ module Aws::LexModelsV2
       :name,
       :statistic,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1309,8 @@ module Aws::LexModelsV2
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1299,7 +1328,8 @@ module Aws::LexModelsV2
       :bin_keys,
       :group_by_keys,
       :metrics_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1339,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class AnalyticsUtteranceAttribute < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1350,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class AnalyticsUtteranceAttributeResult < Struct.new(
       :last_used_intent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1483,7 +1515,8 @@ module Aws::LexModelsV2
       :name,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1497,7 +1530,8 @@ module Aws::LexModelsV2
     class AnalyticsUtteranceGroupByKey < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1507,7 +1541,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class AnalyticsUtteranceGroupBySpecification < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1557,7 +1592,8 @@ module Aws::LexModelsV2
       :name,
       :statistic,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1607,7 +1643,8 @@ module Aws::LexModelsV2
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1629,7 +1666,8 @@ module Aws::LexModelsV2
       :group_by_keys,
       :metrics_results,
       :attribute_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1680,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class AssociatedTranscript < Struct.new(
       :transcript,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,7 +1696,8 @@ module Aws::LexModelsV2
     class AssociatedTranscriptFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1676,7 +1716,8 @@ module Aws::LexModelsV2
       :start_timeout_ms,
       :audio_specification,
       :dtmf_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1689,7 +1730,8 @@ module Aws::LexModelsV2
     #   @return [Types::S3BucketLogDestination]
     class AudioLogDestination < Struct.new(
       :s3_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1752,8 @@ module Aws::LexModelsV2
       :enabled,
       :destination,
       :selective_logging_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1731,7 +1774,8 @@ module Aws::LexModelsV2
     class AudioSpecification < Struct.new(
       :max_length_ms,
       :end_timeout_ms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1756,7 +1800,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :custom_vocabulary_item_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1786,7 +1831,8 @@ module Aws::LexModelsV2
       :locale_id,
       :errors,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1811,7 +1857,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :custom_vocabulary_item_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1842,7 +1889,8 @@ module Aws::LexModelsV2
       :locale_id,
       :errors,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1915,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :custom_vocabulary_item_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1897,7 +1946,8 @@ module Aws::LexModelsV2
       :locale_id,
       :errors,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1911,7 +1961,8 @@ module Aws::LexModelsV2
     class BedrockGuardrailConfiguration < Struct.new(
       :identifier,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1929,7 +1980,8 @@ module Aws::LexModelsV2
       :bedrock_knowledge_base_arn,
       :exact_response,
       :exact_response_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1944,7 +1996,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class BedrockKnowledgeStoreExactResponseFields < Struct.new(
       :answer_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1966,7 +2019,8 @@ module Aws::LexModelsV2
       :guardrail,
       :trace_status,
       :custom_prompt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1985,7 +2039,8 @@ module Aws::LexModelsV2
       :bot_version,
       :start_date,
       :end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2057,8 @@ module Aws::LexModelsV2
     class BotAliasLocaleSettings < Struct.new(
       :enabled,
       :code_hook_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2037,7 +2093,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       :failure_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2075,7 +2132,8 @@ module Aws::LexModelsV2
       :bot_alias_status,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2093,7 +2151,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_alias_id,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2108,7 +2167,8 @@ module Aws::LexModelsV2
     class BotExportSpecification < Struct.new(
       :bot_id,
       :bot_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2131,7 +2191,8 @@ module Aws::LexModelsV2
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2181,7 +2242,8 @@ module Aws::LexModelsV2
       :idle_session_ttl_in_seconds,
       :bot_tags,
       :test_bot_alias_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2201,7 +2263,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2224,7 +2287,8 @@ module Aws::LexModelsV2
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2239,7 +2303,8 @@ module Aws::LexModelsV2
     class BotLocaleHistoryEvent < Struct.new(
       :event,
       :event_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2327,7 +2392,8 @@ module Aws::LexModelsV2
       :locale_id,
       :nlu_intent_confidence_threshold,
       :voice_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2342,7 +2408,8 @@ module Aws::LexModelsV2
     class BotLocaleSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2442,8 @@ module Aws::LexModelsV2
       :bot_locale_status,
       :last_updated_date_time,
       :last_build_submitted_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2401,7 +2469,8 @@ module Aws::LexModelsV2
       :bot_member_alias_id,
       :bot_member_alias_name,
       :bot_member_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2417,7 +2486,8 @@ module Aws::LexModelsV2
     class BotRecommendationResultStatistics < Struct.new(
       :intents,
       :slot_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2437,7 +2507,8 @@ module Aws::LexModelsV2
       :bot_locale_export_url,
       :associated_transcripts_url,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2464,7 +2535,8 @@ module Aws::LexModelsV2
       :bot_recommendation_id,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2486,7 +2558,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :bot_replica_status,
       :failure_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2501,7 +2574,8 @@ module Aws::LexModelsV2
     class BotSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2537,7 +2611,8 @@ module Aws::LexModelsV2
       :latest_bot_version,
       :last_updated_date_time,
       :bot_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2547,7 +2622,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class BotVersionLocaleDetails < Struct.new(
       :source_bot_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2561,7 +2637,8 @@ module Aws::LexModelsV2
     class BotVersionReplicaSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2583,7 +2660,8 @@ module Aws::LexModelsV2
       :bot_version_replication_status,
       :creation_date_time,
       :failure_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2598,7 +2676,8 @@ module Aws::LexModelsV2
     class BotVersionSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2627,7 +2706,8 @@ module Aws::LexModelsV2
       :description,
       :bot_status,
       :creation_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2649,7 +2729,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2681,7 +2762,8 @@ module Aws::LexModelsV2
       :locale_id,
       :bot_locale_status,
       :last_build_submitted_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2695,7 +2777,8 @@ module Aws::LexModelsV2
     class BuildtimeSettings < Struct.new(
       :descriptive_bot_builder,
       :sample_utterance_generation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2710,7 +2793,8 @@ module Aws::LexModelsV2
     class BuiltInIntentSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2725,7 +2809,8 @@ module Aws::LexModelsV2
     class BuiltInIntentSummary < Struct.new(
       :intent_signature,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2741,7 +2826,8 @@ module Aws::LexModelsV2
     class BuiltInSlotTypeSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2758,7 +2844,8 @@ module Aws::LexModelsV2
     class BuiltInSlotTypeSummary < Struct.new(
       :slot_type_signature,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2775,7 +2862,8 @@ module Aws::LexModelsV2
     class Button < Struct.new(
       :text,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2792,7 +2880,8 @@ module Aws::LexModelsV2
     class CloudWatchLogGroupLogDestination < Struct.new(
       :cloud_watch_log_group_arn,
       :log_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2804,7 +2893,8 @@ module Aws::LexModelsV2
     #   @return [Types::LambdaCodeHook]
     class CodeHookSpecification < Struct.new(
       :lambda_code_hook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2815,7 +2905,8 @@ module Aws::LexModelsV2
     #   @return [Array<Types::SubSlotTypeComposition>]
     class CompositeSlotTypeSetting < Struct.new(
       :sub_slots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2825,7 +2916,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class Condition < Struct.new(
       :expression_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2850,7 +2942,8 @@ module Aws::LexModelsV2
       :condition,
       :next_step,
       :response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2879,7 +2972,8 @@ module Aws::LexModelsV2
       :active,
       :conditional_branches,
       :default_branch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2890,7 +2984,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2905,7 +3000,8 @@ module Aws::LexModelsV2
     class ConversationLevelIntentClassificationResultItem < Struct.new(
       :intent_name,
       :match_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2919,7 +3015,8 @@ module Aws::LexModelsV2
     class ConversationLevelResultDetail < Struct.new(
       :end_to_end_result,
       :speech_transcription_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2937,7 +3034,8 @@ module Aws::LexModelsV2
       :intent_name,
       :slot_name,
       :match_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2963,7 +3061,8 @@ module Aws::LexModelsV2
       :speech_transcription_result,
       :intent_classification_results,
       :slot_resolution_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2973,7 +3072,8 @@ module Aws::LexModelsV2
     #   @return [Array<Types::ConversationLevelTestResultItem>]
     class ConversationLevelTestResults < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2984,7 +3084,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class ConversationLevelTestResultsFilterBy < Struct.new(
       :end_to_end_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2999,7 +3100,8 @@ module Aws::LexModelsV2
     class ConversationLogSettings < Struct.new(
       :text_log_settings,
       :audio_log_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3021,7 +3123,8 @@ module Aws::LexModelsV2
       :bot_alias_id,
       :locale_id,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3039,7 +3142,8 @@ module Aws::LexModelsV2
       :start_time,
       :end_time,
       :input_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3088,7 +3192,8 @@ module Aws::LexModelsV2
       :sentiment_analysis_settings,
       :bot_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3143,7 +3248,8 @@ module Aws::LexModelsV2
       :bot_id,
       :creation_date_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3206,7 +3312,8 @@ module Aws::LexModelsV2
       :nlu_intent_confidence_threshold,
       :voice_settings,
       :generative_ai_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3265,7 +3372,8 @@ module Aws::LexModelsV2
       :bot_locale_status,
       :creation_date_time,
       :generative_ai_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3278,7 +3386,8 @@ module Aws::LexModelsV2
     class CreateBotReplicaRequest < Struct.new(
       :bot_id,
       :replica_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3303,7 +3412,8 @@ module Aws::LexModelsV2
       :source_region,
       :creation_date_time,
       :bot_replica_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3364,7 +3474,8 @@ module Aws::LexModelsV2
       :bot_type,
       :bot_members,
       :error_log_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3426,7 +3537,8 @@ module Aws::LexModelsV2
       :bot_type,
       :bot_members,
       :error_log_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3447,7 +3559,8 @@ module Aws::LexModelsV2
       :bot_id,
       :description,
       :bot_version_locale_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3480,7 +3593,8 @@ module Aws::LexModelsV2
       :bot_version_locale_specification,
       :bot_status,
       :creation_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3500,7 +3614,8 @@ module Aws::LexModelsV2
       :resource_specification,
       :file_format,
       :file_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3530,7 +3645,8 @@ module Aws::LexModelsV2
       :file_format,
       :export_status,
       :creation_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3658,7 +3774,8 @@ module Aws::LexModelsV2
       :initial_response_setting,
       :qn_a_intent_configuration,
       :q_in_connect_intent_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3742,7 +3859,8 @@ module Aws::LexModelsV2
       :initial_response_setting,
       :qn_a_intent_configuration,
       :q_in_connect_intent_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3762,7 +3880,8 @@ module Aws::LexModelsV2
     class CreateResourcePolicyRequest < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3779,7 +3898,8 @@ module Aws::LexModelsV2
     class CreateResourcePolicyResponse < Struct.new(
       :resource_arn,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3831,7 +3951,8 @@ module Aws::LexModelsV2
       :action,
       :condition,
       :expected_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3848,7 +3969,8 @@ module Aws::LexModelsV2
     class CreateResourcePolicyStatementResponse < Struct.new(
       :resource_arn,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3916,7 +4038,8 @@ module Aws::LexModelsV2
       :intent_id,
       :multiple_values_setting,
       :sub_slot_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3978,7 +4101,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :multiple_values_setting,
       :sub_slot_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4053,7 +4177,8 @@ module Aws::LexModelsV2
       :locale_id,
       :external_source_setting,
       :composite_slot_type_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4112,7 +4237,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :external_source_setting,
       :composite_slot_type_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4125,7 +4251,8 @@ module Aws::LexModelsV2
     class CreateTestSetDiscrepancyReportRequest < Struct.new(
       :test_set_id,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4146,12 +4273,14 @@ module Aws::LexModelsV2
       :creation_date_time,
       :test_set_id,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateUploadUrlRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4166,7 +4295,8 @@ module Aws::LexModelsV2
     class CreateUploadUrlResponse < Struct.new(
       :import_id,
       :upload_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4177,7 +4307,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class CustomPayload < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4189,7 +4320,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class CustomVocabularyEntryId < Struct.new(
       :item_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4207,7 +4339,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4226,7 +4359,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4253,7 +4387,8 @@ module Aws::LexModelsV2
       :phrase,
       :weight,
       :display_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4278,7 +4413,8 @@ module Aws::LexModelsV2
       :end_timeout_ms,
       :deletion_character,
       :end_character,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4316,7 +4452,8 @@ module Aws::LexModelsV2
     #   @return [Boolean]
     class DataPrivacy < Struct.new(
       :child_directed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4339,7 +4476,8 @@ module Aws::LexModelsV2
       :opensearch_configuration,
       :kendra_configuration,
       :bedrock_knowledge_store_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4356,7 +4494,8 @@ module Aws::LexModelsV2
     class DateRangeFilter < Struct.new(
       :start_date_time,
       :end_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4372,7 +4511,8 @@ module Aws::LexModelsV2
     class DefaultConditionalBranch < Struct.new(
       :next_step,
       :response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4395,7 +4535,8 @@ module Aws::LexModelsV2
       :bot_alias_id,
       :bot_id,
       :skip_resource_in_use_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4416,7 +4557,8 @@ module Aws::LexModelsV2
       :bot_alias_id,
       :bot_id,
       :bot_alias_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4435,7 +4577,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4458,7 +4601,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :bot_locale_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4471,7 +4615,8 @@ module Aws::LexModelsV2
     class DeleteBotReplicaRequest < Struct.new(
       :bot_id,
       :replica_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4488,7 +4633,8 @@ module Aws::LexModelsV2
       :bot_id,
       :replica_region,
       :bot_replica_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4506,7 +4652,8 @@ module Aws::LexModelsV2
     class DeleteBotRequest < Struct.new(
       :bot_id,
       :skip_resource_in_use_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4520,7 +4667,8 @@ module Aws::LexModelsV2
     class DeleteBotResponse < Struct.new(
       :bot_id,
       :bot_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4542,7 +4690,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :skip_resource_in_use_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4559,7 +4708,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :bot_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4579,7 +4729,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4603,7 +4754,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :custom_vocabulary_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4612,7 +4764,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DeleteExportRequest < Struct.new(
       :export_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4628,7 +4781,8 @@ module Aws::LexModelsV2
     class DeleteExportResponse < Struct.new(
       :export_id,
       :export_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4637,7 +4791,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DeleteImportRequest < Struct.new(
       :import_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4652,7 +4807,8 @@ module Aws::LexModelsV2
     class DeleteImportResponse < Struct.new(
       :import_id,
       :import_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4675,7 +4831,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4692,7 +4849,8 @@ module Aws::LexModelsV2
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
       :expected_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4709,7 +4867,8 @@ module Aws::LexModelsV2
     class DeleteResourcePolicyResponse < Struct.new(
       :resource_arn,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4731,7 +4890,8 @@ module Aws::LexModelsV2
       :resource_arn,
       :statement_id,
       :expected_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4748,7 +4908,8 @@ module Aws::LexModelsV2
     class DeleteResourcePolicyStatementResponse < Struct.new(
       :resource_arn,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4775,7 +4936,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :intent_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4806,7 +4968,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :skip_resource_in_use_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4815,7 +4978,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DeleteTestSetRequest < Struct.new(
       :test_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4837,12 +5001,14 @@ module Aws::LexModelsV2
       :bot_id,
       :locale_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUtterancesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4856,7 +5022,8 @@ module Aws::LexModelsV2
     class DescribeBotAliasRequest < Struct.new(
       :bot_alias_id,
       :bot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4919,7 +5086,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       :parent_bot_networks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4938,7 +5106,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5022,7 +5191,8 @@ module Aws::LexModelsV2
       :bot_locale_history_events,
       :recommended_actions,
       :generative_ai_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5047,7 +5217,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :bot_recommendation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5107,7 +5278,8 @@ module Aws::LexModelsV2
       :transcript_source_setting,
       :encryption_setting,
       :bot_recommendation_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5120,7 +5292,8 @@ module Aws::LexModelsV2
     class DescribeBotReplicaRequest < Struct.new(
       :bot_id,
       :replica_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5149,7 +5322,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :bot_replica_status,
       :failure_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5158,7 +5332,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DescribeBotRequest < Struct.new(
       :bot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5180,7 +5355,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :generation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5230,7 +5406,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :model_arn,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5294,7 +5471,8 @@ module Aws::LexModelsV2
       :bot_members,
       :failure_reasons,
       :error_log_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5308,7 +5486,8 @@ module Aws::LexModelsV2
     class DescribeBotVersionRequest < Struct.new(
       :bot_id,
       :bot_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5370,7 +5549,8 @@ module Aws::LexModelsV2
       :parent_bot_networks,
       :bot_type,
       :bot_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5388,7 +5568,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5418,7 +5599,8 @@ module Aws::LexModelsV2
       :custom_vocabulary_status,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5427,7 +5609,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DescribeExportRequest < Struct.new(
       :export_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5470,7 +5653,8 @@ module Aws::LexModelsV2
       :download_url,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5479,7 +5663,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DescribeImportRequest < Struct.new(
       :import_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5528,7 +5713,8 @@ module Aws::LexModelsV2
       :failure_reasons,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5551,7 +5737,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5650,7 +5837,8 @@ module Aws::LexModelsV2
       :initial_response_setting,
       :qn_a_intent_configuration,
       :q_in_connect_intent_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5660,7 +5848,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DescribeResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5683,7 +5872,8 @@ module Aws::LexModelsV2
       :resource_arn,
       :policy,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5710,7 +5900,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :intent_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5779,7 +5970,8 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :multiple_values_setting,
       :sub_slot_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5802,7 +5994,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5863,7 +6056,8 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :external_source_setting,
       :composite_slot_type_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5872,7 +6066,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DescribeTestExecutionRequest < Struct.new(
       :test_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5920,7 +6115,8 @@ module Aws::LexModelsV2
       :api_mode,
       :test_execution_modality,
       :failure_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5929,7 +6125,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DescribeTestSetDiscrepancyReportRequest < Struct.new(
       :test_set_discrepancy_report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5970,7 +6167,8 @@ module Aws::LexModelsV2
       :test_set_discrepancy_top_errors,
       :test_set_discrepancy_raw_output_url,
       :failure_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5979,7 +6177,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DescribeTestSetGenerationRequest < Struct.new(
       :test_set_generation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6028,7 +6227,8 @@ module Aws::LexModelsV2
       :role_arn,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6037,7 +6237,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class DescribeTestSetRequest < Struct.new(
       :test_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6083,7 +6284,8 @@ module Aws::LexModelsV2
       :storage_location,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6097,7 +6299,8 @@ module Aws::LexModelsV2
     class DescriptiveBotBuilderSpecification < Struct.new(
       :enabled,
       :bedrock_model_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6122,7 +6325,8 @@ module Aws::LexModelsV2
       :type,
       :slot_to_elicit,
       :suppress_next_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6149,7 +6353,8 @@ module Aws::LexModelsV2
       :active,
       :invocation_label,
       :post_code_hook_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6161,7 +6366,8 @@ module Aws::LexModelsV2
     #   @return [Boolean]
     class DialogCodeHookSettings < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6186,7 +6392,8 @@ module Aws::LexModelsV2
       :dialog_action,
       :intent,
       :session_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6202,7 +6409,8 @@ module Aws::LexModelsV2
     class ElicitationCodeHookInvocationSetting < Struct.new(
       :enable_code_hook_invocation,
       :invocation_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6224,7 +6432,8 @@ module Aws::LexModelsV2
       :kms_key_arn,
       :bot_locale_export_password,
       :associated_transcripts_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6234,7 +6443,8 @@ module Aws::LexModelsV2
     #   @return [Boolean]
     class ErrorLogSettings < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6248,7 +6458,8 @@ module Aws::LexModelsV2
     class ExactResponseFields < Struct.new(
       :question_field,
       :answer_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6262,7 +6473,8 @@ module Aws::LexModelsV2
     class ExecutionErrorDetails < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6286,7 +6498,8 @@ module Aws::LexModelsV2
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6310,7 +6523,8 @@ module Aws::LexModelsV2
       :bot_locale_export_specification,
       :custom_vocabulary_export_specification,
       :test_set_export_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6324,7 +6538,8 @@ module Aws::LexModelsV2
     class ExportSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6356,7 +6571,8 @@ module Aws::LexModelsV2
       :export_status,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6366,7 +6582,8 @@ module Aws::LexModelsV2
     #   @return [Types::GrammarSlotTypeSetting]
     class ExternalSourceSetting < Struct.new(
       :grammar_slot_type_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6388,7 +6605,8 @@ module Aws::LexModelsV2
       :item_id,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6417,7 +6635,8 @@ module Aws::LexModelsV2
       :post_fulfillment_status_specification,
       :fulfillment_updates_specification,
       :active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6445,7 +6664,8 @@ module Aws::LexModelsV2
       :delay_in_seconds,
       :message_groups,
       :allow_interrupt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6469,7 +6689,8 @@ module Aws::LexModelsV2
       :frequency_in_seconds,
       :message_groups,
       :allow_interrupt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6499,7 +6720,8 @@ module Aws::LexModelsV2
       :start_response,
       :update_response,
       :timeout_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6520,7 +6742,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6545,7 +6768,8 @@ module Aws::LexModelsV2
       :locale_id,
       :intent_id,
       :sample_utterances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6569,7 +6793,8 @@ module Aws::LexModelsV2
     class GenerationSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6591,7 +6816,8 @@ module Aws::LexModelsV2
       :generation_status,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6605,7 +6831,8 @@ module Aws::LexModelsV2
     class GenerativeAISettings < Struct.new(
       :runtime_settings,
       :buildtime_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6614,7 +6841,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class GetTestExecutionArtifactsUrlRequest < Struct.new(
       :test_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6627,7 +6855,8 @@ module Aws::LexModelsV2
     class GetTestExecutionArtifactsUrlResponse < Struct.new(
       :test_execution_id,
       :download_artifacts_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6637,7 +6866,8 @@ module Aws::LexModelsV2
     #   @return [Types::GrammarSlotTypeSource]
     class GrammarSlotTypeSetting < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6656,7 +6886,8 @@ module Aws::LexModelsV2
       :s3_bucket_name,
       :s3_object_key,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6688,7 +6919,8 @@ module Aws::LexModelsV2
       :subtitle,
       :image_url,
       :buttons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6712,7 +6944,8 @@ module Aws::LexModelsV2
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6736,7 +6969,8 @@ module Aws::LexModelsV2
       :bot_locale_import_specification,
       :custom_vocabulary_import_specification,
       :test_set_import_resource_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6750,7 +6984,8 @@ module Aws::LexModelsV2
     class ImportSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6792,7 +7027,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       :imported_resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6821,7 +7057,8 @@ module Aws::LexModelsV2
       :next_step,
       :conditional,
       :code_hook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6832,7 +7069,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class InputContext < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6851,7 +7089,8 @@ module Aws::LexModelsV2
       :session_attributes,
       :active_contexts,
       :runtime_hints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6869,7 +7108,8 @@ module Aws::LexModelsV2
       :intent_name,
       :multi_turn_conversation,
       :result_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6892,7 +7132,8 @@ module Aws::LexModelsV2
       :total_result_count,
       :speech_transcription_result_counts,
       :intent_match_result_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6902,7 +7143,8 @@ module Aws::LexModelsV2
     #   @return [Array<Types::IntentClassificationTestResultItem>]
     class IntentClassificationTestResults < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6932,7 +7174,8 @@ module Aws::LexModelsV2
       :active,
       :next_step,
       :conditional,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7020,7 +7263,8 @@ module Aws::LexModelsV2
       :failure_conditional,
       :code_hook,
       :elicitation_code_hook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7043,7 +7287,8 @@ module Aws::LexModelsV2
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7061,7 +7306,8 @@ module Aws::LexModelsV2
       :intent_name,
       :multi_turn_conversation,
       :slot_resolution_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7076,7 +7322,8 @@ module Aws::LexModelsV2
     #   @return [Array<Types::IntentLevelSlotResolutionTestResultItem>]
     class IntentLevelSlotResolutionTestResults < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7093,7 +7340,8 @@ module Aws::LexModelsV2
     class IntentOverride < Struct.new(
       :name,
       :slots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7108,7 +7356,8 @@ module Aws::LexModelsV2
     class IntentSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7120,7 +7369,8 @@ module Aws::LexModelsV2
     #   @return [Integer]
     class IntentStatistics < Struct.new(
       :discovered_intent_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7161,7 +7411,8 @@ module Aws::LexModelsV2
       :input_contexts,
       :output_contexts,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7171,7 +7422,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7181,7 +7433,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class InvokedIntentSample < Struct.new(
       :intent_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7208,7 +7461,8 @@ module Aws::LexModelsV2
       :kendra_index,
       :query_filter_string_enabled,
       :query_filter_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7229,7 +7483,8 @@ module Aws::LexModelsV2
     class LambdaCodeHook < Struct.new(
       :lambda_arn,
       :code_hook_interface_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7242,7 +7497,8 @@ module Aws::LexModelsV2
     #   @return [Types::DateRangeFilter]
     class LexTranscriptFilter < Struct.new(
       :date_range_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7301,7 +7557,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7377,7 +7634,8 @@ module Aws::LexModelsV2
       :aggregation_last_refreshed_date_time,
       :aggregated_utterances_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7398,7 +7656,8 @@ module Aws::LexModelsV2
       :replica_region,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7423,7 +7682,8 @@ module Aws::LexModelsV2
       :replica_region,
       :bot_alias_replica_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7446,7 +7706,8 @@ module Aws::LexModelsV2
       :bot_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7471,7 +7732,8 @@ module Aws::LexModelsV2
       :bot_alias_summaries,
       :next_token,
       :bot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7509,7 +7771,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7538,7 +7801,8 @@ module Aws::LexModelsV2
       :bot_version,
       :next_token,
       :bot_locale_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7571,7 +7835,8 @@ module Aws::LexModelsV2
       :locale_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7607,7 +7872,8 @@ module Aws::LexModelsV2
       :locale_id,
       :bot_recommendation_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7616,7 +7882,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class ListBotReplicasRequest < Struct.new(
       :bot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7633,7 +7900,8 @@ module Aws::LexModelsV2
       :bot_id,
       :source_region,
       :bot_replica_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7669,7 +7937,8 @@ module Aws::LexModelsV2
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7697,7 +7966,8 @@ module Aws::LexModelsV2
       :locale_id,
       :generation_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7722,7 +7992,8 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7747,7 +8018,8 @@ module Aws::LexModelsV2
       :replica_region,
       :bot_version_replica_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7776,7 +8048,8 @@ module Aws::LexModelsV2
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7801,7 +8074,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7835,7 +8109,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7856,7 +8131,8 @@ module Aws::LexModelsV2
     class ListBotsResponse < Struct.new(
       :bot_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7887,7 +8163,8 @@ module Aws::LexModelsV2
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7912,7 +8189,8 @@ module Aws::LexModelsV2
       :built_in_intent_summaries,
       :next_token,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7944,7 +8222,8 @@ module Aws::LexModelsV2
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7970,7 +8249,8 @@ module Aws::LexModelsV2
       :built_in_slot_type_summaries,
       :next_token,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8001,7 +8281,8 @@ module Aws::LexModelsV2
       :locale_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8031,7 +8312,8 @@ module Aws::LexModelsV2
       :locale_id,
       :custom_vocabulary_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8079,7 +8361,8 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8112,7 +8395,8 @@ module Aws::LexModelsV2
       :export_summaries,
       :next_token,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8160,7 +8444,8 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8194,7 +8479,8 @@ module Aws::LexModelsV2
       :import_summaries,
       :next_token,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8246,7 +8532,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8264,7 +8551,8 @@ module Aws::LexModelsV2
       :bot_id,
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8300,7 +8588,8 @@ module Aws::LexModelsV2
       :end_date_time,
       :intent_path,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8309,7 +8598,8 @@ module Aws::LexModelsV2
     #   @return [Array<Types::AnalyticsIntentNodeSummary>]
     class ListIntentPathsResponse < Struct.new(
       :node_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8361,7 +8651,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8379,7 +8670,8 @@ module Aws::LexModelsV2
       :bot_id,
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8428,7 +8720,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8461,7 +8754,8 @@ module Aws::LexModelsV2
       :locale_id,
       :intent_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8498,7 +8792,8 @@ module Aws::LexModelsV2
       :bot_recommendation_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8539,7 +8834,8 @@ module Aws::LexModelsV2
       :bot_recommendation_id,
       :summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8573,7 +8869,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8591,7 +8888,8 @@ module Aws::LexModelsV2
       :bot_id,
       :next_token,
       :sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8643,7 +8941,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8661,7 +8960,8 @@ module Aws::LexModelsV2
       :bot_id,
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8708,7 +9008,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8741,7 +9042,8 @@ module Aws::LexModelsV2
       :locale_id,
       :slot_type_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8791,7 +9093,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8828,7 +9131,8 @@ module Aws::LexModelsV2
       :intent_id,
       :slot_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8838,7 +9142,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8847,7 +9152,8 @@ module Aws::LexModelsV2
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8873,7 +9179,8 @@ module Aws::LexModelsV2
       :result_filter_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8890,7 +9197,8 @@ module Aws::LexModelsV2
     class ListTestExecutionResultItemsResponse < Struct.new(
       :test_execution_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8911,7 +9219,8 @@ module Aws::LexModelsV2
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8927,7 +9236,8 @@ module Aws::LexModelsV2
     class ListTestExecutionsResponse < Struct.new(
       :test_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8948,7 +9258,8 @@ module Aws::LexModelsV2
       :test_set_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8964,7 +9275,8 @@ module Aws::LexModelsV2
     class ListTestSetRecordsResponse < Struct.new(
       :test_set_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8984,7 +9296,8 @@ module Aws::LexModelsV2
       :sort_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9000,7 +9313,8 @@ module Aws::LexModelsV2
     class ListTestSetsResponse < Struct.new(
       :test_sets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9034,7 +9348,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9052,7 +9367,8 @@ module Aws::LexModelsV2
       :bot_id,
       :next_token,
       :utterances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9114,7 +9430,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9132,7 +9449,8 @@ module Aws::LexModelsV2
       :bot_id,
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9156,7 +9474,8 @@ module Aws::LexModelsV2
       :custom_payload,
       :ssml_message,
       :image_response_card,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9173,7 +9492,8 @@ module Aws::LexModelsV2
     class MessageGroup < Struct.new(
       :message,
       :variations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9191,7 +9511,8 @@ module Aws::LexModelsV2
     #   @return [Boolean]
     class MultipleValuesSetting < Struct.new(
       :allow_multiple_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9218,7 +9539,8 @@ module Aws::LexModelsV2
       :phrase,
       :weight,
       :display_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9228,7 +9550,8 @@ module Aws::LexModelsV2
     #   @return [Boolean]
     class NluImprovementSpecification < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9245,7 +9568,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class ObfuscationSetting < Struct.new(
       :obfuscation_setting_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9271,7 +9595,8 @@ module Aws::LexModelsV2
       :exact_response,
       :exact_response_fields,
       :include_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9299,7 +9624,8 @@ module Aws::LexModelsV2
       :name,
       :time_to_live_in_seconds,
       :turns_to_live,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9321,7 +9647,8 @@ module Aws::LexModelsV2
       :total_result_count,
       :speech_transcription_result_counts,
       :end_to_end_result_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9336,7 +9663,8 @@ module Aws::LexModelsV2
     #   @return [Array<Types::OverallTestResultItem>]
     class OverallTestResults < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9350,7 +9678,8 @@ module Aws::LexModelsV2
     class ParentBotNetwork < Struct.new(
       :bot_id,
       :bot_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9365,7 +9694,8 @@ module Aws::LexModelsV2
     #   @return [Array<String>]
     class PathFormat < Struct.new(
       :object_prefixes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9375,7 +9705,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class PlainTextMessage < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9429,7 +9760,8 @@ module Aws::LexModelsV2
       :timeout_response,
       :timeout_next_step,
       :timeout_conditional,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9485,7 +9817,8 @@ module Aws::LexModelsV2
       :failure_conditional,
       :timeout_next_step,
       :timeout_conditional,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9496,7 +9829,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class PreconditionFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9513,7 +9847,8 @@ module Aws::LexModelsV2
     class Principal < Struct.new(
       :service,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9535,7 +9870,8 @@ module Aws::LexModelsV2
       :allowed_input_types,
       :audio_and_dtmf_input_specification,
       :text_input_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9565,7 +9901,8 @@ module Aws::LexModelsV2
       :allow_interrupt,
       :message_selection_strategy,
       :prompt_attempts_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9575,7 +9912,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class QInConnectAssistantConfiguration < Struct.new(
       :assistant_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9585,7 +9923,8 @@ module Aws::LexModelsV2
     #   @return [Types::QInConnectAssistantConfiguration]
     class QInConnectIntentConfiguration < Struct.new(
       :q_in_connect_assistant_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9599,7 +9938,8 @@ module Aws::LexModelsV2
     class QnAIntentConfiguration < Struct.new(
       :data_source_configuration,
       :bedrock_model_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9621,7 +9961,8 @@ module Aws::LexModelsV2
       :query_filter_string_enabled,
       :query_filter_string,
       :exact_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9648,7 +9989,8 @@ module Aws::LexModelsV2
       :intent_id,
       :intent_name,
       :sample_utterances_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9708,7 +10050,8 @@ module Aws::LexModelsV2
     class RelativeAggregationDuration < Struct.new(
       :time_dimension,
       :time_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9718,7 +10061,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9735,7 +10079,8 @@ module Aws::LexModelsV2
     class ResponseSpecification < Struct.new(
       :message_groups,
       :allow_interrupt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9755,7 +10100,8 @@ module Aws::LexModelsV2
     class RuntimeHintDetails < Struct.new(
       :runtime_hint_values,
       :sub_slot_hints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9767,7 +10113,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class RuntimeHintValue < Struct.new(
       :phrase,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9791,7 +10138,8 @@ module Aws::LexModelsV2
     #   @return [Hash<String, Hash<String, Types::RuntimeHintDetails>>]
     class RuntimeHints < Struct.new(
       :slot_hints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9805,7 +10153,8 @@ module Aws::LexModelsV2
     class RuntimeSettings < Struct.new(
       :slot_resolution_improvement,
       :nlu_improvement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9825,7 +10174,8 @@ module Aws::LexModelsV2
       :kms_key_arn,
       :s3_bucket_arn,
       :log_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9862,7 +10212,8 @@ module Aws::LexModelsV2
       :transcript_format,
       :transcript_filter,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9872,7 +10223,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class SSMLMessage < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9884,7 +10236,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class SampleUtterance < Struct.new(
       :utterance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9898,7 +10251,8 @@ module Aws::LexModelsV2
     class SampleUtteranceGenerationSpecification < Struct.new(
       :enabled,
       :bedrock_model_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9913,7 +10267,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class SampleValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9962,7 +10317,8 @@ module Aws::LexModelsV2
       :filters,
       :max_results,
       :next_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10006,7 +10362,8 @@ module Aws::LexModelsV2
       :next_index,
       :associated_transcripts,
       :total_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10018,7 +10375,8 @@ module Aws::LexModelsV2
     #   @return [Boolean]
     class SentimentAnalysisSettings < Struct.new(
       :detect_sentiment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10032,7 +10390,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10060,7 +10419,8 @@ module Aws::LexModelsV2
     class SessionDataSortBy < Struct.new(
       :name,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10136,7 +10496,8 @@ module Aws::LexModelsV2
       :number_of_turns,
       :invoked_intent_samples,
       :originating_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10183,7 +10544,8 @@ module Aws::LexModelsV2
       :failure_conditional,
       :code_hook,
       :elicitation_code_hook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10195,7 +10557,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class SlotDefaultValue < Struct.new(
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10207,7 +10570,8 @@ module Aws::LexModelsV2
     #   @return [Array<Types::SlotDefaultValue>]
     class SlotDefaultValueSpecification < Struct.new(
       :default_value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10230,7 +10594,8 @@ module Aws::LexModelsV2
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10245,7 +10610,8 @@ module Aws::LexModelsV2
     class SlotPriority < Struct.new(
       :priority,
       :slot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10259,7 +10625,8 @@ module Aws::LexModelsV2
     class SlotResolutionImprovementSpecification < Struct.new(
       :enabled,
       :bedrock_model_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10274,7 +10641,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class SlotResolutionSetting < Struct.new(
       :slot_resolution_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10289,7 +10657,8 @@ module Aws::LexModelsV2
     class SlotResolutionTestResultItem < Struct.new(
       :slot_name,
       :result_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10307,7 +10676,8 @@ module Aws::LexModelsV2
       :total_result_count,
       :speech_transcription_result_counts,
       :slot_match_result_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10322,7 +10692,8 @@ module Aws::LexModelsV2
     class SlotSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10361,7 +10732,8 @@ module Aws::LexModelsV2
       :slot_type_id,
       :value_elicitation_prompt_specification,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10384,7 +10756,8 @@ module Aws::LexModelsV2
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10399,7 +10772,8 @@ module Aws::LexModelsV2
     class SlotTypeSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10411,7 +10785,8 @@ module Aws::LexModelsV2
     #   @return [Integer]
     class SlotTypeStatistics < Struct.new(
       :discovered_slot_type_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10464,7 +10839,8 @@ module Aws::LexModelsV2
       :parent_slot_type_signature,
       :last_updated_date_time,
       :slot_type_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10480,7 +10856,8 @@ module Aws::LexModelsV2
     class SlotTypeValue < Struct.new(
       :sample_value,
       :synonyms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10494,7 +10871,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class SlotValue < Struct.new(
       :interpreted_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10537,7 +10915,8 @@ module Aws::LexModelsV2
       :wait_and_continue_specification,
       :slot_capture_setting,
       :slot_resolution_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10561,7 +10940,8 @@ module Aws::LexModelsV2
       :shape,
       :value,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10596,7 +10976,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class SlotValueRegexFilter < Struct.new(
       :pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10633,7 +11014,8 @@ module Aws::LexModelsV2
       :resolution_strategy,
       :regex_filter,
       :advanced_recognition_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10647,7 +11029,8 @@ module Aws::LexModelsV2
     class Specifications < Struct.new(
       :slot_type_id,
       :value_elicitation_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10679,7 +11062,8 @@ module Aws::LexModelsV2
       :locale_id,
       :transcript_source_setting,
       :encryption_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10727,7 +11111,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :transcript_source_setting,
       :encryption_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10748,7 +11133,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10781,7 +11167,8 @@ module Aws::LexModelsV2
       :locale_id,
       :generation_status,
       :creation_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10809,7 +11196,8 @@ module Aws::LexModelsV2
       :resource_specification,
       :merge_strategy,
       :file_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10839,7 +11227,8 @@ module Aws::LexModelsV2
       :merge_strategy,
       :import_status,
       :creation_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10863,7 +11252,8 @@ module Aws::LexModelsV2
       :target,
       :api_mode,
       :test_execution_modality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10894,7 +11284,8 @@ module Aws::LexModelsV2
       :target,
       :api_mode,
       :test_execution_modality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10924,7 +11315,8 @@ module Aws::LexModelsV2
       :generation_data_source,
       :role_arn,
       :test_set_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10966,7 +11358,8 @@ module Aws::LexModelsV2
       :generation_data_source,
       :role_arn,
       :test_set_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10993,7 +11386,8 @@ module Aws::LexModelsV2
       :frequency_in_seconds,
       :timeout_in_seconds,
       :allow_interrupt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11019,7 +11413,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :bot_recommendation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11051,7 +11446,8 @@ module Aws::LexModelsV2
       :locale_id,
       :bot_recommendation_status,
       :bot_recommendation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11066,7 +11462,8 @@ module Aws::LexModelsV2
     class SubSlotSetting < Struct.new(
       :expression,
       :slot_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11081,7 +11478,8 @@ module Aws::LexModelsV2
     class SubSlotTypeComposition < Struct.new(
       :name,
       :slot_type_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11115,7 +11513,8 @@ module Aws::LexModelsV2
       :prompt_specification,
       :sample_utterances,
       :wait_and_continue_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11130,12 +11529,14 @@ module Aws::LexModelsV2
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11150,7 +11551,8 @@ module Aws::LexModelsV2
     class TestExecutionResultFilterBy < Struct.new(
       :result_type_filter,
       :conversation_level_test_results_filter_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11182,7 +11584,8 @@ module Aws::LexModelsV2
       :intent_classification_test_results,
       :intent_level_slot_resolution_test_results,
       :utterance_level_test_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11197,7 +11600,8 @@ module Aws::LexModelsV2
     class TestExecutionSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11241,7 +11645,8 @@ module Aws::LexModelsV2
       :target,
       :api_mode,
       :test_execution_modality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11251,7 +11656,8 @@ module Aws::LexModelsV2
     #   @return [Types::BotAliasTestExecutionTarget]
     class TestExecutionTarget < Struct.new(
       :bot_alias_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11265,7 +11671,8 @@ module Aws::LexModelsV2
     class TestSetDiscrepancyErrors < Struct.new(
       :intent_discrepancies,
       :slot_discrepancies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11284,7 +11691,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_alias_id,
       :locale_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11296,7 +11704,8 @@ module Aws::LexModelsV2
     #   @return [Types::TestSetDiscrepancyReportBotAliasTarget]
     class TestSetDiscrepancyReportResourceTarget < Struct.new(
       :bot_alias_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11306,7 +11715,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class TestSetExportSpecification < Struct.new(
       :test_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11316,7 +11726,8 @@ module Aws::LexModelsV2
     #   @return [Types::ConversationLogsDataSource]
     class TestSetGenerationDataSource < Struct.new(
       :conversation_logs_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11330,7 +11741,8 @@ module Aws::LexModelsV2
     class TestSetImportInputLocation < Struct.new(
       :s3_bucket_name,
       :s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11365,7 +11777,8 @@ module Aws::LexModelsV2
       :import_input_location,
       :modality,
       :test_set_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11380,7 +11793,8 @@ module Aws::LexModelsV2
     class TestSetIntentDiscrepancyItem < Struct.new(
       :intent_name,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11398,7 +11812,8 @@ module Aws::LexModelsV2
       :intent_name,
       :slot_name,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11412,7 +11827,8 @@ module Aws::LexModelsV2
     class TestSetSortBy < Struct.new(
       :attribute,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11431,7 +11847,8 @@ module Aws::LexModelsV2
       :s3_bucket_name,
       :s3_path,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11478,7 +11895,8 @@ module Aws::LexModelsV2
       :storage_location,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11500,7 +11918,8 @@ module Aws::LexModelsV2
       :conversation_id,
       :turn_number,
       :turn_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11514,7 +11933,8 @@ module Aws::LexModelsV2
     class TestSetTurnResult < Struct.new(
       :agent,
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11524,7 +11944,8 @@ module Aws::LexModelsV2
     #   @return [Integer]
     class TextInputSpecification < Struct.new(
       :start_timeout_ms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11536,7 +11957,8 @@ module Aws::LexModelsV2
     #   @return [Types::CloudWatchLogGroupLogDestination]
     class TextLogDestination < Struct.new(
       :cloud_watch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11556,7 +11978,8 @@ module Aws::LexModelsV2
       :enabled,
       :destination,
       :selective_logging_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11575,7 +11998,8 @@ module Aws::LexModelsV2
     class ThrottlingException < Struct.new(
       :retry_after_seconds,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11593,7 +12017,8 @@ module Aws::LexModelsV2
     #   @return [Types::LexTranscriptFilter]
     class TranscriptFilter < Struct.new(
       :lex_transcript_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11605,7 +12030,8 @@ module Aws::LexModelsV2
     #   @return [Types::S3BucketTranscriptSource]
     class TranscriptSourceSetting < Struct.new(
       :s3_bucket_transcript_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11619,7 +12045,8 @@ module Aws::LexModelsV2
     class TurnSpecification < Struct.new(
       :agent_turn,
       :user_turn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11634,12 +12061,14 @@ module Aws::LexModelsV2
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11679,7 +12108,8 @@ module Aws::LexModelsV2
       :conversation_log_settings,
       :sentiment_analysis_settings,
       :bot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11733,7 +12163,8 @@ module Aws::LexModelsV2
       :bot_id,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11773,7 +12204,8 @@ module Aws::LexModelsV2
       :nlu_intent_confidence_threshold,
       :voice_settings,
       :generative_ai_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11839,7 +12271,8 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :recommended_actions,
       :generative_ai_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11872,7 +12305,8 @@ module Aws::LexModelsV2
       :locale_id,
       :bot_recommendation_id,
       :encryption_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11926,7 +12360,8 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :transcript_source_setting,
       :encryption_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11978,7 +12413,8 @@ module Aws::LexModelsV2
       :bot_type,
       :bot_members,
       :error_log_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12037,7 +12473,8 @@ module Aws::LexModelsV2
       :bot_type,
       :bot_members,
       :error_log_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12050,7 +12487,8 @@ module Aws::LexModelsV2
     class UpdateExportRequest < Struct.new(
       :export_id,
       :file_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12083,7 +12521,8 @@ module Aws::LexModelsV2
       :export_status,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12176,7 +12615,8 @@ module Aws::LexModelsV2
       :initial_response_setting,
       :qn_a_intent_configuration,
       :q_in_connect_intent_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12275,7 +12715,8 @@ module Aws::LexModelsV2
       :initial_response_setting,
       :qn_a_intent_configuration,
       :q_in_connect_intent_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12303,7 +12744,8 @@ module Aws::LexModelsV2
       :resource_arn,
       :policy,
       :expected_revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12320,7 +12762,8 @@ module Aws::LexModelsV2
     class UpdateResourcePolicyResponse < Struct.new(
       :resource_arn,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12385,7 +12828,8 @@ module Aws::LexModelsV2
       :intent_id,
       :multiple_values_setting,
       :sub_slot_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12453,7 +12897,8 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :multiple_values_setting,
       :sub_slot_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12508,7 +12953,8 @@ module Aws::LexModelsV2
       :locale_id,
       :external_source_setting,
       :composite_slot_type_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12570,7 +13016,8 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :external_source_setting,
       :composite_slot_type_setting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12587,7 +13034,8 @@ module Aws::LexModelsV2
       :test_set_id,
       :test_set_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12633,7 +13081,8 @@ module Aws::LexModelsV2
       :storage_location,
       :creation_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12651,7 +13100,8 @@ module Aws::LexModelsV2
       :utterance_input,
       :request_attributes,
       :session_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12665,7 +13115,8 @@ module Aws::LexModelsV2
     class UserTurnIntentOutput < Struct.new(
       :name,
       :slots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12683,7 +13134,8 @@ module Aws::LexModelsV2
       :intent,
       :active_contexts,
       :transcript,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12725,7 +13177,8 @@ module Aws::LexModelsV2
       :slot_match_result,
       :speech_transcription_result,
       :conversation_level_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12743,7 +13196,8 @@ module Aws::LexModelsV2
       :value,
       :values,
       :sub_slots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12757,7 +13211,8 @@ module Aws::LexModelsV2
     class UserTurnSpecification < Struct.new(
       :input,
       :expected,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12768,7 +13223,8 @@ module Aws::LexModelsV2
     #   @return [Types::RelativeAggregationDuration]
     class UtteranceAggregationDuration < Struct.new(
       :relative_aggregation_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12778,7 +13234,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class UtteranceAudioInputSpecification < Struct.new(
       :audio_file_s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12817,7 +13274,8 @@ module Aws::LexModelsV2
       :content,
       :content_type,
       :image_response_card,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12841,7 +13299,8 @@ module Aws::LexModelsV2
     class UtteranceDataSortBy < Struct.new(
       :name,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12855,7 +13314,8 @@ module Aws::LexModelsV2
     class UtteranceInputSpecification < Struct.new(
       :text_input,
       :audio_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12873,7 +13333,8 @@ module Aws::LexModelsV2
       :record_number,
       :conversation_id,
       :turn_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12883,7 +13344,8 @@ module Aws::LexModelsV2
     #   @return [Array<Types::UtteranceLevelTestResultItem>]
     class UtteranceLevelTestResults < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13063,7 +13525,8 @@ module Aws::LexModelsV2
       :slots_filled_in_session,
       :utterance_request_id,
       :bot_responses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13078,7 +13541,8 @@ module Aws::LexModelsV2
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13118,7 +13582,8 @@ module Aws::LexModelsV2
     class VoiceSettings < Struct.new(
       :voice_id,
       :engine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13147,7 +13612,8 @@ module Aws::LexModelsV2
       :continue_response,
       :still_waiting_response,
       :active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

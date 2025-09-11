@@ -703,7 +703,6 @@ module Aws::DAX
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetQuotaExceededFault)
         operation.traits = {}
       end)
-
     end
 
     class << self

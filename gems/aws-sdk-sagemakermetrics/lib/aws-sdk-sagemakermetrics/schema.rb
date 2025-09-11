@@ -111,7 +111,6 @@ module Aws::SageMakerMetrics
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchPutMetricsResponse)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/BatchPutMetrics", "code" => 200}}
       end)
-
     end
 
     class << self

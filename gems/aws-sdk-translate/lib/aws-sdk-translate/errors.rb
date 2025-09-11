@@ -49,7 +49,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::DetectedLanguageLowConfidenceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::InvalidFilterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -166,7 +166,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -180,7 +180,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -194,7 +194,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::TextSizeLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -208,7 +208,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -221,7 +221,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -238,7 +238,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::UnsupportedDisplayLanguageCodeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -257,7 +257,7 @@ module Aws::Translate
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Translate::Types::UnsupportedLanguagePairException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

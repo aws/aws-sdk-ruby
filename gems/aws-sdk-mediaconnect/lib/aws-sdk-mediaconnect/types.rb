@@ -20,7 +20,8 @@ module Aws::MediaConnect
       :flow_arn,
       :flow_vpc_interface_attachment,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,7 +51,8 @@ module Aws::MediaConnect
       :port,
       :protocol,
       :ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +82,8 @@ module Aws::MediaConnect
       :network_name,
       :port,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +93,8 @@ module Aws::MediaConnect
     #   @return [Types::AddBridgeNetworkOutputRequest]
     class AddBridgeOutputRequest < Struct.new(
       :network_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +107,8 @@ module Aws::MediaConnect
     class AddBridgeOutputsRequest < Struct.new(
       :bridge_arn,
       :outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +121,8 @@ module Aws::MediaConnect
     class AddBridgeOutputsResponse < Struct.new(
       :bridge_arn,
       :outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +136,8 @@ module Aws::MediaConnect
     class AddBridgeSourceRequest < Struct.new(
       :flow_source,
       :network_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +150,8 @@ module Aws::MediaConnect
     class AddBridgeSourcesRequest < Struct.new(
       :bridge_arn,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +164,8 @@ module Aws::MediaConnect
     class AddBridgeSourcesResponse < Struct.new(
       :bridge_arn,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -166,7 +175,8 @@ module Aws::MediaConnect
     #   @return [Integer]
     class AddEgressGatewayBridgeRequest < Struct.new(
       :max_bitrate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,7 +189,8 @@ module Aws::MediaConnect
     class AddFlowMediaStreamsRequest < Struct.new(
       :flow_arn,
       :media_streams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +203,8 @@ module Aws::MediaConnect
     class AddFlowMediaStreamsResponse < Struct.new(
       :flow_arn,
       :media_streams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +213,8 @@ module Aws::MediaConnect
     #   @return [String]
     class AddFlowOutputs420Exception < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +227,8 @@ module Aws::MediaConnect
     class AddFlowOutputsRequest < Struct.new(
       :flow_arn,
       :outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +241,8 @@ module Aws::MediaConnect
     class AddFlowOutputsResponse < Struct.new(
       :flow_arn,
       :outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +255,8 @@ module Aws::MediaConnect
     class AddFlowSourcesRequest < Struct.new(
       :flow_arn,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +269,8 @@ module Aws::MediaConnect
     class AddFlowSourcesResponse < Struct.new(
       :flow_arn,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -266,7 +283,8 @@ module Aws::MediaConnect
     class AddFlowVpcInterfacesRequest < Struct.new(
       :flow_arn,
       :vpc_interfaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +297,8 @@ module Aws::MediaConnect
     class AddFlowVpcInterfacesResponse < Struct.new(
       :flow_arn,
       :vpc_interfaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +312,8 @@ module Aws::MediaConnect
     class AddIngressGatewayBridgeRequest < Struct.new(
       :max_bitrate,
       :max_outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +327,8 @@ module Aws::MediaConnect
     class AddMaintenance < Struct.new(
       :maintenance_day,
       :maintenance_start_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +362,8 @@ module Aws::MediaConnect
       :media_stream_name,
       :media_stream_type,
       :video_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +441,8 @@ module Aws::MediaConnect
       :output_status,
       :ndi_speed_hq_quality,
       :ndi_program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -429,7 +452,8 @@ module Aws::MediaConnect
     #   @return [Types::SilentAudio]
     class AudioMonitoringSetting < Struct.new(
       :silent_audio,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +462,8 @@ module Aws::MediaConnect
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +477,8 @@ module Aws::MediaConnect
     class BlackFrames < Struct.new(
       :state,
       :threshold_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +524,8 @@ module Aws::MediaConnect
       :placement_arn,
       :source_failover_config,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +543,8 @@ module Aws::MediaConnect
       :flow_arn,
       :flow_source_arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +566,8 @@ module Aws::MediaConnect
       :flow_vpc_interface_attachment,
       :name,
       :output_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +597,8 @@ module Aws::MediaConnect
       :port,
       :protocol,
       :ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +628,8 @@ module Aws::MediaConnect
       :network_name,
       :port,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +643,8 @@ module Aws::MediaConnect
     class BridgeOutput < Struct.new(
       :flow_output,
       :network_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +658,8 @@ module Aws::MediaConnect
     class BridgeSource < Struct.new(
       :flow_source,
       :network_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +668,8 @@ module Aws::MediaConnect
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +678,8 @@ module Aws::MediaConnect
     #   @return [String]
     class CreateBridge420Exception < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +712,8 @@ module Aws::MediaConnect
       :placement_arn,
       :source_failover_config,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +722,8 @@ module Aws::MediaConnect
     #   @return [Types::Bridge]
     class CreateBridgeResponse < Struct.new(
       :bridge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +732,8 @@ module Aws::MediaConnect
     #   @return [String]
     class CreateFlow420Exception < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +790,8 @@ module Aws::MediaConnect
       :source_monitoring_config,
       :flow_size,
       :ndi_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -761,7 +800,8 @@ module Aws::MediaConnect
     #   @return [Types::Flow]
     class CreateFlowResponse < Struct.new(
       :flow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +810,8 @@ module Aws::MediaConnect
     #   @return [String]
     class CreateGateway420Exception < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +828,8 @@ module Aws::MediaConnect
       :egress_cidr_blocks,
       :name,
       :networks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -796,7 +838,8 @@ module Aws::MediaConnect
     #   @return [Types::Gateway]
     class CreateGatewayResponse < Struct.new(
       :gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +848,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DeleteBridgeRequest < Struct.new(
       :bridge_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +858,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DeleteBridgeResponse < Struct.new(
       :bridge_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +868,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DeleteFlowRequest < Struct.new(
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -836,7 +882,8 @@ module Aws::MediaConnect
     class DeleteFlowResponse < Struct.new(
       :flow_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +892,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DeleteGatewayRequest < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -854,7 +902,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DeleteGatewayResponse < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -867,7 +916,8 @@ module Aws::MediaConnect
     class DeregisterGatewayInstanceRequest < Struct.new(
       :force,
       :gateway_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -880,7 +930,8 @@ module Aws::MediaConnect
     class DeregisterGatewayInstanceResponse < Struct.new(
       :gateway_instance_arn,
       :instance_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +940,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DescribeBridgeRequest < Struct.new(
       :bridge_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -898,7 +950,8 @@ module Aws::MediaConnect
     #   @return [Types::Bridge]
     class DescribeBridgeResponse < Struct.new(
       :bridge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +960,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DescribeFlowRequest < Struct.new(
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,7 +974,8 @@ module Aws::MediaConnect
     class DescribeFlowResponse < Struct.new(
       :flow,
       :messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +984,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DescribeFlowSourceMetadataRequest < Struct.new(
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,7 +1006,8 @@ module Aws::MediaConnect
       :messages,
       :timestamp,
       :transport_media_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +1016,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DescribeFlowSourceThumbnailRequest < Struct.new(
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1026,8 @@ module Aws::MediaConnect
     #   @return [Types::ThumbnailDetails]
     class DescribeFlowSourceThumbnailResponse < Struct.new(
       :thumbnail_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +1036,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DescribeGatewayInstanceRequest < Struct.new(
       :gateway_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1046,8 @@ module Aws::MediaConnect
     #   @return [Types::GatewayInstance]
     class DescribeGatewayInstanceResponse < Struct.new(
       :gateway_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1056,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DescribeGatewayRequest < Struct.new(
       :gateway_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1066,8 @@ module Aws::MediaConnect
     #   @return [Types::Gateway]
     class DescribeGatewayResponse < Struct.new(
       :gateway,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1013,7 +1076,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DescribeOfferingRequest < Struct.new(
       :offering_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1022,7 +1086,8 @@ module Aws::MediaConnect
     #   @return [Types::Offering]
     class DescribeOfferingResponse < Struct.new(
       :offering,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,7 +1096,8 @@ module Aws::MediaConnect
     #   @return [String]
     class DescribeReservationRequest < Struct.new(
       :reservation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1106,8 @@ module Aws::MediaConnect
     #   @return [Types::Reservation]
     class DescribeReservationResponse < Struct.new(
       :reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1062,7 +1129,8 @@ module Aws::MediaConnect
       :destination_port,
       :interface,
       :outbound_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1148,8 @@ module Aws::MediaConnect
       :destination_ip,
       :destination_port,
       :interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1163,8 @@ module Aws::MediaConnect
     class EgressGatewayBridge < Struct.new(
       :instance_id,
       :max_bitrate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1178,8 @@ module Aws::MediaConnect
     class EncodingParameters < Struct.new(
       :compression_factor,
       :encoder_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1122,7 +1193,8 @@ module Aws::MediaConnect
     class EncodingParametersRequest < Struct.new(
       :compression_factor,
       :encoder_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1236,8 @@ module Aws::MediaConnect
       :role_arn,
       :secret_arn,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1198,7 +1271,8 @@ module Aws::MediaConnect
       :entitlement_status,
       :name,
       :subscribers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1294,8 @@ module Aws::MediaConnect
       :recovery_window,
       :source_priority,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1294,7 +1369,8 @@ module Aws::MediaConnect
       :source_monitoring_config,
       :flow_size,
       :ndi_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1328,7 +1404,8 @@ module Aws::MediaConnect
       :range,
       :scan_mode,
       :tcs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1439,8 @@ module Aws::MediaConnect
       :range,
       :scan_mode,
       :tcs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,7 +1449,8 @@ module Aws::MediaConnect
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1385,7 +1464,8 @@ module Aws::MediaConnect
     class FrameResolution < Struct.new(
       :frame_height,
       :frame_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1479,8 @@ module Aws::MediaConnect
     class FrozenFrames < Struct.new(
       :state,
       :threshold_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,7 +1510,8 @@ module Aws::MediaConnect
       :gateway_state,
       :name,
       :networks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1443,7 +1525,8 @@ module Aws::MediaConnect
     class GatewayBridgeSource < Struct.new(
       :bridge_arn,
       :vpc_interface_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1481,7 +1564,8 @@ module Aws::MediaConnect
       :instance_messages,
       :instance_state,
       :running_bridge_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1579,8 @@ module Aws::MediaConnect
     class GatewayNetwork < Struct.new(
       :cidr_block,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1525,7 +1610,8 @@ module Aws::MediaConnect
       :entitlement_status,
       :name,
       :subscribers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1534,7 +1620,8 @@ module Aws::MediaConnect
     #   @return [String]
     class GrantFlowEntitlements420Exception < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1547,7 +1634,8 @@ module Aws::MediaConnect
     class GrantFlowEntitlementsRequest < Struct.new(
       :entitlements,
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1560,7 +1648,8 @@ module Aws::MediaConnect
     class GrantFlowEntitlementsResponse < Struct.new(
       :entitlements,
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1578,7 +1667,8 @@ module Aws::MediaConnect
       :instance_id,
       :max_bitrate,
       :max_outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1596,7 +1686,8 @@ module Aws::MediaConnect
       :input_ip,
       :input_port,
       :interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1610,7 +1701,8 @@ module Aws::MediaConnect
     class InputConfigurationRequest < Struct.new(
       :input_port,
       :interface,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1620,7 +1712,8 @@ module Aws::MediaConnect
     #   @return [String]
     class Interface < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1630,7 +1723,8 @@ module Aws::MediaConnect
     #   @return [String]
     class InterfaceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1733,8 @@ module Aws::MediaConnect
     #   @return [String]
     class InternalServerErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1751,8 @@ module Aws::MediaConnect
       :filter_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1669,7 +1765,8 @@ module Aws::MediaConnect
     class ListBridgesResponse < Struct.new(
       :bridges,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1682,7 +1779,8 @@ module Aws::MediaConnect
     class ListEntitlementsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1695,7 +1793,8 @@ module Aws::MediaConnect
     class ListEntitlementsResponse < Struct.new(
       :entitlements,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1708,7 +1807,8 @@ module Aws::MediaConnect
     class ListFlowsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1721,7 +1821,8 @@ module Aws::MediaConnect
     class ListFlowsResponse < Struct.new(
       :flows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1738,7 +1839,8 @@ module Aws::MediaConnect
       :filter_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1751,7 +1853,8 @@ module Aws::MediaConnect
     class ListGatewayInstancesResponse < Struct.new(
       :instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1867,8 @@ module Aws::MediaConnect
     class ListGatewaysRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1777,7 +1881,8 @@ module Aws::MediaConnect
     class ListGatewaysResponse < Struct.new(
       :gateways,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1790,7 +1895,8 @@ module Aws::MediaConnect
     class ListOfferingsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1803,7 +1909,8 @@ module Aws::MediaConnect
     class ListOfferingsResponse < Struct.new(
       :next_token,
       :offerings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1816,7 +1923,8 @@ module Aws::MediaConnect
     class ListReservationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1829,7 +1937,8 @@ module Aws::MediaConnect
     class ListReservationsResponse < Struct.new(
       :next_token,
       :reservations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1838,7 +1947,8 @@ module Aws::MediaConnect
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1847,7 +1957,8 @@ module Aws::MediaConnect
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1873,7 +1984,8 @@ module Aws::MediaConnect
       :bridge_type,
       :name,
       :placement_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1891,7 +2003,8 @@ module Aws::MediaConnect
       :data_transfer_subscriber_fee_percent,
       :entitlement_arn,
       :entitlement_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1925,7 +2038,8 @@ module Aws::MediaConnect
       :source_type,
       :status,
       :maintenance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1943,7 +2057,8 @@ module Aws::MediaConnect
       :gateway_arn,
       :gateway_state,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1965,7 +2080,8 @@ module Aws::MediaConnect
       :gateway_instance_arn,
       :instance_id,
       :instance_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2103,8 @@ module Aws::MediaConnect
       :maintenance_deadline,
       :maintenance_scheduled_date,
       :maintenance_start_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2025,7 +2142,8 @@ module Aws::MediaConnect
       :media_stream_name,
       :media_stream_type,
       :video_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2039,7 +2157,8 @@ module Aws::MediaConnect
     class MediaStreamAttributes < Struct.new(
       :fmtp,
       :lang,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2053,7 +2172,8 @@ module Aws::MediaConnect
     class MediaStreamAttributesRequest < Struct.new(
       :fmtp,
       :lang,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2075,7 +2195,8 @@ module Aws::MediaConnect
       :encoding_name,
       :encoding_parameters,
       :media_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2097,7 +2218,8 @@ module Aws::MediaConnect
       :encoding_name,
       :encoding_parameters,
       :media_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2115,7 +2237,8 @@ module Aws::MediaConnect
       :encoding_name,
       :input_configurations,
       :media_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2133,7 +2256,8 @@ module Aws::MediaConnect
       :encoding_name,
       :input_configurations,
       :media_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2151,7 +2275,8 @@ module Aws::MediaConnect
       :code,
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2161,7 +2286,8 @@ module Aws::MediaConnect
     #   @return [Array<String>]
     class Messages < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2183,7 +2309,8 @@ module Aws::MediaConnect
       :audio_monitoring_settings,
       :content_quality_analysis_state,
       :video_monitoring_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2193,7 +2320,8 @@ module Aws::MediaConnect
     #   @return [String]
     class MulticastSourceSettings < Struct.new(
       :multicast_source_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2211,7 +2339,8 @@ module Aws::MediaConnect
       :ndi_state,
       :machine_name,
       :ndi_discovery_servers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2229,7 +2358,8 @@ module Aws::MediaConnect
       :discovery_server_address,
       :discovery_server_port,
       :vpc_interface_adapter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2238,7 +2368,8 @@ module Aws::MediaConnect
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2276,7 +2407,8 @@ module Aws::MediaConnect
       :price_per_unit,
       :price_units,
       :resource_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,7 +2482,8 @@ module Aws::MediaConnect
       :bridge_ports,
       :output_status,
       :peer_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2367,7 +2500,8 @@ module Aws::MediaConnect
       :offering_arn,
       :reservation_name,
       :start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2376,7 +2510,8 @@ module Aws::MediaConnect
     #   @return [Types::Reservation]
     class PurchaseOfferingResponse < Struct.new(
       :reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2389,7 +2524,8 @@ module Aws::MediaConnect
     class RemoveBridgeOutputRequest < Struct.new(
       :bridge_arn,
       :output_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2402,7 +2538,8 @@ module Aws::MediaConnect
     class RemoveBridgeOutputResponse < Struct.new(
       :bridge_arn,
       :output_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2552,8 @@ module Aws::MediaConnect
     class RemoveBridgeSourceRequest < Struct.new(
       :bridge_arn,
       :source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2566,8 @@ module Aws::MediaConnect
     class RemoveBridgeSourceResponse < Struct.new(
       :bridge_arn,
       :source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2441,7 +2580,8 @@ module Aws::MediaConnect
     class RemoveFlowMediaStreamRequest < Struct.new(
       :flow_arn,
       :media_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2454,7 +2594,8 @@ module Aws::MediaConnect
     class RemoveFlowMediaStreamResponse < Struct.new(
       :flow_arn,
       :media_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2467,7 +2608,8 @@ module Aws::MediaConnect
     class RemoveFlowOutputRequest < Struct.new(
       :flow_arn,
       :output_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2480,7 +2622,8 @@ module Aws::MediaConnect
     class RemoveFlowOutputResponse < Struct.new(
       :flow_arn,
       :output_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2493,7 +2636,8 @@ module Aws::MediaConnect
     class RemoveFlowSourceRequest < Struct.new(
       :flow_arn,
       :source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2506,7 +2650,8 @@ module Aws::MediaConnect
     class RemoveFlowSourceResponse < Struct.new(
       :flow_arn,
       :source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2519,7 +2664,8 @@ module Aws::MediaConnect
     class RemoveFlowVpcInterfaceRequest < Struct.new(
       :flow_arn,
       :vpc_interface_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2536,7 +2682,8 @@ module Aws::MediaConnect
       :flow_arn,
       :non_deleted_network_interface_ids,
       :vpc_interface_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2594,7 +2741,8 @@ module Aws::MediaConnect
       :reservation_state,
       :resource_specification,
       :start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2608,7 +2756,8 @@ module Aws::MediaConnect
     class ResourceSpecification < Struct.new(
       :reserved_bitrate,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2621,7 +2770,8 @@ module Aws::MediaConnect
     class RevokeFlowEntitlementRequest < Struct.new(
       :entitlement_arn,
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2634,7 +2784,8 @@ module Aws::MediaConnect
     class RevokeFlowEntitlementResponse < Struct.new(
       :entitlement_arn,
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2643,7 +2794,8 @@ module Aws::MediaConnect
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2657,7 +2809,8 @@ module Aws::MediaConnect
     class SetGatewayBridgeSourceRequest < Struct.new(
       :bridge_arn,
       :vpc_interface_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2739,7 +2892,8 @@ module Aws::MediaConnect
       :vpc_interface_name,
       :whitelist_cidr,
       :gateway_bridge_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2753,7 +2907,8 @@ module Aws::MediaConnect
     class SilentAudio < Struct.new(
       :state,
       :threshold_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2823,7 +2978,8 @@ module Aws::MediaConnect
       :whitelist_cidr,
       :gateway_bridge_source,
       :peer_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2833,7 +2989,8 @@ module Aws::MediaConnect
     #   @return [String]
     class SourcePriority < Struct.new(
       :primary_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2842,7 +2999,8 @@ module Aws::MediaConnect
     #   @return [String]
     class StartFlowRequest < Struct.new(
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2855,7 +3013,8 @@ module Aws::MediaConnect
     class StartFlowResponse < Struct.new(
       :flow_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +3023,8 @@ module Aws::MediaConnect
     #   @return [String]
     class StopFlowRequest < Struct.new(
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2877,7 +3037,8 @@ module Aws::MediaConnect
     class StopFlowResponse < Struct.new(
       :flow_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2890,7 +3051,8 @@ module Aws::MediaConnect
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2916,7 +3078,8 @@ module Aws::MediaConnect
       :thumbnail_messages,
       :timecode,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2925,7 +3088,8 @@ module Aws::MediaConnect
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2991,7 +3155,8 @@ module Aws::MediaConnect
       :stream_id,
       :ndi_speed_hq_quality,
       :ndi_program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3001,7 +3166,8 @@ module Aws::MediaConnect
     #   @return [Array<Types::TransportStreamProgram>]
     class TransportMediaInfo < Struct.new(
       :programs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3039,7 +3205,8 @@ module Aws::MediaConnect
       :sample_rate,
       :sample_size,
       :stream_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3065,7 +3232,8 @@ module Aws::MediaConnect
       :program_number,
       :program_pid,
       :streams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3078,7 +3246,8 @@ module Aws::MediaConnect
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3092,7 +3261,8 @@ module Aws::MediaConnect
     class UpdateBridgeFlowSourceRequest < Struct.new(
       :flow_arn,
       :flow_vpc_interface_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3118,7 +3288,8 @@ module Aws::MediaConnect
       :port,
       :protocol,
       :ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3144,7 +3315,8 @@ module Aws::MediaConnect
       :network_name,
       :port,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3161,7 +3333,8 @@ module Aws::MediaConnect
       :bridge_arn,
       :network_output,
       :output_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3174,7 +3347,8 @@ module Aws::MediaConnect
     class UpdateBridgeOutputResponse < Struct.new(
       :bridge_arn,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3195,7 +3369,8 @@ module Aws::MediaConnect
       :egress_gateway_bridge,
       :ingress_gateway_bridge,
       :source_failover_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3204,7 +3379,8 @@ module Aws::MediaConnect
     #   @return [Types::Bridge]
     class UpdateBridgeResponse < Struct.new(
       :bridge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3225,7 +3401,8 @@ module Aws::MediaConnect
       :flow_source,
       :network_source,
       :source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3238,7 +3415,8 @@ module Aws::MediaConnect
     class UpdateBridgeSourceResponse < Struct.new(
       :bridge_arn,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3251,7 +3429,8 @@ module Aws::MediaConnect
     class UpdateBridgeStateRequest < Struct.new(
       :bridge_arn,
       :desired_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3264,7 +3443,8 @@ module Aws::MediaConnect
     class UpdateBridgeStateResponse < Struct.new(
       :bridge_arn,
       :desired_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3274,7 +3454,8 @@ module Aws::MediaConnect
     #   @return [Integer]
     class UpdateEgressGatewayBridgeRequest < Struct.new(
       :max_bitrate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3316,7 +3497,8 @@ module Aws::MediaConnect
       :role_arn,
       :secret_arn,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3338,7 +3520,8 @@ module Aws::MediaConnect
       :recovery_window,
       :source_priority,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3367,7 +3550,8 @@ module Aws::MediaConnect
       :entitlement_status,
       :flow_arn,
       :subscribers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3380,7 +3564,8 @@ module Aws::MediaConnect
     class UpdateFlowEntitlementResponse < Struct.new(
       :entitlement,
       :flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3413,7 +3598,8 @@ module Aws::MediaConnect
       :media_stream_name,
       :media_stream_type,
       :video_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3426,7 +3612,8 @@ module Aws::MediaConnect
     class UpdateFlowMediaStreamResponse < Struct.new(
       :flow_arn,
       :media_stream,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3511,7 +3698,8 @@ module Aws::MediaConnect
       :output_status,
       :ndi_program_name,
       :ndi_speed_hq_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3524,7 +3712,8 @@ module Aws::MediaConnect
     class UpdateFlowOutputResponse < Struct.new(
       :flow_arn,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3549,7 +3738,8 @@ module Aws::MediaConnect
       :maintenance,
       :source_monitoring_config,
       :ndi_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3558,7 +3748,8 @@ module Aws::MediaConnect
     #   @return [Types::Flow]
     class UpdateFlowResponse < Struct.new(
       :flow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3643,7 +3834,8 @@ module Aws::MediaConnect
       :vpc_interface_name,
       :whitelist_cidr,
       :gateway_bridge_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3656,7 +3848,8 @@ module Aws::MediaConnect
     class UpdateFlowSourceResponse < Struct.new(
       :flow_arn,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3670,7 +3863,8 @@ module Aws::MediaConnect
     class UpdateGatewayBridgeSourceRequest < Struct.new(
       :bridge_arn,
       :vpc_interface_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3683,7 +3877,8 @@ module Aws::MediaConnect
     class UpdateGatewayInstanceRequest < Struct.new(
       :bridge_placement,
       :gateway_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3696,7 +3891,8 @@ module Aws::MediaConnect
     class UpdateGatewayInstanceResponse < Struct.new(
       :bridge_placement,
       :gateway_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3710,7 +3906,8 @@ module Aws::MediaConnect
     class UpdateIngressGatewayBridgeRequest < Struct.new(
       :max_bitrate,
       :max_outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3728,7 +3925,8 @@ module Aws::MediaConnect
       :maintenance_day,
       :maintenance_scheduled_date,
       :maintenance_start_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3742,7 +3940,8 @@ module Aws::MediaConnect
     class VideoMonitoringSetting < Struct.new(
       :black_frames,
       :frozen_frames,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3772,7 +3971,8 @@ module Aws::MediaConnect
       :role_arn,
       :security_group_ids,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3782,7 +3982,8 @@ module Aws::MediaConnect
     #   @return [String]
     class VpcInterfaceAttachment < Struct.new(
       :vpc_interface_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3808,7 +4009,8 @@ module Aws::MediaConnect
       :role_arn,
       :security_group_ids,
       :subnet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

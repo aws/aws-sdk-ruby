@@ -2762,7 +2762,6 @@ module Aws::Lambda
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"aws.iam#conditionKeys" => ["lambda:FunctionArn", "lambda:FunctionUrlAuthType"], "aws.iam#iamAction" => {"documentation" => "Grants permission to update a function url configuration for a Lambda function", "relativeDocumentation" => "API_UpdateFunctionUrlConfig.html", "resources" => {"required" => {"function" => {}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/2021-10-31/functions/{FunctionName}/url", "code" => 200}}
       end)
-
     end
 
     class << self

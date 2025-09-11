@@ -67,7 +67,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -91,7 +91,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -115,7 +115,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::BulkLoadIdNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -143,7 +143,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::CancelledByUserException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -167,7 +167,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::ClientTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -195,7 +195,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -223,7 +223,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::ConstraintViolationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -251,7 +251,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::ExpiredStreamException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -275,7 +275,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::FailureByQueryException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -303,7 +303,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::IllegalArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -327,7 +327,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -351,7 +351,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::InvalidArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -375,7 +375,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::InvalidNumericDataException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -399,7 +399,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -423,7 +423,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::LoadUrlAccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -447,7 +447,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::MLResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -471,7 +471,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::MalformedQueryException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -495,7 +495,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::MemoryLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -523,7 +523,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::MethodNotAllowedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -547,7 +547,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::MissingParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -571,7 +571,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::ParsingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -595,7 +595,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::PreconditionsFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -619,7 +619,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::QueryLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -647,7 +647,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::QueryLimitException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -671,7 +671,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::QueryTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -695,7 +695,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::ReadOnlyViolationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -719,7 +719,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::S3Exception] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -747,7 +747,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::ServerShutdownException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -771,7 +771,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::StatisticsNotAvailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -795,7 +795,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::StreamRecordsNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -819,7 +819,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -847,7 +847,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::TimeLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -875,7 +875,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>
@@ -903,7 +903,7 @@ module Aws::Neptunedata
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptunedata::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A detailed message describing the problem.</p>

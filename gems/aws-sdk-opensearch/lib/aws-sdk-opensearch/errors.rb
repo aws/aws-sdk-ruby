@@ -46,7 +46,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -60,7 +60,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::BaseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -74,7 +74,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -88,7 +88,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::DependencyFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -102,7 +102,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::DisabledOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -116,7 +116,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::InternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -130,7 +130,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::InvalidPaginationTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -144,7 +144,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::InvalidTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -158,7 +158,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -172,7 +172,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -186,7 +186,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>
@@ -200,7 +200,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::SlotNotAvailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Alternate time slots during which OpenSearch Service has available capacity to schedule a domain action.</p>
@@ -219,7 +219,7 @@ module Aws::OpenSearch
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearch::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the error.</p>

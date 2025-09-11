@@ -3065,7 +3065,6 @@ module Aws::Imagebuilder
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/UpdateLifecyclePolicy", "code" => 200}}
       end)
-
     end
 
     class << self

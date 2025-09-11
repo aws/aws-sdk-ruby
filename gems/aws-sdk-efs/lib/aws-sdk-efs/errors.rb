@@ -66,7 +66,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::AccessPointAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -88,7 +88,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::AccessPointLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -106,7 +106,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::AccessPointNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -125,7 +125,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::AvailabilityZonesMismatch] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -143,7 +143,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::BadRequest] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -160,7 +160,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -178,7 +178,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::DependencyTimeout] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -196,7 +196,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::FileSystemAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -217,7 +217,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::FileSystemInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -235,7 +235,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::FileSystemLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -253,7 +253,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::FileSystemNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -270,7 +270,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::IncorrectFileSystemLifeCycleState] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -288,7 +288,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::IncorrectMountTargetState] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -309,7 +309,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::InsufficientThroughputCapacity] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -326,7 +326,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -345,7 +345,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::InvalidPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -363,7 +363,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::IpAddressInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -381,7 +381,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::MountTargetConflict] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -399,7 +399,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::MountTargetNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -421,7 +421,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::NetworkInterfaceLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -439,7 +439,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::NoFreeAddressesInSubnet] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -456,7 +456,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::PolicyNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -473,7 +473,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::ReplicationAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -491,7 +491,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::ReplicationNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>ReplicationNotFound</p>
@@ -514,7 +514,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::SecurityGroupLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -532,7 +532,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::SecurityGroupNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -550,7 +550,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::SubnetNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -569,7 +569,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -587,7 +587,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::ThroughputLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -605,7 +605,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::TooManyRequests] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -622,7 +622,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::UnsupportedAvailabilityZone] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code
@@ -639,7 +639,7 @@ module Aws::EFS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EFS::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def error_code

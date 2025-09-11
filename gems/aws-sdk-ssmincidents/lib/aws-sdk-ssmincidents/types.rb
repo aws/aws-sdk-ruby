@@ -11,7 +11,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::SSMIncidents
     class Action < Struct.new(
       :ssm_automation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SsmAutomation < Action; end
@@ -42,7 +44,8 @@ module Aws::SSMIncidents
     class AddRegionAction < Struct.new(
       :region_name,
       :sse_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +60,8 @@ module Aws::SSMIncidents
       :string_values,
       :integer_values,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringValues < AttributeValueList; end
@@ -73,7 +77,8 @@ module Aws::SSMIncidents
     class AutomationExecution < Struct.new(
       :ssm_execution_arn,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SsmExecutionArn < AutomationExecution; end
@@ -98,7 +103,8 @@ module Aws::SSMIncidents
       :finding_id,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +118,8 @@ module Aws::SSMIncidents
     class BatchGetIncidentFindingsInput < Struct.new(
       :incident_record_arn,
       :finding_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +132,8 @@ module Aws::SSMIncidents
     class BatchGetIncidentFindingsOutput < Struct.new(
       :findings,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +150,8 @@ module Aws::SSMIncidents
       :empty,
       :chatbot_sns,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Empty < ChatChannel; end
@@ -167,7 +176,8 @@ module Aws::SSMIncidents
       :start_time,
       :end_time,
       :stack_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +202,8 @@ module Aws::SSMIncidents
       :end_time,
       :deployment_group_arn,
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +225,8 @@ module Aws::SSMIncidents
       :after,
       :equals,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Before < Condition; end
@@ -240,7 +252,8 @@ module Aws::SSMIncidents
       :resource_identifier,
       :resource_type,
       :retry_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -259,7 +272,8 @@ module Aws::SSMIncidents
       :regions,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +282,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class CreateReplicationSetOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +325,8 @@ module Aws::SSMIncidents
       :actions,
       :tags,
       :integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -319,7 +335,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class CreateResponsePlanOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +375,8 @@ module Aws::SSMIncidents
       :event_type,
       :event_data,
       :event_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +389,8 @@ module Aws::SSMIncidents
     class CreateTimelineEventOperationOutput < Struct.new(
       :incident_record_arn,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -380,12 +399,14 @@ module Aws::SSMIncidents
     #   @return [String]
     class DeleteIncidentRecordOperationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIncidentRecordOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +417,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class DeleteRegionAction < Struct.new(
       :region_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,12 +427,14 @@ module Aws::SSMIncidents
     #   @return [String]
     class DeleteReplicationSetOperationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteReplicationSetOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,12 +447,14 @@ module Aws::SSMIncidents
     class DeleteResourcePolicyOperationInput < Struct.new(
       :resource_arn,
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,12 +463,14 @@ module Aws::SSMIncidents
     #   @return [String]
     class DeleteResponsePlanOperationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResponsePlanOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,12 +484,14 @@ module Aws::SSMIncidents
     class DeleteTimelineEventOperationInput < Struct.new(
       :incident_record_arn,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTimelineEventOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +503,8 @@ module Aws::SSMIncidents
     class DynamicSsmParameterValue < Struct.new(
       :variable,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Variable < DynamicSsmParameterValue; end
@@ -482,7 +513,8 @@ module Aws::SSMIncidents
 
     # <p>Used to remove the chat channel from an incident record or response plan.</p>
     class EmptyChatChannel < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +531,8 @@ module Aws::SSMIncidents
       :resource,
       :related_item_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Resource < EventReference; end
@@ -534,7 +567,8 @@ module Aws::SSMIncidents
       :event_updated_time,
       :event_type,
       :event_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -549,7 +583,8 @@ module Aws::SSMIncidents
     class Filter < Struct.new(
       :key,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +609,8 @@ module Aws::SSMIncidents
       :creation_time,
       :last_modified_time,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +626,8 @@ module Aws::SSMIncidents
       :code_deploy_deployment,
       :cloud_formation_stack_update,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CodeDeployDeployment < FindingDetails; end
@@ -608,7 +645,8 @@ module Aws::SSMIncidents
     class FindingSummary < Struct.new(
       :id,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,7 +655,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class GetIncidentRecordOperationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +665,8 @@ module Aws::SSMIncidents
     #   @return [Types::IncidentRecord]
     class GetIncidentRecordOperationOutput < Struct.new(
       :incident_record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +675,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class GetReplicationSetOperationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +685,8 @@ module Aws::SSMIncidents
     #   @return [Types::ReplicationSet]
     class GetReplicationSetOperationOutput < Struct.new(
       :replication_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -663,7 +705,8 @@ module Aws::SSMIncidents
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +720,8 @@ module Aws::SSMIncidents
     class GetResourcePoliciesOperationOutput < Struct.new(
       :resource_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +730,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class GetResponsePlanOperationInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -725,7 +770,8 @@ module Aws::SSMIncidents
       :engagements,
       :actions,
       :integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -739,7 +785,8 @@ module Aws::SSMIncidents
     class GetTimelineEventOperationInput < Struct.new(
       :incident_record_arn,
       :event_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +795,8 @@ module Aws::SSMIncidents
     #   @return [Types::TimelineEvent]
     class GetTimelineEventOperationOutput < Struct.new(
       :event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,7 +886,8 @@ module Aws::SSMIncidents
       :dedupe_string,
       :chat_channel,
       :notification_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -863,7 +912,8 @@ module Aws::SSMIncidents
       :invoked_by,
       :resource_arn,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -898,7 +948,8 @@ module Aws::SSMIncidents
       :creation_time,
       :resolved_time,
       :incident_record_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1019,8 @@ module Aws::SSMIncidents
       :dedupe_string,
       :notification_targets,
       :incident_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1032,8 @@ module Aws::SSMIncidents
     class Integration < Struct.new(
       :pager_duty_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PagerDutyConfiguration < Integration; end
@@ -993,7 +1046,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1007,7 +1061,8 @@ module Aws::SSMIncidents
     class ItemIdentifier < Struct.new(
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,7 +1086,8 @@ module Aws::SSMIncidents
       :metric_definition,
       :pager_duty_incident_detail,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Arn < ItemValue; end
@@ -1056,7 +1112,8 @@ module Aws::SSMIncidents
       :incident_record_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1071,7 +1128,8 @@ module Aws::SSMIncidents
     class ListIncidentFindingsOutput < Struct.new(
       :findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1126,7 +1184,8 @@ module Aws::SSMIncidents
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1199,8 @@ module Aws::SSMIncidents
     class ListIncidentRecordsOperationOutput < Struct.new(
       :incident_record_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1219,8 @@ module Aws::SSMIncidents
       :incident_record_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1234,8 @@ module Aws::SSMIncidents
     class ListRelatedItemsOperationOutput < Struct.new(
       :related_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1249,8 @@ module Aws::SSMIncidents
     class ListReplicationSetsOperationInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1264,8 @@ module Aws::SSMIncidents
     class ListReplicationSetsOperationOutput < Struct.new(
       :replication_set_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1279,8 @@ module Aws::SSMIncidents
     class ListResponsePlansOperationInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1229,7 +1294,8 @@ module Aws::SSMIncidents
     class ListResponsePlansOperationOutput < Struct.new(
       :response_plan_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1238,7 +1304,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1247,7 +1314,8 @@ module Aws::SSMIncidents
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1310,7 +1378,8 @@ module Aws::SSMIncidents
       :sort_order,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,7 +1393,8 @@ module Aws::SSMIncidents
     class ListTimelineEventsOperationOutput < Struct.new(
       :event_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1335,7 +1405,8 @@ module Aws::SSMIncidents
     class NotificationTargetItem < Struct.new(
       :sns_topic_arn,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SnsTopicArn < NotificationTargetItem; end
@@ -1357,7 +1428,8 @@ module Aws::SSMIncidents
       :name,
       :secret_id,
       :pager_duty_incident_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1440,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class PagerDutyIncidentConfiguration < Struct.new(
       :service_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1462,8 @@ module Aws::SSMIncidents
       :id,
       :auto_resolve,
       :secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1476,8 @@ module Aws::SSMIncidents
     class PutResourcePolicyOperationInput < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,7 +1486,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class PutResourcePolicyOperationOutput < Struct.new(
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1433,7 +1509,8 @@ module Aws::SSMIncidents
       :status,
       :status_message,
       :status_update_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1444,7 +1521,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class RegionMapInputValue < Struct.new(
       :sse_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1543,8 @@ module Aws::SSMIncidents
       :identifier,
       :title,
       :generated_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1480,7 +1559,8 @@ module Aws::SSMIncidents
       :item_to_add,
       :item_to_remove,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ItemToAdd < RelatedItemsUpdate; end
@@ -1526,7 +1606,8 @@ module Aws::SSMIncidents
       :created_by,
       :last_modified_time,
       :last_modified_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1624,8 @@ module Aws::SSMIncidents
       :message,
       :resource_identifier,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1562,7 +1644,8 @@ module Aws::SSMIncidents
       :policy_document,
       :policy_id,
       :ram_resource_share_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1580,7 +1663,8 @@ module Aws::SSMIncidents
       :arn,
       :name,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1605,7 +1689,8 @@ module Aws::SSMIncidents
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1724,8 @@ module Aws::SSMIncidents
       :target_account,
       :parameters,
       :dynamic_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1697,7 +1783,8 @@ module Aws::SSMIncidents
       :impact,
       :trigger_details,
       :related_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1706,7 +1793,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class StartIncidentOperationOutput < Struct.new(
       :incident_record_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1719,12 +1807,14 @@ module Aws::SSMIncidents
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1741,7 +1831,8 @@ module Aws::SSMIncidents
       :message,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1776,7 +1867,8 @@ module Aws::SSMIncidents
       :event_type,
       :event_data,
       :event_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1800,7 +1892,8 @@ module Aws::SSMIncidents
       :trigger_arn,
       :timestamp,
       :raw_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1813,12 +1906,14 @@ module Aws::SSMIncidents
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1836,12 +1931,14 @@ module Aws::SSMIncidents
       :arn,
       :deletion_protected,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDeletionProtectionOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1909,12 +2006,14 @@ module Aws::SSMIncidents
       :status,
       :chat_channel,
       :notification_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateIncidentRecordOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1933,12 +2032,14 @@ module Aws::SSMIncidents
       :client_token,
       :incident_record_arn,
       :related_items_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateRelatedItemsOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2056,8 @@ module Aws::SSMIncidents
       :add_region_action,
       :delete_region_action,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AddRegionAction < UpdateReplicationSetAction; end
@@ -1977,12 +2079,14 @@ module Aws::SSMIncidents
       :arn,
       :actions,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateReplicationSetOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,12 +2177,14 @@ module Aws::SSMIncidents
       :actions,
       :incident_template_tags,
       :integrations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateResponsePlanOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2123,12 +2229,14 @@ module Aws::SSMIncidents
       :event_type,
       :event_data,
       :event_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTimelineEventOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2138,7 +2246,8 @@ module Aws::SSMIncidents
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

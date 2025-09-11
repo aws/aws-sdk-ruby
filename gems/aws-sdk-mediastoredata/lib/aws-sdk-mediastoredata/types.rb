@@ -11,7 +11,8 @@ module Aws::MediaStoreData
     #   @return [String]
     class ContainerNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,12 +22,14 @@ module Aws::MediaStoreData
     #   @return [String]
     class DeleteObjectRequest < Struct.new(
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteObjectResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +39,8 @@ module Aws::MediaStoreData
     #   @return [String]
     class DescribeObjectRequest < Struct.new(
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -63,7 +67,8 @@ module Aws::MediaStoreData
       :content_length,
       :cache_control,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +99,8 @@ module Aws::MediaStoreData
     class GetObjectRequest < Struct.new(
       :path,
       :range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +140,8 @@ module Aws::MediaStoreData
       :e_tag,
       :last_modified,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -149,7 +156,8 @@ module Aws::MediaStoreData
     #   @return [String]
     class InternalServerError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,7 +187,8 @@ module Aws::MediaStoreData
       :last_modified,
       :content_type,
       :content_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +218,8 @@ module Aws::MediaStoreData
       :path,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +236,8 @@ module Aws::MediaStoreData
     class ListItemsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +246,8 @@ module Aws::MediaStoreData
     #   @return [String]
     class ObjectNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +300,8 @@ module Aws::MediaStoreData
       :cache_control,
       :storage_class,
       :upload_availability,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +319,8 @@ module Aws::MediaStoreData
       :content_sha256,
       :e_tag,
       :storage_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,7 +329,8 @@ module Aws::MediaStoreData
     #   @return [String]
     class RequestedRangeNotSatisfiableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -40,7 +40,7 @@ module Aws::AutoScalingPlans
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScalingPlans::Types::ConcurrentUpdateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::AutoScalingPlans
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScalingPlans::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::AutoScalingPlans
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScalingPlans::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::AutoScalingPlans
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScalingPlans::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::AutoScalingPlans
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScalingPlans::Types::ObjectNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::AutoScalingPlans
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScalingPlans::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

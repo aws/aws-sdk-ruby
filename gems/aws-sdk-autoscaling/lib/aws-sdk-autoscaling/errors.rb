@@ -44,7 +44,7 @@ module Aws::AutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScaling::Types::ActiveInstanceRefreshNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::AutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScaling::Types::AlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -72,7 +72,7 @@ module Aws::AutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScaling::Types::InstanceRefreshInProgressFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::AutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScaling::Types::InvalidNextToken] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -102,7 +102,7 @@ module Aws::AutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScaling::Types::IrreversibleInstanceRefreshFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::AutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScaling::Types::LimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -133,7 +133,7 @@ module Aws::AutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScaling::Types::ResourceContentionFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -147,7 +147,7 @@ module Aws::AutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScaling::Types::ResourceInUseFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -162,7 +162,7 @@ module Aws::AutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScaling::Types::ScalingActivityInProgressFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -176,7 +176,7 @@ module Aws::AutoScaling
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AutoScaling::Types::ServiceLinkedRoleFailure] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
