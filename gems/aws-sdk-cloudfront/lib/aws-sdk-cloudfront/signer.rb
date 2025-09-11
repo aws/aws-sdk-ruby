@@ -7,25 +7,22 @@ require 'openssl'
 
 module Aws
   module CloudFront
-
     module Signer
-
       # @option options [String] :key_pair_id
       # @option options [String] :private_key
       # @option options [String] :private_key_path
       def initialize(options = {})
         @key_pair_id = key_pair_id(options)
-        @cipher = OpenSSL::Digest::SHA1.new
-        @private_key = OpenSSL::PKey::RSA.new(private_key(options))
+        @cipher = OpenSSL::Digest.new('SHA1')
+        @private_key = resolve_private_key(options)
       end
 
       private
 
       def scheme_and_uri(url)
         url_sections = url.split('://', 2)
-        if url_sections.length < 2
-          raise ArgumentError, "Invalid URL:#{url}"
-        end
+        raise ArgumentError, "Invalid URL:#{url}" if url_sections.length < 2
+
         scheme = url_sections[0].delete('*')
         uri = "#{scheme}://#{url_sections[1]}"
         [scheme, uri]
@@ -69,7 +66,7 @@ module Aws
             resource_content
           end
         else
-          msg = "Invalid URI scheme:#{scheme}.Scheme must be one of: http, https or rtmp."
+          msg = "Invalid URI scheme:#{scheme}. Scheme must be one of: http, https or rtmp."
           raise ArgumentError, msg
         end
       end
@@ -87,7 +84,7 @@ module Aws
           policy = canned_policy(params[:resource], params[:expires])
           signature_content['Expires'] = params[:expires]
         else
-          msg = "Either a policy or a resource with an expiration time must be provided."
+          msg = 'Either a policy or a resource with an expiration time must be provided.'
           raise ArgumentError, msg
         end
 
@@ -106,24 +103,22 @@ module Aws
         json_hash = {
           'Statement' => [
             'Resource' => resource,
-              'Condition' => {
-                'DateLessThan' => {'AWS:EpochTime' => expires}
-              }
+            'Condition' => { 'DateLessThan' => { 'AWS:EpochTime' => expires } }
           ]
         }
         Aws::Json.dump(json_hash)
       end
 
       def encode(policy)
-        Base64.encode64(policy).gsub(/[+=\/]/, '+' => '-', '=' => '_', '/' => '~')
+        Base64.encode64(policy).gsub(%r{[+=/]}, '+' => '-', '=' => '_', '/' => '~')
       end
 
       def key_pair_id(options)
-        if options[:key_pair_id].nil? or options[:key_pair_id] == ''
-          raise ArgumentError, ":key_pair_id must not be blank"
-        else
-          options[:key_pair_id]
+        if options[:key_pair_id].nil? || (options[:key_pair_id] == '')
+          raise ArgumentError, ':key_pair_id must not be blank'
         end
+
+        options[:key_pair_id]
       end
 
       def private_key(options)
@@ -132,11 +127,19 @@ module Aws
         elsif options[:private_key_path]
           File.open(options[:private_key_path], 'rb') { |f| f.read }
         else
-          msg = ":private_key or :private_key_path should be provided"
+          msg = ':private_key or :private_key_path should be provided'
           raise ArgumentError, msg
         end
       end
 
+      def resolve_private_key(options)
+        key = OpenSSL::PKey.read(private_key(options))
+        unless key.is_a?(OpenSSL::PKey::RSA) || key.is_a?(OpenSSL::PKey::EC)
+          raise ArgumentError, "Invalid private key: #{key.class}. Only RSA and ECDSA keys are supported"
+        end
+
+        key
+      end
     end
   end
 end
