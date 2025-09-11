@@ -8,20 +8,22 @@ require 'base64'
 module Aws
   module Sigv4
     describe Signer do
+      let(:credentials) do
+        {
+          access_key_id: 'akid',
+          secret_access_key: 'secret'
+        }
+      end
 
-      let(:credentials) {{
-        access_key_id: 'akid',
-        secret_access_key: 'secret',
-      }}
-
-      let(:options) {{
-        service: 'SERVICE',
-        region: 'REGION',
-        credentials_provider: StaticCredentialsProvider.new(credentials),
-      }}
+      let(:options) do
+        {
+          service: 'SERVICE',
+          region: 'REGION',
+          credentials_provider: StaticCredentialsProvider.new(credentials)
+        }
+      end
 
       context '#service' do
-
         it 'requires a service' do
           expect do
             Signer.new(
@@ -35,11 +37,9 @@ module Aws
         it 'accepts a string' do
           expect(Signer.new(options).service).to eq(options[:service])
         end
-
       end
 
       context '#region' do
-
         it 'requires a region' do
           expect do
             Signer.new(
@@ -53,12 +53,10 @@ module Aws
         it 'accepts a string' do
           expect(Signer.new(options).region).to eq(options[:region])
         end
-
       end
 
       describe '#credentials' do
-
-        let(:options) {{ service: 'ec2', region: 'us-east-1' }}
+        let(:options) { { service: 'ec2', region: 'us-east-1' } }
 
         it 'requires credentials' do
           expect do
@@ -68,9 +66,9 @@ module Aws
 
         it 'accepts :access_key_id and :secret_access_key' do
           signer = Signer.new(options.merge(
-            access_key_id: 'akid',
-            secret_access_key: 'secret'
-          ))
+                                access_key_id: 'akid',
+                                secret_access_key: 'secret'
+                              ))
           creds = signer.credentials_provider.credentials
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
@@ -79,10 +77,10 @@ module Aws
 
         it 'accepts credentials with a session token' do
           signer = Signer.new(options.merge(
-            access_key_id: 'akid',
-            secret_access_key: 'secret',
-            session_token: 'token'
-          ))
+                                access_key_id: 'akid',
+                                secret_access_key: 'secret',
+                                session_token: 'token'
+                              ))
           creds = signer.credentials_provider.credentials
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
@@ -91,12 +89,12 @@ module Aws
 
         it 'accepts :credentials' do
           signer = Signer.new(options.merge(
-            credentials: Credentials.new(
-              access_key_id: 'akid',
-              secret_access_key: 'secret',
-              session_token: 'token'
-            )
-          ))
+                                credentials: Credentials.new(
+                                  access_key_id: 'akid',
+                                  secret_access_key: 'secret',
+                                  session_token: 'token'
+                                )
+                              ))
           creds = signer.credentials_provider.credentials
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
@@ -105,12 +103,12 @@ module Aws
 
         it 'accepts :credentials_provider' do
           signer = Signer.new(options.merge(
-            credentials_provider: StaticCredentialsProvider.new(
-              access_key_id: 'akid',
-              secret_access_key: 'secret',
-              session_token: 'token'
-            )
-          ))
+                                credentials_provider: StaticCredentialsProvider.new(
+                                  access_key_id: 'akid',
+                                  secret_access_key: 'secret',
+                                  session_token: 'token'
+                                )
+                              ))
           creds = signer.credentials_provider.credentials
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
@@ -119,18 +117,16 @@ module Aws
 
         it 'accepts empty credentials' do
           signer = Signer.new(options.merge(
-            access_key_id: '',
-            secret_access_key: ''
-          ))
+                                access_key_id: '',
+                                secret_access_key: ''
+                              ))
           creds = signer.credentials_provider.credentials
           expect(creds.access_key_id).to eq('')
           expect(creds.secret_access_key).to eq('')
         end
-
       end
 
       context '#sign_request' do
-
         let(:request) do
           {
             http_method: 'GET',
@@ -165,14 +161,14 @@ module Aws
                 credentials_provider: StaticCredentialsProvider.new(
                   credentials: creds
                 )
-              ))
+              )
+            )
             expect { signer.sign_request(request) }
               .to raise_error(Errors::MissingCredentialsError)
           end
         end
 
         context 'when URI schema is known' do
-
           it 'omits port in Host when port not provided' do
             signature = Signer.new(options).sign_request(
               http_method: 'GET',
@@ -196,18 +192,15 @@ module Aws
             )
             expect(signature.headers['host']).to eq('domain.com:123')
           end
-
         end
 
         context 'when URI schema is unknown' do
-
           it 'omits port in Host when uri port not provided' do
             signature = Signer.new(options).sign_request(
               http_method: 'GET',
               url: 'abcd://domain.com'
             )
             expect(signature.headers['host']).to eq('domain.com')
-
           end
 
           it 'includes port in Host when uri port provided' do
@@ -217,7 +210,6 @@ module Aws
             )
             expect(signature.headers['host']).to eq('domain.com:123')
           end
-
         end
 
         it 'sets the X-Amz-Date header' do
@@ -227,11 +219,11 @@ module Aws
             http_method: 'GET',
             url: 'https://domain.com:123'
           )
-          expect(signature.headers['x-amz-date']).to eq(now.utc.strftime("%Y%m%dT%H%M%SZ"))
+          expect(signature.headers['x-amz-date']).to eq(now.utc.strftime('%Y%m%dT%H%M%SZ'))
         end
 
         it 'uses the X-Amz-Date header of the request if present' do
-          now = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
+          now = Time.now.utc.strftime('%Y%m%dT%H%M%SZ')
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
             url: 'https://domain.com',
@@ -350,7 +342,7 @@ module Aws
               'Bar' => 'bar  bar',
               'Bar2' => '"bar bar"',
               'Content-Length' => '9',
-              'X-Amz-Date' => '20120101T112233Z',
+              'X-Amz-Date' => '20120101T112233Z'
             },
             body: StringIO.new('http-body')
           )
@@ -384,7 +376,7 @@ module Aws
         end
 
         it 'can sign with s3session tokens' do
-          options[:signing_algorithm] = 'sigv4-s3express'.to_sym
+          options[:signing_algorithm] = :'sigv4-s3express'
           options[:credentials_provider] = StaticCredentialsProvider.new(
             access_key_id: 's3-akid',
             secret_access_key: 's3-secret',
@@ -392,14 +384,13 @@ module Aws
           )
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
-            url: 'https://domain.com',
+            url: 'https://domain.com'
           )
           expect(signature.headers['x-amz-s3session-token']).to eq('s3-token')
         end
       end
 
       context '#sign_event' do
-
         before(:each) do
           allow(Time).to receive(:now).and_return(now)
           allow(now).to receive(:utc).and_return(utc)
@@ -409,15 +400,16 @@ module Aws
 
         let(:now) { double('now') }
         let(:utc) { double('utc-time') }
-        let(:time_i) { 1546045446 }
+        let(:time_i) { 1_546_045_446 }
         let(:datetime) { '20130524T000000Z' }
 
         it 'support event signning' do
           headers, signature = Signer.new(options).sign_event(
-            '', 'foo', Aws::EventStream::Encoder.new)
-          expect(headers[":date"].value).to eq(1546045446000)
-          expect(Base64.strict_encode64(headers[":chunk-signature"].value)).to eq("IEu14nE+lTVGgOlSKYbTrAMErq/TM5fznmVAylH/4iY=")
-          expect(signature).to eq("204bb5e2713e95354680e9522986d3ac0304aeafd33397f39e6540ca51ffe226")
+            '', 'foo', Aws::EventStream::Encoder.new
+          )
+          expect(headers[':date'].value).to eq(1_546_045_446_000)
+          expect(Base64.strict_encode64(headers[':chunk-signature'].value)).to eq('IEu14nE+lTVGgOlSKYbTrAMErq/TM5fznmVAylH/4iY=')
+          expect(signature).to eq('204bb5e2713e95354680e9522986d3ac0304aeafd33397f39e6540ca51ffe226')
         end
       end
 
@@ -432,28 +424,28 @@ module Aws
               'Mno' => '3',
               'Authorization' => '4',
               'authorization' => '5',
-              'X-Amz-Date' => '20161024T184027Z',
+              'X-Amz-Date' => '20161024T184027Z'
             }
           )
-          expect(signature.canonical_request).to eq(<<-EOF.strip)
-PUT
-/
+          expect(signature.canonical_request).to eq(<<~EOF.strip)
+            PUT
+            /
 
-abc:2
-host:domain.com
-mno:3
-x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-x-amz-date:20161024T184027Z
-xyz:1
+            abc:2
+            host:domain.com
+            mno:3
+            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            x-amz-date:20161024T184027Z
+            xyz:1
 
-abc;host;mno;x-amz-content-sha256;x-amz-date;xyz
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            abc;host;mno;x-amz-content-sha256;x-amz-date;xyz
+            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
           EOF
         end
 
         it 'can ignore configured headers' do
           # case insenstive
-          options[:unsigned_headers] = ['cache-control', 'User-Agent']
+          options[:unsigned_headers] = %w[cache-control User-Agent]
           signature = Signer.new(options).sign_request(
             http_method: 'PUT',
             url: 'http://domain.com',
@@ -461,20 +453,20 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
               'Abc' => '2',
               'Cache-Control' => '4',
               'User-Agent' => '5',
-              'X-Amz-Date' => '20161024T184027Z',
+              'X-Amz-Date' => '20161024T184027Z'
             }
           )
-          expect(signature.canonical_request).to eq(<<-EOF.strip)
-PUT
-/
+          expect(signature.canonical_request).to eq(<<~EOF.strip)
+            PUT
+            /
 
-abc:2
-host:domain.com
-x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-x-amz-date:20161024T184027Z
+            abc:2
+            host:domain.com
+            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            x-amz-date:20161024T184027Z
 
-abc;host;x-amz-content-sha256;x-amz-date
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            abc;host;x-amz-content-sha256;x-amz-date
+            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
           EOF
         end
 
@@ -488,23 +480,23 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
               'Xyz' => '3',
               'Authorization' => '4',
               'authorization' => '5',
-              'X-Amz-Date' => '20160101T112233Z',
+              'X-Amz-Date' => '20160101T112233Z'
             },
             body: ''
           )
-          expect(signature.canonical_request).to eq(<<-EOS.strip)
-PUT
-/
+          expect(signature.canonical_request).to eq(<<~EOS.strip)
+            PUT
+            /
 
-abc:1
-host:domain.com
-mno:2
-x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-x-amz-date:20160101T112233Z
-xyz:3
+            abc:1
+            host:domain.com
+            mno:2
+            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            x-amz-date:20160101T112233Z
+            xyz:3
 
-abc;host;mno;x-amz-content-sha256;x-amz-date;xyz
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            abc;host;mno;x-amz-content-sha256;x-amz-date;xyz
+            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
           EOS
         end
 
@@ -514,21 +506,21 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
             url: 'http://domain.com',
             headers: {
               'Abc' => 'a  b  c', # double spaces between letters
-              'X-Amz-Date' => '20160101T112233Z',
-            },
+              'X-Amz-Date' => '20160101T112233Z'
+            }
             # defaults body to the empty string
           )
-          expect(signature.canonical_request).to eq(<<-EOF.strip)
-PUT
-/
+          expect(signature.canonical_request).to eq(<<~EOF.strip)
+            PUT
+            /
 
-abc:a b c
-host:domain.com
-x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-x-amz-date:20160101T112233Z
+            abc:a b c
+            host:domain.com
+            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            x-amz-date:20160101T112233Z
 
-abc;host;x-amz-content-sha256;x-amz-date
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            abc;host;x-amz-content-sha256;x-amz-date
+            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
           EOF
         end
 
@@ -537,19 +529,19 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
             http_method: 'PUT',
             url: 'http://domain.com?other=&test&x-amz-header=foo',
             headers: {
-              'X-Amz-Date' => '20160101T112233Z',
+              'X-Amz-Date' => '20160101T112233Z'
             }
           )
-          expect(signature.canonical_request).to eq(<<-EOF.strip)
-PUT
-/
-other=&test=&x-amz-header=foo
-host:domain.com
-x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-x-amz-date:20160101T112233Z
+          expect(signature.canonical_request).to eq(<<~EOF.strip)
+            PUT
+            /
+            other=&test=&x-amz-header=foo
+            host:domain.com
+            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            x-amz-date:20160101T112233Z
 
-host;x-amz-content-sha256;x-amz-date
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            host;x-amz-content-sha256;x-amz-date
+            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
           EOF
         end
 
@@ -558,19 +550,19 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
             http_method: 'PUT',
             url: 'http://domain.com?foo=&bar=&baz=',
             headers: {
-              'X-Amz-Date' => '20160101T112233Z',
+              'X-Amz-Date' => '20160101T112233Z'
             }
           )
-          expect(signature.canonical_request).to eq(<<-EOF.strip)
-PUT
-/
-bar=&baz=&foo=
-host:domain.com
-x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-x-amz-date:20160101T112233Z
+          expect(signature.canonical_request).to eq(<<~EOF.strip)
+            PUT
+            /
+            bar=&baz=&foo=
+            host:domain.com
+            x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            x-amz-date:20160101T112233Z
 
-host;x-amz-content-sha256;x-amz-date
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            host;x-amz-content-sha256;x-amz-date
+            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
           EOF
         end
 
@@ -579,7 +571,7 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
             http_method: 'PUT',
             url: 'http://domain.com?q.options=abc&q=xyz&q=mno',
             headers: {
-              'X-Amz-Date' => '20160101T112233Z',
+              'X-Amz-Date' => '20160101T112233Z'
             }
           )
           expect(signature.canonical_request).to include('q=mno&q=xyz&q.options=abc')
@@ -591,22 +583,21 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
             url: 'http://domain.com',
             headers: {
               'X-Amz-Date' => '20160101T112233Z',
-              'X-Amz-Content-Sha256' => 'CHECKSUM',
+              'X-Amz-Content-Sha256' => 'CHECKSUM'
             }
           )
-          expect(signature.canonical_request).to eq(<<-EOF.strip)
-PUT
-/
+          expect(signature.canonical_request).to eq(<<~EOF.strip)
+            PUT
+            /
 
-host:domain.com
-x-amz-content-sha256:CHECKSUM
-x-amz-date:20160101T112233Z
+            host:domain.com
+            x-amz-content-sha256:CHECKSUM
+            x-amz-date:20160101T112233Z
 
-host;x-amz-content-sha256;x-amz-date
-CHECKSUM
+            host;x-amz-content-sha256;x-amz-date
+            CHECKSUM
           EOF
         end
-
       end
 
       describe '#presign_url' do
@@ -625,7 +616,7 @@ CHECKSUM
           {
             service: 'SERVICE',
             region: 'REGION',
-            credentials_provider: double(credentials: double(credentials), expiration: expiration),
+            credentials_provider: double(credentials: double(credentials), expiration: expiration)
           }
         end
 

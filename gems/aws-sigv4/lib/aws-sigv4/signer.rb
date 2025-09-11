@@ -4,14 +4,12 @@ require 'openssl'
 require 'tempfile'
 require 'time'
 require 'uri'
-require 'set'
-require "cgi/escape"
-require "cgi/util" if RUBY_VERSION < "3.5"
+require 'cgi/escape'
+require 'cgi/util' if RUBY_VERSION < '3.5'
 require 'pathname'
 
 module Aws
   module SigV4
-
     # Utility class for creating AWS signature version 4 signature. This class
     # provides two methods for generating signatures:
     #
@@ -74,7 +72,6 @@ module Aws
     # and `#session_token`.
     #
     class Signer
-
       class MissingCredentialsError < ArgumentError
         def initialize(msg = nil)
           super(msg || <<~MSG.strip)
@@ -87,7 +84,7 @@ module Aws
       end
 
       class MissingRegionError < ArgumentError
-        def initialize(*args)
+        def initialize(*_args)
           super('missing required option :region')
         end
       end
@@ -154,7 +151,7 @@ module Aws
         @service = extract_service(options)
         @region = extract_region(options)
         @credentials_provider = extract_credentials_provider(options)
-        @unsigned_headers = Set.new((options.fetch(:unsigned_headers, [])).map(&:downcase))
+        @unsigned_headers = Set.new(options.fetch(:unsigned_headers, []).map(&:downcase))
         @unsigned_headers << 'authorization'
         @unsigned_headers << 'x-amzn-trace-id'
         @unsigned_headers << 'expect'
@@ -238,7 +235,7 @@ module Aws
       #   a `#headers` method. The headers must be applied to your request.
       #
       def sign_request(request)
-        creds, _ = fetch_credentials
+        creds, = fetch_credentials
 
         http_method = extract_http_method(request)
         url = extract_url(request)
@@ -246,8 +243,8 @@ module Aws
         headers = downcase_headers(request[:headers])
 
         datetime = headers['x-amz-date']
-        datetime ||= Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
-        date = datetime[0,8]
+        datetime ||= Time.now.utc.strftime('%Y%m%dT%H%M%SZ')
+        date = datetime[0, 8]
 
         content_sha256 = headers['x-amz-content-sha256']
         content_sha256 ||= sha256_hexdigest(request[:body] || '')
@@ -256,7 +253,7 @@ module Aws
         sigv4_headers['host'] = headers['host'] || host(url)
         sigv4_headers['x-amz-date'] = datetime
         if creds.session_token && !@omit_session_token
-          if @signing_algorithm == 'sigv4-s3express'.to_sym
+          if @signing_algorithm == :'sigv4-s3express'
             sigv4_headers['x-amz-s3session-token'] = creds.session_token
           else
             sigv4_headers['x-amz-security-token'] = creds.session_token
@@ -265,9 +262,7 @@ module Aws
 
         sigv4_headers['x-amz-content-sha256'] ||= content_sha256 if @apply_checksum_header
 
-        if @signing_algorithm == :sigv4a && @region && !@region.empty?
-          sigv4_headers['x-amz-region-set'] = @region
-        end
+        sigv4_headers['x-amz-region-set'] = @region if @signing_algorithm == :sigv4a && @region && !@region.empty?
         headers = headers.merge(sigv4_headers) # merge so we do not modify given headers hash
 
         algorithm = sts_algorithm
@@ -289,13 +284,11 @@ module Aws
         sigv4_headers['authorization'] = [
           "#{algorithm} Credential=#{credential(creds, date)}",
           "SignedHeaders=#{signed_headers(headers)}",
-          "Signature=#{sig}",
+          "Signature=#{sig}"
         ].join(', ')
 
         # skip signing the session token, but include it in the headers
-        if creds.session_token && @omit_session_token
-          sigv4_headers['x-amz-security-token'] = creds.session_token
-        end
+        sigv4_headers['x-amz-security-token'] = creds.session_token if creds.session_token && @omit_session_token
 
         # Returning the signature components.
         Signature.new(
@@ -386,8 +379,8 @@ module Aws
         headers['host'] ||= host(url)
 
         datetime = headers['x-amz-date']
-        datetime ||= (options[:time] || Time.now).utc.strftime("%Y%m%dT%H%M%SZ")
-        date = datetime[0,8]
+        datetime ||= (options[:time] || Time.now).utc.strftime('%Y%m%dT%H%M%SZ')
+        date = datetime[0, 8]
 
         content_sha256 = headers['x-amz-content-sha256']
         content_sha256 ||= options[:body_digest]
@@ -399,9 +392,10 @@ module Aws
         params['X-Amz-Algorithm'] = algorithm
         params['X-Amz-Credential'] = credential(creds, date)
         params['X-Amz-Date'] = datetime
-        params['X-Amz-Expires'] = presigned_url_expiration(options, expiration, Time.strptime(datetime, "%Y%m%dT%H%M%S%Z")).to_s
+        params['X-Amz-Expires'] =
+          presigned_url_expiration(options, expiration, Time.strptime(datetime, '%Y%m%dT%H%M%S%Z')).to_s
         if creds.session_token && !@omit_session_token
-          if @signing_algorithm == 'sigv4-s3express'.to_sym
+          if @signing_algorithm == :'sigv4-s3express'
             params['X-Amz-S3session-Token'] = creds.session_token
           else
             params['X-Amz-Security-Token'] = creds.session_token
@@ -416,16 +410,14 @@ module Aws
 
         params['X-Amz-SignedHeaders'] = signed_headers(sigv4_headers)
 
-        if @signing_algorithm == :sigv4a && @region
-          params['X-Amz-Region-Set'] = @region
-        end
+        params['X-Amz-Region-Set'] = @region if @signing_algorithm == :sigv4a && @region
 
         params = params.map do |key, value|
           "#{uri_escape(key)}=#{uri_escape(value)}"
         end.join('&')
 
         if url.query
-          url.query += '&' + params
+          url.query += "&#{params}"
         else
           url.query = params
         end
@@ -438,7 +430,7 @@ module Aws
           else
             signature(creds.secret_access_key, date, sts)
           end
-        url.query += '&X-Amz-Signature=' + signature
+        url.query += "&X-Amz-Signature=#{signature}"
 
         PresignedUrl.new(
           url: url.to_s,
@@ -461,9 +453,9 @@ module Aws
           http_method,
           path(url),
           normalized_querystring(url.query || ''),
-          canonical_headers(headers) + "\n",
+          "#{canonical_headers(headers)}\n",
           signed_headers(headers),
-          content_sha256,
+          content_sha256
         ].join("\n")
       end
 
@@ -471,8 +463,8 @@ module Aws
         [
           algorithm,
           datetime,
-          credential_scope(datetime[0,8]),
-          sha256_hexdigest(canonical_request),
+          credential_scope(datetime[0, 8]),
+          sha256_hexdigest(canonical_request)
         ].join("\n")
       end
 
@@ -490,9 +482,9 @@ module Aws
           Aws::EventStream::Message.new(headers: headers, payload: payload)
         )
         [
-          "AWS4-HMAC-SHA256-PAYLOAD",
+          'AWS4-HMAC-SHA256-PAYLOAD',
           datetime,
-          credential_scope(datetime[0,8]),
+          credential_scope(datetime[0, 8]),
           prior_signature,
           sha256_hexdigest(encoded_headers),
           sha256_hexdigest(payload)
@@ -513,7 +505,7 @@ module Aws
       end
 
       def signature(secret_access_key, date, string_to_sign)
-        k_date = hmac("AWS4" + secret_access_key, date)
+        k_date = hmac("AWS4#{secret_access_key}", date)
         k_region = hmac(k_date, @region)
         k_service = hmac(k_region, @service)
         k_credentials = hmac(k_service, 'aws4_request')
@@ -521,7 +513,7 @@ module Aws
       end
 
       def asymmetric_signature(creds, string_to_sign)
-        ec, _ = AsymmetricCredentials.derive_asymmetric_key(creds.access_key_id, creds.secret_access_key)
+        ec, = AsymmetricCredentials.derive_asymmetric_key(creds.access_key_id, creds.secret_access_key)
         sts_digest = OpenSSL::Digest::SHA256.digest(string_to_sign)
         s = ec.dsa_sign_asn1(sts_digest)
 
@@ -538,7 +530,7 @@ module Aws
       #   string is handled at #sign_event instead. (Will be used
       #   as next prior signature for event signing)
       def event_signature(secret_access_key, date, string_to_sign)
-        k_date = hmac("AWS4" + secret_access_key, date)
+        k_date = hmac("AWS4#{secret_access_key}", date)
         k_region = hmac(k_date, @region)
         k_service = hmac(k_region, @service)
         k_credentials = hmac(k_service, 'aws4_request')
@@ -557,7 +549,7 @@ module Aws
 
       def normalized_querystring(querystring)
         params = querystring.split('&')
-        params = params.map { |p| p.match(/=/) ? p : p + '=' }
+        params = params.map { |p| p.match(/=/) ? p : "#{p}=" }
         # From: https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
         # Sort the parameter names by character code point in ascending order.
         # Parameters with duplicate names should be sorted by value.
@@ -595,15 +587,15 @@ module Aws
       end
 
       def canonical_headers(headers)
-        headers = headers.inject([]) do |hdrs, (k,v)|
+        headers = headers.inject([]) do |hdrs, (k, v)|
           if @unsigned_headers.include?(k)
             hdrs
           else
-            hdrs << [k,v]
+            hdrs << [k, v]
           end
         end
         headers = headers.sort_by(&:first)
-        headers.map{|k,v| "#{k}:#{canonical_header_value(v.to_s)}" }.join("\n")
+        headers.map { |k, v| "#{k}:#{canonical_header_value(v.to_s)}" }.join("\n")
       end
 
       def canonical_header_value(value)
@@ -622,13 +614,14 @@ module Aws
       # @param [File, Tempfile, IO#read, String] value
       # @return [String<SHA256 Hexdigest>]
       def sha256_hexdigest(value)
-        if (File === value || Tempfile === value) && !value.path.nil? && File.exist?(value.path)
+        if (value.is_a?(File) || value.is_a?(Tempfile)) && !value.path.nil? && File.exist?(value.path)
           OpenSSL::Digest::SHA256.file(value).hexdigest
         elsif value.respond_to?(:read)
-          sha256 = OpenSSL::Digest::SHA256.new
+          sha256 = OpenSSL::Digest.new('SHA256')
           loop do
             chunk = value.read(1024 * 1024) # 1MB
             break unless chunk
+
             sha256.update(chunk)
           end
           value.rewind
@@ -650,17 +643,15 @@ module Aws
         if options[:service]
           options[:service]
         else
-          msg = "missing required option :service"
+          msg = 'missing required option :service'
           raise ArgumentError, msg
         end
       end
 
       def extract_region(options)
-        if options[:region]
-          options[:region]
-        else
-          raise MissingRegionError
-        end
+        raise MissingRegionError unless options[:region]
+
+        options[:region]
       end
 
       def extract_credentials_provider(options)
@@ -677,7 +668,7 @@ module Aws
         if request[:http_method]
           request[:http_method].upcase
         else
-          msg = "missing required option :http_method"
+          msg = 'missing required option :http_method'
           raise ArgumentError, msg
         end
       end
@@ -686,16 +677,13 @@ module Aws
         if request[:url]
           URI.parse(request[:url].to_s)
         else
-          msg = "missing required option :url"
+          msg = 'missing required option :url'
           raise ArgumentError, msg
         end
       end
 
       def downcase_headers(headers)
-        (headers || {}).to_hash.inject({}) do |hash, (key, value)|
-          hash[key.downcase] = value
-          hash
-        end
+        (headers || {}).to_hash.transform_keys(&:downcase)
       end
 
       def extract_expires_in(options)
@@ -703,7 +691,7 @@ module Aws
         when nil then 900
         when Integer then options[:expires_in]
         else
-          msg = "expected :expires_in to be a number of seconds"
+          msg = 'expected :expires_in to be a number of seconds'
           raise ArgumentError, msg
         end
       end
@@ -720,13 +708,11 @@ module Aws
         credentials = @credentials_provider.identity
         if credentials_set?(credentials)
           expiration = nil
-          if @credentials_provider.respond_to?(:expiration)
-            expiration = @credentials_provider.expiration
-          end
+          expiration = @credentials_provider.expiration if @credentials_provider.respond_to?(:expiration)
           [credentials, expiration]
         else
           raise MissingCredentialsError,
-          'unable to sign request without credentials set'
+                'unable to sign request without credentials set'
         end
       end
 
@@ -759,7 +745,7 @@ module Aws
       class << self
         # @api private
         def uri_escape_path(path)
-          path.gsub(/[^\/]+/) { |part| uri_escape(part) }
+          path.gsub(%r{[^/]+}) { |part| uri_escape(part) }
         end
 
         # @api private
@@ -778,9 +764,7 @@ module Aws
           # resolve to "." and should be disregarded
           normalized_path = '' if normalized_path == '.'
           # Ensure trailing slashes are correctly preserved
-          if uri.path.end_with?('/') && !normalized_path.end_with?('/')
-            normalized_path << '/'
-          end
+          normalized_path << '/' if uri.path.end_with?('/') && !normalized_path.end_with?('/')
           uri.path = normalized_path
         end
       end
