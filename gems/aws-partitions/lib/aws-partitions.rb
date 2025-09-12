@@ -588,7 +588,6 @@ module Aws
             'S3Vectors' => 's3vectors',
             'SES' => 'email',
             'SESV2' => 'email',
-            'SMS' => 'sms',
             'SNS' => 'sns',
             'SQS' => 'sqs',
             'SSM' => 'ssm',

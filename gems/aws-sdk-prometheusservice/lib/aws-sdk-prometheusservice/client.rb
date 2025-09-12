@@ -1162,6 +1162,37 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Deletes the logging configuration for a Amazon Managed Service for
+    # Prometheus scraper.
+    #
+    # @option params [required, String] :scraper_id
+    #   The ID of the scraper whose logging configuration will be deleted.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   request is processed exactly once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_scraper_logging_configuration({
+    #     scraper_id: "ScraperId", # required
+    #     client_token: "IdempotencyToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteScraperLoggingConfiguration AWS API Documentation
+    #
+    # @overload delete_scraper_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_scraper_logging_configuration(params = {}, options = {})
+      req = build_request(:delete_scraper_logging_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing workspace.
     #
     # <note markdown="1"> When you delete a workspace, the data that has been ingested into it
@@ -1475,6 +1506,47 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def describe_scraper(params = {}, options = {})
       req = build_request(:describe_scraper, params)
+      req.send_request(options)
+    end
+
+    # Describes the logging configuration for a Amazon Managed Service for
+    # Prometheus scraper.
+    #
+    # @option params [required, String] :scraper_id
+    #   The ID of the scraper whose logging configuration will be described.
+    #
+    # @return [Types::DescribeScraperLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScraperLoggingConfigurationResponse#status #status} => Types::ScraperLoggingConfigurationStatus
+    #   * {Types::DescribeScraperLoggingConfigurationResponse#scraper_id #scraper_id} => String
+    #   * {Types::DescribeScraperLoggingConfigurationResponse#logging_destination #logging_destination} => Types::ScraperLoggingDestination
+    #   * {Types::DescribeScraperLoggingConfigurationResponse#scraper_components #scraper_components} => Array&lt;Types::ScraperComponent&gt;
+    #   * {Types::DescribeScraperLoggingConfigurationResponse#modified_at #modified_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_scraper_logging_configuration({
+    #     scraper_id: "ScraperId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.status.status_reason #=> String
+    #   resp.scraper_id #=> String
+    #   resp.logging_destination.cloud_watch_logs.log_group_arn #=> String
+    #   resp.scraper_components #=> Array
+    #   resp.scraper_components[0].type #=> String, one of "SERVICE_DISCOVERY", "COLLECTOR", "EXPORTER"
+    #   resp.scraper_components[0].config.options #=> Hash
+    #   resp.scraper_components[0].config.options["String"] #=> String
+    #   resp.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeScraperLoggingConfiguration AWS API Documentation
+    #
+    # @overload describe_scraper_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_scraper_logging_configuration(params = {}, options = {})
+      req = build_request(:describe_scraper_logging_configuration, params)
       req.send_request(options)
     end
 
@@ -2436,6 +2508,57 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Updates the logging configuration for a Amazon Managed Service for
+    # Prometheus scraper.
+    #
+    # @option params [required, String] :scraper_id
+    #   The ID of the scraper whose logging configuration will be updated.
+    #
+    # @option params [required, Types::ScraperLoggingDestination] :logging_destination
+    #   The destination where scraper logs will be sent.
+    #
+    # @option params [Array<Types::ScraperComponent>] :scraper_components
+    #   The list of scraper components to configure for logging.
+    #
+    # @return [Types::UpdateScraperLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateScraperLoggingConfigurationResponse#status #status} => Types::ScraperLoggingConfigurationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_scraper_logging_configuration({
+    #     scraper_id: "ScraperId", # required
+    #     logging_destination: { # required
+    #       cloud_watch_logs: {
+    #         log_group_arn: "LogGroupArn", # required
+    #       },
+    #     },
+    #     scraper_components: [
+    #       {
+    #         type: "SERVICE_DISCOVERY", # required, accepts SERVICE_DISCOVERY, COLLECTOR, EXPORTER
+    #         config: {
+    #           options: {
+    #             "String" => "String",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.status.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateScraperLoggingConfiguration AWS API Documentation
+    #
+    # @overload update_scraper_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_scraper_logging_configuration(params = {}, options = {})
+      req = build_request(:update_scraper_logging_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the alias of an existing workspace.
     #
     # @option params [required, String] :workspace_id
@@ -2558,7 +2681,7 @@ module Aws::PrometheusService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

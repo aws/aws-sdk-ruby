@@ -206,7 +206,9 @@ module Aws
                           tr_34_key_block: {
                             certificate_authority_public_key_identifier: ::String,
                             wrapping_key_certificate: ::String,
-                            export_token: ::String,
+                            export_token: ::String?,
+                            signing_key_identifier: ::String?,
+                            signing_key_certificate: ::String?,
                             key_block_format: ("X9_TR34_2012"),
                             random_nonce: ::String?,
                             key_block_headers: {
@@ -278,6 +280,26 @@ module Aws
                        alias_name: ::String
                      ) -> _GetAliasResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAliasResponseSuccess
+
+      interface _GetCertificateSigningRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCertificateSigningRequestOutput]
+        def certificate_signing_request: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#get_certificate_signing_request-instance_method
+      def get_certificate_signing_request: (
+                                             key_identifier: ::String,
+                                             signing_algorithm: ("SHA224" | "SHA256" | "SHA384" | "SHA512"),
+                                             certificate_subject: {
+                                               common_name: ::String,
+                                               organization_unit: ::String?,
+                                               organization: ::String?,
+                                               city: ::String?,
+                                               country: ::String?,
+                                               state_or_province: ::String?,
+                                               email_address: ::String?
+                                             }
+                                           ) -> _GetCertificateSigningRequestResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCertificateSigningRequestResponseSuccess
 
       interface _GetDefaultKeyReplicationRegionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDefaultKeyReplicationRegionsOutput]
@@ -392,7 +414,9 @@ module Aws
                           tr_34_key_block: {
                             certificate_authority_public_key_identifier: ::String,
                             signing_key_certificate: ::String,
-                            import_token: ::String,
+                            import_token: ::String?,
+                            wrapping_key_identifier: ::String?,
+                            wrapping_key_certificate: ::String?,
                             wrapped_key_block: ::String,
                             key_block_format: ("X9_TR34_2012"),
                             random_nonce: ::String?

@@ -3695,6 +3695,7 @@ module Aws::DataZone
     IamPropertiesPatch.struct_class = Types::IamPropertiesPatch
 
     IamUserProfileDetails.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    IamUserProfileDetails.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location_name: "principalId"))
     IamUserProfileDetails.struct_class = Types::IamUserProfileDetails
 
     Import.add_member(:name, Shapes::ShapeRef.new(shape: FormTypeName, required: true, location_name: "name"))

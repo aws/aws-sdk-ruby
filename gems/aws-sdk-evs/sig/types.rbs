@@ -8,6 +8,19 @@
 module Aws::Evs
   module Types
 
+    class AssociateEipToVlanRequest
+      attr_accessor client_token: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor vlan_name: ::String
+      attr_accessor allocation_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateEipToVlanResponse
+      attr_accessor vlan: Types::Vlan
+      SENSITIVE: []
+    end
+
     class Check
       attr_accessor type: ("KEY_REUSE" | "KEY_COVERAGE" | "REACHABILITY" | "HOST_COUNT")
       attr_accessor result: ("PASSED" | "FAILED" | "UNKNOWN")
@@ -78,6 +91,26 @@ module Aws::Evs
 
     class DeleteEnvironmentResponse
       attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class DisassociateEipFromVlanRequest
+      attr_accessor client_token: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor vlan_name: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateEipFromVlanResponse
+      attr_accessor vlan: Types::Vlan
+      SENSITIVE: []
+    end
+
+    class EipAssociation
+      attr_accessor association_id: ::String
+      attr_accessor allocation_id: ::String
+      attr_accessor ip_address: ::String
       SENSITIVE: []
     end
 
@@ -168,6 +201,8 @@ module Aws::Evs
       attr_accessor hcx: Types::InitialVlanInfo
       attr_accessor expansion_vlan_1: Types::InitialVlanInfo
       attr_accessor expansion_vlan_2: Types::InitialVlanInfo
+      attr_accessor is_hcx_public: bool
+      attr_accessor hcx_network_acl_id: ::String
       SENSITIVE: []
     end
 
@@ -323,6 +358,9 @@ module Aws::Evs
       attr_accessor modified_at: ::Time
       attr_accessor vlan_state: ("CREATING" | "CREATED" | "DELETING" | "DELETED" | "CREATE_FAILED")
       attr_accessor state_details: ::String
+      attr_accessor eip_associations: ::Array[Types::EipAssociation]
+      attr_accessor is_public: bool
+      attr_accessor network_acl_id: ::String
       SENSITIVE: []
     end
   end

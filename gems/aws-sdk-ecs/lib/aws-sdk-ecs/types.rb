@@ -1328,12 +1328,12 @@ module Aws::ECS
     #   so you can't access a container's mapped port from the host
     #   itself.
     #
-    #   This parameter maps to `PortBindings` in the the docker container
-    #   create command and the `--publish` option to docker run. If the
-    #   network mode of a task definition is set to `none`, then you can't
-    #   specify port mappings. If the network mode of a task definition is
-    #   set to `host`, then host ports must either be undefined or they must
-    #   match the container port in the port mapping.
+    #   This parameter maps to `PortBindings` in the docker container create
+    #   command and the `--publish` option to docker run. If the network
+    #   mode of a task definition is set to `none`, then you can't specify
+    #   port mappings. If the network mode of a task definition is set to
+    #   `host`, then host ports must either be undefined or they must match
+    #   the container port in the port mapping.
     #
     #   <note markdown="1"> After a task reaches the `RUNNING` status, manual and automatic host
     #   and container port assignments are visible in the **Network
@@ -2728,8 +2728,8 @@ module Aws::ECS
     #   The default behavior of `AvailabilityZoneRebalancing` differs
     #   between create and update requests:
     #
-    #   * For create service requests, when when no value is specified for
-    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to to
+    #   * For create service requests, when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to
     #     `ENABLED`.
     #
     #   * For update service requests, when no value is specified for
@@ -4307,12 +4307,18 @@ module Aws::ECS
     #   lifecycle hook.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] hook_details
+    #   Use this field to specify custom parameters that Amazon ECS will
+    #   pass to your hook target invocations (such as a Lambda function).
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentLifecycleHook AWS API Documentation
     #
     class DeploymentLifecycleHook < Struct.new(
       :hook_target_arn,
       :role_arn,
-      :lifecycle_stages)
+      :lifecycle_stages,
+      :hook_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9600,8 +9606,8 @@ module Aws::ECS
     # @!attribute [rw] volume_configurations
     #   The details of the volume that was `configuredAtLaunch`. You can
     #   configure the size, volumeType, IOPS, throughput, snapshot and
-    #   encryption in in [TaskManagedEBSVolumeConfiguration][1]. The `name`
-    #   of the volume must match the `name` from the task definition.
+    #   encryption in [TaskManagedEBSVolumeConfiguration][1]. The `name` of
+    #   the volume must match the `name` from the task definition.
     #
     #
     #
@@ -10044,8 +10050,8 @@ module Aws::ECS
     #   The default behavior of `AvailabilityZoneRebalancing` differs
     #   between create and update requests:
     #
-    #   * For create service requests, when when no value is specified for
-    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to to
+    #   * For create service requests, when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to
     #     `ENABLED`.
     #
     #   * For update service requests, when no value is specified for
@@ -13966,8 +13972,8 @@ module Aws::ECS
     #   The default behavior of `AvailabilityZoneRebalancing` differs
     #   between create and update requests:
     #
-    #   * For create service requests, when when no value is specified for
-    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to to
+    #   * For create service requests, when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to
     #     `ENABLED`.
     #
     #   * For update service requests, when no value is specified for

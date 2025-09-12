@@ -240,6 +240,13 @@ module Aws
                           ) -> _DeleteScraperResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteScraperResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_scraper_logging_configuration-instance_method
+      def delete_scraper_logging_configuration: (
+                                                  scraper_id: ::String,
+                                                  ?client_token: ::String
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_workspace-instance_method
       def delete_workspace: (
                               workspace_id: ::String,
@@ -309,6 +316,20 @@ module Aws
                               scraper_id: ::String
                             ) -> _DescribeScraperResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScraperResponseSuccess
+
+      interface _DescribeScraperLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeScraperLoggingConfigurationResponse]
+        def status: () -> Types::ScraperLoggingConfigurationStatus
+        def scraper_id: () -> ::String
+        def logging_destination: () -> Types::ScraperLoggingDestination
+        def scraper_components: () -> ::Array[Types::ScraperComponent]
+        def modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#describe_scraper_logging_configuration-instance_method
+      def describe_scraper_logging_configuration: (
+                                                    scraper_id: ::String
+                                                  ) -> _DescribeScraperLoggingConfigurationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScraperLoggingConfigurationResponseSuccess
 
       interface _DescribeWorkspaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceResponse]
@@ -510,6 +531,29 @@ module Aws
                             ?client_token: ::String
                           ) -> _UpdateScraperResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScraperResponseSuccess
+
+      interface _UpdateScraperLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScraperLoggingConfigurationResponse]
+        def status: () -> Types::ScraperLoggingConfigurationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#update_scraper_logging_configuration-instance_method
+      def update_scraper_logging_configuration: (
+                                                  scraper_id: ::String,
+                                                  logging_destination: {
+                                                    cloud_watch_logs: {
+                                                      log_group_arn: ::String
+                                                    }?
+                                                  },
+                                                  ?scraper_components: Array[
+                                                    {
+                                                      type: ("SERVICE_DISCOVERY" | "COLLECTOR" | "EXPORTER"),
+                                                      config: {
+                                                        options: Hash[::String, ::String]?
+                                                      }?
+                                                    },
+                                                  ]
+                                                ) -> _UpdateScraperLoggingConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScraperLoggingConfigurationResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#update_workspace_alias-instance_method
       def update_workspace_alias: (

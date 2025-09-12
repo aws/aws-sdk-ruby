@@ -521,6 +521,7 @@ module Aws::ECS
       attr_accessor hook_target_arn: ::String
       attr_accessor role_arn: ::String
       attr_accessor lifecycle_stages: ::Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]
+      attr_accessor hook_details: untyped
       SENSITIVE: []
     end
 

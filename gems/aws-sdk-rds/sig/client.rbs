@@ -700,7 +700,8 @@ module Aws
       def create_db_proxy: (
                              db_proxy_name: ::String,
                              engine_family: ("MYSQL" | "POSTGRESQL" | "SQLSERVER"),
-                             auth: Array[
+                             ?default_auth_scheme: ("IAM_AUTH" | "NONE"),
+                             ?auth: Array[
                                {
                                  description: ::String?,
                                  user_name: ::String?,
@@ -2529,6 +2530,7 @@ module Aws
       def modify_db_proxy: (
                              db_proxy_name: ::String,
                              ?new_db_proxy_name: ::String,
+                             ?default_auth_scheme: ("IAM_AUTH" | "NONE"),
                              ?auth: Array[
                                {
                                  description: ::String?,

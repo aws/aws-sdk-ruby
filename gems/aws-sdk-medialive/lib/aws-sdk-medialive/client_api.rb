@@ -454,11 +454,13 @@ module Aws::MediaLive
     HlsAdMarkers = Shapes::StringShape.new(name: 'HlsAdMarkers')
     HlsAkamaiHttpTransferMode = Shapes::StringShape.new(name: 'HlsAkamaiHttpTransferMode')
     HlsAkamaiSettings = Shapes::StructureShape.new(name: 'HlsAkamaiSettings')
+    HlsAutoSelect = Shapes::StringShape.new(name: 'HlsAutoSelect')
     HlsBasicPutSettings = Shapes::StructureShape.new(name: 'HlsBasicPutSettings')
     HlsCaptionLanguageSetting = Shapes::StringShape.new(name: 'HlsCaptionLanguageSetting')
     HlsCdnSettings = Shapes::StructureShape.new(name: 'HlsCdnSettings')
     HlsClientCache = Shapes::StringShape.new(name: 'HlsClientCache')
     HlsCodecSpecification = Shapes::StringShape.new(name: 'HlsCodecSpecification')
+    HlsDefault = Shapes::StringShape.new(name: 'HlsDefault')
     HlsDirectoryStructure = Shapes::StringShape.new(name: 'HlsDirectoryStructure')
     HlsDiscontinuityTags = Shapes::StringShape.new(name: 'HlsDiscontinuityTags')
     HlsEncryptionType = Shapes::StringShape.new(name: 'HlsEncryptionType')
@@ -677,6 +679,8 @@ module Aws::MediaLive
     MediaPackageGroupSettings = Shapes::StructureShape.new(name: 'MediaPackageGroupSettings')
     MediaPackageOutputDestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputDestinationSettings')
     MediaPackageOutputSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputSettings')
+    MediaPackageV2DestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageV2DestinationSettings')
+    MediaPackageV2GroupSettings = Shapes::StructureShape.new(name: 'MediaPackageV2GroupSettings')
     MediaResource = Shapes::StructureShape.new(name: 'MediaResource')
     MediaResourceMap = Shapes::MapShape.new(name: 'MediaResourceMap')
     MediaResourceNeighbor = Shapes::StructureShape.new(name: 'MediaResourceNeighbor')
@@ -3990,6 +3994,7 @@ module Aws::MediaLive
     MediaConnectFlowRequest.struct_class = Types::MediaConnectFlowRequest
 
     MediaPackageGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
+    MediaPackageGroupSettings.add_member(:mediapackage_v2_group_settings, Shapes::ShapeRef.new(shape: MediaPackageV2GroupSettings, location_name: "mediapackageV2GroupSettings"))
     MediaPackageGroupSettings.struct_class = Types::MediaPackageGroupSettings
 
     MediaPackageOutputDestinationSettings.add_member(:channel_id, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "channelId"))
@@ -3997,7 +4002,17 @@ module Aws::MediaLive
     MediaPackageOutputDestinationSettings.add_member(:channel_name, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "channelName"))
     MediaPackageOutputDestinationSettings.struct_class = Types::MediaPackageOutputDestinationSettings
 
+    MediaPackageOutputSettings.add_member(:media_package_v2_destination_settings, Shapes::ShapeRef.new(shape: MediaPackageV2DestinationSettings, location_name: "mediaPackageV2DestinationSettings"))
     MediaPackageOutputSettings.struct_class = Types::MediaPackageOutputSettings
+
+    MediaPackageV2DestinationSettings.add_member(:audio_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "audioGroupId"))
+    MediaPackageV2DestinationSettings.add_member(:audio_rendition_sets, Shapes::ShapeRef.new(shape: __string, location_name: "audioRenditionSets"))
+    MediaPackageV2DestinationSettings.add_member(:hls_auto_select, Shapes::ShapeRef.new(shape: HlsAutoSelect, location_name: "hlsAutoSelect"))
+    MediaPackageV2DestinationSettings.add_member(:hls_default, Shapes::ShapeRef.new(shape: HlsDefault, location_name: "hlsDefault"))
+    MediaPackageV2DestinationSettings.struct_class = Types::MediaPackageV2DestinationSettings
+
+    MediaPackageV2GroupSettings.add_member(:caption_language_mappings, Shapes::ShapeRef.new(shape: __listOfCaptionLanguageMapping, location_name: "captionLanguageMappings"))
+    MediaPackageV2GroupSettings.struct_class = Types::MediaPackageV2GroupSettings
 
     MediaResource.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMediaResourceNeighbor, location_name: "destinations"))
     MediaResource.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "name"))

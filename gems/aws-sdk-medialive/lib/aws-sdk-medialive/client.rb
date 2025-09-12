@@ -1359,6 +1359,10 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings #=> Array
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -1505,6 +1509,10 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.klv_data_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_group_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_rendition_sets #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_auto_select #=> String, one of "NO", "OMIT", "YES"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_default #=> String, one of "NO", "OMIT", "YES"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
@@ -2754,6 +2762,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -2900,6 +2912,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.klv_data_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_group_id #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_rendition_sets #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_auto_select #=> String, one of "NO", "OMIT", "YES"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_default #=> String, one of "NO", "OMIT", "YES"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
@@ -3913,6 +3929,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -4059,6 +4079,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.klv_data_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_group_id #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_rendition_sets #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_auto_select #=> String, one of "NO", "OMIT", "YES"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_default #=> String, one of "NO", "OMIT", "YES"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
@@ -6289,6 +6313,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -6435,6 +6463,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.klv_data_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_group_id #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_rendition_sets #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_auto_select #=> String, one of "NO", "OMIT", "YES"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_default #=> String, one of "NO", "OMIT", "YES"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
@@ -7255,6 +7287,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -7401,6 +7437,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.klv_data_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_group_id #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_rendition_sets #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_auto_select #=> String, one of "NO", "OMIT", "YES"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_default #=> String, one of "NO", "OMIT", "YES"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
@@ -8254,6 +8294,10 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings #=> Array
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -8400,6 +8444,10 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.klv_data_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_group_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_rendition_sets #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_auto_select #=> String, one of "NO", "OMIT", "YES"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_default #=> String, one of "NO", "OMIT", "YES"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
@@ -9136,6 +9184,10 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings #=> Array
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -9282,6 +9334,10 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.klv_data_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_group_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_rendition_sets #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_auto_select #=> String, one of "NO", "OMIT", "YES"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_default #=> String, one of "NO", "OMIT", "YES"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
@@ -10605,6 +10661,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -10751,6 +10811,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.klv_data_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_group_id #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.audio_rendition_sets #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_auto_select #=> String, one of "NO", "OMIT", "YES"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_package_output_settings.media_package_v2_destination_settings.hls_default #=> String, one of "NO", "OMIT", "YES"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
@@ -14322,7 +14386,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.161.0'
+      context[:gem_version] = '1.162.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

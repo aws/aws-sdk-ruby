@@ -98,6 +98,50 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
+    # Metadata used in generating the CSR
+    #
+    # @!attribute [rw] common_name
+    #   Common Name to be used in the certificate signing request
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_unit
+    #   Organization Unit to be used in the certificate signing request
+    #   @return [String]
+    #
+    # @!attribute [rw] organization
+    #   Organization to be used in the certificate signing request
+    #   @return [String]
+    #
+    # @!attribute [rw] city
+    #   City to be used in the certificate signing request
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   Country to be used in the certificate signing request
+    #   @return [String]
+    #
+    # @!attribute [rw] state_or_province
+    #   State Or Province to be used in the certificate signing request
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   Email to be used in the certificate signing request
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/CertificateSubjectType AWS API Documentation
+    #
+    class CertificateSubjectType < Struct.new(
+      :common_name,
+      :organization_unit,
+      :organization,
+      :city,
+      :country,
+      :state_or_province,
+      :email_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This request can cause an inconsistent state for the resource.
     #
     # The requested operation conflicts with the current state of the
@@ -660,6 +704,14 @@ module Aws::PaymentCryptography
     #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html
     #   @return [String]
     #
+    # @!attribute [rw] signing_key_identifier
+    #   Key Identifier used for signing the export key
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_key_certificate
+    #   Certificate used for signing the export key
+    #   @return [String]
+    #
     # @!attribute [rw] key_block_format
     #   The format of key block that Amazon Web Services Payment
     #   Cryptography will use during key export.
@@ -682,6 +734,8 @@ module Aws::PaymentCryptography
       :certificate_authority_public_key_identifier,
       :wrapping_key_certificate,
       :export_token,
+      :signing_key_identifier,
+      :signing_key_certificate,
       :key_block_format,
       :random_nonce,
       :key_block_headers)
@@ -710,6 +764,40 @@ module Aws::PaymentCryptography
     class GetAliasOutput < Struct.new(
       :alias)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_identifier
+    #   Asymmetric key used for generating the certificate signing request
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_algorithm
+    #   Algorithm used to generate the certificate signing request
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_subject
+    #   Certificate subject data
+    #   @return [Types::CertificateSubjectType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetCertificateSigningRequestInput AWS API Documentation
+    #
+    class GetCertificateSigningRequestInput < Struct.new(
+      :key_identifier,
+      :signing_algorithm,
+      :certificate_subject)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_signing_request
+    #   Certificate signing request
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetCertificateSigningRequestOutput AWS API Documentation
+    #
+    class GetCertificateSigningRequestOutput < Struct.new(
+      :certificate_signing_request)
+      SENSITIVE = [:certificate_signing_request]
       include Aws::Structure
     end
 
@@ -1207,6 +1295,14 @@ module Aws::PaymentCryptography
     #   token to import multiple keys to the same service account.
     #   @return [String]
     #
+    # @!attribute [rw] wrapping_key_identifier
+    #   Key Identifier used for unwrapping the import key
+    #   @return [String]
+    #
+    # @!attribute [rw] wrapping_key_certificate
+    #   Key Identifier used for unwrapping the import key
+    #   @return [String]
+    #
     # @!attribute [rw] wrapped_key_block
     #   The TR-34 wrapped key block to import.
     #   @return [String]
@@ -1228,6 +1324,8 @@ module Aws::PaymentCryptography
       :certificate_authority_public_key_identifier,
       :signing_key_certificate,
       :import_token,
+      :wrapping_key_identifier,
+      :wrapping_key_certificate,
       :wrapped_key_block,
       :key_block_format,
       :random_nonce)
@@ -1602,7 +1700,14 @@ module Aws::PaymentCryptography
     #   @return [Boolean]
     #
     # @!attribute [rw] multi_region_key_type
-    #   Defines the replication type of a key
+    #   Indicates whether this key is a multi-region key and its role in the
+    #   multi-region key hierarchy.
+    #
+    #   Multi-region keys allow the same key material to be used across
+    #   multiple Amazon Web Services Regions. This field specifies whether
+    #   the key is a primary key (which can be replicated to other regions)
+    #   or a replica key (which is a copy of a primary key in another
+    #   region).
     #   @return [String]
     #
     # @!attribute [rw] primary_region
@@ -1832,7 +1937,13 @@ module Aws::PaymentCryptography
     # about the replication process.
     #
     # @!attribute [rw] status
-    #   Defines the replication state of a key
+    #   The current status of key replication in this region.
+    #
+    #   This field indicates whether the key replication is in progress,
+    #   completed successfully, or has encountered an error. Possible values
+    #   include states such as SYNCRHONIZED, IN\_PROGRESS,
+    #   DELETE\_IN\_PROGRESS, or FAILED. This provides visibility into the
+    #   replication process for monitoring and troubleshooting purposes.
     #   @return [String]
     #
     # @!attribute [rw] status_message

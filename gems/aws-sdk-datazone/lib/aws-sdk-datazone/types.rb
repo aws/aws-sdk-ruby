@@ -11655,10 +11655,15 @@ module Aws::DataZone
     #   The ARN of an IAM user profile in Amazon DataZone.
     #   @return [String]
     #
+    # @!attribute [rw] principal_id
+    #   Principal ID of the IAM user.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/IamUserProfileDetails AWS API Documentation
     #
     class IamUserProfileDetails < Struct.new(
-      :arn)
+      :arn,
+      :principal_id)
       SENSITIVE = []
       include Aws::Structure
     end

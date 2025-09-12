@@ -483,6 +483,75 @@ module Aws::Evs
 
     # @!group API Operations
 
+    # Associates an Elastic IP address with a public HCX VLAN. This
+    # operation is only allowed for public HCX VLANs at this time.
+    #
+    # @option params [String] :client_token
+    #   <note markdown="1"> This parameter is not used in Amazon EVS
+    #   currently. If you supply
+    #   input for this parameter, it will have no effect.
+    #
+    #    </note>
+    #
+    #    A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the environment creation request. If you do not specify
+    #   a client token, a randomly generated token is used for the request to
+    #   ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :environment_id
+    #   A unique ID for the environment containing the VLAN that the Elastic
+    #   IP address associates with.
+    #
+    # @option params [required, String] :vlan_name
+    #   The name of the VLAN. `hcx` is the only accepted VLAN name at this
+    #   time.
+    #
+    # @option params [required, String] :allocation_id
+    #   The Elastic IP address allocation ID.
+    #
+    # @return [Types::AssociateEipToVlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateEipToVlanResponse#vlan #vlan} => Types::Vlan
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_eip_to_vlan({
+    #     client_token: "ClientToken",
+    #     environment_id: "EnvironmentId", # required
+    #     vlan_name: "AssociateEipToVlanRequestVlanNameString", # required
+    #     allocation_id: "AllocationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vlan.vlan_id #=> Integer
+    #   resp.vlan.cidr #=> String
+    #   resp.vlan.availability_zone #=> String
+    #   resp.vlan.function_name #=> String
+    #   resp.vlan.subnet_id #=> String
+    #   resp.vlan.created_at #=> Time
+    #   resp.vlan.modified_at #=> Time
+    #   resp.vlan.vlan_state #=> String, one of "CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"
+    #   resp.vlan.state_details #=> String
+    #   resp.vlan.eip_associations #=> Array
+    #   resp.vlan.eip_associations[0].association_id #=> String
+    #   resp.vlan.eip_associations[0].allocation_id #=> String
+    #   resp.vlan.eip_associations[0].ip_address #=> String
+    #   resp.vlan.is_public #=> Boolean
+    #   resp.vlan.network_acl_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/AssociateEipToVlan AWS API Documentation
+    #
+    # @overload associate_eip_to_vlan(params = {})
+    # @param [Hash] params ({})
+    def associate_eip_to_vlan(params = {}, options = {})
+      req = build_request(:associate_eip_to_vlan, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon EVS environment that runs VCF software, such as SDDC
     # Manager, NSX Manager, and vCenter Server.
     #
@@ -701,6 +770,8 @@ module Aws::Evs
     #       expansion_vlan_2: { # required
     #         cidr: "Cidr", # required
     #       },
+    #       is_hcx_public: false,
+    #       hcx_network_acl_id: "NetworkAclId",
     #     },
     #     hosts: [ # required
     #       {
@@ -1030,6 +1101,75 @@ module Aws::Evs
       req.send_request(options)
     end
 
+    # Disassociates an Elastic IP address from a public HCX VLAN. This
+    # operation is only allowed for public HCX VLANs at this time.
+    #
+    # @option params [String] :client_token
+    #   <note markdown="1"> This parameter is not used in Amazon EVS
+    #   currently. If you supply
+    #   input for this parameter, it will have no effect.
+    #
+    #    </note>
+    #
+    #    A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the environment creation request. If you do not specify
+    #   a client token, a randomly generated token is used for the request to
+    #   ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :environment_id
+    #   A unique ID for the environment containing the VLAN that the Elastic
+    #   IP address disassociates from.
+    #
+    # @option params [required, String] :vlan_name
+    #   The name of the VLAN. `hcx` is the only accepted VLAN name at this
+    #   time.
+    #
+    # @option params [required, String] :association_id
+    #   A unique ID for the Elastic IP address association.
+    #
+    # @return [Types::DisassociateEipFromVlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateEipFromVlanResponse#vlan #vlan} => Types::Vlan
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_eip_from_vlan({
+    #     client_token: "ClientToken",
+    #     environment_id: "EnvironmentId", # required
+    #     vlan_name: "DisassociateEipFromVlanRequestVlanNameString", # required
+    #     association_id: "AssociationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vlan.vlan_id #=> Integer
+    #   resp.vlan.cidr #=> String
+    #   resp.vlan.availability_zone #=> String
+    #   resp.vlan.function_name #=> String
+    #   resp.vlan.subnet_id #=> String
+    #   resp.vlan.created_at #=> Time
+    #   resp.vlan.modified_at #=> Time
+    #   resp.vlan.vlan_state #=> String, one of "CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"
+    #   resp.vlan.state_details #=> String
+    #   resp.vlan.eip_associations #=> Array
+    #   resp.vlan.eip_associations[0].association_id #=> String
+    #   resp.vlan.eip_associations[0].allocation_id #=> String
+    #   resp.vlan.eip_associations[0].ip_address #=> String
+    #   resp.vlan.is_public #=> Boolean
+    #   resp.vlan.network_acl_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/DisassociateEipFromVlan AWS API Documentation
+    #
+    # @overload disassociate_eip_from_vlan(params = {})
+    # @param [Hash] params ({})
+    def disassociate_eip_from_vlan(params = {}, options = {})
+      req = build_request(:disassociate_eip_from_vlan, params)
+      req.send_request(options)
+    end
+
     # Returns a description of the specified environment.
     #
     # @option params [required, String] :environment_id
@@ -1198,6 +1338,12 @@ module Aws::Evs
     #   resp.environment_vlans[0].modified_at #=> Time
     #   resp.environment_vlans[0].vlan_state #=> String, one of "CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.environment_vlans[0].state_details #=> String
+    #   resp.environment_vlans[0].eip_associations #=> Array
+    #   resp.environment_vlans[0].eip_associations[0].association_id #=> String
+    #   resp.environment_vlans[0].eip_associations[0].allocation_id #=> String
+    #   resp.environment_vlans[0].eip_associations[0].ip_address #=> String
+    #   resp.environment_vlans[0].is_public #=> Boolean
+    #   resp.environment_vlans[0].network_acl_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/ListEnvironmentVlans AWS API Documentation
     #
@@ -1376,7 +1522,7 @@ module Aws::Evs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-evs'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -449,7 +449,6 @@ RubyGems.org page under "LINKS" section.
 | AWS Secrets Manager                                    | Aws::SecretsManager                      | aws-sdk-secretsmanager                      | 2017-10-17  |
 | AWS Security Token Service                             | Aws::STS                                 | aws-sdk-core                                | 2011-06-15  |
 | AWS SecurityHub                                        | Aws::SecurityHub                         | aws-sdk-securityhub                         | 2018-10-26  |
-| AWS Server Migration Service                           | Aws::SMS                                 | aws-sdk-sms                                 | 2016-10-24  |
 | AWS Service Catalog                                    | Aws::ServiceCatalog                      | aws-sdk-servicecatalog                      | 2015-12-10  |
 | AWS Service Catalog App Registry                       | Aws::AppRegistry                         | aws-sdk-appregistry                         | 2020-06-24  |
 | AWS Shield                                             | Aws::Shield                              | aws-sdk-shield                              | 2016-06-02  |

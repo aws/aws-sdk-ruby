@@ -4187,6 +4187,7 @@ module Aws::DataZone
     # @example Response structure
     #
     #   resp.details.iam.arn #=> String
+    #   resp.details.iam.principal_id #=> String
     #   resp.details.sso.first_name #=> String
     #   resp.details.sso.last_name #=> String
     #   resp.details.sso.username #=> String
@@ -7732,6 +7733,7 @@ module Aws::DataZone
     # @example Response structure
     #
     #   resp.details.iam.arn #=> String
+    #   resp.details.iam.principal_id #=> String
     #   resp.details.sso.first_name #=> String
     #   resp.details.sso.last_name #=> String
     #   resp.details.sso.username #=> String
@@ -11667,6 +11669,7 @@ module Aws::DataZone
     #
     #   resp.items #=> Array
     #   resp.items[0].details.iam.arn #=> String
+    #   resp.items[0].details.iam.principal_id #=> String
     #   resp.items[0].details.sso.first_name #=> String
     #   resp.items[0].details.sso.last_name #=> String
     #   resp.items[0].details.sso.username #=> String
@@ -14019,6 +14022,7 @@ module Aws::DataZone
     # @example Response structure
     #
     #   resp.details.iam.arn #=> String
+    #   resp.details.iam.principal_id #=> String
     #   resp.details.sso.first_name #=> String
     #   resp.details.sso.last_name #=> String
     #   resp.details.sso.username #=> String
@@ -14054,7 +14058,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

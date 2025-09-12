@@ -600,6 +600,7 @@ module Aws::RDS
     class CreateDBProxyRequest
       attr_accessor db_proxy_name: ::String
       attr_accessor engine_family: ("MYSQL" | "POSTGRESQL" | "SQLSERVER")
+      attr_accessor default_auth_scheme: ("IAM_AUTH" | "NONE")
       attr_accessor auth: ::Array[Types::UserAuthConfig]
       attr_accessor role_arn: ::String
       attr_accessor vpc_subnet_ids: ::Array[::String]
@@ -1368,6 +1369,7 @@ module Aws::RDS
       attr_accessor vpc_id: ::String
       attr_accessor vpc_security_group_ids: ::Array[::String]
       attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor default_auth_scheme: ::String
       attr_accessor auth: ::Array[Types::UserAuthConfigInfo]
       attr_accessor role_arn: ::String
       attr_accessor endpoint: ::String
@@ -3031,6 +3033,7 @@ module Aws::RDS
     class ModifyDBProxyRequest
       attr_accessor db_proxy_name: ::String
       attr_accessor new_db_proxy_name: ::String
+      attr_accessor default_auth_scheme: ("IAM_AUTH" | "NONE")
       attr_accessor auth: ::Array[Types::UserAuthConfig]
       attr_accessor require_tls: bool
       attr_accessor idle_client_timeout: ::Integer

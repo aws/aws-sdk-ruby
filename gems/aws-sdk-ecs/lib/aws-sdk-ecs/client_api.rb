@@ -188,6 +188,7 @@ module Aws::ECS
     GpuIds = Shapes::ListShape.new(name: 'GpuIds')
     HealthCheck = Shapes::StructureShape.new(name: 'HealthCheck')
     HealthStatus = Shapes::StringShape.new(name: 'HealthStatus')
+    HookDetails = Shapes::DocumentShape.new(name: 'HookDetails', document: true)
     HostEntry = Shapes::StructureShape.new(name: 'HostEntry')
     HostEntryList = Shapes::ListShape.new(name: 'HostEntryList')
     HostVolumeProperties = Shapes::StructureShape.new(name: 'HostVolumeProperties')
@@ -896,6 +897,7 @@ module Aws::ECS
     DeploymentLifecycleHook.add_member(:hook_target_arn, Shapes::ShapeRef.new(shape: String, location_name: "hookTargetArn"))
     DeploymentLifecycleHook.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "roleArn"))
     DeploymentLifecycleHook.add_member(:lifecycle_stages, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookStageList, location_name: "lifecycleStages"))
+    DeploymentLifecycleHook.add_member(:hook_details, Shapes::ShapeRef.new(shape: HookDetails, location_name: "hookDetails"))
     DeploymentLifecycleHook.struct_class = Types::DeploymentLifecycleHook
 
     DeploymentLifecycleHookList.member = Shapes::ShapeRef.new(shape: DeploymentLifecycleHook)

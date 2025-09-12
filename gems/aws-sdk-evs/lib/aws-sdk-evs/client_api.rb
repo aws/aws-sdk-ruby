@@ -14,7 +14,12 @@ module Aws::Evs
 
     include Seahorse::Model
 
+    AllocationId = Shapes::StringShape.new(name: 'AllocationId')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AssociateEipToVlanRequest = Shapes::StructureShape.new(name: 'AssociateEipToVlanRequest')
+    AssociateEipToVlanRequestVlanNameString = Shapes::StringShape.new(name: 'AssociateEipToVlanRequestVlanNameString')
+    AssociateEipToVlanResponse = Shapes::StructureShape.new(name: 'AssociateEipToVlanResponse')
+    AssociationId = Shapes::StringShape.new(name: 'AssociationId')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Check = Shapes::StructureShape.new(name: 'Check')
     CheckResult = Shapes::StringShape.new(name: 'CheckResult')
@@ -32,6 +37,11 @@ module Aws::Evs
     DeleteEnvironmentHostResponse = Shapes::StructureShape.new(name: 'DeleteEnvironmentHostResponse')
     DeleteEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteEnvironmentRequest')
     DeleteEnvironmentResponse = Shapes::StructureShape.new(name: 'DeleteEnvironmentResponse')
+    DisassociateEipFromVlanRequest = Shapes::StructureShape.new(name: 'DisassociateEipFromVlanRequest')
+    DisassociateEipFromVlanRequestVlanNameString = Shapes::StringShape.new(name: 'DisassociateEipFromVlanRequestVlanNameString')
+    DisassociateEipFromVlanResponse = Shapes::StructureShape.new(name: 'DisassociateEipFromVlanResponse')
+    EipAssociation = Shapes::StructureShape.new(name: 'EipAssociation')
+    EipAssociationList = Shapes::ListShape.new(name: 'EipAssociationList')
     Environment = Shapes::StructureShape.new(name: 'Environment')
     EnvironmentId = Shapes::StringShape.new(name: 'EnvironmentId')
     EnvironmentName = Shapes::StringShape.new(name: 'EnvironmentName')
@@ -64,6 +74,7 @@ module Aws::Evs
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NetworkAclId = Shapes::StringShape.new(name: 'NetworkAclId')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaceList = Shapes::ListShape.new(name: 'NetworkInterfaceList')
@@ -107,6 +118,15 @@ module Aws::Evs
     VlanList = Shapes::ListShape.new(name: 'VlanList')
     VlanState = Shapes::StringShape.new(name: 'VlanState')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+
+    AssociateEipToVlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    AssociateEipToVlanRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
+    AssociateEipToVlanRequest.add_member(:vlan_name, Shapes::ShapeRef.new(shape: AssociateEipToVlanRequestVlanNameString, required: true, location_name: "vlanName"))
+    AssociateEipToVlanRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "allocationId"))
+    AssociateEipToVlanRequest.struct_class = Types::AssociateEipToVlanRequest
+
+    AssociateEipToVlanResponse.add_member(:vlan, Shapes::ShapeRef.new(shape: Vlan, location_name: "vlan"))
+    AssociateEipToVlanResponse.struct_class = Types::AssociateEipToVlanResponse
 
     Check.add_member(:type, Shapes::ShapeRef.new(shape: CheckType, location_name: "type"))
     Check.add_member(:result, Shapes::ShapeRef.new(shape: CheckResult, location_name: "result"))
@@ -162,6 +182,22 @@ module Aws::Evs
 
     DeleteEnvironmentResponse.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "environment"))
     DeleteEnvironmentResponse.struct_class = Types::DeleteEnvironmentResponse
+
+    DisassociateEipFromVlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DisassociateEipFromVlanRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
+    DisassociateEipFromVlanRequest.add_member(:vlan_name, Shapes::ShapeRef.new(shape: DisassociateEipFromVlanRequestVlanNameString, required: true, location_name: "vlanName"))
+    DisassociateEipFromVlanRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location_name: "associationId"))
+    DisassociateEipFromVlanRequest.struct_class = Types::DisassociateEipFromVlanRequest
+
+    DisassociateEipFromVlanResponse.add_member(:vlan, Shapes::ShapeRef.new(shape: Vlan, location_name: "vlan"))
+    DisassociateEipFromVlanResponse.struct_class = Types::DisassociateEipFromVlanResponse
+
+    EipAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "associationId"))
+    EipAssociation.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "allocationId"))
+    EipAssociation.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "ipAddress"))
+    EipAssociation.struct_class = Types::EipAssociation
+
+    EipAssociationList.member = Shapes::ShapeRef.new(shape: EipAssociation)
 
     Environment.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
     Environment.add_member(:environment_state, Shapes::ShapeRef.new(shape: EnvironmentState, location_name: "environmentState"))
@@ -243,6 +279,8 @@ module Aws::Evs
     InitialVlans.add_member(:hcx, Shapes::ShapeRef.new(shape: InitialVlanInfo, required: true, location_name: "hcx"))
     InitialVlans.add_member(:expansion_vlan_1, Shapes::ShapeRef.new(shape: InitialVlanInfo, required: true, location_name: "expansionVlan1"))
     InitialVlans.add_member(:expansion_vlan_2, Shapes::ShapeRef.new(shape: InitialVlanInfo, required: true, location_name: "expansionVlan2"))
+    InitialVlans.add_member(:is_hcx_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isHcxPublic"))
+    InitialVlans.add_member(:hcx_network_acl_id, Shapes::ShapeRef.new(shape: NetworkAclId, location_name: "hcxNetworkAclId"))
     InitialVlans.struct_class = Types::InitialVlans
 
     LicenseInfo.add_member(:solution_key, Shapes::ShapeRef.new(shape: SolutionKey, required: true, location_name: "solutionKey"))
@@ -370,6 +408,9 @@ module Aws::Evs
     Vlan.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
     Vlan.add_member(:vlan_state, Shapes::ShapeRef.new(shape: VlanState, location_name: "vlanState"))
     Vlan.add_member(:state_details, Shapes::ShapeRef.new(shape: StateDetails, location_name: "stateDetails"))
+    Vlan.add_member(:eip_associations, Shapes::ShapeRef.new(shape: EipAssociationList, location_name: "eipAssociations"))
+    Vlan.add_member(:is_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPublic"))
+    Vlan.add_member(:network_acl_id, Shapes::ShapeRef.new(shape: NetworkAclId, location_name: "networkAclId"))
     Vlan.struct_class = Types::Vlan
 
     VlanList.member = Shapes::ShapeRef.new(shape: Vlan)
@@ -395,6 +436,17 @@ module Aws::Evs
         "targetPrefix" => "AmazonElasticVMwareService",
         "uid" => "evs-2023-07-27",
       }
+
+      api.add_operation(:associate_eip_to_vlan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateEipToVlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateEipToVlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateEipToVlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
 
       api.add_operation(:create_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEnvironment"
@@ -431,6 +483,17 @@ module Aws::Evs
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentHostRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteEnvironmentHostResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:disassociate_eip_from_vlan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateEipFromVlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateEipFromVlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateEipFromVlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:evs)
 # structure.
 #
 #     evs = Aws::Evs::Client.new
-#     resp = evs.create_environment(params)
+#     resp = evs.associate_eip_to_vlan(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::Evs
   autoload :EndpointProvider, 'aws-sdk-evs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-evs/endpoints'
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.6.0'
 
 end
 

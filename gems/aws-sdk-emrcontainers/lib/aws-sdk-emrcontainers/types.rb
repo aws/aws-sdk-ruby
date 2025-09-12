@@ -388,6 +388,10 @@ module Aws::EMRContainers
     #   The name of the security configuration.
     #   @return [String]
     #
+    # @!attribute [rw] container_provider
+    #   The container provider associated with the security configuration.
+    #   @return [Types::ContainerProvider]
+    #
     # @!attribute [rw] security_configuration_data
     #   Security configuration input for the request.
     #   @return [Types::SecurityConfigurationData]
@@ -401,6 +405,7 @@ module Aws::EMRContainers
     class CreateSecurityConfigurationRequest < Struct.new(
       :client_token,
       :name,
+      :container_provider,
       :security_configuration_data,
       :tags)
       SENSITIVE = []
@@ -740,10 +745,17 @@ module Aws::EMRContainers
     #   The namespaces of the Amazon EKS cluster.
     #   @return [String]
     #
+    # @!attribute [rw] node_label
+    #   The nodeLabel of the nodes where the resources of this virtual
+    #   cluster can get scheduled. It requires relevant scaling and policy
+    #   engine addons.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/EksInfo AWS API Documentation
     #
     class EksInfo < Struct.new(
-      :namespace)
+      :namespace,
+      :node_label)
       SENSITIVE = []
       include Aws::Structure
     end

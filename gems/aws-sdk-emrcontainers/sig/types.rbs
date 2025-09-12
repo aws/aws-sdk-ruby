@@ -116,6 +116,7 @@ module Aws::EMRContainers
     class CreateSecurityConfigurationRequest
       attr_accessor client_token: ::String
       attr_accessor name: ::String
+      attr_accessor container_provider: Types::ContainerProvider
       attr_accessor security_configuration_data: Types::SecurityConfigurationData
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -246,6 +247,7 @@ module Aws::EMRContainers
 
     class EksInfo
       attr_accessor namespace: ::String
+      attr_accessor node_label: ::String
       SENSITIVE: []
     end
 

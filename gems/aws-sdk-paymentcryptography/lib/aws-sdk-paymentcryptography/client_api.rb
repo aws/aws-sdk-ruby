@@ -21,6 +21,15 @@ module Aws::PaymentCryptography
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     Aliases = Shapes::ListShape.new(name: 'Aliases')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CertificateSigningRequestType = Shapes::StringShape.new(name: 'CertificateSigningRequestType')
+    CertificateSubjectType = Shapes::StructureShape.new(name: 'CertificateSubjectType')
+    CertificateSubjectTypeCityString = Shapes::StringShape.new(name: 'CertificateSubjectTypeCityString')
+    CertificateSubjectTypeCommonNameString = Shapes::StringShape.new(name: 'CertificateSubjectTypeCommonNameString')
+    CertificateSubjectTypeCountryString = Shapes::StringShape.new(name: 'CertificateSubjectTypeCountryString')
+    CertificateSubjectTypeEmailAddressString = Shapes::StringShape.new(name: 'CertificateSubjectTypeEmailAddressString')
+    CertificateSubjectTypeOrganizationString = Shapes::StringShape.new(name: 'CertificateSubjectTypeOrganizationString')
+    CertificateSubjectTypeOrganizationUnitString = Shapes::StringShape.new(name: 'CertificateSubjectTypeOrganizationUnitString')
+    CertificateSubjectTypeStateOrProvinceString = Shapes::StringShape.new(name: 'CertificateSubjectTypeStateOrProvinceString')
     CertificateType = Shapes::StringShape.new(name: 'CertificateType')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAliasInput = Shapes::StructureShape.new(name: 'CreateAliasInput')
@@ -51,6 +60,8 @@ module Aws::PaymentCryptography
     ExportTr34KeyBlock = Shapes::StructureShape.new(name: 'ExportTr34KeyBlock')
     GetAliasInput = Shapes::StructureShape.new(name: 'GetAliasInput')
     GetAliasOutput = Shapes::StructureShape.new(name: 'GetAliasOutput')
+    GetCertificateSigningRequestInput = Shapes::StructureShape.new(name: 'GetCertificateSigningRequestInput')
+    GetCertificateSigningRequestOutput = Shapes::StructureShape.new(name: 'GetCertificateSigningRequestOutput')
     GetDefaultKeyReplicationRegionsInput = Shapes::StructureShape.new(name: 'GetDefaultKeyReplicationRegionsInput')
     GetDefaultKeyReplicationRegionsOutput = Shapes::StructureShape.new(name: 'GetDefaultKeyReplicationRegionsOutput')
     GetKeyInput = Shapes::StructureShape.new(name: 'GetKeyInput')
@@ -120,6 +131,7 @@ module Aws::PaymentCryptography
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SharedInformation = Shapes::StringShape.new(name: 'SharedInformation')
+    SigningAlgorithmType = Shapes::StringShape.new(name: 'SigningAlgorithmType')
     StartKeyUsageInput = Shapes::StructureShape.new(name: 'StartKeyUsageInput')
     StartKeyUsageOutput = Shapes::StructureShape.new(name: 'StartKeyUsageOutput')
     StopKeyUsageInput = Shapes::StructureShape.new(name: 'StopKeyUsageInput')
@@ -164,6 +176,15 @@ module Aws::PaymentCryptography
     Alias.struct_class = Types::Alias
 
     Aliases.member = Shapes::ShapeRef.new(shape: Alias)
+
+    CertificateSubjectType.add_member(:common_name, Shapes::ShapeRef.new(shape: CertificateSubjectTypeCommonNameString, required: true, location_name: "CommonName"))
+    CertificateSubjectType.add_member(:organization_unit, Shapes::ShapeRef.new(shape: CertificateSubjectTypeOrganizationUnitString, location_name: "OrganizationUnit"))
+    CertificateSubjectType.add_member(:organization, Shapes::ShapeRef.new(shape: CertificateSubjectTypeOrganizationString, location_name: "Organization"))
+    CertificateSubjectType.add_member(:city, Shapes::ShapeRef.new(shape: CertificateSubjectTypeCityString, location_name: "City"))
+    CertificateSubjectType.add_member(:country, Shapes::ShapeRef.new(shape: CertificateSubjectTypeCountryString, location_name: "Country"))
+    CertificateSubjectType.add_member(:state_or_province, Shapes::ShapeRef.new(shape: CertificateSubjectTypeStateOrProvinceString, location_name: "StateOrProvince"))
+    CertificateSubjectType.add_member(:email_address, Shapes::ShapeRef.new(shape: CertificateSubjectTypeEmailAddressString, location_name: "EmailAddress"))
+    CertificateSubjectType.struct_class = Types::CertificateSubjectType
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
@@ -265,7 +286,9 @@ module Aws::PaymentCryptography
 
     ExportTr34KeyBlock.add_member(:certificate_authority_public_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "CertificateAuthorityPublicKeyIdentifier"))
     ExportTr34KeyBlock.add_member(:wrapping_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "WrappingKeyCertificate"))
-    ExportTr34KeyBlock.add_member(:export_token, Shapes::ShapeRef.new(shape: ExportTokenId, required: true, location_name: "ExportToken"))
+    ExportTr34KeyBlock.add_member(:export_token, Shapes::ShapeRef.new(shape: ExportTokenId, location_name: "ExportToken"))
+    ExportTr34KeyBlock.add_member(:signing_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "SigningKeyIdentifier"))
+    ExportTr34KeyBlock.add_member(:signing_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, location_name: "SigningKeyCertificate"))
     ExportTr34KeyBlock.add_member(:key_block_format, Shapes::ShapeRef.new(shape: Tr34KeyBlockFormat, required: true, location_name: "KeyBlockFormat"))
     ExportTr34KeyBlock.add_member(:random_nonce, Shapes::ShapeRef.new(shape: EvenHexLengthBetween16And32, location_name: "RandomNonce"))
     ExportTr34KeyBlock.add_member(:key_block_headers, Shapes::ShapeRef.new(shape: KeyBlockHeaders, location_name: "KeyBlockHeaders"))
@@ -276,6 +299,14 @@ module Aws::PaymentCryptography
 
     GetAliasOutput.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "Alias"))
     GetAliasOutput.struct_class = Types::GetAliasOutput
+
+    GetCertificateSigningRequestInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
+    GetCertificateSigningRequestInput.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: SigningAlgorithmType, required: true, location_name: "SigningAlgorithm"))
+    GetCertificateSigningRequestInput.add_member(:certificate_subject, Shapes::ShapeRef.new(shape: CertificateSubjectType, required: true, location_name: "CertificateSubject"))
+    GetCertificateSigningRequestInput.struct_class = Types::GetCertificateSigningRequestInput
+
+    GetCertificateSigningRequestOutput.add_member(:certificate_signing_request, Shapes::ShapeRef.new(shape: CertificateSigningRequestType, required: true, location_name: "CertificateSigningRequest"))
+    GetCertificateSigningRequestOutput.struct_class = Types::GetCertificateSigningRequestOutput
 
     GetDefaultKeyReplicationRegionsInput.struct_class = Types::GetDefaultKeyReplicationRegionsInput
 
@@ -366,7 +397,9 @@ module Aws::PaymentCryptography
 
     ImportTr34KeyBlock.add_member(:certificate_authority_public_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "CertificateAuthorityPublicKeyIdentifier"))
     ImportTr34KeyBlock.add_member(:signing_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "SigningKeyCertificate"))
-    ImportTr34KeyBlock.add_member(:import_token, Shapes::ShapeRef.new(shape: ImportTokenId, required: true, location_name: "ImportToken"))
+    ImportTr34KeyBlock.add_member(:import_token, Shapes::ShapeRef.new(shape: ImportTokenId, location_name: "ImportToken"))
+    ImportTr34KeyBlock.add_member(:wrapping_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "WrappingKeyIdentifier"))
+    ImportTr34KeyBlock.add_member(:wrapping_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, location_name: "WrappingKeyCertificate"))
     ImportTr34KeyBlock.add_member(:wrapped_key_block, Shapes::ShapeRef.new(shape: Tr34WrappedKeyBlock, required: true, location_name: "WrappedKeyBlock"))
     ImportTr34KeyBlock.add_member(:key_block_format, Shapes::ShapeRef.new(shape: Tr34KeyBlockFormat, required: true, location_name: "KeyBlockFormat"))
     ImportTr34KeyBlock.add_member(:random_nonce, Shapes::ShapeRef.new(shape: EvenHexLengthBetween16And32, location_name: "RandomNonce"))
@@ -701,6 +734,20 @@ module Aws::PaymentCryptography
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetAliasInput)
         o.output = Shapes::ShapeRef.new(shape: GetAliasOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_certificate_signing_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCertificateSigningRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCertificateSigningRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: GetCertificateSigningRequestOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

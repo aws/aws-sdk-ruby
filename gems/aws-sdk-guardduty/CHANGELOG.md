@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2025-09-11)
+------------------
+
+* Feature - Updated Java SDK implementation of entity set status in GuardDuty API.
+
 1.127.0 (2025-08-26)
 ------------------
 

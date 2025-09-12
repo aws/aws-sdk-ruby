@@ -448,6 +448,7 @@ module Aws::QuickSight
     CustomActionURLOperation = Shapes::StructureShape.new(name: 'CustomActionURLOperation')
     CustomColor = Shapes::StructureShape.new(name: 'CustomColor')
     CustomColorsList = Shapes::ListShape.new(name: 'CustomColorsList')
+    CustomConnectionParameters = Shapes::StructureShape.new(name: 'CustomConnectionParameters')
     CustomContentConfiguration = Shapes::StructureShape.new(name: 'CustomContentConfiguration')
     CustomContentImageScalingConfiguration = Shapes::StringShape.new(name: 'CustomContentImageScalingConfiguration')
     CustomContentType = Shapes::StringShape.new(name: 'CustomContentType')
@@ -548,6 +549,7 @@ module Aws::QuickSight
     DataSourceSummaryList = Shapes::ListShape.new(name: 'DataSourceSummaryList')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DataStoriesConfigurations = Shapes::StructureShape.new(name: 'DataStoriesConfigurations')
+    DataStoriesSharingOption = Shapes::StructureShape.new(name: 'DataStoriesSharingOption')
     Database = Shapes::StringShape.new(name: 'Database')
     DatabaseAccessControlRole = Shapes::StringShape.new(name: 'DatabaseAccessControlRole')
     DatabaseGroup = Shapes::StringShape.new(name: 'DatabaseGroup')
@@ -612,6 +614,8 @@ module Aws::QuickSight
     DefaultSliderControlOptions = Shapes::StructureShape.new(name: 'DefaultSliderControlOptions')
     DefaultTextAreaControlOptions = Shapes::StructureShape.new(name: 'DefaultTextAreaControlOptions')
     DefaultTextFieldControlOptions = Shapes::StructureShape.new(name: 'DefaultTextFieldControlOptions')
+    DeleteAccountCustomPermissionRequest = Shapes::StructureShape.new(name: 'DeleteAccountCustomPermissionRequest')
+    DeleteAccountCustomPermissionResponse = Shapes::StructureShape.new(name: 'DeleteAccountCustomPermissionResponse')
     DeleteAccountCustomizationRequest = Shapes::StructureShape.new(name: 'DeleteAccountCustomizationRequest')
     DeleteAccountCustomizationResponse = Shapes::StructureShape.new(name: 'DeleteAccountCustomizationResponse')
     DeleteAccountSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteAccountSubscriptionRequest')
@@ -675,6 +679,8 @@ module Aws::QuickSight
     DeleteVPCConnectionRequest = Shapes::StructureShape.new(name: 'DeleteVPCConnectionRequest')
     DeleteVPCConnectionResponse = Shapes::StructureShape.new(name: 'DeleteVPCConnectionResponse')
     Delimiter = Shapes::StringShape.new(name: 'Delimiter')
+    DescribeAccountCustomPermissionRequest = Shapes::StructureShape.new(name: 'DescribeAccountCustomPermissionRequest')
+    DescribeAccountCustomPermissionResponse = Shapes::StructureShape.new(name: 'DescribeAccountCustomPermissionResponse')
     DescribeAccountCustomizationRequest = Shapes::StructureShape.new(name: 'DescribeAccountCustomizationRequest')
     DescribeAccountCustomizationResponse = Shapes::StructureShape.new(name: 'DescribeAccountCustomizationResponse')
     DescribeAccountSettingsRequest = Shapes::StructureShape.new(name: 'DescribeAccountSettingsRequest')
@@ -809,6 +815,7 @@ module Aws::QuickSight
     ExceptionResourceType = Shapes::StringShape.new(name: 'ExceptionResourceType')
     ExcludePeriodConfiguration = Shapes::StructureShape.new(name: 'ExcludePeriodConfiguration')
     ExecutiveSummaryConfigurations = Shapes::StructureShape.new(name: 'ExecutiveSummaryConfigurations')
+    ExecutiveSummaryOption = Shapes::StructureShape.new(name: 'ExecutiveSummaryOption')
     ExplicitHierarchy = Shapes::StructureShape.new(name: 'ExplicitHierarchy')
     ExplicitHierarchyColumnList = Shapes::ListShape.new(name: 'ExplicitHierarchyColumnList')
     ExportHiddenFieldsOption = Shapes::StructureShape.new(name: 'ExportHiddenFieldsOption')
@@ -1308,6 +1315,7 @@ module Aws::QuickSight
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonRepeatingVisualsList = Shapes::ListShape.new(name: 'NonRepeatingVisualsList')
     NullFilterOption = Shapes::StringShape.new(name: 'NullFilterOption')
+    NullFilterType = Shapes::StringShape.new(name: 'NullFilterType')
     NullString = Shapes::StringShape.new(name: 'NullString')
     NullValueFormatConfiguration = Shapes::StructureShape.new(name: 'NullValueFormatConfiguration')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
@@ -1462,6 +1470,8 @@ module Aws::QuickSight
     QAResults = Shapes::ListShape.new(name: 'QAResults')
     QAUrl = Shapes::StringShape.new(name: 'QAUrl')
     QBusinessInsightsStatus = Shapes::StringShape.new(name: 'QBusinessInsightsStatus')
+    QDataKey = Shapes::StructureShape.new(name: 'QDataKey')
+    QDataKeyType = Shapes::StringShape.new(name: 'QDataKeyType')
     QSearchStatus = Shapes::StringShape.new(name: 'QSearchStatus')
     Query = Shapes::StringShape.new(name: 'Query')
     QueryExecutionMode = Shapes::StringShape.new(name: 'QueryExecutionMode')
@@ -1925,6 +1935,7 @@ module Aws::QuickSight
     TopicId = Shapes::StringShape.new(name: 'TopicId')
     TopicNamedEntities = Shapes::ListShape.new(name: 'TopicNamedEntities')
     TopicNamedEntity = Shapes::StructureShape.new(name: 'TopicNamedEntity')
+    TopicNullFilter = Shapes::StructureShape.new(name: 'TopicNullFilter')
     TopicNumericEqualityFilter = Shapes::StructureShape.new(name: 'TopicNumericEqualityFilter')
     TopicNumericRangeFilter = Shapes::StructureShape.new(name: 'TopicNumericRangeFilter')
     TopicNumericSeparatorSymbol = Shapes::StringShape.new(name: 'TopicNumericSeparatorSymbol')
@@ -1992,6 +2003,8 @@ module Aws::QuickSight
     UntagColumnOperation = Shapes::StructureShape.new(name: 'UntagColumnOperation')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAccountCustomPermissionRequest = Shapes::StructureShape.new(name: 'UpdateAccountCustomPermissionRequest')
+    UpdateAccountCustomPermissionResponse = Shapes::StructureShape.new(name: 'UpdateAccountCustomPermissionResponse')
     UpdateAccountCustomizationRequest = Shapes::StructureShape.new(name: 'UpdateAccountCustomizationRequest')
     UpdateAccountCustomizationResponse = Shapes::StructureShape.new(name: 'UpdateAccountCustomizationResponse')
     UpdateAccountSettingsRequest = Shapes::StructureShape.new(name: 'UpdateAccountSettingsRequest')
@@ -3054,6 +3067,8 @@ module Aws::QuickSight
     Capabilities.add_member(:export_to_csv_in_scheduled_reports, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ExportToCsvInScheduledReports"))
     Capabilities.add_member(:export_to_excel_in_scheduled_reports, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ExportToExcelInScheduledReports"))
     Capabilities.add_member(:include_content_in_scheduled_reports_email, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "IncludeContentInScheduledReportsEmail"))
+    Capabilities.add_member(:dashboard, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Dashboard"))
+    Capabilities.add_member(:analysis, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Analysis"))
     Capabilities.struct_class = Types::Capabilities
 
     CascadingControlConfiguration.add_member(:source_controls, Shapes::ShapeRef.new(shape: CascadingControlSourceList, location_name: "SourceControls"))
@@ -3777,6 +3792,9 @@ module Aws::QuickSight
 
     CustomColorsList.member = Shapes::ShapeRef.new(shape: CustomColor)
 
+    CustomConnectionParameters.add_member(:connection_type, Shapes::ShapeRef.new(shape: String, location_name: "ConnectionType"))
+    CustomConnectionParameters.struct_class = Types::CustomConnectionParameters
+
     CustomContentConfiguration.add_member(:content_url, Shapes::ShapeRef.new(shape: URLOperationTemplate, location_name: "ContentUrl"))
     CustomContentConfiguration.add_member(:content_type, Shapes::ShapeRef.new(shape: CustomContentType, location_name: "ContentType"))
     CustomContentConfiguration.add_member(:image_scaling, Shapes::ShapeRef.new(shape: CustomContentImageScalingConfiguration, location_name: "ImageScaling"))
@@ -3867,6 +3885,8 @@ module Aws::QuickSight
     DashboardPublishOptions.add_member(:data_point_menu_label_option, Shapes::ShapeRef.new(shape: DataPointMenuLabelOption, location_name: "DataPointMenuLabelOption"))
     DashboardPublishOptions.add_member(:data_point_tooltip_option, Shapes::ShapeRef.new(shape: DataPointTooltipOption, location_name: "DataPointTooltipOption"))
     DashboardPublishOptions.add_member(:data_qa_enabled_option, Shapes::ShapeRef.new(shape: DataQAEnabledOption, location_name: "DataQAEnabledOption"))
+    DashboardPublishOptions.add_member(:executive_summary_option, Shapes::ShapeRef.new(shape: ExecutiveSummaryOption, location_name: "ExecutiveSummaryOption"))
+    DashboardPublishOptions.add_member(:data_stories_sharing_option, Shapes::ShapeRef.new(shape: DataStoriesSharingOption, location_name: "DataStoriesSharingOption"))
     DashboardPublishOptions.struct_class = Types::DashboardPublishOptions
 
     DashboardSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "Operator"))
@@ -4158,6 +4178,7 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:trino_parameters, Shapes::ShapeRef.new(shape: TrinoParameters, location_name: "TrinoParameters"))
     DataSourceParameters.add_member(:big_query_parameters, Shapes::ShapeRef.new(shape: BigQueryParameters, location_name: "BigQueryParameters"))
     DataSourceParameters.add_member(:impala_parameters, Shapes::ShapeRef.new(shape: ImpalaParameters, location_name: "ImpalaParameters"))
+    DataSourceParameters.add_member(:custom_connection_parameters, Shapes::ShapeRef.new(shape: CustomConnectionParameters, location_name: "CustomConnectionParameters"))
     DataSourceParameters.struct_class = Types::DataSourceParameters
 
     DataSourceParametersList.member = Shapes::ShapeRef.new(shape: DataSourceParameters)
@@ -4181,6 +4202,9 @@ module Aws::QuickSight
 
     DataStoriesConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     DataStoriesConfigurations.struct_class = Types::DataStoriesConfigurations
+
+    DataStoriesSharingOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    DataStoriesSharingOption.struct_class = Types::DataStoriesSharingOption
 
     DatabaseGroupList.member = Shapes::ShapeRef.new(shape: DatabaseGroup)
 
@@ -4385,6 +4409,13 @@ module Aws::QuickSight
 
     DefaultTextFieldControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: TextFieldControlDisplayOptions, location_name: "DisplayOptions"))
     DefaultTextFieldControlOptions.struct_class = Types::DefaultTextFieldControlOptions
+
+    DeleteAccountCustomPermissionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteAccountCustomPermissionRequest.struct_class = Types::DeleteAccountCustomPermissionRequest
+
+    DeleteAccountCustomPermissionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteAccountCustomPermissionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
+    DeleteAccountCustomPermissionResponse.struct_class = Types::DeleteAccountCustomPermissionResponse
 
     DeleteAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
@@ -4684,6 +4715,14 @@ module Aws::QuickSight
     DeleteVPCConnectionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DeleteVPCConnectionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteVPCConnectionResponse.struct_class = Types::DeleteVPCConnectionResponse
+
+    DescribeAccountCustomPermissionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAccountCustomPermissionRequest.struct_class = Types::DescribeAccountCustomPermissionRequest
+
+    DescribeAccountCustomPermissionResponse.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: CustomPermissionsName, location_name: "CustomPermissionsName"))
+    DescribeAccountCustomPermissionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeAccountCustomPermissionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
+    DescribeAccountCustomPermissionResponse.struct_class = Types::DescribeAccountCustomPermissionResponse
 
     DescribeAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
@@ -5067,6 +5106,7 @@ module Aws::QuickSight
 
     DescribeKeyRegistrationResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
     DescribeKeyRegistrationResponse.add_member(:key_registration, Shapes::ShapeRef.new(shape: KeyRegistration, location_name: "KeyRegistration"))
+    DescribeKeyRegistrationResponse.add_member(:q_data_key, Shapes::ShapeRef.new(shape: QDataKey, location_name: "QDataKey"))
     DescribeKeyRegistrationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
     DescribeKeyRegistrationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
     DescribeKeyRegistrationResponse.struct_class = Types::DescribeKeyRegistrationResponse
@@ -5347,6 +5387,9 @@ module Aws::QuickSight
 
     ExecutiveSummaryConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     ExecutiveSummaryConfigurations.struct_class = Types::ExecutiveSummaryConfigurations
+
+    ExecutiveSummaryOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    ExecutiveSummaryOption.struct_class = Types::ExecutiveSummaryOption
 
     ExplicitHierarchy.add_member(:hierarchy_id, Shapes::ShapeRef.new(shape: HierarchyId, required: true, location_name: "HierarchyId"))
     ExplicitHierarchy.add_member(:columns, Shapes::ShapeRef.new(shape: ExplicitHierarchyColumnList, required: true, location_name: "Columns"))
@@ -7721,6 +7764,10 @@ module Aws::QuickSight
 
     QAResults.member = Shapes::ShapeRef.new(shape: QAResult)
 
+    QDataKey.add_member(:q_data_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "QDataKeyArn"))
+    QDataKey.add_member(:q_data_key_type, Shapes::ShapeRef.new(shape: QDataKeyType, location_name: "QDataKeyType"))
+    QDataKey.struct_class = Types::QDataKey
+
     QueryExecutionOptions.add_member(:query_execution_mode, Shapes::ShapeRef.new(shape: QueryExecutionMode, location_name: "QueryExecutionMode"))
     QueryExecutionOptions.struct_class = Types::QueryExecutionOptions
 
@@ -9222,6 +9269,7 @@ module Aws::QuickSight
     TopicFilter.add_member(:numeric_range_filter, Shapes::ShapeRef.new(shape: TopicNumericRangeFilter, location_name: "NumericRangeFilter"))
     TopicFilter.add_member(:date_range_filter, Shapes::ShapeRef.new(shape: TopicDateRangeFilter, location_name: "DateRangeFilter"))
     TopicFilter.add_member(:relative_date_filter, Shapes::ShapeRef.new(shape: TopicRelativeDateFilter, location_name: "RelativeDateFilter"))
+    TopicFilter.add_member(:null_filter, Shapes::ShapeRef.new(shape: TopicNullFilter, location_name: "NullFilter"))
     TopicFilter.struct_class = Types::TopicFilter
 
     TopicFilters.member = Shapes::ShapeRef.new(shape: TopicFilter)
@@ -9300,6 +9348,11 @@ module Aws::QuickSight
     TopicNamedEntity.add_member(:semantic_entity_type, Shapes::ShapeRef.new(shape: SemanticEntityType, location_name: "SemanticEntityType"))
     TopicNamedEntity.add_member(:definition, Shapes::ShapeRef.new(shape: NamedEntityDefinitions, location_name: "Definition"))
     TopicNamedEntity.struct_class = Types::TopicNamedEntity
+
+    TopicNullFilter.add_member(:null_filter_type, Shapes::ShapeRef.new(shape: NullFilterType, location_name: "NullFilterType"))
+    TopicNullFilter.add_member(:constant, Shapes::ShapeRef.new(shape: TopicSingularFilterConstant, location_name: "Constant"))
+    TopicNullFilter.add_member(:inverse, Shapes::ShapeRef.new(shape: Boolean, location_name: "Inverse"))
+    TopicNullFilter.struct_class = Types::TopicNullFilter
 
     TopicNumericEqualityFilter.add_member(:constant, Shapes::ShapeRef.new(shape: TopicSingularFilterConstant, location_name: "Constant"))
     TopicNumericEqualityFilter.add_member(:aggregation, Shapes::ShapeRef.new(shape: NamedFilterAggType, location_name: "Aggregation"))
@@ -9538,6 +9591,14 @@ module Aws::QuickSight
     UntagResourceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UntagResourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAccountCustomPermissionRequest.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: CustomPermissionsName, required: true, location_name: "CustomPermissionsName"))
+    UpdateAccountCustomPermissionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateAccountCustomPermissionRequest.struct_class = Types::UpdateAccountCustomPermissionRequest
+
+    UpdateAccountCustomPermissionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateAccountCustomPermissionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
+    UpdateAccountCustomPermissionResponse.struct_class = Types::UpdateAccountCustomPermissionResponse
 
     UpdateAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
@@ -10771,6 +10832,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:delete_account_custom_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccountCustomPermission"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/custom-permission"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccountCustomPermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccountCustomPermissionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:delete_account_customization, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAccountCustomization"
         o.http_method = "DELETE"
@@ -11222,6 +11296,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_account_custom_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountCustomPermission"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/custom-permission"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountCustomPermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountCustomPermissionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -12975,6 +13062,19 @@ module Aws::QuickSight
         o.http_request_uri = "/resources/{ResourceArn}/tags"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_account_custom_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountCustomPermission"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/custom-permission"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountCustomPermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccountCustomPermissionResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

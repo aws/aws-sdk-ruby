@@ -5103,16 +5103,13 @@ module Aws::MediaLive
     # H264 Settings
     #
     # @!attribute [rw] adaptive_quantization
-    #   Enables or disables adaptive quantization, which is a technique
+    #   Enables or disables adaptive quantization (AQ), which is a technique
     #   MediaLive can apply to video on a frame-by-frame basis to produce
     #   more compression without losing quality. There are three types of
-    #   adaptive quantization: flicker, spatial, and temporal. Set the field
-    #   in one of these ways: Set to Auto. Recommended. For each type of AQ,
-    #   MediaLive will determine if AQ is needed, and if so, the appropriate
-    #   strength. Set a strength (a value other than Auto or Disable). This
-    #   strength will apply to any of the AQ fields that you choose to
-    #   enable. Set to Disabled to disable all types of adaptive
-    #   quantization.
+    #   adaptive quantization: spatial, temporal, and flicker. We recommend
+    #   that you set the field to Auto. For more information about all the
+    #   options, see the topic about video adaptive quantization in the
+    #   MediaLive user guide.
     #   @return [String]
     #
     # @!attribute [rw] afd_signaling
@@ -5173,15 +5170,9 @@ module Aws::MediaLive
     # @!attribute [rw] flicker_aq
     #   Flicker AQ makes adjustments within each frame to reduce flicker or
     #   'pop' on I-frames. The value to enter in this field depends on the
-    #   value in the Adaptive quantization field: If you have set the
-    #   Adaptive quantization field to Auto, MediaLive ignores any value in
-    #   this field. MediaLive will determine if flicker AQ is appropriate
-    #   and will apply the appropriate strength. If you have set the
-    #   Adaptive quantization field to a strength, you can set this field to
-    #   Enabled or Disabled. Enabled: MediaLive will apply flicker AQ using
-    #   the specified strength. Disabled: MediaLive won't apply flicker AQ.
-    #   If you have set the Adaptive quantization to Disabled, MediaLive
-    #   ignores any value in this field and doesn't apply flicker AQ.
+    #   value in the Adaptive quantization field. For more information, see
+    #   the topic about video adaptive quantization in the MediaLive user
+    #   guide.
     #   @return [String]
     #
     # @!attribute [rw] force_field_pictures
@@ -5362,16 +5353,9 @@ module Aws::MediaLive
     # @!attribute [rw] spatial_aq
     #   Spatial AQ makes adjustments within each frame based on spatial
     #   variation of content complexity. The value to enter in this field
-    #   depends on the value in the Adaptive quantization field: If you have
-    #   set the Adaptive quantization field to Auto, MediaLive ignores any
-    #   value in this field. MediaLive will determine if spatial AQ is
-    #   appropriate and will apply the appropriate strength. If you have set
-    #   the Adaptive quantization field to a strength, you can set this
-    #   field to Enabled or Disabled. Enabled: MediaLive will apply spatial
-    #   AQ using the specified strength. Disabled: MediaLive won't apply
-    #   spatial AQ. If you have set the Adaptive quantization to Disabled,
-    #   MediaLive ignores any value in this field and doesn't apply spatial
-    #   AQ.
+    #   depends on the value in the Adaptive quantization field. For more
+    #   information, see the topic about video adaptive quantization in the
+    #   MediaLive user guide.
     #   @return [String]
     #
     # @!attribute [rw] subgop_length
@@ -5385,18 +5369,11 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] temporal_aq
-    #   Temporal makes adjustments within each frame based on temporal
-    #   variation of content complexity. The value to enter in this field
-    #   depends on the value in the Adaptive quantization field: If you have
-    #   set the Adaptive quantization field to Auto, MediaLive ignores any
-    #   value in this field. MediaLive will determine if temporal AQ is
-    #   appropriate and will apply the appropriate strength. If you have set
-    #   the Adaptive quantization field to a strength, you can set this
-    #   field to Enabled or Disabled. Enabled: MediaLive will apply temporal
-    #   AQ using the specified strength. Disabled: MediaLive won't apply
-    #   temporal AQ. If you have set the Adaptive quantization to Disabled,
-    #   MediaLive ignores any value in this field and doesn't apply
-    #   temporal AQ.
+    #   Temporal makes adjustments within each frame based on variations in
+    #   content complexity over time. The value to enter in this field
+    #   depends on the value in the Adaptive quantization field. For more
+    #   information, see the topic about video adaptive quantization in the
+    #   MediaLive user guide.
     #   @return [String]
     #
     # @!attribute [rw] timecode_insertion
@@ -5522,8 +5499,13 @@ module Aws::MediaLive
     # H265 Settings
     #
     # @!attribute [rw] adaptive_quantization
-    #   Adaptive quantization. Allows intra-frame quantizers to vary to
-    #   improve visual quality.
+    #   Enables or disables adaptive quantization (AQ), which is a technique
+    #   MediaLive can apply to video on a frame-by-frame basis to produce
+    #   more compression without losing quality. There are three types of
+    #   adaptive quantization: spatial, temporal, and flicker. Flicker is
+    #   the only type that you can customize. We recommend that you set the
+    #   field to Auto. For more information about all the options, see the
+    #   topic about video adaptive quantization in the MediaLive user guide.
     #   @return [String]
     #
     # @!attribute [rw] afd_signaling
@@ -5578,8 +5560,11 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] flicker_aq
-    #   If set to enabled, adjust quantization within each frame to reduce
-    #   flicker or 'pop' on I-frames.
+    #   Flicker AQ makes adjustments within each frame to reduce flicker or
+    #   'pop' on I-frames. The value to enter in this field depends on the
+    #   value in the Adaptive quantization field. For more information, see
+    #   the topic about video adaptive quantization in the MediaLive user
+    #   guide.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -8997,10 +8982,18 @@ module Aws::MediaLive
     #   MediaPackage channel destination.
     #   @return [Types::OutputLocationRef]
     #
+    # @!attribute [rw] mediapackage_v2_group_settings
+    #   Parameters that apply only if the destination parameter (for the
+    #   output group) specifies a channelGroup and channelName. Use of these
+    #   two paramters indicates that the output group is for MediaPackage V2
+    #   (CMAF Ingest).
+    #   @return [Types::MediaPackageV2GroupSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageGroupSettings AWS API Documentation
     #
     class MediaPackageGroupSettings < Struct.new(
-      :destination)
+      :destination,
+      :mediapackage_v2_group_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9039,11 +9032,17 @@ module Aws::MediaLive
 
     # Media Package Output Settings
     #
-    # @api private
+    # @!attribute [rw] media_package_v2_destination_settings
+    #   Optional settings for MediaPackage V2 destinations
+    #   @return [Types::MediaPackageV2DestinationSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputSettings AWS API Documentation
     #
-    class MediaPackageOutputSettings < Aws::EmptyStructure; end
+    class MediaPackageOutputSettings < Struct.new(
+      :media_package_v2_destination_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Settings to specify the rendering of motion graphics into the video
     # stream.
@@ -21751,6 +21750,76 @@ module Aws::MediaLive
     #
     class AdditionalDestinations < Struct.new(
       :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Media Package V2 Destination Settings
+    #
+    # @!attribute [rw] audio_group_id
+    #   Applies only to an output that contains audio. If you want to put
+    #   several audio encodes into one audio rendition group, decide on a
+    #   name (ID) for the group. Then in every audio output that you want to
+    #   belong to that group, enter that ID in this field. Note that this
+    #   information is part of the HLS specification (not the CMAF
+    #   specification), but if you include it then MediaPackage will include
+    #   it in the manifest it creates for the video player.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_rendition_sets
+    #   Applies only to an output that contains video, and only if you want
+    #   to associate one or more audio groups to this video. In this field
+    #   you assign the groups that you create (in the Group ID fields in the
+    #   various audio outputs). Enter one group ID, or enter a
+    #   comma-separated list of group IDs. Note that this information is
+    #   part of the HLS specification (not the CMAF specification), but if
+    #   you include it then MediaPackage will include it in the manifest it
+    #   creates for the video player.
+    #   @return [String]
+    #
+    # @!attribute [rw] hls_auto_select
+    #   Specifies whether MediaPackage should set this output as the
+    #   auto-select rendition in the HLS manifest. YES means this must be
+    #   the auto-select. NO means this should never be the auto-select. OMIT
+    #   means MediaPackage decides what to set on this rendition. When you
+    #   consider all the renditions, follow these guidelines. You can set
+    #   zero or one renditions to YES. You can set zero or more renditions
+    #   to NO, but you can't set all renditions to NO. You can set zero,
+    #   some, or all to OMIT.
+    #   @return [String]
+    #
+    # @!attribute [rw] hls_default
+    #   Specifies whether MediaPackage should set this output as the default
+    #   rendition in the HLS manifest. YES means this must be the default.
+    #   NO means this should never be the default. OMIT means MediaPackage
+    #   decides what to set on this rendition. When you consider all the
+    #   renditions, follow these guidelines. You can set zero or one
+    #   renditions to YES. You can set zero or more renditions to NO, but
+    #   you can't set all renditions to NO. You can set zero, some, or all
+    #   to OMIT.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageV2DestinationSettings AWS API Documentation
+    #
+    class MediaPackageV2DestinationSettings < Struct.new(
+      :audio_group_id,
+      :audio_rendition_sets,
+      :hls_auto_select,
+      :hls_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Media Package V2 Group Settings
+    #
+    # @!attribute [rw] caption_language_mappings
+    #   Mapping of up to 4 caption channels to caption languages.
+    #   @return [Array<Types::CaptionLanguageMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageV2GroupSettings AWS API Documentation
+    #
+    class MediaPackageV2GroupSettings < Struct.new(
+      :caption_language_mappings)
       SENSITIVE = []
       include Aws::Structure
     end

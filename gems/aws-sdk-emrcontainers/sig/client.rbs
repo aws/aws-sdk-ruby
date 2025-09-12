@@ -202,6 +202,16 @@ module Aws
       def create_security_configuration: (
                                            client_token: ::String,
                                            name: ::String,
+                                           ?container_provider: {
+                                             type: ("EKS"),
+                                             id: ::String,
+                                             info: {
+                                               eks_info: {
+                                                 namespace: ::String?,
+                                                 node_label: ::String?
+                                               }?
+                                             }?
+                                           },
                                            security_configuration_data: {
                                              authorization_configuration: {
                                                lake_formation_configuration: {
@@ -241,7 +251,8 @@ module Aws
                                       id: ::String,
                                       info: {
                                         eks_info: {
-                                          namespace: ::String?
+                                          namespace: ::String?,
+                                          node_label: ::String?
                                         }?
                                       }?
                                     },

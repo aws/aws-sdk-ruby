@@ -23,6 +23,7 @@ module Aws::PrometheusService
     Blob = Shapes::BlobShape.new(name: 'Blob')
     CloudWatchLogDestination = Shapes::StructureShape.new(name: 'CloudWatchLogDestination')
     ClusterArn = Shapes::StringShape.new(name: 'ClusterArn')
+    ComponentConfig = Shapes::StructureShape.new(name: 'ComponentConfig')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAlertManagerDefinitionRequest = Shapes::StructureShape.new(name: 'CreateAlertManagerDefinitionRequest')
     CreateAlertManagerDefinitionResponse = Shapes::StructureShape.new(name: 'CreateAlertManagerDefinitionResponse')
@@ -41,6 +42,7 @@ module Aws::PrometheusService
     DeleteQueryLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteQueryLoggingConfigurationRequest')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteRuleGroupsNamespaceRequest = Shapes::StructureShape.new(name: 'DeleteRuleGroupsNamespaceRequest')
+    DeleteScraperLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteScraperLoggingConfigurationRequest')
     DeleteScraperRequest = Shapes::StructureShape.new(name: 'DeleteScraperRequest')
     DeleteScraperResponse = Shapes::StructureShape.new(name: 'DeleteScraperResponse')
     DeleteWorkspaceRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceRequest')
@@ -54,6 +56,8 @@ module Aws::PrometheusService
     DescribeResourcePolicyResponse = Shapes::StructureShape.new(name: 'DescribeResourcePolicyResponse')
     DescribeRuleGroupsNamespaceRequest = Shapes::StructureShape.new(name: 'DescribeRuleGroupsNamespaceRequest')
     DescribeRuleGroupsNamespaceResponse = Shapes::StructureShape.new(name: 'DescribeRuleGroupsNamespaceResponse')
+    DescribeScraperLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeScraperLoggingConfigurationRequest')
+    DescribeScraperLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeScraperLoggingConfigurationResponse')
     DescribeScraperRequest = Shapes::StructureShape.new(name: 'DescribeScraperRequest')
     DescribeScraperResponse = Shapes::StructureShape.new(name: 'DescribeScraperResponse')
     DescribeWorkspaceConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceConfigurationRequest')
@@ -121,9 +125,15 @@ module Aws::PrometheusService
     ScrapeConfiguration = Shapes::UnionShape.new(name: 'ScrapeConfiguration')
     ScraperAlias = Shapes::StringShape.new(name: 'ScraperAlias')
     ScraperArn = Shapes::StringShape.new(name: 'ScraperArn')
+    ScraperComponent = Shapes::StructureShape.new(name: 'ScraperComponent')
+    ScraperComponentType = Shapes::StringShape.new(name: 'ScraperComponentType')
+    ScraperComponents = Shapes::ListShape.new(name: 'ScraperComponents')
     ScraperDescription = Shapes::StructureShape.new(name: 'ScraperDescription')
     ScraperFilters = Shapes::MapShape.new(name: 'ScraperFilters')
     ScraperId = Shapes::StringShape.new(name: 'ScraperId')
+    ScraperLoggingConfigurationStatus = Shapes::StructureShape.new(name: 'ScraperLoggingConfigurationStatus')
+    ScraperLoggingConfigurationStatusCode = Shapes::StringShape.new(name: 'ScraperLoggingConfigurationStatusCode')
+    ScraperLoggingDestination = Shapes::UnionShape.new(name: 'ScraperLoggingDestination')
     ScraperStatus = Shapes::StructureShape.new(name: 'ScraperStatus')
     ScraperStatusCode = Shapes::StringShape.new(name: 'ScraperStatusCode')
     ScraperSummary = Shapes::StructureShape.new(name: 'ScraperSummary')
@@ -134,6 +144,7 @@ module Aws::PrometheusService
     Source = Shapes::UnionShape.new(name: 'Source')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
     String = Shapes::StringShape.new(name: 'String')
+    StringMap = Shapes::MapShape.new(name: 'StringMap')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -150,6 +161,8 @@ module Aws::PrometheusService
     UpdateLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateLoggingConfigurationResponse')
     UpdateQueryLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateQueryLoggingConfigurationRequest')
     UpdateQueryLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateQueryLoggingConfigurationResponse')
+    UpdateScraperLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateScraperLoggingConfigurationRequest')
+    UpdateScraperLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateScraperLoggingConfigurationResponse')
     UpdateScraperRequest = Shapes::StructureShape.new(name: 'UpdateScraperRequest')
     UpdateScraperResponse = Shapes::StructureShape.new(name: 'UpdateScraperResponse')
     UpdateWorkspaceAliasRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceAliasRequest')
@@ -193,6 +206,9 @@ module Aws::PrometheusService
 
     CloudWatchLogDestination.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
     CloudWatchLogDestination.struct_class = Types::CloudWatchLogDestination
+
+    ComponentConfig.add_member(:options, Shapes::ShapeRef.new(shape: StringMap, location_name: "options"))
+    ComponentConfig.struct_class = Types::ComponentConfig
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -286,6 +302,10 @@ module Aws::PrometheusService
     DeleteRuleGroupsNamespaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteRuleGroupsNamespaceRequest.struct_class = Types::DeleteRuleGroupsNamespaceRequest
 
+    DeleteScraperLoggingConfigurationRequest.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location: "uri", location_name: "scraperId"))
+    DeleteScraperLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeleteScraperLoggingConfigurationRequest.struct_class = Types::DeleteScraperLoggingConfigurationRequest
+
     DeleteScraperRequest.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location: "uri", location_name: "scraperId"))
     DeleteScraperRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteScraperRequest.struct_class = Types::DeleteScraperRequest
@@ -330,6 +350,16 @@ module Aws::PrometheusService
 
     DescribeRuleGroupsNamespaceResponse.add_member(:rule_groups_namespace, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceDescription, required: true, location_name: "ruleGroupsNamespace"))
     DescribeRuleGroupsNamespaceResponse.struct_class = Types::DescribeRuleGroupsNamespaceResponse
+
+    DescribeScraperLoggingConfigurationRequest.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location: "uri", location_name: "scraperId"))
+    DescribeScraperLoggingConfigurationRequest.struct_class = Types::DescribeScraperLoggingConfigurationRequest
+
+    DescribeScraperLoggingConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ScraperLoggingConfigurationStatus, required: true, location_name: "status"))
+    DescribeScraperLoggingConfigurationResponse.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location_name: "scraperId"))
+    DescribeScraperLoggingConfigurationResponse.add_member(:logging_destination, Shapes::ShapeRef.new(shape: ScraperLoggingDestination, required: true, location_name: "loggingDestination"))
+    DescribeScraperLoggingConfigurationResponse.add_member(:scraper_components, Shapes::ShapeRef.new(shape: ScraperComponents, required: true, location_name: "scraperComponents"))
+    DescribeScraperLoggingConfigurationResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
+    DescribeScraperLoggingConfigurationResponse.struct_class = Types::DescribeScraperLoggingConfigurationResponse
 
     DescribeScraperRequest.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location: "uri", location_name: "scraperId"))
     DescribeScraperRequest.struct_class = Types::DescribeScraperRequest
@@ -516,6 +546,12 @@ module Aws::PrometheusService
     ScrapeConfiguration.add_member_subclass(:unknown, Types::ScrapeConfiguration::Unknown)
     ScrapeConfiguration.struct_class = Types::ScrapeConfiguration
 
+    ScraperComponent.add_member(:type, Shapes::ShapeRef.new(shape: ScraperComponentType, required: true, location_name: "type"))
+    ScraperComponent.add_member(:config, Shapes::ShapeRef.new(shape: ComponentConfig, location_name: "config"))
+    ScraperComponent.struct_class = Types::ScraperComponent
+
+    ScraperComponents.member = Shapes::ShapeRef.new(shape: ScraperComponent)
+
     ScraperDescription.add_member(:alias, Shapes::ShapeRef.new(shape: ScraperAlias, location_name: "alias"))
     ScraperDescription.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location_name: "scraperId"))
     ScraperDescription.add_member(:arn, Shapes::ShapeRef.new(shape: ScraperArn, required: true, location_name: "arn"))
@@ -533,6 +569,16 @@ module Aws::PrometheusService
 
     ScraperFilters.key = Shapes::ShapeRef.new(shape: FilterKey)
     ScraperFilters.value = Shapes::ShapeRef.new(shape: FilterValues)
+
+    ScraperLoggingConfigurationStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: ScraperLoggingConfigurationStatusCode, required: true, location_name: "statusCode"))
+    ScraperLoggingConfigurationStatus.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    ScraperLoggingConfigurationStatus.struct_class = Types::ScraperLoggingConfigurationStatus
+
+    ScraperLoggingDestination.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogDestination, location_name: "cloudWatchLogs"))
+    ScraperLoggingDestination.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ScraperLoggingDestination.add_member_subclass(:cloud_watch_logs, Types::ScraperLoggingDestination::CloudWatchLogs)
+    ScraperLoggingDestination.add_member_subclass(:unknown, Types::ScraperLoggingDestination::Unknown)
+    ScraperLoggingDestination.struct_class = Types::ScraperLoggingDestination
 
     ScraperStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: ScraperStatusCode, required: true, location_name: "statusCode"))
     ScraperStatus.struct_class = Types::ScraperStatus
@@ -567,6 +613,9 @@ module Aws::PrometheusService
     Source.add_member_subclass(:eks_configuration, Types::Source::EksConfiguration)
     Source.add_member_subclass(:unknown, Types::Source::Unknown)
     Source.struct_class = Types::Source
+
+    StringMap.key = Shapes::ShapeRef.new(shape: String)
+    StringMap.value = Shapes::ShapeRef.new(shape: String)
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -608,6 +657,14 @@ module Aws::PrometheusService
 
     UpdateQueryLoggingConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: QueryLoggingConfigurationStatus, required: true, location_name: "status"))
     UpdateQueryLoggingConfigurationResponse.struct_class = Types::UpdateQueryLoggingConfigurationResponse
+
+    UpdateScraperLoggingConfigurationRequest.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location: "uri", location_name: "scraperId"))
+    UpdateScraperLoggingConfigurationRequest.add_member(:logging_destination, Shapes::ShapeRef.new(shape: ScraperLoggingDestination, required: true, location_name: "loggingDestination"))
+    UpdateScraperLoggingConfigurationRequest.add_member(:scraper_components, Shapes::ShapeRef.new(shape: ScraperComponents, location_name: "scraperComponents"))
+    UpdateScraperLoggingConfigurationRequest.struct_class = Types::UpdateScraperLoggingConfigurationRequest
+
+    UpdateScraperLoggingConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ScraperLoggingConfigurationStatus, required: true, location_name: "status"))
+    UpdateScraperLoggingConfigurationResponse.struct_class = Types::UpdateScraperLoggingConfigurationResponse
 
     UpdateScraperRequest.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location: "uri", location_name: "scraperId"))
     UpdateScraperRequest.add_member(:alias, Shapes::ShapeRef.new(shape: ScraperAlias, location_name: "alias"))
@@ -865,6 +922,19 @@ module Aws::PrometheusService
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_scraper_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteScraperLoggingConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/scrapers/{scraperId}/logging-configuration"
+        o.input = Shapes::ShapeRef.new(shape: DeleteScraperLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_workspace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteWorkspace"
         o.http_method = "DELETE"
@@ -949,6 +1019,18 @@ module Aws::PrometheusService
         o.input = Shapes::ShapeRef.new(shape: DescribeScraperRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeScraperResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_scraper_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeScraperLoggingConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/scrapers/{scraperId}/logging-configuration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeScraperLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeScraperLoggingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1169,6 +1251,19 @@ module Aws::PrometheusService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:update_scraper_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateScraperLoggingConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/scrapers/{scraperId}/logging-configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateScraperLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateScraperLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:update_workspace_alias, Seahorse::Model::Operation.new.tap do |o|

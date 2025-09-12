@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2025-09-11)
+------------------
+
+* Feature - adding IAM principal id to IAM user profile details
+
 1.51.0 (2025-09-09)
 ------------------
 

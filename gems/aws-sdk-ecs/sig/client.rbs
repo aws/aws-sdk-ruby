@@ -219,7 +219,9 @@ module Aws
                                 {
                                   hook_target_arn: ::String?,
                                   role_arn: ::String?,
-                                  lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?
+                                  lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?,
+                                  hook_details: {
+                                  }?
                                 },
                               ]?
                             },
@@ -1688,7 +1690,9 @@ module Aws
                                 {
                                   hook_target_arn: ::String?,
                                   role_arn: ::String?,
-                                  lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?
+                                  lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?,
+                                  hook_details: {
+                                  }?
                                 },
                               ]?
                             },

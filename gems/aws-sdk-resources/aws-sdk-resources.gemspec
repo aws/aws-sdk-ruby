@@ -360,7 +360,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-s3vectors', '~> 1')
   spec.add_dependency('aws-sdk-ses', '~> 1')
   spec.add_dependency('aws-sdk-sesv2', '~> 1')
-  spec.add_dependency('aws-sdk-sms', '~> 1')
   spec.add_dependency('aws-sdk-sns', '~> 1')
   spec.add_dependency('aws-sdk-sqs', '~> 1')
   spec.add_dependency('aws-sdk-ssm', '~> 1')

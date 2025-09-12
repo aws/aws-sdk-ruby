@@ -30,6 +30,17 @@ module Aws::PaymentCryptography
       SENSITIVE: []
     end
 
+    class CertificateSubjectType
+      attr_accessor common_name: ::String
+      attr_accessor organization_unit: ::String
+      attr_accessor organization: ::String
+      attr_accessor city: ::String
+      attr_accessor country: ::String
+      attr_accessor state_or_province: ::String
+      attr_accessor email_address: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -184,6 +195,8 @@ module Aws::PaymentCryptography
       attr_accessor certificate_authority_public_key_identifier: ::String
       attr_accessor wrapping_key_certificate: ::String
       attr_accessor export_token: ::String
+      attr_accessor signing_key_identifier: ::String
+      attr_accessor signing_key_certificate: ::String
       attr_accessor key_block_format: ("X9_TR34_2012")
       attr_accessor random_nonce: ::String
       attr_accessor key_block_headers: Types::KeyBlockHeaders
@@ -198,6 +211,18 @@ module Aws::PaymentCryptography
     class GetAliasOutput
       attr_accessor alias: Types::Alias
       SENSITIVE: []
+    end
+
+    class GetCertificateSigningRequestInput
+      attr_accessor key_identifier: ::String
+      attr_accessor signing_algorithm: ("SHA224" | "SHA256" | "SHA384" | "SHA512")
+      attr_accessor certificate_subject: Types::CertificateSubjectType
+      SENSITIVE: []
+    end
+
+    class GetCertificateSigningRequestOutput
+      attr_accessor certificate_signing_request: ::String
+      SENSITIVE: [:certificate_signing_request]
     end
 
     class GetDefaultKeyReplicationRegionsInput < Aws::EmptyStructure
@@ -330,6 +355,8 @@ module Aws::PaymentCryptography
       attr_accessor certificate_authority_public_key_identifier: ::String
       attr_accessor signing_key_certificate: ::String
       attr_accessor import_token: ::String
+      attr_accessor wrapping_key_identifier: ::String
+      attr_accessor wrapping_key_certificate: ::String
       attr_accessor wrapped_key_block: ::String
       attr_accessor key_block_format: ("X9_TR34_2012")
       attr_accessor random_nonce: ::String

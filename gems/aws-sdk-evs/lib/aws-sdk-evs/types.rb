@@ -10,6 +10,59 @@
 module Aws::Evs
   module Types
 
+    # @!attribute [rw] client_token
+    #   <note markdown="1"> This parameter is not used in Amazon EVS
+    #   currently. If you supply
+    #   input for this parameter, it will have no effect.
+    #
+    #    </note>
+    #
+    #    A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the environment creation request. If you do not
+    #   specify a client token, a randomly generated token is used for the
+    #   request to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   A unique ID for the environment containing the VLAN that the Elastic
+    #   IP address associates with.
+    #   @return [String]
+    #
+    # @!attribute [rw] vlan_name
+    #   The name of the VLAN. `hcx` is the only accepted VLAN name at this
+    #   time.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_id
+    #   The Elastic IP address allocation ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/AssociateEipToVlanRequest AWS API Documentation
+    #
+    class AssociateEipToVlanRequest < Struct.new(
+      :client_token,
+      :environment_id,
+      :vlan_name,
+      :allocation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vlan
+    #   The VLANs that Amazon EVS creates during environment creation.
+    #   @return [Types::Vlan]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/AssociateEipToVlanResponse AWS API Documentation
+    #
+    class AssociateEipToVlanResponse < Struct.new(
+      :vlan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A check on the environment to identify environment health and validate
     # VMware VCF licensing compliance.
     #
@@ -409,6 +462,85 @@ module Aws::Evs
     #
     class DeleteEnvironmentResponse < Struct.new(
       :environment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   <note markdown="1"> This parameter is not used in Amazon EVS
+    #   currently. If you supply
+    #   input for this parameter, it will have no effect.
+    #
+    #    </note>
+    #
+    #    A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the environment creation request. If you do not
+    #   specify a client token, a randomly generated token is used for the
+    #   request to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   A unique ID for the environment containing the VLAN that the Elastic
+    #   IP address disassociates from.
+    #   @return [String]
+    #
+    # @!attribute [rw] vlan_name
+    #   The name of the VLAN. `hcx` is the only accepted VLAN name at this
+    #   time.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   A unique ID for the Elastic IP address association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/DisassociateEipFromVlanRequest AWS API Documentation
+    #
+    class DisassociateEipFromVlanRequest < Struct.new(
+      :client_token,
+      :environment_id,
+      :vlan_name,
+      :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vlan
+    #   The VLANs that Amazon EVS creates during environment creation.
+    #   @return [Types::Vlan]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/DisassociateEipFromVlanResponse AWS API Documentation
+    #
+    class DisassociateEipFromVlanResponse < Struct.new(
+      :vlan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Elastic IP address association with the elastic network interface
+    # in the VLAN subnet.
+    #
+    # @!attribute [rw] association_id
+    #   A unique ID for the elastic IP address association with the VLAN
+    #   subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_id
+    #   The Elastic IP address allocation ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The Elastic IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/EipAssociation AWS API Documentation
+    #
+    class EipAssociation < Struct.new(
+      :association_id,
+      :allocation_id,
+      :ip_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -832,6 +964,18 @@ module Aws::Evs
     #   The HCX VLAN subnet. This VLAN subnet allows the HCX Interconnnect
     #   (IX) and HCX Network Extension (NE) to reach their peers and enable
     #   HCX Service Mesh creation.
+    #
+    #   If you plan to use a public HCX VLAN subnet, the following
+    #   requirements must be met:
+    #
+    #   * Must have a /28 netmask and be allocated from the IPAM public
+    #     pool. Required for HCX internet access configuration.
+    #
+    #   * The HCX public VLAN CIDR block must be added to the VPC as a
+    #     secondary CIDR block.
+    #
+    #   * Must have at least three Elastic IP addresses to be allocated from
+    #     the public IPAM pool for HCX components.
     #   @return [Types::InitialVlanInfo]
     #
     # @!attribute [rw] expansion_vlan_1
@@ -850,6 +994,16 @@ module Aws::Evs
     #   different locations.
     #   @return [Types::InitialVlanInfo]
     #
+    # @!attribute [rw] is_hcx_public
+    #   Determines if the HCX VLAN that Amazon EVS provisions is public or
+    #   private.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] hcx_network_acl_id
+    #   A unique ID for a network access control list that the HCX VLAN
+    #   uses. Required when `isHcxPublic` is set to `true`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/InitialVlans AWS API Documentation
     #
     class InitialVlans < Struct.new(
@@ -862,7 +1016,9 @@ module Aws::Evs
       :nsx_uplink,
       :hcx,
       :expansion_vlan_1,
-      :expansion_vlan_2)
+      :expansion_vlan_2,
+      :is_hcx_public,
+      :hcx_network_acl_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1213,10 +1369,9 @@ module Aws::Evs
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # The `CreateEnvironmentHost` operation couldn't be performed because
-    # the service is throttling requests. This exception is thrown when the
-    # `CreateEnvironmentHost` request exceeds concurrency of 1 transaction
-    # per second (TPS).
+    # The operation couldn't be performed because the service is throttling
+    # requests. This exception is thrown when there are too many requests
+    # accepted concurrently from the service endpoint.
     #
     # @!attribute [rw] message
     #   Describes the error encountered.
@@ -1428,6 +1583,19 @@ module Aws::Evs
     #   The state details of the VLAN.
     #   @return [String]
     #
+    # @!attribute [rw] eip_associations
+    #   An array of Elastic IP address associations.
+    #   @return [Array<Types::EipAssociation>]
+    #
+    # @!attribute [rw] is_public
+    #   Determines if the VLAN that Amazon EVS provisions is public or
+    #   private.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_acl_id
+    #   A unique ID for a network access control list.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/Vlan AWS API Documentation
     #
     class Vlan < Struct.new(
@@ -1439,7 +1607,10 @@ module Aws::Evs
       :created_at,
       :modified_at,
       :vlan_state,
-      :state_details)
+      :state_details,
+      :eip_associations,
+      :is_public,
+      :network_acl_id)
       SENSITIVE = []
       include Aws::Structure
     end

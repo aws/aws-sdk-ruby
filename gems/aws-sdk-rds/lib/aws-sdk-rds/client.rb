@@ -7332,7 +7332,15 @@ module Aws::RDS
     #   For Aurora PostgreSQL and RDS for PostgreSQL databases, specify
     #   `POSTGRESQL`. For RDS for Microsoft SQL Server, specify `SQLSERVER`.
     #
-    # @option params [required, Array<Types::UserAuthConfig>] :auth
+    # @option params [String] :default_auth_scheme
+    #   The default authentication scheme that the proxy uses for client
+    #   connections to the proxy and connections from the proxy to the
+    #   underlying database. Valid values are `NONE` and `IAM_AUTH`. When set
+    #   to `IAM_AUTH`, the proxy uses end-to-end IAM authentication to connect
+    #   to the database. If you don't specify `DefaultAuthScheme` or specify
+    #   this parameter as `NONE`, you must specify the `Auth` option.
+    #
+    # @option params [Array<Types::UserAuthConfig>] :auth
     #   The authorization mechanism that the proxy uses.
     #
     # @option params [required, String] :role_arn
@@ -7419,7 +7427,8 @@ module Aws::RDS
     #   resp = client.create_db_proxy({
     #     db_proxy_name: "String", # required
     #     engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL, SQLSERVER
-    #     auth: [ # required
+    #     default_auth_scheme: "IAM_AUTH", # accepts IAM_AUTH, NONE
+    #     auth: [
     #       {
     #         description: "String",
     #         user_name: "String",
@@ -7456,6 +7465,7 @@ module Aws::RDS
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
     #   resp.db_proxy.vpc_subnet_ids #=> Array
     #   resp.db_proxy.vpc_subnet_ids[0] #=> String
+    #   resp.db_proxy.default_auth_scheme #=> String
     #   resp.db_proxy.auth #=> Array
     #   resp.db_proxy.auth[0].description #=> String
     #   resp.db_proxy.auth[0].user_name #=> String
@@ -10374,6 +10384,7 @@ module Aws::RDS
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
     #   resp.db_proxy.vpc_subnet_ids #=> Array
     #   resp.db_proxy.vpc_subnet_ids[0] #=> String
+    #   resp.db_proxy.default_auth_scheme #=> String
     #   resp.db_proxy.auth #=> Array
     #   resp.db_proxy.auth[0].description #=> String
     #   resp.db_proxy.auth[0].user_name #=> String
@@ -14320,6 +14331,7 @@ module Aws::RDS
     #   resp.db_proxies[0].vpc_security_group_ids[0] #=> String
     #   resp.db_proxies[0].vpc_subnet_ids #=> Array
     #   resp.db_proxies[0].vpc_subnet_ids[0] #=> String
+    #   resp.db_proxies[0].default_auth_scheme #=> String
     #   resp.db_proxies[0].auth #=> Array
     #   resp.db_proxies[0].auth[0].description #=> String
     #   resp.db_proxies[0].auth[0].user_name #=> String
@@ -22201,6 +22213,13 @@ module Aws::RDS
     #   letter and must contain only ASCII letters, digits, and hyphens; it
     #   can't end with a hyphen or contain two consecutive hyphens.
     #
+    # @option params [String] :default_auth_scheme
+    #   The default authentication scheme that the proxy uses for client
+    #   connections to the proxy and connections from the proxy to the
+    #   underlying database. Valid values are `NONE` and `IAM_AUTH`. When set
+    #   to `IAM_AUTH`, the proxy uses end-to-end IAM authentication to connect
+    #   to the database.
+    #
     # @option params [Array<Types::UserAuthConfig>] :auth
     #   The new authentication settings for the `DBProxy`.
     #
@@ -22239,6 +22258,7 @@ module Aws::RDS
     #   resp = client.modify_db_proxy({
     #     db_proxy_name: "String", # required
     #     new_db_proxy_name: "String",
+    #     default_auth_scheme: "IAM_AUTH", # accepts IAM_AUTH, NONE
     #     auth: [
     #       {
     #         description: "String",
@@ -22267,6 +22287,7 @@ module Aws::RDS
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
     #   resp.db_proxy.vpc_subnet_ids #=> Array
     #   resp.db_proxy.vpc_subnet_ids[0] #=> String
+    #   resp.db_proxy.default_auth_scheme #=> String
     #   resp.db_proxy.auth #=> Array
     #   resp.db_proxy.auth[0].description #=> String
     #   resp.db_proxy.auth[0].user_name #=> String
@@ -32596,7 +32617,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.292.0'
+      context[:gem_version] = '1.293.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

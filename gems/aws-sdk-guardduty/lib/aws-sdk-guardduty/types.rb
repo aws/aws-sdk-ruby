@@ -193,9 +193,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] email
-    #   The email address of the member account.
-    #
-    #   The rules for a valid email address:
+    #   The email address of the member account. The following list includes
+    #   the rules for a valid email address:
     #
     #   * The email address must be a minimum of 6 and a maximum of 64
     #     characters long.

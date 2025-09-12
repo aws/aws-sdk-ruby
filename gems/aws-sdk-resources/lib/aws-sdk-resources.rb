@@ -350,7 +350,6 @@ module Aws
   autoload :S3Vectors, 'aws-sdk-s3vectors'
   autoload :SES, 'aws-sdk-ses'
   autoload :SESV2, 'aws-sdk-sesv2'
-  autoload :SMS, 'aws-sdk-sms'
   autoload :SNS, 'aws-sdk-sns'
   autoload :SQS, 'aws-sdk-sqs'
   autoload :SSM, 'aws-sdk-ssm'

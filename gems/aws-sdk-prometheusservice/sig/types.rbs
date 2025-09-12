@@ -37,6 +37,11 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class ComponentConfig
+      attr_accessor options: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -165,6 +170,12 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class DeleteScraperLoggingConfigurationRequest
+      attr_accessor scraper_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
     class DeleteScraperRequest
       attr_accessor scraper_id: ::String
       attr_accessor client_token: ::String
@@ -233,6 +244,20 @@ module Aws::PrometheusService
 
     class DescribeRuleGroupsNamespaceResponse
       attr_accessor rule_groups_namespace: Types::RuleGroupsNamespaceDescription
+      SENSITIVE: []
+    end
+
+    class DescribeScraperLoggingConfigurationRequest
+      attr_accessor scraper_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScraperLoggingConfigurationResponse
+      attr_accessor status: Types::ScraperLoggingConfigurationStatus
+      attr_accessor scraper_id: ::String
+      attr_accessor logging_destination: Types::ScraperLoggingDestination
+      attr_accessor scraper_components: ::Array[Types::ScraperComponent]
+      attr_accessor modified_at: ::Time
       SENSITIVE: []
     end
 
@@ -493,6 +518,12 @@ module Aws::PrometheusService
       end
     end
 
+    class ScraperComponent
+      attr_accessor type: ("SERVICE_DISCOVERY" | "COLLECTOR" | "EXPORTER")
+      attr_accessor config: Types::ComponentConfig
+      SENSITIVE: []
+    end
+
     class ScraperDescription
       attr_accessor alias: ::String
       attr_accessor scraper_id: ::String
@@ -508,6 +539,23 @@ module Aws::PrometheusService
       attr_accessor destination: Types::Destination
       attr_accessor role_configuration: Types::RoleConfiguration
       SENSITIVE: []
+    end
+
+    class ScraperLoggingConfigurationStatus
+      attr_accessor status_code: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATION_FAILED" | "UPDATE_FAILED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ScraperLoggingDestination
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogDestination
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CloudWatchLogs < ScraperLoggingDestination
+      end
+      class Unknown < ScraperLoggingDestination
+      end
     end
 
     class ScraperStatus
@@ -598,6 +646,18 @@ module Aws::PrometheusService
 
     class UpdateQueryLoggingConfigurationResponse
       attr_accessor status: Types::QueryLoggingConfigurationStatus
+      SENSITIVE: []
+    end
+
+    class UpdateScraperLoggingConfigurationRequest
+      attr_accessor scraper_id: ::String
+      attr_accessor logging_destination: Types::ScraperLoggingDestination
+      attr_accessor scraper_components: ::Array[Types::ScraperComponent]
+      SENSITIVE: []
+    end
+
+    class UpdateScraperLoggingConfigurationResponse
+      attr_accessor status: Types::ScraperLoggingConfigurationStatus
       SENSITIVE: []
     end
 

@@ -1096,8 +1096,8 @@ module Aws::ECS
     #   The default behavior of `AvailabilityZoneRebalancing` differs between
     #   create and update requests:
     #
-    #   * For create service requests, when when no value is specified for
-    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to to
+    #   * For create service requests, when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to
     #     `ENABLED`.
     #
     #   * For update service requests, when no value is specified for
@@ -1617,6 +1617,8 @@ module Aws::ECS
     #           hook_target_arn: "String",
     #           role_arn: "IAMRoleArn",
     #           lifecycle_stages: ["RECONCILE_SERVICE"], # accepts RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT
+    #           hook_details: {
+    #           },
     #         },
     #       ],
     #     },
@@ -9087,7 +9089,7 @@ module Aws::ECS
     # @option params [Array<Types::TaskVolumeConfiguration>] :volume_configurations
     #   The details of the volume that was `configuredAtLaunch`. You can
     #   configure the size, volumeType, IOPS, throughput, snapshot and
-    #   encryption in in [TaskManagedEBSVolumeConfiguration][1]. The `name` of
+    #   encryption in [TaskManagedEBSVolumeConfiguration][1]. The `name` of
     #   the volume must match the `name` from the task definition.
     #
     #
@@ -11712,8 +11714,8 @@ module Aws::ECS
     #   The default behavior of `AvailabilityZoneRebalancing` differs between
     #   create and update requests:
     #
-    #   * For create service requests, when when no value is specified for
-    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to to
+    #   * For create service requests, when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to
     #     `ENABLED`.
     #
     #   * For update service requests, when no value is specified for
@@ -12005,6 +12007,8 @@ module Aws::ECS
     #           hook_target_arn: "String",
     #           role_arn: "IAMRoleArn",
     #           lifecycle_stages: ["RECONCILE_SERVICE"], # accepts RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT
+    #           hook_details: {
+    #           },
     #         },
     #       ],
     #     },
@@ -12833,7 +12837,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.204.0'
+      context[:gem_version] = '1.205.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

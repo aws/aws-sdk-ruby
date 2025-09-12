@@ -1385,7 +1385,9 @@ module Aws::PaymentCryptography
     #       tr_34_key_block: {
     #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #         wrapping_key_certificate: "CertificateType", # required
-    #         export_token: "ExportTokenId", # required
+    #         export_token: "ExportTokenId",
+    #         signing_key_identifier: "KeyArnOrKeyAliasType",
+    #         signing_key_certificate: "CertificateType",
     #         key_block_format: "X9_TR34_2012", # required, accepts X9_TR34_2012
     #         random_nonce: "EvenHexLengthBetween16And32",
     #         key_block_headers: {
@@ -1515,6 +1517,50 @@ module Aws::PaymentCryptography
     # @param [Hash] params ({})
     def get_alias(params = {}, options = {})
       req = build_request(:get_alias, params)
+      req.send_request(options)
+    end
+
+    # Used to retrieve the public key for a keypair.
+    #
+    # @option params [required, String] :key_identifier
+    #   Asymmetric key used for generating the certificate signing request
+    #
+    # @option params [required, String] :signing_algorithm
+    #   Algorithm used to generate the certificate signing request
+    #
+    # @option params [required, Types::CertificateSubjectType] :certificate_subject
+    #   Certificate subject data
+    #
+    # @return [Types::GetCertificateSigningRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCertificateSigningRequestOutput#certificate_signing_request #certificate_signing_request} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_certificate_signing_request({
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     signing_algorithm: "SHA224", # required, accepts SHA224, SHA256, SHA384, SHA512
+    #     certificate_subject: { # required
+    #       common_name: "CertificateSubjectTypeCommonNameString", # required
+    #       organization_unit: "CertificateSubjectTypeOrganizationUnitString",
+    #       organization: "CertificateSubjectTypeOrganizationString",
+    #       city: "CertificateSubjectTypeCityString",
+    #       country: "CertificateSubjectTypeCountryString",
+    #       state_or_province: "CertificateSubjectTypeStateOrProvinceString",
+    #       email_address: "CertificateSubjectTypeEmailAddressString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_signing_request #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetCertificateSigningRequest AWS API Documentation
+    #
+    # @overload get_certificate_signing_request(params = {})
+    # @param [Hash] params ({})
+    def get_certificate_signing_request(params = {}, options = {})
+      req = build_request(:get_certificate_signing_request, params)
       req.send_request(options)
     end
 
@@ -2131,7 +2177,9 @@ module Aws::PaymentCryptography
     #       tr_34_key_block: {
     #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #         signing_key_certificate: "CertificateType", # required
-    #         import_token: "ImportTokenId", # required
+    #         import_token: "ImportTokenId",
+    #         wrapping_key_identifier: "KeyArnOrKeyAliasType",
+    #         wrapping_key_certificate: "CertificateType",
     #         wrapped_key_block: "Tr34WrappedKeyBlock", # required
     #         key_block_format: "X9_TR34_2012", # required, accepts X9_TR34_2012
     #         random_nonce: "EvenHexLengthBetween16And32",
@@ -3007,7 +3055,7 @@ module Aws::PaymentCryptography
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptography'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

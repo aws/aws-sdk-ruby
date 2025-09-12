@@ -114,6 +114,20 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Configuration settings for a scraper component.
+    #
+    # @!attribute [rw] options
+    #   Configuration options for the scraper component.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ComponentConfig AWS API Documentation
+    #
+    class ComponentConfig < Struct.new(
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request would cause an inconsistent state.
     #
     # @!attribute [rw] message
@@ -649,6 +663,27 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper whose logging configuration will be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   request is processed exactly once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteScraperLoggingConfigurationRequest AWS API Documentation
+    #
+    class DeleteScraperLoggingConfigurationRequest < Struct.new(
+      :scraper_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `DeleteScraper` operation.
     #
     # @!attribute [rw] scraper_id
@@ -862,6 +897,50 @@ module Aws::PrometheusService
     #
     class DescribeRuleGroupsNamespaceResponse < Struct.new(
       :rule_groups_namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper whose logging configuration will be described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeScraperLoggingConfigurationRequest AWS API Documentation
+    #
+    class DescribeScraperLoggingConfigurationRequest < Struct.new(
+      :scraper_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the scraper logging configuration.
+    #   @return [Types::ScraperLoggingConfigurationStatus]
+    #
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_destination
+    #   The destination where scraper logs are sent.
+    #   @return [Types::ScraperLoggingDestination]
+    #
+    # @!attribute [rw] scraper_components
+    #   The list of scraper components configured for logging.
+    #   @return [Array<Types::ScraperComponent>]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time when the logging configuration was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeScraperLoggingConfigurationResponse AWS API Documentation
+    #
+    class DescribeScraperLoggingConfigurationResponse < Struct.new(
+      :status,
+      :scraper_id,
+      :logging_destination,
+      :scraper_components,
+      :modified_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1852,6 +1931,26 @@ module Aws::PrometheusService
       class Unknown < ScrapeConfiguration; end
     end
 
+    # A component of a Amazon Managed Service for Prometheus scraper that
+    # can be configured for logging.
+    #
+    # @!attribute [rw] type
+    #   The type of the scraper component.
+    #   @return [String]
+    #
+    # @!attribute [rw] config
+    #   The configuration settings for the scraper component.
+    #   @return [Types::ComponentConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperComponent AWS API Documentation
+    #
+    class ScraperComponent < Struct.new(
+      :type,
+      :config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `ScraperDescription` structure contains the full details about one
     # scraper in your account.
     #
@@ -1935,6 +2034,50 @@ module Aws::PrometheusService
       :role_configuration)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The status of a scraper logging configuration.
+    #
+    # @!attribute [rw] status_code
+    #   The status code of the scraper logging configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status of the scraper logging
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperLoggingConfigurationStatus AWS API Documentation
+    #
+    class ScraperLoggingConfigurationStatus < Struct.new(
+      :status_code,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The destination where scraper logs are sent.
+    #
+    # @note ScraperLoggingDestination is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ScraperLoggingDestination is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ScraperLoggingDestination corresponding to the set member.
+    #
+    # @!attribute [rw] cloud_watch_logs
+    #   The CloudWatch Logs configuration for the scraper logging
+    #   destination.
+    #   @return [Types::CloudWatchLogDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperLoggingDestination AWS API Documentation
+    #
+    class ScraperLoggingDestination < Struct.new(
+      :cloud_watch_logs,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CloudWatchLogs < ScraperLoggingDestination; end
+      class Unknown < ScraperLoggingDestination; end
     end
 
     # The `ScraperStatus` structure contains status information about the
@@ -2236,6 +2379,40 @@ module Aws::PrometheusService
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateQueryLoggingConfigurationResponse AWS API Documentation
     #
     class UpdateQueryLoggingConfigurationResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper whose logging configuration will be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_destination
+    #   The destination where scraper logs will be sent.
+    #   @return [Types::ScraperLoggingDestination]
+    #
+    # @!attribute [rw] scraper_components
+    #   The list of scraper components to configure for logging.
+    #   @return [Array<Types::ScraperComponent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateScraperLoggingConfigurationRequest AWS API Documentation
+    #
+    class UpdateScraperLoggingConfigurationRequest < Struct.new(
+      :scraper_id,
+      :logging_destination,
+      :scraper_components)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the updated scraper logging configuration.
+    #   @return [Types::ScraperLoggingConfigurationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateScraperLoggingConfigurationResponse AWS API Documentation
+    #
+    class UpdateScraperLoggingConfigurationResponse < Struct.new(
       :status)
       SENSITIVE = []
       include Aws::Structure

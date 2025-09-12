@@ -249,6 +249,7 @@ module Aws::EMRContainers
 
     CreateSecurityConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSecurityConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, required: true, location_name: "name"))
+    CreateSecurityConfigurationRequest.add_member(:container_provider, Shapes::ShapeRef.new(shape: ContainerProvider, location_name: "containerProvider"))
     CreateSecurityConfigurationRequest.add_member(:security_configuration_data, Shapes::ShapeRef.new(shape: SecurityConfigurationData, required: true, location_name: "securityConfigurationData"))
     CreateSecurityConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSecurityConfigurationRequest.struct_class = Types::CreateSecurityConfigurationRequest
@@ -332,6 +333,7 @@ module Aws::EMRContainers
     EKSRequestThrottledException.struct_class = Types::EKSRequestThrottledException
 
     EksInfo.add_member(:namespace, Shapes::ShapeRef.new(shape: KubernetesNamespace, location_name: "namespace"))
+    EksInfo.add_member(:node_label, Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "nodeLabel"))
     EksInfo.struct_class = Types::EksInfo
 
     EncryptionConfiguration.add_member(:in_transit_encryption_configuration, Shapes::ShapeRef.new(shape: InTransitEncryptionConfiguration, location_name: "inTransitEncryptionConfiguration"))

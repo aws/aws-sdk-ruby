@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.205.0 (2025-09-11)
+------------------
+
+* Feature - This release supports hook details for Amazon ECS lifecycle hooks.
+
 1.204.0 (2025-09-05)
 ------------------
 

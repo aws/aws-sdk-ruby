@@ -3855,13 +3855,13 @@
       "required":[
         "DBProxyName",
         "EngineFamily",
-        "Auth",
         "RoleArn",
         "VpcSubnetIds"
       ],
       "members":{
         "DBProxyName":{"shape":"String"},
         "EngineFamily":{"shape":"EngineFamily"},
+        "DefaultAuthScheme":{"shape":"DefaultAuthScheme"},
         "Auth":{"shape":"UserAuthConfigList"},
         "RoleArn":{"shape":"String"},
         "VpcSubnetIds":{"shape":"StringList"},
@@ -5120,6 +5120,7 @@
         "VpcId":{"shape":"String"},
         "VpcSecurityGroupIds":{"shape":"StringList"},
         "VpcSubnetIds":{"shape":"StringList"},
+        "DefaultAuthScheme":{"shape":"String"},
         "Auth":{"shape":"UserAuthConfigInfoList"},
         "RoleArn":{"shape":"String"},
         "Endpoint":{"shape":"String"},
@@ -5753,6 +5754,13 @@
       "enum":[
         "standard",
         "advanced"
+      ]
+    },
+    "DefaultAuthScheme":{
+      "type":"string",
+      "enum":[
+        "IAM_AUTH",
+        "NONE"
       ]
     },
     "DeleteBlueGreenDeploymentRequest":{
@@ -8030,6 +8038,7 @@
       "members":{
         "DBProxyName":{"shape":"String"},
         "NewDBProxyName":{"shape":"String"},
+        "DefaultAuthScheme":{"shape":"DefaultAuthScheme"},
         "Auth":{"shape":"UserAuthConfigList"},
         "RequireTLS":{"shape":"BooleanOptional"},
         "IdleClientTimeout":{"shape":"IntegerOptional"},
@@ -10218,7 +10227,9 @@
     },
     "UserAuthConfigList":{
       "type":"list",
-      "member":{"shape":"UserAuthConfig"}
+      "member":{"shape":"UserAuthConfig"},
+      "max":200,
+      "min":0
     },
     "ValidDBInstanceModificationsMessage":{
       "type":"structure",

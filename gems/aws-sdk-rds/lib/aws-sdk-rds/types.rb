@@ -6048,6 +6048,16 @@ module Aws::RDS
     #   `SQLSERVER`.
     #   @return [String]
     #
+    # @!attribute [rw] default_auth_scheme
+    #   The default authentication scheme that the proxy uses for client
+    #   connections to the proxy and connections from the proxy to the
+    #   underlying database. Valid values are `NONE` and `IAM_AUTH`. When
+    #   set to `IAM_AUTH`, the proxy uses end-to-end IAM authentication to
+    #   connect to the database. If you don't specify `DefaultAuthScheme`
+    #   or specify this parameter as `NONE`, you must specify the `Auth`
+    #   option.
+    #   @return [String]
+    #
     # @!attribute [rw] auth
     #   The authorization mechanism that the proxy uses.
     #   @return [Array<Types::UserAuthConfig>]
@@ -6141,6 +6151,7 @@ module Aws::RDS
     class CreateDBProxyRequest < Struct.new(
       :db_proxy_name,
       :engine_family,
+      :default_auth_scheme,
       :auth,
       :role_arn,
       :vpc_subnet_ids,
@@ -10406,6 +10417,14 @@ module Aws::RDS
     #   The EC2 subnet IDs for the proxy.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] default_auth_scheme
+    #   The default authentication scheme that the proxy uses for client
+    #   connections to the proxy and connections from the proxy to the
+    #   underlying database. Valid values are `NONE` and `IAM_AUTH`. When
+    #   set to `IAM_AUTH`, the proxy uses end-to-end IAM authentication to
+    #   connect to the database.
+    #   @return [String]
+    #
     # @!attribute [rw] auth
     #   One or more data structures specifying the authorization mechanism
     #   to connect to the associated RDS DB instance or Aurora DB cluster.
@@ -10490,6 +10509,7 @@ module Aws::RDS
       :vpc_id,
       :vpc_security_group_ids,
       :vpc_subnet_ids,
+      :default_auth_scheme,
       :auth,
       :role_arn,
       :endpoint,
@@ -20232,6 +20252,14 @@ module Aws::RDS
     #   it can't end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
+    # @!attribute [rw] default_auth_scheme
+    #   The default authentication scheme that the proxy uses for client
+    #   connections to the proxy and connections from the proxy to the
+    #   underlying database. Valid values are `NONE` and `IAM_AUTH`. When
+    #   set to `IAM_AUTH`, the proxy uses end-to-end IAM authentication to
+    #   connect to the database.
+    #   @return [String]
+    #
     # @!attribute [rw] auth
     #   The new authentication settings for the `DBProxy`.
     #   @return [Array<Types::UserAuthConfig>]
@@ -20272,6 +20300,7 @@ module Aws::RDS
     class ModifyDBProxyRequest < Struct.new(
       :db_proxy_name,
       :new_db_proxy_name,
+      :default_auth_scheme,
       :auth,
       :require_tls,
       :idle_client_timeout,

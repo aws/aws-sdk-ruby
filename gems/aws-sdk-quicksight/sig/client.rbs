@@ -38390,7 +38390,9 @@ module Aws
                                          export_to_pdf_in_scheduled_reports: ("DENY")?,
                                          export_to_csv_in_scheduled_reports: ("DENY")?,
                                          export_to_excel_in_scheduled_reports: ("DENY")?,
-                                         include_content_in_scheduled_reports_email: ("DENY")?
+                                         include_content_in_scheduled_reports_email: ("DENY")?,
+                                         dashboard: ("DENY")?,
+                                         analysis: ("DENY")?
                                        },
                                        ?tags: Array[
                                          {
@@ -38502,6 +38504,12 @@ module Aws
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?,
                                 data_qa_enabled_option: {
+                                  availability_status: ("ENABLED" | "DISABLED")?
+                                }?,
+                                executive_summary_option: {
+                                  availability_status: ("ENABLED" | "DISABLED")?
+                                }?,
+                                data_stories_sharing_option: {
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?
                               },
@@ -76035,7 +76043,7 @@ module Aws
                                 aws_account_id: ::String,
                                 data_source_id: ::String,
                                 name: ::String,
-                                type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY"),
+                                type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS"),
                                 ?data_source_parameters: {
                                   amazon_elasticsearch_parameters: {
                                     domain: ::String
@@ -76193,6 +76201,9 @@ module Aws
                                     port: ::Integer,
                                     database: ::String?,
                                     sql_endpoint_path: ::String
+                                  }?,
+                                  custom_connection_parameters: {
+                                    connection_type: ::String?
                                   }?
                                 },
                                 ?credentials: {
@@ -76357,6 +76368,9 @@ module Aws
                                           port: ::Integer,
                                           database: ::String?,
                                           sql_endpoint_path: ::String
+                                        }?,
+                                        custom_connection_parameters: {
+                                          connection_type: ::String?
                                         }?
                                       },
                                     ]?
@@ -114037,7 +114051,7 @@ module Aws
                                     filter_name: ::String,
                                     filter_synonyms: Array[::String]?,
                                     operand_field_name: ::String,
-                                    filter_type: ("CATEGORY_FILTER" | "NUMERIC_EQUALITY_FILTER" | "NUMERIC_RANGE_FILTER" | "DATE_RANGE_FILTER" | "RELATIVE_DATE_FILTER")?,
+                                    filter_type: ("CATEGORY_FILTER" | "NUMERIC_EQUALITY_FILTER" | "NUMERIC_RANGE_FILTER" | "DATE_RANGE_FILTER" | "RELATIVE_DATE_FILTER" | "NULL_FILTER")?,
                                     category_filter: {
                                       category_filter_function: ("EXACT" | "CONTAINS")?,
                                       category_filter_type: ("CUSTOM_FILTER" | "CUSTOM_FILTER_LIST" | "FILTER_LIST")?,
@@ -114085,6 +114099,14 @@ module Aws
                                         constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")?,
                                         singular_constant: ::String?
                                       }?
+                                    }?,
+                                    null_filter: {
+                                      null_filter_type: ("ALL_VALUES" | "NON_NULLS_ONLY" | "NULLS_ONLY")?,
+                                      constant: {
+                                        constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")?,
+                                        singular_constant: ::String?
+                                      }?,
+                                      inverse: bool?
                                     }?
                                   },
                                 ]?,
@@ -114296,6 +114318,17 @@ module Aws
                                    ]
                                  ) -> _CreateVPCConnectionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVPCConnectionResponseSuccess
+
+      interface _DeleteAccountCustomPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountCustomPermissionResponse]
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_account_custom_permission-instance_method
+      def delete_account_custom_permission: (
+                                              aws_account_id: ::String
+                                            ) -> _DeleteAccountCustomPermissionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountCustomPermissionResponseSuccess
 
       interface _DeleteAccountCustomizationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountCustomizationResponse]
@@ -114719,6 +114752,18 @@ module Aws
                                    vpc_connection_id: ::String
                                  ) -> _DeleteVPCConnectionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVPCConnectionResponseSuccess
+
+      interface _DescribeAccountCustomPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountCustomPermissionResponse]
+        def custom_permissions_name: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_account_custom_permission-instance_method
+      def describe_account_custom_permission: (
+                                                aws_account_id: ::String
+                                              ) -> _DescribeAccountCustomPermissionResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountCustomPermissionResponseSuccess
 
       interface _DescribeAccountCustomizationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountCustomizationResponse]
@@ -115228,6 +115273,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeKeyRegistrationResponse]
         def aws_account_id: () -> ::String
         def key_registration: () -> ::Array[Types::RegisteredCustomerManagedKey]
+        def q_data_key: () -> Types::QDataKey
         def request_id: () -> ::String
         def status: () -> ::Integer
       end
@@ -116812,6 +116858,9 @@ module Aws
                                                      port: ::Integer,
                                                      database: ::String?,
                                                      sql_endpoint_path: ::String
+                                                   }?,
+                                                   custom_connection_parameters: {
+                                                     connection_type: ::String?
                                                    }?
                                                  }?,
                                                  vpc_connection_properties: {
@@ -117148,6 +117197,18 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAccountCustomPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountCustomPermissionResponse]
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_account_custom_permission-instance_method
+      def update_account_custom_permission: (
+                                              custom_permissions_name: ::String,
+                                              aws_account_id: ::String
+                                            ) -> _UpdateAccountCustomPermissionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountCustomPermissionResponseSuccess
 
       interface _UpdateAccountCustomizationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountCustomizationResponse]
@@ -154693,7 +154754,9 @@ module Aws
                                          export_to_pdf_in_scheduled_reports: ("DENY")?,
                                          export_to_csv_in_scheduled_reports: ("DENY")?,
                                          export_to_excel_in_scheduled_reports: ("DENY")?,
-                                         include_content_in_scheduled_reports_email: ("DENY")?
+                                         include_content_in_scheduled_reports_email: ("DENY")?,
+                                         dashboard: ("DENY")?,
+                                         analysis: ("DENY")?
                                        }
                                      ) -> _UpdateCustomPermissionsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomPermissionsResponseSuccess
@@ -154787,6 +154850,12 @@ module Aws
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?,
                                 data_qa_enabled_option: {
+                                  availability_status: ("ENABLED" | "DISABLED")?
+                                }?,
+                                executive_summary_option: {
+                                  availability_status: ("ENABLED" | "DISABLED")?
+                                }?,
+                                data_stories_sharing_option: {
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?
                               },
@@ -192562,6 +192631,9 @@ module Aws
                                     port: ::Integer,
                                     database: ::String?,
                                     sql_endpoint_path: ::String
+                                  }?,
+                                  custom_connection_parameters: {
+                                    connection_type: ::String?
                                   }?
                                 },
                                 ?credentials: {
@@ -192726,6 +192798,9 @@ module Aws
                                           port: ::Integer,
                                           database: ::String?,
                                           sql_endpoint_path: ::String
+                                        }?,
+                                        custom_connection_parameters: {
+                                          connection_type: ::String?
                                         }?
                                       },
                                     ]?
@@ -230500,7 +230575,7 @@ module Aws
                                     filter_name: ::String,
                                     filter_synonyms: Array[::String]?,
                                     operand_field_name: ::String,
-                                    filter_type: ("CATEGORY_FILTER" | "NUMERIC_EQUALITY_FILTER" | "NUMERIC_RANGE_FILTER" | "DATE_RANGE_FILTER" | "RELATIVE_DATE_FILTER")?,
+                                    filter_type: ("CATEGORY_FILTER" | "NUMERIC_EQUALITY_FILTER" | "NUMERIC_RANGE_FILTER" | "DATE_RANGE_FILTER" | "RELATIVE_DATE_FILTER" | "NULL_FILTER")?,
                                     category_filter: {
                                       category_filter_function: ("EXACT" | "CONTAINS")?,
                                       category_filter_type: ("CUSTOM_FILTER" | "CUSTOM_FILTER_LIST" | "FILTER_LIST")?,
@@ -230548,6 +230623,14 @@ module Aws
                                         constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")?,
                                         singular_constant: ::String?
                                       }?
+                                    }?,
+                                    null_filter: {
+                                      null_filter_type: ("ALL_VALUES" | "NON_NULLS_ONLY" | "NULLS_ONLY")?,
+                                      constant: {
+                                        constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")?,
+                                        singular_constant: ::String?
+                                      }?,
+                                      inverse: bool?
                                     }?
                                   },
                                 ]?,

@@ -1033,6 +1033,8 @@ module Aws::QuickSight
       attr_accessor export_to_csv_in_scheduled_reports: ("DENY")
       attr_accessor export_to_excel_in_scheduled_reports: ("DENY")
       attr_accessor include_content_in_scheduled_reports_email: ("DENY")
+      attr_accessor dashboard: ("DENY")
+      attr_accessor analysis: ("DENY")
       SENSITIVE: []
     end
 
@@ -1564,7 +1566,7 @@ module Aws::QuickSight
       attr_accessor aws_account_id: ::String
       attr_accessor data_source_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY")
+      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS")
       attr_accessor data_source_parameters: Types::DataSourceParameters
       attr_accessor credentials: Types::DataSourceCredentials
       attr_accessor permissions: ::Array[Types::ResourcePermission]
@@ -1927,6 +1929,11 @@ module Aws::QuickSight
       SENSITIVE: [:field_value]
     end
 
+    class CustomConnectionParameters
+      attr_accessor connection_type: ::String
+      SENSITIVE: []
+    end
+
     class CustomContentConfiguration
       attr_accessor content_url: ::String
       attr_accessor content_type: ("IMAGE" | "OTHER_EMBEDDED_CONTENT")
@@ -2040,6 +2047,8 @@ module Aws::QuickSight
       attr_accessor data_point_menu_label_option: Types::DataPointMenuLabelOption
       attr_accessor data_point_tooltip_option: Types::DataPointTooltipOption
       attr_accessor data_qa_enabled_option: Types::DataQAEnabledOption
+      attr_accessor executive_summary_option: Types::ExecutiveSummaryOption
+      attr_accessor data_stories_sharing_option: Types::DataStoriesSharingOption
       SENSITIVE: []
     end
 
@@ -2331,7 +2340,7 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor data_source_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY")
+      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS")
       attr_accessor status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
@@ -2385,6 +2394,7 @@ module Aws::QuickSight
       attr_accessor trino_parameters: Types::TrinoParameters
       attr_accessor big_query_parameters: Types::BigQueryParameters
       attr_accessor impala_parameters: Types::ImpalaParameters
+      attr_accessor custom_connection_parameters: Types::CustomConnectionParameters
       SENSITIVE: []
     end
 
@@ -2399,7 +2409,7 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor data_source_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY")
+      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS")
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
       SENSITIVE: []
@@ -2407,6 +2417,11 @@ module Aws::QuickSight
 
     class DataStoriesConfigurations
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class DataStoriesSharingOption
+      attr_accessor availability_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -2669,6 +2684,17 @@ module Aws::QuickSight
 
     class DefaultTextFieldControlOptions
       attr_accessor display_options: Types::TextFieldControlDisplayOptions
+      SENSITIVE: []
+    end
+
+    class DeleteAccountCustomPermissionRequest
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccountCustomPermissionResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
       SENSITIVE: []
     end
 
@@ -3090,6 +3116,18 @@ module Aws::QuickSight
       attr_accessor vpc_connection_id: ::String
       attr_accessor deletion_status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETION_IN_PROGRESS" | "DELETION_FAILED" | "DELETED")
       attr_accessor availability_status: ("AVAILABLE" | "UNAVAILABLE" | "PARTIALLY_AVAILABLE")
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccountCustomPermissionRequest
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountCustomPermissionResponse
+      attr_accessor custom_permissions_name: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
@@ -3608,6 +3646,7 @@ module Aws::QuickSight
     class DescribeKeyRegistrationResponse
       attr_accessor aws_account_id: ::String
       attr_accessor key_registration: ::Array[Types::RegisteredCustomerManagedKey]
+      attr_accessor q_data_key: Types::QDataKey
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
@@ -3979,6 +4018,11 @@ module Aws::QuickSight
 
     class ExecutiveSummaryConfigurations
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ExecutiveSummaryOption
+      attr_accessor availability_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -6988,6 +7032,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class QDataKey
+      attr_accessor q_data_key_arn: ::String
+      attr_accessor q_data_key_type: ("AWS_OWNED" | "CMK")
+      SENSITIVE: []
+    end
+
     class QueryExecutionOptions
       attr_accessor query_execution_mode: ("AUTO" | "MANUAL")
       SENSITIVE: []
@@ -8856,12 +8906,13 @@ module Aws::QuickSight
       attr_accessor filter_name: ::String
       attr_accessor filter_synonyms: ::Array[::String]
       attr_accessor operand_field_name: ::String
-      attr_accessor filter_type: ("CATEGORY_FILTER" | "NUMERIC_EQUALITY_FILTER" | "NUMERIC_RANGE_FILTER" | "DATE_RANGE_FILTER" | "RELATIVE_DATE_FILTER")
+      attr_accessor filter_type: ("CATEGORY_FILTER" | "NUMERIC_EQUALITY_FILTER" | "NUMERIC_RANGE_FILTER" | "DATE_RANGE_FILTER" | "RELATIVE_DATE_FILTER" | "NULL_FILTER")
       attr_accessor category_filter: Types::TopicCategoryFilter
       attr_accessor numeric_equality_filter: Types::TopicNumericEqualityFilter
       attr_accessor numeric_range_filter: Types::TopicNumericRangeFilter
       attr_accessor date_range_filter: Types::TopicDateRangeFilter
       attr_accessor relative_date_filter: Types::TopicRelativeDateFilter
+      attr_accessor null_filter: Types::TopicNullFilter
       SENSITIVE: []
     end
 
@@ -8942,6 +8993,13 @@ module Aws::QuickSight
       attr_accessor semantic_entity_type: Types::SemanticEntityType
       attr_accessor definition: ::Array[Types::NamedEntityDefinition]
       SENSITIVE: []
+    end
+
+    class TopicNullFilter
+      attr_accessor null_filter_type: ("ALL_VALUES" | "NON_NULLS_ONLY" | "NULLS_ONLY")
+      attr_accessor constant: Types::TopicSingularFilterConstant
+      attr_accessor inverse: bool
+      SENSITIVE: [:constant]
     end
 
     class TopicNumericEqualityFilter
@@ -9224,6 +9282,18 @@ module Aws::QuickSight
     end
 
     class UntagResourceResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateAccountCustomPermissionRequest
+      attr_accessor custom_permissions_name: ::String
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccountCustomPermissionResponse
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.241.0 (2025-09-12)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-sms` gem.
+
 3.240.0 (2025-08-26)
 ------------------
 

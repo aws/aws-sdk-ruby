@@ -282,6 +282,7 @@ module Aws::RDS
     DataFilter = Shapes::StringShape.new(name: 'DataFilter')
     DatabaseArn = Shapes::StringShape.new(name: 'DatabaseArn')
     DatabaseInsightsMode = Shapes::StringShape.new(name: 'DatabaseInsightsMode')
+    DefaultAuthScheme = Shapes::StringShape.new(name: 'DefaultAuthScheme')
     DeleteBlueGreenDeploymentRequest = Shapes::StructureShape.new(name: 'DeleteBlueGreenDeploymentRequest')
     DeleteBlueGreenDeploymentResponse = Shapes::StructureShape.new(name: 'DeleteBlueGreenDeploymentResponse')
     DeleteCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'DeleteCustomDBEngineVersionMessage')
@@ -1273,7 +1274,8 @@ module Aws::RDS
 
     CreateDBProxyRequest.add_member(:db_proxy_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBProxyName"))
     CreateDBProxyRequest.add_member(:engine_family, Shapes::ShapeRef.new(shape: EngineFamily, required: true, location_name: "EngineFamily"))
-    CreateDBProxyRequest.add_member(:auth, Shapes::ShapeRef.new(shape: UserAuthConfigList, required: true, location_name: "Auth"))
+    CreateDBProxyRequest.add_member(:default_auth_scheme, Shapes::ShapeRef.new(shape: DefaultAuthScheme, location_name: "DefaultAuthScheme"))
+    CreateDBProxyRequest.add_member(:auth, Shapes::ShapeRef.new(shape: UserAuthConfigList, location_name: "Auth"))
     CreateDBProxyRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
     CreateDBProxyRequest.add_member(:vpc_subnet_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "VpcSubnetIds"))
     CreateDBProxyRequest.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "VpcSecurityGroupIds"))
@@ -1940,6 +1942,7 @@ module Aws::RDS
     DBProxy.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
     DBProxy.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "VpcSecurityGroupIds"))
     DBProxy.add_member(:vpc_subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "VpcSubnetIds"))
+    DBProxy.add_member(:default_auth_scheme, Shapes::ShapeRef.new(shape: String, location_name: "DefaultAuthScheme"))
     DBProxy.add_member(:auth, Shapes::ShapeRef.new(shape: UserAuthConfigInfoList, location_name: "Auth"))
     DBProxy.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "RoleArn"))
     DBProxy.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
@@ -3258,6 +3261,7 @@ module Aws::RDS
 
     ModifyDBProxyRequest.add_member(:db_proxy_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBProxyName"))
     ModifyDBProxyRequest.add_member(:new_db_proxy_name, Shapes::ShapeRef.new(shape: String, location_name: "NewDBProxyName"))
+    ModifyDBProxyRequest.add_member(:default_auth_scheme, Shapes::ShapeRef.new(shape: DefaultAuthScheme, location_name: "DefaultAuthScheme"))
     ModifyDBProxyRequest.add_member(:auth, Shapes::ShapeRef.new(shape: UserAuthConfigList, location_name: "Auth"))
     ModifyDBProxyRequest.add_member(:require_tls, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "RequireTLS"))
     ModifyDBProxyRequest.add_member(:idle_client_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IdleClientTimeout"))

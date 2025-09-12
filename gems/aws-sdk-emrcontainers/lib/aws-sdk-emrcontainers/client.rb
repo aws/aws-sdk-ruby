@@ -737,6 +737,9 @@ module Aws::EMRContainers
     # @option params [required, String] :name
     #   The name of the security configuration.
     #
+    # @option params [Types::ContainerProvider] :container_provider
+    #   The container provider associated with the security configuration.
+    #
     # @option params [required, Types::SecurityConfigurationData] :security_configuration_data
     #   Security configuration input for the request.
     #
@@ -754,6 +757,16 @@ module Aws::EMRContainers
     #   resp = client.create_security_configuration({
     #     client_token: "ClientToken", # required
     #     name: "ResourceNameString", # required
+    #     container_provider: {
+    #       type: "EKS", # required, accepts EKS
+    #       id: "ClusterId", # required
+    #       info: {
+    #         eks_info: {
+    #           namespace: "KubernetesNamespace",
+    #           node_label: "ResourceNameString",
+    #         },
+    #       },
+    #     },
     #     security_configuration_data: { # required
     #       authorization_configuration: {
     #         lake_formation_configuration: {
@@ -836,6 +849,7 @@ module Aws::EMRContainers
     #       info: {
     #         eks_info: {
     #           namespace: "KubernetesNamespace",
+    #           node_label: "ResourceNameString",
     #         },
     #       },
     #     },
@@ -1235,6 +1249,7 @@ module Aws::EMRContainers
     #   resp.virtual_cluster.container_provider.type #=> String, one of "EKS"
     #   resp.virtual_cluster.container_provider.id #=> String
     #   resp.virtual_cluster.container_provider.info.eks_info.namespace #=> String
+    #   resp.virtual_cluster.container_provider.info.eks_info.node_label #=> String
     #   resp.virtual_cluster.created_at #=> Time
     #   resp.virtual_cluster.tags #=> Hash
     #   resp.virtual_cluster.tags["String128"] #=> String
@@ -1734,6 +1749,7 @@ module Aws::EMRContainers
     #   resp.virtual_clusters[0].container_provider.type #=> String, one of "EKS"
     #   resp.virtual_clusters[0].container_provider.id #=> String
     #   resp.virtual_clusters[0].container_provider.info.eks_info.namespace #=> String
+    #   resp.virtual_clusters[0].container_provider.info.eks_info.node_label #=> String
     #   resp.virtual_clusters[0].created_at #=> Time
     #   resp.virtual_clusters[0].tags #=> Hash
     #   resp.virtual_clusters[0].tags["String128"] #=> String
@@ -1956,7 +1972,7 @@ module Aws::EMRContainers
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

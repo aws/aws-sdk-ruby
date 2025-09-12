@@ -2244,6 +2244,7 @@ module Aws::MediaLive
 
     class MediaPackageGroupSettings
       attr_accessor destination: Types::OutputLocationRef
+      attr_accessor mediapackage_v2_group_settings: Types::MediaPackageV2GroupSettings
       SENSITIVE: []
     end
 
@@ -2254,7 +2255,9 @@ module Aws::MediaLive
       SENSITIVE: []
     end
 
-    class MediaPackageOutputSettings < Aws::EmptyStructure
+    class MediaPackageOutputSettings
+      attr_accessor media_package_v2_destination_settings: Types::MediaPackageV2DestinationSettings
+      SENSITIVE: []
     end
 
     class MotionGraphicsActivateScheduleActionSettings
@@ -5663,6 +5666,19 @@ module Aws::MediaLive
 
     class AdditionalDestinations
       attr_accessor destination: Types::OutputLocationRef
+      SENSITIVE: []
+    end
+
+    class MediaPackageV2DestinationSettings
+      attr_accessor audio_group_id: ::String
+      attr_accessor audio_rendition_sets: ::String
+      attr_accessor hls_auto_select: ("NO" | "OMIT" | "YES")
+      attr_accessor hls_default: ("NO" | "OMIT" | "YES")
+      SENSITIVE: []
+    end
+
+    class MediaPackageV2GroupSettings
+      attr_accessor caption_language_mappings: ::Array[Types::CaptionLanguageMapping]
       SENSITIVE: []
     end
   end

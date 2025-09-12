@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2025-09-11)
+------------------
+
+* Feature - This release adds support for Account level custom permissions, additional Dashboard Options, and Null support for Q&A.
+
 1.157.0 (2025-08-28)
 ------------------
 

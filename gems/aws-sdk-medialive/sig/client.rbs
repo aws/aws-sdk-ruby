@@ -771,7 +771,16 @@ module Aws
                                     media_package_group_settings: {
                                       destination: {
                                         destination_ref_id: ::String?
-                                      }
+                                      },
+                                      mediapackage_v2_group_settings: {
+                                        caption_language_mappings: Array[
+                                          {
+                                            caption_channel: ::Integer,
+                                            language_code: ::String,
+                                            language_description: ::String
+                                          },
+                                        ]?
+                                      }?
                                     }?,
                                     ms_smooth_group_settings: {
                                       acquisition_point_id: ::String?,
@@ -976,6 +985,12 @@ module Aws
                                           segment_modifier: ::String?
                                         }?,
                                         media_package_output_settings: {
+                                          media_package_v2_destination_settings: {
+                                            audio_group_id: ::String?,
+                                            audio_rendition_sets: ::String?,
+                                            hls_auto_select: ("NO" | "OMIT" | "YES")?,
+                                            hls_default: ("NO" | "OMIT" | "YES")?
+                                          }?
                                         }?,
                                         ms_smooth_output_settings: {
                                           h265_packaging_type: ("HEV1" | "HVC1")?,
@@ -2881,7 +2896,16 @@ module Aws
                                     media_package_group_settings: {
                                       destination: {
                                         destination_ref_id: ::String?
-                                      }
+                                      },
+                                      mediapackage_v2_group_settings: {
+                                        caption_language_mappings: Array[
+                                          {
+                                            caption_channel: ::Integer,
+                                            language_code: ::String,
+                                            language_description: ::String
+                                          },
+                                        ]?
+                                      }?
                                     }?,
                                     ms_smooth_group_settings: {
                                       acquisition_point_id: ::String?,
@@ -3086,6 +3110,12 @@ module Aws
                                           segment_modifier: ::String?
                                         }?,
                                         media_package_output_settings: {
+                                          media_package_v2_destination_settings: {
+                                            audio_group_id: ::String?,
+                                            audio_rendition_sets: ::String?,
+                                            hls_auto_select: ("NO" | "OMIT" | "YES")?,
+                                            hls_default: ("NO" | "OMIT" | "YES")?
+                                          }?
                                         }?,
                                         ms_smooth_output_settings: {
                                           h265_packaging_type: ("HEV1" | "HVC1")?,

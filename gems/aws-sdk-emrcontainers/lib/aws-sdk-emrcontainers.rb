@@ -54,7 +54,7 @@ module Aws::EMRContainers
   autoload :EndpointProvider, 'aws-sdk-emrcontainers/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-emrcontainers/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
 
