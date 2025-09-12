@@ -26,7 +26,7 @@ module Aws
         end
 
         it 'accepts private key path' do
-          options[:private_key_path] = "#{File.dirname(__FILE__)}/unit_test_dummy_key"
+          options[:private_key_path] = "#{File.dirname(__FILE__)}/rsa_dummy_key"
           expect { klass.new(options) }.to_not raise_error
         end
 

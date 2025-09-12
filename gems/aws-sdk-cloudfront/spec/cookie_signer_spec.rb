@@ -6,13 +6,12 @@ module Aws
   module CloudFront
     describe CookieSigner do
 
-      let(:options) {
+      let(:options) do
         {
-          :key_pair_id => "CF_KEYPAIR_ID",
-          # private key is a .pem file
-          :private_key_path =>"#{File.dirname(__FILE__)}/unit_test_dummy_key"
+          key_pair_id: 'CF_KEYPAIR_ID',
+          private_key_path: "#{File.dirname(__FILE__)}/rsa_dummy_key"
         }
-      }
+      end
       let(:signer) { Aws::CloudFront::CookieSigner.new(options) }
       let(:expires) { 1357034400 } # January 1, 2013 10:00 am UTC (Unix timestamp)
 
