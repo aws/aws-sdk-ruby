@@ -14,7 +14,7 @@ module Aws
       def initialize(options = {})
         @key_pair_id = key_pair_id(options)
         @cipher = OpenSSL::Digest.new('SHA1')
-        @private_key = resolve_private_key(options)
+        @private_key = OpenSSL::PKey.read(private_key(options))
       end
 
       private
@@ -130,15 +130,6 @@ module Aws
           msg = ':private_key or :private_key_path should be provided'
           raise ArgumentError, msg
         end
-      end
-
-      def resolve_private_key(options)
-        key = OpenSSL::PKey.read(private_key(options))
-        unless key.is_a?(OpenSSL::PKey::RSA) || key.is_a?(OpenSSL::PKey::EC)
-          raise ArgumentError, "Invalid private key: #{key.class}. Only RSA and ECDSA keys are supported"
-        end
-
-        key
       end
     end
   end

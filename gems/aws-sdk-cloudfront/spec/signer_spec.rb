@@ -33,11 +33,6 @@ module Aws
         it 'raises when key pair id is blank' do
           expect { klass.new(private_key: rsa_key) }.to raise_error(ArgumentError, /:key_pair_id must not be blank/)
         end
-
-        it 'raises when private key type is unsupported' do
-          options[:private_key] = OpenSSL::PKey::DSA.new(1024).to_pem
-          expect { klass.new(options) }.to raise_error(ArgumentError, /Invalid private key/)
-        end
       end
     end
   end
