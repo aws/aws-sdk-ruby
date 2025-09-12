@@ -22,7 +22,7 @@ module Aws
         end
 
         it 'accepts ECDSA private key' do
-          options[:private_key] = ecdsa_key
+          options[:private_key_path] = "#{File.dirname(__FILE__)}/ecdsa_dummy_key"
           expect { klass.new(options) }.to_not raise_error
         end
 
