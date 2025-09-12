@@ -13,7 +13,6 @@ module Aws
 
       let(:options) { { key_pair_id: 'CF_KEYPAIR_ID' } }
       let(:rsa_key) { OpenSSL::PKey::RSA.new(1024).to_pem }
-      let(:ecdsa_key) { OpenSSL::PKey::EC.generate('prime256v1').to_pem }
 
       describe '#initialize' do
         it 'accepts RSA private key' do
