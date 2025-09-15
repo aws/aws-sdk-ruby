@@ -476,6 +476,75 @@ module Aws::ObservabilityAdmin
 
     # @!group API Operations
 
+    # Creates a centralization rule that applies across an Amazon Web
+    # Services Organization. This operation can only be called by the
+    # organization's management account or a delegated administrator
+    # account.
+    #
+    # @option params [required, String] :rule_name
+    #   A unique name for the organization-wide centralization rule being
+    #   created.
+    #
+    # @option params [required, Types::CentralizationRule] :rule
+    #   The configuration details for the organization-wide centralization
+    #   rule, including the source configuration and the destination
+    #   configuration to centralize telemetry data across the organization.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value pairs to associate with the organization telemetry rule
+    #   resource for categorization and management purposes.
+    #
+    # @return [Types::CreateCentralizationRuleForOrganizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCentralizationRuleForOrganizationOutput#rule_arn #rule_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_centralization_rule_for_organization({
+    #     rule_name: "RuleName", # required
+    #     rule: { # required
+    #       source: { # required
+    #         regions: ["Region"], # required
+    #         scope: "SourceFilterString",
+    #         source_logs_configuration: {
+    #           log_group_selection_criteria: "LogsFilterString", # required
+    #           encrypted_log_group_strategy: "ALLOW", # required, accepts ALLOW, SKIP
+    #         },
+    #       },
+    #       destination: { # required
+    #         region: "Region", # required
+    #         account: "AccountIdentifier",
+    #         destination_logs_configuration: {
+    #           logs_encryption_configuration: {
+    #             encryption_strategy: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, AWS_OWNED
+    #             kms_key_arn: "ResourceArn",
+    #             encryption_conflict_resolution_strategy: "ALLOW", # accepts ALLOW, SKIP
+    #           },
+    #           backup_configuration: {
+    #             region: "Region", # required
+    #             kms_key_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateCentralizationRuleForOrganization AWS API Documentation
+    #
+    # @overload create_centralization_rule_for_organization(params = {})
+    # @param [Hash] params ({})
+    def create_centralization_rule_for_organization(params = {}, options = {})
+      req = build_request(:create_centralization_rule_for_organization, params)
+      req.send_request(options)
+    end
+
     # Creates a telemetry rule that defines how telemetry should be
     # configured for Amazon Web Services resources in your account. The rule
     # specifies which resources should have telemetry enabled and how that
@@ -595,6 +664,31 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
+    # Deletes an organization-wide centralization rule. This operation can
+    # only be called by the organization's management account or a
+    # delegated administrator account.
+    #
+    # @option params [required, String] :rule_identifier
+    #   The identifier (name or ARN) of the organization centralization rule
+    #   to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_centralization_rule_for_organization({
+    #     rule_identifier: "RuleIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteCentralizationRuleForOrganization AWS API Documentation
+    #
+    # @overload delete_centralization_rule_for_organization(params = {})
+    # @param [Hash] params ({})
+    def delete_centralization_rule_for_organization(params = {}, options = {})
+      req = build_request(:delete_centralization_rule_for_organization, params)
+      req.send_request(options)
+    end
+
     # Deletes a telemetry rule from your account. Any telemetry
     # configurations previously created by the rule will remain but no new
     # resources will be configured by this rule.
@@ -641,6 +735,64 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def delete_telemetry_rule_for_organization(params = {}, options = {})
       req = build_request(:delete_telemetry_rule_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a specific organization centralization rule.
+    # This operation can only be called by the organization's management
+    # account or a delegated administrator account.
+    #
+    # @option params [required, String] :rule_identifier
+    #   The identifier (name or ARN) of the organization centralization rule
+    #   to retrieve.
+    #
+    # @return [Types::GetCentralizationRuleForOrganizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#rule_name #rule_name} => String
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#rule_arn #rule_arn} => String
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#creator_account_id #creator_account_id} => String
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#created_time_stamp #created_time_stamp} => Integer
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#created_region #created_region} => String
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#last_update_time_stamp #last_update_time_stamp} => Integer
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#rule_health #rule_health} => String
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#failure_reason #failure_reason} => String
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#centralization_rule #centralization_rule} => Types::CentralizationRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_centralization_rule_for_organization({
+    #     rule_identifier: "RuleIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_name #=> String
+    #   resp.rule_arn #=> String
+    #   resp.creator_account_id #=> String
+    #   resp.created_time_stamp #=> Integer
+    #   resp.created_region #=> String
+    #   resp.last_update_time_stamp #=> Integer
+    #   resp.rule_health #=> String, one of "Healthy", "Unhealthy", "Provisioning"
+    #   resp.failure_reason #=> String, one of "TRUSTED_ACCESS_NOT_ENABLED", "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION", "INTERNAL_SERVER_ERROR"
+    #   resp.centralization_rule.source.regions #=> Array
+    #   resp.centralization_rule.source.regions[0] #=> String
+    #   resp.centralization_rule.source.scope #=> String
+    #   resp.centralization_rule.source.source_logs_configuration.log_group_selection_criteria #=> String
+    #   resp.centralization_rule.source.source_logs_configuration.encrypted_log_group_strategy #=> String, one of "ALLOW", "SKIP"
+    #   resp.centralization_rule.destination.region #=> String
+    #   resp.centralization_rule.destination.account #=> String
+    #   resp.centralization_rule.destination.destination_logs_configuration.logs_encryption_configuration.encryption_strategy #=> String, one of "CUSTOMER_MANAGED", "AWS_OWNED"
+    #   resp.centralization_rule.destination.destination_logs_configuration.logs_encryption_configuration.kms_key_arn #=> String
+    #   resp.centralization_rule.destination.destination_logs_configuration.logs_encryption_configuration.encryption_conflict_resolution_strategy #=> String, one of "ALLOW", "SKIP"
+    #   resp.centralization_rule.destination.destination_logs_configuration.backup_configuration.region #=> String
+    #   resp.centralization_rule.destination.destination_logs_configuration.backup_configuration.kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetCentralizationRuleForOrganization AWS API Documentation
+    #
+    # @overload get_centralization_rule_for_organization(params = {})
+    # @param [Hash] params ({})
+    def get_centralization_rule_for_organization(params = {}, options = {})
+      req = build_request(:get_centralization_rule_for_organization, params)
       req.send_request(options)
     end
 
@@ -781,6 +933,66 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def get_telemetry_rule_for_organization(params = {}, options = {})
       req = build_request(:get_telemetry_rule_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Lists all centralization rules in your organization. This operation
+    # can only be called by the organization's management account or a
+    # delegated administrator account.
+    #
+    # @option params [String] :rule_name_prefix
+    #   A string to filter organization centralization rules whose names begin
+    #   with the specified prefix.
+    #
+    # @option params [Boolean] :all_regions
+    #   A flag determining whether to return organization centralization rules
+    #   from all regions or only the current region.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of organization centralization rules to return in a
+    #   single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. A previous call generates this
+    #   token.
+    #
+    # @return [Types::ListCentralizationRulesForOrganizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCentralizationRulesForOrganizationOutput#centralization_rule_summaries #centralization_rule_summaries} => Array&lt;Types::CentralizationRuleSummary&gt;
+    #   * {Types::ListCentralizationRulesForOrganizationOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_centralization_rules_for_organization({
+    #     rule_name_prefix: "ListCentralizationRulesForOrganizationInputRuleNamePrefixString",
+    #     all_regions: false,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.centralization_rule_summaries #=> Array
+    #   resp.centralization_rule_summaries[0].rule_name #=> String
+    #   resp.centralization_rule_summaries[0].rule_arn #=> String
+    #   resp.centralization_rule_summaries[0].creator_account_id #=> String
+    #   resp.centralization_rule_summaries[0].created_time_stamp #=> Integer
+    #   resp.centralization_rule_summaries[0].created_region #=> String
+    #   resp.centralization_rule_summaries[0].last_update_time_stamp #=> Integer
+    #   resp.centralization_rule_summaries[0].rule_health #=> String, one of "Healthy", "Unhealthy", "Provisioning"
+    #   resp.centralization_rule_summaries[0].failure_reason #=> String, one of "TRUSTED_ACCESS_NOT_ENABLED", "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION", "INTERNAL_SERVER_ERROR"
+    #   resp.centralization_rule_summaries[0].destination_account_id #=> String
+    #   resp.centralization_rule_summaries[0].destination_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListCentralizationRulesForOrganization AWS API Documentation
+    #
+    # @overload list_centralization_rules_for_organization(params = {})
+    # @param [Hash] params ({})
+    def list_centralization_rules_for_organization(params = {}, options = {})
+      req = build_request(:list_centralization_rules_for_organization, params)
       req.send_request(options)
     end
 
@@ -1200,6 +1412,68 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
+    # Updates an existing centralization rule that applies across an Amazon
+    # Web Services Organization. This operation can only be called by the
+    # organization's management account or a delegated administrator
+    # account.
+    #
+    # @option params [required, String] :rule_identifier
+    #   The identifier (name or ARN) of the organization centralization rule
+    #   to update.
+    #
+    # @option params [required, Types::CentralizationRule] :rule
+    #   The configuration details for the organization-wide centralization
+    #   rule, including the source configuration and the destination
+    #   configuration to centralize telemetry data across the organization.
+    #
+    # @return [Types::UpdateCentralizationRuleForOrganizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCentralizationRuleForOrganizationOutput#rule_arn #rule_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_centralization_rule_for_organization({
+    #     rule_identifier: "RuleIdentifier", # required
+    #     rule: { # required
+    #       source: { # required
+    #         regions: ["Region"], # required
+    #         scope: "SourceFilterString",
+    #         source_logs_configuration: {
+    #           log_group_selection_criteria: "LogsFilterString", # required
+    #           encrypted_log_group_strategy: "ALLOW", # required, accepts ALLOW, SKIP
+    #         },
+    #       },
+    #       destination: { # required
+    #         region: "Region", # required
+    #         account: "AccountIdentifier",
+    #         destination_logs_configuration: {
+    #           logs_encryption_configuration: {
+    #             encryption_strategy: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, AWS_OWNED
+    #             kms_key_arn: "ResourceArn",
+    #             encryption_conflict_resolution_strategy: "ALLOW", # accepts ALLOW, SKIP
+    #           },
+    #           backup_configuration: {
+    #             region: "Region", # required
+    #             kms_key_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/UpdateCentralizationRuleForOrganization AWS API Documentation
+    #
+    # @overload update_centralization_rule_for_organization(params = {})
+    # @param [Hash] params ({})
+    def update_centralization_rule_for_organization(params = {}, options = {})
+      req = build_request(:update_centralization_rule_for_organization, params)
+      req.send_request(options)
+    end
+
     # Updates an existing telemetry rule in your account.
     #
     # @option params [required, String] :rule_identifier
@@ -1318,7 +1592,7 @@ module Aws::ObservabilityAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-observabilityadmin'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

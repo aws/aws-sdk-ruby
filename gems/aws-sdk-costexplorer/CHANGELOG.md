@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2025-09-15)
+------------------
+
+* Feature - Added endpoint support for eusc-de-east-1 region.
+
 1.133.0 (2025-08-26)
 ------------------
 

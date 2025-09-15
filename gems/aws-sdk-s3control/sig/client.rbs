@@ -420,7 +420,24 @@ module Aws
                               }?,
                               object_size_greater_than_bytes: ::Integer?,
                               object_size_less_than_bytes: ::Integer?,
-                              match_any_storage_class: Array[("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "GLACIER" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")]?
+                              match_any_storage_class: Array[("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "GLACIER" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")]?,
+                              match_any_object_encryption: Array[
+                                {
+                                  sses3: {
+                                  }?,
+                                  ssekms: {
+                                    kms_key_arn: ::String?,
+                                    bucket_key_enabled: bool?
+                                  }?,
+                                  dssekms: {
+                                    kms_key_arn: ::String?
+                                  }?,
+                                  ssec: {
+                                  }?,
+                                  notsse: {
+                                  }?
+                                },
+                              ]?
                             }?,
                             enable_manifest_output: bool
                           }?

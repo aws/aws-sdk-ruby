@@ -532,14 +532,14 @@ module Aws::MedicalImaging
     #   resp.source_image_set_properties.image_set_id #=> String
     #   resp.source_image_set_properties.latest_version_id #=> String
     #   resp.source_image_set_properties.image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.source_image_set_properties.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"
+    #   resp.source_image_set_properties.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #   resp.source_image_set_properties.created_at #=> Time
     #   resp.source_image_set_properties.updated_at #=> Time
     #   resp.source_image_set_properties.image_set_arn #=> String
     #   resp.destination_image_set_properties.image_set_id #=> String
     #   resp.destination_image_set_properties.latest_version_id #=> String
     #   resp.destination_image_set_properties.image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.destination_image_set_properties.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"
+    #   resp.destination_image_set_properties.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #   resp.destination_image_set_properties.created_at #=> Time
     #   resp.destination_image_set_properties.updated_at #=> Time
     #   resp.destination_image_set_properties.image_set_arn #=> String
@@ -571,6 +571,9 @@ module Aws::MedicalImaging
     #   The Amazon Resource Name (ARN) assigned to the Key Management Service
     #   (KMS) key for accessing encrypted data.
     #
+    # @option params [String] :lambda_authorizer_arn
+    #   The ARN of the authorizer's Lambda function.
+    #
     # @return [Types::CreateDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatastoreResponse#datastore_id #datastore_id} => String
@@ -585,6 +588,7 @@ module Aws::MedicalImaging
     #       "TagKey" => "TagValue",
     #     },
     #     kms_key_arn: "KmsKeyArn",
+    #     lambda_authorizer_arn: "LambdaArn",
     #   })
     #
     # @example Response structure
@@ -663,7 +667,7 @@ module Aws::MedicalImaging
     #   resp.datastore_id #=> String
     #   resp.image_set_id #=> String
     #   resp.image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"
+    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/DeleteImageSet AWS API Documentation
     #
@@ -746,6 +750,7 @@ module Aws::MedicalImaging
     #   resp.datastore_properties.datastore_name #=> String
     #   resp.datastore_properties.datastore_status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING", "DELETED"
     #   resp.datastore_properties.kms_key_arn #=> String
+    #   resp.datastore_properties.lambda_authorizer_arn #=> String
     #   resp.datastore_properties.datastore_arn #=> String
     #   resp.datastore_properties.created_at #=> Time
     #   resp.datastore_properties.updated_at #=> Time
@@ -839,7 +844,7 @@ module Aws::MedicalImaging
     #   resp.image_set_id #=> String
     #   resp.version_id #=> String
     #   resp.image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"
+    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.deleted_at #=> Time
@@ -1034,7 +1039,7 @@ module Aws::MedicalImaging
     #   resp.image_set_properties_list[0].image_set_id #=> String
     #   resp.image_set_properties_list[0].version_id #=> String
     #   resp.image_set_properties_list[0].image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.image_set_properties_list[0].image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"
+    #   resp.image_set_properties_list[0].image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #   resp.image_set_properties_list[0].created_at #=> Time
     #   resp.image_set_properties_list[0].updated_at #=> Time
     #   resp.image_set_properties_list[0].deleted_at #=> Time
@@ -1370,7 +1375,7 @@ module Aws::MedicalImaging
     #   resp.image_set_id #=> String
     #   resp.latest_version_id #=> String
     #   resp.image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"
+    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.message #=> String
@@ -1402,7 +1407,7 @@ module Aws::MedicalImaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medicalimaging'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

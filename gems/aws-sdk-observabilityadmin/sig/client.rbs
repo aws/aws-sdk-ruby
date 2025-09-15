@@ -78,6 +78,42 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateCentralizationRuleForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCentralizationRuleForOrganizationOutput]
+        def rule_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#create_centralization_rule_for_organization-instance_method
+      def create_centralization_rule_for_organization: (
+                                                         rule_name: ::String,
+                                                         rule: {
+                                                           source: {
+                                                             regions: Array[::String],
+                                                             scope: ::String?,
+                                                             source_logs_configuration: {
+                                                               log_group_selection_criteria: ::String,
+                                                               encrypted_log_group_strategy: ("ALLOW" | "SKIP")
+                                                             }?
+                                                           },
+                                                           destination: {
+                                                             region: ::String,
+                                                             account: ::String?,
+                                                             destination_logs_configuration: {
+                                                               logs_encryption_configuration: {
+                                                                 encryption_strategy: ("CUSTOMER_MANAGED" | "AWS_OWNED"),
+                                                                 kms_key_arn: ::String?,
+                                                                 encryption_conflict_resolution_strategy: ("ALLOW" | "SKIP")?
+                                                               }?,
+                                                               backup_configuration: {
+                                                                 region: ::String,
+                                                                 kms_key_arn: ::String?
+                                                               }?
+                                                             }?
+                                                           }
+                                                         },
+                                                         ?tags: Hash[::String, ::String]
+                                                       ) -> _CreateCentralizationRuleForOrganizationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCentralizationRuleForOrganizationResponseSuccess
+
       interface _CreateTelemetryRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateTelemetryRuleOutput]
         def rule_arn: () -> ::String
@@ -132,6 +168,12 @@ module Aws
                                                   ) -> _CreateTelemetryRuleForOrganizationResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTelemetryRuleForOrganizationResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_centralization_rule_for_organization-instance_method
+      def delete_centralization_rule_for_organization: (
+                                                         rule_identifier: ::String
+                                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_telemetry_rule-instance_method
       def delete_telemetry_rule: (
                                    rule_identifier: ::String
@@ -143,6 +185,24 @@ module Aws
                                                     rule_identifier: ::String
                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetCentralizationRuleForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCentralizationRuleForOrganizationOutput]
+        def rule_name: () -> ::String
+        def rule_arn: () -> ::String
+        def creator_account_id: () -> ::String
+        def created_time_stamp: () -> ::Integer
+        def created_region: () -> ::String
+        def last_update_time_stamp: () -> ::Integer
+        def rule_health: () -> ("Healthy" | "Unhealthy" | "Provisioning")
+        def failure_reason: () -> ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
+        def centralization_rule: () -> Types::CentralizationRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_centralization_rule_for_organization-instance_method
+      def get_centralization_rule_for_organization: (
+                                                      rule_identifier: ::String
+                                                    ) -> _GetCentralizationRuleForOrganizationResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCentralizationRuleForOrganizationResponseSuccess
 
       interface _GetTelemetryEvaluationStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryEvaluationStatusOutput]
@@ -189,6 +249,20 @@ module Aws
                                                  rule_identifier: ::String
                                                ) -> _GetTelemetryRuleForOrganizationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTelemetryRuleForOrganizationResponseSuccess
+
+      interface _ListCentralizationRulesForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCentralizationRulesForOrganizationOutput]
+        def centralization_rule_summaries: () -> ::Array[Types::CentralizationRuleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_centralization_rules_for_organization-instance_method
+      def list_centralization_rules_for_organization: (
+                                                        ?rule_name_prefix: ::String,
+                                                        ?all_regions: bool,
+                                                        ?max_results: ::Integer,
+                                                        ?next_token: ::String
+                                                      ) -> _ListCentralizationRulesForOrganizationResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCentralizationRulesForOrganizationResponseSuccess
 
       interface _ListResourceTelemetryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceTelemetryOutput]
@@ -290,6 +364,41 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateCentralizationRuleForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCentralizationRuleForOrganizationOutput]
+        def rule_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#update_centralization_rule_for_organization-instance_method
+      def update_centralization_rule_for_organization: (
+                                                         rule_identifier: ::String,
+                                                         rule: {
+                                                           source: {
+                                                             regions: Array[::String],
+                                                             scope: ::String?,
+                                                             source_logs_configuration: {
+                                                               log_group_selection_criteria: ::String,
+                                                               encrypted_log_group_strategy: ("ALLOW" | "SKIP")
+                                                             }?
+                                                           },
+                                                           destination: {
+                                                             region: ::String,
+                                                             account: ::String?,
+                                                             destination_logs_configuration: {
+                                                               logs_encryption_configuration: {
+                                                                 encryption_strategy: ("CUSTOMER_MANAGED" | "AWS_OWNED"),
+                                                                 kms_key_arn: ::String?,
+                                                                 encryption_conflict_resolution_strategy: ("ALLOW" | "SKIP")?
+                                                               }?,
+                                                               backup_configuration: {
+                                                                 region: ::String,
+                                                                 kms_key_arn: ::String?
+                                                               }?
+                                                             }?
+                                                           }
+                                                         }
+                                                       ) -> _UpdateCentralizationRuleForOrganizationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCentralizationRuleForOrganizationResponseSuccess
 
       interface _UpdateTelemetryRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTelemetryRuleOutput]

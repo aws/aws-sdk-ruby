@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:observabilityadmin)
 # structure.
 #
 #     observability_admin = Aws::ObservabilityAdmin::Client.new
-#     resp = observability_admin.create_telemetry_rule(params)
+#     resp = observability_admin.create_centralization_rule_for_organization(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::ObservabilityAdmin
   autoload :EndpointProvider, 'aws-sdk-observabilityadmin/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-observabilityadmin/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end
 

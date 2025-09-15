@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2025-09-15)
+------------------
+
+* Feature - Added support for OpenID Connect (OIDC) custom authorizer
+
 1.34.0 (2025-08-27)
 ------------------
 

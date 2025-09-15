@@ -28,7 +28,7 @@ module Aws::MedicalImaging
       attr_accessor image_set_id: ::String
       attr_accessor latest_version_id: ::String
       attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
-      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "IMPORTING" | "IMPORTED" | "IMPORT_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor image_set_arn: ::String
@@ -67,7 +67,7 @@ module Aws::MedicalImaging
       attr_accessor image_set_id: ::String
       attr_accessor latest_version_id: ::String
       attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
-      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "IMPORTING" | "IMPORTED" | "IMPORT_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor image_set_arn: ::String
@@ -79,6 +79,7 @@ module Aws::MedicalImaging
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor kms_key_arn: ::String
+      attr_accessor lambda_authorizer_arn: ::String
       SENSITIVE: []
     end
 
@@ -151,6 +152,7 @@ module Aws::MedicalImaging
       attr_accessor datastore_name: ::String
       attr_accessor datastore_status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED")
       attr_accessor kms_key_arn: ::String
+      attr_accessor lambda_authorizer_arn: ::String
       attr_accessor datastore_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -188,7 +190,7 @@ module Aws::MedicalImaging
       attr_accessor datastore_id: ::String
       attr_accessor image_set_id: ::String
       attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
-      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "IMPORTING" | "IMPORTED" | "IMPORT_FAILED")
       SENSITIVE: []
     end
 
@@ -252,7 +254,7 @@ module Aws::MedicalImaging
       attr_accessor image_set_id: ::String
       attr_accessor version_id: ::String
       attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
-      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "IMPORTING" | "IMPORTED" | "IMPORT_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor deleted_at: ::Time
@@ -272,7 +274,7 @@ module Aws::MedicalImaging
       attr_accessor image_set_id: ::String
       attr_accessor version_id: ::String
       attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
-      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "IMPORTING" | "IMPORTED" | "IMPORT_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor deleted_at: ::Time
@@ -506,7 +508,7 @@ module Aws::MedicalImaging
       attr_accessor image_set_id: ::String
       attr_accessor latest_version_id: ::String
       attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
-      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "IMPORTING" | "IMPORTED" | "IMPORT_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor message: ::String

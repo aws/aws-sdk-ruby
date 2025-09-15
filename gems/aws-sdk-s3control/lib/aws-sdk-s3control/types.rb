@@ -1462,6 +1462,39 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A filter that returns objects that are encrypted by dual-layer
+    # server-side encryption with Amazon Web Services Key Management Service
+    # (KMS) keys (DSSE-KMS). You can further refine your filtering by
+    # optionally providing a KMS Key ARN to create an object list of
+    # DSSE-KMS objects with that specific KMS Key ARN.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed KMS key to
+    #   use for the filter to return objects that are encrypted by the
+    #   specified key. For best performance, we recommend using the
+    #   `KMSKeyArn` filter in conjunction with other object metadata
+    #   filters, like `MatchAnyPrefix`, `CreatedAfter`, or
+    #   `MatchAnyStorageClass`.
+    #
+    #   <note markdown="1"> You must provide the full KMS Key ARN. You can't use an alias name
+    #   or alias ARN. For more information, see [ KMS keys][1] in the
+    #   *Amazon Web Services Key Management Service Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DSSEKMSFilter AWS API Documentation
+    #
+    class DSSEKMSFilter < Struct.new(
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
@@ -3998,6 +4031,16 @@ module Aws::S3Control
     #   objects that are stored with the specified storage class.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] match_any_object_encryption
+    #   If provided, the generated object list includes only source bucket
+    #   objects with the indicated server-side encryption type (SSE-S3,
+    #   SSE-KMS, DSSE-KMS, SSE-C, or NOT-SSE). If you select SSE-KMS or
+    #   DSSE-KMS, you can optionally further filter your results by
+    #   specifying a specific KMS Key ARN. If you select SSE-KMS, you can
+    #   also optionally further filter your results by Bucket Key enabled
+    #   status.
+    #   @return [Array<Types::ObjectEncryptionFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobManifestGeneratorFilter AWS API Documentation
     #
     class JobManifestGeneratorFilter < Struct.new(
@@ -4008,7 +4051,8 @@ module Aws::S3Control
       :key_name_constraint,
       :object_size_greater_than_bytes,
       :object_size_less_than_bytes,
-      :match_any_storage_class)
+      :match_any_storage_class,
+      :match_any_object_encryption)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4469,7 +4513,7 @@ module Aws::S3Control
     #
     # @!attribute [rw] noncurrent_version_transitions
     #   Specifies the transition rule for the lifecycle rule that describes
-    #   when noncurrent objects transition to a specific storage class. If
+    #   when non-current objects transition to a specific storage class. If
     #   your bucket is versioning-enabled (or versioning is suspended), you
     #   can set this action to request that Amazon S3 transition noncurrent
     #   object versions to a specific storage class at a set period in the
@@ -5922,6 +5966,72 @@ module Aws::S3Control
       :message)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A filter that returns objects that aren't server-side encrypted.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/NotSSEFilter AWS API Documentation
+    #
+    class NotSSEFilter < Aws::EmptyStructure; end
+
+    # An optional filter for the `S3JobManifestGenerator` that identifies
+    # the subset of objects by encryption type. This filter is used to
+    # create an object list for S3 Batch Operations jobs. If provided, this
+    # filter will generate an object list that only includes objects with
+    # the specified encryption type.
+    #
+    # @note ObjectEncryptionFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ObjectEncryptionFilter is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ObjectEncryptionFilter corresponding to the set member.
+    #
+    # @!attribute [rw] sses3
+    #   Filters for objects that are encrypted by server-side encryption
+    #   with Amazon S3 managed keys (SSE-S3).
+    #   @return [Types::SSES3Filter]
+    #
+    # @!attribute [rw] ssekms
+    #   Filters for objects that are encrypted by server-side encryption
+    #   with Amazon Web Services Key Management Service (KMS) keys
+    #   (SSE-KMS).
+    #   @return [Types::SSEKMSFilter]
+    #
+    # @!attribute [rw] dssekms
+    #   Filters for objects that are encrypted by dual-layer server-side
+    #   encryption with Amazon Web Services Key Management Service (KMS)
+    #   keys (DSSE-KMS).
+    #   @return [Types::DSSEKMSFilter]
+    #
+    # @!attribute [rw] ssec
+    #   Filters for objects that are encrypted by server-side encryption
+    #   with customer-provided keys (SSE-C).
+    #   @return [Types::SSECFilter]
+    #
+    # @!attribute [rw] notsse
+    #   Filters for objects that are not encrypted by server-side
+    #   encryption.
+    #   @return [Types::NotSSEFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectEncryptionFilter AWS API Documentation
+    #
+    class ObjectEncryptionFilter < Struct.new(
+      :sses3,
+      :ssekms,
+      :dssekms,
+      :ssec,
+      :notsse,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Sses3 < ObjectEncryptionFilter; end
+      class Ssekms < ObjectEncryptionFilter; end
+      class Dssekms < ObjectEncryptionFilter; end
+      class Ssec < ObjectEncryptionFilter; end
+      class Notsse < ObjectEncryptionFilter; end
+      class Unknown < ObjectEncryptionFilter; end
     end
 
     # An access point with an attached Lambda function used to access
@@ -7900,6 +8010,15 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A filter that returns objects that are encrypted by server-side
+    # encryption with customer-provided keys (SSE-C).
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSECFilter AWS API Documentation
+    #
+    class SSECFilter < Aws::EmptyStructure; end
+
     # @!attribute [rw] key_id
     #   A container for the ARN of the SSE-KMS encryption. This property is
     #   read-only and follows the following format: `
@@ -7932,6 +8051,50 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A filter that returns objects that are encrypted by server-side
+    # encryption with Amazon Web Services KMS (SSE-KMS).
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed KMS key to
+    #   use for the filter to return objects that are encrypted by the
+    #   specified key. For best performance, we recommend using the
+    #   `KMSKeyArn` filter in conjunction with other object metadata
+    #   filters, like `MatchAnyPrefix`, `CreatedAfter`, or
+    #   `MatchAnyStorageClass`.
+    #
+    #   <note markdown="1"> You must provide the full KMS Key ARN. You can't use an alias name
+    #   or alias ARN. For more information, see [ KMS keys][1] in the
+    #   *Amazon Web Services Key Management Service Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) keys (SSE-KMS). If
+    #   specified, will filter SSE-KMS encrypted objects by S3 Bucket Key
+    #   status. For more information, see [Reducing the cost of SSE-KMS with
+    #   Amazon S3 Bucket Keys][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSEKMSFilter AWS API Documentation
+    #
+    class SSEKMSFilter < Struct.new(
+      :kms_key_arn,
+      :bucket_key_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3 AWS API Documentation
@@ -7946,6 +8109,15 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3Encryption AWS API Documentation
     #
     class SSES3Encryption < Aws::EmptyStructure; end
+
+    # A filter that returns objects that are encrypted by server-side
+    # encryption with Amazon S3 managed keys (SSE-S3).
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3Filter AWS API Documentation
+    #
+    class SSES3Filter < Aws::EmptyStructure; end
 
     # You can use the access point scope to restrict access to specific
     # prefixes, API operations, or a combination of both.

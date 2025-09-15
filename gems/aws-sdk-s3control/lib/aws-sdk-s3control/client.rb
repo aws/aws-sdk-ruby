@@ -1570,6 +1570,23 @@ module Aws::S3Control
     #           object_size_greater_than_bytes: 1,
     #           object_size_less_than_bytes: 1,
     #           match_any_storage_class: ["STANDARD"], # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
+    #           match_any_object_encryption: [
+    #             {
+    #               sses3: {
+    #               },
+    #               ssekms: {
+    #                 kms_key_arn: "NonEmptyKmsKeyArnString",
+    #                 bucket_key_enabled: false,
+    #               },
+    #               dssekms: {
+    #                 kms_key_arn: "NonEmptyKmsKeyArnString",
+    #               },
+    #               ssec: {
+    #               },
+    #               notsse: {
+    #               },
+    #             },
+    #           ],
     #         },
     #         enable_manifest_output: false, # required
     #       },
@@ -3154,6 +3171,10 @@ module Aws::S3Control
     #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_size_less_than_bytes #=> Integer
     #   resp.job.manifest_generator.s3_job_manifest_generator.filter.match_any_storage_class #=> Array
     #   resp.job.manifest_generator.s3_job_manifest_generator.filter.match_any_storage_class[0] #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "GLACIER", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "GLACIER_IR"
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.match_any_object_encryption #=> Array
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.match_any_object_encryption[0].ssekms.kms_key_arn #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.match_any_object_encryption[0].ssekms.bucket_key_enabled #=> Boolean
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.match_any_object_encryption[0].dssekms.kms_key_arn #=> String
     #   resp.job.manifest_generator.s3_job_manifest_generator.enable_manifest_output #=> Boolean
     #   resp.job.generated_manifest_descriptor.format #=> String, one of "S3InventoryReport_CSV_20211130"
     #   resp.job.generated_manifest_descriptor.location.object_arn #=> String
@@ -8489,7 +8510,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

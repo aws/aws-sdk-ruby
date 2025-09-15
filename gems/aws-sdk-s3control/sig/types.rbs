@@ -298,6 +298,11 @@ module Aws::S3Control
       SENSITIVE: [:access_key_id, :secret_access_key, :session_token]
     end
 
+    class DSSEKMSFilter
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
     class DeleteAccessGrantRequest
       attr_accessor account_id: ::String
       attr_accessor access_grant_id: ::String
@@ -966,6 +971,7 @@ module Aws::S3Control
       attr_accessor object_size_greater_than_bytes: ::Integer
       attr_accessor object_size_less_than_bytes: ::Integer
       attr_accessor match_any_storage_class: ::Array[("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "GLACIER" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")]
+      attr_accessor match_any_object_encryption: ::Array[Types::ObjectEncryptionFilter]
       SENSITIVE: []
     end
 
@@ -1384,6 +1390,32 @@ module Aws::S3Control
     class NotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class NotSSEFilter < Aws::EmptyStructure
+    end
+
+    class ObjectEncryptionFilter
+      attr_accessor sses3: Types::SSES3Filter
+      attr_accessor ssekms: Types::SSEKMSFilter
+      attr_accessor dssekms: Types::DSSEKMSFilter
+      attr_accessor ssec: Types::SSECFilter
+      attr_accessor notsse: Types::NotSSEFilter
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Sses3 < ObjectEncryptionFilter
+      end
+      class Ssekms < ObjectEncryptionFilter
+      end
+      class Dssekms < ObjectEncryptionFilter
+      end
+      class Ssec < ObjectEncryptionFilter
+      end
+      class Notsse < ObjectEncryptionFilter
+      end
+      class Unknown < ObjectEncryptionFilter
+      end
     end
 
     class ObjectLambdaAccessPoint
@@ -1813,6 +1845,9 @@ module Aws::S3Control
       SENSITIVE: []
     end
 
+    class SSECFilter < Aws::EmptyStructure
+    end
+
     class SSEKMS
       attr_accessor key_id: ::String
       SENSITIVE: []
@@ -1823,10 +1858,19 @@ module Aws::S3Control
       SENSITIVE: []
     end
 
+    class SSEKMSFilter
+      attr_accessor kms_key_arn: ::String
+      attr_accessor bucket_key_enabled: bool
+      SENSITIVE: []
+    end
+
     class SSES3 < Aws::EmptyStructure
     end
 
     class SSES3Encryption < Aws::EmptyStructure
+    end
+
+    class SSES3Filter < Aws::EmptyStructure
     end
 
     class Scope

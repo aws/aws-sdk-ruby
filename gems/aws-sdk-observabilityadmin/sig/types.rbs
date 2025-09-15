@@ -14,8 +14,54 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class CentralizationRule
+      attr_accessor source: Types::CentralizationRuleSource
+      attr_accessor destination: Types::CentralizationRuleDestination
+      SENSITIVE: []
+    end
+
+    class CentralizationRuleDestination
+      attr_accessor region: ::String
+      attr_accessor account: ::String
+      attr_accessor destination_logs_configuration: Types::DestinationLogsConfiguration
+      SENSITIVE: []
+    end
+
+    class CentralizationRuleSource
+      attr_accessor regions: ::Array[::String]
+      attr_accessor scope: ::String
+      attr_accessor source_logs_configuration: Types::SourceLogsConfiguration
+      SENSITIVE: []
+    end
+
+    class CentralizationRuleSummary
+      attr_accessor rule_name: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor created_time_stamp: ::Integer
+      attr_accessor created_region: ::String
+      attr_accessor last_update_time_stamp: ::Integer
+      attr_accessor rule_health: ("Healthy" | "Unhealthy" | "Provisioning")
+      attr_accessor failure_reason: ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
+      attr_accessor destination_account_id: ::String
+      attr_accessor destination_region: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCentralizationRuleForOrganizationInput
+      attr_accessor rule_name: ::String
+      attr_accessor rule: Types::CentralizationRule
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCentralizationRuleForOrganizationOutput
+      attr_accessor rule_arn: ::String
       SENSITIVE: []
     end
 
@@ -43,6 +89,11 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class DeleteCentralizationRuleForOrganizationInput
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
     class DeleteTelemetryRuleForOrganizationInput
       attr_accessor rule_identifier: ::String
       SENSITIVE: []
@@ -50,6 +101,30 @@ module Aws::ObservabilityAdmin
 
     class DeleteTelemetryRuleInput
       attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationLogsConfiguration
+      attr_accessor logs_encryption_configuration: Types::LogsEncryptionConfiguration
+      attr_accessor backup_configuration: Types::LogsBackupConfiguration
+      SENSITIVE: []
+    end
+
+    class GetCentralizationRuleForOrganizationInput
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCentralizationRuleForOrganizationOutput
+      attr_accessor rule_name: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor created_time_stamp: ::Integer
+      attr_accessor created_region: ::String
+      attr_accessor last_update_time_stamp: ::Integer
+      attr_accessor rule_health: ("Healthy" | "Unhealthy" | "Provisioning")
+      attr_accessor failure_reason: ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
+      attr_accessor centralization_rule: Types::CentralizationRule
       SENSITIVE: []
     end
 
@@ -96,6 +171,20 @@ module Aws::ObservabilityAdmin
     class InternalServerException
       attr_accessor message: ::String
       attr_accessor amzn_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListCentralizationRulesForOrganizationInput
+      attr_accessor rule_name_prefix: ::String
+      attr_accessor all_regions: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCentralizationRulesForOrganizationOutput
+      attr_accessor centralization_rule_summaries: ::Array[Types::CentralizationRuleSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -170,6 +259,19 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class LogsBackupConfiguration
+      attr_accessor region: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LogsEncryptionConfiguration
+      attr_accessor encryption_strategy: ("CUSTOMER_MANAGED" | "AWS_OWNED")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor encryption_conflict_resolution_strategy: ("ALLOW" | "SKIP")
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -178,6 +280,12 @@ module Aws::ObservabilityAdmin
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor amzn_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class SourceLogsConfiguration
+      attr_accessor log_group_selection_criteria: ::String
+      attr_accessor encrypted_log_group_strategy: ("ALLOW" | "SKIP")
       SENSITIVE: []
     end
 
@@ -232,6 +340,17 @@ module Aws::ObservabilityAdmin
     class UntagResourceInput
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateCentralizationRuleForOrganizationInput
+      attr_accessor rule_identifier: ::String
+      attr_accessor rule: Types::CentralizationRule
+      SENSITIVE: []
+    end
+
+    class UpdateCentralizationRuleForOrganizationOutput
+      attr_accessor rule_arn: ::String
       SENSITIVE: []
     end
 

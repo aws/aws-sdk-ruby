@@ -267,13 +267,18 @@ module Aws::MedicalImaging
     #   Service (KMS) key for accessing encrypted data.
     #   @return [String]
     #
+    # @!attribute [rw] lambda_authorizer_arn
+    #   The ARN of the authorizer's Lambda function.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/CreateDatastoreRequest AWS API Documentation
     #
     class CreateDatastoreRequest < Struct.new(
       :datastore_name,
       :client_token,
       :tags,
-      :kms_key_arn)
+      :kms_key_arn,
+      :lambda_authorizer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -555,6 +560,10 @@ module Aws::MedicalImaging
     #   Service (KMS) key for accessing encrypted data.
     #   @return [String]
     #
+    # @!attribute [rw] lambda_authorizer_arn
+    #   The ARN of the authorizer's Lambda function.
+    #   @return [String]
+    #
     # @!attribute [rw] datastore_arn
     #   The Amazon Resource Name (ARN) for the data store.
     #   @return [String]
@@ -574,6 +583,7 @@ module Aws::MedicalImaging
       :datastore_name,
       :datastore_status,
       :kms_key_arn,
+      :lambda_authorizer_arn,
       :datastore_arn,
       :created_at,
       :updated_at)

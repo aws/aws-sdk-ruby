@@ -90,6 +90,7 @@ module Aws::S3Control
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
     CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
+    DSSEKMSFilter = Shapes::StructureShape.new(name: 'DSSEKMSFilter')
     DataSourceId = Shapes::StringShape.new(name: 'DataSourceId')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     Date = Shapes::TimestampShape.new(name: 'Date')
@@ -326,6 +327,7 @@ module Aws::S3Control
     NetworkOrigin = Shapes::StringShape.new(name: 'NetworkOrigin')
     NoSuchPublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'NoSuchPublicAccessBlockConfiguration')
     NoSuchPublicAccessBlockConfigurationMessage = Shapes::StringShape.new(name: 'NoSuchPublicAccessBlockConfigurationMessage')
+    NonEmptyKmsKeyArnString = Shapes::StringShape.new(name: 'NonEmptyKmsKeyArnString')
     NonEmptyMaxLength1024String = Shapes::StringShape.new(name: 'NonEmptyMaxLength1024String')
     NonEmptyMaxLength1024StringList = Shapes::ListShape.new(name: 'NonEmptyMaxLength1024StringList')
     NonEmptyMaxLength2048String = Shapes::StringShape.new(name: 'NonEmptyMaxLength2048String')
@@ -336,8 +338,11 @@ module Aws::S3Control
     NoncurrentVersionTransition = Shapes::StructureShape.new(name: 'NoncurrentVersionTransition')
     NoncurrentVersionTransitionList = Shapes::ListShape.new(name: 'NoncurrentVersionTransitionList')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    NotSSEFilter = Shapes::StructureShape.new(name: 'NotSSEFilter')
     ObjectAgeValue = Shapes::IntegerShape.new(name: 'ObjectAgeValue')
     ObjectCreationTime = Shapes::TimestampShape.new(name: 'ObjectCreationTime')
+    ObjectEncryptionFilter = Shapes::UnionShape.new(name: 'ObjectEncryptionFilter')
+    ObjectEncryptionFilterList = Shapes::ListShape.new(name: 'ObjectEncryptionFilterList')
     ObjectLambdaAccessPoint = Shapes::StructureShape.new(name: 'ObjectLambdaAccessPoint')
     ObjectLambdaAccessPointAlias = Shapes::StructureShape.new(name: 'ObjectLambdaAccessPointAlias')
     ObjectLambdaAccessPointAliasStatus = Shapes::StringShape.new(name: 'ObjectLambdaAccessPointAliasStatus')
@@ -471,11 +476,14 @@ module Aws::S3Control
     S3Tag = Shapes::StructureShape.new(name: 'S3Tag')
     S3TagSet = Shapes::ListShape.new(name: 'S3TagSet')
     S3UserMetadata = Shapes::MapShape.new(name: 'S3UserMetadata')
+    SSECFilter = Shapes::StructureShape.new(name: 'SSECFilter')
     SSEKMS = Shapes::StructureShape.new(name: 'SSEKMS', locationName: "SSE-KMS")
     SSEKMSEncryption = Shapes::StructureShape.new(name: 'SSEKMSEncryption', locationName: "SSE-KMS")
+    SSEKMSFilter = Shapes::StructureShape.new(name: 'SSEKMSFilter')
     SSEKMSKeyId = Shapes::StringShape.new(name: 'SSEKMSKeyId')
     SSES3 = Shapes::StructureShape.new(name: 'SSES3', locationName: "SSE-S3")
     SSES3Encryption = Shapes::StructureShape.new(name: 'SSES3Encryption', locationName: "SSE-S3")
+    SSES3Filter = Shapes::StructureShape.new(name: 'SSES3Filter')
     Scope = Shapes::StructureShape.new(name: 'Scope')
     ScopePermission = Shapes::StringShape.new(name: 'ScopePermission')
     ScopePermissionList = Shapes::ListShape.new(name: 'ScopePermissionList')
@@ -770,6 +778,9 @@ module Aws::S3Control
     Credentials.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionToken, location_name: "SessionToken"))
     Credentials.add_member(:expiration, Shapes::ShapeRef.new(shape: Expiration, location_name: "Expiration"))
     Credentials.struct_class = Types::Credentials
+
+    DSSEKMSFilter.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: NonEmptyKmsKeyArnString, location_name: "KmsKeyArn", metadata: {"box" => true}))
+    DSSEKMSFilter.struct_class = Types::DSSEKMSFilter
 
     DeleteAccessGrantRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam" => {"name" => "AccountId"}}))
     DeleteAccessGrantRequest.add_member(:access_grant_id, Shapes::ShapeRef.new(shape: AccessGrantId, required: true, location: "uri", location_name: "id"))
@@ -1240,6 +1251,7 @@ module Aws::S3Control
     JobManifestGeneratorFilter.add_member(:object_size_greater_than_bytes, Shapes::ShapeRef.new(shape: ObjectSizeGreaterThanBytes, location_name: "ObjectSizeGreaterThanBytes", metadata: {"box" => true}))
     JobManifestGeneratorFilter.add_member(:object_size_less_than_bytes, Shapes::ShapeRef.new(shape: ObjectSizeLessThanBytes, location_name: "ObjectSizeLessThanBytes", metadata: {"box" => true}))
     JobManifestGeneratorFilter.add_member(:match_any_storage_class, Shapes::ShapeRef.new(shape: StorageClassList, location_name: "MatchAnyStorageClass"))
+    JobManifestGeneratorFilter.add_member(:match_any_object_encryption, Shapes::ShapeRef.new(shape: ObjectEncryptionFilterList, location_name: "MatchAnyObjectEncryption"))
     JobManifestGeneratorFilter.struct_class = Types::JobManifestGeneratorFilter
 
     JobManifestLocation.add_member(:object_arn, Shapes::ShapeRef.new(shape: S3KeyArnString, required: true, location_name: "ObjectArn"))
@@ -1560,6 +1572,24 @@ module Aws::S3Control
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
+
+    NotSSEFilter.struct_class = Types::NotSSEFilter
+
+    ObjectEncryptionFilter.add_member(:sses3, Shapes::ShapeRef.new(shape: SSES3Filter, location_name: "SSE-S3"))
+    ObjectEncryptionFilter.add_member(:ssekms, Shapes::ShapeRef.new(shape: SSEKMSFilter, location_name: "SSE-KMS"))
+    ObjectEncryptionFilter.add_member(:dssekms, Shapes::ShapeRef.new(shape: DSSEKMSFilter, location_name: "DSSE-KMS"))
+    ObjectEncryptionFilter.add_member(:ssec, Shapes::ShapeRef.new(shape: SSECFilter, location_name: "SSE-C"))
+    ObjectEncryptionFilter.add_member(:notsse, Shapes::ShapeRef.new(shape: NotSSEFilter, location_name: "NOT-SSE"))
+    ObjectEncryptionFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ObjectEncryptionFilter.add_member_subclass(:sses3, Types::ObjectEncryptionFilter::Sses3)
+    ObjectEncryptionFilter.add_member_subclass(:ssekms, Types::ObjectEncryptionFilter::Ssekms)
+    ObjectEncryptionFilter.add_member_subclass(:dssekms, Types::ObjectEncryptionFilter::Dssekms)
+    ObjectEncryptionFilter.add_member_subclass(:ssec, Types::ObjectEncryptionFilter::Ssec)
+    ObjectEncryptionFilter.add_member_subclass(:notsse, Types::ObjectEncryptionFilter::Notsse)
+    ObjectEncryptionFilter.add_member_subclass(:unknown, Types::ObjectEncryptionFilter::Unknown)
+    ObjectEncryptionFilter.struct_class = Types::ObjectEncryptionFilter
+
+    ObjectEncryptionFilterList.member = Shapes::ShapeRef.new(shape: ObjectEncryptionFilter, location_name: "ObjectEncryption")
 
     ObjectLambdaAccessPoint.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location_name: "Name"))
     ObjectLambdaAccessPoint.add_member(:object_lambda_access_point_arn, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointArn, location_name: "ObjectLambdaAccessPointArn"))
@@ -1906,15 +1936,23 @@ module Aws::S3Control
     S3UserMetadata.key = Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String)
     S3UserMetadata.value = Shapes::ShapeRef.new(shape: MaxLength1024String)
 
+    SSECFilter.struct_class = Types::SSECFilter
+
     SSEKMS.add_member(:key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, required: true, location_name: "KeyId"))
     SSEKMS.struct_class = Types::SSEKMS
 
     SSEKMSEncryption.add_member(:key_id, Shapes::ShapeRef.new(shape: KmsKeyArnString, required: true, location_name: "KeyId"))
     SSEKMSEncryption.struct_class = Types::SSEKMSEncryption
 
+    SSEKMSFilter.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: NonEmptyKmsKeyArnString, location_name: "KmsKeyArn", metadata: {"box" => true}))
+    SSEKMSFilter.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "BucketKeyEnabled", metadata: {"box" => true}))
+    SSEKMSFilter.struct_class = Types::SSEKMSFilter
+
     SSES3.struct_class = Types::SSES3
 
     SSES3Encryption.struct_class = Types::SSES3Encryption
+
+    SSES3Filter.struct_class = Types::SSES3Filter
 
     Scope.add_member(:prefixes, Shapes::ShapeRef.new(shape: PrefixesList, location_name: "Prefixes"))
     Scope.add_member(:permissions, Shapes::ShapeRef.new(shape: ScopePermissionList, location_name: "Permissions"))

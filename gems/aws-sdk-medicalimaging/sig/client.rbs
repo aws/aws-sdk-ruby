@@ -115,7 +115,8 @@ module Aws
                               ?datastore_name: ::String,
                               client_token: ::String,
                               ?tags: Hash[::String, ::String],
-                              ?kms_key_arn: ::String
+                              ?kms_key_arn: ::String,
+                              ?lambda_authorizer_arn: ::String
                             ) -> _CreateDatastoreResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatastoreResponseSuccess
 
@@ -135,7 +136,7 @@ module Aws
         def datastore_id: () -> ::String
         def image_set_id: () -> ::String
         def image_set_state: () -> ("ACTIVE" | "LOCKED" | "DELETED")
-        def image_set_workflow_status: () -> ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+        def image_set_workflow_status: () -> ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "IMPORTING" | "IMPORTED" | "IMPORT_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#delete_image_set-instance_method
       def delete_image_set: (
@@ -186,7 +187,7 @@ module Aws
         def image_set_id: () -> ::String
         def version_id: () -> ::String
         def image_set_state: () -> ("ACTIVE" | "LOCKED" | "DELETED")
-        def image_set_workflow_status: () -> ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+        def image_set_workflow_status: () -> ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "IMPORTING" | "IMPORTED" | "IMPORT_FAILED")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def deleted_at: () -> ::Time
@@ -354,7 +355,7 @@ module Aws
         def image_set_id: () -> ::String
         def latest_version_id: () -> ::String
         def image_set_state: () -> ("ACTIVE" | "LOCKED" | "DELETED")
-        def image_set_workflow_status: () -> ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+        def image_set_workflow_status: () -> ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "IMPORTING" | "IMPORTED" | "IMPORT_FAILED")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def message: () -> ::String

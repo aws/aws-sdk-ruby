@@ -91,6 +91,7 @@ module Aws::MedicalImaging
     JobName = Shapes::StringShape.new(name: 'JobName')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
     ListDICOMImportJobsRequest = Shapes::StructureShape.new(name: 'ListDICOMImportJobsRequest')
     ListDICOMImportJobsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDICOMImportJobsRequestMaxResultsInteger')
     ListDICOMImportJobsResponse = Shapes::StructureShape.new(name: 'ListDICOMImportJobsResponse')
@@ -194,6 +195,7 @@ module Aws::MedicalImaging
     CreateDatastoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDatastoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateDatastoreRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    CreateDatastoreRequest.add_member(:lambda_authorizer_arn, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "lambdaAuthorizerArn"))
     CreateDatastoreRequest.struct_class = Types::CreateDatastoreRequest
 
     CreateDatastoreResponse.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "datastoreId"))
@@ -254,6 +256,7 @@ module Aws::MedicalImaging
     DatastoreProperties.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, required: true, location_name: "datastoreName"))
     DatastoreProperties.add_member(:datastore_status, Shapes::ShapeRef.new(shape: DatastoreStatus, required: true, location_name: "datastoreStatus"))
     DatastoreProperties.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    DatastoreProperties.add_member(:lambda_authorizer_arn, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "lambdaAuthorizerArn"))
     DatastoreProperties.add_member(:datastore_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datastoreArn"))
     DatastoreProperties.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
     DatastoreProperties.add_member(:updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt"))
@@ -584,6 +587,7 @@ module Aws::MedicalImaging
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
