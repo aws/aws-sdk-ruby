@@ -27,6 +27,11 @@ module Aws
           expect { signer }.to_not raise_error
         end
 
+        it 'raises when private key or private key path is blank' do
+          options.delete(:private_key)
+          expect { signer.new }.to raise_error(ArgumentError, /:private_key or :private_key_path should be provided/)
+        end
+
         it 'raises when key pair id is blank' do
           options.delete(:key_pair_id)
           options[:private_key] = rsa_key
