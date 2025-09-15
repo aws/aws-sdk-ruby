@@ -6,40 +6,40 @@ module Aws
   module CloudFront
     describe UrlSigner do
       let(:rsa_key) { OpenSSL::PKey::RSA.new(1024).to_pem }
-      let(:options) { { key_pair_id: 'CF_KEYPAIR_ID', private_key: rsa_key } }
+      let(:options) { { key_pair_id: 'CF_KEYPAIR_ID' } }
       let(:signer) { Aws::CloudFront::UrlSigner.new(options) }
       let(:expires) { 1357034400 } # January 1, 2013 10:00 am UTC (Unix timestamp)
 
       describe '#initialize' do
         it 'accepts RSA private key' do
+          options[:private_key] = rsa_key
           expect { signer }.to_not raise_error
         end
 
         it 'accepts ECDSA private key' do
-          options.delete(:private_key)
           options[:private_key_path] = "#{File.dirname(__FILE__)}/ecdsa_dummy_key"
           expect { signer }.to_not raise_error
         end
 
         it 'accepts private key path' do
-          options.delete(:private_key)
           options[:private_key_path] = "#{File.dirname(__FILE__)}/rsa_dummy_key"
           expect { signer }.to_not raise_error
         end
 
         it 'raises when private key or private key path is blank' do
-          options.delete(:private_key)
-          expect { signer.new }.to raise_error(ArgumentError, /:private_key or :private_key_path should be provided/)
+          expect { signer }.to raise_error(ArgumentError, /:private_key or :private_key_path should be provided/)
         end
 
         it 'raises when key pair id is blank' do
           options.delete(:key_pair_id)
           options[:private_key] = rsa_key
-          expect { signer.new }.to raise_error(ArgumentError, /:key_pair_id must not be blank/)
+          expect { signer }.to raise_error(ArgumentError, /:key_pair_id must not be blank/)
         end
       end
 
       describe '#signed_url' do
+        let(:options) { { key_pair_id: 'CF_KEYPAIR_ID', private_key_path: "#{File.dirname(__FILE__)}/rsa_dummy_key" } }
+
         it 'raises error if url is invalid' do
           expect {
             signer.signed_url('what_ever_illegal/url')
