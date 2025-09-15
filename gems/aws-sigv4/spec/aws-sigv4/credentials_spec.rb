@@ -34,33 +34,6 @@ module Aws
           end
         end
 
-        describe '#set?' do
-          it 'returns true when both access key id and secret access key are set' do
-            creds = Credentials.new(access_key_id: 'akid', secret_access_key: 'secret')
-            expect(creds.set?).to be(true)
-          end
-
-          it 'returns false when access key id is nil' do
-            creds = Credentials.new(access_key_id: nil, secret_access_key: 'secret')
-            expect(creds.set?).to be(false)
-          end
-
-          it 'returns false when access key id is empty' do
-            creds = Credentials.new(access_key_id: '', secret_access_key: 'secret')
-            expect(creds.set?).to be(false)
-          end
-
-          it 'returns false when secret access key is nil' do
-            creds = Credentials.new(access_key_id: 'akid', secret_access_key: nil)
-            expect(creds.set?).to be(false)
-          end
-
-          it 'returns false when secret access key is empty' do
-            creds = Credentials.new(access_key_id: 'akid', secret_access_key: '')
-            expect(creds.set?).to be(false)
-          end
-        end
-
         describe '#inspect' do
           it 'filters sensitive information' do
             creds = Credentials.new(

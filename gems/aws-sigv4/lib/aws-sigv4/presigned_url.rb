@@ -4,7 +4,7 @@ module Aws
   module SigV4
     # Contains the results of a presigning operation.
     class PresignedUrl
-      def initialize(options)
+      def initialize(options = {})
         @url = options.fetch(:url)
         @headers = options.fetch(:headers, {})
         @canonical_request = options[:canonical_request]

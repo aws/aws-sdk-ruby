@@ -4,7 +4,7 @@ module Aws
   module SigV4
     # Contains the results of a signing operation.
     class Signature
-      def initialize(options)
+      def initialize(options = {})
         @headers = options.fetch(:headers)
         @canonical_request = options[:canonical_request]
         @string_to_sign = options[:string_to_sign]
