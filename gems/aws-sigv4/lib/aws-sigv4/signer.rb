@@ -375,7 +375,7 @@ module Aws
         url.query += "&X-Amz-Signature=#{sig}"
 
         PresignedUrl.new(
-          url: url,
+          url: url.to_s,
           headers: signed_headers,
           string_to_sign: sts,
           canonical_request: creq,

@@ -18,7 +18,7 @@ module Aws
 
       describe 'attributes' do
         it 'gets values' do
-          url = URI('https://example.com?param=value&X-Amz-Signature=abcdef')
+          url = 'https://example.com?param=value&X-Amz-Signature=abcdef'
           headers = { 'host' => 'example.com' }
           presigned_url = PresignedUrl.new(
             url: url,

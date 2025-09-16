@@ -57,7 +57,7 @@ module Aws
           expires_in: options.fetch(:expires_in, 900)
         )
         # Remove extra scheme for token
-        presigned_url.url.to_s[8..-1]
+        presigned_url.url[8..-1]
       end
     end
   end
