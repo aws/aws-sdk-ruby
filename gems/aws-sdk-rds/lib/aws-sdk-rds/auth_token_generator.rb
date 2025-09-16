@@ -30,7 +30,7 @@ module Aws
         param_list.set('Action', 'connect')
         param_list.set('DBUser', options.fetch(:username))
 
-        signer = Aws::Sigv4::Signer.new(
+        signer = Aws::SigV4::Signer.new(
           service: 'rds-db',
           region: options.fetch(:region),
           credentials: @credentials.identity
@@ -41,9 +41,9 @@ module Aws
           url: "https://#{options.fetch(:endpoint)}/?#{param_list}",
           body: '',
           expires_in: options.fetch(:expires_in, 900)
-        ).to_s
+        )
         # Remove extra scheme for token
-        presigned_url[8..-1]
+        presigned_url.url.to_s[8..-1]
       end
     end
   end
