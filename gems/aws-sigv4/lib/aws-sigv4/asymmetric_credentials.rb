@@ -19,7 +19,8 @@ module Aws
           d = 0 # d will end up being the private key
           loop do
             kdf_context = access_key_id.unpack('C*') + [counter].pack('C').unpack('C') # 1 byte for counter
-            input = label.unpack('C*') + [0x00] + kdf_context + [bit_len].pack('L>').unpack('CCCC') # 4 bytes (change endianess)
+            # 4 bytes (change endianess)
+            input = label.unpack('C*') + [0x00] + kdf_context + [bit_len].pack('L>').unpack('CCCC')
             k0 = OpenSSL::HMAC.digest('SHA256', input_key, ([0, 0, 0, 0x01] + input).pack('C*'))
             c = be_bytes_to_num(k0.unpack('C*'))
             if c <= N_MINUS_2
@@ -57,11 +58,11 @@ module Aws
         end
 
         # @return [Array] value of the BigNumber as a big-endian unsigned byte array.
-        def bn_to_be_bytes(bn)
+        def bn_to_be_bytes(big_num)
           bytes = []
-          while bn.positive?
-            bytes << (bn & 0xff)
-            bn >>= 8
+          while big_num.positive?
+            bytes << (big_num & 0xff)
+            big_num >>= 8
           end
           bytes.reverse
         end
@@ -69,12 +70,12 @@ module Aws
         # Prior to openssl3 we could directly set public and private key on EC
         # However, openssl3 deprecated those methods and we must now construct
         # a DER with the keys and load the EC from it.
-        def generate_ec(public_key, d)
+        def generate_ec(public_key, priv_key)
           # format reversed from: OpenSSL::ASN1.decode_all(OpenSSL::PKey::EC.new.to_der)
           asn1 = OpenSSL::ASN1::Sequence(
             [
               OpenSSL::ASN1::Integer(OpenSSL::BN.new(1)),
-              OpenSSL::ASN1::OctetString(bn_to_be_bytes(d).pack('C*')),
+              OpenSSL::ASN1::OctetString(bn_to_be_bytes(priv_key).pack('C*')),
               OpenSSL::ASN1::ASN1Data.new([OpenSSL::ASN1::ObjectId('prime256v1')], 0, :CONTEXT_SPECIFIC),
               OpenSSL::ASN1::ASN1Data.new(
                 [OpenSSL::ASN1::BitString(public_key.to_octet_string(:uncompressed))], 1, :CONTEXT_SPECIFIC
