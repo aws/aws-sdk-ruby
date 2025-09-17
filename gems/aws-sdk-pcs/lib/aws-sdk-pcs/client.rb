@@ -649,15 +649,18 @@ module Aws::PCS
     #   instances. Subnets must be in the same VPC as the cluster.
     #
     # @option params [String] :purchase_option
-    #   Specifies how EC2 instances are purchased on your behalf. Amazon Web
-    #   Services PCS supports On-Demand and Spot instances. For more
-    #   information, see [Instance purchasing options][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*. If you don't provide this option,
-    #   it defaults to On-Demand.
+    #   Specifies how EC2 instances are purchased on your behalf. PCS supports
+    #   On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks
+    #   for ML. For more information, see [Amazon EC2 billing and purchasing
+    #   options][1] in the *Amazon Elastic Compute Cloud User Guide*. For more
+    #   information about PCS support for Capacity Blocks, see [Using Amazon
+    #   EC2 Capacity Blocks for ML with PCS][2] in the *PCS User Guide*. If
+    #   you don't provide this option, it defaults to On-Demand.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
+    #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
     #
     # @option params [required, Types::CustomLaunchTemplate] :custom_launch_template
     #   An Amazon EC2 launch template PCS uses to launch compute nodes.
@@ -679,8 +682,8 @@ module Aws::PCS
     #   Specifies the boundaries of the compute node group auto scaling.
     #
     # @option params [required, Array<Types::InstanceConfig>] :instance_configs
-    #   A list of EC2 instance configurations that Amazon Web Services PCS can
-    #   provision in the compute node group.
+    #   A list of EC2 instance configurations that PCS can provision in the
+    #   compute node group.
     #
     # @option params [Types::SpotOptions] :spot_options
     #   Additional configuration when you specify `SPOT` as the
@@ -716,7 +719,7 @@ module Aws::PCS
     #     compute_node_group_name: "ComputeNodeGroupName", # required
     #     ami_id: "AmiId",
     #     subnet_ids: ["String"], # required
-    #     purchase_option: "ONDEMAND", # accepts ONDEMAND, SPOT
+    #     purchase_option: "ONDEMAND", # accepts ONDEMAND, SPOT, CAPACITY_BLOCK
     #     custom_launch_template: { # required
     #       id: "String", # required
     #       version: "String", # required
@@ -760,7 +763,7 @@ module Aws::PCS
     #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
-    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT"
+    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK"
     #   resp.compute_node_group.custom_launch_template.id #=> String
     #   resp.compute_node_group.custom_launch_template.version #=> String
     #   resp.compute_node_group.iam_instance_profile_arn #=> String
@@ -1070,7 +1073,7 @@ module Aws::PCS
     #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
-    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT"
+    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK"
     #   resp.compute_node_group.custom_launch_template.id #=> String
     #   resp.compute_node_group.custom_launch_template.version #=> String
     #   resp.compute_node_group.iam_instance_profile_arn #=> String
@@ -1458,15 +1461,18 @@ module Aws::PCS
     #   An Amazon EC2 launch template PCS uses to launch compute nodes.
     #
     # @option params [String] :purchase_option
-    #   Specifies how EC2 instances are purchased on your behalf. Amazon Web
-    #   Services PCS supports On-Demand and Spot instances. For more
-    #   information, see [Instance purchasing options][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*. If you don't provide this option,
-    #   it defaults to On-Demand.
+    #   Specifies how EC2 instances are purchased on your behalf. PCS supports
+    #   On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks
+    #   for ML. For more information, see [Amazon EC2 billing and purchasing
+    #   options][1] in the *Amazon Elastic Compute Cloud User Guide*. For more
+    #   information about PCS support for Capacity Blocks, see [Using Amazon
+    #   EC2 Capacity Blocks for ML with PCS][2] in the *PCS User Guide*. If
+    #   you don't provide this option, it defaults to On-Demand.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
+    #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
     #
     # @option params [Types::SpotOptions] :spot_options
     #   Additional configuration when you specify `SPOT` as the
@@ -1518,7 +1524,7 @@ module Aws::PCS
     #       id: "String", # required
     #       version: "String", # required
     #     },
-    #     purchase_option: "ONDEMAND", # accepts ONDEMAND, SPOT
+    #     purchase_option: "ONDEMAND", # accepts ONDEMAND, SPOT, CAPACITY_BLOCK
     #     spot_options: {
     #       allocation_strategy: "lowest-price", # accepts lowest-price, capacity-optimized, price-capacity-optimized
     #     },
@@ -1550,7 +1556,7 @@ module Aws::PCS
     #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
-    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT"
+    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK"
     #   resp.compute_node_group.custom_launch_template.id #=> String
     #   resp.compute_node_group.custom_launch_template.version #=> String
     #   resp.compute_node_group.iam_instance_profile_arn #=> String
@@ -1659,7 +1665,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

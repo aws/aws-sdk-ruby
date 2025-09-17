@@ -871,7 +871,7 @@ module Aws::NetworkFirewall
     #   endpoints for a transit gateway-attached firewall. You must specify at
     #   least one Availability Zone. Consider enabling the firewall in every
     #   Availability Zone where you have workloads to maintain Availability
-    #   Zone independence.
+    #   Zone isolation.
     #
     #   You can modify Availability Zones later using
     #   AssociateAvailabilityZones or DisassociateAvailabilityZones, but this
@@ -1080,6 +1080,7 @@ module Aws::NetworkFirewall
     #           },
     #         },
     #       },
+    #       enable_tls_session_holding: false,
     #     },
     #     description: "Description",
     #     tags: [
@@ -1838,7 +1839,7 @@ module Aws::NetworkFirewall
     # the firewall owner or the transit gateway owner can delete the
     # attachment.
     #
-    # After you delete a transit gateway attachment, raffic will no longer
+    # After you delete a transit gateway attachment, traffic will no longer
     # flow through the firewall endpoints.
     #
     # After you initiate the delete operation, use DescribeFirewall to
@@ -2268,6 +2269,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy.policy_variables.rule_variables #=> Hash
     #   resp.firewall_policy.policy_variables.rule_variables["RuleVariableName"].definition #=> Array
     #   resp.firewall_policy.policy_variables.rule_variables["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy.enable_tls_session_holding #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallPolicy AWS API Documentation
     #
@@ -3722,8 +3724,9 @@ module Aws::NetworkFirewall
     # creation of routing components between the transit gateway and
     # firewall endpoints.
     #
-    # Only the firewall owner can reject the attachment. After rejection, no
-    # traffic will flow through the firewall endpoints for this attachment.
+    # Only the transit gateway owner can reject the attachment. After
+    # rejection, no traffic will flow through the firewall endpoints for
+    # this attachment.
     #
     # Use DescribeFirewall to monitor the rejection status. To accept the
     # attachment instead of rejecting it, use
@@ -4541,6 +4544,7 @@ module Aws::NetworkFirewall
     #           },
     #         },
     #       },
+    #       enable_tls_session_holding: false,
     #     },
     #     description: "Description",
     #     dry_run: false,
@@ -5273,7 +5277,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

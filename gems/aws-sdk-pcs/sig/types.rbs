@@ -76,7 +76,7 @@ module Aws::PCS
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "DELETED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor ami_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
-      attr_accessor purchase_option: ("ONDEMAND" | "SPOT")
+      attr_accessor purchase_option: ("ONDEMAND" | "SPOT" | "CAPACITY_BLOCK")
       attr_accessor custom_launch_template: Types::CustomLaunchTemplate
       attr_accessor iam_instance_profile_arn: ::String
       attr_accessor scaling_configuration: Types::ScalingConfiguration
@@ -141,7 +141,7 @@ module Aws::PCS
       attr_accessor compute_node_group_name: ::String
       attr_accessor ami_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
-      attr_accessor purchase_option: ("ONDEMAND" | "SPOT")
+      attr_accessor purchase_option: ("ONDEMAND" | "SPOT" | "CAPACITY_BLOCK")
       attr_accessor custom_launch_template: Types::CustomLaunchTemplate
       attr_accessor iam_instance_profile_arn: ::String
       attr_accessor scaling_configuration: Types::ScalingConfigurationRequest
@@ -444,7 +444,7 @@ module Aws::PCS
       attr_accessor ami_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor custom_launch_template: Types::CustomLaunchTemplate
-      attr_accessor purchase_option: ("ONDEMAND" | "SPOT")
+      attr_accessor purchase_option: ("ONDEMAND" | "SPOT" | "CAPACITY_BLOCK")
       attr_accessor spot_options: Types::SpotOptions
       attr_accessor scaling_configuration: Types::ScalingConfigurationRequest
       attr_accessor iam_instance_profile_arn: ::String

@@ -378,15 +378,19 @@ module Aws::PCS
     #   @return [Array<String>]
     #
     # @!attribute [rw] purchase_option
-    #   Specifies how EC2 instances are purchased on your behalf. Amazon Web
-    #   Services PCS supports On-Demand and Spot instances. For more
-    #   information, see [Instance purchasing options][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*. If you don't provide this
-    #   option, it defaults to On-Demand.
+    #   Specifies how EC2 instances are purchased on your behalf. PCS
+    #   supports On-Demand Instances, Spot Instances, and Amazon EC2
+    #   Capacity Blocks for ML. For more information, see [Amazon EC2
+    #   billing and purchasing options][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*. For more information about PCS support for
+    #   Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with
+    #   PCS][2] in the *PCS User Guide*. If you don't provide this option,
+    #   it defaults to On-Demand.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
+    #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
     #   @return [String]
     #
     # @!attribute [rw] custom_launch_template
@@ -412,8 +416,8 @@ module Aws::PCS
     #   @return [Types::ScalingConfiguration]
     #
     # @!attribute [rw] instance_configs
-    #   A list of EC2 instance configurations that Amazon Web Services PCS
-    #   can provision in the compute node group.
+    #   A list of EC2 instance configurations that PCS can provision in the
+    #   compute node group.
     #   @return [Array<Types::InstanceConfig>]
     #
     # @!attribute [rw] spot_options
@@ -691,15 +695,19 @@ module Aws::PCS
     #   @return [Array<String>]
     #
     # @!attribute [rw] purchase_option
-    #   Specifies how EC2 instances are purchased on your behalf. Amazon Web
-    #   Services PCS supports On-Demand and Spot instances. For more
-    #   information, see [Instance purchasing options][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*. If you don't provide this
-    #   option, it defaults to On-Demand.
+    #   Specifies how EC2 instances are purchased on your behalf. PCS
+    #   supports On-Demand Instances, Spot Instances, and Amazon EC2
+    #   Capacity Blocks for ML. For more information, see [Amazon EC2
+    #   billing and purchasing options][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*. For more information about PCS support for
+    #   Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with
+    #   PCS][2] in the *PCS User Guide*. If you don't provide this option,
+    #   it defaults to On-Demand.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
+    #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
     #   @return [String]
     #
     # @!attribute [rw] custom_launch_template
@@ -725,8 +733,8 @@ module Aws::PCS
     #   @return [Types::ScalingConfigurationRequest]
     #
     # @!attribute [rw] instance_configs
-    #   A list of EC2 instance configurations that Amazon Web Services PCS
-    #   can provision in the compute node group.
+    #   A list of EC2 instance configurations that PCS can provision in the
+    #   compute node group.
     #   @return [Array<Types::InstanceConfig>]
     #
     # @!attribute [rw] spot_options
@@ -1376,16 +1384,15 @@ module Aws::PCS
     # The networking configuration for the cluster's control plane.
     #
     # @!attribute [rw] subnet_ids
-    #   The list of subnet IDs where Amazon Web Services PCS creates an
-    #   Elastic Network Interface (ENI) to enable communication between
-    #   managed controllers and Amazon Web Services PCS resources. Subnet
-    #   IDs have the form `subnet-0123456789abcdef0`.
+    #   The list of subnet IDs where PCS creates an Elastic Network
+    #   Interface (ENI) to enable communication between managed controllers
+    #   and PCS resources. Subnet IDs have the form
+    #   `subnet-0123456789abcdef0`.
     #
     #   Subnets can't be in Outposts, Wavelength or an Amazon Web Services
     #   Local Zone.
     #
-    #   <note markdown="1"> Amazon Web Services PCS currently supports only 1 subnet in this
-    #   list.
+    #   <note markdown="1"> PCS currently supports only 1 subnet in this list.
     #
     #    </note>
     #   @return [Array<String>]
@@ -1768,7 +1775,7 @@ module Aws::PCS
     # secret**.
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of the the shared Slurm key.
+    #   The Amazon Resource Name (ARN) of the shared Slurm key.
     #   @return [String]
     #
     # @!attribute [rw] secret_version
@@ -1835,13 +1842,13 @@ module Aws::PCS
     # `purchaseOption` for the `CreateComputeNodeGroup` API action.
     #
     # @!attribute [rw] allocation_strategy
-    #   The Amazon EC2 allocation strategy Amazon Web Services PCS uses to
-    #   provision EC2 instances. Amazon Web Services PCS supports **lowest
-    #   price**, **capacity optimized**, and **price capacity optimized**.
-    #   For more information, see [Use allocation strategies to determine
-    #   how EC2 Fleet or Spot Fleet fulfills Spot and On-Demand capacity][1]
-    #   in the *Amazon Elastic Compute Cloud User Guide*. If you don't
-    #   provide this option, it defaults to **price capacity optimized**.
+    #   The Amazon EC2 allocation strategy PCS uses to provision EC2
+    #   instances. PCS supports **lowest price**, **capacity optimized**,
+    #   and **price capacity optimized**. For more information, see [Use
+    #   allocation strategies to determine how EC2 Fleet or Spot Fleet
+    #   fulfills Spot and On-Demand capacity][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*. If you don't provide this option, it
+    #   defaults to **price capacity optimized**.
     #
     #
     #
@@ -1935,15 +1942,19 @@ module Aws::PCS
     #   @return [Types::CustomLaunchTemplate]
     #
     # @!attribute [rw] purchase_option
-    #   Specifies how EC2 instances are purchased on your behalf. Amazon Web
-    #   Services PCS supports On-Demand and Spot instances. For more
-    #   information, see [Instance purchasing options][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*. If you don't provide this
-    #   option, it defaults to On-Demand.
+    #   Specifies how EC2 instances are purchased on your behalf. PCS
+    #   supports On-Demand Instances, Spot Instances, and Amazon EC2
+    #   Capacity Blocks for ML. For more information, see [Amazon EC2
+    #   billing and purchasing options][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*. For more information about PCS support for
+    #   Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with
+    #   PCS][2] in the *PCS User Guide*. If you don't provide this option,
+    #   it defaults to On-Demand.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
+    #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
     #   @return [String]
     #
     # @!attribute [rw] spot_options

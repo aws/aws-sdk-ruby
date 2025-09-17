@@ -124,7 +124,7 @@ module Aws
                                        compute_node_group_name: ::String,
                                        ?ami_id: ::String,
                                        subnet_ids: Array[::String],
-                                       ?purchase_option: ("ONDEMAND" | "SPOT"),
+                                       ?purchase_option: ("ONDEMAND" | "SPOT" | "CAPACITY_BLOCK"),
                                        custom_launch_template: {
                                          id: ::String,
                                          version: ::String
@@ -326,7 +326,7 @@ module Aws
                                          id: ::String,
                                          version: ::String
                                        },
-                                       ?purchase_option: ("ONDEMAND" | "SPOT"),
+                                       ?purchase_option: ("ONDEMAND" | "SPOT" | "CAPACITY_BLOCK"),
                                        ?spot_options: {
                                          allocation_strategy: ("lowest-price" | "capacity-optimized" | "price-capacity-optimized")?
                                        },

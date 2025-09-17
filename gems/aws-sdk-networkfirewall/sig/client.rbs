@@ -242,7 +242,8 @@ module Aws
                                         rule_variables: Hash[::String, {
                                             definition: Array[::String]
                                           }]?
-                                      }?
+                                      }?,
+                                      enable_tls_session_holding: bool?
                                     },
                                     ?description: ::String,
                                     ?tags: Array[
@@ -1161,7 +1162,8 @@ module Aws
                                         rule_variables: Hash[::String, {
                                             definition: Array[::String]
                                           }]?
-                                      }?
+                                      }?,
+                                      enable_tls_session_holding: bool?
                                     },
                                     ?description: ::String,
                                     ?dry_run: bool,

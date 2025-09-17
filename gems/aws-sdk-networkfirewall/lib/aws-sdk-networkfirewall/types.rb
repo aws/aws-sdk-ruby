@@ -949,7 +949,7 @@ module Aws::NetworkFirewall
     #   endpoints for a transit gateway-attached firewall. You must specify
     #   at least one Availability Zone. Consider enabling the firewall in
     #   every Availability Zone where you have workloads to maintain
-    #   Availability Zone independence.
+    #   Availability Zone isolation.
     #
     #   You can modify Availability Zones later using
     #   AssociateAvailabilityZones or DisassociateAvailabilityZones, but
@@ -2969,6 +2969,12 @@ module Aws::NetworkFirewall
     #   settings in your firewall policy.
     #   @return [Types::PolicyVariables]
     #
+    # @!attribute [rw] enable_tls_session_holding
+    #   When true, prevents TCP and TLS packets from reaching destination
+    #   servers until TLS Inspection has evaluated Server Name Indication
+    #   (SNI) rules. Requires an associated TLS Inspection configuration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicy AWS API Documentation
     #
     class FirewallPolicy < Struct.new(
@@ -2980,7 +2986,8 @@ module Aws::NetworkFirewall
       :stateful_default_actions,
       :stateful_engine_options,
       :tls_inspection_configuration_arn,
-      :policy_variables)
+      :policy_variables,
+      :enable_tls_session_holding)
       SENSITIVE = []
       include Aws::Structure
     end

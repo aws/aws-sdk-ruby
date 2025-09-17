@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2025-09-17)
+------------------
+
+* Feature - Add support for Amazon EC2 Capacity Blocks for ML
+
 1.30.0 (2025-09-05)
 ------------------
 

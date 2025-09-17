@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.557.0 (2025-09-17)
+------------------
+
+* Feature - Add mac-m4.metal and mac-m4pro.metal instance types.
+
 1.556.0 (2025-09-04)
 ------------------
 

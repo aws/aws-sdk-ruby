@@ -119,6 +119,7 @@ module Aws::NetworkFirewall
     DisassociateSubnetsResponse = Shapes::StructureShape.new(name: 'DisassociateSubnetsResponse')
     Domain = Shapes::StringShape.new(name: 'Domain')
     EnableMonitoringDashboard = Shapes::BooleanShape.new(name: 'EnableMonitoringDashboard')
+    EnableTLSSessionHolding = Shapes::BooleanShape.new(name: 'EnableTLSSessionHolding')
     EnabledAnalysisType = Shapes::StringShape.new(name: 'EnabledAnalysisType')
     EnabledAnalysisTypes = Shapes::ListShape.new(name: 'EnabledAnalysisTypes')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
@@ -792,6 +793,7 @@ module Aws::NetworkFirewall
     FirewallPolicy.add_member(:stateful_engine_options, Shapes::ShapeRef.new(shape: StatefulEngineOptions, location_name: "StatefulEngineOptions"))
     FirewallPolicy.add_member(:tls_inspection_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TLSInspectionConfigurationArn"))
     FirewallPolicy.add_member(:policy_variables, Shapes::ShapeRef.new(shape: PolicyVariables, location_name: "PolicyVariables"))
+    FirewallPolicy.add_member(:enable_tls_session_holding, Shapes::ShapeRef.new(shape: EnableTLSSessionHolding, location_name: "EnableTLSSessionHolding"))
     FirewallPolicy.struct_class = Types::FirewallPolicy
 
     FirewallPolicyMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
