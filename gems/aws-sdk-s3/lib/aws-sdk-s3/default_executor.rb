@@ -9,13 +9,14 @@ module Aws
         @max_threads = options[:max_threads] || 10
         @pool = []
         @running = true
-        monitor_pool
+        @mutex = Mutex.new
       end
 
       def post(*args, &block)
         raise 'Executor is not running' unless @running
 
         @queue << [args, block]
+        ensure_worker_available
       end
 
       def shutdown
@@ -32,20 +33,16 @@ module Aws
 
       private
 
-      def monitor_pool
-        Thread.new do
-          while @running
-            @pool.select!(&:alive?)
-
-            @pool << spawn_worker if @queue.size > @pool.size && @pool.size < @max_threads
-            sleep(0.01)
-          end
+      def ensure_worker_available
+        @mutex.synchronize do
+          @pool.select!(&:alive?)
+          @pool << spawn_worker if @pool.size < @max_threads
         end
       end
 
       def spawn_worker
         Thread.new do
-          while (job = @queue.pop)
+          while (job = @queue.shift)
             break if job == :shutdown
 
             args, block = job
