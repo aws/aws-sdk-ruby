@@ -2162,8 +2162,8 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Returns a list of field indexes listed in the field index policies of
-    # one or more log groups. For more information about field index
+    # Returns a list of custom and default field indexes which are
+    # discovered in log data. For more information about field index
     # policies, see [PutIndexPolicy][1].
     #
     #
@@ -2209,7 +2209,7 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Returns the field index policies of one or more log groups. For more
+    # Returns the field index policies of the specified log group. For more
     # information about field index policies, see [PutIndexPolicy][1].
     #
     # If a specified log group has a log-group level index policy, that
@@ -2594,6 +2594,9 @@ module Aws::CloudWatchLogs
     #   resp.metric_filters[0].creation_time #=> Integer
     #   resp.metric_filters[0].log_group_name #=> String
     #   resp.metric_filters[0].apply_on_transformed_logs #=> Boolean
+    #   resp.metric_filters[0].field_selection_criteria #=> String
+    #   resp.metric_filters[0].emit_system_field_dimensions #=> Array
+    #   resp.metric_filters[0].emit_system_field_dimensions[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeMetricFilters AWS API Documentation
@@ -2827,6 +2830,9 @@ module Aws::CloudWatchLogs
     #   resp.subscription_filters[0].distribution #=> String, one of "Random", "ByLogStream"
     #   resp.subscription_filters[0].apply_on_transformed_logs #=> Boolean
     #   resp.subscription_filters[0].creation_time #=> Integer
+    #   resp.subscription_filters[0].field_selection_criteria #=> String
+    #   resp.subscription_filters[0].emit_system_fields #=> Array
+    #   resp.subscription_filters[0].emit_system_fields[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeSubscriptionFilters AWS API Documentation
@@ -2927,7 +2933,7 @@ module Aws::CloudWatchLogs
     # * A time range
     #
     # * The log stream name, or a log stream name prefix that matches
-    #   mutltiple log streams
+    #   multiple log streams
     #
     # You must have the `logs:FilterLogEvents` permission to perform this
     # operation.
@@ -4604,6 +4610,22 @@ module Aws::CloudWatchLogs
     # that start with `my-log`, you can't have another field index policy
     # filtered to `my-logpprod` or `my-logging`.
     #
+    # CloudWatch Logs provides default field indexes for all log groups in
+    # the Standard log class. Default field indexes are automatically
+    # available for the following fields:
+    #
+    # * `@aws.region`
+    #
+    # * `@aws.account`
+    #
+    # * `@source.log`
+    #
+    # * `traceId`
+    #
+    # Default field indexes are in addition to any custom field indexes you
+    # define within your policy. Default field indexes are not counted
+    # towards your field index quota.
+    #
     # You can also set up a transformer at the log-group level. For more
     # information, see [PutTransformer][7]. If there is both a log-group
     # level transformer created with `PutTransformer` and an account-level
@@ -5507,6 +5529,22 @@ module Aws::CloudWatchLogs
     # will process fewer log events to reduce costs, and have improved
     # performance.
     #
+    # CloudWatch Logs provides default field indexes for all log groups in
+    # the Standard log class. Default field indexes are automatically
+    # available for the following fields:
+    #
+    # * `@aws.region`
+    #
+    # * `@aws.account`
+    #
+    # * `@source.log`
+    #
+    # * `traceId`
+    #
+    # Default field indexes are in addition to any custom field indexes you
+    # define within your policy. Default field indexes are not counted
+    # towards your field index quota.
+    #
     # Each index policy has the following quotas and restrictions:
     #
     # * As many as 20 fields can be included in the policy.
@@ -5822,6 +5860,20 @@ module Aws::CloudWatchLogs
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
     #
+    # @option params [String] :field_selection_criteria
+    #   A filter expression that specifies which log events should be
+    #   processed by this metric filter based on system fields such as source
+    #   account and source region. Uses selection criteria syntax with
+    #   operators like `=`, `!=`, `AND`, `OR`, `IN`, `NOT IN`. Example:
+    #   `@aws.region = "us-east-1"` or `@aws.account IN ["123456789012",
+    #   "987654321098"]`. Maximum length: 2000 characters.
+    #
+    # @option params [Array<String>] :emit_system_field_dimensions
+    #   A list of system fields to emit as additional dimensions in the
+    #   generated metrics. Valid values are `@aws.account` and `@aws.region`.
+    #   These dimensions help identify the source of centralized log data and
+    #   count toward the total dimension limit for metric filters.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5843,6 +5895,8 @@ module Aws::CloudWatchLogs
     #       },
     #     ],
     #     apply_on_transformed_logs: false,
+    #     field_selection_criteria: "FieldSelectionCriteria",
+    #     emit_system_field_dimensions: ["SystemField"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutMetricFilter AWS API Documentation
@@ -6215,6 +6269,20 @@ module Aws::CloudWatchLogs
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
     #
+    # @option params [String] :field_selection_criteria
+    #   A filter expression that specifies which log events should be
+    #   processed by this subscription filter based on system fields such as
+    #   source account and source region. Uses selection criteria syntax with
+    #   operators like `=`, `!=`, `AND`, `OR`, `IN`, `NOT IN`. Example:
+    #   `@aws.region NOT IN ["cn-north-1"]` or `@aws.account = "123456789012"
+    #   AND @aws.region = "us-east-1"`. Maximum length: 2000 characters.
+    #
+    # @option params [Array<String>] :emit_system_fields
+    #   A list of system fields to include in the log events sent to the
+    #   subscription destination. Valid values are `@aws.account` and
+    #   `@aws.region`. These fields provide source information for centralized
+    #   log data in the forwarded payload.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -6227,6 +6295,8 @@ module Aws::CloudWatchLogs
     #     role_arn: "RoleArn",
     #     distribution: "Random", # accepts Random, ByLogStream
     #     apply_on_transformed_logs: false,
+    #     field_selection_criteria: "FieldSelectionCriteria",
+    #     emit_system_fields: ["SystemField"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilter AWS API Documentation
@@ -7539,7 +7609,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

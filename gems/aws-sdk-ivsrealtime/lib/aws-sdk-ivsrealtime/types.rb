@@ -1000,7 +1000,7 @@ module Aws::IVSRealTime
     # @!attribute [rw] replica
     #   If true, this indicates the `participantId` is a replicated
     #   participant. If this is a subscribe event, then this flag refers to
-    #   `remoteParticipantId`.
+    #   `remoteParticipantId`. Default: `false`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Event AWS API Documentation
@@ -1263,6 +1263,13 @@ module Aws::IVSRealTime
     #   `2`.
     #   @return [Integer]
     #
+    # @!attribute [rw] participant_order_attribute
+    #   Attribute name in ParticipantTokenConfiguration identifying the
+    #   participant ordering key. Participants with
+    #   `participantOrderAttribute` set to `""` or not specified are ordered
+    #   based on their arrival time into the stage.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GridConfiguration AWS API Documentation
     #
     class GridConfiguration < Struct.new(
@@ -1270,7 +1277,8 @@ module Aws::IVSRealTime
       :omit_stopped_video,
       :video_aspect_ratio,
       :video_fill_mode,
-      :grid_gap)
+      :grid_gap,
+      :participant_order_attribute)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2242,7 +2250,8 @@ module Aws::IVSRealTime
     #   @return [String]
     #
     # @!attribute [rw] source_stage_arn
-    #   ARN of the stage from which this participant is replicated.
+    #   Source stage ARN from which this participant is replicated, if
+    #   `replicationType` is `REPLICA`.
     #   @return [String]
     #
     # @!attribute [rw] source_session_id
@@ -2505,6 +2514,13 @@ module Aws::IVSRealTime
     #   composition and the aspect ratio of the participant’s video.
     #   @return [Integer]
     #
+    # @!attribute [rw] participant_order_attribute
+    #   Attribute name in ParticipantTokenConfiguration identifying the
+    #   participant ordering key. Participants with
+    #   `participantOrderAttribute` set to `""` or not specified are ordered
+    #   based on their arrival time into the stage.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/PipConfiguration AWS API Documentation
     #
     class PipConfiguration < Struct.new(
@@ -2517,7 +2533,8 @@ module Aws::IVSRealTime
       :pip_offset,
       :pip_position,
       :pip_width,
-      :pip_height)
+      :pip_height,
+      :participant_order_attribute)
       SENSITIVE = []
       include Aws::Structure
     end

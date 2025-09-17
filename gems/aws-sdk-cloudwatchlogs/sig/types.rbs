@@ -1089,6 +1089,8 @@ module Aws::CloudWatchLogs
       attr_accessor creation_time: ::Integer
       attr_accessor log_group_name: ::String
       attr_accessor apply_on_transformed_logs: bool
+      attr_accessor field_selection_criteria: ::String
+      attr_accessor emit_system_field_dimensions: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1430,6 +1432,8 @@ module Aws::CloudWatchLogs
       attr_accessor filter_pattern: ::String
       attr_accessor metric_transformations: ::Array[Types::MetricTransformation]
       attr_accessor apply_on_transformed_logs: bool
+      attr_accessor field_selection_criteria: ::String
+      attr_accessor emit_system_field_dimensions: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1476,6 +1480,8 @@ module Aws::CloudWatchLogs
       attr_accessor role_arn: ::String
       attr_accessor distribution: ("Random" | "ByLogStream")
       attr_accessor apply_on_transformed_logs: bool
+      attr_accessor field_selection_criteria: ::String
+      attr_accessor emit_system_fields: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1680,6 +1686,8 @@ module Aws::CloudWatchLogs
       attr_accessor distribution: ("Random" | "ByLogStream")
       attr_accessor apply_on_transformed_logs: bool
       attr_accessor creation_time: ::Integer
+      attr_accessor field_selection_criteria: ::String
+      attr_accessor emit_system_fields: ::Array[::String]
       SENSITIVE: []
     end
 

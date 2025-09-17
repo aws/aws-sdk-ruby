@@ -952,7 +952,9 @@ module Aws
                                    unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
                                  },
                                ],
-                               ?apply_on_transformed_logs: bool
+                               ?apply_on_transformed_logs: bool,
+                               ?field_selection_criteria: ::String,
+                               ?emit_system_field_dimensions: Array[::String]
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1000,7 +1002,9 @@ module Aws
                                      destination_arn: ::String,
                                      ?role_arn: ::String,
                                      ?distribution: ("Random" | "ByLogStream"),
-                                     ?apply_on_transformed_logs: bool
+                                     ?apply_on_transformed_logs: bool,
+                                     ?field_selection_criteria: ::String,
+                                     ?emit_system_fields: Array[::String]
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

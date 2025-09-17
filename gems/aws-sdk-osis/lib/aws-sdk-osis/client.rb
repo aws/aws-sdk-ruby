@@ -519,14 +519,8 @@ module Aws::OSIS
     #   List of tags to add to the pipeline upon creation.
     #
     # @option params [String] :pipeline_role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that provides the
-    #   required permissions for a pipeline to read from the source and write
-    #   to the sink. For more information, see [Setting up roles and users in
-    #   Amazon OpenSearch Ingestion][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html
+    #   The Amazon Resource Name (ARN) of the IAM role that grants the
+    #   pipeline permission to access Amazon Web Services resources.
     #
     # @return [Types::CreatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -617,6 +611,51 @@ module Aws::OSIS
       req.send_request(options)
     end
 
+    # Creates a VPC endpoint for an OpenSearch Ingestion pipeline. Pipeline
+    # endpoints allow you to ingest data from your VPC into pipelines that
+    # you have access to.
+    #
+    # @option params [required, String] :pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline to create the endpoint
+    #   for.
+    #
+    # @option params [required, Types::PipelineEndpointVpcOptions] :vpc_options
+    #   Container for the VPC configuration for the pipeline endpoint,
+    #   including subnet IDs and security group IDs.
+    #
+    # @return [Types::CreatePipelineEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePipelineEndpointResponse#pipeline_arn #pipeline_arn} => String
+    #   * {Types::CreatePipelineEndpointResponse#endpoint_id #endpoint_id} => String
+    #   * {Types::CreatePipelineEndpointResponse#status #status} => String
+    #   * {Types::CreatePipelineEndpointResponse#vpc_id #vpc_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_pipeline_endpoint({
+    #     pipeline_arn: "PipelineArn", # required
+    #     vpc_options: { # required
+    #       subnet_ids: ["SubnetId"],
+    #       security_group_ids: ["SecurityGroupId"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_arn #=> String
+    #   resp.endpoint_id #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "DELETING", "REVOKING", "REVOKED"
+    #   resp.vpc_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/CreatePipelineEndpoint AWS API Documentation
+    #
+    # @overload create_pipeline_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_pipeline_endpoint(params = {}, options = {})
+      req = build_request(:create_pipeline_endpoint, params)
+      req.send_request(options)
+    end
+
     # Deletes an OpenSearch Ingestion pipeline. For more information, see
     # [Deleting Amazon OpenSearch Ingestion pipelines][1].
     #
@@ -641,6 +680,51 @@ module Aws::OSIS
     # @param [Hash] params ({})
     def delete_pipeline(params = {}, options = {})
       req = build_request(:delete_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Deletes a VPC endpoint for an OpenSearch Ingestion pipeline.
+    #
+    # @option params [required, String] :endpoint_id
+    #   The unique identifier of the pipeline endpoint to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_pipeline_endpoint({
+    #     endpoint_id: "PipelineEndpointId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/DeletePipelineEndpoint AWS API Documentation
+    #
+    # @overload delete_pipeline_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_pipeline_endpoint(params = {}, options = {})
+      req = build_request(:delete_pipeline_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Deletes a resource-based policy from an OpenSearch Ingestion resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to delete
+    #   the policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "PipelineArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
       req.send_request(options)
     end
 
@@ -798,6 +882,38 @@ module Aws::OSIS
       req.send_request(options)
     end
 
+    # Retrieves the resource-based policy attached to an OpenSearch
+    # Ingestion resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to retrieve
+    #   the policy.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetResourcePolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "PipelineArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of all available blueprints for Data Prepper. For
     # more information, see [Using blueprints to create a pipeline][1].
     #
@@ -824,6 +940,98 @@ module Aws::OSIS
     # @param [Hash] params ({})
     def list_pipeline_blueprints(params = {}, options = {})
       req = build_request(:list_pipeline_blueprints, params)
+      req.send_request(options)
+    end
+
+    # Lists the pipeline endpoints connected to pipelines in your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of pipeline endpoint connections to return in the
+    #   response.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListPipelineEndpointConnections` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListPipelineEndpointConnections` operations, which returns results in
+    #   the next page.
+    #
+    # @return [Types::ListPipelineEndpointConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPipelineEndpointConnectionsResponse#next_token #next_token} => String
+    #   * {Types::ListPipelineEndpointConnectionsResponse#pipeline_endpoint_connections #pipeline_endpoint_connections} => Array&lt;Types::PipelineEndpointConnection&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pipeline_endpoint_connections({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.pipeline_endpoint_connections #=> Array
+    #   resp.pipeline_endpoint_connections[0].pipeline_arn #=> String
+    #   resp.pipeline_endpoint_connections[0].endpoint_id #=> String
+    #   resp.pipeline_endpoint_connections[0].status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "DELETING", "REVOKING", "REVOKED"
+    #   resp.pipeline_endpoint_connections[0].vpc_endpoint_owner #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ListPipelineEndpointConnections AWS API Documentation
+    #
+    # @overload list_pipeline_endpoint_connections(params = {})
+    # @param [Hash] params ({})
+    def list_pipeline_endpoint_connections(params = {}, options = {})
+      req = build_request(:list_pipeline_endpoint_connections, params)
+      req.send_request(options)
+    end
+
+    # Lists all pipeline endpoints in your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of pipeline endpoints to return in the response.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListPipelineEndpoints` operation returns a
+    #   `NextToken`, you can include the returned `NextToken` in subsequent
+    #   `ListPipelineEndpoints` operations, which returns results in the next
+    #   page.
+    #
+    # @return [Types::ListPipelineEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPipelineEndpointsResponse#next_token #next_token} => String
+    #   * {Types::ListPipelineEndpointsResponse#pipeline_endpoints #pipeline_endpoints} => Array&lt;Types::PipelineEndpoint&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pipeline_endpoints({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.pipeline_endpoints #=> Array
+    #   resp.pipeline_endpoints[0].pipeline_arn #=> String
+    #   resp.pipeline_endpoints[0].endpoint_id #=> String
+    #   resp.pipeline_endpoints[0].status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "DELETING", "REVOKING", "REVOKED"
+    #   resp.pipeline_endpoints[0].vpc_id #=> String
+    #   resp.pipeline_endpoints[0].vpc_options.subnet_ids #=> Array
+    #   resp.pipeline_endpoints[0].vpc_options.subnet_ids[0] #=> String
+    #   resp.pipeline_endpoints[0].vpc_options.security_group_ids #=> Array
+    #   resp.pipeline_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline_endpoints[0].ingest_endpoint_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ListPipelineEndpoints AWS API Documentation
+    #
+    # @overload list_pipeline_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_pipeline_endpoints(params = {}, options = {})
+      req = build_request(:list_pipeline_endpoints, params)
       req.send_request(options)
     end
 
@@ -919,6 +1127,76 @@ module Aws::OSIS
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Attaches a resource-based policy to an OpenSearch Ingestion resource.
+    # Resource-based policies grant permissions to principals to perform
+    # actions on the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to attach the policy
+    #   to.
+    #
+    # @option params [required, String] :policy
+    #   The resource-based policy document in JSON format.
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::PutResourcePolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "PipelineArn", # required
+    #     policy: "ResourcePolicy", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Revokes pipeline endpoints from specified endpoint IDs.
+    #
+    # @option params [required, String] :pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline from which to revoke
+    #   endpoint connections.
+    #
+    # @option params [required, Array<String>] :endpoint_ids
+    #   A list of endpoint IDs for which to revoke access to the pipeline.
+    #
+    # @return [Types::RevokePipelineEndpointConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RevokePipelineEndpointConnectionsResponse#pipeline_arn #pipeline_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_pipeline_endpoint_connections({
+    #     pipeline_arn: "PipelineArn", # required
+    #     endpoint_ids: ["PipelineEndpointId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/RevokePipelineEndpointConnections AWS API Documentation
+    #
+    # @overload revoke_pipeline_endpoint_connections(params = {})
+    # @param [Hash] params ({})
+    def revoke_pipeline_endpoint_connections(params = {}, options = {})
+      req = build_request(:revoke_pipeline_endpoint_connections, params)
       req.send_request(options)
     end
 
@@ -1159,14 +1437,8 @@ module Aws::OSIS
     #   persistent buffer.
     #
     # @option params [String] :pipeline_role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that provides the
-    #   required permissions for a pipeline to read from the source and write
-    #   to the sink. For more information, see [Setting up roles and users in
-    #   Amazon OpenSearch Ingestion][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html
+    #   The Amazon Resource Name (ARN) of the IAM role that grants the
+    #   pipeline permission to access Amazon Web Services resources.
     #
     # @return [Types::UpdatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1300,7 +1572,7 @@ module Aws::OSIS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-osis'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

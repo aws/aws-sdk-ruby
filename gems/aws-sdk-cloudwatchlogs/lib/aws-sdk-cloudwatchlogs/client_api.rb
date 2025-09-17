@@ -162,6 +162,7 @@ module Aws::CloudWatchLogs
     DisassociateKmsKeyRequest = Shapes::StructureShape.new(name: 'DisassociateKmsKeyRequest')
     Distribution = Shapes::StringShape.new(name: 'Distribution')
     DynamicTokenPosition = Shapes::IntegerShape.new(name: 'DynamicTokenPosition')
+    EmitSystemFields = Shapes::ListShape.new(name: 'EmitSystemFields')
     EncryptionKey = Shapes::StringShape.new(name: 'EncryptionKey')
     Entity = Shapes::StructureShape.new(name: 'Entity')
     EntityAttributes = Shapes::MapShape.new(name: 'EntityAttributes')
@@ -197,6 +198,7 @@ module Aws::CloudWatchLogs
     FieldIndex = Shapes::StructureShape.new(name: 'FieldIndex')
     FieldIndexName = Shapes::StringShape.new(name: 'FieldIndexName')
     FieldIndexes = Shapes::ListShape.new(name: 'FieldIndexes')
+    FieldSelectionCriteria = Shapes::StringShape.new(name: 'FieldSelectionCriteria')
     FieldsData = Shapes::StructureShape.new(name: 'FieldsData')
     FilterCount = Shapes::IntegerShape.new(name: 'FilterCount')
     FilterLogEventsRequest = Shapes::StructureShape.new(name: 'FilterLogEventsRequest')
@@ -497,6 +499,7 @@ module Aws::CloudWatchLogs
     SuppressionState = Shapes::StringShape.new(name: 'SuppressionState')
     SuppressionType = Shapes::StringShape.new(name: 'SuppressionType')
     SuppressionUnit = Shapes::StringShape.new(name: 'SuppressionUnit')
+    SystemField = Shapes::StringShape.new(name: 'SystemField')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagList = Shapes::ListShape.new(name: 'TagList')
@@ -1012,6 +1015,8 @@ module Aws::CloudWatchLogs
     DisassociateKmsKeyRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
     DisassociateKmsKeyRequest.struct_class = Types::DisassociateKmsKeyRequest
 
+    EmitSystemFields.member = Shapes::ShapeRef.new(shape: SystemField)
+
     Entity.add_member(:key_attributes, Shapes::ShapeRef.new(shape: EntityKeyAttributes, location_name: "keyAttributes"))
     Entity.add_member(:attributes, Shapes::ShapeRef.new(shape: EntityAttributes, location_name: "attributes"))
     Entity.struct_class = Types::Entity
@@ -1420,6 +1425,8 @@ module Aws::CloudWatchLogs
     MetricFilter.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     MetricFilter.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     MetricFilter.add_member(:apply_on_transformed_logs, Shapes::ShapeRef.new(shape: ApplyOnTransformedLogs, location_name: "applyOnTransformedLogs"))
+    MetricFilter.add_member(:field_selection_criteria, Shapes::ShapeRef.new(shape: FieldSelectionCriteria, location_name: "fieldSelectionCriteria"))
+    MetricFilter.add_member(:emit_system_field_dimensions, Shapes::ShapeRef.new(shape: EmitSystemFields, location_name: "emitSystemFieldDimensions"))
     MetricFilter.struct_class = Types::MetricFilter
 
     MetricFilterMatchRecord.add_member(:event_number, Shapes::ShapeRef.new(shape: EventNumber, location_name: "eventNumber"))
@@ -1682,6 +1689,8 @@ module Aws::CloudWatchLogs
     PutMetricFilterRequest.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, required: true, location_name: "filterPattern"))
     PutMetricFilterRequest.add_member(:metric_transformations, Shapes::ShapeRef.new(shape: MetricTransformations, required: true, location_name: "metricTransformations"))
     PutMetricFilterRequest.add_member(:apply_on_transformed_logs, Shapes::ShapeRef.new(shape: ApplyOnTransformedLogs, location_name: "applyOnTransformedLogs"))
+    PutMetricFilterRequest.add_member(:field_selection_criteria, Shapes::ShapeRef.new(shape: FieldSelectionCriteria, location_name: "fieldSelectionCriteria"))
+    PutMetricFilterRequest.add_member(:emit_system_field_dimensions, Shapes::ShapeRef.new(shape: EmitSystemFields, location_name: "emitSystemFieldDimensions"))
     PutMetricFilterRequest.struct_class = Types::PutMetricFilterRequest
 
     PutQueryDefinitionRequest.add_member(:query_language, Shapes::ShapeRef.new(shape: QueryLanguage, location_name: "queryLanguage"))
@@ -1716,6 +1725,8 @@ module Aws::CloudWatchLogs
     PutSubscriptionFilterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     PutSubscriptionFilterRequest.add_member(:distribution, Shapes::ShapeRef.new(shape: Distribution, location_name: "distribution"))
     PutSubscriptionFilterRequest.add_member(:apply_on_transformed_logs, Shapes::ShapeRef.new(shape: ApplyOnTransformedLogs, location_name: "applyOnTransformedLogs"))
+    PutSubscriptionFilterRequest.add_member(:field_selection_criteria, Shapes::ShapeRef.new(shape: FieldSelectionCriteria, location_name: "fieldSelectionCriteria"))
+    PutSubscriptionFilterRequest.add_member(:emit_system_fields, Shapes::ShapeRef.new(shape: EmitSystemFields, location_name: "emitSystemFields"))
     PutSubscriptionFilterRequest.struct_class = Types::PutSubscriptionFilterRequest
 
     PutTransformerRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, required: true, location_name: "logGroupIdentifier"))
@@ -1887,6 +1898,8 @@ module Aws::CloudWatchLogs
     SubscriptionFilter.add_member(:distribution, Shapes::ShapeRef.new(shape: Distribution, location_name: "distribution"))
     SubscriptionFilter.add_member(:apply_on_transformed_logs, Shapes::ShapeRef.new(shape: ApplyOnTransformedLogs, location_name: "applyOnTransformedLogs"))
     SubscriptionFilter.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    SubscriptionFilter.add_member(:field_selection_criteria, Shapes::ShapeRef.new(shape: FieldSelectionCriteria, location_name: "fieldSelectionCriteria"))
+    SubscriptionFilter.add_member(:emit_system_fields, Shapes::ShapeRef.new(shape: EmitSystemFields, location_name: "emitSystemFields"))
     SubscriptionFilter.struct_class = Types::SubscriptionFilter
 
     SubscriptionFilters.member = Shapes::ShapeRef.new(shape: SubscriptionFilter)

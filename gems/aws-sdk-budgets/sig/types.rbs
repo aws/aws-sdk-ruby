@@ -60,7 +60,7 @@ module Aws::Budgets
       attr_accessor planned_budget_limits: ::Hash[::String, Types::Spend]
       attr_accessor cost_filters: ::Hash[::String, ::Array[::String]]
       attr_accessor cost_types: Types::CostTypes
-      attr_accessor time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY")
+      attr_accessor time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY" | "CUSTOM")
       attr_accessor time_period: Types::TimePeriod
       attr_accessor calculated_spend: Types::CalculatedSpend
       attr_accessor budget_type: ("USAGE" | "COST" | "RI_UTILIZATION" | "RI_COVERAGE" | "SAVINGS_PLANS_UTILIZATION" | "SAVINGS_PLANS_COVERAGE")
@@ -84,7 +84,7 @@ module Aws::Budgets
       attr_accessor budget_type: ("USAGE" | "COST" | "RI_UTILIZATION" | "RI_COVERAGE" | "SAVINGS_PLANS_UTILIZATION" | "SAVINGS_PLANS_COVERAGE")
       attr_accessor cost_filters: ::Hash[::String, ::Array[::String]]
       attr_accessor cost_types: Types::CostTypes
-      attr_accessor time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY")
+      attr_accessor time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY" | "CUSTOM")
       attr_accessor billing_view_arn: ::String
       attr_accessor budgeted_and_actual_amounts_list: ::Array[Types::BudgetedAndActualAmounts]
       SENSITIVE: []
@@ -420,7 +420,7 @@ module Aws::Budgets
 
     class HealthStatus
       attr_accessor status: ("HEALTHY" | "UNHEALTHY")
-      attr_accessor status_reason: ("BILLING_VIEW_NO_ACCESS" | "BILLING_VIEW_UNHEALTHY" | "FILTER_INVALID")
+      attr_accessor status_reason: ("BILLING_VIEW_NO_ACCESS" | "BILLING_VIEW_UNHEALTHY" | "FILTER_INVALID" | "MULTI_YEAR_HISTORICAL_DATA_DISABLED")
       attr_accessor last_updated_time: ::Time
       SENSITIVE: []
     end

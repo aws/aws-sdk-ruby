@@ -510,6 +510,7 @@ module Aws::IVSRealTime
     GridConfiguration.add_member(:video_aspect_ratio, Shapes::ShapeRef.new(shape: VideoAspectRatio, location_name: "videoAspectRatio"))
     GridConfiguration.add_member(:video_fill_mode, Shapes::ShapeRef.new(shape: VideoFillMode, location_name: "videoFillMode"))
     GridConfiguration.add_member(:grid_gap, Shapes::ShapeRef.new(shape: GridGap, location_name: "gridGap"))
+    GridConfiguration.add_member(:participant_order_attribute, Shapes::ShapeRef.new(shape: AttributeKey, location_name: "participantOrderAttribute"))
     GridConfiguration.struct_class = Types::GridConfiguration
 
     ImportPublicKeyRequest.add_member(:public_key_material, Shapes::ShapeRef.new(shape: PublicKeyMaterial, required: true, location_name: "publicKeyMaterial"))
@@ -764,6 +765,7 @@ module Aws::IVSRealTime
     PipConfiguration.add_member(:pip_position, Shapes::ShapeRef.new(shape: PipPosition, location_name: "pipPosition"))
     PipConfiguration.add_member(:pip_width, Shapes::ShapeRef.new(shape: PipWidth, location_name: "pipWidth"))
     PipConfiguration.add_member(:pip_height, Shapes::ShapeRef.new(shape: PipHeight, location_name: "pipHeight"))
+    PipConfiguration.add_member(:participant_order_attribute, Shapes::ShapeRef.new(shape: AttributeKey, location_name: "participantOrderAttribute"))
     PipConfiguration.struct_class = Types::PipConfiguration
 
     PublicKey.add_member(:arn, Shapes::ShapeRef.new(shape: PublicKeyArn, location_name: "arn"))

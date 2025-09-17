@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2025-09-16)
+------------------
+
 * Feature - CloudFront signers now support ECDSA private keys in addition to RSA keys.
 
 1.128.0 (2025-09-03)

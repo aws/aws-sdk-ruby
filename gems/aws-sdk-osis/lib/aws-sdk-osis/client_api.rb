@@ -15,6 +15,7 @@ module Aws::OSIS
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     BlueprintFormat = Shapes::StringShape.new(name: 'BlueprintFormat')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BufferOptions = Shapes::StructureShape.new(name: 'BufferOptions')
@@ -27,10 +28,16 @@ module Aws::OSIS
     CidrBlock = Shapes::StringShape.new(name: 'CidrBlock')
     CloudWatchLogDestination = Shapes::StructureShape.new(name: 'CloudWatchLogDestination')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreatePipelineEndpointRequest = Shapes::StructureShape.new(name: 'CreatePipelineEndpointRequest')
+    CreatePipelineEndpointResponse = Shapes::StructureShape.new(name: 'CreatePipelineEndpointResponse')
     CreatePipelineRequest = Shapes::StructureShape.new(name: 'CreatePipelineRequest')
     CreatePipelineResponse = Shapes::StructureShape.new(name: 'CreatePipelineResponse')
+    DeletePipelineEndpointRequest = Shapes::StructureShape.new(name: 'DeletePipelineEndpointRequest')
+    DeletePipelineEndpointResponse = Shapes::StructureShape.new(name: 'DeletePipelineEndpointResponse')
     DeletePipelineRequest = Shapes::StructureShape.new(name: 'DeletePipelineRequest')
     DeletePipelineResponse = Shapes::StructureShape.new(name: 'DeletePipelineResponse')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DisabledOperationException = Shapes::StructureShape.new(name: 'DisabledOperationException')
     EncryptionAtRestOptions = Shapes::StructureShape.new(name: 'EncryptionAtRestOptions')
     GetPipelineBlueprintRequest = Shapes::StructureShape.new(name: 'GetPipelineBlueprintRequest')
@@ -39,6 +46,8 @@ module Aws::OSIS
     GetPipelineChangeProgressResponse = Shapes::StructureShape.new(name: 'GetPipelineChangeProgressResponse')
     GetPipelineRequest = Shapes::StructureShape.new(name: 'GetPipelineRequest')
     GetPipelineResponse = Shapes::StructureShape.new(name: 'GetPipelineResponse')
+    GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
+    GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     IngestEndpointUrlsList = Shapes::ListShape.new(name: 'IngestEndpointUrlsList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
@@ -47,6 +56,10 @@ module Aws::OSIS
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListPipelineBlueprintsRequest = Shapes::StructureShape.new(name: 'ListPipelineBlueprintsRequest')
     ListPipelineBlueprintsResponse = Shapes::StructureShape.new(name: 'ListPipelineBlueprintsResponse')
+    ListPipelineEndpointConnectionsRequest = Shapes::StructureShape.new(name: 'ListPipelineEndpointConnectionsRequest')
+    ListPipelineEndpointConnectionsResponse = Shapes::StructureShape.new(name: 'ListPipelineEndpointConnectionsResponse')
+    ListPipelineEndpointsRequest = Shapes::StructureShape.new(name: 'ListPipelineEndpointsRequest')
+    ListPipelineEndpointsResponse = Shapes::StructureShape.new(name: 'ListPipelineEndpointsResponse')
     ListPipelinesRequest = Shapes::StructureShape.new(name: 'ListPipelinesRequest')
     ListPipelinesResponse = Shapes::StructureShape.new(name: 'ListPipelinesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -63,6 +76,14 @@ module Aws::OSIS
     PipelineConfigurationBody = Shapes::StringShape.new(name: 'PipelineConfigurationBody')
     PipelineDestination = Shapes::StructureShape.new(name: 'PipelineDestination')
     PipelineDestinationList = Shapes::ListShape.new(name: 'PipelineDestinationList')
+    PipelineEndpoint = Shapes::StructureShape.new(name: 'PipelineEndpoint')
+    PipelineEndpointConnection = Shapes::StructureShape.new(name: 'PipelineEndpointConnection')
+    PipelineEndpointConnectionsSummaryList = Shapes::ListShape.new(name: 'PipelineEndpointConnectionsSummaryList')
+    PipelineEndpointId = Shapes::StringShape.new(name: 'PipelineEndpointId')
+    PipelineEndpointIdsList = Shapes::ListShape.new(name: 'PipelineEndpointIdsList')
+    PipelineEndpointStatus = Shapes::StringShape.new(name: 'PipelineEndpointStatus')
+    PipelineEndpointVpcOptions = Shapes::StructureShape.new(name: 'PipelineEndpointVpcOptions')
+    PipelineEndpointsSummaryList = Shapes::ListShape.new(name: 'PipelineEndpointsSummaryList')
     PipelineName = Shapes::StringShape.new(name: 'PipelineName')
     PipelineRoleArn = Shapes::StringShape.new(name: 'PipelineRoleArn')
     PipelineStatus = Shapes::StringShape.new(name: 'PipelineStatus')
@@ -70,8 +91,13 @@ module Aws::OSIS
     PipelineSummary = Shapes::StructureShape.new(name: 'PipelineSummary')
     PipelineSummaryList = Shapes::ListShape.new(name: 'PipelineSummaryList')
     PipelineUnits = Shapes::IntegerShape.new(name: 'PipelineUnits')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
+    RevokePipelineEndpointConnectionsRequest = Shapes::StructureShape.new(name: 'RevokePipelineEndpointConnectionsRequest')
+    RevokePipelineEndpointConnectionsResponse = Shapes::StructureShape.new(name: 'RevokePipelineEndpointConnectionsResponse')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     ServiceVpcEndpoint = Shapes::StructureShape.new(name: 'ServiceVpcEndpoint')
@@ -133,6 +159,16 @@ module Aws::OSIS
 
     ConflictException.struct_class = Types::ConflictException
 
+    CreatePipelineEndpointRequest.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, required: true, location_name: "PipelineArn"))
+    CreatePipelineEndpointRequest.add_member(:vpc_options, Shapes::ShapeRef.new(shape: PipelineEndpointVpcOptions, required: true, location_name: "VpcOptions"))
+    CreatePipelineEndpointRequest.struct_class = Types::CreatePipelineEndpointRequest
+
+    CreatePipelineEndpointResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
+    CreatePipelineEndpointResponse.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: PipelineEndpointId, location_name: "EndpointId"))
+    CreatePipelineEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: PipelineEndpointStatus, location_name: "Status"))
+    CreatePipelineEndpointResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
+    CreatePipelineEndpointResponse.struct_class = Types::CreatePipelineEndpointResponse
+
     CreatePipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "PipelineName"))
     CreatePipelineRequest.add_member(:min_units, Shapes::ShapeRef.new(shape: PipelineUnits, required: true, location_name: "MinUnits"))
     CreatePipelineRequest.add_member(:max_units, Shapes::ShapeRef.new(shape: PipelineUnits, required: true, location_name: "MaxUnits"))
@@ -148,10 +184,20 @@ module Aws::OSIS
     CreatePipelineResponse.add_member(:pipeline, Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
     CreatePipelineResponse.struct_class = Types::CreatePipelineResponse
 
+    DeletePipelineEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: PipelineEndpointId, required: true, location: "uri", location_name: "EndpointId"))
+    DeletePipelineEndpointRequest.struct_class = Types::DeletePipelineEndpointRequest
+
+    DeletePipelineEndpointResponse.struct_class = Types::DeletePipelineEndpointResponse
+
     DeletePipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location: "uri", location_name: "PipelineName"))
     DeletePipelineRequest.struct_class = Types::DeletePipelineRequest
 
     DeletePipelineResponse.struct_class = Types::DeletePipelineResponse
+
+    DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PipelineArn, required: true, location: "uri", location_name: "ResourceArn"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
 
     DisabledOperationException.struct_class = Types::DisabledOperationException
 
@@ -178,6 +224,13 @@ module Aws::OSIS
     GetPipelineResponse.add_member(:pipeline, Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
     GetPipelineResponse.struct_class = Types::GetPipelineResponse
 
+    GetResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PipelineArn, required: true, location: "uri", location_name: "ResourceArn"))
+    GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
+
+    GetResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "ResourceArn"))
+    GetResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
+    GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
+
     IngestEndpointUrlsList.member = Shapes::ShapeRef.new(shape: String)
 
     InternalException.struct_class = Types::InternalException
@@ -190,6 +243,22 @@ module Aws::OSIS
 
     ListPipelineBlueprintsResponse.add_member(:blueprints, Shapes::ShapeRef.new(shape: PipelineBlueprintsSummaryList, location_name: "Blueprints"))
     ListPipelineBlueprintsResponse.struct_class = Types::ListPipelineBlueprintsResponse
+
+    ListPipelineEndpointConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPipelineEndpointConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPipelineEndpointConnectionsRequest.struct_class = Types::ListPipelineEndpointConnectionsRequest
+
+    ListPipelineEndpointConnectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPipelineEndpointConnectionsResponse.add_member(:pipeline_endpoint_connections, Shapes::ShapeRef.new(shape: PipelineEndpointConnectionsSummaryList, location_name: "PipelineEndpointConnections"))
+    ListPipelineEndpointConnectionsResponse.struct_class = Types::ListPipelineEndpointConnectionsResponse
+
+    ListPipelineEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPipelineEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPipelineEndpointsRequest.struct_class = Types::ListPipelineEndpointsRequest
+
+    ListPipelineEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPipelineEndpointsResponse.add_member(:pipeline_endpoints, Shapes::ShapeRef.new(shape: PipelineEndpointsSummaryList, location_name: "PipelineEndpoints"))
+    ListPipelineEndpointsResponse.struct_class = Types::ListPipelineEndpointsResponse
 
     ListPipelinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListPipelinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -253,6 +322,30 @@ module Aws::OSIS
 
     PipelineDestinationList.member = Shapes::ShapeRef.new(shape: PipelineDestination)
 
+    PipelineEndpoint.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
+    PipelineEndpoint.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: PipelineEndpointId, location_name: "EndpointId"))
+    PipelineEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: PipelineEndpointStatus, location_name: "Status"))
+    PipelineEndpoint.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
+    PipelineEndpoint.add_member(:vpc_options, Shapes::ShapeRef.new(shape: PipelineEndpointVpcOptions, location_name: "VpcOptions"))
+    PipelineEndpoint.add_member(:ingest_endpoint_url, Shapes::ShapeRef.new(shape: String, location_name: "IngestEndpointUrl"))
+    PipelineEndpoint.struct_class = Types::PipelineEndpoint
+
+    PipelineEndpointConnection.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
+    PipelineEndpointConnection.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: PipelineEndpointId, location_name: "EndpointId"))
+    PipelineEndpointConnection.add_member(:status, Shapes::ShapeRef.new(shape: PipelineEndpointStatus, location_name: "Status"))
+    PipelineEndpointConnection.add_member(:vpc_endpoint_owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "VpcEndpointOwner"))
+    PipelineEndpointConnection.struct_class = Types::PipelineEndpointConnection
+
+    PipelineEndpointConnectionsSummaryList.member = Shapes::ShapeRef.new(shape: PipelineEndpointConnection)
+
+    PipelineEndpointIdsList.member = Shapes::ShapeRef.new(shape: PipelineEndpointId)
+
+    PipelineEndpointVpcOptions.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    PipelineEndpointVpcOptions.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    PipelineEndpointVpcOptions.struct_class = Types::PipelineEndpointVpcOptions
+
+    PipelineEndpointsSummaryList.member = Shapes::ShapeRef.new(shape: PipelineEndpoint)
+
     PipelineStatusReason.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     PipelineStatusReason.struct_class = Types::PipelineStatusReason
 
@@ -270,9 +363,24 @@ module Aws::OSIS
 
     PipelineSummaryList.member = Shapes::ShapeRef.new(shape: PipelineSummary)
 
+    PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PipelineArn, required: true, location: "uri", location_name: "ResourceArn"))
+    PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "Policy"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "ResourceArn"))
+    PutResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
+
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RevokePipelineEndpointConnectionsRequest.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, required: true, location_name: "PipelineArn"))
+    RevokePipelineEndpointConnectionsRequest.add_member(:endpoint_ids, Shapes::ShapeRef.new(shape: PipelineEndpointIdsList, required: true, location_name: "EndpointIds"))
+    RevokePipelineEndpointConnectionsRequest.struct_class = Types::RevokePipelineEndpointConnectionsRequest
+
+    RevokePipelineEndpointConnectionsResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
+    RevokePipelineEndpointConnectionsResponse.struct_class = Types::RevokePipelineEndpointConnectionsResponse
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -393,6 +501,20 @@ module Aws::OSIS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:create_pipeline_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePipelineEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/2022-01-01/osis/createPipelineEndpoint"
+        o.input = Shapes::ShapeRef.new(shape: CreatePipelineEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePipelineEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_pipeline, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePipeline"
         o.http_method = "DELETE"
@@ -405,6 +527,32 @@ module Aws::OSIS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_pipeline_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePipelineEndpoint"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2022-01-01/osis/deletePipelineEndpoint/{EndpointId}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePipelineEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePipelineEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2022-01-01/osis/resourcePolicy/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_pipeline, Seahorse::Model::Operation.new.tap do |o|
@@ -446,6 +594,20 @@ module Aws::OSIS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/2022-01-01/osis/resourcePolicy/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:list_pipeline_blueprints, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPipelineBlueprints"
         o.http_method = "POST"
@@ -457,6 +619,44 @@ module Aws::OSIS
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+      end)
+
+      api.add_operation(:list_pipeline_endpoint_connections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPipelineEndpointConnections"
+        o.http_method = "GET"
+        o.http_request_uri = "/2022-01-01/osis/listPipelineEndpointConnections"
+        o.input = Shapes::ShapeRef.new(shape: ListPipelineEndpointConnectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPipelineEndpointConnectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_pipeline_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPipelineEndpoints"
+        o.http_method = "GET"
+        o.http_request_uri = "/2022-01-01/osis/listPipelineEndpoints"
+        o.input = Shapes::ShapeRef.new(shape: ListPipelineEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPipelineEndpointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_pipelines, Seahorse::Model::Operation.new.tap do |o|
@@ -487,6 +687,33 @@ module Aws::OSIS
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2022-01-01/osis/resourcePolicy/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:revoke_pipeline_endpoint_connections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokePipelineEndpointConnections"
+        o.http_method = "POST"
+        o.http_request_uri = "/2022-01-01/osis/revokePipelineEndpointConnections"
+        o.input = Shapes::ShapeRef.new(shape: RevokePipelineEndpointConnectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: RevokePipelineEndpointConnectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)

@@ -40,6 +40,20 @@ module Aws::OSIS
     class ConflictException < Aws::EmptyStructure
     end
 
+    class CreatePipelineEndpointRequest
+      attr_accessor pipeline_arn: ::String
+      attr_accessor vpc_options: Types::PipelineEndpointVpcOptions
+      SENSITIVE: []
+    end
+
+    class CreatePipelineEndpointResponse
+      attr_accessor pipeline_arn: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "REVOKING" | "REVOKED")
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
     class CreatePipelineRequest
       attr_accessor pipeline_name: ::String
       attr_accessor min_units: ::Integer
@@ -59,12 +73,28 @@ module Aws::OSIS
       SENSITIVE: []
     end
 
+    class DeletePipelineEndpointRequest
+      attr_accessor endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePipelineEndpointResponse < Aws::EmptyStructure
+    end
+
     class DeletePipelineRequest
       attr_accessor pipeline_name: ::String
       SENSITIVE: []
     end
 
     class DeletePipelineResponse < Aws::EmptyStructure
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
     end
 
     class DisabledOperationException < Aws::EmptyStructure
@@ -107,6 +137,17 @@ module Aws::OSIS
       SENSITIVE: []
     end
 
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
     class InternalException < Aws::EmptyStructure
     end
 
@@ -121,6 +162,30 @@ module Aws::OSIS
 
     class ListPipelineBlueprintsResponse
       attr_accessor blueprints: ::Array[Types::PipelineBlueprintSummary]
+      SENSITIVE: []
+    end
+
+    class ListPipelineEndpointConnectionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelineEndpointConnectionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor pipeline_endpoint_connections: ::Array[Types::PipelineEndpointConnection]
+      SENSITIVE: []
+    end
+
+    class ListPipelineEndpointsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelineEndpointsResponse
+      attr_accessor next_token: ::String
+      attr_accessor pipeline_endpoints: ::Array[Types::PipelineEndpoint]
       SENSITIVE: []
     end
 
@@ -200,6 +265,30 @@ module Aws::OSIS
       SENSITIVE: []
     end
 
+    class PipelineEndpoint
+      attr_accessor pipeline_arn: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "REVOKING" | "REVOKED")
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_options: Types::PipelineEndpointVpcOptions
+      attr_accessor ingest_endpoint_url: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineEndpointConnection
+      attr_accessor pipeline_arn: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "REVOKING" | "REVOKED")
+      attr_accessor vpc_endpoint_owner: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineEndpointVpcOptions
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class PipelineStatusReason
       attr_accessor description: ::String
       SENSITIVE: []
@@ -219,10 +308,33 @@ module Aws::OSIS
       SENSITIVE: []
     end
 
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
     class ResourceAlreadyExistsException < Aws::EmptyStructure
     end
 
     class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class RevokePipelineEndpointConnectionsRequest
+      attr_accessor pipeline_arn: ::String
+      attr_accessor endpoint_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RevokePipelineEndpointConnectionsResponse
+      attr_accessor pipeline_arn: ::String
+      SENSITIVE: []
     end
 
     class ServiceVpcEndpoint

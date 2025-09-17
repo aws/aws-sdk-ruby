@@ -109,7 +109,7 @@ module Aws
                                include_discount: bool?,
                                use_amortized: bool?
                              }?,
-                             time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY"),
+                             time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY" | "CUSTOM"),
                              time_period: {
                                start: ::Time?,
                                end: ::Time?
@@ -162,7 +162,7 @@ module Aws
                              billing_view_arn: ::String?,
                              health_status: {
                                status: ("HEALTHY" | "UNHEALTHY")?,
-                               status_reason: ("BILLING_VIEW_NO_ACCESS" | "BILLING_VIEW_UNHEALTHY" | "FILTER_INVALID")?,
+                               status_reason: ("BILLING_VIEW_NO_ACCESS" | "BILLING_VIEW_UNHEALTHY" | "FILTER_INVALID" | "MULTI_YEAR_HISTORICAL_DATA_DISABLED")?,
                                last_updated_time: ::Time?
                              }?
                            },
@@ -581,7 +581,7 @@ module Aws
                                include_discount: bool?,
                                use_amortized: bool?
                              }?,
-                             time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY"),
+                             time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY" | "CUSTOM"),
                              time_period: {
                                start: ::Time?,
                                end: ::Time?
@@ -634,7 +634,7 @@ module Aws
                              billing_view_arn: ::String?,
                              health_status: {
                                status: ("HEALTHY" | "UNHEALTHY")?,
-                               status_reason: ("BILLING_VIEW_NO_ACCESS" | "BILLING_VIEW_UNHEALTHY" | "FILTER_INVALID")?,
+                               status_reason: ("BILLING_VIEW_NO_ACCESS" | "BILLING_VIEW_UNHEALTHY" | "FILTER_INVALID" | "MULTI_YEAR_HISTORICAL_DATA_DISABLED")?,
                                last_updated_time: ::Time?
                              }?
                            }

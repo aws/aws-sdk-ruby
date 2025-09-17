@@ -121,6 +121,53 @@ module Aws::OSIS
     #
     class ConflictException < Aws::EmptyStructure; end
 
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline to create the
+    #   endpoint for.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_options
+    #   Container for the VPC configuration for the pipeline endpoint,
+    #   including subnet IDs and security group IDs.
+    #   @return [Types::PipelineEndpointVpcOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/CreatePipelineEndpointRequest AWS API Documentation
+    #
+    class CreatePipelineEndpointRequest < Struct.new(
+      :pipeline_arn,
+      :vpc_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline associated with the
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier of the pipeline endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the pipeline endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC where the pipeline endpoint was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/CreatePipelineEndpointResponse AWS API Documentation
+    #
+    class CreatePipelineEndpointResponse < Struct.new(
+      :pipeline_arn,
+      :endpoint_id,
+      :status,
+      :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] pipeline_name
     #   The name of the OpenSearch Ingestion pipeline to create. Pipeline
     #   names are unique across the pipelines owned by an account within an
@@ -166,14 +213,8 @@ module Aws::OSIS
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] pipeline_role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that provides the
-    #   required permissions for a pipeline to read from the source and
-    #   write to the sink. For more information, see [Setting up roles and
-    #   users in Amazon OpenSearch Ingestion][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html
+    #   The Amazon Resource Name (ARN) of the IAM role that grants the
+    #   pipeline permission to access Amazon Web Services resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/CreatePipelineRequest AWS API Documentation
@@ -205,6 +246,22 @@ module Aws::OSIS
       include Aws::Structure
     end
 
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier of the pipeline endpoint to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/DeletePipelineEndpointRequest AWS API Documentation
+    #
+    class DeletePipelineEndpointRequest < Struct.new(
+      :endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/DeletePipelineEndpointResponse AWS API Documentation
+    #
+    class DeletePipelineEndpointResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline to delete.
     #   @return [String]
@@ -220,6 +277,23 @@ module Aws::OSIS
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/DeletePipelineResponse AWS API Documentation
     #
     class DeletePipelineResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to delete
+    #   the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
     # Exception is thrown when an operation has been disabled.
     #
@@ -324,6 +398,36 @@ module Aws::OSIS
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to retrieve
+    #   the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy document in JSON format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request failed because of an unknown error, exception, or failure
     # (the failure is internal to the service).
     #
@@ -357,6 +461,87 @@ module Aws::OSIS
     #
     class ListPipelineBlueprintsResponse < Struct.new(
       :blueprints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of pipeline endpoint connections to return in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListPipelineEndpointConnections` operation returns
+    #   a `nextToken`, you can include the returned `nextToken` in
+    #   subsequent `ListPipelineEndpointConnections` operations, which
+    #   returns results in the next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ListPipelineEndpointConnectionsRequest AWS API Documentation
+    #
+    class ListPipelineEndpointConnectionsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_endpoint_connections
+    #   A list of pipeline endpoint connections.
+    #   @return [Array<Types::PipelineEndpointConnection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ListPipelineEndpointConnectionsResponse AWS API Documentation
+    #
+    class ListPipelineEndpointConnectionsResponse < Struct.new(
+      :next_token,
+      :pipeline_endpoint_connections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of pipeline endpoints to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListPipelineEndpoints` operation returns a
+    #   `NextToken`, you can include the returned `NextToken` in subsequent
+    #   `ListPipelineEndpoints` operations, which returns results in the
+    #   next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ListPipelineEndpointsRequest AWS API Documentation
+    #
+    class ListPipelineEndpointsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_endpoints
+    #   A list of pipeline endpoints.
+    #   @return [Array<Types::PipelineEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ListPipelineEndpointsResponse AWS API Documentation
+    #
+    class ListPipelineEndpointsResponse < Struct.new(
+      :next_token,
+      :pipeline_endpoints)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -532,9 +717,8 @@ module Aws::OSIS
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] pipeline_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that provides the
-    #   required permissions for a pipeline to read from the source and
-    #   write to the sink.
+    #   The Amazon Resource Name (ARN) of the IAM role that the pipeline
+    #   uses to access AWS resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/Pipeline AWS API Documentation
@@ -655,6 +839,103 @@ module Aws::OSIS
       include Aws::Structure
     end
 
+    # Represents a VPC endpoint for an OpenSearch Ingestion pipeline,
+    # enabling private connectivity between your VPC and the pipeline.
+    #
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline associated with this
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier for the pipeline endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the pipeline endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC where the pipeline endpoint is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_options
+    #   Configuration options for the VPC endpoint, including subnet and
+    #   security group settings.
+    #   @return [Types::PipelineEndpointVpcOptions]
+    #
+    # @!attribute [rw] ingest_endpoint_url
+    #   The URL used to ingest data to the pipeline through the VPC
+    #   endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/PipelineEndpoint AWS API Documentation
+    #
+    class PipelineEndpoint < Struct.new(
+      :pipeline_arn,
+      :endpoint_id,
+      :status,
+      :vpc_id,
+      :vpc_options,
+      :ingest_endpoint_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a connection to a pipeline endpoint, containing details
+    # about the endpoint association.
+    #
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline in the endpoint
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier of the endpoint in the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the pipeline endpoint connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_owner
+    #   The Amazon Web Services account ID that owns the VPC endpoint used
+    #   in this connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/PipelineEndpointConnection AWS API Documentation
+    #
+    class PipelineEndpointConnection < Struct.new(
+      :pipeline_arn,
+      :endpoint_id,
+      :status,
+      :vpc_endpoint_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for the VPC endpoint, specifying network access
+    # controls.
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs where the pipeline endpoint network interfaces
+    #   are created.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs that control network access to the
+    #   pipeline endpoint.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/PipelineEndpointVpcOptions AWS API Documentation
+    #
+    class PipelineEndpointVpcOptions < Struct.new(
+      :subnet_ids,
+      :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a pipeline's current status.
     #
     # @!attribute [rw] description
@@ -728,6 +1009,42 @@ module Aws::OSIS
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to attach the policy
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy document in JSON format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy document that was attached to the
+    #   resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You attempted to create a resource that already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ResourceAlreadyExistsException AWS API Documentation
@@ -739,6 +1056,37 @@ module Aws::OSIS
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline from which to revoke
+    #   endpoint connections.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_ids
+    #   A list of endpoint IDs for which to revoke access to the pipeline.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/RevokePipelineEndpointConnectionsRequest AWS API Documentation
+    #
+    class RevokePipelineEndpointConnectionsRequest < Struct.new(
+      :pipeline_arn,
+      :endpoint_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline from which endpoint
+    #   connections were revoked.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/RevokePipelineEndpointConnectionsResponse AWS API Documentation
+    #
+    class RevokePipelineEndpointConnectionsResponse < Struct.new(
+      :pipeline_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A container for information about VPC endpoints that were created to
     # other services
@@ -906,14 +1254,8 @@ module Aws::OSIS
     #   @return [Types::EncryptionAtRestOptions]
     #
     # @!attribute [rw] pipeline_role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that provides the
-    #   required permissions for a pipeline to read from the source and
-    #   write to the sink. For more information, see [Setting up roles and
-    #   users in Amazon OpenSearch Ingestion][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html
+    #   The Amazon Resource Name (ARN) of the IAM role that grants the
+    #   pipeline permission to access Amazon Web Services resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/UpdatePipelineRequest AWS API Documentation

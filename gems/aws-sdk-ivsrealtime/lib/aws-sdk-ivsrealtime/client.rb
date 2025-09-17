@@ -1046,6 +1046,7 @@ module Aws::IVSRealTime
     #   resp.composition.layout.grid.video_aspect_ratio #=> String, one of "AUTO", "VIDEO", "SQUARE", "PORTRAIT"
     #   resp.composition.layout.grid.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
     #   resp.composition.layout.grid.grid_gap #=> Integer
+    #   resp.composition.layout.grid.participant_order_attribute #=> String
     #   resp.composition.layout.pip.featured_participant_attribute #=> String
     #   resp.composition.layout.pip.omit_stopped_video #=> Boolean
     #   resp.composition.layout.pip.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
@@ -1056,6 +1057,7 @@ module Aws::IVSRealTime
     #   resp.composition.layout.pip.pip_position #=> String, one of "TOP_LEFT", "TOP_RIGHT", "BOTTOM_LEFT", "BOTTOM_RIGHT"
     #   resp.composition.layout.pip.pip_width #=> Integer
     #   resp.composition.layout.pip.pip_height #=> Integer
+    #   resp.composition.layout.pip.participant_order_attribute #=> String
     #   resp.composition.destinations #=> Array
     #   resp.composition.destinations[0].id #=> String
     #   resp.composition.destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
@@ -2038,6 +2040,7 @@ module Aws::IVSRealTime
     #         video_aspect_ratio: "AUTO", # accepts AUTO, VIDEO, SQUARE, PORTRAIT
     #         video_fill_mode: "FILL", # accepts FILL, COVER, CONTAIN
     #         grid_gap: 1,
+    #         participant_order_attribute: "AttributeKey",
     #       },
     #       pip: {
     #         featured_participant_attribute: "AttributeKey",
@@ -2050,6 +2053,7 @@ module Aws::IVSRealTime
     #         pip_position: "TOP_LEFT", # accepts TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     #         pip_width: 1,
     #         pip_height: 1,
+    #         participant_order_attribute: "AttributeKey",
     #       },
     #     },
     #     destinations: [ # required
@@ -2092,6 +2096,7 @@ module Aws::IVSRealTime
     #   resp.composition.layout.grid.video_aspect_ratio #=> String, one of "AUTO", "VIDEO", "SQUARE", "PORTRAIT"
     #   resp.composition.layout.grid.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
     #   resp.composition.layout.grid.grid_gap #=> Integer
+    #   resp.composition.layout.grid.participant_order_attribute #=> String
     #   resp.composition.layout.pip.featured_participant_attribute #=> String
     #   resp.composition.layout.pip.omit_stopped_video #=> Boolean
     #   resp.composition.layout.pip.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
@@ -2102,6 +2107,7 @@ module Aws::IVSRealTime
     #   resp.composition.layout.pip.pip_position #=> String, one of "TOP_LEFT", "TOP_RIGHT", "BOTTOM_LEFT", "BOTTOM_RIGHT"
     #   resp.composition.layout.pip.pip_width #=> Integer
     #   resp.composition.layout.pip.pip_height #=> Integer
+    #   resp.composition.layout.pip.participant_order_attribute #=> String
     #   resp.composition.destinations #=> Array
     #   resp.composition.destinations[0].id #=> String
     #   resp.composition.destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
@@ -2490,7 +2496,7 @@ module Aws::IVSRealTime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

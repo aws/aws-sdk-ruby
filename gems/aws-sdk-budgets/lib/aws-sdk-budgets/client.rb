@@ -554,7 +554,7 @@ module Aws::Budgets
     #         include_discount: false,
     #         use_amortized: false,
     #       },
-    #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
+    #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY, CUSTOM
     #       time_period: {
     #         start: Time.now,
     #         end: Time.now,
@@ -613,7 +613,7 @@ module Aws::Budgets
     #       billing_view_arn: "BillingViewArn",
     #       health_status: {
     #         status: "HEALTHY", # accepts HEALTHY, UNHEALTHY
-    #         status_reason: "BILLING_VIEW_NO_ACCESS", # accepts BILLING_VIEW_NO_ACCESS, BILLING_VIEW_UNHEALTHY, FILTER_INVALID
+    #         status_reason: "BILLING_VIEW_NO_ACCESS", # accepts BILLING_VIEW_NO_ACCESS, BILLING_VIEW_UNHEALTHY, FILTER_INVALID, MULTI_YEAR_HISTORICAL_DATA_DISABLED
     #         last_updated_time: Time.now,
     #       },
     #     },
@@ -1074,7 +1074,7 @@ module Aws::Budgets
     #   resp.budget.cost_types.include_support #=> Boolean
     #   resp.budget.cost_types.include_discount #=> Boolean
     #   resp.budget.cost_types.use_amortized #=> Boolean
-    #   resp.budget.time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY"
+    #   resp.budget.time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY", "CUSTOM"
     #   resp.budget.time_period.start #=> Time
     #   resp.budget.time_period.end #=> Time
     #   resp.budget.calculated_spend.actual_spend.amount #=> String
@@ -1111,7 +1111,7 @@ module Aws::Budgets
     #   resp.budget.metrics[0] #=> String, one of "BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"
     #   resp.budget.billing_view_arn #=> String
     #   resp.budget.health_status.status #=> String, one of "HEALTHY", "UNHEALTHY"
-    #   resp.budget.health_status.status_reason #=> String, one of "BILLING_VIEW_NO_ACCESS", "BILLING_VIEW_UNHEALTHY", "FILTER_INVALID"
+    #   resp.budget.health_status.status_reason #=> String, one of "BILLING_VIEW_NO_ACCESS", "BILLING_VIEW_UNHEALTHY", "FILTER_INVALID", "MULTI_YEAR_HISTORICAL_DATA_DISABLED"
     #   resp.budget.health_status.last_updated_time #=> Time
     #
     # @overload describe_budget(params = {})
@@ -1515,7 +1515,7 @@ module Aws::Budgets
     #   resp.budget_performance_history.cost_types.include_support #=> Boolean
     #   resp.budget_performance_history.cost_types.include_discount #=> Boolean
     #   resp.budget_performance_history.cost_types.use_amortized #=> Boolean
-    #   resp.budget_performance_history.time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY"
+    #   resp.budget_performance_history.time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY", "CUSTOM"
     #   resp.budget_performance_history.billing_view_arn #=> String
     #   resp.budget_performance_history.budgeted_and_actual_amounts_list #=> Array
     #   resp.budget_performance_history.budgeted_and_actual_amounts_list[0].budgeted_amount.amount #=> String
@@ -1599,7 +1599,7 @@ module Aws::Budgets
     #   resp.budgets[0].cost_types.include_support #=> Boolean
     #   resp.budgets[0].cost_types.include_discount #=> Boolean
     #   resp.budgets[0].cost_types.use_amortized #=> Boolean
-    #   resp.budgets[0].time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY"
+    #   resp.budgets[0].time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY", "CUSTOM"
     #   resp.budgets[0].time_period.start #=> Time
     #   resp.budgets[0].time_period.end #=> Time
     #   resp.budgets[0].calculated_spend.actual_spend.amount #=> String
@@ -1636,7 +1636,7 @@ module Aws::Budgets
     #   resp.budgets[0].metrics[0] #=> String, one of "BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"
     #   resp.budgets[0].billing_view_arn #=> String
     #   resp.budgets[0].health_status.status #=> String, one of "HEALTHY", "UNHEALTHY"
-    #   resp.budgets[0].health_status.status_reason #=> String, one of "BILLING_VIEW_NO_ACCESS", "BILLING_VIEW_UNHEALTHY", "FILTER_INVALID"
+    #   resp.budgets[0].health_status.status_reason #=> String, one of "BILLING_VIEW_NO_ACCESS", "BILLING_VIEW_UNHEALTHY", "FILTER_INVALID", "MULTI_YEAR_HISTORICAL_DATA_DISABLED"
     #   resp.budgets[0].health_status.last_updated_time #=> Time
     #   resp.next_token #=> String
     #
@@ -1944,7 +1944,7 @@ module Aws::Budgets
     #         include_discount: false,
     #         use_amortized: false,
     #       },
-    #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
+    #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY, CUSTOM
     #       time_period: {
     #         start: Time.now,
     #         end: Time.now,
@@ -2003,7 +2003,7 @@ module Aws::Budgets
     #       billing_view_arn: "BillingViewArn",
     #       health_status: {
     #         status: "HEALTHY", # accepts HEALTHY, UNHEALTHY
-    #         status_reason: "BILLING_VIEW_NO_ACCESS", # accepts BILLING_VIEW_NO_ACCESS, BILLING_VIEW_UNHEALTHY, FILTER_INVALID
+    #         status_reason: "BILLING_VIEW_NO_ACCESS", # accepts BILLING_VIEW_NO_ACCESS, BILLING_VIEW_UNHEALTHY, FILTER_INVALID, MULTI_YEAR_HISTORICAL_DATA_DISABLED
     #         last_updated_time: Time.now,
     #       },
     #     },
@@ -2269,7 +2269,7 @@ module Aws::Budgets
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

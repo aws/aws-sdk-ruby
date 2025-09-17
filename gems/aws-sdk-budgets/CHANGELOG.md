@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2025-09-16)
+------------------
+
+* Feature - Add support for custom time periods in budget configuration
+
 1.93.0 (2025-08-26)
 ------------------
 

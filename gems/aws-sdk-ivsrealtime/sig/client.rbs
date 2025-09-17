@@ -485,7 +485,8 @@ module Aws
                                    omit_stopped_video: bool?,
                                    video_aspect_ratio: ("AUTO" | "VIDEO" | "SQUARE" | "PORTRAIT")?,
                                    video_fill_mode: ("FILL" | "COVER" | "CONTAIN")?,
-                                   grid_gap: ::Integer?
+                                   grid_gap: ::Integer?,
+                                   participant_order_attribute: ::String?
                                  }?,
                                  pip: {
                                    featured_participant_attribute: ::String?,
@@ -497,7 +498,8 @@ module Aws
                                    pip_offset: ::Integer?,
                                    pip_position: ("TOP_LEFT" | "TOP_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_RIGHT")?,
                                    pip_width: ::Integer?,
-                                   pip_height: ::Integer?
+                                   pip_height: ::Integer?,
+                                   participant_order_attribute: ::String?
                                  }?
                                },
                                destinations: Array[

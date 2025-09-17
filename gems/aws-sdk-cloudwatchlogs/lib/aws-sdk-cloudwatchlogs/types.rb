@@ -3597,12 +3597,12 @@ module Aws::CloudWatchLogs
     # unstructured data. This processor can also extract fields from log
     # messages.
     #
-    # For more information about this processor including examples, see [
-    # grok][1] in the *CloudWatch Logs User Guide*.
+    # For more information about this processor including examples, see
+    # [grok][1] in the *CloudWatch Logs User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Grok
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#CloudWatch-Logs-Transformation-Grok
     #
     # @!attribute [rw] source
     #   The path to the field in the log event that you want to parse. If
@@ -3615,7 +3615,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Grok AWS API Documentation
@@ -4693,6 +4693,19 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] field_selection_criteria
+    #   The filter expression that specifies which log events are processed
+    #   by this metric filter based on system fields. Returns the
+    #   `fieldSelectionCriteria` value if it was specified when the metric
+    #   filter was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] emit_system_field_dimensions
+    #   The list of system fields that are emitted as additional dimensions
+    #   in the generated metrics. Returns the `emitSystemFieldDimensions`
+    #   value if it was specified when the metric filter was created.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MetricFilter AWS API Documentation
     #
     class MetricFilter < Struct.new(
@@ -4701,7 +4714,9 @@ module Aws::CloudWatchLogs
       :metric_transformations,
       :creation_time,
       :log_group_name,
-      :apply_on_transformed_logs)
+      :apply_on_transformed_logs,
+      :field_selection_criteria,
+      :emit_system_field_dimensions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6663,6 +6678,23 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] field_selection_criteria
+    #   A filter expression that specifies which log events should be
+    #   processed by this metric filter based on system fields such as
+    #   source account and source region. Uses selection criteria syntax
+    #   with operators like `=`, `!=`, `AND`, `OR`, `IN`, `NOT IN`. Example:
+    #   `@aws.region = "us-east-1"` or `@aws.account IN ["123456789012",
+    #   "987654321098"]`. Maximum length: 2000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] emit_system_field_dimensions
+    #   A list of system fields to emit as additional dimensions in the
+    #   generated metrics. Valid values are `@aws.account` and
+    #   `@aws.region`. These dimensions help identify the source of
+    #   centralized log data and count toward the total dimension limit for
+    #   metric filters.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutMetricFilterRequest AWS API Documentation
     #
     class PutMetricFilterRequest < Struct.new(
@@ -6670,7 +6702,9 @@ module Aws::CloudWatchLogs
       :filter_name,
       :filter_pattern,
       :metric_transformations,
-      :apply_on_transformed_logs)
+      :apply_on_transformed_logs,
+      :field_selection_criteria,
+      :emit_system_field_dimensions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6944,6 +6978,23 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] field_selection_criteria
+    #   A filter expression that specifies which log events should be
+    #   processed by this subscription filter based on system fields such as
+    #   source account and source region. Uses selection criteria syntax
+    #   with operators like `=`, `!=`, `AND`, `OR`, `IN`, `NOT IN`. Example:
+    #   `@aws.region NOT IN ["cn-north-1"]` or `@aws.account =
+    #   "123456789012" AND @aws.region = "us-east-1"`. Maximum length: 2000
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] emit_system_fields
+    #   A list of system fields to include in the log events sent to the
+    #   subscription destination. Valid values are `@aws.account` and
+    #   `@aws.region`. These fields provide source information for
+    #   centralized log data in the forwarded payload.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilterRequest AWS API Documentation
     #
     class PutSubscriptionFilterRequest < Struct.new(
@@ -6953,7 +7004,9 @@ module Aws::CloudWatchLogs
       :destination_arn,
       :role_arn,
       :distribution,
-      :apply_on_transformed_logs)
+      :apply_on_transformed_logs,
+      :field_selection_criteria,
+      :emit_system_fields)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7820,6 +7873,19 @@ module Aws::CloudWatchLogs
     #   number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
+    # @!attribute [rw] field_selection_criteria
+    #   The filter expression that specifies which log events are processed
+    #   by this subscription filter based on system fields. Returns the
+    #   `fieldSelectionCriteria` value if it was specified when the
+    #   subscription filter was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] emit_system_fields
+    #   The list of system fields that are included in the log events sent
+    #   to the subscription destination. Returns the `emitSystemFields`
+    #   value if it was specified when the subscription filter was created.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/SubscriptionFilter AWS API Documentation
     #
     class SubscriptionFilter < Struct.new(
@@ -7830,7 +7896,9 @@ module Aws::CloudWatchLogs
       :role_arn,
       :distribution,
       :apply_on_transformed_logs,
-      :creation_time)
+      :creation_time,
+      :field_selection_criteria,
+      :emit_system_fields)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2025-09-16)
+------------------
+
+* Feature - Cloudwatch Logs added support for 2 new API parameters in metric and subscription filter APIs to filter log events based on system field values and emit system field values as dimensions and send them to customer destination as additional metadata.
+
 1.126.0 (2025-08-26)
 ------------------
 

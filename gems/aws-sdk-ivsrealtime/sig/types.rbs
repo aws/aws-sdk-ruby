@@ -349,6 +349,7 @@ module Aws::IVSRealTime
       attr_accessor video_aspect_ratio: ("AUTO" | "VIDEO" | "SQUARE" | "PORTRAIT")
       attr_accessor video_fill_mode: ("FILL" | "COVER" | "CONTAIN")
       attr_accessor grid_gap: ::Integer
+      attr_accessor participant_order_attribute: ::String
       SENSITIVE: []
     end
 
@@ -657,6 +658,7 @@ module Aws::IVSRealTime
       attr_accessor pip_position: ("TOP_LEFT" | "TOP_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_RIGHT")
       attr_accessor pip_width: ::Integer
       attr_accessor pip_height: ::Integer
+      attr_accessor participant_order_attribute: ::String
       SENSITIVE: []
     end
 

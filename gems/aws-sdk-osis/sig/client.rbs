@@ -119,6 +119,23 @@ module Aws
                            ) -> _CreatePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
 
+      interface _CreatePipelineEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePipelineEndpointResponse]
+        def pipeline_arn: () -> ::String
+        def endpoint_id: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "REVOKING" | "REVOKED")
+        def vpc_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#create_pipeline_endpoint-instance_method
+      def create_pipeline_endpoint: (
+                                      pipeline_arn: ::String,
+                                      vpc_options: {
+                                        subnet_ids: Array[::String]?,
+                                        security_group_ids: Array[::String]?
+                                      }
+                                    ) -> _CreatePipelineEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineEndpointResponseSuccess
+
       interface _DeletePipelineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePipelineResponse]
       end
@@ -127,6 +144,24 @@ module Aws
                              pipeline_name: ::String
                            ) -> _DeletePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePipelineResponseSuccess
+
+      interface _DeletePipelineEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePipelineEndpointResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#delete_pipeline_endpoint-instance_method
+      def delete_pipeline_endpoint: (
+                                      endpoint_id: ::String
+                                    ) -> _DeletePipelineEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePipelineEndpointResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
 
       interface _GetPipelineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPipelineResponse]
@@ -160,6 +195,17 @@ module Aws
                                         ) -> _GetPipelineChangeProgressResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPipelineChangeProgressResponseSuccess
 
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def resource_arn: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
       interface _ListPipelineBlueprintsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelineBlueprintsResponse]
         def blueprints: () -> ::Array[Types::PipelineBlueprintSummary]
@@ -168,6 +214,30 @@ module Aws
       def list_pipeline_blueprints: (
                                     ) -> _ListPipelineBlueprintsResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineBlueprintsResponseSuccess
+
+      interface _ListPipelineEndpointConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelineEndpointConnectionsResponse]
+        def next_token: () -> ::String
+        def pipeline_endpoint_connections: () -> ::Array[Types::PipelineEndpointConnection]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#list_pipeline_endpoint_connections-instance_method
+      def list_pipeline_endpoint_connections: (
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListPipelineEndpointConnectionsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineEndpointConnectionsResponseSuccess
+
+      interface _ListPipelineEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelineEndpointsResponse]
+        def next_token: () -> ::String
+        def pipeline_endpoints: () -> ::Array[Types::PipelineEndpoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#list_pipeline_endpoints-instance_method
+      def list_pipeline_endpoints: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListPipelineEndpointsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineEndpointsResponseSuccess
 
       interface _ListPipelinesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelinesResponse]
@@ -190,6 +260,29 @@ module Aws
                                     arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def resource_arn: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 policy: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RevokePipelineEndpointConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokePipelineEndpointConnectionsResponse]
+        def pipeline_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#revoke_pipeline_endpoint_connections-instance_method
+      def revoke_pipeline_endpoint_connections: (
+                                                  pipeline_arn: ::String,
+                                                  endpoint_ids: Array[::String]
+                                                ) -> _RevokePipelineEndpointConnectionsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokePipelineEndpointConnectionsResponseSuccess
 
       interface _StartPipelineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartPipelineResponse]
