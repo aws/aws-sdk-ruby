@@ -30,7 +30,6 @@ module Aws
         raise ArgumentError, 'Invalid directory' unless Dir.exist?(source)
 
         upload_opts = options.dup
-        bucket = bucket
         @source = source
         @s3_prefix = upload_opts.delete(:s3_prefix)
         @recursive = upload_opts.delete(:recursive) || false
@@ -152,8 +151,8 @@ module Aws
       end
 
       def should_upload_file?(path)
-        return false if File.directory?(path)
-        return false if !@follow_symlinks && File.symlink?(path)
+        return false if File.directory?(path) || (!@follow_symlinks && File.symlink?(path))
+
         File.file?(path) || File.symlink?(path)
       end
 
